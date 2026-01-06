@@ -1,11 +1,795 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import HubspotForm from "../components/HubspotForm.astro";
+import { SITE } from "../config/site";
 ---
 
 <Layout>
-	<Welcome />
+<!-- Slider
+============================================= -->
+<section id="slider" class="slider-element slider-parallax min-vh-60 min-vh-md-100 include-header">
+  <div
+    class="slider-inner"
+    style="background: var(--cnvs-contrast-0) url('/images/hero/hero-1.jpg') center center no-repeat; background-size: cover;"
+  >
+    <div class="vertical-middle slider-element-fade">
+      <div class="container py-5">
+        <div class="row pt-5">
+          <div class="col-md-7">
+            <div class="slider-title">
+              <div class="badge rounded-pill badge-default">Appels + formulaires • payés seulement si qualifiés</div>
+
+              <h1>Je vous apporte des demandes entrantes.</h1>
+
+              <h2
+                class="text-rotater mb-2"
+                data-separator=","
+                data-rotate="fadeIn"
+                data-speed="3200"
+              >
+                – Pour <span class="t-rotate">dépannage,devis,RDV</span> sur votre secteur.
+              </h2>
+
+              <p>
+                Vous êtes artisan ? Je génère des demandes locales et je filtre avant de vous les envoyer.
+                Vous ne payez que si la demande correspond à vos critères (zone, service, contact joignable).
+              </p>
+
+              <a href="/contact" class="button button-rounded button-large text-transform-none ls-0">
+                Demander un audit gratuit
+              </a>
+
+              <a
+                href={`tel:${SITE.phoneE164}`}
+                class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0"
+              >
+                Appeler {SITE.phoneDisplay}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-wrap h-100 d-block d-lg-none">
+      <div class="video-overlay" style="background: rgba(255,255,255,0.85);"></div>
+    </div>
+  </div>
+</section>
+<!-- #slider end -->
+
+		
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class="content-wrap pt-0">
+
+<!-- Features
+============================================= -->
+<div class="section bg-transparent mt-4 mb-0 pb-0">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 650px">
+      <div class="badge rounded-pill badge-default">Concrètement</div>
+      <h3 class="text-transform-none ls-0 mb-3">Ce que je fais pour vous</h3>
+      <p>
+        Je mets en place un système simple : on attire des demandes locales, on filtre, puis on vous envoie
+        uniquement celles qui correspondent à vos critères.
+      </p>
+    </div>
+
+    <div class="row justify-content-between align-items-center">
+
+      <!-- Colonne gauche -->
+      <div class="col-lg-4 col-sm-6">
+
+        <div class="feature-box flex-md-row-reverse text-md-end border-0">
+          <div class="fbox-icon">
+            <a href="/qui-je-suis">
+              <img src="/images/icons/seo.svg" alt="Pages locales" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Pages locales (métier + ville)</h3>
+            <p>
+              Des pages claires sur vos prestations et votre secteur, pour que les clients vous trouvent facilement.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-box flex-md-row-reverse text-md-end border-0 mt-5">
+          <div class="fbox-icon">
+            <a href="/qui-je-suis">
+              <img src="/images/icons/adword.svg" alt="Publicité locale" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Publicité locale (si utile)</h3>
+            <p>
+              On peut booster la demande sur votre zone quand il faut remplir le planning (sans arroser partout).
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-box flex-md-row-reverse text-md-end border-0 mt-5">
+          <div class="fbox-icon">
+            <a href="/faqs">
+              <img src="/images/icons/analysis.svg" alt="Suivi simple" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Suivi simple</h3>
+            <p>
+              On suit l’essentiel : volume, qualité, zones, services demandés. Et on ajuste si besoin.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Image centrale -->
+      <div class="col-lg-3 col-7 offset-3 offset-sm-0 d-sm-none d-lg-block text-center my-5">
+        <img
+          src="/images/sections/2.png"
+          alt="Illustration"
+          class="rounded parallax"
+          data-bottom-top="transform: translateY(-30px)"
+          data-top-bottom="transform: translateY(30px)"
+        />
+      </div>
+
+      <!-- Colonne droite -->
+      <div class="col-lg-4 col-sm-6">
+
+        <div class="feature-box border-0">
+          <div class="fbox-icon">
+            <a href="/contact">
+              <img src="/images/icons/social.svg" alt="Demandes entrantes" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Demandes entrantes</h3>
+            <p>
+              Des appels et des formulaires de personnes qui cherchent vraiment (pas des curieux).
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-box border-0 mt-5">
+          <div class="fbox-icon">
+            <a href="/faqs">
+              <img src="/images/icons/experience.svg" alt="Qualification" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Qualification avant envoi</h3>
+            <p>
+              Zone, prestation, délai, contact joignable : si ça ne colle pas à vos critères, je ne transmets pas.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-box border-0 mt-5">
+          <div class="fbox-icon">
+            <a href="/qui-je-suis">
+              <img src="/images/icons/content_marketing.svg" alt="Ajustements" class="bg-transparent rounded-0" />
+            </a>
+          </div>
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0">Ajustements réguliers</h3>
+            <p>
+              Si la qualité baisse ou si vous êtes trop chargé, on ajuste le filtre et la diffusion.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Pricing
+============================================= -->
+<div class="section m-0" style="background: url('/images/sections/4.png') no-repeat center top; background-size: cover; padding: 140px 0 0;">
+  <div class="container">
+    <div class="row justify-content-between">
+
+      <!-- Texte à gauche -->
+      <div class="col-lg-4 mt-4">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Tarifs</div>
+          <h3 class="text-transform-none ls-0">
+            Simple : vous payez uniquement quand c’est qualifié.
+          </h3>
+        </div>
+
+        <p>
+          Le prix dépend du métier et de la zone (la demande n’est pas la même partout).
+          On fait un point rapide, on fixe les critères “qualifié”, puis on vous donne un prix clair.
+        </p>
+
+        <p class="mb-0">
+          <strong>Pas de clics facturés.</strong> Pas de flou.
+        </p>
+      </div>
+
+      <!-- Cartes à droite -->
+      <div class="col-lg-8">
+        <div id="section-pricing" class="page-section p-0 m-0">
+          <div id="pricing-switch" class="pricing row align-items-end g-0 col-mb-50 mb-4">
+
+            <!-- Formule 1 -->
+            <div class="col-md-6">
+              <div class="pricing-box">
+                <div class="pricing-title">
+                  <img class="mb-2 bg-transparent rounded-0" src="/images/icons/man.svg" alt="Test" width="50">
+                  <h3>Test (1 zone)</h3>
+                  <span>Pour démarrer proprement</span>
+                </div>
+
+                <div class="pricing-price">
+                  <div class="pts-content">
+                    <span class="price-unit">€</span>Sur devis
+                    <span class="price-tenure">Prix par demande qualifiée</span>
+                  </div>
+                </div>
+
+                <div class="pricing-features border-0 bg-transparent">
+                  <ul>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>1</strong> métier</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>1</strong> zone (villes/rayon)</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>1</strong> priorité (ex : dépannage / devis)</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Qualification avant envoi</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Réglages selon votre capacité</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Suivi simple (qualité / volume)</li>
+                  </ul>
+                </div>
+
+                <div class="pricing-action">
+                  <a href="/contact" class="button button-large button-rounded w-100 text-transform-none m-0 ls-0">
+                    Demander un audit gratuit
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formule 2 -->
+            <div class="col-md-6">
+              <div class="pricing-box">
+                <div class="pricing-title">
+                  <img class="mb-2 bg-transparent rounded-0" src="/images/icons/group.svg" alt="Déploiement" width="60">
+                  <h3>Déploiement (plus large)</h3>
+                  <span>Quand vous avez de la capacité</span>
+                </div>
+
+                <div class="pricing-price">
+                  <div class="pts-content">
+                    <span class="price-unit">€</span>Sur devis
+                    <span class="price-tenure">Prix par demande qualifiée</span>
+                  </div>
+                </div>
+
+                <div class="pricing-features border-0 bg-transparent">
+                  <ul>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>1</strong> métier</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>2–3</strong> zones (progressif)</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i><strong>Plusieurs</strong> services (ex : entretien + dépannage)</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Filtrage renforcé (moins de temps perdu)</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Ajustements réguliers</li>
+                    <li><i class="fa-solid fa-check-circle color me-2"></i>Priorisation selon votre planning</li>
+                  </ul>
+                </div>
+
+                <div class="pricing-action">
+                  <a href="/contact" class="button button-rounded button-large button-light text-dark bg-white border w-100 text-transform-none m-0 ls-0">
+                    Voir si c’est possible sur votre zone
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center pb-5">
+            <small class="text-muted">
+              Une demande “qualifiée” = dans votre zone + bonne prestation + délai cohérent + contact joignable.
+            </small>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Form Section
+============================================= -->
+<div
+  class="section m-0"
+  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <!-- Texte -->
+      <div class="col-md-5">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Audit gratuit</div>
+          <h3 class="text-transform-none ls-0">On regarde si je peux vous apporter des demandes</h3>
+        </div>
+
+        <p>
+          On fait simple : votre métier, votre zone (villes/rayon), vos prestations, et votre capacité (devis par semaine).
+          Je vous dis si c’est possible et comment on démarre.
+        </p>
+
+        <ul class="iconlist mb-0">
+          <li><i class="bi-check-circle-fill"></i> Secteur : <strong class="ms-2">{SITE.area}</strong></li>
+          <li><i class="bi-check-circle-fill"></i> Objectif : <strong class="ms-2">appels / formulaires</strong></li>
+          <li><i class="bi-check-circle-fill"></i> Paiement : <strong class="ms-2">uniquement si qualifié</strong></li>
+        </ul>
+
+        <div class="mt-4">
+          <a href={`tel:${SITE.phoneE164}`} class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0">
+            Appeler {SITE.phoneDisplay}
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="mb-3">Demande d’audit</h4>
+
+            <!-- ✅ HubSpot (remplace le form.php) -->
+            <div class="form-widget">
+              <HubspotForm portalId="XXXXXX" formId="YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" />
+            </div>
+
+            <small class="d-block mt-3 text-muted">
+              Réponse rapide. Si vous préférez : <a href={`tel:${SITE.phoneE164}`}>appelez-moi</a>.
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Exemples de demandes
+============================================= -->
+<div class="section m-0" style="background: url('/images/sections/5.jpg') no-repeat center center; background-size: cover; padding: 80px 0;">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center">
+      <div class="badge rounded-pill badge-default">Exemples</div>
+      <h3 class="text-transform-none ls-0">Le type de demandes que vous pouvez recevoir</h3>
+      <p class="text-muted mb-0">
+        Selon votre métier, votre zone et vos prestations. On filtre avant envoi.
+      </p>
+    </div>
+
+    <div id="portfolio" class="portfolio row gutter-20">
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/1.jpg" alt="Dépannage fuite d’eau">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Dépannage fuite d’eau</a></h3>
+            <span>Plomberie • Urgence</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/2.jpg" alt="Entretien chaudière">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Entretien / dépannage chaudière</a></h3>
+            <span>Chauffage</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/3.jpg" alt="Tableau électrique">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Tableau électrique / mise en sécurité</a></h3>
+            <span>Électricité</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/4.jpg" alt="Fuite toiture">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Fuite toiture / réparation</a></h3>
+            <span>Couverture</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/5.jpg" alt="Remplacement ballon d’eau chaude">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Remplacement ballon d’eau chaude</a></h3>
+            <span>Plomberie / Chauffage</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item col-12 col-sm-6 col-md-4">
+        <div class="grid-inner">
+          <div class="portfolio-image">
+            <img src="/images/works/6.jpg" alt="Devis rénovation salle de bain">
+            <div class="bg-overlay">
+              <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                <a href="/contact" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                  <i class="uil uil-ellipsis-h"></i>
+                </a>
+              </div>
+              <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+            </div>
+          </div>
+          <div class="portfolio-desc">
+            <h3><a href="/contact">Devis rénovation (ex : salle de bain)</a></h3>
+            <span>Rénovation</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="text-center">
+      <a href="/qui-je-suis" class="button button-large button-rounded text-transform-none ms-0 mt-5 ls-0">
+        Voir comment je travaille
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Features (3 étapes)
+============================================= -->
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-4 mt-5">
+      <div class="feature-box fbox-center border-0">
+        <div class="fbox-icon">
+          <a href="/faqs">
+            <img src="/images/icons/research.svg" alt="Cadrage" class="bg-transparent rounded-0" />
+          </a>
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0">1. On cadre</h3>
+          <p>
+            On définit vos critères : zone (villes/rayon), prestations, délais, capacité.
+            Comme ça, on sait exactement ce qui est “qualifié”.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mt-5">
+      <div class="feature-box fbox-center border-0">
+        <div class="fbox-icon">
+          <a href="/qui-je-suis">
+            <img src="/images/icons/optimizing.svg" alt="Mise en place" class="bg-transparent rounded-0" />
+          </a>
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0">2. Je mets en place et je lance</h3>
+          <p>
+            Je crée les pages locales et je lance l’acquisition sur votre secteur.
+            Objectif : générer des appels et des formulaires utiles.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mt-5">
+      <div class="feature-box fbox-center border-0">
+        <div class="fbox-icon">
+          <a href="/contact">
+            <img src="/images/icons/result.svg" alt="Résultats" class="bg-transparent rounded-0" />
+          </a>
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0">3. Je filtre et je vous envoie</h3>
+          <p>
+            Je vérifie les infos (zone, demande, délai, contact joignable).
+            Vous recevez ce qui vaut le coup d’être rappelé.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Avis / Retours
+============================================= -->
+<div class="section mt-0" style="background: url('/images/sections/3.jpg') no-repeat top center; background-size: cover; padding: 80px 0 70px;">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center">
+      <div class="badge rounded-pill badge-default">Retours</div>
+      <h3 class="text-transform-none ls-0">Ce que les artisans apprécient</h3>
+      <p class="text-muted mb-0"><small>Exemples (à remplacer par vos avis réels).</small></p>
+    </div>
+
+    <div
+      id="oc-testi"
+      class="owl-carousel testimonials-carousel carousel-widget"
+      data-margin="0"
+      data-pagi="true"
+      data-loop="true"
+      data-center="true"
+      data-autoplay="5000"
+      data-items-xs="1"
+      data-items-sm="1"
+      data-items-md="2"
+      data-items-xl="3"
+    >
+      <div class="oc-item">
+        <div class="card rounded-6 shadow border-0">
+          <img class="testimonial-image rounded-circle p-2 bg-white" src="/images/testimonials/1.jpg" alt="Avis artisan">
+          <div class="card-body p-4 pt-2 position-relative overflow-hidden">
+            <div class="row">
+              <div class="col-12 text-center">
+                <p class="mb-4 font-primary fst-normal">
+                  “Les demandes reçues sont plus claires. Je passe moins de temps à trier et plus de temps à faire des devis.”
+                </p>
+                <h4 class="h6 mb-0 fw-bold">Artisan (plomberie)</h4>
+                <small class="text-muted">Secteur : Oise</small>
+              </div>
+            </div>
+            <div class="bg-icon bi-quote op-02"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="oc-item">
+        <div class="card rounded-6 shadow border-0">
+          <img class="testimonial-image rounded-circle p-2 bg-white" src="/images/testimonials/2.jpg" alt="Avis artisan">
+          <div class="card-body p-4 pt-2 position-relative overflow-hidden">
+            <div class="row">
+              <div class="col-12 text-center">
+                <p class="mb-4 font-primary fst-normal">
+                  “On a défini la zone et les prestations au départ. Si ça ne colle pas, ce n’est pas envoyé.”
+                </p>
+                <h4 class="h6 mb-0 fw-bold">Artisan (chauffage)</h4>
+                <small class="text-muted">Secteur : Sud Oise</small>
+              </div>
+            </div>
+            <div class="bg-icon bi-quote op-02"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="oc-item">
+        <div class="card rounded-6 shadow border-0">
+          <img class="testimonial-image rounded-circle p-2 bg-white" src="/images/testimonials/3.jpg" alt="Avis artisan">
+          <div class="card-body p-4 pt-2 position-relative overflow-hidden">
+            <div class="row">
+              <div class="col-12 text-center">
+                <p class="mb-4 font-primary fst-normal">
+                  “Quand je suis plein, on réduit. Quand j’ai de la place, on relance. C’est simple.”
+                </p>
+                <h4 class="h6 mb-0 fw-bold">Artisan (électricité)</h4>
+                <small class="text-muted">Secteur : Val-d’Oise</small>
+              </div>
+            </div>
+            <div class="bg-icon bi-quote op-02"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="oc-item">
+        <div class="card rounded-6 shadow border-0">
+          <img class="testimonial-image rounded-circle p-2 bg-white" src="/images/testimonials/4.jpg" alt="Avis artisan">
+          <div class="card-body p-4 pt-2 position-relative overflow-hidden">
+            <div class="row">
+              <div class="col-12 text-center">
+                <p class="mb-4 font-primary fst-normal">
+                  “Je préfère payer une demande qui correspond, plutôt que des clics. Ça évite les mauvaises surprises.”
+                </p>
+                <h4 class="h6 mb-0 fw-bold">Artisan (toiture)</h4>
+                <small class="text-muted">Secteur : Oise</small>
+              </div>
+            </div>
+            <div class="bg-icon bi-quote op-02"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Guides pratiques
+============================================= -->
+<div class="container py-4">
+  <div class="heading-block border-bottom-0 text-center">
+    <div class="badge rounded-pill badge-default">Guides</div>
+    <h3 class="text-transform-none ls-0">Quelques infos utiles (rapides)</h3>
+    <p class="text-muted mb-0">
+      Pour comprendre comment je qualifie et comment on évite de perdre du temps.
+    </p>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <article class="entry">
+        <div class="entry-image mb-3">
+          <a href="/guides/lead-qualifie">
+            <img src="/images/blog/1.jpg" alt="Lead qualifié : définition simple" />
+          </a>
+        </div>
+        <div class="entry-title">
+          <h3 class="text-transform-none ls-0">
+            <a href="/guides/lead-qualifie">C’est quoi une demande “qualifiée” ?</a>
+          </h3>
+        </div>
+        <div class="entry-meta">
+          <ul>
+            <li><i class="bi-person"></i><a href="/qui-je-suis"> Horizon Conversion</a></li>
+            <li><i class="bi-calendar"></i><span> Mise à jour régulière</span></li>
+          </ul>
+        </div>
+        <div class="entry-content">
+          <p>
+            Zone, prestation, délai, contact joignable : on pose des règles simples pour éviter les demandes inutiles.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4">
+      <article class="entry">
+        <div class="entry-image mb-3">
+          <a href="/guides/eviter-perdre-temps">
+            <img src="/images/blog/2.jpg" alt="Éviter de perdre du temps" />
+          </a>
+        </div>
+        <div class="entry-title">
+          <h3 class="text-transform-none ls-0">
+            <a href="/guides/eviter-perdre-temps">Moins de temps perdu au téléphone</a>
+          </h3>
+        </div>
+        <div class="entry-meta">
+          <ul>
+            <li><i class="bi-person"></i><a href="/qui-je-suis"> Horizon Conversion</a></li>
+            <li><i class="bi-calendar"></i><span> Mise à jour régulière</span></li>
+          </ul>
+        </div>
+        <div class="entry-content">
+          <p>
+            Les 5 infos à récupérer (et à filtrer) avant d’envoyer une demande à un artisan.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4">
+      <article class="entry">
+        <div class="entry-image mb-3">
+          <a href="/guides/zone-capacite">
+            <img src="/images/blog/3.jpg" alt="Zone et capacité" />
+          </a>
+        </div>
+        <div class="entry-title">
+          <h3 class="text-transform-none ls-0">
+            <a href="/guides/zone-capacite">Zone & capacité : comment on règle le volume</a>
+          </h3>
+        </div>
+        <div class="entry-meta">
+          <ul>
+            <li><i class="bi-person"></i><a href="/qui-je-suis"> Horizon Conversion</a></li>
+            <li><i class="bi-calendar"></i><span> Mise à jour régulière</span></li>
+          </ul>
+        </div>
+        <div class="entry-content">
+          <p>
+            Si vous êtes plein, on réduit. Si vous avez de la place, on relance. On ajuste sans prise de tête.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</div>
+
+<!-- Promo/Contact
+============================================= -->
+<div class="section mt-5 footer-stick promo-section bg-transparent" style="padding: 100px 0; overflow: visible">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center">
+      <h5 class="text-uppercase ls-1 mb-1">Audit gratuit • 15 minutes</h5>
+
+      <h2 class="text-transform-none ls-0">
+        On voit si je peux vous apporter des demandes qualifiées<br />
+        sur votre secteur.
+      </h2>
+
+      <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+        <a href="/contact" class="button button-large button-rounded text-transform-none ms-0 ls-0">
+          Demander un audit
+        </a>
+
+        <a
+          href={`tel:${SITE.phoneE164}`}
+          class="button button-large button-rounded button-light text-dark bg-white border text-transform-none ms-0 ls-0"
+        >
+          Appeler {SITE.phoneDisplay}
+        </a>
+      </div>
+
+      <p class="text-muted mt-3 mb-0" style="max-width: 820px; margin: 0 auto;">
+        On valide ensemble : votre métier, votre zone, vos prestations, votre capacité.
+        Vous payez uniquement quand une demande correspond à vos critères.
+      </p>
+    </div>
+  </div>
+</div>
+			</div>
+		</section><!-- #content end -->
 </Layout>

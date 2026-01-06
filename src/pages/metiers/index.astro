@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { METIERS } from "../../data/catalogue";
+---
+
+<Layout title="Métiers" description="Métiers couverts par Horizon Conversion.">
+  <section class="page-title page-title-mini">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Métiers</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container">
+        <div class="row col-mb-30">
+          {METIERS.map((m) => (
+            <div class="col-md-6 col-lg-4">
+              <a class="card h-shadow h-translate-y-sm all-ts text-decoration-none" href={`/metiers/${m.slug}/`}>
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <i class="bi-briefcase color" style="font-size:2.25rem; line-height:1;"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">{m.name}</h3>
+                      <p class="text-smaller mb-0">Voir les services et les villes.</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

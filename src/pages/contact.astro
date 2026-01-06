@@ -1,0 +1,196 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE } from "../config/site";
+import HubspotForm from "../components/HubspotForm.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact | Horizon Conversion",
+  url: `${SITE.url}/contact`,
+};
+---
+
+<Layout
+  title="Contact | Horizon Conversion"
+  description="Demandez un audit gratuit : métier, zone, capacité, objectifs. Réponse rapide."
+  jsonLd={jsonLd}
+>
+<!-- Page Title
+============================================= -->
+<section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+  <img src="/images/services/analysis-title.jpg" class="parallax-bg" alt="Contact Horizon Conversion" />
+  <div id="particles-line"></div>
+
+  <div class="container">
+    <div class="page-title-row">
+
+      <div class="page-title-content">
+        <div class="badge rounded-pill border border-light text-light">Audit gratuit • 15 minutes</div>
+        <h1>Me contacter</h1>
+      </div>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact</li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+</section><!-- .page-title end -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+  <div class="content-wrap pb-0">
+			
+<div class="container mb-3">
+  <div class="row justify-content-between">
+
+    <!-- Zone -->
+    <div class="col-lg-4 col-md-6">
+      <div class="feature-box flex-column text-center">
+        <div class="fbox-image text-center mb-3">
+          <img height="120" src="/images/icons/seo.svg" alt="Zone d’intervention" />
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0 mb-4">Zone d’intervention</h3>
+          <p class="text-smaller mb-3">
+            Je travaille surtout sur ce secteur :
+          </p>
+          <address class="mb-0">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.area)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <u>{SITE.area}</u>
+            </a>
+          </address>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="col-lg-4 col-md-6">
+      <div class="feature-box flex-column text-center">
+        <div class="fbox-image text-center mb-3">
+          <img height="120" src="/images/icons/social.svg" alt="Contact" />
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0 mb-4">Contact</h3>
+          <p class="text-smaller mb-3">
+            Le plus simple : un appel rapide ou un message.
+          </p>
+
+          <a class="btn btn-link" href={`mailto:${SITE.email}`}>
+            <u>{SITE.email}</u>
+          </a>
+
+          <a class="btn btn-link" href={`tel:${SITE.phoneE164}`}>
+            <u>{SITE.phoneDisplay}</u>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit -->
+    <div class="col-lg-4 col-md-6">
+      <div class="feature-box flex-column text-center">
+        <div class="fbox-image text-center mb-3">
+          <img height="120" src="/images/icons/group.svg" alt="Audit gratuit" />
+        </div>
+        <div class="fbox-content">
+          <h3 class="text-transform-none ls-0 mb-4">Audit gratuit</h3>
+          <p class="text-smaller mb-3">
+            En 15 minutes, on voit si je peux t’apporter des demandes qualifiées.
+          </p>
+          <a href="#contact-form"><u>Remplir le formulaire</u></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="clear"></div>
+
+<!-- Carte (zone) ============================================= -->
+<section class="gmap vh-60 mt-6">
+  <iframe
+    title={`Carte - ${SITE.area}`}
+    src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.area)}&output=embed`}
+    style="border:0; width:100%; height:100%;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen
+  ></iframe>
+</section>
+
+<!-- Form Section
+============================================= -->
+<div
+  id="contact-form"
+  class="section mt-0 mb-3"
+  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <!-- Texte -->
+      <div class="col-md-5">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Audit gratuit</div>
+          <h3 class="text-transform-none ls-0">Parlons de votre zone et de vos prestations</h3>
+        </div>
+
+        <p>
+          L’objectif est simple : vérifier si je peux vous apporter des demandes qualifiées sur votre secteur.
+          On cale vos critères (zone, prestations, délais, capacité) et je vous dis si on peut démarrer.
+        </p>
+
+        <ul class="iconlist mb-0">
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Secteur : <strong>{SITE.area}</strong></li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Canal : <strong>appels + formulaires</strong></li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Paiement : <strong>uniquement si qualifié</strong></li>
+        </ul>
+
+        <div class="mt-4">
+          <a
+            href={`tel:${SITE.phoneE164}`}
+            class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+          >
+            Appeler {SITE.phoneDisplay}
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="mb-3">Demande d’audit</h4>
+
+            <div class="form-widget">
+              <HubspotForm portalId="XXXXXX" formId="YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" />
+            </div>
+
+            <small class="d-block mt-3 text-muted">
+              Réponse rapide. Si c’est urgent : <a href={`tel:${SITE.phoneE164}`}>appelez-moi</a>.
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+</section><!-- #content end -->
+
+</Layout>

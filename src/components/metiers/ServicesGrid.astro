@@ -1,0 +1,85 @@
+---
+import { hashString, pickRotated } from "../../utils/seoLinks";
+
+type Service = {
+  slug: string;
+  name?: string;
+  titre?: string;
+  description?: string;
+  resume?: string;
+  icon: string;
+};
+
+type Ville = {
+  slug: string;
+  name?: string;
+  nom?: string;
+};
+
+const {
+  badge = "Services",
+  title = "Services demandés",
+  metierSlug,
+  services = [],
+  villes = [],
+  villesCount = 3,
+} = Astro.props;
+
+const serviceUrl = (s: string) => `/metiers/${metierSlug}/services/${s}/`;
+const villeUrl = (v: string) => `/metiers/${metierSlug}/villes/${v}/`;
+
+const serviceTitle = (s: Service) => s.name ?? s.titre ?? "";
+const serviceDesc = (s: Service) => s.description ?? s.resume ?? "";
+const villeName = (v: Ville) => v.name ?? v.nom ?? "";
+---
+
+<div class="heading-block border-bottom-0 text-center">
+  <div class="badge rounded-pill badge-default">{badge}</div>
+  <h3 class="text-transform-none ls-0">{title}</h3>
+</div>
+
+<div class="clear"></div>
+
+<div class="row mt-4 col-mb-50 mb-0">
+  {services.map((s) => {
+    const seed = hashString(`${metierSlug}:service:${s.slug}`);
+    const villesForThisService = pickRotated(villes, seed, villesCount);
+
+    return (
+      <div class="col-sm-6 col-lg-4">
+        <div class="feature-box">
+          <div class="fbox-icon mb-4">
+            <a href={serviceUrl(s.slug)} aria-label={serviceTitle(s)}>
+              <i class={`${s.icon} text-white bg-color`}></i>
+            </a>
+          </div>
+
+          <div class="fbox-content">
+            <h3 class="text-transform-none">
+              <a class="nav-link" href={serviceUrl(s.slug)}>{serviceTitle(s)}</a>
+            </h3>
+
+            <p class="mb-0">
+              {serviceDesc(s)}
+              {villesForThisService.length > 0 && (
+                <>
+                  <br />
+                  <small class="text-muted">
+                    Villes :
+                    {" "}
+                    {villesForThisService.map((v, idx) => (
+                      <>
+                        <a href={villeUrl(v.slug)}>{villeName(v)}</a>
+                        {idx < villesForThisService.length - 1 ? " • " : ""}
+                      </>
+                    ))}
+                  </small>
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</div>

@@ -1,22 +1,101 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import TopBar from "../components/TopBar.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../config/site";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const {
+  title = `${SITE.name} | Leads & RDV qualifiés pour artisans`,
+  description = "Je vous apporte des demandes entrantes (appels + formulaires) et vous payez uniquement quand c’est qualifié.",
+  noindex = false,
+  jsonLd = null,
+} = Astro.props;
+
+// Canonical (si Astro.site est configuré, c’est parfait ; sinon fallback)
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.toString();
+---
+
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <meta name="author" content={SITE.name} />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content="website" />
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- Font Icons -->
+  <link rel="stylesheet" href="/css/font-icons.css" />
+
+  <!-- Plugins/Components CSS -->
+  <link rel="stylesheet" href="/css/components/bs-switches.css" />
+
+  <!-- Niche -->
+  <link rel="stylesheet" href="/hc.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" />
+
+  <slot name="head" />
+
+  {jsonLd && (
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify(jsonLd)}
+    </script>
+  )}
+</head>
+
+<body class="stretched">
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper">
+
+		<TopBar />
+
+		<Header />
+
+		<slot />
+
+		<Footer />
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="uil uil-angle-up"></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script is:inline defer src="/js/plugins.min.js"></script>
+	<script is:inline defer src="/js/functions.bundle.js"></script>
+
+	<!-- Parallax Script
+	============================================= -->
+	<script is:inline defer src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+	<script is:inline defer>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight: false});</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+---
+import { hashString, pickRotated } from "../../utils/seoLinks";
+
+type Ville = {
+  slug: string;
+  name?: string;
+  nom?: string;
+  description?: string;
+};
+
+type Service = {
+  slug: string;
+  name?: string;
+  titre?: string;
+};
+
+const {
+  badge = "Villes",
+  title = "Zones d’intervention",
+  metierSlug,
+  villes = [],
+  services = [],
+  servicesCount = 3,
+} = Astro.props;
+
+const villeUrl = (v: string) => `/metiers/${metierSlug}/villes/${v}/`;
+const serviceUrl = (s: string) => `/metiers/${metierSlug}/services/${s}/`;
+
+const villeName = (v: Ville) => v.name ?? v.nom ?? "";
+const serviceTitle = (s: Service) => s.name ?? s.titre ?? "";
+
+const icons = [
+  "/images/icons/seo.svg",
+  "/images/icons/social.svg",
+  "/images/icons/adword.svg",
+  "/images/icons/analysis.svg",
+  "/images/icons/experience.svg",
+  "/images/icons/content_marketing.svg",
+];
+---
+
+<div class="section mb-0">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center">
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h3 class="text-transform-none ls-0">{title}</h3>
+    </div>
+
+    <div class="row col-mb-30 align-content-stretch">
+      {villes.map((v, i) => {
+        const seed = hashString(`${metierSlug}:ville:${v.slug}`);
+        const servicesForThisVille = pickRotated(services, seed, servicesCount);
+
+        return (
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <div class="feature-box flex-column">
+                  <div class="fbox-icon mb-3">
+                    <img src={icons[i % icons.length]} alt={villeName(v)} class="bg-transparent rounded-0" />
+                  </div>
+
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0 text-larger">
+                      <a class="nav-link" href={villeUrl(v.slug)}>{villeName(v)}</a>
+                    </h3>
+                    {v.description && <p class="text-smaller mb-0">{v.description}</p>}
+                  </div>
+
+                  <ul class="iconlist ms-3 mt-4 mb-0">
+                    {servicesForThisVille.map((s) => (
+                      <li class="mb-2 text-muted">
+                        <i class="fa-solid fa-check text-smaller color"></i>{" "}
+                        <a class="nav-link" href={serviceUrl(s.slug)}>{serviceTitle(s)}</a>
+                      </li>
+                    ))}
+
+                    <li class="text-muted">
+                      <i class="fa-solid fa-check text-smaller color"></i>{" "}
+                      <a href="/contact/">Recevoir des demandes</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>

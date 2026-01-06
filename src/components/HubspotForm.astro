@@ -1,0 +1,71 @@
+---
+interface Props {
+  portalId: string;
+  formId: string;
+  region?: string; // ex: "eu1" ou "na1"
+  targetId?: string;
+  class?: string;
+  context?: Record<string, string>;
+}
+
+const {
+  portalId,
+  formId,
+  region = "eu1",
+  targetId = `hsform-${formId}`,
+  class: className = "",
+  context = {},
+} = Astro.props;
+---
+
+<div id={targetId} class={className}></div>
+
+<script is:inline define:vars={{ portalId, formId, region, targetId, context }}>
+  (function () {
+    function loadHubspotForms(cb) {
+      if (window.hbspt && window.hbspt.forms) return cb();
+
+      // Evite de charger 2 fois
+      if (document.querySelector('script[data-hsforms="true"]')) {
+        const t = setInterval(() => {
+          if (window.hbspt && window.hbspt.forms) {
+            clearInterval(t);
+            cb();
+          }
+        }, 50);
+        return;
+      }
+
+      const s = document.createElement("script");
+      s.src = "https://js.hsforms.net/forms/v2.js";
+      s.async = true;
+      s.dataset.hsforms = "true";
+      s.onload = cb;
+      document.head.appendChild(s);
+    }
+
+    loadHubspotForms(function () {
+      if (!window.hbspt || !window.hbspt.forms) return;
+
+      window.hbspt.forms.create({
+        region: region,
+        portalId: portalId,
+        formId: formId,
+        target: "#" + targetId,
+
+        onFormReady: function ($form) {
+          try {
+            const formEl = document.querySelector("#" + targetId + " form");
+            if (!formEl) return;
+
+            // Remplit les champs cachés si ils existent dans le formulaire HubSpot
+            Object.keys(context || {}).forEach((name) => {
+              const el = formEl.querySelector(`[name="${name}"]`);
+              if (el) el.value = context[name];
+            });
+          } catch (e) {}
+        },
+      });
+    });
+  })();
+</script>

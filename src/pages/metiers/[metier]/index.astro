@@ -1,0 +1,154 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ServicesGrid from "../../../components/metiers/ServicesGrid.astro";
+import VillesCards from "../../../components/metiers/VillesCards.astro";
+import { METIERS, ZONE } from "../../../data/catalogue";
+import HubspotForm from "../../../components/HubspotForm.astro";
+
+export function getStaticPaths() {
+  return METIERS.map((m) => ({ params: { metier: m.slug } }));
+}
+
+const metierSlug = Astro.params.metier!;
+const metier = METIERS.find((m) => m.slug === metierSlug);
+if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
+
+const pageTitle = `${metier.name} : demandes qualifiées (${ZONE})`;
+const description = `Vous êtes ${metier.name.toLowerCase()} ? Je vous envoie des demandes entrantes (appel + formulaire) dans le ${ZONE}. Paiement uniquement quand c’est qualifié.`;
+
+const HUBSPOT_PORTAL_ID = "PORTAL_ID";
+const HUBSPOT_FORM_ID = "FORM_ID";
+
+const pageUrl = Astro.url.pathname;
+---
+
+<Layout title={pageTitle} description={description}>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">{metier.badge}</div>
+          <h1>{metier.name} : des demandes qualifiées</h1>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers/">Métiers</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{metier.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro (pas en composant, comme tu préfères) -->
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">{metier.badge}</div>
+            <h2 class="display-4 fw-bold">Je vous envoie des demandes de {metier.name.toLowerCase()} dans votre secteur.</h2>
+
+            <p>
+              Concrètement : je génère des demandes entrantes (appels + formulaires) et je vous les transmets.
+              Vous payez uniquement quand la demande est <strong>qualifiée</strong>.
+            </p>
+
+            <p class="mb-3">
+              Je filtre avant de vous envoyer :
+            </p>
+
+            <ul class="iconlist iconlist-color mb-4">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+            </ul>
+
+            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
+            <a href="/faqs/" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Questions fréquentes</a>
+          </div>
+
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src={metier.introImage} alt="" />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <ServicesGrid metierSlug={metier.slug} services={metier.services} villes={metier.villes} title="Ce que les particuliers demandent le plus" />
+
+      </div>
+	  
+	  <div class="clear"></div>
+
+      <VillesCards metierSlug={metier.slug} villes={metier.villes} services={metier.services} title="Villes prioritaires (on élargit ensuite autour)" />
+
+      <div
+  class="section mt-0"
+  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <div class="col-lg-6 col-md-6">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+          <h3 class="text-transform-none ls-0">
+            Vous êtes {metier.name.toLowerCase()} ?
+            <br />Je peux vous envoyer des appels + formulaires.
+          </h3>
+        </div>
+
+        <p class="mb-3">
+          Des demandes entrantes dans votre secteur. Vous payez uniquement quand c’est qualifié.
+        </p>
+
+        <ul class="iconlist iconlist-color mb-0">
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="mb-3">Recevoir des demandes</h4>
+
+            <HubspotForm
+              portalId={HUBSPOT_PORTAL_ID}
+              formId={HUBSPOT_FORM_ID}
+              region="eu1"
+              context={{
+                page_type: "metier",
+                metier,
+                page_url: pageUrl,
+              }}
+            />
+
+            <small class="text-muted d-block mt-3">
+              Réponse rapide (jours ouvrés).
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+</Layout>

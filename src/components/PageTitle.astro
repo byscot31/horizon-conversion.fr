@@ -1,0 +1,55 @@
+---
+/**
+ * Props:
+ * - image: string (ex: "/images/services/adwords-title.jpg")
+ * - badge: string (petit label)
+ * - title: string (H1)
+ * - subtitle?: string (ligne sous le H1)
+ * - breadcrumbs: Array<{ label: string; href?: string }>
+ */
+const {
+  image,
+  badge,
+  title,
+  subtitle,
+  breadcrumbs = [],
+} = Astro.props;
+
+const lastIndex = breadcrumbs.length - 1;
+---
+
+<section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+  <img src={image} class="parallax-bg" alt={title} />
+  <div id="particles-line"></div>
+
+  <div class="container">
+    <div class="page-title-row">
+      <div class="page-title-content">
+        <div class="badge rounded-pill border border-light text-light">{badge}</div>
+        <h1>{title}</h1>
+        {subtitle && <span class="text-light">{subtitle}</span>}
+      </div>
+
+      {breadcrumbs.length > 0 && (
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            {breadcrumbs.map((b, i) => (
+              i === lastIndex ? (
+                <li class="breadcrumb-item active" aria-current="page">{b.label}</li>
+              ) : (
+                <li class="breadcrumb-item">
+                  <a href={b.href ?? "#"}>{b.label}</a>
+                </li>
+              )
+            ))}
+          </ol>
+        </nav>
+      )}
+    </div>
+  </div>
+
+  <div
+    class="video-overlay z-1"
+    style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"
+  ></div>
+</section>

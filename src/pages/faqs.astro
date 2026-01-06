@@ -1,0 +1,392 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HubspotForm from "../components/HubspotForm.astro";
+import { SITE } from "../config/site";
+---
+
+<Layout
+  title="FAQ | Horizon Conversion"
+  description="Réponses simples : demande qualifiée, zone, volume, coût, démarrage."
+>
+<!-- Page Title
+============================================= -->
+<section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+  <img src="/images/faqs-title.jpg" class="parallax-bg" alt="FAQ Horizon Conversion" />
+  <div id="particles-line"></div>
+
+  <div class="container">
+    <div class="page-title-row">
+
+      <div class="page-title-content">
+        <div class="badge rounded-pill border border-light text-light">
+          Réponses simples aux questions des artisans
+        </div>
+        <h1>FAQ</h1>
+      </div>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+</section><!-- .page-title end -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+  <div class="content-wrap pb-0">
+  
+  <div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-8 text-center">
+      <div class="heading-block border-bottom-0 text-center mx-auto">
+        <div class="badge rounded-pill badge-default">Une question ?</div>
+        <h3 class="text-transform-none ls-0 mb-3">FAQ (réponses simples)</h3>
+        <p>
+          Ici, je réponds aux questions qu’on me pose le plus : demande “qualifiée”, zone, volume, prix, démarrage.
+        </p>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <!-- Contenu FAQ -->
+    <div class="col-lg-10">
+
+      <!-- Filtres -->
+      <div class="grid-filter-wrap justify-content-center">
+        <ul class="grid-filter style-4 customjs">
+          <li class="activeFilter"><a href="#" class="fw-semibold" data-filter="all">Tout</a></li>
+          <li><a href="#" class="fw-semibold" data-filter=".faq-qualif">Demande qualifiée</a></li>
+          <li><a href="#" class="fw-semibold" data-filter=".faq-zone">Zone & volume</a></li>
+          <li><a href="#" class="fw-semibold" data-filter=".faq-prix">Prix</a></li>
+          <li><a href="#" class="fw-semibold" data-filter=".faq-demarrage">Démarrage</a></li>
+          <li><a href="#" class="fw-semibold" data-filter=".faq-divers">Divers</a></li>
+        </ul>
+      </div>
+
+      <div class="clear"></div>
+
+      <div id="faqs" class="faqs">
+
+        <!-- 1 -->
+        <div class="toggle faq pb-3 mb-4 faq-qualif">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-question-circle"></i>
+              <i class="toggle-open bi-question-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              C’est quoi une “demande qualifiée” ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Une demande est “qualifiée” si elle respecte les critères fixés ensemble :
+            <strong>zone</strong>, <strong>prestation</strong>, <strong>délai</strong> cohérent et <strong>contact joignable</strong>.
+            Si ça ne colle pas, je ne transmets pas.
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="toggle faq pb-3 mb-4 faq-zone">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-geo-alt"></i>
+              <i class="toggle-open bi-geo-alt"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Quelle zone tu couvres ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Principalement : <strong>{SITE.area}</strong>.
+            On démarre sur une zone (villes / rayon) que tu peux réellement traiter, puis on étend proprement si tout est OK.
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="toggle faq pb-3 mb-4 faq-zone">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-speedometer2"></i>
+              <i class="toggle-open bi-speedometer2"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Combien de demandes je peux recevoir ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Ça dépend du métier, de la zone et de la saison. Le plus important :
+            on règle le volume selon ta capacité. Si tu es plein, on réduit. Si tu as de la place, on relance.
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="toggle faq pb-3 mb-4 faq-zone faq-divers">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-calendar-check"></i>
+              <i class="toggle-open bi-calendar-check"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Et si je suis déjà plein ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            On met en pause ou on baisse. Le but n’est pas de t’envoyer des demandes pour “faire du volume”.
+            Le but, c’est que tu puisses répondre correctement quand tu en reçois.
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="toggle faq pb-3 mb-4 faq-divers">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-telephone"></i>
+              <i class="toggle-open bi-telephone"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Comment je reçois les demandes ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Selon le réglage : appels directs, formulaires, ou transmission par email.
+            Si tu veux centraliser, on peut aussi tout faire remonter dans ton outil (ex : HubSpot).
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="toggle faq pb-3 mb-4 faq-prix">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-cash"></i>
+              <i class="toggle-open bi-cash"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Je paye des clics ou des pubs ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Non. Le principe est simple : <strong>tu payes uniquement quand une demande est qualifiée</strong>.
+            On définit ensemble les critères, et c’est cadré.
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="toggle faq pb-3 mb-4 faq-prix">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-credit-card"></i>
+              <i class="toggle-open bi-credit-card"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Ça coûte combien ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Le prix dépend du métier et de la zone (la demande n’est pas la même partout).
+            On fait un point rapide, on fixe les critères “qualifié”, et je te donne un prix clair.
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="toggle faq pb-3 mb-4 faq-demarrage">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-play-circle"></i>
+              <i class="toggle-open bi-play-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              En combien de temps ça démarre ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Après l’audit (métier, zone, prestations, capacité), on peut démarrer rapidement.
+            Le délai dépend surtout des réglages et du métier.
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="toggle faq pb-3 mb-4 faq-demarrage faq-divers">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-person-check"></i>
+              <i class="toggle-open bi-person-check"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Est-ce que tu demandes l’exclusivité ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Pas obligatoire. On en parle selon la zone et ta capacité.
+            Le but, c’est que les demandes envoyées soient bien traitées.
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="toggle faq pb-3 mb-4 faq-qualif faq-divers">
+          <div class="toggle-header">
+            <div class="toggle-icon color">
+              <i class="toggle-closed bi-shield-check"></i>
+              <i class="toggle-open bi-shield-check"></i>
+            </div>
+            <div class="toggle-title fw-semibold ps-1">
+              Et si une demande n’est pas bonne ?
+            </div>
+            <div class="toggle-icon color">
+              <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+              <i class="toggle-open fa-solid fa-chevron-up color"></i>
+            </div>
+          </div>
+          <div class="toggle-content text-black-50 ps-4">
+            Si elle ne respecte pas les critères définis ensemble, elle ne doit pas être transmise.
+            Si un cas passe quand même, tu me le remontes : on corrige le filtre et on ajuste.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+  
+  <div class="clear"></div>
+
+  <!-- Form Section
+============================================= -->
+<div
+  class="section mb-3"
+  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <!-- Texte -->
+      <div class="col-md-5">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Contact</div>
+          <h3 class="text-transform-none ls-0">Tu veux des demandes qualifiées sur ta zone ?</h3>
+        </div>
+
+        <p>
+          On fait un point rapide (15 minutes) : métier, zone, prestations, capacité.
+          Ensuite je te dis si c’est possible et comment on démarre.
+        </p>
+
+        <ul class="iconlist mb-0">
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Secteur : <strong>{SITE.area}</strong></li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Objectif : <strong>appels + formulaires</strong></li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i> Paiement : <strong>uniquement si qualifié</strong></li>
+        </ul>
+
+        <div class="mt-4">
+          <a
+            href={`tel:${SITE.phoneE164}`}
+            class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+          >
+            Appeler {SITE.phoneDisplay}
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="mb-3">Demande d’audit</h4>
+
+            <div class="form-widget">
+              <HubspotForm portalId="XXXXXX" formId="YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" />
+            </div>
+
+            <small class="d-block mt-3 text-muted">
+              Si tu préfères : <a href={`tel:${SITE.phoneE164}`}>appelle-moi</a>.
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+</section><!-- #content end -->
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!window.jQuery) return;
+
+    const $ = window.jQuery;
+    const $faqItems = $("#faqs .faq");
+
+    if (window.location.hash !== "") {
+      const cls = window.location.hash.replace("#", "");
+      if (cls && $faqItems.hasClass(cls)) {
+        $(".grid-filter li").removeClass("activeFilter");
+        $(`[data-filter=".${cls}"]`).parent("li").addClass("activeFilter");
+
+        const sel = "." + cls;
+        $faqItems.hide();
+        if (sel !== "all") $(sel).fadeIn(500);
+        else $faqItems.fadeIn(500);
+      }
+    }
+
+    $(".grid-filter a").on("click", function () {
+      $(".grid-filter li").removeClass("activeFilter");
+      $(this).parent("li").addClass("activeFilter");
+
+      const faqSelector = $(this).attr("data-filter");
+      $faqItems.hide();
+      if (faqSelector !== "all") $(faqSelector).fadeIn(500);
+      else $faqItems.fadeIn(500);
+
+      return false;
+    });
+  });
+</script>
+
+</Layout>

@@ -1,0 +1,116 @@
+---
+import { SITE } from "../config/site";
+const year = new Date().getFullYear();
+---
+
+<footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+  <div class="container">
+    <div class="footer-widgets-wrap pb-5">
+
+      <div class="row col-mb-50">
+        <div class="col-md-8">
+
+          <div class="widget">
+            <img
+              src="/images/logo.svg"
+              alt="Horizon Conversion"
+              class="alignleft"
+              style="height: 60px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
+            />
+
+            <p>
+              <strong>Horizon Conversion</strong> : génération de demandes entrantes (appels + formulaires) pour artisans.
+              <br />
+              <strong>Vous payez uniquement quand c’est qualifié.</strong>
+            </p>
+
+            <div class="line line-sm"></div>
+
+            <div class="row g-4">
+              <div class="col-lg-4 col-6 widget_links">
+                <ul>
+				  <li><a href="/">Accueil</a></li>
+				  <li><a href="/qui-je-suis">Qui je suis</a></li>
+				  <li><a href="/faqs">FAQ</a></li>
+				  <li><a href="/contact">Contact</a></li>
+				</ul>
+              </div>
+
+              <div class="col-lg-8 col-12 widget_links">
+                <ul>
+                  <li class="d-block"><strong>Secteur :</strong> {SITE.area}</li>
+                  <li class="d-block"><strong>Objectif :</strong> appels / RDV qualifiés</li>
+                  <li class="d-block"><strong>Modèle :</strong> paiement au lead qualifié</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+          <div class="widget">
+
+            <div class="row">
+              <div class="col-12">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-telephone text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Appeler :</span><br />
+                    <h3 class="text-transform-none ls-0 fw-semibold">
+                      <a class="text-dark" href={`tel:${SITE.phoneE164}`}>{SITE.phoneDisplay}</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-4">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-envelope text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Écrire :</span><br />
+                    <h3 class="text-transform-none ls-0 fw-semibold">
+                      <a class="text-dark" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-4">
+                <a href="/contact" class="button button-rounded button-large w-100 text-center text-transform-none ls-0">
+                  Demander un audit (gratuit)
+                </a>
+                <small class="d-block mt-2 text-muted">
+                  Réponse rapide. On valide ensemble : métier, zone, capacité, objectifs.
+                </small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="copyrights"
+    style="background: url('/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;">
+    <div class="container">
+      <div class="row justify-content-between col-mb-30">
+        <div class="col-12 col-lg-auto text-center text-lg-start">
+          © {year} {SITE.name}. Tous droits réservés.
+        </div>
+        <div class="col-12 col-lg-auto text-center text-lg-end">
+          <div class="copyrights-menu copyright-links">
+            <a href="/" class="text-contrast-600">Accueil</a> /
+            <a href="/contact" class="text-contrast-600">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

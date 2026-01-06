@@ -1,0 +1,157 @@
+---
+import { SITE } from "../config/site";
+
+const normalize = (p) => (p === "/" ? "/" : p.replace(/\/$/, ""));
+const currentPath = normalize(Astro.url.pathname);
+
+// Page exacte (ex: /contact)
+const isExact = (href) => normalize(href) === currentPath;
+
+// Section (ex: /metiers/*)
+const isSection = (prefix) => {
+  const p = normalize(prefix);
+  return currentPath === p || currentPath.startsWith(p + "/");
+};
+---
+
+<header id="header" class="transparent-header floating-header header-size-md">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row">
+
+        <div id="logo">
+          <a href="/" aria-label={`${SITE.name} - Accueil`}>
+            <img class="logo-default py-2" src="/images/logo.svg" alt="Horizon Conversion" />
+          </a>
+        </div>
+
+        <div class="header-misc">
+          <a href="/contact" class="button button-rounded ms-3 d-none d-sm-block">
+            Recevoir des demandes
+          </a>
+        </div>
+
+        <div class="primary-menu-trigger">
+          <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
+
+        <nav class="primary-menu with-arrows">
+  <ul class="menu-container">
+    <li class={`menu-item ${isExact("/") ? "current" : ""}`}>
+      <a class="menu-link" href="/" aria-current={isExact("/") ? "page" : undefined}><div>Accueil</div></a>
+    </li>
+
+    <li class={`menu-item ${isExact("/qui-je-suis") ? "current" : ""}`}>
+      <a class="menu-link" href="/qui-je-suis" aria-current={isExact("/qui-je-suis") ? "page" : undefined}><div>Qui je suis</div></a>
+    </li>
+
+    <li class={`menu-item mega-menu ${isSection("/metiers") ? "current" : ""}`}>
+      <a class="menu-link" href="#" aria-current={isSection("/metiers") ? "page" : undefined}><div>Métiers</div></a>
+
+      <div class="mega-menu-content mega-menu-style-2 px-0">
+        <div class="container">
+          <div class="row">
+
+            <a href="/metiers/plombier/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-droplet-half color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Plombier</div>
+                  <p class="mb-0">Fuite, débouchage, chauffe-eau, sanitaires.</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="/metiers/electricien/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-lightning-charge color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Électricien</div>
+                  <p class="mb-0">Dépannage, tableau, prises, mise aux normes.</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="/metiers/chauffagiste/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-thermometer-sun color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Chauffagiste</div>
+                  <p class="mb-0">Chaudière, PAC, entretien, dépannage.</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="/metiers/couvreur/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-house color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Couvreur</div>
+                  <p class="mb-0">Fuite toiture, tuiles, zinguerie, entretien.</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="/metiers/serrurier/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-key color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Serrurier</div>
+                  <p class="mb-0">Ouverture porte, remplacement serrure, urgence.</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="/metiers/menuisier/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-2">
+                  <i class="bi-door-open color" style="font-size:2.25rem; line-height:1;"></i>
+                </div>
+                <div class="fbox-content">
+                  <div class="h3 text-transform-none ls-0">Menuisier</div>
+                  <p class="mb-0">Fenêtres, portes, volets, pose & remplacement.</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="mega-menu-column sub-menu-container col-12 p-0">
+              <a
+                href="/contact/"
+                class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light"
+              >
+                Je veux des demandes qualifiées <i class="bi-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class={`menu-item ${isExact("/faqs") ? "current" : ""}`}>
+      <a class="menu-link" href="/faqs" aria-current={isExact("/faqs") ? "page" : undefined}><div>FAQ</div></a>
+    </li>
+
+    <li class={`menu-item ${isExact("/contact") ? "current" : ""}`}>
+      <a class="menu-link" href="/contact" aria-current={isExact("/contact") ? "page" : undefined}><div>Contact</div></a>
+    </li>
+  </ul>
+</nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>

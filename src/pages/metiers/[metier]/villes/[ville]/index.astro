@@ -1,0 +1,154 @@
+---
+import Layout from "../../../../../layouts/Layout.astro";
+import ServicesGrid from "../../../../../components/metiers/ServicesGrid.astro";
+import VillesCards from "../../../../../components/metiers/VillesCards.astro";
+import { METIERS, ZONE } from "../../../../../data/catalogue";
+import HubspotForm from "../../../../../components/HubspotForm.astro";
+
+export function getStaticPaths() {
+  return METIERS.flatMap((m) =>
+    m.villes.map((v) => ({
+      params: { metier: m.slug, ville: v.slug },
+    }))
+  );
+}
+
+const metierSlug = Astro.params.metier!;
+const villeSlug = Astro.params.ville!;
+
+const metier = METIERS.find((m) => m.slug === metierSlug);
+if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
+
+const ville = metier.villes.find((v) => v.slug === villeSlug);
+if (!ville) throw new Error(`Ville introuvable: ${villeSlug} (${metierSlug})`);
+
+const pageTitle = `${metier.name} à ${ville.name} : demandes qualifiées`;
+const description = `Vous êtes ${metier.name.toLowerCase()} à ${ville.name} ? Je vous envoie des demandes entrantes (appel + formulaire). Paiement uniquement quand c’est qualifié.`;
+
+const otherVilles = metier.villes.filter((v) => v.slug !== ville.slug);
+
+const HUBSPOT_PORTAL_ID = "PORTAL_ID";
+const HUBSPOT_FORM_ID = "FORM_ID";
+
+const pageUrl = Astro.url.pathname;
+---
+
+<Layout title={pageTitle} description={description}>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">{metier.badge}</div>
+          <h1>{metier.name} à {ville.name}</h1>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers/">Métiers</a></li>
+            <li class="breadcrumb-item"><a href={`/metiers/${metier.slug}/`}>{metier.name}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{ville.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">{ville.name}</div>
+            <h2 class="display-4 fw-bold">Vous êtes {metier.name.toLowerCase()} sur {ville.name} ?</h2>
+
+            <p>
+              Je génère des demandes entrantes (appels + formulaires) sur {ville.name} et autour.
+              Je vous transfère uniquement ce qui est <strong>qualifié</strong>.
+            </p>
+
+            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
+            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Voir la page {metier.name}</a>
+          </div>
+
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src={metier.introImage} alt="" />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <ServicesGrid metierSlug={metier.slug} services={metier.services} villes={metier.villes} title={`Services les plus demandés à ${ville.name}`} />
+
+      </div>
+	  
+	  <div class="clear"></div>
+
+      <VillesCards metierSlug={metier.slug} villes={metier.villes} services={metier.services} />
+	  
+	  <div
+  class="section mt-0"
+  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <div class="col-lg-6 col-md-6">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+          <h3 class="text-transform-none ls-0">
+            Vous êtes {metier.name.toLowerCase()} à {ville.name.toLowerCase()} ?
+            <br />Je peux vous envoyer des demandes dans ce secteur.
+          </h3>
+        </div>
+
+        <p class="mb-3">
+          Appels + formulaires entrants autour de {ville.name.toLowerCase()}. Paiement uniquement quand c’est qualifié.
+        </p>
+
+        <ul class="iconlist iconlist-color mb-0">
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : {ville} et alentours</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que vous faites vraiment</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="mb-3">Recevoir des demandes</h4>
+
+            <HubspotForm
+              portalId={HUBSPOT_PORTAL_ID}
+              formId={HUBSPOT_FORM_ID}
+              region="eu1"
+              context={{
+                page_type: "ville",
+                metier,
+                ville,
+                page_url: pageUrl,
+              }}
+            />
+
+            <small class="text-muted d-block mt-3">
+              Objectif : des demandes simples, claires, et joignables.
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+</Layout>
