@@ -1,8 +1,14 @@
 ---
 import { SITE } from "../config/site";
+
+// "/" sur la home. (on garde robuste au cas où)
+const path = Astro.url.pathname;
+const isHome = path === "/" || path === "" || path === "/index.html";
+
+const topBarClass = `transparent-topbar${isHome ? "" : " dark"}`;
 ---
 
-<div id="top-bar" class="transparent-topbar dark">
+<div id="top-bar" class={topBarClass}>
   <div class="container">
     <div class="row justify-content-between">
       <div class="col-12 col-md-auto">
@@ -32,6 +38,7 @@ import { SITE } from "../config/site";
           </li>
         </ul>
       </div>
+
     </div>
   </div>
 </div>
