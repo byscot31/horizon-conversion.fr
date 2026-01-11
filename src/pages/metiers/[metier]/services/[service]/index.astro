@@ -127,13 +127,10 @@ const pageUrl = Astro.url.pathname;
             <h4 class="mb-3">Recevoir des demandes</h4>
 
             <HubspotForm
-              portalId={HUBSPOT_PORTAL_ID}
-              formId={HUBSPOT_FORM_ID}
-              region="eu1"
               context={{
                 page_type: "service",
-                metier,
-                service,
+                metier: metier.name,
+                service: service.name,
                 page_url: pageUrl,
               }}
             />

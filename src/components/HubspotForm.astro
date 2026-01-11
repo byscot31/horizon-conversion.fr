@@ -1,71 +1,106 @@
 ---
-interface Props {
-  portalId: string;
-  formId: string;
-  region?: string; // ex: "eu1" ou "na1"
-  targetId?: string;
+type Primitive = string | number | boolean | null | undefined;
+
+type Props = {
+  portalId?: string;
+  formId?: string;
+  region?: string;
+  /**
+   * Valeurs envoyées en champs cachés (si les champs existent dans HubSpot).
+   * Exemple: { page_type:"metier", metier:"Plombier", page_url:"/metiers/plombier/" }
+   */
+  context?: Record<string, any>;
   class?: string;
-  context?: Record<string, string>;
-}
+};
 
 const {
-  portalId,
-  formId,
-  region = "eu1",
-  targetId = `hsform-${formId}`,
-  class: className = "",
+  portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID,
+  formId = import.meta.env.PUBLIC_HUBSPOT_FORM_ID,
+  region = import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1",
   context = {},
+  class: className = "",
 } = Astro.props;
+
+if (!portalId || !formId) {
+  console.warn("[HubspotForm] portalId/formId manquant. Vérifie le .env");
+}
+
+const targetId = `hs-form-${crypto.randomUUID()}`;
+
+function toText(v: any): string {
+  if (v === null || v === undefined) return "";
+  if (typeof v === "string") return v;
+  if (typeof v === "number" || typeof v === "boolean") return String(v);
+
+  // Si tu passes un objet "metier" / "service" / "ville", on prend .name si dispo
+  if (typeof v === "object") {
+    if ("name" in v) return String(v.name);
+    if ("slug" in v) return String(v.slug);
+    try { return JSON.stringify(v); } catch { return ""; }
+  }
+
+  return "";
+}
+
+const contextEntries = Object.entries(context).map(([k, v]) => [k, toText(v)]);
 ---
 
-<div id={targetId} class={className}></div>
+<div class={className}>
+  <div id={targetId} />
+</div>
 
-<script is:inline define:vars={{ portalId, formId, region, targetId, context }}>
+<script is:inline>
   (function () {
-    function loadHubspotForms(cb) {
-      if (window.hbspt && window.hbspt.forms) return cb();
+    const portalId = {JSON.stringify(portalId)};
+    const formId = {JSON.stringify(formId)};
+    const region = {JSON.stringify(region)};
+    const targetId = {JSON.stringify(targetId)};
+    const contextEntries = {JSON.stringify(contextEntries)};
 
-      // Evite de charger 2 fois
-      if (document.querySelector('script[data-hsforms="true"]')) {
-        const t = setInterval(() => {
-          if (window.hbspt && window.hbspt.forms) {
-            clearInterval(t);
-            cb();
-          }
-        }, 50);
-        return;
+    function setHiddenValues(formEl) {
+      // Injecte uniquement si le champ existe dans le form HubSpot
+      for (const [name, value] of contextEntries) {
+        const input = formEl.querySelector(`[name="${name}"]`);
+        if (input) input.value = value || "";
       }
-
-      const s = document.createElement("script");
-      s.src = "https://js.hsforms.net/forms/v2.js";
-      s.async = true;
-      s.dataset.hsforms = "true";
-      s.onload = cb;
-      document.head.appendChild(s);
     }
 
-    loadHubspotForms(function () {
-      if (!window.hbspt || !window.hbspt.forms) return;
+    function createForm() {
+      const host = document.getElementById(targetId);
+      if (!host) return;
+
+      // Évite double rendu (navigation, hot reload, etc.)
+      if (host.dataset.hsLoaded === "1") return;
+      host.dataset.hsLoaded = "1";
 
       window.hbspt.forms.create({
-        region: region,
-        portalId: portalId,
-        formId: formId,
-        target: "#" + targetId,
-
+        region,
+        portalId,
+        formId,
+        target: `#${targetId}`,
         onFormReady: function ($form) {
-          try {
-            const formEl = document.querySelector("#" + targetId + " form");
-            if (!formEl) return;
-
-            // Remplit les champs cachés si ils existent dans le formulaire HubSpot
-            Object.keys(context || {}).forEach((name) => {
-              const el = formEl.querySelector(`[name="${name}"]`);
-              if (el) el.value = context[name];
-            });
-          } catch (e) {}
+          // $form peut être un élément DOM ou un wrapper selon versions
+          const formEl = ($form && $form[0]) ? $form[0] : $form;
+          if (formEl) setHiddenValues(formEl);
         },
       });
-    });
+    }
+
+    function waitForHubspot(tries) {
+      if (window.hbspt && window.hbspt.forms && typeof window.hbspt.forms.create === "function") {
+        createForm();
+        return;
+      }
+      if (tries <= 0) return;
+      setTimeout(() => waitForHubspot(tries - 1), 120);
+    }
+
+    waitForHubspot(80);
   })();
 </script>
+
+<style>
+  /* Optionnel : petit reset pour éviter un rendu “cassé” dans certaines sections */
+  :global(.hs-form fieldset) { max-width: none !important; }
+  :global(.hs-form .hs-error-msgs) { margin: .25rem 0 0; }
+</style>

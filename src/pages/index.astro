@@ -520,7 +520,12 @@ const quickFaqs =
 
             <!-- ✅ HubSpot (remplace le form.php) -->
             <div class="form-widget">
-              <HubspotForm portalId="XXXXXX" formId="YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" />
+              <HubspotForm
+                context={{
+                  page_type: "home",
+                  page_url: Astro.url.pathname,
+                }}
+              />
             </div>
 
             <small class="d-block mt-3 text-muted">
