@@ -4,7 +4,7 @@ export const SITE = {
   area: "Sud de l’Oise & Nord Val-d’Oise",
 
   // ✅ À PERSONNALISER
-  phoneDisplay: "06 00 00 00 00",
-  phoneE164: "+33600000000",
+  phoneDisplay: "06 60 92 10 08",
+  phoneE164: "+33660921008",
   email: "contact@horizon-conversion.fr",
 };

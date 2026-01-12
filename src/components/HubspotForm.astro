@@ -1,14 +1,8 @@
 ---
-type Primitive = string | number | boolean | null | undefined;
-
 type Props = {
   portalId?: string;
   formId?: string;
   region?: string;
-  /**
-   * Valeurs envoyées en champs cachés (si les champs existent dans HubSpot).
-   * Exemple: { page_type:"metier", metier:"Plombier", page_url:"/metiers/plombier/" }
-   */
   context?: Record<string, any>;
   class?: string;
 };
@@ -21,24 +15,18 @@ const {
   class: className = "",
 } = Astro.props;
 
-if (!portalId || !formId) {
-  console.warn("[HubspotForm] portalId/formId manquant. Vérifie le .env");
-}
-
 const targetId = `hs-form-${crypto.randomUUID()}`;
 
 function toText(v: any): string {
   if (v === null || v === undefined) return "";
   if (typeof v === "string") return v;
   if (typeof v === "number" || typeof v === "boolean") return String(v);
-
-  // Si tu passes un objet "metier" / "service" / "ville", on prend .name si dispo
   if (typeof v === "object") {
     if ("name" in v) return String(v.name);
+    if ("nom" in v) return String(v.nom);
     if ("slug" in v) return String(v.slug);
     try { return JSON.stringify(v); } catch { return ""; }
   }
-
   return "";
 }
 
@@ -46,7 +34,7 @@ const contextEntries = Object.entries(context).map(([k, v]) => [k, toText(v)]);
 ---
 
 <div class={className}>
-  <div id={targetId} />
+  <div id={targetId}></div>
 </div>
 
 <script is:inline>
@@ -57,20 +45,16 @@ const contextEntries = Object.entries(context).map(([k, v]) => [k, toText(v)]);
     const targetId = {JSON.stringify(targetId)};
     const contextEntries = {JSON.stringify(contextEntries)};
 
-    function setHiddenValues(formEl) {
-      // Injecte uniquement si le champ existe dans le form HubSpot
+    function applyHiddenValues(formEl) {
       for (const [name, value] of contextEntries) {
         const input = formEl.querySelector(`[name="${name}"]`);
         if (input) input.value = value || "";
       }
     }
 
-    function createForm() {
+    function render() {
       const host = document.getElementById(targetId);
-      if (!host) return;
-
-      // Évite double rendu (navigation, hot reload, etc.)
-      if (host.dataset.hsLoaded === "1") return;
+      if (!host || host.dataset.hsLoaded === "1") return;
       host.dataset.hsLoaded = "1";
 
       window.hbspt.forms.create({
@@ -79,28 +63,20 @@ const contextEntries = Object.entries(context).map(([k, v]) => [k, toText(v)]);
         formId,
         target: `#${targetId}`,
         onFormReady: function ($form) {
-          // $form peut être un élément DOM ou un wrapper selon versions
           const formEl = ($form && $form[0]) ? $form[0] : $form;
-          if (formEl) setHiddenValues(formEl);
+          if (formEl) applyHiddenValues(formEl);
         },
       });
     }
 
-    function waitForHubspot(tries) {
-      if (window.hbspt && window.hbspt.forms && typeof window.hbspt.forms.create === "function") {
-        createForm();
-        return;
-      }
+    (function waitForHubspot(tries) {
+      if (window.hbspt?.forms?.create) return render();
       if (tries <= 0) return;
       setTimeout(() => waitForHubspot(tries - 1), 120);
-    }
-
-    waitForHubspot(80);
+    })(80);
   })();
 </script>
 
 <style>
-  /* Optionnel : petit reset pour éviter un rendu “cassé” dans certaines sections */
   :global(.hs-form fieldset) { max-width: none !important; }
-  :global(.hs-form .hs-error-msgs) { margin: .25rem 0 0; }
 </style>
