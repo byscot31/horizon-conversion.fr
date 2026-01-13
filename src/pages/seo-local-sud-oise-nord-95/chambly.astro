@@ -4,115 +4,81 @@ import HubspotForm from "../../components/HubspotForm.astro";
 import { SITE } from "../../config/site";
 
 const pageUrl = Astro.url.pathname;
-
 const cityLabel = "Chambly";
 const zoneLabel = "Sud de l’Oise & Nord Val-d’Oise (95)";
 
-const pageTitle = `Consultant webmarketing à ${cityLabel} | SEO local + Pub + Site (conversion)`;
-const description =
-  `À ${cityLabel} : visibilité Google locale, site clair qui convertit en appels/devis, et pub locale si besoin. Audit rapide.`;
+const pageTitle = `Consultant webmarketing ${cityLabel} | SEO local + Pub locale + Site (conversion)`;
+const description = `${cityLabel} : visibilité locale sur Google + site clair + pub locale si besoin pour générer des demandes qualifiées (Oise / Nord 95).`;
 
 const nearby = [
-  "Le Mesnil-en-Thelle","Neuilly-en-Thelle","Bornel","Belle-Église","Puiseux-le-Hauberger",
-  "Persan","Beaumont-sur-Oise","Bernes-sur-Oise","Champagne-sur-Oise","Ronquerolles",
-  "Parmain","L’Isle-Adam","Méru","Boran-sur-Oise","Saint-Leu-d’Esserent","Précy-sur-Oise",
-  "Gouvieux","Creil"
+  "Chambly","Bornel","Le Mesnil-en-Thelle","Méru","Persan","Beaumont-sur-Oise","L’Isle-Adam",
+  "Andeville","Amblainville","Cires-lès-Mello","Mello","Précy-sur-Oise","Saint-Leu-d’Esserent",
+  "Gouvieux","Chantilly","Creil","Nogent-sur-Oise","Montataire"
 ];
 
-const localAngle = [
-  "À Chambly, les recherches “près de moi” sont fréquentes et la zone bouge vite (Oise / 95).",
-  "La clé, ce n’est pas d’être visible “partout” : c’est d’être visible sur les bonnes communes, avec un site qui fait agir (appel / devis).",
-  "On cadre le rayon, on simplifie le contact, et on filtre pour éviter les demandes hors secteur."
+const quickFaqs = [
+  {
+    q: "Chambly : c’est plutôt Oise ou 95 ?",
+    a: "Les deux : c’est une zone “charnière”. L’objectif, c’est de <strong>cadrer ton rayon</strong> (Oise / Nord 95) pour éviter le hors-zone et garder du qualifié.",
+  },
+  {
+    q: "Je reçois des demandes trop loin (Cergy, Paris, etc.), tu peux éviter ça ?",
+    a: "Oui : on verrouille les zones (villes + rayon), on annonce clairement les secteurs servis, et côté pub on met des <strong>exclusions</strong> pour ne pas payer le mauvais trafic.",
+  },
+  {
+    q: "SEO local ou pub locale sur Chambly ?",
+    a: "Souvent un mix : la pub peut donner du volume rapidement, le SEO construit du durable. On adapte selon ta capacité (plein = on baisse).",
+  },
+  {
+    q: "Comment filtrer sans perdre des bons clients ?",
+    a: "2–3 questions simples (ville, délai, type de besoin) + micro-copy rassurante. On filtre le hors-sujet sans fermer la porte.",
+  },
+  {
+    q: "Combien de temps avant de voir des résultats ?",
+    a: "La pub peut démarrer vite. Le SEO met plus de temps mais dure. Dans tous les cas, on commence par un parcours simple qui convertit (CTA, preuve, contact).",
+  },
+  {
+    q: "Tu bosses avec artisans / TPE autour de Chambly ?",
+    a: "Oui : on s’adapte au type de demandes : urgence = appels, devis = formulaire, premium = rassurance + preuves + process.",
+  },
 ];
-
-const useCases = [
-  { title: "Artisan / commerce : remplissage", desc: "SEO local + pages simples + boutons d’appel. Objectif : des demandes gérables." },
-  { title: "Devis planifiés", desc: "Formulaire court + questions utiles (zone, prestation, délai) pour gagner du temps." },
-  { title: "Projets plus qualifiés", desc: "Rassurance (preuves, process), filtrage léger, orientation devis." },
-];
-
-const miniFaqLocal = [
-  { q: `Tu couvres Persan / Beaumont depuis ${cityLabel} ?`, a: "Oui si c’est cohérent avec ton activité. On fixe un rayon réaliste et on le respecte." },
-  { q: `Quel rayon autour de ${cityLabel} ?`, a: "On démarre sur un rayon “facile à traiter” (temps de trajet), puis on élargit si tu as de la capacité." },
-  { q: "Comment éviter les demandes hors zone ?", a: "On l’affiche clairement sur le site, on paramètre le ciblage, et on ajoute 2–3 questions de tri au formulaire." },
-];
-
-const services = [
-  { icon: "bi-search", title: "SEO local", desc: "Pages locales propres + fiche Google reliée au site." },
-  { icon: "bi-megaphone", title: "Pub locale (option)", desc: "Pour accélérer quand tu as de la place." },
-  { icon: "bi-telephone", title: "Conversion", desc: "Contact simple, CTA visibles, preuves." },
-  { icon: "bi-bar-chart", title: "Suivi", desc: "Appels + formulaires + qualité → ajustements." },
-];
-
-const faqMixte = [
-  { cat: "faq-qualif", icon: "bi-question-circle", q: "C’est quoi une demande “qualifiée” ?", a: "Zone OK, prestation OK, délai cohérent, contact joignable. Sinon, on filtre." },
-  { cat: "faq-zone", icon: "bi-geo-alt", q: "Tu interviens où ?", a: `Principalement : <strong>${SITE.area ?? zoneLabel}</strong>. On démarre sur une zone réaliste, puis on étend si besoin.` },
-  { cat: "faq-zone", icon: "bi-speedometer2", q: "Combien de demandes ?", a: "Ça dépend. On règle le volume selon ta capacité (on baisse si tu es plein)." },
-  { cat: "faq-prix", icon: "bi-credit-card", q: "C’est quoi le budget ?", a: "Selon concurrence + objectif. Je te donne un prix clair après un point rapide." },
-  { cat: "faq-demarrage", icon: "bi-play-circle", q: "Quand ça démarre ?", a: "Après cadrage, on peut démarrer vite. Ensuite on améliore." },
-  { cat: "faq-divers", icon: "bi-telephone", q: "Comment tu mesures ?", a: "Appels, formulaires, zones, qualité. Et on ajuste." },
-];
-
-const metierSlug = "chambly"; // <-- change selon la page
-
-const relatedMap = {
-  "chambly": [
-    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
-    { href: "/seo-local-sud-oise-nord-95/nord-95/", label: "Nord 95 : Persan / Beaumont / L’Isle-Adam" },
-  ],
-  "le-mesnil-en-thelle": [
-    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly : demandes locales" },
-    { href: "/seo-local-sud-oise-nord-95/meru/", label: "Méru : zone étendue" },
-  ],
-  "creil-saint-maximin": [
-    { href: "/seo-local-sud-oise-nord-95/nogent-montataire/", label: "Nogent / Montataire : appels & devis" },
-    { href: "/seo-local-sud-oise-nord-95/chantilly/", label: "Chantilly : premium / devis" },
-  ],
-  "nogent-montataire": [
-    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
-    { href: "/seo-local-sud-oise-nord-95/senlis/", label: "Senlis : mieux qualifié" },
-  ],
-  "meru": [
-    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
-    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly : demandes locales" },
-  ],
-  "senlis": [
-    { href: "/seo-local-sud-oise-nord-95/chantilly/", label: "Chantilly : premium / devis" },
-    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
-  ],
-  "chantilly": [
-    { href: "/seo-local-sud-oise-nord-95/senlis/", label: "Senlis : mieux qualifié" },
-    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
-  ],
-  "nord-95": [
-    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly (connexion Oise/95)" },
-    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
-  ],
-};
-
-const relatedLinks = relatedMap[metierSlug] ?? [];
 ---
 
 <Layout title={pageTitle} description={description}>
-  <!-- Page Title -->
-  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
-    <img src="/images/services/analysis-title.jpg" class="parallax-bg" alt="" />
+  <!-- Page Title
+  ============================================= -->
+  <section
+    class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar"
+    style="padding-bottom: 140px;"
+  >
+    <img
+      src="/images/services/analysis-title.jpg"
+      class="parallax-bg"
+      alt="Chambly : SEO local et demandes qualifiées"
+    />
     <div id="particles-line"></div>
 
-    <div class="container">
+    <div class="container position-relative">
       <div class="page-title-row">
+
         <div class="page-title-content">
-          <div class="badge rounded-pill border border-light text-light">Consultant webmarketing</div>
-          <h1>À {cityLabel} : plus de demandes locales</h1>
+          <div class="badge rounded-pill border border-light text-light">Zone : Oise / Nord 95</div>
+          <h1>Chambly : des demandes locales (Oise + Nord 95) bien cadrées</h1>
+          <div class="mt-3">
+            <small class="text-light op-08 d-block">
+              Zone charnière : on définit un rayon réaliste + on filtre pour éviter le hors-zone et garder des appels/devis exploitables.
+            </small>
+          </div>
         </div>
 
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="/seo-local-sud-oise-nord-95/">Sud Oise / Nord 95</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{cityLabel}</li>
+            <li class="breadcrumb-item"><a href="/seo-local-sud-oise-nord-95/">Sud Oise & Nord 95</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chambly</li>
           </ol>
         </nav>
+
       </div>
     </div>
 
@@ -121,198 +87,319 @@ const relatedLinks = relatedMap[metierSlug] ?? [];
 
   <section id="content">
     <div class="content-wrap pb-0">
+
       <div class="container">
 
-        <!-- Intro -->
         <div class="row align-items-center">
           <div class="col-lg-7">
-            <div class="badge rounded-pill badge-default">Pack complet</div>
-            <h2 class="display-4 fw-bold">Je t’aide à générer des demandes locales à {cityLabel}.</h2>
+            <div class="badge rounded-pill badge-default">{cityLabel}</div>
+
+            <h2 class="display-4 fw-bold">Une zone “charnière” : on capte, on filtre, on convertit.</h2>
 
             <p>
-              Je suis <strong>consultant webmarketing</strong> : visibilité (Google) + site clair qui transforme en
-              <strong>appels</strong> et <strong>demandes de devis</strong>. On garde le volume gérable.
+              Chambly, c’est le bon endroit pour capter des demandes Oise + Nord 95…
+              mais si la zone n’est pas cadrée, tu récupères vite du <strong>hors-secteur</strong>.
+              Mon rôle : <strong>attirer des appels + demandes de devis</strong> et <strong>filtrer</strong> pour ne garder que l’utile.
             </p>
 
-            <ul class="iconlist iconlist-color mb-4">
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : rayon / communes définies</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que tu proposes vraiment</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible planning</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : joignable</li>
-            </ul>
+            <p class="mb-4">
+              Concrètement : on clarifie ton <strong>rayon réel</strong> (Bornel, Mesnil-en-Thelle, Persan…),
+              tes prestations et tes priorités (dépannage, devis, projets), puis on met en place des pages locales + (si besoin)
+              une pub locale avec <strong>exclusions</strong>. Ensuite, on suit l’essentiel : <strong>appels</strong>, <strong>formulaires</strong> et <strong>qualité</strong>.
+            </p>
 
-            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Demander un audit</a>
-            {SITE?.phoneE164 && (
-              <a href={`tel:${SITE.phoneE164}`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
-                Appeler
+            <div class="d-flex flex-wrap gap-2">
+              <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Demander un audit</a>
+              <a
+                href="/seo-local-sud-oise-nord-95/"
+                class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0"
+              >
+                Voir les autres zones
               </a>
-            )}
+              <a
+                href="/faqs/"
+                class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0"
+              >
+                FAQ
+              </a>
+            </div>
 
             <small class="text-muted d-block mt-3">
-              Exemples communes : {nearby.slice(0, 10).join(" • ")}…
+              Astuce : sur Chambly, la priorité c’est <strong>rayon clair</strong> + <strong>messages précis</strong> + <strong>filtrage</strong>.
             </small>
+
+            <div class="mt-3">
+              <small class="text-muted">
+                Communes proches : {nearby.slice(0, 10).join(" • ")}…
+              </small>
+            </div>
           </div>
 
-          <div class="col-lg-5 mt-4 mt-lg-0">
-            <img src="/images/sections/2.png" alt="" />
-          </div>
-        </div>
-
-        <div class="clear line my-6"></div>
-
-        <!-- Ce que je mets en place -->
-        <div class="heading-block border-bottom-0 text-center">
-          <div class="badge rounded-pill badge-default">Mise en place</div>
-          <h3 class="text-transform-none ls-0">Simple, local, efficace</h3>
-        </div>
-
-        <div class="row mt-4 col-mb-50 mb-0">
-          {services.map((s) => (
-            <div class="col-sm-6 col-lg-3">
-              <div class="feature-box">
-                <div class="fbox-icon mb-4">
-                  <i class={`${s.icon} text-white bg-color`}></i>
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none">{s.title}</h3>
-                  <p class="mb-0 text-muted">{s.desc}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div class="clear line my-6"></div>
-
-        <!-- Angle local (UNIQUE) -->
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="card shadow-sm">
-              <div class="card-body p-5">
-                <div class="badge rounded-pill badge-default mb-3">Spécifique {cityLabel}</div>
-                <h3 class="text-transform-none ls-0 mb-3">L’approche la plus rentable ici</h3>
-                {localAngle.map((p) => <p class="mb-2 text-muted">{p}</p>)}
-              </div>
-            </div>
+          <div class="col-lg-5 mt-4 mt-lg-0 text-center">
+            <img
+              src="/images/services/analysis.svg"
+              alt="Filtrer et convertir à Chambly"
+              style="max-width: 420px;"
+              loading="lazy"
+            />
           </div>
         </div>
 
         <div class="clear line my-6"></div>
 
-        <!-- Cas d’usage (UNIQUE) -->
         <div class="heading-block border-bottom-0 text-center">
-          <div class="badge rounded-pill badge-default">Cas d’usage</div>
-          <h3 class="text-transform-none ls-0">Selon ton activité</h3>
-        </div>
-
-        <div class="row col-mb-30 align-content-stretch mt-4">
-          {useCases.map((u) => (
-            <div class="col-lg-4 d-flex">
-              <div class="card w-100">
-                <div class="card-body p-4">
-                  <h4 class="text-transform-none ls-0 mb-2">{u.title}</h4>
-                  <p class="text-muted mb-0">{u.desc}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div class="clear line my-6"></div>
-
-        <!-- Zone couverte (UNIQUE via nearby + microcopy) -->
-        <div class="heading-block border-bottom-0 text-center">
-          <div class="badge rounded-pill badge-default">Zone</div>
-          <h3 class="text-transform-none ls-0">J’interviens à {cityLabel} et autour</h3>
-          <p class="text-muted mb-0">
-            On démarre sur un rayon simple à traiter. Si tu as de la capacité, on élargit proprement.
+          <div class="badge rounded-pill badge-default">Ce que je mets en place</div>
+          <h2 class="text-transform-none ls-0">Pour Chambly : rayon, filtrage, demandes utiles</h2>
+          <p class="text-muted mb-0" style="max-width: 780px; margin: 0 auto;">
+            Ici, l’enjeu n’est pas “d’avoir des clics”, mais d’avoir des <strong>demandes qualifiées</strong> :
+            bonne zone, bon besoin, bon délai.
           </p>
         </div>
 
-        <div class="row col-mb-20 mt-4">
-          {nearby.map((v) => (
-            <div class="col-6 col-md-4 col-lg-3">
-              <span class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center" style="justify-content:center; cursor:default;">
-                {v}
-              </span>
-            </div>
-          ))}
-        </div>
+        <div class="clear"></div>
 
-        <div class="clear line my-6"></div>
+        <div class="row mt-4 col-mb-50 mb-0">
 
-        <!-- FAQ -->
-        <div class="container mb-5 px-0">
-          <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-8 text-center">
-              <div class="heading-block border-bottom-0 text-center mx-auto">
-                <div class="badge rounded-pill badge-default">FAQ</div>
-                <h3 class="text-transform-none ls-0 mb-3">Réponses simples</h3>
-                <p>Qualité, zone, volume, prix, démarrage.</p>
+          <!-- 1 -->
+          <div class="col-sm-6 col-lg-4">
+            <div class="feature-box">
+              <div class="fbox-icon mb-4">
+                <a href="/seo-local-sud-oise-nord-95/chambly/" aria-label="SEO local Chambly">
+                  <i class="fa-brands fa-google text-white bg-google"></i>
+                </a>
               </div>
-            </div>
-
-            <div class="clear"></div>
-
-            <div class="col-lg-10">
-              <div class="grid-filter-wrap justify-content-center">
-                <ul class="grid-filter style-4 customjs">
-                  <li class="activeFilter"><a href="#" class="fw-semibold" data-filter="all">Tout</a></li>
-                  <li><a href="#" class="fw-semibold" data-filter=".faq-qualif">Qualifiée</a></li>
-                  <li><a href="#" class="fw-semibold" data-filter=".faq-zone">Zone & volume</a></li>
-                  <li><a href="#" class="fw-semibold" data-filter=".faq-prix">Prix</a></li>
-                  <li><a href="#" class="fw-semibold" data-filter=".faq-demarrage">Démarrage</a></li>
-                  <li><a href="#" class="fw-semibold" data-filter=".faq-divers">Divers</a></li>
-                </ul>
+              <div class="fbox-content">
+                <h3 class="text-transform-none">Pages locales + Google (SEO local)</h3>
+                <p class="mb-0">
+                  Page dédiée à Chambly avec <strong>secteurs</strong>, <strong>prestations</strong>, preuves et CTA visibles
+                  pour déclencher des <strong>appels</strong> et <strong>devis</strong>.
+                </p>
+                <small class="text-muted d-block mt-2">
+                  Voir aussi : <a href="/seo-local-sud-oise-nord-95/">toutes les zones</a>
+                </small>
               </div>
-
-              <div class="clear"></div>
-
-              <div id="faqs" class="faqs">
-                {faqMixte.map((f) => (
-                  <div class={`toggle faq pb-3 mb-4 ${f.cat}`}>
-                    <div class="toggle-header">
-                      <div class="toggle-icon color">
-                        <i class={`toggle-closed ${f.icon}`}></i>
-                        <i class={`toggle-open ${f.icon}`}></i>
-                      </div>
-                      <div class="toggle-title fw-semibold ps-1">{f.q}</div>
-                      <div class="toggle-icon color">
-                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
-                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
-                      </div>
-                    </div>
-                    <div class="toggle-content text-black-50 ps-4" set:html={f.a} />
-                  </div>
-                ))}
-
-                <div class="clear line my-4"></div>
-
-                {miniFaqLocal.map((f) => (
-                  <div class="toggle faq pb-3 mb-4 faq-zone faq-divers">
-                    <div class="toggle-header">
-                      <div class="toggle-icon color">
-                        <i class="toggle-closed bi-geo-alt"></i>
-                        <i class="toggle-open bi-geo-alt"></i>
-                      </div>
-                      <div class="toggle-title fw-semibold ps-1">{f.q}</div>
-                      <div class="toggle-icon color">
-                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
-                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
-                      </div>
-                    </div>
-                    <div class="toggle-content text-black-50 ps-4">{f.a}</div>
-                  </div>
-                ))}
-              </div>
-
             </div>
           </div>
+
+          <!-- 2 -->
+          <div class="col-sm-6 col-lg-4">
+            <div class="feature-box">
+              <div class="fbox-icon mb-4">
+                <a href="/faqs/" aria-label="Filtrage et anti hors-zone">
+                  <i class="bi-funnel bg-dark border-0"></i>
+                </a>
+              </div>
+              <div class="fbox-content">
+                <h3 class="text-transform-none">Filtrage (anti hors-zone)</h3>
+                <p class="mb-0">
+                  On filtre : <strong>hors zone</strong>, <strong>hors prestation</strong>, <strong>délai irréaliste</strong>, contact non joignable.
+                  Objectif : moins de bruit, plus de demandes exploitables.
+                </p>
+                <small class="text-muted d-block mt-2">
+                  À lire : <a href="/faqs/">“demande qualifiée”, ça veut dire quoi ?</a>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="col-sm-6 col-lg-4">
+            <div class="feature-box">
+              <div class="fbox-icon mb-4">
+                <a href="/contact/" aria-label="Suivi appels et formulaires">
+                  <i class="bi-telephone bg-info border-0"></i>
+                </a>
+              </div>
+              <div class="fbox-content">
+                <h3 class="text-transform-none">Suivi simple (appels + formulaires)</h3>
+                <p class="mb-0">
+                  On suit l’essentiel : <strong>appels</strong>, <strong>formulaires</strong>, qualité.
+                  Si tu es plein : on baisse. Si tu as de la place : on relance.
+                </p>
+                <small class="text-muted d-block mt-2">
+                  <a href="/contact/">Demander un audit</a> • réponse rapide (jours ouvrés)
+                </small>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
 
-      <!-- Form Section -->
+      <div class="clear"></div>
+
+      <!-- Zones autour / secteurs proches
+      ============================================= -->
+      <div class="section mb-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">Zones autour</div>
+            <h2 class="text-transform-none ls-0">Vous êtes proche de Chambly ?</h2>
+            <p class="text-muted mb-0" style="max-width: 820px; margin: 0 auto;">
+              Choisissez la page la plus proche de votre secteur. Chaque bassin a son approche (volume, concurrence, type de demandes).
+            </p>
+          </div>
+
+          <div class="row col-mb-30 align-content-stretch">
+
+            <!-- 1 : Chambly (page actuelle) -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/seo.svg" alt="Chambly" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">Chambly</h3>
+                      <p class="text-smaller mb-0">
+                        Zone charnière Oise/95 : rayon clair + filtrage pour garder l’utile (appels/devis).
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Chambly • Bornel</li>
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Connexion Nord 95</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Approche : rayon + tri</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 : Le Mesnil-en-Thelle -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/optimizing.svg" alt="Le Mesnil-en-Thelle" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">
+                        <a class="nav-link d-inline" href="/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/">Le Mesnil-en-Thelle</a>
+                      </h3>
+                      <p class="text-smaller mb-0">
+                        Proximité : demandes locales maîtrisées + conversion simple (appels/devis).
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Mesnil-en-Thelle • Cires-lès-Mello</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Approche : proximité</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 : Nord 95 -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/adword.svg" alt="Nord 95" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">
+                        <a class="nav-link d-inline" href="/seo-local-sud-oise-nord-95/nord-95/">Nord 95</a>
+                      </h3>
+                      <p class="text-smaller mb-0">
+                        Persan • Beaumont • L’Isle-Adam : ciblage + exclusions pour éviter le hors-zone.
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Persan • Beaumont</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Approche : ciblage</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 : Méru -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/optimizing.svg" alt="Méru" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">
+                        <a class="nav-link d-inline" href="/seo-local-sud-oise-nord-95/meru/">Méru</a>
+                      </h3>
+                      <p class="text-smaller mb-0">
+                        Zone étendue : on cadre le rayon et on filtre fort pour éviter les demandes trop loin.
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Méru • Andeville</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Approche : SEO + tri</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 : Creil / Saint-Maximin -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/analysis.svg" alt="Creil / Saint-Maximin" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">
+                        <a class="nav-link d-inline" href="/seo-local-sud-oise-nord-95/creil-saint-maximin/">Creil / Saint-Maximin</a>
+                      </h3>
+                      <p class="text-smaller mb-0">
+                        Zone concurrentielle : volume + tri (appels/devis) pour couper le bruit.
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Creil • Saint-Maximin</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Approche : volume + filtre</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6 : Hub -->
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-icon mb-3">
+                      <img src="/images/icons/adword.svg" alt="Sud Oise & Nord 95" class="bg-transparent rounded-0">
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">
+                        <a class="nav-link d-inline" href="/seo-local-sud-oise-nord-95/">Sud Oise & Nord 95 (hub)</a>
+                      </h3>
+                      <p class="text-smaller mb-0">
+                        Accès rapide à toutes les pages zones + explications simples (SEO local, pub locale, conversion).
+                      </p>
+                    </div>
+                    <ul class="iconlist ms-3 mt-4 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Choisir la zone la plus proche</li>
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Comprendre l’approche par bassin</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> <a href="/contact/">Demander un audit</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Form Section (Chambly)
+      ============================================= -->
       <div
         class="section mt-0"
         style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
@@ -320,44 +407,175 @@ const relatedLinks = relatedMap[metierSlug] ?? [];
         <div class="container">
           <div class="row justify-content-between align-items-center">
 
-            <div class="col-lg-6 col-md-6">
+            <!-- Texte -->
+            <div class="col-md-6">
               <div class="heading-block border-bottom-0 mb-4">
-                <div class="badge rounded-pill badge-default">Audit</div>
-                <h3 class="text-transform-none ls-0">
-                  Tu es à {cityLabel} ?
-                  <br />On met en place un plan simple.
-                </h3>
+                <div class="badge rounded-pill badge-default">Audit rapide</div>
+                <h2 class="text-transform-none ls-0">Chambly : cadrer le rayon (Oise / Nord 95).</h2>
               </div>
 
-              <p class="mb-3">SEO local + conversion + pub si besoin. On règle la zone, on suit, on améliore.</p>
+              <p class="mb-3">
+                Dans une zone charnière, le plus important c’est de recevoir des demandes <strong>exploitables</strong> :
+                <strong>bonne zone</strong>, <strong>bonne prestation</strong>, <strong>délai réaliste</strong>, contact joignable.
+              </p>
 
-              <ul class="iconlist iconlist-color mb-0">
-                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : {cityLabel} + alentours</li>
-                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Objectif</strong> : appels + devis</li>
-                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Qualité</strong> : filtrage</li>
+              <ul class="iconlist iconlist-color mb-4">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : villes / rayon que vous traitez vraiment</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Filtre</strong> : hors zone / hors budget / hors délai</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Option pub</strong> : exclusions + ciblage zone</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Suivi</strong> : simple (on garde ce qui marche)</li>
               </ul>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a href="/seo-local-sud-oise-nord-95/" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0">
+                  Voir toutes les zones
+                </a>
+                <a href="/faqs/" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0">
+                  FAQ (réponses simples)
+                </a>
+              </div>
+
+              <small class="text-muted d-block mt-3">
+                Vous êtes côté 95 ?{" "}
+                <a href="/seo-local-sud-oise-nord-95/nord-95/">Nord 95</a>
+                {" "}•{" "}
+                Proximité immédiate ?{" "}
+                <a href="/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/">Le Mesnil-en-Thelle</a>
+              </small>
             </div>
 
+            <!-- Form HubSpot -->
             <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
               <div class="card shadow-sm">
                 <div class="card-body">
-                  <h4 class="mb-3">Demander un audit</h4>
+                  <h3 class="mb-2">Demander un audit</h3>
+                  <p class="text-muted mb-3">Réponse rapide (jours ouvrés).</p>
 
                   <HubspotForm
                     context={{
-                      page_type: "local-city",
-                      city: cityLabel,
-                      zone: zoneLabel,
-                      offer: "Pack complet SEO + Pub + Conversion",
-                      page_url: pageUrl,
+                      page_type: "zone",
+                      zone: "Chambly",
+                      area: "Sud Oise / Nord 95",
+                      page_url: Astro.url.pathname,
                     }}
                   />
 
-                  <small class="text-muted d-block mt-3">Réponse rapide (jours ouvrés).</small>
+                  <small class="text-muted d-block mt-3">
+                    Pas de spam. Un échange pour cadrer la zone + le type de demandes à viser.
+                  </small>
                 </div>
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ express -->
+      <div class="section bg-transparent mt-0" style="background: url('/images/sections/3.jpg') no-repeat top center; background-size: cover; padding: 0 0 70px;">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">FAQ express</div>
+            <h2 class="text-transform-none ls-0">Questions fréquentes (Chambly)</h2>
+            <p class="text-muted mb-0">
+              Zone charnière Oise/95 : on cadre le rayon et on filtre. Réponses courtes.
+            </p>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              {quickFaqs.map((item) => (
+                <div class="toggle faq pb-3 mb-4">
+                  <div class="toggle-header">
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed bi-question-circle"></i>
+                      <i class="toggle-open bi-question-circle"></i>
+                    </div>
+                    <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                      <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                    </div>
+                  </div>
+
+                  <div class="toggle-content text-black-50 ps-4">
+                    {item.a}
+
+                    <div class="mt-2">
+                      <small class="text-muted">
+                        Besoin d’une reco rapide ?{" "}
+                        <a href="/contact/">Demander un audit</a>
+                        {" "}•{" "}
+                        <a href="/seo-local-sud-oise-nord-95/">Voir toutes les zones</a>
+                        {" "}•{" "}
+                        Zones proches :{" "}
+                        <a href="/seo-local-sud-oise-nord-95/nord-95/">Nord 95</a>
+                        {" "}•{" "}
+                        <a href="/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/">Le Mesnil-en-Thelle</a>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <div class="text-center d-flex flex-wrap justify-content-center gap-2">
+                <a href="/faqs/" class="button button-rounded text-transform-none ls-0">Voir toutes les FAQ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Promo/Contact (Chambly)
+      ============================================= -->
+      <div
+        class="section mt-5"
+        style="padding: 100px 0; overflow: visible; background: url('/images/sections/3.jpg') no-repeat top center; background-size: cover;"
+      >
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="h5 text-uppercase ls-1 mb-2">Chambly • Bornel • Oise / Nord 95</div>
+
+            <h2 class="text-transform-none ls-0 mb-3">
+              Vous voulez plus <span>d’appels</span> et de <span>demandes de devis</span>…
+              <br class="d-none d-md-block" />
+              sans perdre du temps avec le hors-zone ?
+            </h2>
+
+            <p class="text-muted mb-0" style="max-width: 820px; margin: 0 auto;">
+              On fait un point rapide : votre zone réelle, vos prestations, et le type de demandes à viser.
+              Ensuite je te dis si le plus pertinent est <strong>SEO local</strong>, <strong>pub locale</strong>, ou un <strong>mix</strong>
+              (avec filtrage).
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+              <a href="/contact/" class="button button-large button-rounded text-transform-none ms-0 ls-0">
+                Demander un audit
+              </a>
+
+              <a
+                href="/seo-local-sud-oise-nord-95/"
+                class="button button-large button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+              >
+                Voir toutes les zones
+              </a>
+
+              <a
+                href="/faqs/"
+                class="button button-large button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+              >
+                FAQ
+              </a>
+            </div>
+
+            <small class="text-muted d-block mt-3">
+              Zones proches :{" "}
+              <a href="/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/">Le Mesnil-en-Thelle</a>
+              {" "}•{" "}
+              <a href="/seo-local-sud-oise-nord-95/nord-95/">Nord 95</a>
+              {" "}•{" "}
+              <a href="/seo-local-sud-oise-nord-95/meru/">Méru</a>
+            </small>
           </div>
         </div>
       </div>
