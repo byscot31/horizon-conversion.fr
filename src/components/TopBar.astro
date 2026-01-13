@@ -1,11 +1,14 @@
 ---
 import { SITE } from "../config/site";
 
-// "/" sur la home. (on garde robuste au cas où)
 const path = Astro.url.pathname;
-const isHome = path === "/" || path === "" || path === "/index.html";
 
-const topBarClass = `transparent-topbar${isHome ? "" : " dark"}`;
+const noDarkPaths = new Set([
+  "/", "", "/index.html",
+  "/seo-local-sud-oise-nord-95", "/seo-local-sud-oise-nord-95/",
+]);
+
+const topBarClass = `transparent-topbar${noDarkPaths.has(path) ? "" : " dark"}`;
 ---
 
 <div id="top-bar" class={topBarClass}>
