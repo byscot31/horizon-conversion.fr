@@ -1,0 +1,304 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HubspotForm from "../../components/HubspotForm.astro";
+import { SITE } from "../../config/site";
+
+const pageUrl = Astro.url.pathname;
+const cityLabel = "Méru";
+const zoneLabel = "Sud de l’Oise & Nord Val-d’Oise (95)";
+
+const pageTitle = `Consultant webmarketing à ${cityLabel} | SEO local + Pub + Site (conversion)`;
+const description = `À ${cityLabel} : visibilité Google locale + site clair + pub locale si besoin pour générer des appels/devis qualifiés.`;
+
+const nearby = [
+  "Andeville","Amblainville","Esches","Bornel","Belle-Église","Sainte-Geneviève",
+  "Laboissière-en-Thelle","Puiseux-le-Hauberger","Chambly","Le Mesnil-en-Thelle","Neuilly-en-Thelle",
+  "Hénonville","Chaumont-en-Vexin","Persan","Beaumont-sur-Oise","Saint-Leu-d’Esserent","Creil"
+];
+
+const localAngle = [
+  "À Méru et à l’Ouest Oise, le piège classique est la zone trop large : tu te retrouves avec des demandes trop loin.",
+  "Ici, on gagne en cadrant le rayon dès le départ (communes prioritaires), puis en élargissant seulement si tu as de la capacité.",
+  "Le site doit aussi aider à trier : 2–3 infos utiles au formulaire, et une zone affichée clairement."
+];
+
+const useCases = [
+  { title: "Zone étendue : cadrage", desc: "On fixe un rayon réaliste + liste de communes. Moins de bruit, plus de qualité." },
+  { title: "Devis", desc: "Formulaire court mais intelligent (prestation + commune + délai)." },
+  { title: "Relance planning", desc: "Pub locale ponctuelle quand tu as de la place." },
+];
+
+const miniFaqLocal = [
+  { q: "Je reçois des demandes de trop loin", a: "On réduit le rayon et on ajuste le ciblage. C’est la priorité ici." },
+  { q: "Tu peux cibler uniquement certaines communes ?", a: "Oui : on démarre sur les communes les plus rentables pour toi." },
+  { q: "Comment éviter les demandes hors secteur ?", a: "Zone affichée + filtrage formulaire + ciblage pub (si activée)." },
+];
+
+const services = [
+  { icon: "bi-search", title: "SEO local", desc: "Pages locales propres + fiche Google reliée au site." },
+  { icon: "bi-megaphone", title: "Pub locale (option)", desc: "Pour accélérer quand tu as de la place." },
+  { icon: "bi-telephone", title: "Conversion", desc: "Contact simple, CTA visibles, preuves." },
+  { icon: "bi-bar-chart", title: "Suivi", desc: "Appels + formulaires + qualité → ajustements." },
+];
+
+const faqMixte = [
+  { cat: "faq-qualif", icon: "bi-question-circle", q: "C’est quoi une demande “qualifiée” ?", a: "Zone OK, prestation OK, délai cohérent, contact joignable. Sinon, on filtre." },
+  { cat: "faq-zone", icon: "bi-geo-alt", q: "Tu interviens où ?", a: `Principalement : <strong>${SITE.area ?? zoneLabel}</strong>. On démarre sur une zone réaliste, puis on étend si besoin.` },
+  { cat: "faq-zone", icon: "bi-speedometer2", q: "Combien de demandes ?", a: "Ça dépend. On règle le volume selon ta capacité (on baisse si tu es plein)." },
+  { cat: "faq-prix", icon: "bi-credit-card", q: "C’est quoi le budget ?", a: "Selon concurrence + objectif. Je te donne un prix clair après un point rapide." },
+  { cat: "faq-demarrage", icon: "bi-play-circle", q: "Quand ça démarre ?", a: "Après cadrage, on peut démarrer vite. Ensuite on améliore." },
+  { cat: "faq-divers", icon: "bi-telephone", q: "Comment tu mesures ?", a: "Appels, formulaires, zones, qualité. Et on ajuste." },
+];
+
+const metierSlug = "meru"; // <-- change selon la page
+
+const relatedMap = {
+  "chambly": [
+    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
+    { href: "/seo-local-sud-oise-nord-95/nord-95/", label: "Nord 95 : Persan / Beaumont / L’Isle-Adam" },
+  ],
+  "le-mesnil-en-thelle": [
+    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly : demandes locales" },
+    { href: "/seo-local-sud-oise-nord-95/meru/", label: "Méru : zone étendue" },
+  ],
+  "creil-saint-maximin": [
+    { href: "/seo-local-sud-oise-nord-95/nogent-montataire/", label: "Nogent / Montataire : appels & devis" },
+    { href: "/seo-local-sud-oise-nord-95/chantilly/", label: "Chantilly : premium / devis" },
+  ],
+  "nogent-montataire": [
+    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
+    { href: "/seo-local-sud-oise-nord-95/senlis/", label: "Senlis : mieux qualifié" },
+  ],
+  "meru": [
+    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
+    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly : demandes locales" },
+  ],
+  "senlis": [
+    { href: "/seo-local-sud-oise-nord-95/chantilly/", label: "Chantilly : premium / devis" },
+    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
+  ],
+  "chantilly": [
+    { href: "/seo-local-sud-oise-nord-95/senlis/", label: "Senlis : mieux qualifié" },
+    { href: "/seo-local-sud-oise-nord-95/creil-saint-maximin/", label: "Creil / Saint-Maximin : qualifié" },
+  ],
+  "nord-95": [
+    { href: "/seo-local-sud-oise-nord-95/chambly/", label: "Chambly (connexion Oise/95)" },
+    { href: "/seo-local-sud-oise-nord-95/le-mesnil-en-thelle/", label: "Le Mesnil-en-Thelle : proximité" },
+  ],
+};
+
+const relatedLinks = relatedMap[metierSlug] ?? [];
+---
+
+<!-- Copie markup Chambly -->
+<Layout title={pageTitle} description={description}>
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src="/images/services/analysis-title.jpg" class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content"><div class="badge rounded-pill border border-light text-light">Consultant webmarketing</div><h1>À {cityLabel} : visibilité locale & demandes</h1></div>
+        <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/">Accueil</a></li><li class="breadcrumb-item"><a href="/seo-local-sud-oise-nord-95/">Sud Oise / Nord 95</a></li><li class="breadcrumb-item active" aria-current="page">{cityLabel}</li></ol></nav>
+      </div>
+    </div>
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">Pack complet</div>
+            <h2 class="display-4 fw-bold">Je t’aide à générer des demandes locales à {cityLabel}.</h2>
+            <p>On cadre la zone pour éviter les demandes trop loin, puis on améliore la conversion.</p>
+            <ul class="iconlist iconlist-color mb-4">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : rayon / communes définies</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que tu proposes vraiment</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible planning</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : joignable</li>
+            </ul>
+            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Demander un audit</a>
+            {SITE?.phoneE164 && <a href={`tel:${SITE.phoneE164}`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Appeler</a>}
+            <small class="text-muted d-block mt-3">Exemples communes : {nearby.slice(0, 10).join(" • ")}…</small>
+          </div>
+          <div class="col-lg-5 mt-4 mt-lg-0"><img src="/images/sections/2.png" alt="" /></div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="heading-block border-bottom-0 text-center"><div class="badge rounded-pill badge-default">Mise en place</div><h3 class="text-transform-none ls-0">Simple, local, efficace</h3></div>
+
+        <div class="row mt-4 col-mb-50 mb-0">
+          {services.map((s) => (
+            <div class="col-sm-6 col-lg-3">
+              <div class="feature-box"><div class="fbox-icon mb-4"><i class={`${s.icon} text-white bg-color`}></i></div><div class="fbox-content"><h3 class="text-transform-none">{s.title}</h3><p class="mb-0 text-muted">{s.desc}</p></div></div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="row justify-content-center"><div class="col-lg-10"><div class="card shadow-sm"><div class="card-body p-5">
+          <div class="badge rounded-pill badge-default mb-3">Spécifique {cityLabel}</div>
+          <h3 class="text-transform-none ls-0 mb-3">L’approche la plus rentable ici</h3>
+          {localAngle.map((p) => <p class="mb-2 text-muted">{p}</p>)}
+        </div></div></div></div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="heading-block border-bottom-0 text-center"><div class="badge rounded-pill badge-default">Cas d’usage</div><h3 class="text-transform-none ls-0">Selon ton activité</h3></div>
+
+        <div class="row col-mb-30 align-content-stretch mt-4">
+          {useCases.map((u) => (
+            <div class="col-lg-4 d-flex"><div class="card w-100"><div class="card-body p-4"><h4 class="text-transform-none ls-0 mb-2">{u.title}</h4><p class="text-muted mb-0">{u.desc}</p></div></div></div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="heading-block border-bottom-0 text-center"><div class="badge rounded-pill badge-default">Zone</div><h3 class="text-transform-none ls-0">J’interviens à {cityLabel} et autour</h3><p class="text-muted mb-0">On démarre sur un rayon simple à traiter. Si tu as de la capacité, on élargit proprement.</p></div>
+
+        <div class="row col-mb-20 mt-4">
+          {nearby.map((v) => (
+            <div class="col-6 col-md-4 col-lg-3"><span class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center" style="justify-content:center; cursor:default;">{v}</span></div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card shadow-sm">
+              <div class="card-body p-5">
+                <div class="badge rounded-pill badge-default mb-3">À lire aussi</div>
+                <h3 class="text-transform-none ls-0 mb-2">Pages proches (même logique de zone)</h3>
+                <p class="text-muted mb-4">
+                  Pour éviter les pages “clones”, chaque pôle a une approche différente (concurrence, rayon, type de demande).
+                </p>
+
+                <div class="row col-mb-30 align-content-stretch">
+                  <div class="col-md-6 d-flex">
+                    <div class="card w-100">
+                      <div class="card-body p-4">
+                        <h4 class="text-transform-none ls-0 mb-2">Vue d’ensemble</h4>
+                        <p class="text-muted mb-3">La page hub explique les pôles et comment choisir le bon.</p>
+                        <a class="button button-rounded text-transform-none ls-0" href="/seo-local-sud-oise-nord-95/">
+                          Voir le hub Sud Oise / Nord 95
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 d-flex">
+                    <div class="card w-100">
+                      <div class="card-body p-4">
+                        <h4 class="text-transform-none ls-0 mb-2">Pages proches</h4>
+                        <ul class="iconlist ms-3 mb-3">
+                          {relatedLinks.map((l) => (
+                            <li class="mb-2 text-muted">
+                              <i class="fa-solid fa-check text-smaller color"></i>{" "}
+                              <a class="nav-link d-inline" href={l.href}>{l.label}</a>
+                            </li>
+                          ))}
+                        </ul>
+                        <a class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0" href="/contact/">
+                          Demander un audit
+                        </a>
+                        <a class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 ms-2" href="/faqs/">
+                          FAQ
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <small class="text-muted d-block mt-4">
+                  Astuce : si ta zone change, on ajuste le rayon (et donc les pages “proches”).
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="container mb-5 px-0">
+          <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8 text-center">
+              <div class="heading-block border-bottom-0 text-center mx-auto"><div class="badge rounded-pill badge-default">FAQ</div><h3 class="text-transform-none ls-0 mb-3">Réponses simples</h3><p>Qualité, zone, volume, prix, démarrage.</p></div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="col-lg-10">
+              <div class="grid-filter-wrap justify-content-center">
+                <ul class="grid-filter style-4 customjs">
+                  <li class="activeFilter"><a href="#" class="fw-semibold" data-filter="all">Tout</a></li>
+                  <li><a href="#" class="fw-semibold" data-filter=".faq-qualif">Qualifiée</a></li>
+                  <li><a href="#" class="fw-semibold" data-filter=".faq-zone">Zone & volume</a></li>
+                  <li><a href="#" class="fw-semibold" data-filter=".faq-prix">Prix</a></li>
+                  <li><a href="#" class="fw-semibold" data-filter=".faq-demarrage">Démarrage</a></li>
+                  <li><a href="#" class="fw-semibold" data-filter=".faq-divers">Divers</a></li>
+                </ul>
+              </div>
+
+              <div class="clear"></div>
+
+              <div id="faqs" class="faqs">
+                {faqMixte.map((f) => (
+                  <div class={`toggle faq pb-3 mb-4 ${f.cat}`}>
+                    <div class="toggle-header">
+                      <div class="toggle-icon color"><i class={`toggle-closed ${f.icon}`}></i><i class={`toggle-open ${f.icon}`}></i></div>
+                      <div class="toggle-title fw-semibold ps-1">{f.q}</div>
+                      <div class="toggle-icon color"><i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i><i class="toggle-open fa-solid fa-chevron-up color"></i></div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4" set:html={f.a} />
+                  </div>
+                ))}
+
+                <div class="clear line my-4"></div>
+
+                {miniFaqLocal.map((f) => (
+                  <div class="toggle faq pb-3 mb-4 faq-zone faq-divers">
+                    <div class="toggle-header">
+                      <div class="toggle-icon color"><i class="toggle-closed bi-geo-alt"></i><i class="toggle-open bi-geo-alt"></i></div>
+                      <div class="toggle-title fw-semibold ps-1">{f.q}</div>
+                      <div class="toggle-icon color"><i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i><i class="toggle-open fa-solid fa-chevron-up color"></i></div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4">{f.a}</div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section mt-0" style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;">
+        <div class="container"><div class="row justify-content-between align-items-center">
+          <div class="col-lg-6 col-md-6">
+            <div class="heading-block border-bottom-0 mb-4"><div class="badge rounded-pill badge-default">Audit</div><h3 class="text-transform-none ls-0">Tu es à {cityLabel} ?<br />On met en place un plan simple.</h3></div>
+            <p class="mb-3">SEO local + conversion + pub si besoin. On règle la zone, on suit, on améliore.</p>
+            <ul class="iconlist iconlist-color mb-0">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : {cityLabel} + alentours</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Objectif</strong> : appels + devis</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Qualité</strong> : filtrage</li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+            <div class="card shadow-sm"><div class="card-body">
+              <h4 class="mb-3">Demander un audit</h4>
+              <HubspotForm context={{ page_type: "local-city", city: cityLabel, zone: zoneLabel, offer: "Pack complet SEO + Pub + Conversion", page_url: pageUrl }} />
+              <small class="text-muted d-block mt-3">Réponse rapide (jours ouvrés).</small>
+            </div></div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
