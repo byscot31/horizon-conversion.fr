@@ -1,22 +1,41 @@
 export type Service = {
   slug: string;
-  name: string;
-  description: string;
-  icon: string; // classe d’icône (Bootstrap Icons)
+
+  // compat : certaines pages utilisent name, d'autres titre
+  name?: string;
+  titre?: string;
+
+  // 1ère phrase (cas typiques) -> utilisée dans les listings
+  description?: string;
+  resume?: string;
+
+  // 2e phrase (ce que tu qualifies)
+  qualif?: string;
+
+  // icône (fallback si absent)
+  icon?: string;
 };
 
 export type Ville = {
   slug: string;
-  name: string;
-  description: string;
+
+  // compat : name / nom
+  name?: string;
+  nom?: string;
+
+  // 1ère phrase (zone couverte) -> utilisée dans les listings
+  description?: string;
+
+  // 2e phrase (demandes fréquentes)
+  demandes?: string;
 };
 
 export type Metier = {
   slug: string;
   name: string;
   badge: string;
-  pageTitleImage: string; // image du bandeau (Page Title)
-  introImage: string; // image dans le bloc intro
+  pageTitleImage: string;
+  introImage: string;
   services: Service[];
   villes: Ville[];
 };
