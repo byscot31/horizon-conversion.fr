@@ -3,11 +3,20 @@ import { hashString, pickRotated } from "../../utils/seoLinks";
 
 type Service = {
   slug: string;
+  // selon tes pages/data : parfois name, parfois titre
   name?: string;
   titre?: string;
+
+  // texte court (listing)
   description?: string;
   resume?: string;
-  icon: string;
+
+  // uniques (si tu les ajoutes dans catalogue.ts)
+  cas?: string;        // 1 phrase "cas typiques"
+  qualifies?: string;  // 1 phrase "ce que tu qualifies"
+
+  // icône (optionnelle pour éviter les crash/vides)
+  icon?: string; // ex: "bi-tools" (ou autre)
 };
 
 type Ville = {
@@ -28,9 +37,15 @@ const {
 const serviceUrl = (s: string) => `/metiers/${metierSlug}/services/${s}/`;
 const villeUrl = (v: string) => `/metiers/${metierSlug}/villes/${v}/`;
 
-const serviceTitle = (s: Service) => s.name ?? s.titre ?? "";
-const serviceDesc = (s: Service) => s.description ?? s.resume ?? "";
-const villeName = (v: Ville) => v.name ?? v.nom ?? "";
+const serviceTitle = (s: Service) => String(s.name ?? s.titre ?? "").trim();
+const serviceDesc = (s: Service) => String(s.description ?? s.resume ?? "").trim();
+
+const serviceCas = (s: Service) => String(s.cas ?? "").trim();
+const serviceQualifies = (s: Service) => String(s.qualifies ?? "").trim();
+
+const villeName = (v: Ville) => String(v.name ?? v.nom ?? "").trim();
+
+const iconClass = (s: Service) => (s.icon && String(s.icon).trim().length ? String(s.icon).trim() : "bi-tools");
 ---
 
 <div class="heading-block border-bottom-0 text-center">
@@ -45,28 +60,52 @@ const villeName = (v: Ville) => v.name ?? v.nom ?? "";
     const seed = hashString(`${metierSlug}:service:${s.slug}`);
     const villesForThisService = pickRotated(villes, seed, villesCount);
 
+    const t = serviceTitle(s);
+    const d = serviceDesc(s);
+    const cas = serviceCas(s);
+    const qual = serviceQualifies(s);
+
     return (
       <div class="col-sm-6 col-lg-4">
         <div class="feature-box">
           <div class="fbox-icon mb-4">
-            <a href={serviceUrl(s.slug)} aria-label={serviceTitle(s)}>
-              <i class={`${s.icon} text-white bg-color`}></i>
+            <a href={serviceUrl(s.slug)} aria-label={t || "Service"}>
+              <i class={`${iconClass(s)} text-white bg-color`}></i>
             </a>
           </div>
 
           <div class="fbox-content">
             <h3 class="text-transform-none">
-              <a class="nav-link" href={serviceUrl(s.slug)}>{serviceTitle(s)}</a>
+              <a class="nav-link" href={serviceUrl(s.slug)}>{t}</a>
             </h3>
 
             <p class="mb-0">
-              {serviceDesc(s)}
+              {d}
+
+              {(cas || qual) && (
+                <>
+                  <br />
+                  <small class="text-muted">
+                    {cas && (
+                      <>
+                        <strong>Cas typiques :</strong> {cas}
+                      </>
+                    )}
+                    {cas && qual ? " " : ""}
+                    {qual && (
+                      <>
+                        <strong>Je qualifie :</strong> {qual}
+                      </>
+                    )}
+                  </small>
+                </>
+              )}
+
               {villesForThisService.length > 0 && (
                 <>
                   <br />
                   <small class="text-muted">
-                    Villes :
-                    {" "}
+                    Villes :{" "}
                     {villesForThisService.map((v, idx) => (
                       <>
                         <a href={villeUrl(v.slug)}>{villeName(v)}</a>
