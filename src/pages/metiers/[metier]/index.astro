@@ -20,6 +20,10 @@ const HUBSPOT_PORTAL_ID = "PORTAL_ID";
 const HUBSPOT_FORM_ID = "FORM_ID";
 
 const pageUrl = Astro.url.pathname;
+
+const startsWithVowel = (s) => /^[aeiouyàâäéèêëîïôöùûüœh]/i.test(s.trim());
+const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
+
 ---
 
 <Layout title={pageTitle} description={description}>
@@ -57,7 +61,7 @@ const pageUrl = Astro.url.pathname;
         <div class="row align-items-center">
           <div class="col-lg-7">
             <div class="badge rounded-pill badge-default">{metier.badge}</div>
-            <h2 class="display-4 fw-bold">Je vous envoie des demandes de {metier.name.toLowerCase()} dans votre secteur.</h2>
+            <h2 class="display-4 fw-bold">Je vous envoie des demandes {de(metier.name.toLowerCase())} dans votre secteur.</h2>
 
             <p>
               Concrètement : je génère des demandes entrantes (appels + formulaires) et je vous les transmets.
@@ -104,28 +108,41 @@ const pageUrl = Astro.url.pathname;
       <div class="col-lg-6 col-md-6">
         <div class="heading-block border-bottom-0 mb-4">
           <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
-          <h3 class="text-transform-none ls-0">
+          <h2 class="text-transform-none ls-0">
             Vous êtes {metier.name.toLowerCase()} ?
             <br />Je peux vous envoyer des appels + formulaires.
-          </h3>
+          </h2>
         </div>
 
         <p class="mb-3">
           Des demandes entrantes dans votre secteur. Vous payez uniquement quand c’est qualifié.
         </p>
 
-        <ul class="iconlist iconlist-color mb-0">
+        <ul class="iconlist iconlist-color">
           <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
           <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
           <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
           <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
         </ul>
+
+        {metier.services?.length > 0 && (
+          <p class="mb-4">
+            Exemples de demandes :
+            {" "}
+            {metier.services.slice(0, 3).map((s, i) => (
+              <>
+                <a href={`/metiers/${metier.slug}/services/${s.slug}/`}>{s.titre}</a>
+                {i < 2 ? ", " : "."}
+              </>
+            ))}
+          </p>
+        )}
       </div>
 
       <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
         <div class="card shadow-sm">
           <div class="card-body">
-            <h4 class="mb-3">Recevoir des demandes</h4>
+            <h3 class="h4 mb-3">Recevoir des demandes</h3>
 
             <HubspotForm
               context={{

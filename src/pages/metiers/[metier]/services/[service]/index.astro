@@ -2,12 +2,12 @@
 import Layout from "../../../../../layouts/Layout.astro";
 import ServicesGrid from "../../../../../components/metiers/ServicesGrid.astro";
 import VillesCards from "../../../../../components/metiers/VillesCards.astro";
-import { METIERS, ZONE } from "../../../../../data/catalogue";
 import HubspotForm from "../../../../../components/HubspotForm.astro";
+import { METIERS, ZONE } from "../../../../../data/catalogue";
 
 export function getStaticPaths() {
   return METIERS.flatMap((m) =>
-    m.services.map((s) => ({
+    (m.services ?? []).map((s) => ({
       params: { metier: m.slug, service: s.slug },
     }))
   );
@@ -19,16 +19,17 @@ const serviceSlug = Astro.params.service!;
 const metier = METIERS.find((m) => m.slug === metierSlug);
 if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
 
-const service = metier.services.find((s) => s.slug === serviceSlug);
+const service = (metier.services ?? []).find((s) => s.slug === serviceSlug);
 if (!service) throw new Error(`Service introuvable: ${serviceSlug} (${metierSlug})`);
 
-const pageTitle = `${metier.name} – ${service.name} (${ZONE})`;
-const description = `${service.name} : je vous envoie des demandes entrantes (appel + formulaire) dans le ${ZONE}. Paiement uniquement quand c’est qualifié.`;
+const serviceTitle = String(service.titre ?? service.name ?? "Service").trim();
+const serviceTitleLower = serviceTitle.toLowerCase();
 
-const otherServices = metier.services.filter((s) => s.slug !== service.slug);
+const pageTitle = `${serviceTitle} - ${metier.name} : demandes qualifiées (${ZONE})`;
+const description = `Vous êtes ${metier.name.toLowerCase()} ? Je vous envoie des demandes entrantes pour "${serviceTitleLower}" dans le ${ZONE}. Paiement uniquement quand c’est qualifié.`;
 
-const HUBSPOT_PORTAL_ID = "PORTAL_ID";
-const HUBSPOT_FORM_ID = "FORM_ID";
+const otherServices = (metier.services ?? []).filter((s) => s.slug !== service.slug);
+const servicesForLinks = otherServices.length ? otherServices : (metier.services ?? []);
 
 const pageUrl = Astro.url.pathname;
 ---
@@ -43,7 +44,7 @@ const pageUrl = Astro.url.pathname;
       <div class="page-title-row">
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">{metier.badge}</div>
-          <h1>{service.name}</h1>
+          <h1>{serviceTitle}</h1>
         </div>
 
         <nav aria-label="breadcrumb">
@@ -51,7 +52,7 @@ const pageUrl = Astro.url.pathname;
             <li class="breadcrumb-item"><a href="/">Accueil</a></li>
             <li class="breadcrumb-item"><a href="/metiers/">Métiers</a></li>
             <li class="breadcrumb-item"><a href={`/metiers/${metier.slug}/`}>{metier.name}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{service.name}</li>
+            <li class="breadcrumb-item active" aria-current="page">{serviceTitle}</li>
           </ol>
         </nav>
       </div>
@@ -60,22 +61,37 @@ const pageUrl = Astro.url.pathname;
     <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
   </section>
 
+  <!-- Content -->
   <section id="content">
     <div class="content-wrap pb-0">
       <div class="container">
 
+        <!-- Intro -->
         <div class="row align-items-center">
           <div class="col-lg-7">
-            <div class="badge rounded-pill badge-default">{metier.badge}</div>
-            <h2 class="display-4 fw-bold">{service.name} : des demandes qualifiées.</h2>
+            <div class="badge rounded-pill badge-default">{serviceTitle}</div>
+            <h2 class="display-4 fw-bold">
+              Je vous envoie des demandes pour “{serviceTitleLower}”.
+            </h2>
 
             <p>
-              Vous êtes {metier.name.toLowerCase()} ? Je vous envoie des demandes de <strong>{service.name.toLowerCase()}</strong>
-              dans le {ZONE}. Vous payez uniquement quand c’est qualifié.
+              Je génère des demandes entrantes (appels + formulaires) et je vous les transmets.
+              Vous payez uniquement quand la demande est <strong>qualifiée</strong>.
             </p>
 
+            <p class="mb-3">Je filtre avant de vous envoyer :</p>
+
+            <ul class="iconlist iconlist-color mb-4">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+            </ul>
+
             <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
-            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Retour {metier.name}</a>
+            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
+              Voir la page {metier.name}
+            </a>
           </div>
 
           <div class="col-lg-5 mt-4 mt-lg-0">
@@ -84,67 +100,80 @@ const pageUrl = Astro.url.pathname;
         </div>
 
         <div class="clear line my-6"></div>
-		
-		<ServicesGrid metierSlug={metier.slug} services={metier.services} villes={metier.villes} title={`Autres services de ${metier.name.toLowerCase()}`} />
+
+        <!-- Maillage : autres services (avec villes “rotatives”) -->
+        <ServicesGrid
+          metierSlug={metier.slug}
+          services={servicesForLinks}
+          villes={metier.villes}
+          title="Autres demandes fréquentes (et où ça tombe)"
+        />
 
       </div>
-	  
-	  <div class="clear"></div>
 
-      <VillesCards metierSlug={metier.slug} villes={metier.villes} services={metier.services} title="Où je cherche des demandes" />
-	  
-	  <div
-  class="section mt-0"
-  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
->
-  <div class="container">
-    <div class="row justify-content-between align-items-center">
+      <div class="clear"></div>
 
-      <div class="col-lg-6 col-md-6">
-        <div class="heading-block border-bottom-0 mb-4">
-          <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
-          <h3 class="text-transform-none ls-0">
-            Vous faites du <span class="fw-bold">{service.name.toLowerCase()}</span>
-            <br />Je peux vous envoyer des demandes prêtes à traiter.
-          </h3>
-        </div>
+      <!-- Maillage : villes (avec services “rotatifs”, sans répéter le service actuel partout) -->
+      <VillesCards
+        metierSlug={metier.slug}
+        villes={metier.villes}
+        services={servicesForLinks}
+        title="Villes où je pousse en priorité (on élargit ensuite)"
+      />
 
-        <p class="mb-3">
-          Des appels + formulaires sur {metier.name.toLowerCase()}. Paiement uniquement quand c’est qualifié.
-        </p>
+      <!-- Bloc conversion (Hubspot) -->
+      <div
+        class="section mt-0"
+        style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
 
-        <ul class="iconlist iconlist-color mb-0">
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : {service}</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
-        </ul>
-      </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+                <h2 class="text-transform-none ls-0">
+                  Vous faites “{serviceTitleLower}” ?
+                  <br />Je peux vous envoyer des appels + formulaires.
+                </h2>
+              </div>
 
-      <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h4 class="mb-3">Recevoir des demandes</h4>
+              <p class="mb-3">
+                Des demandes entrantes dans votre secteur. Paiement uniquement quand c’est qualifié.
+              </p>
 
-            <HubspotForm
-              context={{
-                page_type: "service",
-                metier: metier.name,
-                service: service.name,
-                page_url: pageUrl,
-              }}
-            />
+              <ul class="iconlist iconlist-color mb-0">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+              </ul>
+            </div>
 
-            <small class="text-muted d-block mt-3">
-              On voit ensemble si ça colle à votre zone et votre planning.
-            </small>
+            <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h3 class="h4 mb-3">Recevoir des demandes</h3>
+
+                  <HubspotForm
+                    context={{
+                      page_type: "service",
+                      metier,
+                      service,
+                      page_url: pageUrl,
+                    }}
+                  />
+
+                  <small class="text-muted d-block mt-3">
+                    Réponse rapide (jours ouvrés).
+                  </small>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
 
     </div>
   </section>
