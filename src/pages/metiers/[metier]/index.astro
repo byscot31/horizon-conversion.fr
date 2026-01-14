@@ -2,8 +2,8 @@
 import Layout from "../../../layouts/Layout.astro";
 import ServicesGrid from "../../../components/metiers/ServicesGrid.astro";
 import VillesCards from "../../../components/metiers/VillesCards.astro";
-import { METIERS, ZONE } from "../../../data/catalogue";
 import HubspotForm from "../../../components/HubspotForm.astro";
+import { METIERS, ZONE } from "../../../data/catalogue";
 
 export function getStaticPaths() {
   return METIERS.map((m) => ({ params: { metier: m.slug } }));
@@ -16,17 +16,40 @@ if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
 const pageTitle = `${metier.name} : demandes qualifiées (${ZONE})`;
 const description = `Vous êtes ${metier.name.toLowerCase()} ? Je vous envoie des demandes entrantes (appel + formulaire) dans le ${ZONE}. Paiement uniquement quand c’est qualifié.`;
 
-const HUBSPOT_PORTAL_ID = "PORTAL_ID";
-const HUBSPOT_FORM_ID = "FORM_ID";
-
 const pageUrl = Astro.url.pathname;
 
-const startsWithVowel = (s) => /^[aeiouyàâäéèêëîïôöùûüœh]/i.test(s.trim());
-const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
+const startsWithVowel = (s: string) => /^[aeiouyàâäéèêëîïôöùûüœh]/i.test(s.trim());
+const de = (s: string) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
 
+const faq = [
+  {
+    q: `Comment je vous envoie des demandes de ${metier.name.toLowerCase()} ?`,
+    a: `Je génère des appels + formulaires et je vous transfère uniquement les demandes qui collent à votre zone, votre type d’intervention et un délai réaliste.`,
+  },
+  {
+    q: `Je paye quand ?`,
+    a: `Uniquement quand la demande est qualifiée (zone OK, besoin clair, contact joignable). Si ce n’est pas qualifié, vous ne payez pas.`,
+  },
+  {
+    q: `Je peux choisir les services que je veux recevoir ?`,
+    a: `Oui. Vous pouvez me dire ce que vous prenez (et ce que vous ne prenez pas) : dépannage, travaux, urgences, types de chantiers, etc.`,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
 ---
 
 <Layout title={pageTitle} description={description}>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
     <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
@@ -57,7 +80,7 @@ const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
     <div class="content-wrap pb-0">
       <div class="container">
 
-        <!-- Intro (pas en composant, comme tu préfères) -->
+        <!-- Intro -->
         <div class="row align-items-center">
           <div class="col-lg-7">
             <div class="badge rounded-pill badge-default">{metier.badge}</div>
@@ -68,9 +91,7 @@ const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
               Vous payez uniquement quand la demande est <strong>qualifiée</strong>.
             </p>
 
-            <p class="mb-3">
-              Je filtre avant de vous envoyer :
-            </p>
+            <p class="mb-3">Je filtre avant de vous envoyer :</p>
 
             <ul class="iconlist iconlist-color mb-4">
               <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
@@ -78,6 +99,19 @@ const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
               <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
               <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
             </ul>
+
+            {metier.services?.length > 0 && (
+              <p class="mb-4">
+                Exemples de demandes :
+                {" "}
+                {metier.services.slice(0, 3).map((s, i) => (
+                  <>
+                    <a href={`/metiers/${metier.slug}/services/${s.slug}/`}>{s.title}</a>
+                    {i < 2 ? ", " : "."}
+                  </>
+                ))}
+              </p>
+            )}
 
             <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
             <a href="/faqs/" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Questions fréquentes</a>
@@ -90,78 +124,152 @@ const de = (s) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
 
         <div class="clear line my-6"></div>
 
-        <ServicesGrid metierSlug={metier.slug} services={metier.services} villes={metier.villes} title="Ce que les particuliers demandent le plus" />
+        <!-- Bloc spécifique (métier) -->
+        <div class="row col-mb-30 align-content-stretch">
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que vous recevez</h3>
+                <p class="mb-0 text-muted">
+                  Un appel ou un formulaire avec le besoin, la ville, le délai et un contact joignable.
+                  Si c’est flou, je clarifie avant de transmettre.
+                </p>
+              </div>
+            </div>
+          </div>
 
-      </div>
-	  
-	  <div class="clear"></div>
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce qu’on évite</h3>
+                <p class="mb-0 text-muted">
+                  Les demandes hors zone, hors métier, ou les contacts injoignables.
+                  Objectif : vous faire gagner du temps.
+                </p>
+              </div>
+            </div>
+          </div>
 
-      <VillesCards metierSlug={metier.slug} villes={metier.villes} services={metier.services} title="Villes prioritaires (on élargit ensuite autour)" />
-
-      <div
-  class="section mt-0"
-  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
->
-  <div class="container">
-    <div class="row justify-content-between align-items-center">
-
-      <div class="col-lg-6 col-md-6">
-        <div class="heading-block border-bottom-0 mb-4">
-          <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
-          <h2 class="text-transform-none ls-0">
-            Vous êtes {metier.name.toLowerCase()} ?
-            <br />Je peux vous envoyer des appels + formulaires.
-          </h2>
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Pour démarrer</h3>
+                <p class="mb-0 text-muted">
+                  Vous me dites vos zones, vos interventions et vos disponibilités.
+                  Ensuite je lance et j’ajuste avec vous.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <p class="mb-3">
-          Des demandes entrantes dans votre secteur. Vous payez uniquement quand c’est qualifié.
-        </p>
+        <div class="clear line my-6"></div>
 
-        <ul class="iconlist iconlist-color">
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
-        </ul>
+        <ServicesGrid
+          metierSlug={metier.slug}
+          services={metier.services}
+          villes={metier.villes}
+          title="Ce que les particuliers demandent le plus"
+        />
 
-        {metier.services?.length > 0 && (
-          <p class="mb-4">
-            Exemples de demandes :
-            {" "}
-            {metier.services.slice(0, 3).map((s, i) => (
-              <>
-                <a href={`/metiers/${metier.slug}/services/${s.slug}/`}>{s.titre}</a>
-                {i < 2 ? ", " : "."}
-              </>
-            ))}
-          </p>
-        )}
       </div>
 
-      <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h3 class="h4 mb-3">Recevoir des demandes</h3>
+      <div class="clear"></div>
 
-            <HubspotForm
-              context={{
-                page_type: "metier",
-                metier: metier.name,
-                page_url: pageUrl,
-              }}
-            />
+      <VillesCards
+        metierSlug={metier.slug}
+        villes={metier.villes}
+        services={metier.services}
+        title="Villes prioritaires (on élargit ensuite autour)"
+      />
 
-            <small class="text-muted d-block mt-3">
-              Réponse rapide (jours ouvrés).
-            </small>
+      <!-- Mini-FAQ (métier) -->
+      <div class="section bg-transparent mt-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">FAQ</div>
+            <h2 class="text-transform-none ls-0">Questions rapides</h2>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="faqs">
+                {faq.map((item) => (
+                  <div class="toggle pb-3 mb-3">
+                    <div class="toggle-header">
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed bi-question-circle"></i>
+                        <i class="toggle-open bi-question-circle"></i>
+                      </div>
+                      <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                      </div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4">{item.a}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bloc conversion (Hubspot) -->
+      <div
+        class="section mt-0"
+        style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+
+            <div class="col-lg-6 col-md-6">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+                <h2 class="text-transform-none ls-0">
+                  Vous êtes {metier.name.toLowerCase()} ?
+                  <br />Je peux vous envoyer des appels + formulaires.
+                </h2>
+              </div>
+
+              <p class="mb-3">
+                Des demandes entrantes dans votre secteur. Vous payez uniquement quand c’est qualifié.
+              </p>
+
+              <ul class="iconlist iconlist-color mb-0">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h3 class="h4 mb-3">Recevoir des demandes</h3>
+
+                  <HubspotForm
+                    context={{
+                      page_type: "metier",
+                      metier: metier.name,
+                      metier_slug: metier.slug,
+                      page_url: pageUrl,
+                    }}
+                  />
+
+                  <small class="text-muted d-block mt-3">
+                    Réponse rapide (jours ouvrés).
+                  </small>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
 
     </div>
   </section>

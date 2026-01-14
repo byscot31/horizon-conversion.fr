@@ -2,12 +2,12 @@
 import Layout from "../../../../../layouts/Layout.astro";
 import ServicesGrid from "../../../../../components/metiers/ServicesGrid.astro";
 import VillesCards from "../../../../../components/metiers/VillesCards.astro";
-import { METIERS, ZONE } from "../../../../../data/catalogue";
 import HubspotForm from "../../../../../components/HubspotForm.astro";
+import { METIERS } from "../../../../../data/catalogue";
 
 export function getStaticPaths() {
   return METIERS.flatMap((m) =>
-    m.villes.map((v) => ({
+    (m.villes ?? []).map((v) => ({
       params: { metier: m.slug, ville: v.slug },
     }))
   );
@@ -19,21 +19,47 @@ const villeSlug = Astro.params.ville!;
 const metier = METIERS.find((m) => m.slug === metierSlug);
 if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
 
-const ville = metier.villes.find((v) => v.slug === villeSlug);
+const ville = (metier.villes ?? []).find((v) => v.slug === villeSlug);
 if (!ville) throw new Error(`Ville introuvable: ${villeSlug} (${metierSlug})`);
 
 const pageTitle = `${metier.name} à ${ville.name} : demandes qualifiées`;
-const description = `Vous êtes ${metier.name.toLowerCase()} à ${ville.name} ? Je vous envoie des demandes entrantes (appel + formulaire). Paiement uniquement quand c’est qualifié.`;
+const description = `Vous êtes ${metier.name.toLowerCase()} à ${ville.name} ? Je vous envoie des demandes entrantes (appel + formulaire) sur ce secteur, uniquement quand c’est qualifié.`;
 
-const otherVilles = metier.villes.filter((v) => v.slug !== ville.slug);
-
-const HUBSPOT_PORTAL_ID = "PORTAL_ID";
-const HUBSPOT_FORM_ID = "FORM_ID";
+const otherVilles = (metier.villes ?? []).filter((v) => v.slug !== ville.slug);
+const villesForLinks = otherVilles.length ? otherVilles : (metier.villes ?? []);
 
 const pageUrl = Astro.url.pathname;
+
+// Mini-FAQ (ville)
+const faq = [
+  {
+    q: `Vous couvrez uniquement ${ville.name} ?`,
+    a: `Je cible ${ville.name} et les communes autour. Si vous avez un rayon précis, on l’ajuste ensemble.`,
+  },
+  {
+    q: `Quel type de demandes arrive le plus sur ${ville.name} ?`,
+    a: ville.demandes ?? `Des demandes locales et joignables, avec un besoin clair et un délai réaliste.`,
+  },
+  {
+    q: `Je peux recevoir seulement certains services ?`,
+    a: `Oui. Vous choisissez : dépannage, travaux, urgences, et ce que vous ne voulez pas prendre.`,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
 ---
 
 <Layout title={pageTitle} description={description}>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
     <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
@@ -60,10 +86,12 @@ const pageUrl = Astro.url.pathname;
     <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
   </section>
 
+  <!-- Content -->
   <section id="content">
     <div class="content-wrap pb-0">
       <div class="container">
 
+        <!-- Intro -->
         <div class="row align-items-center">
           <div class="col-lg-7">
             <div class="badge rounded-pill badge-default">{ville.name}</div>
@@ -74,8 +102,17 @@ const pageUrl = Astro.url.pathname;
               Je vous transfère uniquement ce qui est <strong>qualifié</strong>.
             </p>
 
-            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
-            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Voir la page {metier.name}</a>
+            {(ville.zone || ville.demandes) && (
+              <p class="mb-0 text-muted">
+                {ville.zone && <><strong>Zone :</strong> {ville.zone}<br /></>}
+                {ville.demandes && <><strong>Demandes fréquentes :</strong> {ville.demandes}</>}
+              </p>
+            )}
+
+            <div class="mt-4">
+              <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
+              <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Voir la page {metier.name}</a>
+            </div>
           </div>
 
           <div class="col-lg-5 mt-4 mt-lg-0">
@@ -85,66 +122,142 @@ const pageUrl = Astro.url.pathname;
 
         <div class="clear line my-6"></div>
 
-        <ServicesGrid metierSlug={metier.slug} services={metier.services} villes={metier.villes} title={`Services les plus demandés à ${ville.name}`} />
+        <!-- Bloc spécifique (ville) -->
+        <div class="row col-mb-30 align-content-stretch">
+          <div class="col-lg-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Sur ce secteur</h3>
+                <p class="mb-0 text-muted">
+                  L’idée est simple : travailler proprement une zone, puis élargir autour.
+                  Si vous avez des rues/quartiers à éviter ou un rayon précis, on le cadre.
+                </p>
+              </div>
+            </div>
+          </div>
 
-      </div>
-	  
-	  <div class="clear"></div>
-
-      <VillesCards metierSlug={metier.slug} villes={metier.villes} services={metier.services} />
-	  
-	  <div
-  class="section mt-0"
-  style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
->
-  <div class="container">
-    <div class="row justify-content-between align-items-center">
-
-      <div class="col-lg-6 col-md-6">
-        <div class="heading-block border-bottom-0 mb-4">
-          <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
-          <h2 class="text-transform-none ls-0">
-            Vous êtes {metier.name.toLowerCase()} à {ville.name.toLowerCase()} ?
-            <br />Je peux vous envoyer des demandes dans ce secteur.
-          </h2>
+          <div class="col-lg-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que je qualifie avant envoi</h3>
+                <p class="mb-0 text-muted">
+                  Besoin clair, délai réaliste, et contact joignable.
+                  Je vérifie aussi que c’est bien dans votre zone autour de {ville.name}.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <p class="mb-3">
-          Appels + formulaires entrants autour de {ville.name.toLowerCase()}. Paiement uniquement quand c’est qualifié.
-        </p>
+        <div class="clear line my-6"></div>
 
-        <ul class="iconlist iconlist-color mb-0">
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : {ville.name} et alentours</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que vous faites vraiment</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
-          <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
-        </ul>
+        <ServicesGrid
+          metierSlug={metier.slug}
+          services={metier.services}
+          villes={villesForLinks}
+          title={`Services les plus demandés à ${ville.name}`}
+        />
+
       </div>
 
-      <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h3 class="h4 mb-3">Recevoir des demandes</h3>
+      <div class="clear"></div>
 
-            <HubspotForm
-              context={{
-                page_type: "ville",
-                metier: metier.name,
-                ville: ville.name,
-                page_url: pageUrl,
-              }}
-            />
+      <VillesCards
+        metierSlug={metier.slug}
+        villes={villesForLinks}
+        services={metier.services}
+        title="Autres villes proches (maillage)"
+      />
 
-            <small class="text-muted d-block mt-3">
-              Objectif : des demandes simples, claires, et joignables.
-            </small>
+      <!-- Mini-FAQ (ville) -->
+      <div class="section bg-transparent mt-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">FAQ</div>
+            <h2 class="text-transform-none ls-0">Questions rapides</h2>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="faqs">
+                {faq.map((item) => (
+                  <div class="toggle pb-3 mb-3">
+                    <div class="toggle-header">
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed bi-question-circle"></i>
+                        <i class="toggle-open bi-question-circle"></i>
+                      </div>
+                      <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                      </div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4">{item.a}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bloc conversion (Hubspot) -->
+      <div
+        class="section mt-0"
+        style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+
+            <div class="col-lg-6 col-md-6">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+                <h2 class="text-transform-none ls-0">
+                  Vous êtes {metier.name.toLowerCase()} à {ville.name.toLowerCase()} ?
+                  <br />Je peux vous envoyer des demandes sur ce secteur.
+                </h2>
+              </div>
+
+              <p class="mb-3">
+                Appels + formulaires entrants autour de {ville.name.toLowerCase()}. Paiement uniquement quand c’est qualifié.
+              </p>
+
+              <ul class="iconlist iconlist-color mb-0">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : {ville.name} et alentours</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que vous faites vraiment</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h3 class="h4 mb-3">Recevoir des demandes</h3>
+
+                  <HubspotForm
+                    context={{
+                      page_type: "ville",
+                      metier: metier.name,
+                      metier_slug: metier.slug,
+                      ville: ville.name,
+                      ville_slug: ville.slug,
+                      page_url: pageUrl,
+                    }}
+                  />
+
+                  <small class="text-muted d-block mt-3">
+                    Objectif : des demandes simples, claires, et joignables.
+                  </small>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
 
     </div>
   </section>

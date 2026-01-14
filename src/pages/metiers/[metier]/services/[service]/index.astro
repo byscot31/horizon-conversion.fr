@@ -22,7 +22,7 @@ if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
 const service = (metier.services ?? []).find((s) => s.slug === serviceSlug);
 if (!service) throw new Error(`Service introuvable: ${serviceSlug} (${metierSlug})`);
 
-const serviceTitle = String(service.titre ?? service.name ?? "Service").trim();
+const serviceTitle = String(service.title ?? service.name ?? service.titre ?? "Service").trim();
 const serviceTitleLower = serviceTitle.toLowerCase();
 
 const pageTitle = `${serviceTitle} - ${metier.name} : demandes qualifiées (${ZONE})`;
@@ -31,10 +31,41 @@ const description = `Vous êtes ${metier.name.toLowerCase()} ? Je vous envoie de
 const otherServices = (metier.services ?? []).filter((s) => s.slug !== service.slug);
 const servicesForLinks = otherServices.length ? otherServices : (metier.services ?? []);
 
+const cas = service.cas ?? [];
+const qualif = service.qualif ?? [];
+
 const pageUrl = Astro.url.pathname;
+
+// Mini-FAQ (service) — texte “variable” => pages moins similaires
+const faq = [
+  {
+    q: `Quel type de demandes vous envoyez pour “${serviceTitleLower}” ?`,
+    a: `Des demandes avec un besoin clair, une ville, un délai réaliste et un contact joignable. Je clarifie si c’est flou avant de transmettre.`,
+  },
+  {
+    q: `Je paye si le client ne répond plus ?`,
+    a: `Non. Si le contact est injoignable ou que la demande ne colle pas (zone/prestation/délai), ce n’est pas qualifié.`,
+  },
+  {
+    q: `Vous couvrez uniquement ${ZONE} ?`,
+    a: `Oui, c’est le secteur prioritaire. Si vous intervenez un peu plus loin, on peut en parler et cadrer proprement.`,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
 ---
 
 <Layout title={pageTitle} description={description}>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
     <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
@@ -79,19 +110,38 @@ const pageUrl = Astro.url.pathname;
               Vous payez uniquement quand la demande est <strong>qualifiée</strong>.
             </p>
 
-            <p class="mb-3">Je filtre avant de vous envoyer :</p>
+            {service.description && (
+              <p class="mb-3 text-muted">
+                {service.description}
+              </p>
+            )}
 
-            <ul class="iconlist iconlist-color mb-4">
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ça correspond à ce que vous faites</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
-              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
-            </ul>
+            <div class="row col-mb-30">
+              <div class="col-md-6">
+                <h3 class="h5 mb-2">Cas typiques</h3>
+                <ul class="iconlist iconlist-color mb-0">
+                  {(cas.length ? cas : ["Demande claire et intervention réaliste.", "Contexte suffisamment précis pour chiffrer."]).slice(0, 2).map((t) => (
+                    <li class="d-block"><i class="bi-check-circle-fill"></i>{t}</li>
+                  ))}
+                </ul>
+              </div>
 
-            <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
-            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
-              Voir la page {metier.name}
-            </a>
+              <div class="col-md-6">
+                <h3 class="h5 mb-2">Ce que je qualifie</h3>
+                <ul class="iconlist iconlist-color mb-0">
+                  {(qualif.length ? qualif : ["Zone + prestation + délai cohérents.", "Contact joignable et besoin clair."]).slice(0, 2).map((t) => (
+                    <li class="d-block"><i class="bi-check-circle-fill"></i>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Recevoir des demandes</a>
+              <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
+                Voir la page {metier.name}
+              </a>
+            </div>
           </div>
 
           <div class="col-lg-5 mt-4 mt-lg-0">
@@ -101,7 +151,48 @@ const pageUrl = Astro.url.pathname;
 
         <div class="clear line my-6"></div>
 
-        <!-- Maillage : autres services (avec villes “rotatives”) -->
+        <!-- Bloc spécifique (service) -->
+        <div class="row col-mb-30 align-content-stretch">
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Infos utiles à demander au client</h3>
+                <p class="mb-0 text-muted">
+                  Pour “{serviceTitleLower}”, une photo + une description simple du symptôme évitent les allers-retours.
+                  Si c’est urgent, on confirme aussi l’accès et la sécurité.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que je transfère</h3>
+                <p class="mb-0 text-muted">
+                  Besoin, ville, délai, et contact joignable.
+                  S’il manque une info clé, je la demande avant.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que vous gardez</h3>
+                <p class="mb-0 text-muted">
+                  Vous décidez : vous rappelez, vous planifiez, vous refusez si ça ne colle pas.
+                  Le but est de vous faire gagner du temps.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Maillage : autres services (avec villes rotatives) -->
         <ServicesGrid
           metierSlug={metier.slug}
           services={servicesForLinks}
@@ -113,13 +204,47 @@ const pageUrl = Astro.url.pathname;
 
       <div class="clear"></div>
 
-      <!-- Maillage : villes (avec services “rotatifs”, sans répéter le service actuel partout) -->
+      <!-- Maillage : villes (avec services rotatifs) -->
       <VillesCards
         metierSlug={metier.slug}
         villes={metier.villes}
         services={servicesForLinks}
         title="Villes où je pousse en priorité (on élargit ensuite)"
       />
+
+      <!-- Mini-FAQ (service) -->
+      <div class="section bg-transparent mt-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">FAQ</div>
+            <h2 class="text-transform-none ls-0">Questions rapides</h2>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="faqs">
+                {faq.map((item) => (
+                  <div class="toggle pb-3 mb-3">
+                    <div class="toggle-header">
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed bi-question-circle"></i>
+                        <i class="toggle-open bi-question-circle"></i>
+                      </div>
+                      <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                      </div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4">{item.a}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       <!-- Bloc conversion (Hubspot) -->
       <div
@@ -158,14 +283,16 @@ const pageUrl = Astro.url.pathname;
                   <HubspotForm
                     context={{
                       page_type: "service",
-                      metier,
-                      service,
+                      metier: metier.name,
+                      metier_slug: metier.slug,
+                      service: serviceTitle,
+                      service_slug: service.slug,
                       page_url: pageUrl,
                     }}
                   />
 
                   <small class="text-muted d-block mt-3">
-                    Réponse rapide (jours ouvrés).
+                    Objectif : des demandes simples, claires, et joignables.
                   </small>
                 </div>
               </div>

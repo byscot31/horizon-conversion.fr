@@ -179,7 +179,7 @@ const quickFaqs =
   <div class="container">
     <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 650px">
       <div class="badge rounded-pill badge-default">Concrètement</div>
-      <h3 class="text-transform-none ls-0 mb-3">Ce que je fais pour vous</h3>
+      <h2 class="text-transform-none ls-0 mb-3">Ce que je fais pour vous</h2>
       <p>
         Je mets en place un système simple : on attire des demandes locales, on filtre, puis on vous envoie
         uniquement celles qui correspondent à vos critères.
@@ -305,7 +305,7 @@ const quickFaqs =
       <div class="col-lg-6">
         <div class="heading-block border-bottom-0 mb-4">
           <div class="badge rounded-pill badge-default">Métiers</div>
-          <h3 class="text-transform-none ls-0 mb-2">Métiers couverts (exemples)</h3>
+          <h2 class="text-transform-none ls-0 mb-2">Métiers couverts (exemples)</h2>
           <p class="text-muted mb-0">Cliquez pour voir les pages métiers (structure + maillage).</p>
         </div>
 
@@ -319,7 +319,7 @@ const quickFaqs =
                       <i class={`bi ${m.icon} color`} style="font-size:2rem; line-height:1;"></i>
                     </div>
                     <div class="fbox-content">
-                      <div class="h4 mb-1 text-transform-none ls-0">{m.label}</div>
+                      <h3 class="h4 mb-1 text-transform-none ls-0">{m.label}</h3>
                       <p class="mb-0 text-muted">{m.desc}</p>
                     </div>
                   </div>
@@ -333,7 +333,7 @@ const quickFaqs =
       <div class="col-lg-6">
         <div class="heading-block border-bottom-0 mb-4">
           <div class="badge rounded-pill badge-default">Secteur</div>
-          <h3 class="text-transform-none ls-0 mb-2">Villes prioritaires</h3>
+          <h2 class="text-transform-none ls-0 mb-2">Villes prioritaires</h2>
           <p class="text-muted mb-0">
             {HOME_VARIANT === "premium-travaux"
               ? "Focus “travaux” sur des zones à bons paniers moyens."
@@ -343,7 +343,7 @@ const quickFaqs =
 
         <div class="row col-mb-20">
           {villes.map((v) => (
-            <div class="col-sm-6 d-flex">
+            <h3 class="col-sm-6 d-flex">
               <a
                 href={`${CITY_BASE}/${v.slug}/`}
                 class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center"
@@ -351,7 +351,7 @@ const quickFaqs =
               >
                 {v.label}
               </a>
-            </div>
+            </h3>
           ))}
         </div>
 
@@ -373,9 +373,9 @@ const quickFaqs =
       <div class="col-lg-4 mt-4">
         <div class="heading-block border-bottom-0 mb-4">
           <div class="badge rounded-pill badge-default">Tarifs</div>
-          <h3 class="text-transform-none ls-0">
+          <h2 class="text-transform-none ls-0">
             Simple : vous payez uniquement quand c’est qualifié.
-          </h3>
+          </h2>
         </div>
 
         <p>
@@ -491,7 +491,7 @@ const quickFaqs =
       <div class="col-md-5">
         <div class="heading-block border-bottom-0 mb-4">
           <div class="badge rounded-pill badge-default">Audit gratuit</div>
-          <h3 class="text-transform-none ls-0">On regarde si je peux vous apporter des demandes</h3>
+          <h2 class="text-transform-none ls-0">On regarde si je peux vous apporter des demandes</h2>
         </div>
 
         <p>
@@ -516,7 +516,7 @@ const quickFaqs =
       <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
         <div class="card shadow-sm">
           <div class="card-body">
-            <h4 class="mb-3">Demande d’audit</h4>
+            <h3 class="mb-3">Demande d’audit</h3>
 
             <!-- ✅ HubSpot (remplace le form.php) -->
             <div class="form-widget">
@@ -545,7 +545,7 @@ const quickFaqs =
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
       <div class="badge rounded-pill badge-default">Exemples</div>
-      <h3 class="text-transform-none ls-0">Le type de demandes que vous pouvez recevoir</h3>
+      <h2 class="text-transform-none ls-0">Le type de demandes que vous pouvez recevoir</h2>
       <p class="text-muted mb-0">
         Selon votre métier, votre zone et vos prestations. On filtre avant envoi.
       </p>
@@ -749,7 +749,7 @@ const quickFaqs =
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
       <div class="badge rounded-pill badge-default">Retours</div>
-      <h3 class="text-transform-none ls-0">Ce que les artisans apprécient</h3>
+      <h2 class="text-transform-none ls-0">Ce que les artisans apprécient</h2>
       <p class="text-muted mb-0"><small>Exemples (à remplacer par vos avis réels).</small></p>
     </div>
 
@@ -775,7 +775,7 @@ const quickFaqs =
                 <p class="mb-4 font-primary fst-normal">
                   “Les demandes reçues sont plus claires. Je passe moins de temps à trier et plus de temps à faire des devis.”
                 </p>
-                <h4 class="h6 mb-0 fw-bold">Artisan (plomberie)</h4>
+                <h3 class="h6 mb-0 fw-bold">Artisan (plomberie)</h3>
                 <small class="text-muted">Secteur : Oise</small>
               </div>
             </div>
@@ -793,7 +793,7 @@ const quickFaqs =
                 <p class="mb-4 font-primary fst-normal">
                   “On a défini la zone et les prestations au départ. Si ça ne colle pas, ce n’est pas envoyé.”
                 </p>
-                <h4 class="h6 mb-0 fw-bold">Artisan (chauffage)</h4>
+                <h3 class="h6 mb-0 fw-bold">Artisan (chauffage)</h3>
                 <small class="text-muted">Secteur : Sud Oise</small>
               </div>
             </div>
@@ -811,7 +811,7 @@ const quickFaqs =
                 <p class="mb-4 font-primary fst-normal">
                   “Quand je suis plein, on réduit. Quand j’ai de la place, on relance. C’est simple.”
                 </p>
-                <h4 class="h6 mb-0 fw-bold">Artisan (électricité)</h4>
+                <h3 class="h6 mb-0 fw-bold">Artisan (électricité)</h3>
                 <small class="text-muted">Secteur : Val-d’Oise</small>
               </div>
             </div>
@@ -829,7 +829,7 @@ const quickFaqs =
                 <p class="mb-4 font-primary fst-normal">
                   “Je préfère payer une demande qui correspond, plutôt que des clics. Ça évite les mauvaises surprises.”
                 </p>
-                <h4 class="h6 mb-0 fw-bold">Artisan (toiture)</h4>
+                <h3 class="h6 mb-0 fw-bold">Artisan (toiture)</h3>
                 <small class="text-muted">Secteur : Oise</small>
               </div>
             </div>
@@ -848,7 +848,7 @@ const quickFaqs =
 <div class="container py-4">
   <div class="heading-block border-bottom-0 text-center">
     <div class="badge rounded-pill badge-default">Guides</div>
-    <h3 class="text-transform-none ls-0">Quelques infos utiles (rapides)</h3>
+    <h2 class="text-transform-none ls-0">Quelques infos utiles (rapides)</h2>
     <p class="text-muted mb-0">
       Pour comprendre comment je qualifie et comment on évite de perdre du temps.
     </p>
@@ -940,7 +940,7 @@ const quickFaqs =
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
       <div class="badge rounded-pill badge-default">FAQ express</div>
-      <h3 class="text-transform-none ls-0">Questions fréquentes (artisans)</h3>
+      <h2 class="text-transform-none ls-0">Questions fréquentes (artisans)</h2>
     </div>
 
     <div class="row justify-content-center">
@@ -975,7 +975,7 @@ const quickFaqs =
 <div class="section mt-5 footer-stick promo-section bg-transparent" style="padding: 100px 0; overflow: visible">
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
-      <h5 class="text-uppercase ls-1 mb-1">Audit gratuit • 15 minutes</h5>
+      <div class="h5 text-uppercase ls-1 mb-1">Audit gratuit • 15 minutes</div>
 
       <h2 class="text-transform-none ls-0">
         On voit si je peux vous apporter des demandes qualifiées<br />

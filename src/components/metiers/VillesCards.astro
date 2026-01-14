@@ -5,17 +5,15 @@ type Ville = {
   slug: string;
   name?: string;
   nom?: string;
-
-  // texte court (listing)
   description?: string;
 
-  // uniques (si tu les ajoutes dans catalogue.ts)
-  zone?: string;       // 1 phrase "zone couverte"
-  frequentes?: string; // 1 phrase "demandes fréquentes"
+  zone?: string;
+  demandes?: string;
 };
 
 type Service = {
   slug: string;
+  title?: string;
   name?: string;
   titre?: string;
 };
@@ -32,12 +30,8 @@ const {
 const villeUrl = (v: string) => `/metiers/${metierSlug}/villes/${v}/`;
 const serviceUrl = (s: string) => `/metiers/${metierSlug}/services/${s}/`;
 
-const villeName = (v: Ville) => String(v.name ?? v.nom ?? "").trim();
-const serviceTitle = (s: Service) => String(s.name ?? s.titre ?? "").trim();
-
-const villeDesc = (v: Ville) => String(v.description ?? "").trim();
-const villeZone = (v: Ville) => String(v.zone ?? "").trim();
-const villeFreq = (v: Ville) => String(v.frequentes ?? "").trim();
+const villeName = (v: Ville) => (v.name ?? v.nom ?? "").trim();
+const serviceTitle = (s: Service) => (s.title ?? s.name ?? s.titre ?? "").trim();
 
 const icons = [
   "/images/icons/seo.svg",
@@ -57,14 +51,9 @@ const icons = [
     </div>
 
     <div class="row col-mb-30 align-content-stretch">
-      {villes.map((v, i) => {
+      {villes.map((v: Ville, i: number) => {
         const seed = hashString(`${metierSlug}:ville:${v.slug}`);
         const servicesForThisVille = pickRotated(services, seed, servicesCount);
-
-        const name = villeName(v);
-        const desc = villeDesc(v);
-        const zone = villeZone(v);
-        const freq = villeFreq(v);
 
         return (
           <div class="col-lg-4 col-md-6 d-flex">
@@ -72,45 +61,26 @@ const icons = [
               <div class="card-body p-5">
                 <div class="feature-box flex-column">
                   <div class="fbox-icon mb-3">
-                    <img
-                      src={icons[i % icons.length]}
-                      alt={name}
-                      class="bg-transparent rounded-0"
-                    />
+                    <img src={icons[i % icons.length]} alt={villeName(v)} class="bg-transparent rounded-0" />
                   </div>
 
                   <div class="fbox-content">
                     <h3 class="text-transform-none ls-0 text-larger">
-                      <a class="nav-link" href={villeUrl(v.slug)}>{name}</a>
+                      <a class="nav-link" href={villeUrl(v.slug)}>{villeName(v)}</a>
                     </h3>
 
-                    {(desc || zone || freq) && (
+                    {v.description && <p class="text-smaller mb-2">{v.description}</p>}
+
+                    {(v.zone || v.demandes) && (
                       <p class="text-smaller mb-0">
-                        {desc}
-                        {(zone || freq) && (
-                          <>
-                            <br />
-                            <span class="text-muted">
-                              {zone && (
-                                <>
-                                  <strong>Zone :</strong> {zone}
-                                </>
-                              )}
-                              {zone && freq ? " " : ""}
-                              {freq && (
-                                <>
-                                  <strong>Demandes fréquentes :</strong> {freq}
-                                </>
-                              )}
-                            </span>
-                          </>
-                        )}
+                        {v.zone && <><span class="text-muted">{v.zone}</span><br /></>}
+                        {v.demandes && <span class="text-muted">{v.demandes}</span>}
                       </p>
                     )}
                   </div>
 
                   <ul class="iconlist ms-3 mt-4 mb-0">
-                    {servicesForThisVille.map((s) => (
+                    {servicesForThisVille.map((s: Service) => (
                       <li class="mb-2 text-muted">
                         <i class="fa-solid fa-check text-smaller color"></i>{" "}
                         <a class="nav-link" href={serviceUrl(s.slug)}>{serviceTitle(s)}</a>
