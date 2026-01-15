@@ -17,11 +17,11 @@
 	--cnvs-primary-menu-font-size: 15px;
 }
 
-.is-expanded-menu #header.floating-header + .include-header {
+.is-expanded-menu #header.floating-header ~ .include-header {
 	margin-top: -161px;
 }
 
-.is-expanded-menu #header.floating-header + .include-header .page-title-row {
+.is-expanded-menu #header.floating-header ~ .include-header .page-title-row {
 	margin-top: 3rem;
 }
 

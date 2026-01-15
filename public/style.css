@@ -17440,7 +17440,7 @@ body:not(.is-expanded-menu) #header:not([data-mobile-sticky=true]) .header-wrap-
   margin-top: calc(var(--cnvs-header-height) + var(--cnvs-header-floating-top-offset) - 2px);
 }
 
-.is-expanded-menu #header.transparent-header + .page-title-parallax.include-header .container {
+.is-expanded-menu #header.transparent-header ~ .page-title-parallax.include-header .container {
   z-index: 5;
   padding-top: var(--cnvs-header-height);
 }
