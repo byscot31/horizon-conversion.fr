@@ -513,26 +513,8 @@ const quickFaqs =
       </div>
 
       <!-- Formulaire -->
-      <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h3 class="mb-3">Demande d’audit</h3>
-
-            <!-- ✅ HubSpot (remplace le form.php) -->
-            <div class="form-widget">
-              <HubspotForm
-                context={{
-                  page_type: "home",
-                  page_url: Astro.url.pathname,
-                }}
-              />
-            </div>
-
-            <small class="d-block mt-3 text-muted">
-              Réponse rapide. Si vous préférez : <a href={`tel:${SITE.phoneE164}`}>appelez-moi</a>.
-            </small>
-          </div>
-        </div>
+      <div class="col-md-6 mt-5 mt-md-0">
+        <HubspotForm />
       </div>
 
     </div>

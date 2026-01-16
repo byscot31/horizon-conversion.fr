@@ -1,9 +1,9 @@
 ---
 const {
   portalId = "147571896",
-  formGuid = "01ec833b-5953-4811-b35a-6e50b702a68f",
+  formGuid = "37afaad1-d647-4342-9e90-76b00be43ed5",
   region = "eu1",
-  submitLabel = "Recevoir des demandes",
+  submitLabel = "Demander un audit",
 } = Astro.props;
 
 if (!portalId || !formGuid) {
@@ -18,7 +18,7 @@ if (!portalId || !formGuid) {
   data-hs-region={region}
 >
   <div class="card-body">
-    <h3 class="h4 mb-3">Recevoir des demandes qualifiées</h3>
+    <h3 class="h4 mb-3">Demander un audit</h3>
 
     <div class="hc-form-widget">
       <div class="form-result" aria-live="polite" hidden></div>
@@ -51,15 +51,14 @@ if (!portalId || !formGuid) {
           <div class="w-100"></div>
 
           <div class="col-md-6 form-group">
-            <label for="hc-metier">Métier *</label>
-            <select id="hc-metier" name="metier" class="form-select">
+            <label for="hc-activite">Votre activité *</label>
+            <select id="hc-activite" name="activite" class="form-select">
               <option value="">-- Sélectionnez --</option>
-              <option value="Plombier">Plombier</option>
-              <option value="Électricien">Électricien</option>
-              <option value="Chauffagiste">Chauffagiste</option>
-              <option value="Couvreur">Couvreur</option>
-              <option value="Serrurier">Serrurier</option>
-              <option value="Menuisier">Menuisier</option>
+              <option value="Artisan">Artisan</option>
+              <option value="TPE">TPE</option>
+              <option value="PME">PME</option>
+              <option value="Indépendant">Indépendant</option>
+              <option value="Commerce">Commerce</option>
               <option value="Autre">Autre</option>
             </select>
           </div>
@@ -72,8 +71,37 @@ if (!portalId || !formGuid) {
           <div class="w-100"></div>
 
           <div class="col-12 form-group">
-            <label for="hc-message">Message *</label>
-            <textarea class="form-control" id="hc-message" name="message" rows="3" required></textarea>
+            <label class="d-block" for="hc-message">Objectif principal *</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="objectif_principal" value="Plus d’appels" id="hc-Check1">
+              <label class="form-check-label" for="hc-Check1">
+                Plus d’appels
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="objectif_principal" value="Plus de devis" id="hc-Check2">
+              <label class="form-check-label" for="hc-Check2">
+                Plus de devis
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="objectif_principal" value="Plus de trafic qualifié" id="hc-Check3">
+              <label class="form-check-label" for="hc-Check3">
+                Plus de trafic qualifié
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="objectif_principal" value="Améliorer site & conversion" id="hc-Check4">
+              <label class="form-check-label" for="hc-Check4">
+                Améliorer site & conversion
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="objectif_principal" value="Lancer une pub locale" id="hc-Check5">
+              <label class="form-check-label" for="hc-Check5">
+                Lancer une pub locale
+              </label>
+            </div>
           </div>
 
           <!-- honeypot anti-spam -->
@@ -91,7 +119,7 @@ if (!portalId || !formGuid) {
       </form>
 
       <small class="d-block text-muted mt-3" style="line-height:1.35">
-        En envoyant, vous acceptez d’être recontacté. Vos données ne sont utilisées que pour répondre à votre demande.
+        Pas de spam. Juste un échange pour cadrer la zone et le besoin.
       </small>
     </div>
   </div>
@@ -99,7 +127,7 @@ if (!portalId || !formGuid) {
 
 <script is:inline>
   (function () {
-    const SUBMIT_LABEL = "Recevoir des demandes";
+    const SUBMIT_LABEL = "Demander un audit";
 
     function getCookie(name) {
       const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));

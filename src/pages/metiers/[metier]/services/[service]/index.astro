@@ -254,7 +254,7 @@ const faqSchema = {
         <div class="container">
           <div class="row justify-content-between align-items-center">
 
-            <div class="col-lg-6 col-md-6">
+            <div class="col-md-5">
               <div class="heading-block border-bottom-0 mb-4">
                 <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
                 <h2 class="text-transform-none ls-0">
@@ -275,27 +275,9 @@ const faqSchema = {
               </ul>
             </div>
 
-            <div class="col-lg-4 col-md-5 mt-5 mt-md-0">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h3 class="h4 mb-3">Recevoir des demandes</h3>
-
-                  <HubspotForm
-                    context={{
-                      page_type: "service",
-                      metier: metier.name,
-                      metier_slug: metier.slug,
-                      service: serviceTitle,
-                      service_slug: service.slug,
-                      page_url: pageUrl,
-                    }}
-                  />
-
-                  <small class="text-muted d-block mt-3">
-                    Objectif : des demandes simples, claires, et joignables.
-                  </small>
-                </div>
-              </div>
+            <!-- Formulaire -->
+            <div class="col-md-6 mt-5 mt-md-0">
+              <HubspotForm />
             </div>
 
           </div>
