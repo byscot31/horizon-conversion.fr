@@ -1,0 +1,134 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { VILLES_HUB, ZONE } from "../../data/catalogue";
+
+const pageTitle = `Villes couvertes (${ZONE})`;
+const description = `Toutes les villes prioritaires couvertes dans le ${ZONE}. Choisissez votre ville pour voir les métiers disponibles et démarrer.`;
+
+// Canonical robuste (Astro.site peut être undefined en dev)
+const canonicalPath = `/villes/`;
+const canonical = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+
+// On ne liste que les villes “prioritaires” (celles générées en /villes/[ville]/)
+const villes = VILLES_HUB.filter((v) => v.priority);
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical}>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src="/images/services/page-title.jpg" class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Villes</div>
+          <h1>Villes couvertes</h1>
+          <p class="lead text-white-50 mb-0">
+            {`Sélection de villes prioritaires dans le ${ZONE}. Choisissez votre ville pour voir les métiers disponibles.`}
+          </p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Villes</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro -->
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">Zone</div>
+            <h2 class="display-4 fw-bold">Choisissez votre ville</h2>
+
+            <p>
+              Chaque page ville sert de <strong>hub</strong> : vous y trouvez les métiers disponibles sur le secteur,
+              et un accès direct pour démarrer.
+            </p>
+
+            <ul class="iconlist iconlist-color mb-0">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Villes</strong> : priorisées (on élargit ensuite autour)</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Métiers</strong> : uniquement ceux actifs sur la ville</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Qualification</strong> : zone + besoin + délai + contact joignable</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src="/images/services/hero.svg" alt="" />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Listing Villes -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Villes</div>
+          <h2 class="text-transform-none ls-0">Villes prioritaires</h2>
+          <p class="mb-0 text-muted">
+            Cliquez sur une ville pour voir les métiers disponibles et recevoir des demandes qualifiées.
+          </p>
+        </div>
+
+        <div class="row col-mb-30">
+          {villes.length > 0 ? (
+            villes.map((v) => (
+              <div class="col-lg-4 col-md-6 d-flex">
+                <a class="card w-100 text-decoration-none" href={`/villes/${v.slug}/`}>
+                  <div class="card-body p-5">
+                    <h3 class="text-transform-none ls-0 mb-2">{v.name}</h3>
+
+                    <p class="mb-2 text-muted">{v.description}</p>
+
+                    <div class="small text-muted">
+                      <strong>Métiers :</strong>{" "}
+                      {v.metiers?.length ? v.metiers.map((m) => m.name).slice(0, 3).join(", ") : "—"}
+                      {v.metiers?.length > 3 ? "…" : ""}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))
+          ) : (
+            <div class="col-12">
+              <div class="alert alert-warning">
+                Aucune ville prioritaire n’est configurée pour le moment.
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- CTA -->
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center">
+            <div class="card">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0 mb-3">Votre ville n’est pas listée ?</h3>
+                <p class="text-muted mb-4">
+                  Dites-moi votre secteur et votre métier : je vous confirme rapidement si je peux vous envoyer des demandes qualifiées.
+                </p>
+                <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">
+                  Vérifier mon secteur
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="clear"></div>
+    </div>
+  </section>
+</Layout>

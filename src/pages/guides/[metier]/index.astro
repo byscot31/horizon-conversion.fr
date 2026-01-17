@@ -1,0 +1,233 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import HubspotForm from "../../../components/HubspotForm.astro";
+import { METIERS, ZONE } from "../../../data/catalogue";
+import { GUIDES } from "../../../data/guides";
+
+export function getStaticPaths() {
+  return GUIDES.map((g) => ({ params: { metier: g.slug } }));
+}
+
+const metierSlug = Astro.params.metier!;
+const guide = GUIDES.find((g) => g.slug === metierSlug);
+if (!guide) throw new Error(`Guide introuvable: ${metierSlug}`);
+
+const metier = METIERS.find((m) => m.slug === metierSlug);
+if (!metier) throw new Error(`Métier introuvable pour guide: ${metierSlug}`);
+
+const pageTitle = `${guide.title} : demandes qualifiées (${ZONE})`;
+const description = `Téléchargez le ${guide.title.toLowerCase()} : checklist + critères simples pour recevoir des demandes entrantes qualifiées dans le ${ZONE}.`;
+
+const startsWithVowel = (s: string) => /^[aeiouyàâäéèêëîïôöùûüœh]/i.test(s.trim());
+const de = (s: string) => (startsWithVowel(s) ? `d’${s}` : `de ${s}`);
+
+const faq = [
+  {
+    q: `À quoi sert ce guide ${metier.name.toLowerCase()} ?`,
+    a: `À filtrer rapidement les demandes entrantes (zone, besoin, délai, contact) pour ne garder que celles qui valent le coup.`,
+  },
+  {
+    q: `Qu’est-ce qu’une demande “qualifiée” ?`,
+    a: `Zone OK, besoin clair, contact joignable, et un délai compatible. Si c’est flou, je clarifie avant d’envoyer.`,
+  },
+  {
+    q: `Je dois payer pour le guide ?`,
+    a: `Non. Le guide est gratuit. Ensuite, si vous voulez, je peux aussi vous envoyer des demandes qualifiées (paiement uniquement quand c’est qualifié).`,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<Layout title={pageTitle} description={description}>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src={metier.pageTitleImage} class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Guide</div>
+          <h1>{guide.title} : recevoir des demandes qualifiées</h1>
+          <span>{guide.subtitle}</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/guides/">Guides</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{metier.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro -->
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">{metier.badge}</div>
+            <h2 class="display-4 fw-bold">
+              Le guide pour filtrer les demandes {de(metier.name.toLowerCase())} (et gagner du temps).
+            </h2>
+
+            <p>
+              Objectif : recevoir moins de demandes inutiles, et plus de demandes qui correspondent à votre zone, vos services et votre planning.
+            </p>
+
+            <p class="mb-3">Dans ce guide, vous obtenez :</p>
+
+            <ul class="iconlist iconlist-color mb-4">
+              {guide.bullets.map((b) => (
+                <li class="d-block"><i class="bi-check-circle-fill"></i>{b}</li>
+              ))}
+            </ul>
+
+            <a href="#recevoir" class="button button-rounded button-large text-transform-none ls-0">
+              Recevoir le guide
+            </a>
+            <a href={`/metiers/${metier.slug}/`} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
+              Voir la page métier
+            </a>
+          </div>
+
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src={metier.introImage} alt="" />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Bloc spécifique -->
+        <div class="row col-mb-30 align-content-stretch">
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que vous apprenez</h3>
+                <p class="mb-0 text-muted">
+                  Une méthode simple pour qualifier : zone, besoin, délai, contact + les bonnes questions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce qu’on évite</h3>
+                <p class="mb-0 text-muted">
+                  Hors zone, hors prestation, demandes floues, contacts injoignables : tout ce qui vous fait perdre du temps.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Après le guide</h3>
+                <p class="mb-0 text-muted">
+                  Si vous voulez, je peux aussi vous envoyer des appels + formulaires. Paiement uniquement quand c’est qualifié.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Mini-FAQ -->
+        <div class="section bg-transparent mt-0">
+          <div class="container">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">FAQ</div>
+              <h2 class="text-transform-none ls-0">Questions rapides</h2>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-lg-9">
+                <div class="faqs">
+                  {faq.map((item) => (
+                    <div class="toggle pb-3 mb-3">
+                      <div class="toggle-header">
+                        <div class="toggle-icon color">
+                          <i class="toggle-closed bi-question-circle"></i>
+                          <i class="toggle-open bi-question-circle"></i>
+                        </div>
+                        <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                        <div class="toggle-icon color">
+                          <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                          <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                        </div>
+                      </div>
+                      <div class="toggle-content text-black-50 ps-4">{item.a}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bloc conversion (Hubspot) -->
+      <div
+        id="recevoir"
+        class="section mt-0"
+        style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+
+            <div class="col-md-5">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Recevoir le guide</div>
+                <h2 class="text-transform-none ls-0">
+                  Vous êtes {metier.name.toLowerCase()} ?
+                  <br />Je vous envoie le guide + une checklist.
+                </h2>
+              </div>
+
+              <p class="mb-3">
+                {guide.subtitle}. Gratuit. Et si vous le souhaitez : demandes entrantes qualifiées ensuite.
+              </p>
+
+              <ul class="iconlist iconlist-color mb-0">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : votre secteur</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Prestation</strong> : ce que vous faites</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible planning</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : joignable</li>
+              </ul>
+            </div>
+
+            <div class="col-md-6 mt-5 mt-md-0">
+              <HubspotForm />
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

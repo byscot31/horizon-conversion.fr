@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Mentions légales | Horizon Conversion";
+const description =
+  "Mentions légales du site Horizon Conversion (éditeur, hébergeur, contact, propriété intellectuelle).";
+---
+
+<Layout title={title} description={description}>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src="/images/sections/1.jpg" class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Informations</div>
+          <h1>Mentions légales</h1>
+          <span>Éditeur • Hébergeur • Contact</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mentions légales</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container" style="max-width: 980px;">
+
+        <div class="row">
+          <div class="col-12">
+            <h2 class="text-transform-none ls-0">1) Éditeur du site</h2>
+            <p class="text-muted mb-2">
+              <strong>Horizon Conversion</strong> est édité par :
+            </p>
+
+            <ul class="iconlist iconlist-color">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Éditeur / Responsable de publication :</strong> DA COSTA François (Entrepreneur individuel)</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Nom commercial :</strong> CONTROL ONLINE</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>SIREN :</strong> 810 922 641 — <strong>SIRET :</strong> 810 922 641 00024</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>TVA intracommunautaire :</strong> FR78810922641</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>RCS :</strong> 810 922 641 R.C.S. Pontoise</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Adresse :</strong> 21 Boulevard de l’Orangerie, 95160 Montmorency (France)</li>
+            </ul>
+
+            <div class="clear line my-5"></div>
+
+            <h2 class="text-transform-none ls-0">2) Contact</h2>
+            <ul class="iconlist iconlist-color">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Téléphone :</strong> 06 60 92 10 08</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Email :</strong> contact@horizon-conversion.fr</li>
+            </ul>
+
+            <div class="clear line my-5"></div>
+
+            <h2 class="text-transform-none ls-0">3) Hébergement</h2>
+            <p class="text-muted mb-2">Le site est hébergé par :</p>
+            <ul class="iconlist iconlist-color">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Scaleway SAS</strong></li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Adresse :</strong> 8, rue de la Ville-l’Évêque, 75008 Paris, France</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Assistance :</strong> support par ticket (console Scaleway)</li>
+            </ul>
+
+            <div class="clear line my-5"></div>
+
+            <h2 class="text-transform-none ls-0">4) Propriété intellectuelle</h2>
+            <p class="text-muted">
+              Sauf mention contraire, l’ensemble des contenus présents sur ce site (textes, visuels, graphismes, logos, éléments de mise en page)
+              est protégé par le droit de la propriété intellectuelle. Toute reproduction, représentation ou adaptation, totale ou partielle,
+              sans autorisation préalable est interdite.
+            </p>
+
+            <div class="clear line my-5"></div>
+
+            <h2 class="text-transform-none ls-0">5) Responsabilité</h2>
+            <p class="text-muted">
+              L’éditeur s’efforce d’assurer au mieux l’exactitude et la mise à jour des informations publiées.
+              L’éditeur ne pourra être tenu responsable des erreurs, omissions ou de l’indisponibilité temporaire du site.
+            </p>
+
+            <div class="clear line my-5"></div>
+
+            <h2 class="text-transform-none ls-0">6) Données personnelles</h2>
+            <p class="text-muted">
+              Pour en savoir plus sur la collecte et l’utilisation des données, consultez la page
+              <a href="/politique-confidentialite/">Politique de confidentialité</a>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

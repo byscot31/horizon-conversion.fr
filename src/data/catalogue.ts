@@ -801,3 +801,46 @@ export const METIERS: Metier[] = [
         villes: MENUISIER_VILLES,
     },
 ];
+
+// -------------------------
+// HUB VILLES (déduites des villes des métiers)
+// -------------------------
+export type HubVille = Ville & {
+    // Métiers disponibles dans cette ville
+    metiers: Array<{ slug: string; name: string; badge: string }>;
+    // Pour trier/afficher des “prioritaires”
+    priority: boolean;
+};
+
+export const VILLES_HUB: HubVille[] = (() => {
+    const map = new Map<string, HubVille>();
+
+    for (const m of METIERS) {
+        for (const v of m.villes) {
+            const existing = map.get(v.slug);
+
+            if (!existing) {
+                map.set(v.slug, {
+                    ...v,
+                    metiers: [{ slug: m.slug, name: m.name, badge: m.badge }],
+                    // “priority” = vrai par défaut si la ville apparaît déjà dans au moins 1 métier
+                    // (tu peux raffiner ensuite : ex. si ville dans >=2 métiers, etc.)
+                    priority: true,
+                });
+            } else {
+                // Fusion : garde le texte ville existant, et ajoute le métier s’il manque
+                const already = existing.metiers.some((x) => x.slug === m.slug);
+                if (!already) existing.metiers.push({ slug: m.slug, name: m.name, badge: m.badge });
+
+                // Option : enrichir description/zone/demandes si tu veux une règle de merge
+                // (ici on garde “le premier”, pour éviter des textes incohérents)
+            }
+        }
+    }
+
+    // Tri : villes avec le plus de métiers en premier, puis alpha
+    return Array.from(map.values()).sort((a, b) => {
+        const d = b.metiers.length - a.metiers.length;
+        return d !== 0 ? d : a.name.localeCompare(b.name, "fr");
+    });
+})();

@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { GUIDES } from "../../data/guides";
+import { ZONE } from "../../data/catalogue";
+---
+
+<Layout
+  title={`Guides gratuits : demandes qualifiées (${ZONE})`}
+  description={`Guides pratiques pour recevoir des demandes entrantes qualifiées dans le ${ZONE} (par métier).`}
+>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Guides</div>
+          <h1>Guides gratuits : recevoir des demandes qualifiées</h1>
+          <span>Choisis ton métier, récupère une checklist simple.</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Guides</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+        <div class="row col-mb-30">
+          {GUIDES.map((g) => (
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="badge rounded-pill badge-default">Guide</div>
+                  <h3 class="text-transform-none ls-0">{g.title}</h3>
+                  <p class="text-muted mb-4">{g.subtitle}</p>
+                  <a href={`/guides/${g.slug}/`} class="button button-rounded button-small text-transform-none ls-0">
+                    Voir le guide
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="text-center">
+          <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">
+            Recevoir des demandes (audit rapide)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,299 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HubspotForm from "../../components/HubspotForm.astro";
+import { VILLES_HUB, ZONE } from "../../data/catalogue";
+
+// -------------------------
+// Static paths
+// -------------------------
+export function getStaticPaths() {
+  return VILLES_HUB
+    .filter((v) => v.priority)
+    .map((v) => ({ params: { ville: v.slug }, props: { ville: v } }));
+}
+
+const { ville } = Astro.props;
+
+// -------------------------
+// SEO
+// -------------------------
+const pageTitle = `Demandes qualifiées à ${ville.name} (${ZONE})`;
+const description = `Recevez des demandes entrantes (appel + formulaire) à ${ville.name} et autour. Choisissez votre métier. Paiement uniquement quand c’est qualifié.`;
+const canonicalPath = `/villes/${ville.slug}/`;
+const canonical = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+
+// -------------------------
+// Helpers
+// -------------------------
+const heroImg = "/images/services/page-title.jpg";
+const introImg = "/images/services/hero.svg";
+
+// Liens métiers disponibles dans cette ville (pas toute la liste)
+const metierLinks = (ville.metiers ?? []).map((m) => ({
+  ...m,
+  href: `/metiers/${m.slug}/`, // si tu veux des pages metier+ville : `/metiers/${m.slug}/villes/${ville.slug}/`
+}));
+
+const zoneLine = ville.zone
+  ? ville.zone
+  : `Zone couverte : ${ville.name} et communes proches (${ZONE}).`;
+
+const demandesLine = ville.demandes
+  ? ville.demandes
+  : `Dépannage, devis et RDV selon votre activité.`;
+
+const faq = [
+  {
+    q: `Quels métiers sont disponibles à ${ville.name} ?`,
+    a: `La page liste les métiers actuellement actifs sur ${ville.name}. Si votre activité n’est pas affichée, contactez-moi : j’ajoute le métier et j’adapte la qualification.`,
+  },
+  {
+    q: `Qu’est-ce qu’une demande “qualifiée” ?`,
+    a: `Zone OK, besoin clair, délai réaliste et contact joignable (téléphone/email valides). Si ce n’est pas qualifié, vous ne payez pas.`,
+  },
+  {
+    q: `Je peux limiter la zone autour de ${ville.name} ?`,
+    a: `Oui. Vous me donnez vos villes/rayon et ce que vous prenez (dépannage, travaux, urgences…). Je filtre avant de transmettre.`,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<Layout title={pageTitle} description={description} canonical={canonical}>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src={heroImg} class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">
+            Ville
+          </div>
+          <h1>{`Demandes qualifiées à ${ville.name}`}</h1>
+          <p class="lead text-white-50 mb-0">{zoneLine}</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/villes/">Villes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{ville.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro -->
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">Ville</div>
+
+            <h2 class="display-4 fw-bold">
+              {`Recevez des demandes qualifiées à ${ville.name} et autour.`}
+            </h2>
+
+            <p>
+              Concrètement : je génère des demandes entrantes (appels + formulaires) et je vous les transmets.
+              Vous payez uniquement quand la demande est <strong>qualifiée</strong>.
+            </p>
+
+            <p class="mb-3">Je filtre avant de vous envoyer :</p>
+
+            <ul class="iconlist iconlist-color mb-4">
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Besoin</strong> : clair (devis / dépannage / RDV)</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+              <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+            </ul>
+
+            <p class="mb-4">
+              {`À ${ville.name}, les demandes les plus fréquentes : `}
+              <strong>{demandesLine}</strong>
+            </p>
+
+            <a href="#metiers" class="button button-rounded button-large text-transform-none ls-0">
+              Voir les métiers disponibles
+            </a>
+            <a href="/contact/" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
+              Être rappelé
+            </a>
+          </div>
+
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src={introImg} alt="" />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Bloc spécifique (ville) : 3 cards -->
+        <div class="row col-mb-30 align-content-stretch">
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Zone couverte</h3>
+                <p class="mb-0 text-muted">
+                  {zoneLine}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Ce que vous recevez</h3>
+                <p class="mb-0 text-muted">
+                  Un appel ou un formulaire avec le besoin, la ville, le délai et un contact joignable.
+                  Si c’est flou, je clarifie avant de transmettre.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <h3 class="text-transform-none ls-0">Pour démarrer</h3>
+                <p class="mb-0 text-muted">
+                  Vous me dites votre métier, vos zones et vos disponibilités.
+                  Ensuite je lance et j’ajuste avec vous.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Grille métiers -->
+        <div id="metiers" class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Métiers</div>
+          <h2 class="text-transform-none ls-0">{`Métiers disponibles à ${ville.name}`}</h2>
+          <p class="mb-0 text-muted">
+            Choisissez votre métier pour voir l’offre et démarrer.
+          </p>
+        </div>
+
+        <div class="row col-mb-30">
+          {metierLinks.length > 0 ? (
+            metierLinks.map((m) => (
+              <div class="col-lg-4 col-md-6 d-flex">
+                <a class="card w-100 text-decoration-none" href={m.href}>
+                  <div class="card-body p-5">
+                    <h3 class="text-transform-none ls-0 mb-2">{m.name}</h3>
+                    <p class="mb-0 text-muted">
+                      {`Voir l’offre et recevoir des demandes à ${ville.name}.`}
+                    </p>
+                  </div>
+                </a>
+              </div>
+            ))
+          ) : (
+            <div class="col-12">
+              <div class="alert alert-warning">
+                Aucun métier n’est encore affiché pour {ville.name}. Utilisez le formulaire ci-dessous et je vous réponds rapidement.
+              </div>
+            </div>
+          )}
+        </div>
+
+      </div>
+
+      <div class="clear"></div>
+
+      <!-- Mini-FAQ -->
+      <div class="section bg-transparent mt-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">FAQ</div>
+            <h2 class="text-transform-none ls-0">Questions rapides</h2>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="faqs">
+                {faq.map((item) => (
+                  <div class="toggle pb-3 mb-3">
+                    <div class="toggle-header">
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed bi-question-circle"></i>
+                        <i class="toggle-open bi-question-circle"></i>
+                      </div>
+                      <div class="toggle-title fw-semibold ps-1">{item.q}</div>
+                      <div class="toggle-icon color">
+                        <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                        <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                      </div>
+                    </div>
+                    <div class="toggle-content text-black-50 ps-4">{item.a}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bloc conversion (Hubspot) -->
+      <div
+        class="section mt-0"
+        style="background: url('/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+
+            <div class="col-md-5">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Recevoir des demandes</div>
+                <h2 class="text-transform-none ls-0">
+                  {`Vous travaillez à ${ville.name} ?`}
+                  <br />Je peux vous envoyer des appels + formulaires.
+                </h2>
+              </div>
+
+              <p class="mb-3">
+                Des demandes entrantes dans votre secteur. Vous payez uniquement quand c’est qualifié.
+              </p>
+
+              <ul class="iconlist iconlist-color mb-0">
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Zone</strong> : dans votre secteur</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Besoin</strong> : clair (devis / dépannage / RDV)</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Délai</strong> : compatible avec votre planning</li>
+                <li class="d-block"><i class="bi-check-circle-fill"></i><strong>Contact</strong> : numéro/email valides + joignable</li>
+              </ul>
+            </div>
+
+            <div class="col-md-6 mt-5 mt-md-0">
+              <HubspotForm />
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
