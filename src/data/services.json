@@ -1,0 +1,416 @@
+[
+  // =========================
+  // PLOMBIER — top demandes
+  // =========================
+  {
+    "metier": "plombier",
+    "slug": "depannage-plomberie",
+    "name": "Dépannage plomberie",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Intervention rapide pour panne, fuite, WC bouché, bruit de canalisation, etc.",
+    "keywords": ["dépannage plomberie", "plombier urgence", "intervention rapide", "panne plomberie"],
+    "benefits": ["Diagnostic clair", "Devis avant travaux", "Intervention soignée"],
+    "faq": [
+      { "q": "Intervenez-vous en urgence à {ville} ?", "a": "Oui, selon disponibilité. Décrivez votre urgence et votre adresse pour une prise en charge rapide." },
+      { "q": "Quel est le délai d’intervention ?", "a": "Souvent dans la journée selon la zone et l’urgence." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui, devis communiqué avant intervention (hors cas spécifiques)." }
+    ]
+  },
+  {
+    "metier": "plombier",
+    "slug": "fuite-eau",
+    "name": "Recherche & réparation de fuite d’eau",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Fuite visible ou encastrée : localisation, réparation, remise en service.",
+    "keywords": ["fuite d'eau", "recherche fuite", "réparation fuite", "plombier fuite"],
+    "benefits": ["Localisation efficace", "Réparation durable", "Conseils prévention"],
+    "faq": [
+      { "q": "Fuite encastrée : comment faites-vous ?", "a": "On identifie l’origine (tests, inspection) puis on répare proprement avec accord." },
+      { "q": "Pouvez-vous intervenir sur PER / multicouche ?", "a": "Oui, selon l’installation et l’accessibilité." }
+    ]
+  },
+  {
+    "metier": "plombier",
+    "slug": "debouchage-canalisation",
+    "name": "Débouchage canalisation",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Évier, douche, WC, colonne : débouchage et vérification d’écoulement.",
+    "keywords": ["débouchage", "canalisation bouchée", "WC bouché", "évier bouché"],
+    "benefits": ["Intervention rapide", "Solution adaptée", "Écoulement rétabli"],
+    "faq": [
+      { "q": "Intervenez-vous pour WC bouché à {ville} ?", "a": "Oui, indiquez si l’eau remonte et depuis quand." },
+      { "q": "Utilisez-vous un furet / pompe / pression ?", "a": "On choisit la méthode selon la cause et l’installation." }
+    ]
+  },
+  {
+    "metier": "plombier",
+    "slug": "chauffe-eau",
+    "name": "Dépannage & remplacement chauffe-eau",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Plus d’eau chaude, ballon HS, fuite : diagnostic, réparation ou remplacement.",
+    "keywords": ["chauffe-eau", "ballon d'eau chaude", "panne eau chaude", "remplacement chauffe-eau"],
+    "benefits": ["Diagnostic", "Pose conforme", "Conseils d’entretien"],
+    "faq": [
+      { "q": "Remplacez-vous les ballons électriques ?", "a": "Oui, après contrôle du volume, de l’emplacement et de l’alimentation." },
+      { "q": "Quel volume choisir ?", "a": "Selon le nombre d’occupants et l’usage (douche/bain)." }
+    ]
+  },
+  {
+    "metier": "plombier",
+    "slug": "wc-sanitaires",
+    "name": "Réparation WC & sanitaires",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Mécanisme, chasse d’eau, fuite, robinet flotteur, remplacement WC.",
+    "keywords": ["réparation wc", "chasse d'eau", "fuite wc", "remplacement wc"],
+    "benefits": ["Pièces adaptées", "Réglage précis", "Économie d’eau"],
+    "faq": [
+      { "q": "Chasse d’eau qui coule : vous intervenez ?", "a": "Oui, souvent lié au flotteur/joint. On répare ou remplace." }
+    ]
+  },
+  {
+    "metier": "plombier",
+    "slug": "robinetterie",
+    "name": "Robinetterie & mitigeurs",
+    "category": "installation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Remplacement mitigeur, joints, fuite au robinet, pression.",
+    "keywords": ["mitigeur", "robinet", "fuite robinet", "remplacement mitigeur"],
+    "benefits": ["Pose propre", "Étanchéité", "Conseils produits"]
+  },
+  {
+    "metier": "plombier",
+    "slug": "renovation-salle-de-bain",
+    "name": "Rénovation salle de bain",
+    "category": "renovation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Remplacement douche/baignoire, réseaux, évacuations, finitions.",
+    "keywords": ["rénovation salle de bain", "douche", "baignoire", "plomberie salle de bain"],
+    "benefits": ["Planification", "Devis détaillé", "Finitions soignées"]
+  },
+
+  // =========================
+  // ÉLECTRICIEN — top demandes
+  // =========================
+  {
+    "metier": "electricien",
+    "slug": "depannage-electrique",
+    "name": "Dépannage électrique",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Coupure, disjonction, panne prises/éclairage : diagnostic et remise en service.",
+    "keywords": ["dépannage électrique", "panne électrique", "disjoncte", "coupure courant"],
+    "benefits": ["Diagnostic rapide", "Sécurisation", "Réparation durable"],
+    "faq": [
+      { "q": "Disjoncteur qui saute : vous intervenez ?", "a": "Oui, on isole le circuit en défaut et on sécurise l’installation." },
+      { "q": "Intervention le soir / week-end ?", "a": "Selon disponibilité, surtout si c’est une urgence." }
+    ]
+  },
+  {
+    "metier": "electricien",
+    "slug": "tableau-electrique",
+    "name": "Tableau électrique",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Remise en état, remplacement, ajout protections, étiquetage circuits.",
+    "keywords": ["tableau électrique", "remplacement tableau", "disjoncteur", "différentiel"],
+    "benefits": ["Protection renforcée", "Tableau propre", "Conformité"],
+    "faq": [
+      { "q": "Mise en sécurité du tableau possible ?", "a": "Oui, selon l’état de l’installation et les protections existantes." }
+    ]
+  },
+  {
+    "metier": "electricien",
+    "slug": "mise-aux-normes",
+    "name": "Mise aux normes / mise en sécurité",
+    "category": "renovation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Contrôle, corrections, protections, terre, circuits : amélioration sécurité.",
+    "keywords": ["mise aux normes", "mise en sécurité", "électricité norme", "terre"],
+    "benefits": ["Sécurité", "Conseils priorités", "Devis clair"]
+  },
+  {
+    "metier": "electricien",
+    "slug": "prise-interrupteur",
+    "name": "Prises & interrupteurs",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Ajout/remplacement prises, va-et-vient, prises extérieures, RJ45.",
+    "keywords": ["prise électrique", "interrupteur", "va-et-vient", "prise extérieure"],
+    "benefits": ["Pose propre", "Finitions", "Conseils emplacement"]
+  },
+  {
+    "metier": "electricien",
+    "slug": "eclairage",
+    "name": "Éclairage intérieur/extérieur",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Luminaires, spots, LED, détecteurs de mouvement, éclairage extérieur.",
+    "keywords": ["éclairage", "spots", "LED", "détecteur mouvement", "luminaire"],
+    "benefits": ["Mise en valeur", "Économie d’énergie", "Sécurité"]
+  },
+  {
+    "metier": "electricien",
+    "slug": "borne-recharge-ve",
+    "name": "Borne de recharge véhicule électrique",
+    "category": "installation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Étude, protection, pose borne/prise renforcée, tests.",
+    "keywords": ["borne de recharge", "wallbox", "prise renforcée", "véhicule électrique"],
+    "benefits": ["Dimensionnement", "Sécurité", "Installation conforme"]
+  },
+
+  // =========================
+  // SERRURIER — top demandes
+  // =========================
+  {
+    "metier": "serrurier",
+    "slug": "ouverture-porte",
+    "name": "Ouverture de porte",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Porte claquée/fermée, clés perdues : ouverture sans dégâts si possible.",
+    "keywords": ["ouverture de porte", "porte claquée", "serrurier urgence", "clé perdue"],
+    "benefits": ["Intervention rapide", "Respect du matériel", "Conseils sécurisation"],
+    "faq": [
+      { "q": "Porte claquée : pouvez-vous ouvrir sans casser ?", "a": "Souvent oui selon serrure/porte. On privilégie les méthodes non destructives." }
+    ]
+  },
+  {
+    "metier": "serrurier",
+    "slug": "changement-serrure",
+    "name": "Changement de serrure",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Remplacement serrure/cylindre, mise en sécurité après perte de clés.",
+    "keywords": ["changement serrure", "remplacement cylindre", "barillet", "sécurisation"],
+    "benefits": ["Matériel adapté", "Pose propre", "Niveau de sécurité au choix"]
+  },
+  {
+    "metier": "serrurier",
+    "slug": "reparation-apres-effraction",
+    "name": "Sécurisation après effraction",
+    "category": "securite",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Réparation provisoire/definitive, remplacement serrure, sécurisation porte.",
+    "keywords": ["effraction", "porte forcée", "sécurisation", "serrurier effraction"],
+    "benefits": ["Sécurisation rapide", "Solutions durables", "Conseils assurance"]
+  },
+  {
+    "metier": "serrurier",
+    "slug": "blindage-porte",
+    "name": "Blindage / renforcement de porte",
+    "category": "securite",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Renforcement, cornières anti-pinces, serrure multipoints.",
+    "keywords": ["blindage porte", "renforcement", "serrure multipoints"],
+    "benefits": ["Sécurité renforcée", "Solution sur mesure", "Devis détaillé"]
+  },
+
+  // =========================
+  // COUVREUR — top demandes
+  // =========================
+  {
+    "metier": "couvreur",
+    "slug": "fuite-toiture",
+    "name": "Recherche & réparation fuite toiture",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "rdv-rapide",
+    "short": "Infiltration, tuiles déplacées, solins : diagnostic et réparation.",
+    "keywords": ["fuite toiture", "infiltration", "réparation toiture", "tuiles cassées"],
+    "benefits": ["Diagnostic", "Réparation ciblée", "Protection temporaire si besoin"],
+    "faq": [
+      { "q": "Intervenez-vous après intempéries ?", "a": "Oui, on peut sécuriser puis planifier la réparation définitive." }
+    ]
+  },
+  {
+    "metier": "couvreur",
+    "slug": "reparation-toiture",
+    "name": "Réparation toiture (tuiles, ardoises, faîtage)",
+    "category": "renovation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Remplacement éléments, reprise faîtage, petites réfections.",
+    "keywords": ["réparation toiture", "faîtage", "tuiles", "ardoises"],
+    "benefits": ["Intervention propre", "Durabilité", "Conseils entretien"]
+  },
+  {
+    "metier": "couvreur",
+    "slug": "gouttieres",
+    "name": "Gouttières (réparation, nettoyage, remplacement)",
+    "category": "entretien",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Gouttières bouchées/fuyardes : nettoyage, réparations, remplacement.",
+    "keywords": ["gouttière", "nettoyage gouttière", "fuite gouttière", "remplacement gouttière"],
+    "benefits": ["Écoulement OK", "Prévention infiltrations", "Finitions soignées"]
+  },
+  {
+    "metier": "couvreur",
+    "slug": "demoussage-toiture",
+    "name": "Démoussage & entretien toiture",
+    "category": "entretien",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Nettoyage, démoussage, traitement préventif selon support.",
+    "keywords": ["démoussage toiture", "nettoyage toiture", "mousse toiture"],
+    "benefits": ["Toiture propre", "Prévention", "Contrôle visuel"]
+  },
+  {
+    "metier": "couvreur",
+    "slug": "etancheite-toit-plat",
+    "name": "Étanchéité toit plat",
+    "category": "renovation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Réparation/renforcement étanchéité, relevés, évacuations.",
+    "keywords": ["étanchéité toit plat", "infiltration toit plat", "membrane"],
+    "benefits": ["Diagnostic", "Solution adaptée", "Durabilité"]
+  },
+
+  // =========================
+  // CHAUFFAGISTE — top demandes
+  // =========================
+  {
+    "metier": "chauffagiste",
+    "slug": "depannage-chaudiere",
+    "name": "Dépannage chaudière",
+    "category": "depannage",
+    "is_top": true,
+    "urgency": "24-7",
+    "short": "Panne chauffage/eau chaude : diagnostic, remise en route, sécurisation.",
+    "keywords": ["dépannage chaudière", "panne chauffage", "plus d'eau chaude", "chauffagiste urgence"],
+    "benefits": ["Diagnostic", "Sécurisation", "Remise en service"],
+    "faq": [
+      { "q": "Vous dépannez gaz/fioul ?", "a": "Selon votre installation. Donnez la marque/modèle pour confirmer." }
+    ]
+  },
+  {
+    "metier": "chauffagiste",
+    "slug": "entretien-chaudiere",
+    "name": "Entretien chaudière",
+    "category": "entretien",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Entretien, contrôle, nettoyage, réglages, conseils d’optimisation.",
+    "keywords": ["entretien chaudière", "révision chaudière", "maintenance chauffage"],
+    "benefits": ["Performance", "Sécurité", "Conseils réglages"]
+  },
+  {
+    "metier": "chauffagiste",
+    "slug": "remplacement-chaudiere",
+    "name": "Remplacement chaudière",
+    "category": "installation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Dépose/pose, dimensionnement, mise en service, évacuation.",
+    "keywords": ["remplacement chaudière", "pose chaudière", "devis chaudière"],
+    "benefits": ["Dimensionnement", "Pose conforme", "Mise en service"]
+  },
+  {
+    "metier": "chauffagiste",
+    "slug": "radiateurs",
+    "name": "Radiateurs (pose, remplacement, purge)",
+    "category": "installation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Pose/remplacement radiateurs, réglages, purge, équilibrage simple.",
+    "keywords": ["radiateur", "purge radiateur", "remplacement radiateur"],
+    "benefits": ["Confort", "Réglages", "Finitions propres"]
+  },
+  {
+    "metier": "chauffagiste",
+    "slug": "pompe-a-chaleur",
+    "name": "Pompe à chaleur (PAC) — installation/maintenance",
+    "category": "installation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Étude, dimensionnement, pose, maintenance selon matériel.",
+    "keywords": ["pompe à chaleur", "PAC", "installation pac", "entretien pac"],
+    "benefits": ["Étude", "Installation", "Optimisation"]
+  },
+
+  // =========================
+  // PEINTRE — top demandes
+  // =========================
+  {
+    "metier": "peintre",
+    "slug": "peinture-interieure",
+    "name": "Peinture intérieure",
+    "category": "renovation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Murs, plafonds, boiseries : préparation, sous-couche, finitions propres.",
+    "keywords": ["peinture intérieure", "peintre", "murs", "plafonds", "finitions"],
+    "benefits": ["Préparation supports", "Finitions soignées", "Protection chantier"],
+    "faq": [
+      { "q": "Faites-vous l’enduit / ratissage ?", "a": "Oui, selon l’état des murs et la finition souhaitée." }
+    ]
+  },
+  {
+    "metier": "peintre",
+    "slug": "peinture-exterieure",
+    "name": "Peinture extérieure",
+    "category": "renovation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Boiseries, ferronneries, façades selon supports : préparation + peinture adaptée.",
+    "keywords": ["peinture extérieure", "volets", "portail", "boiseries"],
+    "benefits": ["Produits adaptés", "Tenue dans le temps", "Finitions"]
+  },
+  {
+    "metier": "peintre",
+    "slug": "ravalement-facade",
+    "name": "Ravalement / remise en état façade",
+    "category": "renovation",
+    "is_top": true,
+    "urgency": "rdv",
+    "short": "Nettoyage, réparations, enduits, peinture façade selon état.",
+    "keywords": ["ravalement façade", "peinture façade", "enduit façade"],
+    "benefits": ["Diagnostic", "Réparation fissures", "Protection durable"]
+  },
+  {
+    "metier": "peintre",
+    "slug": "enduits-rebouchage",
+    "name": "Enduits, rebouchage & préparation supports",
+    "category": "renovation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Reprise murs/plafonds, ratissage, ponçage, préparation avant peinture.",
+    "keywords": ["enduit", "ratissage", "rebouchage", "préparation murs"],
+    "benefits": ["Supports nickel", "Meilleure finition", "Durabilité"]
+  },
+  {
+    "metier": "peintre",
+    "slug": "papier-peint-revetements",
+    "name": "Papier peint & revêtements muraux",
+    "category": "renovation",
+    "is_top": false,
+    "urgency": "rdv",
+    "short": "Pose papier peint, panoramique, toile de verre, finitions.",
+    "keywords": ["papier peint", "pose papier peint", "toile de verre", "revêtement mural"],
+    "benefits": ["Pose propre", "Alignements", "Finitions"]
+  }
+]

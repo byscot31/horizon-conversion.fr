@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "plombier",
+    "name": "Plombier",
+    "title": "Plombier",
+    "short": "Dépannage plomberie, fuite, débouchage, chauffe-eau.",
+    "keywords": ["plombier", "dépannage plomberie", "fuite d'eau", "débouchage", "chauffe-eau"],
+    "default_radius_km": 25,
+    "primary_cta": { "label": "Appeler maintenant", "type": "tel" },
+    "secondary_cta": { "label": "Devis / rappel", "type": "form" },
+    "service_slug_prefix": "plombier"
+  },
+  {
+    "slug": "electricien",
+    "name": "Électricien",
+    "title": "Électricien",
+    "short": "Dépannage électrique, tableau, mise aux normes, prises/éclairage.",
+    "keywords": ["électricien", "dépannage électrique", "mise aux normes", "tableau électrique", "prise"],
+    "default_radius_km": 25,
+    "primary_cta": { "label": "Appeler maintenant", "type": "tel" },
+    "secondary_cta": { "label": "Devis / rappel", "type": "form" },
+    "service_slug_prefix": "electricien"
+  },
+  {
+    "slug": "serrurier",
+    "name": "Serrurier",
+    "title": "Serrurier",
+    "short": "Ouverture de porte, changement de serrure, sécurisation après effraction.",
+    "keywords": ["serrurier", "ouverture de porte", "serrure", "porte claquée", "effraction"],
+    "default_radius_km": 25,
+    "primary_cta": { "label": "Appeler maintenant", "type": "tel" },
+    "secondary_cta": { "label": "Devis / rappel", "type": "form" },
+    "service_slug_prefix": "serrurier"
+  },
+  {
+    "slug": "couvreur",
+    "name": "Couvreur",
+    "title": "Couvreur",
+    "short": "Recherche de fuite toiture, réparation, entretien, gouttières.",
+    "keywords": ["couvreur", "fuite toiture", "réparation toiture", "gouttière", "démoussage"],
+    "default_radius_km": 30,
+    "primary_cta": { "label": "Appeler maintenant", "type": "tel" },
+    "secondary_cta": { "label": "Devis / rappel", "type": "form" },
+    "service_slug_prefix": "couvreur"
+  },
+  {
+    "slug": "chauffagiste",
+    "name": "Chauffagiste",
+    "title": "Chauffagiste",
+    "short": "Entretien chaudière, dépannage, remplacement, radiateurs, PAC.",
+    "keywords": ["chauffagiste", "entretien chaudière", "dépannage chaudière", "pompe à chaleur", "radiateur"],
+    "default_radius_km": 30,
+    "primary_cta": { "label": "Appeler maintenant", "type": "tel" },
+    "secondary_cta": { "label": "Devis / rappel", "type": "form" },
+    "service_slug_prefix": "chauffagiste"
+  },
+  {
+    "slug": "peintre",
+    "name": "Peintre",
+    "title": "Peintre en bâtiment",
+    "short": "Peinture intérieure/extérieure, préparation supports, finitions.",
+    "keywords": ["peintre", "peinture intérieure", "peinture extérieure", "ravalement", "enduit"],
+    "default_radius_km": 25,
+    "primary_cta": { "label": "Demander un devis", "type": "form" },
+    "secondary_cta": { "label": "Appeler", "type": "tel" },
+    "service_slug_prefix": "peintre"
+  }
+]

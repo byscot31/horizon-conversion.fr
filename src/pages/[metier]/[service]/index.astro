@@ -1,0 +1,19 @@
+---
+import metiers from "../../../data/metiers.json";
+import services from "../../../data/services.json";
+
+const metierSlugs = new Set(metiers.map((m) => m.slug));
+
+/** @type {import("astro").GetStaticPaths} */
+export function getStaticPaths() {
+  return services
+    .filter((s) => metierSlugs.has(s.metier))
+    .map((s) => ({
+      params: { metier: s.metier, service: s.slug },
+      props: { service: s },
+    }));
+}
+
+// Exemple d’usage
+const { service } = Astro.props;
+---

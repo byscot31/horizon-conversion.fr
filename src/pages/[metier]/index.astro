@@ -1,0 +1,14 @@
+---
+import metiers from "../../data/metiers.json";
+
+/** @type {import("astro").GetStaticPaths} */
+export function getStaticPaths() {
+  return metiers.map((m) => ({
+    params: { metier: m.slug },
+    props: { metier: m },
+  }));
+}
+
+// Exemple d’usage
+const { metier } = Astro.props;
+---
