@@ -1,0 +1,119 @@
+---
+import Layout from "@layouts/Layout.astro";
+import MainMenu from "@components/MainMenu.astro";
+
+const BRAND = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+
+const COMPANY = import.meta.env.PUBLIC_LEGAL_COMPANY_NAME ?? BRAND;
+const ADDRESS = import.meta.env.PUBLIC_LEGAL_ADDRESS ?? "—";
+const EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "contact@exemple.fr";
+
+const DPO_EMAIL = import.meta.env.PUBLIC_DPO_EMAIL ?? EMAIL;
+
+const canonical = "/politique-confidentialite/";
+const title = `Politique de confidentialité | ${BRAND}`;
+const description = `Politique de confidentialité et protection des données personnelles (${BRAND}).`;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <MainMenu slot="header" />
+
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-5">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Données</div>
+          <h1>Politique de confidentialité</h1>
+          <p class="lead mb-0">Comment tes données sont utilisées, simplement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+
+                <p class="text-muted mb-4">
+                  Cette page explique comment <strong>{COMPANY}</strong> (ci-après “{BRAND}”) collecte et traite
+                  tes données personnelles lorsque tu navigues sur le site ou fais une demande de devis.
+                </p>
+
+                <h2 class="h5 mb-3">Responsable du traitement</h2>
+                <p class="text-muted mb-2">
+                  <strong>{COMPANY}</strong> — {ADDRESS}
+                </p>
+                <p class="text-muted mb-4">
+                  Contact : <a href={`mailto:${EMAIL}`}>{EMAIL}</a> • Délégué/Contact RGPD : <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a>
+                </p>
+
+                <h2 class="h5 mb-3">Données collectées</h2>
+                <ul class="iconlist ms-3 mb-4">
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Formulaire :</strong> nom, téléphone/email, ville, besoin, message (selon ce que tu renseignes)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Données techniques :</strong> pages consultées, appareil/navigateur, adresse IP (logs)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Mesure d’audience / marketing :</strong> uniquement si tu y consens (voir Cookies)</li>
+                </ul>
+
+                <h2 class="h5 mb-3">Finalités</h2>
+                <ul class="iconlist ms-3 mb-4">
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Répondre à ta demande (devis, rappel, prise de rendez-vous)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Assurer le suivi client et la qualité de service</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Sécurité du site (prévention fraude/abus)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Mesure d’audience / amélioration (si consentement)</li>
+                </ul>
+
+                <h2 class="h5 mb-3">Base légale</h2>
+                <ul class="iconlist ms-3 mb-4">
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Exécution de mesures précontractuelles</strong> : traiter une demande de devis</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Intérêt légitime</strong> : sécurité, lutte contre abus, amélioration du service</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Consentement</strong> : cookies non essentiels / marketing / analytics</li>
+                </ul>
+
+                <h2 class="h5 mb-3">Durées de conservation (principes)</h2>
+                <p class="text-muted mb-4">
+                  Les données liées à une demande sont conservées le temps nécessaire au traitement et au suivi.
+                  Les données techniques (logs) peuvent être conservées pour la sécurité du site sur une durée limitée.
+                  Les cookies non essentiels ne sont déposés qu’avec ton consentement et pour une durée limitée.
+                </p>
+
+                <h2 class="h5 mb-3">Destinataires</h2>
+                <p class="text-muted mb-4">
+                  Les données sont destinées aux équipes en charge du traitement des demandes. Elles peuvent être
+                  traitées via des prestataires techniques (hébergement, formulaire/CRM, mesure d’audience) strictement
+                  pour fournir le service.
+                </p>
+
+                <h2 class="h5 mb-3">Tes droits</h2>
+                <p class="text-muted mb-2">
+                  Tu peux demander l’accès, la rectification, l’effacement, la limitation, l’opposition et la portabilité,
+                  selon les cas.
+                </p>
+                <p class="text-muted mb-4">
+                  Pour exercer tes droits : <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a>
+                </p>
+
+                <h2 class="h5 mb-3">Cookies</h2>
+                <p class="text-muted mb-0">
+                  Pour en savoir plus et gérer tes préférences : <a href="/cookies/">page Cookies</a>.
+                </p>
+
+              </div>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Besoin d’un devis ? <a href="/contact/">Faire une demande</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

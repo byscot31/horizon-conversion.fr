@@ -145,7 +145,7 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
 
             <!-- Logo -->
             <div id="logo">
-              <a href="/" class="standard-logo">
+              <a href="/" class="standard-logo py-2">
                 <img src="/images/logo.svg" alt={`${BRAND_NAME} - Artisan local`} />
               </a>
             </div>
@@ -180,10 +180,168 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
     <slot />
 
     <!-- Footer -->
-    <footer id="footer" class="dark">
-      <div class="container">...</div>
-      <div id="copyrights">
-        <div class="container">...</div>
+    <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+      <div class="container">
+        <!-- Footer Widgets -->
+        <div class="footer-widgets-wrap pb-5">
+          <div class="row col-mb-50 align-items-start">
+
+            <!-- Brand / Pitch -->
+            <div class="col-lg-5">
+              <div class="widget">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <img src="/images/logo.svg" alt="Horizon Conversion" style="height:46px; width:auto;" loading="lazy">
+                  <div class="small text-muted">
+                    <strong class="d-block text-dark">Dépannage & travaux</strong>
+                    <span>Sud Oise (60) & Nord 95</span>
+                  </div>
+                </div>
+
+                <p class="mb-3 text-muted" style="max-width: 520px;">
+                  Besoin d’un artisan pour un dépannage, une installation ou des travaux ?
+                  On intervient rapidement avec un <strong>devis annoncé avant intervention</strong> et un travail soigné.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/contact/" class="button button-rounded button-small m-0">📝 Demander un devis</a>
+                  <a href="/urgence/" class="button button-border button-rounded button-small m-0">
+                    <span class="text-danger fw-semibold">Urgence</span>
+                  </a>
+                  <a href="/avis/" class="button button-light button-rounded button-small bg-white border text-dark m-0">⭐ Avis</a>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="row g-3 small">
+                  <div class="col-12 col-sm-6">
+                    <div class="p-3 border rounded-3 bg-white">
+                      ✅ Devis clair avant intervention
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <div class="p-3 border rounded-3 bg-white">
+                      ✅ Intervention locale & soignée
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="col-lg-4">
+              <div class="widget">
+                <h4 class="text-transform-none ls-0 mb-3">Accès rapide</h4>
+
+                <div class="row g-4">
+                  <div class="col-6 widget_links">
+                    <ul class="list-unstyled mb-0">
+                      <li><a href="/">Accueil</a></li>
+                      <li><a href="/metiers/">Métiers</a></li>
+                      <li><a href="/villes/">Villes</a></li>
+                      <li><a href="/travaux/">Réalisations</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-6 widget_links">
+                    <ul class="list-unstyled mb-0">
+                      <li><a href="/avis/">Avis clients</a></li>
+                      <li><a href="/urgence/"><span class="text-danger fw-semibold">Urgence</span></a></li>
+                      <li><a href="/contact/">Contact / Devis</a></li>
+                      <li><a href="/pro/">Espace Pro</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="small text-muted">
+                  Astuce : si tu hésites, passe par <a href="/contact/">Contact</a> — on t’oriente vers la bonne solution.
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-3">
+              <div class="widget">
+                <h4 class="text-transform-none ls-0 mb-3">Contact</h4>
+
+                <div class="feature-box fbox-plain fbox-sm align-items-center mb-3">
+                  <div class="fbox-icon">
+                    <i class="bi-telephone text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted small">Téléphone</span><br>
+                    <a href="tel:+33600000000" class="text-dark text-decoration-none">
+                      <strong class="h5 d-block mb-0">06 00 00 00 00</strong>
+                    </a>
+                    <div class="small text-muted">Appel direct — réponse rapide</div>
+                  </div>
+                </div>
+
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-envelope text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted small">Demande en ligne</span><br>
+                    <a href="/contact/" class="text-dark text-decoration-none">
+                      <strong class="h6 d-block mb-0">Devis gratuit</strong>
+                    </a>
+                    <div class="small text-muted">Décris ton besoin, on rappelle</div>
+                  </div>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/contact/" class="btn btn-outline-secondary btn-sm">📝 Devis</a>
+                  <a href="/villes/" class="btn btn-outline-secondary btn-sm">📍 Zone</a>
+                  <a href="/avis/" class="btn btn-outline-secondary btn-sm">⭐ Avis</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div><!-- .footer-widgets-wrap end -->
+      </div>
+
+      <!-- Copyrights -->
+      <div id="copyrights"
+           style="background: url('/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 60px;">
+        <div class="container">
+          <div class="row justify-content-between align-items-center col-mb-30">
+
+            <div class="col-12 col-lg-auto text-center text-lg-start">
+              <div class="small text-contrast-600">
+                © <span id="js-year"></span> Horizon Conversion — Tous droits réservés.
+              </div>
+              <div class="copyright-links small mt-1">
+                <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+                <span class="mx-1">·</span>
+                <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+                <span class="mx-1">·</span>
+                <a href="/cookies/" class="text-contrast-600">Cookies</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+              <div class="small text-contrast-600">
+                Zone : <a class="text-contrast-600" href="/villes/">Sud Oise (60) & Nord 95</a>
+                <span class="mx-2">•</span>
+                <a class="text-contrast-600" href="/contact/">Demander un devis</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <script is:inline>
+          (() => {
+            const y = document.getElementById("js-year");
+            if (y) y.textContent = String(new Date().getFullYear());
+          })();
+        </script>
       </div>
     </footer>
 

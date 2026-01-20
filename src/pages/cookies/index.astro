@@ -1,0 +1,86 @@
+---
+import Layout from "@layouts/Layout.astro";
+import MainMenu from "@components/MainMenu.astro";
+
+const BRAND = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "contact@exemple.fr";
+
+const canonical = "/cookies/";
+const title = `Cookies | ${BRAND}`;
+const description = `Informations sur les cookies et gestion des préférences (${BRAND}).`;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <MainMenu slot="header" />
+
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-5">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Préférences</div>
+          <h1>Cookies</h1>
+          <p class="lead mb-0">À quoi ça sert, et comment les gérer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+
+                <h2 class="h5 mb-3">Qu’est-ce qu’un cookie ?</h2>
+                <p class="text-muted mb-4">
+                  Un cookie est un petit fichier stocké sur ton appareil. Il sert par exemple à faire fonctionner
+                  le site, à mémoriser certaines préférences, ou (si tu l’acceptes) à mesurer l’audience.
+                </p>
+
+                <h2 class="h5 mb-3">Types de cookies</h2>
+                <ul class="iconlist ms-3 mb-4">
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Essentiels</strong> : nécessaires au fonctionnement du site (pas de consentement requis)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Mesure d’audience</strong> : statistiques de visite (soumis à consentement selon configuration)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Marketing</strong> : suivi publicitaire / retargeting (soumis à consentement)</li>
+                </ul>
+
+                <h2 class="h5 mb-3">Comment gérer tes préférences</h2>
+                <p class="text-muted mb-2">
+                  Si un bandeau de consentement est présent sur le site, tu peux modifier tes choix à tout moment
+                  via le lien “Cookies” (en bas de page) ou via l’interface de gestion.
+                </p>
+                <p class="text-muted mb-4">
+                  Tu peux aussi gérer/supprimer les cookies depuis les réglages de ton navigateur.
+                </p>
+
+                <h2 class="h5 mb-3">Cookies liés aux formulaires / CRM</h2>
+                <p class="text-muted mb-4">
+                  Lorsque tu envoies une demande via le formulaire, des cookies ou identifiants techniques peuvent être
+                  utilisés pour assurer la transmission, éviter les abus, et améliorer la fiabilité du traitement.
+                  Ces éléments ne servent pas à “te spammer” : ils facilitent le suivi de ta demande.
+                </p>
+
+                <h2 class="h5 mb-3">Contact</h2>
+                <p class="text-muted mb-0">
+                  Une question sur les cookies ou la confidentialité ? Écris-nous :
+                  <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                </p>
+
+              </div>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Lire aussi : <a href="/politique-confidentialite/">Politique de confidentialité</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -9,46 +9,78 @@ const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
 const canonical = "/avis/";
 
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL ??
+  (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
+
 const title = `Avis clients — ${brand}`;
-const description = `Avis clients vérifiés. Interventions ${regionLabel}.`;
+const description = `Avis clients et retours d’intervention. Zone : ${regionLabel}.`;
 
 const items = [...avis].sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
 function villeName(slug) {
-  return villes.find(v => v.slug === slug)?.name ?? slug;
+  return villes.find((v) => v.slug === slug)?.name ?? slug;
 }
 function metierName(slug) {
-  return metiers.find(m => m.slug === slug)?.name ?? slug;
+  return metiers.find((m) => m.slug === slug)?.name ?? slug;
 }
 function serviceName(mSlug, sSlug) {
-  return services.find(s => s.metier === mSlug && s.slug === sSlug)?.name ?? sSlug;
+  return services.find((s) => s.metier === mSlug && s.slug === sSlug)?.name ?? sSlug;
 }
 
-// AggregateRating JSON-LD
+// stats
 const ratingCount = items.length;
 const averageRating =
-  ratingCount ? (items.reduce((sum, r) => sum + Number(r.rating || 0), 0) / ratingCount) : 5;
+  ratingCount ? items.reduce((sum, r) => sum + Number(r.rating ?? 5), 0) / ratingCount : 5;
 
-const jsonLd = {
+const verifiedCount = items.filter((r) => !!r.verified).length;
+
+// options filtres
+const villeOptions = [...new Map(villes.map((v) => [v.slug, v.name])).entries()]
+  .map(([slug, name]) => ({ slug, name }))
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+const metierOptions = [...metiers]
+  .map((m) => ({ slug: m.slug, name: m.name }))
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+// JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL ? `${SITE_URL}/` : "/" },
+    { "@type": "ListItem", "position": 2, "name": "Avis", "item": SITE_URL ? `${SITE_URL}${canonical}` : canonical },
+  ],
+};
+
+const businessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": brand,
   "areaServed": regionLabel,
+  "url": SITE_URL ? `${SITE_URL}/` : undefined,
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": Number(averageRating.toFixed(2)),
-    "reviewCount": ratingCount
-  }
+    "reviewCount": ratingCount,
+  },
 };
+
+const jsonLd = [breadcrumbJsonLd, businessJsonLd];
 ---
-<Layout title={title} description={description} canonical={canonical} jsonLd={[jsonLd]}>
+
+<Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
   <section class="page-title page-title-center dark include-header include-topbar">
     <div class="container">
-      <div class="page-title-row">
+      <div class="page-title-row mt-5">
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">Avis</div>
           <h1>Avis clients</h1>
-          <p class="lead mb-0">{regionLabel} — note moyenne {averageRating.toFixed(1)} / 5</p>
+          <p class="lead mb-0">
+            {regionLabel} • <strong>{averageRating.toFixed(1)}/5</strong> (sur {ratingCount} avis)
+            {verifiedCount ? ` • ${verifiedCount} avis vérifiés` : ""}
+          </p>
         </div>
 
         <nav aria-label="breadcrumb">
@@ -65,62 +97,160 @@ const jsonLd = {
     <div class="content-wrap pb-0">
       <div class="container">
 
+        <!-- Intro (client-first) -->
         <div class="row justify-content-center text-center">
           <div class="col-lg-9">
             <div class="badge rounded-pill badge-default mb-2">Confiance</div>
-            <h2 class="display-6 fw-bold mb-3">Ils nous ont fait confiance</h2>
+            <h2 class="display-6 fw-bold mb-3">Des retours concrets, sur de vraies interventions</h2>
             <p class="text-muted mb-0">
-              Les avis renvoient aussi vers les pages <strong>Ville × Métier</strong> et <strong>Service × Ville</strong>.
+              Lis les avis par ville et par type d’intervention. Si tu veux, tu peux demander un devis en 1 minute.
             </p>
           </div>
         </div>
 
         <div class="clear line my-6"></div>
 
-        <div class="row col-mb-30">
-          {items.map((r) => (
-            <div class="col-lg-4 col-md-6 d-flex">
-              <div class="card h-100 w-100 shadow-sm">
-                <div class="card-body p-4">
-                  <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div>
-                      <h3 class="h6 mb-1 fw-bold">{r.author}</h3>
-                      <div class="small text-muted">{r.date} • {villeName(r.ville)}</div>
-                    </div>
-                    <div class="badge rounded-pill bg-dark">{r.rating}/5</div>
+        <!-- Filtres -->
+        <div class="row justify-content-center">
+          <div class="col-lg-11">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="row g-3 align-items-end">
+                  <div class="col-md-5">
+                    <label class="form-label small text-muted mb-1" for="r-search">Rechercher dans les avis</label>
+                    <input
+                      id="r-search"
+                      class="form-control"
+                      type="search"
+                      placeholder="Ex : fuite, serrure, disjoncteur, chauffe-eau, dépannage…"
+                    />
                   </div>
 
-                  <p class="mb-3">{r.text}</p>
-
-                  <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-outline-secondary btn-sm"
-                       href={`/villes/${r.ville}/${r.metier}/`}>
-                      {metierName(r.metier)} {villeName(r.ville)}
-                    </a>
-                    <a class="btn btn-outline-secondary btn-sm"
-                       href={`/villes/${r.ville}/${r.metier}/${r.service}/`}>
-                      {serviceName(r.metier, r.service)}
-                    </a>
-                    <a class="btn btn-light btn-sm border" href={`/avis/${r.id}/`}>Détail</a>
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1" for="r-ville">Ville</label>
+                    <select id="r-ville" class="form-select">
+                      <option value="all">Toutes les villes</option>
+                      {villeOptions.map((v) => (
+                        <option value={v.slug}>{v.name}</option>
+                      ))}
+                    </select>
                   </div>
 
-                  {r.verified && <div class="small text-success mt-3">✓ Avis vérifié</div>}
+                  <div class="col-md-2">
+                    <label class="form-label small text-muted mb-1" for="r-metier">Catégorie</label>
+                    <select id="r-metier" class="form-select">
+                      <option value="all">Toutes</option>
+                      {metierOptions.map((m) => (
+                        <option value={m.slug}>{m.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label class="form-label small text-muted mb-1" for="r-min">Note mini</label>
+                    <select id="r-min" class="form-select">
+                      <option value="all">Toutes</option>
+                      <option value="5">5/5</option>
+                      <option value="4">4/5 et +</option>
+                      <option value="3">3/5 et +</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 align-items-center mt-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="r-verified" />
+                    <label class="form-check-label small" for="r-verified">Afficher uniquement les avis vérifiés</label>
+                  </div>
+
+                  <button class="btn btn-outline-secondary btn-sm ms-auto" type="button" id="r-reset">
+                    Réinitialiser
+                  </button>
+
+                  <div class="small text-muted" id="r-count"></div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         <div class="clear line my-6"></div>
 
+        <!-- Grid avis -->
+        <div class="row col-mb-30" id="reviews-grid">
+          {items.map((r) => {
+            const vName = villeName(r.ville);
+            const mName = metierName(r.metier);
+            const sName = serviceName(r.metier, r.service);
+            const txt = String(r.text ?? "");
+            const short = txt.length > 220 ? `${txt.slice(0, 220)}…` : txt;
+
+            return (
+              <div
+                class="col-lg-4 col-md-6 d-flex review-item"
+                data-text={`${r.author} ${vName} ${mName} ${sName} ${txt}`.toLowerCase()}
+                data-ville={String(r.ville)}
+                data-metier={String(r.metier)}
+                data-rating={String(Number(r.rating ?? 5))}
+                data-verified={r.verified ? "1" : "0"}
+              >
+                <div class="card h-100 w-100 shadow-sm">
+                  <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                      <div>
+                        <h3 class="h6 mb-1 fw-bold">{r.author}</h3>
+                        <div class="small text-muted">
+                          {r.date} • {vName}
+                        </div>
+                      </div>
+                      <div class="text-end">
+                        <div class="badge rounded-pill bg-dark">{Number(r.rating ?? 5)}/5</div>
+                        {r.verified && <div class="small text-success mt-1">✓ vérifié</div>}
+                      </div>
+                    </div>
+
+                    <div class="small text-muted mb-2">
+                      <strong>{mName}</strong> • {sName}
+                    </div>
+
+                    <p class="mb-3">{short}</p>
+
+                    <div class="d-flex flex-wrap gap-2">
+                      <a class="btn btn-outline-secondary btn-sm" href={`/avis/${String(r.id)}/`}>
+                        Lire l’avis
+                      </a>
+
+                      <a class="btn btn-light btn-sm border" href={`/villes/${r.ville}/`}>
+                        {vName}
+                      </a>
+
+                      <a class="btn btn-light btn-sm border" href={`/villes/${r.ville}/${r.metier}/${r.service}/`}>
+                        Intervention
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- CTA devis -->
         <div class="section mt-0" style="padding: 70px 0;">
           <div class="container">
             <div class="row justify-content-center text-center">
               <div class="col-lg-8">
                 <div class="badge rounded-pill badge-default mb-2">Devis gratuit</div>
-                <h3 class="text-transform-none ls-0 mb-3">On t’aide aussi</h3>
-                <p class="text-muted mb-4">Explique ton besoin et ta ville, on te rappelle rapidement.</p>
-                <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
+                <h3 class="text-transform-none ls-0 mb-3">Besoin d’aide chez toi ?</h3>
+                <p class="text-muted mb-4">
+                  Dis-nous ta ville et ce qui ne va pas (urgence ou rendez-vous) : on te rappelle rapidement.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                  <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
+                  <a href="/villes/" class="button button-border button-rounded button-large m-0">📍 Choisir ma ville</a>
+                </div>
               </div>
             </div>
           </div>
@@ -129,4 +259,66 @@ const jsonLd = {
       </div>
     </div>
   </section>
+
+  <!-- Filtrage front (isolé, léger, sans $ global) -->
+  <script is:inline>
+    (() => {
+      const qs = (sel, root = document) => root.querySelector(sel);
+      const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+      const input = qs("#r-search");
+      const ville = qs("#r-ville");
+      const metier = qs("#r-metier");
+      const min = qs("#r-min");
+      const verified = qs("#r-verified");
+      const reset = qs("#r-reset");
+      const count = qs("#r-count");
+
+      function applyFilters() {
+        const q = (input?.value || "").trim().toLowerCase();
+        const v = ville?.value || "all";
+        const m = metier?.value || "all";
+        const minVal = min?.value || "all";
+        const onlyVerified = !!verified?.checked;
+
+        const cards = qsa(".review-item");
+        let visible = 0;
+
+        cards.forEach((el) => {
+          const text = el.getAttribute("data-text") || "";
+          const elVille = el.getAttribute("data-ville") || "";
+          const elMetier = el.getAttribute("data-metier") || "";
+          const elRating = Number(el.getAttribute("data-rating") || "0");
+          const elVerified = el.getAttribute("data-verified") === "1";
+
+          const okQ = !q || text.includes(q);
+          const okV = v === "all" || elVille === v;
+          const okM = m === "all" || elMetier === m;
+          const okMin = minVal === "all" || elRating >= Number(minVal);
+          const okVer = !onlyVerified || elVerified;
+
+          const show = okQ && okV && okM && okMin && okVer;
+          el.style.display = show ? "" : "none";
+          if (show) visible++;
+        });
+
+        if (count) count.textContent = `${visible} avis affiché(s)`;
+      }
+
+      [input, ville, metier, min].forEach((el) => el && el.addEventListener("input", applyFilters));
+      [ville, metier, min].forEach((el) => el && el.addEventListener("change", applyFilters));
+      verified?.addEventListener("change", applyFilters);
+
+      reset?.addEventListener("click", () => {
+        if (input) input.value = "";
+        if (ville) ville.value = "all";
+        if (metier) metier.value = "all";
+        if (min) min.value = "all";
+        if (verified) verified.checked = false;
+        applyFilters();
+      });
+
+      applyFilters();
+    })();
+  </script>
 </Layout>

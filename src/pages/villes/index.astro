@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import MainMenu from "@components/MainMenu.astro";
 import villes from "@data/villes.json";
 import metiers from "@data/metiers.json";
 
@@ -7,7 +8,10 @@ const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
 
 const title = `Villes d’intervention — ${regionLabel} | ${brand}`;
-const description = `Retrouvez toutes les villes d’intervention : Sud Oise (60) et Nord 95. Dépannage, travaux, devis gratuit et rappel rapide.`;
+const description =
+  `Choisis ta ville en ${regionLabel} : dépannage plomberie (fuite d’eau, WC bouché), ` +
+  `électricité (panne, tableau), serrurerie (porte claquée), chauffage, toiture, peinture. ` +
+  `Devis gratuit, rappel rapide.`;
 const canonical = "/villes/";
 
 // Helpers
@@ -32,11 +36,13 @@ const prettifySlug = (s) =>
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
+  <MainMenu slot="header" />
+
   <section class="page-title page-title-center dark include-header include-topbar">
     <div class="container">
-      <div class="page-title-row">
+      <div class="page-title-row mt-5">
         <div class="page-title-content">
-          <div class="badge rounded-pill border border-light text-light">Villes</div>
+          <div class="badge rounded-pill border border-light text-light">Zones d’intervention</div>
           <h1>Villes d’intervention</h1>
           <p class="lead mb-0">{regionLabel} — devis gratuit & réponse rapide</p>
         </div>
@@ -57,27 +63,36 @@ const prettifySlug = (s) =>
 
         <!-- Intro -->
         <div class="row justify-content-center">
-          <div class="col-lg-9 text-center">
-            <div class="badge rounded-pill badge-default mb-2">SEO local</div>
+          <div class="col-lg-10 text-center">
+            <div class="badge rounded-pill badge-default mb-2">Trouver un artisan près de chez toi</div>
             <h2 class="display-6 fw-bold mb-3">Choisis ta ville</h2>
-            <p class="text-muted mb-0">
-              Chaque page ville renvoie ensuite vers “Ville × Métier” puis “Service × Ville”
-              pour capter les requêtes les plus rentables.
+            <p class="text-muted mb-3">
+              Sélectionne ta commune pour accéder rapidement aux services disponibles (dépannage, installation, petits travaux).
+              Si c’est une urgence, tu peux aussi faire une demande : on te rappelle rapidement.
             </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-2 small text-muted">
+              <span class="badge bg-light text-dark">Fuite d’eau / WC bouché</span>
+              <span class="badge bg-light text-dark">Panne électrique / tableau</span>
+              <span class="badge bg-light text-dark">Porte claquée / serrure</span>
+              <span class="badge bg-light text-dark">Chauffage en panne</span>
+              <span class="badge bg-light text-dark">Infiltration toiture</span>
+              <span class="badge bg-light text-dark">Peinture intérieure</span>
+            </div>
           </div>
         </div>
 
         <div class="clear line my-6"></div>
 
-        <!-- Filtres (UX + SEO : améliore la navigation sans surcharger) -->
+        <!-- Filtres -->
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <div class="card shadow-sm">
               <div class="card-body p-4">
                 <div class="row g-3 align-items-end">
                   <div class="col-md-6">
-                    <label class="form-label small text-muted mb-1" for="v-search">Rechercher une ville</label>
-                    <input id="v-search" class="form-control" type="search" placeholder="Ex: Senlis, Chantilly, Persan…" />
+                    <label class="form-label small text-muted mb-1" for="v-search">Rechercher ta ville</label>
+                    <input id="v-search" class="form-control" type="search" placeholder="Ex : Senlis, Chantilly, Persan…" />
                   </div>
 
                   <div class="col-md-3">
@@ -90,11 +105,11 @@ const prettifySlug = (s) =>
                   </div>
 
                   <div class="col-md-3">
-                    <label class="form-label small text-muted mb-1" for="v-priority">Priorité</label>
+                    <label class="form-label small text-muted mb-1" for="v-priority">Affichage</label>
                     <select id="v-priority" class="form-select">
-                      <option value="all">A + B</option>
-                      <option value="A">Priorité A</option>
-                      <option value="B">Priorité B</option>
+                      <option value="all">Toutes les villes</option>
+                      <option value="A">Villes principales</option>
+                      <option value="B">Villes autour</option>
                     </select>
                   </div>
                 </div>
@@ -110,13 +125,15 @@ const prettifySlug = (s) =>
 
         <div class="clear line my-6"></div>
 
-        <!-- COMBOS POPULAIRES (Ville × Métier) — ultra maillant mais lisible -->
+        <!-- Accès rapides -->
         <div class="row justify-content-center">
           <div class="col-lg-11">
             <div class="heading-block border-bottom-0 text-center mb-4">
-              <div class="badge rounded-pill badge-default">Liens rapides</div>
-              <h3 class="text-transform-none ls-0 mb-1">Combos populaires</h3>
-              <p class="text-muted mb-0">Accès direct aux pages “Ville × Métier” (priorité A).</p>
+              <div class="badge rounded-pill badge-default">Accès rapide</div>
+              <h3 class="text-transform-none ls-0 mb-1">Métiers dans les villes les plus demandées</h3>
+              <p class="text-muted mb-0">
+                Clique sur ta ville, puis choisis le métier (plombier, électricien, serrurier…).
+              </p>
             </div>
 
             <div class="row g-3">
@@ -129,19 +146,19 @@ const prettifySlug = (s) =>
                           <div class="fw-semibold">{v.name}</div>
                           <div class="small text-muted">{v.dept} • {v.zone}</div>
                         </div>
-                        <span class="badge bg-success">A</span>
+                        <span class="badge bg-success">Ville principale</span>
                       </div>
 
                       <div class="d-flex flex-wrap gap-2 mt-2 mb-3">
-                        <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Page ville</a>
-                        <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
+                        <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Voir {v.name}</a>
+                        <a class="btn btn-outline-primary btn-sm" href="/contact/">Demander un devis</a>
                       </div>
 
-                      <div class="small fw-semibold mb-2">Ville × Métier</div>
+                      <div class="small fw-semibold mb-2">Choisir un métier</div>
                       <div class="d-flex flex-wrap gap-2">
                         {topMetiers.map((m) => (
                           <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
-                            {m.name}
+                            {m.name} à {v.name}
                           </a>
                         ))}
                       </div>
@@ -155,8 +172,8 @@ const prettifySlug = (s) =>
             <div class="mt-4">
               <details class="card shadow-sm">
                 <summary class="card-body p-4" style="cursor:pointer;">
-                  <span class="fw-semibold">Voir tous les combos (A + B)</span>
-                  <span class="text-muted small ms-2">— classés par ville, puis métiers</span>
+                  <span class="fw-semibold">Voir toutes les villes et tous les métiers</span>
+                  <span class="text-muted small ms-2">— pratique si tu hésites entre plusieurs communes</span>
                 </summary>
 
                 <div class="card-body pt-0 px-4 pb-4">
@@ -168,7 +185,7 @@ const prettifySlug = (s) =>
                             <div class="d-flex justify-content-between align-items-start">
                               <span class="fw-semibold">{v.name}</span>
                               <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
-                                {v.priority}
+                                {v.priority === "A" ? "Principale" : "Autour"}
                               </span>
                             </div>
                             <div class="small text-muted">{v.dept} • {v.zone}</div>
@@ -176,14 +193,14 @@ const prettifySlug = (s) =>
 
                           <div class="card-body pt-0 px-3 pb-3">
                             <div class="d-flex flex-wrap gap-2 mb-2">
-                              <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Page ville</a>
+                              <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Voir {v.name}</a>
                               <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
                             </div>
 
                             <div class="d-flex flex-wrap gap-2">
                               {metiers.map((m) => (
                                 <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
-                                  {m.name}
+                                  {m.name} à {v.name}
                                 </a>
                               ))}
                             </div>
@@ -200,7 +217,7 @@ const prettifySlug = (s) =>
 
         <div class="clear line my-6"></div>
 
-        <!-- Tabs (comme avant) -->
+        <!-- Tabs -->
         <ul class="nav nav-tabs justify-content-center" id="villesTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-60" data-bs-toggle="tab" data-bs-target="#pane-60" type="button" role="tab" aria-controls="pane-60" aria-selected="true">
@@ -220,7 +237,7 @@ const prettifySlug = (s) =>
           <div class="tab-pane fade show active" id="pane-60" role="tabpanel" aria-labelledby="tab-60" tabindex="0">
             <div class="text-center mb-4">
               <div class="small text-muted">
-                Priorité A (money pages) : <strong>{countA(sudOiseAll)}</strong> • Priorité B (renfort) : <strong>{sudOiseAll.length - countA(sudOiseAll)}</strong>
+                Villes principales : <strong>{countA(sudOiseAll)}</strong> • Villes autour : <strong>{sudOiseAll.length - countA(sudOiseAll)}</strong>
               </div>
             </div>
 
@@ -239,7 +256,9 @@ const prettifySlug = (s) =>
                           <div class="fw-semibold">{v.name}</div>
                           <div class="small text-muted">{v.dept} • {v.zone}</div>
                         </div>
-                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>{v.priority}</span>
+                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
+                          {v.priority === "A" ? "Principale" : "Autour"}
+                        </span>
                       </div>
 
                       {v.around?.length ? (
@@ -258,7 +277,7 @@ const prettifySlug = (s) =>
           <div class="tab-pane fade" id="pane-95" role="tabpanel" aria-labelledby="tab-95" tabindex="0">
             <div class="text-center mb-4">
               <div class="small text-muted">
-                Priorité A (money pages) : <strong>{countA(nord95All)}</strong> • Priorité B (renfort) : <strong>{nord95All.length - countA(nord95All)}</strong>
+                Villes principales : <strong>{countA(nord95All)}</strong> • Villes autour : <strong>{nord95All.length - countA(nord95All)}</strong>
               </div>
             </div>
 
@@ -277,7 +296,9 @@ const prettifySlug = (s) =>
                           <div class="fw-semibold">{v.name}</div>
                           <div class="small text-muted">{v.dept} • {v.zone}</div>
                         </div>
-                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>{v.priority}</span>
+                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
+                          {v.priority === "A" ? "Principale" : "Autour"}
+                        </span>
                       </div>
 
                       {v.around?.length ? (
@@ -301,12 +322,13 @@ const prettifySlug = (s) =>
           <div class="container">
             <div class="row justify-content-center text-center">
               <div class="col-lg-8">
-                <div class="badge rounded-pill badge-default mb-2">Besoin d’aide ?</div>
-                <h3 class="text-transform-none ls-0 mb-3">Pas sûr de la ville / du service ?</h3>
+                <div class="badge rounded-pill badge-default mb-2">Tu ne trouves pas ?</div>
+                <h3 class="text-transform-none ls-0 mb-3">Indique ta ville et ton besoin</h3>
                 <p class="text-muted mb-4">
-                  Va sur la page Contact : UTM + page source + contexte (ville/métier/service) remontent automatiquement dans HubSpot.
+                  Même si ta commune n’est pas listée, indique ton secteur et le souci (fuite, panne, serrure, chauffage…).
+                  On te répond rapidement avec une solution claire.
                 </p>
-                <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
+                <a href="/contact/" class="button button-rounded button-large m-0">📝 Faire une demande</a>
               </div>
             </div>
           </div>
@@ -316,7 +338,7 @@ const prettifySlug = (s) =>
     </div>
   </section>
 
-  <!-- Filtrage front (simple, rapide, pas de dépendance) -->
+  <!-- Filtrage front (simple, rapide, pas de dépendance, pas de $ global) -->
   <script type="module" is:inline>
   (() => {
     const qs = (sel, root = document) => root.querySelector(sel);
