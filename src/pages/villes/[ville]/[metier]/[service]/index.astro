@@ -44,12 +44,59 @@ const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
 const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
 
+const telHref = `tel:${String(phone).replace(/\s+/g, "")}`;
+
 const title = `${service.name} à ${ville.name} (${ville.dept}) — ${metier.name} | ${brand}`;
-const description = `${service.short} Intervention ${ville.name} et communes autour. Devis gratuit, réponse rapide.`;
+const short = service.short ?? "";
+const description =
+  `${short ? `${short} ` : ""}Intervention à ${ville.name} et dans les communes autour. ` +
+  `Devis gratuit, réponse rapide.`;
 
 const canonical = `/villes/${ville.slug}/${metier.slug}/${service.slug}/`;
 
-// FAQ (merge: service.faq + FAQ génériques)
+// Exemples client-first (longue traîne) selon le métier
+const metierExamples = {
+  plombier: [
+    "Fuite d’eau (robinet, tuyau, sous évier)",
+    "WC bouché / évier bouché / douche qui ne s’évacue plus",
+    "Changement de robinet / siphon / mécanisme de WC",
+    "Problème de chauffe-eau / ballon d’eau chaude",
+  ],
+  electricien: [
+    "Panne électrique / disjoncteur qui saute",
+    "Prise qui ne fonctionne plus / interrupteur HS",
+    "Tableau électrique (remise en état / sécurisation)",
+    "Mise en sécurité après court-circuit",
+  ],
+  serrurier: [
+    "Porte claquée / ouverture de porte",
+    "Clé cassée / serrure bloquée",
+    "Remplacement de cylindre / verrou",
+    "Sécurisation après tentative d’effraction",
+  ],
+  couvreur: [
+    "Fuite en toiture / infiltration après pluie",
+    "Tuile cassée ou envolée (vent/tempête)",
+    "Réparation faîtage / solins / étanchéité",
+    "Gouttière endommagée / débordement",
+  ],
+  chauffagiste: [
+    "Panne de chauffage / radiateur froid",
+    "Problème chaudière (selon installation) / réglages",
+    "Fuite sur circuit / purge / pression",
+    "Eau chaude irrégulière / chauffe-eau",
+  ],
+  peintre: [
+    "Peinture intérieure (murs, plafonds)",
+    "Rattrapage fissures / préparation des supports",
+    "Rafraîchissement avant emménagement",
+    "Peinture après dégât des eaux (selon état)",
+  ],
+};
+
+const examples = metierExamples[metier.slug] ?? [];
+
+// FAQ (merge: service.faq + FAQ génériques “particulier”)
 const faq = [
   ...(service.faq ?? []),
   {
@@ -57,8 +104,20 @@ const faq = [
     a: `Oui : ${[...(ville.around ?? [])].slice(0, 8).map((x) => x.replace(/-/g, " ")).join(", ")} et les communes proches selon planning.`,
   },
   {
+    q: "En combien de temps pouvez-vous intervenir ?",
+    a: "Selon l’urgence et les disponibilités. Appelez ou envoyez le formulaire : on vous confirme rapidement le créneau possible.",
+  },
+  {
     q: "Le devis est-il gratuit ?",
-    a: "Oui, devis communiqué avant intervention (hors cas spécifiques).",
+    a: "Oui, nous vous annonçons le tarif avant intervention (hors cas spécifiques).",
+  },
+  {
+    q: "Quel est le prix pour ce type d’intervention ?",
+    a: "Le tarif dépend de la complexité, de l’accès et du temps sur place. Après votre description (et idéalement une photo), on vous donne une estimation, puis on confirme le prix avant intervention.",
+  },
+  {
+    q: "Que faut-il préparer avant votre arrivée ?",
+    a: "Si possible : photos/vidéo, accès au compteur/tableau/vanne d’eau selon le cas, et une description claire du problème.",
   },
 ];
 
@@ -97,6 +156,52 @@ const around = (ville.around ?? [])
   .map((slug) => villes.find((v) => v.slug === slug))
   .filter(Boolean)
   .slice(0, 10);
+
+// Conseils “urgence” (safe) selon métier (pas de geste technique risqué)
+const urgenceTipsByMetier = {
+  plombier: [
+    "Coupez l’eau au robinet d’arrêt (ou à l’arrivée générale si besoin).",
+    "Placez un seau / serpillière et protégez les meubles/sols.",
+    "Évitez d’utiliser les sanitaires concernés (WC/évier/douche).",
+    "Prenez 1–2 photos/vidéos (ça aide à diagnostiquer plus vite).",
+  ],
+  electricien: [
+    "Coupez l’alimentation au disjoncteur si odeur de brûlé, étincelles ou fumée.",
+    "N’essayez pas de réarmer plusieurs fois si ça re-saute immédiatement.",
+    "Débranchez les appareils de la zone si possible (sans toucher à des fils).",
+    "Éloignez enfants/animaux et gardez la zone accessible.",
+  ],
+  serrurier: [
+    "Si la porte est bloquée, évitez de forcer : ça peut aggraver la casse.",
+    "En cas de tentative d’effraction, ne touchez pas aux zones endommagées si vous souhaitez déposer plainte.",
+    "Restez en sécurité (éclairage, voisin, intérieur si possible).",
+    "Préparez une pièce d’identité + justificatif (souvent demandé pour une ouverture).",
+  ],
+  couvreur: [
+    "Éloignez-vous des zones humides (risque de glissade) et protégez le sol avec une bâche/serviettes.",
+    "Placez un récipient sous la fuite si ça goutte à l’intérieur.",
+    "N’allez pas sur le toit (risque de chute).",
+    "Si possible, prenez des photos depuis le sol (ou fenêtre) sans vous exposer.",
+  ],
+  chauffagiste: [
+    "Si vous sentez une odeur anormale ou constatez une fuite, coupez l’appareil et aérez la pièce.",
+    "Notez le message d’erreur / voyant / pression affichée (sans manipuler).",
+    "Évitez les réglages multiples : appelez, on vous guide si nécessaire.",
+    "Préparez la marque/modèle si vous l’avez (photo de l’étiquette).",
+  ],
+  peintre: [
+    "Aérez la pièce et évitez de toucher les zones humides.",
+    "Protégez le sol/meubles si la peinture a coulé (bâche, carton).",
+    "Si c’est après un dégât des eaux, limitez l’humidité (ventilation) et prenez des photos.",
+    "Préparez les surfaces à identifier (murs/plafonds, pièces concernées).",
+  ],
+};
+
+const urgenceTips = urgenceTipsByMetier[metier.slug] ?? [
+  "Sécurisez la zone et évitez toute manipulation risquée.",
+  "Si nécessaire, coupez eau/électricité de la zone concernée.",
+  "Prenez 1–2 photos/vidéos pour accélérer le diagnostic.",
+];
 ---
 
 <Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd} noindex={noindex}>
@@ -106,7 +211,7 @@ const around = (ville.around ?? [])
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">{metier.name}</div>
           <h1>{service.name} à {ville.name}</h1>
-          <p class="lead mb-0">Intervention {ville.name} ({ville.dept}) • {regionLabel}</p>
+          <p class="lead mb-0">Intervention à {ville.name} ({ville.dept}) • {regionLabel}</p>
         </div>
 
         <nav aria-label="breadcrumb">
@@ -130,20 +235,32 @@ const around = (ville.around ?? [])
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
             <div class="badge rounded-pill badge-default mb-2">Devis gratuit • Réponse rapide</div>
+
             <h2 class="display-6 fw-bold mb-3">
-              {service.name} {ville.name} : intervention rapide et soignée
+              {service.name} à {ville.name} : une intervention claire, propre, sans surprise
             </h2>
 
-            <p class="text-muted mb-3">{service.short}</p>
+            {short ? <p class="text-muted mb-3">{short}</p> : null}
+
+            {examples.length ? (
+              <>
+                <div class="small text-uppercase ls-1 fw-bold text-muted mb-2">Exemples de situations</div>
+                <ul class="iconlist ms-3 mb-4">
+                  {examples.slice(0, 4).map((e) => (
+                    <li><i class="fa-solid fa-check text-smaller color"></i> {e}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
 
             <ul class="iconlist ms-3 mb-4">
-              {(service.benefits ?? ["Diagnostic clair", "Devis avant travaux", "Intervention soignée"]).slice(0, 5).map((b) => (
+              {(service.benefits ?? ["Explication claire du problème", "Tarif annoncé avant intervention", "Intervention soignée"]).slice(0, 4).map((b) => (
                 <li><i class="fa-solid fa-check text-smaller color"></i> {b}</li>
               ))}
             </ul>
 
             <div class="d-flex flex-wrap gap-2">
-              <a href={`tel:${phone}`} class="button button-rounded button-large text-transform-none ls-0 m-0">
+              <a href={telHref} class="button button-rounded button-large text-transform-none ls-0 m-0">
                 📞 Appeler — {phoneDisplay}
               </a>
               <a href="#devis" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0 m-0">
@@ -152,34 +269,67 @@ const around = (ville.around ?? [])
             </div>
 
             <div class="small text-muted mt-3">
-              Zone : {ville.name} + alentours • {metier.name} • {service.category}
+              Zone : {ville.name} + communes proches • {metier.name}
             </div>
           </div>
 
           <div class="col-lg-5">
             <div class="card shadow-sm">
               <div class="card-body p-4">
-                <h3 class="h5 mb-2">Ce que tu obtiens</h3>
+                <h3 class="h5 mb-2">Ce que vous obtenez</h3>
                 <div class="row g-3 small">
-                  <div class="col-12"><div class="p-3 border rounded">✅ Diagnostic clair + explication</div></div>
-                  <div class="col-12"><div class="p-3 border rounded">✅ Devis avant intervention</div></div>
-                  <div class="col-12"><div class="p-3 border rounded">✅ Intervention soignée</div></div>
-                  <div class="col-12"><div class="p-3 border rounded">✅ Conseils prévention</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Diagnostic + explication simple</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Tarif annoncé avant intervention</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Intervention propre & soignée</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Conseils pour éviter que ça revienne</div></div>
+                </div>
+
+                <div class="small text-muted mt-3">
+                  Astuce : si possible, préparez 1–2 photos/vidéos du problème (ça accélère le diagnostic).
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="clear line my-6"></div>
+        <!-- URGENCE : quoi faire en attendant -->
+        <div class="card shadow-sm mt-5">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+              <div>
+                <div class="badge rounded-pill bg-danger mb-2">Urgence</div>
+                <h3 class="h5 mb-2">Que faire en attendant ?</h3>
+                <p class="small text-muted mb-0">
+                  Quelques gestes simples pour éviter que la situation n’empire, sans prendre de risque.
+                </p>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href={telHref} class="btn btn-outline-danger btn-sm">📞 Appeler</a>
+                <a href="#devis" class="btn btn-outline-secondary btn-sm">📝 Demander un devis</a>
+              </div>
+            </div>
+
+            <hr class="my-3" />
+
+            <ul class="iconlist ms-3 mb-0">
+              {urgenceTips.slice(0, 5).map((t) => (
+                <li><i class="fa-solid fa-triangle-exclamation text-smaller text-danger"></i> {t}</li>
+              ))}
+            </ul>
+
+            <div class="small text-muted mt-3">
+              Si vous avez un doute : appelez, on vous dit quoi faire (et quoi éviter) selon votre situation.
+            </div>
+          </div>
+        </div>
 
         <!-- Services liés -->
         {siblingServices.length ? (
           <>
             <div class="heading-block border-bottom-0 text-center">
-              <div class="badge rounded-pill badge-default">Services</div>
-              <h3 class="text-transform-none ls-0">Autres demandes fréquentes</h3>
-              <p class="text-muted mb-0">Même zone, même métier — pour capter plus de requêtes.</p>
+              <div class="badge rounded-pill badge-default">Autres services</div>
+              <h3 class="text-transform-none ls-0">Autres demandes fréquentes à {ville.name}</h3>
+              <p class="text-muted mb-0">Si votre problème ressemble à l’un de ces cas, vous pouvez cliquer directement.</p>
             </div>
 
             <div class="row mt-4 col-mb-30">
@@ -205,8 +355,8 @@ const around = (ville.around ?? [])
         <!-- Zones : communes autour -->
         <div class="heading-block border-bottom-0 text-center">
           <div class="badge rounded-pill badge-default">Zone</div>
-          <h3 class="text-transform-none ls-0">Intervention autour de {ville.name}</h3>
-          <p class="text-muted mb-0">On se déplace aussi dans les communes proches.</p>
+          <h3 class="text-transform-none ls-0">Autour de {ville.name}</h3>
+          <p class="text-muted mb-0">Nous intervenons aussi dans les communes proches (selon disponibilités).</p>
         </div>
 
         <div class="row col-mb-20 mt-4">
@@ -257,6 +407,42 @@ const around = (ville.around ?? [])
 
         <div class="clear line my-6"></div>
 
+        <!-- TARIFS : rassurer sans promettre -->
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-10">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="badge rounded-pill badge-default mb-2">Tarifs</div>
+                <h3 class="h5 mb-2">Combien ça coûte ?</h3>
+
+                <p class="text-muted mb-3">
+                  Le prix dépend surtout de la complexité, de l’accès, du temps sur place et des pièces éventuelles.
+                  Dans tous les cas, on vous annonce le tarif <strong>avant</strong> de lancer l’intervention.
+                </p>
+
+                <div class="row g-3 small">
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                      ✅ <strong>Devis clair avant intervention</strong><br />
+                      Vous savez à quoi vous attendre (pas de surprise).
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                      ✅ <strong>Fourchette indicative</strong><br />
+                      Après votre description + 1–2 photos si possible, on vous donne une estimation réaliste.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="small text-muted mt-3">
+                  Astuce : indiquez “ce qui se passe”, depuis quand, et ce que vous avez déjà essayé (sans forcer). Ça permet d’être plus précis.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- FORM -->
         <div id="devis" class="section mt-0" style="padding: 70px 0;">
           <div class="container">
@@ -266,21 +452,23 @@ const around = (ville.around ?? [])
                   <div class="badge rounded-pill badge-default">Devis gratuit</div>
                   <h2 class="text-transform-none ls-0 mb-0">Demande rapide — {service.name}</h2>
                 </div>
+
                 <p class="text-muted">
-                  Indique l’adresse, l’urgence et ton problème. On te rappelle vite sur {ville.name} et alentours.
+                  Décrivez votre problème (ce que vous constatez), indiquez l’adresse et l’urgence.
+                  Nous vous rappelons rapidement pour confirmer la solution et le créneau sur {ville.name} et alentours.
                 </p>
 
                 <div class="small text-muted">
-                  Pages associées :
-                  <a href={`/villes/${ville.slug}/`}>{ville.name}</a> •
-                  <a href={`/villes/${ville.slug}/${metier.slug}/`}>{metier.name} {ville.name}</a>
+                  Voir aussi :
+                  <a href={`/villes/${ville.slug}/`}> {ville.name}</a> •
+                  <a href={`/villes/${ville.slug}/${metier.slug}/`}> {metier.name} à {ville.name}</a>
                 </div>
               </div>
 
               <div class="col-lg-6">
                 <HubspotCustomForm
-                  title={`Devis ${service.name}`}
-                  subtitle={`${ville.name} • ${metier.name} • tracking auto (UTM + page source)`}
+                  title={`Devis — ${service.name}`}
+                  subtitle={`${ville.name} • ${metier.name} • réponse rapide`}
                   submitLabel="Envoyer ma demande"
                 />
               </div>

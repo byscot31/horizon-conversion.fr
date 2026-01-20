@@ -1,0 +1,184 @@
+---
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+import services from "@data/services.json";
+
+const {
+  title = "Services les plus demandés (toutes activités)",
+  subtitle = "Accès direct aux services prioritaires. Choisis une ville pour aller sur la page la plus précise.",
+  limit = 12,                 // nombre de services affichés
+  onlyTop = true,             // n'afficher que is_top
+  defaultCityPriority = "A",  // villes proposées par défaut
+  cityLimit = 10,
+  ctaTel = true,
+  ctaDevis = true,
+} = Astro.props;
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? phone;
+const telHref = `tel:${String(phone).replace(/\s+/g, "")}`;
+
+// Urgence order
+const urgencyRank = (u) => {
+  switch (u) {
+    case "24-7": return 0;
+    case "rdv-rapide": return 1;
+    case "rdv": return 2;
+    default: return 3;
+  }
+};
+
+const byNameFR = (a, b) => String(a.name).localeCompare(String(b.name), "fr");
+
+const metierBySlug = new Map(metiers.map((m) => [m.slug, m]));
+
+const sortedServices = [...services]
+  .filter((s) => (onlyTop ? s.is_top === true : true))
+  .sort((a, b) => {
+    const ur = urgencyRank(a.urgency) - urgencyRank(b.urgency);
+    if (ur !== 0) return ur;
+
+    // priorité aux "top"
+    const top = (b.is_top === true) - (a.is_top === true);
+    if (top !== 0) return top;
+
+    // ensuite alpha
+    return byNameFR(a, b);
+  })
+  .slice(0, limit);
+
+// Villes proposées dans le sélecteur
+const cityChoices = [...villes]
+  .filter((v) => (defaultCityPriority ? v.priority === defaultCityPriority : true))
+  .sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority === "A" ? -1 : 1;
+    return byNameFR(a, b);
+  })
+  .slice(0, cityLimit);
+
+// Badge label
+const urgencyLabel = (u) => {
+  switch (u) {
+    case "24-7": return "Urgence 24/7";
+    case "rdv-rapide": return "Rdv rapide";
+    case "rdv": return "Sur rdv";
+    default: return "Sur demande";
+  }
+};
+const urgencyBadgeClass = (u) => {
+  switch (u) {
+    case "24-7": return "bg-danger";
+    case "rdv-rapide": return "bg-warning text-dark";
+    case "rdv": return "bg-secondary";
+    default: return "bg-light text-dark";
+  }
+};
+---
+
+<section class="section m-0">
+  <div class="container">
+
+    <div class="heading-block border-bottom-0 text-center mb-4">
+      <div class="badge rounded-pill badge-default">Conversion</div>
+      <h2 class="text-transform-none ls-0">{title}</h2>
+      <p class="text-muted mb-0">{subtitle}</p>
+    </div>
+
+    <!-- Quick CTAs -->
+    <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+      {ctaTel && <a class="button button-rounded" href={telHref}>📞 Appeler {phoneDisplay}</a>}
+      {ctaDevis && <a class="button button-rounded button-light text-dark bg-white border" href="/contact/">📝 Devis gratuit</a>}
+    </div>
+
+    <!-- Global services list -->
+    <div class="row g-3">
+      {sortedServices.map((s) => {
+        const m = metierBySlug.get(s.metier);
+        const metierName = m?.name ?? s.metier;
+        const metierSlug = m?.slug ?? s.metier;
+
+        return (
+          <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="small text-muted">{metierName}</div>
+                    <div class="fw-semibold">{s.name}</div>
+                  </div>
+                  <span class={`badge ${urgencyBadgeClass(s.urgency)}`}>{urgencyLabel(s.urgency)}</span>
+                </div>
+
+                {s.short && <p class="text-muted mt-2 mb-3">{s.short}</p>}
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a class="btn btn-outline-secondary btn-sm" href={`/${metierSlug}/`}>
+                    Page métier
+                  </a>
+
+                  <a class="btn btn-outline-primary btn-sm" href="/contact/">
+                    Devis
+                  </a>
+                </div>
+
+                <hr class="my-3" />
+
+                <div class="small fw-semibold mb-2">Aller sur la page la plus précise :</div>
+
+                <div class="d-flex gap-2 align-items-center">
+                  <select class="form-select form-select-sm js-city" aria-label="Choisir une ville">
+                    {cityChoices.map((v) => (
+                      <option value={v.slug}>{v.name}</option>
+                    ))}
+                  </select>
+
+                  <a
+                    class="btn btn-sm btn-outline-secondary js-go"
+                    href={`/villes/${cityChoices[0]?.slug ?? "senlis"}/${metierSlug}/${s.slug}/`}
+                    data-metier={metierSlug}
+                    data-service={s.slug}
+                  >
+                    Voir
+                  </a>
+                </div>
+
+                <div class="small text-muted mt-2">
+                  (Service × Ville) — meilleure page pour convertir et se positionner.
+                </div>
+
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+
+  <!-- JS isolé : met à jour le lien "Voir" selon la ville choisie -->
+  <script is:inline>
+    (() => {
+      const cards = Array.from(document.querySelectorAll(".card .js-go"));
+      cards.forEach((btn) => {
+        const wrap = btn.closest(".card");
+        if (!wrap) return;
+
+        const select = wrap.querySelector(".js-city");
+        if (!select) return;
+
+        const metier = btn.getAttribute("data-metier") || "";
+        const service = btn.getAttribute("data-service") || "";
+
+        const updateHref = () => {
+          const ville = select.value;
+          btn.setAttribute("href", `/villes/${ville}/${metier}/${service}/`);
+        };
+
+        select.addEventListener("change", updateHref);
+        updateHref();
+      });
+    })();
+  </script>
+</section>

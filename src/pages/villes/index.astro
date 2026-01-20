@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
 
 const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
@@ -9,17 +10,25 @@ const title = `Villes d’intervention — ${regionLabel} | ${brand}`;
 const description = `Retrouvez toutes les villes d’intervention : Sud Oise (60) et Nord 95. Dépannage, travaux, devis gratuit et rappel rapide.`;
 const canonical = "/villes/";
 
-// Tri : A puis B, et alpha
+// Helpers
 const sortVilles = (arr) =>
   [...arr].sort((a, b) => {
     if (a.priority !== b.priority) return a.priority === "A" ? -1 : 1;
     return a.name.localeCompare(b.name, "fr");
   });
 
-const sudOise = sortVilles(villes.filter((v) => v.zone === "sud-oise"));
-const nord95 = sortVilles(villes.filter((v) => v.zone === "nord-95"));
-
 const countA = (arr) => arr.filter((v) => v.priority === "A").length;
+
+const sudOiseAll = sortVilles(villes.filter((v) => v.zone === "sud-oise"));
+const nord95All = sortVilles(villes.filter((v) => v.zone === "nord-95"));
+
+const topVillesA = sortVilles(villes.filter((v) => v.priority === "A")).slice(0, 6);
+const topMetiers = [...metiers].sort((a, b) => a.name.localeCompare(b.name, "fr")).slice(0, 6);
+
+const prettifySlug = (s) =>
+  String(s)
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (m) => m.toUpperCase());
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -52,23 +61,155 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
             <div class="badge rounded-pill badge-default mb-2">SEO local</div>
             <h2 class="display-6 fw-bold mb-3">Choisis ta ville</h2>
             <p class="text-muted mb-0">
-              Chaque page ville renvoie ensuite vers “Ville × Métier” puis “Service × Ville” pour capter les requêtes les plus rentables.
+              Chaque page ville renvoie ensuite vers “Ville × Métier” puis “Service × Ville”
+              pour capter les requêtes les plus rentables.
             </p>
           </div>
         </div>
 
         <div class="clear line my-6"></div>
 
-        <!-- Tabs -->
+        <!-- Filtres (UX + SEO : améliore la navigation sans surcharger) -->
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="row g-3 align-items-end">
+                  <div class="col-md-6">
+                    <label class="form-label small text-muted mb-1" for="v-search">Rechercher une ville</label>
+                    <input id="v-search" class="form-control" type="search" placeholder="Ex: Senlis, Chantilly, Persan…" />
+                  </div>
+
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1" for="v-zone">Zone</label>
+                    <select id="v-zone" class="form-select">
+                      <option value="all">Toutes</option>
+                      <option value="sud-oise">Sud Oise (60)</option>
+                      <option value="nord-95">Nord 95</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1" for="v-priority">Priorité</label>
+                    <select id="v-priority" class="form-select">
+                      <option value="all">A + B</option>
+                      <option value="A">Priorité A</option>
+                      <option value="B">Priorité B</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="v-reset">Réinitialiser</button>
+                  <div class="small text-muted ms-auto" id="v-count"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- COMBOS POPULAIRES (Ville × Métier) — ultra maillant mais lisible -->
+        <div class="row justify-content-center">
+          <div class="col-lg-11">
+            <div class="heading-block border-bottom-0 text-center mb-4">
+              <div class="badge rounded-pill badge-default">Liens rapides</div>
+              <h3 class="text-transform-none ls-0 mb-1">Combos populaires</h3>
+              <p class="text-muted mb-0">Accès direct aux pages “Ville × Métier” (priorité A).</p>
+            </div>
+
+            <div class="row g-3">
+              {topVillesA.map((v) => (
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body p-4">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                          <div class="fw-semibold">{v.name}</div>
+                          <div class="small text-muted">{v.dept} • {v.zone}</div>
+                        </div>
+                        <span class="badge bg-success">A</span>
+                      </div>
+
+                      <div class="d-flex flex-wrap gap-2 mt-2 mb-3">
+                        <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Page ville</a>
+                        <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
+                      </div>
+
+                      <div class="small fw-semibold mb-2">Ville × Métier</div>
+                      <div class="d-flex flex-wrap gap-2">
+                        {topMetiers.map((m) => (
+                          <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
+                            {m.name}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Tous les combos rangés -->
+            <div class="mt-4">
+              <details class="card shadow-sm">
+                <summary class="card-body p-4" style="cursor:pointer;">
+                  <span class="fw-semibold">Voir tous les combos (A + B)</span>
+                  <span class="text-muted small ms-2">— classés par ville, puis métiers</span>
+                </summary>
+
+                <div class="card-body pt-0 px-4 pb-4">
+                  <div class="row g-3">
+                    {[...villes].sort((a,b)=>a.name.localeCompare(b.name,"fr")).map((v) => (
+                      <div class="col-md-6 col-lg-4">
+                        <details class="card h-100 shadow-sm">
+                          <summary class="card-body p-3" style="cursor:pointer;">
+                            <div class="d-flex justify-content-between align-items-start">
+                              <span class="fw-semibold">{v.name}</span>
+                              <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
+                                {v.priority}
+                              </span>
+                            </div>
+                            <div class="small text-muted">{v.dept} • {v.zone}</div>
+                          </summary>
+
+                          <div class="card-body pt-0 px-3 pb-3">
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                              <a class="btn btn-outline-secondary btn-sm" href={`/villes/${v.slug}/`}>Page ville</a>
+                              <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2">
+                              {metiers.map((m) => (
+                                <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
+                                  {m.name}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        </details>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Tabs (comme avant) -->
         <ul class="nav nav-tabs justify-content-center" id="villesTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-60" data-bs-toggle="tab" data-bs-target="#pane-60" type="button" role="tab" aria-controls="pane-60" aria-selected="true">
-              Sud Oise (60) <span class="badge bg-light text-dark ms-2">{sudOise.length}</span>
+              Sud Oise (60) <span class="badge bg-light text-dark ms-2">{sudOiseAll.length}</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="tab-95" data-bs-toggle="tab" data-bs-target="#pane-95" type="button" role="tab" aria-controls="pane-95" aria-selected="false">
-              Nord 95 <span class="badge bg-light text-dark ms-2">{nord95.length}</span>
+              Nord 95 <span class="badge bg-light text-dark ms-2">{nord95All.length}</span>
             </button>
           </li>
         </ul>
@@ -79,13 +220,18 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
           <div class="tab-pane fade show active" id="pane-60" role="tabpanel" aria-labelledby="tab-60" tabindex="0">
             <div class="text-center mb-4">
               <div class="small text-muted">
-                Priorité A (money pages) : <strong>{countA(sudOise)}</strong> • Priorité B (renfort) : <strong>{sudOise.length - countA(sudOise)}</strong>
+                Priorité A (money pages) : <strong>{countA(sudOiseAll)}</strong> • Priorité B (renfort) : <strong>{sudOiseAll.length - countA(sudOiseAll)}</strong>
               </div>
             </div>
 
-            <div class="row col-mb-20">
-              {sudOise.map((v) => (
-                <div class="col-lg-3 col-md-4 col-6">
+            <div class="row col-mb-20" id="grid-60">
+              {sudOiseAll.map((v) => (
+                <div
+                  class="col-lg-3 col-md-4 col-6"
+                  data-ville-name={`${v.name}`.toLowerCase()}
+                  data-zone={v.zone}
+                  data-priority={v.priority}
+                >
                   <a class={`card h-100 text-decoration-none ${v.priority === "A" ? "border border-2" : ""}`} href={`/villes/${v.slug}/`}>
                     <div class="card-body p-3">
                       <div class="d-flex justify-content-between align-items-start">
@@ -93,14 +239,12 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
                           <div class="fw-semibold">{v.name}</div>
                           <div class="small text-muted">{v.dept} • {v.zone}</div>
                         </div>
-                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
-                          {v.priority}
-                        </span>
+                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>{v.priority}</span>
                       </div>
 
                       {v.around?.length ? (
                         <div class="small text-muted mt-2">
-                          Autour : {v.around.slice(0, 4).map((x) => x.replace(/-/g, " ")).join(", ")}{v.around.length > 4 ? "…" : ""}
+                          Autour : {v.around.slice(0, 4).map((x) => prettifySlug(x)).join(", ")}{v.around.length > 4 ? "…" : ""}
                         </div>
                       ) : null}
                     </div>
@@ -114,13 +258,18 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
           <div class="tab-pane fade" id="pane-95" role="tabpanel" aria-labelledby="tab-95" tabindex="0">
             <div class="text-center mb-4">
               <div class="small text-muted">
-                Priorité A (money pages) : <strong>{countA(nord95)}</strong> • Priorité B (renfort) : <strong>{nord95.length - countA(nord95)}</strong>
+                Priorité A (money pages) : <strong>{countA(nord95All)}</strong> • Priorité B (renfort) : <strong>{nord95All.length - countA(nord95All)}</strong>
               </div>
             </div>
 
-            <div class="row col-mb-20">
-              {nord95.map((v) => (
-                <div class="col-lg-3 col-md-4 col-6">
+            <div class="row col-mb-20" id="grid-95">
+              {nord95All.map((v) => (
+                <div
+                  class="col-lg-3 col-md-4 col-6"
+                  data-ville-name={`${v.name}`.toLowerCase()}
+                  data-zone={v.zone}
+                  data-priority={v.priority}
+                >
                   <a class={`card h-100 text-decoration-none ${v.priority === "A" ? "border border-2" : ""}`} href={`/villes/${v.slug}/`}>
                     <div class="card-body p-3">
                       <div class="d-flex justify-content-between align-items-start">
@@ -128,14 +277,12 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
                           <div class="fw-semibold">{v.name}</div>
                           <div class="small text-muted">{v.dept} • {v.zone}</div>
                         </div>
-                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>
-                          {v.priority}
-                        </span>
+                        <span class={`badge ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>{v.priority}</span>
                       </div>
 
                       {v.around?.length ? (
                         <div class="small text-muted mt-2">
-                          Autour : {v.around.slice(0, 4).map((x) => x.replace(/-/g, " ")).join(", ")}{v.around.length > 4 ? "…" : ""}
+                          Autour : {v.around.slice(0, 4).map((x) => prettifySlug(x)).join(", ")}{v.around.length > 4 ? "…" : ""}
                         </div>
                       ) : null}
                     </div>
@@ -168,4 +315,55 @@ const countA = (arr) => arr.filter((v) => v.priority === "A").length;
       </div>
     </div>
   </section>
+
+  <!-- Filtrage front (simple, rapide, pas de dépendance) -->
+  <script type="module" is:inline>
+  (() => {
+    const qs = (sel, root = document) => root.querySelector(sel);
+    const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+    const input = qs("#v-search");
+    const zone = qs("#v-zone");
+    const prio = qs("#v-priority");
+    const reset = qs("#v-reset");
+    const count = qs("#v-count");
+
+    function applyFilters() {
+      const q = (input?.value || "").trim().toLowerCase();
+      const z = zone?.value || "all";
+      const p = prio?.value || "all";
+
+      const cards = qsa("[data-ville-name]");
+      let visible = 0;
+
+      cards.forEach((el) => {
+        const name = el.getAttribute("data-ville-name") || "";
+        const elZone = el.getAttribute("data-zone") || "";
+        const elPrio = el.getAttribute("data-priority") || "";
+
+        const okQ = !q || name.includes(q);
+        const okZ = z === "all" || elZone === z;
+        const okP = p === "all" || elPrio === p;
+
+        const show = okQ && okZ && okP;
+        el.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+
+      if (count) count.textContent = `${visible} ville(s) affichée(s)`;
+    }
+
+    [input, zone, prio].forEach((el) => el && el.addEventListener("input", applyFilters));
+    [zone, prio].forEach((el) => el && el.addEventListener("change", applyFilters));
+
+    reset?.addEventListener("click", () => {
+      if (input) input.value = "";
+      if (zone) zone.value = "all";
+      if (prio) prio.value = "all";
+      applyFilters();
+    });
+
+    applyFilters();
+  })();
+  </script>
 </Layout>

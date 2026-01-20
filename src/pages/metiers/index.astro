@@ -1,13 +1,42 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import villes from "@data/villes.json";
 import metiers from "@data/metiers.json";
+import services from "@data/services.json";
+import PopularCombosByMetier from "@components/PopularCombosByMetier.astro";
 
 const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
 
-const title = `Métiers — artisans locaux | ${brand}`;
-const description = `Plombier, électricien, serrurier, couvreur, chauffagiste, peintre : intervention ${regionLabel}. Devis gratuit, réponse rapide.`;
+const title = `Trouver un artisan — Plombier, électricien, serrurier… | ${regionLabel} | ${brand}`;
+const description =
+  `Choisissez votre artisan puis votre ville : dépannage en urgence ou rendez-vous rapide. ` +
+  `Fuite d’eau, WC bouché, panne électrique, porte claquée, serrure bloquée… Devis gratuit.`;
 const canonical = "/metiers/";
+
+// Helpers
+const byNameFR = (a, b) => String(a.name).localeCompare(String(b.name), "fr");
+const sortVilles = (arr) =>
+  [...arr].sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority === "A" ? -1 : 1;
+    return byNameFR(a, b);
+  });
+
+const villesA = sortVilles(villes.filter((v) => v.priority === "A"));
+const villesB = sortVilles(villes.filter((v) => v.priority === "B"));
+
+const servicesFor = (metierSlug) =>
+  services
+    .filter((s) => s.metier === metierSlug)
+    .sort((a, b) => (b.is_top === true) - (a.is_top === true) || byNameFR(a, b));
+
+const topServicesFor = (metierSlug, limit = 6) =>
+  servicesFor(metierSlug).filter((s) => s.is_top).slice(0, limit);
+
+const prettify = (s) =>
+  String(s)
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (m) => m.toUpperCase());
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -15,8 +44,8 @@ const canonical = "/metiers/";
     <div class="container">
       <div class="page-title-row">
         <div class="page-title-content">
-          <div class="badge rounded-pill border border-light text-light">Métiers</div>
-          <h1>Nos métiers</h1>
+          <div class="badge rounded-pill border border-light text-light">Dépannage & travaux</div>
+          <h1>Trouver le bon artisan</h1>
           <p class="lead mb-0">{regionLabel} — devis gratuit & réponse rapide</p>
         </div>
 
@@ -34,52 +63,246 @@ const canonical = "/metiers/";
     <div class="content-wrap pb-0">
       <div class="container">
 
+        <!-- Intro -->
         <div class="row justify-content-center">
           <div class="col-lg-9 text-center">
-            <div class="badge rounded-pill badge-default mb-2">Accès rapide</div>
-            <h2 class="display-6 fw-bold mb-3">Choisis ton métier</h2>
+            <div class="badge rounded-pill badge-default mb-2">Rapide & simple</div>
+            <h2 class="display-6 fw-bold mb-3">Choisissez votre besoin</h2>
             <p class="text-muted mb-0">
-              Chaque métier renvoie ensuite vers les pages “Ville × Métier” et “Service × Ville” pour améliorer le SEO local.
+              D’abord le métier (plombier, électricien, serrurier…), puis votre ville.
+              Vous accédez aux demandes les plus courantes : <strong>fuite d’eau</strong>, <strong>WC bouché</strong>,
+              <strong>disjoncteur qui saute</strong>, <strong>porte claquée</strong>, <strong>serrure bloquée</strong>,
+              <strong>fuite en toiture</strong>… et vous pouvez demander un devis en 1 minute.
             </p>
           </div>
         </div>
 
         <div class="clear line my-6"></div>
 
-        <div class="row col-mb-30">
-          {metiers.map((m) => (
-            <div class="col-lg-4 col-md-6 d-flex">
-              <div class="card h-100 w-100">
-                <div class="card-body p-4">
-                  <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div class="badge rounded-pill badge-default">{m.slug}</div>
+        <!-- Filtres -->
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="row g-3 align-items-end">
+                  <div class="col-md-6">
+                    <label class="form-label small text-muted mb-1" for="m-search">Rechercher (métier ou problème)</label>
+                    <input
+                      id="m-search"
+                      class="form-control"
+                      type="search"
+                      placeholder="Ex : fuite d’eau, WC bouché, disjoncteur, porte claquée, chauffe-eau…"
+                    />
                   </div>
-                  <h3 class="h5 mb-2">{m.name}</h3>
-                  <p class="small text-muted mb-3">
-                    Dépannage, installation, travaux — intervention locale {regionLabel}.
-                  </p>
-                  <a class="button button-rounded button-small m-0" href={`/${m.slug}/`}>
-                    Voir {m.name.toLowerCase()}
-                  </a>
-                  <a class="button button-border button-rounded button-small ms-2 m-0" href="/contact/">
-                    Devis
-                  </a>
+
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1" for="m-zone">Zone</label>
+                    <select id="m-zone" class="form-select">
+                      <option value="all">Toutes</option>
+                      <option value="sud-oise">Sud Oise (60)</option>
+                      <option value="nord-95">Nord 95</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1" for="m-priority">Villes affichées</label>
+                    <select id="m-priority" class="form-select">
+                      <option value="all">Villes principales + autour</option>
+                      <option value="A">Villes principales</option>
+                      <option value="B">Villes autour</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="m-reset">Réinitialiser</button>
+                  <div class="small text-muted ms-auto" id="m-count"></div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         <div class="clear line my-6"></div>
 
+        <!-- Bloc combos -->
+        <PopularCombosByMetier
+          title="Combinaisons populaires"
+          subtitle="Accès rapide : métiers + villes les plus demandées + problèmes fréquents. Cliquez pour aller directement à la page la plus utile."
+          limitMetiers={6}
+          limitVilles={4}
+          limitServices={3}
+          topVillePriority="A"
+          showAllToggle={true}
+          allToggleLabel="Voir tous les métiers (accordéons)"
+        />
+
+        <div class="clear line my-6"></div>
+
+        <!-- Tous les métiers : accordéons -->
+        <div class="row justify-content-center">
+          <div class="col-lg-11">
+            <div class="heading-block border-bottom-0 text-center mb-4">
+              <div class="badge rounded-pill badge-default">Catalogue</div>
+              <h2 class="text-transform-none ls-0 mb-1">Tous les métiers</h2>
+              <p class="text-muted mb-0">
+                Ouvrez un métier pour voir : <strong>problèmes courants</strong> + <strong>villes d’intervention</strong> + accès au devis.
+              </p>
+            </div>
+
+            <div class="row g-3" id="metiers-grid">
+              {[...metiers].sort(byNameFR).map((m) => {
+                const allS = servicesFor(m.slug);
+                const topS = topServicesFor(m.slug, 8);
+
+                return (
+                  <div
+                    class="col-lg-6 metier-item"
+                    data-metier={`${m.name} ${m.slug}`.toLowerCase()}
+                    data-services={`${allS.map((s) => s.name).join(" ")}`.toLowerCase()}
+                  >
+                    <details class="card shadow-sm h-100">
+                      <summary class="card-body p-4" style="cursor:pointer;">
+                        <div class="d-flex justify-content-between align-items-start">
+                          <div>
+                            <div class="fw-semibold">{m.name}</div>
+                            <div class="small text-muted">Urgence ou rendez-vous • devis gratuit</div>
+                          </div>
+                          <span class="badge bg-light text-dark">{topS.length} fréquents</span>
+                        </div>
+                      </summary>
+
+                      <div class="card-body pt-0 px-4 pb-4">
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                          <a class="btn btn-outline-secondary btn-sm" href={`/${m.slug}/`}>Voir {m.name}</a>
+                          <a class="btn btn-outline-primary btn-sm" href="/contact/">Demander un devis</a>
+                          <a class="btn btn-outline-secondary btn-sm" href="/villes/">Choisir une ville</a>
+                        </div>
+
+                        <div class="row g-4">
+                          <!-- Services top -->
+                          <div class="col-md-6">
+                            <div class="small text-uppercase ls-1 fw-bold text-muted mb-2">Problèmes fréquents</div>
+
+                            {topS.length ? (
+                              <div class="d-flex flex-wrap gap-2">
+                                {topS.map((s) => (
+                                  <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href={`/${m.slug}/#service-${s.slug}`}
+                                    id={`service-${s.slug}`}
+                                  >
+                                    {s.name}
+                                  </a>
+                                ))}
+                              </div>
+                            ) : (
+                              <div class="small text-muted">Bientôt plus de détails sur ce métier.</div>
+                            )}
+
+                            <div class="small text-muted mt-3">
+                              Votre cas n’est pas listé ? Pas grave : décrivez le problème sur le devis, on vous oriente.
+                            </div>
+                          </div>
+
+                          <!-- Villes -->
+                          <div class="col-md-6">
+                            <div class="small text-uppercase ls-1 fw-bold text-muted mb-2">Villes d’intervention</div>
+
+                            <details class="border rounded-3 p-3 mb-2">
+                              <summary style="cursor:pointer;">
+                                <span class="fw-semibold">Villes principales</span>
+                                <span class="text-muted small ms-2">({villesA.length})</span>
+                              </summary>
+
+                              <div class="pt-2 d-flex flex-column gap-2">
+                                {villesA.map((v) => (
+                                  <div class="p-2 border rounded-3 ville-row" data-zone={v.zone} data-priority={v.priority}>
+                                    <div class="d-flex justify-content-between align-items-start">
+                                      <div>
+                                        <div class="fw-semibold">{v.name}</div>
+                                        <div class="small text-muted">{v.dept} • {v.zone}</div>
+                                      </div>
+                                      <span class="badge bg-success">OK</span>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-2">
+                                      <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
+                                        {m.name} à {v.name}
+                                      </a>
+
+                                      {topS.slice(0, 3).map((s) => (
+                                        <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/${s.slug}/`}>
+                                          {s.name}
+                                        </a>
+                                      ))}
+                                    </div>
+
+                                    {v.around?.length ? (
+                                      <div class="small text-muted mt-2">
+                                        Communes proches : {v.around.slice(0, 6).map((x) => prettify(x)).join(", ")}{v.around.length > 6 ? "…" : ""}
+                                      </div>
+                                    ) : null}
+                                  </div>
+                                ))}
+                              </div>
+                            </details>
+
+                            <details class="border rounded-3 p-3">
+                              <summary style="cursor:pointer;">
+                                <span class="fw-semibold">Autres villes autour</span>
+                                <span class="text-muted small ms-2">({villesB.length})</span>
+                              </summary>
+
+                              <div class="pt-2 d-flex flex-column gap-2">
+                                {villesB.map((v) => (
+                                  <div class="p-2 border rounded-3 ville-row" data-zone={v.zone} data-priority={v.priority}>
+                                    <div class="d-flex justify-content-between align-items-start">
+                                      <div>
+                                        <div class="fw-semibold">{v.name}</div>
+                                        <div class="small text-muted">{v.dept} • {v.zone}</div>
+                                      </div>
+                                      <span class="badge bg-secondary">OK</span>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-2">
+                                      <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
+                                        {m.name} à {v.name}
+                                      </a>
+
+                                      {topS.slice(0, 2).map((s) => (
+                                        <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/${s.slug}/`}>
+                                          {s.name}
+                                        </a>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </details>
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Bottom CTA -->
         <div class="section mt-0" style="padding: 60px 0;">
           <div class="container">
             <div class="row justify-content-center text-center">
               <div class="col-lg-8">
-                <div class="badge rounded-pill badge-default mb-2">Besoin d’un dépannage ?</div>
-                <h3 class="text-transform-none ls-0 mb-3">Décris ton besoin, on te rappelle</h3>
+                <div class="badge rounded-pill badge-default mb-2">Besoin d’aide ?</div>
+                <h3 class="text-transform-none ls-0 mb-3">Vous ne savez pas quel artisan choisir ?</h3>
                 <p class="text-muted mb-4">
-                  UTM + page source + contexte (ville/métier/service) remontent automatiquement dans HubSpot.
+                  Décrivez votre problème (ex : fuite, panne, porte bloquée) + votre ville.
+                  On vous rappelle rapidement pour confirmer le bon métier et le créneau.
                 </p>
                 <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
               </div>
@@ -90,4 +313,61 @@ const canonical = "/metiers/";
       </div>
     </div>
   </section>
+
+  <!-- Filtrage front (isolé, pas de $ global) -->
+  <script is:inline>
+    (() => {
+      const qs = (sel, root = document) => root.querySelector(sel);
+      const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+      const input = qs("#m-search");
+      const zone = qs("#m-zone");
+      const prio = qs("#m-priority");
+      const reset = qs("#m-reset");
+      const count = qs("#m-count");
+
+      function applyFilters() {
+        const q = (input?.value || "").trim().toLowerCase();
+        const z = zone?.value || "all";
+        const p = prio?.value || "all";
+
+        // 1) filtre métiers (recherche)
+        const items = qsa(".metier-item");
+        let visibleMetiers = 0;
+
+        items.forEach((item) => {
+          const mtxt = item.getAttribute("data-metier") || "";
+          const stxt = item.getAttribute("data-services") || "";
+          const okQ = !q || mtxt.includes(q) || stxt.includes(q);
+
+          item.style.display = okQ ? "" : "none";
+          if (okQ) visibleMetiers++;
+        });
+
+        // 2) filtre villes à l'intérieur des accordéons
+        const villeRows = qsa(".ville-row");
+        villeRows.forEach((row) => {
+          const rowZone = row.getAttribute("data-zone") || "";
+          const rowPrio = row.getAttribute("data-priority") || "";
+          const okZ = z === "all" || rowZone === z;
+          const okP = p === "all" || rowPrio === p;
+          row.style.display = (okZ && okP) ? "" : "none";
+        });
+
+        if (count) count.textContent = `${visibleMetiers} métier(s) affiché(s)`;
+      }
+
+      [input, zone, prio].forEach((el) => el && el.addEventListener("input", applyFilters));
+      [zone, prio].forEach((el) => el && el.addEventListener("change", applyFilters));
+
+      reset?.addEventListener("click", () => {
+        if (input) input.value = "";
+        if (zone) zone.value = "all";
+        if (prio) prio.value = "all";
+        applyFilters();
+      });
+
+      applyFilters();
+    })();
+  </script>
 </Layout>
