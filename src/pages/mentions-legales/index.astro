@@ -7,25 +7,29 @@ const SITE_URL =
   import.meta.env.PUBLIC_SITE_URL ??
   (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
 
-const COMPANY = import.meta.env.PUBLIC_LEGAL_COMPANY_NAME ?? BRAND;
-const LEGAL_FORM = import.meta.env.PUBLIC_LEGAL_FORM ?? "—";
-const SIRET = import.meta.env.PUBLIC_LEGAL_SIRET ?? "—";
-const RCS = import.meta.env.PUBLIC_LEGAL_RCS ?? "—";
-const VAT = import.meta.env.PUBLIC_LEGAL_VAT ?? "—";
-const ADDRESS = import.meta.env.PUBLIC_LEGAL_ADDRESS ?? "—";
+// Éditeur
+const COMPANY =
+  import.meta.env.PUBLIC_LEGAL_COMPANY_NAME ?? "CONTROL ONLINE";
+const SIRET = import.meta.env.PUBLIC_LEGAL_SIRET ?? "810 922 641 00024";
+const RCS = import.meta.env.PUBLIC_LEGAL_RCS ?? "RCS Pontoise";
+const VAT = import.meta.env.PUBLIC_LEGAL_VAT ?? "FR78810922641";
 
 const EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "contact@exemple.fr";
-const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
-const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 60 92 10 08";
+const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33660921008";
 const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
 
-const HOST_NAME = import.meta.env.PUBLIC_HOST_NAME ?? "—";
-const HOST_ADDRESS = import.meta.env.PUBLIC_HOST_ADDRESS ?? "—";
+// Hébergeur (Scaleway)
+const HOST_NAME = import.meta.env.PUBLIC_HOST_NAME ?? "Scaleway SAS";
+const HOST_ADDRESS =
+  import.meta.env.PUBLIC_HOST_ADDRESS ?? "8, rue de la Ville-l'Évêque, 75008 Paris, France";
 const HOST_PHONE = import.meta.env.PUBLIC_HOST_PHONE ?? "—";
 
 const canonical = "/mentions-legales/";
 const title = `Mentions légales | ${BRAND}`;
-const description = `Mentions légales du site ${BRAND}.`;
+const description = `Mentions légales du site ${BRAND} (éditeur, hébergeur, fonctionnement, contact).`;
+
+const updatedAt = new Date().toISOString().slice(0, 10);
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -37,7 +41,7 @@ const description = `Mentions légales du site ${BRAND}.`;
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">Informations</div>
           <h1>Mentions légales</h1>
-          <p class="lead mb-0">Informations légales et contact</p>
+          <p class="lead mb-0">Éditeur • Hébergeur • Fonctionnement • Contact</p>
         </div>
       </div>
     </div>
@@ -46,31 +50,78 @@ const description = `Mentions légales du site ${BRAND}.`;
   <section id="content">
     <div class="content-wrap pb-0">
       <div class="container">
-
         <div class="row justify-content-center">
           <div class="col-lg-9">
 
             <div class="card shadow-sm">
               <div class="card-body p-4">
 
-                <h2 class="h5 mb-3">Éditeur du site</h2>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <a class="btn btn-outline-secondary btn-sm" href="#editeur">Éditeur</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="#fonctionnement">Fonctionnement</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="#contact">Contact</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="#hebergeur">Hébergement</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="#responsabilite">Responsabilité</a>
+                </div>
+
+                <div class="small text-muted mb-4">
+                  Mise à jour : {updatedAt}
+                </div>
+
+                <h2 id="editeur" class="h5 mb-3">Éditeur du site</h2>
+                <p class="text-muted mb-3">
+                  <strong>{BRAND}</strong> est une <strong>marque commerciale</strong> exploitée par <strong>{COMPANY}</strong>.
+                </p>
+
                 <ul class="iconlist ms-3 mb-4">
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Nom / Société :</strong> {COMPANY}</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Forme juridique :</strong> {LEGAL_FORM}</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Société / Exploitant :</strong> {COMPANY}</li>
                   <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>SIRET :</strong> {SIRET}</li>
                   <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>RCS :</strong> {RCS}</li>
                   <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>TVA intracom :</strong> {VAT}</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Adresse :</strong> {ADDRESS}</li>
                 </ul>
 
-                <h2 class="h5 mb-3">Contact</h2>
+                <h2 id="fonctionnement" class="h5 mb-3">Fonctionnement du service</h2>
+                <p class="text-muted mb-3">
+                  {BRAND} est un site d’<strong>acquisition</strong> qui <strong>génère des demandes</strong> et <strong>met en relation</strong>
+                  des particuliers avec des artisans (partenaires ou indépendants) susceptibles d’intervenir.
+                </p>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-3 h-100">
+                      <div class="fw-semibold mb-1">✅ Ce que fait {BRAND}</div>
+                      <ul class="mb-0 text-muted">
+                        <li>Collecte ta demande (formulaire / téléphone)</li>
+                        <li>La transmet à un ou plusieurs artisans</li>
+                        <li>Facilite la prise de contact</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-3 h-100">
+                      <div class="fw-semibold mb-1">⛔ Ce que {BRAND} ne fait pas</div>
+                      <ul class="mb-0 text-muted">
+                        <li>Ne réalise pas les travaux</li>
+                        <li>Ne fixe pas les prix</li>
+                        <li>Ne garantit pas la disponibilité immédiate</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-muted mb-4">
+                  Le <strong>devis</strong>, le <strong>prix final</strong>, les <strong>délais</strong> et l’<strong>exécution</strong> des travaux
+                  relèvent exclusivement de l’artisan choisi. Le contrat de prestation est conclu directement entre le client et l’artisan.
+                </p>
+
+                <h2 id="contact" class="h5 mb-3">Contact</h2>
                 <div class="d-flex flex-wrap gap-2 mb-4">
                   <a class="button button-rounded button-small m-0" href={telHref}>📞 Appeler {PHONE_DISPLAY}</a>
                   <a class="button button-border button-rounded button-small m-0" href="/contact/">📝 Demander un devis</a>
                   <a class="button button-light button-rounded button-small bg-white border text-dark m-0" href={`mailto:${EMAIL}`}>✉️ {EMAIL}</a>
                 </div>
 
-                <h2 class="h5 mb-3">Hébergement</h2>
+                <h2 id="hebergeur" class="h5 mb-3">Hébergement</h2>
                 <ul class="iconlist ms-3 mb-4">
                   <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Hébergeur :</strong> {HOST_NAME}</li>
                   <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> <strong>Adresse :</strong> {HOST_ADDRESS}</li>
@@ -79,17 +130,27 @@ const description = `Mentions légales du site ${BRAND}.`;
 
                 <h2 class="h5 mb-3">Propriété intellectuelle</h2>
                 <p class="text-muted">
-                  L’ensemble des contenus (textes, images, logos, éléments graphiques, code) présents sur ce site
-                  est protégé. Toute reproduction, représentation ou réutilisation, totale ou partielle, est interdite
-                  sans autorisation préalable.
+                  Les contenus du site (textes, visuels, logos, éléments graphiques, code) sont protégés.
+                  Toute reproduction ou réutilisation non autorisée est interdite.
                 </p>
 
-                <h2 class="h5 mt-4 mb-3">Responsabilité</h2>
-                <p class="text-muted mb-0">
-                  Les informations publiées sur ce site sont fournies à titre indicatif. Malgré le soin apporté,
-                  {BRAND} ne peut garantir l’exactitude ou l’exhaustivité des contenus. Les liens externes sont fournis
-                  pour faciliter l’accès à des ressources ; {BRAND} n’est pas responsable de leur contenu.
+                <h2 id="responsabilite" class="h5 mt-4 mb-3">Responsabilité</h2>
+                <p class="text-muted mb-3">
+                  {BRAND} met tout en œuvre pour fournir des informations utiles, mais ne garantit pas l’absence d’erreurs
+                  ni l’exhaustivité des contenus. Les liens externes sont fournis à titre pratique.
                 </p>
+                <p class="text-muted mb-0">
+                  {BRAND} n’est pas responsable des prestations réalisées par les artisans (qualité, délais, prix, dommages),
+                  ni des échanges contractuels entre le client et l’artisan. En cas d’urgence vitale, appelle les services d’urgence (112).
+                </p>
+
+                <div class="clear line my-4"></div>
+
+                <div class="small text-muted">
+                  Pages utiles :
+                  <a href="/politique-confidentialite/">Confidentialité</a> •
+                  <a href="/cookies/">Cookies</a>
+                </div>
 
               </div>
             </div>
@@ -100,7 +161,6 @@ const description = `Mentions légales du site ${BRAND}.`;
 
           </div>
         </div>
-
       </div>
     </div>
   </section>
