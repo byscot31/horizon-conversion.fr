@@ -138,7 +138,7 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
   <div id="wrapper">
 
     <!-- Header -->
-    <header id="header" class="full-header header-size-md" data-sticky-offset="full" data-sticky-offset-negative="80">
+    <header id="header" class="full-header header-size-md">
       <div id="header-wrap">
         <div class="container">
           <div class="header-row">
@@ -157,16 +157,14 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
             </div>
 
             <!-- Mobile Menu Trigger -->
-            <div id="primary-menu-trigger" aria-label="Ouvrir le menu" role="button" tabindex="0">
-              <svg class="svg-trigger" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-                <path d="m 30,33 h 40 c 3.7,0 7.5,3.1 7.5,8.6 0,5.5 -2.7,8.4 -7.5,8.4 h -20"></path>
-                <path d="m 30,50 h 40"></path>
-                <path d="m 70,67 h -40 c 0,0 -7.5,-0.8 -7.5,-8.4 0,-7.6 7.5,-8.6 7.5,-8.6 h 20"></path>
-              </svg>
+            <div class="primary-menu-trigger">
+              <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+                <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+              </button>
             </div>
 
             <!-- Primary Navigation -->
-            <nav class="primary-menu mobile-menu-off-canvas from-right">
+            <nav class="primary-menu mobile-menu-off-canvas">
               <MainMenu slot="header" />
             </nav>
 

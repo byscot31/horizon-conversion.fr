@@ -423,7 +423,7 @@ const description =
         <div class="container">
           <div class="row justify-content-between align-items-center">
 
-            <div class="col-md-5">
+            <div class="col-lg-5">
               <div class="heading-block border-bottom-0 mb-4">
                 <div class="badge rounded-pill badge-default">Devis</div>
                 <h2 class="text-transform-none ls-0">Demande de devis</h2>
@@ -439,23 +439,13 @@ const description =
               </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h3 class="h4 mb-3">Demander un devis</h3>
-
-                  <HubspotCustomForm
-                    portalId={import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID}
-                    formGuid={import.meta.env.PUBLIC_HUBSPOT_FORM_GUID}
-                    region={import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1"}
-                    submitLabel="Envoyer"
-                  />
-                </div>
-              </div>
-
-              <p class="small text-light-50 mt-2 mb-0">
-                En envoyant, vous acceptez d’être recontacté. Pas de spam.
-              </p>
+            <div class="col-lg-6">
+              <HubspotCustomForm
+                portalId={import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID}
+                formGuid={import.meta.env.PUBLIC_HUBSPOT_FORM_GUID}
+                region={import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1"}
+                submitLabel="Envoyer"
+              />
             </div>
 
           </div>
