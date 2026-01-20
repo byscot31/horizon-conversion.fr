@@ -1,0 +1,85 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HubspotCustomForm from "../../components/HubspotCustomForm.astro";
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const title = `Contact / Devis gratuit — ${regionLabel} | ${brand}`;
+const description = `Demande de devis gratuit : dépannage, installation, travaux. Réponse rapide ${regionLabel}.`;
+---
+
+<Layout title={title} description={description} canonical="/contact/">
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Contact</div>
+          <h1>Devis gratuit & rappel rapide</h1>
+          <p class="lead mb-0">{regionLabel}</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-6">
+            <div class="badge rounded-pill badge-default mb-2">Réponse rapide</div>
+            <h2 class="display-6 fw-bold mb-3">Explique ton besoin, on te rappelle</h2>
+            <p class="text-muted mb-4">
+              Indique l’adresse, l’urgence et le problème. On te propose un créneau rapidement.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Devis clair</h3><p class="small text-muted mb-0">Devis avant intervention.</p></div></div></div>
+              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Intervention locale</h3><p class="small text-muted mb-0">{regionLabel} + alentours.</p></div></div></div>
+              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Conseils</h3><p class="small text-muted mb-0">Orientation avant déplacement si possible.</p></div></div></div>
+              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Suivi</h3><p class="small text-muted mb-0">Rappel + planification.</p></div></div></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <HubspotCustomForm
+              title="Demande de devis"
+              subtitle="UTM + page source + ville/métier/service auto"
+              submitLabel="Envoyer ma demande"
+            />
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-between align-items-center g-4">
+              <div class="col-md-7">
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Urgence</div>
+                  <h2 class="text-transform-none ls-0 mb-0">Si c’est urgent : appelle directement</h2>
+                </div>
+                <p class="text-muted mb-0">Tu gagnes du temps : décris l’adresse + le souci.</p>
+              </div>
+              <div class="col-md-5 text-md-end">
+                <a href={`tel:${import.meta.env.PUBLIC_PHONE ?? "+33600000000"}`} class="button button-rounded button-large m-0">
+                  📞 {import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00"}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

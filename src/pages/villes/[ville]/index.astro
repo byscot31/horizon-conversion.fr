@@ -1,0 +1,266 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import HubspotCustomForm from "../../../components/HubspotCustomForm.astro";
+
+import villes from "../../../data/villes.json";
+import metiers from "../../../data/metiers.json";
+import services from "../../../data/services.json";
+
+export function getStaticPaths() {
+  // On ne génère que les villes Priority A (money pages)
+  const A = villes.filter((v) => v.priority === "A");
+  return A.map((v) => ({ params: { ville: v.slug } }));
+}
+
+const { ville: villeSlug } = Astro.params;
+
+const ville = villes.find((v) => v.slug === villeSlug);
+if (!ville) throw new Error(`Ville introuvable: ${villeSlug}`);
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const canonical = `/villes/${ville.slug}/`;
+const noindex = ville.priority !== "A";
+
+// Villes autour (liens)
+const around = (ville.around ?? [])
+  .map((slug) => villes.find((v) => v.slug === slug))
+  .filter(Boolean)
+  .slice(0, 12);
+
+// Accroches dynamiques (évite “thin content”)
+const metiersList = metiers.map((m) => m.name).join(", ");
+const aroundNames = around.map((v) => v.name).slice(0, 6).join(", ");
+
+const title = `Artisans à ${ville.name} (${ville.dept}) — Dépannage & travaux | ${brand}`;
+const description = `Besoin d’un artisan à ${ville.name} ? ${metiersList}. Intervention ${ville.name} et alentours (${aroundNames}). Devis gratuit, réponse rapide.`;
+
+// Breadcrumb JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "/" },
+    { "@type": "ListItem", "position": 2, "name": "Villes", "item": "/villes/" },
+    { "@type": "ListItem", "position": 3, "name": ville.name, "item": canonical },
+  ],
+};
+
+// Pour chaque métier : 3 services top (raccourcis money pages)
+function topServicesForMetier(mSlug) {
+  return services
+    .filter((s) => s.metier === mSlug && s.is_top)
+    .slice(0, 3);
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={[breadcrumbJsonLd]}
+  noindex={noindex}
+>
+  <!-- HERO -->
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Ville</div>
+          <h1>Artisan à {ville.name}</h1>
+          <p class="lead mb-0">
+            Dépannage • Installation • Travaux — {ville.name} ({ville.dept}) • {regionLabel}
+          </p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/villes/">Villes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{ville.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro + CTA -->
+        <div class="row align-items-start g-4">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default mb-2">Devis gratuit • Réponse rapide</div>
+
+            <h2 class="display-6 fw-bold mb-3">
+              Dépannage & travaux à {ville.name} : trouver le bon artisan
+            </h2>
+
+            <p class="text-muted mb-3">
+              Sur cette page, tu accèdes directement aux demandes les plus fréquentes à {ville.name}
+              (et autour). Chaque catégorie a sa page dédiée pour répondre vite et faciliter le maillage SEO.
+            </p>
+
+            <ul class="iconlist ms-3 mb-4">
+              <li><i class="fa-solid fa-check text-smaller color"></i> Devis communiqué avant intervention</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Intervention {ville.name} + alentours</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Suivi + prise de rendez-vous rapide</li>
+            </ul>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a href={`tel:${phone}`} class="button button-rounded button-large text-transform-none ls-0 m-0">
+                📞 Appeler — {phoneDisplay}
+              </a>
+              <a href="#devis" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0 m-0">
+                📝 Demander un devis
+              </a>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Zone : {ville.name} ({ville.dept}) • Communes proches : {aroundNames}{around.length > 6 ? "…" : ""}
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Accès rapide</h3>
+                <p class="small text-muted mb-3">
+                  Choisis d’abord le métier, puis la demande précise (service).
+                </p>
+
+                <div class="row g-2">
+                  {metiers.slice(0, 6).map((m) => (
+                    <div class="col-12">
+                      <a class="btn btn-outline-secondary w-100 text-start" href={`/villes/${ville.slug}/${m.slug}/`}>
+                        {m.name} à {ville.name}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="small text-muted mt-3">
+                  Astuce : ces pages renvoient vers “service × ville” pour capter les requêtes les plus rentables.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Métiers + services top -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Métiers</div>
+          <h3 class="text-transform-none ls-0">Choisir une catégorie à {ville.name}</h3>
+          <p class="text-muted mb-0">
+            Accède aux demandes fréquentes (dépannage, installation, rénovation) par métier.
+          </p>
+        </div>
+
+        <div class="row mt-4 col-mb-30">
+          {metiers.map((m) => {
+            const top = topServicesForMetier(m.slug);
+            return (
+              <div class="col-lg-4 col-md-6 d-flex">
+                <div class="card h-100 w-100">
+                  <div class="card-body p-4">
+                    <h3 class="h5 mb-2">{m.name} à {ville.name}</h3>
+                    <p class="small text-muted mb-3">
+                      Pages dédiées métier×ville + demandes précises pour améliorer le référencement local.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                      <a class="button button-rounded button-small m-0" href={`/villes/${ville.slug}/${m.slug}/`}>
+                        Voir {m.name.toLowerCase()}
+                      </a>
+                      <a class="button button-border button-rounded button-small m-0" href="#devis">
+                        Devis
+                      </a>
+                    </div>
+
+                    {top?.length ? (
+                      <>
+                        <div class="small fw-semibold mb-2">Demandes fréquentes :</div>
+                        <div class="d-grid gap-2">
+                          {top.map((s) => (
+                            <a class="btn btn-sm btn-outline-secondary text-start"
+                               href={`/villes/${ville.slug}/${m.slug}/${s.slug}/`}>
+                              {s.name}
+                            </a>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <div class="small text-muted">Ajoute 3 services “top” pour ce métier pour booster le SEO.</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Communes autour -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Zone</div>
+          <h3 class="text-transform-none ls-0">Intervention autour de {ville.name}</h3>
+          <p class="text-muted mb-0">
+            Pour renforcer le SEO local, on relie aussi les communes proches.
+          </p>
+        </div>
+
+        <div class="row col-mb-20 mt-4">
+          {around.map((v) => (
+            <div class="col-lg-3 col-md-4 col-6">
+              <a class="card h-100 text-decoration-none" href={`/villes/${v.slug}/`}>
+                <div class="card-body p-3">
+                  <div class="fw-semibold">{v.name}</div>
+                  <div class="small text-muted">{v.dept}</div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Form -->
+        <div id="devis" class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-between align-items-start g-4">
+              <div class="col-lg-5">
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Devis gratuit</div>
+                  <h2 class="text-transform-none ls-0 mb-0">Demande rapide — {ville.name}</h2>
+                </div>
+                <p class="text-muted">
+                  Décris ton besoin (adresse, urgence, détail). On te rappelle rapidement pour planifier l’intervention.
+                </p>
+
+                <div class="small text-muted">
+                  Tu peux aussi choisir directement un métier ci-dessus (métier×ville) puis une demande (service×ville).
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <HubspotCustomForm
+                  title={`Devis — ${ville.name}`}
+                  subtitle={`Tracking auto (UTM + page source) • ${ville.name} (${ville.dept})`}
+                  submitLabel="Envoyer ma demande"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

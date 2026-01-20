@@ -1,0 +1,234 @@
+---
+// src/components/HubspotCustomForm.astro
+const {
+  title = "Demande de devis",
+  subtitle = "Réponse rapide • Devis gratuit • Intervention locale",
+  submitLabel = "Envoyer ma demande",
+} = Astro.props;
+
+const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID ?? "";
+const formGuid = import.meta.env.PUBLIC_HUBSPOT_FORM_GUID ?? "";
+const region = import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1";
+
+if (!portalId || !formGuid) {
+  console.warn("[HubspotCustomForm] portalId/formGuid manquants.");
+}
+---
+
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <h3 class="h5 mb-1">{title}</h3>
+    <p class="small text-muted mb-3">{subtitle}</p>
+
+    <div class="form-result alert" hidden></div>
+
+    <form class="js-hs-custom-form" novalidate>
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <label class="form-label" for="hc-lastname">Nom *</label>
+          <input id="hc-lastname" name="lastname" class="form-control" autocomplete="family-name" required />
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="hc-firstname">Prénom *</label>
+          <input id="hc-firstname" name="firstname" class="form-control" autocomplete="given-name" required />
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="hc-phone">Téléphone *</label>
+          <input id="hc-phone" name="phone" class="form-control" autocomplete="tel" required />
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="hc-email">Email</label>
+          <input id="hc-email" name="email" type="email" class="form-control" autocomplete="email" />
+        </div>
+
+        <div class="col-12">
+          <label class="form-label" for="hc-message">Votre demande *</label>
+          <textarea id="hc-message" name="message" class="form-control" rows="4" required
+            placeholder="Ex : fuite sous évier, adresse, urgence, créneau souhaité…"></textarea>
+        </div>
+
+        <!-- Hidden tracking (doivent exister dans HubSpot si tu veux les stocker) -->
+        <input type="hidden" name="utm_source" />
+        <input type="hidden" name="utm_medium" />
+        <input type="hidden" name="utm_campaign" />
+        <input type="hidden" name="utm_term" />
+        <input type="hidden" name="utm_content" />
+        <input type="hidden" name="source_page" />
+        <input type="hidden" name="referrer" />
+        <input type="hidden" name="hc_ville" />
+        <input type="hidden" name="hc_metier" />
+        <input type="hidden" name="hc_service" />
+
+        <!-- Honeypot -->
+        <div style="position:absolute;left:-5000px;" aria-hidden="true">
+          <label for="hc-company">Company</label>
+          <input id="hc-company" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="col-12">
+          <button class="button button-rounded w-100 text-transform-none ls-0 m-0 js-submit" type="submit">
+            {submitLabel}
+          </button>
+          <div class="small text-muted mt-2">
+            En soumettant, vous acceptez d’être recontacté pour traiter votre demande.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script is:inline define:vars={{ portalId, formGuid, region }}>
+  const $ = (sel, root=document) => root.querySelector(sel);
+
+  function getCookie(name) {
+    const v = `; ${document.cookie}`;
+    const parts = v.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return "";
+  }
+
+  function parseContextFromPath(pathname) {
+    const clean = pathname.replace(/\/+$/, "");
+    const parts = clean.split("/").filter(Boolean);
+
+    let ville = "", metier = "", service = "";
+
+    // /villes/:ville/:metier/:service?
+    if (parts[0] === "villes") {
+      ville = parts[1] || "";
+      metier = parts[2] || "";
+      service = parts[3] || "";
+    } else {
+      // fallback /:metier/:service?
+      metier = parts[0] || "";
+      service = parts[1] || "";
+    }
+
+    return { ville, metier, service };
+  }
+
+  function persistUtm(params) {
+    const keys = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"];
+    const hasAny = keys.some(k => params.get(k));
+    const storeKey = "hc_utm";
+
+    if (hasAny) {
+      const payload = {};
+      keys.forEach(k => payload[k] = params.get(k) || "");
+      localStorage.setItem(storeKey, JSON.stringify(payload));
+      return payload;
+    }
+
+    try { return JSON.parse(localStorage.getItem(storeKey) || "{}"); }
+    catch { return {}; }
+  }
+
+  function setHidden(form) {
+    const params = new URLSearchParams(window.location.search);
+    const utm = persistUtm(params);
+
+    const set = (name, value) => {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (el) el.value = value || "";
+    };
+
+    set("utm_source", utm.utm_source || "");
+    set("utm_medium", utm.utm_medium || "");
+    set("utm_campaign", utm.utm_campaign || "");
+    set("utm_term", utm.utm_term || "");
+    set("utm_content", utm.utm_content || "");
+
+    set("source_page", window.location.href);
+    set("referrer", document.referrer || "");
+
+    const ctx = parseContextFromPath(window.location.pathname);
+    set("hc_ville", ctx.ville);
+    set("hc_metier", ctx.metier);
+    set("hc_service", ctx.service);
+  }
+
+  async function submitToHubSpot(form) {
+    const result = $(".form-result", form.parentElement);
+    const btn = $(".js-submit", form);
+
+    // Honeypot
+    const hp = form.querySelector('[name="company"]');
+    if (hp && hp.value) return;
+
+    const data = new FormData(form);
+
+    // Required fields
+    const required = ["firstname","lastname","phone","message"];
+    for (const r of required) {
+      if (!String(data.get(r) || "").trim()) {
+        result.hidden = false;
+        result.className = "form-result alert alert-danger";
+        result.textContent = "Merci de remplir les champs obligatoires.";
+        return;
+      }
+    }
+
+    const fields = [];
+    for (const [name, value] of data.entries()) {
+      if (name === "company") continue;
+      fields.push({ name, value: String(value ?? "") });
+    }
+
+    const hutk = getCookie("hubspotutk");
+    const payload = {
+      fields,
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title,
+        hutk: hutk || undefined,
+      }
+    };
+
+    // Endpoint v3 EU
+    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
+
+    btn && (btn.disabled = true);
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || `HTTP ${res.status}`);
+      }
+
+      form.reset();
+      setHidden(form);
+
+      result.hidden = false;
+      result.className = "form-result alert alert-success";
+      result.textContent = "✅ Demande envoyée. On vous recontacte rapidement.";
+    } catch (e) {
+      result.hidden = false;
+      result.className = "form-result alert alert-danger";
+      result.textContent = "❌ Erreur d’envoi. Réessayez ou appelez-nous.";
+      console.error("[HubspotCustomForm] submit error:", e);
+    } finally {
+      btn && (btn.disabled = false);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".js-hs-custom-form");
+    if (!form) return;
+    setHidden(form);
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      submitToHubSpot(form);
+    });
+  });
+</script>

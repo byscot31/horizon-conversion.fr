@@ -1,0 +1,93 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import metiers from "../../data/metiers.json";
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const title = `Métiers — artisans locaux | ${brand}`;
+const description = `Plombier, électricien, serrurier, couvreur, chauffagiste, peintre : intervention ${regionLabel}. Devis gratuit, réponse rapide.`;
+const canonical = "/metiers/";
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Métiers</div>
+          <h1>Nos métiers</h1>
+          <p class="lead mb-0">{regionLabel} — devis gratuit & réponse rapide</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Métiers</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center">
+            <div class="badge rounded-pill badge-default mb-2">Accès rapide</div>
+            <h2 class="display-6 fw-bold mb-3">Choisis ton métier</h2>
+            <p class="text-muted mb-0">
+              Chaque métier renvoie ensuite vers les pages “Ville × Métier” et “Service × Ville” pour améliorer le SEO local.
+            </p>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="row col-mb-30">
+          {metiers.map((m) => (
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card h-100 w-100">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="badge rounded-pill badge-default">{m.slug}</div>
+                  </div>
+                  <h3 class="h5 mb-2">{m.name}</h3>
+                  <p class="small text-muted mb-3">
+                    Dépannage, installation, travaux — intervention locale {regionLabel}.
+                  </p>
+                  <a class="button button-rounded button-small m-0" href={`/${m.slug}/`}>
+                    Voir {m.name.toLowerCase()}
+                  </a>
+                  <a class="button button-border button-rounded button-small ms-2 m-0" href="/contact/">
+                    Devis
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="section mt-0" style="padding: 60px 0;">
+          <div class="container">
+            <div class="row justify-content-center text-center">
+              <div class="col-lg-8">
+                <div class="badge rounded-pill badge-default mb-2">Besoin d’un dépannage ?</div>
+                <h3 class="text-transform-none ls-0 mb-3">Décris ton besoin, on te rappelle</h3>
+                <p class="text-muted mb-4">
+                  UTM + page source + contexte (ville/métier/service) remontent automatiquement dans HubSpot.
+                </p>
+                <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

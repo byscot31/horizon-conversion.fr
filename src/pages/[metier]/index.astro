@@ -1,14 +1,188 @@
 ---
-import metiers from "../../data/metiers.json";
+import Layout from "../../layouts/Layout.astro";
+import HubspotCustomForm from "../../components/HubspotCustomForm.astro";
 
-/** @type {import("astro").GetStaticPaths} */
+import villes from "../../data/villes.json";
+import metiers from "../../data/metiers.json";
+import services from "../../data/services.json";
+
 export function getStaticPaths() {
-  return metiers.map((m) => ({
-    params: { metier: m.slug },
-    props: { metier: m },
-  }));
+  return metiers.map((m) => ({ params: { metier: m.slug } }));
 }
 
-// Exemple d’usage
-const { metier } = Astro.props;
+const { metier: metierSlug } = Astro.params;
+const metier = metiers.find((m) => m.slug === metierSlug);
+if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const canonical = `/${metier.slug}/`;
+
+const title = `${metier.name} — Sud Oise & Nord 95 | Devis gratuit | ${brand}`;
+const description = `${metier.name} : dépannage, installation, travaux. Intervention ${regionLabel}. Devis gratuit, réponse rapide.`;
+
+// Villes A + top (priorité)
+const villesA = villes
+  .filter((v) => v.priority === "A")
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+const zones = {
+  "Sud Oise (60)": villesA.filter((v) => v.zone === "sud-oise").slice(0, 8),
+  "Nord 95": villesA.filter((v) => v.zone === "nord-95").slice(0, 8),
+};
+
+const topServices = services
+  .filter((s) => s.metier === metier.slug && s.is_top)
+  .slice(0, 9);
+
+// Breadcrumb JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "/" },
+    { "@type": "ListItem", "position": 2, "name": "Métiers", "item": "/metiers/" },
+    { "@type": "ListItem", "position": 3, "name": metier.name, "item": canonical },
+  ],
+};
 ---
+
+<Layout title={title} description={description} canonical={canonical} jsonLd={[breadcrumbJsonLd]}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Métier</div>
+          <h1>{metier.name}</h1>
+          <p class="lead mb-0">{regionLabel} — devis gratuit & réponse rapide</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers/">Métiers</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{metier.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="row align-items-start g-4">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default mb-2">Devis gratuit • Réponse rapide</div>
+            <h2 class="display-6 fw-bold mb-3">{metier.name} : dépannage & travaux</h2>
+
+            <p class="text-muted mb-3">
+              Besoin d’un {metier.name.toLowerCase()} ? Choisis ta ville et la demande précise (service) pour accéder aux pages les plus pertinentes.
+            </p>
+
+            <ul class="iconlist ms-3 mb-4">
+              <li><i class="fa-solid fa-check text-smaller color"></i> Diagnostic clair + devis avant intervention</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Intervention locale {regionLabel}</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Services “top demandes” dédiés (SEO + conversion)</li>
+            </ul>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a href={`tel:${phone}`} class="button button-rounded button-large m-0">📞 {phoneDisplay}</a>
+              <a href="#devis" class="button button-border button-rounded button-large m-0">📝 Devis</a>
+              <a href="/villes/" class="button button-light button-rounded button-large bg-white border text-dark m-0">📍 Voir toutes les villes</a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Demandes fréquentes</h3>
+                <p class="small text-muted mb-3">Accès direct vers les pages “service × ville”.</p>
+
+                <div class="d-grid gap-2">
+                  {topServices.map((s) => (
+                    <a class="btn btn-outline-secondary text-start"
+                       href={`/villes/${zones["Sud Oise (60)"][0]?.slug ?? "senlis"}/${metier.slug}/${s.slug}/`}>
+                      {s.name}
+                    </a>
+                  ))}
+                </div>
+
+                <div class="small text-muted mt-3">
+                  (Astuce) Pour éviter du “thin content”, chaque service a un texte + FAQ + maillage par ville.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Villes principales -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Zones</div>
+          <h3 class="text-transform-none ls-0">Intervention par ville</h3>
+          <p class="text-muted mb-0">Clique sur ta ville : tu arrives sur “Ville × Métier”, puis les services.</p>
+        </div>
+
+        <div class="row mt-4 col-mb-30">
+          {Object.entries(zones).map(([zoneName, list]) => (
+            <div class="col-lg-6">
+              <div class="card h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-3">{zoneName}</h3>
+                  <div class="row g-2">
+                    {list.map((v) => (
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-secondary w-100 text-start"
+                           href={`/villes/${v.slug}/${metier.slug}/`}>
+                          {metier.name} {v.name}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="small text-muted mt-3">
+                    <a href="/villes/">Voir toutes les villes →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Form -->
+        <div id="devis" class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-between align-items-start g-4">
+              <div class="col-lg-5">
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Devis gratuit</div>
+                  <h2 class="text-transform-none ls-0 mb-0">{metier.name}</h2>
+                </div>
+                <p class="text-muted">
+                  Décris ton besoin (adresse, urgence, détail). On te rappelle rapidement pour planifier.
+                </p>
+              </div>
+
+              <div class="col-lg-6">
+                <HubspotCustomForm
+                  title={`Devis — ${metier.name}`}
+                  subtitle={`Tracking auto (UTM + page source) • ${regionLabel}`}
+                  submitLabel="Envoyer ma demande"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

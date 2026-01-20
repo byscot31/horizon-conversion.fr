@@ -1,488 +1,202 @@
+---
+/**
+ * Layout.astro — SEO-ready (improved)
+ * Usage :
+ * <Layout title="..." description="..." canonical="..." jsonLd={...} noindex={false}>
+ *   ...page...
+ * </Layout>
+ */
+
+const {
+  title = "Horizon Conversion — Artisan local",
+  description = "Artisan local : dépannage, installation et devis rapide dans le Sud Oise et le Nord 95.",
+  canonical,
+  ogImage = "/images/og-default.jpg",
+  noindex = false,
+  jsonLd = null, // object ou array
+} = Astro.props;
+
+// ENV
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL ??
+  (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
+
+const BRAND_NAME = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? PHONE;
+const THEME_COLOR = import.meta.env.PUBLIC_THEME_COLOR ?? "#39384D";
+
+// Helpers
+const stripUtm = (urlStr) => {
+  try {
+    const u = new URL(urlStr);
+    // retire tracking courants
+    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach((k) => u.searchParams.delete(k));
+    u.hash = "";
+    return u.toString();
+  } catch {
+    return urlStr;
+  }
+};
+
+const ensureTrailingSlash = (urlStr) => {
+  try {
+    const u = new URL(urlStr);
+    if (!u.pathname.endsWith("/")) u.pathname += "/";
+    return u.toString();
+  } catch {
+    return urlStr;
+  }
+};
+
+const canonicalRaw =
+  canonical ??
+  (SITE_URL ? `${SITE_URL}${Astro.url.pathname}` : Astro.url.toString());
+
+const canonicalUrl = ensureTrailingSlash(stripUtm(canonicalRaw));
+
+const ogImageUrl = ogImage?.startsWith("http")
+  ? ogImage
+  : (SITE_URL ? `${SITE_URL}${ogImage}` : ogImage);
+
+const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
+
+// JSON-LD: accepte object/array, sinon null
+const jsonLdPayload =
+  Array.isArray(jsonLd) ? jsonLd :
+  (jsonLd && typeof jsonLd === "object") ? jsonLd :
+  null;
+
+// Robots : noindex MAIS follow pour conserver le maillage interne crawlable
+const robotsContent = noindex ? "noindex,follow" : "index,follow";
+---
+
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge">
-	<meta name="author" content="Horizon Conversion">
-	<meta name="description" content="">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="author" content={BRAND_NAME} />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<!-- Font Imports -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <!-- Canonical + robots -->
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content={robotsContent} />
 
-	<!-- Core Style -->
-	<link rel="stylesheet" href="style.css">
+  <!-- Hreflang (FR) -->
+  <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
 
-	<!-- Font Icons -->
-	<link rel="stylesheet" href="css/font-icons.css">
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={BRAND_NAME} />
+  {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
 
-	<!-- Plugins/Components CSS -->
-	<link rel="stylesheet" href="css/components/bs-switches.css">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
-	<!-- Niche Demos -->
-	<link rel="stylesheet" href="hc.css">
+  <title>{title}</title>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="css/custom.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- JSON-LD (optionnel) -->
+  {jsonLdPayload && (
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLdPayload)}
+    </script>
+  )}
 
-	<!-- Document Title
-	============================================= -->
-	<title>Demo | Horizon Conversion</title>
+  <!-- Slot head pour méta spécifiques (FAQPage, BreadcrumbList, etc.) -->
+  <slot name="head" />
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/css/font-icons.css" />
+  <link rel="stylesheet" href="/css/components/bs-switches.css" />
+  <link rel="stylesheet" href="/hc.css" />
+  <link rel="stylesheet" href="/css/custom.css" />
 
 </head>
+
 <body class="stretched page-transition" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
 
-	<!-- The Main Wrapper
-	============================================= -->
-	<div id="wrapper">
+  <div id="wrapper">
 
-		<!-- Header
-		============================================= -->
-		<header id="header" class="full-header header-size-md" data-sticky-offset="full" data-sticky-offset-negative="80">
-          <div id="header-wrap">
-            <div class="container">
-              <div class="header-row">
+    <!-- Header -->
+    <header id="header" class="full-header header-size-md" data-sticky-offset="full" data-sticky-offset-negative="80">
+      <div id="header-wrap">
+        <div class="container">
+          <div class="header-row">
 
-                <!-- Logo -->
-                <div id="logo">
-                  <a href="/" class="standard-logo">
-                    <img src="/images/logo.svg" alt="Horizon Conversion - Artisan local">
-                  </a>
-                  <a href="/" class="retina-logo">
-                    <img src="/images/logo@2x.svg" alt="Horizon Conversion - Artisan local">
-                  </a>
-                </div>
-                <!-- #logo end -->
-
-                <!-- Header misc (desktop) -->
-                <div class="header-misc d-none d-lg-flex align-items-center gap-2">
-                  <a href="tel:+33600000000" class="btn btn-outline-secondary btn-sm">06 00 00 00 00</a>
-                  <a href="/contact/" class="button button-rounded button-small m-0">Devis gratuit</a>
-                </div>
-
-                <!-- Mobile Menu Trigger -->
-                <div id="primary-menu-trigger" aria-label="Ouvrir le menu" role="button" tabindex="0">
-                  <svg class="svg-trigger" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-                    <path d="m 30,33 h 40 c 3.7,0 7.5,3.1 7.5,8.6 0,5.5 -2.7,8.4 -7.5,8.4 h -20"></path>
-                    <path d="m 30,50 h 40"></path>
-                    <path d="m 70,67 h -40 c 0,0 -7.5,-0.8 -7.5,-8.4 0,-7.6 7.5,-8.6 7.5,-8.6 h 20"></path>
-                  </svg>
-                </div>
-
-                <!-- Primary Navigation -->
-                <nav class="primary-menu mobile-menu-off-canvas from-right">
-                  <ul class="menu-container">
-
-                    <li class="menu-item current">
-                      <a class="menu-link" href="/"><div>Accueil</div></a>
-                    </li>
-
-                    <!-- Métiers (Mega Menu) -->
-                    <li class="menu-item mega-menu mega-menu-full">
-                      <a class="menu-link" href="/metiers/"><div>Métiers</div></a>
-
-                      <div class="mega-menu-content">
-                        <div class="container">
-                          <div class="row g-4 py-4">
-
-                            <ul class="sub-menu-container mega-menu-column col-lg-3">
-                              <li class="menu-item"><a class="menu-link" href="/plombier/"><div>Plombier</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/electricien/"><div>Électricien</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/serrurier/"><div>Serrurier</div></a></li>
-                            </ul>
-
-                            <ul class="sub-menu-container mega-menu-column col-lg-3">
-                              <li class="menu-item"><a class="menu-link" href="/chauffagiste/"><div>Chauffagiste</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/couvreur/"><div>Couvreur</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/peintre/"><div>Peintre</div></a></li>
-                            </ul>
-
-                            <div class="col-lg-6">
-                              <div class="widget p-4 rounded-3 bg-light">
-                                <h5 class="mb-2">Besoin d’un dépannage ?</h5>
-                                <p class="mb-3 small">Réponse rapide • Devis gratuit • Intervention Sud Oise / Nord 95</p>
-                                <a href="/contact/" class="button button-rounded button-small m-0">Demander un devis</a>
-                                <a href="tel:+33600000000" class="button button-border button-rounded button-small ms-2 m-0">Appeler</a>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-
-                    <!-- Villes (Mega Menu) -->
-                    <li class="menu-item mega-menu mega-menu-full">
-                      <a class="menu-link" href="/villes/"><div>Villes</div></a>
-
-                      <div class="mega-menu-content">
-                        <div class="container">
-                          <div class="row g-4 py-4">
-
-                            <ul class="sub-menu-container mega-menu-column col-lg-4">
-                              <li class="menu-item"><a class="menu-link" href="/senlis/"><div>Senlis</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/chantilly/"><div>Chantilly</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/creil/"><div>Creil</div></a></li>
-                            </ul>
-
-                            <ul class="sub-menu-container mega-menu-column col-lg-4">
-                              <li class="menu-item"><a class="menu-link" href="/gouvieux/"><div>Gouvieux</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/l-isle-adam/"><div>L’Isle-Adam</div></a></li>
-                              <li class="menu-item"><a class="menu-link" href="/persan/"><div>Persan</div></a></li>
-                            </ul>
-
-                            <div class="col-lg-4">
-                              <div class="widget p-4 rounded-3 bg-light">
-                                <h6 class="mb-2 text-uppercase ls-1">Astuce SEO</h6>
-                                <p class="mb-0 small">
-                                  Chaque page ville renvoie vers “<em>Ville × Métier</em>” + les communes autour,
-                                  pour mailler naturellement.
-                                </p>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="menu-item">
-                      <a class="menu-link" href="/travaux/"><div>Travaux</div></a>
-                    </li>
-
-                    <li class="menu-item">
-                      <a class="menu-link" href="/avis/"><div>Avis</div></a>
-                    </li>
-
-                    <li class="menu-item">
-                      <a class="menu-link" href="/pro/"><div>Pro</div></a>
-                    </li>
-
-                    <li class="menu-item">
-                      <a class="menu-link" href="/contact/"><div>Contact / Devis</div></a>
-                    </li>
-
-                    <li class="menu-item">
-                      <a class="menu-link" href="/urgence/"><div><span class="text-danger fw-semibold">Urgence</span></div></a>
-                    </li>
-                  </ul>
-
-                  <!-- Alternate Mobile Menu (2 actions max) -->
-                  <ul class="menu-container mobile-primary-menu">
-                    <li class="menu-item"><a class="menu-link" href="tel:+33600000000"><div>📞 Appeler</div></a></li>
-                    <li class="menu-item"><a class="menu-link" href="/contact/"><div>📝 Devis gratuit</div></a></li>
-                  </ul>
-                </nav>
-                <!-- #primary-menu end -->
-
-              </div>
+            <!-- Logo -->
+            <div id="logo">
+              <a href="/" class="standard-logo">
+                <img src="/images/logo.svg" alt={`${BRAND_NAME} - Artisan local`} />
+              </a>
             </div>
+
+            <!-- Header misc (desktop) -->
+            <div class="header-misc d-none d-lg-flex align-items-center gap-2">
+              <a href={telHref} class="btn btn-outline-secondary btn-sm">{PHONE_DISPLAY}</a>
+              <a href="/contact/" class="button button-rounded button-small m-0">Devis gratuit</a>
+            </div>
+
+            <!-- Mobile Menu Trigger -->
+            <div id="primary-menu-trigger" aria-label="Ouvrir le menu" role="button" tabindex="0">
+              <svg class="svg-trigger" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                <path d="m 30,33 h 40 c 3.7,0 7.5,3.1 7.5,8.6 0,5.5 -2.7,8.4 -7.5,8.4 h -20"></path>
+                <path d="m 30,50 h 40"></path>
+                <path d="m 70,67 h -40 c 0,0 -7.5,-0.8 -7.5,-8.4 0,-7.6 7.5,-8.6 7.5,-8.6 h 20"></path>
+              </svg>
+            </div>
+
+            <!-- Primary Navigation -->
+            <nav class="primary-menu mobile-menu-off-canvas from-right">
+              <slot name="header" />
+              <!-- Par défaut tu gardes ton menu statique actuel dans les pages,
+                   OU tu peux coller ton menu ici comme avant. -->
+            </nav>
+
           </div>
+        </div>
+      </div>
 
-          <div class="header-wrap-clone"></div>
-        </header>
+      <div class="header-wrap-clone"></div>
+    </header>
 
-        <!-- Hero / Slider -->
-            <section id="slider" class="slider-element include-header"
-              style="background: radial-gradient(1200px 600px at 20% 20%, #e8f2ff 0%, #ffffff 55%);">
-              <div class="slider-inner">
-                <div class="container py-6">
-                  <div class="row align-items-center g-4">
+    <slot />
 
-                    <div class="col-lg-7">
-                      <h1 class="display-5 fw-bold mb-3">Dépannage & travaux — artisans locaux Sud Oise / Nord 95</h1>
-                      <p class="lead mb-4">
-                        Intervention rapide, devis gratuit, et suivi clair. Choisis ton métier + ta ville pour une demande ciblée.
-                      </p>
+    <!-- Footer -->
+    <footer id="footer" class="dark">
+      <div class="container">...</div>
+      <div id="copyrights">
+        <div class="container">...</div>
+      </div>
+    </footer>
 
-                      <div class="d-flex flex-wrap gap-2">
-                        <a href="tel:+33600000000" class="button button-rounded button-large m-0">Appeler maintenant</a>
-                        <a href="#demande" data-scrollto="#demande" class="button button-border button-rounded button-large m-0">
-                          Demander un devis
-                        </a>
-                      </div>
-                      <!-- ScrollTo via data-scrollto (Canvas) -->
-                      <!-- cf. Useful Snippets -->
-                    </div>
+  </div>
 
-                    <div class="col-lg-5">
-                      <div class="card border-0 shadow-sm rounded-4">
-                        <div class="card-body p-4">
-                          <h2 class="h5 mb-3">Trouver un artisan</h2>
+  <div id="gotoTop" class="uil uil-angle-up"></div>
 
-                          <form action="/contact/" method="GET">
-                            <div class="row g-2">
-                              <div class="col-12">
-                                <label class="form-label small mb-1" for="metier">Métier</label>
-                                <select id="metier" name="metier" class="form-select">
-                                  <option value="">Choisir…</option>
-                                  <option value="plombier">Plombier</option>
-                                  <option value="electricien">Électricien</option>
-                                  <option value="serrurier">Serrurier</option>
-                                  <option value="chauffagiste">Chauffagiste</option>
-                                  <option value="couvreur">Couvreur</option>
-                                  <option value="peintre">Peintre</option>
-                                </select>
-                              </div>
+  <!-- Sticky CTA -->
+  <div class="scw-switcher-wrap text-center">
+    <a href="/contact/" class="scw-trigger-icon scw-trigger" aria-label="Demander un devis">
+      <i class="bi-whatsapp align-baseline pt-1"></i>
+    </a>
+  </div>
 
-                              <div class="col-12">
-                                <label class="form-label small mb-1" for="service">Service</label>
-                                <select id="service" name="service" class="form-select">
-                                  <option value="">Choisir…</option>
-                                  <option value="depannage">Dépannage</option>
-                                  <option value="installation">Installation</option>
-                                  <option value="renovation">Rénovation</option>
-                                  <option value="entretien">Entretien</option>
-                                  <option value="mise-aux-normes">Mise aux normes</option>
-                                  <option value="urgence">Urgence</option>
-                                </select>
-                              </div>
-
-                              <div class="col-12">
-                                <label class="form-label small mb-1" for="ville">Ville</label>
-                                <select id="ville" name="ville" class="form-select">
-                                  <option value="">Choisir…</option>
-                                  <option value="senlis">Senlis</option>
-                                  <option value="chantilly">Chantilly</option>
-                                  <option value="creil">Creil</option>
-                                  <option value="gouvieux">Gouvieux</option>
-                                  <option value="l-isle-adam">L’Isle-Adam</option>
-                                  <option value="persan">Persan</option>
-                                </select>
-                              </div>
-
-                              <div class="col-12 pt-2">
-                                <button type="submit" class="button button-rounded w-100 m-0">Obtenir un devis</button>
-                                <p class="small text-muted mt-2 mb-0">Réponse sous 1h ouvrée (objectif).</p>
-                              </div>
-                            </div>
-                          </form>
-
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </section>
-
-		<!-- Site Content
-		============================================= -->
-		<section id="content">
-			<div class="content-wrap">
-
-				<!-- Preuves -->
-                <div class="section bg-transparent my-0 py-5">
-                  <div class="container">
-                    <div class="row g-4 text-center">
-                      <div class="col-md-4">
-                        <div class="feature-box fbox-center border-0">
-                          <div class="fbox-icon"><i class="icon-line2-clock"></i></div>
-                          <div class="fbox-content"><h3 class="h5 mb-1">Réponse rapide</h3><p class="mb-0">Traitement prioritaire des urgences.</p></div>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="feature-box fbox-center border-0">
-                          <div class="fbox-icon"><i class="icon-line2-note"></i></div>
-                          <div class="fbox-content"><h3 class="h5 mb-1">Devis clair</h3><p class="mb-0">Sans surprise, après description.</p></div>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="feature-box fbox-center border-0">
-                          <div class="fbox-icon"><i class="icon-line2-badge"></i></div>
-                          <div class="fbox-content"><h3 class="h5 mb-1">Artisans locaux</h3><p class="mb-0">Sud Oise & Nord 95.</p></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Nos métiers -->
-                <div class="section my-0">
-                  <div class="container">
-                    <div class="heading-block text-center">
-                      <h2>Nos métiers</h2>
-                      <span>Choisis ton besoin pour accéder aux pages “métier × services × villes”.</span>
-                    </div>
-
-                    <div class="row g-4">
-                      <!-- Carte -->
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/plombier/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Plombier</h3>
-                            <p class="mb-0 text-muted">Fuite, débouchage, installation, rénovation.</p>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/electricien/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Électricien</h3>
-                            <p class="mb-0 text-muted">Panne, tableau, mise aux normes, éclairage.</p>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/serrurier/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Serrurier</h3>
-                            <p class="mb-0 text-muted">Porte claquée, serrure, sécurisation.</p>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/chauffagiste/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Chauffagiste</h3>
-                            <p class="mb-0 text-muted">Chaudière, entretien, remplacement.</p>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/couvreur/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Couvreur</h3>
-                            <p class="mb-0 text-muted">Fuite toiture, zinguerie, réparation.</p>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4">
-                        <a href="/peintre/" class="card h-100 border-0 shadow-sm text-decoration-none">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Peintre</h3>
-                            <p class="mb-0 text-muted">Intérieur/extérieur, rénovation, finitions.</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Zones -->
-                <div class="section bg-light my-0">
-                  <div class="container">
-                    <div class="heading-block text-center">
-                      <h2>Zones d’intervention</h2>
-                      <span>Pages “ville × métier” + communes autour pour capter la demande locale.</span>
-                    </div>
-
-                    <div class="row g-4">
-                      <div class="col-md-6 col-lg-4"><a class="card h-100 border-0 shadow-sm text-decoration-none" href="/senlis/"><div class="card-body p-4"><h3 class="h5 mb-1">Senlis</h3><p class="mb-0 text-muted">+ alentours</p></div></a></div>
-                      <div class="col-md-6 col-lg-4"><a class="card h-100 border-0 shadow-sm text-decoration-none" href="/chantilly/"><div class="card-body p-4"><h3 class="h5 mb-1">Chantilly</h3><p class="mb-0 text-muted">+ alentours</p></div></a></div>
-                      <div class="col-md-6 col-lg-4"><a class="card h-100 border-0 shadow-sm text-decoration-none" href="/creil/"><div class="card-body p-4"><h3 class="h5 mb-1">Creil</h3><p class="mb-0 text-muted">+ alentours</p></div></a></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Demande de devis (ancre) -->
-                <div id="demande" class="section my-0">
-                  <div class="container">
-                    <div class="row align-items-center g-4">
-                      <div class="col-lg-6">
-                        <h2 class="mb-2">Demande de devis</h2>
-                        <p class="mb-0">Décris ton besoin en 30 secondes. Je te rappelle rapidement.</p>
-                      </div>
-                      <div class="col-lg-6 text-lg-end">
-                        <a href="tel:+33600000000" class="button button-rounded m-0">📞 Appeler</a>
-                        <a href="/contact/" class="button button-border button-rounded ms-2 m-0">📝 Formulaire</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Bloc Pro -->
-                <div class="section bg-transparent my-0">
-                  <div class="container">
-                    <div class="heading-block text-center">
-                      <h2>Pro (Entreprises locales)</h2>
-                      <span>J’apporte des demandes qualifiées aux entreprises (Sud Oise / Nord 95).</span>
-                    </div>
-
-                    <div class="row g-4">
-                      <div class="col-lg-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">SEO local</h3>
-                            <p class="text-muted mb-3">Visibilité durable sur Google Maps + pages locales.</p>
-                            <a href="/pro/#seo-local" class="button button-small button-rounded m-0">Découvrir</a>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Google Ads</h3>
-                            <p class="text-muted mb-3">Leads rapides, pilotage & optimisation.</p>
-                            <a href="/pro/#google-ads" class="button button-small button-rounded m-0">Découvrir</a>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                          <div class="card-body p-4">
-                            <h3 class="h5 mb-2">Audit CRO</h3>
-                            <p class="text-muted mb-3">Convertir plus avec le même trafic.</p>
-                            <a href="/pro/#audit-cro" class="button button-small button-rounded m-0">Découvrir</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-			</div>
-		</section><!-- #content end -->
-
-		<!-- Footer
-		============================================= -->
-		<footer id="footer" class="dark">
-			<div class="container">
-
-				...
-
-			</div>
-
-			<!-- Copyrights
-			============================================= -->
-			<div id="copyrights">
-				<div class="container">
-
-					...
-
-				</div>
-			</div>
-
-		</footer>
-
-	</div><!-- #wrapper end -->
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="uil uil-angle-up"></div>
-
-	<div class="scw-switcher-wrap text-center">
-		<button type="button" class="scw-trigger-icon scw-trigger">
-			<i class="bi-sliders align-baseline"></i>
-		</button>
-	</div>
-
-	<!-- JavaScripts
-	============================================= -->
-	<script is:inline src="js/plugins.min.js"></script>
-	<script is:inline src="js/functions.bundle.js"></script>
+  <script is:inline src="/js/plugins.min.js"></script>
+  <script is:inline src="/js/functions.bundle.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,4 @@
 [
-  // =========================
-  // PLOMBIER — top demandes
-  // =========================
   {
     "metier": "plombier",
     "slug": "depannage-plomberie",
@@ -9,6 +6,8 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 10,
+    "intent": "urgence",
     "short": "Intervention rapide pour panne, fuite, WC bouché, bruit de canalisation, etc.",
     "keywords": ["dépannage plomberie", "plombier urgence", "intervention rapide", "panne plomberie"],
     "benefits": ["Diagnostic clair", "Devis avant travaux", "Intervention soignée"],
@@ -25,12 +24,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 20,
+    "intent": "urgence",
     "short": "Fuite visible ou encastrée : localisation, réparation, remise en service.",
     "keywords": ["fuite d'eau", "recherche fuite", "réparation fuite", "plombier fuite"],
     "benefits": ["Localisation efficace", "Réparation durable", "Conseils prévention"],
     "faq": [
       { "q": "Fuite encastrée : comment faites-vous ?", "a": "On identifie l’origine (tests, inspection) puis on répare proprement avec accord." },
-      { "q": "Pouvez-vous intervenir sur PER / multicouche ?", "a": "Oui, selon l’installation et l’accessibilité." }
+      { "q": "Pouvez-vous intervenir sur PER / multicouche ?", "a": "Oui, selon l’installation et l’accessibilité." },
+      { "q": "Intervenez-vous en urgence à {ville} ?", "a": "Oui selon disponibilité. Appelez et précisez l’adresse, la situation et l’accessibilité pour une prise en charge rapide." }
     ]
   },
   {
@@ -40,12 +42,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 30,
+    "intent": "urgence",
     "short": "Évier, douche, WC, colonne : débouchage et vérification d’écoulement.",
     "keywords": ["débouchage", "canalisation bouchée", "WC bouché", "évier bouché"],
     "benefits": ["Intervention rapide", "Solution adaptée", "Écoulement rétabli"],
     "faq": [
       { "q": "Intervenez-vous pour WC bouché à {ville} ?", "a": "Oui, indiquez si l’eau remonte et depuis quand." },
-      { "q": "Utilisez-vous un furet / pompe / pression ?", "a": "On choisit la méthode selon la cause et l’installation." }
+      { "q": "Utilisez-vous un furet / pompe / pression ?", "a": "On choisit la méthode selon la cause et l’installation." },
+      { "q": "Quel est le délai d’intervention ?", "a": "Souvent dans la journée selon la zone et le niveau d’urgence." }
     ]
   },
   {
@@ -55,12 +60,15 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 40,
+    "intent": "devis",
     "short": "Plus d’eau chaude, ballon HS, fuite : diagnostic, réparation ou remplacement.",
     "keywords": ["chauffe-eau", "ballon d'eau chaude", "panne eau chaude", "remplacement chauffe-eau"],
     "benefits": ["Diagnostic", "Pose conforme", "Conseils d’entretien"],
     "faq": [
       { "q": "Remplacez-vous les ballons électriques ?", "a": "Oui, après contrôle du volume, de l’emplacement et de l’alimentation." },
-      { "q": "Quel volume choisir ?", "a": "Selon le nombre d’occupants et l’usage (douche/bain)." }
+      { "q": "Quel volume choisir ?", "a": "Selon le nombre d’occupants et l’usage (douche/bain)." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." }
     ]
   },
   {
@@ -70,11 +78,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 50,
+    "intent": "devis",
     "short": "Mécanisme, chasse d’eau, fuite, robinet flotteur, remplacement WC.",
     "keywords": ["réparation wc", "chasse d'eau", "fuite wc", "remplacement wc"],
     "benefits": ["Pièces adaptées", "Réglage précis", "Économie d’eau"],
     "faq": [
-      { "q": "Chasse d’eau qui coule : vous intervenez ?", "a": "Oui, souvent lié au flotteur/joint. On répare ou remplace." }
+      { "q": "Chasse d’eau qui coule : vous intervenez ?", "a": "Oui, souvent lié au flotteur/joint. On répare ou remplace." },
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." }
     ]
   },
   {
@@ -84,9 +96,16 @@
     "category": "installation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "devis",
     "short": "Remplacement mitigeur, joints, fuite au robinet, pression.",
     "keywords": ["mitigeur", "robinet", "fuite robinet", "remplacement mitigeur"],
-    "benefits": ["Pose propre", "Étanchéité", "Conseils produits"]
+    "benefits": ["Pose propre", "Étanchéité", "Conseils produits"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "plombier",
@@ -95,14 +114,18 @@
     "category": "renovation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 120,
+    "intent": "devis",
     "short": "Remplacement douche/baignoire, réseaux, évacuations, finitions.",
     "keywords": ["rénovation salle de bain", "douche", "baignoire", "plomberie salle de bain"],
-    "benefits": ["Planification", "Devis détaillé", "Finitions soignées"]
+    "benefits": ["Planification", "Devis détaillé", "Finitions soignées"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
 
-  // =========================
-  // ÉLECTRICIEN — top demandes
-  // =========================
   {
     "metier": "electricien",
     "slug": "depannage-electrique",
@@ -110,12 +133,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 10,
+    "intent": "urgence",
     "short": "Coupure, disjonction, panne prises/éclairage : diagnostic et remise en service.",
     "keywords": ["dépannage électrique", "panne électrique", "disjoncte", "coupure courant"],
     "benefits": ["Diagnostic rapide", "Sécurisation", "Réparation durable"],
     "faq": [
       { "q": "Disjoncteur qui saute : vous intervenez ?", "a": "Oui, on isole le circuit en défaut et on sécurise l’installation." },
-      { "q": "Intervention le soir / week-end ?", "a": "Selon disponibilité, surtout si c’est une urgence." }
+      { "q": "Intervention le soir / week-end ?", "a": "Selon disponibilité, surtout si c’est une urgence." },
+      { "q": "Quel est le délai d’intervention ?", "a": "Souvent dans la journée selon la zone et le niveau d’urgence." }
     ]
   },
   {
@@ -125,11 +151,15 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 20,
+    "intent": "devis",
     "short": "Remise en état, remplacement, ajout protections, étiquetage circuits.",
     "keywords": ["tableau électrique", "remplacement tableau", "disjoncteur", "différentiel"],
     "benefits": ["Protection renforcée", "Tableau propre", "Conformité"],
     "faq": [
-      { "q": "Mise en sécurité du tableau possible ?", "a": "Oui, selon l’état de l’installation et les protections existantes." }
+      { "q": "Mise en sécurité du tableau possible ?", "a": "Oui, selon l’état de l’installation et les protections existantes." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
     ]
   },
   {
@@ -139,9 +169,16 @@
     "category": "renovation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 30,
+    "intent": "devis",
     "short": "Contrôle, corrections, protections, terre, circuits : amélioration sécurité.",
     "keywords": ["mise aux normes", "mise en sécurité", "électricité norme", "terre"],
-    "benefits": ["Sécurité", "Conseils priorités", "Devis clair"]
+    "benefits": ["Sécurité", "Conseils priorités", "Devis clair"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "electricien",
@@ -150,9 +187,16 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 40,
+    "intent": "devis",
     "short": "Ajout/remplacement prises, va-et-vient, prises extérieures, RJ45.",
     "keywords": ["prise électrique", "interrupteur", "va-et-vient", "prise extérieure"],
-    "benefits": ["Pose propre", "Finitions", "Conseils emplacement"]
+    "benefits": ["Pose propre", "Finitions", "Conseils emplacement"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "electricien",
@@ -161,9 +205,16 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 50,
+    "intent": "devis",
     "short": "Luminaires, spots, LED, détecteurs de mouvement, éclairage extérieur.",
     "keywords": ["éclairage", "spots", "LED", "détecteur mouvement", "luminaire"],
-    "benefits": ["Mise en valeur", "Économie d’énergie", "Sécurité"]
+    "benefits": ["Mise en valeur", "Économie d’énergie", "Sécurité"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "electricien",
@@ -172,14 +223,18 @@
     "category": "installation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "devis",
     "short": "Étude, protection, pose borne/prise renforcée, tests.",
     "keywords": ["borne de recharge", "wallbox", "prise renforcée", "véhicule électrique"],
-    "benefits": ["Dimensionnement", "Sécurité", "Installation conforme"]
+    "benefits": ["Dimensionnement", "Sécurité", "Installation conforme"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
 
-  // =========================
-  // SERRURIER — top demandes
-  // =========================
   {
     "metier": "serrurier",
     "slug": "ouverture-porte",
@@ -187,11 +242,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 10,
+    "intent": "urgence",
     "short": "Porte claquée/fermée, clés perdues : ouverture sans dégâts si possible.",
     "keywords": ["ouverture de porte", "porte claquée", "serrurier urgence", "clé perdue"],
     "benefits": ["Intervention rapide", "Respect du matériel", "Conseils sécurisation"],
     "faq": [
-      { "q": "Porte claquée : pouvez-vous ouvrir sans casser ?", "a": "Souvent oui selon serrure/porte. On privilégie les méthodes non destructives." }
+      { "q": "Porte claquée : pouvez-vous ouvrir sans casser ?", "a": "Souvent oui selon serrure/porte. On privilégie les méthodes non destructives." },
+      { "q": "Intervenez-vous en urgence à {ville} ?", "a": "Oui selon disponibilité. Appelez et précisez l’adresse, la situation et l’accessibilité pour une prise en charge rapide." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui : nous vous annonçons le tarif / devis avant intervention (hors cas spécifiques)." }
     ]
   },
   {
@@ -201,9 +260,16 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 20,
+    "intent": "devis",
     "short": "Remplacement serrure/cylindre, mise en sécurité après perte de clés.",
     "keywords": ["changement serrure", "remplacement cylindre", "barillet", "sécurisation"],
-    "benefits": ["Matériel adapté", "Pose propre", "Niveau de sécurité au choix"]
+    "benefits": ["Matériel adapté", "Pose propre", "Niveau de sécurité au choix"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "serrurier",
@@ -212,9 +278,16 @@
     "category": "securite",
     "is_top": true,
     "urgency": "24-7",
+    "order": 30,
+    "intent": "urgence",
     "short": "Réparation provisoire/definitive, remplacement serrure, sécurisation porte.",
     "keywords": ["effraction", "porte forcée", "sécurisation", "serrurier effraction"],
-    "benefits": ["Sécurisation rapide", "Solutions durables", "Conseils assurance"]
+    "benefits": ["Sécurisation rapide", "Solutions durables", "Conseils assurance"],
+    "faq": [
+      { "q": "Intervenez-vous en urgence à {ville} ?", "a": "Oui selon disponibilité. Appelez et précisez l’adresse, la situation et l’accessibilité pour une prise en charge rapide." },
+      { "q": "Quel est le délai d’intervention ?", "a": "Souvent dans la journée selon la zone et le niveau d’urgence." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui : nous vous annonçons le tarif / devis avant intervention (hors cas spécifiques)." }
+    ]
   },
   {
     "metier": "serrurier",
@@ -223,14 +296,18 @@
     "category": "securite",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "devis",
     "short": "Renforcement, cornières anti-pinces, serrure multipoints.",
     "keywords": ["blindage porte", "renforcement", "serrure multipoints"],
-    "benefits": ["Sécurité renforcée", "Solution sur mesure", "Devis détaillé"]
+    "benefits": ["Sécurité renforcée", "Solution sur mesure", "Devis détaillé"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
 
-  // =========================
-  // COUVREUR — top demandes
-  // =========================
   {
     "metier": "couvreur",
     "slug": "fuite-toiture",
@@ -238,11 +315,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "rdv-rapide",
+    "order": 10,
+    "intent": "devis",
     "short": "Infiltration, tuiles déplacées, solins : diagnostic et réparation.",
     "keywords": ["fuite toiture", "infiltration", "réparation toiture", "tuiles cassées"],
     "benefits": ["Diagnostic", "Réparation ciblée", "Protection temporaire si besoin"],
     "faq": [
-      { "q": "Intervenez-vous après intempéries ?", "a": "Oui, on peut sécuriser puis planifier la réparation définitive." }
+      { "q": "Intervenez-vous après intempéries ?", "a": "Oui, on peut sécuriser puis planifier la réparation définitive." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
     ]
   },
   {
@@ -252,9 +333,16 @@
     "category": "renovation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 20,
+    "intent": "devis",
     "short": "Remplacement éléments, reprise faîtage, petites réfections.",
     "keywords": ["réparation toiture", "faîtage", "tuiles", "ardoises"],
-    "benefits": ["Intervention propre", "Durabilité", "Conseils entretien"]
+    "benefits": ["Intervention propre", "Durabilité", "Conseils entretien"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "couvreur",
@@ -263,9 +351,16 @@
     "category": "entretien",
     "is_top": true,
     "urgency": "rdv",
+    "order": 30,
+    "intent": "maintenance",
     "short": "Gouttières bouchées/fuyardes : nettoyage, réparations, remplacement.",
     "keywords": ["gouttière", "nettoyage gouttière", "fuite gouttière", "remplacement gouttière"],
-    "benefits": ["Écoulement OK", "Prévention infiltrations", "Finitions soignées"]
+    "benefits": ["Écoulement OK", "Prévention infiltrations", "Finitions soignées"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Indiquez votre besoin et vos disponibilités." },
+      { "q": "Comment se déroule l’intervention ?", "a": "On contrôle, nettoie/ajuste si besoin, puis on vous conseille sur les réglages et la prévention." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui : devis communiqué avant travaux si remplacement/ajout de pièces." }
+    ]
   },
   {
     "metier": "couvreur",
@@ -274,9 +369,16 @@
     "category": "entretien",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "maintenance",
     "short": "Nettoyage, démoussage, traitement préventif selon support.",
     "keywords": ["démoussage toiture", "nettoyage toiture", "mousse toiture"],
-    "benefits": ["Toiture propre", "Prévention", "Contrôle visuel"]
+    "benefits": ["Toiture propre", "Prévention", "Contrôle visuel"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Indiquez votre besoin et vos disponibilités." },
+      { "q": "Comment se déroule l’intervention ?", "a": "On contrôle, nettoie/ajuste si besoin, puis on vous conseille sur les réglages et la prévention." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui : devis communiqué avant travaux si remplacement/ajout de pièces." }
+    ]
   },
   {
     "metier": "couvreur",
@@ -285,14 +387,18 @@
     "category": "renovation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 120,
+    "intent": "devis",
     "short": "Réparation/renforcement étanchéité, relevés, évacuations.",
     "keywords": ["étanchéité toit plat", "infiltration toit plat", "membrane"],
-    "benefits": ["Diagnostic", "Solution adaptée", "Durabilité"]
+    "benefits": ["Diagnostic", "Solution adaptée", "Durabilité"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
 
-  // =========================
-  // CHAUFFAGISTE — top demandes
-  // =========================
   {
     "metier": "chauffagiste",
     "slug": "depannage-chaudiere",
@@ -300,11 +406,15 @@
     "category": "depannage",
     "is_top": true,
     "urgency": "24-7",
+    "order": 10,
+    "intent": "urgence",
     "short": "Panne chauffage/eau chaude : diagnostic, remise en route, sécurisation.",
     "keywords": ["dépannage chaudière", "panne chauffage", "plus d'eau chaude", "chauffagiste urgence"],
     "benefits": ["Diagnostic", "Sécurisation", "Remise en service"],
     "faq": [
-      { "q": "Vous dépannez gaz/fioul ?", "a": "Selon votre installation. Donnez la marque/modèle pour confirmer." }
+      { "q": "Vous dépannez gaz/fioul ?", "a": "Selon votre installation. Donnez la marque/modèle pour confirmer." },
+      { "q": "Intervenez-vous en urgence à {ville} ?", "a": "Oui selon disponibilité. Appelez et précisez l’adresse, la situation et l’accessibilité pour une prise en charge rapide." },
+      { "q": "Quel est le délai d’intervention ?", "a": "Souvent dans la journée selon la zone et le niveau d’urgence." }
     ]
   },
   {
@@ -314,9 +424,16 @@
     "category": "entretien",
     "is_top": true,
     "urgency": "rdv",
+    "order": 20,
+    "intent": "maintenance",
     "short": "Entretien, contrôle, nettoyage, réglages, conseils d’optimisation.",
     "keywords": ["entretien chaudière", "révision chaudière", "maintenance chauffage"],
-    "benefits": ["Performance", "Sécurité", "Conseils réglages"]
+    "benefits": ["Performance", "Sécurité", "Conseils réglages"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Indiquez votre besoin et vos disponibilités." },
+      { "q": "Comment se déroule l’intervention ?", "a": "On contrôle, nettoie/ajuste si besoin, puis on vous conseille sur les réglages et la prévention." },
+      { "q": "Le devis est-il gratuit ?", "a": "Oui : devis communiqué avant travaux si remplacement/ajout de pièces." }
+    ]
   },
   {
     "metier": "chauffagiste",
@@ -325,9 +442,16 @@
     "category": "installation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 30,
+    "intent": "devis",
     "short": "Dépose/pose, dimensionnement, mise en service, évacuation.",
     "keywords": ["remplacement chaudière", "pose chaudière", "devis chaudière"],
-    "benefits": ["Dimensionnement", "Pose conforme", "Mise en service"]
+    "benefits": ["Dimensionnement", "Pose conforme", "Mise en service"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "chauffagiste",
@@ -336,9 +460,16 @@
     "category": "installation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "devis",
     "short": "Pose/remplacement radiateurs, réglages, purge, équilibrage simple.",
     "keywords": ["radiateur", "purge radiateur", "remplacement radiateur"],
-    "benefits": ["Confort", "Réglages", "Finitions propres"]
+    "benefits": ["Confort", "Réglages", "Finitions propres"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "chauffagiste",
@@ -347,14 +478,18 @@
     "category": "installation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 120,
+    "intent": "devis",
     "short": "Étude, dimensionnement, pose, maintenance selon matériel.",
     "keywords": ["pompe à chaleur", "PAC", "installation pac", "entretien pac"],
-    "benefits": ["Étude", "Installation", "Optimisation"]
+    "benefits": ["Étude", "Installation", "Optimisation"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
 
-  // =========================
-  // PEINTRE — top demandes
-  // =========================
   {
     "metier": "peintre",
     "slug": "peinture-interieure",
@@ -362,11 +497,15 @@
     "category": "renovation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 10,
+    "intent": "devis",
     "short": "Murs, plafonds, boiseries : préparation, sous-couche, finitions propres.",
     "keywords": ["peinture intérieure", "peintre", "murs", "plafonds", "finitions"],
     "benefits": ["Préparation supports", "Finitions soignées", "Protection chantier"],
     "faq": [
-      { "q": "Faites-vous l’enduit / ratissage ?", "a": "Oui, selon l’état des murs et la finition souhaitée." }
+      { "q": "Faites-vous l’enduit / ratissage ?", "a": "Oui, selon l’état des murs et la finition souhaitée." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
     ]
   },
   {
@@ -376,9 +515,16 @@
     "category": "renovation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 20,
+    "intent": "devis",
     "short": "Boiseries, ferronneries, façades selon supports : préparation + peinture adaptée.",
     "keywords": ["peinture extérieure", "volets", "portail", "boiseries"],
-    "benefits": ["Produits adaptés", "Tenue dans le temps", "Finitions"]
+    "benefits": ["Produits adaptés", "Tenue dans le temps", "Finitions"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "peintre",
@@ -387,9 +533,16 @@
     "category": "renovation",
     "is_top": true,
     "urgency": "rdv",
+    "order": 30,
+    "intent": "devis",
     "short": "Nettoyage, réparations, enduits, peinture façade selon état.",
     "keywords": ["ravalement façade", "peinture façade", "enduit façade"],
-    "benefits": ["Diagnostic", "Réparation fissures", "Protection durable"]
+    "benefits": ["Diagnostic", "Réparation fissures", "Protection durable"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "peintre",
@@ -398,9 +551,16 @@
     "category": "renovation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 110,
+    "intent": "devis",
     "short": "Reprise murs/plafonds, ratissage, ponçage, préparation avant peinture.",
     "keywords": ["enduit", "ratissage", "rebouchage", "préparation murs"],
-    "benefits": ["Supports nickel", "Meilleure finition", "Durabilité"]
+    "benefits": ["Supports nickel", "Meilleure finition", "Durabilité"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   },
   {
     "metier": "peintre",
@@ -409,8 +569,15 @@
     "category": "renovation",
     "is_top": false,
     "urgency": "rdv",
+    "order": 120,
+    "intent": "devis",
     "short": "Pose papier peint, panoramique, toile de verre, finitions.",
     "keywords": ["papier peint", "pose papier peint", "toile de verre", "revêtement mural"],
-    "benefits": ["Pose propre", "Alignements", "Finitions"]
+    "benefits": ["Pose propre", "Alignements", "Finitions"],
+    "faq": [
+      { "q": "Intervenez-vous à {ville} et alentours ?", "a": "Oui : {ville} et communes proches. Dites-nous votre besoin et l’adresse pour confirmer la zone." },
+      { "q": "Proposez-vous un devis gratuit ?", "a": "Oui : devis clair avant travaux (photos/infos utiles accélèrent l’estimation)." },
+      { "q": "Quels sont les délais ?", "a": "Selon charge et complexité. On vous propose un créneau rapidement après votre demande." }
+    ]
   }
 ]

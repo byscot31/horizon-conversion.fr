@@ -1,126 +1,38 @@
 [
   {
-    "slug": "creil",
-    "name": "Creil",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "A",
-    "is_pillar": true,
-    "around": [
-      "nogent-sur-oise",
-      "montataire",
-      "saint-leu-d-esserent",
-      "villers-saint-paul",
-      "saint-maximin",
-      "thiverny",
-      "cramoisy",
-      "verneuil-en-halatte",
-      "pont-sainte-maxence",
-      "les-ageux"
-    ]
-  },
-  {
-    "slug": "nogent-sur-oise",
-    "name": "Nogent-sur-Oise",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "A",
-    "is_pillar": true,
-    "around": [
-      "creil",
-      "montataire",
-      "saint-leu-d-esserent",
-      "villers-saint-paul",
-      "thiverny",
-      "saint-maximin",
-      "pont-sainte-maxence"
-    ]
-  },
-  {
-    "slug": "montataire",
-    "name": "Montataire",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "A",
-    "is_pillar": true,
-    "around": [
-      "creil",
-      "nogent-sur-oise",
-      "thiverny",
-      "villers-saint-paul",
-      "saint-maximin",
-      "verneuil-en-halatte"
-    ]
-  },
-  {
-    "slug": "saint-leu-d-esserent",
-    "name": "Saint-Leu-d'Esserent",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "A",
-    "is_pillar": true,
-    "around": [
-      "creil",
-      "nogent-sur-oise",
-      "chantilly",
-      "gouvieux",
-      "lamorlaye",
-      "cramoisy",
-      "coye-la-foret"
-    ]
-  },
-  {
-    "slug": "senlis",
-    "name": "Senlis",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "A",
-    "is_pillar": true,
-    "around": [
-      "chantilly",
-      "orry-la-ville",
-      "coye-la-foret",
-      "vineuil-saint-firmin",
-      "avilly-saint-leonard",
-      "plailly",
-      "gouvieux",
-      "lamorlaye"
-    ]
-  },
-  {
     "slug": "chantilly",
     "name": "Chantilly",
     "dept": "60",
     "zone": "sud-oise",
     "priority": "A",
-    "is_pillar": true,
     "around": [
       "gouvieux",
       "lamorlaye",
-      "vineuil-saint-firmin",
       "coye-la-foret",
-      "orry-la-ville",
-      "avilly-saint-leonard",
-      "plailly",
       "senlis",
-      "saint-leu-d-esserent"
+      "orry-la-ville",
+      "plailly",
+      "saint-leu-d-esserent",
+      "creil",
+      "la-chapelle-en-serval",
+      "survilliers"
     ]
   },
   {
-    "slug": "lamorlaye",
-    "name": "Lamorlaye",
+    "slug": "creil",
+    "name": "Creil",
     "dept": "60",
     "zone": "sud-oise",
     "priority": "A",
-    "is_pillar": true,
     "around": [
-      "chantilly",
+      "nogent-sur-oise",
+      "montataire",
+      "villers-saint-paul",
+      "saint-leu-d-esserent",
       "gouvieux",
-      "coye-la-foret",
-      "orry-la-ville",
-      "luzarches",
-      "viarmes",
-      "vineuil-saint-firmin"
+      "chantilly",
+      "pont-sainte-maxence",
+      "verberie"
     ]
   },
   {
@@ -129,14 +41,16 @@
     "dept": "60",
     "zone": "sud-oise",
     "priority": "A",
-    "is_pillar": true,
     "around": [
       "chantilly",
       "lamorlaye",
       "coye-la-foret",
-      "orry-la-ville",
-      "vineuil-saint-firmin",
-      "avilly-saint-leonard"
+      "saint-leu-d-esserent",
+      "creil",
+      "senlis",
+      "auvers-sur-oise",
+      "parmain",
+      "l-isle-adam"
     ]
   },
   {
@@ -145,198 +59,56 @@
     "dept": "60",
     "zone": "sud-oise",
     "priority": "A",
-    "is_pillar": true,
     "around": [
-      "les-ageux",
-      "brenouille",
-      "rieux",
-      "verneuil-en-halatte",
       "creil",
-      "saint-maximin",
-      "nogent-sur-oise"
+      "verberie",
+      "pontpoint",
+      "sacy-le-grand",
+      "cinqueux",
+      "fleurines",
+      "senlis",
+      "monceaux",
+      "les-ageux",
+      "saint-leu-d-esserent"
     ]
   },
   {
-    "slug": "chambly",
-    "name": "Chambly",
+    "slug": "saint-leu-d-esserent",
+    "name": "Saint-Leu-d'Esserent",
     "dept": "60",
     "zone": "sud-oise",
     "priority": "A",
-    "is_pillar": true,
     "around": [
-      "persan",
-      "beaumont-sur-oise",
-      "champagne-sur-oise",
+      "creil",
+      "chantilly",
+      "gouvieux",
+      "villers-saint-paul",
+      "montataire",
+      "coye-la-foret",
+      "lamorlaye",
       "boran-sur-oise",
-      "le-mesnil-en-thelle",
-      "belle-eglise",
-      "bruyeres-sur-oise"
+      "precy-sur-oise",
+      "pont-sainte-maxence"
     ]
   },
-
   {
-    "slug": "villers-saint-paul",
-    "name": "Villers-Saint-Paul",
+    "slug": "senlis",
+    "name": "Senlis",
     "dept": "60",
     "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["creil", "nogent-sur-oise", "thiverny", "saint-maximin"]
-  },
-  {
-    "slug": "saint-maximin",
-    "name": "Saint-Maximin",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["creil", "villers-saint-paul", "pont-sainte-maxence", "verneuil-en-halatte"]
-  },
-  {
-    "slug": "thiverny",
-    "name": "Thiverny",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["montataire", "creil", "villers-saint-paul", "saint-maximin"]
-  },
-  {
-    "slug": "cramoisy",
-    "name": "Cramoisy",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["creil", "saint-leu-d-esserent", "thiverny", "nogent-sur-oise"]
-  },
-  {
-    "slug": "verneuil-en-halatte",
-    "name": "Verneuil-en-Halatte",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["creil", "pont-sainte-maxence", "saint-maximin", "les-ageux"]
-  },
-  {
-    "slug": "les-ageux",
-    "name": "Les Ageux",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["pont-sainte-maxence", "verneuil-en-halatte", "creil", "brenouille"]
-  },
-  {
-    "slug": "brenouille",
-    "name": "Brenouille",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["pont-sainte-maxence", "les-ageux", "rieux", "verneuil-en-halatte"]
-  },
-  {
-    "slug": "rieux",
-    "name": "Rieux",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["pont-sainte-maxence", "brenouille", "creil", "les-ageux"]
-  },
-  {
-    "slug": "orry-la-ville",
-    "name": "Orry-la-Ville",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["senlis", "chantilly", "coye-la-foret", "plailly"]
-  },
-  {
-    "slug": "coye-la-foret",
-    "name": "Coye-la-Forêt",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["chantilly", "lamorlaye", "orry-la-ville", "gouvieux"]
-  },
-  {
-    "slug": "vineuil-saint-firmin",
-    "name": "Vineuil-Saint-Firmin",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["chantilly", "senlis", "avilly-saint-leonard", "gouvieux"]
-  },
-  {
-    "slug": "avilly-saint-leonard",
-    "name": "Avilly-Saint-Léonard",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["senlis", "chantilly", "vineuil-saint-firmin", "gouvieux"]
-  },
-  {
-    "slug": "plailly",
-    "name": "Plailly",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["senlis", "chantilly", "orry-la-ville", "coye-la-foret"]
-  },
-  {
-    "slug": "boran-sur-oise",
-    "name": "Boran-sur-Oise",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["persan", "chambly", "beaumont-sur-oise", "saint-leu-d-esserent"]
-  },
-  {
-    "slug": "le-mesnil-en-thelle",
-    "name": "Le Mesnil-en-Thelle",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["chambly", "persan", "belle-eglise", "boran-sur-oise"]
-  },
-  {
-    "slug": "belle-eglise",
-    "name": "Belle-Église",
-    "dept": "60",
-    "zone": "sud-oise",
-    "priority": "B",
-    "is_pillar": false,
-    "around": ["chambly", "le-mesnil-en-thelle", "persan", "boran-sur-oise"]
-  },
-
-  {
-    "slug": "persan",
-    "name": "Persan",
-    "dept": "95",
-    "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
     "around": [
-      "beaumont-sur-oise",
-      "champagne-sur-oise",
-      "bernes-sur-oise",
-      "bruyeres-sur-oise",
-      "lisle-adam",
-      "parmain",
-      "nointel",
-      "presles",
-      "mours",
-      "chambly"
+      "chantilly",
+      "gouvieux",
+      "lamorlaye",
+      "coye-la-foret",
+      "orry-la-ville",
+      "plailly",
+      "la-chapelle-en-serval",
+      "pont-sainte-maxence",
+      "creil",
+      "survilliers",
+      "saint-witz"
     ]
   },
   {
@@ -345,26 +117,18 @@
     "dept": "95",
     "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
     "around": [
       "persan",
-      "champagne-sur-oise",
-      "bruyeres-sur-oise",
-      "bernes-sur-oise",
       "mours",
       "nointel",
-      "presles",
-      "boran-sur-oise"
+      "champagne-sur-oise",
+      "bernes-sur-oise",
+      "bruyeres-sur-oise",
+      "boran-sur-oise",
+      "l-isle-adam",
+      "parmain",
+      "precy-sur-oise"
     ]
-  },
-  {
-    "slug": "lisle-adam",
-    "name": "L'Isle-Adam",
-    "dept": "95",
-    "zone": "nord-95",
-    "priority": "A",
-    "is_pillar": true,
-    "around": ["parmain", "champagne-sur-oise", "presles", "nointel", "mours", "beaumont-sur-oise"]
   },
   {
     "slug": "fosses",
@@ -372,35 +136,34 @@
     "dept": "95",
     "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
-    "around": ["survilliers", "marly-la-ville", "louvres", "saint-witz", "vemars", "villeron", "goussainville"]
+    "around": [
+      "survilliers",
+      "marly-la-ville",
+      "louvres",
+      "roissy-en-france",
+      "saint-witz",
+      "luzarches",
+      "viarmes"
+    ]
   },
   {
-    "slug": "survilliers",
-    "name": "Survilliers",
+    "slug": "l-isle-adam",
+    "name": "L’Isle-Adam",
     "dept": "95",
     "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
-    "around": ["fosses", "marly-la-ville", "louvres", "saint-witz", "vemars", "villeron"]
-  },
-  {
-    "slug": "marly-la-ville",
-    "name": "Marly-la-Ville",
-    "dept": "95",
-    "zone": "nord-95",
-    "priority": "A",
-    "is_pillar": true,
-    "around": ["fosses", "survilliers", "louvres", "luzarches", "vemars", "saint-witz"]
-  },
-  {
-    "slug": "louvres",
-    "name": "Louvres",
-    "dept": "95",
-    "zone": "nord-95",
-    "priority": "A",
-    "is_pillar": true,
-    "around": ["goussainville", "vemars", "villeron", "marly-la-ville", "fosses", "survilliers"]
+    "around": [
+      "parmain",
+      "mery-sur-oise",
+      "valmondois",
+      "butry-sur-oise",
+      "auvers-sur-oise",
+      "beaumont-sur-oise",
+      "persan",
+      "nointel",
+      "mours",
+      "champagne-sur-oise"
+    ]
   },
   {
     "slug": "luzarches",
@@ -408,8 +171,36 @@
     "dept": "95",
     "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
-    "around": ["viarmes", "chaumontel", "belloy-en-france", "saint-martin-du-tertre", "marly-la-ville", "lamorlaye"]
+    "around": [
+      "viarmes",
+      "fosses",
+      "survilliers",
+      "marly-la-ville",
+      "chaumontel",
+      "asnieres-sur-oise",
+      "seugy",
+      "orry-la-ville",
+      "saint-witz"
+    ]
+  },
+  {
+    "slug": "persan",
+    "name": "Persan",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "A",
+    "around": [
+      "beaumont-sur-oise",
+      "champagne-sur-oise",
+      "bernes-sur-oise",
+      "bruyeres-sur-oise",
+      "mours",
+      "nointel",
+      "l-isle-adam",
+      "parmain",
+      "boran-sur-oise",
+      "precy-sur-oise"
+    ]
   },
   {
     "slug": "viarmes",
@@ -417,117 +208,291 @@
     "dept": "95",
     "zone": "nord-95",
     "priority": "A",
-    "is_pillar": true,
-    "around": ["luzarches", "chaumontel", "belloy-en-france", "saint-martin-du-tertre", "presles"]
-  },
-  {
-    "slug": "goussainville",
-    "name": "Goussainville",
-    "dept": "95",
-    "zone": "nord-95",
-    "priority": "A",
-    "is_pillar": true,
-    "around": ["louvres", "villeron", "vemars", "fosses", "survilliers"]
+    "around": [
+      "luzarches",
+      "asnieres-sur-oise",
+      "chaumontel",
+      "belloy-en-france",
+      "fosses",
+      "survilliers",
+      "marly-la-ville"
+    ]
   },
 
   {
-    "slug": "champagne-sur-oise",
-    "name": "Champagne-sur-Oise",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "boran-sur-oise",
+    "name": "Boran-sur-Oise",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["persan", "lisle-adam", "parmain", "bernes-sur-oise", "bruyeres-sur-oise", "beaumont-sur-oise", "chambly"]
+    "around": [
+      "persan",
+      "beaumont-sur-oise",
+      "bruyeres-sur-oise",
+      "saint-leu-d-esserent",
+      "precy-sur-oise"
+    ]
   },
   {
-    "slug": "parmain",
-    "name": "Parmain",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "cinqueux",
+    "name": "Cinqueux",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["lisle-adam", "champagne-sur-oise", "presles", "nointel"]
+    "around": [
+      "pont-sainte-maxence",
+      "monceaux",
+      "fleurines",
+      "sacy-le-grand"
+    ]
   },
   {
-    "slug": "bruyeres-sur-oise",
-    "name": "Bruyères-sur-Oise",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "coye-la-foret",
+    "name": "Coye-la-Forêt",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["persan", "beaumont-sur-oise", "bernes-sur-oise", "mours", "champagne-sur-oise"]
+    "around": [
+      "chantilly",
+      "lamorlaye",
+      "gouvieux",
+      "senlis",
+      "orry-la-ville",
+      "plailly",
+      "la-chapelle-en-serval"
+    ]
   },
   {
-    "slug": "bernes-sur-oise",
-    "name": "Bernes-sur-Oise",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "fleurines",
+    "name": "Fleurines",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["persan", "beaumont-sur-oise", "bruyeres-sur-oise", "champagne-sur-oise"]
+    "around": [
+      "senlis",
+      "pont-sainte-maxence",
+      "cinqueux",
+      "sacy-le-grand",
+      "verberie"
+    ]
   },
   {
-    "slug": "presles",
-    "name": "Presles",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "la-chapelle-en-serval",
+    "name": "La Chapelle-en-Serval",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["nointel", "mours", "lisle-adam", "viarmes", "beaumont-sur-oise"]
+    "around": [
+      "plailly",
+      "orry-la-ville",
+      "coye-la-foret",
+      "senlis",
+      "chantilly",
+      "survilliers",
+      "saint-witz",
+      "fosses"
+    ]
   },
   {
-    "slug": "nointel",
-    "name": "Nointel",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "lamorlaye",
+    "name": "Lamorlaye",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["presles", "mours", "lisle-adam", "beaumont-sur-oise", "persan"]
+    "around": [
+      "chantilly",
+      "gouvieux",
+      "coye-la-foret",
+      "senlis",
+      "saint-leu-d-esserent",
+      "beaumont-sur-oise",
+      "persan",
+      "l-isle-adam",
+      "parmain"
+    ]
   },
   {
-    "slug": "mours",
-    "name": "Mours",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "les-ageux",
+    "name": "Les Ageux",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["nointel", "presles", "beaumont-sur-oise", "bruyeres-sur-oise", "lisle-adam"]
+    "around": [
+      "pont-sainte-maxence",
+      "monceaux",
+      "pontpoint",
+      "creil",
+      "saint-leu-d-esserent"
+    ]
   },
   {
-    "slug": "saint-witz",
-    "name": "Saint-Witz",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "monceaux",
+    "name": "Monceaux",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["fosses", "survilliers", "vemars", "villeron", "marly-la-ville"]
+    "around": [
+      "pont-sainte-maxence",
+      "les-ageux",
+      "pontpoint",
+      "sacy-le-grand",
+      "cinqueux"
+    ]
   },
   {
-    "slug": "vemars",
-    "name": "Vémars",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "montataire",
+    "name": "Montataire",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["saint-witz", "fosses", "louvres", "goussainville", "villeron", "survilliers"]
+    "around": [
+      "creil",
+      "nogent-sur-oise",
+      "villers-saint-paul",
+      "saint-leu-d-esserent"
+    ]
   },
   {
-    "slug": "villeron",
-    "name": "Villeron",
-    "dept": "95",
-    "zone": "nord-95",
+    "slug": "nogent-sur-oise",
+    "name": "Nogent-sur-Oise",
+    "dept": "60",
+    "zone": "sud-oise",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["louvres", "goussainville", "vemars", "saint-witz", "fosses"]
+    "around": [
+      "creil",
+      "montataire",
+      "villers-saint-paul",
+      "saint-leu-d-esserent",
+      "pont-sainte-maxence"
+    ]
   },
   {
-    "slug": "chaumontel",
-    "name": "Chaumontel",
+    "slug": "orry-la-ville",
+    "name": "Orry-la-Ville",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "senlis",
+      "chantilly",
+      "coye-la-foret",
+      "plailly",
+      "la-chapelle-en-serval",
+      "survilliers",
+      "fosses",
+      "luzarches"
+    ]
+  },
+  {
+    "slug": "plailly",
+    "name": "Plailly",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "senlis",
+      "orry-la-ville",
+      "la-chapelle-en-serval",
+      "survilliers",
+      "fosses",
+      "saint-witz",
+      "chantilly"
+    ]
+  },
+  {
+    "slug": "pontpoint",
+    "name": "Pontpoint",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "pont-sainte-maxence",
+      "verberie",
+      "les-ageux",
+      "monceaux",
+      "sacy-le-grand"
+    ]
+  },
+  {
+    "slug": "precy-sur-oise",
+    "name": "Précy-sur-Oise",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "boran-sur-oise",
+      "persan",
+      "beaumont-sur-oise",
+      "saint-leu-d-esserent",
+      "bruyeres-sur-oise"
+    ]
+  },
+  {
+    "slug": "sacy-le-grand",
+    "name": "Sacy-le-Grand",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "pont-sainte-maxence",
+      "pontpoint",
+      "monceaux",
+      "cinqueux",
+      "fleurines"
+    ]
+  },
+  {
+    "slug": "verberie",
+    "name": "Verberie",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "pont-sainte-maxence",
+      "pontpoint",
+      "fleurines"
+    ]
+  },
+  {
+    "slug": "villers-saint-paul",
+    "name": "Villers-Saint-Paul",
+    "dept": "60",
+    "zone": "sud-oise",
+    "priority": "B",
+    "around": [
+      "creil",
+      "nogent-sur-oise",
+      "montataire",
+      "saint-leu-d-esserent"
+    ]
+  },
+
+  {
+    "slug": "asnieres-sur-oise",
+    "name": "Asnières-sur-Oise",
     "dept": "95",
     "zone": "nord-95",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["luzarches", "viarmes", "belloy-en-france", "saint-martin-du-tertre"]
+    "around": [
+      "viarmes",
+      "luzarches",
+      "chaumontel",
+      "seugy"
+    ]
+  },
+  {
+    "slug": "auvers-sur-oise",
+    "name": "Auvers-sur-Oise",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "l-isle-adam",
+      "valmondois",
+      "butry-sur-oise",
+      "parmain",
+      "mery-sur-oise"
+    ]
   },
   {
     "slug": "belloy-en-france",
@@ -535,16 +500,257 @@
     "dept": "95",
     "zone": "nord-95",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["luzarches", "viarmes", "chaumontel", "saint-martin-du-tertre"]
+    "around": [
+      "viarmes",
+      "chaumontel",
+      "luzarches"
+    ]
   },
   {
-    "slug": "saint-martin-du-tertre",
-    "name": "Saint-Martin-du-Tertre",
+    "slug": "bernes-sur-oise",
+    "name": "Bernes-sur-Oise",
     "dept": "95",
     "zone": "nord-95",
     "priority": "B",
-    "is_pillar": false,
-    "around": ["luzarches", "viarmes", "chaumontel", "belloy-en-france"]
+    "around": [
+      "champagne-sur-oise",
+      "bruyeres-sur-oise",
+      "persan",
+      "beaumont-sur-oise"
+    ]
+  },
+  {
+    "slug": "bruyeres-sur-oise",
+    "name": "Bruyères-sur-Oise",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "bernes-sur-oise",
+      "champagne-sur-oise",
+      "persan",
+      "beaumont-sur-oise",
+      "boran-sur-oise",
+      "precy-sur-oise"
+    ]
+  },
+  {
+    "slug": "butry-sur-oise",
+    "name": "Butry-sur-Oise",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "l-isle-adam",
+      "valmondois",
+      "auvers-sur-oise",
+      "mery-sur-oise"
+    ]
+  },
+  {
+    "slug": "champagne-sur-oise",
+    "name": "Champagne-sur-Oise",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "persan",
+      "beaumont-sur-oise",
+      "bernes-sur-oise",
+      "bruyeres-sur-oise",
+      "mours",
+      "nointel",
+      "l-isle-adam",
+      "parmain"
+    ]
+  },
+  {
+    "slug": "chaumontel",
+    "name": "Chaumontel",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "luzarches",
+      "viarmes",
+      "asnieres-sur-oise",
+      "seugy",
+      "belloy-en-france"
+    ]
+  },
+  {
+    "slug": "goussainville",
+    "name": "Goussainville",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "louvres",
+      "roissy-en-france",
+      "marly-la-ville",
+      "fosses"
+    ]
+  },
+  {
+    "slug": "louvres",
+    "name": "Louvres",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "survilliers",
+      "fosses",
+      "marly-la-ville",
+      "roissy-en-france",
+      "goussainville",
+      "saint-witz"
+    ]
+  },
+  {
+    "slug": "marly-la-ville",
+    "name": "Marly-la-Ville",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "fosses",
+      "survilliers",
+      "louvres",
+      "luzarches",
+      "viarmes",
+      "saint-witz"
+    ]
+  },
+  {
+    "slug": "mery-sur-oise",
+    "name": "Méry-sur-Oise",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "l-isle-adam",
+      "parmain",
+      "nointel",
+      "mours",
+      "champagne-sur-oise",
+      "butry-sur-oise"
+    ]
+  },
+  {
+    "slug": "mours",
+    "name": "Mours",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "beaumont-sur-oise",
+      "nointel",
+      "champagne-sur-oise",
+      "bruyeres-sur-oise",
+      "l-isle-adam",
+      "persan"
+    ]
+  },
+  {
+    "slug": "nointel",
+    "name": "Nointel",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "beaumont-sur-oise",
+      "mours",
+      "champagne-sur-oise",
+      "l-isle-adam",
+      "mery-sur-oise",
+      "parmain"
+    ]
+  },
+  {
+    "slug": "parmain",
+    "name": "Parmain",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "l-isle-adam",
+      "champagne-sur-oise",
+      "mery-sur-oise",
+      "valmondois",
+      "auvers-sur-oise",
+      "nointel"
+    ]
+  },
+  {
+    "slug": "roissy-en-france",
+    "name": "Roissy-en-France",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "louvres",
+      "survilliers",
+      "fosses",
+      "marly-la-ville"
+    ]
+  },
+  {
+    "slug": "saint-witz",
+    "name": "Saint-Witz",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "fosses",
+      "survilliers",
+      "louvres",
+      "senlis",
+      "plailly",
+      "la-chapelle-en-serval",
+      "luzarches"
+    ]
+  },
+  {
+    "slug": "seugy",
+    "name": "Seugy",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "luzarches",
+      "chaumontel",
+      "asnieres-sur-oise",
+      "viarmes"
+    ]
+  },
+  {
+    "slug": "survilliers",
+    "name": "Survilliers",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "fosses",
+      "marly-la-ville",
+      "louvres",
+      "saint-witz",
+      "plailly",
+      "la-chapelle-en-serval",
+      "luzarches"
+    ]
+  },
+  {
+    "slug": "valmondois",
+    "name": "Valmondois",
+    "dept": "95",
+    "zone": "nord-95",
+    "priority": "B",
+    "around": [
+      "l-isle-adam",
+      "butry-sur-oise",
+      "auvers-sur-oise",
+      "parmain",
+      "champagne-sur-oise"
+    ]
   }
 ]
