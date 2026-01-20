@@ -3,114 +3,111 @@ import type { APIRoute } from "astro";
 import villes from "../data/villes.json";
 import metiers from "../data/metiers.json";
 import services from "../data/services.json";
+import travaux from "../data/travaux.json";
+import avis from "../data/avis.json";
 
 const SITE_URL =
 import.meta.env.PUBLIC_SITE_URL ??
     (import.meta.env.SITE ? String(import.meta.env.SITE) : "");
 
-function abs(urlPath: string) {
+function abs(path: string) {
     const base = SITE_URL.replace(/\/$/, "");
-    const path = urlPath.startsWith("/") ? urlPath : `/${urlPath}`;
-    return `${base}${path}`;
+    const p = path.startsWith("/") ? path : `/${path}`;
+    return `${base}${p}`;
 }
 
-function xmlEscape(str: string) {
-    return str
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&apos;");
+function urlEntry(loc: string, lastmod?: string, changefreq?: string, priority?: string) {
+    const parts = [
+        `<url>`,
+        `<loc>${loc}</loc>`,
+        lastmod ? `<lastmod>${lastmod}</lastmod>` : "",
+        changefreq ? `<changefreq>${changefreq}</changefreq>` : "",
+        priority ? `<priority>${priority}</priority>` : "",
+        `</url>`,
+    ].filter(Boolean);
+    return parts.join("");
+}
+
+function isoDate(d?: string) {
+    if (!d) return undefined;
+    // Si d est déjà YYYY-MM-DD on le garde (ok sitemap)
+    return d;
 }
 
 export const GET: APIRoute = async () => {
-    if (!SITE_URL) {
-        return new Response(
-            "Missing PUBLIC_SITE_URL (ex: https://example.com) in .env",
-            { status: 500 }
-        );
-    }
+    if (!SITE_URL) return new Response("Missing PUBLIC_SITE_URL in .env", { status: 500 });
 
-    const now = new Date().toISOString();
+    const urls: string[] = [];
 
-    const urls: Array<{ loc: string; lastmod?: string; changefreq?: string; priority?: string }> = [];
+    // Hubs
+    urls.push(abs("/"));
+    urls.push(abs("/metiers/"));
+    urls.push(abs("/villes/"));
+    urls.push(abs("/travaux/"));
+    urls.push(abs("/avis/"));
+    urls.push(abs("/contact/"));
+    urls.push(abs("/urgence/"));
 
-    // Pages “hubs” fixes
-    urls.push(
-        { loc: abs("/"), lastmod: now, changefreq: "weekly", priority: "1.0" },
-        { loc: abs("/contact/"), lastmod: now, changefreq: "monthly", priority: "0.8" },
-        { loc: abs("/villes/"), lastmod: now, changefreq: "weekly", priority: "0.8" },
-        { loc: abs("/metiers/"), lastmod: now, changefreq: "weekly", priority: "0.7" }
-    );
-
-    // Métier global: /[metier]/
+    // Pages métiers /[metier]/
     for (const m of metiers) {
-        urls.push({
-            loc: abs(`/${m.slug}/`),
-            lastmod: now,
-            changefreq: "weekly",
-            priority: "0.7",
-        });
+        urls.push(abs(`/${m.slug}/`));
     }
 
-    // On n’indexe QUE les villes priority A
-    const villesA = villes.filter((v) => v.priority === "A");
-
-    // /villes/[ville]/
-    for (const v of villesA) {
-        urls.push({
-            loc: abs(`/villes/${v.slug}/`),
-            lastmod: now,
-            changefreq: "weekly",
-            priority: "0.7",
-        });
+    // Pages villes /villes/[ville]/
+    for (const v of villes) {
+        urls.push(abs(`/villes/${v.slug}/`));
     }
 
-    // /villes/[ville]/[metier]/
-    for (const v of villesA) {
+    // Pages ville×métier /villes/[ville]/[metier]/
+    for (const v of villes) {
         for (const m of metiers) {
-            urls.push({
-                loc: abs(`/villes/${v.slug}/${m.slug}/`),
-                lastmod: now,
-                changefreq: "weekly",
-                priority: "0.7",
-            });
+            urls.push(abs(`/villes/${v.slug}/${m.slug}/`));
         }
     }
 
-    // /villes/[ville]/[metier]/[service]/  (money pages: top services)
+    // Pages service×ville /villes/[ville]/[metier]/[service]/
+    // -> top services seulement pour ne pas exploser la volumétrie
     const topServices = services.filter((s) => s.is_top === true);
 
-    for (const v of villesA) {
+    for (const v of villes) {
         for (const m of metiers) {
             const svcs = topServices.filter((s) => s.metier === m.slug);
             for (const s of svcs) {
-                urls.push({
-                    loc: abs(`/villes/${v.slug}/${m.slug}/${s.slug}/`),
-                    lastmod: now,
-                    changefreq: "weekly",
-                    priority: "0.9",
-                });
+                urls.push(abs(`/villes/${v.slug}/${m.slug}/${s.slug}/`));
             }
         }
     }
 
+    // Travaux: /travaux/[slug]/
+    for (const t of travaux) {
+        urls.push(abs(`/travaux/${t.slug}/`));
+    }
+
+    // Avis: /avis/[id]/
+    for (const a of avis) {
+        urls.push(abs(`/avis/${a.id}/`));
+    }
+
+    // Dédup au cas où
+    const uniq = Array.from(new Set(urls));
+
+    // XML
+    const now = new Date().toISOString().slice(0, 10);
+
     const body =
-        `<?xml version="1.0" encoding="UTF-8"?>\n` +
-        `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-        urls
-            .map((u) => {
-                return (
-                    `  <url>\n` +
-                    `    <loc>${xmlEscape(u.loc)}</loc>\n` +
-                    (u.lastmod ? `    <lastmod>${xmlEscape(u.lastmod)}</lastmod>\n` : "") +
-                    (u.changefreq ? `    <changefreq>${xmlEscape(u.changefreq)}</changefreq>\n` : "") +
-                    (u.priority ? `    <priority>${xmlEscape(u.priority)}</priority>\n` : "") +
-                    `  </url>\n`
-                );
+        `<?xml version="1.0" encoding="UTF-8"?>` +
+        `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+        uniq
+            .map((loc) => {
+                // priorités simples
+                const isHome = loc === abs("/");
+                const isHub = /\/(metiers|villes|travaux|avis)\/$/.test(loc);
+                const priority = isHome ? "1.0" : isHub ? "0.8" : "0.6";
+                const changefreq = isHome ? "daily" : isHub ? "weekly" : "monthly";
+                return urlEntry(loc, now, changefreq, priority);
             })
             .join("") +
-        `</urlset>\n`;
+        `</urlset>`;
 
     return new Response(body, {
         headers: {

@@ -1,0 +1,6 @@
+Contact: https://horizon-conversion.fr/contact/
+Expires: 2026-12-31T23:59:59Z
+Preferred-Languages: fr, en
+Canonical: https://horizon-conversion.fr/.well-known/security.txt
+Policy: https://horizon-conversion.fr/mentions-legales/
+Hiring: https://horizon-conversion.fr/pro/

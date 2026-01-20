@@ -1,0 +1,101 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import avis from "../../../data/avis.json";
+import villes from "../../../data/villes.json";
+import metiers from "../../../data/metiers.json";
+import services from "../../../data/services.json";
+
+export function getStaticPaths() {
+  return avis.map((a) => ({ params: { id: a.id } }));
+}
+
+const { id } = Astro.params;
+const r = avis.find((x) => x.id === id);
+if (!r) throw new Error(`Avis introuvable: ${id}`);
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const canonical = `/avis/${r.id}/`;
+
+const villeName = villes.find(v => v.slug === r.ville)?.name ?? r.ville;
+const metierName = metiers.find(m => m.slug === r.metier)?.name ?? r.metier;
+const serviceName =
+  services.find(s => s.metier === r.metier && s.slug === r.service)?.name ?? r.service;
+
+const title = `Avis — ${metierName} ${villeName} | ${brand}`;
+const description = `${r.author} — ${r.rating}/5 : ${r.text}`.slice(0, 160);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": 5 },
+  "author": { "@type": "Person", "name": r.author },
+  "datePublished": r.date,
+  "reviewBody": r.text,
+  "itemReviewed": { "@type": "LocalBusiness", "name": brand }
+};
+---
+<Layout title={title} description={description} canonical={canonical} jsonLd={[jsonLd]}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Avis</div>
+          <h1>Avis de {r.author}</h1>
+          <p class="lead mb-0">{metierName} à {villeName} — {r.rating}/5</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/avis/">Avis</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{r.author}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <h2 class="h5 mb-1">{r.author}</h2>
+                    <div class="small text-muted">{r.date} • {villeName}</div>
+                  </div>
+                  <div class="badge rounded-pill bg-dark">{r.rating}/5</div>
+                </div>
+
+                <p class="mb-3">{r.text}</p>
+
+                {r.verified && <div class="small text-success">✓ Avis vérifié</div>}
+
+                <div class="clear line my-4"></div>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a class="button button-rounded m-0" href="/contact/">📝 Demander un devis</a>
+                  <a class="button button-border button-rounded m-0" href={`/villes/${r.ville}/${r.metier}/`}>
+                    {metierName} {villeName}
+                  </a>
+                  <a class="button button-light button-rounded bg-white border text-dark m-0" href={`/villes/${r.ville}/${r.metier}/${r.service}/`}>
+                    {serviceName}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="small text-muted mt-3">
+              <a href="/avis/">← Retour aux avis</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

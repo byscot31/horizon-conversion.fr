@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import avis from "../../data/avis.json";
+import villes from "../../data/villes.json";
+import metiers from "../../data/metiers.json";
+import services from "../../data/services.json";
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+const canonical = "/avis/";
+
+const title = `Avis clients — ${brand}`;
+const description = `Avis clients vérifiés. Interventions ${regionLabel}.`;
+
+const items = [...avis].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+function villeName(slug) {
+  return villes.find(v => v.slug === slug)?.name ?? slug;
+}
+function metierName(slug) {
+  return metiers.find(m => m.slug === slug)?.name ?? slug;
+}
+function serviceName(mSlug, sSlug) {
+  return services.find(s => s.metier === mSlug && s.slug === sSlug)?.name ?? sSlug;
+}
+
+// AggregateRating JSON-LD
+const ratingCount = items.length;
+const averageRating =
+  ratingCount ? (items.reduce((sum, r) => sum + Number(r.rating || 0), 0) / ratingCount) : 5;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": brand,
+  "areaServed": regionLabel,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": Number(averageRating.toFixed(2)),
+    "reviewCount": ratingCount
+  }
+};
+---
+<Layout title={title} description={description} canonical={canonical} jsonLd={[jsonLd]}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Avis</div>
+          <h1>Avis clients</h1>
+          <p class="lead mb-0">{regionLabel} — note moyenne {averageRating.toFixed(1)} / 5</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Avis</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-9">
+            <div class="badge rounded-pill badge-default mb-2">Confiance</div>
+            <h2 class="display-6 fw-bold mb-3">Ils nous ont fait confiance</h2>
+            <p class="text-muted mb-0">
+              Les avis renvoient aussi vers les pages <strong>Ville × Métier</strong> et <strong>Service × Ville</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="row col-mb-30">
+          {items.map((r) => (
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card h-100 w-100 shadow-sm">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <h3 class="h6 mb-1 fw-bold">{r.author}</h3>
+                      <div class="small text-muted">{r.date} • {villeName(r.ville)}</div>
+                    </div>
+                    <div class="badge rounded-pill bg-dark">{r.rating}/5</div>
+                  </div>
+
+                  <p class="mb-3">{r.text}</p>
+
+                  <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href={`/villes/${r.ville}/${r.metier}/`}>
+                      {metierName(r.metier)} {villeName(r.ville)}
+                    </a>
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href={`/villes/${r.ville}/${r.metier}/${r.service}/`}>
+                      {serviceName(r.metier, r.service)}
+                    </a>
+                    <a class="btn btn-light btn-sm border" href={`/avis/${r.id}/`}>Détail</a>
+                  </div>
+
+                  {r.verified && <div class="small text-success mt-3">✓ Avis vérifié</div>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <div class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-center text-center">
+              <div class="col-lg-8">
+                <div class="badge rounded-pill badge-default mb-2">Devis gratuit</div>
+                <h3 class="text-transform-none ls-0 mb-3">On t’aide aussi</h3>
+                <p class="text-muted mb-4">Explique ton besoin et ta ville, on te rappelle rapidement.</p>
+                <a href="/contact/" class="button button-rounded button-large m-0">📝 Demander un devis</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -7,6 +7,8 @@
  * </Layout>
  */
 
+import MainMenu from "../components/MainMenu.astro";
+
 const {
   title = "Horizon Conversion — Artisan local",
   description = "Artisan local : dépannage, installation et devis rapide dans le Sud Oise et le Nord 95.",
@@ -24,7 +26,6 @@ const SITE_URL =
 const BRAND_NAME = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
 const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? PHONE;
-const THEME_COLOR = import.meta.env.PUBLIC_THEME_COLOR ?? "#39384D";
 
 // Helpers
 const stripUtm = (urlStr) => {
@@ -84,6 +85,8 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
   <!-- Canonical + robots -->
   <link rel="canonical" href={canonicalUrl} />
   <meta name="robots" content={robotsContent} />
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 
   <!-- Hreflang (FR) -->
   <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
@@ -162,9 +165,7 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
 
             <!-- Primary Navigation -->
             <nav class="primary-menu mobile-menu-off-canvas from-right">
-              <slot name="header" />
-              <!-- Par défaut tu gardes ton menu statique actuel dans les pages,
-                   OU tu peux coller ton menu ici comme avant. -->
+              <MainMenu slot="header" />
             </nav>
 
           </div>
