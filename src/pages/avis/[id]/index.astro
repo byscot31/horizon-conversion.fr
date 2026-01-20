@@ -1,9 +1,9 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import avis from "../../../data/avis.json";
-import villes from "../../../data/villes.json";
-import metiers from "../../../data/metiers.json";
-import services from "../../../data/services.json";
+import Layout from "@layouts/Layout.astro";
+import avis from "@data/avis.json";
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+import services from "@data/services.json";
 
 export function getStaticPaths() {
   return avis.map((a) => ({ params: { id: a.id } }));
