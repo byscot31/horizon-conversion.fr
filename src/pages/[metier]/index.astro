@@ -2,9 +2,9 @@
 import Layout from "@layouts/Layout.astro";
 import HubspotCustomForm from "@components/HubspotCustomForm.astro";
 
-import villes from ".@data/villes.json";
-import metiers from "@data/data/metiers.json";
-import services from "@data/data/services.json";
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+import services from "@data/services.json";
 
 export function getStaticPaths() {
   return metiers.map((m) => ({ params: { metier: m.slug } }));
