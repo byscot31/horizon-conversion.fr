@@ -4,17 +4,16 @@ import metiers from "@data/metiers.json";
 import services from "@data/services.json";
 
 const {
-  title = "Services les plus demandés (toutes activités)",
-  subtitle = "Accès direct aux services prioritaires. Choisis une ville pour aller sur la page la plus précise.",
-  limit = 12,                 // nombre de services affichés
-  onlyTop = true,             // n'afficher que is_top
-  defaultCityPriority = "A",  // villes proposées par défaut
+  title = "Services les plus demandés",
+  subtitle = "Choisis le service puis ta ville : tu arrives sur la page dédiée (infos pratiques + demande de devis).",
+  limit = 12,
+  onlyTop = true,
+  defaultCityPriority = "A",
   cityLimit = 10,
   ctaTel = true,
   ctaDevis = true,
 } = Astro.props;
 
-const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
 const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? phone;
 const telHref = `tel:${String(phone).replace(/\s+/g, "")}`;
@@ -39,11 +38,9 @@ const sortedServices = [...services]
     const ur = urgencyRank(a.urgency) - urgencyRank(b.urgency);
     if (ur !== 0) return ur;
 
-    // priorité aux "top"
     const top = (b.is_top === true) - (a.is_top === true);
     if (top !== 0) return top;
 
-    // ensuite alpha
     return byNameFR(a, b);
   })
   .slice(0, limit);
@@ -57,10 +54,12 @@ const cityChoices = [...villes]
   })
   .slice(0, cityLimit);
 
+const fallbackCity = cityChoices[0] ?? { slug: "senlis", name: "Senlis" };
+
 // Badge label
 const urgencyLabel = (u) => {
   switch (u) {
-    case "24-7": return "Urgence 24/7";
+    case "24-7": return "Urgence";
     case "rdv-rapide": return "Rdv rapide";
     case "rdv": return "Sur rdv";
     default: return "Sur demande";
@@ -80,7 +79,7 @@ const urgencyBadgeClass = (u) => {
   <div class="container">
 
     <div class="heading-block border-bottom-0 text-center mb-4">
-      <div class="badge rounded-pill badge-default">Conversion</div>
+      <div class="badge rounded-pill badge-default">Dépannage • Devis</div>
       <h2 class="text-transform-none ls-0">{title}</h2>
       <p class="text-muted mb-0">{subtitle}</p>
     </div>
@@ -88,7 +87,7 @@ const urgencyBadgeClass = (u) => {
     <!-- Quick CTAs -->
     <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
       {ctaTel && <a class="button button-rounded" href={telHref}>📞 Appeler {phoneDisplay}</a>}
-      {ctaDevis && <a class="button button-rounded button-light text-dark bg-white border" href="/contact/">📝 Devis gratuit</a>}
+      {ctaDevis && <a class="button button-rounded button-light text-dark bg-white border" href="/contact/">📝 Demander un devis</a>}
     </div>
 
     <!-- Global services list -->
@@ -114,38 +113,42 @@ const urgencyBadgeClass = (u) => {
                 {s.short && <p class="text-muted mt-2 mb-3">{s.short}</p>}
 
                 <div class="d-flex flex-wrap gap-2">
-                  <a class="btn btn-outline-secondary btn-sm" href={`/${metierSlug}/`}>
-                    Page métier
+                  <a class="btn btn-outline-secondary btn-sm" href={`/${metierSlug}/`} aria-label={`Voir ${metierName}`}>
+                    Voir {metierName}
                   </a>
 
-                  <a class="btn btn-outline-primary btn-sm" href="/contact/">
-                    Devis
+                  <a class="btn btn-outline-primary btn-sm" href="/contact/" aria-label="Demander un devis">
+                    Demander un devis
                   </a>
                 </div>
 
                 <hr class="my-3" />
 
-                <div class="small fw-semibold mb-2">Aller sur la page la plus précise :</div>
+                <div class="small fw-semibold mb-2">Choisir ta ville :</div>
 
                 <div class="d-flex gap-2 align-items-center">
                   <select class="form-select form-select-sm js-city" aria-label="Choisir une ville">
                     {cityChoices.map((v) => (
-                      <option value={v.slug}>{v.name}</option>
+                      <option value={v.slug} data-name={v.name}>
+                        {v.name}
+                      </option>
                     ))}
                   </select>
 
                   <a
                     class="btn btn-sm btn-outline-secondary js-go"
-                    href={`/villes/${cityChoices[0]?.slug ?? "senlis"}/${metierSlug}/${s.slug}/`}
+                    href={`/villes/${fallbackCity.slug}/${metierSlug}/${s.slug}/`}
                     data-metier={metierSlug}
+                    data-metier-name={metierName}
                     data-service={s.slug}
+                    data-service-name={s.name}
                   >
                     Voir
                   </a>
                 </div>
 
-                <div class="small text-muted mt-2">
-                  (Service × Ville) — meilleure page pour convertir et se positionner.
+                <div class="small text-muted mt-2 js-helper">
+                  Ex : “{s.name} à {fallbackCity.name}” • “devis gratuit {metierName} {fallbackCity.name}” • “intervention rapide”.
                 </div>
 
               </div>
@@ -157,27 +160,39 @@ const urgencyBadgeClass = (u) => {
 
   </div>
 
-  <!-- JS isolé : met à jour le lien "Voir" selon la ville choisie -->
+  <!-- JS isolé : met à jour le lien "Voir" + l'exemple selon la ville choisie -->
   <script is:inline>
     (() => {
-      const cards = Array.from(document.querySelectorAll(".card .js-go"));
-      cards.forEach((btn) => {
+      const buttons = Array.from(document.querySelectorAll(".card .js-go"));
+
+      buttons.forEach((btn) => {
         const wrap = btn.closest(".card");
         if (!wrap) return;
 
         const select = wrap.querySelector(".js-city");
+        const helper = wrap.querySelector(".js-helper");
         if (!select) return;
 
         const metier = btn.getAttribute("data-metier") || "";
+        const metierName = btn.getAttribute("data-metier-name") || "";
         const service = btn.getAttribute("data-service") || "";
+        const serviceName = btn.getAttribute("data-service-name") || "";
 
-        const updateHref = () => {
-          const ville = select.value;
-          btn.setAttribute("href", `/villes/${ville}/${metier}/${service}/`);
+        const update = () => {
+          const villeSlug = select.value;
+          const opt = select.options[select.selectedIndex];
+          const villeName = (opt && opt.dataset && opt.dataset.name) ? opt.dataset.name : "";
+
+          btn.setAttribute("href", `/villes/${villeSlug}/${metier}/${service}/`);
+
+          if (helper) {
+            helper.textContent =
+              `Ex : “${serviceName} à ${villeName}” • “devis gratuit ${metierName} ${villeName}” • “intervention rapide”.`;
+          }
         };
 
-        select.addEventListener("change", updateHref);
-        updateHref();
+        select.addEventListener("change", update);
+        update();
       });
     })();
   </script>

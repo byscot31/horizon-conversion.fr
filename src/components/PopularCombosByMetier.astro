@@ -4,26 +4,30 @@ import metiers from "@data/metiers.json";
 import services from "@data/services.json";
 
 /**
- * PopularCombosByMetier.astro
+ * PopularCombosByMetier.astro (client-first)
  * Objectif :
- * - Maillage fort mais lisible
- * - Pour chaque métier : liens /[metier]/ + Ville×Métier + Service×Ville (via top villes)
+ * - Navigation claire pour particuliers
+ * - Pour chaque métier : page métier + accès rapide par ville + demandes fréquentes (service×ville)
  */
 
 const {
-  title = "Combos populaires",
-  subtitle = "Accès direct aux pages “Métier × Ville” et “Service × Ville” (SEO local).",
+  title = "Accès rapide par métier",
+  subtitle = "Choisis ton métier, puis ta ville : tu arrives sur la page la plus utile pour ton besoin (devis gratuit, réponse rapide).",
   limitMetiers = 6,
-  limitVilles = 4,     // nb de villes affichées par métier
-  limitServices = 4,   // nb de services top par métier et par ville
-  topVillePriority = "A",
+  limitVilles = 4,
+  limitServices = 4,
+  topVillePriority = "A", // tri interne uniquement
   showAllToggle = true,
-  allToggleLabel = "Voir tous les métiers (accordéons)",
+  allToggleLabel = "Voir tous les métiers",
+  ctaDevisHref = "/contact/",
+  ctaDevisLabel = "Demander un devis",
 } = Astro.props;
 
 const byNameFR = (a, b) => String(a.name).localeCompare(String(b.name), "fr");
+
 const sortVilles = (arr) =>
   [...arr].sort((a, b) => {
+    // tri interne : A d’abord, sans l’afficher
     if (a.priority !== b.priority) return a.priority === "A" ? -1 : 1;
     return byNameFR(a, b);
   });
@@ -42,10 +46,11 @@ const topServicesFor = (metierSlug) =>
     .filter((s) => s.is_top)
     .slice(0, limitServices);
 
-const prettify = (s) =>
-  String(s)
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
+// petit helper pour varier microcopy
+const examplesFor = (mName, vName) => {
+  const m = String(mName).toLowerCase();
+  return `Ex : “${m} à ${vName}”, “dépannage ${m} ${vName}”, “devis ${m} ${vName}”.`;
+};
 ---
 
 <section class="section m-0">
@@ -60,25 +65,35 @@ const prettify = (s) =>
     <div class="row g-3">
       {topMetiers.map((m) => {
         const sTop = topServicesFor(m.slug);
+
         return (
           <div class="col-lg-4 col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body p-4">
-
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <div class="fw-semibold">{m.name}</div>
-                    <div class="small text-muted">Pages métier + villes prioritaires</div>
+                    <div class="small text-muted">Dépannage • installation • petits travaux</div>
                   </div>
-                  <span class="badge bg-light text-dark">{sTop.length} services</span>
+                  <span class="badge bg-light text-dark">
+                    {sTop.length ? `${sTop.length} demandes fréquentes` : "Demandes fréquentes"}
+                  </span>
                 </div>
 
                 <div class="d-flex flex-wrap gap-2 mt-2 mb-3">
-                  <a class="btn btn-outline-secondary btn-sm" href={`/${m.slug}/`}>Page métier</a>
-                  <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
+                  <a
+                    class="btn btn-outline-secondary btn-sm"
+                    href={`/${m.slug}/`}
+                    aria-label={`Voir la page ${m.name}`}
+                  >
+                    Voir {m.name}
+                  </a>
+                  <a class="btn btn-outline-primary btn-sm" href={ctaDevisHref}>
+                    {ctaDevisLabel}
+                  </a>
                 </div>
 
-                <div class="small fw-semibold mb-2">Métiers × Villes (priorité {topVillePriority})</div>
+                <div class="small fw-semibold mb-2">Choisir votre ville</div>
 
                 <div class="d-flex flex-column gap-2">
                   {topVilles.map((v) => (
@@ -86,33 +101,48 @@ const prettify = (s) =>
                       <summary style="cursor:pointer;">
                         <span class="fw-semibold">{v.name}</span>
                         <span class="small text-muted ms-2">{v.dept}</span>
-                        <span class={`badge ms-2 ${v.priority === "A" ? "bg-success" : "bg-secondary"}`}>{v.priority}</span>
                       </summary>
 
                       <div class="pt-2">
                         <div class="d-flex flex-wrap gap-2 mb-2">
-                          <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
-                            Voir {m.name} à {v.name}
+                          <a
+                            class="btn btn-sm btn-outline-secondary"
+                            href={`/villes/${v.slug}/${m.slug}/`}
+                            aria-label={`${m.name} à ${v.name} — devis gratuit`}
+                            title={`${m.name} à ${v.name}`}
+                          >
+                            {m.name} à {v.name}
                           </a>
+                          <a class="btn btn-sm btn-outline-primary" href={ctaDevisHref}>
+                            Devis
+                          </a>
+                        </div>
+
+                        <div class="small text-muted mb-2">
+                          {examplesFor(m.name, v.name)}
                         </div>
 
                         {sTop.length ? (
                           <>
-                            <div class="small text-muted mb-1">Services top (Service × Ville)</div>
+                            <div class="small fw-semibold mb-1">Demandes fréquentes</div>
                             <div class="d-flex flex-wrap gap-2">
                               {sTop.map((s) => (
                                 <a
                                   class="btn btn-sm btn-outline-secondary"
                                   href={`/villes/${v.slug}/${m.slug}/${s.slug}/`}
-                                  aria-label={`${s.name} - ${m.name} à ${v.name}`}
+                                  aria-label={`${s.name} à ${v.name} — devis gratuit`}
+                                  title={`${s.name} à ${v.name}`}
                                 >
                                   {s.name}
                                 </a>
                               ))}
                             </div>
+                            <div class="small text-muted mt-2">
+                              Cliquez la demande la plus proche de votre problème.
+                            </div>
                           </>
                         ) : (
-                          <div class="small text-muted">Services à venir pour ce métier.</div>
+                          <div class="small text-muted">Demandes en cours d’ajout pour ce métier.</div>
                         )}
                       </div>
                     </details>
@@ -131,48 +161,66 @@ const prettify = (s) =>
         <details class="card shadow-sm">
           <summary class="card-body p-4" style="cursor:pointer;">
             <span class="fw-semibold">{allToggleLabel}</span>
-            <span class="text-muted small ms-2">— plus de liens, mais rangés</span>
+            <span class="text-muted small ms-2">— si tu cherches un autre métier</span>
           </summary>
 
           <div class="card-body pt-0 px-4 pb-4">
             <div class="row g-3">
               {allMetiers.map((m) => {
                 const sTop = topServicesFor(m.slug);
+
                 return (
                   <div class="col-lg-4 col-md-6">
                     <details class="card h-100 shadow-sm">
                       <summary class="card-body p-3" style="cursor:pointer;">
                         <div class="d-flex justify-content-between align-items-start">
                           <span class="fw-semibold">{m.name}</span>
-                          <span class="badge bg-light text-dark">{sTop.length} top</span>
+                          <span class="badge bg-light text-dark">
+                            {sTop.length ? `${sTop.length} top` : "Top"}
+                          </span>
                         </div>
-                        <div class="small text-muted">Ouvre pour voir villes + services</div>
+                        <div class="small text-muted">Ouvre pour choisir une ville + une demande</div>
                       </summary>
 
                       <div class="card-body pt-0 px-3 pb-3">
                         <div class="d-flex flex-wrap gap-2 mb-3">
-                          <a class="btn btn-outline-secondary btn-sm" href={`/${m.slug}/`}>Page métier</a>
-                          <a class="btn btn-outline-primary btn-sm" href="/contact/">Devis</a>
+                          <a class="btn btn-outline-secondary btn-sm" href={`/${m.slug}/`}>
+                            Voir {m.name}
+                          </a>
+                          <a class="btn btn-outline-primary btn-sm" href={ctaDevisHref}>
+                            {ctaDevisLabel}
+                          </a>
+                          <a class="btn btn-outline-secondary btn-sm" href="/villes/">
+                            Toutes les villes
+                          </a>
                         </div>
 
-                        <div class="small fw-semibold mb-2">Villes</div>
+                        <div class="small fw-semibold mb-2">Villes principales</div>
                         <div class="d-flex flex-wrap gap-2 mb-3">
-                          {sortVilles(villes).slice(0, 10).map((v) => (
-                            <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/${m.slug}/`}>
+                          {topVilles.map((v) => (
+                            <a
+                              class="btn btn-sm btn-outline-secondary"
+                              href={`/villes/${v.slug}/${m.slug}/`}
+                              aria-label={`${m.name} à ${v.name} — devis gratuit`}
+                              title={`${m.name} à ${v.name}`}
+                            >
                               {v.name}
                             </a>
                           ))}
-                          <a class="btn btn-sm btn-outline-secondary" href="/villes/">Toutes les villes</a>
                         </div>
 
-                        <div class="small fw-semibold mb-2">Services top</div>
+                        <div class="small fw-semibold mb-2">Demandes fréquentes</div>
                         <div class="d-flex flex-wrap gap-2">
                           {sTop.map((s) => (
-                            <a class="btn btn-sm btn-outline-secondary" href={`/${m.slug}/#service-${s.slug}`}>
+                            <a
+                              class="btn btn-sm btn-outline-secondary"
+                              href={`/${m.slug}/#service-${s.slug}`}
+                              title={s.name}
+                            >
                               {s.name}
                             </a>
                           ))}
-                          {!sTop.length && <span class="small text-muted">Services à venir.</span>}
+                          {!sTop.length && <span class="small text-muted">À venir.</span>}
                         </div>
                       </div>
                     </details>

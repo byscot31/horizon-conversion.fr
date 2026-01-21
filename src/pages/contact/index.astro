@@ -5,6 +5,10 @@ import HubspotCustomForm from "@components/HubspotCustomForm.astro";
 const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
 const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
 
+const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
+const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
+
 const title = `Contact / Devis gratuit — ${regionLabel} | ${brand}`;
 const description = `Demande de devis gratuit : dépannage, installation, travaux. Réponse rapide ${regionLabel}.`;
 ---
@@ -36,23 +40,59 @@ const description = `Demande de devis gratuit : dépannage, installation, travau
         <div class="row g-4 align-items-start">
           <div class="col-lg-6">
             <div class="badge rounded-pill badge-default mb-2">Réponse rapide</div>
-            <h2 class="display-6 fw-bold mb-3">Explique ton besoin, on te rappelle</h2>
+            <h2 class="display-6 fw-bold mb-3">Expliquez votre besoin, nous vous rappelons</h2>
             <p class="text-muted mb-4">
-              Indique l’adresse, l’urgence et le problème. On te propose un créneau rapidement.
+              Indiquez l’adresse, le niveau d’urgence et le problème. Nous vous proposons un créneau rapidement.
             </p>
 
             <div class="row g-3">
-              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Devis clair</h3><p class="small text-muted mb-0">Devis avant intervention.</p></div></div></div>
-              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Intervention locale</h3><p class="small text-muted mb-0">{regionLabel} + alentours.</p></div></div></div>
-              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Conseils</h3><p class="small text-muted mb-0">Orientation avant déplacement si possible.</p></div></div></div>
-              <div class="col-md-6"><div class="card h-100"><div class="card-body p-4"><h3 class="h6 mb-2">✅ Suivi</h3><p class="small text-muted mb-0">Rappel + planification.</p></div></div></div>
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Devis clair</h3>
+                    <p class="small text-muted mb-0">Devis annoncé avant intervention (hors cas particuliers).</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Intervention locale</h3>
+                    <p class="small text-muted mb-0">{regionLabel} et alentours.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Conseils</h3>
+                    <p class="small text-muted mb-0">Si possible, premiers conseils avant déplacement.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Suivi</h3>
+                    <p class="small text-muted mb-0">Rappel et planification de l’intervention.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <a class="btn btn-outline-secondary btn-sm" href={telHref}>📞 Appeler {PHONE_DISPLAY}</a>
+              <a class="btn btn-outline-primary btn-sm" href="#form">📝 Faire une demande</a>
             </div>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-6" id="form">
             <HubspotCustomForm
               title="Demande de devis"
-              subtitle="UTM + page source + ville/métier/service auto"
+              subtitle="Nous recevons automatiquement les informations utiles (page, ville, service) pour vous répondre plus vite."
               submitLabel="Envoyer ma demande"
             />
           </div>
@@ -66,13 +106,15 @@ const description = `Demande de devis gratuit : dépannage, installation, travau
               <div class="col-md-7">
                 <div class="heading-block border-bottom-0 mb-2">
                   <div class="badge rounded-pill badge-default">Urgence</div>
-                  <h2 class="text-transform-none ls-0 mb-0">Si c’est urgent : appelle directement</h2>
+                  <h2 class="text-transform-none ls-0 mb-0">Si c’est urgent : appelez directement</h2>
                 </div>
-                <p class="text-muted mb-0">Tu gagnes du temps : décris l’adresse + le souci.</p>
+                <p class="text-muted mb-0">
+                  Vous gagnerez du temps : indiquez l’adresse et décrivez brièvement le souci.
+                </p>
               </div>
               <div class="col-md-5 text-md-end">
-                <a href={`tel:${import.meta.env.PUBLIC_PHONE ?? "+33600000000"}`} class="button button-rounded button-large m-0">
-                  📞 {import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00"}
+                <a href={telHref} class="button button-rounded button-large m-0">
+                  📞 {PHONE_DISPLAY}
                 </a>
               </div>
             </div>
