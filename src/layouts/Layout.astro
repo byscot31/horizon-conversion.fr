@@ -31,7 +31,6 @@ const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? PHONE;
 const stripUtm = (urlStr) => {
   try {
     const u = new URL(urlStr);
-    // retire tracking courants
     ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach((k) => u.searchParams.delete(k));
     u.hash = "";
     return u.toString();
@@ -196,8 +195,8 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
                 </div>
 
                 <p class="mb-3 text-muted" style="max-width: 520px;">
-                  Besoin d’un artisan pour un dépannage, une installation ou des travaux ?
-                  On intervient rapidement avec un <strong>devis annoncé avant intervention</strong> et un travail soigné.
+                  Vous cherchez un artisan pour un dépannage, une installation ou des travaux ?
+                  Nous intervenons rapidement avec un <strong>devis annoncé avant intervention</strong> et un travail soigné.
                 </p>
 
                 <div class="d-flex flex-wrap gap-2">
@@ -253,7 +252,7 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
                 <div class="clear line line-sm my-4"></div>
 
                 <div class="small text-muted">
-                  Astuce : si tu hésites, passe par <a href="/contact/">Contact</a> — on t’oriente vers la bonne solution.
+                  Astuce : si vous hésitez, passez par <a href="/contact/">Contact</a> — nous vous orientons vers la bonne solution.
                 </div>
               </div>
             </div>
@@ -285,7 +284,7 @@ const robotsContent = noindex ? "noindex,follow" : "index,follow";
                     <a href="/contact/" class="text-dark text-decoration-none">
                       <strong class="h6 d-block mb-0">Devis gratuit</strong>
                     </a>
-                    <div class="small text-muted">Décris ton besoin, on rappelle</div>
+                    <div class="small text-muted">Décrivez votre besoin, nous vous rappelons</div>
                   </div>
                 </div>
 
