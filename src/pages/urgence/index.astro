@@ -35,34 +35,42 @@ const defaultCitySlug =
 const defaultCity = villesA.find((v) => v.slug === defaultCitySlug) ?? villesA[0];
 
 const urgentServices = [...services]
-  .filter((s) => String(s.intent || "").toLowerCase() === "urgence" || String(s.urgency || "").toLowerCase() === "24-7")
-  .sort((a, b) => (Number(a.order ?? 999) - Number(b.order ?? 999)) || String(a.name).localeCompare(String(b.name), "fr"));
+  .filter(
+    (s) =>
+      String(s.intent || "").toLowerCase() === "urgence" ||
+      String(s.urgency || "").toLowerCase() === "24-7"
+  )
+  .sort(
+    (a, b) =>
+      (Number(a.order ?? 999) - Number(b.order ?? 999)) ||
+      String(a.name).localeCompare(String(b.name), "fr")
+  );
 
 const getMetierName = (slug) => metiers.find((m) => m.slug === slug)?.name ?? slug;
 
 const topCitiesList = villesA.slice(0, 8).map((v) => v.name).join(", ");
 
-// FAQ
+// FAQ (ton "vous")
 const faq = [
   {
     q: "Intervenez-vous vraiment en urgence ?",
-    a: "Oui, selon disponibilité. Le plus simple est d’appeler : on confirme le délai et on te dit quoi faire tout de suite en attendant."
+    a: "Oui, selon disponibilité. Le plus simple est d’appeler : nous confirmons le délai et nous vous indiquons quoi faire immédiatement en attendant."
   },
   {
     q: "Quels types d’urgences prenez-vous en charge ?",
     a: "Les urgences courantes à domicile : fuite d’eau / dégât des eaux, panne électrique, porte claquée / serrure, problème de chauffe-eau ou chauffage (selon équipement)."
   },
   {
-    q: "Combien ça coûte en urgence ?",
-    a: "Ça dépend de la situation (accès, heure, complexité, pièces). On t’annonce une fourchette et/ou un devis avant intervention, pour éviter les surprises."
+    q: "Combien cela coûte en urgence ?",
+    a: "Cela dépend de la situation (accès, horaire, complexité, pièces). Nous vous annonçons une fourchette et/ou un devis avant intervention, pour éviter les surprises."
   },
   {
-    q: `Vous intervenez dans quelle zone ?`,
+    q: "Dans quelle zone intervenez-vous ?",
     a: `Intervention locale : ${REGION}. Villes prioritaires : ${topCitiesList} (et communes autour selon planning).`
   },
   {
-    q: "Que dois-je préparer avant l’arrivée ?",
-    a: "Si possible : l’accès au compteur (eau/élec), une photo/vidéo du problème, et l’adresse complète. En cas de danger immédiat, mets-toi en sécurité d’abord."
+    q: "Que devez-vous préparer avant l’arrivée ?",
+    a: "Si possible : l’accès au compteur (eau/électricité), une photo/vidéo du problème, et l’adresse complète. En cas de danger immédiat, mettez-vous d’abord en sécurité."
   }
 ];
 
@@ -97,7 +105,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
       <div class="page-title-row py-5">
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">Urgence • Dépannage à domicile</div>
-          <h1>Urgence dépannage : on t’aide rapidement</h1>
+          <h1>Urgence dépannage : nous vous aidons rapidement</h1>
           <p class="lead mb-0">
             {REGION} — fuite d’eau, panne électrique, porte claquée, dégât des eaux…<br />
             <strong>Prix annoncé avant intervention</strong> • <strong>réponse claire</strong> • <strong>intervention soignée</strong>
@@ -108,12 +116,12 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
               📞 Appeler {PHONE_DISPLAY}
             </a>
             <a href="#devis" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
-              📝 Demander un rappel / devis
+              📝 Demander un rappel / un devis
             </a>
           </div>
 
           <div class="d-flex flex-wrap justify-content-center gap-3 mt-4 small text-light-50">
-            <span>✅ Dépannage (selon dispo)</span>
+            <span>✅ Dépannage (selon disponibilité)</span>
             <span>✅ Fourchette / devis avant</span>
             <span>✅ {REGION}</span>
           </div>
@@ -138,11 +146,11 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
         <div class="row align-items-start g-4">
           <div class="col-lg-7">
             <div class="badge rounded-pill badge-default mb-2">Particuliers • Maison / appartement</div>
-            <h2 class="display-6 fw-bold mb-3">Un problème urgent ? On commence par sécuriser, puis on dépanne.</h2>
+            <h2 class="display-6 fw-bold mb-3">Un problème urgent ? Nous sécurisons d’abord, puis nous dépannons.</h2>
 
             <p class="text-muted mb-3">
-              Quand ça fuit, que ça disjoncte ou que la porte est bloquée, tu veux surtout : une réponse rapide,
-              une explication claire, et <strong>pas de mauvaise surprise</strong>.
+              Quand cela fuit, disjoncte ou que la porte est bloquée, vous voulez surtout : une réponse rapide,
+              une explication claire, et <strong>aucune mauvaise surprise</strong>.
             </p>
 
             <div class="row g-3 mt-3">
@@ -185,10 +193,10 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
             <div class="card shadow-sm">
               <div class="card-body p-4">
                 <div class="badge rounded-pill badge-default mb-2">Urgence</div>
-                <h3 class="h4 mb-2">Quoi faire en attendant (sans prendre de risques)</h3>
+                <h3 class="h4 mb-2">Que faire en attendant (sans prendre de risques)</h3>
                 <p class="text-muted mb-3">
-                  Le but : <strong>sécuriser</strong> et <strong>limiter les dégâts</strong> en attendant l’intervention.
-                  Si tu as un danger immédiat (fumée, odeur forte, étincelles…), mets-toi en sécurité et appelle les secours.
+                  Objectif : <strong>sécuriser</strong> et <strong>limiter les dégâts</strong> en attendant l’intervention.
+                  En cas de danger immédiat (fumée, odeur forte, étincelles…), mettez-vous en sécurité et appelez les secours.
                 </p>
 
                 <div class="toggle faq pb-3 mb-3">
@@ -205,10 +213,10 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                   </div>
                   <div class="toggle-content text-black-50 ps-4">
                     <ul class="mb-0">
-                      <li>Coupe l’eau au <strong>robinet d’arrêt</strong> (ou au compteur si besoin).</li>
-                      <li>Éloigne appareils électriques / multiprises de la zone humide.</li>
-                      <li>Éponge / serpillière + seau pour limiter la propagation.</li>
-                      <li>Si tu peux, prends une photo/vidéo : ça aide à diagnostiquer vite.</li>
+                      <li>Coupez l’eau au <strong>robinet d’arrêt</strong> (ou au compteur si nécessaire).</li>
+                      <li>Éloignez les appareils électriques / multiprises de la zone humide.</li>
+                      <li>Épongez (serpillière + seau) pour limiter la propagation.</li>
+                      <li>Si possible, prenez une photo/vidéo : cela aide à diagnostiquer plus vite.</li>
                     </ul>
                   </div>
                 </div>
@@ -227,10 +235,10 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                   </div>
                   <div class="toggle-content text-black-50 ps-4">
                     <ul class="mb-0">
-                      <li>Coupe les appareils non essentiels et vérifie le <strong>tableau électrique</strong>.</li>
-                      <li>Si ça re-saute, ne force pas : il peut y avoir un défaut (prise, appareil, humidité…).</li>
-                      <li>Évite toute manipulation si tu vois <strong>étincelles</strong>, odeur de brûlé ou chaleur anormale.</li>
-                      <li>En attendant, sécurise : lampe/chargeur, frigo fermé, etc.</li>
+                      <li>Coupez les appareils non essentiels et vérifiez le <strong>tableau électrique</strong>.</li>
+                      <li>Si cela re-saute, ne forcez pas : il peut y avoir un défaut (prise, appareil, humidité…).</li>
+                      <li>Évitez toute manipulation si vous constatez <strong>étincelles</strong>, odeur de brûlé ou chaleur anormale.</li>
+                      <li>En attendant, sécurisez (lampe/chargeur) et limitez l’ouverture du réfrigérateur.</li>
                     </ul>
                   </div>
                 </div>
@@ -249,9 +257,9 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                   </div>
                   <div class="toggle-content text-black-50 ps-4">
                     <ul class="mb-0">
-                      <li>Vérifie si une autre entrée est accessible (sans forcer).</li>
-                      <li>Évite les techniques “internet” qui abîment la porte/la serrure.</li>
-                      <li>Prépare un justificatif (adresse/identité) : ça simplifie la prise en charge.</li>
+                      <li>Vérifiez si une autre entrée est accessible (sans forcer).</li>
+                      <li>Évitez les techniques “internet” qui abîment la porte ou la serrure.</li>
+                      <li>Préparez un justificatif (adresse/identité) : cela facilite la prise en charge.</li>
                     </ul>
                   </div>
                 </div>
@@ -270,9 +278,9 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                   </div>
                   <div class="toggle-content text-black-50 ps-4">
                     <ul class="mb-0">
-                      <li>Si tu te sens en danger : <strong>mets-toi en sécurité</strong> et appelle les secours (<strong>112</strong> / <strong>18</strong> / <strong>15</strong>).</li>
-                      <li>N’allume pas/éteins pas d’appareil électrique si tu suspects un risque (étincelles, forte odeur, fumée).</li>
-                      <li>Aère si c’est possible sans prendre de risque, et éloigne les personnes de la zone.</li>
+                      <li>Si vous êtes en danger : <strong>mettez-vous en sécurité</strong> et appelez les secours (<strong>112</strong> / <strong>18</strong> / <strong>15</strong>).</li>
+                      <li>N’allumez/éteignez pas d’appareil électrique si vous suspectez un risque (étincelles, forte odeur, fumée).</li>
+                      <li>Si possible sans risque, aérez et éloignez les personnes de la zone.</li>
                     </ul>
                   </div>
                 </div>
@@ -289,8 +297,9 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 <h3 class="h4 mb-2">Prix : transparence avant intervention</h3>
                 <p class="text-muted mb-0">
                   En dépannage, le prix dépend de la <strong>complexité</strong>, de l’<strong>accessibilité</strong>, de l’<strong>horaire</strong> (soir / week-end)
-                  et des <strong>pièces</strong> éventuelles. Pour te rassurer : on explique le diagnostic et on <strong>annonce la fourchette</strong> (ou un devis)
-                  <strong>avant</strong> de lancer l’intervention. Objectif : pas de surprise.
+                  et des <strong>pièces</strong> éventuelles. Pour vous rassurer : nous expliquons le diagnostic et nous
+                  <strong>annonçons une fourchette</strong> (ou un devis) <strong>avant</strong> de lancer l’intervention.
+                  Objectif : pas de surprise.
                 </p>
               </div>
             </div>
@@ -304,14 +313,14 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <h3 class="h5 mb-1">Accès rapide (urgence)</h3>
-                    <p class="small text-muted mb-0">Choisis ta ville, puis le problème.</p>
+                    <p class="small text-muted mb-0">Choisissez votre ville, puis le problème.</p>
                   </div>
                   <a href={telHref} class="btn btn-outline-secondary btn-sm">📞 {PHONE_DISPLAY}</a>
                 </div>
 
                 <hr class="my-3" />
 
-                <label class="form-label small text-muted mb-1" for="u-city">Ta ville</label>
+                <label class="form-label small text-muted mb-1" for="u-city">Votre ville</label>
                 <select id="u-city" class="form-select">
                   {villesA.map((v) => (
                     <option value={v.slug} selected={v.slug === defaultCitySlug}>{v.name} ({v.dept})</option>
@@ -319,7 +328,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 </select>
 
                 <div class="small text-muted mt-2">
-                  Pas dans la liste ? <a href="/villes/">Voir toutes les villes</a>
+                  Votre commune n’est pas dans la liste ? <a href="/villes/">Voir toutes les villes</a>
                 </div>
 
                 <div class="clear"></div>
@@ -341,7 +350,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                       ))}
                     </div>
                   ) : (
-                    <div class="small text-muted">Ajoute des services “urgence” dans <code>services.json</code>.</div>
+                    <div class="small text-muted">Ajoutez des services “urgence” dans <code>services.json</code>.</div>
                   )}
                 </div>
 
@@ -350,7 +359,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 <div class="p-3 border rounded-3">
                   <div class="fw-semibold mb-1">📍 Zone couverte</div>
                   <div class="small text-muted">
-                    {REGION}. Intervention selon planning, y compris communes autour de {defaultCity?.name ?? "ta ville"}.
+                    {REGION}. Intervention selon planning, y compris communes autour de {defaultCity?.name ?? "votre ville"}.
                   </div>
                 </div>
 
@@ -420,8 +429,8 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 </div>
 
                 <p class="text-muted mb-3">
-                  Décris ton problème (adresse, urgence, détail). On te rappelle rapidement pour confirmer le délai
-                  et te donner une estimation avant intervention.
+                  Décrivez votre problème (adresse, niveau d’urgence, détail). Nous vous rappelons rapidement pour confirmer le délai
+                  et vous donner une estimation avant intervention.
                 </p>
 
                 <div class="d-flex flex-wrap gap-2">
@@ -430,14 +439,14 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd].filter(Boolean);
                 </div>
 
                 <p class="small text-muted mt-3 mb-0">
-                  Conseil : indique si tu as déjà coupé l’eau / l’électricité et si la situation est stabilisée.
+                  Conseil : indiquez si vous avez déjà coupé l’eau / l’électricité et si la situation est stabilisée.
                 </p>
               </div>
 
               <div class="col-lg-6">
                 <HubspotCustomForm
                   title="Urgence — demande rapide"
-                  subtitle={`Zone : ${REGION} • on te répond vite`}
+                  subtitle={`Zone : ${REGION} • nous vous répondons rapidement`}
                   submitLabel="Envoyer ma demande"
                 />
               </div>
