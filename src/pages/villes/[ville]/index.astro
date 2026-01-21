@@ -34,7 +34,7 @@ const around = (ville.around ?? [])
 
 const aroundNames = around.map((v) => v.name).slice(0, 8).join(", ");
 
-// Metiers (texte “naturel”)
+// Métiers (texte “naturel”)
 const metiersNames = metiers.map((m) => m.name);
 const metiersShort = metiersNames.slice(0, 6).join(", ") + (metiersNames.length > 6 ? "…" : "");
 
@@ -51,25 +51,25 @@ function topServicesForMetier(mSlug) {
     .slice(0, 3);
 }
 
-// FAQ (rassurance + longue traîne)
+// FAQ (rassurance + longue traîne) — ton "vous"
 const faq = [
   {
     q: `Intervenez-vous à ${ville.name} et autour ?`,
     a: around.length
-      ? `Oui. Intervention à ${ville.name} et dans les communes proches : ${around.map(v => v.name).slice(0, 8).join(", ")}${around.length > 8 ? "…" : ""}.`
-      : `Oui. Intervention à ${ville.name} et alentours selon planning.`,
+      ? `Oui. Nous intervenons à ${ville.name} et dans les communes proches : ${around.map(v => v.name).slice(0, 8).join(", ")}${around.length > 8 ? "…" : ""}.`
+      : `Oui. Nous intervenons à ${ville.name} et alentours selon notre planning.`,
   },
   {
     q: "Le devis est-il gratuit ?",
-    a: "Oui : on annonce le tarif avant intervention/travaux (hors cas particuliers).",
+    a: "Oui : nous annonçons le tarif avant intervention/travaux (hors cas particuliers).",
   },
   {
     q: "Quel délai pour un dépannage ?",
-    a: "Selon disponibilité et l’urgence. Dites-nous votre problème + votre adresse : on vous confirme le délai.",
+    a: "Selon la disponibilité et l’urgence. Indiquez-nous votre problème et votre adresse : nous vous confirmons le délai.",
   },
   {
     q: "Combien ça coûte ?",
-    a: "Le prix dépend de la complexité, de l’accès, du temps sur place et des pièces éventuelles. Après votre description (et une photo si possible), on vous donne une estimation puis on confirme avant d’intervenir.",
+    a: "Le prix dépend de la complexité, de l’accès, du temps sur place et des pièces éventuelles. Après votre description (et une photo si possible), nous vous donnons une estimation, puis nous confirmons avant d’intervenir.",
   },
 ];
 
@@ -95,13 +95,13 @@ const faqJsonLd = {
 
 const jsonLd = [breadcrumbJsonLd, faqJsonLd];
 
-// “Urgence : quoi faire en attendant” (générique, safe)
+// “Urgence : quoi faire en attendant” (générique, safe) — ton "vous"
 const urgenceTips = [
   "Sécurisez la zone (enfants/animaux à distance) et évitez toute manipulation risquée.",
-  "Si besoin : coupez l’eau (fuite) ou coupez au disjoncteur (odeur de brûlé/étincelles).",
-  "Protégez le sol/meubles, récupérez l’eau si nécessaire (seau, serpillière).",
-  "Prenez 1–2 photos/vidéos : ça accélère le diagnostic et le devis.",
-  "Préparez l’adresse + l’accès (digicode, étage, stationnement) pour gagner du temps.",
+  "Si nécessaire : coupez l’eau (fuite) ou coupez au disjoncteur (odeur de brûlé/étincelles).",
+  "Protégez le sol et les meubles, et récupérez l’eau si besoin (seau, serpillière).",
+  "Prenez 1–2 photos/vidéos : cela accélère le diagnostic et l’estimation.",
+  "Préparez l’adresse et l’accès (digicode, étage, stationnement) pour gagner du temps.",
 ];
 ---
 
@@ -143,12 +143,12 @@ const urgenceTips = [
             </h2>
 
             <p class="text-muted mb-3">
-              Panne, urgence, réparation, installation ou rénovation : choisis d’abord la catégorie (plomberie, électricité, serrurerie…),
-              puis la demande la plus proche. On te répond vite et on annonce le tarif avant de commencer.
+              Panne, urgence, réparation, installation ou rénovation : choisissez d’abord la catégorie (plomberie, électricité, serrurerie…),
+              puis la demande la plus proche. Nous vous répondons rapidement et nous annonçons le tarif avant de commencer.
             </p>
 
             <ul class="iconlist ms-3 mb-4">
-              <li><i class="fa-solid fa-check text-smaller color"></i> Explication simple + diagnostic clair</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Explications simples et diagnostic clair</li>
               <li><i class="fa-solid fa-check text-smaller color"></i> Prix annoncé avant intervention</li>
               <li><i class="fa-solid fa-check text-smaller color"></i> Intervention soignée à {ville.name} et autour</li>
             </ul>
@@ -172,7 +172,7 @@ const urgenceTips = [
               <div class="card-body p-4">
                 <h3 class="h5 mb-2">Accès rapide</h3>
                 <p class="small text-muted mb-3">
-                  Choisis le type d’artisan à {ville.name}.
+                  Choisissez le type d’artisan à {ville.name}.
                 </p>
 
                 <div class="row g-2">
@@ -186,7 +186,7 @@ const urgenceTips = [
                 </div>
 
                 <div class="small text-muted mt-3">
-                  Tu ne sais pas lequel choisir ? Décris simplement le problème dans le formulaire, on te guide.
+                  Vous ne savez pas lequel choisir ? Décrivez simplement le problème dans le formulaire, nous vous guidons.
                 </div>
               </div>
             </div>
@@ -227,7 +227,7 @@ const urgenceTips = [
           <div class="badge rounded-pill badge-default">Catégories</div>
           <h3 class="text-transform-none ls-0">Choisir une catégorie à {ville.name}</h3>
           <p class="text-muted mb-0">
-            Dépannage, installation, travaux : clique sur la demande la plus proche.
+            Dépannage, installation, travaux : cliquez sur la demande la plus proche.
           </p>
         </div>
 
@@ -240,7 +240,7 @@ const urgenceTips = [
                   <div class="card-body p-4">
                     <h3 class="h5 mb-2">{m.name} à {ville.name}</h3>
                     <p class="small text-muted mb-3">
-                      Pour une panne, une urgence, une réparation ou des travaux : on te confirme le délai et le prix avant intervention.
+                      Pour une panne, une urgence, une réparation ou des travaux : nous vous confirmons le délai et le prix avant intervention.
                     </p>
 
                     <div class="d-flex flex-wrap gap-2 mb-3">
@@ -268,7 +268,7 @@ const urgenceTips = [
                       </>
                     ) : (
                       <div class="small text-muted">
-                        (À compléter) Ajoute 3 demandes fréquentes pour ce métier (ex : dépannage, réparation, installation).
+                        (À compléter) Ajoutez 3 demandes fréquentes pour ce métier (ex : dépannage, réparation, installation).
                       </div>
                     )}
                   </div>
@@ -286,11 +286,11 @@ const urgenceTips = [
             <div class="card shadow-sm">
               <div class="card-body p-4">
                 <div class="badge rounded-pill badge-default mb-2">Tarifs</div>
-                <h3 class="h5 mb-2">Combien ça coûte ?</h3>
+                <h3 class="h5 mb-2">Combien cela coûte ?</h3>
 
                 <p class="text-muted mb-3">
                   Le prix dépend de la complexité, de l’accès, du temps sur place et des pièces éventuelles.
-                  Après votre description (et une photo si possible), on vous donne une estimation puis on confirme
+                  Après votre description (et une photo si possible), nous vous donnons une estimation puis nous confirmons
                   <strong> avant</strong> d’intervenir.
                 </p>
 
@@ -304,7 +304,7 @@ const urgenceTips = [
                   <div class="col-md-6">
                     <div class="p-3 border rounded">
                       ✅ <strong>Selon l’urgence</strong><br />
-                      On vous confirme le délai et le tarif avant déplacement.
+                      Nous vous confirmons le délai et le tarif avant déplacement.
                     </div>
                   </div>
                 </div>
@@ -323,7 +323,7 @@ const urgenceTips = [
               <div class="badge rounded-pill badge-default">Zone</div>
               <h3 class="text-transform-none ls-0">Autour de {ville.name}</h3>
               <p class="text-muted mb-0">
-                On se déplace aussi dans les communes proches.
+                Nous intervenons aussi dans les communes proches.
               </p>
             </div>
 
@@ -386,11 +386,11 @@ const urgenceTips = [
                 </div>
 
                 <p class="text-muted">
-                  Décris ton besoin (adresse, urgence, détail). On te rappelle rapidement pour confirmer le délai et le prix.
+                  Décrivez votre besoin (adresse, urgence, détail). Nous vous rappelons rapidement pour confirmer le délai et le prix.
                 </p>
 
                 <div class="small text-muted">
-                  Astuce : si tu connais le métier, choisis-le plus haut puis la demande précise.
+                  Conseil : si vous connaissez le métier, choisissez-le plus haut puis sélectionnez la demande précise.
                 </div>
               </div>
 

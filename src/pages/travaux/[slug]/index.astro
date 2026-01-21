@@ -53,16 +53,16 @@ const breadcrumbJsonLd = {
 
 const faq = [
   {
-    q: "Combien de temps ça prend ?",
+    q: "Combien de temps cela prend-il ?",
     a: t.duration
-      ? `Selon le cas, cette intervention prend environ : ${t.duration}. Pour votre situation, on confirme après diagnostic.`
-      : "Ça dépend du problème et de l’accès. On confirme le délai après un rapide diagnostic (photos + description).",
+      ? `Selon le cas, cette intervention prend environ : ${t.duration}. Pour votre situation, nous confirmons après diagnostic.`
+      : "Cela dépend du problème et de l’accès. Nous confirmons le délai après un diagnostic rapide (photos + description).",
   },
   {
     q: "Quel prix prévoir ?",
     a:
       "Le tarif dépend de la complexité, de l’accès, des pièces éventuelles et du niveau d’urgence. " +
-      "On annonce toujours le prix (ou une fourchette) avant d’intervenir, pour éviter les surprises.",
+      "Nous annonçons toujours le prix (ou une fourchette) avant d’intervenir, pour éviter les surprises.",
   },
   {
     q: `Intervenez-vous aussi autour de ${villeName} ?`,
@@ -147,7 +147,9 @@ const related = [...travaux]
             ) : (
               <div class="card">
                 <div class="card-body p-4">
-                  <p class="mb-0 text-muted">Ajoute des photos dans <code>travaux.json</code> (champ <code>photos</code>).</p>
+                  <p class="mb-0 text-muted">
+                    Ajoutez des photos dans <code>travaux.json</code> (champ <code>photos</code>).
+                  </p>
                 </div>
               </div>
             )}
@@ -160,7 +162,7 @@ const related = [...travaux]
                 <h2 class="h5 mb-2">En bref</h2>
                 <p class="text-muted mb-3">
                   Intervention à <strong>{villeName}</strong> pour <strong>{serviceName.toLowerCase()}</strong>.
-                  Objectif : régler le problème proprement, expliquer clairement, et annoncer le prix avant.
+                  Objectif : résoudre le problème proprement, vous expliquer clairement, et annoncer le prix avant intervention.
                 </p>
 
                 <div class="row g-3 small">
@@ -185,10 +187,10 @@ const related = [...travaux]
               </div>
             </div>
 
-            <h2 class="h4 mt-5 mb-3">Le besoin (ce que le client voulait)</h2>
+            <h2 class="h4 mt-5 mb-3">Le besoin (ce que vous souhaitiez)</h2>
             <p class="text-muted">{t.problem}</p>
 
-            <h2 class="h4 mt-4 mb-3">Ce qu’on a fait (solution)</h2>
+            <h2 class="h4 mt-4 mb-3">Ce que nous avons fait (solution)</h2>
             <p class="text-muted">{t.solution}</p>
 
             {t.steps?.length ? (
@@ -225,13 +227,14 @@ const related = [...travaux]
               <div class="card-body p-4">
                 <h3 class="h5 mb-2">Urgence : quoi faire en attendant</h3>
                 <p class="small text-muted mb-3">
-                  Si la situation présente un danger (eau, électricité, fumée, odeur de gaz), privilégie la sécurité et appelle les secours si nécessaire.
+                  Si la situation présente un danger (eau, électricité, fumée, odeur de gaz),
+                  privilégiez la sécurité et appelez les secours si nécessaire.
                 </p>
                 <ul class="iconlist ms-3 mb-0">
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Couper l’eau au robinet d’arrêt si fuite ou dégât des eaux.</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Couper l’électricité au disjoncteur si risque électrique (étincelles, odeur, humidité).</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Sécuriser la zone : éloigner enfants/animaux, éviter de toucher aux éléments douteux.</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Protéger : bassine/serpillères, ventilation si besoin, prendre 2–3 photos pour expliquer.</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Coupez l’eau au robinet d’arrêt en cas de fuite ou de dégât des eaux.</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Coupez l’électricité au disjoncteur en cas de risque électrique (étincelles, odeur, humidité).</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Sécurisez la zone : éloignez enfants/animaux, évitez de toucher aux éléments douteux.</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Protégez : bassine/serpillères, aérez si besoin, prenez 2–3 photos pour décrire la situation.</li>
                 </ul>
               </div>
             </div>
@@ -239,9 +242,9 @@ const related = [...travaux]
             {/* Prix / fourchette (ultra prudent) */}
             <div class="card mt-3">
               <div class="card-body p-4">
-                <h3 class="h5 mb-2">Prix : à quoi s’attendre</h3>
+                <h3 class="h5 mb-2">Prix : à quoi vous attendre</h3>
                 <p class="text-muted mb-0">
-                  Le tarif dépend de la complexité, de l’accès, du matériel/pièces éventuelles et du niveau d’urgence.
+                  Le tarif dépend de la complexité, de l’accès, du matériel / des pièces éventuelles et du niveau d’urgence.
                   Dans tous les cas, <strong>le prix (ou une fourchette) est annoncé avant d’intervenir</strong> afin d’éviter les mauvaises surprises.
                 </p>
               </div>
@@ -310,7 +313,7 @@ const related = [...travaux]
                 <hr class="my-3" />
 
                 <div class="small text-muted">
-                  Tu as le même souci ? Va directement à la page la plus proche de ton cas :
+                  Vous avez le même souci ? Allez directement à la page la plus proche de votre cas :
                   <div class="mt-2 d-flex flex-wrap gap-2">
                     <a class="btn btn-sm btn-outline-secondary" href={`/villes/${t.ville}/${t.metier}/`}>
                       {metierName} à {villeName}

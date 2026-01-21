@@ -25,7 +25,7 @@ const metier = metiers.find((m) => m.slug === metierSlug);
 
 if (!ville || !metier) throw new Error("404");
 
-// Noindex si ville B (au cas où tu élargis plus tard)
+// Noindex si ville B (au cas où vous élargissez plus tard)
 const noindex = ville.priority !== "A";
 
 const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
@@ -60,51 +60,51 @@ const prettyVilleList = (arr, limit = 8) =>
 const metierLC = lower(metier.name);
 const title = `${metier.name} à ${ville.name} (${ville.dept}) — Devis gratuit | ${brand}`;
 const description =
-  `Besoin d’un ${metierLC} à ${ville.name} ? Dépannage, installation et travaux. ` +
+  `Vous cherchez un ${metierLC} à ${ville.name} ? Dépannage, installation et travaux. ` +
   `Réponse rapide, devis annoncé avant intervention. ${regionLabel}.`;
 
 // Urgence tips (safe, pas de geste technique)
 const urgenceTipsByMetier = {
   plombier: [
     "Coupez l’eau au robinet d’arrêt (ou à l’arrivée générale si besoin).",
-    "Protégez le sol/meubles et récupérez l’eau (seau, serpillière).",
-    "Évitez d’utiliser le point d’eau concerné en attendant.",
-    "Prenez 1–2 photos/vidéos : ça accélère le diagnostic.",
+    "Protégez le sol et les meubles, et récupérez l’eau (seau, serpillière).",
+    "N’utilisez pas le point d’eau concerné en attendant.",
+    "Prenez 1–2 photos/vidéos : cela accélère le diagnostic.",
   ],
   electricien: [
-    "Coupez au disjoncteur si odeur de brûlé, étincelles ou fumée.",
-    "N’insistez pas si ça re-saute immédiatement (on vous guide).",
+    "Coupez au disjoncteur en cas d’odeur de brûlé, d’étincelles ou de fumée.",
+    "N’insistez pas si le disjoncteur re-saute immédiatement (nous vous guidons).",
     "Débranchez les appareils de la zone si possible (sans toucher aux fils).",
     "Éloignez enfants/animaux et laissez la zone accessible.",
   ],
   serrurier: [
-    "Évitez de forcer : ça peut aggraver le blocage/la casse.",
-    "Si tentative d’effraction : sécurisez et prenez des photos.",
-    "Préparez pièce d’identité + justificatif de domicile (souvent demandé).",
-    "Restez en sécurité (éclairage, voisin, intérieur si possible).",
+    "Évitez de forcer : cela peut aggraver le blocage ou la casse.",
+    "En cas de tentative d’effraction : sécurisez et prenez des photos.",
+    "Préparez une pièce d’identité et un justificatif de domicile (souvent demandés).",
+    "Restez en sécurité (éclairage, voisin, à l’intérieur si possible).",
   ],
   couvreur: [
     "Ne montez pas sur le toit (risque de chute).",
     "Protégez l’intérieur et placez un récipient sous la fuite si ça goutte.",
-    "Éloignez-vous des zones humides (glissade).",
-    "Photo depuis le sol / fenêtre sans vous exposer.",
+    "Évitez les zones humides (risque de glissade).",
+    "Prenez une photo depuis le sol / une fenêtre, sans vous exposer.",
   ],
   chauffagiste: [
     "En cas d’odeur anormale : coupez l’appareil et aérez.",
-    "Notez le message d’erreur / voyant (photo si possible).",
-    "Évitez les réglages répétés : appelez, on vous guide.",
-    "Préparez marque/modèle si vous l’avez.",
+    "Notez le message d’erreur / les voyants (photo si possible).",
+    "Évitez les réglages répétés : appelez, nous vous guidons.",
+    "Préparez la marque et le modèle si vous les avez.",
   ],
   peintre: [
     "Aérez la pièce et évitez de toucher les zones humides.",
-    "Protégez le sol/meubles si la peinture a coulé.",
-    "Si dégât des eaux : photos + ventilation (sans chauffer à fond).",
+    "Protégez le sol et les meubles si la peinture a coulé.",
+    "En cas de dégât des eaux : photos + ventilation (sans chauffer à fond).",
     "Listez les surfaces à traiter (murs/plafonds/pièces).",
   ],
 };
 const urgenceTips = urgenceTipsByMetier[metier.slug] ?? [
   "Sécurisez la zone et évitez toute manipulation risquée.",
-  "Si nécessaire, coupez eau/électricité de la zone concernée.",
+  "Si nécessaire, coupez l’eau et/ou l’électricité de la zone concernée.",
   "Prenez 1–2 photos/vidéos pour accélérer le diagnostic.",
 ];
 
@@ -117,16 +117,16 @@ const faq = [
       : `Oui. Intervention à ${ville.name} et alentours selon planning.`,
   },
   {
-    q: "Combien de temps pour être rappelé ?",
-    a: "En général rapidement aux horaires d’ouverture. En cas d’urgence, précisez-le : on vous confirme le délai.",
+    q: "Sous quel délai serez-vous rappelé ?",
+    a: "En général rapidement aux horaires d’ouverture. En cas d’urgence, précisez-le : nous vous confirmons le délai.",
   },
   {
     q: "Le devis est-il gratuit ?",
-    a: "Oui : on annonce le tarif avant intervention/travaux (hors cas très particuliers).",
+    a: "Oui : nous annonçons le tarif avant intervention/travaux (hors cas très particuliers).",
   },
   {
     q: "Quel est le prix ?",
-    a: "Le prix dépend de la complexité, de l’accès, du temps sur place et des pièces éventuelles. Après votre description (et une photo si possible), on vous donne une estimation puis on confirme avant d’intervenir.",
+    a: "Le prix dépend de la complexité, de l’accès, du temps sur place et des pièces éventuelles. Après votre description (et une photo si possible), nous vous donnons une estimation puis nous confirmons avant d’intervenir.",
   },
 ];
 
@@ -189,18 +189,18 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
             <div class="badge rounded-pill badge-default mb-2">Rappel rapide • Devis gratuit</div>
 
             <h2 class="display-6 fw-bold mb-3">
-              Besoin d’un {metierLC} à {ville.name} ?
+              Vous avez besoin d’un {metierLC} à {ville.name} ?
             </h2>
 
             <p class="text-muted mb-3">
-              Dépannage (panne, urgence), installation ou travaux : décris ton problème et on te confirme le délai + le tarif avant intervention.
-              Zone : {ville.name} et alentours.
+              Dépannage (panne, urgence), installation ou travaux : décrivez votre problème et nous vous confirmons le délai
+              et le tarif avant intervention. Zone : {ville.name} et alentours.
             </p>
 
             <ul class="iconlist ms-3 mb-4">
-              <li><i class="fa-solid fa-check text-smaller color"></i> Diagnostic clair + explication simple</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Diagnostic clair et explications simples</li>
               <li><i class="fa-solid fa-check text-smaller color"></i> Tarif annoncé avant de commencer</li>
-              <li><i class="fa-solid fa-check text-smaller color"></i> Intervention soignée (protection + finitions)</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Intervention soignée (protection et finitions)</li>
             </ul>
 
             <div class="d-flex flex-wrap gap-2">
@@ -216,7 +216,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
             </div>
 
             <div class="small text-muted mt-3">
-              Requêtes fréquentes : “{metierLC} {ville.name}”, “dépannage {metierLC} {ville.name}”, “urgence {metierLC} {ville.name}”.
+              Recherches fréquentes : “{metierLC} {ville.name}”, “dépannage {metierLC} {ville.name}”, “urgence {metierLC} {ville.name}”.
             </div>
           </div>
 
@@ -225,7 +225,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
               <div class="card-body p-4">
                 <h3 class="h5 mb-2">Demandes les plus fréquentes</h3>
                 <p class="small text-muted mb-3">
-                  Choisis la demande la plus proche : tu arrives sur une page dédiée.
+                  Choisissez la demande la plus proche : vous arrivez sur une page dédiée.
                 </p>
 
                 <div class="d-grid gap-2">
@@ -283,8 +283,10 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
           <>
             <div class="heading-block border-bottom-0 text-center">
               <div class="badge rounded-pill badge-default">Services</div>
-              <h3 class="text-transform-none ls-0">Autres demandes (selon besoin)</h3>
-              <p class="text-muted mb-0">Si tu ne trouves pas, décris simplement ton problème dans le formulaire.</p>
+              <h3 class="text-transform-none ls-0">Autres demandes (selon votre besoin)</h3>
+              <p class="text-muted mb-0">
+                Si vous ne trouvez pas, décrivez simplement votre problème dans le formulaire.
+              </p>
             </div>
 
             <div class="row mt-4 col-mb-20">
@@ -310,7 +312,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
             <div class="heading-block border-bottom-0 text-center">
               <div class="badge rounded-pill badge-default">Zone</div>
               <h3 class="text-transform-none ls-0">Intervention autour de {ville.name}</h3>
-              <p class="text-muted mb-0">On se déplace aussi dans les communes proches.</p>
+              <p class="text-muted mb-0">Nous intervenons aussi dans les communes proches.</p>
             </div>
 
             <div class="row col-mb-20 mt-4">
@@ -340,7 +342,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
 
                 <p class="text-muted mb-3">
                   Le prix dépend surtout de la complexité, de l’accès, du temps sur place et des pièces éventuelles.
-                  Dans tous les cas, on vous annonce le tarif <strong>avant</strong> de lancer l’intervention.
+                  Dans tous les cas, nous vous annonçons le tarif <strong>avant</strong> de lancer l’intervention.
                 </p>
 
                 <div class="row g-3 small">
@@ -353,9 +355,13 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
                   <div class="col-md-6">
                     <div class="p-3 border rounded">
                       ✅ <strong>Estimation réaliste</strong><br />
-                      Avec votre description + une photo si possible.
+                      Avec votre description et une photo si possible.
                     </div>
                   </div>
+                </div>
+
+                <div class="small text-muted mt-3">
+                  Astuce : pour une demande rapide, indiquez l’accès (maison/appartement), l’étage, et joignez une photo si possible.
                 </div>
               </div>
             </div>
@@ -406,7 +412,7 @@ const jsonLd = [breadcrumbJsonLd, faqJsonLd];
                 </div>
 
                 <p class="text-muted mb-3">
-                  Décris le problème (adresse, urgence, ce que tu constates). On te rappelle rapidement pour confirmer le délai et le prix.
+                  Décrivez le problème (adresse, urgence, ce que vous constatez). Nous vous rappelons rapidement pour confirmer le délai et le prix.
                 </p>
 
                 <div class="small text-muted">
