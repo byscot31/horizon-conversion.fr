@@ -4,15 +4,28 @@ const {
   title = "Demande de devis",
   subtitle = "Réponse rapide • Devis gratuit • Intervention locale",
   submitLabel = "Envoyer ma demande",
+  consentText = "En soumettant, vous acceptez d’être recontacté afin de traiter votre demande.",
+  // optionnel : override si besoin
+  portalId: portalIdProp,
+  formGuid: formGuidProp,
 } = Astro.props;
 
-const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID ?? "";
-const formGuid = import.meta.env.PUBLIC_HUBSPOT_FORM_GUID ?? "";
-const region = import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1";
+const portalId =
+  portalIdProp ??
+  import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID ??
+  "147409378";
+
+const formGuid =
+  formGuidProp ??
+  import.meta.env.PUBLIC_HUBSPOT_FORM_GUID ??
+  "a1a5dfd9-d905-454f-b09c-5a8ae22b3d35";
 
 if (!portalId || !formGuid) {
   console.warn("[HubspotCustomForm] portalId/formGuid manquants.");
 }
+
+// IDs uniques (évite collisions si plusieurs forms sur une page)
+const uid = `hc-${String(formGuid).slice(0, 8)}-${Math.random().toString(16).slice(2, 8)}`;
 ---
 
 <div class="card shadow-sm">
@@ -22,36 +35,41 @@ if (!portalId || !formGuid) {
 
     <div class="form-result alert" hidden></div>
 
-    <form class="js-hs-custom-form" novalidate>
+    <form class="js-hs-custom-form" novalidate data-hs-uid={uid}>
       <div class="row g-3">
 
         <div class="col-md-6">
-          <label class="form-label" for="hc-lastname">Nom *</label>
-          <input id="hc-lastname" name="lastname" class="form-control" autocomplete="family-name" required />
+          <label class="form-label" for={`${uid}-lastname`}>Nom *</label>
+          <input id={`${uid}-lastname`} name="lastname" class="form-control" autocomplete="family-name" required />
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="hc-firstname">Prénom *</label>
-          <input id="hc-firstname" name="firstname" class="form-control" autocomplete="given-name" required />
+          <label class="form-label" for={`${uid}-firstname`}>Prénom *</label>
+          <input id={`${uid}-firstname`} name="firstname" class="form-control" autocomplete="given-name" required />
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="hc-phone">Téléphone *</label>
-          <input id="hc-phone" name="phone" class="form-control" autocomplete="tel" required />
+          <label class="form-label" for={`${uid}-phone`}>Téléphone *</label>
+          <input id={`${uid}-phone`} name="phone" class="form-control" autocomplete="tel" required />
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="hc-email">Email</label>
-          <input id="hc-email" name="email" type="email" class="form-control" autocomplete="email" />
+          <label class="form-label" for={`${uid}-email`}>Email</label>
+          <input id={`${uid}-email`} name="email" type="email" class="form-control" autocomplete="email" />
         </div>
 
         <div class="col-12">
-          <label class="form-label" for="hc-message">Votre demande *</label>
-          <textarea id="hc-message" name="message" class="form-control" rows="4" required
+          <label class="form-label" for={`${uid}-message`}>Votre demande *</label>
+          <textarea
+            id={`${uid}-message`}
+            name="message"
+            class="form-control"
+            rows="4"
+            required
             placeholder="Ex : fuite sous évier, adresse, urgence, créneau souhaité…"></textarea>
         </div>
 
-        <!-- Hidden tracking (doivent exister dans HubSpot si tu veux les stocker) -->
+        <!-- Hidden tracking -->
         <input type="hidden" name="utm_source" />
         <input type="hidden" name="utm_medium" />
         <input type="hidden" name="utm_campaign" />
@@ -63,27 +81,25 @@ if (!portalId || !formGuid) {
         <input type="hidden" name="hc_metier" />
         <input type="hidden" name="hc_service" />
 
-        <!-- Honeypot -->
+        <!-- Honeypot (ne pas utiliser un name existant dans HubSpot) -->
         <div style="position:absolute;left:-5000px;" aria-hidden="true">
-          <label for="hc-company">Company</label>
-          <input id="hc-company" name="company" tabindex="-1" autocomplete="off" />
+          <label for={`${uid}-website`}>Website</label>
+          <input id={`${uid}-website`} name="hs_website" tabindex="-1" autocomplete="off" />
         </div>
 
         <div class="col-12">
           <button class="button button-rounded w-100 text-transform-none ls-0 m-0 js-submit" type="submit">
             {submitLabel}
           </button>
-          <div class="small text-muted mt-2">
-            En soumettant, vous acceptez d’être recontacté pour traiter votre demande.
-          </div>
+          <div class="small text-muted mt-2">{consentText}</div>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<script is:inline define:vars={{ portalId, formGuid, region }}>
-  const $ = (sel, root=document) => root.querySelector(sel);
+<script is:inline define:vars={{ portalId, formGuid, consentText }}>
+  const qs = (sel, root=document) => root.querySelector(sel);
 
   function getCookie(name) {
     const v = `; ${document.cookie}`;
@@ -98,13 +114,11 @@ if (!portalId || !formGuid) {
 
     let ville = "", metier = "", service = "";
 
-    // /villes/:ville/:metier/:service?
     if (parts[0] === "villes") {
       ville = parts[1] || "";
       metier = parts[2] || "";
       service = parts[3] || "";
     } else {
-      // fallback /:metier/:service?
       metier = parts[0] || "";
       service = parts[1] || "";
     }
@@ -152,47 +166,67 @@ if (!portalId || !formGuid) {
     set("hc_service", ctx.service);
   }
 
+  function getResultBox(form) {
+    return form.closest(".card")?.querySelector(".form-result");
+  }
+
   async function submitToHubSpot(form) {
-    const result = $(".form-result", form.parentElement);
-    const btn = $(".js-submit", form);
+    const result = getResultBox(form);
+    const btn = qs(".js-submit", form);
 
     // Honeypot
-    const hp = form.querySelector('[name="company"]');
+    const hp = form.querySelector('[name="hs_website"]');
     if (hp && hp.value) return;
 
     const data = new FormData(form);
 
-    // Required fields
+    // Validation minimale
     const required = ["firstname","lastname","phone","message"];
-    for (const r of required) {
-      if (!String(data.get(r) || "").trim()) {
+    const ok = required.every((r) => String(data.get(r) || "").trim());
+    if (!ok) {
+      if (result) {
         result.hidden = false;
         result.className = "form-result alert alert-danger";
         result.textContent = "Merci de remplir les champs obligatoires.";
-        return;
       }
+      return;
     }
 
     const fields = [];
     for (const [name, value] of data.entries()) {
-      if (name === "company") continue;
+      if (name === "hs_website") continue;
       fields.push({ name, value: String(value ?? "") });
     }
 
     const hutk = getCookie("hubspotutk");
+
+    // Endpoint officiel (CORS OK)
+    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`; // :contentReference[oaicite:1]{index=1}
+
     const payload = {
+      submittedAt: Date.now(),
       fields,
       context: {
         pageUri: window.location.href,
         pageName: document.title,
         hutk: hutk || undefined,
+      },
+      // RGPD : indispensable si votre formulaire HubSpot a le consentement activé
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: consentText,
+          communications: []
+        }
       }
     };
 
-    // Endpoint v3 EU
-    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
-
-    btn && (btn.disabled = true);
+    if (btn) btn.disabled = true;
+    if (result) {
+      result.hidden = false;
+      result.className = "form-result alert alert-info";
+      result.textContent = "Envoi en cours…";
+    }
 
     try {
       const res = await fetch(endpoint, {
@@ -202,33 +236,48 @@ if (!portalId || !formGuid) {
       });
 
       if (!res.ok) {
-        const txt = await res.text();
+        const txt = await res.text().catch(() => "");
         throw new Error(txt || `HTTP ${res.status}`);
       }
 
       form.reset();
       setHidden(form);
 
-      result.hidden = false;
-      result.className = "form-result alert alert-success";
-      result.textContent = "✅ Demande envoyée. On vous recontacte rapidement.";
+      if (result) {
+        result.hidden = false;
+        result.className = "form-result alert alert-success";
+        result.textContent = "✅ Demande envoyée. Nous vous recontactons rapidement.";
+      }
     } catch (e) {
-      result.hidden = false;
-      result.className = "form-result alert alert-danger";
-      result.textContent = "❌ Erreur d’envoi. Réessayez ou appelez-nous.";
       console.error("[HubspotCustomForm] submit error:", e);
+      if (result) {
+        result.hidden = false;
+        result.className = "form-result alert alert-danger";
+        result.textContent = "❌ Erreur d’envoi. Veuillez réessayer ou nous appeler.";
+      }
     } finally {
-      btn && (btn.disabled = false);
+      if (btn) btn.disabled = false;
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".js-hs-custom-form");
-    if (!form) return;
-    setHidden(form);
-    form.addEventListener("submit", (ev) => {
-      ev.preventDefault();
-      submitToHubSpot(form);
+  function bindAllForms() {
+    document.querySelectorAll("form.js-hs-custom-form").forEach((form) => {
+      if (form.dataset.hsBound === "1") return;
+      form.dataset.hsBound = "1";
+
+      setHidden(form);
+
+      form.addEventListener("submit", (ev) => {
+        ev.preventDefault();
+        submitToHubSpot(form);
+      });
     });
-  });
+  }
+
+  // IMPORTANT :
+  // - exécute tout de suite
+  // - + re-bind après navigation Astro (view transitions)
+  bindAllForms();
+  document.addEventListener("DOMContentLoaded", bindAllForms);
+  document.addEventListener("astro:page-load", bindAllForms);
 </script>
