@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "senlis",
+    "around": ["chantilly","gouvieux","lamorlaye","coye-la-foret","orry-la-ville","plailly","la-chapelle-en-serval","pont-sainte-maxence"]
+  },
+  {
+    "slug": "chantilly",
+    "around": ["gouvieux","lamorlaye","coye-la-foret","senlis","orry-la-ville","plailly","saint-leu-d-esserent","creil"]
+  },
+  {
+    "slug": "creil",
+    "around": ["nogent-sur-oise","montataire","villers-saint-paul","saint-leu-d-esserent","gouvieux","chantilly","pont-sainte-maxence","verberie"]
+  },
+  {
+    "slug": "persan",
+    "around": ["beaumont-sur-oise","champagne-sur-oise","bernes-sur-oise","bruyeres-sur-oise","mours","nointel","l-isle-adam","parmain"]
+  },
+  {
+    "slug": "fosses",
+    "around": ["survilliers","marly-la-ville","louvres","roissy-en-france","saint-witz","luzarches","viarmes","goussainville"]
+  },
+  {
+    "slug": "l-isle-adam",
+    "around": ["parmain","mery-sur-oise","valmondois","butry-sur-oise","auvers-sur-oise","beaumont-sur-oise","persan","nointel"]
+  }
+]

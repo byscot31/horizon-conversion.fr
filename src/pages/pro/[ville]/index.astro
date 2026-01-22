@@ -1,0 +1,530 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HubspotCustomForm from "@components/HubspotCustomForm.astro";
+import villes from "@data/villes.json";
+import PRO_CITY_CLUSTERS from "@data/pro_city_clusters.json";
+
+/**
+ * /pro/[ville]/index.astro
+ * Pages locales “PRO” : Consultant webmarketing / génération de leads
+ * Ton : VOUS
+ */
+
+// 6 clusters PRO (slugs 100% existants dans votre villes.json)
+const PRO_CITY_CLUSTERS = [
+  {
+    slug: "senlis",
+    around: [
+      "chantilly",
+      "gouvieux",
+      "lamorlaye",
+      "coye-la-foret",
+      "orry-la-ville",
+      "plailly",
+      "la-chapelle-en-serval",
+      "pont-sainte-maxence",
+    ],
+  },
+  {
+    slug: "chantilly",
+    around: [
+      "gouvieux",
+      "lamorlaye",
+      "coye-la-foret",
+      "senlis",
+      "orry-la-ville",
+      "plailly",
+      "saint-leu-d-esserent",
+      "creil",
+    ],
+  },
+  {
+    slug: "creil",
+    around: [
+      "nogent-sur-oise",
+      "montataire",
+      "villers-saint-paul",
+      "saint-leu-d-esserent",
+      "gouvieux",
+      "chantilly",
+      "pont-sainte-maxence",
+      "verberie",
+    ],
+  },
+  {
+    slug: "persan",
+    around: [
+      "beaumont-sur-oise",
+      "champagne-sur-oise",
+      "bernes-sur-oise",
+      "bruyeres-sur-oise",
+      "mours",
+      "nointel",
+      "l-isle-adam",
+      "parmain",
+    ],
+  },
+  {
+    slug: "fosses",
+    around: [
+      "survilliers",
+      "marly-la-ville",
+      "louvres",
+      "roissy-en-france",
+      "saint-witz",
+      "luzarches",
+      "viarmes",
+      "goussainville",
+    ],
+  },
+  {
+    slug: "l-isle-adam",
+    around: [
+      "parmain",
+      "mery-sur-oise",
+      "valmondois",
+      "butry-sur-oise",
+      "auvers-sur-oise",
+      "beaumont-sur-oise",
+      "persan",
+      "nointel",
+    ],
+  },
+];
+
+export function getStaticPaths() {
+  return PRO_CITY_CLUSTERS.map((c) => ({ params: { ville: c.slug } }));
+}
+
+const { ville: villeSlug } = Astro.params;
+
+const cluster = PRO_CITY_CLUSTERS.find((c) => c.slug === villeSlug);
+if (!cluster) throw new Error(`Ville /pro introuvable: ${villeSlug}`);
+
+const ville = villes.find((v) => v.slug === villeSlug);
+if (!ville) throw new Error(`Ville introuvable dans villes.json: ${villeSlug}`);
+
+// Helpers
+const byNameFR = (a, b) => String(a.name).localeCompare(String(b.name), "fr");
+const findCity = (slug) => villes.find((v) => v.slug === slug);
+
+// 8 alentours (robuste : cluster + fallback ville.around si besoin)
+const aroundSlugs = Array.from(
+  new Set([...(cluster.around ?? []), ...(ville.around ?? [])])
+).filter((s) => s && s !== ville.slug).slice(0, 8);
+
+const aroundCities = aroundSlugs.map(findCity).filter(Boolean);
+
+// Autres villes PRO (maillage)
+const otherProCities = PRO_CITY_CLUSTERS
+  .map((c) => findCity(c.slug))
+  .filter(Boolean)
+  .filter((c) => c.slug !== ville.slug)
+  .sort(byNameFR);
+
+// ENV
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? phone;
+const telHref = `tel:${String(phone).replace(/\s+/g, "")}`;
+
+// OFFRES (maillage)
+const offers = [
+  {
+    key: "seo-local",
+    title: "SEO local",
+    subtitle: "Être visible sur Google sur des requêtes à intention.",
+    bullets: [
+      "Pages locales (ville + services) + maillage interne",
+      "Optimisation Google Business Profile",
+      "Suivi positions + amélioration continue",
+    ],
+    // vous pourrez créer ces pages ensuite
+    href: "/pro/seo-local/",
+  },
+  {
+    key: "ads",
+    title: "Google Ads / Meta Ads",
+    subtitle: "Des leads rapidement grâce à la publicité.",
+    bullets: [
+      "Campagnes orientées appels & formulaires",
+      "Pages d’atterrissage (CRO) + tracking",
+      "Optimisations hebdomadaires (budget maîtrisé)",
+    ],
+    href: "/pro/google-ads/",
+  },
+  {
+    key: "cro",
+    title: "Optimisation conversion (CRO)",
+    subtitle: "Transformer plus de visites en demandes.",
+    bullets: [
+      "Audit UX + priorisation (quick wins)",
+      "Optimisation des formulaires & parcours",
+      "Mesure (UTM, events) + itérations",
+    ],
+    href: "/pro/cro/",
+  },
+];
+
+// SEO
+const dept = ville.dept;
+const canonical = `/pro/${ville.slug}/`;
+
+const title = `Consultant webmarketing à ${ville.name} (${dept}) — Acquisition de leads | ${brand}`;
+const description =
+  `Consultant webmarketing à ${ville.name} : SEO local, Google Ads/Meta Ads et optimisation de conversion pour générer des leads (appels & demandes). Intervention ${regionLabel} + alentours. Devis gratuit.`.slice(0, 160);
+
+// Requêtes (intention) à afficher “proprement”
+const intentQueries = [
+  `consultant webmarketing ${ville.name.toLowerCase()}`,
+  `consultant marketing digital ${ville.name.toLowerCase()}`,
+  `agence webmarketing ${ville.name.toLowerCase()}`,
+  `consultant acquisition ${ville.name.toLowerCase()}`,
+  `agence génération de leads ${ville.name.toLowerCase()}`,
+  `génération de prospects ${ville.name.toLowerCase()}`,
+  `consultant freelance marketing digital ${ville.name.toLowerCase()}`,
+  `consultant webmarketing ${dept}`,
+];
+
+// FAQ
+const aroundNames = aroundCities.map((c) => c.name).join(", ");
+
+const faq = [
+  {
+    q: `Intervenez-vous à ${ville.name} et autour ?`,
+    a: `Oui. Nous intervenons sur ${ville.name} et dans les communes proches (${aroundNames || "secteur proche"}).`,
+  },
+  {
+    q: "Travaillez-vous avec des artisans, indépendants, TPE et PME ?",
+    a: "Oui. L’objectif est simple : générer des demandes (appels et formulaires) via un plan d’acquisition adapté à votre activité.",
+  },
+  {
+    q: "Quel levier choisir : SEO, Ads ou CRO ?",
+    a: "Cela dépend de votre urgence, de votre marché et de votre budget. Nous pouvons démarrer par un audit rapide puis prioriser le levier le plus rentable.",
+  },
+  {
+    q: "En combien de temps peut-on obtenir des résultats ?",
+    a: "La publicité peut générer des demandes rapidement. Le SEO est plus progressif. Dans tous les cas, un plan d’action est annoncé avant lancement.",
+  },
+  {
+    q: "Combien cela coûte-t-il ?",
+    a: "Le tarif dépend du périmètre (site, concurrence, zones, objectifs) et, pour la publicité, du budget média. Un devis est proposé avant démarrage, sans surprise.",
+  },
+  {
+    q: "Proposez-vous un suivi ?",
+    a: "Oui : suivi mensuel (reporting, optimisations, recommandations) et points réguliers pour piloter la performance.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: "/" },
+    { "@type": "ListItem", position: 2, name: "Pro", item: "/pro/" },
+    { "@type": "ListItem", position: 3, name: ville.name, item: canonical },
+  ],
+};
+
+// “ProfessionalService” light (sans surpromettre)
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: `${brand} — Consultant webmarketing`,
+  url: canonical,
+  telephone: phone,
+  areaServed: [
+    { "@type": "AdministrativeArea", name: regionLabel },
+    { "@type": "City", name: ville.name },
+    ...aroundCities.map((c) => ({ "@type": "City", name: c.name })),
+  ],
+  serviceType: ["SEO local", "Google Ads", "Meta Ads", "Optimisation conversion (CRO)"],
+};
+
+const jsonLd = [breadcrumbJsonLd, faqJsonLd, serviceJsonLd];
+---
+
+<Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <!-- HERO -->
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Pro</div>
+          <h1>Consultant webmarketing à {ville.name}</h1>
+          <p class="lead mb-0">
+            Acquisition de leads (appels & demandes) — {regionLabel}
+          </p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/pro/">Pro</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{ville.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro + CTA -->
+        <div class="row align-items-start g-4">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default mb-2">Leads • ROI • Suivi</div>
+
+            <h2 class="display-6 fw-bold mb-3">
+              Générez plus de demandes à {ville.name} (SEO, Ads, conversion)
+            </h2>
+
+            <p class="text-muted mb-3">
+              Vous recherchez un <strong>consultant webmarketing</strong> pour générer des leads (appels et formulaires) ?
+              J’accompagne les <strong>artisans</strong>, <strong>commerces</strong>, <strong>indépendants</strong> et <strong>TPE/PME</strong> sur {regionLabel},
+              avec une approche orientée résultats : acquisition + optimisation + suivi.
+            </p>
+
+            <ul class="iconlist ms-3 mb-4">
+              <li><i class="fa-solid fa-check text-smaller color"></i> Plan d’action clair (avant lancement)</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Tracking (UTM / événements) pour mesurer les leads</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Options de suivi mensuel (pilotage & optimisations)</li>
+            </ul>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a href={telHref} class="button button-rounded button-large text-transform-none ls-0 m-0">
+                📞 Appeler — {phoneDisplay}
+              </a>
+              <a href="#devis" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0 m-0">
+                📝 Demander un devis
+              </a>
+              <a href="#offres" class="button button-border button-rounded button-large text-transform-none ls-0 m-0">
+                Voir les offres
+              </a>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Secteur : {ville.name} ({ville.dept}) • Autour : {aroundCities.map((c) => c.name).slice(0, 6).join(", ")}{aroundCities.length > 6 ? "…" : ""}
+            </div>
+
+            <!-- Requêtes “intention” (propre, sans spam) -->
+            <details class="border rounded-3 p-3 mt-4">
+              <summary style="cursor:pointer;">
+                <span class="fw-semibold">Recherches fréquentes à {ville.name}</span>
+                <span class="text-muted small ms-2">(intention : trouver un prestataire)</span>
+              </summary>
+              <div class="pt-2 small text-muted">
+                <ul class="mb-0">
+                  {intentQueries.map((q) => <li>{q}</li>)}
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Ce que vous obtenez</h3>
+                <div class="row g-3 small">
+                  <div class="col-12"><div class="p-3 border rounded">✅ Diagnostic & recommandations actionnables</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Mise en place (SEO / Ads / CRO) selon priorité</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Suivi possible (reporting + optimisations)</div></div>
+                  <div class="col-12"><div class="p-3 border rounded">✅ Objectif : leads mesurables (appels & demandes)</div></div>
+                </div>
+                <hr class="my-3" />
+                <p class="small text-muted mb-0">
+                  Vous hésitez sur le levier ? Nous démarrons par une analyse rapide, puis nous priorisons ce qui a le plus d’impact.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- OFFRES -->
+        <div id="offres" class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Offres</div>
+          <h3 class="text-transform-none ls-0">3 offres pour générer des leads à {ville.name}</h3>
+          <p class="text-muted mb-0">
+            SEO local (durable), Ads (rapide), CRO (conversion). Chaque offre peut inclure une option de suivi.
+          </p>
+        </div>
+
+        <div class="row mt-4 col-mb-30">
+          {offers.map((o) => (
+            <div class="col-lg-4 col-md-6 d-flex">
+              <div class="card h-100 w-100 shadow-sm">
+                <div class="card-body p-4">
+                  <div class="badge rounded-pill badge-default mb-2">{o.title}</div>
+                  <h3 class="h5 mb-2">{o.subtitle}</h3>
+
+                  <ul class="iconlist ms-3 mb-3">
+                    {o.bullets.map((b) => (
+                      <li><i class="fa-solid fa-check text-smaller color"></i> {b}</li>
+                    ))}
+                  </ul>
+
+                  <div class="d-flex flex-wrap gap-2">
+                    <a class="button button-rounded button-small m-0" href={o.href}>
+                      Découvrir l’offre
+                    </a>
+                    <a class="button button-border button-rounded button-small m-0" href="#devis">
+                      Demander un devis
+                    </a>
+                  </div>
+
+                  <div class="small text-muted mt-3">
+                    Pages locales : <a href={canonical}>{ville.name}</a> → offre → suivi (option).
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- PRIX (ultra prudent) -->
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="badge rounded-pill badge-default mb-2">Tarifs</div>
+                <h3 class="h5 mb-2">Prix : une fourchette annoncée avant démarrage</h3>
+                <p class="text-muted mb-0">
+                  Le coût dépend de la complexité (site, concurrence, zones, objectifs) et, pour la publicité, du budget média.
+                  Dans tous les cas, <strong>nous annonçons le périmètre et le prix avant de démarrer</strong>, avec une approche très prudente
+                  et orientée ROI. Une option de <strong>suivi</strong> (reporting + optimisations) peut être ajoutée si vous souhaitez piloter la performance dans le temps.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- ZONE : 8 alentours -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Zone</div>
+          <h3 class="text-transform-none ls-0">Intervention autour de {ville.name}</h3>
+          <p class="text-muted mb-0">
+            Pour renforcer le SEO local et couvrir davantage de demandes, nous publions aussi des pages par secteur.
+          </p>
+        </div>
+
+        <div class="row col-mb-20 mt-4">
+          {aroundCities.map((c) => (
+            <div class="col-lg-3 col-md-4 col-6">
+              <a class="card h-100 text-decoration-none" href={`/pro/${c.slug}/`}>
+                <div class="card-body p-3">
+                  <div class="fw-semibold">{c.name}</div>
+                  <div class="small text-muted">{c.dept} • {c.zone}</div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {otherProCities.length ? (
+          <>
+            <div class="clear line my-6"></div>
+
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Maillage</div>
+              <h3 class="text-transform-none ls-0">Autres zones “Pro”</h3>
+              <p class="text-muted mb-0">Accédez aux pages locales pour renforcer votre présence régionale.</p>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
+              {otherProCities.map((c) => (
+                <a class="btn btn-outline-secondary btn-sm" href={`/pro/${c.slug}/`}>
+                  {c.name}
+                </a>
+              ))}
+              <a class="btn btn-outline-secondary btn-sm" href="/pro/">Voir toutes les pages Pro</a>
+            </div>
+          </>
+        ) : null}
+
+        <div class="clear line my-6"></div>
+
+        <!-- FAQ -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">FAQ</div>
+          <h3 class="text-transform-none ls-0">Questions fréquentes</h3>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="faqs">
+              {faq.map((f) => (
+                <div class="toggle faq pb-3 mb-4">
+                  <div class="toggle-header">
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed bi-question-circle"></i>
+                      <i class="toggle-open bi-question-circle"></i>
+                    </div>
+                    <div class="toggle-title fw-semibold ps-1">{f.q}</div>
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                      <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                    </div>
+                  </div>
+                  <div class="toggle-content text-black-50 ps-4">
+                    {f.a}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- FORM -->
+        <div id="devis" class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-between align-items-start g-4">
+              <div class="col-lg-5">
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Devis</div>
+                  <h2 class="text-transform-none ls-0 mb-0">Demande rapide — {ville.name}</h2>
+                </div>
+                <p class="text-muted">
+                  Décrivez votre activité, votre zone et votre objectif (appels, formulaires, ventes). Vous serez recontacté rapidement.
+                </p>
+
+                <div class="small text-muted">
+                  Besoin immédiat ? <a href={telHref}>Appelez le {phoneDisplay}</a>.
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <HubspotCustomForm
+                  title={`Devis webmarketing — ${ville.name}`}
+                  subtitle={`SEO local • Ads • CRO — ${ville.name} (${ville.dept}) • Tracking automatique`}
+                  submitLabel="Envoyer ma demande"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
