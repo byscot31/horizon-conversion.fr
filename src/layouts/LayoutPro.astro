@@ -1,0 +1,405 @@
+---
+// src/layouts/LayoutPro.astro
+/**
+ * LayoutPro.astro — SEO-ready (Pro)
+ * Objectif : distinguer la partie "pro" (B2B) du site "artisans" (B2C),
+ * tout en gardant la base technique (canonical, robots, OG, JSON-LD).
+ *
+ * Usage :
+ * <LayoutPro title="..." description="..." canonical="/pro/..." jsonLd={[...]} noindex={false}>
+ *   ...page...
+ * </LayoutPro>
+ */
+
+import MainMenuPro from "@components/MainMenuPro.astro";
+
+const {
+  title = "Horizon Conversion — Consultant webmarketing",
+  description = "Consultant webmarketing : acquisition de leads (SEO local, Google Ads) et optimisation conversion (CRO) dans l’Oise (60) et le Val-d’Oise (95).",
+  canonical,
+  ogImage = "/images/og-default.jpg",
+  noindex = false,
+  jsonLd = null, // object ou array
+} = Astro.props;
+
+// ENV
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL ??
+  (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
+
+const BRAND_NAME = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+
+// PRO ENV (optionnels)
+const REGION_LABEL = import.meta.env.PUBLIC_REGION_LABEL ?? "Oise (60) & Val-d’Oise (95)";
+const PRO_PHONE = import.meta.env.PUBLIC_PRO_PHONE ?? import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const PRO_PHONE_DISPLAY = import.meta.env.PUBLIC_PRO_PHONE_DISPLAY ?? import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 00 00 00 00";
+
+// Helpers
+const stripUtm = (urlStr) => {
+  try {
+    const u = new URL(urlStr);
+    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach((k) => u.searchParams.delete(k));
+    u.hash = "";
+    return u.toString();
+  } catch {
+    return urlStr;
+  }
+};
+
+const ensureTrailingSlash = (urlStr) => {
+  try {
+    const u = new URL(urlStr);
+    if (!u.pathname.endsWith("/")) u.pathname += "/";
+    return u.toString();
+  } catch {
+    return urlStr;
+  }
+};
+
+const canonicalRaw =
+  canonical ??
+  (SITE_URL ? `${SITE_URL}${Astro.url.pathname}` : Astro.url.toString());
+
+const canonicalUrl = ensureTrailingSlash(stripUtm(canonicalRaw));
+
+const ogImageUrl = ogImage?.startsWith("http")
+  ? ogImage
+  : (SITE_URL ? `${SITE_URL}${ogImage}` : ogImage);
+
+const telHref = `tel:${String(PRO_PHONE).replace(/\s+/g, "")}`;
+
+// JSON-LD: accepte object/array, sinon null
+const jsonLdPayload =
+  Array.isArray(jsonLd) ? jsonLd :
+  (jsonLd && typeof jsonLd === "object") ? jsonLd :
+  null;
+
+// Robots : noindex MAIS follow pour conserver le maillage interne crawlable
+const robotsContent = noindex ? "noindex,follow" : "index,follow";
+
+// UX helpers
+const pathname = Astro.url?.pathname || "/";
+const isPro = pathname.startsWith("/pro");
+const proNav = [
+  { href: "/pro/", label: "Accueil Pro" },
+  { href: "/pro/seo-local/", label: "SEO local" },
+  { href: "/pro/google-ads/", label: "Google Ads" },
+  { href: "/pro/cro/", label: "CRO" },
+];
+
+const isActive = (href) => pathname === href || pathname.startsWith(href);
+---
+
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="author" content={BRAND_NAME} />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Canonical + robots -->
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content={robotsContent} />
+
+  <!-- Hreflang (FR) -->
+  <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={BRAND_NAME} />
+  {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+  <title>{title}</title>
+
+  <!-- JSON-LD (optionnel) -->
+  {jsonLdPayload && (
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLdPayload)}
+    </script>
+  )}
+
+  <!-- Slot head pour méta spécifiques (FAQPage, BreadcrumbList, etc.) -->
+  <slot name="head" />
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/css/font-icons.css" />
+  <link rel="stylesheet" href="/css/components/bs-switches.css" />
+  <link rel="stylesheet" href="/hc.css" />
+  <link rel="stylesheet" href="/css/custom.css" />
+</head>
+
+<body
+  class="stretched page-transition"
+  data-loader="2"
+  data-animation-in="fadeIn"
+  data-speed-in="1500"
+  data-animation-out="fadeOut"
+  data-speed-out="800"
+>
+  <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="full-header header-size-md">
+      <div id="header-wrap">
+        <div class="container">
+          <div class="header-row">
+
+            <!-- Logo (pro : renvoie vers /pro/) -->
+            <div id="logo">
+              <a href={isPro ? "/pro/" : "/"} class="standard-logo py-2">
+                <img src="/images/logo.svg" alt={`${BRAND_NAME} - Consultant webmarketing`} />
+              </a>
+            </div>
+
+            <!-- Header misc (desktop) -->
+            <div class="header-misc d-none d-lg-flex align-items-center gap-2">
+              <a href={telHref} class="btn btn-outline-secondary btn-sm">{PRO_PHONE_DISPLAY}</a>
+              <a href="/pro/#diagnostic" class="button button-rounded button-small m-0">Diagnostic gratuit</a>
+            </div>
+
+            <!-- Mobile Menu Trigger -->
+            <div class="primary-menu-trigger">
+              <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+                <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+              </button>
+            </div>
+
+            <!-- Primary Navigation -->
+            <nav class="primary-menu mobile-menu-off-canvas">
+              <!-- On conserve le menu global (utile pour revenir aux pages “artisans”),
+                   mais on ajoute une sous-nav “Pro” sous le header -->
+              <MainMenuPro slot="header" />
+            </nav>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Sous-nav PRO (simple, très lisible, et renforce le maillage interne Pro) -->
+      <div class="border-top" style="background: #fff;">
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-between py-2 flex-wrap gap-2">
+            <div class="small text-muted">
+              <strong class="text-dark">Espace Pro :</strong> acquisition de leads • SEO local • Google Ads • CRO • {REGION_LABEL}
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              {proNav.map((it) => (
+                <a
+                  href={it.href}
+                  class={`btn btn-sm ${isActive(it.href) ? "btn-primary" : "btn-outline-secondary"}`}
+                >
+                  {it.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-wrap-clone"></div>
+    </header>
+
+    <slot />
+
+    <!-- Footer PRO -->
+    <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+      <div class="container">
+        <div class="footer-widgets-wrap pb-5">
+          <div class="row col-mb-50 align-items-start">
+
+            <!-- Brand / Pitch (PRO) -->
+            <div class="col-lg-5">
+              <div class="widget">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <img src="/images/logo.svg" alt="Horizon Conversion" style="height:46px; width:auto;" loading="lazy">
+                  <div class="small text-muted">
+                    <strong class="d-block text-dark">Consultant webmarketing</strong>
+                    <span>{REGION_LABEL}</span>
+                  </div>
+                </div>
+
+                <p class="mb-3 text-muted" style="max-width: 520px;">
+                  Vous cherchez un <strong>consultant marketing digital</strong> ou une <strong>agence webmarketing</strong>
+                  pour générer des leads ? Je vous aide à obtenir <strong>plus d’appels</strong> et <strong>plus de demandes</strong>
+                  via <strong>SEO local</strong>, <strong>Google Ads</strong> (SEA) et <strong>optimisation conversion (CRO)</strong>.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/pro/#diagnostic" class="button button-rounded button-small m-0">📝 Diagnostic gratuit</a>
+                  <a href={telHref} class="button button-border button-rounded button-small m-0">📞 Appeler</a>
+                  <a href="/" class="button button-light button-rounded button-small bg-white border text-dark m-0">↩︎ Espace artisans</a>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="row g-3 small">
+                  <div class="col-12 col-sm-6">
+                    <div class="p-3 border rounded-3 bg-white">
+                      ✅ Tracking appels & formulaires
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <div class="p-3 border rounded-3 bg-white">
+                      ✅ Optimisation continue (option)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation PRO -->
+            <div class="col-lg-4">
+              <div class="widget">
+                <h4 class="text-transform-none ls-0 mb-3">Accès rapide (Pro)</h4>
+
+                <div class="row g-4">
+                  <div class="col-6 widget_links">
+                    <ul class="list-unstyled mb-0">
+                      <li><a href="/pro/">Accueil Pro</a></li>
+                      <li><a href="/pro/seo-local/">SEO local</a></li>
+                      <li><a href="/pro/google-ads/">Google Ads</a></li>
+                      <li><a href="/pro/cro/">CRO</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-6 widget_links">
+                    <ul class="list-unstyled mb-0">
+                      <li><a href="/contact/">Contact (artisans)</a></li>
+                      <li><a href="/villes/">Villes (artisans)</a></li>
+                      <li><a href="/metiers/">Métiers (artisans)</a></li>
+                      <li><a href="/travaux/">Réalisations</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="small text-muted">
+                  Astuce : si vous voulez des leads rapidement, commencez par <a href="/pro/google-ads/">Google Ads</a>.
+                  Si vous cherchez une visibilité durable, <a href="/pro/seo-local/">SEO local</a>.
+                  Si vous avez déjà du trafic, <a href="/pro/cro/">CRO</a>.
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact PRO -->
+            <div class="col-lg-3">
+              <div class="widget">
+                <h4 class="text-transform-none ls-0 mb-3">Contact Pro</h4>
+
+                <div class="feature-box fbox-plain fbox-sm align-items-center mb-3">
+                  <div class="fbox-icon">
+                    <i class="bi-telephone text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted small">Téléphone</span><br>
+                    <a href={telHref} class="text-dark text-decoration-none">
+                      <strong class="h5 d-block mb-0">{PRO_PHONE_DISPLAY}</strong>
+                    </a>
+                    <div class="small text-muted">Réponse rapide</div>
+                  </div>
+                </div>
+
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-envelope text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted small">Demande en ligne</span><br>
+                    <a href="/pro/#diagnostic" class="text-dark text-decoration-none">
+                      <strong class="h6 d-block mb-0">Diagnostic gratuit</strong>
+                    </a>
+                    <div class="small text-muted">Décrivez votre objectif, je vous réponds</div>
+                  </div>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/pro/#diagnostic" class="btn btn-outline-secondary btn-sm">📝 Diagnostic</a>
+                  <a href="/pro/seo-local/" class="btn btn-outline-secondary btn-sm">📍 SEO local</a>
+                  <a href="/pro/google-ads/" class="btn btn-outline-secondary btn-sm">📣 Google Ads</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyrights -->
+      <div
+        id="copyrights"
+        style="background: url('/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 60px;"
+      >
+        <div class="container">
+          <div class="row justify-content-between align-items-center col-mb-30">
+
+            <div class="col-12 col-lg-auto text-center text-lg-start">
+              <div class="small text-contrast-600">
+                © <span id="js-year"></span> {BRAND_NAME} — Tous droits réservés.
+              </div>
+              <div class="copyright-links small mt-1">
+                <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+                <span class="mx-1">·</span>
+                <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+                <span class="mx-1">·</span>
+                <a href="/cookies/" class="text-contrast-600">Cookies</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+              <div class="small text-contrast-600">
+                Zone : <a class="text-contrast-600" href="/pro/">{REGION_LABEL}</a>
+                <span class="mx-2">•</span>
+                <a class="text-contrast-600" href="/pro/#diagnostic">Demander un diagnostic</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <script is:inline>
+          (() => {
+            const y = document.getElementById("js-year");
+            if (y) y.textContent = String(new Date().getFullYear());
+          })();
+        </script>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="gotoTop" class="uil uil-angle-up"></div>
+
+  <!-- Sticky CTA PRO (diagnostic) -->
+  <div class="scw-switcher-wrap text-center">
+    <a href="/pro/#diagnostic" class="scw-trigger-icon scw-trigger" aria-label="Demander un diagnostic gratuit">
+      <i class="bi-whatsapp align-baseline pt-1"></i>
+    </a>
+  </div>
+
+  <script is:inline src="/js/plugins.min.js"></script>
+  <script is:inline src="/js/functions.bundle.js"></script>
+
+</body>
+</html>

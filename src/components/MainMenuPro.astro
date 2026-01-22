@@ -1,0 +1,145 @@
+---
+// src/components/MainMenuPro.astro
+/**
+ * MainMenuPro.astro (version PRO / B2B)
+ * Objectif : navigation courte, orientée offres + conversion.
+ * Ton : "vous" partout.
+ *
+ * Usage:
+ * <nav class="primary-menu ...">
+ *   <MainMenuPro />
+ * </nav>
+ */
+
+const PHONE = import.meta.env.PUBLIC_PRO_PHONE ?? import.meta.env.PUBLIC_PHONE ?? "+33600000000";
+const PHONE_DISPLAY =
+  import.meta.env.PUBLIC_PRO_PHONE_DISPLAY ??
+  import.meta.env.PUBLIC_PHONE_DISPLAY ??
+  PHONE;
+
+const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
+
+// Active state
+const path = Astro.url.pathname || "/";
+
+const isActive = (href) => {
+  if (href === "/pro/") return path === "/pro/" || path === "/pro";
+  return path === href || path.startsWith(href);
+};
+
+// Config (simple et modifiable)
+const items = [
+  { href: "/pro/", label: "Accueil Pro" },
+  { href: "/pro/seo-local/", label: "SEO local" },
+  { href: "/pro/google-ads/", label: "Google Ads" },
+  { href: "/pro/cro/", label: "CRO" },
+];
+
+const secondary = [
+  { href: "/avis/", label: "Avis" },
+  { href: "/travaux/", label: "Études de cas" }, // ou "/travaux/" si vous y mettez vos cas
+];
+---
+
+<ul class="menu-container">
+
+  <!-- Accueil PRO -->
+  <li class={`menu-item ${isActive("/pro/") ? "current" : ""}`}>
+    <a class="menu-link" href="/pro/"><div>Pro</div></a>
+  </li>
+
+  <!-- Offres (mega menu) -->
+  <li class={`menu-item mega-menu mega-menu-full ${path.startsWith("/pro/") && !isActive("/pro/") ? "current" : ""}`}>
+    <a class="menu-link" href="/pro/"><div>Offres</div></a>
+
+    <div class="mega-menu-content">
+      <div class="container">
+        <div class="row g-4 py-4 align-items-stretch">
+
+          <div class="col-lg-6">
+            <div class="small text-uppercase ls-1 text-muted mb-2">Choisir une offre</div>
+
+            <ul class="sub-menu-container mega-menu-column">
+              {items.slice(1).map((it) => (
+                <li class={`menu-item ${isActive(it.href) ? "current" : ""}`}>
+                  <a class="menu-link" href={it.href}>
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                      <span>{it.label}</span>
+                      <span class="small text-muted">→</span>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="small text-muted mt-3">
+              Vous ne savez pas par où commencer ? Consultez <a href="/pro/">l’accueil Pro</a> : méthode, options de suivi et diagnostic.
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="widget p-4 rounded-3 bg-light h-100">
+              <h5 class="mb-2">Objectif : plus de demandes qualifiées</h5>
+              <p class="mb-3 small">
+                SEO local, Google Ads et optimisation conversion : une méthode simple, du tracking, et des actions mesurables
+                pour TPE/PME, indépendants, commerces et artisans.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a href="/pro/#diagnostic" class="button button-rounded button-small m-0">
+                  Diagnostic gratuit
+                </a>
+                <a href={telHref} class="button button-border button-rounded button-small m-0">
+                  Appeler {PHONE_DISPLAY}
+                </a>
+              </div>
+
+              <hr class="my-3" />
+
+              <div class="small text-muted mb-0">
+                Zone : Sud Oise (60) & Nord 95 — interventions à distance possibles selon votre activité.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <!-- Ressources / preuves -->
+  <li class={`menu-item ${isActive("/avis/") ? "current" : ""}`}>
+    <a class="menu-link" href="/avis/"><div>Avis</div></a>
+  </li>
+
+  <li class={`menu-item ${isActive("/travaux/") ? "current" : ""}`}>
+    <a class="menu-link" href="/travaux/"><div>Études de cas</div></a>
+  </li>
+
+  <!-- CTA -->
+  <li class={`menu-item ${isActive("/pro/#diagnostic") ? "current" : ""}`}>
+    <a class="menu-link" href="/pro/#diagnostic"><div>Diagnostic gratuit</div></a>
+  </li>
+
+  <li class="menu-item">
+    <a class="menu-link" href={telHref}>
+      <div>📞 {PHONE_DISPLAY}</div>
+    </a>
+  </li>
+
+  <!-- Retour vers espace artisans -->
+  <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
+    <a class="menu-link" href="/"><div>Espace artisans</div></a>
+  </li>
+
+</ul>
+
+<!-- Menu actions mobile (2 actions max) -->
+<ul class="menu-container mobile-primary-menu">
+  <li class="menu-item">
+    <a class="menu-link" href="/pro/#diagnostic"><div>📝 Diagnostic gratuit</div></a>
+  </li>
+  <li class="menu-item">
+    <a class="menu-link" href={telHref}><div>📞 Appeler {PHONE_DISPLAY}</div></a>
+  </li>
+</ul>
