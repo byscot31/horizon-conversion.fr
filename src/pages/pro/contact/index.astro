@@ -1,5 +1,6 @@
 ---
 import LayoutPro from "@layouts/LayoutPro.astro";
+import HubspotFormPro from "@components/HubspotFormPro.astro";
 
 // HubSpot (embed) — même principe que votre B2C, mais GUID PRO si vous en avez un
 const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID ?? "147409378";
@@ -45,7 +46,7 @@ const jsonLd = {
 <LayoutPro title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
   <section class="page-title page-title-center dark include-header include-topbar">
     <div class="container">
-      <div class="page-title-row mt-6">
+      <div class="page-title-row mt-5">
         <div class="page-title-content">
           <div class="badge rounded-pill border border-light text-light">Contact Pro</div>
           <h1>Diagnostic gratuit & plan d’action</h1>
@@ -124,53 +125,13 @@ const jsonLd = {
           </div>
 
           <div class="col-lg-6">
-
-            <div class="card shadow-sm">
-              <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <h3 class="h5 mb-1">Demande de diagnostic</h3>
-                    <p class="small text-muted mb-0">
-                      Merci d’indiquer votre site, votre activité, votre zone, et votre priorité.
-                    </p>
-                  </div>
-                  <span class="badge bg-light text-dark">Pro</span>
-                </div>
-
-                <div class="clear line line-sm my-4"></div>
-
-                <!-- HubSpot embed -->
-                <script
-                  src={`https://js-${region}.hsforms.net/forms/embed/${portalId}.js`}
-                  defer
-                ></script>
-
-                <div
-                  class="hs-form-frame"
-                  data-region={region}
-                  data-form-id={formGuid}
-                  data-portal-id={portalId}
-                ></div>
-
-                <div class="small text-muted mt-3">
-                  En soumettant ce formulaire, vous acceptez d’être recontacté afin de traiter votre demande.
-                </div>
-              </div>
-            </div>
-
-            <div class="card shadow-sm mt-3">
-              <div class="card-body p-4">
-                <h3 class="h6 mb-2">Pour une demande efficace, indiquez :</h3>
-                <ul class="iconlist ms-3 mb-0 small">
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre site / Google Business Profile</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre zone (60 / 95, villes)</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre objectif (appels, formulaires, ventes)</li>
-                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre budget / ordre de grandeur si possible</li>
-                </ul>
-              </div>
-            </div>
-
+            <HubspotFormPro
+              title="Diagnostic webmarketing"
+              subtitle={`Acquisition (SEO/Ads) + conversion (CRO) • ${regionLabel} • Tracking auto`}
+              submitLabel="Envoyer ma demande"
+            />
           </div>
+
         </div>
 
         <div class="clear line my-6"></div>

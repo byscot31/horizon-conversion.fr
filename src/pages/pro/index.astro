@@ -1,7 +1,7 @@
 ---
 // src/pages/pro/index.astro
 import Layout from "@layouts/LayoutPro.astro";
-import HubspotCustomForm from "@components/HubspotCustomForm.astro";
+import HubspotFormPro from "@components/HubspotFormPro.astro";
 import villes from "@data/villes.json";
 
 const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
@@ -402,12 +402,13 @@ const jsonLd = [breadcrumbJsonLd, serviceJsonLd, faqJsonLd];
               </div>
 
               <div class="col-lg-6">
-                <HubspotCustomForm
+                <HubspotFormPro
                   title="Diagnostic webmarketing"
                   subtitle={`Acquisition (SEO/Ads) + conversion (CRO) • ${regionLabel} • Tracking auto`}
                   submitLabel="Envoyer ma demande"
                 />
               </div>
+
             </div>
           </div>
         </div>
