@@ -1,0 +1,215 @@
+---
+// src/pages/pro/temoignages/index.astro
+import LayoutPro from "@layouts/LayoutPro.astro";
+
+// (Optionnel) JSON data : si vous créez @data/temoignages-pro.json
+// import temoignages from "@data/temoignages-pro.json";
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const title = `Témoignages clients — Webmarketing / Acquisition | ${regionLabel} | ${brand}`;
+const description =
+  "Découvrez des retours clients (TPE/PME, indépendants, commerces, artisans) : SEO local, Google Ads et optimisation de conversion.";
+const canonical = "/pro/temoignages/";
+
+// Dummy data si vous n’avez pas encore le JSON
+const temoignages = [
+  {
+    name: "Artisan (BTP) — Sud Oise",
+    title: "Plus d’appels en 30 jours",
+    text:
+      "Mise en place du tracking + landing page + optimisation Google Business Profile. " +
+      "On a rapidement augmenté les appels entrants et les demandes qualifiées.",
+    metrics: ["Tracking propre", "SEO local", "Formulaire + relances"],
+    tags: ["SEO local", "GBP", "Tracking"],
+  },
+  {
+    name: "Commerce — Nord 95",
+    title: "Campagnes Google Ads rentables",
+    text:
+      "Reprise des campagnes : structure, mots-clés, annonces et suivi des conversions. " +
+      "Les demandes ont augmenté, avec un coût par lead stabilisé.",
+    metrics: ["Conversions", "Optimisation continue", "Reporting"],
+    tags: ["Google Ads", "SEA", "Leads"],
+  },
+  {
+    name: "TPE — Oise (60)",
+    title: "Site qui convertit mieux",
+    text:
+      "Audit CRO + améliorations UX : preuves, clarté de l’offre, CTA et simplification du parcours. " +
+      "Le taux de conversion a progressé sans augmenter le trafic.",
+    metrics: ["Audit CRO", "Quick wins", "Pages offres"],
+    tags: ["CRO", "UX", "Conversion"],
+  },
+];
+
+// FAQ pro (objections)
+const faq = [
+  { q: "Pouvez-vous travailler avec mon site actuel ?", a: "Oui. Nous auditons l’existant, puis nous priorisons des actions rapides avant d’envisager une refonte si nécessaire." },
+  { q: "En combien de temps puis-je voir des résultats ?", a: "Cela dépend du levier : Google Ads peut produire des leads rapidement, le SEO local est progressif. Nous annonçons un plan et des jalons réalistes dès le départ." },
+  { q: "Avez-vous besoin d’accès ?", a: "Oui, selon le levier : Google Ads / Analytics / Search Console / CMS. Si vous ne les avez pas, nous vous guidons pour les récupérer proprement." },
+  { q: "Proposez-vous un suivi mensuel ?", a: "Oui : reporting, optimisation continue, tests et priorisation. C’est l’option la plus efficace pour progresser sur la durée." },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Pro", item: "/pro/" },
+    { "@type": "ListItem", position: 2, name: "Témoignages", item: canonical },
+  ],
+};
+
+const jsonLd = [breadcrumbJsonLd, faqJsonLd];
+---
+
+<LayoutPro title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-5">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Pro</div>
+          <h1>Témoignages</h1>
+          <p class="lead mb-0">SEO local • Google Ads • CRO — {regionLabel}</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/pro/">Pro</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Témoignages</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- Intro -->
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center">
+            <div class="badge rounded-pill badge-default mb-2">Preuves</div>
+            <h2 class="display-6 fw-bold mb-3">Des retours concrets, orientés résultats</h2>
+            <p class="text-muted mb-0">
+              Chaque activité est différente. L’objectif reste le même : générer plus de demandes qualifiées
+              (appels, formulaires, prises de rendez-vous) et améliorer la rentabilité.
+            </p>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Témoignages -->
+        <div class="row g-3">
+          {temoignages.map((t) => (
+            <div class="col-lg-4 col-md-6">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <div class="fw-semibold">{t.title}</div>
+                      <div class="small text-muted">{t.name}</div>
+                    </div>
+                    <span class="badge bg-light text-dark">Client</span>
+                  </div>
+
+                  <p class="text-muted mt-3 mb-3">{t.text}</p>
+
+                  {t.metrics?.length ? (
+                    <>
+                      <div class="small fw-semibold mb-2">Ce qui a été fait</div>
+                      <ul class="iconlist ms-3 mb-3 small">
+                        {t.metrics.slice(0, 5).map((m) => (
+                          <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> {m}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+
+                  {t.tags?.length ? (
+                    <div class="d-flex flex-wrap gap-2">
+                      {t.tags.slice(0, 6).map((tag) => (
+                        <span class="badge bg-secondary">{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <div class="clear line line-sm my-4"></div>
+
+                  <a class="button button-rounded button-small m-0" href="/pro/contact/">
+                    Demander un diagnostic gratuit
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- FAQ -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">FAQ</div>
+          <h3 class="text-transform-none ls-0">Questions fréquentes</h3>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="faqs">
+              {faq.map((f) => (
+                <div class="toggle faq pb-3 mb-4">
+                  <div class="toggle-header">
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed bi-question-circle"></i>
+                      <i class="toggle-open bi-question-circle"></i>
+                    </div>
+                    <div class="toggle-title fw-semibold ps-1">{f.q}</div>
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                      <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                    </div>
+                  </div>
+                  <div class="toggle-content text-black-50 ps-4">{f.a}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- CTA -->
+        <div class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-center text-center">
+              <div class="col-lg-8">
+                <div class="badge rounded-pill badge-default mb-2">Diagnostic gratuit</div>
+                <h3 class="text-transform-none ls-0 mb-3">Vous voulez plus d’appels et de demandes ?</h3>
+                <p class="text-muted mb-4">
+                  Décrivez votre activité, votre zone et votre objectif. Vous recevez un plan d’action clair.
+                </p>
+                <a href="/pro/contact/" class="button button-rounded button-large m-0">
+                  Demander un diagnostic gratuit
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</LayoutPro>

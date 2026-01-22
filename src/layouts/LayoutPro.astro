@@ -219,7 +219,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
 
     <slot />
 
-    <!-- Footer PRO -->
+    <!-- Footer PRO (révisé : suppression des liens artisans) -->
     <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
       <div class="container">
         <div class="footer-widgets-wrap pb-5">
@@ -243,9 +243,10 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
                 </p>
 
                 <div class="d-flex flex-wrap gap-2">
-                  <a href="/pro/#diagnostic" class="button button-rounded button-small m-0">📝 Diagnostic gratuit</a>
+                  <a href="/pro/contact/" class="button button-rounded button-small m-0">📝 Diagnostic gratuit</a>
                   <a href={telHref} class="button button-border button-rounded button-small m-0">📞 Appeler</a>
-                  <a href="/" class="button button-light button-rounded button-small bg-white border text-dark m-0">↩︎ Espace artisans</a>
+                  <a href="/pro/temoignages/" class="button button-light button-rounded button-small bg-white border text-dark m-0">⭐ Témoignages</a>
+                  <a href="/pro/realisations/" class="button button-light button-rounded button-small bg-white border text-dark m-0">📌 Réalisations</a>
                 </div>
 
                 <div class="clear line line-sm my-4"></div>
@@ -268,7 +269,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
             <!-- Navigation PRO -->
             <div class="col-lg-4">
               <div class="widget">
-                <h4 class="text-transform-none ls-0 mb-3">Accès rapide (Pro)</h4>
+                <h4 class="text-transform-none ls-0 mb-3">Accès rapide</h4>
 
                 <div class="row g-4">
                   <div class="col-6 widget_links">
@@ -282,10 +283,11 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
 
                   <div class="col-6 widget_links">
                     <ul class="list-unstyled mb-0">
-                      <li><a href="/contact/">Contact (artisans)</a></li>
-                      <li><a href="/villes/">Villes (artisans)</a></li>
-                      <li><a href="/metiers/">Métiers (artisans)</a></li>
-                      <li><a href="/travaux/">Réalisations</a></li>
+                      <li><a href="/pro/temoignages/">Témoignages</a></li>
+                      <li><a href="/pro/realisations/">Réalisations</a></li>
+                      <li><a href="/pro/contact/">Contact / Diagnostic</a></li>
+                      <!-- Option : si vous voulez garder un lien discret vers la partie artisans -->
+                      <!-- <li><a href="/">Espace particuliers</a></li> -->
                     </ul>
                   </div>
                 </div>
@@ -293,9 +295,9 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
                 <div class="clear line line-sm my-4"></div>
 
                 <div class="small text-muted">
-                  Astuce : si vous voulez des leads rapidement, commencez par <a href="/pro/google-ads/">Google Ads</a>.
-                  Si vous cherchez une visibilité durable, <a href="/pro/seo-local/">SEO local</a>.
-                  Si vous avez déjà du trafic, <a href="/pro/cro/">CRO</a>.
+                  Pour des leads rapides : <a href="/pro/google-ads/">Google Ads</a>. Pour une visibilité durable :
+                  <a href="/pro/seo-local/">SEO local</a>. Pour améliorer un site existant :
+                  <a href="/pro/cro/">CRO</a>.
                 </div>
               </div>
             </div>
@@ -303,7 +305,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
             <!-- Contact PRO -->
             <div class="col-lg-3">
               <div class="widget">
-                <h4 class="text-transform-none ls-0 mb-3">Contact Pro</h4>
+                <h4 class="text-transform-none ls-0 mb-3">Contact</h4>
 
                 <div class="feature-box fbox-plain fbox-sm align-items-center mb-3">
                   <div class="fbox-icon">
@@ -324,7 +326,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
                   </div>
                   <div class="fbox-content">
                     <span class="text-muted small">Demande en ligne</span><br>
-                    <a href="/pro/#diagnostic" class="text-dark text-decoration-none">
+                    <a href="/pro/contact/" class="text-dark text-decoration-none">
                       <strong class="h6 d-block mb-0">Diagnostic gratuit</strong>
                     </a>
                     <div class="small text-muted">Décrivez votre objectif, je vous réponds</div>
@@ -334,9 +336,10 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
                 <div class="clear line line-sm my-4"></div>
 
                 <div class="d-flex flex-wrap gap-2">
-                  <a href="/pro/#diagnostic" class="btn btn-outline-secondary btn-sm">📝 Diagnostic</a>
+                  <a href="/pro/contact/" class="btn btn-outline-secondary btn-sm">📝 Diagnostic</a>
                   <a href="/pro/seo-local/" class="btn btn-outline-secondary btn-sm">📍 SEO local</a>
                   <a href="/pro/google-ads/" class="btn btn-outline-secondary btn-sm">📣 Google Ads</a>
+                  <a href="/pro/cro/" class="btn btn-outline-secondary btn-sm">⚡ CRO</a>
                 </div>
 
               </div>
@@ -371,7 +374,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
               <div class="small text-contrast-600">
                 Zone : <a class="text-contrast-600" href="/pro/">{REGION_LABEL}</a>
                 <span class="mx-2">•</span>
-                <a class="text-contrast-600" href="/pro/#diagnostic">Demander un diagnostic</a>
+                <a class="text-contrast-600" href="/pro/contact/">Demander un diagnostic</a>
               </div>
             </div>
 
@@ -393,7 +396,7 @@ const isActive = (href) => pathname === href || pathname.startsWith(href);
 
   <!-- Sticky CTA PRO (diagnostic) -->
   <div class="scw-switcher-wrap text-center">
-    <a href="/pro/#diagnostic" class="scw-trigger-icon scw-trigger" aria-label="Demander un diagnostic gratuit">
+    <a href="/pro/contact/" class="scw-trigger-icon scw-trigger" aria-label="Demander un diagnostic gratuit">
       <i class="bi-whatsapp align-baseline pt-1"></i>
     </a>
   </div>

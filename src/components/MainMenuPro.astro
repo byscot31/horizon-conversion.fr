@@ -2,24 +2,13 @@
 // src/components/MainMenuPro.astro
 /**
  * MainMenuPro.astro (version PRO / B2B)
- * Objectif : navigation courte, orientée offres + conversion.
- * Ton : "vous" partout.
- *
- * Usage:
- * <nav class="primary-menu ...">
- *   <MainMenuPro />
- * </nav>
+ * Objectif : ne PAS mélanger B2B/B2C.
+ * - "Avis" => "Témoignages"
+ * - "Travaux" => "Réalisations"
+ * - Suppression : "Espace artisans", numéro de tel, "Diagnostic gratuit" (déjà dans le header)
+ * Ton : "vous"
  */
 
-const PHONE = import.meta.env.PUBLIC_PRO_PHONE ?? import.meta.env.PUBLIC_PHONE ?? "+33600000000";
-const PHONE_DISPLAY =
-  import.meta.env.PUBLIC_PRO_PHONE_DISPLAY ??
-  import.meta.env.PUBLIC_PHONE_DISPLAY ??
-  PHONE;
-
-const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
-
-// Active state
 const path = Astro.url.pathname || "/";
 
 const isActive = (href) => {
@@ -27,23 +16,25 @@ const isActive = (href) => {
   return path === href || path.startsWith(href);
 };
 
-// Config (simple et modifiable)
-const items = [
-  { href: "/pro/", label: "Accueil Pro" },
+const offres = [
   { href: "/pro/seo-local/", label: "SEO local" },
   { href: "/pro/google-ads/", label: "Google Ads" },
   { href: "/pro/cro/", label: "CRO" },
 ];
 
-const secondary = [
-  { href: "/avis/", label: "Avis" },
-  { href: "/travaux/", label: "Études de cas" }, // ou "/travaux/" si vous y mettez vos cas
+// Liens preuve (B2B)
+const preuves = [
+  { href: "/pro/temoignages/", label: "Témoignages" },  // à créer (recommandé)
+  { href: "/pro/realisations/", label: "Réalisations" }, // à créer (recommandé)
 ];
+
+// Option : fallback si vous n'avez pas encore ces pages
+const fallbackTemoignages = "/avis/";
+const fallbackRealisations = "/travaux/";
 ---
 
 <ul class="menu-container">
 
-  <!-- Accueil PRO -->
   <li class={`menu-item ${isActive("/pro/") ? "current" : ""}`}>
     <a class="menu-link" href="/pro/"><div>Pro</div></a>
   </li>
@@ -57,10 +48,10 @@ const secondary = [
         <div class="row g-4 py-4 align-items-stretch">
 
           <div class="col-lg-6">
-            <div class="small text-uppercase ls-1 text-muted mb-2">Choisir une offre</div>
+            <div class="small text-uppercase ls-1 text-muted mb-2">Nos offres</div>
 
             <ul class="sub-menu-container mega-menu-column">
-              {items.slice(1).map((it) => (
+              {offres.map((it) => (
                 <li class={`menu-item ${isActive(it.href) ? "current" : ""}`}>
                   <a class="menu-link" href={it.href}>
                     <div class="d-flex justify-content-between align-items-center w-100">
@@ -73,7 +64,7 @@ const secondary = [
             </ul>
 
             <div class="small text-muted mt-3">
-              Vous ne savez pas par où commencer ? Consultez <a href="/pro/">l’accueil Pro</a> : méthode, options de suivi et diagnostic.
+              Vous hésitez ? Commencez par <a href="/pro/">la page Pro</a> (méthode + options de suivi).
             </div>
           </div>
 
@@ -86,12 +77,8 @@ const secondary = [
               </p>
 
               <div class="d-flex flex-wrap gap-2">
-                <a href="/pro/#diagnostic" class="button button-rounded button-small m-0">
-                  Diagnostic gratuit
-                </a>
-                <a href={telHref} class="button button-border button-rounded button-small m-0">
-                  Appeler {PHONE_DISPLAY}
-                </a>
+                <a href="/pro/#diagnostic" class="btn btn-outline-primary btn-sm">Demander un diagnostic</a>
+                <a href="/pro/#offres" class="btn btn-outline-secondary btn-sm">Voir les offres</a>
               </div>
 
               <hr class="my-3" />
@@ -107,39 +94,28 @@ const secondary = [
     </div>
   </li>
 
-  <!-- Ressources / preuves -->
-  <li class={`menu-item ${isActive("/avis/") ? "current" : ""}`}>
-    <a class="menu-link" href="/avis/"><div>Avis</div></a>
+  <!-- Preuves (B2B) -->
+  <li class={`menu-item ${isActive("/pro/temoignages/") || isActive(fallbackTemoignages) ? "current" : ""}`}>
+    <a class="menu-link" href={preuves[0].href}><div>Témoignages</div></a>
   </li>
 
-  <li class={`menu-item ${isActive("/travaux/") ? "current" : ""}`}>
-    <a class="menu-link" href="/travaux/"><div>Études de cas</div></a>
+  <li class={`menu-item ${isActive("/pro/realisations/") || isActive(fallbackRealisations) ? "current" : ""}`}>
+    <a class="menu-link" href={preuves[1].href}><div>Réalisations</div></a>
   </li>
 
-  <!-- CTA -->
-  <li class={`menu-item ${isActive("/pro/#diagnostic") ? "current" : ""}`}>
-    <a class="menu-link" href="/pro/#diagnostic"><div>Diagnostic gratuit</div></a>
-  </li>
-
-  <li class="menu-item">
-    <a class="menu-link" href={telHref}>
-      <div>📞 {PHONE_DISPLAY}</div>
-    </a>
-  </li>
-
-  <!-- Retour vers espace artisans -->
-  <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
-    <a class="menu-link" href="/"><div>Espace artisans</div></a>
+  <!-- Contact PRO -->
+  <li class={`menu-item ${isActive("/pro/contact/") ? "current" : ""}`}>
+    <a class="menu-link" href="/pro/contact/"><div>Contact</div></a>
   </li>
 
 </ul>
 
-<!-- Menu actions mobile (2 actions max) -->
+<!-- Mobile : liens courts (sans tel / sans diagnostic) -->
 <ul class="menu-container mobile-primary-menu">
   <li class="menu-item">
-    <a class="menu-link" href="/pro/#diagnostic"><div>📝 Diagnostic gratuit</div></a>
+    <a class="menu-link" href="/pro/"><div>Offres</div></a>
   </li>
   <li class="menu-item">
-    <a class="menu-link" href={telHref}><div>📞 Appeler {PHONE_DISPLAY}</div></a>
+    <a class="menu-link" href="/pro/contact/"><div>Contact</div></a>
   </li>
 </ul>

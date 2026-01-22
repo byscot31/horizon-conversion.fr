@@ -1,0 +1,209 @@
+---
+import LayoutPro from "@layouts/LayoutPro.astro";
+
+// HubSpot (embed) — même principe que votre B2C, mais GUID PRO si vous en avez un
+const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID ?? "147409378";
+const region = import.meta.env.PUBLIC_HUBSPOT_REGION ?? "eu1";
+
+// Recommandé : créez un formulaire HubSpot dédié PRO et mettez son GUID en env
+// ex: PUBLIC_HUBSPOT_FORM_GUID_PRO="xxxx-xxxx-xxxx-xxxx"
+const formGuid =
+  import.meta.env.PUBLIC_HUBSPOT_FORM_GUID_PRO ??
+  import.meta.env.PUBLIC_HUBSPOT_FORM_GUID ??
+  "a1a5dfd9-d905-454f-b09c-5a8ae22b3d35";
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const title = `Contact Pro — Diagnostic gratuit | ${regionLabel} | ${brand}`;
+const description =
+  `Contact Pro : demandez un diagnostic gratuit (SEO local, Google Ads, CRO). ` +
+  `Réponse rapide sur ${regionLabel}.`;
+
+const canonical = "/pro/contact/";
+
+// JSON-LD (ProfessionalService light)
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL ??
+  (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": `${brand} — Conseil Webmarketing (Pro)`,
+  "areaServed": ["Oise (60)", "Val-d’Oise (95)"],
+  "url": SITE_URL ? `${SITE_URL}${canonical}` : canonical,
+  "serviceType": [
+    "SEO local",
+    "Google Ads / SEA",
+    "Optimisation de conversion (CRO)",
+    "Génération de leads"
+  ]
+};
+---
+
+<LayoutPro title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-6">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Contact Pro</div>
+          <h1>Diagnostic gratuit & plan d’action</h1>
+          <p class="lead mb-0">{regionLabel}</p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/pro/">Pro</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-6">
+            <div class="badge rounded-pill badge-default mb-2">Réponse rapide</div>
+            <h2 class="display-6 fw-bold mb-3">Expliquez votre objectif, je vous réponds</h2>
+
+            <p class="text-muted mb-4">
+              Décrivez votre activité, votre zone (Sud Oise / Nord 95), votre offre et votre objectif
+              (plus d’appels, plus de demandes, plus de ventes). Je vous propose un diagnostic clair
+              et des priorités actionnables.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Audit express</h3>
+                    <p class="small text-muted mb-0">Site, tracking, positionnement, campagnes.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Plan d’action</h3>
+                    <p class="small text-muted mb-0">3–5 actions prioritaires et un “quoi faire maintenant”.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Estimation de budget</h3>
+                    <p class="small text-muted mb-0">Fourchette prudente selon votre besoin (annoncée avant).</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h6 mb-2">✅ Suivi mensuel</h3>
+                    <p class="small text-muted mb-0">Reporting + optimisation continue en option.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clear line line-sm my-5"></div>
+
+            <div class="small text-muted">
+              Vous préférez aller vite ? Commencez par <a href="/pro/#offres">les offres</a> (SEO local, Google Ads, CRO),
+              puis revenez ici pour le diagnostic.
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h3 class="h5 mb-1">Demande de diagnostic</h3>
+                    <p class="small text-muted mb-0">
+                      Merci d’indiquer votre site, votre activité, votre zone, et votre priorité.
+                    </p>
+                  </div>
+                  <span class="badge bg-light text-dark">Pro</span>
+                </div>
+
+                <div class="clear line line-sm my-4"></div>
+
+                <!-- HubSpot embed -->
+                <script
+                  src={`https://js-${region}.hsforms.net/forms/embed/${portalId}.js`}
+                  defer
+                ></script>
+
+                <div
+                  class="hs-form-frame"
+                  data-region={region}
+                  data-form-id={formGuid}
+                  data-portal-id={portalId}
+                ></div>
+
+                <div class="small text-muted mt-3">
+                  En soumettant ce formulaire, vous acceptez d’être recontacté afin de traiter votre demande.
+                </div>
+              </div>
+            </div>
+
+            <div class="card shadow-sm mt-3">
+              <div class="card-body p-4">
+                <h3 class="h6 mb-2">Pour une demande efficace, indiquez :</h3>
+                <ul class="iconlist ms-3 mb-0 small">
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre site / Google Business Profile</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre zone (60 / 95, villes)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre objectif (appels, formulaires, ventes)</li>
+                  <li class="mb-2"><i class="fa-solid fa-check text-smaller color"></i> Votre budget / ordre de grandeur si possible</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Liens internes utiles -->
+        <div class="row g-3">
+          <div class="col-md-4">
+            <a class="card h-100 text-decoration-none" href="/pro/seo-local/">
+              <div class="card-body p-4">
+                <div class="fw-semibold">SEO local</div>
+                <div class="small text-muted">Être visible sur Google et Google Maps.</div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a class="card h-100 text-decoration-none" href="/pro/google-ads/">
+              <div class="card-body p-4">
+                <div class="fw-semibold">Google Ads</div>
+                <div class="small text-muted">Générer des leads rapidement.</div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a class="card h-100 text-decoration-none" href="/pro/cro/">
+              <div class="card-body p-4">
+                <div class="fw-semibold">CRO</div>
+                <div class="small text-muted">Convertir davantage avec le même trafic.</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</LayoutPro>
