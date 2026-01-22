@@ -1,17 +1,1008 @@
 ---
+// src/pages/index.astro
+// Home page (Astro) — même squelette/sections, contenu SEO local Sud Oise & Nord 95
+// ✅ Tous les assets pointent vers: /public/_assets_/...
 
+const ASSET_BASE = "/_assets_";
+
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+const seo = {
+  title: "Consultant Webmarketing Sud Oise & Nord 95 | SEO local, Google Ads, CRO",
+  description:
+    "Consultant webmarketing (SEO local, Google Ads, CRO) dans le Sud de l’Oise (60) et le Nord Val-d’Oise (95). Générez plus de leads qualifiés avec une stratégie data-driven.",
+  ogTitle:
+    "Consultant Webmarketing Sud Oise & Nord 95 | SEO local, Google Ads, CRO",
+  ogDescription:
+    "J’aide artisans, cabinets et PME à générer des leads via SEO local, Google Ads et optimisation de conversion. Sud Oise (60) & Nord Val-d’Oise (95).",
+  ogUrl: canonical,
+};
+
+const contact = {
+  phoneDisplay: "06 60 92 10 08",
+  phoneHref: "+33660921008",
+  email: "contact@horizon-conversion.fr",
+  linkedin: "#",
+  instagram: "#",
+};
+
+const megaServices = [
+  {
+    href: "/services/seo-local/",
+    icon: `${ASSET_BASE}/images/icons/seo.svg`,
+    title: "SEO Local (Oise / Nord 95)",
+    desc: "Google Business Profile + pages locales + avis : plus d’appels, plus de formulaires.",
+    alt: "SEO local Oise",
+  },
+  {
+    href: "/services/google-ads/",
+    icon: `${ASSET_BASE}/images/icons/adword.svg`,
+    title: "Google Ads (leads rapides)",
+    desc: "Campagnes pilotées au coût par lead : appels qualifiés, formulaires, devis.",
+    alt: "Google Ads Oise",
+  },
+  {
+    href: "/services/cro/",
+    icon: `${ASSET_BASE}/images/icons/experience.svg`,
+    title: "CRO (Conversion)",
+    desc: "On transforme votre trafic existant en demandes : UX, parcours, formulaires, preuves.",
+    alt: "CRO conversion",
+  },
+  {
+    href: "/services/analytics/",
+    icon: `${ASSET_BASE}/images/icons/analysis.svg`,
+    title: "Tracking & Analytics",
+    desc: "GA4, GTM, événements, appels, UTM : décisions basées sur la donnée.",
+    alt: "Analytics tracking",
+  },
+  {
+    href: "/services/contenu-seo/",
+    icon: `${ASSET_BASE}/images/icons/content_marketing.svg`,
+    title: "Contenu SEO",
+    desc: "Pages services + pages villes : visibilité locale durable et qualifiée.",
+    alt: "Contenu SEO local",
+  },
+  {
+    href: "/services/social/",
+    icon: `${ASSET_BASE}/images/icons/social.svg`,
+    title: "Social (utile, pas “vanité”)",
+    desc: "Contenus orientés demande + retargeting : on relie visibilité et conversion.",
+    alt: "Social retargeting",
+  },
+];
+
+const pricing = {
+  intro:
+    "Vous choisissez un pack adapté (Artisan / Cabinet / PME). Mise en place, suivi et optimisation. Transparence : priorités, actions, reporting.",
+  plans: [
+    {
+      name: "Pack Local",
+      subtitle: "Idéal artisans & cabinets",
+      icon: `${ASSET_BASE}/images/icons/man.svg`,
+      iconWidth: 50,
+      monthly: "490",
+      quarterly: "1290",
+      featuresMonthly: [
+        { ok: true, text: "Google Business Profile : optimisation" },
+        { ok: false, text: "Pages locales (x2)", del: true },
+        { ok: true, text: "Tracking conversions (formulaire/CTA)" },
+        { ok: true, text: "Reporting mensuel + plan d’actions" },
+        { ok: true, text: "Support email" },
+      ],
+      featuresQuarterly: [
+        { ok: true, text: "Google Business Profile : optimisation" },
+        { ok: true, text: "Pages locales (x6)" },
+        { ok: true, text: "Tracking conversions (formulaire/CTA)" },
+        { ok: true, text: "Reporting mensuel + plan d’actions" },
+        { ok: true, text: "Support email" },
+      ],
+      cta: { label: "Demander un audit", href: "/contact/" },
+      primary: true,
+    },
+    {
+      name: "Pack Acquisition",
+      subtitle: "SEO + Ads + CRO",
+      icon: `${ASSET_BASE}/images/icons/group.svg`,
+      iconWidth: 60,
+      monthly: "990",
+      quarterly: "2690",
+      featuresMonthly: [
+        { ok: true, text: "Google Ads (structure + optimisation)" },
+        { ok: true, text: "Landing pages conversion (CRO)" },
+        { ok: true, text: "SEO local + contenus prioritaires" },
+        { ok: true, text: "Tracking avancé (UTM + événements)" },
+        { ok: true, text: "Point hebdo (30 min) + reporting" },
+      ],
+      featuresQuarterly: [
+        { ok: true, text: "Google Ads (structure + optimisation)" },
+        { ok: true, text: "Landing pages conversion (CRO)" },
+        { ok: true, text: "SEO local + contenus prioritaires" },
+        { ok: true, text: "Tracking avancé (UTM + événements)" },
+        { ok: true, text: "Point hebdo (30 min) + reporting" },
+      ],
+      cta: { label: "Parler de votre projet", href: "/contact/" },
+      primary: false,
+    },
+  ],
+  note: "* Budget publicitaire non inclus. Packs modulables selon votre activité.",
+};
+
+const works = [
+  {
+    img: `${ASSET_BASE}/images/works/1.jpg`,
+    alt: "Artisan - SEO local",
+    title: "Artisan : visibilité Google",
+    tag: "SEO Local • Google Business Profile",
+    href: "/services/seo-local/",
+  },
+  {
+    img: `${ASSET_BASE}/images/works/2.jpg`,
+    alt: "PME - Google Ads",
+    title: "PME : leads via Ads",
+    tag: "Google Ads • Landing pages",
+    href: "/services/google-ads/",
+  },
+  {
+    img: `${ASSET_BASE}/images/works/3.jpg`,
+    alt: "CRO - conversion",
+    title: "Site : + demandes sans + trafic",
+    tag: "CRO • UX • Formulaires",
+    href: "/services/cro/",
+  },
+  {
+    img: `${ASSET_BASE}/images/works/4.jpg`,
+    alt: "Audit SEO / Tracking",
+    title: "Audit : priorités data",
+    tag: "Analytics • Tracking • Plan d’actions",
+    href: "/services/analytics/",
+  },
+  {
+    img: `${ASSET_BASE}/images/works/5.jpg`,
+    alt: "Contenu SEO local",
+    title: "Pages villes + services",
+    tag: "SEO • Contenu • Maillage",
+    href: "/services/contenu-seo/",
+  },
+  {
+    img: `${ASSET_BASE}/images/works/6.jpg`,
+    alt: "Stratégie webmarketing",
+    title: "Stratégie acquisition",
+    tag: "SEO • Ads • CRO",
+    href: "/services/",
+  },
+];
+
+const processSteps = [
+  {
+    icon: `${ASSET_BASE}/images/icons/research.svg`,
+    title: "1. Audit & priorités",
+    desc: "On identifie les leviers à fort impact : visibilité locale, pages clés, tracking, points de friction.",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/optimizing.svg`,
+    title: "2. Mise en place & optimisation",
+    desc: "SEO local, Ads, landing pages, formulaires : on construit un système qui génère des demandes.",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/result.svg`,
+    title: "3. Suivi & résultats",
+    desc: "Reporting clair, décisions data : on améliore en continu le coût par lead et la qualité des demandes.",
+  },
+];
+
+const testimonials = [
+  {
+    img: `${ASSET_BASE}/demos/pet/images/testimonials/1.jpg`,
+    quote:
+      "“On a enfin un suivi clair des demandes et des appels. Les actions sont concrètes, on voit la différence.”",
+    name: "Client (Artisan)",
+    meta: "Sud Oise",
+  },
+  {
+    img: `${ASSET_BASE}/demos/pet/images/testimonials/2.jpg`,
+    quote:
+      "“Google Ads est devenu rentable : moins de clics inutiles, plus de demandes qualifiées.”",
+    name: "Client (PME)",
+    meta: "Nord 95",
+  },
+  {
+    img: `${ASSET_BASE}/demos/pet/images/testimonials/3.jpg`,
+    quote:
+      "“Le site convertit mieux. On a optimisé les pages, le formulaire et le message. Résultat : plus de contacts.”",
+    name: "Client (Cabinet)",
+    meta: "Oise",
+  },
+];
+
+const blog = [
+  {
+    href: "/blog/seo-local-oise/",
+    img: `${ASSET_BASE}/images/blog/1.jpg`,
+    alt: "SEO local Oise",
+    title: "SEO local : apparaître dans Google Maps (Oise & Nord 95)",
+    author: "Horizon Conversion",
+    date: "2026",
+    excerpt:
+      "Les bases qui font la différence : Google Business Profile, avis, catégories, pages locales et cohérence NAP.",
+  },
+  {
+    href: "/blog/google-ads-artisans/",
+    img: `${ASSET_BASE}/images/blog/2.jpg`,
+    alt: "Google Ads artisans",
+    title: "Google Ads : générer des devis sans brûler le budget",
+    author: "Horizon Conversion",
+    date: "2026",
+    excerpt:
+      "Structure, mots-clés, exclusions, annonces, landing page : le combo pour un coût par lead maîtrisé.",
+  },
+  {
+    href: "/blog/cro-formulaire/",
+    img: `${ASSET_BASE}/images/blog/3.jpg`,
+    alt: "CRO formulaire",
+    title: "CRO : 7 optimisations pour doubler les demandes",
+    author: "Horizon Conversion",
+    date: "2026",
+    excerpt:
+      "Preuves, CTA, friction, vitesse, mobile : des gains rapides sans changer tout le site.",
+  },
+];
+
+// JSON-LD (à adapter quand tu ajoutes adresse/ville)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Horizon Conversion",
+  url: canonical,
+  areaServed: ["Oise", "Val-d’Oise"],
+  serviceType: ["SEO local", "Google Ads", "CRO", "Analytics"],
+  email: contact.email,
+  telephone: contact.phoneDisplay,
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="author" content="Horizon Conversion" />
+  <meta name="description" content={seo.description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="canonical" href={canonical} />
+  <title>{seo.title}</title>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={seo.ogTitle} />
+  <meta property="og:description" content={seo.ogDescription} />
+  <meta property="og:url" content={seo.ogUrl} />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href={`${ASSET_BASE}/style.css`} />
+  <!-- Font Icons -->
+  <link rel="stylesheet" href={`${ASSET_BASE}/css/font-icons.css`} />
+  <!-- Plugins/Components CSS -->
+  <link rel="stylesheet" href={`${ASSET_BASE}/css/components/bs-switches.css`} />
+  <!-- Niche Demos -->
+  <link rel="stylesheet" href={`${ASSET_BASE}/seo.css`} />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href={`${ASSET_BASE}/css/custom.css`} />
+</head>
+
+<body class="stretched">
+
+  <div id="wrapper">
+
+    <!-- Top Bar -->
+    <div id="top-bar" class="transparent-topbar">
+      <div class="container">
+
+        <div class="row justify-content-between">
+          <div class="col-12 col-md-auto">
+            <div class="top-links">
+              <ul class="top-links-container">
+                <li class="top-links-item"><a href="/">Accueil</a></li>
+                <li class="top-links-item"><a href="/faqs/">FAQ</a></li>
+                <li class="top-links-item"><a href="/contact/">Contact</a></li>
+                <li class="top-links-item">
+                  <a href="#"><img src={`${ASSET_BASE}/images/flags/fre.png`} alt="Langue">FR</a>
+                  <ul class="top-links-sub-menu">
+                    <li class="top-links-item"><a href="#"><img src={`${ASSET_BASE}/images/flags/eng.png`} alt="Langue">EN (bientôt)</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-auto dark">
+            <ul id="top-social">
+              <li><a href={contact.linkedin} class="h-bg-linkedin" target="_blank" rel="noopener"><span class="ts-icon"><i class="fa-brands fa-linkedin-in"></i></span><span class="ts-text">LinkedIn</span></a></li>
+              <li><a href={contact.instagram} class="h-bg-instagram" target="_blank" rel="noopener"><span class="ts-icon"><i class="fa-brands fa-instagram"></i></span><span class="ts-text">Instagram</span></a></li>
+              <li><a href={`tel:${contact.phoneHref}`} class="h-bg-call"><span class="ts-icon"><i class="fa-solid fa-phone"></i></span><span class="ts-text">{contact.phoneDisplay}</span></a></li>
+              <li><a href={`mailto:${contact.email}`} class="h-bg-email3"><span class="ts-icon"><i class="bi-envelope-fill"></i></span><span class="ts-text">{contact.email}</span></a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="transparent-header floating-header header-size-md">
+      <div id="header-wrap">
+        <div class="container">
+          <div class="header-row">
+
+            <div id="logo">
+              <a href="/">
+                <img class="logo-default py-2" src={`${ASSET_BASE}/images/logo.svg`} alt="Horizon Conversion" />
+              </a>
+            </div>
+
+            <div class="header-misc">
+              <a href="/contact/" class="button button-rounded ms-3 d-none d-sm-block">Demander un audit</a>
+            </div>
+
+            <div class="primary-menu-trigger">
+              <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+                <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+              </button>
+            </div>
+
+            <nav class="primary-menu with-arrows">
+              <ul class="menu-container">
+                <li class="menu-item current"><a class="menu-link" href="/"><div>Accueil</div></a></li>
+                <li class="menu-item"><a class="menu-link" href="/services/"><div>Ce que je fais</div></a></li>
+
+                <li class="menu-item mega-menu">
+                  <a class="menu-link" href="#"><div>Services</div></a>
+                  <div class="mega-menu-content mega-menu-style-2 px-0">
+                    <div class="container">
+                      <div class="row">
+                        {megaServices.map((s) => (
+                          <a href={s.href} class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                            <div class="feature-box">
+                              <div class="fbox-icon mb-2">
+                                <img src={s.icon} alt={s.alt} class="bg-transparent rounded-0" />
+                              </div>
+                              <div class="fbox-content">
+                                <h3 class="text-transform-none ls-0">{s.title}</h3>
+                                <p>{s.desc}</p>
+                              </div>
+                            </div>
+                          </a>
+                        ))}
+                        <div class="mega-menu-column sub-menu-container col-12 p-0">
+                          <a href="/services/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
+                            Voir tous les services <i class="bi-arrow-right"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="menu-item"><a class="menu-link" href="/faqs/"><div>FAQ</div></a></li>
+                <li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+      <div class="header-wrap-clone"></div>
+    </header>
+
+    <!-- Slider -->
+    <section id="slider" class="slider-element slider-parallax min-vh-60 min-vh-md-100 include-header">
+      <div class="slider-inner" style={`background: var(--cnvs-contrast-0) url('${ASSET_BASE}/images/hero/hero-1.jpg') center center no-repeat; background-size: cover;`}>
+
+        <div class="vertical-middle slider-element-fade">
+          <div class="container py-5">
+            <div class="row pt-5">
+              <div class="col-lg-5 col-md-8">
+                <div class="slider-title">
+                  <div class="badge rounded-pill badge-default">Sud Oise (60) • Nord 95</div>
+
+                  <h1 class="mb-2">Consultant webmarketing local : SEO, Google Ads &amp; CRO.</h1>
+
+                  <h2 class="h3 text-rotater mb-2" data-separator="," data-rotate="fadeIn" data-speed="3500">
+                    - Générez plus de <span class="t-rotate">leads,appels,devis</span> avec une stratégie orientée conversion.
+                  </h2>
+
+                  <p class="lead">
+                    J’accompagne artisans, cabinets et PME autour de <strong>Senlis, Chantilly, Creil, Compiègne</strong> et du <strong>Nord Val-d’Oise</strong>
+                    pour gagner en visibilité sur Google, capter des demandes qualifiées et améliorer le taux de conversion de leur site.
+                  </p>
+
+                  <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">Demander un audit</a>
+                  <a href="/services/" class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">Voir les services</a>
+
+                  <div class="mt-4 small text-muted">
+                    <strong>Focus requêtes :</strong> consultant webmarketing Oise • consultant SEO local Oise • agence Google Ads Oise • optimisation conversion (CRO) • SEO Nord 95
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-wrap h-100 d-block d-lg-none">
+          <div class="video-overlay" style="background: rgba(255,255,255,0.85);"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section id="content">
+      <div class="content-wrap pt-0">
+
+        <!-- Client Carousel -->
+        <div class="section bg-transparent m-0 border-bottom py-5">
+          <div class="container">
+            <div id="oc-clients" class="owl-carousel image-carousel carousel-widget"
+              data-margin="100" data-loop="true" data-autoplay="5000"
+              data-nav="false" data-pagi="false"
+              data-items-xs="2" data-items-sm="3" data-items-md="4"
+              data-items-lg="5" data-items-xl="6">
+              <div class="oc-item"><a href="#"><img src={`${ASSET_BASE}/demos/business/images/clients/linkedin.svg`} alt="Artisans & PME" /></a></div>
+              <div class="oc-item"><a href="#"><img src={`${ASSET_BASE}/demos/business/images/clients/amazon.svg`} alt="E-commerce" /></a></div>
+              <div class="oc-item"><a href="#"><img src={`${ASSET_BASE}/demos/business/images/clients/zillow.svg`} alt="Immobilier" /></a></div>
+              <div class="oc-item"><a href="#"><img src={`${ASSET_BASE}/demos/business/images/clients/jetblue.svg`} alt="Services locaux" /></a></div>
+              <div class="oc-item"><a href="#"><img src={`${ASSET_BASE}/demos/business/images/clients/nat-geo.svg`} alt="Professions libérales" /></a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="section bg-transparent mt-4 mb-0 pb-0">
+          <div class="container">
+            <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 650px">
+              <div class="badge rounded-pill badge-default">Services</div>
+              <h2 class="text-transform-none ls-0 mb-3">Ce que je fais (concrètement)</h2>
+              <p>
+                Une approche simple : <strong>attirer</strong> le bon trafic (SEO/Ads), <strong>mesurer</strong> (tracking), puis <strong>convertir</strong> (CRO).
+                Objectif : plus d’appels, plus de formulaires, plus de chiffre.
+              </p>
+            </div>
+
+            <div class="row justify-content-between align-items-center">
+              <div class="col-lg-4 col-sm-6">
+                <div class="feature-box flex-md-row-reverse text-md-end border-0">
+                  <div class="fbox-icon"><a href="/services/seo-local/"><img src={`${ASSET_BASE}/images/icons/seo.svg`} alt="SEO local Oise" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">SEO local (Oise / Nord 95)</h3>
+                    <p>Google Business Profile, pages “ville + service”, avis, maillage interne : visibilité durable là où vos clients cherchent.</p>
+                  </div>
+                </div>
+
+                <div class="feature-box flex-md-row-reverse text-md-end border-0 mt-5">
+                  <div class="fbox-icon"><a href="/services/google-ads/"><img src={`${ASSET_BASE}/images/icons/adword.svg`} alt="Google Ads Oise" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">Google Ads (leads rapides)</h3>
+                    <p>Structure propre, mots-clés intention, annonces orientées devis, pages dédiées : on pilote au coût par lead.</p>
+                  </div>
+                </div>
+
+                <div class="feature-box flex-md-row-reverse text-md-end border-0 mt-5">
+                  <div class="fbox-icon"><a href="/services/analytics/"><img src={`${ASSET_BASE}/images/icons/analysis.svg`} alt="Tracking GA4 GTM" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">Tracking &amp; analyse</h3>
+                    <p>GA4, GTM, conversions, appels, UTM : vous savez d’où viennent vos demandes et ce qui rapporte.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-7 offset-3 offset-sm-0 d-sm-none d-lg-block text-center my-5">
+                <img src={`${ASSET_BASE}/images/sections/2.png`} alt="Tableau de bord marketing" class="rounded parallax"
+                  data-bottom-top="transform: translateY(-30px)" data-top-bottom="transform: translateY(30px)" />
+              </div>
+
+              <div class="col-lg-4 col-sm-6">
+                <div class="feature-box border-0">
+                  <div class="fbox-icon"><a href="/services/social/"><img src={`${ASSET_BASE}/images/icons/social.svg`} alt="Social & retargeting" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">Social &amp; retargeting</h3>
+                    <p>On connecte contenu + publicités pour relancer les visiteurs et déclencher la demande (sans “posts pour poster”).</p>
+                  </div>
+                </div>
+
+                <div class="feature-box border-0 mt-5">
+                  <div class="fbox-icon"><a href="/services/cro/"><img src={`${ASSET_BASE}/images/icons/experience.svg`} alt="CRO Conversion" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">CRO (optimisation conversion)</h3>
+                    <p>Amélioration UX, preuves, arguments, formulaires, vitesse : même trafic, plus de contacts.</p>
+                  </div>
+                </div>
+
+                <div class="feature-box border-0 mt-5">
+                  <div class="fbox-icon"><a href="/services/contenu-seo/"><img src={`${ASSET_BASE}/images/icons/content_marketing.svg`} alt="Contenu SEO local" class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0">Pages SEO &amp; contenus locaux</h3>
+                    <p>Pages services, pages villes, FAQ, schémas : on capte les requêtes “près de chez moi” et “devis”.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="section m-0" style={`background: url('${ASSET_BASE}/images/sections/4.png') no-repeat center top; background-size: cover; padding: 140px 0 0;`}>
+          <div class="container">
+            <div class="row justify-content-between">
+              <div class="col-lg-4 mt-4">
+                <div class="heading-block border-bottom-0 mb-4">
+                  <div class="badge rounded-pill badge-default">Offres</div>
+                  <h2 class="text-transform-none ls-0">Des packs simples.<br />Objectif : leads qualifiés.</h2>
+                </div>
+                <p>{pricing.intro}</p>
+
+                <div class="pricing-tenure-switcher d-flex align-items-center mb-4 position-relative" data-container="#pricing-switch">
+                  <span class="pts-switch pts-false col-auto">Mensuel</span>
+                  <div class="pts-switcher col-auto">
+                    <div class="switch mx-3">
+                      <input id="switch-toggle-pricing-tenure" class="switch-toggle switch-toggle-round" type="checkbox" />
+                      <label for="switch-toggle-pricing-tenure" class="mb-0"></label>
+                    </div>
+                  </div>
+                  <span class="pts-switch pts-true col-auto">Trimestriel</span>
+                  <div class="price-discount"></div>
+                </div>
+
+                <small class="text-muted d-block">
+                  Zone : Sud Oise (60) &amp; Nord 95 • Senlis, Chantilly, Creil, Compiègne, Luzarches, L’Isle-Adam…
+                </small>
+              </div>
+
+              <div class="col-lg-8">
+                <div id="section-pricing" class="page-section p-0 m-0">
+                  <div id="pricing-switch" class="pricing row align-items-end g-0 col-mb-50 mb-4">
+
+                    {pricing.plans.map((p) => (
+                      <div class="col-md-6">
+                        <div class="pricing-box">
+                          <div class="pricing-title">
+                            <img class="mb-2 bg-transparent rounded-0" src={p.icon} alt={p.name} width={p.iconWidth} />
+                            <h3>{p.name}</h3>
+                            <span>{p.subtitle}</span>
+                          </div>
+
+                          <div class="pricing-price">
+                            <div class="pts-content pts-content-false"><span class="price-unit">€</span>{p.monthly}<span class="price-tenure"> / mois</span></div>
+                            <div class="pts-content pts-content-true"><span class="price-unit">€</span>{p.quarterly}<span class="price-tenure"> / trimestre</span></div>
+                          </div>
+
+                          <div class="pricing-features border-0 bg-transparent">
+                            <ul>
+                              {p.featuresMonthly.map((f) => (
+                                <li class={f.del ? "pts-content pts-content-false text-black-50" : "pts-content pts-content-false"}>
+                                  {f.ok ? <i class="fa-solid fa-check-circle color me-2"></i> : <i class="bi-dash-circle me-2"></i>}
+                                  {f.del ? <del style="opacity:.5">{f.text}</del> : f.text}
+                                </li>
+                              ))}
+
+                              {p.featuresQuarterly.map((f) => (
+                                <li class="pts-content pts-content-true">
+                                  <i class="fa-solid fa-check-circle color me-2"></i>{f.text}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div class="pricing-action">
+                            <div class="pts-content pts-content-false">
+                              <a href={p.cta.href} class={`button ${p.primary ? "" : "button-light text-dark bg-white border"} button-large button-rounded w-100 text-transform-none m-0 ls-0`}>
+                                {p.cta.label}
+                              </a>
+                            </div>
+                            <div class="pts-content pts-content-true">
+                              <a href={p.cta.href} class={`button ${p.primary ? "" : "button-light text-dark bg-white border"} button-large button-rounded w-100 text-transform-none m-0 ls-0`}>
+                                {p.cta.label}
+                              </a>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    ))}
+
+                  <small class="text-muted">{pricing.note}</small>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="section m-0" style={`background: url('${ASSET_BASE}/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;`}>
+          <div class="container">
+            <div class="row justify-content-between align-items-center">
+
+              <div class="col-md-6">
+                <div class="heading-block border-bottom-0 mb-4">
+                  <div class="badge rounded-pill badge-default">Audit</div>
+                  <h2 class="text-transform-none ls-0">Recevez un diagnostic gratuit</h2>
+                </div>
+                <p>
+                  En 48h : analyse rapide de votre visibilité locale, de vos pages clés et de vos conversions.
+                  Vous repartez avec <strong>3 priorités</strong> et un <strong>plan d’actions</strong> clair.
+                </p>
+                <ul class="iconlist">
+                  <li><i class="fa-solid fa-check"></i> SEO local (Google + GBP)</li>
+                  <li><i class="fa-solid fa-check"></i> Google Ads (si pertinent)</li>
+                  <li><i class="fa-solid fa-check"></i> Conversion (CRO / formulaire / CTA)</li>
+                </ul>
+              </div>
+
+              <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm">
+                  <div class="card-body">
+                    <h3 class="h4 mb-3">Demande d’audit</h3>
+
+                    <!-- Remplace par HubSpot custom quand tu veux -->
+                    <div class="form-widget">
+                      <div class="form-result"></div>
+                      <form class="row mb-0" id="template-contactform" name="template-contactform" action="/api/contact" method="post">
+                        <div class="form-process">
+                          <div class="css3-spinner" style="--cnvs-loader-color:var(--cnvs-themecolor);">
+                            <div class="css3-spinner-scaler"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 form-group mb-3">
+                          <label for="name">Nom *</label>
+                          <input type="text" id="name" name="name" class="form-control input-sm required" />
+                        </div>
+                        <div class="col-12 form-group mb-3">
+                          <label for="email">Email *</label>
+                          <input type="email" id="email" name="email" class="form-control input-sm required" />
+                        </div>
+                        <div class="col-12 form-group mb-4">
+                          <label for="website">Site / Page Google *</label>
+                          <input type="text" id="website" name="website" class="form-control input-sm required" placeholder="https://..." />
+                        </div>
+
+                        <div class="col-12 form-group mb-0">
+                          <button class="button button-rounded w-100 text-transform-none ls-0 m-0" type="submit">
+                            Envoyer
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+
+                    <small class="text-muted d-block mt-3">
+                      En envoyant ce formulaire, vous acceptez d’être recontacté. Pas de spam.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Works/Projects -->
+        <div class="section m-0" style={`background: url('${ASSET_BASE}/images/sections/5.jpg') no-repeat center center; background-size: cover; padding: 80px 0;`}>
+          <div class="container">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Résultats</div>
+              <h2 class="text-transform-none ls-0">Exemples de missions (format “cas”)</h2>
+              <p class="mb-0 text-muted">À remplacer par tes vrais cas clients dès que possible (même 3 suffisent).</p>
+            </div>
+
+            <div id="portfolio" class="portfolio row gutter-20">
+              {works.map((w) => (
+                <article class="portfolio-item col-12 col-sm-6 col-md-4">
+                  <div class="grid-inner">
+                    <div class="portfolio-image">
+                      <img src={w.img} alt={w.alt} />
+                      <div class="bg-overlay">
+                        <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                          <a href={w.href} class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeIn" data-hover-speed="500">
+                            <i class="uil uil-ellipsis-h"></i>
+                          </a>
+                        </div>
+                        <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="500"></div>
+                      </div>
+                    </div>
+                    <div class="portfolio-desc">
+                      <h3><a href={w.href}>{w.title}</a></h3>
+                      <span>{w.tag}</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div class="text-center">
+              <a href="/services/" class="button button-large button-rounded text-capitalize ms-0 mt-5 ls-0">Voir les services</a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Process -->
+        <div class="container py-5">
+          <div class="row">
+            {processSteps.map((s) => (
+              <div class="col-md-4 mt-5">
+                <div class="feature-box fbox-center border-0">
+                  <div class="fbox-icon"><a href="#"><img src={s.icon} alt={s.title} class="bg-transparent rounded-0" /></a></div>
+                  <div class="fbox-content">
+                    <h2 class="text-transform-none ls-0">{s.title}</h2>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="section mt-0" style={`background: url('${ASSET_BASE}/images/sections/3.jpg') no-repeat top center; background-size: cover; padding: 80px 0 70px;`}>
+          <div class="container">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Avis</div>
+              <h2 class="text-transform-none ls-0">Ce que disent les clients</h2>
+              <p class="mb-0 text-muted">Remplace par de vrais avis (Google / LinkedIn). Même 3 avis = énorme.</p>
+            </div>
+
+            <div id="oc-testi" class="owl-carousel testimonials-carousel carousel-widget"
+              data-margin="0" data-pagi="true" data-loop="true" data-center="true"
+              data-autoplay="5000" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-xl="3">
+
+              {testimonials.map((t) => (
+                <div class="oc-item">
+                  <div class="card rounded-6 shadow border-0">
+                    <img class="testimonial-image rounded-circle p-2 bg-white" src={t.img} alt="Avis client" />
+                    <div class="card-body p-4 pt-2 position-relative overflow-hidden">
+                      <div class="row">
+                        <div class="col-12 text-center">
+                          <p class="mb-4 font-primary fst-normal">{t.quote}</p>
+                          <h3 class="h6 mb-0 fw-bold">{t.name}</h3>
+                          <small class="text-muted">{t.meta}</small>
+                        </div>
+                      </div>
+                      <div class="bg-icon bi-quote op-02"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog -->
+        <div class="container py-4">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">Ressources</div>
+            <h2 class="text-transform-none ls-0">Derniers articles</h2>
+          </div>
+
+          <div class="row mt-5">
+            {blog.map((b) => (
+              <div class="col-md-4">
+                <article class="entry">
+                  <div class="entry-image mb-3">
+                    <a href={b.href}><img src={b.img} alt={b.alt} /></a>
+                  </div>
+                  <div class="entry-title">
+                    <h3><a href={b.href}>{b.title}</a></h3>
+                  </div>
+                  <div class="entry-meta">
+                    <ul>
+                      <li><i class="bi-person"></i><a href="#"> {b.author}</a></li>
+                      <li><i class="bi-calendar"></i><a href="#"> {b.date}</a></li>
+                    </ul>
+                  </div>
+                  <div class="entry-content">
+                    <p>{b.excerpt}</p>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Promo/Contact -->
+        <div class="section mt-5 footer-stick promo-section bg-transparent" style="padding: 100px 0; overflow: visible">
+          <div class="container">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="h5 text-uppercase ls-1 mb-1">Audit gratuit • Sud Oise &amp; Nord 95</div>
+              <h2 class="text-transform-none ls-0">
+                On fait le point sur votre acquisition et vos conversions.<br />
+                <span>Vous repartez avec un plan d’actions.</span>
+              </h2>
+              <a href="/contact/" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">Demander un audit</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+      <div class="container">
+        <div class="footer-widgets-wrap pb-5">
+          <div class="row col-mb-50">
+
+            <div class="col-md-8">
+              <div class="widget">
+                <img src={`${ASSET_BASE}/images/logo.svg`} alt="Horizon Conversion" class="alignleft" style="height: 60px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;" />
+                <p>
+                  <strong>Horizon Conversion</strong> : consulting webmarketing orienté résultats (SEO local, Google Ads, CRO, tracking).
+                  Intervention : Sud de l’Oise (60) &amp; Nord Val-d’Oise (95).
+                </p>
+
+                <div class="line line-sm"></div>
+
+                <div class="row g-4">
+                  <div class="col-lg-3 col-6 widget_links">
+                    <ul>
+                      <li><a href="/">Accueil</a></li>
+                      <li><a href="/services/">Services</a></li>
+                      <li><a href="/faqs/">FAQ</a></li>
+                      <li><a href="/blog/">Blog</a></li>
+                      <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-lg-3 col-6 widget_links">
+                    <ul>
+                      <li><a href="/services/seo-local/">SEO local</a></li>
+                      <li><a href="/services/google-ads/">Google Ads</a></li>
+                      <li><a href="/services/cro/">CRO</a></li>
+                      <li><a href="/services/analytics/">Analytics</a></li>
+                      <li><a href="/services/contenu-seo/">Contenu SEO</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-lg-3 col-6 widget_links">
+                    <ul>
+                      <li><a href="/zones/oise/">Oise (60)</a></li>
+                      <li><a href="/zones/val-doise/">Val-d’Oise (95)</a></li>
+                      <li><a href="/zones/senlis/">Senlis</a></li>
+                      <li><a href="/zones/chantilly/">Chantilly</a></li>
+                      <li><a href="/zones/creil/">Creil</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-lg-3 col-6 widget_links">
+                    <ul>
+                      <li><a href="/mentions-legales/">Mentions légales</a></li>
+                      <li><a href="/politique-confidentialite/">Confidentialité</a></li>
+                      <li><a href="/cgu/">CGU</a></li>
+                      <li><a href="/plan-du-site/">Plan du site</a></li>
+                      <li><a href="/contact/">Devis</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="widget">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="feature-box fbox-plain fbox-sm align-items-center">
+                      <div class="fbox-icon"><i class="bi-telephone text-dark"></i></div>
+                      <div class="fbox-content">
+                        <span class="text-muted">Téléphone :</span><br />
+                        <h2 class="h3 text-transform-none ls-0 fw-semibold">{contact.phoneDisplay}</h2>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 mt-4">
+                    <div class="feature-box fbox-plain fbox-sm align-items-center">
+                      <div class="fbox-icon"><i class="bi-envelope text-dark"></i></div>
+                      <div class="fbox-content">
+                        <span class="text-muted">Email :</span><br />
+                        <h2 class="h3 text-transform-none ls-0 fw-semibold">{contact.email}</h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="widget subscribe-widget">
+                <h2 class="h5"><strong>Newsletter</strong> : conseils SEO local &amp; acquisition (1/mois max)</h2>
+                <div class="widget-subscribe-form-result"></div>
+                <form id="widget-subscribe-form" action="/api/subscribe" method="post" class="mb-0">
+                  <div class="input-group mx-auto">
+                    <div class="input-group-text bg-transparent"><i class="bi-send"></i></div>
+                    <input type="email" id="widget-subscribe-form-email" name="email" class="form-control required email" placeholder="Votre email" />
+                    <button class="btn btn-success button button-color text-transform-none ls-0 m-0" type="submit">S’inscrire</button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="widget">
+                <div class="row col-mb-30">
+                  <div class="col-lg-6 col-md-12 col-6">
+                    <div class="d-flex align-items-center">
+                      <a href={contact.linkedin} target="_blank" rel="noopener" class="social-icon bg-dark h-bg-linkedin mb-0 me-2">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <i class="fa-brands fa-linkedin-in"></i>
+                      </a>
+                      <a href={contact.linkedin} target="_blank" rel="noopener" class="text-dark">
+                        <small><strong class="d-block">Suivre</strong>sur LinkedIn</small>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-12 col-6">
+                    <div class="d-flex align-items-center">
+                      <a href="/blog/" class="social-icon bg-dark h-bg-rss mb-0 me-2">
+                        <i class="fa-solid fa-rss"></i>
+                        <i class="fa-solid fa-rss"></i>
+                      </a>
+                      <a href="/blog/" class="text-dark">
+                        <small><strong class="d-block">Lire</strong>le blog</small>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="copyrights" style={`background: url('${ASSET_BASE}/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;`}>
+        <div class="container">
+          <div class="row justify-content-between col-mb-30">
+            <div class="col-12 col-lg-auto text-center text-lg-start">
+              Copyright &copy; 2026 Horizon Conversion. Tous droits réservés.<br />
+              <div class="copyright-links">
+                <a href="/cgu/" class="text-contrast-600">CGU</a> / <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+              </div>
+            </div>
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+              <div class="copyrights-menu copyright-links">
+                <a href="/" class="text-contrast-600">Accueil</a>/<a href="/services/" class="text-contrast-600">Services</a>/<a href="/blog/" class="text-contrast-600">Blog</a>/<a href="/faqs/" class="text-contrast-600">FAQ</a>/<a href="/contact/" class="text-contrast-600">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="gotoTop" class="uil uil-angle-up"></div>
+
+  <!-- JS (Canvas) -->
+  <script src={`${ASSET_BASE}/js/plugins.min.js`}></script>
+  <script src={`${ASSET_BASE}/js/functions.bundle.js`}></script>
+
+  <!-- Parallax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+  <script is:inline>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight: false});</script>
+
+</body>
 </html>
