@@ -23,43 +23,51 @@ const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
             <div class="line line-sm"></div>
 
             <div class="row g-4">
+              <!-- COL 1 : Site -->
               <div class="col-lg-3 col-6 widget_links">
                 <ul>
                   <li><a href="/">Accueil</a></li>
                   <li><a href="/services/">Services</a></li>
-                  <li><a href="/faqs/">FAQ</a></li>
+                  <li><a href="/zones/">Zones</a></li>
                   <li><a href="/blog/">Blog</a></li>
+                  <li><a href="/faqs/">FAQ</a></li>
                   <li><a href="/contact/">Contact</a></li>
                 </ul>
               </div>
 
+              <!-- COL 2 : Services -->
               <div class="col-lg-3 col-6 widget_links">
                 <ul>
                   <li><a href="/services/seo-local/">SEO local</a></li>
                   <li><a href="/services/google-ads/">Google Ads</a></li>
                   <li><a href="/services/cro/">CRO</a></li>
-                  <li><a href="/services/analytics/">Analytics</a></li>
+                  <li><a href="/services/tracking/">Tracking (GA4/GTM)</a></li>
                   <li><a href="/services/contenu-seo/">Contenu SEO</a></li>
+                  <li><a href="/contact/">Mini-audit</a></li>
                 </ul>
               </div>
 
+              <!-- COL 3 : Oise (Sud Oise) -->
               <div class="col-lg-3 col-6 widget_links">
                 <ul>
                   <li><a href="/zones/oise/">Oise (60)</a></li>
-                  <li><a href="/zones/val-doise/">Val-d’Oise (95)</a></li>
-                  <li><a href="/zones/senlis/">Senlis</a></li>
-                  <li><a href="/zones/chantilly/">Chantilly</a></li>
-                  <li><a href="/zones/creil/">Creil</a></li>
+                  <li><a href="/zones/oise/senlis/">Senlis</a></li>
+                  <li><a href="/zones/oise/chantilly/">Chantilly</a></li>
+                  <li><a href="/zones/oise/creil/">Creil</a></li>
+                  <li><a href="/zones/oise/nogent-sur-oise/">Nogent-sur-Oise</a></li>
+                  <li><a href="/zones/oise/saint-leu-d-esserent/">Saint-Leu-d’Esserent</a></li>
                 </ul>
               </div>
 
+              <!-- COL 4 : Val-d’Oise (Nord 95) -->
               <div class="col-lg-3 col-6 widget_links">
                 <ul>
-                  <li><a href="/mentions-legales/">Mentions légales</a></li>
-                  <li><a href="/politique-confidentialite/">Confidentialité</a></li>
-                  <li><a href="/cgu/">CGU</a></li>
-                  <li><a href="/plan-du-site/">Plan du site</a></li>
-                  <li><a href="/contact/">Devis</a></li>
+                  <li><a href="/zones/val-doise/">Val-d’Oise (95)</a></li>
+                  <li><a href="/zones/val-doise/argenteuil/">Argenteuil</a></li>
+                  <li><a href="/zones/val-doise/bezons/">Bezons</a></li>
+                  <li><a href="/zones/val-doise/cergy/">Cergy</a></li>
+                  <li><a href="/zones/val-doise/pontoise/">Pontoise</a></li>
+                  <li><a href="/zones/val-doise/enghien-les-bains/">Enghien-les-Bains</a></li>
                 </ul>
               </div>
             </div>
@@ -138,20 +146,44 @@ const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
     </div>
   </div>
 
-  <div id="copyrights" style={`background: url('${ASSET_BASE}/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;`}>
+  <div
+    id="copyrights"
+    style={`background: url('${ASSET_BASE}/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;`}
+  >
     <div class="container">
-      <div class="row justify-content-between col-mb-30">
-        <div class="col-12 col-lg-auto text-center text-lg-start">
-          Copyright &copy; 2026 Horizon Conversion. Tous droits réservés.<br />
-          <div class="copyright-links">
-            <a href="/cgu/" class="text-contrast-600">CGU</a> / <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+      <div class="row justify-content-between align-items-center col-mb-30">
+
+        <div class="col-12 col-lg-6 text-center text-lg-start">
+          <div class="text-contrast-600">
+            Copyright &copy; 2026 Horizon Conversion. Tous droits réservés.
+          </div>
+          <div class="copyright-links mt-2">
+            <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+            <span class="mx-1">/</span>
+            <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+            <span class="mx-1">/</span>
+            <a href="/cgu/" class="text-contrast-600">CGU</a>
+            <span class="mx-1">/</span>
+            <a href="/plan-du-site/" class="text-contrast-600">Plan du site</a>
           </div>
         </div>
-        <div class="col-12 col-lg-auto text-center text-lg-end">
+
+        <div class="col-12 col-lg-6 text-center text-lg-end">
           <div class="copyrights-menu copyright-links">
-            <a href="/" class="text-contrast-600">Accueil</a>/<a href="/services/" class="text-contrast-600">Services</a>/<a href="/blog/" class="text-contrast-600">Blog</a>/<a href="/faqs/" class="text-contrast-600">FAQ</a>/<a href="/contact/" class="text-contrast-600">Contact</a>
+            <a href="/" class="text-contrast-600">Accueil</a>
+            <span class="mx-1">/</span>
+            <a href="/services/" class="text-contrast-600">Services</a>
+            <span class="mx-1">/</span>
+            <a href="/zones/" class="text-contrast-600">Zones</a>
+            <span class="mx-1">/</span>
+            <a href="/blog/" class="text-contrast-600">Blog</a>
+            <span class="mx-1">/</span>
+            <a href="/faqs/" class="text-contrast-600">FAQ</a>
+            <span class="mx-1">/</span>
+            <a href="/contact/" class="text-contrast-600">Contact</a>
           </div>
         </div>
+
       </div>
     </div>
   </div>
