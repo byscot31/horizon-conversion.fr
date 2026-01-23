@@ -1,5 +1,5 @@
 ---
-// src/pages/services/analytics/index.astro
+// src/pages/services/cro/index.astro
 
 import Head from "../../../components/Head.astro";
 import TopBar from "../../../components/TopBar.astro";
@@ -7,6 +7,7 @@ import Header from "../../../components/Header.astro";
 import Footer from "../../../components/Footer.astro";
 import JavaScripts from "../../../components/JavaScripts.astro";
 
+// Base URL + assets
 const SITE =
   (import.meta as any).env?.PUBLIC_SITE_URL ||
   (Astro.site ? String(Astro.site) : "");
@@ -19,9 +20,9 @@ const canonical = SITE
   : Astro.url.toString();
 
 const seo = {
-  title: "Analyse & suivi des performances | GA4, GTM, conversions & reporting | Sud Oise (60) / Nord 95",
+  title: "Consultant CRO & UX Sud Oise (60) / Nord 95 | Optimisation conversion (leads)",
   description:
-    "Mesurez ce qui rapporte : GA4, Google Tag Manager, tracking formulaires/appels/WhatsApp, pixels & conversions, dashboards, attribution et recommandations actionnables (CRO/SEO/Ads).",
+    "CRO (Conversion Rate Optimization) : transformez votre trafic en demandes (appels, formulaires, devis). Audit UX mobile, messages & preuves, formulaires, tests A/B simples, tracking GA4/GTM. Sud Oise & Nord Val-d’Oise.",
 };
 
 const contact = {
@@ -33,118 +34,158 @@ const contact = {
 };
 
 const pageTitle = {
-  badge: "Analyse",
-  h1: "Analyse & suivi des performances",
+  badge: "CRO / UX",
+  h1: "Optimisation du taux de conversion (CRO)",
   breadcrumb: [
     { label: "Accueil", href: "/" },
     { label: "Services", href: "/services/" },
-    { label: "Analyse", href: "/services/analytics/" },
+    { label: "CRO", href: "/services/cro/" },
   ],
 };
 
 const hero = {
-  badge: "Tracking & reporting",
-  title: "Comprendre vos chiffres. Décider vite. Dépenser mieux.",
+  badge: "Objectif : + d’appels & formulaires",
+  title: "Votre site doit convertir. Sinon, vous payez… pour rien.",
   p1:
-    "Sans tracking propre, vous optimisez “au feeling”. Je mets en place une mesure fiable (GA4/GTM) et un reporting lisible pour piloter SEO, Ads et CRO.",
+    "La CRO (Conversion Rate Optimization) améliore le pourcentage de visiteurs qui vous contactent. En pratique : plus d’appels, plus de formulaires, plus de demandes qualifiées — sans forcément augmenter le trafic.",
   p2:
-    "Objectif : suivre les vrais leads (formulaires, appels, prises de RDV, WhatsApp), identifier les pages qui performent, et prioriser les actions qui augmentent le CA.",
-  ctaPrimary: { label: "Demander un audit tracking", href: "/contact/" },
-  ctaSecondary: { label: "Contact", href: "/contact/" },
-  img: `${ASSET_BASE}/images/services/analysis.svg`,
-  imgAlt: "Digital Analysis - Horizon Conversion",
+    "Je travaille sur 3 leviers : un message clair (quoi / pour qui / où), de la confiance (preuves, avis, cas), et moins de friction (mobile, vitesse, formulaire, parcours).",
+  ctaPrimary: { label: "Demander un audit CRO", href: "/contact/" },
+  ctaSecondary: { label: "Voir tous les services", href: "/services/" },
+  img: `${ASSET_BASE}/images/services/experience.svg`,
+  imgAlt: "CRO UX - optimisation conversion",
 };
 
 const provideIntro = {
-  badge: "Ce que je mesure",
-  title: "Ce que je mets en place (concret et actionnable)",
+  badge: "Ce que je fais",
+  title: "CRO orienté business : chaque changement = une métrique",
 };
 
 const provides = [
   {
-    iconClass: "fa-brands fa-google text-white bg-google",
-    title: "Google Analytics 4 (GA4)",
+    iconClass: "bi-check-lg bg-info border-0",
+    title: "Clarté & proposition de valeur",
     text:
-      "Paramétrage GA4, événements, conversions, audiences, filtrage du trafic interne, et lecture orientée business (pas “des pages vues”).",
+      "On clarifie la promesse : service, zone, délais, différence. Moins de flou = plus de confiance et plus de clics vers le contact.",
   },
   {
-    iconClass: "bi-file-earmark-richtext bg-dark border-0",
-    title: "Page / Funnel analytics",
+    iconClass: "bi-book-reader bg-primary border-0",
+    title: "UX mobile-first (parcours & lisibilité)",
     text:
-      "Analyse pages clés : sources, parcours, micro-conversions, points de friction, priorisation des améliorations (CRO).",
+      "Menus, sections, hiérarchie, CTA visibles, lecture rapide. Sur mobile, 3 secondes décident souvent de tout.",
   },
   {
-    iconClass: "bi-box-arrow-in-right bg-info border-0",
-    title: "Performance & vitesse",
+    iconClass: "bi-fonts bg-danger border-0",
+    title: "Preuves & réassurance (avis, cas, FAQ)",
     text:
-      "Core Web Vitals, chargement, mobile, scripts : recommandations pragmatiques (ce qui impacte vraiment SEO & conversion).",
+      "Avis clients, réalisations, garanties, réponses aux objections (prix, délais, zones). C’est ce qui déclenche le passage à l’action.",
   },
 ];
 
 const otherIntro = {
-  badge: "À associer",
-  title: "Services complémentaires (pour transformer la data en CA)",
+  badge: "À combiner pour aller plus vite",
+  title: "Les services complémentaires (souvent indispensables)",
 };
 
 const otherCauses = [
   {
-    icon: `${ASSET_BASE}/images/icons/seo.svg`,
-    title: "SEO local",
+    icon: `${ASSET_BASE}/images/icons/analysis.svg`,
+    title: "Analytics & tracking (GA4 / GTM)",
     desc:
-      "Créer un flux régulier de demandes en local : pages “ville + service”, Google Business Profile, avis, maillage.",
-    bullets: ["Pages locales", "GBP optimisé", "FAQ & schémas", "Suivi positions", "Vitesse"],
+      "On mesure ce qui compte vraiment : clic téléphone, envoi formulaire, WhatsApp, conversions Ads, sources & UTMs.",
+    bullets: [
+      "GA4 + Google Tag Manager",
+      "Événements (tel, formulaire, WhatsApp…)",
+      "UTM & attribution",
+      "Tableau de bord simple",
+      "Qualité des leads",
+    ],
+    href: "/services/analytics/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/seo.svg`,
+    title: "SEO local (Google Maps + organique)",
+    desc:
+      "Plus de visibilité locale + pages qui convertissent = combo gagnant (artisan, cabinet, PME locale).",
+    bullets: [
+      "Google Business Profile",
+      "Pages “ville + service”",
+      "FAQ + schémas",
+      "Avis & e-réputation",
+      "Core Web Vitals",
+    ],
     href: "/services/seo-local/",
   },
   {
     icon: `${ASSET_BASE}/images/icons/adword.svg`,
-    title: "Google Ads",
+    title: "Google Ads (Search) : leads rapides",
     desc:
-      "Leads rapides sur requêtes à forte intention. Le tracking permet de mesurer CPL/CPA et d’optimiser la rentabilité.",
-    bullets: ["Search", "Conversions", "Landing", "Reporting", "Optimisation"],
+      "Si vous voulez des demandes rapidement : campagnes Search pilotées à l’intention + landing pages orientées conversion.",
+    bullets: [
+      "Structure campagnes + extensions",
+      "Mots-clés intention + exclusions",
+      "Landing pages dédiées",
+      "Suivi appels & formulaires",
+      "Optimisation coût par lead",
+    ],
     href: "/services/google-ads/",
   },
   {
-    icon: `${ASSET_BASE}/images/icons/experience.svg`,
-    title: "CRO / UX",
-    desc:
-      "Améliorer le taux de conversion : message, preuves, CTA, formulaire, vitesse. On utilise vos données pour prioriser.",
-    bullets: ["Audit UX", "Hypothèses", "Optimisations", "A/B tests", "Suivi résultats"],
-    href: "/services/cro/",
-  },
-  {
-    icon: `${ASSET_BASE}/images/icons/social.svg`,
-    title: "Social Ads",
-    desc:
-      "Pour accélérer l’acquisition : Meta Ads + retargeting + tracking (pixel/CAPI).",
-    bullets: ["Meta Ads", "Retargeting", "Créa", "Landing", "CPL optimisé"],
-    href: "/services/social-media/",
-  },
-  {
     icon: `${ASSET_BASE}/images/icons/content_marketing.svg`,
-    title: "Contenu SEO",
+    title: "Contenu SEO orienté conversion",
     desc:
-      "Transformer la donnée en plan éditorial : sujets qui convertissent, pages services, FAQ anti-objections.",
-    bullets: ["Plan éditorial", "Pages services", "FAQ", "Maillage", "Mises à jour"],
+      "Pages services et contenus qui répondent aux vraies recherches : prix, délais, zones, étapes, garanties.",
+    bullets: [
+      "Pages services structurées",
+      "FAQ (objections) intégrées",
+      "Briefs conversion",
+      "Optimisation titles/meta",
+      "Maillage interne",
+    ],
     href: "/services/contenu-seo/",
   },
   {
-    icon: `${ASSET_BASE}/images/icons/analysis.svg`,
-    title: "Dashboards & reporting",
+    icon: `${ASSET_BASE}/images/icons/social.svg`,
+    title: "Social & retargeting",
     desc:
-      "Tableau de bord simple : leads, sources, coûts, pages clés, tendances. Partage en 10 minutes en réunion.",
-    bullets: ["KPIs utiles", "Sources", "Leads", "Coûts", "Synthèse"],
-    href: "/services/analytics/",
+      "Relancer les visiteurs et renforcer la preuve sociale : utile si la décision se fait sur plusieurs visites.",
+    bullets: [
+      "Retargeting visiteurs",
+      "Créa simple & locale",
+      "Offres + preuves",
+      "Tracking UTM",
+      "Optimisation CPL",
+    ],
+    href: "/services/social/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/experience.svg`,
+    title: "CRO “light” : tests A/B simples",
+    desc:
+      "Sans usine à gaz : on teste titres, CTA, preuves, formulaires. Objectif : gagner en conversion rapidement.",
+    bullets: [
+      "Hypothèses + priorisation",
+      "Tests sur pages clés",
+      "Analyse résultats",
+      "Déploiement gagnants",
+      "Itérations mensuelles",
+    ],
+    href: "/services/cro/",
   },
 ];
 
 const formSection = {
   bg: `${ASSET_BASE}/images/sections/1.jpg`,
-  badge: "Audit",
-  title: "Recevez un mini-audit Analytics (tracking + opportunités rapides)",
+  badge: "Audit CRO",
+  title: "Recevez 10 recommandations concrètes (gratuit)",
   text:
-    "Je vous indique : ce qui est correctement mesuré, ce qui manque (leads, appels, RDV…), et 3 actions prioritaires pour améliorer l’acquisition et la conversion.",
-  cardTitle: "Demander le mini-audit",
-  fields: { nameLabel: "Nom *", emailLabel: "Email *", websiteLabel: "Site Web *" },
+    "Je vous envoie une mini-roadmap priorisée : ce qui fera le plus d’impact sur vos demandes dans les 30 prochains jours.",
+  cardTitle: "Demander l’audit",
+  fields: {
+    nameLabel: "Nom *",
+    emailLabel: "Email *",
+    websiteLabel: "Site Web *",
+  },
   submitLabel: "Envoyer",
   videoUrl: "https://www.youtube.com/watch?v=P3Huse9K6Xs",
 };
@@ -153,8 +194,8 @@ const formSection = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Digital Analysis & Tracking (GA4/GTM/Reporting)",
-  serviceType: "Web Analytics / Tracking / Reporting",
+  name: "CRO / UX - Optimisation du taux de conversion",
+  serviceType: "CRO (Conversion Rate Optimization) / UX",
   areaServed: [
     "Oise (60)",
     "Val-d’Oise (95)",
@@ -165,7 +206,11 @@ const jsonLd = {
     "Luzarches",
     "L'Isle-Adam",
   ],
-  provider: { "@type": "Organization", name: "Horizon Conversion", url: canonical },
+  provider: {
+    "@type": "Organization",
+    name: "Horizon Conversion",
+    url: canonical,
+  },
 };
 ---
 
@@ -179,11 +224,7 @@ const jsonLd = {
 
       <!-- Page Title -->
       <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
-        <img
-          src={`${ASSET_BASE}/images/services/analysis-title.jpg`}
-          class="parallax-bg"
-          alt="Digital Analysis"
-        />
+        <img src={`${ASSET_BASE}/images/services/experience-title.jpg`} class="parallax-bg" alt="CRO UX - Sud Oise et Nord 95" />
         <div id="particles-line"></div>
 
         <div class="container">
@@ -227,19 +268,13 @@ const jsonLd = {
                 <p>{hero.p2}</p>
 
                 <div class="d-flex flex-wrap gap-2">
-                  <a href={hero.ctaPrimary.href} class="button button-rounded button-large text-transform-none ls-0">
-                    {hero.ctaPrimary.label}
-                  </a>
-                  <a
-                    href={hero.ctaSecondary.href}
-                    class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0"
-                  >
-                    {hero.ctaSecondary.label}
-                  </a>
+                  <a href={hero.ctaPrimary.href} class="button button-rounded button-large text-transform-none ls-0">{hero.ctaPrimary.label}</a>
+                  <a href={hero.ctaSecondary.href} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">{hero.ctaSecondary.label}</a>
                 </div>
 
                 <div class="mt-4 small text-muted">
-                  Résultat attendu : un tableau de bord clair + des recommandations qui impactent <strong>leads</strong> et <strong>CA</strong>.
+                  Requêtes visées : <strong>consultant CRO Oise</strong>, <strong>optimisation taux de conversion</strong>,{" "}
+                  <strong>audit UX</strong>, <strong>améliorer conversions site</strong>, <strong>landing page</strong>.
                 </div>
               </div>
 
@@ -306,10 +341,7 @@ const jsonLd = {
                           </ul>
 
                           <div class="mt-4">
-                            <a
-                              href={c.href}
-                              class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center"
-                            >
+                            <a href={c.href} class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center">
                               En savoir plus
                             </a>
                           </div>
@@ -339,6 +371,10 @@ const jsonLd = {
                     <h3 class="text-transform-none ls-0">{formSection.title}</h3>
                   </div>
                   <p>{formSection.text}</p>
+
+                  <div class="mt-4 small text-white-50">
+                    Exemples d’objectifs suivis : <strong>clic téléphone</strong>, <strong>envoi formulaire</strong>, <strong>WhatsApp</strong>, <strong>devis</strong>.
+                  </div>
                 </div>
 
                 <div class="col-lg-5 col-md-6">
@@ -376,6 +412,7 @@ const jsonLd = {
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
