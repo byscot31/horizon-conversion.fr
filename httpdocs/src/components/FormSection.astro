@@ -1,0 +1,69 @@
+---
+const { ASSET_BASE = "/_assets_" } = Astro.props;
+---
+
+<div class="section m-0" style={`background: url('${ASSET_BASE}/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;`}>
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <div class="col-md-6">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Audit</div>
+          <h2 class="h3 text-transform-none ls-0">Recevez un diagnostic gratuit</h2>
+        </div>
+        <p>
+          En 48h : analyse rapide de votre visibilité locale, de vos pages clés et de vos conversions.
+          Vous repartez avec <strong>3 priorités</strong> et un <strong>plan d’actions</strong> clair.
+        </p>
+        <ul class="iconlist">
+          <li><i class="fa-solid fa-check"></i> SEO local (Google + GBP)</li>
+          <li><i class="fa-solid fa-check"></i> Google Ads (si pertinent)</li>
+          <li><i class="fa-solid fa-check"></i> Conversion (CRO / formulaire / CTA)</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-5 col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="h4 mb-3">Demande d’audit</h3>
+
+            <div class="form-widget">
+              <div class="form-result"></div>
+              <form class="row mb-0" id="template-contactform" name="template-contactform" action="/api/contact" method="post">
+                <div class="form-process">
+                  <div class="css3-spinner" style="--cnvs-loader-color:var(--cnvs-themecolor);">
+                    <div class="css3-spinner-scaler"></div>
+                  </div>
+                </div>
+
+                <div class="col-12 form-group mb-3">
+                  <label for="name">Nom *</label>
+                  <input type="text" id="name" name="name" class="form-control input-sm required" />
+                </div>
+                <div class="col-12 form-group mb-3">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" class="form-control input-sm required" />
+                </div>
+                <div class="col-12 form-group mb-4">
+                  <label for="website">Site / Page Google *</label>
+                  <input type="text" id="website" name="website" class="form-control input-sm required" placeholder="https://..." />
+                </div>
+
+                <div class="col-12 form-group mb-0">
+                  <button class="button button-rounded w-100 text-transform-none ls-0 m-0" type="submit">
+                    Envoyer
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <small class="text-muted d-block mt-3">
+              En envoyant ce formulaire, vous acceptez d’être recontacté. Pas de spam.
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
