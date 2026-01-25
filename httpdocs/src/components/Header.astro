@@ -50,6 +50,20 @@ const megaServices =
   Array.isArray(megaServicesProp) && megaServicesProp.length
     ? megaServicesProp
     : defaultMegaServices;
+
+// Header.astro
+const path = Astro.url.pathname;
+
+const isHome = path === "/";
+
+// "Ce que je fais" : uniquement la page liste
+const isServicesIndex = path === "/services/";
+
+// "Services" (mega) : uniquement les sous-pages
+const isServicesMega = path.startsWith("/services/") && path !== "/services/";
+
+const isFaq = path.startsWith("/faqs/");
+const isContact = path.startsWith("/contact/");
 ---
 
 <header id="header" class="transparent-header floating-header header-size-md">
@@ -75,10 +89,15 @@ const megaServices =
 
         <nav class="primary-menu with-arrows">
           <ul class="menu-container">
-            <li class="menu-item current"><a class="menu-link" href="/"><div>Accueil</div></a></li>
-            <li class="menu-item"><a class="menu-link" href="/services/"><div>Ce que je fais</div></a></li>
+            <li class={`menu-item ${isHome ? "current" : ""}`}>
+              <a class="menu-link" href="/"><div>Accueil</div></a>
+            </li>
 
-            <li class="menu-item mega-menu">
+            <li class={`menu-item ${isServicesIndex ? "current" : ""}`}>
+              <a class="menu-link" href="/services/"><div>Ce que je fais</div></a>
+            </li>
+
+            <li class={`menu-item mega-menu ${isServicesMega ? "current" : ""}`}>
               <a class="menu-link" href="#"><div>Services</div></a>
               <div class="mega-menu-content mega-menu-style-2 px-0">
                 <div class="container">
@@ -106,8 +125,13 @@ const megaServices =
               </div>
             </li>
 
-            <li class="menu-item"><a class="menu-link" href="/faqs/"><div>FAQ</div></a></li>
-            <li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
+            <li class={`menu-item ${isFaq ? "current" : ""}`}>
+              <a class="menu-link" href="/faqs/"><div>FAQ</div></a>
+            </li>
+
+            <li class={`menu-item ${isContact ? "current" : ""}`}>
+              <a class="menu-link" href="/contact/"><div>Contact</div></a>
+            </li>
           </ul>
         </nav>
 

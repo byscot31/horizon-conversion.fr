@@ -1,8 +1,15 @@
 ---
 const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
+
+const path = Astro.url.pathname;
+// Home = "/" (si tu veux aussi gérer "/index.html", dis-moi)
+const isHome = path === "/";
+
+const topBarClass = `transparent-topbar${isHome ? "" : " dark"}`;
+const rightColClass = `col-12 col-md-auto${isHome ? "" : " dark"}`;
 ---
 
-<div id="top-bar" class="transparent-topbar dark">
+<div id="top-bar" class={topBarClass}>
   <div class="container">
     <div class="row justify-content-between">
 
@@ -22,7 +29,7 @@ const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
         </div>
       </div>
 
-      <div class="col-12 col-md-auto dark">
+      <div class={rightColClass}>
         <ul id="top-social">
           <li>
             <a href={contact?.linkedin} class="h-bg-linkedin" target="_blank" rel="noopener">

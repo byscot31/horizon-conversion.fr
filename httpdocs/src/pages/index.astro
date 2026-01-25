@@ -8,6 +8,8 @@ import FormSection from "../components/FormSection.astro";
 import Footer from "../components/Footer.astro";
 import JavaScripts from "../components/JavaScripts.astro";
 
+import { getCollection } from "astro:content";
+
 const ASSET_BASE = "/_assets_";
 
 const SITE =
@@ -105,11 +107,10 @@ const processSteps = [
   { icon: `${ASSET_BASE}/images/icons/result.svg`, title: "3. Suivi & résultats", desc: "Reporting clair, décisions data : on améliore en continu le coût par lead et la qualité des demandes." },
 ];
 
-const blog = [
-  { href: "/blog/seo-local-oise/", img: `${ASSET_BASE}/images/blog/1.jpg`, alt: "SEO local Oise", title: "SEO local : apparaître dans Google Maps (Oise & Nord 95)", author: "Horizon Conversion", date: "2026", excerpt: "Les bases qui font la différence : Google Business Profile, avis, catégories, pages locales et cohérence NAP." },
-  { href: "/blog/google-ads-artisans/", img: `${ASSET_BASE}/images/blog/2.jpg`, alt: "Google Ads artisans", title: "Google Ads : générer des devis sans brûler le budget", author: "Horizon Conversion", date: "2026", excerpt: "Structure, mots-clés, exclusions, annonces, landing page : le combo pour un coût par lead maîtrisé." },
-  { href: "/blog/cro-formulaire/", img: `${ASSET_BASE}/images/blog/3.jpg`, alt: "CRO formulaire", title: "CRO : 7 optimisations pour doubler les demandes", author: "Horizon Conversion", date: "2026", excerpt: "Preuves, CTA, friction, vitesse, mobile : des gains rapides sans changer tout le site." },
-];
+const latestPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
 // JSON-LD (à adapter quand tu ajoutes adresse/ville)
 const jsonLd = {
@@ -470,27 +471,31 @@ const jsonLd = {
             </div>
 
             <div class="row mt-5">
-              {blog.map((b) => (
-                <div class="col-md-4">
-                  <article class="entry">
-                    <div class="entry-image mb-3">
-                      <a href={b.href}><img src={b.img} alt={b.alt} /></a>
-                    </div>
-                    <div class="entry-title">
-                      <h3><a href={b.href}>{b.title}</a></h3>
-                    </div>
-                    <div class="entry-meta">
-                      <ul>
-                        <li><i class="bi-person"></i><a href="#"> {b.author}</a></li>
-                        <li><i class="bi-calendar"></i><a href="#"> {b.date}</a></li>
-                      </ul>
-                    </div>
-                    <div class="entry-content">
-                      <p>{b.excerpt}</p>
-                    </div>
-                  </article>
-                </div>
-              ))}
+              {latestPosts.map((p) => {
+                const url = "/blog/" + p.slug + "/";
+                return (
+                  <div class="col-md-4">
+                    <article class="entry">
+                      <div class="entry-image mb-3">
+                        <a href={url}>
+                          <img
+                            src={p.data.cover ?? "/_assets_/images/blog/1.jpg"}
+                            alt={p.data.title}
+                          />
+                        </a>
+                      </div>
+
+                      <div class="entry-title">
+                        <h3><a href={url}>{p.data.title}</a></h3>
+                      </div>
+
+                      <div class="entry-content">
+                        <p>{p.data.description}</p>
+                      </div>
+                    </article>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
