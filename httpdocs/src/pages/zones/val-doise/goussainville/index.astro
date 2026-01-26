@@ -1,0 +1,270 @@
+---
+// src/pages/zones/val-doise/goussainville/index.astro
+
+import Head from "../../../../components/Head.astro";
+import TopBar from "../../../../components/TopBar.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import JavaScripts from "../../../../components/JavaScripts.astro";
+
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const ASSET_BASE =
+  (((import.meta as any).env?.PUBLIC_ASSET_BASE as string) || "/_assets_").replace(/\/$/, "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+const basePath = "/zones/val-doise";
+
+const zone = {
+  departement: "Val-d’Oise",
+  name: "Goussainville",
+  h1: "Agence webmarketing à Goussainville (Val-d’Oise)",
+  sub: "SEO local • Google Ads • CRO • Tracking (GA4/GTM) – Goussainville, Gonesse, Louvres, Le Thillay & Nord 95",
+  heroImage: `${ASSET_BASE}/images/services/analysis-title.jpg`,
+  nearby: [
+    { name: "Gonesse", slug: "gonesse" },
+    { name: "Louvres", slug: "louvres" },
+    { name: "Le Thillay", slug: "le-thillay" },
+    { name: "Arnouville", slug: "arnouville" },
+    { name: "Roissy-en-France", slug: "roissy-en-france" },
+    { name: "Sarcelles", slug: "sarcelles" },
+    { name: "Villiers-le-Bel", slug: "villiers-le-bel" },
+    { name: "Garges-lès-Gonesse", slug: "garges-les-gonesse" },
+    { name: "Écouen", slug: "ecouen" },
+  ],
+  services: [
+    {
+      title: "SEO local (Google Maps)",
+      desc: "Remonter sur “service + Goussainville” et dans le pack local.",
+      href: "/services/seo-local/",
+    },
+    {
+      title: "Google Ads (leads rapides)",
+      desc: "Campagnes orientées appels / formulaires avec coût/lead piloté.",
+      href: "/services/google-ads/",
+    },
+    {
+      title: "CRO (conversion)",
+      desc: "Optimiser les pages pour transformer les clics en demandes.",
+      href: "/services/cro/",
+    },
+    {
+      title: "Tracking (GA4/GTM)",
+      desc: "UTM + événements + conversions : attribution fiable des leads.",
+      href: "/services/tracking/",
+    },
+  ],
+  cta: {
+    primary: { label: "Demander un mini-audit", href: "/contact/" },
+    secondary: { label: "Voir les services", href: "/services/" },
+  },
+};
+
+const seo = {
+  title: `Webmarketing Goussainville (95) – SEO local, Google Ads, CRO | Horizon Conversion`,
+  description:
+    "Horizon Conversion accompagne artisans, commerces et TPE/PME à Goussainville (Val-d’Oise) : SEO local, Google Ads, CRO, tracking GA4/GTM. Mini-audit gratuit.",
+};
+
+const breadcrumb = [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+  { label: "Val-d’Oise", href: "/zones/val-doise/" },
+  { label: "Goussainville", href: "/zones/val-doise/goussainville/" },
+];
+
+const zoneJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `Webmarketing – ${zone.name} (${zone.departement})`,
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Horizon Conversion",
+    url: canonical,
+  },
+  areaServed: [
+    { "@type": "City", name: zone.name },
+    { "@type": "AdministrativeArea", name: zone.departement },
+  ],
+  serviceType: ["SEO local", "Google Ads", "CRO", "Analytics / Tracking"],
+};
+---
+
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+  <Head {seo} {canonical} jsonLd={zoneJsonLd} />
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar ASSET_BASE={ASSET_BASE} />
+      <Header ASSET_BASE={ASSET_BASE} />
+
+      <!-- Hero -->
+      <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+        <img src={zone.heroImage} class="parallax-bg" alt={zone.name} />
+        <div id="particles-line"></div>
+
+        <div class="container">
+          <div class="page-title-row">
+            <div class="page-title-content">
+              <div class="badge rounded-pill border border-light text-light">Zone d’intervention</div>
+              <h1>{zone.h1}</h1>
+              <p class="mt-3 mb-0 text-white-50" style="max-width: 900px; margin-inline: auto;">
+                {zone.sub}
+              </p>
+            </div>
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                {breadcrumb.map((b, idx) => (
+                  <li
+                    class={`breadcrumb-item ${idx === breadcrumb.length - 1 ? "active" : ""}`}
+                    aria-current={idx === breadcrumb.length - 1 ? "page" : undefined}
+                  >
+                    {idx === breadcrumb.length - 1 ? b.label : <a href={b.href}>{b.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+      </section>
+
+      <!-- Content -->
+      <section id="content">
+        <div class="content-wrap pb-0">
+          <div class="container">
+            <div class="row justify-content-between align-items-start col-mb-50">
+
+              <!-- Left -->
+              <div class="col-lg-7">
+                <div class="badge rounded-pill badge-default">Goussainville (95)</div>
+                <h2 class="display-5 fw-bold mt-2">Acquisition + conversion + tracking</h2>
+                <p class="lead mt-3 mb-4">
+                  Un plan simple et mesurable : visibilité locale, leads, mesure, optimisation.
+                </p>
+
+                <div class="row col-mb-30">
+                  {zone.services.map((s) => (
+                    <div class="col-md-6">
+                      <div class="feature-box fbox-plain">
+                        <div class="fbox-icon">
+                          <i class="bi-check-circle text-dark"></i>
+                        </div>
+                        <div class="fbox-content">
+                          <h3 class="text-transform-none ls-0 mb-1">{s.title}</h3>
+                          <p class="mb-2 text-muted">{s.desc}</p>
+                          <a href={s.href} class="text-dark"><u>En savoir plus</u></a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="clear line my-5"></div>
+
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Autour de Goussainville</div>
+                  <h3 class="text-transform-none ls-0 mb-0">Villes proches</h3>
+                </div>
+
+                <div class="row col-mb-30 mt-3">
+                  {zone.nearby.map((c) => (
+                    <div class="col-sm-6 col-lg-4">
+                      <a
+                        class="card h-bg-light border-0 shadow-sm"
+                        href={`${basePath}/${c.slug}/`}
+                        style="text-decoration:none;"
+                      >
+                        <div class="card-body py-4">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <strong class="text-dark">{c.name}</strong>
+                            <i class="bi-arrow-right text-black-50"></i>
+                          </div>
+                          <small class="text-muted d-block mt-1">SEO local • Ads • CRO</small>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Right (CTA) -->
+              <div class="col-lg-4">
+                <div class="card shadow-sm">
+                  <div class="card-body p-5">
+                    <div class="badge rounded-pill badge-default">Mini-audit</div>
+                    <h3 class="text-transform-none ls-0 mt-2">Priorités & plan d’action</h3>
+                    <p class="text-muted mb-4">
+                      3 actions concrètes pour générer plus de demandes qualifiées à Goussainville.
+                    </p>
+
+                    <a href={zone.cta.primary.href} class="button button-rounded w-100 text-transform-none ls-0 m-0 mb-2">
+                      {zone.cta.primary.label}
+                    </a>
+                    <a href={zone.cta.secondary.href} class="button button-rounded button-light w-100 text-dark bg-white border text-transform-none ls-0 m-0">
+                      {zone.cta.secondary.label}
+                    </a>
+
+                    <div class="line line-sm my-4"></div>
+
+                    <ul class="iconlist ms-0 mb-0">
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> SEO local + pages zone</li>
+                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Tracking appels / formulaires</li>
+                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Pilotage coût/lead</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="clear"></div>
+
+          <!-- CTA section -->
+          <div
+            class="section mt-6 mb-0"
+            style={{
+              background: `url(${ASSET_BASE}/images/sections/1.jpg) no-repeat center center`,
+              backgroundSize: "cover",
+              padding: "90px 0",
+            }}
+          >
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-7">
+                  <div class="heading-block border-bottom-0 mb-3">
+                    <div class="badge rounded-pill badge-default">Val-d’Oise</div>
+                    <h3 class="text-transform-none ls-0">Goussainville : plus de visibilité, plus de leads</h3>
+                  </div>
+                  <p class="mb-0">On attire, on convertit, on mesure, puis on optimise.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                  <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">
+                    Parler de ton projet
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer ASSET_BASE={ASSET_BASE} />
+    </div>
+
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+    <JavaScripts ASSET_BASE={ASSET_BASE} />
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles.min.js`}></script>
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles-line.js`}></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+---
+const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
+
+const path = Astro.url.pathname;
+// Home = "/" (si tu veux aussi gérer "/index.html", dis-moi)
+const isHome = path === "/";
+
+const topBarClass = `transparent-topbar${isHome ? "" : " dark"}`;
+const rightColClass = `col-12 col-md-auto${isHome ? "" : " dark"}`;
+---
+
+<div id="top-bar" class={topBarClass}>
+  <div class="container">
+    <div class="row justify-content-between">
+
+      <div class="col-12 col-md-auto">
+        <div class="top-links">
+          <ul class="top-links-container">
+            <li class="top-links-item"><a href="/">Accueil</a></li>
+            <li class="top-links-item"><a href="/faqs/">FAQ</a></li>
+            <li class="top-links-item"><a href="/contact/">Contact</a></li>
+            <li class="top-links-item">
+              <a href="#"><img src={`${ASSET_BASE}/images/flags/fre.png`} alt="Langue" />FR</a>
+              <ul class="top-links-sub-menu">
+                <li class="top-links-item"><a href="#"><img src={`${ASSET_BASE}/images/flags/eng.png`} alt="Langue" />EN (bientôt)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class={rightColClass}>
+        <ul id="top-social">
+          <li>
+            <a href={contact?.linkedin} class="h-bg-linkedin" target="_blank" rel="noopener">
+              <span class="ts-icon"><i class="fa-brands fa-linkedin-in"></i></span><span class="ts-text">LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href={contact?.instagram} class="h-bg-instagram" target="_blank" rel="noopener">
+              <span class="ts-icon"><i class="fa-brands fa-instagram"></i></span><span class="ts-text">Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${contact?.phoneHref}`} class="h-bg-call">
+              <span class="ts-icon"><i class="fa-solid fa-phone"></i></span><span class="ts-text">{contact?.phoneDisplay}</span>
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${contact?.email}`} class="h-bg-email3">
+              <span class="ts-icon"><i class="bi-envelope-fill"></i></span><span class="ts-text">{contact?.email}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+---
+// src/components/blog/Sidebar.astro
+import { getCollection } from "astro:content";
+
+const {
+  ASSET_BASE = "/_assets_",
+  // optionnels : utile si tu veux exclure l’article courant des "populaires"
+  currentSlug = "",
+} = Astro.props;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+}
+
+// Blogroll (liens fixes)
+const blogroll = [
+  { label: "SEO local", href: "/services/seo-local/" },
+  { label: "Google Ads", href: "/services/google-ads/" },
+  { label: "CRO", href: "/services/cro/" },
+  { label: "Tracking", href: "/services/analytics/" },
+  { label: "Zones", href: "/zones/" },
+  { label: "Contact", href: "/contact/" },
+];
+
+// Tous les posts publiés
+const allPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Populaires (simple = derniers). On exclut le post courant si fourni.
+const popular = allPosts
+  .filter((p) => p.slug !== currentSlug)
+  .slice(0, 5);
+
+// Tag cloud avec comptage
+const tagCounts = new Map<string, number>();
+for (const p of allPosts) {
+  for (const t of (p.data.tags ?? [])) {
+    tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+  }
+}
+
+const tags = Array.from(tagCounts.entries())
+  .map(([tag, count]) => ({ tag, count }))
+  .sort((a, b) => a.tag.localeCompare(b.tag, "fr"));
+
+const maxCount = Math.max(1, ...tags.map((x) => x.count));
+function tagSize(count: number) {
+  // taille entre 12px et 18px
+  const min = 12;
+  const max = 18;
+  return Math.round(min + ((count - 1) / (maxCount - 1 || 1)) * (max - min));
+}
+
+function tagHref(tag: string) {
+  return `/blog/tag/${encodeURIComponent(tag)}/`;
+}
+---
+
+<div class="sidebar-widgets-wrap">
+
+  <!-- Blogroll -->
+  <div class="widget mb-5">
+    <h4 class="text-transform-none ls-0">Blogroll</h4>
+    <div class="list-group">
+      {blogroll.map((l) => (
+        <a class="list-group-item list-group-item-action" href={l.href}>
+          {l.label} <i class="bi-arrow-right float-end"></i>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Posts populaires -->
+  <div class="widget mb-5">
+    <h4 class="text-transform-none ls-0">Posts populaires</h4>
+
+    {popular.length === 0 ? (
+      <p class="text-muted mb-0">Aucun article pour le moment.</p>
+    ) : (
+      popular.map((p) => (
+        <div class="d-flex align-items-start mb-3">
+          <div style="width:70px; flex:0 0 70px;">
+            <a href={`/blog/${p.slug}/`}>
+              <img
+                src={(p.data.cover as any)?.src ?? `${ASSET_BASE}/images/blog/1.jpg`}
+                alt={p.data.title}
+                class="rounded"
+                style="width:70px; height:55px; object-fit:cover;"
+              />
+            </a>
+          </div>
+          <div class="ms-3">
+            <div class="fw-semibold">
+              <a href={`/blog/${p.slug}/`} class="text-dark" style="text-decoration:none;">
+                {p.data.title}
+              </a>
+            </div>
+            <small class="text-muted">{formatDate(p.data.date)}</small>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+
+  <!-- Tag Cloud -->
+  <div class="widget">
+    <h4 class="text-transform-none ls-0">Tag Cloud</h4>
+
+    {tags.length === 0 ? (
+      <p class="text-muted mb-0">Aucun tag pour le moment.</p>
+    ) : (
+      <div class="tagcloud">
+        {tags.map((t) => (
+          <a
+            href={tagHref(t.tag)}
+            title={`${t.count} article${t.count > 1 ? "s" : ""}`}
+            style={`font-size:${tagSize(t.count)}px`}
+          >
+            {t.tag}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+</div>

@@ -1,0 +1,430 @@
+---
+// src/pages/services/cro/index.astro
+
+import Head from "../../../components/Head.astro";
+import TopBar from "../../../components/TopBar.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import JavaScripts from "../../../components/JavaScripts.astro";
+
+// Base URL + assets
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const ASSET_BASE =
+  (((import.meta as any).env?.PUBLIC_ASSET_BASE as string) || "/_assets_").replace(/\/$/, "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+const seo = {
+  title: "Consultant CRO & UX Sud Oise (60) / Nord 95 | Optimisation conversion (leads)",
+  description:
+    "CRO (Conversion Rate Optimization) : transformez votre trafic en demandes (appels, formulaires, devis). Audit UX mobile, messages & preuves, formulaires, tests A/B simples, tracking GA4/GTM. Sud Oise & Nord Val-d’Oise.",
+};
+
+const contact = {
+  phoneDisplay: "06 60 92 10 08",
+  phoneHref: "+33660921008",
+  email: "contact@horizon-conversion.fr",
+  linkedin: "#",
+  instagram: "#",
+};
+
+const pageTitle = {
+  badge: "CRO / UX",
+  h1: "Optimisation du taux de conversion (CRO)",
+  breadcrumb: [
+    { label: "Accueil", href: "/" },
+    { label: "Services", href: "/services/" },
+    { label: "CRO", href: "/services/cro/" },
+  ],
+};
+
+const hero = {
+  badge: "Objectif : + d’appels & formulaires",
+  title: "Votre site doit convertir. Sinon, vous payez… pour rien.",
+  p1:
+    "La CRO (Conversion Rate Optimization) améliore le pourcentage de visiteurs qui vous contactent. En pratique : plus d’appels, plus de formulaires, plus de demandes qualifiées — sans forcément augmenter le trafic.",
+  p2:
+    "Je travaille sur 3 leviers : un message clair (quoi / pour qui / où), de la confiance (preuves, avis, cas), et moins de friction (mobile, vitesse, formulaire, parcours).",
+  ctaPrimary: { label: "Demander un audit CRO", href: "/contact/" },
+  ctaSecondary: { label: "Voir tous les services", href: "/services/" },
+  img: `${ASSET_BASE}/images/services/experience.svg`,
+  imgAlt: "CRO UX - optimisation conversion",
+};
+
+const provideIntro = {
+  badge: "Ce que je fais",
+  title: "CRO orienté business : chaque changement = une métrique",
+};
+
+const provides = [
+  {
+    iconClass: "bi-check-lg bg-info border-0",
+    title: "Clarté & proposition de valeur",
+    text:
+      "On clarifie la promesse : service, zone, délais, différence. Moins de flou = plus de confiance et plus de clics vers le contact.",
+  },
+  {
+    iconClass: "bi-book-reader bg-primary border-0",
+    title: "UX mobile-first (parcours & lisibilité)",
+    text:
+      "Menus, sections, hiérarchie, CTA visibles, lecture rapide. Sur mobile, 3 secondes décident souvent de tout.",
+  },
+  {
+    iconClass: "bi-fonts bg-danger border-0",
+    title: "Preuves & réassurance (avis, cas, FAQ)",
+    text:
+      "Avis clients, réalisations, garanties, réponses aux objections (prix, délais, zones). C’est ce qui déclenche le passage à l’action.",
+  },
+];
+
+const otherIntro = {
+  badge: "À combiner pour aller plus vite",
+  title: "Les services complémentaires (souvent indispensables)",
+};
+
+const otherCauses = [
+  {
+    icon: `${ASSET_BASE}/images/icons/analysis.svg`,
+    title: "Analytics & tracking (GA4 / GTM)",
+    desc:
+      "On mesure ce qui compte vraiment : clic téléphone, envoi formulaire, WhatsApp, conversions Ads, sources & UTMs.",
+    bullets: [
+      "GA4 + Google Tag Manager",
+      "Événements (tel, formulaire, WhatsApp…)",
+      "UTM & attribution",
+      "Tableau de bord simple",
+      "Qualité des leads",
+    ],
+    href: "/services/analytics/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/seo.svg`,
+    title: "SEO local (Google Maps + organique)",
+    desc:
+      "Plus de visibilité locale + pages qui convertissent = combo gagnant (artisan, cabinet, PME locale).",
+    bullets: [
+      "Google Business Profile",
+      "Pages “ville + service”",
+      "FAQ + schémas",
+      "Avis & e-réputation",
+      "Core Web Vitals",
+    ],
+    href: "/services/seo-local/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/adword.svg`,
+    title: "Google Ads (Search) : leads rapides",
+    desc:
+      "Si vous voulez des demandes rapidement : campagnes Search pilotées à l’intention + landing pages orientées conversion.",
+    bullets: [
+      "Structure campagnes + extensions",
+      "Mots-clés intention + exclusions",
+      "Landing pages dédiées",
+      "Suivi appels & formulaires",
+      "Optimisation coût par lead",
+    ],
+    href: "/services/google-ads/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/content_marketing.svg`,
+    title: "Contenu SEO orienté conversion",
+    desc:
+      "Pages services et contenus qui répondent aux vraies recherches : prix, délais, zones, étapes, garanties.",
+    bullets: [
+      "Pages services structurées",
+      "FAQ (objections) intégrées",
+      "Briefs conversion",
+      "Optimisation titles/meta",
+      "Maillage interne",
+    ],
+    href: "/services/contenu-seo/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/social.svg`,
+    title: "Social & retargeting",
+    desc:
+      "Relancer les visiteurs et renforcer la preuve sociale : utile si la décision se fait sur plusieurs visites.",
+    bullets: [
+      "Retargeting visiteurs",
+      "Créa simple & locale",
+      "Offres + preuves",
+      "Tracking UTM",
+      "Optimisation CPL",
+    ],
+    href: "/services/social/",
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/experience.svg`,
+    title: "CRO “light” : tests A/B simples",
+    desc:
+      "Sans usine à gaz : on teste titres, CTA, preuves, formulaires. Objectif : gagner en conversion rapidement.",
+    bullets: [
+      "Hypothèses + priorisation",
+      "Tests sur pages clés",
+      "Analyse résultats",
+      "Déploiement gagnants",
+      "Itérations mensuelles",
+    ],
+    href: "/services/cro/",
+  },
+];
+
+const formSection = {
+  bg: `${ASSET_BASE}/images/sections/1.jpg`,
+  badge: "Audit CRO",
+  title: "Recevez 10 recommandations concrètes (gratuit)",
+  text:
+    "Je vous envoie une mini-roadmap priorisée : ce qui fera le plus d’impact sur vos demandes dans les 30 prochains jours.",
+  cardTitle: "Demander l’audit",
+  fields: {
+    nameLabel: "Nom *",
+    emailLabel: "Email *",
+    websiteLabel: "Site Web *",
+  },
+  submitLabel: "Envoyer",
+  videoUrl: "https://www.youtube.com/watch?v=P3Huse9K6Xs",
+};
+
+// JSON-LD (Service)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "CRO / UX - Optimisation du taux de conversion",
+  serviceType: "CRO (Conversion Rate Optimization) / UX",
+  areaServed: [
+    "Oise (60)",
+    "Val-d’Oise (95)",
+    "Senlis",
+    "Chantilly",
+    "Creil",
+    "Compiègne",
+    "Luzarches",
+    "L'Isle-Adam",
+  ],
+  provider: {
+    "@type": "Organization",
+    name: "Horizon Conversion",
+    url: canonical,
+  },
+};
+---
+
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+  <Head {seo} {canonical} {jsonLd} />
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar {contact} ASSET_BASE={ASSET_BASE} />
+      <Header {contact} ASSET_BASE={ASSET_BASE} />
+
+      <!-- Page Title -->
+      <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+        <img src={`${ASSET_BASE}/images/services/experience-title.jpg`} class="parallax-bg" alt="CRO UX - Sud Oise et Nord 95" />
+        <div id="particles-line"></div>
+
+        <div class="container">
+          <div class="page-title-row">
+            <div class="page-title-content">
+              <div class="badge rounded-pill border border-light text-light">{pageTitle.badge}</div>
+              <h1>{pageTitle.h1}</h1>
+              <p class="mb-0 mt-3">
+                Zone : <strong>Sud Oise (60)</strong> &amp; <strong>Nord Val-d’Oise (95)</strong> — Senlis, Chantilly, Creil,
+                Compiègne, Luzarches, L’Isle-Adam…
+              </p>
+            </div>
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                {pageTitle.breadcrumb.map((b, idx) => (
+                  <li
+                    class={`breadcrumb-item ${idx === pageTitle.breadcrumb.length - 1 ? "active" : ""}`}
+                    aria-current={idx === pageTitle.breadcrumb.length - 1 ? "page" : undefined}
+                  >
+                    {idx === pageTitle.breadcrumb.length - 1 ? b.label : <a href={b.href}>{b.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+      </section>
+
+      <!-- Content -->
+      <section id="content">
+        <div class="content-wrap pb-0">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="badge rounded-pill badge-default">{hero.badge}</div>
+                <h2 class="display-4 fw-bold">{hero.title}</h2>
+                <p>{hero.p1}</p>
+                <p>{hero.p2}</p>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href={hero.ctaPrimary.href} class="button button-rounded button-large text-transform-none ls-0">{hero.ctaPrimary.label}</a>
+                  <a href={hero.ctaSecondary.href} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">{hero.ctaSecondary.label}</a>
+                </div>
+
+                <div class="mt-4 small text-muted">
+                  Requêtes visées : <strong>consultant CRO Oise</strong>, <strong>optimisation taux de conversion</strong>,{" "}
+                  <strong>audit UX</strong>, <strong>améliorer conversions site</strong>, <strong>landing page</strong>.
+                </div>
+              </div>
+
+              <div class="col-lg-6 mt-4 mt-lg-0 text-center">
+                <img src={hero.img} alt={hero.imgAlt} />
+              </div>
+            </div>
+
+            <div class="clear line my-6"></div>
+
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">{provideIntro.badge}</div>
+              <h3 class="text-transform-none ls-0">{provideIntro.title}</h3>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="row mt-4 col-mb-50 mb-0">
+              {provides.map((f) => (
+                <div class="col-sm-6 col-lg-4">
+                  <div class="feature-box">
+                    <div class="fbox-icon mb-4">
+                      <a href="#"><i class={f.iconClass}></i></a>
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none">{f.title}</h3>
+                      <p>{f.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="clear"></div>
+
+          <!-- Other Causes -->
+          <div class="section mb-0">
+            <div class="container">
+              <div class="heading-block border-bottom-0 text-center">
+                <div class="badge rounded-pill badge-default">{otherIntro.badge}</div>
+                <h3 class="text-transform-none ls-0">{otherIntro.title}</h3>
+              </div>
+
+              <div class="row col-mb-30 align-content-stretch">
+                {otherCauses.map((c) => (
+                  <div class="col-lg-4 col-md-6 d-flex">
+                    <div class="card">
+                      <div class="card-body p-5">
+                        <div class="feature-box flex-column">
+                          <div class="fbox-icon mb-3">
+                            <img src={c.icon} alt={c.title} class="bg-transparent rounded-0" />
+                          </div>
+                          <div class="fbox-content">
+                            <h3 class="text-transform-none ls-0 text-larger">{c.title}</h3>
+                            <p class="text-smaller">{c.desc}</p>
+                          </div>
+                          <ul class="iconlist ms-3 mt-4 mb-0">
+                            {c.bullets.map((b, idx) => (
+                              <li class={`mb-2 text-muted ${idx === c.bullets.length - 1 ? "mb-0" : ""}`}>
+                                <i class="fa-solid fa-check text-smaller color"></i> {b}
+                              </li>
+                            ))}
+                          </ul>
+
+                          <div class="mt-4">
+                            <a href={c.href} class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 w-100 text-center">
+                              En savoir plus
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Section -->
+          <div
+            class="section mt-0"
+            style={{
+              background: `url(${formSection.bg}) no-repeat center center`,
+              backgroundSize: "cover",
+              padding: "100px 0",
+            }}
+          >
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-6">
+                  <div class="heading-block border-bottom-0 mb-4">
+                    <div class="badge rounded-pill badge-default">{formSection.badge}</div>
+                    <h3 class="text-transform-none ls-0">{formSection.title}</h3>
+                  </div>
+                  <p>{formSection.text}</p>
+
+                  <div class="mt-4 small text-white-50">
+                    Exemples d’objectifs suivis : <strong>clic téléphone</strong>, <strong>envoi formulaire</strong>, <strong>WhatsApp</strong>, <strong>devis</strong>.
+                  </div>
+                </div>
+
+                <div class="col-lg-5 col-md-6">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <h4 class="mb-3">{formSection.cardTitle}</h4>
+
+                      <div class="form-widget">
+                        <div class="form-result"></div>
+                        <form class="row mb-0" id="template-contactform" name="template-contactform" action="/include/form.php" method="post">
+                          <div class="col-12 form-group mb-3">
+                            <label for="template-contactform-name">{formSection.fields.nameLabel}</label>
+                            <input type="text" id="template-contactform-name" name="template-contactform-name" class="form-control input-sm required" value="" />
+                          </div>
+                          <div class="col-12 form-group mb-3">
+                            <label for="template-contactform-email">{formSection.fields.emailLabel}</label>
+                            <input type="email" id="template-contactform-email" name="template-contactform-email" class="form-control input-sm required" value="" />
+                          </div>
+                          <div class="col-12 form-group mb-4">
+                            <label for="template-contactform-website">{formSection.fields.websiteLabel}</label>
+                            <input type="text" id="template-contactform-website" name="template-contactform-website" class="form-control input-sm required" value="" />
+                          </div>
+                          <div class="col-12 form-group mb-0">
+                            <button class="button button-rounded w-100 text-transform-none ls-0 m-0" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">
+                              {formSection.submitLabel}
+                            </button>
+                          </div>
+
+                          <input type="hidden" name="prefix" value="template-contactform-" />
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer {contact} ASSET_BASE={ASSET_BASE} />
+    </div>
+
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+    <JavaScripts ASSET_BASE={ASSET_BASE} />
+
+    <!-- Particles -->
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles.min.js`}></script>
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles-line.js`}></script>
+  </body>
+</html>

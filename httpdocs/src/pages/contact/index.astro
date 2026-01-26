@@ -1,0 +1,316 @@
+---
+// src/pages/contact/index.astro
+// Page Contact inspirée Canvas "demo-seo-contact.html" adaptée Horizon Conversion (Sud Oise / Nord 95)
+// - 3 cartes (Zone / Contact / RDV) + Google Map + section mini-audit
+// - Hook facile vers ton HubSpot custom form si tu veux ensuite
+
+import Head from "../../components/Head.astro";
+import TopBar from "../../components/TopBar.astro";
+import Header from "../../components/Header.astro";
+import FormSection from "../../components/FormSection.astro";
+import Footer from "../../components/Footer.astro";
+import JavaScripts from "../../components/JavaScripts.astro";
+
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const ASSET_BASE =
+  (((import.meta as any).env?.PUBLIC_ASSET_BASE as string) || "/_assets_").replace(/\/$/, "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+const contact = {
+  name: "Horizon Conversion",
+  phoneDisplay: "06 60 92 10 08",
+  phoneHref: "+33660921008",
+  email: "contact@horizon-conversion.fr",
+  whatsappText: "Discuter sur WhatsApp",
+  // Remplace par ton vrai lien wa.me si tu veux (format international sans +)
+  whatsappUrl: "https://wa.me/33660921008?text=Bonjour%20Fran%C3%A7ois%2C%20je%20souhaite%20un%20audit%20rapide%20de%20mon%20site.",
+  // Remplace par ton vrai lien Calendly / agenda si tu veux
+  bookingUrl: "https://meetings-eu1.hubspot.com/fda-costa",
+  addressLabel: "Sud Oise / Nord Val-d’Oise (déplacements & visio)",
+  // Adresse visible (pas obligatoire si tu ne veux pas afficher une adresse précise)
+  addressLines: ["Zone : Senlis, Chantilly, Creil, Compiègne…", "Et Nord 95 : Luzarches, Beaumont, L’Isle-Adam…"],
+  // Map
+  mapAddress: "Senlis, France",
+  mapMarkerTitle: "Horizon Conversion",
+  mapMarkerHtml:
+    `<div style="width: 320px;">
+      <h4 class="mb-2">Horizon <span>Conversion</span></h4>
+      <p class="mb-0" style="font-size:1rem;">
+        SEO local • Google Ads • CRO • Tracking (GA4/GTM).<br/>
+        Zone : Sud Oise (60) & Nord Val-d’Oise (95).
+      </p>
+    </div>`,
+};
+
+const seo = {
+  title: "Contact – Horizon Conversion | SEO local, Google Ads, CRO (Sud Oise / Nord 95)",
+  description:
+    "Contactez Horizon Conversion : SEO local, Google Ads, CRO, tracking GA4/GTM. Sud Oise (60) & Nord Val-d’Oise (95). Demandez un mini-audit gratuit.",
+};
+
+const pageTitle = {
+  badge: "Entrons en contact",
+  h1: "Contact",
+  breadcrumb: [
+    { label: "Accueil", href: "/" },
+    { label: "Contact", href: "/contact/" },
+  ],
+};
+
+const cards = [
+  {
+    icon: `${ASSET_BASE}/images/icons/seo.svg`,
+    title: "Zone d’intervention",
+    text:
+      "Intervention locale (sur place) et visio. Idéal pour artisans, commerces, indépendants, cabinets, TPE/PME.",
+    addressHtml: `
+      <address class="mb-0">
+        <u>${contact.addressLines[0]}<br/>${contact.addressLines[1]}</u>
+      </address>
+    `,
+    link: { href: "https://maps.google.com/?q=Senlis%2C%20France", label: "Voir sur Google Maps" },
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/social.svg`,
+    title: "Me contacter",
+    text:
+      "Réponse rapide. Décrivez votre activité + votre zone + votre site (si vous en avez un).",
+    links: [
+      { href: `mailto:${contact.email}`, label: contact.email },
+      { href: `tel:${contact.phoneHref}`, label: contact.phoneDisplay },
+      { href: contact.whatsappUrl, label: contact.whatsappText, target: "_blank" },
+    ],
+  },
+  {
+    icon: `${ASSET_BASE}/images/icons/group.svg`,
+    title: "Prendre un RDV",
+    text:
+      "15 min pour cadrer l’objectif (leads), vérifier le tracking, et définir 3 priorités (SEO/Ads/CRO).",
+    cta: { href: contact.bookingUrl, label: "Réserver un créneau" },
+  },
+];
+
+const formSection = {
+  bg: `${ASSET_BASE}/images/sections/1.jpg`,
+  badge: "Mini-audit",
+  title: "Demandez votre mini-audit gratuit",
+  text:
+    "Je vous fais un retour clair sur : acquisition (SEO/Ads) + conversion (CRO) + tracking (GA4/GTM) et je vous donne 3 actions prioritaires.",
+  cardTitle: "Recevoir le mini-audit",
+  fields: {
+    name: { id: "hc-name", label: "Nom *", name: "name", type: "text" },
+    email: { id: "hc-email", label: "Email *", name: "email", type: "email" },
+    website: { id: "hc-website", label: "Site Web *", name: "website", type: "text", placeholder: "https://..." },
+  },
+  submitLabel: "Envoyer",
+  videoUrl: "https://www.youtube.com/watch?v=P3Huse9K6Xs",
+};
+
+// (Optionnel) JSON-LD LocalBusiness léger (sans adresse précise)
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: contact.name,
+  url: canonical,
+  areaServed: ["Oise", "Val-d’Oise"],
+  telephone: `+33${contact.phoneHref.replace("+33", "").replace("+", "")}`,
+  email: contact.email,
+  serviceType: ["SEO local", "Google Ads", "CRO", "Analytics / Tracking"],
+};
+---
+
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+  <Head {seo} {canonical} jsonLd={localBusinessJsonLd} />
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar {contact} ASSET_BASE={ASSET_BASE} />
+      <Header {contact} ASSET_BASE={ASSET_BASE} />
+
+      <!-- Page Title -->
+      <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+        <img src={`${ASSET_BASE}/images/services/analysis-title.jpg`} class="parallax-bg" alt="Contact" />
+        <div id="particles-line"></div>
+
+        <div class="container">
+          <div class="page-title-row">
+            <div class="page-title-content">
+              <div class="badge rounded-pill border border-light text-light">{pageTitle.badge}</div>
+              <h1>{pageTitle.h1}</h1>
+            </div>
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                {pageTitle.breadcrumb.map((b, idx) => (
+                  <li
+                    class={`breadcrumb-item ${idx === pageTitle.breadcrumb.length - 1 ? "active" : ""}`}
+                    aria-current={idx === pageTitle.breadcrumb.length - 1 ? "page" : undefined}
+                  >
+                    {idx === pageTitle.breadcrumb.length - 1 ? b.label : <a href={b.href}>{b.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+      </section>
+
+      <!-- Content -->
+      <section id="content">
+        <div class="content-wrap pb-0">
+          <div class="container mb-3">
+            <div class="row justify-content-between">
+              {cards.map((c) => (
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                  <div class="feature-box flex-column text-center">
+                    <div class="fbox-image text-center mb-3">
+                      <img height="120" src={c.icon} alt={c.title} />
+                    </div>
+
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 mb-4">{c.title}</h3>
+                      <p class="text-smaller mb-3">{c.text}</p>
+
+                      {c.addressHtml && (
+                        <div set:html={`
+                          <a href="${c.link?.href || "#"}" target="_blank" rel="noopener">
+                            ${c.addressHtml}
+                          </a>
+                        `} />
+                      )}
+
+                      {c.links && (
+                        <div class="d-flex flex-column gap-2">
+                          {c.links.map((l) => (
+                            <a class="btn btn-link" href={l.href} target={l.target} rel={l.target ? "noopener" : undefined}>
+                              <u>{l.label}</u>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+
+                      {c.cta && (
+                        <a href={c.cta.href} class="button button-rounded button-small text-transform-none ls-0">
+                          {c.cta.label}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="clear"></div>
+
+          <!-- Google Map (Canvas gmap component style) -->
+          <section
+            class="gmap vh-60 mt-6"
+            data-address={contact.mapAddress}
+            data-markers={`[{address: "${contact.mapAddress}", html: jQuery("#map-marker-1").html(), icon:{ image: "images/icons/map-icon-red.png", iconsize: [32, 39], iconanchor: [32,39] } }]`}
+          ></section>
+
+          <div id="map-marker-1" class="d-none">
+            <div set:html={contact.mapMarkerHtml} />
+          </div>
+
+          <!-- Form Section -->
+          <div
+            class="section mt-0 mb-3"
+            style={{
+              background: `url(${formSection.bg}) no-repeat center center`,
+              backgroundSize: "cover",
+              padding: "100px 0",
+            }}
+          >
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-6">
+                  <div class="heading-block border-bottom-0 mb-4">
+                    <div class="badge rounded-pill badge-default">{formSection.badge}</div>
+                    <h3 class="text-transform-none ls-0">{formSection.title}</h3>
+                  </div>
+                  <p>{formSection.text}</p>
+                </div>
+
+                <div class="col-lg-5 col-md-6">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <h4 class="mb-3">{formSection.cardTitle}</h4>
+
+                      <div class="form-widget">
+                        <div class="form-result" aria-live="polite"></div>
+
+                        form class="row mb-0" id="hc-contactform" name="hc-contactform" action="/include/form.php" method="post">
+                          <div class="col-12 form-group mb-3">
+                            <label for={formSection.fields.name.id}>{formSection.fields.name.label}</label>
+                            <input
+                              type={formSection.fields.name.type}
+                              id={formSection.fields.name.id}
+                              name={formSection.fields.name.name}
+                              class="form-control input-sm required"
+                              value=""
+                            />
+                          </div>
+
+                          <div class="col-12 form-group mb-3">
+                            <label for={formSection.fields.email.id}>{formSection.fields.email.label}</label>
+                            <input
+                              type={formSection.fields.email.type}
+                              id={formSection.fields.email.id}
+                              name={formSection.fields.email.name}
+                              class="form-control input-sm required"
+                              value=""
+                            />
+                          </div>
+
+                          <div class="col-12 form-group mb-4">
+                            <label for={formSection.fields.website.id}>{formSection.fields.website.label}</label>
+                            <input
+                              type={formSection.fields.website.type}
+                              id={formSection.fields.website.id}
+                              name={formSection.fields.website.name}
+                              placeholder={formSection.fields.website.placeholder}
+                              class="form-control input-sm required"
+                              value=""
+                            />
+                          </div>
+
+                          <div class="col-12 form-group mb-0">
+                            <button class="button button-rounded w-100 text-transform-none ls-0 m-0" type="submit">
+                              {formSection.submitLabel}
+                            </button>
+                          </div>
+
+                          <input type="hidden" name="source_page" value={Astro.url.pathname} />
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer {contact} ASSET_BASE={ASSET_BASE} />
+    </div>
+
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+    <JavaScripts ASSET_BASE={ASSET_BASE} />
+
+    <!-- Particles -->
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles.min.js`}></script>
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles-line.js`}></script>
+  </body>
+</html>

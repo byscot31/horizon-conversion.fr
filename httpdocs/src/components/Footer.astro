@@ -1,0 +1,190 @@
+---
+const { contact, ASSET_BASE = "/_assets_" } = Astro.props;
+---
+
+<footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+  <div class="container">
+    <div class="footer-widgets-wrap pb-5">
+      <div class="row col-mb-50">
+
+        <div class="col-md-8">
+          <div class="widget">
+            <img
+              src={`${ASSET_BASE}/images/logo.svg`}
+              alt="Horizon Conversion"
+              class="alignleft"
+              style="height: 60px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
+            />
+            <p>
+              <strong>Horizon Conversion</strong> : consulting webmarketing orienté résultats (SEO local, Google Ads, CRO, tracking).
+              Intervention : Sud de l’Oise (60) &amp; Nord Val-d’Oise (95).
+            </p>
+
+            <div class="line line-sm"></div>
+
+            <div class="row g-4">
+              <!-- COL 1 : Site -->
+              <div class="col-lg-3 col-6 widget_links">
+                <ul>
+                  <li><a href="/">Accueil</a></li>
+                  <li><a href="/services/">Services</a></li>
+                  <li><a href="/zones/">Zones</a></li>
+                  <li><a href="/blog/">Blog</a></li>
+                  <li><a href="/faqs/">FAQ</a></li>
+                  <li><a href="/contact/">Contact</a></li>
+                </ul>
+              </div>
+
+              <!-- COL 2 : Services -->
+              <div class="col-lg-3 col-6 widget_links">
+                <ul>
+                  <li><a href="/services/seo-local/">SEO local</a></li>
+                  <li><a href="/services/google-ads/">Google Ads</a></li>
+                  <li><a href="/services/cro/">CRO</a></li>
+                  <li><a href="/services/tracking/">Tracking (GA4/GTM)</a></li>
+                  <li><a href="/services/contenu-seo/">Contenu SEO</a></li>
+                  <li><a href="/contact/">Mini-audit</a></li>
+                </ul>
+              </div>
+
+              <!-- COL 3 : Oise (Sud Oise) -->
+              <div class="col-lg-3 col-6 widget_links">
+                <ul>
+                  <li><a href="/zones/oise/">Oise (60)</a></li>
+                  <li><a href="/zones/oise/senlis/">Senlis</a></li>
+                  <li><a href="/zones/oise/chantilly/">Chantilly</a></li>
+                  <li><a href="/zones/oise/creil/">Creil</a></li>
+                  <li><a href="/zones/oise/nogent-sur-oise/">Nogent-sur-Oise</a></li>
+                  <li><a href="/zones/oise/saint-leu-d-esserent/">Saint-Leu-d’Esserent</a></li>
+                </ul>
+              </div>
+
+              <!-- COL 4 : Val-d’Oise (Nord 95) -->
+              <div class="col-lg-3 col-6 widget_links">
+                <ul>
+                  <li><a href="/zones/val-doise/">Val-d’Oise (95)</a></li>
+                  <li><a href="/zones/val-doise/argenteuil/">Argenteuil</a></li>
+                  <li><a href="/zones/val-doise/bezons/">Bezons</a></li>
+                  <li><a href="/zones/val-doise/cergy/">Cergy</a></li>
+                  <li><a href="/zones/val-doise/pontoise/">Pontoise</a></li>
+                  <li><a href="/zones/val-doise/enghien-les-bains/">Enghien-les-Bains</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="widget">
+            <div class="row">
+              <div class="col-12">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon"><i class="bi-telephone text-dark"></i></div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Téléphone :</span><br />
+                    <h2 class="h3 text-transform-none ls-0 fw-semibold">{contact?.phoneDisplay}</h2>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-4">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon"><i class="bi-envelope text-dark"></i></div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Email :</span><br />
+                    <h2 class="h3 text-transform-none ls-0 fw-semibold">{contact?.email}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget subscribe-widget">
+            <h2 class="h5"><strong>Newsletter</strong> : conseils SEO local &amp; acquisition (1/mois max)</h2>
+            <div class="widget-subscribe-form-result"></div>
+            <form id="widget-subscribe-form" action="/api/subscribe" method="post" class="mb-0">
+              <div class="input-group mx-auto">
+                <div class="input-group-text bg-transparent"><i class="bi-send"></i></div>
+                <input type="email" id="widget-subscribe-form-email" name="email" class="form-control required email" placeholder="Votre email" />
+                <button class="btn btn-success button button-color text-transform-none ls-0 m-0" type="submit">S’inscrire</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="widget">
+            <div class="row col-mb-30">
+              <div class="col-lg-6 col-md-12 col-6">
+                <div class="d-flex align-items-center">
+                  <a href={contact?.linkedin} target="_blank" rel="noopener" class="social-icon bg-dark h-bg-linkedin mb-0 me-2">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </a>
+                  <a href={contact?.linkedin} target="_blank" rel="noopener" class="text-dark">
+                    <small><strong class="d-block">Suivre</strong>sur LinkedIn</small>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-12 col-6">
+                <div class="d-flex align-items-center">
+                  <a href="/blog/" class="social-icon bg-dark h-bg-rss mb-0 me-2">
+                    <i class="fa-solid fa-rss"></i>
+                    <i class="fa-solid fa-rss"></i>
+                  </a>
+                  <a href="/blog/" class="text-dark">
+                    <small><strong class="d-block">Lire</strong>le blog</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="copyrights"
+    style={`background: url('${ASSET_BASE}/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;`}
+  >
+    <div class="container">
+      <div class="row justify-content-between align-items-center col-mb-30">
+
+        <div class="col-12 col-lg-6 text-center text-lg-start">
+          <div class="text-contrast-600">
+            Copyright &copy; 2026 Horizon Conversion. Tous droits réservés.
+          </div>
+          <div class="copyright-links mt-2">
+            <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+            <span class="mx-1">/</span>
+            <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+            <span class="mx-1">/</span>
+            <a href="/cgu/" class="text-contrast-600">CGU</a>
+            <span class="mx-1">/</span>
+            <a href="/plan-du-site/" class="text-contrast-600">Plan du site</a>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 text-center text-lg-end">
+          <div class="copyrights-menu copyright-links">
+            <a href="/" class="text-contrast-600">Accueil</a>
+            <span class="mx-1">/</span>
+            <a href="/services/" class="text-contrast-600">Services</a>
+            <span class="mx-1">/</span>
+            <a href="/zones/" class="text-contrast-600">Zones</a>
+            <span class="mx-1">/</span>
+            <a href="/blog/" class="text-contrast-600">Blog</a>
+            <span class="mx-1">/</span>
+            <a href="/faqs/" class="text-contrast-600">FAQ</a>
+            <span class="mx-1">/</span>
+            <a href="/contact/" class="text-contrast-600">Contact</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</footer>

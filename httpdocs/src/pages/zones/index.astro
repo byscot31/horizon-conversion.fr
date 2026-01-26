@@ -1,0 +1,209 @@
+---
+// httpdocs/src/pages/zones/index.astro
+import Head from "../../components/Head.astro";
+import TopBar from "../../components/TopBar.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import JavaScripts from "../../components/JavaScripts.astro";
+
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const ASSET_BASE =
+  (((import.meta as any).env?.PUBLIC_ASSET_BASE as string) || "/_assets_").replace(/\/$/, "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+const seo = {
+  title: "Zones d’intervention – Oise (60) & Val-d’Oise (95) | Horizon Conversion",
+  description:
+    "Horizon Conversion accompagne artisans, commerces et TPE/PME en Oise (60) et Val-d’Oise (95) : SEO local, Google Ads, CRO, tracking GA4/GTM. Découvrez nos zones.",
+};
+
+const breadcrumb = [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+];
+
+const zones = [
+  {
+    name: "Oise (60)",
+    title: "Agence webmarketing dans l’Oise",
+    sub: "SEO local • Google Ads • CRO • Tracking (GA4/GTM)",
+    href: "/zones/oise/",
+    citiesHint: "Senlis, Chantilly, Creil, Compiègne, Beauvais…",
+    image: `${ASSET_BASE}/images/services/analysis-title.jpg`,
+  },
+  {
+    name: "Val-d’Oise (95)",
+    title: "Agence webmarketing dans le Val-d’Oise",
+    sub: "SEO local • Google Ads • CRO • Tracking (GA4/GTM)",
+    href: "/zones/val-doise/",
+    citiesHint: "Cergy, Pontoise, Argenteuil, Sarcelles…",
+    image: `${ASSET_BASE}/images/services/analysis-title.jpg`,
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Zones d’intervention Horizon Conversion",
+  url: canonical,
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Horizon Conversion",
+    url: SITE || canonical,
+  },
+  mainEntity: zones.map((z) => ({
+    "@type": "WebPage",
+    name: z.name,
+    url: SITE ? new URL(z.href, SITE).toString() : z.href,
+  })),
+};
+---
+
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+  <Head {seo} {canonical} jsonLd={jsonLd} />
+
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar ASSET_BASE={ASSET_BASE} />
+      <Header ASSET_BASE={ASSET_BASE} />
+
+      <!-- Hero -->
+      <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+        <img src={`${ASSET_BASE}/images/services/analysis-title.jpg`} class="parallax-bg" alt="Zones d’intervention" />
+        <div id="particles-line"></div>
+
+        <div class="container">
+          <div class="page-title-row">
+            <div class="page-title-content">
+              <div class="badge rounded-pill border border-light text-light">Zones d’intervention</div>
+              <h1>Oise (60) & Val-d’Oise (95)</h1>
+              <p class="mt-3 mb-0 text-white-50" style="max-width: 900px; margin-inline: auto;">
+                Pages locales prêtes à convertir : <strong>SEO local</strong>, <strong>Google Ads</strong>, <strong>CRO</strong> et <strong>tracking</strong>.
+              </p>
+            </div>
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                {breadcrumb.map((b, idx) => (
+                  <li
+                    class={`breadcrumb-item ${idx === breadcrumb.length - 1 ? "active" : ""}`}
+                    aria-current={idx === breadcrumb.length - 1 ? "page" : undefined}
+                  >
+                    {idx === breadcrumb.length - 1 ? b.label : <a href={b.href}>{b.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+      </section>
+
+      <!-- Content -->
+      <section id="content">
+        <div class="content-wrap pb-0">
+          <div class="container">
+
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Départements</div>
+              <h2 class="text-transform-none ls-0 mb-0">Choisissez votre zone</h2>
+            </div>
+
+            <div class="row col-mb-30 mt-4">
+              {zones.map((z) => (
+                <div class="col-md-6">
+                  <a href={z.href} class="card h-bg-light border-0 shadow-sm" style="text-decoration:none;">
+                    <div class="card-body p-5">
+                      <div class="d-flex align-items-start justify-content-between">
+                        <div>
+                          <div class="badge rounded-pill badge-default">{z.name}</div>
+                          <h3 class="text-transform-none ls-0 mt-3 mb-2 text-dark">{z.title}</h3>
+                          <p class="text-muted mb-3">{z.sub}</p>
+                          <small class="text-muted d-block">Villes : {z.citiesHint}</small>
+                        </div>
+                        <i class="bi-arrow-right text-black-50 fs-4"></i>
+                      </div>
+
+                      <div class="line line-sm my-4"></div>
+
+                      <ul class="iconlist ms-0 mb-0">
+                        <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> SEO local (Maps + pages ville/service)</li>
+                        <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Google Ads orientées appels/devis</li>
+                        <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Tracking GA4/GTM + UTM</li>
+                      </ul>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+
+            <div class="clear line my-6"></div>
+
+            <!-- CTA -->
+            <div class="card shadow-sm border-0">
+              <div class="card-body p-5 d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                <div class="mb-3 mb-md-0">
+                  <div class="badge rounded-pill badge-default">Mini-audit</div>
+                  <h3 class="text-transform-none ls-0 mt-2 mb-1">3 actions prioritaires en 24/48h</h3>
+                  <p class="text-muted mb-0">Vous m’envoyez votre site + votre zone + votre objectif : je vous réponds avec un plan simple.</p>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="/contact/" class="button button-rounded text-transform-none ls-0 m-0">Demander un mini-audit</a>
+                  <a href="/services/" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 m-0">Voir les services</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="clear"></div>
+
+          <div
+            class="section mt-6 mb-0"
+            style={{
+              background: `url(${ASSET_BASE}/images/sections/1.jpg) no-repeat center center`,
+              backgroundSize: "cover",
+              padding: "90px 0",
+            }}
+          >
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-7">
+                  <div class="heading-block border-bottom-0 mb-2">
+                    <div class="badge rounded-pill badge-default">Zones</div>
+                    <h3 class="text-transform-none ls-0 mb-0">Vous ciblez une autre ville ?</h3>
+                  </div>
+                  <p class="mb-0">
+                    Je peux créer une page locale dédiée (ville + service) et la connecter au tracking + formulaire.
+                  </p>
+                </div>
+                <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                  <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">
+                    Me contacter
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer ASSET_BASE={ASSET_BASE} />
+    </div>
+
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+    <JavaScripts ASSET_BASE={ASSET_BASE} />
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles.min.js`}></script>
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles-line.js`}></script>
+  </body>
+</html>

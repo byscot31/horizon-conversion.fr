@@ -1,0 +1,338 @@
+---
+// src/pages/politique-confidentialite/index.astro
+import Head from "../../components/Head.astro";
+import TopBar from "../../components/TopBar.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import JavaScripts from "../../components/JavaScripts.astro";
+
+const SITE =
+  (import.meta as any).env?.PUBLIC_SITE_URL ||
+  (Astro.site ? String(Astro.site) : "");
+
+const ASSET_BASE =
+  (((import.meta as any).env?.PUBLIC_ASSET_BASE as string) || "/_assets_").replace(/\/$/, "");
+
+const canonical = SITE
+  ? new URL(Astro.url.pathname, SITE).toString()
+  : Astro.url.toString();
+
+// Tu peux centraliser ces infos dans un fichier config plus tard
+const contact = {
+  brand: "Horizon Conversion",
+  owner: "François DA COSTA",
+  legalForm: "Entrepreneur individuel",
+  siren: "810 922 641",
+  // Adresse vue sur Pappers (à remplacer si tu veux une adresse de correspondance différente)
+  address: "21 Boulevard de l'Orangerie, 95160 Montmorency, France",
+  email: "contact@horizon-conversion.fr",
+  phoneDisplay: "06 60 92 10 08",
+  website: "https://horizon-conversion.fr",
+};
+
+const host = {
+  name: "SCALEWAY S.A.S.",
+  // infos issues des mentions légales Scaleway
+  address: "8 rue de la Ville l’Évêque, 75008 Paris, France",
+  phone: "+33 (0)1 84 13 00 00",
+  website: "https://www.scaleway.com",
+};
+
+const seo = {
+  title: "Politique de confidentialité (RGPD) | Horizon Conversion",
+  description:
+    "Politique de confidentialité Horizon Conversion : données collectées, finalités, base légale, cookies, durée de conservation, droits RGPD et contact.",
+};
+
+const breadcrumb = [
+  { label: "Accueil", href: "/" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite/" },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Politique de confidentialité",
+  url: canonical,
+  isPartOf: { "@type": "WebSite", name: contact.brand, url: contact.website },
+  publisher: { "@type": "Organization", name: contact.brand, url: contact.website },
+};
+---
+
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+  <Head {seo} {canonical} jsonLd={jsonLd} />
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar ASSET_BASE={ASSET_BASE} />
+      <Header ASSET_BASE={ASSET_BASE} />
+
+      <!-- Hero -->
+      <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+        <img src={`${ASSET_BASE}/images/services/analysis-title.jpg`} class="parallax-bg" alt="Politique de confidentialité" />
+        <div id="particles-line"></div>
+
+        <div class="container">
+          <div class="page-title-row">
+            <div class="page-title-content">
+              <div class="badge rounded-pill border border-light text-light">RGPD</div>
+              <h1>Politique de confidentialité</h1>
+              <p class="mt-3 mb-0 text-white-50" style="max-width: 920px; margin-inline: auto;">
+                Cette page explique quelles données nous collectons, pourquoi, combien de temps nous les conservons et comment exercer vos droits.
+              </p>
+            </div>
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                {breadcrumb.map((b, idx) => (
+                  <li
+                    class={`breadcrumb-item ${idx === breadcrumb.length - 1 ? "active" : ""}`}
+                    aria-current={idx === breadcrumb.length - 1 ? "page" : undefined}
+                  >
+                    {idx === breadcrumb.length - 1 ? b.label : <a href={b.href}>{b.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+      </section>
+
+      <!-- Content -->
+      <section id="content">
+        <div class="content-wrap pb-0">
+          <div class="container">
+
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+
+                <div class="badge rounded-pill badge-default">Dernière mise à jour</div>
+                <h2 class="display-6 fw-bold mt-2">23 janvier 2026</h2>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">1) Qui est responsable du traitement ?</h3>
+                <p class="text-muted">
+                  Le responsable du traitement des données est <strong>{contact.owner}</strong>, {contact.legalForm} (SIREN : {contact.siren}),
+                  opérant sous la marque <strong>{contact.brand}</strong>.
+                </p>
+
+                <div class="card shadow-sm border-0">
+                  <div class="card-body p-4">
+                    <div class="row col-mb-30">
+                      <div class="col-md-6">
+                        <h4 class="h5 mb-2">Éditeur</h4>
+                        <ul class="iconlist ms-0 mb-0">
+                          <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> {contact.owner}</li>
+                          <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> {contact.legalForm}</li>
+                          <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> SIREN : {contact.siren}</li>
+                          <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> {contact.address}</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h4 class="h5 mb-2">Contact</h4>
+                        <ul class="iconlist ms-0 mb-0">
+                          <li class="mb-2 text-muted"><i class="fa-solid fa-envelope text-smaller color"></i> <a href={`mailto:${contact.email}`} class="text-dark"><u>{contact.email}</u></a></li>
+                          <li class="text-muted"><i class="fa-solid fa-phone text-smaller color"></i> <a href={`tel:${contact.phoneDisplay?.replace(/\s/g, "")}`} class="text-dark"><u>{contact.phoneDisplay}</u></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">2) Quelles données collectons-nous ?</h3>
+                <p class="text-muted mb-3">
+                  Selon votre usage du site, nous pouvons collecter :
+                </p>
+                <ul class="iconlist ms-0">
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Données de contact : nom, email, téléphone (si vous les renseignez).</li>
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Données projet : activité, zone, besoins, message libre (formulaires).</li>
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Données techniques : IP, user-agent, pages consultées, référent, événements (mesure d’audience).</li>
+                  <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Données marketing : paramètres UTM (utm_source, utm_campaign…) si présents dans l’URL.</li>
+                </ul>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">3) Pourquoi collectons-nous ces données ? (finalités & bases légales)</h3>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered align-middle">
+                    <thead>
+                      <tr>
+                        <th>Finalité</th>
+                        <th>Exemples</th>
+                        <th>Base légale</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Répondre à vos demandes</td>
+                        <td>contact, demande de mini-audit, devis</td>
+                        <td>Exécution de mesures précontractuelles / contrat</td>
+                      </tr>
+                      <tr>
+                        <td>Amélioration du site</td>
+                        <td>mesure d’audience, performance, UX</td>
+                        <td>Intérêt légitime (ou consentement si requis)</td>
+                      </tr>
+                      <tr>
+                        <td>Prospection</td>
+                        <td>newsletter, suivi d’une demande</td>
+                        <td>Consentement (newsletter) / intérêt légitime (B2B, selon contexte)</td>
+                      </tr>
+                      <tr>
+                        <td>Sécurité</td>
+                        <td>logs, prévention fraude/abus</td>
+                        <td>Intérêt légitime</td>
+                      </tr>
+                      <tr>
+                        <td>Obligations légales</td>
+                        <td>comptabilité, preuves</td>
+                        <td>Obligation légale</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">4) À qui sont transmises vos données ?</h3>
+                <p class="text-muted mb-3">
+                  Vos données sont destinées à {contact.brand} et peuvent être traitées par des sous-traitants techniques strictement nécessaires :
+                </p>
+                <ul class="iconlist ms-0">
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Hébergeur : <strong>{host.name}</strong> – {host.address}.</li>
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Outils de mesure d’audience / tag management (ex : GA4/GTM) si activés sur le site.</li>
+                  <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Outils CRM / formulaires / emailing si utilisés (ex : HubSpot, email transactionnel).</li>
+                </ul>
+                <p class="text-muted">
+                  En fonction des outils utilisés, certaines données peuvent être transférées hors UE. Le cas échéant, nous nous appuyons sur des mécanismes de protection reconnus (ex : clauses contractuelles types) et/ou sur des réglages limitant les données.
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <h3 id="cookies" class="text-transform-none ls-0">5) Cookies & traceurs</h3>
+                <p class="text-muted mb-3">
+                  Des cookies/traceurs peuvent être déposés pour :
+                </p>
+                <ul class="iconlist ms-0">
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> le fonctionnement du site (cookies techniques, nécessaires)</li>
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> la mesure d’audience et la performance</li>
+                  <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> l’attribution marketing (UTM/événements) si activé</li>
+                </ul>
+                <p class="text-muted">
+                  Conformément aux règles CNIL, les cookies non essentiels sont soumis à votre consentement (bannière/paramétrage) et vous pouvez modifier votre choix à tout moment.
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">6) Durées de conservation</h3>
+                <ul class="iconlist ms-0">
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Demandes via formulaire : durée nécessaire au traitement, puis archivage limité si besoin de preuve.</li>
+                  <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Newsletter : jusqu’au désabonnement.</li>
+                  <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Logs techniques : durée proportionnée à la sécurité et au diagnostic.</li>
+                </ul>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">7) Vos droits (RGPD)</h3>
+                <p class="text-muted mb-3">
+                  Vous disposez des droits suivants : accès, rectification, effacement, opposition, limitation, portabilité, ainsi que le retrait de votre consentement (lorsqu’il s’applique).
+                  Nous répondons dans un délai d’un mois (prolongeable dans certains cas).
+                </p>
+                <p class="text-muted mb-0">
+                  Pour exercer vos droits : <a class="text-dark" href={`mailto:${contact.email}`}><u>{contact.email}</u></a>.
+                  Vous pouvez également introduire une réclamation auprès de la CNIL.
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">8) Sécurité</h3>
+                <p class="text-muted">
+                  Nous mettons en place des mesures techniques et organisationnelles raisonnables pour protéger vos données (contrôles d’accès, mises à jour, sauvegardes, limitation des accès).
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">9) Hébergement</h3>
+                <p class="text-muted mb-0">
+                  Le site est hébergé par <strong>{host.name}</strong>, {host.address}. Téléphone : {host.phone}.
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <h3 class="text-transform-none ls-0">10) Modification de la politique</h3>
+                <p class="text-muted">
+                  Nous pouvons faire évoluer cette politique (ex : ajout d’un outil, changement de finalité). La date de mise à jour en haut de page fait foi.
+                </p>
+
+                <div class="clear line my-5"></div>
+
+                <div class="card shadow-sm border-0">
+                  <div class="card-body p-4">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                      <div>
+                        <div class="badge rounded-pill badge-default">Besoin d’aide ?</div>
+                        <h4 class="text-transform-none ls-0 mb-1">Une question sur vos données ?</h4>
+                        <p class="text-muted mb-0">Écrivez-nous et on vous répond rapidement.</p>
+                      </div>
+                      <div class="text-md-end">
+                        <a href="/contact/" class="button button-rounded text-transform-none ls-0 m-0">Nous contacter</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="clear"></div>
+
+          <!-- CTA section -->
+          <div
+            class="section mt-6 mb-0"
+            style={{
+              background: `url(${ASSET_BASE}/images/sections/1.jpg) no-repeat center center`,
+              backgroundSize: "cover",
+              padding: "90px 0",
+            }}
+          >
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-7">
+                  <div class="heading-block border-bottom-0 mb-4">
+                    <div class="badge rounded-pill badge-default">Transparence</div>
+                    <h3 class="text-transform-none ls-0">On collecte le minimum nécessaire</h3>
+                  </div>
+                  <p class="mb-0">
+                    Objectif : répondre à vos demandes, améliorer le site et mesurer ce qui fonctionne — sans en faire trop.
+                  </p>
+                </div>
+                <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                  <a href="/contact/" class="button button-rounded button-large text-transform-none ls-0">
+                    Demander un mini-audit
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer ASSET_BASE={ASSET_BASE} contact={contact} />
+    </div>
+
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+    <JavaScripts ASSET_BASE={ASSET_BASE} />
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles.min.js`}></script>
+    <script is:inline src={`${ASSET_BASE}/js/particles/particles-line.js`}></script>
+  </body>
+</html>
