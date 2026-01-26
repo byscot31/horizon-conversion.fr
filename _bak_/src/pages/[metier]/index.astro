@@ -1,0 +1,474 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HubspotCustomForm from "@components/HubspotCustomForm.astro";
+
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+import services from "@data/services.json";
+import avis from "@data/avis.json";
+import travaux from "@data/travaux.json";
+
+export function getStaticPaths() {
+  return metiers.map((m) => ({ params: { metier: m.slug } }));
+}
+
+const { metier: metierSlug } = Astro.params;
+
+const metier = metiers.find((m) => m.slug === metierSlug);
+if (!metier) throw new Error(`Métier introuvable: ${metierSlug}`);
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33660921008";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? phone;
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const telHref = `tel:${String(phone).replace(/\s+/g, "")}`;
+const canonical = `/${metier.slug}/`;
+
+// Helpers
+const pickLongTail = (arr = [], n = 3) => {
+  const cleaned = arr
+    .map((x) => String(x || "").trim())
+    .filter(Boolean);
+
+  // évite de répéter le métier lui-même
+  const withoutMetier = cleaned.filter((k) =>
+    !k.toLowerCase().includes(String(metier.title || metier.name).toLowerCase())
+  );
+
+  return (withoutMetier.length ? withoutMetier : cleaned).slice(0, n);
+};
+
+const fmt = (s) => String(s ?? "").replaceAll("{ville}", "votre ville");
+const formatDateFR = (iso) => {
+  try {
+    const d = new Date(String(iso));
+    return d.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+  } catch {
+    return String(iso ?? "");
+  }
+};
+
+const villesA = [...villes]
+  .filter((v) => v.priority === "A")
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+const zones = {
+  "Sud Oise (60)": villesA.filter((v) => v.zone === "sud-oise").slice(0, 10),
+  "Nord 95": villesA.filter((v) => v.zone === "nord-95").slice(0, 10),
+};
+
+// Top services du métier (urgence d’abord, puis order)
+const topServices = [...services]
+  .filter((s) => s.metier === metier.slug && s.is_top)
+  .sort((a, b) => {
+    const score = (x) => (x.urgency === "24-7" ? 0 : x.urgency === "rdv-rapide" ? 1 : 2);
+    if (score(a) !== score(b)) return score(a) - score(b);
+    return (a.order ?? 999) - (b.order ?? 999);
+  });
+
+const heroLongTail = pickLongTail(metier.keywords, 3); // ex: fuite d'eau, débouchage, chauffe-eau
+const heroServicesNames = topServices.slice(0, 3).map((s) => s.name);
+
+// Avis & travaux liés au métier
+const avisMetier = [...(avis ?? [])]
+  .filter((a) => a.metier === metier.slug)
+  .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+  .slice(0, 3);
+
+const travauxMetier = [...(travaux ?? [])]
+  .filter((t) => t.metier === metier.slug)
+  .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+  .slice(0, 3);
+
+// Petites villes “picks” (pour liens directs sur services)
+const cityPicks = [
+  zones["Sud Oise (60)"]?.[0],
+  zones["Sud Oise (60)"]?.[1],
+  zones["Nord 95"]?.[0],
+].filter(Boolean);
+
+// FAQ : pioche dans les FAQ des top services (max 6, questions uniques)
+const faqs = [];
+const seenQ = new Set();
+for (const s of topServices) {
+  for (const qa of s.faq ?? []) {
+    const q = fmt(qa?.q);
+    const a = fmt(qa?.a);
+    if (!q || !a) continue;
+    if (seenQ.has(q)) continue;
+    faqs.push({ q, a });
+    seenQ.add(q);
+    if (faqs.length >= 6) break;
+  }
+  if (faqs.length >= 6) break;
+}
+
+// SEO meta (client-first)
+const title =
+  `${metier.title} — ${regionLabel} | ${heroLongTail.join(" • ")} | Devis gratuit | ${brand}`.slice(0, 70);
+
+const description =
+  `${metier.title} ${regionLabel} : ${metier.short} ` +
+  `Dépannage en urgence ou rendez-vous rapide. Devis communiqué avant intervention.`;
+
+// JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "/" },
+    { "@type": "ListItem", "position": 2, "name": "Métiers", "item": "/metiers/" },
+    { "@type": "ListItem", "position": 3, "name": metier.name, "item": canonical },
+  ],
+};
+
+const faqJsonLd =
+  faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((x) => ({
+          "@type": "Question",
+          "name": x.q,
+          "acceptedAnswer": { "@type": "Answer", "text": x.a },
+        })),
+      }
+    : null;
+---
+
+<Layout title={title} description={description} canonical={canonical} jsonLd={[breadcrumbJsonLd, faqJsonLd].filter(Boolean)}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-5">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">{metier.title} • {regionLabel}</div>
+          <h1>{metier.title}</h1>
+
+          <p class="lead mb-0" style="max-width: 920px;">
+            {metier.short}
+            {heroLongTail.length ? (
+              <> • <strong>{heroLongTail.join(" • ")}</strong></>
+            ) : null}
+          </p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers/">Métiers</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{metier.name}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <!-- HERO -->
+        <div class="row align-items-start g-4">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default mb-2">Devis gratuit • Réponse rapide</div>
+
+            <h2 class="display-6 fw-bold mb-3">
+              Besoin d’un {metier.title.toLowerCase()} ? On intervient près de chez vous.
+            </h2>
+
+            <p class="text-muted mb-4">
+              Urgence (aujourd’hui si possible) ou rendez-vous rapide : vous expliquez le problème, on vous répond clairement,
+              et on vous annonce le tarif / devis avant d’intervenir.
+            </p>
+
+            <ul class="iconlist ms-3 mb-4">
+              <li><i class="fa-solid fa-check text-smaller color"></i> Dépannage & travaux : <strong>{heroServicesNames.join(" • ")}</strong></li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Intervention locale : Sud Oise (60) + Nord 95</li>
+              <li><i class="fa-solid fa-check text-smaller color"></i> Chantier propre, explications simples, pas de mauvaise surprise</li>
+            </ul>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a href={telHref} class="button button-rounded button-large m-0">📞 Appeler {phoneDisplay}</a>
+              <a href="#devis" class="button button-border button-rounded button-large m-0">📝 Demander un devis</a>
+              <a href="/villes/" class="button button-light button-rounded button-large bg-white border text-dark m-0">📍 Choisir ma ville</a>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Astuce : si c’est une urgence, dites-nous <strong>la ville</strong>, <strong>le problème</strong> et <strong>si c’est accessible</strong> (maison/appartement).
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Comment ça se passe ?</h3>
+
+                <div class="row g-3 mt-1">
+                  <div class="col-12">
+                    <div class="feature-box fbox-sm">
+                      <div class="fbox-icon"><a href="#"><i class="bi-telephone bg-info border-0"></i></a></div>
+                      <div class="fbox-content">
+                        <h3 class="text-transform-none">1) Vous nous contactez</h3>
+                        <p class="mb-0">Appel ou demande en ligne (ville + problème).</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="feature-box fbox-sm">
+                      <div class="fbox-icon"><a href="#"><i class="bi-chat-dots bg-primary border-0"></i></a></div>
+                      <div class="fbox-content">
+                        <h3 class="text-transform-none">2) On confirme le créneau</h3>
+                        <p class="mb-0">Urgence si possible, sinon RDV rapide.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="feature-box fbox-sm">
+                      <div class="fbox-icon"><a href="#"><i class="bi-check2-circle bg-success border-0"></i></a></div>
+                      <div class="fbox-content">
+                        <h3 class="text-transform-none">3) Intervention soignée</h3>
+                        <p class="mb-0">Devis annoncé, réparation propre, conseils.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="small text-muted">
+                  Zones : <a href="/villes/">voir toutes les villes</a> •
+                  {zones["Sud Oise (60)"]?.[0] ? <> Exemples : <strong>{zones["Sud Oise (60)"][0].name}</strong>, <strong>{zones["Sud Oise (60)"][1]?.name}</strong>, <strong>{zones["Nord 95"][0]?.name}</strong></> : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- DEMANDES FREQUENTES -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Demandes fréquentes</div>
+          <h3 class="text-transform-none ls-0">Choisissez le problème le plus proche</h3>
+          <p class="text-muted mb-0">Accès direct par ville (3 villes populaires) ou via la liste complète.</p>
+        </div>
+
+        <div class="row mt-4 col-mb-30">
+          {topServices.slice(0, 6).map((s) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h4 class="text-transform-none mb-0">{s.name}</h4>
+                    {s.urgency === "24-7" ? (
+                      <span class="badge bg-danger">Urgence</span>
+                    ) : s.urgency === "rdv-rapide" ? (
+                      <span class="badge bg-warning text-dark">RDV rapide</span>
+                    ) : (
+                      <span class="badge bg-secondary">Sur RDV</span>
+                    )}
+                  </div>
+
+                  <p class="text-muted mb-3">{s.short}</p>
+
+                  {Array.isArray(s.benefits) && s.benefits.length ? (
+                    <div class="d-flex flex-wrap gap-1 mb-3">
+                      {s.benefits.slice(0, 3).map((b) => (
+                        <span class="badge bg-light text-dark border">{b}</span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <div class="small text-muted mb-2">Villes populaires :</div>
+                  <div class="d-flex flex-wrap gap-2">
+                    {cityPicks.map((v) => (
+                      <a class="btn btn-outline-secondary btn-sm"
+                         href={`/villes/${v.slug}/${metier.slug}/${s.slug}/`}>
+                        {v.name}
+                      </a>
+                    ))}
+                    <a class="btn btn-outline-primary btn-sm" href="/villes/">Autre ville</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-4">
+          <a href="/villes/" class="button button-rounded button-small m-0">📍 Voir toutes les villes</a>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- VILLES -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Intervention locale</div>
+          <h3 class="text-transform-none ls-0">Votre ville</h3>
+          <p class="text-muted mb-0">Cliquez sur votre ville pour voir {metier.title.toLowerCase()} + demandes possibles.</p>
+        </div>
+
+        <div class="row mt-4 col-mb-30">
+          {Object.entries(zones).map(([zoneName, list]) => (
+            <div class="col-lg-6">
+              <div class="card h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-3">{zoneName}</h3>
+                  <div class="row g-2">
+                    {list.map((v) => (
+                      <div class="col-md-6">
+                        <a class="btn btn-outline-secondary w-100 text-start" href={`/villes/${v.slug}/${metier.slug}/`}>
+                          {metier.title} {v.name}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="small text-muted mt-3">
+                    <a href="/villes/">Toutes les villes →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- PREUVES : TRAVAUX -->
+        {travauxMetier.length ? (
+          <div class="container px-0">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Exemples</div>
+              <h3 class="text-transform-none ls-0">Dernières interventions</h3>
+              <p class="text-muted mb-0">Des cas réels, des solutions simples et propres.</p>
+            </div>
+
+            <div class="row col-mb-30 mt-4">
+              {travauxMetier.map((t) => (
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body p-4">
+                      <div class="small text-muted mb-2">
+                        {formatDateFR(t.date)} • {villes.find((v) => v.slug === t.ville)?.name ?? t.ville}
+                      </div>
+                      <h4 class="text-transform-none">{t.title}</h4>
+                      <p class="text-muted mb-3">{t.problem}</p>
+                      <a class="btn btn-outline-secondary btn-sm" href={`/travaux/${t.slug}/`}>Voir le détail</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="/travaux/" class="button button-rounded button-small m-0">Voir toutes les réalisations</a>
+            </div>
+          </div>
+        ) : null}
+
+        <div class="clear line my-6"></div>
+
+        <!-- PREUVES : AVIS -->
+        {avisMetier.length ? (
+          <div class="container px-0">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">Avis</div>
+              <h3 class="text-transform-none ls-0">Ce que disent les clients</h3>
+            </div>
+
+            <div class="row col-mb-30 mt-4">
+              {avisMetier.map((a) => (
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body p-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <strong>{a.author}</strong>
+                        <span class="badge bg-light text-dark">{a.rating}/5</span>
+                      </div>
+                      <div class="small text-muted mb-2">
+                        {villes.find((v) => v.slug === a.ville)?.name ?? a.ville}
+                      </div>
+                      <p class="mb-3">{String(a.text).slice(0, 220)}{String(a.text).length > 220 ? "…" : ""}</p>
+                      <a class="btn btn-outline-secondary btn-sm" href={`/avis/${a.id}/`}>Lire l’avis</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="/avis/" class="button button-rounded button-small m-0">Voir tous les avis</a>
+            </div>
+          </div>
+        ) : null}
+
+        <div class="clear line my-6"></div>
+
+        <!-- FAQ -->
+        {faqs.length ? (
+          <div class="container px-0 mb-5">
+            <div class="heading-block border-bottom-0 text-center">
+              <div class="badge rounded-pill badge-default">FAQ</div>
+              <h3 class="text-transform-none ls-0">Questions fréquentes</h3>
+              <p class="text-muted mb-0">Réponses simples, sans blabla.</p>
+            </div>
+
+            <div id="faqs" class="faqs mt-4">
+              {faqs.map((x) => (
+                <div class="toggle faq pb-3 mb-4">
+                  <div class="toggle-header">
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed bi-question-circle"></i>
+                      <i class="toggle-open bi-question-circle"></i>
+                    </div>
+                    <div class="toggle-title fw-semibold ps-1">{x.q}</div>
+                    <div class="toggle-icon color">
+                      <i class="toggle-closed fa-solid fa-chevron-down text-black-50"></i>
+                      <i class="toggle-open fa-solid fa-chevron-up color"></i>
+                    </div>
+                  </div>
+                  <div class="toggle-content text-black-50 ps-4">{x.a}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <!-- FORM -->
+        <div id="devis" class="section mt-0" style="padding: 70px 0;">
+          <div class="container">
+            <div class="row justify-content-between align-items-start g-4">
+              <div class="col-lg-5">
+                <div class="heading-block border-bottom-0 mb-2">
+                  <div class="badge rounded-pill badge-default">Devis gratuit</div>
+                  <h2 class="text-transform-none ls-0 mb-0">{metier.title}</h2>
+                </div>
+                <p class="text-muted">
+                  Décrivez votre besoin (ville, urgence, ce qui se passe). On vous rappelle rapidement pour confirmer un créneau.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href={telHref} class="btn btn-outline-secondary btn-sm">📞 {phoneDisplay}</a>
+                  <a href="/villes/" class="btn btn-outline-secondary btn-sm">📍 Choisir ma ville</a>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <HubspotCustomForm
+                  title={`Demande — ${metier.title}`}
+                  subtitle={`Sud Oise (60) + Nord 95 • Réponse rapide`}
+                  submitLabel="Envoyer ma demande"
+                />
+                <p class="small text-muted mt-2 mb-0">En envoyant, vous acceptez d’être recontacté. Pas de spam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

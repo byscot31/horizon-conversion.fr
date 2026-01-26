@@ -1,0 +1,180 @@
+---
+/**
+ * MainMenu.astro (version particuliers / conversion)
+ */
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+
+const PHONE = import.meta.env.PUBLIC_PHONE ?? "+33660921008";
+const PHONE_DISPLAY = import.meta.env.PUBLIC_PHONE_DISPLAY ?? PHONE;
+const telHref = `tel:${String(PHONE).replace(/\s+/g, "")}`;
+
+// Active state
+const path = Astro.url.pathname || "/";
+
+const isActive = (href) => {
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(href);
+};
+
+// Data
+const metiersList = [...metiers].sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+// Villes : on privilégie l'UX => A en priorité, B en "autour"
+const villesA = villes
+  .filter((v) => v.priority === "A")
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+const villesB = villes
+  .filter((v) => v.priority === "B")
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+// Helpers
+const chunk = (arr, n) => {
+  const out = [];
+  for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n));
+  return out;
+};
+
+const metierCols = chunk(metiersList, Math.ceil(metiersList.length / 2));
+
+// Villes A : 2 colonnes
+const villesACols = chunk(villesA, Math.ceil(villesA.length / 2));
+
+// Villes B : on limite pour ne pas exploser le menu (UX)
+const villesBPreview = villesB.slice(0, 16);
+const villesBCols = chunk(villesBPreview, Math.ceil(villesBPreview.length / 2));
+---
+
+<ul class="menu-container">
+
+  <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
+    <a class="menu-link" href="/"><div>Accueil</div></a>
+  </li>
+
+  <!-- Dépannage / Métiers -->
+  <li class={`menu-item mega-menu mega-menu-full ${isActive("/metiers/") ? "current" : ""}`}>
+    <a class="menu-link" href="/metiers/"><div>Dépannage</div></a>
+
+    <div class="mega-menu-content">
+      <div class="container">
+        <div class="row g-4 py-4 align-items-stretch">
+
+          <div class="col-12">
+            <div class="small text-uppercase ls-1 text-muted mb-2">Choisir un métier</div>
+          </div>
+
+          {metierCols.map((col) => (
+            <ul class="sub-menu-container mega-menu-column col-lg-3">
+              {col.map((m) => (
+                <li class={`menu-item ${isActive(`/${m.slug}/`) ? "current" : ""}`}>
+                  <a class="menu-link" href={`/${m.slug}/`}><div>{m.name}</div></a>
+                </li>
+              ))}
+            </ul>
+          ))}
+
+          <div class="col-lg-6">
+            <div class="widget p-4 rounded-3 bg-light h-100">
+              <h5 class="mb-2">Besoin d’aide tout de suite ?</h5>
+              <p class="mb-3 small">
+                Décris ton souci (fuite, panne, serrure…) et ta ville : on te rappelle rapidement.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a href="/urgence/" class="button button-rounded button-small m-0">
+                  <span class="text-danger fw-semibold">Urgence</span>
+                </a>
+                <a href="/contact/" class="button button-rounded button-small m-0">
+                  Devis gratuit
+                </a>
+                <a href={telHref} class="button button-border button-rounded button-small m-0">
+                  Appeler {PHONE_DISPLAY}
+                </a>
+              </div>
+
+              <hr class="my-3" />
+
+              <div class="small text-muted">
+                Astuce : si tu connais ta ville, passe par <a href="/villes/">la liste des villes</a> pour aller au plus vite.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <!-- Villes -->
+  <li class={`menu-item mega-menu mega-menu-full ${isActive("/villes/") ? "current" : ""}`}>
+    <a class="menu-link" href="/villes/"><div>Villes</div></a>
+
+    <div class="mega-menu-content">
+      <div class="container">
+        <div class="row g-4 py-4 align-items-stretch">
+
+          <div class="col-12">
+            <div class="small text-uppercase ls-1 text-muted mb-2">Villes principales</div>
+          </div>
+
+          {villesACols.map((col) => (
+            <ul class="sub-menu-container mega-menu-column col-lg-3">
+              {col.map((v) => (
+                <li class={`menu-item ${isActive(`/villes/${v.slug}/`) ? "current" : ""}`}>
+                  <a class="menu-link" href={`/villes/${v.slug}/`}><div>{v.name}</div></a>
+                </li>
+              ))}
+            </ul>
+          ))}
+
+          <div class="col-lg-6">
+            <div class="widget p-4 rounded-3 bg-light h-100">
+              <h6 class="mb-2 text-uppercase ls-1">Tu n’es pas sûr(e) de ta commune ?</h6>
+              <p class="mb-3 small">
+                Pas grave : choisis une ville proche, ou fais une demande en indiquant ton secteur.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a href="/villes/" class="btn btn-outline-secondary btn-sm">Voir toutes les villes</a>
+                <a href="/contact/" class="btn btn-outline-primary btn-sm">Demander un devis</a>
+              </div>
+
+              <hr class="my-3" />
+
+              <div class="small text-muted mb-2">Communes autour (aperçu)</div>
+              <div class="d-flex flex-wrap gap-2">
+                {villesBPreview.slice(0, 10).map((v) => (
+                  <a class="btn btn-sm btn-outline-secondary" href={`/villes/${v.slug}/`}>{v.name}</a>
+                ))}
+                {villesB.length > villesBPreview.length ? (
+                  <a class="btn btn-sm btn-outline-secondary" href="/villes/">+ voir plus</a>
+                ) : null}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class={`menu-item ${isActive("/travaux/") ? "current" : ""}`}>
+    <a class="menu-link" href="/travaux/"><div>Réalisations</div></a>
+  </li>
+
+  <li class={`menu-item ${isActive("/avis/") ? "current" : ""}`}>
+    <a class="menu-link" href="/avis/"><div>Avis</div></a>
+  </li>
+
+  <li class={`menu-item ${isActive("/contact/") ? "current" : ""}`}>
+    <a class="menu-link" href="/contact/"><div>Devis</div></a>
+  </li>
+
+  <li class={`menu-item ${isActive("/urgence/") ? "current" : ""}`}>
+    <a class="menu-link" href="/urgence/">
+      <div><span class="text-danger fw-semibold">Urgence</span></div>
+    </a>
+  </li>
+
+</ul>

@@ -1,0 +1,231 @@
+---
+import Layout from "@layouts/Layout.astro";
+import avis from "@data/avis.json";
+import villes from "@data/villes.json";
+import metiers from "@data/metiers.json";
+import services from "@data/services.json";
+
+export function getStaticPaths() {
+  return avis.map((a) => ({ params: { id: String(a.id) } }));
+}
+
+const { id } = Astro.params;
+const r = avis.find((x) => String(x.id) === String(id));
+if (!r) throw new Error(`Avis introuvable: ${id}`);
+
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL ??
+  (Astro.site ? Astro.site.toString().replace(/\/$/, "") : "");
+
+const brand = import.meta.env.PUBLIC_BRAND_NAME ?? "Horizon Conversion";
+const phone = import.meta.env.PUBLIC_PHONE ?? "+33660921008";
+const phoneDisplay = import.meta.env.PUBLIC_PHONE_DISPLAY ?? "06 60 92 10 08";
+const regionLabel = import.meta.env.PUBLIC_REGION_LABEL ?? "Sud Oise (60) / Nord 95";
+
+const canonical = `/avis/${String(r.id)}/`;
+
+// Helpers
+const ville = villes.find((v) => v.slug === r.ville);
+const metier = metiers.find((m) => m.slug === r.metier);
+const service = services.find((s) => s.metier === r.metier && s.slug === r.service);
+
+const villeName = ville?.name ?? r.ville;
+const metierName = metier?.name ?? r.metier;
+const serviceName = service?.name ?? r.service;
+
+const rating = Number(r.rating ?? 5);
+const safeText = String(r.text ?? "").trim();
+
+const avgRating =
+  avis && avis.length
+    ? Math.round((avis.reduce((sum, a) => sum + Number(a.rating ?? 5), 0) / avis.length) * 10) / 10
+    : 5;
+
+const title = `Avis client — ${metierName} à ${villeName} (${ville?.dept ?? ""}) | ${brand}`.replace(/\s+\(\)/g, "");
+const description = `${r.author} — ${rating}/5 : ${safeText}`.slice(0, 160);
+
+// Autres avis (similaires)
+const otherReviews = [...avis]
+  .filter((a) => String(a.id) !== String(r.id))
+  .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+  .filter((a) => a.metier === r.metier || a.ville === r.ville || a.service === r.service)
+  .slice(0, 6);
+
+// JSON-LD
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL ? `${SITE_URL}/` : "/" },
+    { "@type": "ListItem", "position": 2, "name": "Avis", "item": SITE_URL ? `${SITE_URL}/avis/` : "/avis/" },
+    { "@type": "ListItem", "position": 3, "name": `Avis ${r.author}`, "item": SITE_URL ? `${SITE_URL}${canonical}` : canonical },
+  ],
+};
+
+const reviewJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "reviewRating": { "@type": "Rating", "ratingValue": rating, "bestRating": 5 },
+  "author": { "@type": "Person", "name": r.author },
+  "datePublished": r.date,
+  "reviewBody": safeText,
+  "itemReviewed": {
+    "@type": "LocalBusiness",
+    "name": brand,
+    "telephone": phone,
+    "areaServed": regionLabel,
+    "url": SITE_URL ? `${SITE_URL}/` : undefined
+  },
+  "mainEntityOfPage": SITE_URL ? `${SITE_URL}${canonical}` : canonical
+};
+
+const jsonLd = [breadcrumbJsonLd, reviewJsonLd];
+---
+
+<Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="page-title page-title-center dark include-header include-topbar">
+    <div class="container">
+      <div class="page-title-row mt-5">
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">Avis client</div>
+          <h1>Avis de {r.author}</h1>
+          <p class="lead mb-0">
+            {metierName} à {villeName} • <strong>{rating}/5</strong>
+          </p>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/avis/">Avis</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{r.author}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container">
+
+        <div class="row justify-content-center g-4">
+          <div class="col-lg-8">
+
+            <!-- Card Avis -->
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                  <div>
+                    <h2 class="h5 mb-1">{r.author}</h2>
+                    <div class="small text-muted">
+                      {r.date} • {villeName}{ville?.dept ? ` (${ville.dept})` : ""} • {metierName}
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <div class="badge rounded-pill bg-dark">{rating}/5</div>
+                    <div class="small text-muted mt-1">{avgRating}/5 en moyenne • {avis.length} avis</div>
+                  </div>
+                </div>
+
+                <div class="small text-muted mb-3">
+                  <strong>Intervention :</strong> {serviceName} à {villeName}
+                </div>
+
+                <p class="mb-3">{safeText}</p>
+
+                {r.verified ? (
+                  <div class="small text-success">✓ Avis vérifié</div>
+                ) : (
+                  <div class="small text-muted">Avis publié par un client</div>
+                )}
+
+                <div class="clear line my-4"></div>
+
+                <!-- CTAs -->
+                <div class="d-flex flex-wrap gap-2">
+                  <a class="button button-rounded m-0" href="/contact/">📝 Demander un devis</a>
+                  <a class="button button-border button-rounded m-0" href={`tel:${String(phone).replace(/\s+/g, "")}`}>
+                    📞 Appeler {phoneDisplay}
+                  </a>
+                </div>
+
+                <div class="small text-muted mt-3">
+                  Pages utiles :
+                  <a href={`/villes/${r.ville}/`}>{villeName}</a> •
+                  <a href={`/villes/${r.ville}/${r.metier}/`}>{metierName} à {villeName}</a> •
+                  <a href={`/villes/${r.ville}/${r.metier}/${r.service}/`}>{serviceName}</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rassurance "prix" (prudente) -->
+            <div class="card shadow-sm mt-3">
+              <div class="card-body p-4">
+                <h3 class="h6 mb-2">Tarif : comment ça se passe ?</h3>
+                <p class="small text-muted mb-0">
+                  Le prix dépend de la situation (accès, complexité, urgence, pièces). Dans tous les cas, on explique et on annonce
+                  la solution et le tarif <strong>avant</strong> de démarrer (hors cas particuliers).
+                </p>
+              </div>
+            </div>
+
+            <!-- Autres avis -->
+            {otherReviews.length ? (
+              <div class="mt-5">
+                <div class="heading-block border-bottom-0 text-center mb-4">
+                  <div class="badge rounded-pill badge-default">Avis</div>
+                  <h3 class="text-transform-none ls-0 mb-1">Autres avis utiles</h3>
+                  <p class="text-muted mb-0">
+                    Même ville, même métier ou même type d’intervention.
+                  </p>
+                </div>
+
+                <div class="row col-mb-30">
+                  {otherReviews.map((a) => {
+                    const vName = villes.find((v) => v.slug === a.ville)?.name ?? a.ville;
+                    const mName = metiers.find((m) => m.slug === a.metier)?.name ?? a.metier;
+                    const sName =
+                      services.find((s) => s.metier === a.metier && s.slug === a.service)?.name ?? a.service;
+
+                    return (
+                      <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                          <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                              <div>
+                                <div class="fw-semibold">{a.author}</div>
+                                <div class="small text-muted">{mName} • {vName}</div>
+                              </div>
+                              <span class="badge bg-light text-dark">{Number(a.rating ?? 5)}/5</span>
+                            </div>
+
+                            <div class="small text-muted mb-2">
+                              <strong>Intervention :</strong> {sName}
+                            </div>
+
+                            <p class="small text-muted mb-3">
+                              {String(a.text ?? "").slice(0, 140)}{String(a.text ?? "").length > 140 ? "…" : ""}
+                            </p>
+
+                            <a class="btn btn-outline-secondary btn-sm" href={`/avis/${String(a.id)}/`}>Lire l’avis</a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
+
+            <div class="small text-muted mt-4">
+              <a href="/avis/">← Retour à tous les avis</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
