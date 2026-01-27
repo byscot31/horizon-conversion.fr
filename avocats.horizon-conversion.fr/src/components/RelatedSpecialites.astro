@@ -16,14 +16,7 @@ interface Props {
 }
 
 const props = Astro.props as Props;
-
-const {
-  related = [],
-  ville,
-  title = "Axes de travail fréquents",
-  intro = "Quelques domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :",
-  limit = 2,
-} = props;
+const { related = [], ville, title = "...", intro = "...", limit = 2 } = props;
 
 const allSpecialites = specialites as Specialite[];
 const allVilles = villes as Ville[];
