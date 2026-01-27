@@ -130,10 +130,11 @@ const otherServices = (services as Service[])
     )}
 
     <RelatedSpecialites
-      related={service?.relatedSpecialites}
+      related={service.relatedSpecialites}
       ville={villeSlug}
-      title={`Axes de travail fréquents à ${ville.name}`}
-      intro="Exemples d’axes sur lesquels nous structurons souvent la visibilité locale :"
+      title={service.relatedTitle}
+      intro={service.relatedIntro}
+      limit={2}
     />
 
     <section>

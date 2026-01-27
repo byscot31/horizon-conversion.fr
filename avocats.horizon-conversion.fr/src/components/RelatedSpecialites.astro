@@ -8,17 +8,14 @@ type Ville = { slug: string; specialites?: string[] };
 const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 interface Props {
-  // slugs de spécialités à afficher (ex: ["droit-immobilier", "droit-des-affaires"])
   related?: string[];
-  // optionnel : slug de ville courante (si présent, on pointe vers /specialites/<sp>/<ville> quand possible)
   ville?: string;
-  // optionnel : titre du bloc
   title?: string;
-  // optionnel : texte d’intro
   intro?: string;
-  // limite d’items (par défaut 2)
   limit?: number;
 }
+
+const props = Astro.props as Props;
 
 const {
   related = [],
@@ -26,26 +23,34 @@ const {
   title = "Axes de travail fréquents",
   intro = "Quelques domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :",
   limit = 2,
-} = Astro.props;
+} = props;
 
 const allSpecialites = specialites as Specialite[];
 const allVilles = villes as Ville[];
 
 const city = ville ? allVilles.find((v) => v.slug === ville) : undefined;
-const cityAllowed = new Set(city?.specialites ?? []);
+const cityList = city?.specialites ?? [];
+const hasMatrix = cityList.length > 0;
+const cityAllowed = new Set(cityList);
 
-// on prend les spécialités demandées, existantes, et on limite
-const selected = related
+// dédoublonne + garde uniquement celles qui existent + limite
+const selected = Array.from(new Set(related))
   .map((slug) => allSpecialites.find((s) => s.slug === slug))
   .filter(Boolean)
   .slice(0, limit) as Specialite[];
 
-// construit la meilleure URL : /specialites/sp/ville si autorisé, sinon /specialites/sp
+// construit la meilleure URL : /specialites/<sp>/<ville> si ville fournie et autorisée (ou pas de matrice)
+// sinon hub : /specialites/<sp>
 function spHref(spSlug: string) {
-  if (ville && cityAllowed.size > 0 && cityAllowed.has(spSlug)) {
-    return url(`/specialites/${spSlug}/${ville}`);
-  }
-  return url(`/specialites/${spSlug}`);
+  if (!ville) return url(`/specialites/${spSlug}`);
+
+  // ville inconnue → hub
+  if (!city) return url(`/specialites/${spSlug}`);
+
+  // si matrice définie, on respecte strictement ; sinon on considère "autorisé"
+  const allowed = !hasMatrix || cityAllowed.has(spSlug);
+
+  return allowed ? url(`/specialites/${spSlug}/${ville}`) : url(`/specialites/${spSlug}`);
 }
 
 const shouldRender = selected.length > 0;
