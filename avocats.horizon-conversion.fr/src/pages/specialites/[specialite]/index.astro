@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+
+import specialites from "../../../data/specialites.json";
+import villes from "../../../data/villes.json";
+
+type Specialite = { slug: string; label: string; hubTitle?: string; hubDesc?: string };
+type Ville = { slug: string; name: string; dept?: string; specialites?: string[] };
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+export async function getStaticPaths() {
+  return (specialites as Specialite[]).map((sp) => ({
+    params: { specialite: sp.slug },
+  }));
+}
+
+const { specialite: spSlug } = Astro.params;
+const sp = (specialites as Specialite[]).find((s) => s.slug === spSlug);
+if (!sp) throw new Error(`Spécialité inconnue: ${spSlug}`);
+
+const villesOk = (villes as Ville[]).filter((v) => !v.specialites?.length || v.specialites.includes(sp.slug));
+
+const title = sp.hubTitle ?? `Stratégie SEO local — ${sp.label}`;
+const description =
+  sp.hubDesc ??
+  `Contenu B2B : structurer la visibilité locale autour de “${sp.label}” (pages, maillage, GBP, conversion).`;
+
+const canonical = url(`${SITE}/specialites/${sp.slug}`);
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="container">
+    <section>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </section>
+
+    <section>
+      <h2>Déclinaisons par ville</h2>
+      <ul>
+        {villesOk.map((v) => (
+          <li>
+            <a href={url(`/specialites/${sp.slug}/${v.slug}`)}>
+              {sp.label} — stratégie SEO à {v.name}{v.dept ? ` (${v.dept})` : ""}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <a class="btn" href="/contact">Demander un audit</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

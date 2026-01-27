@@ -1,0 +1,55 @@
+[
+  {
+    "slug": "referencement-local",
+    "label": "Référencement local",
+    "hubTitle": "Référencement local pour cabinets d’avocats",
+    "hubDesc": "Améliorer la visibilité du cabinet sur Google (y compris la fiche établissement) et augmenter les prises de contact (appel + formulaire), en Sud Oise et Nord 95.",
+    "titleTpl": "Référencement local pour cabinets d’avocats à {ville}",
+    "descTpl": "Visibilité locale sur Google à {ville} et alentours : structuration, contenus essentiels et parcours de prise de contact, avec une approche sobre et conforme.",
+    "relatedSpecialites": ["droit-immobilier", "droit-des-affaires"],
+    "relatedTitle": "Domaines souvent travaillés",
+    "relatedIntro": "Exemples de domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :"
+  },
+  {
+    "slug": "refonte-site",
+    "label": "Refonte de site",
+    "hubTitle": "Refonte de site pour cabinets d’avocats",
+    "hubDesc": "Un site clair, rassurant et rapide, conçu pour faciliter la prise de contact et soutenir le référencement local.",
+    "titleTpl": "Refonte de site pour cabinet d’avocats à {ville}",
+    "descTpl": "Refonte orientée prise de contact à {ville} : clarté, rassurance, pages utiles et performance, en cohérence avec le référencement local.",
+    "relatedSpecialites": ["droit-immobilier", "droit-du-travail-employeur"],
+    "relatedTitle": "Exemples de structuration par domaine",
+    "relatedIntro": "Exemples de structuration de pages et de parcours, selon les domaines :"
+  },
+  {
+    "slug": "optimisation-parcours-contact",
+    "label": "Optimisation du parcours de contact",
+    "hubTitle": "Optimisation du parcours de contact",
+    "hubDesc": "Améliorer concrètement la prise de contact : messages, pages clés, preuves, appels à l’action et formulaires.",
+    "titleTpl": "Optimisation du parcours de contact d’un cabinet d’avocats à {ville}",
+    "descTpl": "Amélioration des pages clés à {ville} pour augmenter les prises de contact : messages, preuves, appels à l’action et formulaires.",
+    "relatedSpecialites": ["droit-des-affaires", "droit-du-travail-employeur"],
+    "relatedTitle": "Axes de travail fréquents",
+    "relatedIntro": "Quelques domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :"
+  },
+  {
+    "slug": "mesure-demandes",
+    "label": "Mesure des demandes",
+    "hubTitle": "Mesure des demandes (appels & formulaires)",
+    "hubDesc": "Suivre clairement l’origine des demandes (appel, formulaire) et piloter avec des indicateurs simples, sans complexité inutile.",
+    "titleTpl": "Mesure des demandes d’un cabinet d’avocats à {ville}",
+    "descTpl": "Mise en place d’une mesure fiable à {ville} : suivi des formulaires et des clics téléphone, et tableau de bord mensuel.",
+    "relatedSpecialites": []
+  },
+  {
+    "slug": "google-ads",
+    "label": "Google Ads (en option)",
+    "hubTitle": "Google Ads (en option) pour cabinets d’avocats",
+    "hubDesc": "Option d’accélération si et seulement si le dispositif est prêt : pages adaptées, mesure en place, capacité de traitement des demandes.",
+    "titleTpl": "Google Ads (en option) pour cabinet d’avocats à {ville}",
+    "descTpl": "Google Ads en option à {ville} : uniquement si les pages et la mesure sont prêtes, avec un cadrage strict pour limiter les demandes non pertinentes.",
+    "relatedSpecialites": ["droit-des-affaires", "droit-du-travail-employeur"],
+    "relatedTitle": "Axes pour des demandes plus ciblées",
+    "relatedIntro": "Exemples d’axes permettant de mieux cadrer les demandes, lorsque l’option Google Ads est pertinente :"
+  }
+]

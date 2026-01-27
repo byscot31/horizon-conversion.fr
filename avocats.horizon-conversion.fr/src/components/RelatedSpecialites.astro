@@ -1,0 +1,64 @@
+---
+import specialites from "../data/specialites.json";
+import villes from "../data/villes.json";
+
+type Specialite = { slug: string; label: string };
+type Ville = { slug: string; specialites?: string[] };
+
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+interface Props {
+  related?: string[];
+  ville?: string;
+  title?: string;
+  intro?: string;
+  limit?: number;
+}
+
+const props = Astro.props as Props;
+const { related = [], ville, title = "...", intro = "...", limit = 2 } = props;
+
+const allSpecialites = specialites as Specialite[];
+const allVilles = villes as Ville[];
+
+const city = ville ? allVilles.find((v) => v.slug === ville) : undefined;
+const cityList = city?.specialites ?? [];
+const hasMatrix = cityList.length > 0;
+const cityAllowed = new Set(cityList);
+
+// dédoublonne + garde uniquement celles qui existent + limite
+const selected = Array.from(new Set(related))
+  .map((slug) => allSpecialites.find((s) => s.slug === slug))
+  .filter(Boolean)
+  .slice(0, limit) as Specialite[];
+
+// construit la meilleure URL : /specialites/<sp>/<ville> si ville fournie et autorisée (ou pas de matrice)
+// sinon hub : /specialites/<sp>
+function spHref(spSlug: string) {
+  if (!ville) return url(`/specialites/${spSlug}`);
+
+  // ville inconnue → hub
+  if (!city) return url(`/specialites/${spSlug}`);
+
+  // si matrice définie, on respecte strictement ; sinon on considère "autorisé"
+  const allowed = !hasMatrix || cityAllowed.has(spSlug);
+
+  return allowed ? url(`/specialites/${spSlug}/${ville}`) : url(`/specialites/${spSlug}`);
+}
+
+const shouldRender = selected.length > 0;
+---
+
+{shouldRender && (
+  <section class="related-specialites">
+    <h2>{title}</h2>
+    <p>{intro}</p>
+    <ul>
+      {selected.map((sp) => (
+        <li>
+          <a href={spHref(sp.slug)}>{sp.label}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
