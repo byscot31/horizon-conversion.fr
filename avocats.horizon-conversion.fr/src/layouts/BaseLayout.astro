@@ -1,0 +1,63 @@
+---
+const {
+  title = "Acquisition locale pour cabinets d’avocats | Horizon Conversion",
+  description = "SEO local + refonte orientée conversion pour générer des demandes qualifiées (appel + formulaire) en Sud Oise & Nord 95, dans le respect de la déontologie.",
+  canonical = "https://avocats.horizon-conversion.fr/"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=Material+Symbols+Outlined&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Core Style -->
+    <link rel="stylesheet" href="/_assets_/style.css" />
+    <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
+    <link rel="stylesheet" href="/_assets_/css/custom.css" />
+
+    <!-- Niche -->
+    <link rel="stylesheet" href="/_assets_/law-firm.css" />
+
+    <!-- OpenGraph minimal -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+
+    <!-- JSON-LD (Organization + Service) -->
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Horizon Conversion",
+        url: "https://avocats.horizon-conversion.fr",
+        brand: { "@type": "Brand", name: "Horizon Conversion" },
+        areaServed: ["Sud Oise", "Nord 95"],
+        knowsAbout: ["SEO local", "Refonte de site", "Conversion", "Tracking"]
+      })}
+    </script>
+  </head>
+
+  <body class="stretched">
+    <div id="wrapper">
+      <slot />
+    </div>
+
+    <!-- JS template -->
+    <script src="/js/plugins.min.js"></script>
+    <script src="/js/functions.bundle.js"></script>
+  </body>
+</html>
