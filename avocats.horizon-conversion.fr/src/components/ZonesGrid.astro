@@ -1,0 +1,78 @@
+---
+// src/components/ZonesGrid.astro
+
+type City = {
+  slug: string;
+  name: string;
+  dept?: string;
+};
+
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+interface Props {
+  badge?: string;
+  title?: string;
+  intro?: string;
+
+  cities: City[];
+  hrefFor: (city: City) => string;
+
+  renderLabel?: (city: City) => any;
+
+  background?: string;
+  icon?: string;
+  columns?: 1 | 2 | 3; // optionnel, pour forcer la grille
+}
+
+const {
+  badge = "Zone",
+  title = "Villes couvertes",
+  intro = "Sélection de pages locales utiles (pas de surproduction). Cliquez pour voir la page dédiée.",
+  cities,
+  hrefFor,
+  renderLabel,
+  background = "#f1f3f7",
+  icon = "location_on",
+  columns
+} = Astro.props as Props;
+
+const gridClass =
+  columns === 1 ? "hc-grid-1" : columns === 2 ? "hc-grid-2" : columns === 3 ? "hc-grid-3" : "";
+---
+
+<div class="section py-6 mb-0" style={`background-color: ${background}`}>
+  <div class="container">
+
+    <div class="row align-items-end justify-content-between mb-4">
+      <div class="col-lg-7">
+        <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">{badge}</div>
+        <h2 class="h3 fw-bold mb-2">{title}</h2>
+        {intro && <p class="lead mb-0 op-07">{intro}</p>}
+      </div>
+    </div>
+
+    <ul class={`hc-cities-grid ${gridClass}`}>
+      {cities.map((c) => (
+        <li>
+          <a class="hc-city" href={url(hrefFor(c))}>
+            <span class="material-symbols-outlined color">{icon}</span>
+
+            <span class="hc-city__label">
+              {renderLabel ? (
+                renderLabel(c)
+              ) : (
+                <span>
+                  <strong>{c.name}</strong>
+                  {c.dept ? ` (${c.dept})` : ""}
+                </span>
+              )}
+            </span>
+
+            <span class="material-symbols-outlined op-06">arrow_right_alt</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</div>

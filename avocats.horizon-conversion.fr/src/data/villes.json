@@ -1,15 +1,98 @@
 [
-  { "nom": "Senlis", "slug": "senlis", "departement": "60", "code_postal": "60300" },
-  { "nom": "Chantilly", "slug": "chantilly", "departement": "60", "code_postal": "60500" },
-  { "nom": "Creil", "slug": "creil", "departement": "60", "code_postal": "60100" },
-  { "nom": "Nogent-sur-Oise", "slug": "nogent-sur-oise", "departement": "60", "code_postal": "60180" },
-  { "nom": "Pont-Sainte-Maxence", "slug": "pont-sainte-maxence", "departement": "60", "code_postal": "60700" },
-  { "nom": "Compiègne", "slug": "compiegne", "departement": "60", "code_postal": "60200" },
-  { "nom": "Clermont (Oise)", "slug": "clermont-oise", "departement": "60", "code_postal": "60600" },
-
-  { "nom": "Persan", "slug": "persan", "departement": "95", "code_postal": "95340" },
-  { "nom": "Beaumont-sur-Oise", "slug": "beaumont-sur-oise", "departement": "95", "code_postal": "95260" },
-  { "nom": "L'Isle-Adam", "slug": "lisle-adam", "departement": "95", "code_postal": "95290" },
-  { "nom": "Luzarches", "slug": "luzarches", "departement": "95", "code_postal": "95270" },
-  { "nom": "Fosses", "slug": "fosses", "departement": "95", "code_postal": "95470" }
+  {
+    "slug": "senlis",
+    "name": "Senlis",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes"],
+    "specialites": ["droit-immobilier", "droit-des-affaires"]
+  },
+  {
+    "slug": "chantilly",
+    "name": "Chantilly",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes"],
+    "specialites": ["droit-immobilier"]
+  },
+  {
+    "slug": "creil",
+    "name": "Creil",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-immobilier", "droit-du-travail-employeur"]
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "name": "Nogent-sur-Oise",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes"],
+    "specialites": ["droit-immobilier"]
+  },
+  {
+    "slug": "compiegne",
+    "name": "Compiègne",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-des-affaires", "droit-du-travail-employeur"]
+  },
+  {
+    "slug": "beauvais",
+    "name": "Beauvais",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-immobilier", "droit-des-affaires"]
+  },
+  {
+    "slug": "pontoise",
+    "name": "Pontoise",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-des-affaires", "droit-du-travail-employeur"]
+  },
+  {
+    "slug": "cergy",
+    "name": "Cergy",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-des-affaires", "droit-du-travail-employeur"]
+  },
+  {
+    "slug": "sarcelles",
+    "name": "Sarcelles",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-immobilier"]
+  },
+  {
+    "slug": "garges-les-gonesse",
+    "name": "Garges-lès-Gonesse",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes"],
+    "specialites": ["droit-immobilier"]
+  },
+  {
+    "slug": "gonesse",
+    "name": "Gonesse",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes", "google-ads"],
+    "specialites": ["droit-des-affaires"]
+  },
+  {
+    "slug": "louvres",
+    "name": "Louvres",
+    "dept": "95",
+    "regionHint": "Nord 95",
+    "services": ["referencement-local", "refonte-site", "optimisation-parcours-contact", "mesure-demandes"],
+    "specialites": ["droit-des-affaires"]
+  }
 ]

@@ -1,69 +1,93 @@
 ---
 // src/components/Contact.astro
 ---
-<div id="section-contact" class="section bg-color dark mt-6" style="background-image: linear-gradient(to bottom, rgba(var(--cnvs-themecolor-rgb),.8), rgba(var(--cnvs-themecolor-rgb),1)), url('/_assets_/images/bg-1.jpg'); background-attachment: fixed; background-size: cover;">
-  					<div class="container py-4">
-  						<div class="row justify-content-center">
-  							<div class="col-lg-9">
-  								 <div class="form-widget" data-alert-type="false">
+<div id="section-contact" class="section bg-color dark mt-6"
+  style="background-image: linear-gradient(to bottom, rgba(var(--cnvs-themecolor-rgb),.8), rgba(var(--cnvs-themecolor-rgb),1)), url('/_assets_/images/bg-1.jpg'); background-attachment: fixed; background-size: cover;">
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="form-widget" data-alert-type="false">
 
-  									<div class="form-result"></div>
-  									<div class="lawfirm-inline-loader css3-spinner" style="position: absolute;">
-  										<div class="css3-spinner-bounce1"></div>
-  										<div class="css3-spinner-bounce2"></div>
-  										<div class="css3-spinner-bounce3"></div>
-  									</div>
-  									<div id="lawfirm-inline-submitted" class="text-center">
-  										<div class="fw-normal mb-0 h3 lh-base">Thank You for Contact Us! <br> Our Team will contact you asap on your email Address.</div>
-  									</div>
+          <div class="form-result"></div>
+          <div class="lawfirm-inline-loader css3-spinner" style="position: absolute;">
+            <div class="css3-spinner-bounce1"></div>
+            <div class="css3-spinner-bounce2"></div>
+            <div class="css3-spinner-bounce3"></div>
+          </div>
 
-  									<form class="mb-0" id="lawfirm-inline" name="lawfirm-inline" action="include/form.php" method="post" enctype="multipart/form-data">
+          <div id="lawfirm-inline-submitted" class="text-center">
+            <div class="fw-normal mb-0 h3 lh-base">
+              Merci. <br /> Nous revenons vers vous rapidement pour cadrer votre demande.
+            </div>
+          </div>
 
-  										<div class="row">
+          <form class="mb-0" id="lawfirm-inline" name="lawfirm-inline" action="include/form.php" method="post" enctype="multipart/form-data">
+            <div class="row">
 
-  											<div class="before-title text-uppercase ls-3 text-smaller mb-3 op-05">Looking for a Lawyer?</div>
+              <div class="before-title text-uppercase ls-3 text-smaller mb-3 op-05">
+                Demande d’audit – cabinets d’avocats
+              </div>
 
-  											<div class="col-12 mb-4">
-  												<label for="lawfirm-inline-lawyer">I'd like to Contact a</label>
-  												<select class="required form-select" name="lawfirm-inline-lawyer" id="lawfirm-inline-lawyer">
-  													<option value="Immigration" selected>Immigration</option>
-  													<option value="Education">Education</option>
-  													<option value="Insurance">Insurance</option>
-  													<option value="Business">Business</option>
-  													<option value="Family">Family</option>
-  													<option value="Criminal">Criminal</option>
-  													<option value="Employment">Employment</option>
-  												</select>
-  												<label for="lawfirm-inline-industry">lawyer, expert in</label>
-  												<select class="required form-select" name="lawfirm-inline-industry" id="lawfirm-inline-industry">
-  													<option value="Industry" selected>Industry</option>
-  													<option value="Professional">Professional</option>
-  													<option value="Pracice Area">Pracice Area</option>
-  												</select>
-  												<label for="lawfirm-inline-city">located in</label>
+              <div class="col-12 mb-4">
+                <label for="lawfirm-inline-lawyer">Cabinet</label>
+                <input class="required form-control" type="text" name="lawfirm-inline-lawyer" id="lawfirm-inline-lawyer" placeholder="Nom du cabinet" />
 
-  												<input class="required form-control" type="text" value="" name="lawfirm-inline-city" id="lawfirm-inline-city" placeholder="City" style="max-width: 200px">
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="lawfirm-inline-city">Ville principale</label>
+                    <input class="required form-control" type="text" name="lawfirm-inline-city" id="lawfirm-inline-city" placeholder="Ex. Senlis" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lawfirm-inline-email">Email</label>
+                    <input type="email" class="form-control required" id="lawfirm-inline-email" name="lawfirm-inline-email" placeholder="email@cabinet.fr" />
+                  </div>
+                </div>
 
-  												<label for="lawfirm-inline-email"> send email us to</label>
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="lawfirm-inline-industry">Besoin principal</label>
+                    <select class="required form-select" name="lawfirm-inline-industry" id="lawfirm-inline-industry">
+                      <option value="" selected>Choisir</option>
+                      <option value="referencement-local">Référencement local</option>
+                      <option value="refonte-site">Refonte de site</option>
+                      <option value="optimisation-parcours-contact">Optimisation du parcours de contact</option>
+                      <option value="mesure-demandes">Mesure des demandes</option>
+                      <option value="google-ads">Google Ads (en option)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lawfirm-inline-site">Site actuel (optionnel)</label>
+                    <input class="form-control" type="url" name="lawfirm-inline-site" id="lawfirm-inline-site" placeholder="https://..." />
+                  </div>
+                </div>
 
-  												<input type="email" value="" class="form-control required" id="lawfirm-inline-email" name="lawfirm-inline-email" placeholder="email address">.
-  											</div>
+                <div class="mt-3">
+                  <label for="lawfirm-inline-message">Contexte (optionnel)</label>
+                  <textarea class="form-control" name="lawfirm-inline-message" id="lawfirm-inline-message" rows="3" placeholder="Objectif, domaines prioritaires, zone visée…"></textarea>
+                </div>
 
-  											<div class="col-12 d-none">
-  												<input type="text" id="lawfirm-inline-botcheck" name="lawfirm-inline-botcheck" value="">
-  											</div>
-  											<div class="col-12 text-center">
-  												<button type="submit" name="lawfirm-inline-submit" class="btn btn-lg py-3 px-6 mt-2 rounded-1 btn-light h-op-09">Send Now</button>
-  											</div>
+                <small class="d-block mt-3 op-07">
+                  Sans promesse de résultat. Les informations envoyées servent uniquement à traiter votre demande.
+                </small>
+              </div>
 
-  											<input type="hidden" name="prefix" value="lawfirm-inline-">
-  											<input type="hidden" name="subject" value="Messgae From Law Firm Template">
+              <div class="col-12 d-none">
+                <input type="text" id="lawfirm-inline-botcheck" name="lawfirm-inline-botcheck" value="">
+              </div>
 
-  										</div>
+              <div class="col-12 text-center">
+                <button type="submit" name="lawfirm-inline-submit" class="btn btn-lg py-3 px-6 mt-2 rounded-1 btn-light h-op-09">
+                  Demander un audit
+                </button>
+              </div>
 
-  									</form>
-  								</div>
-  							</div>
-  						</div>
-  					</div>
-  				</div>
+              <input type="hidden" name="prefix" value="lawfirm-inline-">
+              <input type="hidden" name="subject" value="Demande d’audit – Avocats Horizon Conversion">
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

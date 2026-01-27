@@ -1,64 +1,61 @@
 ---
 // src/components/Header.astro
 ---
-<!-- Header
-		============================================= -->
-		<header id="header" class="transparent-header dark">
-			<div id="header-wrap">
-				<div class="container">
-					<div class="header-row align-items-lg-start justify-content-between py-lg-4">
+<header id="header" class="transparent-header dark">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row align-items-lg-start justify-content-between py-lg-4">
 
-						<!-- Logo
-						============================================= -->
-						<div id="logo" class="col-xl-2 col-md-3 col-6 align-items-lg-start py-4">
-							<a href="demo-law-firm.html">
-								<img class="logo-default" src="/_assets_/images/logo.svg" alt="Horizon Conversion">
-							</a>
-						</div><!-- #logo end -->
+        <div id="logo" class="col-xl-2 col-md-3 col-6 align-items-lg-start py-4">
+          <a href="/">
+            <img class="logo-default" src="/_assets_/images/logo.svg" alt="Horizon Conversion – Avocats" />
+          </a>
+        </div>
 
-						<!-- Primary Menu In Large Screen
-						============================================= -->
-						<div class="col-auto d-none d-lg-flex py-2">
-							<div class="row gx-5 large-device-menu-wrap">
-								<div class="col-auto large-device-menu">
-									<a class="text-white op-09 h-op-1" href="#"><div>Accueil</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>Offres</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>Méthode</div></a>
-								</div>
-								<div class="col-auto large-device-menu">
-									<a class="text-white op-09 h-op-1" href="#"><div>SEO local</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>Contact</div></a>
-								</div>
-								<div class="col-auto">
-									<a href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88" class="btn px-3 py-2 btn-dark h-bg-light h-text-dark d-inline-block op-09 h-op-1" style="background-color: rgba(255,255,255,0.2)">Free Consultation</a>
-								</div>
-							</div>
-						</div>
+        <div class="col-auto d-none d-lg-flex py-2">
+          <div class="row gx-5 large-device-menu-wrap">
+            <div class="col-auto large-device-menu">
+              <a class="text-white op-09 h-op-1" href="/"><div>Accueil</div></a>
+              <a class="text-white op-09 h-op-1" href="/offres"><div>Offres</div></a>
+              <a class="text-white op-09 h-op-1" href="/methode"><div>Méthode</div></a>
+            </div>
+            <div class="col-auto large-device-menu">
+              <a class="text-white op-09 h-op-1" href="/referencement-local"><div>Référencement local</div></a>
+              <a class="text-white op-09 h-op-1" href="/refonte-site"><div>Refonte</div></a>
+              <a class="text-white op-09 h-op-1" href="/contact"><div>Contact</div></a>
+            </div>
+            <div class="col-auto">
+              <a
+                href="/contact"
+                class="btn px-3 py-2 btn-dark h-bg-light h-text-dark d-inline-block op-09 h-op-1"
+                style="background-color: rgba(255,255,255,0.2)"
+              >
+                Demander un audit
+              </a>
+            </div>
+          </div>
+        </div>
 
-						<!-- Primary Menu Trigger for Devices
-						============================================= -->
-						<div class="primary-menu-trigger">
-							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-							</button>
-						</div>
+        <div class="primary-menu-trigger">
+          <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
 
-						<!-- Primary Menu In Mobile
-						============================================= -->
-						<nav class="primary-menu d-block d-lg-none">
+        <nav class="primary-menu d-block d-lg-none">
+          <ul class="menu-container">
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/"><div>Accueil</div></a></li>
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/offres"><div>Offres</div></a></li>
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/methode"><div>Méthode</div></a></li>
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/referencement-local"><div>Référencement local</div></a></li>
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/refonte-site"><div>Refonte</div></a></li>
+            <li class="menu-item"><a class="menu-link h-text-warning" href="/contact"><div>Contact</div></a></li>
+            <li class="menu-item"><a class="menu-link text-warning" href="/contact"><div>Demander un audit</div></a></li>
+          </ul>
+        </nav>
 
-							<ul class="menu-container">
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Who We Are</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Recent Cases</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Our Lawyers</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>News &amp; Blogs</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Contacts</div></a></li>
-								<li class="menu-item"><a class="menu-link text-warning" href="#"><div>Free Consultation</div></a></li>
-							</ul>
-
-						</nav><!-- #primary-menu end -->
-					</div>
-				</div>
-			</div>
-			<div class="header-wrap-clone"></div>
-		</header><!-- #header end -->
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>

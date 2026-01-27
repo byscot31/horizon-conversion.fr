@@ -1,71 +1,81 @@
 ---
 // src/components/Faqs.astro
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+export type FaqItem = {
+  q: string;
+  a: string;
+};
+
+interface Props {
+  title?: string;
+  intro?: string;
+  items: FaqItem[];
+  canonical?: string; // optionnel
+  imageSrc?: string;  // optionnel
+  imageAlt?: string;  // optionnel
+  openFirst?: boolean; // optionnel (default true)
+}
+
+const {
+  title = "Questions fréquentes",
+  intro = "Réponses sobres aux questions qui reviennent le plus souvent.",
+  items,
+  canonical,
+  imageSrc = "/_assets_/images/bg-2.jpg",
+  imageAlt = "Cabinet d’avocats",
+  openFirst = true
+} = Astro.props as Props;
+
+const safeItems = (items ?? []).filter((it) => it?.q && it?.a);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": safeItems.map((it) => ({
+    "@type": "Question",
+    "name": it.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": it.a
+    }
+  })),
+  ...(canonical ? { url: url(canonical) } : {})
+};
 ---
-<div class="section bg-transparent py-4">
-  					<div class="container">
-  						<div class="row align-items-center justify-content-center gutter-50">
-  							<div class="col-lg-5 px-5">
-  								<i class="material-symbols-outlined display-4 color mb-3">help_outline</i>
-  								<h2 class="h1 fw-bold mb-4">Frequently Asked Questions</h2>
 
-  								<p class="lead">Nam aut labore voluptas explicabo, assumenda</p>
+{safeItems.length > 0 && (
+  <div class="section bg-transparent py-4">
+    <div class="container">
+      <div class="row align-items-center justify-content-center gutter-50">
+        <div class="col-lg-5 px-5">
+          <i class="material-symbols-outlined display-4 color mb-3">help_outline</i>
+          <h2 class="h1 fw-bold mb-4">{title}</h2>
 
-  								<div class="toggle" data-state="open">
-  									<div class="toggle-header justify-content-between">
-  										<div class="toggle-icon">
-  											<i class="toggle-closed bi-caret-right-fill color"></i>
-  											<i class="toggle-open bi-caret-down-fill text-warning"></i>
-  										</div>
-  										<div class="toggle-title fw-bold">
-  											How do I become an author?
-  										</div>
-  									</div>
-  									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores.</div>
-  								</div>
+          <p class="lead">{intro}</p>
 
-  								<div class="toggle">
-  									<div class="toggle-header justify-content-between">
-  										<div class="toggle-icon">
-  											<i class="toggle-closed bi-caret-right-fill color"></i>
-  											<i class="toggle-open bi-caret-down-fill text-warning"></i>
-  										</div>
-  										<div class="toggle-title fw-bold">
-  											Helpful Resources for Authors
-  										</div>
-  									</div>
-  									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
-  								</div>
+          {safeItems.map((it, idx) => (
+            <div class="toggle" data-state={openFirst && idx === 0 ? "open" : undefined}>
+              <div class="toggle-header justify-content-between">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-caret-right-fill color"></i>
+                  <i class="toggle-open bi-caret-down-fill text-warning"></i>
+                </div>
+                <div class="toggle-title fw-bold">{it.q}</div>
+              </div>
+              <div class="toggle-content ps-4">{it.a}</div>
+            </div>
+          ))}
+        </div>
 
-  								<div class="toggle">
-  									<div class="toggle-header justify-content-between">
-  										<div class="toggle-icon">
-  											<i class="toggle-closed bi-caret-right-fill color"></i>
-  											<i class="toggle-open bi-caret-down-fill text-warning"></i>
-  										</div>
-  										<div class="toggle-title fw-bold">
-  											How much money can I make?
-  										</div>
-  									</div>
-  									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
-  								</div>
+        <div class="col-lg-5 col-10">
+          <img src={imageSrc} alt={imageAlt} loading="lazy" />
+        </div>
+      </div>
+    </div>
 
-  								<div class="toggle">
-  									<div class="toggle-header justify-content-between">
-  										<div class="toggle-icon">
-  											<i class="toggle-closed bi-caret-right-fill color"></i>
-  											<i class="toggle-open bi-caret-down-fill text-warning"></i>
-  										</div>
-  										<div class="toggle-title fw-bold">
-  											Can I offer my items for free on a promotional basis?
-  										</div>
-  									</div>
-  									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
-  								</div>
-  							</div>
-
-  							<div class="col-lg-5 col-10">
-  								<img src="/_assets_/images/bg-2.jpg" alt="Image">
-  							</div>
-  						</div>
-  					</div>
-  				</div>
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </script>
+  </div>
+)}

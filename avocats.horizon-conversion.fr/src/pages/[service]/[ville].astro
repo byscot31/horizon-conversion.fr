@@ -1,9 +1,20 @@
 ---
+// src/pages/[service]/[ville].astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import Hero from "../../components/Hero.astro";
+import Services from "../../components/Services.astro";
+import ScopeCards from "../../components/ScopeCards.astro";
 import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
+import Contact from "../../components/Contact.astro";
+import Faqs from "../../components/Faqs.astro";
+import OtherServicesGrid from "../../components/OtherServicesGrid.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import LinkedPages from "../../components/LinkedPages.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
 
+import ui from "../../data/ui.json";
 import services from "../../data/services.json";
 import villes from "../../data/villes.json";
 
@@ -18,6 +29,13 @@ type Service = {
   relatedSpecialites?: string[];
   relatedTitle?: string;
   relatedIntro?: string;
+
+  faqTitle?: string;
+  faqIntroHub?: string;
+  faqIntroLocalTpl?: string;
+  faqs?: { q: string; a: string }[];
+
+  localFaqsTpl?: { qTpl: string; aTpl: string }[];
 };
 type Ville = {
   slug: string;
@@ -77,87 +95,46 @@ const objectiveByService: Record<string, string> = {
   "mesure-demandes": "Objectif : suivre clairement l’origine des demandes et piloter avec des indicateurs simples.",
   "google-ads": "Objectif : option d’accélération, uniquement si le dispositif est prêt et cadré."
 };
+
+const zone = ville.regionHint ? `${ville.regionHint} — ${ville.name}` : ville.name;
+
+const localFaqs = (service.localFaqsTpl ?? []).map((it: any) => ({
+  q: tpl(it.qTpl, { ville: ville.name, zone }),
+  a: tpl(it.aTpl, { ville: ville.name, zone })
+}));
+
+const faqIntroLocal = service.faqIntroLocalTpl
+  ? tpl(service.faqIntroLocalTpl, { ville: ville.name, zone })
+  : service.faqIntroHub;
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `${service.label} — ${zone}`,
+  title: service.titleTpl ? tpl(service.titleTpl, { ville: ville.name }) : pageTitle,
+  subtitle: service.descTpl ? tpl(service.descTpl, { ville: ville.name }) : pageDesc,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir les packs", href: "/offres" }
+};
+
+const otherServicesForGrid = otherServices.map((s) => ({ slug: s.slug, label: s.label }));
+
+const hubServiceHref = url("/" + service.slug);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} canonical={canonical}>
+
   <Header />
 
-  <main class="container">
-    <section>
-      <h1>{pageTitle}</h1>
-      <p>
-        Zone : {ville.regionHint ? `${ville.regionHint} — ` : ""}{ville.name}
-        {ville.dept ? ` (${ville.dept})` : ""}.
-      </p>
-      <p>
-        {objectiveByService[service.slug] ?? "Objectif : faciliter la prise de contact (appel + formulaire) avec une approche sobre et conforme."}
-      </p>
-    </section>
+  <Hero {...hero} />
 
-    <section>
-      <h2>Ce que comprend l’intervention</h2>
+  <!-- Content
+  ============================================= -->
+  <section id="content">
+  	<div class="content-wrap overflow-visible py-0">
 
-      {service.slug === "referencement-local" && (
-        <ul>
-          <li>Optimisation de la présence locale sur Google (y compris la fiche établissement)</li>
-          <li>Pages utiles du site : structure claire, contenus essentiels, cohérence des informations</li>
-          <li>Renvoi vers la prise de contact (appel / formulaire) avec un parcours simple</li>
-          <li>Suivi des demandes et points mensuels (selon l’offre choisie)</li>
-        </ul>
-      )}
+  	<Services />
 
-      {service.slug === "refonte-site" && (
-        <ul>
-          <li>Architecture et contenus pensés pour inspirer confiance</li>
-          <li>Pages clés : offres, prise de contact, questions fréquentes</li>
-          <li>Site rapide et lisible, compatible avec le référencement local</li>
-        </ul>
-      )}
-
-      {service.slug === "optimisation-parcours-contact" && (
-        <ul>
-          <li>Amélioration des pages qui mènent à l’appel et au formulaire</li>
-          <li>Clarification de l’offre, éléments de rassurance, appels à l’action</li>
-          <li>Formulaire : concis, orienté qualification, sans friction</li>
-        </ul>
-      )}
-
-      {service.slug === "mesure-demandes" && (
-        <ul>
-          <li>Suivi des formulaires et des clics téléphone</li>
-          <li>Tableau de bord lisible : volume de demandes, sources, pages d’entrée</li>
-          <li>Recommandations d’ajustement sur la base de données concrètes</li>
-        </ul>
-      )}
-
-      {service.slug === "google-ads" && (
-        <ul>
-          <li>Activation uniquement si les pages et la mesure sont prêtes</li>
-          <li>Cadrage strict pour limiter les demandes non pertinentes</li>
-          <li>Pilotage orienté qualité (et non volume)</li>
-        </ul>
-      )}
-    </section>
-
-    <section>
-      <h2>Pages liées</h2>
-      <ul>
-        <li><a href={url(`/${service.slug}`)}>Voir toutes les villes ({service.label})</a></li>
-        <li><a href="/offres">Découvrir les packs</a></li>
-        <li><a href="/methode">Comprendre la méthode</a></li>
-      </ul>
-    </section>
-
-    {otherServices.length > 0 && (
-      <section>
-        <h2>Autres services à {ville.name}</h2>
-        <ul>
-          {otherServices.map((s) => (
-            <li><a href={url(`/${s.slug}/${ville.slug}`)}>{s.label} à {ville.name}</a></li>
-          ))}
-        </ul>
-      </section>
-    )}
+  	<ScopeCards serviceSlug={service.slug} />
 
     <RelatedSpecialites
       related={service.relatedSpecialites}
@@ -167,11 +144,35 @@ const objectiveByService: Record<string, string> = {
       limit={2}
     />
 
-    <section>
-      <h2>Demander un audit</h2>
-      <a class="btn" href="/contact">Planifier un échange</a>
-    </section>
-  </main>
+    <Contact />
+
+    <Faqs
+      title={service.faqTitle}
+      intro={faqIntroLocal}
+      items={[...(service.faqs ?? []).slice(0, 4), ...localFaqs]}
+      canonical={canonical}
+    />
+
+    <OtherServicesGrid
+      villeName={ville.name}
+      villeSlug={ville.slug}
+      services={otherServicesForGrid}
+    />
+
+    <Reassurance />
+
+    <LinkedPages
+      cards={[
+        { title: "Toutes les villes", desc: `${service.label} — pages locales`, href: hubServiceHref },
+        { title: "Découvrir les packs", desc: "Options et livrables", href: "/offres" },
+        { title: "Comprendre la méthode", desc: "Déroulé et cadre", href: "/methode" }
+      ]}
+    />
+
+    <Promo />
+
+  </section><!-- #content end -->
 
   <Footer />
+
 </BaseLayout>

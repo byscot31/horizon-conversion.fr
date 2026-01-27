@@ -8,7 +8,38 @@
     "descTpl": "Visibilité locale sur Google à {ville} et alentours : structuration, contenus essentiels et parcours de prise de contact, avec une approche sobre et conforme.",
     "relatedSpecialites": ["droit-immobilier", "droit-des-affaires"],
     "relatedTitle": "Domaines souvent travaillés",
-    "relatedIntro": "Exemples de domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :"
+    "relatedIntro": "Exemples de domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :",
+    "faqTitle": "Questions fréquentes sur la visibilité locale",
+    "faqIntroHub": "Réponses simples sur la visibilité locale d’un cabinet : périmètre, priorités et manière de travailler.",
+    "faqIntroLocalTpl": "À {zone}, voici les réponses aux questions qui reviennent le plus souvent sur la visibilité locale du cabinet.",
+    "faqs": [
+      {
+        "q": "En combien de temps peut-on constater une évolution ?",
+        "a": "Les premiers effets apparaissent après la mise au propre des fondamentaux (présence locale, pages utiles, cohérence des informations). Ensuite, la progression se construit dans la durée."
+      },
+      {
+        "q": "Travaillez-vous la fiche établissement Google du cabinet ?",
+        "a": "Oui, si elle existe ou si elle doit être créée. L’objectif est une présence claire et cohérente, sans artifices, avec des informations fiables."
+      },
+      {
+        "q": "Faut-il créer une page par ville ?",
+        "a": "Pas systématiquement. Nous privilégions un nombre limité de pages réellement utiles, plutôt qu’une multiplication de pages très proches."
+      },
+      {
+        "q": "Comment évitez-vous les demandes hors périmètre ?",
+        "a": "En clarifiant le périmètre d’intervention, les domaines traités et les modalités de contact, avec un formulaire qui qualifie correctement la demande."
+      }
+    ],
+    "localFaqsTpl": [
+      {
+        "qTpl": "Qu’englobe votre intervention en visibilité locale à {ville} ?",
+        "aTpl": "À {zone}, nous cadrons une présence locale cohérente sur Google (y compris la fiche établissement lorsque c’est pertinent) et une structure de pages utile au cabinet, afin de faciliter la prise de contact (appel ou formulaire)."
+      },
+      {
+        "qTpl": "Quels ajustements ont le plus d’impact localement à {ville} ?",
+        "aTpl": "En priorité : cohérence des informations, pages du site clairement structurées (domaines, contact, informations pratiques) et parcours de prise de contact fluide. Les actions sont priorisées selon la situation du cabinet."
+      }
+    ]
   },
   {
     "slug": "refonte-site",
@@ -19,7 +50,38 @@
     "descTpl": "Refonte orientée prise de contact à {ville} : clarté, rassurance, pages utiles et performance, en cohérence avec le référencement local.",
     "relatedSpecialites": ["droit-immobilier", "droit-du-travail-employeur"],
     "relatedTitle": "Exemples de structuration par domaine",
-    "relatedIntro": "Exemples de structuration de pages et de parcours, selon les domaines :"
+    "relatedIntro": "Exemples de structuration de pages et de parcours, selon les domaines :",
+    "faqTitle": "Questions fréquentes sur la refonte de site",
+    "faqIntroHub": "Ce que couvre une refonte pensée pour un cabinet : clarté, confiance et prise de contact.",
+    "faqIntroLocalTpl": "À {zone}, voici les réponses aux questions courantes sur la refonte et l’organisation des pages du cabinet.",
+    "faqs": [
+      {
+        "q": "Qu’est-ce qu’une refonte orientée prise de contact ?",
+        "a": "Une refonte qui facilite la décision : messages clairs, éléments de rassurance, pages structurées, et accès évident à l’appel et au formulaire."
+      },
+      {
+        "q": "Peut-on conserver l’identité visuelle et les contenus existants ?",
+        "a": "Oui. Nous conservons ce qui est solide et nous améliorons ce qui freine la compréhension, la confiance ou la prise de contact."
+      },
+      {
+        "q": "Quelles pages sont réellement indispensables ?",
+        "a": "En général : présentation claire des domaines, page méthode, page contact efficace, et une section questions fréquentes."
+      },
+      {
+        "q": "La refonte aide-t-elle aussi la visibilité sur Google ?",
+        "a": "Oui, si la structure et les contenus sont conçus pour répondre clairement aux besoins et soutenir une présence locale cohérente."
+      }
+    ],
+    "localFaqsTpl": [
+      {
+        "qTpl": "À {ville}, sur quelles pages travaillez-vous en priorité lors d’une refonte ?",
+        "aTpl": "À {zone}, nous priorisons les pages qui décident de la prise de contact : présentation claire des domaines, pages clés du cabinet, page contact, et questions fréquentes. Le but est d’inspirer confiance et de simplifier le contact."
+      },
+      {
+        "qTpl": "Peut-on conserver l’existant du cabinet lors d’une refonte à {ville} ?",
+        "aTpl": "Oui. Nous conservons ce qui est solide (contenus, identité, structure utile) et nous ajustons ce qui freine la compréhension, la confiance ou la prise de contact."
+      }
+    ]
   },
   {
     "slug": "optimisation-parcours-contact",
@@ -30,7 +92,38 @@
     "descTpl": "Amélioration des pages clés à {ville} pour augmenter les prises de contact : messages, preuves, appels à l’action et formulaires.",
     "relatedSpecialites": ["droit-des-affaires", "droit-du-travail-employeur"],
     "relatedTitle": "Axes de travail fréquents",
-    "relatedIntro": "Quelques domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :"
+    "relatedIntro": "Exemples de domaines pour lesquels nous travaillons souvent la clarté des pages et le parcours de prise de contact :",
+    "faqTitle": "Questions fréquentes sur l’amélioration du parcours de contact",
+    "faqIntroHub": "Clarifier ce qui mène à l’appel ou au formulaire, sans modifier l’image du cabinet.",
+    "faqIntroLocalTpl": "À {zone}, voici les réponses aux questions fréquentes sur l’amélioration du parcours de prise de contact.",
+    "faqs": [
+      {
+        "q": "Qu’améliorez-vous en priorité ?",
+        "a": "Ce qui freine la prise de contact : clarté de l’offre, éléments de rassurance, appels à l’action, structure des pages, et formulaire."
+      },
+      {
+        "q": "Faut-il refaire tout le site ?",
+        "a": "Non. Souvent, quelques pages clés et le parcours de contact suffisent à améliorer sensiblement les demandes entrantes."
+      },
+      {
+        "q": "Comment qualifiez-vous les demandes ?",
+        "a": "Par des pages plus explicites (périmètre, domaines) et un formulaire structuré (objectif, situation, coordonnées), sans surcharger."
+      },
+      {
+        "q": "Est-ce compatible avec une image premium ?",
+        "a": "Oui. L’objectif est la clarté et la confiance, sans artifices ni accroches agressives."
+      }
+    ],
+    "localFaqsTpl": [
+      {
+        "qTpl": "À {ville}, comment améliorez-vous concrètement la prise de contact ?",
+        "aTpl": "À {zone}, nous travaillons la clarté des pages, les éléments de rassurance, les appels à l’action et le formulaire. L’objectif est de faciliter l’appel et le formulaire, sans tonalité commerciale."
+      },
+      {
+        "qTpl": "Qu’est-ce qui est le plus souvent à corriger pour améliorer les contacts à {ville} ?",
+        "aTpl": "Le plus fréquent : offre peu lisible, pages qui n’orientent pas clairement vers l’appel ou le formulaire, et formulaire trop long ou trop vague. Nous priorisons des ajustements simples, compatibles avec une image premium."
+      }
+    ]
   },
   {
     "slug": "mesure-demandes",
@@ -39,7 +132,38 @@
     "hubDesc": "Suivre clairement l’origine des demandes (appel, formulaire) et piloter avec des indicateurs simples, sans complexité inutile.",
     "titleTpl": "Mesure des demandes d’un cabinet d’avocats à {ville}",
     "descTpl": "Mise en place d’une mesure fiable à {ville} : suivi des formulaires et des clics téléphone, et tableau de bord mensuel.",
-    "relatedSpecialites": []
+    "relatedSpecialites": [],
+    "faqTitle": "Questions fréquentes sur la mesure des demandes",
+    "faqIntroHub": "Comprendre ce qui génère réellement des demandes et décider sur des faits, avec des indicateurs lisibles.",
+    "faqIntroLocalTpl": "À {zone}, voici les réponses aux questions courantes sur le suivi des appels et formulaires du cabinet.",
+    "faqs": [
+      {
+        "q": "Que mesurez-vous exactement ?",
+        "a": "Les formulaires envoyés et les actions liées à l’appel (clic téléphone), ainsi que les sources et pages d’entrée associées."
+      },
+      {
+        "q": "Est-ce utile sans publicité ?",
+        "a": "Oui. Une mesure fiable permet d’améliorer le site et la visibilité locale sur des priorités factuelles."
+      },
+      {
+        "q": "Avez-vous un tableau de bord mensuel ?",
+        "a": "Oui : volume de demandes, origines, pages qui déclenchent le contact, et actions recommandées."
+      },
+      {
+        "q": "Est-ce compliqué à maintenir ?",
+        "a": "Non. L’objectif est un dispositif stable, compréhensible, et exploitable sans complexité inutile."
+      }
+    ],
+    "localFaqsTpl": [
+      {
+        "qTpl": "À {ville}, que suivez-vous exactement sur les demandes ?",
+        "aTpl": "À {zone}, nous suivons les demandes issues du formulaire et les actions liées à l’appel (clic téléphone), ainsi que les sources et les pages d’entrée associées. L’objectif est un pilotage lisible, basé sur des faits."
+      },
+      {
+        "qTpl": "Que peut-on apprendre sur les demandes à {ville} ?",
+        "aTpl": "D’où viennent les demandes, quelles pages déclenchent l’appel ou le formulaire, et ce qui doit être clarifié pour améliorer la qualité. Nous proposons ensuite des priorités d’amélioration simples."
+      }
+    ]
   },
   {
     "slug": "google-ads",
@@ -50,6 +174,37 @@
     "descTpl": "Google Ads en option à {ville} : uniquement si les pages et la mesure sont prêtes, avec un cadrage strict pour limiter les demandes non pertinentes.",
     "relatedSpecialites": ["droit-des-affaires", "droit-du-travail-employeur"],
     "relatedTitle": "Axes pour des demandes plus ciblées",
-    "relatedIntro": "Exemples d’axes permettant de mieux cadrer les demandes, lorsque l’option Google Ads est pertinente :"
+    "relatedIntro": "Exemples d’axes permettant de mieux cadrer les demandes, lorsque l’option Google Ads est pertinente :",
+    "faqTitle": "Questions fréquentes sur Google Ads (en option)",
+    "faqIntroHub": "Une option d’accélération, uniquement si le dispositif est prêt et cadré pour préserver la qualité des demandes.",
+    "faqIntroLocalTpl": "À {zone}, voici les réponses aux questions fréquentes sur l’option Google Ads, son cadrage et ses prérequis.",
+    "faqs": [
+      {
+        "q": "Dans quels cas activer Google Ads est-il pertinent ?",
+        "a": "Lorsque les pages sont adaptées, la mesure des demandes en place, et que le cabinet peut traiter les sollicitations rapidement."
+      },
+      {
+        "q": "Comment limitez-vous les demandes non pertinentes ?",
+        "a": "Par un cadrage strict : ciblage, exclusions, annonces sobres, et pages dédiées qui clarifient le périmètre."
+      },
+      {
+        "q": "Quel pilotage mettez-vous en place ?",
+        "a": "Un suivi orienté qualité : volume de demandes, origines, et pertinence pour le cabinet (plutôt que volume à tout prix)."
+      },
+      {
+        "q": "Est-ce compatible avec la visibilité locale ?",
+        "a": "Oui. L’idée est de compléter le dispositif, sans dépendance excessive, et en cohérence avec l’image du cabinet."
+      }
+    ],
+    "localFaqsTpl": [
+      {
+        "qTpl": "À {ville}, dans quels cas l’option Google Ads a du sens ?",
+        "aTpl": "À {zone}, cette option est pertinente si les pages sont prêtes, la mesure des demandes en place, et si le cabinet peut traiter les sollicitations rapidement. L’objectif est d’accélérer, sans dégrader la qualité."
+      },
+      {
+        "qTpl": "Comment évitez-vous les demandes non pertinentes avec Google Ads à {ville} ?",
+        "aTpl": "Par un cadrage strict : ciblage, exclusions, messages sobres, et page dédiée qui clarifie immédiatement le périmètre. Nous privilégions la qualité des demandes plutôt que le volume."
+      }
+    ]
   }
 ]

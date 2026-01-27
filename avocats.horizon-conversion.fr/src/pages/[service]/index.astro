@@ -1,9 +1,19 @@
 ---
+// src/pages/[service]/index.astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import Hero from "../../components/Hero.astro";
+import Services from "../../components/Services.astro";
 import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
+import Contact from "../../components/Contact.astro";
+import Faqs from "../../components/Faqs.astro";
+import ZonesGrid from "../../components/ZonesGrid.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import NextSteps from "../../components/NextSteps.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
 
+import ui from "../../data/ui.json";
 import services from "../../data/services.json";
 import villes from "../../data/villes.json";
 
@@ -18,6 +28,11 @@ type Service = {
   relatedSpecialites?: string[];
   relatedTitle?: string;
   relatedIntro?: string;
+
+  faqTitle?: string;
+  faqIntro?: string;
+  faqIntroHub?: string;
+  faqs?: { q: string; a: string }[];
 };
 type Ville = { slug: string; name: string; dept?: string; regionHint?: string; services?: string[] };
 
@@ -43,51 +58,79 @@ const description =
   `Intervention Sud Oise & Nord 95 : ${service.label}, orienté demandes qualifiées (appel + formulaire), approche sobre et conforme.`;
 
 const canonical = url(`${SITE}/${service.slug}`);
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `Horizon Conversion — ${service.label}`,
+  title: service.hubTitle ?? `${service.label} pour cabinets d’avocats`,
+  subtitle: service.hubDesc ?? description,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir les packs", href: "/offres" }
+};
+
+const hrefForCity = (c: Ville) => "/" + service.slug + "/" + c.slug;
+
+const renderCityLabel = (c: Ville) =>
+  service.label + " à " + c.name + (c.dept ? ` (${c.dept})` : "");
+
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
+
   <Header />
 
-  <main class="container">
-    <section>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </section>
+  <Hero {...hero} />
 
-    <section>
-      <h2>Villes couvertes</h2>
-      <ul>
-        {villesOk.map((v) => (
-          <li>
-            <a href={url(`/${service.slug}/${v.slug}`)}>
-              {service.label} à {v.name}{v.dept ? ` (${v.dept})` : ""}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+  <!-- Content
+  ============================================= -->
+  <section id="content">
+  	<div class="content-wrap overflow-visible py-0">
 
-    <RelatedSpecialites
-      related={service.relatedSpecialites}
-      title={service.relatedTitle}
-      intro={service.relatedIntro}
-      limit={2}
-    />
+  	  <Services />
 
-    <section>
-      <h2>Besoin d’un avis rapide ?</h2>
-      <a class="btn" href="/contact">Demander un audit</a>
-    </section>
+        <RelatedSpecialites
+          related={service.relatedSpecialites}
+          title={service.relatedTitle}
+          intro={service.relatedIntro}
+          limit={2}
+        />
 
-    <section>
-      <h2>Pour aller plus loin</h2>
-      <ul>
-        <li><a href="/offres">Voir les packs</a></li>
-        <li><a href="/methode">Comprendre la méthode</a></li>
-      </ul>
-    </section>
+        <ZonesGrid
+          badge="Zone"
+          title="Villes couvertes"
+          intro="Sélection de pages locales utiles (pas de surproduction). Cliquez pour voir la page dédiée."
+          cities={villesOk}
+          hrefFor={hrefForCity}
+          renderLabel={renderCityLabel}
+          columns={2}
+        />
 
-  </main>
+        <Faqs
+          title={service.faqTitle}
+          intro={service.faqIntroHub ?? service.faqIntro}
+          items={(service.faqs ?? []).slice(0, 4)}
+          canonical={canonical}
+        />
+
+        <Contact />
+
+        <Reassurance />
+
+        <NextSteps
+          badge="Suite"
+          title="Pour aller plus loin"
+          intro="Deux pages utiles pour cadrer le budget et la méthode."
+          cards={[
+            { title: "Voir les packs", desc: "Comparer les options et les livrables, simplement.", href: "/offres" },
+            { title: "Comprendre la méthode", desc: "Priorités, déroulé, et cadre de collaboration.", href: "/methode" }
+          ]}
+        />
+
+        <Promo />
+
+  	</div>
+  </section><!-- #content end -->
 
   <Footer />
+
 </BaseLayout>
