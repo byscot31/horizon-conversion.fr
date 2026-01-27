@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+
+import specialites from "../../../data/specialites.json";
+import villes from "../../../data/villes.json";
+
+type Specialite = { slug: string; label: string; titleTpl?: string; descTpl?: string; angles?: string[] };
+type Ville = { slug: string; name: string; dept?: string; regionHint?: string; specialites?: string[] };
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+function tpl(s: string, vars: Record<string, string>) {
+  return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+}
+
+export async function getStaticPaths() {
+  const sps = specialites as Specialite[];
+  const vls = villes as Ville[];
+
+  return vls.flatMap((v) => {
+    const allowed = new Set(v.specialites ?? []);
+    return sps
+      .filter((sp) => allowed.size === 0 || allowed.has(sp.slug))
+      .map((sp) => ({ params: { specialite: sp.slug, ville: v.slug } }));
+  });
+}
+
+const { specialite: spSlug, ville: villeSlug } = Astro.params;
+
+const sp = (specialites as Specialite[]).find((s) => s.slug === spSlug);
+const ville = (villes as Ville[]).find((v) => v.slug === villeSlug);
+
+if (!sp || !ville) throw new Error(`Route invalide: ${spSlug}/${villeSlug}`);
+if (ville.specialites?.length && !ville.specialites.includes(sp.slug)) {
+  throw new Error(`Page non autorisée (matrice): ${sp.slug}/${ville.slug}`);
+}
+
+const title = sp.titleTpl
+  ? tpl(sp.titleTpl, { ville: ville.name, specialite: sp.label })
+  : `${sp.label} : stratégie SEO local à ${ville.name} (cabinet d’avocats)`;
+
+const description = sp.descTpl
+  ? tpl(sp.descTpl, { ville: ville.name, specialite: sp.label })
+  : `Structurer la visibilité locale sur “${sp.label}” à ${ville.name} : pages, maillage, GBP, conversion (B2B cabinet).`;
+
+const canonical = url(`${SITE}/specialites/${sp.slug}/${ville.slug}`);
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="container">
+    <section>
+      <h1>{title}</h1>
+      <p>
+        Zone : {ville.regionHint ? `${ville.regionHint} — ` : ""}{ville.name}{ville.dept ? ` (${ville.dept})` : ""}.
+      </p>
+      <p>
+        Page B2B : recommandations de structure SEO local autour de <strong>{sp.label}</strong>.
+      </p>
+    </section>
+
+    {sp.angles?.length ? (
+      <section>
+        <h2>Intentions à couvrir</h2>
+        <ul>
+          {sp.angles.map((a) => <li>{a}</li>)}
+        </ul>
+      </section>
+    ) : null}
+
+    <section>
+      <h2>Maillage conseillé</h2>
+      <ul>
+        <li><a href={url(`/specialites/${sp.slug}`)}>Voir toutes les villes ({sp.label})</a></li>
+        <li><a href="/seo-local">SEO local</a> · <a href="/refonte-site">Refonte</a></li>
+        <li><a href="/offres">Voir les packs</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <a class="btn" href="/contact">Planifier un échange</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

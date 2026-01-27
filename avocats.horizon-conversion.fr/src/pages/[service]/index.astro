@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
+
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+type Service = { slug: string; label: string; hubTitle?: string; hubDesc?: string };
+type Ville = { slug: string; name: string; dept?: string; regionHint?: string; services?: string[] };
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+export async function getStaticPaths() {
+  return (services as Service[]).map((s) => ({
+    params: { service: s.slug },
+  }));
+}
+
+const { service: serviceSlug } = Astro.params;
+
+const service = (services as Service[]).find((s) => s.slug === serviceSlug);
+if (!service) throw new Error(`Service inconnu: ${serviceSlug}`);
+
+const villesOk = (villes as Ville[]).filter((v) => !v.services?.length || v.services.includes(service.slug));
+
+const title = service.hubTitle ?? `${service.label} pour cabinets d’avocats`;
+const description =
+  service.hubDesc ??
+  `Intervention Sud Oise & Nord 95 : ${service.label}, orienté demandes qualifiées (appel + formulaire), approche sobre et conforme.`;
+
+const canonical = url(`${SITE}/${service.slug}`);
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="container">
+    <section>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </section>
+
+    <section>
+      <h2>Villes couvertes</h2>
+      <ul>
+        {villesOk.map((v) => (
+          <li>
+            <a href={url(`/${service.slug}/${v.slug}`)}>
+              {service.label} à {v.name}{v.dept ? ` (${v.dept})` : ""}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <RelatedSpecialites
+      related={service?.relatedSpecialites}
+      title="Axes de travail fréquents"
+      intro="Quelques domaines sur lesquels nous structurons souvent la visibilité locale d’un cabinet :"
+    />
+
+    <section>
+      <h2>Besoin d’un avis rapide ?</h2>
+      <a class="btn" href="/contact">Demander un audit</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
