@@ -85,8 +85,12 @@
 
 	.service-feature {
 		position: relative;
-		transform: translateY(-50%);
+		transform: translateY(-15%);
 		z-index: 4;
+	}
+
+	.homepage .service-feature {
+		transform: translateY(-33%);
 	}
 
 	.service-feature  .grid-inner .more-link {
@@ -216,3 +220,50 @@ body:not(.lawfirm-inline-processing) .lawfirm-inline-loader { display: none; }
 .widget_links li {
 	padding: 6px 0;
 }
+
+ /* Horizon Conversion - grids */
+ .hc-cities-grid {
+	 list-style: none;
+	 padding: 0;
+	 margin: 0;
+	 display: grid;
+	 gap: .75rem;
+	 grid-template-columns: 1fr;
+ }
+
+ @media (min-width: 768px) {
+	 .hc-cities-grid { grid-template-columns: 1fr 1fr; }
+ }
+ @media (min-width: 1200px) {
+	 .hc-cities-grid { grid-template-columns: 1fr 1fr 1fr; }
+ }
+
+ /* Optional overrides to force columns (useful per page) */
+ .hc-cities-grid.hc-grid-1 { grid-template-columns: 1fr !important; }
+ @media (min-width: 768px) {
+	 .hc-cities-grid.hc-grid-2 { grid-template-columns: 1fr 1fr !important; }
+ }
+ @media (min-width: 1200px) {
+	 .hc-cities-grid.hc-grid-3 { grid-template-columns: 1fr 1fr 1fr !important; }
+ }
+
+ .hc-city {
+	 display: flex;
+	 align-items: center;
+	 justify-content: space-between;
+	 gap: .75rem;
+	 text-decoration: none;
+	 background: #fff;
+	 border: 1px solid rgba(0,0,0,.06);
+	 padding: .9rem 1rem;
+	 border-radius: 18px;
+	 box-shadow: 0 10px 25px rgba(0,0,0,.05);
+ }
+
+ .hc-city:hover {
+	 transform: translateY(-2px);
+	 transition: 180ms ease;
+ }
+
+ .hc-city__label { flex: 1; }
+ .hc-city strong { font-weight: 700; }

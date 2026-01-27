@@ -1,0 +1,36 @@
+---
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props as Props;
+---
+
+<nav aria-label="Fil d’Ariane" class="breadcrumb">
+  <ol>
+    {items.map((it, idx) => (
+      <li>
+        {idx < items.length - 1 ? (
+          <a href={url(it.href)}>{it.label}</a>
+        ) : (
+          <span aria-current="page">{it.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb ol { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .breadcrumb li::after { content: "›"; margin-left: .5rem; opacity: .6; }
+  .breadcrumb li:last-child::after { content: ""; }
+  .breadcrumb a { text-decoration: none; }
+  .breadcrumb span { opacity: .85; }
+</style>

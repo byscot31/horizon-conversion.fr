@@ -1,4 +1,5 @@
 ---
+// src/pages/index.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
@@ -10,38 +11,46 @@ import Reassurance from "../components/Reassurance.astro";
 import Blog from "../components/Blog.astro";
 import Promo from "../components/Promo.astro";
 import Footer from "../components/Footer.astro";
+
+import ui from "../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/";
+
+const homeFaq = ui.faq.home;
 ---
 
 <BaseLayout
   title="Acquisition locale pour cabinets d’avocats | Sud Oise & Nord 95"
-  canonical="https://avocats.horizon-conversion.fr/"
+  canonical={canonical}
 >
   <Header />
 
-  <Hero />
+  <Hero {...ui.hero.home} />
 
-  <!-- Content
-  		============================================= -->
-  		<section id="content">
-  			<div class="content-wrap overflow-visible py-0">
+  <section id="content" class="homepage">
+    <div class="content-wrap overflow-visible py-0">
 
-  				<Services />
+      <Services />
 
-  				<Contact />
+      <Reassurance />
 
-  				<Faqs />
+      <Testimonails />
 
-  				<Testimonails />
+      <Faqs
+        title={homeFaq.title}
+        intro={homeFaq.intro}
+        items={homeFaq.items}
+        canonical={canonical}
+      />
 
-  				<Reassurance />
+      <Contact />
 
-  				<Blog />
+      <Blog />
 
-  				<Promo />
+      <Promo />
 
-  			</div>
-  		</section><!-- #content end -->
+    </div>
+  </section>
 
-  		<Footer />
-
+  <Footer />
 </BaseLayout>

@@ -1,0 +1,62 @@
+---
+/**
+ * LinkedPages.astro
+ * Bloc de navigation (cards) : "Pages liées"
+ */
+
+type Card = {
+  title: string;
+  desc?: string;
+  href: string;
+  icon?: string;
+};
+
+interface Props {
+  badge?: string;          // "Navigation"
+  title?: string;          // "Pages liées"
+  intro?: string;          // "Pour situer..."
+  cards: Card[];
+  containerClass?: string; // ex: "container mw-md mt-5 mt-lg-0"
+}
+
+const {
+  badge = "Navigation",
+  title = "Pages liées",
+  intro = "Pour situer l’intervention et cadrer la suite.",
+  cards,
+  containerClass = "container mw-md mt-5 mt-lg-0"
+} = Astro.props as Props;
+---
+
+<div class={containerClass}>
+  <div class="row align-items-end justify-content-between mb-4">
+    <div class="col-lg-7">
+      <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">{badge}</div>
+      <h2 class="h3 fw-bold mb-2">{title}</h2>
+      {intro && <p class="lead mb-0 op-07">{intro}</p>}
+    </div>
+  </div>
+
+  <div class="row g-3">
+    {cards.map((c) => (
+      <div class="col-md-6 col-lg-4">
+        <a href={c.href} class="hc-card-link">
+          <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="h5 fw-bold mb-1">{c.title}</div>
+                {c.desc && <div class="op-07">{c.desc}</div>}
+              </div>
+              <span class="material-symbols-outlined color">{c.icon ?? "arrow_right_alt"}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    ))}
+  </div>
+
+  <style>
+    .hc-card-link { text-decoration: none; display: block; }
+    .hc-card-link:hover .grid-inner { transform: translateY(-2px); transition: 180ms ease; }
+  </style>
+</div>

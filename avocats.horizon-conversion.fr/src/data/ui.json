@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "home": {
+      "backgroundImage": "/_assets_/images/hero.jpg",
+      "eyebrow": "Acquisition locale pour cabinets d’avocats",
+      "titleHtml": "SEO local + site orienté conversion<br class='d-none d-lg-block'>pour générer plus de demandes qualifiées"
+    },
+    "defaultInner": {
+      "backgroundImage": "/_assets_/images/hero.jpg",
+      "eyebrow": "Horizon Conversion — cabinets d’avocats",
+      "title": "Visibilité locale et prises de contact",
+      "subtitle": "Une démarche cadrée : pages utiles, parcours clair, demandes suivies.",
+      "primaryCta": { "label": "Demander un audit", "href": "/contact" },
+      "secondaryCta": { "label": "Voir la méthode", "href": "/methode" },
+      "note": "Approche sobre, sans surpromesse."
+    }
+  },
+  "faq": {
+    "home": {
+      "title": "Questions fréquentes",
+      "intro": "Réponses simples sur notre approche : périmètre, méthode et conditions de collaboration.",
+      "items": [
+        {
+          "q": "Travaillez-vous uniquement en Sud Oise et Nord 95 ?",
+          "a": "Notre priorité est cette zone. Si votre cabinet est limitrophe, nous pouvons étudier la demande au cas par cas."
+        },
+        {
+          "q": "En combien de temps peut-on constater une évolution ?",
+          "a": "Après la mise au propre des fondamentaux (pages clés, cohérence des informations, parcours de contact), les premiers effets apparaissent progressivement. La consolidation se fait dans la durée."
+        },
+        {
+          "q": "Intervenez-vous sur la fiche établissement Google ?",
+          "a": "Oui lorsque c’est pertinent. L’objectif est une présence claire et cohérente, sans artifices."
+        },
+        {
+          "q": "Proposez-vous de la publicité ?",
+          "a": "Oui en option, uniquement si le dispositif est prêt et avec un cadrage strict pour préserver la qualité."
+        }
+      ]
+    }
+  }
+}

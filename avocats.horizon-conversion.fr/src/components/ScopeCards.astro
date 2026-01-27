@@ -1,0 +1,148 @@
+---
+/**
+ * ScopeCards.astro
+ * Bloc "Ce que comprend l’intervention" + 3 cards, variant selon le service.
+ */
+
+type Card = { icon: string; title: string; desc: string };
+
+interface Props {
+  serviceSlug: string;
+
+  badge?: string;
+  title?: string;
+  intro?: string;
+
+  // optionnel : surcharge par page
+  cardsOverride?: Card[];
+}
+
+const {
+  serviceSlug,
+  badge = "Périmètre",
+  title = "Ce que comprend l’intervention",
+  intro = "Une approche cadrée, adaptée à un cabinet. Livrables clairs, sans complexité inutile.",
+  cardsOverride
+} = Astro.props as Props;
+
+const cardsByService: Record<string, Card[]> = {
+  "referencement-local": [
+    {
+      icon: "search",
+      title: "Présence locale Google",
+      desc: "Optimisation de la présence locale, y compris la fiche établissement quand c’est pertinent."
+    },
+    {
+      icon: "description",
+      title: "Pages utiles",
+      desc: "Structure claire, contenus essentiels, cohérence des informations."
+    },
+    {
+      icon: "call",
+      title: "Prise de contact",
+      desc: "Parcours simple vers l’appel et le formulaire, avec suivi des demandes selon l’offre."
+    }
+  ],
+
+  "refonte-site": [
+    {
+      icon: "language",
+      title: "Site clair & rassurant",
+      desc: "Architecture et contenus pensés pour inspirer confiance."
+    },
+    {
+      icon: "lists",
+      title: "Pages clés",
+      desc: "Offres, prise de contact, questions fréquentes — sans superflu."
+    },
+    {
+      icon: "speed",
+      title: "Performance",
+      desc: "Site rapide et lisible, cohérent avec le référencement local."
+    }
+  ],
+
+  "optimisation-parcours-contact": [
+    {
+      icon: "ads_click",
+      title: "Pages qui convertissent",
+      desc: "Amélioration des pages qui mènent à l’appel et au formulaire."
+    },
+    {
+      icon: "verified",
+      title: "Rassurance",
+      desc: "Clarification de l’offre, éléments de rassurance, appels à l’action."
+    },
+    {
+      icon: "assignment",
+      title: "Formulaire efficace",
+      desc: "Concis, orienté qualification, sans friction."
+    }
+  ],
+
+  "mesure-demandes": [
+    {
+      icon: "monitoring",
+      title: "Suivi fiable",
+      desc: "Formulaires et clics téléphone (prise de contact)."
+    },
+    {
+      icon: "dashboard",
+      title: "Tableau de bord",
+      desc: "Demandes, sources, pages d’entrée — lisible et exploitable."
+    },
+    {
+      icon: "tune",
+      title: "Ajustements",
+      desc: "Recommandations concrètes basées sur les données observées."
+    }
+  ],
+
+  "google-ads": [
+    {
+      icon: "checklist",
+      title: "Pré-requis",
+      desc: "Activation uniquement si les pages et la mesure sont prêtes."
+    },
+    {
+      icon: "filter_alt",
+      title: "Cadrage strict",
+      desc: "Limiter les demandes non pertinentes (ciblage, exclusions, pages)."
+    },
+    {
+      icon: "verified",
+      title: "Pilotage orienté qualité",
+      desc: "Priorité à la pertinence des demandes, pas au volume."
+    }
+  ]
+};
+
+const cards = cardsOverride ?? cardsByService[serviceSlug] ?? [];
+const shouldRender = cards.length > 0;
+---
+
+{shouldRender && (
+  <div class="section bg-transparent py-4">
+    <div class="container">
+      <div class="row align-items-end justify-content-between mb-4">
+        <div class="col-lg-7">
+          <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">{badge}</div>
+          <h2 class="h3 fw-bold mb-2">{title}</h2>
+          {intro && <p class="lead mb-0 op-07">{intro}</p>}
+        </div>
+      </div>
+
+      <div class="row g-3">
+        {cards.map((c) => (
+          <div class="col-md-6 col-lg-4">
+            <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+              <i class={`material-symbols-outlined display-6 color mb-2`}>{c.icon}</i>
+              <div class="h5 fw-bold mb-1">{c.title}</div>
+              <div class="op-07">{c.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}

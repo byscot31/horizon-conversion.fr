@@ -1,0 +1,80 @@
+---
+/**
+ * OtherServicesGrid.astro
+ * Bloc "Autres services à <ville>" (grille de liens stylée thème).
+ */
+
+type ServiceLink = {
+  slug: string;
+  label: string;
+};
+
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+interface Props {
+  villeName: string;        // ex: "Senlis"
+  villeSlug: string;        // ex: "senlis"
+  services: ServiceLink[];  // otherServices
+
+  badge?: string;
+  titleTpl?: string;        // ex: "Autres services à {ville}"
+  intro?: string;
+
+  background?: string;
+  leftIcon?: string;        // ex: "arrow_right_alt"
+  rightIcon?: string;       // ex: "chevron_right"
+
+  hrefFor?: (s: ServiceLink, villeSlug: string) => string; // override route
+}
+
+const {
+  villeName,
+  villeSlug,
+  services,
+
+  badge = "Complément",
+  titleTpl = "Autres services à {ville}",
+  intro = "Selon la situation du cabinet, ces pages peuvent être utiles.",
+
+  background = "#f1f3f7",
+  leftIcon = "arrow_right_alt",
+  rightIcon = "chevron_right",
+
+  hrefFor
+} = Astro.props as Props;
+
+const title = titleTpl.replace("{ville}", villeName);
+const linkFor = hrefFor ?? ((s: ServiceLink, vSlug: string) => "/" + s.slug + "/" + vSlug);
+
+const shouldRender = Array.isArray(services) && services.length > 0;
+---
+
+{shouldRender && (
+  <div class="section py-6 mb-0" style={`background-color: ${background}`}>
+    <div class="container">
+
+      <div class="row align-items-end justify-content-between mb-4">
+        <div class="col-lg-7">
+          <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">{badge}</div>
+          <h2 class="h3 fw-bold mb-2">{title}</h2>
+          {intro && <p class="lead mb-0 op-07">{intro}</p>}
+        </div>
+      </div>
+
+      <ul class="hc-cities-grid">
+        {services.map((s) => (
+          <li>
+            <a class="hc-city" href={url(linkFor(s, villeSlug))}>
+              <span class="material-symbols-outlined color">{leftIcon}</span>
+              <span class="hc-city__label">
+                <strong>{s.label}</strong> à {villeName}
+              </span>
+              <span class="material-symbols-outlined op-06">{rightIcon}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </div>
+)}
