@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
+
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+type Service = {
+  slug: string;
+  label: string;
+  hubTitle?: string;
+  hubDesc?: string;
+  titleTpl?: string;
+  descTpl?: string;
+
+  relatedSpecialites?: string[];
+  relatedTitle?: string;
+  relatedIntro?: string;
+};
+type Ville = {
+  slug: string;
+  name: string;
+  dept?: string;
+  regionHint?: string;
+  services?: string[]; // matrice de services autorisés
+};
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+function tpl(s: string, vars: Record<string, string>) {
+  return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+}
+
+export async function getStaticPaths() {
+  const svc = services as Service[];
+  const vls = villes as Ville[];
+
+  return vls.flatMap((v) => {
+    const allowed = new Set(v.services ?? []);
+    return svc
+      .filter((s) => allowed.size === 0 || allowed.has(s.slug))
+      .map((s) => ({ params: { service: s.slug, ville: v.slug } }));
+  });
+}
+
+const { service: serviceSlug, ville: villeSlug } = Astro.params;
+
+const service = (services as Service[]).find((s) => s.slug === serviceSlug);
+const ville = (villes as Ville[]).find((v) => v.slug === villeSlug);
+
+if (!service || !ville) throw new Error(`Route invalide: ${serviceSlug}/${villeSlug}`);
+if (ville.services?.length && !ville.services.includes(service.slug)) {
+  throw new Error(`Page non autorisée (matrice): ${service.slug}/${ville.slug}`);
+}
+
+const pageTitle = service.titleTpl
+  ? tpl(service.titleTpl, { ville: ville.name })
+  : `${service.label} pour cabinets d’avocats à ${ville.name}`;
+
+const pageDesc = service.descTpl
+  ? tpl(service.descTpl, { ville: ville.name })
+  : `Prestation ${service.label} pour cabinets d’avocats à ${ville.name}.`;
+
+const canonical = url(`${SITE}/${service.slug}/${ville.slug}`);
+
+const otherServices = (services as Service[])
+  .filter((s) => s.slug !== service.slug)
+  .filter((s) => !ville.services?.length || ville.services.includes(s.slug));
+
+const objectiveByService: Record<string, string> = {
+  "referencement-local": "Objectif : renforcer la visibilité locale du cabinet et faciliter la prise de contact.",
+  "refonte-site": "Objectif : un site clair et rassurant, conçu pour faciliter la prise de contact et soutenir la visibilité locale.",
+  "optimisation-parcours-contact": "Objectif : améliorer concrètement le parcours menant à l’appel et au formulaire.",
+  "mesure-demandes": "Objectif : suivre clairement l’origine des demandes et piloter avec des indicateurs simples.",
+  "google-ads": "Objectif : option d’accélération, uniquement si le dispositif est prêt et cadré."
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} canonical={canonical}>
+  <Header />
+
+  <main class="container">
+    <section>
+      <h1>{pageTitle}</h1>
+      <p>
+        Zone : {ville.regionHint ? `${ville.regionHint} — ` : ""}{ville.name}
+        {ville.dept ? ` (${ville.dept})` : ""}.
+      </p>
+      <p>
+        {objectiveByService[service.slug] ?? "Objectif : faciliter la prise de contact (appel + formulaire) avec une approche sobre et conforme."}
+      </p>
+    </section>
+
+    <section>
+      <h2>Ce que comprend l’intervention</h2>
+
+      {service.slug === "referencement-local" && (
+        <ul>
+          <li>Optimisation de la présence locale sur Google (y compris la fiche établissement)</li>
+          <li>Pages utiles du site : structure claire, contenus essentiels, cohérence des informations</li>
+          <li>Renvoi vers la prise de contact (appel / formulaire) avec un parcours simple</li>
+          <li>Suivi des demandes et points mensuels (selon l’offre choisie)</li>
+        </ul>
+      )}
+
+      {service.slug === "refonte-site" && (
+        <ul>
+          <li>Architecture et contenus pensés pour inspirer confiance</li>
+          <li>Pages clés : offres, prise de contact, questions fréquentes</li>
+          <li>Site rapide et lisible, compatible avec le référencement local</li>
+        </ul>
+      )}
+
+      {service.slug === "optimisation-parcours-contact" && (
+        <ul>
+          <li>Amélioration des pages qui mènent à l’appel et au formulaire</li>
+          <li>Clarification de l’offre, éléments de rassurance, appels à l’action</li>
+          <li>Formulaire : concis, orienté qualification, sans friction</li>
+        </ul>
+      )}
+
+      {service.slug === "mesure-demandes" && (
+        <ul>
+          <li>Suivi des formulaires et des clics téléphone</li>
+          <li>Tableau de bord lisible : volume de demandes, sources, pages d’entrée</li>
+          <li>Recommandations d’ajustement sur la base de données concrètes</li>
+        </ul>
+      )}
+
+      {service.slug === "google-ads" && (
+        <ul>
+          <li>Activation uniquement si les pages et la mesure sont prêtes</li>
+          <li>Cadrage strict pour limiter les demandes non pertinentes</li>
+          <li>Pilotage orienté qualité (et non volume)</li>
+        </ul>
+      )}
+    </section>
+
+    <section>
+      <h2>Pages liées</h2>
+      <ul>
+        <li><a href={url(`/${service.slug}`)}>Voir toutes les villes ({service.label})</a></li>
+        <li><a href="/offres">Découvrir les packs</a></li>
+        <li><a href="/methode">Comprendre la méthode</a></li>
+      </ul>
+    </section>
+
+    {otherServices.length > 0 && (
+      <section>
+        <h2>Autres services à {ville.name}</h2>
+        <ul>
+          {otherServices.map((s) => (
+            <li><a href={url(`/${s.slug}/${ville.slug}`)}>{s.label} à {ville.name}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <RelatedSpecialites
+      related={service.relatedSpecialites}
+      ville={villeSlug}
+      title={service.relatedTitle}
+      intro={service.relatedIntro}
+      limit={2}
+    />
+
+    <section>
+      <h2>Demander un audit</h2>
+      <a class="btn" href="/contact">Planifier un échange</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
