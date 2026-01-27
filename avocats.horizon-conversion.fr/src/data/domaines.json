@@ -1,0 +1,37 @@
+[
+  {
+    "nom": "Divorce",
+    "slug": "divorce",
+    "intents": ["SEO local", "Pages services", "Contenus utiles", "Suivi conversion"],
+    "cta": { "label": "Demander un audit visibilité", "href": "/contact?domaine=divorce" },
+    "faq": [
+      { "q": "Combien de temps avant de voir une évolution ?", "a": "On suit d’abord l’indexation et les positions, puis la progression des pages locales. Le rythme dépend du point de départ et de la concurrence." },
+      { "q": "Faut-il publier beaucoup d’articles ?", "a": "On privilégie quelques contenus très ciblés (questions fréquentes + pages locales) plutôt qu’un volume élevé." }
+    ],
+    "preuves": [
+      "Arborescence SEO (domaines + villes) structurée",
+      "Pages “service” claires, sans promesses de résultat",
+      "Suivi des demandes (formulaire, appels) et optimisation progressive"
+    ]
+  },
+  {
+    "nom": "Prud’hommes",
+    "slug": "prudhommes",
+    "intents": ["SEO local", "Pages services", "Contenu Q/R", "Optimisation demandes"],
+    "cta": { "label": "Demander un audit visibilité", "href": "/contact?domaine=prudhommes" },
+    "faq": [
+      { "q": "Peut-on cibler une zone précise ?", "a": "Oui : on structure les pages par ville/secteur et on travaille les signaux locaux (contenu, maillage, profils)." }
+    ],
+    "preuves": ["Structure locale", "FAQ utile", "Mesure et itérations"]
+  },
+  {
+    "nom": "Droit pénal",
+    "slug": "penal",
+    "intents": ["SEO local", "Pages urgentes", "Tracking appels", "Amélioration conversion"],
+    "cta": { "label": "Évaluer votre présence Google", "href": "/contact?domaine=penal" },
+    "faq": [
+      { "q": "Peut-on mettre en avant l’appel direct ?", "a": "Oui : un CTA “Appeler” visible, sans agressivité, et mesurable (clics)." }
+    ],
+    "preuves": ["CTA adapté", "Pages locales", "Mesure des clics"]
+  }
+]

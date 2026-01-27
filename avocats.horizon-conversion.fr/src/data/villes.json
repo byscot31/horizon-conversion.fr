@@ -1,0 +1,15 @@
+[
+  { "nom": "Senlis", "slug": "senlis", "departement": "60", "code_postal": "60300" },
+  { "nom": "Chantilly", "slug": "chantilly", "departement": "60", "code_postal": "60500" },
+  { "nom": "Creil", "slug": "creil", "departement": "60", "code_postal": "60100" },
+  { "nom": "Nogent-sur-Oise", "slug": "nogent-sur-oise", "departement": "60", "code_postal": "60180" },
+  { "nom": "Pont-Sainte-Maxence", "slug": "pont-sainte-maxence", "departement": "60", "code_postal": "60700" },
+  { "nom": "Compiègne", "slug": "compiegne", "departement": "60", "code_postal": "60200" },
+  { "nom": "Clermont (Oise)", "slug": "clermont-oise", "departement": "60", "code_postal": "60600" },
+
+  { "nom": "Persan", "slug": "persan", "departement": "95", "code_postal": "95340" },
+  { "nom": "Beaumont-sur-Oise", "slug": "beaumont-sur-oise", "departement": "95", "code_postal": "95260" },
+  { "nom": "L'Isle-Adam", "slug": "lisle-adam", "departement": "95", "code_postal": "95290" },
+  { "nom": "Luzarches", "slug": "luzarches", "departement": "95", "code_postal": "95270" },
+  { "nom": "Fosses", "slug": "fosses", "departement": "95", "code_postal": "95470" }
+]
