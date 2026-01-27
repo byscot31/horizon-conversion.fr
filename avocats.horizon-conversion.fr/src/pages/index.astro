@@ -1,115 +1,9 @@
 ---
-// src/pages/index.astro
+// src\pages\index.astro
+import Layout from '../components/Layout.astro';
 ---
-
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge">
-	<meta name="author" content="Horizon Conversion">
-	<meta name="description" content="Refonte orientée conversion + SEO local (Sud Oise / Nord 95) pour cabinets d’avocats : une présence en ligne claire, crédible et mesurable, conforme à la déontologie.">
-
-	<!-- Font Imports -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
-
-	<!-- Core Style -->
-	<link rel="stylesheet" href="/_assets_/style.css">
-
-	<!-- Font Icons -->
-	<link rel="stylesheet" href="/_assets_/css/font-icons.css">
-
-	<!-- Niche Demos -->
-	<link rel="stylesheet" href="/_assets_/law-firm.css">
-
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="/_assets_/css/custom.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- Document Title
-	============================================= -->
-	<title>Horizon Conversion | Webmarketing & SEO local pour cabinets d’avocats (Sud Oise / Nord 95)</title>
-
-	<style>
-		.device-touch .section-contact {
-			background-attachment: scroll !important;
-		}
-	</style>
-
-</head>
-
-<body class="stretched">
-
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper">
-
-		<!-- Header
-		============================================= -->
-		<header id="header" class="transparent-header dark">
-			<div id="header-wrap">
-				<div class="container">
-					<div class="header-row align-items-lg-start justify-content-between py-lg-4">
-
-						<!-- Logo
-						============================================= -->
-						<div id="logo" class="col-xl-2 col-md-3 col-6 align-items-lg-start py-4">
-							<a href="/">
-								<img class="logo-default" src="/_assets_/images/logo.svg" alt="Horizon Conversion">
-							</a>
-						</div><!-- #logo end -->
-
-						<!-- Primary Menu In Large Screen
-						============================================= -->
-						<div class="col-auto d-none d-lg-flex py-2">
-							<div class="row gx-5 large-device-menu-wrap">
-								<div class="col-auto large-device-menu">
-									<a class="text-white op-09 h-op-1" href="#"><div>Notre approche</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>Offres</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>SEO Local</div></a>
-								</div>
-								<div class="col-auto large-device-menu">
-									<a class="text-white op-09 h-op-1" href="#"><div>Ressources</div></a>
-									<a class="text-white op-09 h-op-1" href="#"><div>Contact</div></a>
-								</div>
-								<div class="col-auto">
-									<a href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88" class="btn px-3 py-2 btn-dark h-bg-light h-text-dark d-inline-block op-09 h-op-1" style="background-color: rgba(255,255,255,0.2)">Échange (15 min)</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Primary Menu Trigger for Devices
-						============================================= -->
-						<div class="primary-menu-trigger">
-							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-							</button>
-						</div>
-
-						<!-- Primary Menu In Mobile
-						============================================= -->
-						<nav class="primary-menu d-block d-lg-none">
-
-							<ul class="menu-container">
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Notre approche</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Offres</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>SEO Local</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Ressources</div></a></li>
-								<li class="menu-item"><a class="menu-link h-text-warning" href="#"><div>Contact</div></a></li>
-								<li class="menu-item"><a class="menu-link text-warning" href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88"><div>Demander un échange</div></a></li>
-							</ul>
-
-						</nav><!-- #primary-menu end -->
-					</div>
-				</div>
-			</div>
-			<div class="header-wrap-clone"></div>
-		</header><!-- #header end -->
-
-		<!-- Hero
+<Layout>
+<!-- Hero
 		============================================= -->
 		<section id="slider" class="slider-element dark min-vh-md-100 min-vh-75 include-header">
 			<div class="slider-inner" style="background-image: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.3)), url('/_assets_/images/hero.jpg');background-position: 50% 0;">
@@ -117,9 +11,9 @@
 
 					<div class="vertical-middle">
 						<div class="row mt-6">
-							<div class="col-md-10">
-								<div class="before-title text-border-right position-relative text-uppercase ls-3 text-smaller overflow-hidden mb-4 op-04 b-w-50">Horizon Conversion · Avocats</div>
-								<h1 class="display-4 fw-bold">Développez votre visibilité locale et vos prises de rendez-vous. <br> Sans compromis sur la déontologie.</h1>
+							<div class="col-md-6">
+								<div class="before-title text-border-right position-relative text-uppercase ls-3 text-smaller overflow-hidden mb-4 op-04 b-w-50">Team Of Law Agency</div>
+								<h1 class="display-4 fw-bold">The Best Legal Advice you can get.</h1>
 							</div>
 						</div>
 					</div>
@@ -143,9 +37,9 @@
 								<div class="grid-inner shadow-sm h-shadow bg-white p-5 overflow-hidden rounded-5 text-center shadow-ts">
 									<div class="f-b-desc">
 										<i class="material-symbols-outlined display-5 color mb-3">gavel</i>
-										<h2 class="h5 mb-0 fw-bold">Pourquoi nous choisir</h2>
+										<h2 class="h5 mb-0 fw-bold">Why choose Us</h2>
 									</div>
-									<a href="#" class="more-link fst-normal color">Voir l’approche</a>
+									<a href="#" class="more-link fst-normal color">View Details</a>
 								</div>
 							</div>
 
@@ -153,9 +47,9 @@
 								<div class="grid-inner shadow-sm h-shadow bg-white p-5 overflow-hidden rounded-5 text-center shadow-ts">
 									<div class="f-b-desc">
 										<i class="material-symbols-outlined display-5 color mb-3">outlined_flag</i>
-										<h2 class="h5 mb-0 fw-bold">Notre mission</h2>
+										<h2 class="h5 mb-0 fw-bold">Our Mission</h2>
 									</div>
-									<a href="#" class="more-link fst-normal color">Comprendre</a>
+									<a href="#" class="more-link fst-normal color">Learn More</a>
 								</div>
 							</div>
 
@@ -163,9 +57,9 @@
 								<div class="grid-inner shadow-sm h-shadow bg-white p-5 overflow-hidden rounded-5 text-center shadow-ts">
 									<div class="f-b-desc">
 										<i class="material-symbols-outlined display-5 color mb-3">date_range</i>
-										<h2 class="h5 mb-0 fw-bold">Prendre contact</h2>
+										<h2 class="h5 mb-0 fw-bold">Contact Us</h2>
 									</div>
-									<a href="#" class="more-link fst-normal color" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88">Échange (15 min)</a>
+									<a href="#" class="more-link fst-normal color">Get in Touch</a>
 								</div>
 							</div>
 
@@ -177,21 +71,16 @@
 					<div class="row align-items-center justify-content-center mt-6 mt-lg-0 mb-4">
 						<div class="col-lg-5 col-10 px-5">
 							<div class="lady-justice-img position-relative">
-								<img src="/_assets_/images/lady-justice.jpg" alt="Cabinet d’avocats : confiance et clarté" class="rounded">
+								<img src="/_assets_/images/lady-justice.jpg" alt="Image" class="rounded">
 							</div>
 						</div>
 						<div class="col-lg-5 p-5">
 							<i class="material-symbols-outlined display-4 color mb-3">verified</i>
-							<h2 class="h1 fw-bold lh-sm">Une présence en ligne crédible, qui transforme la recherche en prise de contact</h2>
-							<h3 class="h4 mt-4 fw-normal lh-base" style="line-height: 1.75 !important;">
-								Nous aidons les cabinets (1 à 10 associés) à être visibles localement sur Google, avec un site clair et rassurant,
-								qui facilite l’appel et la demande de rendez-vous.
-							</h3>
+							<h2 class="h1 fw-bold lh-sm">Our Purpose is Community Safety</h2>
+							<h3 class="h4 mt-4 fw-normal lh-base" style="line-height: 1.75 !important;">Rapidiously conceptualize inexpensive value through functionalized markets. Enthusiastically integrate distinctive web services vis-a-vis end-to-end ROI. Assertively fashion best-of-breed products for installed base alignments. Enthusiastically.</h3>
 
-							<h3 class="h4 mt-4 fw-normal lh-base" style="line-height: 1.75 !important;">
-								Refonte orientée conversion + SEO local (Sud Oise / Nord 95) : une approche sobre, mesurable et conforme à la déontologie (pas de promesses irréalistes, pas d’argumentaire agressif).
-							</h3>
-							<a href="#" class="btn py-3 px-4 mt-2 rounded-1 btn-dark bg-color h-op-09" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88">Voir comment on vous aide <i class="material-symbols-outlined align-middle mb-0 ms-1">arrow_right_alt</i></a>
+							<h3 class="h4 mt-4 fw-normal lh-base" style="line-height: 1.75 !important;">Rapidiously conceptualize inexpensive value through functionalized markets.</h3>
+							<a href="#" class="btn py-3 px-4 mt-2 rounded-1 btn-dark bg-color h-op-09">Find out how we Help <i class="material-symbols-outlined align-middle mb-0 ms-1">arrow_right_alt</i></a>
 						</div>
 					</div>
 
@@ -212,48 +101,50 @@
 										<div class="css3-spinner-bounce3"></div>
 									</div>
 									<div id="lawfirm-inline-submitted" class="text-center">
-										<h2 class="fw-normal mb-0 h3 lh-base">Merci pour votre message. <br> Nous revenons vers vous rapidement par email.</h2>
+										<div class="h4 fw-normal mb-0 h3 lh-base">Thank You for Contact Us! <br> Our Team will contact you asap on your email Address.</div>
 									</div>
 
 									<form class="mb-0" id="lawfirm-inline" name="lawfirm-inline" action="include/form.php" method="post" enctype="multipart/form-data">
 
 										<div class="row">
 
-											<div class="before-title text-uppercase ls-3 text-smaller mb-3 op-05">Échange rapide (15 min) · Sans engagement</div>
+											<div class="before-title text-uppercase ls-3 text-smaller mb-3 op-05">Looking for a Lawyer?</div>
 
 											<div class="col-12 mb-4">
-												<label for="lawfirm-inline-lawyer">Je souhaite développer</label>
+												<label for="lawfirm-inline-lawyer">I'd like to Contact a</label>
 												<select class="required form-select" name="lawfirm-inline-lawyer" id="lawfirm-inline-lawyer">
-													<option value="Droit de la famille" selected>Droit de la famille (divorce, garde, pension)</option>
-													<option value="Droit du travail">Droit du travail (licenciement, RC, prud’hommes)</option>
-													<option value="Droit immobilier">Droit immobilier (baux, impayés, copropriété)</option>
-													<option value="Cabinet generaliste">Cabinet généraliste (priorités à définir)</option>
+													<option value="Immigration" selected>Immigration</option>
+													<option value="Education">Education</option>
+													<option value="Insurance">Insurance</option>
+													<option value="Business">Business</option>
+													<option value="Family">Family</option>
+													<option value="Criminal">Criminal</option>
+													<option value="Employment">Employment</option>
 												</select>
-												<label for="lawfirm-inline-industry">avec un objectif principal</label>
+												<label for="lawfirm-inline-industry">lawyer, expert in</label>
 												<select class="required form-select" name="lawfirm-inline-industry" id="lawfirm-inline-industry">
-													<option value="SEO Local" selected>SEO local (être trouvé sur Google)</option>
-													<option value="Refonte du site">Refonte du site (clarifier & convertir)</option>
-													<option value="Tracking & conversion">Tracking & conversion (mesurer & améliorer)</option>
-													<option value="Ads si pertinent">Ads (optionnel, si rentable)</option>
+													<option value="Industry" selected>Industry</option>
+													<option value="Professional">Professional</option>
+													<option value="Pracice Area">Pracice Area</option>
 												</select>
-												<label for="lawfirm-inline-city">sur la zone</label>
+												<label for="lawfirm-inline-city">located in</label>
 
-												<input class="required form-control" type="text" value="" name="lawfirm-inline-city" id="lawfirm-inline-city" placeholder="Ville / secteur (ex : Creil, Senlis, Cergy…)" style="max-width: 260px">
+												<input class="required form-control" type="text" value="" name="lawfirm-inline-city" id="lawfirm-inline-city" placeholder="City" style="max-width: 200px">
 
-												<label for="lawfirm-inline-email">. Réponse à</label>
+												<label for="lawfirm-inline-email"> send email us to</label>
 
-												<input type="email" value="" class="form-control required" id="lawfirm-inline-email" name="lawfirm-inline-email" placeholder="adresse email">.
+												<input type="email" value="" class="form-control required" id="lawfirm-inline-email" name="lawfirm-inline-email" placeholder="email address">.
 											</div>
 
 											<div class="col-12 d-none">
 												<input type="text" id="lawfirm-inline-botcheck" name="lawfirm-inline-botcheck" value="">
 											</div>
 											<div class="col-12 text-center">
-												<button type="submit" name="lawfirm-inline-submit" class="btn btn-lg py-3 px-6 mt-2 rounded-1 btn-light h-op-09">Envoyer</button>
+												<button type="submit" name="lawfirm-inline-submit" class="btn btn-lg py-3 px-6 mt-2 rounded-1 btn-light h-op-09">Send Now</button>
 											</div>
 
 											<input type="hidden" name="prefix" value="lawfirm-inline-">
-											<input type="hidden" name="subject" value="Demande - Horizon Conversion (Avocats)">
+											<input type="hidden" name="subject" value="Messgae From Law Firm Template">
 
 										</div>
 
@@ -269,9 +160,9 @@
 						<div class="row align-items-center justify-content-center gutter-50">
 							<div class="col-lg-5 px-5">
 								<i class="material-symbols-outlined display-4 color mb-3">help_outline</i>
-								<h2 class="h1 fw-bold mb-4">Questions fréquentes</h2>
+								<h2 class="h1 fw-bold mb-4">Frequently Asked Questions</h2>
 
-								<p class="lead">Des réponses claires, sans promesses irréalistes.</p>
+								<p class="lead">Nam aut labore voluptas explicabo, assumenda</p>
 
 								<div class="toggle" data-state="open">
 									<div class="toggle-header justify-content-between">
@@ -280,10 +171,10 @@
 											<i class="toggle-open bi-caret-down-fill text-warning"></i>
 										</div>
 										<div class="toggle-title fw-bold">
-											Pouvez-vous garantir un nombre de demandes ?
+											How do I become an author?
 										</div>
 									</div>
-									<div class="toggle-content ps-4">Non. En revanche, nous garantissons une méthode : structure SEO local propre, site orienté conversion, suivi des demandes (appels + formulaires) et itérations mensuelles. Le résultat dépend aussi de la concurrence, de la spécialité et de votre capacité de traitement.</div>
+									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores.</div>
 								</div>
 
 								<div class="toggle">
@@ -293,10 +184,10 @@
 											<i class="toggle-open bi-caret-down-fill text-warning"></i>
 										</div>
 										<div class="toggle-title fw-bold">
-											En combien de temps le SEO local fonctionne ?
+											Helpful Resources for Authors
 										</div>
 									</div>
-									<div class="toggle-content ps-4">En général, les premiers signaux apparaissent en 4 à 8 semaines (indexation, impressions, positions), et la traction s’installe sur 3 à 6 mois. Une refonte + pages locales bien structurées accélèrent souvent la montée.</div>
+									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
 								</div>
 
 								<div class="toggle">
@@ -306,10 +197,10 @@
 											<i class="toggle-open bi-caret-down-fill text-warning"></i>
 										</div>
 										<div class="toggle-title fw-bold">
-											Proposez-vous Google Ads ?
+											How much money can I make?
 										</div>
 									</div>
-									<div class="toggle-content ps-4">Oui, uniquement si c’est pertinent : tracking fiable, landing page dédiée, capacité de réponse rapide, et spécialité compatible. Google Search capte une intention “chaude” et se pilote à la qualité (appels + dossiers).</div>
+									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
 								</div>
 
 								<div class="toggle">
@@ -319,15 +210,15 @@
 											<i class="toggle-open bi-caret-down-fill text-warning"></i>
 										</div>
 										<div class="toggle-title fw-bold">
-										Comment respectez-vous la déontologie ?
+											Can I offer my items for free on a promotional basis?
 										</div>
 									</div>
-									<div class="toggle-content ps-4">Message sobre et factuel : pas de comparatifs agressifs, pas de promesses de résultat, pas de “témoignages commerciaux”. Nous travaillons la clarté (domaines d’intervention, modalités, informations honoraires), la conformité RGPD, et la transparence du parcours.</div>
+									<div class="toggle-content ps-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
 								</div>
 							</div>
 
 							<div class="col-lg-5 col-10">
-								<img src="/_assets_/images/bg-2.jpg" alt="FAQ – Horizon Conversion Avocats">
+								<img src="/_assets_/images/bg-2.jpg" alt="Image">
 							</div>
 						</div>
 					</div>
@@ -344,9 +235,9 @@
 									<i class="bi-star-fill h5 me-1 text-warning"></i>
 									<i class="bi-star-fill h5 me-1 text-warning"></i>
 								</div>
-								<h2 class="h3 font-secondary fw-bold mb-4">Ce que nos clients apprécient</h2>
-								<p class="lead">Une approche structurée, des livrables concrets, et un pilotage par la donnée (appels + formulaires) — avec un discours toujours sobre et conforme.</p>
-								<a href="#" class="btn py-3 px-4 mt-3 rounded-1 btn-dark bg-color h-op-09">Découvrir l’offre</a>
+								<h2 class="h3 font-secondary fw-bold mb-4">What our Clients say?</h2>
+								<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quibusdam possimus aut itaque quo ex et dignissimos fuga animi id.</p>
+								<a href="https://themeforest.net/item/canvas-the-multipurpose-html5-template/reviews/9228123?utf8=%E2%9C%93&reviews_controls%5Bsort%5D=ratings_descending" class="btn py-3 px-4 mt-3 rounded-1 btn-dark bg-color h-op-09">View More Testimonials</a>
 							</div>
 
 							<div class="col-lg-7">
@@ -356,13 +247,13 @@
 											<div class="card-body p-4">
 												<div class="row">
 													<div class="col-12">
-														<p class="mb-4 font-secondary">"Une méthode claire : refonte, SEO local, suivi des conversions. Les décisions sont prises sur des données, pas sur des intuitions."</p>
+														<p class="mb-4 font-secondary">"2nd Template purchased from SemiColonWeb, Fantastic work so much detail although I only need a couple of pages, its worth the price."</p>
 													</div>
 													<div class="d-flex align-items-center">
-														<img class="rounded-circle me-3" src="/_assets_/images/authors/2.jpg" width="48" height="48" alt="Avis client">
+														<img class="rounded-circle me-3" src="/_assets_/images/authors/2.jpg" width="48" height="48" alt="Customer Testimonails">
 														<div>
-															<h3 class="h6 mb-0 fw-medium"><a href="#">Cabinet (Sud Oise)</a></h3>
-															<small class="text-muted">retour projet</small>
+															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3295792">Shartois</a></h3>
+															<small class="text-muted">10 days ago</small>
 														</div>
 													</div>
 												</div>
@@ -374,13 +265,13 @@
 											<div class="card-body p-4">
 												<div class="row">
 													<div class="col-12">
-														<p class="mb-4 font-secondary">"On a gagné en clarté : pages spécialités, parcours contact, et une vraie lecture des appels / formulaires par canal."</p>
+														<p class="mb-4 font-secondary">"Canvas Rocks... Too many options and features, just use your imagination to build anything you need. SemiColonTeam always surprise us with new updates and great features. It comes with a REAL and DETAILED documentation."</p>
 													</div>
 													<div class="d-flex align-items-center">
-														<img class="rounded-circle me-3" src="/_assets_/images/authors/1.jpg" width="48" height="48" alt="Avis client">
+														<img class="rounded-circle me-3" src="/_assets_/images/authors/1.jpg" width="48" height="48" alt="Customer Testimonails">
 														<div>
-															<h3 class="h6 mb-0 fw-medium"><a href="#">Cabinet (Nord 95)</a></h3>
-															<small class="text-muted">retour projet</small>
+															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3297954">Framex</a></h3>
+															<small class="text-muted">15 days ago</small>
 														</div>
 													</div>
 												</div>
@@ -393,13 +284,13 @@
 											<div class="card-body p-4">
 												<div class="row">
 													<div class="col-12">
-														<p class="mb-4 font-secondary">"Accompagnement sérieux et pragmatique. Priorisation des spécialités rentables, travail propre sur le SEO local et amélioration continue."</p>
+														<p class="mb-4 font-secondary">"I've been using Canvas for over 6 years and have purchased multiple licenses. There's literally infinite options on the style you want, and can work perfectly to any theme. I focus on video content and over the years I've custom built my website with the SemiColon team. They are so helpful and super supportive! Always there to help you, they know everything and can fix almost any problem or add features you want. Highly recommended!"</p>
 													</div>
 													<div class="d-flex align-items-center">
-														<img class="rounded-circle me-3" src="/_assets_/images/authors/3.jpg" width="48" height="48" alt="Avis client">
+														<img class="rounded-circle me-3" src="/_assets_/images/authors/3.jpg" width="48" height="48" alt="Customer Testimonails">
 														<div>
-															<h3 class="h6 mb-0 fw-medium"><a href="#">Cabinet (IDF)</a></h3>
-															<small class="text-muted">retour projet</small>
+															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3304063">JasonJSW</a></h3>
+															<small class="text-muted">24 days ago</small>
 														</div>
 													</div>
 												</div>
@@ -417,44 +308,44 @@
 					<div class="container">
 						<div class="row justify-content-between align-items-center">
 							<div class="col-lg-6 align-self-center mb-6">
-								<h2 class="h2 font-secondary fw-bold mb-4 lh-base">Pourquoi ce modèle fonctionne<br> pour un cabinet d’avocats ?</h2>
-								<p class="mb-5">Parce qu’un prospect choisit rarement “le meilleur marketing”. Il choisit un cabinet qu’il comprend, qui le rassure et qui répond vite. Nous travaillons la visibilité locale + la clarté du message + la conversion, puis nous mesurons ce qui génère réellement des demandes.</p>
+								<h2 class="h2 font-secondary fw-bold mb-4 lh-base">Why should you choose<br> Canvas Law Agency?</h2>
+								<p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe unde, atque autem deleniti rem vel fuga, sapiente nobis omnis veritatis esse vitae soluta vero debitis.</p>
 								<div class="row g-4">
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center mb-2">
 											<i class="material-symbols-outlined text-warning fs-2 mb-0">admin_panel_settings</i>
-											<h3 class="h6 fw-bold ms-2 mb-0">Déontologie respectée</h3>
+											<h3 class="h6 fw-bold ms-2 mb-0">Diverse Practice Areas</h3>
 										</div>
-										<p class="text-white op-06">Discours sobre : pas de promesses de résultat, pas de comparatifs agressifs. Transparence et conformité (RGPD).</p>
+										<p class="text-white op-06">Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
 									</div>
 
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center mb-2">
 											<i class="material-symbols-outlined text-warning fs-2 mb-0">qr_code_scanner</i>
-											<h3 class="h6 fw-bold ms-2 mb-0">Mesure & traçabilité</h3>
+											<h3 class="h6 fw-bold ms-2 mb-0">Responsiblities</h3>
 										</div>
-										<p class="text-white op-06">Suivi des conversions : clics appel, formulaires, sources (SEO / Ads / annuaires). Reporting lisible.</p>
+										<p class="text-white op-06">Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
 									</div>
 
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center mb-2">
 											<i class="material-symbols-outlined text-warning fs-2 mb-0">female</i>
-											<h3 class="h6 fw-bold ms-2 mb-0">UX qui rassure</h3>
+											<h3 class="h6 fw-bold ms-2 mb-0">Women Initiative</h3>
 										</div>
-										<p class="text-white op-06">Pages spécialités claires, éléments de confiance, parcours contact simple : l’utilisateur comprend et passe à l’action.</p>
+										<p class="text-white op-06">Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
 									</div>
 
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center mb-2">
 											<i class="material-symbols-outlined text-warning fs-2 mb-0">support</i>
-											<h3 class="h6 fw-bold ms-2 mb-0">Amélioration continue</h3>
+											<h3 class="h6 fw-bold ms-2 mb-0">Helpful Environment</h3>
 										</div>
-										<p class="text-white op-06">Optimisations mensuelles : contenus, maillage, performance, conversion. Priorisation selon impact.</p>
+										<p class="text-white op-06">Canvas included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</p>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-6 col-7 mx-auto">
-								<img src="/_assets_/images/lawyer.jpg" alt="Refonte site avocat & SEO local">
+								<img src="/_assets_/images/lawyer.jpg" alt="Image">
 							</div>
 						</div>
 					</div>
@@ -464,18 +355,18 @@
 					<div class="position-relative p-5 mb-4 z-3 rounded shadow bg-white service-feature mt-5 mt-lg-0">
 						<div class="row align-items-center justify-content-center grid-border">
 							<div class="col-lg-4 text-center mb-5 mb-lg-0">
-								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="0" data-to="30" data-refresh-interval="100" data-speed="2000"></span>j</div>
-								<h2 class="mb-0 h6 text-transform-none">Plan d’action (30 jours)</h2>
+								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="40" data-to="213" data-refresh-interval="100" data-speed="2000"></span></div>
+								<div class="mb-0 h6 text-transform-none">Jobs Done</div>
 							</div>
 
 							<div class="col-lg-4 text-center mb-5 mb-lg-0">
-								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="0" data-to="3" data-refresh-interval="100" data-speed="2000"></span></div>
-								<h2 class="mb-0 h6 text-transform-none">Spécialités prioritaires</h2>
+								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="0" data-to="11" data-refresh-interval="100" data-speed="2000"></span>+</div>
+								<div class="mb-0 h6 text-transform-none">Years of Experience</div>
 							</div>
 
 							<div class="col-lg-4 text-center">
-								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="0" data-to="12" data-refresh-interval="100" data-speed="2000"></span></div>
-								<h2 class="mb-0 h6 text-transform-none">Villes cœur de zone</h2>
+								<div class="counter color fw-normal mb-2"><span class="display-4 fw-bold" data-from="100" data-to="873" data-refresh-interval="100" data-speed="2000"></span>+</div>
+								<div class="mb-0 h6 text-transform-none">Happy Clients</div>
 							</div>
 						</div>
 					</div>
@@ -485,19 +376,19 @@
 					<div class="row g-4 align-items-end blog-cards">
 						<div class="col-md-8">
 							<div class="p-3 pb-4">
-								<div class="before-title text-border-right position-relative text-uppercase ls-3 text-smaller overflow-hidden mb-4 op-04 b-w-50">Ressources</div>
-								<h2 class="h2 font-secondary fw-bold mb-4 lh-base">Contenus utiles (sobres et pédagogiques)</h2>
-								<p class="mb-5">Des articles courts pour aider vos prospects à se repérer (documents à préparer, étapes, points d’attention). Objectif : informer, rassurer, et faciliter la prise de rendez-vous.</p>
+								<div class="before-title text-border-right position-relative text-uppercase ls-3 text-smaller overflow-hidden mb-4 op-04 b-w-50">Our Latest News</div>
+								<h2 class="h2 font-secondary fw-bold mb-4 lh-base">From our Law Community</h2>
+								<p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe unde, atque autem deleniti rem vel fuga, sapiente nobis omnis veritatis esse vitae soluta vero debitis.</p>
 							</div>
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="card h-translate-y-sm transform-ts">
 										<img src="/_assets_/images/blog/1.jpg" alt="" class="card-img-top">
 										<div class="card-body p-4">
-											<div class="h6 mb-3 text-warning">Guide</div>
-											<h3 class="h5 lh-base mb-3 color"><a href="#">Divorce : les documents à préparer avant le premier rendez-vous</a></h3>
-											<p class="mb-4">Une checklist simple pour cadrer la situation et gagner du temps lors de l’échange.</p>
-											<a href="#">Lire <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
+											<div class="mb-3 text-warning">June 12, 2020</div>
+											<h3 class="h5 lh-base mb-3 color"><a href="#">Ways You Can Support Someone Recovering from a Serious Injury</a></h3>
+											<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt exercitationem esse eaque velit.</p>
+											<a href="#">Read More <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
 										</div>
 									</div>
 								</div>
@@ -505,10 +396,10 @@
 									<div class="card h-translate-y-sm transform-ts">
 										<img src="/_assets_/images/blog/2.jpg" alt="" class="card-img-top">
 										<div class="card-body p-4">
-											<div class="h6 mb-3 text-warning">Guide</div>
-											<h3 class="h5 lh-base mb-3 color"><a href="#">Rupture conventionnelle : étapes clés et points d’attention</a></h3>
-											<p class="mb-4">Ce que vous pouvez préparer en amont pour un rendez-vous plus efficace.</p>
-											<a href="#">Lire <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
+											<div class="mb-3 text-warning">June 14, 2020</div>
+											<h3 class="h5 lh-base mb-3 color"><a href="#">Could Unruly Airline Passengers Prompt Federal Prosecutions?</a></h3>
+											<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt exercitationem esse eaque velit.</p>
+											<a href="#">Read More <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
 										</div>
 									</div>
 								</div>
@@ -521,18 +412,18 @@
 									<div class="card h-translate-y-sm transform-ts dark mb-4">
 										<img src="/_assets_/images/blog/3.jpg" alt="" class="card-img">
 										<a href="#" class="card-img-overlay d-flex flex-column justify-content-end p-4" style="background-image: linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3));">
-											<div class="h6 mb-3 text-warning">Mémo</div>
-											<h3 class="h5 lh-base mb-0">Baux & loyers impayés : quoi préparer avant de contacter un avocat</h3>
+											<div class="mb-3 text-warning">Aug 07, 2020</div>
+											<h3 class="h5 lh-base mb-0">Will Psychedelic Drugs Become Legal?</h3>
 										</a>
 									</div>
 								</div>
 								<div class="col-md-12 col-sm-6">
 									<div class="card h-translate-y-sm transform-ts">
 										<div class="card-body p-4">
-											<div class="h6 mb-3 text-warning">Méthode</div>
-											<h3 class="h5 lh-base mb-3 color"><a href="#">SEO local : pourquoi “ville + spécialité” convertit mieux</a></h3>
-											<p class="mb-4">Structure de pages, maillage interne et éléments de confiance : le socle d’un site qui performe.</p>
-											<a href="#">Lire <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
+											<div class="mb-3 text-warning">Sep 30, 2020</div>
+											<h3 class="h5 lh-base mb-3 color"><a href="#">Some States and Cities Help Laid Off Workers Reclaim Former Jobs</a></h3>
+											<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt exercitationem esse eaque velit.</p>
+											<a href="#">Read More <span class="material-symbols-outlined align-middle mb-1">trending_flat</span></a>
 										</div>
 									</div>
 								</div>
@@ -545,10 +436,10 @@
 					<div class="container">
 						<div class="row align-items-center justify-content-center col-mb-30 mx-md mx-auto">
 							<div class="col-sm-12 col-md">
-								<h2 class="h3 font-secondary fw-semibold mb-0">Vous souhaitez une <span class="border-bottom border-warning border-width-3">stratégie locale</span> claire et mesurable ?</h2>
+								<h2 class="h3 font-secondary fw-semibold mb-0">Don't hesitate to Contact for <span class="border-bottom border-warning border-width-3">Free  Consultation</span>!</h2>
 							</div>
 							<div class="col-sm-12 col-md-auto">
-								<a href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88" class="btn py-3 px-5 rounded-1 btn-dark bg-color h-op-09 m-0">Demander un échange <span class="material-symbols-outlined align-middle mb-1 ms-1">trending_flat</span></a>
+								<a href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="88" class="btn py-3 px-5 rounded-1 btn-dark bg-color h-op-09 m-0">Contact Us <span class="material-symbols-outlined align-middle mb-1 ms-1">trending_flat</span></a>
 							</div>
 						</div>
 					</div>
@@ -556,114 +447,4 @@
 
 			</div>
 		</section><!-- #content end -->
-
-		<!-- Footer
-		============================================= -->
-		<footer id="footer" class="bg-color dark border-warning">
-			<div class="container">
-
-				<!-- Footer Widgets
-				============================================= -->
-				<div class="footer-widgets-wrap">
-
-					<div class="row col-mb-50">
-						<div class="col-lg-5 col-sm-6">
-
-							<div class="widget">
-
-								<div class="mb-2 h6"><i class="material-symbols-outlined fs-5 text-warning mb-0 align-middle me-3">share_location</i>Zone :</div>
-								<address class="ms-4 ps-3 font-secondary text-warning">
-									Sud Oise &amp; Nord Val-d’Oise<br>
-									(Creil, Senlis, Chantilly, Cergy, Pontoise…)<br>
-								</address>
-
-								<div class="mb-3 h6"><i class="material-symbols-outlined fs-5 text-warning mb-0 align-middle me-3">schedule</i>Lun - Ven : 09:00 - 18:00</div>
-								<div class="mb-3 h6"><i class="material-symbols-outlined fs-5 text-warning mb-0 align-middle me-3">call</i>+33 (0)X XX XX XX XX</div>
-								<div class="mb-0 h6"><i class="material-symbols-outlined fs-5 text-warning mb-0 align-middle me-3">alternate_email</i>contact@horizon-conversion.fr</div>
-
-							</div>
-						</div>
-						<div class="col-lg-2 col-sm-6">
-							<div class="widget widget_links">
-
-								<div class="h4">Services</div>
-
-								<ul class="">
-									<li><a href="#">SEO local</a></li>
-									<li><a href="#">Refonte orientée conversion</a></li>
-									<li><a href="#">Tracking &amp; reporting</a></li>
-									<li><a href="#">Option Google Ads</a></li>
-									<li><a href="#">Ressources</a></li>
-								</ul>
-
-							</div>
-						</div>
-
-						<div class="col-lg-2 col-6">
-							<div class="widget widget_links">
-
-								<div class="h4">Cabinets d’avocats</div>
-
-								<ul>
-									<li><a href="#">Notre approche</a></li>
-									<li><a href="#">Offres</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Contact</a></li>
-								</ul>
-
-							</div>
-						</div>
-
-						<div class="col-lg-2 col-6">
-							<div class="widget widget_links widget-li-noicon">
-
-								<ul>
-									<li><a href="#" class="d-flex align-items-center"><i class="fa-brands fa-linkedin-in h5 text-warning text-center mb-0 me-3" style="width: 1.5rem;"></i> LinkedIn</a></li>
-									<li><a href="#" class="d-flex align-items-center"><i class="fa-brands fa-facebook-f h5 text-warning text-center mb-0 me-3" style="width: 1.5rem;"></i> Facebook</a></li>
-									<li><a href="#" class="d-flex align-items-center"><i class="fa-brands fa-instagram h5 text-warning text-center mb-0 me-3" style="width: 1.5rem;"></i> Instagram</a></li>
-									<li><a href="#" class="d-flex align-items-center"><i class="bi-envelope h5 text-warning text-center mb-0 me-3" style="width: 1.5rem;"></i> Email</a></li>
-								</ul>
-
-							</div>
-						</div>
-
-					</div>
-
-				</div><!-- .footer-widgets-wrap end -->
-
-			</div>
-
-			<!-- Copyrights
-			============================================= -->
-			<div id="copyrights">
-				<div class="container">
-
-					<div class="row col-mb-30 align-items-center">
-
-						<div class="col-md-6 text-center text-md-start">
-							Copyrights &copy; 2026 Horizon Conversion. Tous droits réservés.<br>
-						</div>
-
-						<div class="col-md-6 text-center text-md-end">
-							<div class="copyright-links"><a href="#">Mentions légales</a> / <a href="#">Politique de confidentialité</a></div>
-						</div>
-
-					</div>
-
-				</div>
-			</div><!-- #copyrights end -->
-		</footer><!-- #footer end -->
-
-	</div><!-- #wrapper end -->
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="uil uil-angle-double-up rounded-circle"></div>
-
-	<!-- JavaScripts
-	============================================= -->
-	<script is:inline src="/_assets_/js/plugins.min.js"></script>
-	<script is:inline src="/_assets_/js/functions.bundle.js"></script>
-
-</body>
-</html>
+		</Layout>

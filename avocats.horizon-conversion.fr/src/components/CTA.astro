@@ -1,0 +1,13 @@
+---
+const { label = "Demander un audit visibilité", href = "/contact" } = Astro.props;
+---
+<div class="cta">
+  <a class="cta__btn" href={href}>{label}</a>
+  <p class="cta__note">Réponse sous 24–48h ouvrées. Aucun engagement.</p>
+</div>
+
+<style>
+  .cta{padding:16px;border:1px solid #ddd;border-radius:12px;margin:16px 0}
+  .cta__btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #111;text-decoration:none}
+  .cta__note{margin:8px 0 0;font-size:0.95rem}
+</style>
