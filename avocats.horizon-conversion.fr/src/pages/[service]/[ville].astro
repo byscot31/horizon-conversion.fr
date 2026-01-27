@@ -1,0 +1,146 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
+
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+type Service = {
+  slug: string;
+  label: string;
+  titleTpl?: string;
+  descTpl?: string;
+};
+type Ville = {
+  slug: string;
+  name: string;
+  dept?: string;
+  regionHint?: string;
+  services?: string[]; // matrice de services autorisés
+};
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+function tpl(s: string, vars: Record<string, string>) {
+  return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+}
+
+export async function getStaticPaths() {
+  const svc = services as Service[];
+  const vls = villes as Ville[];
+
+  return vls.flatMap((v) => {
+    const allowed = new Set(v.services ?? []);
+    return svc
+      .filter((s) => allowed.size === 0 || allowed.has(s.slug))
+      .map((s) => ({ params: { service: s.slug, ville: v.slug } }));
+  });
+}
+
+const { service: serviceSlug, ville: villeSlug } = Astro.params;
+
+const service = (services as Service[]).find((s) => s.slug === serviceSlug);
+const ville = (villes as Ville[]).find((v) => v.slug === villeSlug);
+
+if (!service || !ville) throw new Error(`Route invalide: ${serviceSlug}/${villeSlug}`);
+if (ville.services?.length && !ville.services.includes(service.slug)) {
+  throw new Error(`Page non autorisée (matrice): ${service.slug}/${ville.slug}`);
+}
+
+const pageTitle = service.titleTpl
+  ? tpl(service.titleTpl, { ville: ville.name })
+  : `${service.label} pour cabinets d’avocats à ${ville.name}`;
+
+const pageDesc = service.descTpl
+  ? tpl(service.descTpl, { ville: ville.name })
+  : `Prestation ${service.label} pour cabinets d’avocats à ${ville.name}.`;
+
+const canonical = url(`${SITE}/${service.slug}/${ville.slug}`);
+
+const otherServices = (services as Service[])
+  .filter((s) => s.slug !== service.slug)
+  .filter((s) => !ville.services?.length || ville.services.includes(s.slug));
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} canonical={canonical}>
+  <Header />
+
+  <main class="container">
+    <section>
+      <h1>{pageTitle}</h1>
+      <p>
+        Zone : {ville.regionHint ? `${ville.regionHint} — ` : ""}{ville.name}
+        {ville.dept ? ` (${ville.dept})` : ""}.
+      </p>
+      <p>
+        Objectif : générer des demandes qualifiées (appel + formulaire) via une approche sobre et conforme.
+      </p>
+    </section>
+
+    <section>
+      <h2>Ce que comprend l’intervention</h2>
+
+      {service.slug === "seo-local" && (
+        <ul>
+          <li>Google Business Profile : structure, services, cohérence NAP</li>
+          <li>Pages locales + maillage interne</li>
+          <li>SEO technique (indexation, performance)</li>
+          <li>Tracking (clic téléphone / formulaire) + reporting</li>
+        </ul>
+      )}
+
+      {service.slug === "refonte-site" && (
+        <ul>
+          <li>Refonte orientée conversion : rassurance, CTA, formulaire</li>
+          <li>Performance (Core Web Vitals) + SEO technique</li>
+          <li>Socle compatible SEO local (pages services / pages villes)</li>
+        </ul>
+      )}
+
+      {service.slug === "marketing" && (
+        <ul>
+          <li>Stratégie d’acquisition : SEO local + contenu + priorisation</li>
+          <li>Tracking et pilotage mensuel</li>
+          <li>Ads uniquement si rentable et cadré</li>
+        </ul>
+      )}
+    </section>
+
+    <section>
+      <h2>Pages liées</h2>
+      <ul>
+        <li><a href={url(`/${service.slug}`)}>Voir toutes les villes ({service.label})</a></li>
+        <li><a href="/offres">Découvrir les packs</a></li>
+        <li><a href="/methode">Comprendre la méthode</a></li>
+      </ul>
+    </section>
+
+    {otherServices.length > 0 && (
+      <section>
+        <h2>Autres services à {ville.name}</h2>
+        <ul>
+          {otherServices.map((s) => (
+            <li><a href={url(`/${s.slug}/${ville.slug}`)}>{s.label} à {ville.name}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <RelatedSpecialites
+      related={service?.relatedSpecialites}
+      ville={villeSlug}
+      title={`Axes de travail fréquents à ${ville.name}`}
+      intro="Exemples d’axes sur lesquels nous structurons souvent la visibilité locale :"
+    />
+
+    <section>
+      <h2>Demander un audit</h2>
+      <a class="btn" href="/contact">Planifier un échange</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

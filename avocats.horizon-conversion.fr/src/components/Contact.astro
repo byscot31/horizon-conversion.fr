@@ -1,0 +1,69 @@
+---
+// src/components/Contact.astro
+---
+<div id="section-contact" class="section bg-color dark mt-6" style="background-image: linear-gradient(to bottom, rgba(var(--cnvs-themecolor-rgb),.8), rgba(var(--cnvs-themecolor-rgb),1)), url('/_assets_/images/bg-1.jpg'); background-attachment: fixed; background-size: cover;">
+  					<div class="container py-4">
+  						<div class="row justify-content-center">
+  							<div class="col-lg-9">
+  								 <div class="form-widget" data-alert-type="false">
+
+  									<div class="form-result"></div>
+  									<div class="lawfirm-inline-loader css3-spinner" style="position: absolute;">
+  										<div class="css3-spinner-bounce1"></div>
+  										<div class="css3-spinner-bounce2"></div>
+  										<div class="css3-spinner-bounce3"></div>
+  									</div>
+  									<div id="lawfirm-inline-submitted" class="text-center">
+  										<div class="fw-normal mb-0 h3 lh-base">Thank You for Contact Us! <br> Our Team will contact you asap on your email Address.</div>
+  									</div>
+
+  									<form class="mb-0" id="lawfirm-inline" name="lawfirm-inline" action="include/form.php" method="post" enctype="multipart/form-data">
+
+  										<div class="row">
+
+  											<div class="before-title text-uppercase ls-3 text-smaller mb-3 op-05">Looking for a Lawyer?</div>
+
+  											<div class="col-12 mb-4">
+  												<label for="lawfirm-inline-lawyer">I'd like to Contact a</label>
+  												<select class="required form-select" name="lawfirm-inline-lawyer" id="lawfirm-inline-lawyer">
+  													<option value="Immigration" selected>Immigration</option>
+  													<option value="Education">Education</option>
+  													<option value="Insurance">Insurance</option>
+  													<option value="Business">Business</option>
+  													<option value="Family">Family</option>
+  													<option value="Criminal">Criminal</option>
+  													<option value="Employment">Employment</option>
+  												</select>
+  												<label for="lawfirm-inline-industry">lawyer, expert in</label>
+  												<select class="required form-select" name="lawfirm-inline-industry" id="lawfirm-inline-industry">
+  													<option value="Industry" selected>Industry</option>
+  													<option value="Professional">Professional</option>
+  													<option value="Pracice Area">Pracice Area</option>
+  												</select>
+  												<label for="lawfirm-inline-city">located in</label>
+
+  												<input class="required form-control" type="text" value="" name="lawfirm-inline-city" id="lawfirm-inline-city" placeholder="City" style="max-width: 200px">
+
+  												<label for="lawfirm-inline-email"> send email us to</label>
+
+  												<input type="email" value="" class="form-control required" id="lawfirm-inline-email" name="lawfirm-inline-email" placeholder="email address">.
+  											</div>
+
+  											<div class="col-12 d-none">
+  												<input type="text" id="lawfirm-inline-botcheck" name="lawfirm-inline-botcheck" value="">
+  											</div>
+  											<div class="col-12 text-center">
+  												<button type="submit" name="lawfirm-inline-submit" class="btn btn-lg py-3 px-6 mt-2 rounded-1 btn-light h-op-09">Send Now</button>
+  											</div>
+
+  											<input type="hidden" name="prefix" value="lawfirm-inline-">
+  											<input type="hidden" name="subject" value="Messgae From Law Firm Template">
+
+  										</div>
+
+  									</form>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>

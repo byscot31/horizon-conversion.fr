@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "droit-immobilier",
+    "label": "Droit immobilier",
+    "hubTitle": "Droit immobilier : visibilité locale (cabinet)",
+    "hubDesc": "Structurer la visibilité locale du cabinet sur le droit immobilier : pages utiles, questions fréquentes et parcours de contact.",
+    "titleTpl": "{specialite} : visibilité locale du cabinet à {ville}",
+    "descTpl": "Développer la visibilité locale du cabinet sur “{specialite}” à {ville} : structure de pages, contenus utiles et parcours de contact (approche B2B).",
+    "angles": ["baux", "copropriété", "litiges travaux", "contentieux vente"]
+  },
+  {
+    "slug": "droit-des-affaires",
+    "label": "Droit des affaires",
+    "hubTitle": "Droit des affaires : visibilité locale (cabinet)",
+    "hubDesc": "Capter une demande TPE/PME au bon niveau : pages structurées, contenus utiles et prise de contact.",
+    "titleTpl": "{specialite} : visibilité locale du cabinet à {ville}",
+    "descTpl": "Visibilité locale sur “{specialite}” à {ville} : pages structurées, sujets utiles et prise de contact (approche B2B).",
+    "angles": ["contrats", "recouvrement", "litiges commerciaux", "accompagnement TPE/PME"]
+  },
+  {
+    "slug": "droit-du-travail-employeur",
+    "label": "Droit du travail (côté employeur)",
+    "hubTitle": "Droit du travail employeur : visibilité locale (cabinet)",
+    "hubDesc": "Positionner le cabinet sur une demande orientée entreprises : pages utiles, questions fréquentes et prise de contact.",
+    "titleTpl": "{specialite} : visibilité locale du cabinet à {ville}",
+    "descTpl": "Visibilité locale orientée entreprises sur “{specialite}” à {ville} : structure, contenus utiles et prise de contact (approche B2B).",
+    "angles": ["licenciement (employeur)", "rupture conventionnelle", "contentieux prud’hommes", "conseil RH"]
+  }
+]
