@@ -1,0 +1,56 @@
+---
+// src/pages/ressources/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import Blog from "../../components/Blog.astro";
+import Contact from "../../components/Contact.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
+
+import ui from "../../data/ui.json";
+import blog from "../../data/blog.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/ressources";
+
+const home = (blog as any).home ?? {};
+
+const title = "Ressources | Horizon Conversion — cabinets d’avocats";
+const description =
+  "Ressources pour cabinets d’avocats : SEO local, refonte, prise de contact et mesure des demandes.";
+
+const defaultInner = (ui as any)?.hero?.defaultInner ?? {};
+
+const hero = {
+  ...defaultInner,
+  eyebrow: home.badge ?? "Ressources",
+  title: home.title ?? "Ressources",
+  subtitle: home.intro ?? "Notes utiles pour décider et prioriser, avec un ton sobre.",
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir les packs", href: "/offres" },
+  note: "Approche sobre, sans surpromesse."
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      <Blog />
+
+      <Contact />
+
+      <Reassurance />
+
+      <Promo />
+
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
