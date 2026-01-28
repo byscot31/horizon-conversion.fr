@@ -1,0 +1,147 @@
+---
+// src/pages/mentions-legales.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
+
+import ui from "../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/mentions-legales";
+
+const title = "Mentions légales | Horizon Conversion — cabinets d’avocats";
+const description = "Informations légales et conditions d’utilisation du site.";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Informations légales",
+  title: "Mentions légales",
+  subtitle: "Informations d’édition, d’hébergement et d’utilisation du site.",
+  primaryCta: { label: "Nous contacter", href: "/contact" },
+  secondaryCta: { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+  note: "Dernière mise à jour : 28/01/2026."
+};
+
+const publisher = {
+  brand: "Horizon Conversion",
+  operator: "CONTROL ONLINE",
+  legalName: "DA COSTA FRANCOIS",
+  legalForm: "Entrepreneur individuel",
+  siren: "810 922 641",
+  siret: "810 922 641 00024",
+  vat: "FR78810922641",
+  rcs: "810 922 641 R.C.S. Pontoise",
+  address: "21 boulevard de l’Orangerie, 95160 Montmorency, France",
+  activity: "Programmation informatique (NAF 62.01Z)",
+  phone: "06 60 92 10 08",
+  email: "contact@horizon-conversion.fr"
+};
+
+const hosting = {
+  name: "SCALEWAY",
+  address: "8, rue de la Ville-l’Évêque, 75008 Paris, France",
+  phone: "+33 (0) 1 84 13 00 00"
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+      <div class="section bg-transparent py-4">
+        <div class="container mw-md">
+
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-8">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Mentions</div>
+              <h2 class="h3 fw-bold mb-2">Éditeur du site</h2>
+              <p class="lead mb-0 op-07">
+                Le présent site est édité dans le cadre de l’activité de {publisher.operator}.
+              </p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4">
+              <ul class="iconlist mb-0 op-07">
+                <li class="d-block"><strong>Marque :</strong> {publisher.brand}</li>
+                <li class="d-block"><strong>Nom commercial :</strong> {publisher.operator}</li>
+                <li class="d-block"><strong>Exploitant :</strong> {publisher.legalName} — {publisher.legalForm}</li>
+                <li class="d-block"><strong>Adresse :</strong> {publisher.address}</li>
+                <li class="d-block"><strong>SIREN :</strong> {publisher.siren} — <strong>SIRET :</strong> {publisher.siret}</li>
+                <li class="d-block"><strong>TVA intracommunautaire :</strong> {publisher.vat}</li>
+                <li class="d-block"><strong>RCS :</strong> {publisher.rcs}</li>
+                <li class="d-block"><strong>Téléphone :</strong> <a href={`tel:${publisher.phone.replace(/\s+/g, "")}`}>{publisher.phone}</a></li>
+                <li class="d-block"><strong>Email :</strong> <a href={`mailto:${publisher.email}`}>{publisher.email}</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Hébergement</h2>
+              <p class="lead mb-0 op-07">
+                Conformément aux obligations applicables, les informations relatives à l’hébergeur doivent être indiquées.
+              </p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4">
+              <ul class="iconlist mb-0 op-07">
+                <li class="d-block"><strong>Hébergeur :</strong> {hosting.name}</li>
+                <li class="d-block"><strong>Adresse :</strong> {hosting.address}</li>
+                <li class="d-block"><strong>Téléphone :</strong> {hosting.phone}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Propriété intellectuelle</h2>
+              <p class="lead mb-0 op-07">
+                Sauf mention contraire, les contenus du site (textes, visuels, structure) sont protégés.
+              </p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <p class="mb-2">
+                Toute reproduction, représentation, adaptation ou exploitation, totale ou partielle, sans autorisation,
+                est interdite.
+              </p>
+              <p class="mb-0">
+                Les marques, logos et noms cités peuvent appartenir à leurs propriétaires respectifs.
+              </p>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Responsabilité</h2>
+              <p class="lead mb-0 op-07">Informations fournies à titre indicatif et susceptibles d’évoluer.</p>
+            </div>
+          </div>
+
+          <div class="card border-default">
+            <div class="card-body p-4 op-07">
+              <p class="mb-2">
+                Le site peut contenir des liens vers des sites tiers. L’éditeur ne peut être tenu responsable du contenu
+                ou des pratiques de ces sites.
+              </p>
+              <p class="mb-0">
+                Pour toute question : <a href="/contact">contact</a>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

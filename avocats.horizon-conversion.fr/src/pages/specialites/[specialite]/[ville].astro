@@ -1,8 +1,14 @@
 ---
+// src/pages/specialites/[specialite]/[ville].astro
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Header from "../../../components/Header.astro";
+import Hero from "../../../components/Hero.astro";
+import Contact from "../../../components/Contact.astro";
+import Reassurance from "../../../components/Reassurance.astro";
+import Promo from "../../../components/Promo.astro";
 import Footer from "../../../components/Footer.astro";
 
+import ui from "../../../data/ui.json";
 import specialites from "../../../data/specialites.json";
 import villes from "../../../data/villes.json";
 
@@ -38,53 +44,113 @@ if (ville.specialites?.length && !ville.specialites.includes(sp.slug)) {
   throw new Error(`Page non autorisée (matrice): ${sp.slug}/${ville.slug}`);
 }
 
+const zone = ville.regionHint ? `${ville.regionHint} — ${ville.name}` : ville.name;
+
 const title = sp.titleTpl
   ? tpl(sp.titleTpl, { ville: ville.name, specialite: sp.label })
-  : `${sp.label} : stratégie SEO local à ${ville.name} (cabinet d’avocats)`;
+  : `${sp.label} — stratégie SEO local à ${ville.name} (cabinet d’avocats)`;
 
 const description = sp.descTpl
   ? tpl(sp.descTpl, { ville: ville.name, specialite: sp.label })
-  : `Structurer la visibilité locale sur “${sp.label}” à ${ville.name} : pages, maillage, GBP, conversion (B2B cabinet).`;
+  : `Structurer une visibilité locale autour de “${sp.label}” à ${ville.name} : pages utiles, maillage interne, et prise de contact (B2B cabinet).`;
 
 const canonical = url(`${SITE}/specialites/${sp.slug}/${ville.slug}`);
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `Spécialité — ${zone}`,
+  title,
+  subtitle: description,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir la spécialité", href: url(`/specialites/${sp.slug}`) },
+  note: "Page B2B : recommandations de structure, pas un annuaire."
+};
+
+const reassuranceKey =
+  (ui as any)?.reassurance?.variants?.local ? "local" : "service";
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
   <Header />
 
-  <main class="container">
-    <section>
-      <h1>{title}</h1>
-      <p>
-        Zone : {ville.regionHint ? `${ville.regionHint} — ` : ""}{ville.name}{ville.dept ? ` (${ville.dept})` : ""}.
-      </p>
-      <p>
-        Page B2B : recommandations de structure SEO local autour de <strong>{sp.label}</strong>.
-      </p>
-    </section>
+  <Hero {...hero} />
 
-    {sp.angles?.length ? (
-      <section>
-        <h2>Intentions à couvrir</h2>
-        <ul>
-          {sp.angles.map((a) => <li>{a}</li>)}
-        </ul>
-      </section>
-    ) : null}
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
 
-    <section>
-      <h2>Maillage conseillé</h2>
-      <ul>
-        <li><a href={url(`/specialites/${sp.slug}`)}>Voir toutes les villes ({sp.label})</a></li>
-        <li><a href="/seo-local">SEO local</a> · <a href="/refonte-site">Refonte</a></li>
-        <li><a href="/offres">Voir les packs</a></li>
-      </ul>
-    </section>
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Cadre</div>
+              <h2 class="h3 fw-bold mb-2">Ce que couvre la page</h2>
+              <p class="lead mb-0 op-07">
+                Une page utile sert à clarifier le périmètre, rassurer, et rendre la prise de contact évidente.
+              </p>
+            </div>
+          </div>
 
-    <section>
-      <a class="btn" href="/contact">Planifier un échange</a>
-    </section>
-  </main>
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">description</i>
+                <div class="h5 fw-bold mb-1">Structure</div>
+                <div class="op-07">Pages et sections réellement utiles (sans empilement).</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">account_tree</i>
+                <div class="h5 fw-bold mb-1">Maillage</div>
+                <div class="op-07">Lien vers services, méthode, spécialité hub — navigation claire.</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">call</i>
+                <div class="h5 fw-bold mb-1">Contact</div>
+                <div class="op-07">Appel / formulaire visibles et cohérents avec le périmètre.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {sp.angles?.length ? (
+        <div class="section py-6 mb-0" style="background-color:#f1f3f7">
+          <div class="container">
+            <div class="row align-items-end justify-content-between mb-4">
+              <div class="col-lg-7">
+                <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Intentions</div>
+                <h2 class="h3 fw-bold mb-2">Angles à couvrir</h2>
+                <p class="lead mb-0 op-07">Exemples (à adapter selon le cabinet).</p>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              {sp.angles.map((a) => (
+                <div class="col-md-6 col-lg-4">
+                  <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                    <i class="material-symbols-outlined display-6 color mb-2">check_circle</i>
+                    <div class="op-07">{a}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <Reassurance variant={reassuranceKey} />
+
+      <Contact />
+
+      <Promo />
+
+    </div>
+  </section>
 
   <Footer />
 </BaseLayout>

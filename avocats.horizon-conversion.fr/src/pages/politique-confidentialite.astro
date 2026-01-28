@@ -1,0 +1,195 @@
+---
+// src/pages/politique-confidentialite.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
+
+import ui from "../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/politique-confidentialite";
+
+const title = "Politique de confidentialité | Horizon Conversion";
+const description =
+  "Informations sur les données traitées, finalités, durées de conservation et droits des personnes (RGPD).";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Données personnelles",
+  title: "Politique de confidentialité",
+  subtitle: "Une information claire sur les traitements liés au site et aux prises de contact.",
+  primaryCta: { label: "Nous contacter", href: "/contact" },
+  secondaryCta: { label: "Mentions légales", href: "/mentions-legales" },
+  note: "Dernière mise à jour : 28/01/2026."
+};
+
+const controller = {
+  name: "DA COSTA FRANCOIS (CONTROL ONLINE) – Horizon Conversion",
+  address: "21 boulevard de l’Orangerie, 95160 Montmorency, France",
+  email: "contact@horizon-conversion.fr",
+  phone: "06 60 92 10 08"
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+      <div class="section bg-transparent py-4">
+        <div class="container mw-md">
+
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-8">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">RGPD</div>
+              <h2 class="h3 fw-bold mb-2">Responsable de traitement</h2>
+              <p class="lead mb-0 op-07">
+                Le responsable de traitement des données collectées via ce site est :<br> {controller.name}.
+              </p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4">
+              <ul class="iconlist mb-0 op-07">
+                <li class="d-block"><strong>Adresse :</strong> {controller.address}</li>
+                <li class="d-block"><strong>Email :</strong> <a href={`mailto:${controller.email}`}>{controller.email}</a></li>
+                <li class="d-block"><strong>Téléphone :</strong> <a href={`tel:${controller.phone.replace(/\s+/g, "")}`}>{controller.phone}</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Données collectées</h2>
+              <p class="lead mb-0 op-07">Les données varient selon vos interactions avec le site.</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <ul class="iconlist mb-0">
+                <li class="d-block"><strong>Données de contact :</strong> nom/prénom, email, téléphone, message (si vous utilisez le formulaire ou nous contactez).</li>
+                <li class="d-block"><strong>Données de navigation :</strong> informations techniques (pages consultées, type d’appareil, données agrégées de mesure d’audience) si des outils statistiques sont activés.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Finalités et bases légales</h2>
+              <p class="lead mb-0 op-07">Pourquoi nous traitons ces données.</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <ul class="iconlist mb-0">
+                <li class="d-block"><strong>Répondre à votre demande</strong> (prise de rendez-vous, demande d’audit) — base : exécution de mesures précontractuelles / intérêt légitime.</li>
+                <li class="d-block"><strong>Suivi de la relation</strong> (échanges, relances raisonnables) — base : intérêt légitime.</li>
+                <li class="d-block"><strong>Mesure d’audience</strong> (si activée) — base : consentement lorsque requis (cookies/statistiques).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Durées de conservation</h2>
+              <p class="lead mb-0 op-07">Des durées proportionnées, adaptées à la finalité.</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <ul class="iconlist mb-0">
+                <li class="d-block"><strong>Demandes via formulaire / email :</strong> le temps de traiter la demande, puis archivage limité (ex. 12–24 mois) sauf obligation ou relation commerciale.</li>
+                <li class="d-block"><strong>Données de mesure d’audience :</strong> selon les paramètres de l’outil utilisé et/ou la durée de vie des cookies.</li>
+              </ul>
+              <small class="d-block mt-3 op-06">
+                Tu peux ajuster ces durées selon tes pratiques réelles (important).
+              </small>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Destinataires</h2>
+              <p class="lead mb-0 op-07">Les données sont traitées en interne et par des prestataires nécessaires.</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <ul class="iconlist mb-0">
+                <li class="d-block"><strong>Interne :</strong> uniquement les personnes habilitées.</li>
+                <li class="d-block"><strong>Prestataires :</strong> hébergeur, outils techniques indispensables (ex. email, mesure d’audience si activée).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Cookies</h2>
+              <p class="lead mb-0 op-07">Selon les fonctionnalités activées, des cookies peuvent être utilisés.</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <p class="mb-2">
+                Le site peut utiliser :
+              </p>
+              <ul class="iconlist mb-3">
+                <li class="d-block"><strong>Cookies nécessaires</strong> au fonctionnement du site.</li>
+                <li class="d-block"><strong>Cookies de mesure d’audience</strong> si un outil statistique est activé (soumis au consentement lorsque requis).</li>
+              </ul>
+              <p class="mb-0">
+                Vous pouvez gérer les cookies via les paramètres de votre navigateur et/ou via le module de consentement lorsqu’il est présent.
+              </p>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Vos droits</h2>
+              <p class="lead mb-0 op-07">Accès, rectification, opposition, effacement…</p>
+            </div>
+          </div>
+
+          <div class="card border-default mb-4">
+            <div class="card-body p-4 op-07">
+              <p class="mb-2">
+                Conformément à la réglementation, vous pouvez exercer vos droits : accès, rectification, effacement,
+                limitation, opposition, portabilité (selon les cas).
+              </p>
+              <p class="mb-0">
+                Pour exercer vos droits : <a href={`mailto:${controller.email}`}>{controller.email}</a>.
+                Vous pouvez également introduire une réclamation auprès de la CNIL.
+              </p>
+            </div>
+          </div>
+
+          <div class="row align-items-end justify-content-between mb-4 mt-5">
+            <div class="col-lg-8">
+              <h2 class="h3 fw-bold mb-2">Sécurité</h2>
+              <p class="lead mb-0 op-07">Mesures raisonnables pour protéger les données.</p>
+            </div>
+          </div>
+
+          <div class="card border-default">
+            <div class="card-body p-4 op-07">
+              <p class="mb-0">
+                Nous mettons en œuvre des mesures de sécurité adaptées (contrôles d’accès, mises à jour, limitation des accès).
+                Aucun système n’étant infaillible, nous ne pouvons garantir une sécurité absolue.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
