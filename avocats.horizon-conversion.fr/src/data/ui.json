@@ -262,5 +262,46 @@
         ]
       }
     }
+  },
+  "promo": {
+    "default": {
+      "enabled": true,
+      "background": "#f1f3f7",
+      "heading": "Un avis rapide, cadré, sans engagement inutile.",
+      "highlight": "Demander un audit",
+      "cta": { "label": "Contacter Horizon Conversion", "href": "/contact/" }
+    },
+    "variants": {
+      "home": {
+        "heading": "Faire le point sur la visibilité locale du cabinet, sans détour.",
+        "highlight": "Demander un audit",
+        "cta": { "label": "Planifier un échange", "href": "/contact/" }
+      },
+      "service": {
+        "heading": "Valider les priorités et le périmètre avant d’engager du temps.",
+        "highlight": "Demander un audit",
+        "cta": { "label": "Contacter Horizon Conversion", "href": "/contact/" }
+      },
+      "local": {
+        "heading": "À l’échelle locale, quelques ajustements bien choisis suffisent souvent.",
+        "highlight": "Faire le point",
+        "cta": { "label": "Demander un audit", "href": "/contact/" }
+      },
+      "ads": {
+        "heading": "Avant toute publicité : pages prêtes, mesure fiable, et cadrage strict.",
+        "highlight": "Vérifier les prérequis",
+        "cta": { "label": "Demander un audit", "href": "/contact/" }
+      },
+      "methode": {
+        "heading": "Une démarche cadrée : priorités, livrables, mesure.",
+        "highlight": "Planifier un échange",
+        "cta": { "label": "Nous contacter", "href": "/contact/" }
+      },
+      "offres": {
+        "heading": "Choisir un pack adapté au cabinet, sans complexité inutile.",
+        "highlight": "Comparer les options",
+        "cta": { "label": "Demander un audit", "href": "/contact/" }
+      }
+    }
   }
 }

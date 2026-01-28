@@ -18,6 +18,8 @@ import ui from "../../data/ui.json";
 import services from "../../data/services.json";
 import villes from "../../data/villes.json";
 
+import { href, canonicalUrl } from "../../lib/href";
+
 type Service = {
   slug: string;
   label: string;
@@ -39,7 +41,6 @@ type Service = {
 type Ville = { slug: string; name: string; dept?: string; regionHint?: string; services?: string[] };
 
 const SITE = "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 export async function getStaticPaths() {
   return (services as Service[]).map((s) => ({
@@ -52,6 +53,8 @@ const { service: serviceSlug } = Astro.params;
 const service = (services as Service[]).find((s) => s.slug === serviceSlug);
 if (!service) throw new Error(`Service inconnu: ${serviceSlug}`);
 
+const canonical = canonicalUrl(SITE, `/${service.slug}`);
+
 const villesOk = (villes as Ville[]).filter((v) => !v.services?.length || v.services.includes(service.slug));
 
 const title = service.hubTitle ?? `${service.label} pour cabinets d’avocats`;
@@ -59,18 +62,16 @@ const description =
   service.hubDesc ??
   `Intervention Sud Oise & Nord 95 : ${service.label}, orienté demandes qualifiées (appel + formulaire), approche sobre et conforme.`;
 
-const canonical = url(`${SITE}/${service.slug}`);
-
 const hero = {
   ...ui.hero.defaultInner,
   eyebrow: `Horizon Conversion — ${service.label}`,
   title: service.hubTitle ?? `${service.label} pour cabinets d’avocats`,
   subtitle: service.hubDesc ?? description,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir les packs", href: "/offres" }
+  primaryCta: { label: "Demander un audit", href: "/contact/" },
+  secondaryCta: { label: "Voir les packs", href: "/offres/" }
 };
 
-const hrefForCity = (c: Ville) => "/" + service.slug + "/" + c.slug;
+const hrefForCity = (c: Ville) => href("/" + service.slug + "/" + c.slug);
 
 const renderCityLabel = (c: Ville) =>
   service.label + " à " + c.name + (c.dept ? ` (${c.dept})` : "");
@@ -127,12 +128,12 @@ const reassuranceVariant = forced ?? (service as any).reassuranceVariant ?? "ser
           title="Pour aller plus loin"
           intro="Deux pages utiles pour cadrer le budget et la méthode."
           cards={[
-            { title: "Voir les packs", desc: "Comparer les options et les livrables, simplement.", href: "/offres" },
-            { title: "Comprendre la méthode", desc: "Priorités, déroulé, et cadre de collaboration.", href: "/methode" }
+            { title: "Voir les packs", desc: "Comparer les options et les livrables, simplement.", href: "/offres/" },
+            { title: "Comprendre la méthode", desc: "Priorités, déroulé, et cadre de collaboration.", href: "/methode/" }
           ]}
         />
 
-        <Promo />
+        <Promo variant={service.slug === "google-ads" ? "ads" : "service"} />
 
   	</div>
   </section><!-- #content end -->
