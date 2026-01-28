@@ -1,82 +1,100 @@
 ---
 // src/components/Testimonails.astro
+import ui from "../data/ui.json";
+
+type ProofItem = {
+  quote: string;
+  author?: string;
+  meta?: string;
+  icon?: string;
+};
+
+type ProofBlock = {
+  enabled?: boolean;
+  title?: string;
+  intro?: string;
+  cta?: { label: string; href: string };
+  note?: string;
+  items?: ProofItem[];
+  background?: string;
+};
+
+interface Props {
+  variant?: "home" | "service" | "local" | "ads" | string;
+}
+
+const { variant = "home" } = Astro.props as Props;
+
+const proofRoot = (ui as any)?.proof as ProofBlock & { variants?: Record<string, ProofBlock> };
+
+const enabledGlobal = proofRoot?.enabled ?? true;
+const background = proofRoot?.background ?? "#f1f3f7";
+
+// Variante demandée (si elle existe)
+const v = proofRoot?.variants?.[variant] as ProofBlock | undefined;
+
+// Contenu final (fallbacks)
+const title = v?.title ?? proofRoot?.title ?? "Retours de mission (anonymisés)";
+const intro = v?.intro ?? proofRoot?.intro ?? "";
+const cta = v?.cta ?? proofRoot?.cta;
+const note = v?.note ?? proofRoot?.note ?? "";
+const items: ProofItem[] = (v?.items?.length ? v.items : proofRoot?.items) ?? [];
+
+const shouldRender = enabledGlobal && items.length > 0;
 ---
-<div class="section py-6 mb-0" style="background-color: #f1f3f7">
-  					<div class="container">
-  						<div class="row justify-content-between align-items-center col-mb-30">
-  							<div class="col-lg-4">
-  								<div class="d-flex mb-2">
-  									<i class="bi-star-fill h5 me-1 text-warning"></i>
-  									<i class="bi-star-fill h5 me-1 text-warning"></i>
-  									<i class="bi-star-fill h5 me-1 text-warning"></i>
-  									<i class="bi-star-fill h5 me-1 text-warning"></i>
-  									<i class="bi-star-fill h5 me-1 text-warning"></i>
-  								</div>
-  								<h2 class="h3 font-secondary fw-bold mb-4">What our Clients say?</h2>
-  								<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quibusdam possimus aut itaque quo ex et dignissimos fuga animi id.</p>
-  								<a href="https://themeforest.net/item/canvas-the-multipurpose-html5-template/reviews/9228123?utf8=%E2%9C%93&reviews_controls%5Bsort%5D=ratings_descending" class="btn py-3 px-4 mt-3 rounded-1 btn-dark bg-color h-op-09">View More Testimonials</a>
-  							</div>
 
-  							<div class="col-lg-7">
-  								<div class="row row-cols-1 row-cols-md-2 g-4 align-items-center">
-  									<div class="col">
-  										<div class="card rounded-6 overflow-hidden mb-4">
-  											<div class="card-body p-4">
-  												<div class="row">
-  													<div class="col-12">
-  														<p class="mb-4 font-secondary">"2nd Template purchased from SemiColonWeb, Fantastic work so much detail although I only need a couple of pages, its worth the price."</p>
-  													</div>
-  													<div class="d-flex align-items-center">
-  														<img class="rounded-circle me-3" src="/_assets_/images/authors/2.jpg" width="48" height="48" alt="Customer Testimonails">
-  														<div>
-  															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3295792">Shartois</a></h3>
-  															<small class="text-muted">10 days ago</small>
-  														</div>
-  													</div>
-  												</div>
-  											</div>
-  											<div class="bg-icon bi-star-fill op-02"></div>
-  										</div>
+{shouldRender && (
+  <div class="section py-6 mb-0" style={`background-color: ${background}`}>
+    <div class="container">
+      <div class="row justify-content-between align-items-center col-mb-30">
 
-  										<div class="card rounded-6 overflow-hidden">
-  											<div class="card-body p-4">
-  												<div class="row">
-  													<div class="col-12">
-  														<p class="mb-4 font-secondary">"Canvas Rocks... Too many options and features, just use your imagination to build anything you need. SemiColonTeam always surprise us with new updates and great features. It comes with a REAL and DETAILED documentation."</p>
-  													</div>
-  													<div class="d-flex align-items-center">
-  														<img class="rounded-circle me-3" src="/_assets_/images/authors/1.jpg" width="48" height="48" alt="Customer Testimonails">
-  														<div>
-  															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3297954">Framex</a></h3>
-  															<small class="text-muted">15 days ago</small>
-  														</div>
-  													</div>
-  												</div>
-  											</div>
-  											<div class="bg-icon bi-star-fill op-02"></div>
-  										</div>
-  									</div>
-  									<div class="col">
-  										<div class="card rounded-6 overflow-hidden">
-  											<div class="card-body p-4">
-  												<div class="row">
-  													<div class="col-12">
-  														<p class="mb-4 font-secondary">"I've been using Canvas for over 6 years and have purchased multiple licenses. There's literally infinite options on the style you want, and can work perfectly to any theme. I focus on video content and over the years I've custom built my website with the SemiColon team. They are so helpful and super supportive! Always there to help you, they know everything and can fix almost any problem or add features you want. Highly recommended!"</p>
-  													</div>
-  													<div class="d-flex align-items-center">
-  														<img class="rounded-circle me-3" src="/_assets_/images/authors/3.jpg" width="48" height="48" alt="Customer Testimonails">
-  														<div>
-  															<h3 class="h6 mb-0 fw-medium"><a href="https://themeforest.net/ratings/3304063">JasonJSW</a></h3>
-  															<small class="text-muted">24 days ago</small>
-  														</div>
-  													</div>
-  												</div>
-  											</div>
-  											<div class="bg-icon bi-star-fill op-02"></div>
-  										</div>
-  									</div>
-  								</div>
-  							</div>
-  						</div>
-  					</div>
-  				</div>
+        <div class="col-lg-4">
+          <div class="d-flex mb-2">
+            <i class="bi-star-fill h5 me-1 text-warning"></i>
+            <i class="bi-star-fill h5 me-1 text-warning"></i>
+            <i class="bi-star-fill h5 me-1 text-warning"></i>
+            <i class="bi-star-fill h5 me-1 text-warning"></i>
+            <i class="bi-star-fill h5 me-1 text-warning"></i>
+          </div>
+          <h2 class="h3 font-secondary fw-bold mb-4">{title}</h2>
+          {intro && <p class="lead op-08">{intro}</p>}
+
+          {cta && (
+            <a href={cta.href} class="btn py-3 px-4 mt-3 rounded-1 btn-dark bg-color h-op-09">
+              {cta.label}
+            </a>
+          )}
+
+          {note && <div class="small op-06 mt-3">{note}</div>}
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row row-cols-1 row-cols-md-2 g-4 align-items-stretch">
+            {items.map((it) => (
+              <div class="col">
+                <div class="card rounded-6 overflow-hidden h-100">
+                  <div class="card-body p-4 d-flex flex-column">
+                    <p class="mb-4 font-secondary flex-grow-1">“{it.quote}”</p>
+
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div>
+                        {it.author && <h3 class="h6 mb-0 fw-medium">{it.author}</h3>}
+                        {it.meta && <small class="text-muted">{it.meta}</small>}
+                      </div>
+
+                      <span class="material-symbols-outlined op-06">
+                        {it.icon ?? "format_quote"}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="bg-icon bi-star-fill op-02"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}

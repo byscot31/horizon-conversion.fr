@@ -38,5 +38,94 @@
         }
       ]
     }
+  },
+  "proof": {
+    "enabled": true,
+    "background": "#f1f3f7",
+    "variants": {
+      "home": {
+        "title": "Retours de mission (anonymisés)",
+        "intro": "Exemples de retours reçus sur des missions de visibilité locale et de refonte orientée prise de contact.",
+        "note": "Retours anonymisés. Contexte précisé sur demande, dans le respect de la confidentialité.",
+        "cta": { "label": "Voir la méthode", "href": "/methode" },
+        "items": [
+          {
+            "quote": "Cadrage très clair. Les pages prioritaires ont été définies rapidement, avec une mise en œuvre sobre et propre.",
+            "author": "Associé – cabinet (anonymisé)",
+            "meta": "Sud Oise • Refonte & parcours de contact",
+            "icon": "verified"
+          },
+          {
+            "quote": "Bonne méthode : priorités, livrables, et suivi. Les demandes sont mieux orientées, moins de sollicitations hors périmètre.",
+            "author": "Avocat – cabinet (anonymisé)",
+            "meta": "Nord 95 • SEO local & qualification",
+            "icon": "verified"
+          }
+        ]
+      },
+
+      "service": {
+        "title": "Ce que les cabinets apprécient le plus",
+        "intro": "Points de retour récurrents sur nos interventions (sans promesse de résultat).",
+        "note": "Exemples anonymisés. Nous privilégions la clarté des livrables et la mesure.",
+        "cta": { "label": "Découvrir les packs", "href": "/offres" },
+        "items": [
+          {
+            "quote": "Livrables structurés, priorités claires, et un suivi qui permet de décider simplement.",
+            "author": "Direction – cabinet (anonymisé)",
+            "meta": "Mission 2025",
+            "icon": "check_circle"
+          },
+          {
+            "quote": "Approche sobre, sans surpromesse : on avance étape par étape, avec une logique de pages utiles.",
+            "author": "Associé – cabinet (anonymisé)",
+            "meta": "SEO local / site",
+            "icon": "verified"
+          }
+        ]
+      },
+
+      "local": {
+        "title": "Retours fréquents sur les pages locales",
+        "intro": "Ce que les cabinets attendent généralement d’une page locale : clarté, rassurance, et prise de contact fluide.",
+        "note": "Chaque cabinet a ses priorités : la page locale s’intègre dans une structure globale.",
+        "cta": { "label": "Demander un audit", "href": "/contact" },
+        "items": [
+          {
+            "quote": "La page explique clairement la zone et le périmètre : moins de demandes hors-sujet.",
+            "author": "Avocat – cabinet (anonymisé)",
+            "meta": "Sud Oise / Nord 95",
+            "icon": "location_on"
+          },
+          {
+            "quote": "Le parcours de contact est simple : téléphone et formulaire visibles, sans surcharge.",
+            "author": "Cabinet (anonymisé)",
+            "meta": "Pages locales",
+            "icon": "call"
+          }
+        ]
+      },
+
+      "ads": {
+        "title": "Google Ads : cadrage avant activation",
+        "intro": "Pour préserver la qualité des demandes, l’option Ads n’est envisagée qu’avec des prérequis clairs.",
+        "note": "Pas de volume à tout prix : priorité à la pertinence et à la capacité de traitement du cabinet.",
+        "cta": { "label": "Voir les prérequis", "href": "/google-ads" },
+        "items": [
+          {
+            "quote": "Sans pages dédiées et sans mesure fiable, la publicité apporte surtout des sollicitations non pertinentes.",
+            "author": "Retour d’expérience",
+            "meta": "Cadrage Ads",
+            "icon": "filter_alt"
+          },
+          {
+            "quote": "Le bon point de départ : clarifier le périmètre et les exclusions avant d’investir.",
+            "author": "Retour d’expérience",
+            "meta": "Ciblage / exclusions",
+            "icon": "checklist"
+          }
+        ]
+      }
+    }
   }
 }

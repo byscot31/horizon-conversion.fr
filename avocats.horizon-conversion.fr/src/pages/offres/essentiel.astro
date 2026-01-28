@@ -1,0 +1,146 @@
+---
+// src/pages/offres/essentiel.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import ScopeCards from "../../components/ScopeCards.astro";
+import LinkedPages from "../../components/LinkedPages.astro";
+import Contact from "../../components/Contact.astro";
+import Faqs from "../../components/Faqs.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
+
+import ui from "../../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/offres/essentiel";
+
+const title = "Pack Essentiel | Horizon Conversion — cabinets d’avocats";
+const description =
+  "Pack Essentiel : mettre au propre les fondamentaux (pages utiles, présence locale, mesure des demandes) pour faciliter la prise de contact.";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Offres — Pack Essentiel",
+  title: "Essentiel : mettre au propre et clarifier",
+  subtitle:
+    "Pour un cabinet qui veut améliorer sa visibilité locale et ses demandes sans refondre tout le dispositif.",
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Comparer les packs", href: "/offres" },
+  note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
+};
+
+const faqs = [
+  {
+    q: "À qui s’adresse le pack Essentiel ?",
+    a: "Aux cabinets qui souhaitent clarifier l’offre, structurer les pages vraiment utiles et fiabiliser la mesure des demandes, avant d’envisager un déploiement plus large."
+  },
+  {
+    q: "Faut-il refaire le site ?",
+    a: "Pas nécessairement. Nous commençons par les pages qui décident de la prise de contact. Une refonte n’est proposée que si l’existant bloque réellement la compréhension, la confiance ou la performance."
+  },
+  {
+    q: "Qu’est-ce qui est livré, concrètement ?",
+    a: "Un cadrage de priorités, des pages essentielles mises au propre (structure, messages, contact), une présence locale cohérente sur Google quand c’est pertinent, et une mesure fiable des demandes."
+  },
+  {
+    q: "En combien de temps peut-on mettre en place l’Essentiel ?",
+    a: "Une première version opérationnelle se met en place rapidement une fois les éléments fournis (accès, contenus de base, périmètre). Ensuite, on consolide par itérations."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      {/* Résumé du pack */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Périmètre</div>
+              <h2 class="h3 fw-bold mb-2">Ce que couvre l’Essentiel</h2>
+              <p class="lead mb-0 op-07">
+                Le socle : pages utiles, cohérence de la présence locale, et mesure des demandes (appels & formulaires).
+              </p>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts">
+                <div class="fw-bold mb-2">Repères budgétaires</div>
+                <div class="op-07">Setup : 1 800 – 3 500 €</div>
+                <div class="op-07">Mensuel : 450 – 850 €</div>
+                <div class="small op-06 mt-2">
+                  Fourchettes indicatives selon l’existant (site, contenu, présence locale).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cards (réutilise ton composant) */}
+      <ScopeCards
+        serviceSlug="referencement-local"
+        title="Livrables clés (Essentiel)"
+        intro="Trois livrables structurants, conçus pour améliorer la compréhension et la prise de contact."
+      />
+
+      {/* Ce qui est inclus (liste plus “cabinet”) */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Inclus</div>
+                <ul class="iconlist op-08 mb-0">
+                  <li>Cadrage des priorités (audit + plan d’action)</li>
+                  <li>Pages essentielles : offres/domaines, contact, éléments de rassurance</li>
+                  <li>Présence locale cohérente (fiche établissement Google si pertinent)</li>
+                  <li>Mesure des demandes : formulaires + clics téléphone</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Pré-requis côté cabinet</div>
+                <ul class="iconlist op-08 mb-0">
+                  <li>Accès (site / hébergeur / analytics si existants)</li>
+                  <li>Coordonnées et périmètre d’intervention à afficher clairement</li>
+                  <li>Domaines traités / non traités (pour limiter les demandes hors périmètre)</li>
+                  <li>Point de contact interne (validation des contenus)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <Faqs title="Questions fréquentes" intro="Réponses simples sur le pack Essentiel." items={faqs} canonical={canonical} />
+
+      {/* CTA */}
+      <Contact />
+
+      <Reassurance />
+
+      <LinkedPages
+        cards={[
+          { title: "Comparer les packs", desc: "Essentiel, Croissance, Signature", href: "/offres" },
+          { title: "Pack Croissance", desc: "Déployer et consolider", href: "/offres/croissance" },
+          { title: "Pack Signature", desc: "Refonte + pilotage complet", href: "/offres/signature" }
+        ]}
+      />
+
+      <Promo />
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
