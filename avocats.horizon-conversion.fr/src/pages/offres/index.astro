@@ -1,5 +1,4 @@
 ---
-// src/pages/offres/index.astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
@@ -10,180 +9,102 @@ import Promo from "../../components/Promo.astro";
 import Footer from "../../components/Footer.astro";
 
 import ui from "../../data/ui.json";
+import offres from "../../data/offres.json";
 
-const canonical = "https://avocats.horizon-conversion.fr/offres";
+type Pack = (typeof offres)["packs"][number];
 
-const title = "Offres | Acquisition locale pour cabinets d’avocats";
-const description =
-  "Trois packs (Essentiel, Croissance, Signature) pour structurer la visibilité locale et augmenter les prises de contact, avec une approche sobre et conforme.";
+const canonical = (offres as any).meta.canonicalBase + "/offres";
+const title = (offres as any).meta.titleIndex;
+const description = (offres as any).meta.descIndex;
 
 const hero = {
   ...ui.hero.defaultInner,
-  eyebrow: "Horizon Conversion — Offres",
-  title: "Des packs clairs, pensés pour un cabinet",
-  subtitle: "Livrables cadrés, priorités nettes, et mesure des demandes (appels & formulaires).",
+  eyebrow: (offres as any).index.hero.eyebrow,
+  title: (offres as any).index.hero.title,
+  subtitle: (offres as any).index.hero.subtitle,
   primaryCta: { label: "Demander un audit", href: "/contact" },
   secondaryCta: { label: "Comprendre la méthode", href: "/methode" },
-  note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
+  note: (offres as any).index.hero.note
 };
+
+const packs = (offres as any).packs as Pack[];
 
 const faqs = [
   {
     q: "Comment choisir entre Essentiel, Croissance et Signature ?",
-    a: "Essentiel pose les bases (pages utiles + présence locale). Croissance est adapté si vous visez une progression régulière sur plusieurs villes / domaines. Signature convient lorsqu’il faut refondre, structurer et piloter un dispositif plus complet."
-  },
-  {
-    q: "Puis-je commencer sans refonte ?",
-    a: "Oui. Si le site actuel est exploitable, nous priorisons les pages qui décident de la prise de contact. Une refonte n’est proposée que si elle est réellement utile."
+    a: "Essentiel pose les bases. Croissance convient si vous visez une progression régulière (pages locales + pilotage). Signature s’impose lorsqu’il faut refondre/structurer et piloter un dispositif plus complet."
   },
   {
     q: "La publicité est-elle incluse ?",
-    a: "Non. Google Ads est une option, activée uniquement si les pages et la mesure sont prêtes, et si le cabinet peut traiter les sollicitations (cadrage strict pour limiter les demandes non pertinentes)."
+    a: "Non. Google Ads est une option, activée uniquement si les pages et la mesure sont prêtes, et avec un cadrage strict pour préserver la qualité des demandes."
   },
   {
-    q: "Qu’est-ce que vous mesurez exactement ?",
-    a: "Les formulaires envoyés et les actions liées à l’appel (clic téléphone), ainsi que les sources et les pages d’entrée associées, pour décider sur des faits."
+    q: "Mesurez-vous les appels et formulaires ?",
+    a: "Oui : formulaires envoyés et actions liées à l’appel (clic téléphone), plus les sources et pages d’entrée."
+  },
+  {
+    q: "Proposez-vous un engagement de résultat ?",
+    a: "Non. Nous nous engageons sur la méthode, les livrables et une mesure fiable."
   }
 ];
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
   <Header />
-
   <Hero {...hero} />
 
   <section id="content">
     <div class="content-wrap overflow-visible py-0">
 
-      {/* PRICING */}
-      <div class="section py-6 mb-0" style="background-color:#f1f3f7">
+      <div class="section py-6 m-0" style="background-color:#f1f3f7">
         <div class="container">
-
           <div class="row align-items-end justify-content-between mb-4">
             <div class="col-lg-7">
-              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Packs</div>
-              <h2 class="h3 fw-bold mb-2">Comparer les options</h2>
-              <p class="lead mb-0 op-07">
-                Une présentation simple : périmètre, livrables et conditions. Les prix sont des fourchettes (selon l’existant).
-              </p>
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">{(offres as any).index.badge}</div>
+              <h2 class="h3 fw-bold mb-2">{(offres as any).index.sectionTitle}</h2>
+              <p class="lead mb-0 op-07">{(offres as any).index.sectionIntro}</p>
             </div>
           </div>
 
           <div class="row g-4 align-items-stretch">
-
-            {/* Essentiel */}
-            <div class="col-md-6 col-lg-4">
-              <div class="hc-pack card rounded-6 h-100">
-                <div class="card-body p-4 p-lg-5 d-flex flex-column">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div>
-                      <div class="h5 fw-bold mb-1">Essentiel</div>
-                      <div class="op-07">Mettre au propre et clarifier.</div>
-                    </div>
-                    <span class="material-symbols-outlined op-06">rule</span>
-                  </div>
-
-                  <div class="mb-3">
-                    <div class="fw-bold">Setup</div>
-                    <div class="op-07">1 800 – 3 500 €</div>
-                    <div class="fw-bold mt-2">Mensuel</div>
-                    <div class="op-07">450 – 850 €</div>
-                  </div>
-
-                  <ul class="hc-list op-08 mb-4">
-                    <li>Audit + priorités (site + présence locale)</li>
-                    <li>Pages utiles (structure, messages, contact)</li>
-                    <li>Optimisations locales de base (cohérence, périmètre)</li>
-                    <li>Mesure des demandes (formulaire + clic téléphone)</li>
-                  </ul>
-
-                  <div class="mt-auto d-grid gap-2">
-                    <a href="/offres/essentiel" class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
-                    <a href="/contact" class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Croissance (recommandé) */}
-            <div class="col-md-6 col-lg-4">
-              <div class="hc-pack card rounded-6 h-100 hc-pack--featured">
-                <div class="card-body p-4 p-lg-5 d-flex flex-column">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div>
-                      <div class="d-inline-flex align-items-center gap-2 mb-1">
-                        <span class="badge text-bg-warning">Recommandé</span>
-                        <span class="op-06 text-uppercase text-smaller ls-2">progression</span>
+            {packs.map((p) => (
+              <div class="col-md-6 col-lg-4">
+                <div class={`hc-pack card rounded-6 h-100 ${p.featured ? "hc-pack--featured" : ""}`}>
+                  <div class="card-body p-4 p-lg-5 d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                      <div>
+                        {p.featured && p.badge && <span class="badge text-bg-warning mb-2">{p.badge}</span>}
+                        <div class="h5 fw-bold mb-1">{p.name}</div>
+                        <div class="op-07">{p.tagline}</div>
                       </div>
-                      <div class="h5 fw-bold mb-1">Croissance</div>
-                      <div class="op-07">Déployer et consolider.</div>
+                      <span class="material-symbols-outlined op-06">{p.icon ?? "arrow_right_alt"}</span>
                     </div>
-                    <span class="material-symbols-outlined op-06">trending_up</span>
-                  </div>
 
-                  <div class="mb-3">
-                    <div class="fw-bold">Setup</div>
-                    <div class="op-07">3 500 – 6 500 €</div>
-                    <div class="fw-bold mt-2">Mensuel</div>
-                    <div class="op-07">850 – 1 500 €</div>
-                  </div>
+                    <div class="mb-3">
+                      <div class="fw-bold">Setup</div>
+                      <div class="op-07">{p.budget.setup}</div>
+                      <div class="fw-bold mt-2">Mensuel</div>
+                      <div class="op-07">{p.budget.monthly}</div>
+                    </div>
 
-                  <ul class="hc-list op-08 mb-4">
-                    <li>Tout Essentiel</li>
-                    <li>Pages locales ciblées (sélection utile, pas de surproduction)</li>
-                    <li>Amélioration du parcours de contact (pages clés + formulaire)</li>
-                    <li>Suivi mensuel : demandes, sources, priorités d’ajustement</li>
-                  </ul>
+                    <ul class="hc-list op-08 mb-4">
+                      <li>{p.short}</li>
+                    </ul>
 
-                  <div class="mt-auto d-grid gap-2">
-                    <a href="/offres/croissance" class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
-                    <a href="/contact" class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
+                    <div class="mt-auto d-grid gap-2">
+                      <a href={`/offres/${p.slug}`} class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
+                      <a href="/contact" class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Signature */}
-            <div class="col-md-6 col-lg-4">
-              <div class="hc-pack card rounded-6 h-100">
-                <div class="card-body p-4 p-lg-5 d-flex flex-column">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div>
-                      <div class="h5 fw-bold mb-1">Signature</div>
-                      <div class="op-07">Refonte + pilotage complet.</div>
-                    </div>
-                    <span class="material-symbols-outlined op-06">workspace_premium</span>
-                  </div>
-
-                  <div class="mb-3">
-                    <div class="fw-bold">Setup</div>
-                    <div class="op-07">6 500 – 12 000 €</div>
-                    <div class="fw-bold mt-2">Mensuel</div>
-                    <div class="op-07">1 500 – 3 000 €</div>
-                  </div>
-
-                  <ul class="hc-list op-08 mb-4">
-                    <li>Refonte (ou refonte partielle) orientée prise de contact</li>
-                    <li>Architecture pages : domaines / méthode / contact / FAQ</li>
-                    <li>Déploiement local + priorisation par zone</li>
-                    <li>Mesure + pilotage mensuel (qualité des demandes)</li>
-                  </ul>
-
-                  <div class="mt-auto d-grid gap-2">
-                    <a href="/offres/signature" class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
-                    <a href="/contact" class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            ))}
           </div>
 
           <div class="row mt-4">
-            <div class="col-lg-9">
+            <div class="col-lg-10">
               <div class="small op-07">
-                <strong>Option Google Ads :</strong> activée uniquement si (1) pages prêtes, (2) mesure fiable, (3) capacité de traitement des demandes,
-                (4) cadrage strict (périmètre, exclusions, messages sobres).
+                <strong>Option Google Ads :</strong> {(offres as any).index.adsNote}
               </div>
             </div>
           </div>
@@ -195,43 +116,16 @@ const faqs = [
             .hc-list li { position: relative; padding-left: 1.4rem; }
             .hc-list li::before { content: "•"; position: absolute; left: .4rem; color: var(--bs-warning); }
           </style>
-
         </div>
       </div>
 
-      {/* CHOIX RAPIDE */}
-      <div class="section bg-transparent py-4">
-        <div class="container">
-          <div class="row g-4 align-items-start">
-            <div class="col-lg-6">
-              <i class="material-symbols-outlined display-6 color mb-2">help</i>
-              <h2 class="h3 fw-bold mb-2">Choisir rapidement</h2>
-              <p class="op-07 mb-0">
-                Si vous hésitez, on tranche en 20 minutes : état des lieux, priorité, pack le plus adapté (ou ajustement).
-              </p>
-            </div>
-            <div class="col-lg-6">
-              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts">
-                <div class="fw-bold mb-2">Pré-requis côté cabinet</div>
-                <ul class="hc-list op-08 mb-0">
-                  <li>Coordonnées et périmètre à afficher clairement</li>
-                  <li>Domaines traités / non traités (pour filtrer les demandes)</li>
-                  <li>Capacité de réponse aux demandes (délai raisonnable)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <Faqs title="Questions fréquentes" intro="Réponses sobres aux questions qui reviennent le plus souvent." items={faqs} canonical={canonical} />
+      <Faqs title="Questions fréquentes" intro="Réponses sobres sur les packs." items={faqs} canonical={canonical} />
 
       <Contact />
 
       <Reassurance />
 
       <Promo />
-
     </div>
   </section>
 
