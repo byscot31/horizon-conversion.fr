@@ -102,7 +102,6 @@ const contactFaq = (ui as any)?.faq?.contact ?? {
         </div>
       </div>
 
-      {/* Ton composant formulaire */}
       <Contact />
 
       <Faqs
@@ -112,7 +111,8 @@ const contactFaq = (ui as any)?.faq?.contact ?? {
         canonical={canonical}
       />
 
-      <Reassurance />
+      <Reassurance variant="contact" />
+
       <Promo />
 
     </div>

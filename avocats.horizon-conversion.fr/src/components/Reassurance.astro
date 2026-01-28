@@ -1,75 +1,92 @@
 ---
 // src/components/Reassurance.astro
+import ui from "../data/ui.json";
+
+type Feature = { icon: string; title: string; text: string };
+type StatsItem = { title: string; text: string };
+type ReassuranceData = {
+  headingHtml: string;
+  intro: string;
+  features: Feature[];
+  stats: StatsItem[];
+  image?: { src: string; alt: string };
+};
+
+interface Props {
+  variant?: string;            // "home" | "service" | "local" | ...
+  data?: ReassuranceData;      // override ponctuel si besoin
+  background?: string;         // override ponctuel
+}
+
+const { variant = "default", data, background } = Astro.props as Props;
+
+const cfgRoot = (ui as any)?.reassurance ?? {};
+const variants = cfgRoot.variants ?? {};
+const base = variants.default ?? null;
+const chosen = variants[variant] ?? null;
+
+const merged: ReassuranceData = data
+  ? data
+  : {
+      ...(base ?? {}),
+      ...(chosen ?? {}),
+      features: (chosen?.features ?? base?.features ?? []),
+      stats: (chosen?.stats ?? base?.stats ?? []),
+      image: (chosen?.image ?? base?.image ?? cfgRoot.imageFallback ?? null)
+    };
+
+const bg = background ?? cfgRoot.background ?? "#000";
+
+const safeFeatures = (merged.features ?? []).slice(0, 4);
+const safeStats = (merged.stats ?? []).slice(0, 3);
+const img = merged.image?.src ? merged.image : null;
+
+const showStats = safeStats.length > 0;
 ---
-<div class="section my-0 dark py-6" style="background-color: #000;">
+
+<div class="section my-0 dark py-6" style={`background-color: ${bg};`}>
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="col-lg-6 align-self-center mb-6">
-        <h2 class="h2 font-secondary fw-bold mb-4 lh-base">
-          Un cadre sérieux,<br /> adapté aux cabinets d’avocats
-        </h2>
-        <p class="mb-5">
-          Une approche sobre : clarifier l’offre, structurer les pages utiles, faciliter la prise de contact et suivre les demandes.
-          Sans promesse de résultat, avec une exigence de méthode et de mesure.
-        </p>
+        <h2 class="h2 font-secondary fw-bold mb-4 lh-base" set:html={merged.headingHtml} />
+
+        <p class="mb-5">{merged.intro}</p>
 
         <div class="row g-4">
-          <div class="col-sm-6">
-            <div class="d-flex align-items-center mb-2">
-              <i class="material-symbols-outlined text-warning fs-2 mb-0">admin_panel_settings</i>
-              <h3 class="h6 fw-bold ms-2 mb-0">Cadre conforme</h3>
+          {safeFeatures.map((f) => (
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center mb-2">
+                <i class="material-symbols-outlined text-warning fs-2 mb-0">{f.icon}</i>
+                <h3 class="h6 fw-bold ms-2 mb-0">{f.title}</h3>
+              </div>
+              <p class="text-white op-06">{f.text}</p>
             </div>
-            <p class="text-white op-06">Ton sobre, pas de surpromesse, priorité à la clarté et à la confiance.</p>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="d-flex align-items-center mb-2">
-              <i class="material-symbols-outlined text-warning fs-2 mb-0">tune</i>
-              <h3 class="h6 fw-bold ms-2 mb-0">Priorités nettes</h3>
-            </div>
-            <p class="text-white op-06">Actions classées par impact : visibilité locale, pages clés, prise de contact.</p>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="d-flex align-items-center mb-2">
-              <i class="material-symbols-outlined text-warning fs-2 mb-0">analytics</i>
-              <h3 class="h6 fw-bold ms-2 mb-0">Mesure lisible</h3>
-            </div>
-            <p class="text-white op-06">Suivi des appels et formulaires pour piloter sur des faits.</p>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="d-flex align-items-center mb-2">
-              <i class="material-symbols-outlined text-warning fs-2 mb-0">location_on</i>
-              <h3 class="h6 fw-bold ms-2 mb-0">Ciblage local</h3>
-            </div>
-            <p class="text-white op-06">Sud Oise & Nord 95 : pages locales utiles, sans surproduction.</p>
-          </div>
+          ))}
         </div>
       </div>
 
       <div class="col-lg-6 col-7 mx-auto">
-        <img src="/_assets_/images/lawyer.jpg" alt="Cabinet d’avocats" loading="lazy" />
+        {img ? (
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        ) : (
+          <div class="ratio ratio-4x3 rounded-6 bg-dark op-03"></div>
+        )}
       </div>
     </div>
   </div>
 </div>
 
-<div class="container mw-md">
-  <div class="position-relative p-5 mb-4 z-3 rounded shadow bg-white service-feature mt-5 mt-lg-0">
-    <div class="row align-items-center justify-content-center grid-border">
-      <div class="col-lg-4 text-center mb-5 mb-lg-0">
-        <div class="h4 fw-bold mb-2 color">Sans surpromesse</div>
-        <div class="mb-0 h6 text-transform-none">Engagement sur la méthode et les livrables</div>
-      </div>
-      <div class="col-lg-4 text-center mb-5 mb-lg-0">
-        <div class="h4 fw-bold mb-2 color">Demandes suivies</div>
-        <div class="mb-0 h6 text-transform-none">Appels & formulaires, sources et pages d’entrée</div>
-      </div>
-      <div class="col-lg-4 text-center">
-        <div class="h4 fw-bold mb-2 color">Priorités claires</div>
-        <div class="mb-0 h6 text-transform-none">Un plan d’action simple, itératif</div>
+{showStats && (
+  <div class="container mw-md">
+    <div class="position-relative p-5 mb-4 z-3 rounded shadow bg-white service-feature mt-5 mt-lg-0">
+      <div class="row align-items-center justify-content-center grid-border">
+        {safeStats.map((s) => (
+          <div class="col-lg-4 text-center mb-5 mb-lg-0">
+            <div class="h4 fw-bold mb-2 color">{s.title}</div>
+            <div class="mb-0 h6 text-transform-none">{s.text}</div>
+          </div>
+        ))}
       </div>
     </div>
   </div>
-</div>
+)}

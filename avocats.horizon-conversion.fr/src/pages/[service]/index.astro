@@ -34,6 +34,7 @@ type Service = {
   faqIntro?: string;
   faqIntroHub?: string;
   faqs?: { q: string; a: string }[];
+  reassuranceVariant?: string;
 };
 type Ville = { slug: string; name: string; dept?: string; regionHint?: string; services?: string[] };
 
@@ -74,6 +75,8 @@ const hrefForCity = (c: Ville) => "/" + service.slug + "/" + c.slug;
 const renderCityLabel = (c: Ville) =>
   service.label + " à " + c.name + (c.dept ? ` (${c.dept})` : "");
 
+const forced = Astro.url.searchParams.get("reassurance"); // ex: seo | refonte | tracking | ads | service
+const reassuranceVariant = forced ?? (service as any).reassuranceVariant ?? "service";
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
@@ -117,7 +120,7 @@ const renderCityLabel = (c: Ville) =>
 
         <Contact />
 
-        <Reassurance />
+        <Reassurance variant={reassuranceVariant} />
 
         <NextSteps
           badge="Suite"

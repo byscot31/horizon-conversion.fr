@@ -254,13 +254,12 @@ const methodFaq = (ui as any)?.faq?.methode ?? {
         </div>
       </div>
 
-      {/* FAQ */}
       <Faqs title={methodFaq.title} intro={methodFaq.intro} items={methodFaq.items} canonical={canonical} />
 
-      {/* CTA */}
       <Contact />
 
-      <Reassurance />
+      <Reassurance variant="methode" />
+
       <Promo />
 
     </div>
