@@ -56,7 +56,7 @@ const showStats = safeStats.length > 0;
           {safeFeatures.map((f) => (
             <div class="col-sm-6">
               <div class="d-flex align-items-center mb-2">
-                <i class="material-symbols-outlined text-warning fs-2 mb-0">{f.icon}</i>
+                <i class="material-symbols-outlined text-warning fs-2 mb-0" aria-hidden="true">{f.icon}</i>
                 <h3 class="h6 fw-bold ms-2 mb-0">{f.title}</h3>
               </div>
               <p class="text-white op-06">{f.text}</p>
