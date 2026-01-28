@@ -1,21 +1,26 @@
 ---
+// src/pages/specialites/[specialite]/index.astro
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Header from "../../../components/Header.astro";
+import Hero from "../../../components/Hero.astro";
+import ZonesGrid from "../../../components/ZonesGrid.astro";
+import Contact from "../../../components/Contact.astro";
+import Reassurance from "../../../components/Reassurance.astro";
+import Promo from "../../../components/Promo.astro";
 import Footer from "../../../components/Footer.astro";
 
+import ui from "../../../data/ui.json";
 import specialites from "../../../data/specialites.json";
 import villes from "../../../data/villes.json";
 
-type Specialite = { slug: string; label: string; hubTitle?: string; hubDesc?: string };
-type Ville = { slug: string; name: string; dept?: string; specialites?: string[] };
+type Specialite = { slug: string; label: string; hubTitle?: string; hubDesc?: string; angles?: string[] };
+type Ville = { slug: string; name: string; dept?: string; regionHint?: string; specialites?: string[] };
 
 const SITE = "https://avocats.horizon-conversion.fr";
 const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 export async function getStaticPaths() {
-  return (specialites as Specialite[]).map((sp) => ({
-    params: { specialite: sp.slug },
-  }));
+  return (specialites as Specialite[]).map((sp) => ({ params: { specialite: sp.slug } }));
 }
 
 const { specialite: spSlug } = Astro.params;
@@ -27,37 +32,78 @@ const villesOk = (villes as Ville[]).filter((v) => !v.specialites?.length || v.s
 const title = sp.hubTitle ?? `Stratégie SEO local — ${sp.label}`;
 const description =
   sp.hubDesc ??
-  `Contenu B2B : structurer la visibilité locale autour de “${sp.label}” (pages, maillage, GBP, conversion).`;
+  `Contenu B2B : structurer la visibilité locale autour de “${sp.label}” (pages utiles, maillage, prise de contact).`;
 
 const canonical = url(`${SITE}/specialites/${sp.slug}`);
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `Spécialité — ${sp.label}`,
+  title,
+  subtitle: description,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir la méthode", href: "/methode" },
+  note: "Pages B2B : pas un annuaire, mais une approche de structuration."
+};
+
+const hrefForCity = (c: Ville) => `/specialites/${sp.slug}/${c.slug}`;
+const renderCityLabel = (c: Ville) => `${sp.label} — stratégie SEO à ${c.name}${c.dept ? ` (${c.dept})` : ""}`;
+
+const reassuranceKey =
+  (ui as any)?.reassurance?.variants?.specialite ? "specialite" : "service";
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
   <Header />
 
-  <main class="container">
-    <section>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </section>
+  <Hero {...hero} />
 
-    <section>
-      <h2>Déclinaisons par ville</h2>
-      <ul>
-        {villesOk.map((v) => (
-          <li>
-            <a href={url(`/specialites/${sp.slug}/${v.slug}`)}>
-              {sp.label} — stratégie SEO à {v.name}{v.dept ? ` (${v.dept})` : ""}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
 
-    <section>
-      <a class="btn" href="/contact">Demander un audit</a>
-    </section>
-  </main>
+      {sp.angles?.length ? (
+        <div class="section bg-transparent py-4">
+          <div class="container">
+            <div class="row align-items-end justify-content-between mb-4">
+              <div class="col-lg-7">
+                <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Angles</div>
+                <h2 class="h3 fw-bold mb-2">Intentions à couvrir</h2>
+                <p class="lead mb-0 op-07">Ce que nous structurons généralement sur une page “domaine”.</p>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              {sp.angles.map((a) => (
+                <div class="col-md-6 col-lg-4">
+                  <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                    <i class="material-symbols-outlined display-6 color mb-2">check_circle</i>
+                    <div class="op-07">{a}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <ZonesGrid
+        badge="Zone"
+        title="Déclinaisons par ville"
+        intro="Pages locales utiles, limitées, et cohérentes avec la matrice de couverture."
+        cities={villesOk}
+        hrefFor={hrefForCity}
+        renderLabel={renderCityLabel}
+        columns={2}
+      />
+
+      <Reassurance variant={reassuranceKey} />
+
+      <Contact />
+
+      <Promo />
+
+    </div>
+  </section>
 
   <Footer />
 </BaseLayout>
