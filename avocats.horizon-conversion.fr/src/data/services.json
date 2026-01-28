@@ -2,6 +2,7 @@
   {
     "slug": "referencement-local",
     "label": "Référencement local",
+    "reassuranceVariant": "seo",
     "hubTitle": "Référencement local pour cabinets d’avocats",
     "hubDesc": "Améliorer la visibilité du cabinet sur Google (y compris la fiche établissement) et augmenter les prises de contact (appel + formulaire), en Sud Oise et Nord 95.",
     "titleTpl": "Référencement local pour cabinets d’avocats à {ville}",
@@ -44,6 +45,7 @@
   {
     "slug": "refonte-site",
     "label": "Refonte de site",
+    "reassuranceVariant": "refonte",
     "hubTitle": "Refonte de site pour cabinets d’avocats",
     "hubDesc": "Un site clair, rassurant et rapide, conçu pour faciliter la prise de contact et soutenir le référencement local.",
     "titleTpl": "Refonte de site pour cabinet d’avocats à {ville}",
@@ -86,6 +88,7 @@
   {
     "slug": "optimisation-parcours-contact",
     "label": "Optimisation du parcours de contact",
+    "reassuranceVariant": "service",
     "hubTitle": "Optimisation du parcours de contact",
     "hubDesc": "Améliorer concrètement la prise de contact : messages, pages clés, preuves, appels à l’action et formulaires.",
     "titleTpl": "Optimisation du parcours de contact d’un cabinet d’avocats à {ville}",
@@ -128,6 +131,7 @@
   {
     "slug": "mesure-demandes",
     "label": "Mesure des demandes",
+    "reassuranceVariant": "tracking",
     "hubTitle": "Mesure des demandes (appels & formulaires)",
     "hubDesc": "Suivre clairement l’origine des demandes (appel, formulaire) et piloter avec des indicateurs simples, sans complexité inutile.",
     "titleTpl": "Mesure des demandes d’un cabinet d’avocats à {ville}",
@@ -168,6 +172,7 @@
   {
     "slug": "google-ads",
     "label": "Google Ads (en option)",
+    "reassuranceVariant": "ads",
     "hubTitle": "Google Ads (en option) pour cabinets d’avocats",
     "hubDesc": "Option d’accélération si et seulement si le dispositif est prêt : pages adaptées, mesure en place, capacité de traitement des demandes.",
     "titleTpl": "Google Ads (en option) pour cabinet d’avocats à {ville}",

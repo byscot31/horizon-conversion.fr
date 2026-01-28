@@ -127,5 +127,140 @@
         ]
       }
     }
+  },
+  "reassurance": {
+    "enabled": true,
+    "background": "#000",
+    "imageFallback": { "src": "/_assets_/images/lawyer.jpg", "alt": "Cabinet d’avocats" },
+
+    "variants": {
+      "default": {
+        "headingHtml": "Un cadre sérieux,<br /> adapté aux cabinets d’avocats",
+        "intro": "Une approche sobre : clarifier l’offre, structurer les pages utiles, faciliter la prise de contact et suivre les demandes. Sans promesse de résultat, avec une exigence de méthode et de mesure.",
+        "features": [
+          { "icon": "admin_panel_settings", "title": "Cadre conforme", "text": "Ton sobre, pas de surpromesse, priorité à la clarté et à la confiance." },
+          { "icon": "tune", "title": "Priorités nettes", "text": "Actions classées par impact : visibilité locale, pages clés, prise de contact." },
+          { "icon": "analytics", "title": "Mesure lisible", "text": "Suivi des appels et formulaires pour piloter sur des faits." },
+          { "icon": "location_on", "title": "Ciblage local", "text": "Sud Oise & Nord 95 : pages locales utiles, sans surproduction." }
+        ],
+        "stats": [
+          { "title": "Sans surpromesse", "text": "Engagement sur la méthode et les livrables" },
+          { "title": "Demandes suivies", "text": "Appels & formulaires, sources et pages d’entrée" },
+          { "title": "Priorités claires", "text": "Un plan d’action simple, itératif" }
+        ]
+      },
+
+      "home": {
+        "headingHtml": "Un cadre sérieux,<br /> adapté aux cabinets d’avocats",
+        "intro": "SEO local, refonte et prise de contact : priorité aux pages utiles et à la clarté du parcours.",
+        "features": [
+          { "icon": "admin_panel_settings", "title": "Cadre conforme", "text": "Ton sobre, pas de surpromesse, priorité à la clarté." },
+          { "icon": "location_on", "title": "Local", "text": "Sud Oise & Nord 95 : logique locale, sans surproduction." },
+          { "icon": "call", "title": "Contact", "text": "Téléphone et formulaire visibles, sans friction." },
+          { "icon": "query_stats", "title": "Mesure", "text": "Suivi appels & formulaires, sources et pages d’entrée." }
+        ],
+        "stats": [
+          { "title": "Clarté", "text": "Pages et messages lisibles" },
+          { "title": "Sobriété", "text": "Sans artifices" },
+          { "title": "Mesure", "text": "Pilotage simple" }
+        ]
+      },
+
+      "service": {
+        "headingHtml": "Une intervention cadrée,<br /> orientée prise de contact",
+        "intro": "Priorités simples, livrables clairs, et mesure des demandes. L’objectif : faciliter l’appel et le formulaire.",
+        "features": [
+          { "icon": "checklist", "title": "Livrables clairs", "text": "Documents et pages structurés, compréhensibles, réutilisables." },
+          { "icon": "filter_alt", "title": "Demandes mieux orientées", "text": "Périmètre et domaines explicités pour limiter le hors-sujet." },
+          { "icon": "speed", "title": "Site lisible & rapide", "text": "Confort de lecture, performance, et accès au contact." },
+          { "icon": "monitoring", "title": "Suivi simple", "text": "Mesure des demandes et décisions sur des faits." }
+        ],
+        "stats": [
+          { "title": "Méthode", "text": "Un déroulé en étapes" },
+          { "title": "Sobriété", "text": "Sans surpromesse" },
+          { "title": "Mesure", "text": "Simple et fiable" }
+        ]
+      },
+
+      "local": {
+        "headingHtml": "Des pages locales utiles,<br /> et une structure cohérente",
+        "intro": "Une page locale doit clarifier la zone, le périmètre et rendre le contact évident, en cohérence avec l’ensemble du site.",
+        "features": [
+          { "icon": "location_on", "title": "Zone explicitée", "text": "Ville + alentours, informations pratiques et périmètre clair." },
+          { "icon": "description", "title": "Contenu utile", "text": "Pas de remplissage : uniquement ce qui aide à décider." },
+          { "icon": "call", "title": "Contact visible", "text": "Téléphone et formulaire accessibles, sans friction." },
+          { "icon": "link", "title": "Cohérence", "text": "Navigation simple, pages reliées entre elles." }
+        ],
+        "stats": [
+          { "title": "Clarté", "text": "Zone et périmètre" },
+          { "title": "Sobriété", "text": "Pages sans surproduction" },
+          { "title": "Cohérence", "text": "Structure globale" }
+        ]
+      },
+
+      "methode": {
+        "headingHtml": "Une méthode lisible,<br /> dans le bon ordre",
+        "intro": "Audit, priorités, mise au propre, puis renforcement et mesure. Avancer étape par étape, sans surpromesse.",
+        "features": [
+          { "icon": "fact_check", "title": "Prioriser", "text": "Commencer par ce qui compte vraiment." },
+          { "icon": "account_tree", "title": "Structurer", "text": "Pages clés et parcours de contact cohérents." },
+          { "icon": "handshake", "title": "Mettre en œuvre", "text": "Ajustements concrets, sans surcharge." },
+          { "icon": "query_stats", "title": "Mesurer", "text": "Suivre appels & formulaires pour piloter." }
+        ],
+        "stats": [
+          { "title": "Étapes", "text": "Un déroulé cadré" },
+          { "title": "Livrables", "text": "Clairs et utiles" },
+          { "title": "Mesure", "text": "Simple et fiable" }
+        ]
+      },
+
+      "offres": {
+        "headingHtml": "Des packs simples,<br /> et un cadre de travail clair",
+        "intro": "Choisir un pack, c’est choisir un niveau de livrables et de rythme. Le point commun : sobriété, conformité, mesure des demandes.",
+        "features": [
+          { "icon": "inventory_2", "title": "Périmètre clair", "text": "Ce qui est inclus, ce qui ne l’est pas, dès le départ." },
+          { "icon": "calendar_month", "title": "Rythme tenu", "text": "Étapes, délais et validations cadrés." },
+          { "icon": "monitoring", "title": "Mesure utile", "text": "Suivi appels & formulaires pour piloter." },
+          { "icon": "support_agent", "title": "Interlocuteur", "text": "Un point régulier, des décisions simples." }
+        ],
+        "stats": [
+          { "title": "Lisibilité", "text": "Packs comparables" },
+          { "title": "Cadre", "text": "Délais & livrables" },
+          { "title": "Sobriété", "text": "Approche conforme" }
+        ]
+      },
+
+      "contact": {
+        "headingHtml": "Un premier échange simple,<br /> pour cadrer les priorités",
+        "intro": "Comprendre la situation du cabinet, clarifier le périmètre, et proposer un plan d’action court (sans surpromesse).",
+        "features": [
+          { "icon": "call", "title": "Échange direct", "text": "Téléphone ou formulaire, selon votre préférence." },
+          { "icon": "checklist", "title": "Audit court", "text": "Priorités proposées de manière lisible." },
+          { "icon": "location_on", "title": "Zone", "text": "Sud Oise & Nord 95 (limitrophe possible)." },
+          { "icon": "admin_panel_settings", "title": "Conforme", "text": "Ton sobre, pas de promesse de résultat." }
+        ],
+        "stats": [
+          { "title": "Clarté", "text": "Périmètre & priorités" },
+          { "title": "Sobriété", "text": "Sans surpromesse" },
+          { "title": "Décision", "text": "Plan d’action court" }
+        ]
+      },
+
+      "ads": {
+        "headingHtml": "Google Ads :<br /> cadrage avant activation",
+        "intro": "Option d’accélération uniquement si pages et mesure sont prêtes. Priorité à la pertinence des demandes.",
+        "features": [
+          { "icon": "checklist", "title": "Pré-requis", "text": "Pages dédiées + mesure fiable avant activation." },
+          { "icon": "filter_alt", "title": "Exclusions", "text": "Cadrage strict pour limiter le hors-sujet." },
+          { "icon": "monitoring", "title": "Pilotage", "text": "Suivi orienté qualité, pas volume." },
+          { "icon": "admin_panel_settings", "title": "Sobriété", "text": "Annonces et pages conformes." }
+        ],
+        "stats": [
+          { "title": "Qualité", "text": "Pertinence des demandes" },
+          { "title": "Cadre", "text": "Exclusions & périmètre" },
+          { "title": "Mesure", "text": "Suivi clair (si Ads)" }
+        ]
+      }
+    }
   }
 }
