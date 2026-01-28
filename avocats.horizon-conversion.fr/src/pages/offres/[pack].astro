@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import LinkedPages from "../../components/LinkedPages.astro";
+import Contact from "../../components/Contact.astro";
+import Faqs from "../../components/Faqs.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
+
+import ui from "../../data/ui.json";
+import offres from "../../data/offres.json";
+
+type Pillar = { icon: string; title: string; desc: string };
+type Pack = {
+  slug: string;
+  name: string;
+  tagline: string;
+  short: string;
+  featured?: boolean;
+  badge?: string;
+  icon?: string;
+  budget: { setup: string; monthly: string; note?: string };
+  pillars: Pillar[];
+  included: string[];
+  prereqs: string[];
+  faqs: { q: string; a: string }[];
+};
+
+const SITE = (offres as any).meta.canonicalBase ?? "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+function tpl(s: string, vars: Record<string, string>) {
+  return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+}
+
+export async function getStaticPaths() {
+  return (offres as any).packs.map((p: Pack) => ({ params: { pack: p.slug } }));
+}
+
+const { pack: packSlug } = Astro.params;
+const pack = (offres as any).packs.find((p: Pack) => p.slug === packSlug) as Pack | undefined;
+if (!pack) throw new Error(`Pack inconnu: ${packSlug}`);
+
+const canonical = url(`${SITE}/offres/${pack.slug}`);
+
+const title = tpl((offres as any).meta.titleTpl, { name: pack.name });
+const description = tpl((offres as any).meta.descTpl, { name: pack.name, tagline: pack.short });
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `Offres — Pack ${pack.name}`,
+  title: `${pack.name} : ${pack.tagline}`,
+  subtitle: pack.short,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Comparer les packs", href: "/offres" },
+  note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
+};
+
+const other = (offres as any).packs
+  .filter((p: Pack) => p.slug !== pack.slug)
+  .map((p: Pack) => ({
+    title: `Pack ${p.name}`,
+    desc: p.tagline,
+    href: `/offres/${p.slug}`
+  }));
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      {/* Résumé + budget */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Périmètre</div>
+              <h2 class="h3 fw-bold mb-2">Ce que couvre {pack.name}</h2>
+              <p class="lead mb-0 op-07">{pack.short}</p>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts">
+                <div class="fw-bold mb-2">Repères budgétaires</div>
+                <div class="op-07">Setup : {pack.budget.setup}</div>
+                <div class="op-07">Mensuel : {pack.budget.monthly}</div>
+                {pack.budget.note && <div class="small op-06 mt-2">{pack.budget.note}</div>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 piliers */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Livrables</div>
+              <h2 class="h3 fw-bold mb-2">Trois axes structurants</h2>
+              <p class="lead mb-0 op-07">Des priorités claires, sans complexité inutile.</p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            {pack.pillars.map((c) => (
+              <div class="col-md-6 col-lg-4">
+                <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                  <i class="material-symbols-outlined display-6 color mb-2">{c.icon}</i>
+                  <div class="h5 fw-bold mb-1">{c.title}</div>
+                  <div class="op-07">{c.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Inclus / Pré-requis */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Inclus</div>
+                <ul class="iconlist op-08 mb-0">
+                  {pack.included.map((x) => <li>{x}</li>)}
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Pré-requis côté cabinet</div>
+                <ul class="iconlist op-08 mb-0">
+                  {pack.prereqs.map((x) => <li>{x}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-lg-10">
+              <div class="small op-07">
+                <strong>Option Google Ads :</strong> activée uniquement si (1) pages prêtes, (2) mesure fiable,
+                (3) capacité de traitement, (4) cadrage strict. Priorité à la pertinence des demandes.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Faqs
+        title={`Questions fréquentes — ${pack.name}`}
+        intro="Réponses simples sur le périmètre et la manière de travailler."
+        items={pack.faqs}
+        canonical={canonical}
+      />
+
+      <Contact />
+
+      <Reassurance />
+
+      <LinkedPages
+        cards={[
+          { title: "Comparer les packs", desc: "Essentiel, Croissance, Signature", href: "/offres" },
+          ...other
+        ]}
+      />
+
+      <Promo />
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
