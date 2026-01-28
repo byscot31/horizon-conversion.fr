@@ -1,0 +1,254 @@
+---
+// src/pages/ressources/[slug].astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Hero from "../../components/Hero.astro";
+import Contact from "../../components/Contact.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import Promo from "../../components/Promo.astro";
+
+import ui from "../../data/ui.json";
+import blog from "../../data/blog.json";
+
+type Resource = {
+  slug: string;
+  dateLabel: string; // étiquette : "SEO local", "Refonte", etc.
+  title: string;
+  excerpt: string;
+  image?: string;
+  imageCaption?: string
+  contentHtml?: string; // ton contenu rédigé
+  // optionnel si plus tard tu ajoutes : tags?: string[]
+};
+
+const SITE = "https://avocats.horizon-conversion.fr";
+const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+
+export async function getStaticPaths() {
+  const home = (blog as any).home ?? {};
+  const items = (home.items ?? []) as Resource[];
+  return items.map((it) => ({ params: { slug: it.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const home = (blog as any).home ?? {};
+const items = (home.items ?? []) as Resource[];
+
+const item = items.find((x) => x.slug === slug);
+if (!item) throw new Error(`Ressource introuvable: ${slug}`);
+
+const imageSrc = typeof item.image === "string" && item.image.trim().length > 0 ? item.image.trim() : null;
+const imageCaption = (item as any).imageCaption || "Note de travail — ton sobre, sans surpromesse.";
+
+const canonical = url(`${SITE}/ressources/${item.slug}`);
+
+const title = `${item.title} | Ressources`;
+const description = item.excerpt;
+
+// navigation prev/next
+const idx = items.findIndex((x) => x.slug === item.slug);
+const prev = idx > 0 ? items[idx - 1] : null;
+const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
+
+// “meta” sobre (pas de fausses dates/auteur)
+const metaDate = item.dateLabel; // on affiche l’étiquette dans la ligne date
+const metaAuthor = "Horizon Conversion";
+const metaCats = [item.dateLabel];
+
+// partage simple (optionnel)
+const shareUrl = encodeURIComponent(canonical);
+const shareText = encodeURIComponent(item.title);
+
+// Hero : on peut le garder (pour cohérence du site) ou le retirer.
+// Ici je le garde mais discret.
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: `Ressources — ${item.dateLabel}`,
+  title: item.title,
+  subtitle: item.excerpt,
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir toutes les ressources", href: "/ressources" },
+  note: "Approche sobre, sans surpromesse."
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      <div class="section bg-transparent py-4">
+        <div class="container">
+
+          <div class="single-post mb-0 mw-sm mx-auto">
+
+            <!-- Single Post ============================================= -->
+            <div class="entry">
+
+              <!-- Entry Title ============================================= -->
+              <div class="entry-title">
+                <h2>{item.title}</h2>
+              </div><!-- .entry-title end -->
+
+              <div class="row align-items-center mt-2">
+                <div class="col-md-3">
+                  <!-- Entry Meta ============================================= -->
+                  <div>
+                    <ul class="d-flex flex-column entry-meta no-separator mb-0">
+                      <li class="me-0">
+                        <i class="uil uil-schedule"></i> {metaDate}
+                      </li>
+                      <li class="me-0">
+                        <span><i class="uil uil-user"></i> {metaAuthor}</span>
+                      </li>
+                      <li class="me-0">
+                        <i class="uil uil-folder-open"></i>
+                        {metaCats.map((c, i) => (
+                          <>
+                            <a href="/ressources">{c}</a>
+                            {i < metaCats.length - 1 ? ", " : ""}
+                          </>
+                        ))}
+                      </li>
+                      <li class="me-0">
+                        <a href="/contact"><i class="uil uil-comments-alt"></i> Demander un audit</a>
+                      </li>
+                    </ul>
+                  </div><!-- .entry-meta end -->
+                </div>
+
+                <div class="col-md-9">
+                  <p class="text-larger text-muted mt-3">{item.excerpt}</p>
+                </div>
+              </div>
+
+              <!-- Entry Image ============================================= -->
+              {imageSrc && (
+                <div class="entry-image align-wide-xl my-3">
+                  <a href={canonical}>
+                    <img src={imageSrc} alt={item.title} />
+                  </a>
+                  <figcaption class="text-center mt-2 text-muted text-smaller">
+                    {imageCaption}
+                  </figcaption>
+                </div>
+              )}
+
+              <!-- Entry Content ============================================= -->
+              <div class="entry-content mt-3">
+
+                {item.contentHtml ? (
+                  <div set:html={item.contentHtml} />
+                ) : (
+                  <>
+                    <p>
+                      Contenu à compléter. Vous pouvez renseigner <code>contentHtml</code> dans <code>src/data/blog.json</code>.
+                    </p>
+                    <p class="mb-0">
+                      Si vous souhaitez un audit court : <a href="/contact">contactez-nous</a>.
+                    </p>
+                  </>
+                )}
+
+                <!-- Tag Cloud ============================================= -->
+                <div class="tagcloud mb-5">
+                  <a href="/ressources">{item.dateLabel.toLowerCase()}</a>
+                  <a href="/seo-local">seo local</a>
+                  <a href="/refonte-site">refonte</a>
+                  <a href="/methode">méthode</a>
+                </div><!-- .tagcloud end -->
+
+                <!-- Post Single - Share ============================================= -->
+                <div class="card my-4 border rounded border-default">
+                  <div class="card-body p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h6 class="fs-6 fw-semibold mb-0">Partager :</h6>
+                      <div class="d-flex">
+                        <a
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                          class="social-icon si-small text-white border-transparent rounded-circle bg-facebook"
+                          title="LinkedIn"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          <i class="fa-brands fa-linkedin-in"></i>
+                          <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+
+                        <a
+                          href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
+                          class="social-icon si-small text-white border-transparent rounded-circle bg-x-twitter"
+                          title="X"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          <i class="fa-brands fa-x-twitter"></i>
+                          <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+
+                        <a
+                          href={`mailto:?subject=${shareText}&body=${shareUrl}`}
+                          class="social-icon si-small text-white border-transparent rounded-circle bg-email3 me-0"
+                          title="Mail"
+                        >
+                          <i class="fa-solid fa-envelope"></i>
+                          <i class="fa-solid fa-envelope"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- Post Single - Share End -->
+
+              </div>
+            </div><!-- .entry end -->
+
+            <!-- Post Navigation ============================================= -->
+            <div class="row text-center text-md-start justify-content-between my-5">
+              <div class="col-md-auto">
+                {prev ? (
+                  <a href={`/ressources/${prev.slug}`} class="d-inline-flex align-items-center text-dark h-text-color">
+                    <i class="uil uil-angle-left-b fs-3 me-1"></i>
+                    <span>{prev.title}</span>
+                  </a>
+                ) : (
+                  <a href="/ressources" class="d-inline-flex align-items-center text-dark h-text-color">
+                    <i class="uil uil-angle-left-b fs-3 me-1"></i>
+                    <span>Toutes les ressources</span>
+                  </a>
+                )}
+              </div>
+
+              <div class="col-md-auto">
+                {next ? (
+                  <a href={`/ressources/${next.slug}`} class="d-inline-flex align-items-center text-dark h-text-color">
+                    <span>{next.title}</span>
+                    <i class="uil uil-angle-right-b fs-3 ms-1"></i>
+                  </a>
+                ) : (
+                  <a href="/contact" class="d-inline-flex align-items-center text-dark h-text-color">
+                    <span>Demander un audit</span>
+                    <i class="uil uil-angle-right-b fs-3 ms-1"></i>
+                  </a>
+                )}
+              </div>
+            </div><!-- .post-navigation end -->
+
+          </div>
+
+        </div>
+      </div>
+
+      <Contact />
+      <Reassurance />
+      <Promo />
+
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
