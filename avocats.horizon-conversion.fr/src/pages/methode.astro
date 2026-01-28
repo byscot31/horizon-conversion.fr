@@ -1,3 +1,270 @@
 ---
 // src/pages/methode.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Contact from "../components/Contact.astro";
+import Faqs from "../components/Faqs.astro";
+import Reassurance from "../components/Reassurance.astro";
+import Promo from "../components/Promo.astro";
+import Footer from "../components/Footer.astro";
+
+import ui from "../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/methode";
+
+const title = "Méthode | Horizon Conversion — cabinets d’avocats";
+const description =
+  "Une démarche cadrée pour améliorer la visibilité locale et faciliter les prises de contact : priorités, livrables, mesure, et rythme de travail.";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Horizon Conversion — méthode",
+  title: "Une démarche cadrée, sobre, et orientée prise de contact",
+  subtitle:
+    "Prioriser les actions utiles, produire des livrables clairs, et mesurer appels & formulaires. Sans surpromesse : engagement sur la méthode.",
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Voir les packs", href: "/offres" },
+  note: "Approche conforme : pas de promesse de résultat."
+};
+
+const methodFaq = (ui as any)?.faq?.methode ?? {
+  title: "Questions fréquentes sur la méthode",
+  intro: "Réponses simples sur le déroulé, les délais et les prérequis côté cabinet.",
+  items: [
+    {
+      q: "Combien de temps faut-il pour démarrer ?",
+      a:
+        "Après un échange de cadrage, nous pouvons démarrer dès que les accès et informations de base sont disponibles. La première phase sert à prioriser et à sécuriser les fondamentaux."
+    },
+    {
+      q: "Travaillez-vous avec l’existant ou faut-il forcément refaire le site ?",
+      a:
+        "Nous partons de l’existant. Une refonte n’est proposée que si la structure ou la performance freinent clairement la compréhension, la confiance ou la prise de contact."
+    },
+    {
+      q: "Comment suivez-vous les demandes (appels et formulaires) ?",
+      a:
+        "Nous mettons en place une mesure simple et fiable : formulaires envoyés, clics téléphone, sources et pages d’entrée. L’objectif est de piloter sur des faits."
+    },
+    {
+      q: "Proposez-vous de la publicité ?",
+      a:
+        "Oui en option, uniquement si les pages sont prêtes, la mesure en place et le cabinet en capacité de traiter les sollicitations. Le cadrage vise la qualité, pas le volume."
+    }
+  ]
+};
 ---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      {/* Démarche */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Démarche</div>
+              <h2 class="h3 fw-bold mb-2">4 étapes, dans le bon ordre</h2>
+              <p class="lead mb-0 op-07">
+                Une démarche pragmatique : d’abord clarifier et mettre au propre, ensuite renforcer et mesurer.
+              </p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">fact_check</i>
+                <div class="h5 fw-bold mb-1">1) Audit & priorités</div>
+                <div class="op-07">
+                  État des lieux (site, présence locale, parcours de contact) et plan d’action court : ce qui compte, maintenant.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">account_tree</i>
+                <div class="h5 fw-bold mb-1">2) Structure utile</div>
+                <div class="op-07">
+                  Pages clés et organisation : périmètre, domaines, méthode, contact. Pas de surproduction.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">handshake</i>
+                <div class="h5 fw-bold mb-1">3) Mise en œuvre</div>
+                <div class="op-07">
+                  Ajustements concrets : contenus essentiels, rassurance, appels à l’action, performance.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">monitoring</i>
+                <div class="h5 fw-bold mb-1">4) Mesure & pilotage</div>
+                <div class="op-07">
+                  Suivi appels & formulaires, sources, pages qui déclenchent le contact. Points réguliers, décisions simples.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Résultats attendus (sans promesse) */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Ce que cela change</div>
+              <h2 class="h3 fw-bold mb-2">Un dispositif plus lisible, et des demandes mieux orientées</h2>
+              <p class="lead mb-0 op-07">
+                Sans promesse de résultat : l’enjeu est de clarifier, cadrer et faciliter la prise de contact, puis d’ajuster sur des faits.
+              </p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">visibility</i>
+                <div class="h5 fw-bold mb-1">Visibilité locale cohérente</div>
+                <div class="op-07">Présence propre sur Google/Maps et pages du site structurées, cohérentes, utiles.</div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">call</i>
+                <div class="h5 fw-bold mb-1">Contact plus simple</div>
+                <div class="op-07">Téléphone et formulaire visibles, ton neutre, et qualification sans friction.</div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">query_stats</i>
+                <div class="h5 fw-bold mb-1">Pilotage sur des faits</div>
+                <div class="op-07">Mesure des demandes (appels + formulaires) et priorités d’ajustement simples.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Livrables */}
+      <div class="section py-6 mb-0" style="background-color:#f1f3f7">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Livrables</div>
+              <h2 class="h3 fw-bold mb-2">Ce que vous recevez</h2>
+              <p class="lead mb-0 op-07">Des livrables clairs, utiles au cabinet, et réutilisables.</p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">checklist</i>
+                <div class="h5 fw-bold mb-1">Plan de priorités</div>
+                <div class="op-07">Une liste courte d’actions, ordonnée, avec les impacts attendus (sans promesse).</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">description</i>
+                <div class="h5 fw-bold mb-1">Pages utiles</div>
+                <div class="op-07">Structure et contenus essentiels : domaines, méthode, contact, pages locales si pertinent.</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">query_stats</i>
+                <div class="h5 fw-bold mb-1">Mesure des demandes</div>
+                <div class="op-07">Suivi formulaires + clics téléphone, sources, pages d’entrée, tableau de bord lisible.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cadre */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Cadre</div>
+              <h2 class="h3 fw-bold mb-2">Conditions de collaboration</h2>
+              <p class="lead mb-0 op-07">Clarté sur le rythme, les prérequis et la confidentialité.</p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Pré-requis côté cabinet</div>
+                <ul class="iconlist mb-0 op-07">
+                  <li class="d-inline-block"><i class="fa-solid fa-check text-warning me-2"></i> Accès site (ou interlocuteur technique) + fiche établissement si existante.</li>
+                  <li class="d-inline-block"><i class="fa-solid fa-check text-warning me-2"></i> Informations fiables : coordonnées, horaires, domaines, périmètre.</li>
+                  <li class="d-inline-block"><i class="fa-solid fa-check text-warning me-2"></i> Un référent pour valider les contenus et priorités.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Confidentialité & sobriété</div>
+                <ul class="iconlist mb-0 op-07">
+                  <li class="d-inline-block"><i class="fa-solid fa-shield-halved text-warning me-2"></i> Aucun contenu sensible publié sans accord explicite.</li>
+                  <li class="d-inline-block"><i class="fa-solid fa-shield-halved text-warning me-2"></i> Mesure orientée événements (appels / formulaires), pas le contenu des dossiers.</li>
+                  <li class="d-inline-block"><i class="fa-solid fa-shield-halved text-warning me-2"></i> Ton conforme : pas d’accroches agressives, pas de promesse de résultat.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* mini CTA */}
+          <div class="row mt-4">
+            <div class="col-lg-8">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts">
+                <div class="d-flex justify-content-between align-items-start gap-3">
+                  <div>
+                    <div class="h5 fw-bold mb-1">Vous souhaitez un avis rapide sur les priorités ?</div>
+                    <div class="op-07">Audit court, orienté décisions. Sud Oise & Nord 95.</div>
+                  </div>
+                  <a href="/contact" class="btn py-3 px-4 rounded-1 btn-dark bg-color h-op-09 m-0">
+                    Demander un audit <span class="material-symbols-outlined align-middle mb-1 ms-1">trending_flat</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <Faqs title={methodFaq.title} intro={methodFaq.intro} items={methodFaq.items} canonical={canonical} />
+
+      {/* CTA */}
+      <Contact />
+
+      <Reassurance />
+      <Promo />
+
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

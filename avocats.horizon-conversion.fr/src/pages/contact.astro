@@ -1,0 +1,122 @@
+---
+// src/pages/contact.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Contact from "../components/Contact.astro";
+import Faqs from "../components/Faqs.astro";
+import Reassurance from "../components/Reassurance.astro";
+import Promo from "../components/Promo.astro";
+import Footer from "../components/Footer.astro";
+
+import ui from "../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/contact";
+
+const title = "Contact | Horizon Conversion — cabinets d’avocats";
+const description =
+  "Planifier un échange : audit court, priorités et cadrage (Sud Oise & Nord 95). Contact par téléphone ou formulaire.";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Horizon Conversion — contact",
+  title: "Planifier un échange",
+  subtitle:
+    "Un premier point simple pour cadrer les priorités : visibilité locale, site et prise de contact. Sud Oise & Nord 95.",
+  primaryCta: { label: "Appeler", href: "tel:+33660921008" },
+  secondaryCta: { label: "Écrire", href: "mailto:contact@horizon-conversion.fr" },
+  note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
+};
+
+const contactFaq = (ui as any)?.faq?.contact ?? {
+  title: "Questions fréquentes",
+  intro: "Quelques réponses avant de prendre contact.",
+  items: [
+    {
+      q: "Travaillez-vous uniquement en Sud Oise et Nord 95 ?",
+      a: "Notre priorité est cette zone. Si votre cabinet est limitrophe, nous pouvons étudier la demande au cas par cas."
+    },
+    {
+      q: "De quoi avez-vous besoin pour un premier échange utile ?",
+      a: "Le site du cabinet, la zone d’intervention, les domaines principaux, et la manière dont les demandes arrivent aujourd’hui (appel, formulaire)."
+    },
+    {
+      q: "Intervenez-vous sur la fiche établissement Google ?",
+      a: "Oui lorsque c’est pertinent : cohérence des informations, présentation, et articulation avec les pages du site."
+    },
+    {
+      q: "Proposez-vous de la publicité ?",
+      a: "Oui en option, uniquement si les pages sont prêtes, la mesure en place et le cabinet en capacité de traiter les sollicitations. Cadrage strict pour préserver la qualité."
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      {/* Accès direct téléphone / email (sobre) */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a href="tel:+33660921008" class="hc-card-link">
+                <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Téléphone</div>
+                      <div class="h4 fw-bold mb-1">06 60 92 10 08</div>
+                      <div class="op-07">Si vous préférez un échange direct.</div>
+                    </div>
+                    <span class="material-symbols-outlined color">call</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-md-6">
+              <a href="mailto:contact@horizon-conversion.fr" class="hc-card-link">
+                <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Email</div>
+                      <div class="h4 fw-bold mb-1">contact@horizon-conversion.fr</div>
+                      <div class="op-07">Pour une demande écrite, en quelques lignes.</div>
+                    </div>
+                    <span class="material-symbols-outlined color">mail</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <style>
+            .hc-card-link { text-decoration: none; display: block; }
+            .hc-card-link:hover .grid-inner { transform: translateY(-2px); transition: 180ms ease; }
+          </style>
+        </div>
+      </div>
+
+      {/* Ton composant formulaire */}
+      <Contact />
+
+      <Faqs
+        title={contactFaq.title}
+        intro={contactFaq.intro}
+        items={contactFaq.items}
+        canonical={canonical}
+      />
+
+      <Reassurance />
+      <Promo />
+
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
