@@ -55,7 +55,7 @@ const gridClass =
       {cities.map((c) => (
         <li>
           <a class="hc-city" href={url(hrefFor(c))}>
-            <span class="material-symbols-outlined color">{icon}</span>
+            <span class="material-symbols-outlined color" aria-hidden="true">{icon}</span>
 
             <span class="hc-city__label">
               {renderLabel ? (
@@ -68,7 +68,7 @@ const gridClass =
               )}
             </span>
 
-            <span class="material-symbols-outlined op-06">arrow_right_alt</span>
+            <span class="material-symbols-outlined op-06" aria-hidden="true">arrow_right_alt</span>
           </a>
         </li>
       ))}

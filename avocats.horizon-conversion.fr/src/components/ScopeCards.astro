@@ -136,7 +136,7 @@ const shouldRender = cards.length > 0;
         {cards.map((c) => (
           <div class="col-md-6 col-lg-4">
             <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
-              <i class={`material-symbols-outlined display-6 color mb-2`}>{c.icon}</i>
+              <i class={`material-symbols-outlined display-6 color mb-2` aria-hidden='true'}>{c.icon}</i>
               <div class="h5 fw-bold mb-1">{c.title}</div>
               <div class="op-07">{c.desc}</div>
             </div>

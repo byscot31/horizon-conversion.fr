@@ -5,6 +5,6 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://avocats.horizon-conversion.fr",
-  trailingSlash: "never",
+  trailingSlash: "always",
   integrations: [sitemap()],
 });
