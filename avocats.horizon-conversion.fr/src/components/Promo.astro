@@ -1,20 +1,95 @@
 ---
 // src/components/Promo.astro
+import ui from "../data/ui.json";
+import { href } from "../lib/href";
+
+type PromoCfg = {
+  enabled?: boolean;
+  background?: string;
+  heading?: string;
+  highlight?: string;
+  cta?: { label: string; href: string };
+};
+
+interface Props {
+  variant?: string; // ex: "home" | "service" | "local" | "ads" | "methode" | "offres"
+  // overrides optionnels (si tu veux forcer ponctuellement sans toucher ui.json)
+  heading?: string;
+  highlight?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  background?: string;
+}
+
+const {
+  variant = "default",
+  heading,
+  highlight,
+  ctaLabel,
+  ctaHref,
+  background
+} = Astro.props as Props;
+
+const promoRoot = (ui as any)?.promo ?? {};
+const cfgFromUi: PromoCfg =
+  promoRoot?.variants?.[variant] ??
+  promoRoot?.default ??
+  {
+    enabled: true,
+    background: "#f1f3f7",
+    heading: "Un avis rapide, cadré, sans engagement inutile.",
+    highlight: "Demander un audit",
+    cta: { label: "Contacter Horizon Conversion", href: "/contact/" }
+  };
+
+const merged: PromoCfg = {
+  ...cfgFromUi,
+  ...(background ? { background } : {}),
+  ...(heading ? { heading } : {}),
+  ...(highlight ? { highlight } : {}),
+  ...(ctaLabel || ctaHref
+    ? {
+        cta: {
+          label: ctaLabel ?? cfgFromUi?.cta?.label ?? "Nous contacter",
+          href: ctaHref ?? cfgFromUi?.cta?.href ?? "/contact/"
+        }
+      }
+    : {})
+};
+
+const enabled = merged.enabled !== false;
 ---
-<div class="section mt-6 mb-0" style="background-color: #f1f3f7">
-  <div class="container">
-    <div class="row align-items-center justify-content-center col-mb-30 mx-md mx-auto">
-      <div class="col-sm-12 col-md">
-        <h2 class="h3 font-secondary fw-semibold mb-0">
-          Un avis rapide, cadré, sans engagement inutile.
-          <span class="border-bottom border-warning border-width-3"> Demander un audit</span>.
-        </h2>
-      </div>
-      <div class="col-sm-12 col-md-auto">
-        <a href="/contact" class="btn py-3 px-5 rounded-1 btn-dark bg-color h-op-09 m-0">
-          Contacter Horizon Conversion <span class="material-symbols-outlined align-middle mb-1 ms-1" aria-hidden="true">trending_flat</span>
-        </a>
+{enabled && (
+  <div class="section mt-6 mb-0" style={`background-color: ${merged.background ?? "#f1f3f7"}`}>
+    <div class="container">
+      <div class="row align-items-center justify-content-center col-mb-30 mx-md mx-auto">
+        <div class="col-sm-12 col-md">
+          <h2 class="h3 font-secondary fw-semibold mb-0">
+            {merged.heading ?? "Un avis rapide, cadré, sans engagement inutile."}
+            {merged.highlight && (
+              <>
+                {" "}
+                <span class="border-bottom border-warning border-width-3">
+                  {merged.highlight}
+                </span>
+                .
+              </>
+            )}
+          </h2>
+        </div>
+
+        <div class="col-sm-12 col-md-auto">
+          <a
+            href={href(merged.cta?.href ?? "/contact/")}
+            class="btn py-3 px-5 rounded-1 btn-dark bg-color h-op-09 m-0"
+          >
+            {merged.cta?.label ?? "Contacter Horizon Conversion"}{" "}
+            <span class="material-symbols-outlined align-middle mb-1 ms-1" aria-hidden="true">
+              trending_flat
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+)}

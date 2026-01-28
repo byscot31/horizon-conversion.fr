@@ -19,6 +19,8 @@ import ui from "../../data/ui.json";
 import services from "../../data/services.json";
 import villes from "../../data/villes.json";
 
+import { href, canonicalUrl } from "../../lib/href";
+
 type Service = {
   slug: string;
   label: string;
@@ -47,7 +49,6 @@ type Ville = {
 };
 
 const SITE = "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 function tpl(s: string, vars: Record<string, string>) {
   return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
@@ -75,6 +76,8 @@ if (ville.services?.length && !ville.services.includes(service.slug)) {
   throw new Error(`Page non autorisée (matrice): ${service.slug}/${ville.slug}`);
 }
 
+const canonical = canonicalUrl(SITE, `/${service.slug}/${ville.slug}`);
+
 const pageTitle = service.titleTpl
   ? tpl(service.titleTpl, { ville: ville.name })
   : `${service.label} pour cabinets d’avocats à ${ville.name}`;
@@ -82,8 +85,6 @@ const pageTitle = service.titleTpl
 const pageDesc = service.descTpl
   ? tpl(service.descTpl, { ville: ville.name })
   : `Prestation ${service.label} pour cabinets d’avocats à ${ville.name}.`;
-
-const canonical = url(`${SITE}/${service.slug}/${ville.slug}`);
 
 const otherServices = (services as Service[])
   .filter((s) => s.slug !== service.slug)
@@ -113,13 +114,13 @@ const hero = {
   eyebrow: `${service.label} — ${zone}`,
   title: service.titleTpl ? tpl(service.titleTpl, { ville: ville.name }) : pageTitle,
   subtitle: service.descTpl ? tpl(service.descTpl, { ville: ville.name }) : pageDesc,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir les packs", href: "/offres" }
+  primaryCta: { label: "Demander un audit", href: "/contact/" },
+  secondaryCta: { label: "Voir les packs", href: "/offres/" }
 };
 
 const otherServicesForGrid = otherServices.map((s) => ({ slug: s.slug, label: s.label }));
 
-const hubServiceHref = url("/" + service.slug);
+const hubServiceHref = href("/" + service.slug);
 
 const hubServiceDesc = service.label + " — pages locales";
 ---
@@ -169,12 +170,12 @@ const hubServiceDesc = service.label + " — pages locales";
     <LinkedPages
       cards={[
         { title: "Toutes les villes", desc: hubServiceDesc, href: hubServiceHref },
-        { title: "Découvrir les packs", desc: "Options et livrables", href: "/offres" },
-        { title: "Comprendre la méthode", desc: "Déroulé et cadre", href: "/methode" }
+        { title: "Découvrir les packs", desc: "Options et livrables", href: "/offres/" },
+        { title: "Comprendre la méthode", desc: "Déroulé et cadre", href: "/methode/" }
       ]}
     />
 
-    <Promo />
+    <Promo variant={service.slug === "google-ads" ? "ads" : "local"} />
 
   </section><!-- #content end -->
 
