@@ -1,11 +1,29 @@
 ---
+// src/components/RelatedSpecialites.astro
 import specialites from "../data/specialites.json";
 import villes from "../data/villes.json";
 
 type Specialite = { slug: string; label: string };
 type Ville = { slug: string; specialites?: string[] };
 
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+const isExternal = (s: string) => /^https?:\/\//i.test(s);
+
+// Force le trailing slash (sauf "/"), et conserve query/hash
+const withSlash = (p: string) => {
+  if (!p) return "/";
+  if (isExternal(p)) return p;
+
+  // garantit un leading slash
+  let out = p.startsWith("/") ? p : `/${p}`;
+
+  // sépare path et query/hash
+  const [path, rest] = out.split(/(?=[?#])/);
+
+  // force trailing slash
+  const normalized = path === "/" ? "/" : path.replace(/\/+$/, "") + "/";
+
+  return rest ? normalized + rest : normalized;
+};
 
 interface Props {
   related?: string[];
@@ -38,10 +56,10 @@ const selected = Array.from(new Set(related))
   .slice(0, limit) as Specialite[];
 
 function spHref(spSlug: string) {
-  if (!ville) return url(`/specialites/${spSlug}`);
-  if (!city) return url(`/specialites/${spSlug}`);
+  if (!ville) return withSlash(`/specialites/${spSlug}`);
+  if (!city) return withSlash(`/specialites/${spSlug}`);
   const allowed = !hasMatrix || cityAllowed.has(spSlug);
-  return allowed ? url(`/specialites/${spSlug}/${ville}`) : url(`/specialites/${spSlug}`);
+  return allowed ? withSlash(`/specialites/${spSlug}/${ville}`) : withSlash(`/specialites/${spSlug}`);
 }
 
 const shouldRender = selected.length > 0;

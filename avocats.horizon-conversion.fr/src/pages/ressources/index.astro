@@ -12,7 +12,11 @@ import Footer from "../../components/Footer.astro";
 import ui from "../../data/ui.json";
 import blog from "../../data/blog.json";
 
-const canonical = "https://avocats.horizon-conversion.fr/ressources";
+import { href, canonicalUrl } from "../../lib/href";
+
+const SITE = "https://avocats.horizon-conversion.fr";
+
+const canonical = canonicalUrl(SITE, "/ressources");
 
 const home = (blog as any).home ?? {};
 
@@ -27,8 +31,8 @@ const hero = {
   eyebrow: home.badge ?? "Ressources",
   title: home.title ?? "Ressources",
   subtitle: home.intro ?? "Notes utiles pour décider et prioriser, avec un ton sobre.",
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir les packs", href: "/offres" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Voir les packs", href: href("/offres") },
   note: "Approche sobre, sans surpromesse."
 };
 ---

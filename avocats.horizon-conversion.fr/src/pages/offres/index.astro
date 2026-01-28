@@ -1,4 +1,5 @@
 ---
+// src/pages/offres/index.astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
@@ -11,9 +12,14 @@ import Footer from "../../components/Footer.astro";
 import ui from "../../data/ui.json";
 import offres from "../../data/offres.json";
 
+import { href, canonicalUrl } from "../../lib/href";
+
 type Pack = (typeof offres)["packs"][number];
 
-const canonical = (offres as any).meta.canonicalBase + "/offres";
+const SITE = (offres as any).meta.canonicalBase ?? "https://avocats.horizon-conversion.fr";
+
+const canonical = canonicalUrl(SITE, "/offres");
+
 const title = (offres as any).meta.titleIndex;
 const description = (offres as any).meta.descIndex;
 
@@ -22,8 +28,8 @@ const hero = {
   eyebrow: (offres as any).index.hero.eyebrow,
   title: (offres as any).index.hero.title,
   subtitle: (offres as any).index.hero.subtitle,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Comprendre la méthode", href: "/methode" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Comprendre la méthode", href: href("/methode") },
   note: (offres as any).index.hero.note
 };
 
@@ -92,8 +98,8 @@ const faqs = [
                     </ul>
 
                     <div class="mt-auto d-grid gap-2">
-                      <a href={`/offres/${p.slug}`} class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
-                      <a href="/contact" class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
+                      <a href={href(`/offres/${p.slug}`)} class="btn btn-outline-dark py-3 rounded-1">Voir le détail</a>
+                      <a href={href("/contact")} class="btn btn-dark bg-color py-3 rounded-1">Demander un audit</a>
                     </div>
                   </div>
                 </div>
@@ -119,7 +125,12 @@ const faqs = [
         </div>
       </div>
 
-      <Faqs title="Questions fréquentes" intro="Réponses sobres sur les packs." items={faqs} canonical={canonical} />
+      <Faqs
+        title="Questions fréquentes"
+        intro="Réponses sobres sur les packs."
+        items={faqs}
+        canonical={canonical}
+      />
 
       <Contact />
 

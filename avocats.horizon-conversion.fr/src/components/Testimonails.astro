@@ -1,6 +1,7 @@
 ---
 // src/components/Testimonails.astro
 import ui from "../data/ui.json";
+import { href as normalizeHref } from "../lib/href";
 
 type ProofItem = {
   quote: string;
@@ -36,9 +37,13 @@ const v = proofRoot?.variants?.[variant] as ProofBlock | undefined;
 // Contenu final (fallbacks)
 const title = v?.title ?? proofRoot?.title ?? "Retours de mission (anonymisés)";
 const intro = v?.intro ?? proofRoot?.intro ?? "";
-const cta = v?.cta ?? proofRoot?.cta;
+const ctaRaw = v?.cta ?? proofRoot?.cta;
 const note = v?.note ?? proofRoot?.note ?? "";
 const items: ProofItem[] = (v?.items?.length ? v.items : proofRoot?.items) ?? [];
+
+const cta = ctaRaw?.href
+  ? { ...ctaRaw, href: normalizeHref(ctaRaw.href) }
+  : undefined;
 
 const shouldRender = enabledGlobal && items.length > 0;
 ---
@@ -49,13 +54,14 @@ const shouldRender = enabledGlobal && items.length > 0;
       <div class="row justify-content-between align-items-center col-mb-30">
 
         <div class="col-lg-4">
-          <div class="d-flex mb-2">
+          <div class="d-flex mb-2" aria-hidden="true">
             <i class="bi-star-fill h5 me-1 text-warning"></i>
             <i class="bi-star-fill h5 me-1 text-warning"></i>
             <i class="bi-star-fill h5 me-1 text-warning"></i>
             <i class="bi-star-fill h5 me-1 text-warning"></i>
             <i class="bi-star-fill h5 me-1 text-warning"></i>
           </div>
+
           <h2 class="h3 font-secondary fw-bold mb-4">{title}</h2>
           {intro && <p class="lead op-08">{intro}</p>}
 

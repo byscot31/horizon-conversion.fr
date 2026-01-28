@@ -1,13 +1,12 @@
 ---
 // src/components/ZonesGrid.astro
+import { href as normalizeHref } from "../lib/href";
 
 type City = {
   slug: string;
   name: string;
   dept?: string;
 };
-
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 interface Props {
   badge?: string;
@@ -54,7 +53,7 @@ const gridClass =
     <ul class={`hc-cities-grid ${gridClass}`}>
       {cities.map((c) => (
         <li>
-          <a class="hc-city" href={url(hrefFor(c))}>
+          <a class="hc-city" href={normalizeHref(hrefFor(c))}>
             <span class="material-symbols-outlined color" aria-hidden="true">{icon}</span>
 
             <span class="hc-city__label">
