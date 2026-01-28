@@ -16,7 +16,7 @@ import ui from "../data/ui.json";
 
 const canonical = "https://avocats.horizon-conversion.fr/";
 
-const homeFaq = ui.faq.home;
+const homeFaq = ui?.faq?.home;
 ---
 
 <BaseLayout
@@ -34,14 +34,16 @@ const homeFaq = ui.faq.home;
 
       <Reassurance />
 
-      <Testimonails />
+      <Testimonails variant="home" />
 
-      <Faqs
-        title={homeFaq.title}
-        intro={homeFaq.intro}
-        items={homeFaq.items}
-        canonical={canonical}
-      />
+      {homeFaq && (
+        <Faqs
+          title={homeFaq.title}
+          intro={homeFaq.intro}
+          items={homeFaq.items}
+          canonical={canonical}
+        />
+      )}
 
       <Contact />
 

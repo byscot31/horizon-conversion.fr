@@ -6,6 +6,7 @@ import Hero from "../../components/Hero.astro";
 import Services from "../../components/Services.astro";
 import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
 import Contact from "../../components/Contact.astro";
+import Testimonails from "../../components/Testimonails.astro";
 import Faqs from "../../components/Faqs.astro";
 import ZonesGrid from "../../components/ZonesGrid.astro";
 import Reassurance from "../../components/Reassurance.astro";
@@ -104,6 +105,8 @@ const renderCityLabel = (c: Ville) =>
           renderLabel={renderCityLabel}
           columns={2}
         />
+
+        <Testimonails variant={service.slug === "google-ads" ? "ads" : "service"} />
 
         <Faqs
           title={service.faqTitle}

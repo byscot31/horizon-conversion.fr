@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
 import Services from "../../components/Services.astro";
+import Testimonails from "../../components/Testimonails.astro";
 import ScopeCards from "../../components/ScopeCards.astro";
 import RelatedSpecialites from "../../components/RelatedSpecialites.astro";
 import Contact from "../../components/Contact.astro";
@@ -119,6 +120,8 @@ const hero = {
 const otherServicesForGrid = otherServices.map((s) => ({ slug: s.slug, label: s.label }));
 
 const hubServiceHref = url("/" + service.slug);
+
+const hubServiceDesc = service.label + " — pages locales";
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} canonical={canonical}>
@@ -144,7 +147,7 @@ const hubServiceHref = url("/" + service.slug);
       limit={2}
     />
 
-    <Contact />
+  	<Testimonails variant={service.slug === "google-ads" ? "ads" : "local"} />
 
     <Faqs
       title={service.faqTitle}
@@ -152,6 +155,8 @@ const hubServiceHref = url("/" + service.slug);
       items={[...(service.faqs ?? []).slice(0, 4), ...localFaqs]}
       canonical={canonical}
     />
+
+    <Contact />
 
     <OtherServicesGrid
       villeName={ville.name}
@@ -163,7 +168,7 @@ const hubServiceHref = url("/" + service.slug);
 
     <LinkedPages
       cards={[
-        { title: "Toutes les villes", desc: `${service.label} — pages locales`, href: hubServiceHref },
+        { title: "Toutes les villes", desc: hubServiceDesc, href: hubServiceHref },
         { title: "Découvrir les packs", desc: "Options et livrables", href: "/offres" },
         { title: "Comprendre la méthode", desc: "Déroulé et cadre", href: "/methode" }
       ]}

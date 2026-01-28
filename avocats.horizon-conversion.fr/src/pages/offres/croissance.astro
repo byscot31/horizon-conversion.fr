@@ -1,0 +1,187 @@
+---
+// src/pages/offres/croissance.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import LinkedPages from "../../components/LinkedPages.astro";
+import Contact from "../../components/Contact.astro";
+import Faqs from "../../components/Faqs.astro";
+import Reassurance from "../../components/Reassurance.astro";
+import Promo from "../../components/Promo.astro";
+import Footer from "../../components/Footer.astro";
+
+import ui from "../../data/ui.json";
+
+const canonical = "https://avocats.horizon-conversion.fr/offres/croissance";
+
+const title = "Pack Croissance | Horizon Conversion — cabinets d’avocats";
+const description =
+  "Pack Croissance : déployer des pages locales utiles, améliorer le parcours de contact et piloter la progression sur des priorités claires.";
+
+const hero = {
+  ...ui.hero.defaultInner,
+  eyebrow: "Offres — Pack Croissance",
+  title: "Croissance : déployer et consolider",
+  subtitle:
+    "Pour un cabinet qui veut une progression régulière : pages locales sélectionnées, parcours de contact amélioré, et suivi mensuel lisible.",
+  primaryCta: { label: "Demander un audit", href: "/contact" },
+  secondaryCta: { label: "Comparer les packs", href: "/offres" },
+  note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
+};
+
+const faqs = [
+  {
+    q: "À qui s’adresse le pack Croissance ?",
+    a: "Aux cabinets qui ont déjà un socle correct (ou qui l’acceptent dans le démarrage) et qui veulent déployer des pages locales réellement utiles, avec un pilotage mensuel pour progresser de façon régulière."
+  },
+  {
+    q: "Combien de pages locales créez-vous ?",
+    a: "Nous privilégions une sélection limitée de pages utiles (pas de surproduction). Le volume dépend de la zone, des priorités et de l’existant."
+  },
+  {
+    q: "Qu’entendez-vous par “parcours de contact” ?",
+    a: "Les éléments qui mènent concrètement à l’appel ou au formulaire : clarté de l’offre, rassurance, appels à l’action, structure des pages et formulaire."
+  },
+  {
+    q: "Google Ads est-il inclus ?",
+    a: "Non. C’est une option : uniquement si les pages et la mesure sont prêtes, et avec un cadrage strict pour préserver la qualité des demandes."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap overflow-visible py-0">
+
+      {/* Résumé du pack + repères budget */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Périmètre</div>
+              <h2 class="h3 fw-bold mb-2">Ce que couvre Croissance</h2>
+              <p class="lead mb-0 op-07">
+                Déploiement local sélectionné + amélioration du parcours menant à l’appel et au formulaire,
+                avec un suivi mensuel lisible.
+              </p>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts">
+                <div class="fw-bold mb-2">Repères budgétaires</div>
+                <div class="op-07">Setup : 3 500 – 6 500 €</div>
+                <div class="op-07">Mensuel : 850 – 1 500 €</div>
+                <div class="small op-06 mt-2">
+                  Fourchettes indicatives selon l’existant (site, contenu, présence locale).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 axes (cards) */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row align-items-end justify-content-between mb-4">
+            <div class="col-lg-7">
+              <div class="before-title text-uppercase ls-3 text-smaller op-06 mb-2">Livrables</div>
+              <h2 class="h3 fw-bold mb-2">Trois axes qui font progresser</h2>
+              <p class="lead mb-0 op-07">
+                Des actions prioritaires, pas une liste interminable. L’objectif : rendre la prise de contact plus simple et mieux cadrée.
+              </p>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">location_on</i>
+                <div class="h5 fw-bold mb-1">Pages locales sélectionnées</div>
+                <div class="op-07">Création/optimisation de pages “ville” réellement utiles, selon la zone et les priorités.</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">call</i>
+                <div class="h5 fw-bold mb-1">Parcours de contact amélioré</div>
+                <div class="op-07">Pages clés, rassurance, appels à l’action et formulaire : clairs, sobres, efficaces.</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <i class="material-symbols-outlined display-6 color mb-2">monitoring</i>
+                <div class="h5 fw-bold mb-1">Suivi mensuel lisible</div>
+                <div class="op-07">Demandes (appels & formulaires), sources et pages d’entrée : priorités d’ajustement.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Inclus / Pré-requis */}
+      <div class="section bg-transparent py-4">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Inclus</div>
+                <ul class="iconlist op-08 mb-0">
+                  <li>Tout le socle Essentiel (ou mise à niveau au démarrage)</li>
+                  <li>Pages locales : sélection, rédaction/optimisation, cohérence des informations</li>
+                  <li>Amélioration du parcours de contact (pages clés + formulaire)</li>
+                  <li>Suivi mensuel : demandes, sources, pages qui déclenchent le contact</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
+                <div class="h5 fw-bold mb-2">Pré-requis côté cabinet</div>
+                <ul class="iconlist op-08 mb-0">
+                  <li>Accès (site / hébergeur / mesure)</li>
+                  <li>Coordonnées + périmètre d’intervention (clair)</li>
+                  <li>Domaines traités / non traités (pour limiter les demandes hors périmètre)</li>
+                  <li>Réactivité minimale sur les demandes entrantes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-lg-9">
+              <div class="small op-07">
+                <strong>Option Google Ads :</strong> envisageable si (1) pages prêtes, (2) mesure fiable,
+                (3) capacité de traitement, (4) cadrage strict (périmètre, exclusions, messages sobres).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Faqs title="Questions fréquentes" intro="Réponses simples sur le pack Croissance." items={faqs} canonical={canonical} />
+
+      <Contact />
+
+      <Reassurance />
+
+      <LinkedPages
+        cards={[
+          { title: "Comparer les packs", desc: "Essentiel, Croissance, Signature", href: "/offres" },
+          { title: "Pack Essentiel", desc: "Mettre au propre et clarifier", href: "/offres/essentiel" },
+          { title: "Pack Signature", desc: "Refonte + pilotage complet", href: "/offres/signature" }
+        ]}
+      />
+
+      <Promo />
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
