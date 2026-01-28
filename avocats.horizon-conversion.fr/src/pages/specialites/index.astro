@@ -12,6 +12,8 @@ import ui from "../../data/ui.json";
 import specialites from "../../data/specialites.json";
 import villes from "../../data/villes.json";
 
+import { href, canonicalUrl } from "../../lib/href";
+
 type Specialite = {
   slug: string;
   label: string;
@@ -27,8 +29,8 @@ type Ville = {
   specialites?: string[];
 };
 
-const canonical = "https://avocats.horizon-conversion.fr/specialites";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+const SITE = "https://avocats.horizon-conversion.fr";
+const canonical = canonicalUrl(SITE, "/specialites");
 
 const sps = (specialites as Specialite[]) ?? [];
 const vls = (villes as Ville[]) ?? [];
@@ -43,8 +45,8 @@ const hero = {
   title: "Pages par spécialité (B2B cabinet)",
   subtitle:
     "Exemples de pages “domaine” : structure SEO local + clarté du périmètre + parcours de prise de contact. Sobriété, sans surproduction.",
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir la méthode", href: "/methode" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Voir la méthode", href: href("/methode") },
   note: "Approche conforme : pas de promesse de résultat."
 };
 
@@ -84,7 +86,7 @@ const reassuranceKey =
 
               return (
                 <div class="col-md-6 col-lg-4">
-                  <a href={url(`/specialites/${sp.slug}`)} class="hc-card-link">
+                  <a href={href(`/specialites/${sp.slug}`)} class="hc-card-link">
                     <div class="grid-inner shadow-sm h-shadow bg-white p-4 rounded-5 shadow-ts h-100">
                       <div class="d-flex justify-content-between align-items-start">
                         <div>

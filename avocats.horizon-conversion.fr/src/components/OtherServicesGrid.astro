@@ -1,15 +1,29 @@
 ---
-/**
- * OtherServicesGrid.astro
- * Bloc "Autres services à <ville>" (grille de liens stylée thème).
- */
+// src/components/OtherServicesGrid.astro
 
 type ServiceLink = {
   slug: string;
   label: string;
 };
 
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
+const isExternal = (s: string) => /^https?:\/\//i.test(s);
+
+// Force le trailing slash (sauf "/"), et conserve query/hash
+const withSlash = (p: string) => {
+  if (!p) return "/";
+  if (isExternal(p)) return p;
+
+  // garantit un leading slash
+  let out = p.startsWith("/") ? p : `/${p}`;
+
+  // sépare path et query/hash
+  const [path, rest] = out.split(/(?=[?#])/);
+
+  // force trailing slash
+  const normalized = path === "/" ? "/" : path.replace(/\/+$/, "") + "/";
+
+  return rest ? normalized + rest : normalized;
+};
 
 interface Props {
   villeName: string;        // ex: "Senlis"
@@ -64,7 +78,7 @@ const shouldRender = Array.isArray(services) && services.length > 0;
       <ul class="hc-cities-grid">
         {services.map((s) => (
           <li>
-            <a class="hc-city" href={url(linkFor(s, villeSlug))}>
+            <a class="hc-city" href={withSlash(linkFor(s, villeSlug))}>
               <span class="material-symbols-outlined color" aria-hidden="true">{leftIcon}</span>
               <span class="hc-city__label">
                 <strong>{s.label}</strong> à {villeName}

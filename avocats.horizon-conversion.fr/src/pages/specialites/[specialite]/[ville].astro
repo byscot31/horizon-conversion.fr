@@ -12,11 +12,12 @@ import ui from "../../../data/ui.json";
 import specialites from "../../../data/specialites.json";
 import villes from "../../../data/villes.json";
 
+import { href, canonicalUrl } from "../../../lib/href";
+
 type Specialite = { slug: string; label: string; titleTpl?: string; descTpl?: string; angles?: string[] };
 type Ville = { slug: string; name: string; dept?: string; regionHint?: string; specialites?: string[] };
 
 const SITE = "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 function tpl(s: string, vars: Record<string, string>) {
   return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
@@ -54,15 +55,15 @@ const description = sp.descTpl
   ? tpl(sp.descTpl, { ville: ville.name, specialite: sp.label })
   : `Structurer une visibilité locale autour de “${sp.label}” à ${ville.name} : pages utiles, maillage interne, et prise de contact (B2B cabinet).`;
 
-const canonical = url(`${SITE}/specialites/${sp.slug}/${ville.slug}`);
+const canonical = canonicalUrl(SITE, `/specialites/${sp.slug}/${ville.slug}`);
 
 const hero = {
   ...ui.hero.defaultInner,
   eyebrow: `Spécialité — ${zone}`,
   title,
   subtitle: description,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir la spécialité", href: url(`/specialites/${sp.slug}`) },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Voir la spécialité", href: href(`/specialites/${sp.slug}`) },
   note: "Page B2B : recommandations de structure, pas un annuaire."
 };
 

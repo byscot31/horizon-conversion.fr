@@ -13,11 +13,12 @@ import ui from "../../../data/ui.json";
 import specialites from "../../../data/specialites.json";
 import villes from "../../../data/villes.json";
 
+import { href, canonicalUrl } from "../../../lib/href";
+
 type Specialite = { slug: string; label: string; hubTitle?: string; hubDesc?: string; angles?: string[] };
 type Ville = { slug: string; name: string; dept?: string; regionHint?: string; specialites?: string[] };
 
 const SITE = "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 export async function getStaticPaths() {
   return (specialites as Specialite[]).map((sp) => ({ params: { specialite: sp.slug } }));
@@ -34,19 +35,19 @@ const description =
   sp.hubDesc ??
   `Contenu B2B : structurer la visibilité locale autour de “${sp.label}” (pages utiles, maillage, prise de contact).`;
 
-const canonical = url(`${SITE}/specialites/${sp.slug}`);
+const canonical = canonicalUrl(SITE, `/specialites/${sp.slug}`);
 
 const hero = {
   ...ui.hero.defaultInner,
   eyebrow: `Spécialité — ${sp.label}`,
   title,
   subtitle: description,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir la méthode", href: "/methode" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Voir la méthode", href: href("/methode") },
   note: "Pages B2B : pas un annuaire, mais une approche de structuration."
 };
 
-const hrefForCity = (c: Ville) => `/specialites/${sp.slug}/${c.slug}`;
+const hrefForCity = (c: Ville) => href(`/specialites/${sp.slug}/${c.slug}`);
 const renderCityLabel = (c: Ville) => `${sp.label} — stratégie SEO à ${c.name}${c.dept ? ` (${c.dept})` : ""}`;
 
 const reassuranceKey =

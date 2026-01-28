@@ -11,19 +11,19 @@ import Promo from "../../components/Promo.astro";
 import ui from "../../data/ui.json";
 import blog from "../../data/blog.json";
 
+import { href, canonicalUrl } from "../../lib/href";
+
 type Resource = {
   slug: string;
   dateLabel: string; // étiquette : "SEO local", "Refonte", etc.
   title: string;
   excerpt: string;
   image?: string;
-  imageCaption?: string
+  imageCaption?: string;
   contentHtml?: string; // ton contenu rédigé
-  // optionnel si plus tard tu ajoutes : tags?: string[]
 };
 
 const SITE = "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 export async function getStaticPaths() {
   const home = (blog as any).home ?? {};
@@ -39,13 +39,19 @@ const items = (home.items ?? []) as Resource[];
 const item = items.find((x) => x.slug === slug);
 if (!item) throw new Error(`Ressource introuvable: ${slug}`);
 
-const imageSrc = typeof item.image === "string" && item.image.trim().length > 0 ? item.image.trim() : null;
-const imageCaption = (item as any).imageCaption || "Note de travail — ton sobre, sans surpromesse.";
-
-const canonical = url(`${SITE}/ressources/${item.slug}`);
+const canonical = canonicalUrl(SITE, `/ressources/${item.slug}`);
 
 const title = `${item.title} | Ressources`;
 const description = item.excerpt;
+
+// image (optionnelle)
+const imageSrc =
+  typeof item.image === "string" && item.image.trim().length > 0 ? item.image.trim() : null;
+
+const imageCaption =
+  typeof item.imageCaption === "string" && item.imageCaption.trim().length > 0
+    ? item.imageCaption.trim()
+    : "Note de travail — ton sobre, sans surpromesse.";
 
 // navigation prev/next
 const idx = items.findIndex((x) => x.slug === item.slug);
@@ -53,23 +59,21 @@ const prev = idx > 0 ? items[idx - 1] : null;
 const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
 
 // “meta” sobre (pas de fausses dates/auteur)
-const metaDate = item.dateLabel; // on affiche l’étiquette dans la ligne date
+const metaDate = item.dateLabel;
 const metaAuthor = "Horizon Conversion";
 const metaCats = [item.dateLabel];
 
-// partage simple (optionnel)
+// partage simple
 const shareUrl = encodeURIComponent(canonical);
 const shareText = encodeURIComponent(item.title);
 
-// Hero : on peut le garder (pour cohérence du site) ou le retirer.
-// Ici je le garde mais discret.
 const hero = {
   ...ui.hero.defaultInner,
   eyebrow: `Ressources — ${item.dateLabel}`,
   title: item.title,
   subtitle: item.excerpt,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Voir toutes les ressources", href: "/ressources" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Voir toutes les ressources", href: href("/ressources") },
   note: "Approche sobre, sans surpromesse."
 };
 ---
@@ -110,13 +114,13 @@ const hero = {
                         <i class="uil uil-folder-open"></i>
                         {metaCats.map((c, i) => (
                           <>
-                            <a href="/ressources">{c}</a>
+                            <a href={href("/ressources")}>{c}</a>
                             {i < metaCats.length - 1 ? ", " : ""}
                           </>
                         ))}
                       </li>
                       <li class="me-0">
-                        <a href="/contact"><i class="uil uil-comments-alt"></i> Demander un audit</a>
+                        <a href={href("/contact")}><i class="uil uil-comments-alt"></i> Demander un audit</a>
                       </li>
                     </ul>
                   </div><!-- .entry-meta end -->
@@ -150,17 +154,17 @@ const hero = {
                       Contenu à compléter. Vous pouvez renseigner <code>contentHtml</code> dans <code>src/data/blog.json</code>.
                     </p>
                     <p class="mb-0">
-                      Si vous souhaitez un audit court : <a href="/contact">contactez-nous</a>.
+                      Si vous souhaitez un audit court : <a href={href("/contact")}>contactez-nous</a>.
                     </p>
                   </>
                 )}
 
                 <!-- Tag Cloud ============================================= -->
                 <div class="tagcloud mb-5">
-                  <a href="/ressources">{item.dateLabel.toLowerCase()}</a>
-                  <a href="/seo-local">seo local</a>
-                  <a href="/refonte-site">refonte</a>
-                  <a href="/methode">méthode</a>
+                  <a href={href("/ressources")}>{item.dateLabel.toLowerCase()}</a>
+                  <a href={href("/seo-local")}>seo local</a>
+                  <a href={href("/refonte-site")}>refonte</a>
+                  <a href={href("/methode")}>méthode</a>
                 </div><!-- .tagcloud end -->
 
                 <!-- Post Single - Share ============================================= -->
@@ -211,12 +215,12 @@ const hero = {
             <div class="row text-center text-md-start justify-content-between my-5">
               <div class="col-md-auto">
                 {prev ? (
-                  <a href={`/ressources/${prev.slug}`} class="d-inline-flex align-items-center text-dark h-text-color">
+                  <a href={href(`/ressources/${prev.slug}`)} class="d-inline-flex align-items-center text-dark h-text-color">
                     <i class="uil uil-angle-left-b fs-3 me-1"></i>
                     <span>{prev.title}</span>
                   </a>
                 ) : (
-                  <a href="/ressources" class="d-inline-flex align-items-center text-dark h-text-color">
+                  <a href={href("/ressources")} class="d-inline-flex align-items-center text-dark h-text-color">
                     <i class="uil uil-angle-left-b fs-3 me-1"></i>
                     <span>Toutes les ressources</span>
                   </a>
@@ -225,12 +229,12 @@ const hero = {
 
               <div class="col-md-auto">
                 {next ? (
-                  <a href={`/ressources/${next.slug}`} class="d-inline-flex align-items-center text-dark h-text-color">
+                  <a href={href(`/ressources/${next.slug}`)} class="d-inline-flex align-items-center text-dark h-text-color">
                     <span>{next.title}</span>
                     <i class="uil uil-angle-right-b fs-3 ms-1"></i>
                   </a>
                 ) : (
-                  <a href="/contact" class="d-inline-flex align-items-center text-dark h-text-color">
+                  <a href={href("/contact")} class="d-inline-flex align-items-center text-dark h-text-color">
                     <span>Demander un audit</span>
                     <i class="uil uil-angle-right-b fs-3 ms-1"></i>
                   </a>

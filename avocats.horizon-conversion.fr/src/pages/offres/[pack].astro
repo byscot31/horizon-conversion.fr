@@ -1,4 +1,5 @@
 ---
+// src/pages/offres/[pack].astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
@@ -11,6 +12,8 @@ import Footer from "../../components/Footer.astro";
 
 import ui from "../../data/ui.json";
 import offres from "../../data/offres.json";
+
+import { href, canonicalUrl } from "../../lib/href";
 
 type Pillar = { icon: string; title: string; desc: string };
 type Pack = {
@@ -29,7 +32,6 @@ type Pack = {
 };
 
 const SITE = (offres as any).meta.canonicalBase ?? "https://avocats.horizon-conversion.fr";
-const url = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p);
 
 function tpl(s: string, vars: Record<string, string>) {
   return s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
@@ -43,7 +45,7 @@ const { pack: packSlug } = Astro.params;
 const pack = (offres as any).packs.find((p: Pack) => p.slug === packSlug) as Pack | undefined;
 if (!pack) throw new Error(`Pack inconnu: ${packSlug}`);
 
-const canonical = url(`${SITE}/offres/${pack.slug}`);
+const canonical = canonicalUrl(SITE, `/offres/${pack.slug}`);
 
 const title = tpl((offres as any).meta.titleTpl, { name: pack.name });
 const description = tpl((offres as any).meta.descTpl, { name: pack.name, tagline: pack.short });
@@ -53,8 +55,8 @@ const hero = {
   eyebrow: `Offres — Pack ${pack.name}`,
   title: `${pack.name} : ${pack.tagline}`,
   subtitle: pack.short,
-  primaryCta: { label: "Demander un audit", href: "/contact" },
-  secondaryCta: { label: "Comparer les packs", href: "/offres" },
+  primaryCta: { label: "Demander un audit", href: href("/contact") },
+  secondaryCta: { label: "Comparer les packs", href: href("/offres") },
   note: "Sans promesse de résultat. Engagement sur la méthode, les livrables et la mesure."
 };
 
@@ -63,7 +65,7 @@ const other = (offres as any).packs
   .map((p: Pack) => ({
     title: `Pack ${p.name}`,
     desc: p.tagline,
-    href: `/offres/${p.slug}`
+    href: href(`/offres/${p.slug}`)
   }));
 ---
 
@@ -169,7 +171,7 @@ const other = (offres as any).packs
 
       <LinkedPages
         cards={[
-          { title: "Comparer les packs", desc: "Essentiel, Croissance, Signature", href: "/offres" },
+          { title: "Comparer les packs", desc: "Essentiel, Croissance, Signature", href: href("/offres") },
           ...other
         ]}
       />

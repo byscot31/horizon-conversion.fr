@@ -1,6 +1,7 @@
 ---
 // src/components/Blog.astro
 import blog from "../data/blog.json";
+import { href } from "../lib/href";
 
 type HomeItem = {
   slug: string;
@@ -19,7 +20,8 @@ const b = items[1];
 const c = items[2];
 const d = items[3];
 
-const href = (slug?: string) => (slug ? `/ressources/${slug}` : "/ressources");
+// ✅ construit des liens cohérents avec trailing slash
+const linkTo = (slug?: string) => (slug ? href(`/ressources/${slug}`) : href("/ressources"));
 ---
 
 <div class="container mw-md mt-6">
@@ -42,9 +44,9 @@ const href = (slug?: string) => (slug ? `/ressources/${slug}` : "/ressources");
             <img src={a?.image ?? "/_assets_/images/blog/1.jpg"} alt="" class="card-img-top" />
             <div class="card-body p-4">
               <div class="h6 mb-3 text-warning">{a?.dateLabel ?? "SEO local"}</div>
-              <h3 class="h5 lh-base mb-3 color"><a href={href(a?.slug)}>{a?.title ?? ""}</a></h3>
+              <h3 class="h5 lh-base mb-3 color"><a href={linkTo(a?.slug)}>{a?.title ?? ""}</a></h3>
               <p class="mb-4">{a?.excerpt ?? ""}</p>
-              <a href={href(a?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
+              <a href={linkTo(a?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
             </div>
           </div>
         </div>
@@ -53,9 +55,9 @@ const href = (slug?: string) => (slug ? `/ressources/${slug}` : "/ressources");
             <img src={b?.image ?? "/_assets_/images/blog/2.jpg"} alt="" class="card-img-top" />
             <div class="card-body p-4">
               <div class="h6 mb-3 text-warning">{b?.dateLabel ?? "Refonte"}</div>
-              <h3 class="h5 lh-base mb-3 color"><a href={href(b?.slug)}>{b?.title ?? ""}</a></h3>
+              <h3 class="h5 lh-base mb-3 color"><a href={linkTo(b?.slug)}>{b?.title ?? ""}</a></h3>
               <p class="mb-4">{b?.excerpt ?? ""}</p>
-              <a href={href(b?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
+              <a href={linkTo(b?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@ const href = (slug?: string) => (slug ? `/ressources/${slug}` : "/ressources");
           <div class="card h-translate-y-sm transform-ts dark mb-4">
             <img src={c?.image ?? "/_assets_/images/blog/3.jpg"} alt="" class="card-img" />
             <a
-              href={href(c?.slug)}
+              href={linkTo(c?.slug)}
               class="card-img-overlay d-flex flex-column justify-content-end p-4"
               style="background-image: linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3));"
             >
@@ -81,9 +83,9 @@ const href = (slug?: string) => (slug ? `/ressources/${slug}` : "/ressources");
           <div class="card h-translate-y-sm transform-ts">
             <div class="card-body p-4">
               <div class="h6 mb-3 text-warning">{d?.dateLabel ?? "Mesure"}</div>
-              <h3 class="h5 lh-base mb-3 color"><a href={href(d?.slug)}>{d?.title ?? ""}</a></h3>
+              <h3 class="h5 lh-base mb-3 color"><a href={linkTo(d?.slug)}>{d?.title ?? ""}</a></h3>
               <p class="mb-4">{d?.excerpt ?? ""}</p>
-              <a href={href(d?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
+              <a href={linkTo(d?.slug)}>Lire <span class="material-symbols-outlined align-middle mb-1" aria-hidden="true">trending_flat</span></a>
             </div>
           </div>
         </div>
