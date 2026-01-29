@@ -1,4 +1,87 @@
 ---
 // src/layouts/BaseLayout.astro
+import TopBar from "../components/TopBar.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+};
+
+const {
+  title = "Horizon Conversion — Travaux",
+  description = "SEO local, Google Ads et CRO + Analytics pour artisans (Sud Oise / Nord 95).",
+  canonical,
+  noindex = false,
+} = Astro.props;
 ---
 
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="author" content="Horizon Conversion">
+	<meta name="description" content={description}>
+
+	{noindex && <meta name="robots" content="noindex,nofollow" />}
+	{canonical && <link rel="canonical" href={canonical} />}
+
+	<!-- Font Imports -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+	<!-- Core Style -->
+	<link rel="stylesheet" href="/_assets_/style.css">
+
+	<!-- Font Icons -->
+	<link rel="stylesheet" href="/_assets_/css/font-icons.css">
+
+	<!-- Plugins/Components CSS -->
+	<link rel="stylesheet" href="/_assets_/css/swiper.css">
+
+	<!-- Niche Demos -->
+	<link rel="stylesheet" href="/_assets_/construction.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/_assets_/css/custom.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Document Title
+	============================================= -->
+	<title>{title}</title>
+
+</head>
+
+<body class="stretched">
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper">
+
+    <TopBar />
+
+    <Header />
+
+	  <slot />
+
+    <Footer />
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="uil uil-angle-up"></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script is:inline src="/_assets_/js/plugins.min.js"></script>
+	<script is:inline src="/_assets_/js/functions.bundle.js"></script>
+
+</body>
+</html>

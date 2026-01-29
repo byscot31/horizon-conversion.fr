@@ -1,0 +1,52 @@
+---
+// src/components/TopBar.astro
+
+const phone = import.meta.env.PUBLIC_CONTACT_PHONE ?? "";
+const email = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "";
+const phoneHref = phone ? `tel:${phone.replace(/\s+/g, "")}` : "";
+const mailHref = email ? `mailto:${email}` : "";
+
+const zoneLabel = import.meta.env.PUBLIC_ZONE_LABEL ?? "Sud Oise • Nord 95";
+---
+
+<!-- Top Bar
+		============================================= -->
+		<div id="top-bar">
+			<div class="container">
+
+				<div class="row justify-content-between">
+					<div class="col-12 col-md-auto">
+
+						<!-- Top Infos
+						============================================= -->
+						<div class="top-links">
+            							<ul class="top-links-container">
+            								<li class="top-links-item"><a href="#"><i class="bi-geo-alt"></i> {zoneLabel}</a></li>
+            								{phone && (
+            								  <li class="top-links-item"><a href={phoneHref}><i class="bi-telephone"></i> {phone}</a></li>
+            								)}
+            								{email && (
+            								  <li class="top-links-item"><a href={mailHref}><i class="bi-envelope"></i> {email}</a></li>
+            								)}
+            							</ul>
+            						</div><!-- .top-links end -->
+
+					</div>
+
+					<div class="col-12 col-md-auto">
+
+						<!-- Top Links
+						============================================= -->
+						<div class="top-links">
+							<ul class="top-links-container">
+								<li class="top-links-item"><a href="/tarifs">Tarifs</a></li>
+								<li class="top-links-item"><a href="/methode">Méthode</a></li>
+								<li class="top-links-item"><a class="color" href="/contact">Demander un audit</a></li>
+							</ul>
+						</div><!-- .top-links end -->
+
+					</div>
+				</div>
+
+			</div>
+		</div><!-- #top-bar end -->

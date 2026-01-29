@@ -1,2 +1,46 @@
 // src/data/villes.json
 
+[
+  {
+    "slug": "senlis",
+    "name": "Senlis",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "around": ["Chamant", "Vineuil-Saint-Firmin", "Courteuil", "Mont-l'Évêque", "Aumont-en-Halatte", "Barbery", "Orry-la-Ville"]
+  },
+  {
+    "slug": "chantilly",
+    "name": "Chantilly",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "around": ["Gouvieux", "Lamorlaye", "Coye-la-Forêt", "Avilly-Saint-Léonard", "Vineuil-Saint-Firmin", "Orry-la-Ville"]
+  },
+  {
+    "slug": "creil",
+    "name": "Creil",
+    "dept": "60",
+    "regionHint": "Sud Oise",
+    "around": ["Nogent-sur-Oise", "Montataire", "Villers-Saint-Paul", "Saint-Leu-d'Esserent", "Thiverny", "Verneuil-en-Halatte"]
+  },
+  {
+    "slug": "compiegne",
+    "name": "Compiègne",
+    "dept": "60",
+    "regionHint": "Oise",
+    "around": ["Margny-lès-Compiègne", "Venette", "Le Meux", "Lacroix-Saint-Ouen", "Choisy-au-Bac", "Jaux"]
+  },
+  {
+    "slug": "cergy",
+    "name": "Cergy",
+    "dept": "95",
+    "regionHint": "Nord Val-d'Oise",
+    "around": ["Pontoise", "Osny", "Éragny", "Jouy-le-Moutier", "Vauréal", "Courdimanche"]
+  },
+  {
+    "slug": "lisle-adam",
+    "name": "L'Isle-Adam",
+    "dept": "95",
+    "regionHint": "Nord Val-d'Oise",
+    "around": ["Parmain", "Mériel", "Auvers-sur-Oise", "Valmondois", "Presles", "Nerville-la-Forêt"]
+  }
+]

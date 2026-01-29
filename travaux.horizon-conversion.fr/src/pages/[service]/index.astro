@@ -1,4 +1,42 @@
 ---
 // src/pages/[service]/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import services from "../../data/services.json";
+
+export function getStaticPaths() {
+  return services.map((s) => ({
+    params: { service: s.slug },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props;
+const title = `${service.name} pour artisans — Horizon Conversion Travaux`;
+const description = `${service.name} pour artisans (Sud Oise / Nord 95). Objectif : plus de demandes mesurées (appels, formulaires, devis).`;
 ---
 
+<BaseLayout title={title} description={description}>
+  <section class="content-wrap">
+    <div class="container py-6">
+      <h1 class="mb-3">{service.name} pour artisans</h1>
+      <p class="lead mb-5">{service.short}</p>
+
+      <div class="row col-mb-30">
+        <div class="col-md-8">
+          <h2>Ce que vous obtenez</h2>
+          <ul>
+            <li>Plan d’action clair (30 jours)</li>
+            <li>Tracking des demandes (Analytics)</li>
+            <li>Optimisations orientées devis</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <a class="button button-large button-circle button-dark w-100 text-center" href="/contact">
+            Demander un audit
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

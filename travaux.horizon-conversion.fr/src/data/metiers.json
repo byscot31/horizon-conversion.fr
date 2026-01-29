@@ -1,2 +1,16 @@
 // src/data/metiers.json
 
+[
+  { "slug": "plombier", "name": "Plombier" },
+  { "slug": "electricien", "name": "Électricien" },
+  { "slug": "chauffagiste-pac", "name": "Chauffagiste / PAC" },
+  { "slug": "serrurier", "name": "Serrurier" },
+  { "slug": "couvreur", "name": "Couvreur" },
+  { "slug": "vitrier", "name": "Vitrier" },
+  { "slug": "peintre", "name": "Peintre" },
+  { "slug": "macon", "name": "Maçon" },
+  { "slug": "menuisier", "name": "Menuisier" },
+  { "slug": "carreleur", "name": "Carreleur" },
+  { "slug": "plaquiste-isolation", "name": "Plaquiste / Isolation" },
+  { "slug": "renovation-globale", "name": "Rénovation globale (entreprise générale)" }
+]

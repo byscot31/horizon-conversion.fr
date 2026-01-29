@@ -1,4 +1,62 @@
 ---
 // src/pages/metiers/[metier]/[ville].astro
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import metiers from "../../../data/metiers.json";
+import villes from "../../../data/villes.json";
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const m of metiers) {
+    for (const v of villes) {
+      paths.push({
+        params: { metier: m.slug, ville: v.slug },
+        props: { metier: m, ville: v },
+      });
+    }
+  }
+  return paths;
+}
+
+const { metier, ville } = Astro.props;
+
+const title = `SEO local, Google Ads & CRO pour ${metier.name} à ${ville.name}`;
+const description = `Plus de demandes pour ${metier.name} à ${ville.name} et alentours : SEO local + Google Ads + CRO/Analytics (tracking appels & formulaires).`;
 ---
 
+<BaseLayout title={title} description={description}>
+  <section class="content-wrap">
+    <div class="container py-6">
+      <h1 class="mb-2">{metier.name} à {ville.name}</h1>
+      <p class="lead mb-4">SEO local + Google Ads + CRO/Analytics, orienté demandes (devis/appels).</p>
+
+      <div class="row col-mb-30">
+        <div class="col-lg-8">
+          <h2>Ce qui marche le mieux localement</h2>
+          <ul>
+            <li>Google Business Profile + pages locales (SEO local)</li>
+            <li>Google Ads Search sur intentions “devis / urgence”</li>
+            <li>Landing pages + suivi (CRO + Analytics)</li>
+          </ul>
+
+          {ville.around?.length ? (
+            <>
+              <h2>Zone : {ville.name} + alentours</h2>
+              <p>{ville.around.join(", ")}.</p>
+            </>
+          ) : null}
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card p-4 shadow-sm">
+            <h3 class="h5 mb-3">Demander un audit</h3>
+            <a class="button button-large w-100 text-center" href="/contact">Recevoir un diagnostic</a>
+            <div class="mt-3 small text-muted">
+              Mesure : clic téléphone, formulaire, sources.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
