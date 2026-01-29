@@ -1,4 +1,111 @@
 ---
 // src/components/Header.astro
+
+const phone = import.meta.env.PUBLIC_CONTACT_PHONE ?? "";
+const email = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "";
+
+// --- Active menu helpers ---
+const norm = (p: string) => {
+  if (!p) return "/";
+  const x = p.split("?")[0].split("#")[0];
+  return x !== "/" ? x.replace(/\/+$/, "") : "/";
+};
+
+const pathname = norm(Astro.url.pathname);
+
+const isActive = (href: string) => {
+  const h = norm(href);
+  if (h === "/") return pathname === "/";
+  return pathname === h || pathname.startsWith(h + "/");
+};
+
+const isActiveAny = (hrefs: string[]) => hrefs.some(isActive);
+
+const servicesHrefs = ["/seo-local", "/google-ads", "/cro-analytics"];
 ---
 
+<!-- Header
+		============================================= -->
+		<header id="header" class="header-size-sm" data-sticky-shrink="false">
+			<div class="container">
+				<div class="header-row">
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo" class="ms-auto ms-lg-0 me-lg-auto">
+						<a href="/">
+							<img class="logo-default" src="/_assets_/images/logo.png" alt="Horizon Conversion">
+						</a>
+					</div><!-- #logo end -->
+
+					<div class="header-misc d-none d-lg-flex">
+
+						<ul class="header-extras">
+							{phone && (
+							  <li>
+								  <i class="i-plain bi-telephone m-0"></i>
+								  <div class="he-text">
+									  Téléphone
+									  <span>{phone}</span>
+								  </div>
+							  </li>
+							)}
+							{email && (
+							  <li>
+								  <i class="i-plain bi-envelope m-0"></i>
+								  <div class="he-text">
+									  Email
+									  <span>{email}</span>
+								  </div>
+							  </li>
+							)}
+							<li>
+								<i class="i-plain bi-clock m-0"></i>
+								<div class="he-text">
+									Disponibilité
+									<span>Lun–Ven 9h–18h</span>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row justify-content-between flex-row-reverse flex-lg-row justify-content-lg-center">
+
+						<div class="primary-menu-trigger">
+							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+							</button>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<nav class="primary-menu with-arrows">
+
+							<ul class="menu-container">
+								<li class={`menu-item ${isActive("/") ? "current" : ""}`}><a class="menu-link" href="/"><div>Accueil</div></a></li>
+								<li class={`menu-item ${isActiveAny(servicesHrefs) ? "current" : ""}`}><a class="menu-link" href="/seo-local"><div>Services</div></a>
+									<ul class="sub-menu-container">
+										<li class={`menu-item ${isActive("/seo-local") ? "current" : ""}`}><a class="menu-link" href="/seo-local"><div>SEO local</div></a></li>
+										<li class={`menu-item ${isActive("/google-ads") ? "current" : ""}`}><a class="menu-link" href="/google-ads"><div>Google Ads</div></a></li>
+										<li class={`menu-item ${isActive("/cro-analytics") ? "current" : ""}`}><a class="menu-link" href="/cro-analytics"><div>CRO + Analytics</div></a></li>
+									</ul>
+								</li>
+								<li class={`menu-item ${isActive("/metiers") ? "current" : ""}`}><a class="menu-link" href="/metiers"><div>Métiers</div></a></li>
+								<li class={`menu-item ${isActive("/methode") ? "current" : ""}`}><a class="menu-link" href="/methode"><div>Méthode</div></a></li>
+								<li class={`menu-item ${isActive("/tarifs") ? "current" : ""}`}><a class="menu-link" href="/tarifs"><div>Tarifs</div></a></li>
+								<li class={`menu-item ${isActive("/contact") ? "current" : ""}`}><a class="menu-link" href="/contact"><div>Contact</div></a></li>
+							</ul>
+
+						</nav><!-- #primary-menu end -->
+
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->

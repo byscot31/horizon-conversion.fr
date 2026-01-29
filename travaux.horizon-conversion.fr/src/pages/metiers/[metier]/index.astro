@@ -1,4 +1,43 @@
 ---
 // src/pages/metiers/[metier]/index.astro
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import metiers from "../../../data/metiers.json";
+
+export function getStaticPaths() {
+  return metiers.map((m) => ({
+    params: { metier: m.slug },
+    props: { metier: m },
+  }));
+}
+
+const { metier } = Astro.props;
+
+const title = `Marketing pour ${metier.name} — SEO local, Google Ads, CRO`;
+const description = `SEO local + Google Ads + CRO/Analytics pour ${metier.name}. Plus de demandes, suivi clair (appels, formulaires).`;
 ---
 
+<BaseLayout title={title} description={description}>
+  <section class="content-wrap">
+    <div class="container py-6">
+      <h1 class="mb-3">{metier.name} : plus de demandes</h1>
+      <p class="lead">Pack SEO local + Google Ads + CRO/Analytics adapté aux {metier.name.toLowerCase()}.</p>
+
+      <div class="row col-mb-30 mt-4">
+        <div class="col-md-4">
+          <a class="button w-100 text-center" href="/seo-local">SEO local</a>
+        </div>
+        <div class="col-md-4">
+          <a class="button w-100 text-center" href="/google-ads">Google Ads</a>
+        </div>
+        <div class="col-md-4">
+          <a class="button w-100 text-center" href="/cro-analytics">CRO + Analytics</a>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <a class="button button-large button-dark" href="/contact">Demander un audit</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

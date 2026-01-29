@@ -1,4 +1,124 @@
 ---
 // src/components/Footer.astro
+
+const phone = import.meta.env.PUBLIC_CONTACT_PHONE ?? "";
+const email = import.meta.env.PUBLIC_CONTACT_EMAIL ?? "";
+const phoneHref = phone ? `tel:${phone.replace(/\s+/g, "")}` : "";
+const mailHref = email ? `mailto:${email}` : "";
+
+const year = new Date().getFullYear();
 ---
 
+<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+			<div class="container">
+
+				<!-- Footer Widgets
+				============================================= -->
+				<div class="footer-widgets-wrap">
+
+					<div class="row">
+						<div class="col-lg-9">
+							<div class="widget">
+
+								<img src="/_assets_/images/footer-widget-logo.png" alt="Horizon Conversion" class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
+
+								<p>SEO local, Google Ads et CRO + Analytics pour artisans (Sud Oise / Nord 95).</p>
+
+								<div class="line" style="margin: 30px 0;"></div>
+
+								<div class="row col-mb-30">
+									<div class="col-lg-3 col-6 widget_links">
+										<ul>
+											<li><a href="/">Accueil</a></li>
+											<li><a href="/methode">Méthode</a></li>
+											<li><a href="/tarifs">Tarifs</a></li>
+											<li><a href="/contact">Contact</a></li>
+										</ul>
+									</div>
+
+									<div class="col-lg-3 col-6 widget_links">
+										<ul>
+											<li><a href="/seo-local">SEO local</a></li>
+											<li><a href="/google-ads">Google Ads</a></li>
+											<li><a href="/cro-analytics">CRO + Analytics</a></li>
+										</ul>
+									</div>
+
+									<div class="col-lg-3 col-6 widget_links">
+										<ul>
+											<li><a href="/metiers">Métiers</a></li>
+											<li><a href="/seo-local/senlis">Exemple : SEO Senlis</a></li>
+											<li><a href="/metiers/plombier/senlis">Exemple : Plombier Senlis</a></li>
+										</ul>
+									</div>
+
+									<div class="col-lg-3 col-6 widget_links">
+										<ul>
+											<li><a href="#">Restaurant</a></li>
+											<li><a href="#">Wedding</a></li>
+											<li><a href="#">App Showcase</a></li>
+											<li><a href="#">Magazine</a></li>
+											<li><a href="#">Landing Page</a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-lg-3 mt-5 mt-lg-0">
+							<div class="widget">
+
+								<div class="row col-mb-30">
+									<div class="col-12">
+										<div class="footer-big-contacts">
+											<span>Téléphone :</span>
+											{phone ? <a href={phoneHref}>{phone}</a> : "—"}
+										</div>
+									</div>
+
+									<div class="col-12">
+										<div class="footer-big-contacts">
+											<span>Email :</span>
+											{email ? <a href={mailHref}>{email}</a> : "—"}
+										</div>
+									</div>
+								</div>
+
+								<div class="col-12 mt-4">
+                                <a href="/contact" class="button button-small button-dark button-circle m-0 w-100 text-center">
+                                  Demander un audit
+                                </a>
+                              </div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div><!-- .footer-widgets-wrap end -->
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+				<div class="container">
+
+					<div class="row justify-content-between col-mb-30">
+						<div class="col-12 col-md-auto text-center text-md-start">
+							Copyrights &copy; {year} Horizon Conversion<br>
+							<div class="copyright-links"><a href="/mentions-legales">Mentions légales</a> / <a href="/politique-confidentialite">Politique de confidentialité</a></div>
+						</div>
+
+						<div class="col-12 col-md-auto text-center text-md-end">
+							<div class="copyrights-menu copyright-links">
+								<a href="/">Accueil</a>/<a href="/seo-local">SEO local</a>/<a href="/google-ads">Google Ads</a>/<a href="/cro-analytics">CRO</a>/<a href="/contact">Contact</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div><!-- #copyrights end -->
+		</footer><!-- #footer end -->
