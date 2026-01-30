@@ -1,4 +1,268 @@
 ---
 // src/pages/metiers/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import metiers from "../../data/metiers.json";
+import villes from "../../data/villes.json";
+
+const pageTitle = "Métiers artisans : générer plus d’appels et de devis | Horizon Conversion";
+const pageDescription =
+  "Choisis ton métier (plombier, électricien, couvreur…) et découvre une méthode simple pour être trouvé localement, inspirer confiance et transformer les visites en demandes (Sud Oise & Nord 95).";
+
+// (Optionnel) limiter l’affichage pour garder une page lisible
+const metiersList = Array.isArray(metiers) ? metiers : [];
+const villesList = Array.isArray(villes) ? villes : [];
+
+const topVilles = villesList.slice(0, 6);
+
+// Icônes “métier” (Bootstrap Icons) — fallback bi-tools
+const metierIcon: Record<string, string> = {
+  plombier: "bi-droplet",
+  electricien: "bi-lightning-charge",
+  "chauffagiste-pac": "bi-thermometer-sun",
+  serrurier: "bi-key",
+  couvreur: "bi-house",
+  vitrier: "bi-window",
+  peintre: "bi-brush",
+  macon: "bi-bricks",
+  menuisier: "bi-hammer",
+  carreleur: "bi-grid-3x3-gap",
+  "plaquiste-isolation": "bi-layers",
+  "renovation-globale": "bi-tools",
+};
+
+// Mini FAQ (si ton BaseLayout gère FAQ schema)
+const faqs = [
+  {
+    q: "À quoi sert la page “Métier” (ex : /metiers/plombier) ?",
+    a: "Elle présente ton métier et propose ensuite des pages par ville (ex : /metiers/plombier/senlis) pour viser des recherches très locales qui déclenchent des appels.",
+  },
+  {
+    q: "Est-ce que c’est du “texte SEO” ?",
+    a: "Non : on écrit pour que les clients comprennent vite (zone, prestations, délais, contact). C’est justement ce qui aide Google à mieux te classer.",
+  },
+  {
+    q: "Ça marche pour un artisan solo ?",
+    a: "Oui. L’objectif est simple : apparaître localement, rassurer, et faciliter la prise de contact (appel / devis).",
+  },
+];
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Métiers : pages pensées pour générer des demandes</h1>
+          <span>Choisis ton métier → on te guide vers les pages par ville (ultra local, intention forte).</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Métiers</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <!-- Intro (artisan-friendly, sans jargon) -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="heading-block text-center border-bottom-0 mb-4">
+              <h2>Le but : plus d’appels et plus de devis — pas des “visites” pour faire joli</h2>
+              <span>
+                Un client cherche “{`métier + ville`}”, compare 2–3 pros, puis appelle.
+                On construit des pages qui répondent vite : prestations, zone, preuve, contact.
+              </span>
+            </div>
+
+            <div class="row col-mb-50 mt-2">
+              <div class="col-md-4">
+                <div class="feature-box fbox-plain">
+                  <div class="fbox-icon">
+                    <a href="/seo-local"><img src="/_assets_/images/icons/building.png" alt="Être trouvé localement" /></a>
+                  </div>
+                  <div class="fbox-content">
+                    <h3>Être trouvé près de chez toi</h3>
+                    <p>
+                      On te rend visible sur Google/Maps dans ta zone, sur les recherches qui déclenchent un appel.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="feature-box fbox-plain">
+                  <div class="fbox-icon">
+                    <a href="/google-ads"><img src="/_assets_/images/icons/traffic-cone.png" alt="Demandes rapides" /></a>
+                  </div>
+                  <div class="fbox-content">
+                    <h3>Des demandes “vite” si besoin</h3>
+                    <p>
+                      Si tu veux remplir une semaine creuse : on déclenche des appels rapidement, sans payer pour du vent.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="feature-box fbox-plain">
+                  <div class="fbox-icon">
+                    <a href="/cro-analytics"><img src="/_assets_/images/icons/drawer.png" alt="Convertir le trafic" /></a>
+                  </div>
+                  <div class="fbox-content">
+                    <h3>Transformer les visites en contacts</h3>
+                    <p>
+                      Téléphone visible, preuves, formulaire court : on enlève les freins pour que le client te contacte.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="/contact" class="button button-3d">Demander un audit</a>
+              <span class="mx-2">•</span>
+              <a href="/methode" class="text-decoration-none">Voir la méthode →</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="line my-5"></div>
+
+      <!-- LISTE DES MÉTIERS -> DOIT LIER /metiers/{metier} (et pas /metiers/{metier}/{ville}) -->
+      <div class="container">
+        <div class="row text-center mx-auto" style="max-width: 980px;">
+          <div class="col-lg-12">
+            <div class="heading-block text-center">
+              <h3>Choisis ton métier</h3>
+              <span>Tu arriveras ensuite sur la page du métier, puis tu choisis la ville.</span>
+            </div>
+
+            <div id="metiers-list">
+              <div class="row align-items-stretch grid-border">
+                {metiersList.map((m: any) => (
+                  <div class="col-lg-3 col-md-6">
+                    <div class="feature-box fbox-center fbox-plain border-bottom-0">
+                      <div class="fbox-icon">
+                        <i class={`bi ${metierIcon[m.slug] || "bi-tools"}`} style="font-size: 26px;"></i>
+                      </div>
+                      <div class="fbox-content">
+                        <h3>
+                          <a href={`/metiers/${m.slug}`} class="text-dark">
+                            {m.name}
+                          </a>
+                        </h3>
+                        <small class="text-muted d-block">
+                          Voir les pages par ville →
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <a href="/contact" class="button button-3d">Je veux des demandes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="line my-5"></div>
+
+      <!-- Section “comment ça marche” + villes (sans forcer les liens métier/ville ici) -->
+      <div class="container">
+        <h2 class="text-center ls-1 mb-5">Comment ça marche (simple)</h2>
+
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            <h3><strong class="color">1.</strong> On part de ton métier</h3>
+            <p>
+              Chaque métier a sa page dédiée (ex : “Plombier”). Elle explique clairement ce que le client veut savoir
+              (prestations, urgence, zone, délais) et renvoie vers les pages par ville.
+            </p>
+
+            <div class="divider divider-right">
+              <a href="#metiers-list" data-scrollto="#metiers-list"><i class="fa-solid fa-chevron-up"></i></a>
+            </div>
+
+            <h3><strong class="color">2.</strong> Puis on vise la ville et les alentours</h3>
+            <p>
+              Les pages “métier + ville” servent à capter la longue traîne locale (les recherches très concrètes).
+              Et comme tu interviens rarement “juste une ville”, on affiche aussi les communes proches.
+            </p>
+
+            <div class="divider divider-right">
+              <a href="#metiers-list" data-scrollto="#metiers-list"><i class="fa-solid fa-chevron-up"></i></a>
+            </div>
+
+            <h3><strong class="color">3.</strong> On pousse le contact (sans friction)</h3>
+            <p>
+              Un artisan n’a pas besoin d’un site compliqué : téléphone visible, bouton d’appel mobile,
+              preuves (avis / photos), et un formulaire court. Résultat : plus d’appels.
+            </p>
+          </div>
+
+          <div class="col-lg-6">
+            <h3><strong class="color">Où on travaille ?</strong></h3>
+            <p>
+              Sud Oise &amp; Nord 95 (et alentours). Tu peux commencer par une ville, puis étendre.
+            </p>
+
+            <div class="row g-3">
+              {topVilles.map((v: any) => (
+                <div class="col-6">
+                  <a
+                    href={`/villes/${v.slug}`}
+                    class="d-block text-decoration-none p-3 border rounded-3 h-100"
+                  >
+                    <strong class="text-dark d-block">{v.name}</strong>
+                    <small class="text-muted">
+                      {v.dept ? `(${v.dept})` : ""} {v.regionHint ? `— ${v.regionHint}` : ""}
+                    </small>
+                    <div class="text-muted mt-2" style="font-size: 13px;">
+                      Voir la ville →
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-4">
+              <a href="/contact" class="button button-3d ms-0">Parler de ton besoin</a>
+              <span class="mx-2">•</span>
+              <a href="/tarifs" class="text-decoration-none">Voir les tarifs →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA pleine largeur -->
+      <a
+        href="/contact"
+        class="button button-3d border-bottom-0 button-full text-center text-end fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          Tu veux plus d’appels et de devis ? <strong>Demander un audit</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+
+    </div>
+  </section>
+  <!-- #content end -->
+</BaseLayout>

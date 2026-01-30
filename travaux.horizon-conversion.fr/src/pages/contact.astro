@@ -1,4 +1,302 @@
 ---
 // src/pages/contact.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Contact | Horizon Conversion";
+const pageDescription =
+  "Demander un audit : on regarde votre zone, votre site, Google/Maps et (si besoin) Google Ads. Objectif : plus d’appels et de devis, sans jargon.";
+
+const faqs = [
+  {
+    q: "C’est payant ?",
+    a: "On peut faire un premier échange rapide pour cadrer. Ensuite, si tu veux un audit complet et actionnable, on te le propose clairement (sans surprise).",
+  },
+  {
+    q: "Tu travailles sur quelles zones ?",
+    a: "Priorité Sud Oise / Nord 95. Si tu es un peu plus loin, on regarde au cas par cas.",
+  },
+  {
+    q: "Je veux juste plus d’appels, tu fais quoi concrètement ?",
+    a: "On commence par le plus rentable : contact simple (mobile), preuves (avis/photos), Google Maps propre, puis des pages locales utiles. La pub seulement si tu veux accélérer.",
+  },
+  {
+    q: "J’ai déjà un site, ça sert quand même ?",
+    a: "Oui. Souvent le problème n’est pas “le site”, mais ce qui freine l’appel : téléphone, page contact, message, avis, zone. On corrige ça en premier.",
+  },
+];
+
+const quickCards = [
+  {
+    title: "Ce qu’on regarde",
+    items: [
+      "Ta zone réelle d’intervention",
+      "Ce que les gens tapent sur Google (local)",
+      "Ta fiche Google (Maps) + avis/photos",
+      "Ton site : est-ce que ça fait appeler ?",
+      "Si pub : est-ce que ça ramène des demandes utiles ?",
+    ],
+  },
+  {
+    title: "Ce que tu reçois",
+    items: [
+      "Une recommandation simple (pack ou one-shot)",
+      "Des priorités claires (quoi faire d’abord)",
+      "Un plan “action” sans jargon",
+      "Si ok : mise en place + suivi des demandes",
+    ],
+  },
+];
+
+const contact = {
+  email: "contact@horizon-conversion.fr",
+  phone: "", // optionnel si tu veux l’afficher
+};
+
+const cta = {
+  title: "Demande un audit",
+  subtitle: "Dis-nous ton métier + ta ville + ta zone. On te répond avec une reco simple.",
+};
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Contact</h1>
+          <span>On parle “terrain” : appels, devis, zone. Pas de blabla.</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container">
+
+        <div class="row gx-5 align-items-start">
+          {/* Col gauche : message + infos */}
+          <div class="col-lg-5">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h2>{cta.title}</h2>
+              <span>{cta.subtitle}</span>
+            </div>
+
+            <p class="lead">
+              Tu veux plus d’appels et de devis, mais <strong>des demandes utiles</strong> (dans ta zone, sur tes prestations).
+              On commence par ce qui rapporte vite : <strong>contact simple</strong>, <strong>preuves</strong>, <strong>Google/Maps</strong>.
+            </p>
+
+            <div class="row g-4 mt-2">
+              {quickCards.map((c) => (
+                <div class="col-12">
+                  <div class="border rounded-3 p-4">
+                    <h4 class="mb-2">{c.title}</h4>
+                    <ul class="iconlist mb-0">
+                      {c.items.map((x) => (
+                        <li><i class="fa-solid fa-check"></i> {x}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="line my-5"></div>
+
+            <h4 class="mb-2">Infos</h4>
+            <ul class="iconlist iconlist-large">
+              <li>
+                <i class="fa-solid fa-envelope"></i>
+                <a class="text-decoration-none" href={`mailto:${contact.email}`}>{contact.email}</a>
+              </li>
+              {contact.phone ? (
+                <li>
+                  <i class="fa-solid fa-phone"></i>
+                  <a class="text-decoration-none" href={`tel:${contact.phone}`}>{contact.phone}</a>
+                </li>
+              ) : null}
+              <li><i class="fa-solid fa-location-dot"></i> Sud Oise / Nord 95</li>
+              <li><i class="fa-solid fa-clock"></i> Réponse sous 24–48h (jours ouvrés)</li>
+            </ul>
+
+            <div class="mt-3">
+              <a class="text-decoration-none" href="/tarifs">Voir les tarifs →</a>
+              <span class="mx-2">•</span>
+              <a class="text-decoration-none" href="/methode">Voir la méthode →</a>
+            </div>
+          </div>
+
+          {/* Col droite : formulaire */}
+          <div class="col-lg-7">
+            <div class="border rounded-3 p-4 p-lg-5">
+              <h3 class="mb-1">Décris ton besoin en 1 minute</h3>
+              <p class="text-muted mb-4">
+                Plus tu es précis (ville + alentours + prestations), plus la reco sera bonne.
+              </p>
+
+              {/* ✅ Option A : ton formulaire HubSpot custom (si tu as déjà ton composant) */}
+              {/* <HubspotFormCanvas /> */}
+
+              {/* ✅ Option B : formulaire HTML (fallback propre) */}
+              <form method="post" action="/api/contact" class="row g-3" novalidate>
+                <div class="col-md-6">
+                  <label class="form-label" for="firstname">Prénom *</label>
+                  <input class="form-control" id="firstname" name="firstname" type="text" required />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="lastname">Nom *</label>
+                  <input class="form-control" id="lastname" name="lastname" type="text" required />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="email">Email *</label>
+                  <input class="form-control" id="email" name="email" type="email" required />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="phone">Téléphone</label>
+                  <input class="form-control" id="phone" name="phone" type="tel" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="metier">Métier *</label>
+                  <input class="form-control" id="metier" name="metier" type="text" placeholder="Ex : Plombier, Électricien..." required />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="ville">Ville principale *</label>
+                  <input class="form-control" id="ville" name="ville" type="text" placeholder="Ex : Senlis" required />
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="zone">Zone d’intervention (alentours)</label>
+                  <input class="form-control" id="zone" name="zone" type="text" placeholder="Ex : 20 km autour de Senlis, Chantilly, Creil..." />
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="objectif">Objectif *</label>
+                  <select class="form-select" id="objectif" name="objectif" required>
+                    <option value="" selected disabled>Choisir…</option>
+                    <option value="plus-appels">Plus d’appels / devis (Google & Maps)</option>
+                    <option value="pub-rapide">Demandes rapides (Google Ads)</option>
+                    <option value="site-convertit">Mon site ne convertit pas</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="message">Explique en 2–3 phrases *</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Ex : Je veux plus de demandes sur (prestation). J’interviens sur (zone). Mon site est (url)…"
+                    required
+                  ></textarea>
+                </div>
+
+                {/* URL site (optionnel mais utile) */}
+                <div class="col-12">
+                  <label class="form-label" for="website">Ton site (si tu en as un)</label>
+                  <input class="form-control" id="website" name="website" type="url" placeholder="https://..." />
+                </div>
+
+                {/* champs cachés UTM (si tu veux capter les campagnes) */}
+                <input type="hidden" name="utm_source" />
+                <input type="hidden" name="utm_medium" />
+                <input type="hidden" name="utm_campaign" />
+                <input type="hidden" name="utm_term" />
+                <input type="hidden" name="utm_content" />
+                <input type="hidden" name="source_page" />
+
+                <div class="col-12 mt-2">
+                  <button type="submit" class="button button-3d m-0 w-100 text-center">
+                    Envoyer ma demande
+                  </button>
+                  <small class="text-muted d-block mt-2">
+                    On n’envoie pas de spam. Juste une réponse claire + une reco simple.
+                  </small>
+                </div>
+              </form>
+            </div>
+
+            <div class="mt-4 border rounded-3 p-4">
+              <h4 class="mb-2">Astuce pour gagner du temps</h4>
+              <p class="mb-0">
+                Mets 1–2 liens utiles : ton site, ta fiche Google, ou une annonce Google si tu en as.
+                Ça nous permet de te répondre plus vite et plus juste.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="line my-6"></div>
+
+        {/* FAQ */}
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            {faqs.slice(0, 2).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+          <div class="col-lg-6">
+            {faqs.slice(2).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href="/tarifs"
+        class="button button-3d border-bottom-0 button-full text-center mb-0 fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          Tu veux voir les packs ? <strong>Tarifs clairs ici</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+    </div>
+  </section><!-- #content end -->
+</BaseLayout>
+
+<script>
+  // Remplissage UTM + source_page (fallback simple, sans dépendances)
+  const params = new URLSearchParams(window.location.search);
+
+  const setIf = (name) => {
+    const el = document.querySelector(`input[name="${name}"]`);
+    if (!el) return;
+    const v = params.get(name);
+    if (v) el.value = v;
+  };
+
+  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(setIf);
+
+  const sp = document.querySelector('input[name="source_page"]');
+  if (sp) sp.value = window.location.pathname;
+</script>

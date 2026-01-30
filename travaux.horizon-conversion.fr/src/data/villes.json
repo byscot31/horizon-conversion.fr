@@ -1,46 +1,50 @@
-// src/data/villes.json
-
 [
   {
     "slug": "senlis",
     "name": "Senlis",
     "dept": "60",
     "regionHint": "Sud Oise",
-    "around": ["Chamant", "Vineuil-Saint-Firmin", "Courteuil", "Mont-l'Évêque", "Aumont-en-Halatte", "Barbery", "Orry-la-Ville"]
+    "around": ["Chamant", "Courteuil", "Vineuil-Saint-Firmin", "Barbery", "Montépilloy", "Aumont-en-Halatte", "Orry-la-Ville"],
+    "localText": "À Senlis, les demandes sont souvent très “proches” : les clients cherchent un pro disponible vite, dans un rayon court, et comparent 2 ou 3 résultats avant d’appeler. L’enjeu, ce n’est pas d’attirer des visiteurs partout en France : c’est d’être visible ici, au bon moment, avec des infos claires (zone, prestations, horaires) et de quoi rassurer (avis, réalisations, photos). On travaille donc une présence locale propre, pensée pour déclencher l’appel ou la demande de devis, sans texte inutile.\n\nCette page couvre Senlis et les communes voisines comme Chamant, Courteuil, Vineuil-Saint-Firmin, Barbery, Montépilloy, Aumont-en-Halatte ou Orry-la-Ville. L’objectif est simple : que tes futurs clients te trouvent rapidement, comprennent en quelques secondes si tu interviens chez eux, et puissent te contacter sans friction."
   },
   {
     "slug": "chantilly",
     "name": "Chantilly",
     "dept": "60",
     "regionHint": "Sud Oise",
-    "around": ["Gouvieux", "Lamorlaye", "Coye-la-Forêt", "Avilly-Saint-Léonard", "Vineuil-Saint-Firmin", "Orry-la-Ville"]
+    "around": ["Gouvieux", "Lamorlaye", "Avilly-Saint-Léonard", "Coye-la-Forêt", "Vineuil-Saint-Firmin", "Orry-la-Ville", "Saint-Leu-d'Esserent"],
+    "localText": "À Chantilly, une page locale efficace doit aller droit au but : zone d’intervention claire, prestations bien présentées, et contact immédiat (téléphone visible, formulaire court). Les gens ne lisent pas un “site vitrine” comme une brochure : ils veulent savoir si tu interviens chez eux, à quel délai, et s’ils peuvent te joindre tout de suite.\n\nIci, on couvre Chantilly et les alentours comme Gouvieux, Lamorlaye, Avilly-Saint-Léonard, Coye-la-Forêt, Vineuil-Saint-Firmin, Orry-la-Ville ou Saint-Leu-d’Esserent. Le but : générer des demandes utiles autour de Chantilly, et éviter les prises de contact hors zone ou hors prestation."
   },
   {
     "slug": "creil",
     "name": "Creil",
     "dept": "60",
     "regionHint": "Sud Oise",
-    "around": ["Nogent-sur-Oise", "Montataire", "Villers-Saint-Paul", "Saint-Leu-d'Esserent", "Thiverny", "Verneuil-en-Halatte"]
+    "around": ["Nogent-sur-Oise", "Montataire", "Saint-Leu-d'Esserent", "Thiverny", "Villers-Saint-Paul", "Verneuil-en-Halatte", "Pont-Sainte-Maxence"],
+    "localText": "À Creil, une présence locale performante repose sur deux choses : être visible sur des recherches très concrètes (devis, urgence, prestation précise) et transformer cette visibilité en appels. Ce n’est pas une question de “faire joli” : c’est une question de parcours simple, de messages clairs, et de preuves visibles qui rassurent rapidement.\n\nCette page s’adresse à Creil et aux communes proches comme Nogent-sur-Oise, Montataire, Saint-Leu-d’Esserent, Thiverny, Villers-Saint-Paul, Verneuil-en-Halatte ou Pont-Sainte-Maxence. L’idée est d’attirer des demandes locales qualifiées et de rendre la prise de contact évidente, surtout sur mobile."
   },
   {
     "slug": "compiegne",
     "name": "Compiègne",
     "dept": "60",
     "regionHint": "Oise",
-    "around": ["Margny-lès-Compiègne", "Venette", "Le Meux", "Lacroix-Saint-Ouen", "Choisy-au-Bac", "Jaux"]
+    "around": ["Margny-lès-Compiègne", "Venette", "Clairoix", "Choisy-au-Bac", "Le Meux", "Jaux", "Lacroix-Saint-Ouen"],
+    "localText": "À Compiègne, les pages locales doivent être utiles avant tout : elles servent à répondre vite à une intention forte (devis, dépannage, prestation précise) et à guider vers un contact. On évite les textes génériques : on structure l’essentiel (prestations, zone, délais, avis/preuves) pour que le client décide rapidement.\n\nCette page couvre Compiègne et les communes voisines comme Margny-lès-Compiègne, Venette, Clairoix, Choisy-au-Bac, Le Meux, Jaux ou Lacroix-Saint-Ouen. L’objectif est de capter des demandes autour de Compiègne, avec une info claire et une prise de contact simple."
   },
   {
     "slug": "cergy",
     "name": "Cergy",
     "dept": "95",
-    "regionHint": "Nord Val-d'Oise",
-    "around": ["Pontoise", "Osny", "Éragny", "Jouy-le-Moutier", "Vauréal", "Courdimanche"]
+    "regionHint": "Nord 95",
+    "around": ["Pontoise", "Osny", "Éragny", "Courdimanche", "Vauréal", "Neuville-sur-Oise", "Saint-Ouen-l'Aumône"],
+    "localText": "À Cergy, l’enjeu d’une page locale, c’est de capter des recherches très “intention” (devis, intervention, besoin immédiat) et de rendre le contact ultra simple. Le client scrolle vite, compare vite, et appelle vite — surtout sur mobile. Donc on mise sur un message clair, une zone bien cadrée et une page qui rassure.\n\nCette page couvre Cergy et les communes proches comme Pontoise, Osny, Éragny, Courdimanche, Vauréal, Neuville-sur-Oise ou Saint-Ouen-l’Aumône. Le but est de générer des demandes utiles autour de Cergy, sans attirer des contacts hors secteur."
   },
   {
-    "slug": "lisle-adam",
+    "slug": "l-isle-adam",
     "name": "L'Isle-Adam",
     "dept": "95",
-    "regionHint": "Nord Val-d'Oise",
-    "around": ["Parmain", "Mériel", "Auvers-sur-Oise", "Valmondois", "Presles", "Nerville-la-Forêt"]
+    "regionHint": "Nord 95",
+    "around": ["Parmain", "Presles", "Mériel", "Méry-sur-Oise", "Valmondois", "Champagne-sur-Oise", "Nerville-la-Forêt"],
+    "localText": "À L’Isle-Adam, les demandes locales se gagnent souvent sur la confiance : avis visibles, réalisations, et une présentation très claire des prestations et de la zone d’intervention. Une page locale bien faite ne doit pas “raconter une histoire” : elle doit aider un client à décider et à contacter rapidement.\n\nCette page couvre L’Isle-Adam et les alentours comme Parmain, Presles, Mériel, Méry-sur-Oise, Valmondois, Champagne-sur-Oise ou Nerville-la-Forêt. L’objectif est d’obtenir des appels et des demandes de devis autour de L’Isle-Adam, avec une page pensée pour convertir (sans jargon)."
   }
 ]
