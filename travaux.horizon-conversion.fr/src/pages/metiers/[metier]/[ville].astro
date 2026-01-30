@@ -4,59 +4,444 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import metiers from "../../../data/metiers.json";
 import villes from "../../../data/villes.json";
+import services from "../../../data/services.json";
 
 export function getStaticPaths() {
-  const paths = [];
-  for (const m of metiers) {
-    for (const v of villes) {
-      paths.push({
-        params: { metier: m.slug, ville: v.slug },
-        props: { metier: m, ville: v },
-      });
-    }
-  }
-  return paths;
+  return (Array.isArray(metiers) ? metiers : []).flatMap((m: any) =>
+    (Array.isArray(villes) ? villes : []).map((v: any) => ({
+      params: { metier: m.slug, ville: v.slug },
+      props: { metierObj: m, villeObj: v },
+    })),
+  );
 }
 
-const { metier, ville } = Astro.props;
+const { metierObj, villeObj } = Astro.props;
+const { metier, ville } = Astro.params;
 
-const title = `SEO local, Google Ads & CRO pour ${metier.name} à ${ville.name}`;
-const description = `Plus de demandes pour ${metier.name} à ${ville.name} et alentours : SEO local + Google Ads + CRO/Analytics (tracking appels & formulaires).`;
+const trade = metierObj || (Array.isArray(metiers) ? metiers : []).find((m: any) => m.slug === metier);
+const city = villeObj || (Array.isArray(villes) ? villes : []).find((v: any) => v.slug === ville);
+
+if (!trade) throw new Error(`Métier inconnu: ${metier}`);
+if (!city) throw new Error(`Ville inconnue: ${ville}`);
+
+const cityName = city.name;
+const dept = city.dept ? String(city.dept) : "";
+const region = city.regionHint ? String(city.regionHint) : "";
+const around = Array.isArray(city.around) ? city.around : [];
+const localText = typeof city.localText === "string" ? city.localText : "";
+
+// Helpers
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+const lower = (s: string) => (s ? s.toLowerCase() : s);
+const metierLabel = cap(String(trade.name || trade.slug));
+
+// Petit “random” déterministe (pour varier un peu le texte SANS IA, et rester stable au build)
+function hashSeed(input: string) {
+  let h = 2166136261;
+  for (let i = 0; i < input.length; i++) {
+    h ^= input.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return Math.abs(h);
+}
+const seed = hashSeed(`${trade.slug}__${city.slug}`);
+const pick = (arr: string[]) => arr[seed % arr.length];
+
+// Services (cross-sell) — pages déjà existantes côté /[service]/[ville]
+const svc = (slug: string) => (Array.isArray(services) ? services : []).find((s: any) => s.slug === slug);
+const svcLabel = (slug: string) => {
+  if (slug === "seo-local") return "Référencement local (Google / Maps)";
+  if (slug === "google-ads") return "Google Ads (demandes rapides)";
+  if (slug === "cro-analytics") return "Optimisation du site (plus d’appels)";
+  return cap(String(svc(slug)?.name || slug));
+};
+
+// Copy “métier-friendly” (tu t’adresses à l’artisan du métier)
+const hook = pick([
+  `Tu es ${lower(metierLabel)} à ${cityName} et tu veux plus d’appels ?`,
+  `Objectif : remplir ton planning de ${lower(metierLabel)} autour de ${cityName}.`,
+  `À ${cityName}, les clients comparent vite : il faut être visible et rassurer.`,
+  `On vise simple : plus de demandes utiles pour un ${lower(metierLabel)} à ${cityName}.`,
+]);
+
+const promise = pick([
+  `Être trouvé sur Google/Google Maps, déclencher l’appel, et éviter les demandes hors zone.`,
+  `Apparaître sur les recherches “urgent / devis” et convertir en appels (pas en clics).`,
+  `Transformer ton site en machine à demandes : téléphone visible, preuves, formulaire court.`,
+  `Rendre ton entreprise évidente à choisir : avis, photos, zone claire, contact immédiat.`,
+]);
+
+const pageTitle = `${metierLabel} à ${cityName} : plus d'appels & devis | Horizon Conversion`;
+const pageDescription = `${metierLabel} à ${cityName}${dept ? ` (${dept})` : ""} : être visible sur Google/Maps, recevoir des demandes utiles (SEO local, Google Ads, site qui convertit). Zone : ${cityName}${around.length ? ` + ${around.slice(0, 2).join(", ")}` : ""}.`;
+
+// Longue traîne (intention forte) — exemples concrets, pas “liste SEO à bourrer”
+const patterns = {
+  urgent: [
+    `${metierLabel} urgence ${cityName}`,
+    `${metierLabel} dépannage ${cityName}`,
+    `${metierLabel} disponible ${cityName}`,
+  ],
+  devis: [
+    `devis ${metierLabel} ${cityName}`,
+    `${metierLabel} prix ${cityName}`,
+    `${metierLabel} tarif ${cityName}`,
+  ],
+  proche: [
+    `${metierLabel} autour de ${cityName}`,
+    `${metierLabel} près de moi ${cityName}`,
+    `${metierLabel} ${cityName} ${dept ? dept : ""}`.trim(),
+  ],
+  precision: [
+    // on reste générique (sans inventer des prestations non souhaitées)
+    `${metierLabel} recommandé ${cityName}`,
+    `meilleur ${metierLabel} ${cityName}`,
+    `${metierLabel} avis ${cityName}`,
+  ],
+};
+
+const aroundSearches = around.slice(0, 3).map((n: string) => `${metierLabel} ${n}`);
+const frequentSearches = [
+  ...patterns.urgent,
+  ...patterns.devis,
+  ...patterns.proche,
+  patterns.precision[0],
+  ...aroundSearches,
+].filter(Boolean).slice(0, 10);
+
+// Cartes “ce qu’on met en place” (CRO-friendly)
+const cards = [
+  {
+    title: "Google Maps (local)",
+    text: `Être visible quand un client tape “${lower(metierLabel)} ${cityName}”. Fiche Google propre + preuves (avis/photos).`,
+    icon: "/_assets_/images/icons/building.png",
+    href: `/seo-local/${city.slug}`,
+  },
+  {
+    title: "Demandes rapides (Search)",
+    text: `Si tu veux des demandes maintenant : annonces sur les requêtes “urgence / devis”, avec zone cadrée autour de ${cityName}.`,
+    icon: "/_assets_/images/icons/traffic-cone.png",
+    href: `/google-ads/${city.slug}`,
+  },
+  {
+    title: "Page qui déclenche l’appel",
+    text: "Téléphone visible, bouton d’appel mobile, formulaire très court : moins d’hésitation, plus de contacts.",
+    icon: "/_assets_/images/icons/drawer.png",
+    href: `/cro-analytics/${city.slug}`,
+  },
+  {
+    title: "Filtrer les mauvaises demandes",
+    text: `On évite le hors zone / hors sujet : messages clairs, zone affichée, exclusions en pub si besoin.`,
+    icon: "/_assets_/images/icons/bank.png",
+    href: "/methode",
+  },
+  {
+    title: "Preuves qui rassurent",
+    text: "Avis clients, photos, réalisations : le client choisit vite celui qui inspire confiance.",
+    icon: "/_assets_/images/icons/paint-brush.png",
+    href: "/methode",
+  },
+  {
+    title: "Suivi simple (pas de blabla)",
+    text: "On suit les appels / formulaires, et on ajuste. Tu vois ce qui rapporte, point.",
+    icon: "/_assets_/images/icons/paper-money.png",
+    href: "/methode",
+  },
+];
+
+// FAQ (artisan-friendly)
+const faqs = [
+  {
+    q: `Je suis ${lower(metierLabel)} à ${cityName} : ça prend combien de temps pour voir des demandes ?`,
+    a: "Ça dépend du point de départ. Google/Maps progresse sur quelques semaines. Google Ads peut générer des demandes plus vite (si la campagne est bien filtrée).",
+  },
+  {
+    q: "Je ne veux pas être appelé hors zone : possible ?",
+    a: `Oui. On affiche clairement ta zone, on structure les pages, et si on fait de la pub on cible/filtre autour de ${cityName}.`,
+  },
+  {
+    q: "Mon site existe déjà : vous refaites tout ?",
+    a: "Pas forcément. Souvent on améliore l’essentiel : contact, preuves, messages, et suivi des demandes.",
+  },
+  {
+    q: "C’est quoi le minimum qui convertit chez un artisan ?",
+    a: "Téléphone visible (mobile), bouton d’appel, une promesse claire, des avis/photos, et une page devis simple.",
+  },
+];
+
+const cta = {
+  href: "/contact",
+  line: `Tu es ${lower(metierLabel)} à ${cityName} ?`,
+  strong: "Demander un audit (gratuit)",
+};
+
+// Autres villes (catalogue) : 9 max
+const otherCities = (Array.isArray(villes) ? villes : [])
+  .filter((v: any) => v.slug !== city.slug)
+  .slice(0, 9);
+
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="content-wrap">
-    <div class="container py-6">
-      <h1 class="mb-2">{metier.name} à {ville.name}</h1>
-      <p class="lead mb-4">SEO local + Google Ads + CRO/Analytics, orienté demandes (devis/appels).</p>
-
-      <div class="row col-mb-30">
-        <div class="col-lg-8">
-          <h2>Ce qui marche le mieux localement</h2>
-          <ul>
-            <li>Google Business Profile + pages locales (SEO local)</li>
-            <li>Google Ads Search sur intentions “devis / urgence”</li>
-            <li>Landing pages + suivi (CRO + Analytics)</li>
-          </ul>
-
-          {ville.around?.length ? (
-            <>
-              <h2>Zone : {ville.name} + alentours</h2>
-              <p>{ville.around.join(", ")}.</p>
-            </>
-          ) : null}
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark">
+    <img src="demos/construction/images/slider/1.jpg" class="parallax-bg" alt={`${metierLabel} à ${cityName}`} />
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>{metierLabel} à {cityName}</h1>
+          <span>{hook} {promise}</span>
         </div>
 
-        <div class="col-lg-4">
-          <div class="card p-4 shadow-sm">
-            <h3 class="h5 mb-3">Demander un audit</h3>
-            <a class="button button-large w-100 text-center" href="/contact">Recevoir un diagnostic</a>
-            <div class="mt-3 small text-muted">
-              Mesure : clic téléphone, formulaire, sources.
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers">Métiers</a></li>
+            <li class="breadcrumb-item"><a href={`/metiers/${trade.slug}`}>{metierLabel}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {cityName}{dept ? ` (${dept})` : ""}{region ? ` — ${region}` : ""}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <div class="section header-stick">
+        <h2 class="text-center mb-0 ls-1">
+          Obtenir des demandes utiles de {metierLabel} à {cityName}
+        </h2>
+      </div>
+
+      <div class="container">
+
+        {/* Intro (artisan-friendly) */}
+        <div class="row gx-5 align-items-start">
+          <div class="col-lg-6">
+            <h3 class="mb-3">Ce qu’on fait, concrètement</h3>
+            <p class="mb-3">
+              {promise}
+            </p>
+
+            {/* Texte ville unique (venant du JSON, donc réellement différent par ville) */}
+            {localText ? (
+              <div class="mb-4">
+                {localText.split("\n\n").map((para: string) => <p>{para}</p>)}
+              </div>
+            ) : (
+              <p class="mb-4">
+                À {cityName}, les clients veulent une réponse rapide : ils cherchent, comparent 2–3 résultats, puis ils appellent.
+                Le but n’est pas d’avoir “plus de trafic” partout, mais d’être visible ici, et de rendre le contact évident.
+              </p>
+            )}
+
+            {/* Zone / alentours */}
+            {around.length ? (
+              <>
+                <div class="divider divider-sm my-4"></div>
+                <h4 class="mb-2">Zone : {cityName} + alentours</h4>
+                <p class="mb-3">
+                  Pour cadrer la zone (et éviter les demandes hors secteur), on met en avant les communes proches.
+                </p>
+                <ul class="iconlist mb-4">
+                  {around.slice(0, 10).map((n: string) => (
+                    <li><i class="fa-solid fa-check"></i> {n}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+
+            <a href={cta.href} class="button button-3d ms-0 mb-4">
+              {cta.strong}
+            </a>
+
+            <div class="mt-2">
+              <a class="text-decoration-none" href="/tarifs">Voir les tarifs →</a>
+              <span class="mx-2">•</span>
+              <a class="text-decoration-none" href="/methode">Voir la méthode →</a>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <h3 class="mb-3">Recherches qui déclenchent un appel</h3>
+            <p class="mb-3">
+              Exemples de requêtes très locales (intention forte). L’objectif : être visible au bon moment, puis convertir en contact.
+            </p>
+            <ul class="iconlist mb-4">
+              {frequentSearches.map((k: string) => (
+                <li><i class="fa-solid fa-check"></i> {k}</li>
+              ))}
+            </ul>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h4 class="mb-2">3 leviers qui marchent (sans jargon)</h4>
+            <ul class="iconlist mb-0">
+              <li><i class="fa-solid fa-check"></i> <strong>Visibilité locale :</strong> Google / Google Maps</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Demandes rapides :</strong> Google Ads (si besoin)</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Conversion :</strong> contact simple + preuves</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="divider divider-center divider-border"><i class="bi-gem"></i></div>
+
+        {/* Cartes “mise en place” */}
+        <div class="row col-mb-50 mb-0">
+          {cards.map((c) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature-box fbox-plain">
+                <div class="fbox-icon">
+                  <a href={c.href}><img src={c.icon} alt={c.title} /></a>
+                </div>
+                <div class="fbox-content">
+                  <h3>{c.title}</h3>
+                  <p>{c.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="line"></div>
+
+        {/* Bloc “pages locales utiles” */}
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            <h3><strong class="color">1.</strong> Une page qui donne envie d’appeler</h3>
+            <p>
+              Un artisan n’a pas besoin d’un site compliqué. Il a besoin d’un site qui fait gagner des appels :
+              téléphone visible, bouton d’appel sur mobile, formulaire court, et réponses aux questions clés (zone, délai, prestations).
+            </p>
+
+            <div class="divider divider-right">
+              <a href="#metiers-list" data-scrollto="#metiers-list"><i class="fa-solid fa-chevron-up"></i></a>
+            </div>
+
+            <h3><strong class="color">2.</strong> Google Maps : la base pour {cityName}</h3>
+            <p>
+              La plupart des demandes locales passent par Google/Maps. Si ta fiche est propre + des avis + des photos,
+              tu gagnes des appels “gratuits” (hors pub). On s’occupe de rendre ça clair et efficace.
+            </p>
+
+            <div class="divider divider-right">
+              <a href="#metiers-list" data-scrollto="#metiers-list"><i class="fa-solid fa-chevron-up"></i></a>
+            </div>
+
+            <h3><strong class="color">3.</strong> Si tu veux des demandes vite</h3>
+            <p>
+              Google Ads peut aider quand tu veux remplir vite (saison, creux, lancement). La clé : filtrer (hors zone / hors sujet)
+              et envoyer vers une page qui convertit. Sinon, tu payes “pour du vent”.
+            </p>
+          </div>
+
+          <div class="col-lg-6" id="metiers-list">
+            <h3><strong class="color">En pratique</strong> : tes pages “service × ville”</h3>
+            <p class="mb-4">
+              Pour {metierLabel} à {cityName}, tu peux renvoyer vers les pages “service × ville” (elles expliquent chaque levier).
+            </p>
+
+            <div class="row col-mb-30">
+              <div class="col-sm-12">
+                <div class="feature-box media-box">
+                  <div class="fbox-media">
+                    <img class="rounded" src="demos/construction/images/services/1.jpg" alt={`Référencement local à ${cityName}`} />
+                  </div>
+                  <div class="fbox-content px-0">
+                    <h3>{svcLabel("seo-local")}<span class="subtitle"> Google / Maps à {cityName}</span></h3>
+                    <p>Être trouvé localement + inspirer confiance (avis/photos) + contact simple.</p>
+                    <a class="text-decoration-none" href={`/seo-local/${city.slug}`}>Voir la page →</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="feature-box media-box">
+                  <div class="fbox-media">
+                    <img class="rounded" src="demos/construction/images/services/2.jpg" alt={`Google Ads à ${cityName}`} />
+                  </div>
+                  <div class="fbox-content px-0">
+                    <h3>{svcLabel("google-ads")}<span class="subtitle"> demandes rapides</span></h3>
+                    <p>Apparaître sur “urgence / devis”, avec zone cadrée et requêtes filtrées.</p>
+                    <a class="text-decoration-none" href={`/google-ads/${city.slug}`}>Voir la page →</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="feature-box media-box">
+                  <div class="fbox-media">
+                    <img class="rounded" src="demos/construction/images/services/3.jpg" alt={`Optimisation du site à ${cityName}`} />
+                  </div>
+                  <div class="fbox-content px-0">
+                    <h3>{svcLabel("cro-analytics")}<span class="subtitle"> plus d’appels</span></h3>
+                    <p>On enlève la friction : contact immédiat, preuves, suivi des demandes.</p>
+                    <a class="text-decoration-none" href={`/cro-analytics/${city.slug}`}>Voir la page →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <a href={cta.href} class="button button-3d ms-0">
+                {cta.line} <strong>{cta.strong}</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        {/* Autres villes */}
+        <div class="row text-center mx-auto" style="max-width: 960px;">
+          <div class="col-lg-12">
+            <div class="heading-block text-center">
+              <h3>Autres villes (exemples)</h3>
+              <span>Si tu travailles autour de {cityName}, tu peux aussi consulter :</span>
+            </div>
+
+            <div id="faqs-list">
+              <div class="row align-items-stretch grid-border">
+                {otherCities.map((v: any) => (
+                  <div class="col-lg-3 col-md-6">
+                    <div class="feature-box fbox-center fbox-plain border-bottom-0">
+                      <div class="fbox-icon">
+                        <i class="icon-realestate-plan3"></i>
+                      </div>
+                      <div class="fbox-content">
+                        <h3>
+                          <a href={`/metiers/${trade.slug}/${v.slug}`} class="text-dark">
+                            {metierLabel} {v.name}
+                          </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="button button-3d mt-5">
+              <a class="text-dark text-decoration-none" href={`/metiers/${trade.slug}`}>Voir la page {metierLabel} (générale)</a>
             </div>
           </div>
         </div>
       </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 button-full text-center text-end fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          {cta.line} <strong>{cta.strong}</strong> <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+
     </div>
-  </section>
+  </section><!-- #content end -->
 </BaseLayout>

@@ -4,64 +4,561 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import services from "../../data/services.json";
 import villes from "../../data/villes.json";
+import metiers from "../../data/metiers.json";
 
 export function getStaticPaths() {
   return services.flatMap((s) =>
     villes.map((v) => ({
       params: { service: s.slug, ville: v.slug },
-      props: { service: s, ville: v },
-    }))
+      props: { serviceObj: s, villeObj: v },
+    })),
   );
 }
 
-const { service, ville } = Astro.props;
+const { serviceObj, villeObj } = Astro.props;
+const { service, ville } = Astro.params;
 
-const title = `${service.name} à ${ville.name} — Horizon Conversion Travaux`;
-const description = `${service.name} pour artisans à ${ville.name} et alentours : plus de demandes (appels/formulaires) avec mesure Analytics.`;
+const svc = serviceObj || services.find((s) => s.slug === service);
+const city = villeObj || villes.find((v) => v.slug === ville);
+
+if (!svc) throw new Error(`Service inconnu: ${service}`);
+if (!city) throw new Error(`Ville inconnue: ${ville}`);
+
+const cityName = city.name;
+const dept = city.dept ? String(city.dept) : "";
+const region = city.regionHint ? String(city.regionHint) : "";
+
+// ✅ Uniques par ville (à remplir dans villes.json)
+const around = Array.isArray(city.around) ? city.around : [];
+const localText = typeof city.localText === "string" ? city.localText : "";
+
+// Helpers
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+const svcLabel = (slug: string) => {
+  if (slug === "seo-local") return "Référencement local";
+  if (slug === "google-ads") return "Publicité Google";
+  if (slug === "cro-analytics") return "Optimisation du site";
+  return cap(String(svc?.name || slug));
+};
+
+const svcShort = (slug: string) => {
+  if (slug === "seo-local") return "Visibilité Google & Google Maps";
+  if (slug === "google-ads") return "Demandes rapides via Google";
+  if (slug === "cro-analytics") return "Plus d’appels avec le même trafic";
+  return cap(String(svc?.short || svc?.name || slug));
+};
+
+// Affichages limités (SEO + UX)
+const villes9 = Array.isArray(villes) ? villes.slice(0, 9) : [];
+const metiers12 = Array.isArray(metiers) ? metiers.slice(0, 12) : [];
+
+// Icônes métiers (Bootstrap Icons)
+const metierIcon: Record<string, string> = {
+  plombier: "bi-droplet",
+  electricien: "bi-lightning-charge",
+  "chauffagiste-pac": "bi-thermometer-sun",
+  serrurier: "bi-key",
+  couvreur: "bi-house",
+  vitrier: "bi-window",
+  peintre: "bi-brush",
+  macon: "bi-bricks",
+  menuisier: "bi-hammer",
+  carreleur: "bi-grid-3x3-gap",
+  "plaquiste-isolation": "bi-layers",
+  "renovation-globale": "bi-tools",
+};
+
+// Clusters longue traîne (intention forte + local)
+// ⚠️ On les UTILISE comme inspirations et exemples, pas comme “liste SEO” à bourrer.
+const keywordClustersByService: Record<string, any> = {
+  "seo-local": {
+    primary: [
+      `référencement local ${cityName}`,
+      `google maps ${cityName}`,
+      `fiche google business ${cityName}`,
+    ],
+    strongIntent: [
+      `remonter sur google ${cityName}`,
+      `être visible sur google maps ${cityName}`,
+      `plus d'appels ${cityName}`,
+      `plus de devis ${cityName}`,
+    ],
+    localQualifiers: [
+      `autour de ${cityName}`,
+      `avis google ${cityName}`,
+      `artisan ${cityName}`,
+    ],
+    exampleQuery: `plombier ${cityName}`,
+  },
+
+  "google-ads": {
+    primary: [
+      `publicité google ${cityName}`,
+      `google ads ${cityName}`,
+      `annonce google ${cityName}`,
+    ],
+    strongIntent: [
+      `devis ${cityName} rapidement`,
+      `appels immédiats ${cityName}`,
+      `urgence ${cityName} devis`,
+      `dépannage ${cityName} rapidement`,
+    ],
+    localQualifiers: [
+      `budget publicité ${cityName}`,
+      `campagne locale ${cityName}`,
+      `prix google ads ${cityName}`,
+    ],
+    exampleQuery: `serrurier urgence ${cityName}`,
+  },
+
+  "cro-analytics": {
+    primary: [
+      `optimiser site artisan ${cityName}`,
+      `améliorer page contact ${cityName}`,
+      `augmenter appels site ${cityName}`,
+    ],
+    strongIntent: [
+      `formulaire devis simple ${cityName}`,
+      `bouton appel mobile ${cityName}`,
+      `plus de devis avec le même trafic ${cityName}`,
+    ],
+    localQualifiers: [
+      `site vitrine artisan ${cityName}`,
+      `avis et réalisations ${cityName}`,
+      `suivi demandes devis ${cityName}`,
+    ],
+    exampleQuery: `devis électricien ${cityName}`,
+  },
+};
+
+const clusters = keywordClustersByService[svc.slug] || {
+  primary: [`${svcLabel(svc.slug)} ${cityName}`],
+  strongIntent: [`devis ${cityName}`, `appels ${cityName}`],
+  localQualifiers: [`artisan ${cityName}`],
+  exampleQuery: `${svcLabel(svc.slug).toLowerCase()} ${cityName}`,
+};
+
+// ✅ Recherches fréquentes (8 items) : super local + intention forte (sans sur-optimiser)
+const aroundSearches = around
+  .slice(0, 3)
+  .map((n: string) => `${svcLabel(svc.slug).toLowerCase()} ${n}`);
+
+const frequentSearches = [
+  clusters.primary[0],
+  clusters.primary[1] || `${svcLabel(svc.slug).toLowerCase()} ${cityName}`,
+  clusters.strongIntent[0],
+  clusters.strongIntent[1] || `devis ${cityName}`,
+  clusters.localQualifiers[0],
+  clusters.localQualifiers[1] || `artisan ${cityName}`,
+  ...aroundSearches,
+  `${svcLabel(svc.slug).toLowerCase()} autour de ${cityName}`,
+].filter(Boolean).slice(0, 8);
+
+// Copy unique “service × ville” (artisan-friendly)
+const copyByService: Record<string, any> = {
+  "seo-local": {
+    h1: `Référencement local à ${cityName} : être visible sur Google`,
+    subtitle: `Visibilité Google + Google Maps pour recevoir plus d’appels à ${cityName}.`,
+    metaDescription: `Référencement local à ${cityName}${dept ? ` (${dept})` : ""} : fiche Google optimisée, avis, photos et pages locales pour être trouvé sur Google et Google Maps (Sud Oise & Nord 95).`,
+    introTitle: `Être trouvé à ${cityName} quand un client cherche maintenant`,
+    introText:
+      `Quand quelqu’un cherche un artisan à ${cityName}, il regarde quelques résultats puis il appelle. L’objectif : être visible, inspirer confiance, et faciliter la prise de contact.`,
+    smallHelpfulParagraph:
+      `Ici, on ne cherche pas à “faire du marketing”. On cherche à faire simple : que votre entreprise ressorte sur Google et Google Maps à ${cityName}, et que le client puisse vous appeler en 10 secondes.`,
+    editorial: [
+      `À ${cityName}, la majorité des demandes part d’une recherche très directe sur mobile. Le client tape une requête courte (souvent “devis”, “urgence” ou “artisan + ville”), compare rapidement, puis choisit l’entreprise qui a l’air la plus fiable.`,
+      `Le référencement local sert à rendre votre entreprise “évidente” : une fiche Google complète (services, horaires, zone), des avis visibles, des photos qui montrent votre sérieux, et un site qui répond aux questions essentielles (prestations, secteur, délais, contact).`,
+      `Ensuite, on met en place des pages locales propres autour de ${cityName} pour ressortir sur des recherches concrètes. Exemple : “${clusters.exampleQuery}” ou “${clusters.strongIntent[0]}”.`,
+    ],
+    features: [
+      { title: "Fiche Google propre", text: "Infos, zone, services, photos, avis : complet et simple." },
+      { title: "Pages locales utiles", text: `Des pages claires pour ressortir à ${cityName} (ex : “${clusters.exampleQuery}”).` },
+      { title: "Contact facile", text: "Téléphone visible, message clair, formulaire court : moins d’hésitation." },
+      { title: "Preuves qui rassurent", text: "Avis, photos, réalisations : on donne confiance avant l’appel." },
+      { title: "Suivi lisible", text: "On suit visibilité + demandes, puis on ajuste au concret." },
+      { title: "Sans blabla", text: "Objectif : plus d’appels et de devis à proximité." },
+    ],
+    faqs: [
+      { q: `En combien de temps je peux remonter sur Google à ${cityName} ?`, a: "Ça dépend de la concurrence et du point de départ. Souvent, on voit des améliorations en quelques semaines, puis ça continue." },
+      { q: "Est-ce utile si j’ai déjà un site ?", a: "Oui. Souvent, il suffit d’améliorer la page contact, d’ajouter des preuves, et de créer des pages locales propres." },
+      { q: `Comment éviter les demandes hors zone autour de ${cityName} ?`, a: "On clarifie la zone d’intervention, on structure les pages locales, et on guide le client dès le premier écran." },
+      { q: "Qu’est-ce que vous suivez ?", a: "Les demandes (appels, formulaires) et leur origine (Google, Google Maps, site). Vous voyez ce qui rapporte." },
+    ],
+  },
+
+  "google-ads": {
+    h1: `Publicité Google à ${cityName} : recevoir des demandes rapidement`,
+    subtitle: `Apparaître tout de suite quand on cherche “devis / urgence” à ${cityName}.`,
+    metaDescription: `Publicité Google à ${cityName}${dept ? ` (${dept})` : ""} : campagnes locales pour recevoir des appels et demandes de devis rapidement, avec ciblage de zone et filtrage des clics inutiles.`,
+    introTitle: `Remplir le planning à ${cityName} sans payer pour du vent`,
+    introText:
+      `La publicité Google sert quand vous voulez des demandes maintenant. Le point clé : viser les bonnes recherches, dans la bonne zone, et envoyer vers une page qui donne envie d’appeler.`,
+    smallHelpfulParagraph:
+      `Une campagne efficace, ce n’est pas “dépenser plus”. C’est être visible sur les requêtes qui déclenchent un appel à ${cityName}, et couper tout le reste.`,
+    editorial: [
+      `À ${cityName}, un client qui a un besoin urgent cherche “urgence”, “dépannage”, “devis”… puis il appelle. La publicité Google permet d’apparaître immédiatement en haut sur ces recherches.`,
+      `Le risque, c’est de payer pour des clics inutiles : hors zone, hors prestation, demandes qui ne deviennent jamais des devis. On rend la campagne propre : ciblage, exclusions, zone autour de ${cityName}, et annonces claires.`,
+      `Ensuite, on pilote au concret : appels, formulaires, coût par demande. Exemple : “${clusters.exampleQuery}” ou “${clusters.strongIntent[0]}”.`,
+    ],
+    features: [
+      { title: "Recherches très ciblées", text: `On vise les requêtes qui déclenchent une action (ex : “${clusters.strongIntent[0]}”).` },
+      { title: "Zone maîtrisée", text: `On reste autour de ${cityName} pour éviter les demandes hors secteur.` },
+      { title: "Annonces claires", text: "Prestation + zone + téléphone : on parle comme vos clients." },
+      { title: "Page qui déclenche l’appel", text: "Le clic doit finir en contact, pas en lecture." },
+      { title: "Filtrage des mauvaises demandes", text: "On coupe les mots inutiles, le hors zone, le hors besoin." },
+      { title: "Suivi simple", text: "Vous voyez les demandes et le coût par demande, sans jargon." },
+    ],
+    faqs: [
+      { q: `Quel budget pour démarrer à ${cityName} ?`, a: "On peut commencer petit. L’important, c’est le ciblage et le filtrage." },
+      { q: "Je paie au clic ?", a: "Oui. Notre boulot : transformer les clics en appels et en demandes utiles." },
+      { q: "Comment éviter les clics inutiles ?", a: "Exclusions, zone, horaires, requêtes précises : on garde seulement ce qui peut convertir." },
+      { q: "Comment je sais si ça marche ?", a: "On suit appels et formulaires. Vous voyez le nombre de demandes et leur origine." },
+    ],
+  },
+
+  "cro-analytics": {
+    h1: `Optimisation du site à ${cityName} : plus d’appels avec les mêmes visites`,
+    subtitle: `On simplifie votre site pour transformer les visites en demandes de devis à ${cityName}.`,
+    metaDescription: `Optimisation du site à ${cityName}${dept ? ` (${dept})` : ""} : page contact plus simple, preuves visibles (avis/photos) et suivi des demandes (appels/formulaires) pour obtenir plus de devis.`,
+    introTitle: `Un site d’artisan doit faire gagner des appels`,
+    introText:
+      `Beaucoup de sites “existent”, mais ne transforment pas. Ici, on vise simple : contact immédiat, infos claires, preuves, et suivi des demandes pour savoir ce qui rapporte.`,
+    smallHelpfulParagraph:
+      `Si on doit résumer : à ${cityName}, on enlève tout ce qui freine l’appel (ou le devis) et on garde l’essentiel : contact, confiance, clarté.`,
+    editorial: [
+      `Vous pouvez avoir des visites sur votre site à ${cityName}… et pourtant peu d’appels. Souvent, ce n’est pas la visibilité : c’est la page contact qui freine.`,
+      `On corrige : téléphone visible, bouton d’appel sur mobile, formulaire court, réponses aux questions importantes (zone, délais, prestations) et preuves visibles (avis, réalisations).`,
+      `Puis on suit les demandes au concret : d’où viennent-elles ? quelles pages déclenchent l’appel ? Exemple : “${clusters.strongIntent[0]}”.`,
+    ],
+    features: [
+      { title: "Contact immédiat", text: "Téléphone visible + bouton d’appel mobile + formulaire court." },
+      { title: "Demande simple", text: `On réduit les abandons (ex : “${clusters.strongIntent[0]}”).` },
+      { title: "Preuves visibles", text: "Avis, photos, réalisations : on rassure vite." },
+      { title: "Infos utiles", text: `Zone autour de ${cityName}, prestations, délais : clair en 10 secondes.` },
+      { title: "Suivi des demandes", text: "On suit appels et formulaires pour savoir ce qui rapporte." },
+      { title: "Améliorations continues", text: "Petites optimisations régulières, gros effet sur l’appel." },
+    ],
+    faqs: [
+      { q: `Si j’ai déjà des visites, ça peut augmenter les devis à ${cityName} ?`, a: "Oui. Souvent, 2–3 ajustements sur la page contact et les preuves font déjà monter les appels." },
+      { q: "Qu’est-ce que vous suivez exactement ?", a: "Appels, formulaires, et l’origine des demandes (Google, Google Maps, pub, site)." },
+      { q: "Ça prend combien de temps ?", a: "On peut faire des premières améliorations rapidement, puis ajuster selon les résultats." },
+      { q: "Compatible avec un site existant ?", a: "Oui. On améliore l’existant : contact, preuves, messages, et suivi des demandes." },
+    ],
+  },
+};
+
+const copy = copyByService[svc.slug] || {
+  h1: `${svcLabel(svc.slug)} à ${cityName}`,
+  subtitle: `${svcShort(svc.slug)} à ${cityName}.`,
+  metaDescription: `${svcLabel(svc.slug)} à ${cityName}${dept ? ` (${dept})` : ""} : recevoir plus d’appels et de demandes de devis (Sud Oise & Nord 95).`,
+  introTitle: `Des demandes à ${cityName}, simplement`,
+  introText: "Objectif : plus d’appels et de devis, avec une méthode claire.",
+  smallHelpfulParagraph: "",
+  editorial: [],
+  features: [],
+  faqs: [],
+};
+
+const pageTitle = `${copy.h1} | Horizon Conversion`;
+const pageDescription = copy.metaDescription;
+
+const cta = {
+  href: "/contact",
+  line: `Vous voulez recevoir des demandes à ${cityName} ?`,
+  strong: "Demander un audit",
+};
+
+const galleryByService: Record<string, string[]> = {
+  "seo-local": [
+    "/_assets_/images/services/1.jpg",
+    "/_assets_/images/services/2.jpg",
+    "/_assets_/images/services/3.jpg",
+    "/_assets_/images/services/4.jpg",
+    "/_assets_/images/services/5.jpg",
+    "/_assets_/images/services/6.jpg",
+  ],
+  "google-ads": [
+    "/_assets_/images/blog/1.jpg",
+    "/_assets_/images/blog/2.jpg",
+    "/_assets_/images/blog/3.jpg",
+    "/_assets_/images/blog/4.jpg",
+    "/_assets_/images/blog/5.jpg",
+    "/_assets_/images/blog/6.jpg",
+  ],
+  "cro-analytics": [
+    "/_assets_/images/projects/1.jpg",
+    "/_assets_/images/projects/2.jpg",
+    "/_assets_/images/projects/3.jpg",
+    "/_assets_/images/projects/4.jpg",
+    "/_assets_/images/projects/5.jpg",
+    "/_assets_/images/projects/6.jpg",
+  ],
+};
+
+const gallery = galleryByService[svc.slug] || galleryByService["seo-local"];
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="content-wrap">
-    <div class="container py-6">
-      <h1 class="mb-2">{service.name} à {ville.name}</h1>
+<BaseLayout title={pageTitle} description={pageDescription} faq={copy.faqs}>
+  <!-- Page Title -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
 
-      <p class="lead mb-4">
-        Pour artisans à {ville.name}
-        {ville?.around?.length ? ` et alentours (${ville.around.length} communes)` : ""}.
-      </p>
-
-      <div class="row col-mb-30">
-        <div class="col-lg-8">
-          <h2>Objectif</h2>
-          <p>Générer plus de demandes qualifiées et mesurer les résultats (clic téléphone, formulaire, devis).</p>
-
-          <h2>Ce qui est inclus</h2>
-          <ul>
-            <li>Audit rapide + plan d’action 30 jours</li>
-            <li>Tracking (GA4 / événements)</li>
-            <li>Optimisations orientées conversion</li>
-          </ul>
-
-          {ville?.around?.length ? (
-            <>
-              <h2>Zone couverte</h2>
-              <p>{ville.around.join(", ")}.</p>
-            </>
-          ) : null}
+        <div class="page-title-content">
+          <h1>{copy.h1}</h1>
+          <span>{copy.subtitle}</span>
         </div>
 
-        <div class="col-lg-4">
-          <div class="card p-4 shadow-sm">
-            <h3 class="h5 mb-3">Demander un audit</h3>
-            <a class="button button-large w-100 text-center" href="/contact">
-              Recevoir un diagnostic
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href={`/${svc.slug}`}>{svcLabel(svc.slug)}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{cityName}</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container">
+
+        <div class="row">
+          {/* Col gauche */}
+          <div class="col-lg-6">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h3>{copy.introTitle}</h3>
+              <span>
+                {cityName}{dept ? ` (${dept})` : ""}{region ? ` — ${region}` : ""}
+              </span>
+            </div>
+
+            <p>{copy.introText}</p>
+
+            {copy.smallHelpfulParagraph ? (
+              <p class="lead" style="max-width: 900px;">
+                {copy.smallHelpfulParagraph}
+              </p>
+            ) : null}
+
+            {/* Texte unique ville (villes.json) */}
+            {localText ? (
+              <div class="mb-4">
+                {localText.split("\n\n").map((para: string) => <p>{para}</p>)}
+              </div>
+            ) : (
+              <div class="mb-4">
+                {(copy.editorial || []).map((p: string) => <p>{p}</p>)}
+              </div>
+            )}
+
+            {/* Alentours */}
+            {around.length ? (
+              <>
+                <div class="divider divider-sm my-4"></div>
+                <h4 class="mb-2">Intervention à {cityName} et alentours</h4>
+                <p class="mb-3">Exemples de communes couvertes :</p>
+                <ul class="iconlist mb-4">
+                  {around.slice(0, 10).map((n: string) => (
+                    <li><i class="fa-solid fa-check"></i> {n}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h4 class="mb-2">Exemples de recherches à {cityName}</h4>
+            <p class="mb-3">Des requêtes locales qui déclenchent souvent un appel (exemples) :</p>
+            <ul class="iconlist mb-4">
+              {frequentSearches.map((k: string) => (
+                <li><i class="fa-solid fa-check"></i> {k}</li>
+              ))}
+            </ul>
+
+            <a href="/contact" class="button button-3d ms-0 mb-4">
+              Demander un audit à {cityName}
             </a>
-            <div class="mt-3 small text-muted">
-              Mesure : clic téléphone, formulaire, sources.
+
+            <div class="mt-2">
+              <a class="text-decoration-none" href="/tarifs">Voir les tarifs →</a>
+              <span class="mx-2">•</span>
+              <a class="text-decoration-none" href="/methode">Voir la méthode →</a>
+            </div>
+          </div>
+
+          {/* Col droite : galerie */}
+          <div class="col-lg-6">
+            <div class="fslider flex-thumb-grid grid-6" data-pagi="false" data-arrows="false" data-thumbs="true">
+              <div class="flexslider">
+                <div class="slider-wrap">
+                  {gallery.slice(0, 6).map((src: string, i: number) => (
+                    <div class="slide" data-thumb={src}>
+                      <img src={src} alt={`${svcLabel(svc.slug)} à ${cityName} — visuel ${i + 1}`} />
+                      <div class="bg-overlay">
+                        <div class="bg-overlay-content justify-content-start align-items-end">
+                          <div class="h4 fw-light bg-light text-dark px-3 py-2">
+                            {svcLabel(svc.slug)} • {cityName}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="clear"></div>
+
+      {/* Features */}
+      <div class="section row p-0 align-items-stretch dark mt-5">
+        <div class="col-lg-4 d-none d-md-block min-vh-50" style="background: url('/_assets_/images/services/parallax.jpg') center center repeat; background-size: cover;">
+          <div>&nbsp;</div>
+        </div>
+        <div class="col-lg-8">
+          <div class="col-padding">
+            <div class="row align-items-stretch g-5">
+              {(copy.features || []).slice(0, 6).map((f: any, idx: number) => (
+                <div class="col-md-6">
+                  <div class="feature-box fbox-plain">
+                    <div class="fbox-icon">
+                      <a href="/methode">
+                        <img
+                          src={[
+                            "/_assets_/images/icons/building.png",
+                            "/_assets_/images/icons/bank.png",
+                            "/_assets_/images/icons/traffic-cone.png",
+                            "/_assets_/images/icons/paint-brush.png",
+                            "/_assets_/images/icons/drawer.png",
+                            "/_assets_/images/icons/paper-money.png",
+                          ][idx]}
+                          alt={f.title}
+                        />
+                      </a>
+                    </div>
+                    <div class="fbox-content">
+                      <h3>{f.title}</h3>
+                      <p>{f.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bloc: 9 villes + 12 métiers */}
+      <div class="container">
+        <div class="row g-5 mb-6">
+
+          <div class="col-lg-7">
+            <h4>Villes couvertes (exemples)</h4>
+            <p class="mb-4">
+              Tu peux consulter d’autres pages locales si tu travailles autour de {cityName} :
+            </p>
+
+            <ul class="clients-grid row row-cols-2 row-cols-sm-3 grid-border">
+              {villes9.map((v: any) => (
+                <li class="col-padding">
+                  <a class="text-decoration-none" href={`/${svc.slug}/${v.slug}`}>
+                    <div class="text-center py-3 px-2">
+                      <strong class="d-block text-dark">{v.name}</strong>
+                      <small class="d-block text-muted">+ alentours</small>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-3">
+              <a class="text-decoration-none" href={`/${svc.slug}`}>
+                Voir la page {svcLabel(svc.slug).toLowerCase()} (générale) →
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <h4>Métiers concernés à {cityName}</h4>
+            <p class="mb-4">
+              Exemples de métiers pour lesquels on met en place {svcLabel(svc.slug).toLowerCase()} autour de {cityName}.
+            </p>
+
+            <div class="row g-3">
+              {metiers12.map((m: any) => (
+                <div class="col-6">
+                  <a
+                    class="d-block text-decoration-none p-3 border rounded-3 h-100"
+                    href={`/metiers/${m.slug}`}
+                  >
+                    <div class="d-flex align-items-center gap-2">
+                      <i class={`bi ${metierIcon[m.slug] || "bi-tools"}`} style="font-size: 20px;"></i>
+                      <strong class="text-dark">{m.name}</strong>
+                    </div>
+                    <small class="text-muted d-block mt-1">
+                      autour de {cityName}
+                    </small>
+                  </a>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-4">
+              <a href="/metiers" class="button button-3d ms-0">Voir tous les métiers</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 mt-4 button-full text-center mb-5 fw-light font-primary"
+      >
+        <div class="container">
+          {cta.line} <strong>{cta.strong}</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+
+      {/* Bande confiance */}
+      <div class="section bg-transparent mt-0 p-0 footer-stick">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-7">
+              <img
+                src="/_assets_/images/services/bottom-trust.jpg"
+                alt={`Confiance — ${svcLabel(svc.slug)} à ${cityName}`}
+              />
+            </div>
+            <div class="col-lg-5 mt-4">
+              <div class="heading-block border-bottom-0">
+                <h2>Simple, clair, orienté demandes.</h2>
+                <span class="ls-1">5 points qui comptent pour un artisan.</span>
+              </div>
+
+              <ul class="iconlist iconlist-large iconlist-color">
+                <li><i class="fa-solid fa-check"></i> Objectif : appels &amp; devis (pas de blabla)</li>
+                <li><i class="fa-solid fa-check"></i> Zone maîtrisée autour de {cityName}</li>
+                <li><i class="fa-solid fa-check"></i> Pages locales propres (sans “spam”)</li>
+                <li><i class="fa-solid fa-check"></i> Contact simple (mobile-friendly)</li>
+                <li><i class="fa-solid fa-check"></i> Suivi des demandes pour piloter</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 </BaseLayout>

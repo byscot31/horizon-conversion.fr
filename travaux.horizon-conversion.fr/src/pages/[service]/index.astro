@@ -3,40 +3,746 @@
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+import metiers from "../../data/metiers.json";
 
 export function getStaticPaths() {
   return services.map((s) => ({
     params: { service: s.slug },
-    props: { service: s },
+    props: { serviceObj: s },
   }));
 }
 
-const { service } = Astro.props;
-const title = `${service.name} pour artisans — Horizon Conversion Travaux`;
-const description = `${service.name} pour artisans (Sud Oise / Nord 95). Objectif : plus de demandes mesurées (appels, formulaires, devis).`;
+const { serviceObj } = Astro.props;
+const { service } = Astro.params;
+
+const svc = serviceObj || services.find((s) => s.slug === service);
+
+if (!svc) {
+  throw new Error(`Service inconnu: ${service}`);
+}
+
+// Limites d’affichage (SEO + UX)
+const villes9 = Array.isArray(villes) ? villes.slice(0, 9) : [];
+const metiers12 = Array.isArray(metiers) ? metiers.slice(0, 12) : [];
+
+// Icônes métiers (Bootstrap Icons)
+const metierIcon: Record<string, string> = {
+  plombier: "bi-droplet",
+  electricien: "bi-lightning-charge",
+  "chauffagiste-pac": "bi-thermometer-sun",
+  serrurier: "bi-key",
+  couvreur: "bi-house",
+  vitrier: "bi-window",
+  peintre: "bi-brush",
+  macon: "bi-bricks",
+  menuisier: "bi-hammer",
+  carreleur: "bi-grid-3x3-gap",
+  "plaquiste-isolation": "bi-layers",
+  "renovation-globale": "bi-tools",
+};
+
+// Contenus par service (sans jargon / sans acronymes “tech/marketing”)
+const copyByService: Record<string, any> = {
+  "seo-local": {
+    title: "Référencement local : être visible sur Google près de chez vous",
+    subtitle:
+      "Google + Google Maps pour recevoir plus d’appels et de demandes dans votre secteur.",
+    metaDescription:
+      "Référencement local pour artisans : remonter sur Google et Google Maps près de chez vous, avec fiche Google optimisée et pages locales (Sud Oise & Nord 95).",
+    exampleQuery: "plombier Senlis",
+    introTitle: "Une méthode simple pour remonter sur Google",
+    introSubtitle:
+      "Objectif : apparaître quand un client cherche un artisan autour de lui, dans votre secteur.",
+    smallHelpfulParagraph:
+      "Le but n’est pas “faire du marketing”. Le but, c’est d’être trouvé au bon moment : sur Google et surtout sur Google Maps, quand quelqu’un a un vrai besoin près de chez vous.",
+    editorial: [
+      "Quand un client cherche un artisan, il va souvent au plus simple : il tape une recherche rapide sur son téléphone, regarde 2–3 résultats, puis il appelle. Si votre entreprise n’apparaît pas dans les premiers résultats (ou sur Google Maps), vous perdez des appels au profit de concurrents parfois moins bons… mais plus visibles.",
+      "Le référencement local sert à être présent au bon endroit, avec des infos claires : vos prestations, vos horaires, votre zone d’intervention, et surtout des éléments qui rassurent (avis, photos de chantiers, explications simples). Pas besoin d’écrire des romans : il faut répondre aux questions que le client se pose et lui faciliter la prise de contact.",
+      "Concrètement, on travaille votre fiche Google Business (catégories, services, photos, avis, zone), on met en place des pages locales propres par ville/secteur, et on améliore la page contact pour déclencher l’appel ou la demande de devis. Ensuite, on suit ce qui progresse (visibilité, appels, demandes) et on ajuste. Exemple : remonter sur une recherche comme “plombier Senlis” et recevoir des demandes plus régulières, sans courir après les clients.",
+    ],
+    method: [
+      {
+        title: "Diagnostic rapide",
+        text:
+          "On vérifie votre visibilité actuelle : Google, Google Maps, fiche Google et votre site.",
+        icon: "/_assets_/images/icons/building.png",
+        alt: "Diagnostic visibilité locale",
+      },
+      {
+        title: "Fiche Google optimisée",
+        text:
+          "On améliore votre fiche Google Business : infos, zone, services, photos et avis.",
+        icon: "/_assets_/images/icons/bank.png",
+        alt: "Optimisation fiche Google",
+      },
+      {
+        title: "Pages locales efficaces",
+        text:
+          "On crée/optimise des pages par ville pour ressortir sur des recherches simples (ex : {exampleQuery}).",
+        icon: "/_assets_/images/icons/drawer.png",
+        alt: "Pages locales par ville",
+      },
+      {
+        title: "Demande de devis simple",
+        text:
+          "On simplifie la page contact et le formulaire pour augmenter les demandes.",
+        icon: "/_assets_/images/icons/paper-money.png",
+        alt: "Formulaire devis simple",
+      },
+      {
+        title: "Avis & preuves",
+        text:
+          "On met en avant vos avis et vos chantiers pour rassurer et donner envie de vous appeler.",
+        icon: "/_assets_/images/icons/traffic-cone.png",
+        alt: "Avis et preuves",
+      },
+      {
+        title: "Suivi clair",
+        text:
+          "Chaque mois : ce qui progresse sur Google, ce qui amène des appels, et quoi améliorer.",
+        icon: "/_assets_/images/icons/paint-brush.png",
+        alt: "Suivi mensuel",
+      },
+    ],
+    proofTitle: "Pourquoi ça marche (et ce que vous gagnez)",
+    proofs: [
+      {
+        img: "/_assets_/images/services/1.jpg",
+        alt: "Plus visible sur Google Maps",
+        title: "Plus visible sur Google Maps",
+        subtitle: "On vous trouve plus facilement",
+        text:
+          "Quand on cherche un artisan à proximité, votre fiche ressort mieux (Google Maps / résultats locaux).",
+      },
+      {
+        img: "/_assets_/images/services/2.jpg",
+        alt: "Plus d’appels et de devis",
+        title: "Plus d’appels et de devis",
+        subtitle: "Sans changer votre métier",
+        text:
+          "Votre site et votre page contact sont pensés pour déclencher l’appel ou la demande de devis.",
+      },
+      {
+        img: "/_assets_/images/services/3.jpg",
+        alt: "Des demandes dans votre zone",
+        title: "Des demandes dans votre zone",
+        subtitle: "Moins de temps perdu",
+        text:
+          "On précise la zone couverte pour limiter les demandes hors secteur.",
+      },
+      {
+        img: "/_assets_/images/services/4.jpg",
+        alt: "Une image plus pro",
+        title: "Une image plus pro",
+        subtitle: "On rassure avant même l’appel",
+        text:
+          "Photos, avis, réalisations : le client vous fait confiance plus vite.",
+      },
+      {
+        img: "/_assets_/images/services/5.jpg",
+        alt: "Simple et clair",
+        title: "Simple et clair",
+        subtitle: "On va droit au but",
+        text:
+          "On parle appels, devis, planning rempli. Pas de blabla.",
+      },
+      {
+        img: "/_assets_/images/services/6.jpg",
+        alt: "Suivi simple",
+        title: "Suivi simple",
+        subtitle: "Vous savez ce qui rapporte",
+        text:
+          "On suit les demandes (Google / Maps / site) pour savoir ce qui amène des devis.",
+      },
+    ],
+    cityTitle: "Zones couvertes",
+    citySubtitle:
+      "Sud Oise & Nord 95 : visibilité Google et Google Maps par ville + alentours.",
+    cityText:
+      "Choisissez votre ville : vous verrez la page locale adaptée (prestations, zone, prise de contact).",
+    jobsTitle: "Métiers couverts",
+    jobsSubtitle:
+      "Chaque métier a ses recherches : on s’adapte (urgence, devis, prestation précise).",
+    faqs: [
+      {
+        q: "En combien de temps je peux remonter sur Google / Google Maps ?",
+        a:
+          "Ça dépend de la concurrence et de votre point de départ. Souvent, on voit des améliorations sur la fiche Google et les pages locales en quelques semaines, puis ça continue de progresser.",
+      },
+      {
+        q: "Est-ce que ça marche même si j’ai déjà un site ?",
+        a:
+          "Oui. Souvent, on garde le site et on l’améliore : pages par ville, page contact plus simple, mise en avant des avis et des prestations.",
+      },
+      {
+        q: "Comment éviter les demandes hors zone ?",
+        a:
+          "On indique clairement la zone, on adapte les pages locales, et on guide le client vers votre secteur dès la première étape.",
+      },
+      {
+        q: "Qu’est-ce que vous suivez exactement ?",
+        a:
+          "Les appels et les demandes via le site, et ce qui vient de Google / Google Maps. Vous savez ce qui apporte des devis.",
+      },
+    ],
+  },
+
+  "google-ads": {
+    title: "Google Ads : recevoir des demandes de devis plus rapidement",
+    subtitle:
+      "Publicité Google pour recevoir des appels et des demandes sur vos prestations.",
+    metaDescription:
+      "Google Ads pour artisans : être visible tout de suite sur les recherches “devis / urgence” et recevoir des appels et demandes utiles (Sud Oise & Nord 95).",
+    exampleQuery: "serrurier urgence Chantilly",
+    introTitle: "Des demandes rapides, mais propres",
+    introSubtitle:
+      "Objectif : apparaître quand quelqu’un cherche maintenant (devis, urgence, intervention).",
+    smallHelpfulParagraph:
+      "Google Ads sert à remplir le planning quand il faut des demandes rapidement. Le point clé : viser les bonnes recherches, dans la bonne zone, et éviter de payer pour des clics inutiles.",
+    editorial: [
+      "Quand un client a besoin d’un artisan, il tape souvent “urgence”, “devis” ou le nom de la prestation. Google Ads permet d’apparaître immédiatement en haut sur ces recherches, sans attendre que le référencement naturel fasse son effet. C’est pratique quand tu veux des demandes tout de suite, ou quand la saison démarre.",
+      "Mais la publicité peut aussi faire perdre de l’argent si elle est mal réglée : mauvaises recherches, demandes hors zone, clics qui n’appellent jamais… Notre travail, c’est de rendre la campagne “propre” : on cible uniquement ce qui peut devenir un appel ou un devis, on filtre ce qui ne sert à rien, et on envoie vers une page qui convertit (téléphone visible, formulaire court, infos claires).",
+      "On démarre simple, on pilote le budget, et on suit les résultats (appels / formulaires). Exemple : apparaître sur “serrurier urgence Chantilly” et savoir ensuite combien de demandes réelles ça a généré. Pas de promesses floues : tu vois le nombre de contacts et tu décides.",
+    ],
+    method: [
+      {
+        title: "Ciblage simple",
+        text:
+          "On vise les recherches qui convertissent (ex : {exampleQuery}) et on évite les mots-clés inutiles.",
+        icon: "/_assets_/images/icons/building.png",
+        alt: "Ciblage Google Ads",
+      },
+      {
+        title: "Annonces claires",
+        text:
+          "Des annonces qui parlent comme vos clients : prestation, zone, horaires, téléphone.",
+        icon: "/_assets_/images/icons/bank.png",
+        alt: "Annonces Google Ads",
+      },
+      {
+        title: "Budget maîtrisé",
+        text:
+          "On démarre simple, on ajuste. Pas besoin d’un gros budget pour commencer localement.",
+        icon: "/_assets_/images/icons/drawer.png",
+        alt: "Budget Google Ads",
+      },
+      {
+        title: "Page contact efficace",
+        text:
+          "On envoie vers une page qui déclenche l’appel ou le devis (pas une page “fourre-tout”).",
+        icon: "/_assets_/images/icons/paper-money.png",
+        alt: "Page contact",
+      },
+      {
+        title: "Filtrage des demandes",
+        text:
+          "On exclut ce qui fait perdre du temps : hors zone, hors prestation, mauvaises recherches.",
+        icon: "/_assets_/images/icons/traffic-cone.png",
+        alt: "Filtrage",
+      },
+      {
+        title: "Suivi des résultats",
+        text:
+          "On suit appels et formulaires : vous savez combien de demandes vous recevez et d’où elles viennent.",
+        icon: "/_assets_/images/icons/paint-brush.png",
+        alt: "Suivi",
+      },
+    ],
+    proofTitle: "Ce que ça apporte concrètement",
+    proofs: [
+      {
+        img: "/_assets_/images/services/1.jpg",
+        alt: "Des appels rapidement",
+        title: "Des appels rapidement",
+        subtitle: "Quand les gens cherchent maintenant",
+        text:
+          "Vous apparaissez en haut sur des recherches très chaudes : “urgence”, “dépannage”, “devis…”.",
+      },
+      {
+        img: "/_assets_/images/services/2.jpg",
+        alt: "Des demandes sur vos prestations",
+        title: "Des demandes sur vos prestations",
+        subtitle: "Moins de demandes hors sujet",
+        text:
+          "On cible vos prestations rentables et on bloque le reste (hors zone / hors besoin).",
+      },
+      {
+        img: "/_assets_/images/services/3.jpg",
+        alt: "Budget piloté",
+        title: "Budget piloté",
+        subtitle: "Vous gardez la main",
+        text:
+          "On adapte le budget selon la saison, votre planning, et les résultats (appels / devis).",
+      },
+      {
+        img: "/_assets_/images/services/4.jpg",
+        alt: "Une page qui convertit",
+        title: "Une page qui convertit",
+        subtitle: "Pas de clics perdus",
+        text:
+          "Le clic doit finir en appel ou en demande de devis. On améliore la page pour ça.",
+      },
+      {
+        img: "/_assets_/images/services/5.jpg",
+        alt: "Mesure simple",
+        title: "Mesure simple",
+        subtitle: "Vous voyez ce qui rapporte",
+        text:
+          "On suit les contacts : appels, formulaires, demandes. Vous voyez le retour.",
+      },
+      {
+        img: "/_assets_/images/services/6.jpg",
+        alt: "Amélioration continue",
+        title: "Amélioration continue",
+        subtitle: "On améliore semaine après semaine",
+        text:
+          "On garde ce qui marche, on coupe ce qui ne marche pas. Simple et efficace.",
+      },
+    ],
+    cityTitle: "Zones couvertes",
+    citySubtitle:
+      "Campagnes locales : Sud Oise & Nord 95.",
+    cityText:
+      "Choisissez votre ville : vous verrez la page locale (prestations, urgence, devis, prise de contact).",
+    jobsTitle: "Métiers couverts",
+    jobsSubtitle:
+      "On adapte annonces et recherches selon votre métier.",
+    faqs: [
+      {
+        q: "Quel budget minimum pour démarrer ?",
+        a:
+          "On peut commencer petit en local. L’important, c’est de viser les bonnes recherches et de filtrer ce qui ne sert à rien.",
+      },
+      {
+        q: "Est-ce que je paie au clic ?",
+        a:
+          "Oui. Notre travail : faire en sorte que les clics deviennent des appels et des demandes de devis.",
+      },
+      {
+        q: "Comment éviter de payer pour de mauvaises demandes ?",
+        a:
+          "On ajoute des exclusions, on cible votre zone, et on s’appuie sur des recherches très précises liées à vos prestations.",
+      },
+      {
+        q: "Comment je sais si ça marche ?",
+        a:
+          "On suit les appels et les formulaires. Vous voyez le nombre de demandes et ce qui a déclenché la prise de contact.",
+      },
+    ],
+  },
+
+  "cro-analytics": {
+    // ⚠️ On garde le slug, mais on enlève l’acronyme partout
+    title: "Optimisation du site : plus d’appels avec les mêmes visites",
+    subtitle:
+      "On simplifie votre site pour transformer les visites en appels et demandes de devis, avec un suivi clair.",
+    metaDescription:
+      "Optimisation du site + suivi des demandes : plus d’appels et de devis avec le même trafic, avec des chiffres simples à comprendre (Sud Oise & Nord 95).",
+    exampleQuery: "devis électricien Creil",
+    introTitle: "Votre site doit aider à prendre contact",
+    introSubtitle:
+      "Objectif : une page contact simple, des infos claires, et un suivi des demandes (appels / formulaires).",
+    smallHelpfulParagraph:
+      "Beaucoup de sites d’artisans “existent”, mais ne transforment pas. Ici on vise un truc simple : faciliter le contact et comprendre ce qui génère vraiment des demandes.",
+    editorial: [
+      "Tu peux avoir des visites sur ton site… et pourtant peu d’appels. Souvent, le problème n’est pas la pub ou le référencement : c’est le site lui-même. Téléphone pas visible, page contact compliquée, formulaire trop long, pas de preuves, pas de zone claire… Résultat : le client hésite et il appelle quelqu’un d’autre.",
+      "L’optimisation du site consiste à enlever ces freins et à rendre la prise de contact évidente. Concrètement : téléphone toujours visible, bouton d’appel sur mobile, formulaire court, réponses aux questions importantes (zone, délais, prestations), avis et réalisations pour rassurer. Rien de magique, juste du bon sens.",
+      "Et le suivi des demandes, c’est la partie “preuve” : on mesure les appels et les formulaires, et on regarde d’où viennent les demandes (Google, Google Maps, pub…). Exemple : comprendre si une page attire des demandes type “devis électricien Creil”, ou si les visiteurs quittent avant de contacter. Ensuite on corrige, on améliore, et le site devient un vrai outil qui rapporte des devis, pas juste une carte de visite.",
+    ],
+    method: [
+      {
+        title: "Audit rapide",
+        text:
+          "On repère ce qui freine : page contact, formulaire, infos manquantes, confiance.",
+        icon: "/_assets_/images/icons/building.png",
+        alt: "Audit du site",
+      },
+      {
+        title: "Contact ultra simple",
+        text:
+          "Téléphone visible, bouton d’appel, formulaire court, réponses rapides.",
+        icon: "/_assets_/images/icons/bank.png",
+        alt: "Contact simplifié",
+      },
+      {
+        title: "Pages qui rassurent",
+        text:
+          "Avis, réalisations, zones couvertes, prestations : le client hésite moins.",
+        icon: "/_assets_/images/icons/drawer.png",
+        alt: "Rassurance",
+      },
+      {
+        title: "Suivi des demandes",
+        text:
+          "On suit appels et formulaires pour savoir ce qui apporte des devis (ex : {exampleQuery}).",
+        icon: "/_assets_/images/icons/paper-money.png",
+        alt: "Suivi des demandes",
+      },
+      {
+        title: "Améliorations ciblées",
+        text:
+          "On améliore ce qui compte : plus d’appels, plus de demandes utiles, moins de pertes.",
+        icon: "/_assets_/images/icons/traffic-cone.png",
+        alt: "Améliorations",
+      },
+      {
+        title: "Bilan simple",
+        text:
+          "Un suivi clair : nombre de demandes, sources, et actions à faire (sans jargon).",
+        icon: "/_assets_/images/icons/paint-brush.png",
+        alt: "Bilan",
+      },
+    ],
+    proofTitle: "Résultats concrets sur un site d’artisan",
+    proofs: [
+      {
+        img: "/_assets_/images/services/1.jpg",
+        alt: "Plus d’appels",
+        title: "Plus d’appels",
+        subtitle: "Téléphone et contact visibles",
+        text:
+          "On rend l’appel facile : boutons, zone, horaires, réponses rapides.",
+      },
+      {
+        img: "/_assets_/images/services/2.jpg",
+        alt: "Formulaire plus simple",
+        title: "Formulaire plus simple",
+        subtitle: "Plus de demandes",
+        text:
+          "Moins de champs, plus clair : plus de devis envoyés.",
+      },
+      {
+        img: "/_assets_/images/services/3.jpg",
+        alt: "Moins d’hésitation",
+        title: "Moins d’hésitation",
+        subtitle: "On rassure",
+        text:
+          "Avis, réalisations, prestations : le client vous choisit plus vite.",
+      },
+      {
+        img: "/_assets_/images/services/4.jpg",
+        alt: "Suivi des demandes",
+        title: "Suivi des demandes",
+        subtitle: "Vous savez d’où ça vient",
+        text:
+          "On mesure les demandes (appels / formulaires) et leur source.",
+      },
+      {
+        img: "/_assets_/images/services/5.jpg",
+        alt: "Même trafic, plus de devis",
+        title: "Même trafic, plus de devis",
+        subtitle: "On récupère plus de demandes",
+        text:
+          "Sans forcément faire plus de pub, on récupère plus de demandes avec l’existant.",
+      },
+      {
+        img: "/_assets_/images/services/6.jpg",
+        alt: "Amélioration continue",
+        title: "Amélioration continue",
+        subtitle: "Des petits gains réguliers",
+        text:
+          "On corrige et on améliore en continu : le site devient un vrai outil de contact.",
+      },
+    ],
+    cityTitle: "Zones couvertes",
+    citySubtitle:
+      "Optimisation du site + suivi des demandes : Sud Oise & Nord 95.",
+    cityText:
+      "Choisissez votre ville : vous verrez la page locale dédiée (contact, devis, preuves, suivi des demandes).",
+    jobsTitle: "Métiers couverts",
+    jobsSubtitle:
+      "Chaque métier a ses urgences et ses demandes : on adapte les pages et le parcours.",
+    faqs: [
+      {
+        q: "Si j’ai déjà des visites, ça peut vraiment augmenter les devis ?",
+        a:
+          "Oui. Souvent, c’est la page contact ou le formulaire qui bloque. Quelques ajustements peuvent augmenter les appels.",
+      },
+      {
+        q: "Vous suivez quoi exactement ?",
+        a:
+          "Les appels et les formulaires, et la source (Google, Google Maps, pub, site). Vous voyez clairement les demandes.",
+      },
+      {
+        q: "Ça prend combien de temps ?",
+        a:
+          "On peut faire des premières améliorations rapidement, puis on ajuste selon les retours et ce que montrent les chiffres.",
+      },
+      {
+        q: "Est-ce compatible avec un site existant ?",
+        a:
+          "Oui. On améliore l’existant : contact, contenus utiles, preuves, et suivi des demandes.",
+      },
+    ],
+  },
+};
+
+const copy = copyByService[svc.slug] || {
+  title: `${svc.name} : plus de demandes`,
+  subtitle: svc.short,
+  metaDescription: `${svc.short} (Sud Oise & Nord 95).`,
+  exampleQuery: `${svc.name.toLowerCase()} Senlis`,
+  introTitle: "Une méthode simple",
+  introSubtitle: "Objectif : plus d’appels et de devis.",
+  smallHelpfulParagraph: "",
+  editorial: [],
+  method: [],
+  proofTitle: "Pourquoi ça marche",
+  proofs: [],
+  cityTitle: "Zones couvertes",
+  citySubtitle: "Sud Oise & Nord 95",
+  cityText: "Choisissez votre ville.",
+  jobsTitle: "Métiers couverts",
+  jobsSubtitle: "",
+  faqs: [],
+};
+
+// Exemple de recherche (service-specific)
+const exampleQuery: string =
+  copy.exampleQuery || `${String(svc.name || "").toLowerCase()} Senlis`;
+
+// Remplacement placeholders dans les textes (ex: {exampleQuery})
+const methodResolved = (copy.method || []).map((it: any) => ({
+  ...it,
+  text: String(it.text || "").replaceAll("{exampleQuery}", exampleQuery),
+}));
+
+const pageTitle = `${copy.title} | Horizon Conversion`;
+const pageDescription = copy.metaDescription || `${copy.subtitle} (Sud Oise & Nord 95).`;
+
+const heroBg = "/_assets_/images/slider/1.jpg";
+
+const cta = {
+  href: "/contact",
+  line: "Vous voulez recevoir des demandes dans votre ville ?",
+  strong: "Demander un audit",
+};
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="content-wrap">
-    <div class="container py-6">
-      <h1 class="mb-3">{service.name} pour artisans</h1>
-      <p class="lead mb-5">{service.short}</p>
+<BaseLayout title={pageTitle} description={pageDescription} faq={copy.faqs}>
+  <!-- Page Title
+  ============================================= -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark">
+    <img src={heroBg} class="parallax-bg" alt="" />
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>{copy.title}</h1>
+          <span>{copy.subtitle}</span>
+        </div>
 
-      <div class="row col-mb-30">
-        <div class="col-md-8">
-          <h2>Ce que vous obtenez</h2>
-          <ul>
-            <li>Plan d’action clair (30 jours)</li>
-            <li>Tracking des demandes (Analytics)</li>
-            <li>Optimisations orientées devis</li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <a class="button button-large button-circle button-dark w-100 text-center" href="/contact">
-            Demander un audit
-          </a>
-        </div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{svc.name}</li>
+          </ol>
+        </nav>
       </div>
     </div>
-  </section>
+  </section><!-- .page-title end -->
+
+  <!-- Content
+  ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <div class="section header-stick">
+        <h2 class="text-center mb-0 ls-1">{copy.introTitle}</h2>
+        <p class="text-center mt-3 mb-0" style="max-width: 900px; margin: 0 auto;">
+          {copy.introSubtitle}
+        </p>
+      </div>
+
+      <div class="container">
+
+        {/* Petit paragraphe utile */}
+        {copy.smallHelpfulParagraph ? (
+          <p class="lead" style="max-width: 900px;">
+            {copy.smallHelpfulParagraph}
+          </p>
+        ) : null}
+
+        {/* Exemple réel */}
+        <p style="max-width: 900px;">
+          Exemple concret : <strong>{exampleQuery}</strong>
+        </p>
+
+        {/* Corps éditorial unique */}
+        {Array.isArray(copy.editorial) && copy.editorial.length ? (
+          <div class="my-5" style="max-width: 900px;">
+            {copy.editorial.map((p: string) => <p>{p}</p>)}
+          </div>
+        ) : null}
+
+        <div class="line my-6"></div>
+
+        <!-- Méthode -->
+        <div class="row col-mb-50 mb-0">
+          {methodResolved.map((it: any) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature-box fbox-plain">
+                <div class="fbox-icon">
+                  <a href="/methode"><img src={it.icon} alt={it.alt} /></a>
+                </div>
+                <div class="fbox-content">
+                  <h3>{it.title}</h3>
+                  <p>{it.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="line my-6"></div>
+
+        <!-- Preuve -->
+        <h2 class="mb-5">{copy.proofTitle}</h2>
+        <div class="row col-mb-50">
+          {(copy.proofs || []).map((p: any) => (
+            <div class="col-sm-6 col-lg-4">
+              <div class="feature-box media-box">
+                <div class="fbox-media">
+                  <img class="rounded" src={p.img} alt={p.alt} />
+                </div>
+                <div class="fbox-content px-0">
+                  <h3>
+                    {p.title}
+                    <span class="subtitle">{p.subtitle}</span>
+                  </h3>
+                  <p>{p.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+      <div class="line"></div>
+
+      <div class="container">
+
+        <!-- Villes -->
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h3>{copy.cityTitle}</h3>
+              <span>{copy.citySubtitle}</span>
+            </div>
+            <p style="max-width: 520px;">
+              {copy.cityText}
+            </p>
+
+            <a href="/contact" class="button button-3d mt-2">
+              Demander un audit
+            </a>
+          </div>
+
+          <div class="col-lg-7">
+            <ul class="clients-grid grid-border row row-cols-2 row-cols-sm-3 mb-0">
+              {villes9.map((v: any) => (
+                <li class="col-padding">
+                  <a class="op-08 text-decoration-none" href={`/${svc.slug}/${v.slug}`}>
+                    <div class="text-center py-4 px-2">
+                      <strong class="d-block text-dark">{v.name}</strong>
+                      <small class="d-block text-muted">+ alentours</small>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Petit lien “voir plus” si tu as une page de liste */}
+            <div class="mt-3">
+              <a href="/zones" class="text-decoration-none">
+                Voir toutes les villes →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-center divider-border"><i class="bi-gem"></i></div>
+
+        <!-- Métiers -->
+        <div class="container">
+          <div class="row text-center mx-auto" style="max-width: 960px;">
+            <div class="col-lg-12">
+              <div class="heading-block text-center">
+                <h3>{copy.jobsTitle}</h3>
+                <span>{copy.jobsSubtitle}</span>
+              </div>
+
+              <div id="faqs-list">
+                <div class="row align-items-stretch grid-border">
+                  {metiers12.map((m: any) => (
+                    <div class="col-lg-3 col-md-6">
+                      <div class="feature-box fbox-center fbox-plain border-bottom-0">
+                        <div class="fbox-icon">
+                          <i class={`bi ${metierIcon[m.slug] || "bi-tools"}`} style="font-size: 28px;"></i>
+                        </div>
+                        <div class="fbox-content">
+                          <h3>
+                            <a href={`/metiers/${m.slug}`} class="text-dark">
+                              {m.name}
+                            </a>
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <a href="/metiers" class="button button-3d mt-5">Voir tous les métiers</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="line"></div>
+
+      <!-- Faqs (visuel) -->
+      <div class="container">
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            {(copy.faqs || []).slice(0, Math.ceil((copy.faqs || []).length / 2)).map((f: any) => (
+              <>
+                <h3><strong class="color">Q.</strong> {f.q}</h3>
+                <p>{f.a}</p>
+                <div class="divider divider-right">
+                  <a href="#" data-scrollto="#faqs-list"><i class="fa-solid fa-chevron-up"></i></a>
+                </div>
+              </>
+            ))}
+          </div>
+
+          <div class="col-lg-6">
+            {(copy.faqs || []).slice(Math.ceil((copy.faqs || []).length / 2)).map((f: any) => (
+              <>
+                <h3><strong class="color">Q.</strong> {f.q}</h3>
+                <p>{f.a}</p>
+                <div class="divider divider-right">
+                  <a href="#" data-scrollto="#faqs-list"><i class="fa-solid fa-chevron-up"></i></a>
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 button-full text-center fs-3 fw-light font-primary mt-5 footer-stick"
+      >
+        <div class="container">
+          {cta.line} <strong>{cta.strong}</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+
+    </div>
+  </section><!-- #content end -->
 </BaseLayout>

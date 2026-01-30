@@ -1,4 +1,141 @@
 ---
 // src/pages/mentions-legales.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Mentions légales | Horizon Conversion";
+const pageDescription =
+  "Mentions légales du site Horizon Conversion (marque de Control Online). Informations éditeur, hébergeur et contact.";
+
+const company = {
+  brand: "Horizon Conversion",
+  ownerBrandLine: "Horizon Conversion est une marque de Control Online.",
+  ownerName: "DA COSTA François",
+  ownerLink: "https://www.pappers.fr/entreprise/da-costa-francois-810922641",
+  email: "contact@horizon-conversion.fr",
+};
+
+const host = {
+  name: "Scaleway",
+  // tu peux compléter si tu veux : adresse / téléphone / site
+};
+
+const faqs = [
+  {
+    q: "Comment vous contacter ?",
+    a: `Par email : ${company.email}.`,
+  },
+  {
+    q: "Qui héberge ce site ?",
+    a: `Le site est hébergé par ${host.name}.`,
+  },
+];
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Mentions légales</h1>
+          <span>Informations légales &amp; hébergement</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mentions légales</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container">
+
+        <div class="row gx-5">
+          <div class="col-lg-8">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h2>Éditeur du site</h2>
+              <span>{company.ownerBrandLine}</span>
+            </div>
+
+            <p class="mb-2">
+              <strong>Marque :</strong> {company.brand}<br />
+              <strong>Responsable :</strong> {company.ownerName}<br />
+              <strong>Contact :</strong>{" "}
+              <a class="text-decoration-none" href={`mailto:${company.email}`}>{company.email}</a>
+            </p>
+
+            <p class="mb-4">
+              <strong>Fiche entreprise :</strong>{" "}
+              <a class="text-decoration-none" href={company.ownerLink} rel="noopener noreferrer" target="_blank">
+                Voir sur Pappers
+              </a>
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h3>Hébergeur</h3>
+            <p class="mb-0">
+              <strong>Hébergeur :</strong> {host.name}
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h3>Propriété intellectuelle</h3>
+            <p>
+              L’ensemble des contenus présents sur ce site (textes, visuels, éléments graphiques, structure) est protégé
+              par le droit d’auteur. Toute reproduction ou utilisation, totale ou partielle, sans autorisation préalable,
+              est interdite.
+            </p>
+
+            <h3>Responsabilité</h3>
+            <p>
+              Les informations présentes sur ce site sont fournies à titre indicatif. Malgré le soin apporté, l’éditeur
+              ne peut garantir l’exactitude ou l’exhaustivité des informations. L’utilisateur reste responsable de
+              l’usage qu’il fait des informations.
+            </p>
+
+            <h3>Liens externes</h3>
+            <p>
+              Le site peut contenir des liens vers des sites tiers. L’éditeur ne peut être tenu responsable du contenu
+              ou du fonctionnement de ces sites.
+            </p>
+
+            <h3>Contact</h3>
+            <p>
+              Pour toute question, vous pouvez écrire à{" "}
+              <a class="text-decoration-none" href={`mailto:${company.email}`}>{company.email}</a>.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="border rounded-3 p-4">
+              <h4 class="mb-3">Résumé</h4>
+              <ul class="iconlist mb-0">
+                <li><i class="fa-solid fa-check"></i> {company.ownerBrandLine}</li>
+                <li><i class="fa-solid fa-check"></i> Hébergeur : {host.name}</li>
+                <li><i class="fa-solid fa-check"></i> Contact : {company.email}</li>
+              </ul>
+            </div>
+
+            <div class="mt-4 border rounded-3 p-4">
+              <h4 class="mb-2">Pages utiles</h4>
+              <ul class="list-unstyled mb-0">
+                <li><a class="text-decoration-none" href="/contact">Contact</a></li>
+                <li><a class="text-decoration-none" href="/tarifs">Tarifs</a></li>
+                <li><a class="text-decoration-none" href="/methode">Méthode</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- #content end -->
+</BaseLayout>

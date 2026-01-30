@@ -1,4 +1,244 @@
 ---
 // src/pages/politique-confidentialite.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Politique de confidentialité | Horizon Conversion";
+const pageDescription =
+  "Politique de confidentialité : données collectées, finalités, cookies, durée de conservation, droits RGPD et contact.";
+
+const brand = "Horizon Conversion";
+const ownerLine = "Horizon Conversion est une marque de Control Online.";
+const contactEmail = "contact@horizon-conversion.fr";
+
+// ⚠️ Tu peux ajuster ces blocs si tu ajoutes : newsletter, paiement, espace client, etc.
+const dataTypes = [
+  { title: "Formulaire de contact", text: "Nom, email, téléphone, message, et informations liées à votre demande." },
+  { title: "Mesure d’audience (site)", text: "Données techniques (pages vues, appareil, navigateur, source de visite) via cookies/traceurs si activés." },
+  { title: "Emails", text: "Si vous nous écrivez, nous conservons l’historique des échanges." },
+];
+
+const purposes = [
+  { title: "Répondre à votre demande", text: "Vous recontacter, qualifier votre besoin, proposer un accompagnement." },
+  { title: "Améliorer le site", text: "Comprendre ce qui fonctionne et simplifier le parcours (CRO), uniquement avec des mesures utiles." },
+  { title: "Sécurité", text: "Prévenir les abus et sécuriser le site." },
+];
+
+const retention = [
+  { title: "Demandes via formulaire", text: "Durée nécessaire au traitement, puis archivage raisonnable (ex : suivi commercial)."},
+  { title: "Mesure d’audience", text: "Selon l’outil utilisé (souvent quelques mois) et votre paramétrage cookies." },
+  { title: "Emails", text: "Conservés le temps nécessaire à la relation et au suivi." },
+];
+
+const rights = [
+  "Accès, rectification, effacement",
+  "Limitation et opposition au traitement",
+  "Portabilité (si applicable)",
+  "Retrait du consentement (cookies/traceurs)",
+];
+
+const cookiesExamples = [
+  { title: "Cookies nécessaires", text: "Fonctionnement du site (sécurité, préférences)." },
+  { title: "Cookies de mesure", text: "Statistiques de fréquentation et performance (avec consentement si requis)." },
+];
+
+const faqs = [
+  { q: "Utilisez-vous mes données à des fins publicitaires ?", a: "Non, pas “par défaut”. Si un jour une publicité ou un retargeting est mis en place, ce sera indiqué clairement et soumis au consentement lorsque c’est nécessaire." },
+  { q: "Comment exercer mes droits ?", a: `Il suffit d’écrire à ${contactEmail} en précisant votre demande.` },
+  { q: "Qui est responsable du traitement ?", a: `${ownerLine}` },
+];
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Politique de confidentialité</h1>
+          <span>Données personnelles, cookies, droits RGPD</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Politique de confidentialité</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container">
+
+        <div class="row gx-5">
+          <div class="col-lg-8">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h2>1) Qui sommes-nous ?</h2>
+              <span>{brand} — informations essentielles</span>
+            </div>
+
+            <p class="mb-2">{ownerLine}</p>
+            <p class="mb-4">
+              <strong>Contact :</strong>{" "}
+              <a class="text-decoration-none" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>2) Quelles données sont collectées ?</h2>
+            <p>
+              Nous collectons uniquement ce qui est utile pour répondre à votre demande et améliorer l’expérience sur le site.
+              Pas de jargon : si une donnée ne sert à rien, on ne la garde pas.
+            </p>
+
+            <div class="row col-mb-30 mt-2">
+              {dataTypes.map((d) => (
+                <div class="col-md-6">
+                  <div class="feature-box fbox-plain">
+                    <div class="fbox-icon">
+                      <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3>{d.title}</h3>
+                      <p>{d.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>3) Pourquoi collectons-nous ces données ?</h2>
+            <div class="row col-mb-30 mt-2">
+              {purposes.map((p) => (
+                <div class="col-md-6">
+                  <div class="feature-box fbox-plain">
+                    <div class="fbox-icon">
+                      <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3>{p.title}</h3>
+                      <p>{p.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>4) Base légale (RGPD)</h2>
+            <p class="mb-2">
+              Selon les cas, les traitements reposent sur :
+            </p>
+            <ul class="iconlist mb-4">
+              <li><i class="fa-solid fa-check"></i> <strong>Votre consentement</strong> (ex : cookies de mesure si requis).</li>
+              <li><i class="fa-solid fa-check"></i> <strong>L’intérêt légitime</strong> (ex : sécurité, amélioration du site sans intrusif).</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Mesures précontractuelles</strong> (ex : répondre à une demande de devis).</li>
+            </ul>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>5) Cookies &amp; traceurs</h2>
+            <p>
+              Un cookie est un petit fichier déposé sur votre appareil. Certains sont nécessaires au fonctionnement du site,
+              d’autres servent à mesurer l’audience. Lorsque la loi l’impose, votre consentement est demandé.
+            </p>
+
+            <div class="row col-mb-30 mt-2">
+              {cookiesExamples.map((c) => (
+                <div class="col-md-6">
+                  <div class="feature-box fbox-plain">
+                    <div class="fbox-icon">
+                      <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3>{c.title}</h3>
+                      <p>{c.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>6) Durées de conservation</h2>
+            <p>On conserve les données le temps nécessaire, puis on supprime ou on archive de façon raisonnable.</p>
+            <ul class="iconlist mb-4">
+              {retention.map((r) => (
+                <li><i class="fa-solid fa-check"></i> <strong>{r.title} :</strong> {r.text}</li>
+              ))}
+            </ul>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>7) Partage des données</h2>
+            <p>
+              Nous ne vendons pas vos données. Elles peuvent être partagées uniquement si nécessaire, par exemple avec
+              des prestataires techniques (hébergement, outils de mesure, email), et uniquement pour fournir le service.
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>8) Vos droits</h2>
+            <p>Vous disposez des droits suivants :</p>
+            <ul class="iconlist mb-4">
+              {rights.map((r) => (
+                <li><i class="fa-solid fa-check"></i> {r}</li>
+              ))}
+            </ul>
+            <p>
+              Pour exercer vos droits, écrivez à{" "}
+              <a class="text-decoration-none" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+              Nous pourrons vous demander une preuve d’identité si nécessaire (uniquement pour éviter les abus).
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>9) Sécurité</h2>
+            <p>
+              Nous mettons en place des mesures de sécurité raisonnables (techniques et organisationnelles) pour protéger
+              vos données contre l’accès non autorisé, la perte ou l’altération.
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h2>10) Mise à jour</h2>
+            <p class="mb-0">
+              Cette politique peut évoluer (ex : ajout d’un outil de mesure, changement légal). En cas de changement important,
+              la page sera mise à jour.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="border rounded-3 p-4">
+              <h4 class="mb-3">En bref</h4>
+              <ul class="iconlist mb-0">
+                <li><i class="fa-solid fa-check"></i> Données utiles uniquement</li>
+                <li><i class="fa-solid fa-check"></i> Pas de vente de données</li>
+                <li><i class="fa-solid fa-check"></i> Cookies de mesure : consentement si requis</li>
+                <li><i class="fa-solid fa-check"></i> Droits RGPD via {contactEmail}</li>
+              </ul>
+            </div>
+
+            <div class="mt-4 border rounded-3 p-4">
+              <h4 class="mb-2">Pages utiles</h4>
+              <ul class="list-unstyled mb-0">
+                <li><a class="text-decoration-none" href="/mentions-legales">Mentions légales</a></li>
+                <li><a class="text-decoration-none" href="/contact">Contact</a></li>
+                <li><a class="text-decoration-none" href="/methode">Méthode</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- #content end -->
+</BaseLayout>

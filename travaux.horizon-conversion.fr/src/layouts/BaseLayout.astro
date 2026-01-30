@@ -4,84 +4,115 @@ import TopBar from "../components/TopBar.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+type FaqItem = { q: string; a: string };
+
 type Props = {
   title?: string;
   description?: string;
+  /** Si fourni, override le canonical calculé */
   canonical?: string;
   noindex?: boolean;
+  /** FAQ pour JSON-LD FAQPage */
+  faq?: FaqItem[];
 };
 
 const {
   title = "Horizon Conversion — Travaux",
   description = "SEO local, Google Ads et CRO + Analytics pour artisans (Sud Oise / Nord 95).",
-  canonical,
+  canonical: canonicalOverride,
   noindex = false,
-} = Astro.props;
+  faq = [] as FaqItem[],
+} = Astro.props as Props;
+
+// Canonical basé sur Astro.url (et Astro.site si configuré)
+const computedCanonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.href;
+
+// Canonical final (override possible)
+const canonicalUrl = canonicalOverride || computedCanonical;
+
+// JSON-LD FAQPage (si FAQ fournie)
+const faqJsonLd =
+  Array.isArray(faq) && faq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+          },
+        })),
+      }
+    : null;
 ---
 
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
-<head>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="author" content="Horizon Conversion" />
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge">
-	<meta name="author" content="Horizon Conversion">
-	<meta name="description" content={description}>
+    {description ? <meta name="description" content={description} /> : null}
 
-	{noindex && <meta name="robots" content="noindex,nofollow" />}
-	{canonical && <link rel="canonical" href={canonical} />}
+    {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
 
-	<!-- Font Imports -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="canonical" href={canonicalUrl} />
 
-	<!-- Core Style -->
-	<link rel="stylesheet" href="/_assets_/style.css">
+    <meta property="og:title" content={title} />
+    {description ? <meta property="og:description" content={description} /> : null}
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
 
-	<!-- Font Icons -->
-	<link rel="stylesheet" href="/_assets_/css/font-icons.css">
+    {faqJsonLd ? (
+      <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    ) : null}
 
-	<!-- Plugins/Components CSS -->
-	<link rel="stylesheet" href="/_assets_/css/swiper.css">
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-	<!-- Niche Demos -->
-	<link rel="stylesheet" href="/_assets_/construction.css">
+    <!-- Core Style -->
+    <link rel="stylesheet" href="/_assets_/style.css" />
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="/_assets_/css/custom.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Icons -->
+    <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
 
-	<!-- Document Title
-	============================================= -->
-	<title>{title}</title>
+    <!-- Plugins/Components CSS -->
+    <link rel="stylesheet" href="/_assets_/css/swiper.css" />
 
-</head>
+    <!-- Niche Demos -->
+    <link rel="stylesheet" href="/_assets_/construction.css" />
 
-<body class="stretched">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/_assets_/css/custom.css" />
 
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <TopBar />
+    <title>{title}</title>
 
-    <Header />
+    <slot name="head" />
+  </head>
 
-	  <slot />
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar />
+      <Header />
+      <slot />
+      <Footer />
+    </div>
 
-    <Footer />
+    <div id="gotoTop" class="uil uil-angle-up"></div>
 
-	</div><!-- #wrapper end -->
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="uil uil-angle-up"></div>
-
-	<!-- JavaScripts
-	============================================= -->
-	<script is:inline src="/_assets_/js/plugins.min.js"></script>
-	<script is:inline src="/_assets_/js/functions.bundle.js"></script>
-
-</body>
+    <script is:inline src="/_assets_/js/plugins.min.js"></script>
+    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+  </body>
 </html>

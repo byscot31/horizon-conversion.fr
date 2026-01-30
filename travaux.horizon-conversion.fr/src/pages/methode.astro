@@ -1,4 +1,287 @@
 ---
 // src/pages/methode.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Méthode : plus d’appels & devis pour artisans | Horizon Conversion";
+const pageDescription =
+  "Méthode simple et concrète pour artisans : être visible sur Google/Maps, recevoir des demandes utiles, et convertir les visites en appels. Sans jargon, orienté résultats.";
+
+const faqs = [
+  {
+    q: "C’est quoi l’objectif exact ?",
+    a: "Un seul : plus d’appels et de demandes de devis utiles. Pas “du trafic” pour le plaisir, pas de tableaux compliqués.",
+  },
+  {
+    q: "Je n’ai pas beaucoup de temps. Ça reste gérable ?",
+    a: "Oui. On avance par étapes simples : d’abord le contact et les preuves, puis la visibilité locale, puis l’accélération (pub) si besoin.",
+  },
+  {
+    q: "Je veux éviter les demandes hors zone / hors métier.",
+    a: "On cadre la zone (villes + alentours), on clarifie les prestations, et si on fait de la pub on filtre les recherches et la zone.",
+  },
+  {
+    q: "Je dois refaire mon site ?",
+    a: "Pas forcément. Souvent on améliore l’essentiel : téléphone visible, bouton d’appel, formulaire court, avis/photos, messages clairs.",
+  },
+  {
+    q: "Comment je sais si ça marche ?",
+    a: "On suit les appels et les formulaires. Tu vois clairement le nombre de demandes et ce qui les a déclenchées (Google, Maps, pub, site).",
+  },
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "On clarifie (en 30 minutes)",
+    text:
+      "Ton métier, ta zone, tes services, tes horaires, et ce que tu veux vraiment : du dépannage, du devis, du chantier… On évite les demandes qui te font perdre du temps.",
+    points: ["Zone d’intervention + alentours", "Prestations prioritaires", "Objectif : appels / devis"],
+    icon: "/_assets_/images/icons/building.png",
+  },
+  {
+    n: "2",
+    title: "On fait “convertir” (avant tout)",
+    text:
+      "Même si tu es visible, si ton contact est compliqué, les gens passent au suivant. On simplifie : téléphone, bouton d’appel mobile, formulaire court, preuves (avis/photos).",
+    points: ["Téléphone visible partout", "Formulaire court (2–4 champs)", "Avis + réalisations mises en avant"],
+    icon: "/_assets_/images/icons/drawer.png",
+  },
+  {
+    n: "3",
+    title: "On te rend visible localement",
+    text:
+      "Google + Google Maps : c’est là que les demandes locales démarrent. On nettoie/optimise la fiche Google, on structure les pages locales, et on aligne tout (site + Maps).",
+    points: ["Fiche Google Business optimisée", "Pages locales propres (ville + alentours)", "Preuves : photos, avis, services"],
+    icon: "/_assets_/images/icons/traffic-cone.png",
+  },
+  {
+    n: "4",
+    title: "On accélère (si tu veux des demandes vite)",
+    text:
+      "Quand tu veux remplir vite : Google Ads sur des recherches à forte intention (devis/urgence), avec zone cadrée et mots inutiles bloqués. Le clic doit finir en appel.",
+    points: ["Requêtes “intention forte” seulement", "Zone filtrée (pas hors secteur)", "Suivi appels + coût par demande"],
+    icon: "/_assets_/images/icons/paper-money.png",
+  },
+];
+
+const whatYouGet = [
+  {
+    title: "Une checklist simple (pas un PDF de 40 pages)",
+    text: "On te laisse une feuille de route claire : quoi faire maintenant, quoi faire ensuite, et quoi éviter.",
+    icon: "bi-check2-circle",
+  },
+  {
+    title: "Une page contact qui déclenche l’appel",
+    text: "Téléphone, bouton d’appel, formulaire court, zone, preuves : le client comprend vite et agit.",
+    icon: "bi-telephone",
+  },
+  {
+    title: "Une visibilité locale propre",
+    text: "Fiche Google + pages locales cohérentes : tu ressors mieux sur les recherches proches de chez toi.",
+    icon: "bi-geo-alt",
+  },
+  {
+    title: "Un suivi lisible",
+    text: "Appels + formulaires. Tu vois ce qui rapporte, et on coupe ce qui ne sert à rien.",
+    icon: "bi-graph-up",
+  },
+];
+
+const cta = {
+  href: "/contact",
+  title: "Tu veux plus d’appels et de devis ?",
+  subtitle: "On te montre ce qui bloque et ce qui peut marcher chez toi (sans blabla).",
+  button: "Demander un audit",
+};
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Méthode</h1>
+          <span>Simple. Concrète. Orientée demandes (appels & devis).</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Méthode</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <div class="container">
+        <div class="row gx-5 align-items-start">
+          <div class="col-lg-7">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h2>Une méthode pensée pour les artisans</h2>
+              <span>Pas de jargon. Pas de “trafic pour le trafic”. Juste des demandes utiles.</span>
+            </div>
+
+            <p class="lead">
+              Si tu es artisan, ton site doit faire une chose : <strong>faire gagner des appels</strong>.
+              Les clients cherchent vite, comparent 2–3 résultats, puis choisissent celui qui a l’air fiable et joignable.
+            </p>
+
+            <p>
+              Notre approche est simple : <strong>1) convertir</strong> (contact + confiance), <strong>2) être visible</strong> (Google/Maps),
+              <strong>3) accélérer</strong> si tu veux des demandes rapidement (Google Ads).
+            </p>
+
+            <div class="divider divider-sm my-4"></div>
+
+            <h3 class="mb-3">Ce qu’on vise</h3>
+            <ul class="iconlist iconlist-large">
+              <li><i class="fa-solid fa-check"></i> Plus d’appels et de demandes de devis</li>
+              <li><i class="fa-solid fa-check"></i> Moins de demandes hors zone / hors sujet</li>
+              <li><i class="fa-solid fa-check"></i> Un suivi clair (appels + formulaires)</li>
+            </ul>
+
+            <a href={cta.href} class="button button-3d ms-0 mt-3">
+              {cta.button}
+            </a>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="border rounded-3 p-4">
+              <h4 class="mb-2">Le principe</h4>
+              <p class="mb-3">
+                On enlève ce qui freine l’appel, on met en avant ce qui rassure, et on se concentre sur les recherches qui
+                déclenchent une action.
+              </p>
+
+              <div class="divider divider-sm my-4"></div>
+
+              <h5 class="mb-2">Exemples de “bons signaux”</h5>
+              <ul class="iconlist mb-0">
+                <li><i class="fa-solid fa-check"></i> Téléphone visible sur mobile</li>
+                <li><i class="fa-solid fa-check"></i> Avis + photos visibles</li>
+                <li><i class="fa-solid fa-check"></i> Zone clairement affichée</li>
+                <li><i class="fa-solid fa-check"></i> Formulaire court (pas 12 champs)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-center divider-border my-6"><i class="bi-gem"></i></div>
+
+        {/* Étapes */}
+        <div class="row col-mb-50 mb-0">
+          {steps.map((s) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-box fbox-plain">
+                <div class="fbox-icon">
+                  <a href={cta.href}>
+                    <img src={s.icon} alt={s.title} />
+                  </a>
+                </div>
+                <div class="fbox-content">
+                  <h3>
+                    <span class="me-1">{s.n}.</span> {s.title}
+                  </h3>
+                  <p>{s.text}</p>
+                  <ul class="iconlist mb-0">
+                    {s.points.map((p) => (
+                      <li><i class="fa-solid fa-check"></i> {p}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="line my-6"></div>
+
+        {/* Ce que tu reçois */}
+        <div class="row gx-5 align-items-stretch">
+          <div class="col-lg-5">
+            <h2 class="ls-1 mb-3">Ce que tu reçois</h2>
+            <p class="mb-4">
+              Du concret : des améliorations visibles, des demandes suivies, et une méthode que tu comprends.
+              Tu gardes la main sur ton budget.
+            </p>
+
+            <div class="border rounded-3 p-4">
+              <h4 class="mb-2">Mini promesse</h4>
+              <p class="mb-0">
+                Si on doit résumer : <strong>plus de demandes utiles</strong>, avec une approche simple et des priorités claires.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="row g-4">
+              {whatYouGet.map((x) => (
+                <div class="col-md-6">
+                  <div class="border rounded-3 p-4 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <i class={`bi ${x.icon}`} style="font-size: 22px;"></i>
+                      <strong>{x.title}</strong>
+                    </div>
+                    <p class="mb-0 text-muted">{x.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="line my-6"></div>
+
+        {/* FAQ courte (sans blabla) */}
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            <h3>Questions fréquentes</h3>
+            <p class="mb-4">
+              On reste simple. Si tu veux, on en parle sur un audit : tu repars avec des priorités concrètes.
+            </p>
+
+            {faqs.slice(0, 3).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+
+          <div class="col-lg-6">
+            {faqs.slice(3).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 button-full text-center mb-0 fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          {cta.title} <strong>{cta.button}</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+          <div style="font-size: 16px; opacity: .85; margin-top: 6px;">
+            {cta.subtitle}
+          </div>
+        </div>
+      </a>
+    </div>
+  </section><!-- #content end -->
+</BaseLayout>

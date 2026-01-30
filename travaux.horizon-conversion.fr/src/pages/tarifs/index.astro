@@ -1,4 +1,306 @@
 ---
-// src/pages/offres/index.astro
+// src/pages/tarifs.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const pageTitle = "Tarifs | Horizon Conversion";
+const pageDescription =
+  "Tarifs simples pour artisans : visibilité Google/Maps, Google Ads, optimisation du site. Packs clairs + option à la demande. Sans engagement compliqué.";
+
+const packs = [
+  {
+    name: "Essentiel",
+    price: "199€ / mois",
+    badge: "Le plus demandé",
+    forWho: "Pour avoir des demandes locales régulières (Google/Maps) + un site qui fait appeler.",
+    includes: [
+      "Audit express (zone, offres, messages, contact)",
+      "Optimisation fiche Google Business (infos, catégories, services, photos)",
+      "Optimisation page contact (téléphone visible, bouton d’appel mobile, formulaire court)",
+      "Mise en place du suivi des demandes (appels + formulaires)",
+      "1 ajustement / semaine (petite amélioration continue)",
+      "Reporting simple (1 page)",
+    ],
+    notIncluded: [
+      "Budget publicitaire Google",
+      "Création/refonte complète du site",
+      "Rédaction “catalogue” de 50 pages",
+    ],
+    cta: "Démarrer l’Essentiel",
+  },
+  {
+    name: "Croissance",
+    price: "399€ / mois",
+    badge: "Pour accélérer",
+    forWho: "Pour booster les demandes : Google/Maps + pages locales propres + optimisations conversion.",
+    includes: [
+      "Tout le pack Essentiel",
+      "Création de pages locales utiles (ville + alentours) : 2 pages / mois",
+      "Améliorations conversion (messages, preuves, sections, FAQ) : 2 optimisations / mois",
+      "Optimisation Google Maps (posts, photos, Q/R si besoin)",
+      "Suivi des performances (ce qui génère des appels / devis)",
+    ],
+    notIncluded: [
+      "Google Ads (option)",
+      "Gestion multi-sites / e-commerce complexe",
+    ],
+    cta: "Passer en Croissance",
+  },
+  {
+    name: "Accélération",
+    price: "599€ / mois",
+    badge: "Demandes rapides",
+    forWho: "Pour remplir vite : Croissance + Google Ads propre (zone cadrée, clics filtrés, suivi appels).",
+    includes: [
+      "Tout le pack Croissance",
+      "Mise en place Google Ads (campagne locale)",
+      "Filtrage des recherches inutiles (mots clés négatifs)",
+      "Ciblage de zone (évite le hors secteur)",
+      "Optimisation hebdo (annonces, requêtes, coût par demande)",
+      "Suivi appels + formulaires + coût par demande",
+    ],
+    notIncluded: [
+      "Budget Google Ads (payé directement à Google)",
+    ],
+    cta: "Lancer l’Accélération",
+  },
+];
+
+const oneShots = [
+  {
+    title: "Audit express (sans blabla)",
+    price: "149€",
+    text: "1 visio + une checklist claire : ce qui bloque les appels + quoi faire en priorité.",
+  },
+  {
+    title: "Page contact qui convertit",
+    price: "249€",
+    text: "Téléphone visible, bouton d’appel mobile, formulaire court, preuves, zone. Objectif : plus d’appels.",
+  },
+  {
+    title: "Pack Google Business (Maps)",
+    price: "299€",
+    text: "Nettoyage + optimisation complète de ta fiche Google (infos, services, photos, structure).",
+  },
+  {
+    title: "Mise en place Google Ads (setup)",
+    price: "349€",
+    text: "Création campagne + ciblage zone + suivi appels/formulaires + premiers filtres anti-clics inutiles.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Il y a un engagement ?",
+    a: "Non. Tu peux arrêter quand tu veux. L’idée : garder seulement ce qui te rapporte des demandes utiles.",
+  },
+  {
+    q: "Le budget Google Ads est inclus ?",
+    a: "Non. Le budget pub est payé directement à Google. Nous, on gère la campagne pour éviter de “brûler” de l’argent.",
+  },
+  {
+    q: "Je suis artisan, j’ai peu de temps : ça demande beaucoup d’aller-retours ?",
+    a: "Non. On travaille avec des infos simples (zone, prestations, horaires, téléphone, photos/avis). Ensuite on fait des ajustements concrets.",
+  },
+  {
+    q: "Pourquoi 3 packs ?",
+    a: "Parce que les besoins ne sont pas les mêmes : d’abord convertir, ensuite être visible localement, et si besoin accélérer avec la pub.",
+  },
+];
+
+const cta = {
+  href: "/contact",
+  title: "Tu veux savoir quel pack est le bon pour toi ?",
+  subtitle: "On regarde ton cas (zone + demandes + site) et on te donne une recommandation simple.",
+  button: "Demander un audit",
+};
 ---
 
+<BaseLayout title={pageTitle} description={pageDescription} faq={faqs}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-center bg-transparent">
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>Tarifs</h1>
+          <span>Packs clairs pour artisans : plus d’appels & devis, sans jargon.</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tarifs</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <div class="container">
+        <div class="row gx-5 align-items-start">
+          <div class="col-lg-7">
+            <div class="heading-block border-bottom-0 mb-4">
+              <h2>Le but : des demandes utiles</h2>
+              <span>Pas “du trafic”. Pas des promesses floues. Des appels, des devis, et un suivi simple.</span>
+            </div>
+
+            <p class="lead">
+              Un bon site + une bonne visibilité locale, ça doit te faire gagner du temps :
+              moins de demandes hors zone, plus de clients qui appellent directement.
+            </p>
+
+            <ul class="iconlist iconlist-large">
+              <li><i class="fa-solid fa-check"></i> On simplifie le contact (mobile-friendly)</li>
+              <li><i class="fa-solid fa-check"></i> On rassure (avis, photos, messages clairs)</li>
+              <li><i class="fa-solid fa-check"></i> On suit ce qui rapporte (appels + formulaires)</li>
+            </ul>
+
+            <a href={cta.href} class="button button-3d ms-0 mt-2">
+              {cta.button}
+            </a>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="border rounded-3 p-4">
+              <h4 class="mb-2">Règle simple</h4>
+              <p class="mb-0">
+                On commence toujours par <strong>convertir</strong> (contact + preuves),
+                puis on augmente la <strong>visibilité</strong> (Google/Maps).
+                La pub, c’est seulement si tu veux accélérer.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-center divider-border my-6"><i class="bi-gem"></i></div>
+
+        {/* Packs */}
+        <div class="row g-4">
+          {packs.map((p) => (
+            <div class="col-lg-4">
+              <div class="border rounded-3 p-4 h-100">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <div>
+                    <h3 class="mb-1">{p.name}</h3>
+                    <div class="text-muted">{p.forWho}</div>
+                  </div>
+                  {p.badge ? (
+                    <span class="badge bg-dark text-light" style="white-space: nowrap;">
+                      {p.badge}
+                    </span>
+                  ) : null}
+                </div>
+
+                <div class="my-3">
+                  <div style="font-size: 34px; font-weight: 700; line-height: 1;">
+                    {p.price}
+                  </div>
+                  <small class="text-muted">HT — facturation mensuelle</small>
+                </div>
+
+                <div class="divider divider-sm my-4"></div>
+
+                <h5 class="mb-2">Inclus</h5>
+                <ul class="iconlist mb-4">
+                  {p.includes.map((x) => (
+                    <li><i class="fa-solid fa-check"></i> {x}</li>
+                  ))}
+                </ul>
+
+                {p.notIncluded?.length ? (
+                  <>
+                    <h6 class="text-muted mb-2">Non inclus</h6>
+                    <ul class="iconlist mb-4">
+                      {p.notIncluded.map((x) => (
+                        <li><i class="fa-solid fa-xmark"></i> {x}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+
+                <a href={cta.href} class="button button-3d ms-0 w-100 text-center">
+                  {p.cta}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="line my-6"></div>
+
+        {/* One-shots */}
+        <div class="row gx-5 align-items-start">
+          <div class="col-lg-5">
+            <h2 class="ls-1 mb-3">Prestations ponctuelles</h2>
+            <p class="mb-0">
+              Si tu veux avancer par petites étapes (ou tester), tu peux prendre une prestation “one-shot”.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="row g-4">
+              {oneShots.map((x) => (
+                <div class="col-md-6">
+                  <div class="border rounded-3 p-4 h-100">
+                    <div class="d-flex align-items-center justify-content-between gap-2">
+                      <strong>{x.title}</strong>
+                      <span class="badge bg-light text-dark">{x.price}</span>
+                    </div>
+                    <p class="text-muted mb-0 mt-2">{x.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="line my-6"></div>
+
+        {/* FAQ */}
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            <h3>Questions fréquentes</h3>
+            <p class="mb-4">On garde ça simple :</p>
+
+            {faqs.slice(0, 2).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+
+          <div class="col-lg-6">
+            {faqs.slice(2).map((f) => (
+              <>
+                <h4 class="mb-2"><strong class="color">Q.</strong> {f.q}</h4>
+                <p>{f.a}</p>
+                <div class="divider divider-sm my-4"></div>
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA pleine largeur */}
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 button-full text-center mb-0 fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          {cta.title} <strong>{cta.button}</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+          <div style="font-size: 16px; opacity: .85; margin-top: 6px;">
+            {cta.subtitle}
+          </div>
+        </div>
+      </a>
+    </div>
+  </section><!-- #content end -->
+</BaseLayout>

@@ -3,41 +3,360 @@
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import metiers from "../../../data/metiers.json";
+import villes from "../../../data/villes.json";
 
 export function getStaticPaths() {
-  return metiers.map((m) => ({
+  return (Array.isArray(metiers) ? metiers : []).map((m: any) => ({
     params: { metier: m.slug },
-    props: { metier: m },
+    props: { metierObj: m },
   }));
 }
 
-const { metier } = Astro.props;
+const { metierObj } = Astro.props;
+const { metier } = Astro.params;
 
-const title = `Marketing pour ${metier.name} — SEO local, Google Ads, CRO`;
-const description = `SEO local + Google Ads + CRO/Analytics pour ${metier.name}. Plus de demandes, suivi clair (appels, formulaires).`;
+const job = metierObj || (Array.isArray(metiers) ? metiers.find((m: any) => m.slug === metier) : null);
+if (!job) throw new Error(`Métier inconnu: ${metier}`);
+
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+const jobName = job.name || cap(job.slug);
+const jobSlug = job.slug;
+
+// Icônes métiers (Bootstrap Icons)
+const metierIcon: Record<string, string> = {
+  plombier: "bi-droplet",
+  electricien: "bi-lightning-charge",
+  "chauffagiste-pac": "bi-thermometer-sun",
+  serrurier: "bi-key",
+  couvreur: "bi-house",
+  vitrier: "bi-window",
+  peintre: "bi-brush",
+  macon: "bi-bricks",
+  menuisier: "bi-hammer",
+  carreleur: "bi-grid-3x3-gap",
+  "plaquiste-isolation": "bi-layers",
+  "renovation-globale": "bi-tools",
+};
+
+const icon = metierIcon[jobSlug] || "bi-tools";
+
+// Copy “métier-friendly” (sans jargon, orienté demandes)
+const copyByMetier: Record<string, any> = {
+  plombier: {
+    heroTitle: `Plombier : recevoir plus d’appels, sans dépendre du bouche-à-oreille`,
+    heroSubtitle: `Quand quelqu’un a une fuite, un ballon HS ou un WC bouché, il cherche sur Google et il appelle. L’objectif : être visible au bon endroit, et convertir le clic en appel.`,
+    pains: [
+      "Trop de demandes hors zone (ou hors budget)",
+      "Site “joli” mais pas d’appels",
+      "Fiche Google pas à jour / avis pas travaillés",
+      "Publicité qui coûte cher et ramène du vent",
+    ],
+    intentExamples: [
+      "plombier urgence",
+      "fuite d’eau",
+      "débouchage",
+      "chauffe-eau",
+      "devis rapide",
+    ],
+    faq: [
+      { q: "Est-ce que ça marche si je suis déjà chargé ?", a: "Oui : on peut limiter la zone, les horaires, ou pousser uniquement certaines prestations (et couper le reste)." },
+      { q: "Je veux éviter les demandes “petits budgets”", a: "On filtre : mots-clés, annonces, messages et formulaire. Tu reçois moins de demandes, mais de meilleure qualité." },
+      { q: "Je dois refaire mon site ?", a: "Pas forcément. Souvent, on améliore la page contact + les preuves (avis/photos) et ça suffit à faire monter les appels." },
+      { q: "En combien de temps je vois un résultat ?", a: "La pub peut générer des appels rapidement. Le local (Google/Maps) progresse en quelques semaines si on fait propre et régulier." },
+    ],
+  },
+
+  serrurier: {
+    heroTitle: `Serrurier : être visible sur “urgence” et transformer en appels`,
+    heroSubtitle: `Un client bloqué ne compare pas longtemps : il cherche, il clique, il appelle. L’objectif : apparaître sur les bonnes recherches, dans la bonne zone.`,
+    pains: ["Concurrence forte sur “urgence”", "Clics hors zone", "Mauvais appels (hors besoin)", "Manque d’avis qui rassurent"],
+    intentExamples: ["serrurier urgence", "porte claquée", "ouverture de porte", "changement serrure", "devis rapide"],
+    faq: [
+      { q: "Comment éviter les appels hors zone ?", a: "On cible la zone, on écrit des messages clairs, et on coupe ce qui dépasse (mots-clés + réglages)." },
+      { q: "Je veux des appels, pas des formulaires", a: "On met le téléphone au centre : bouton d’appel, horaires visibles, et page ultra simple." },
+      { q: "Je suis déjà sur Google Maps", a: "Parfait : on optimise la fiche + avis + photos + catégories. C’est souvent là que se joue la différence." },
+      { q: "La pub Google c’est obligatoire ?", a: "Non. Mais c’est utile si tu veux des demandes tout de suite (surtout sur l’urgence)." },
+    ],
+  },
+};
+
+// fallback “propre”
+const copy = copyByMetier[jobSlug] || {
+  heroTitle: `${jobName} : recevoir plus de demandes localement`,
+  heroSubtitle: `Le but : être trouvé sur Google, rassurer vite, et faciliter l’appel ou la demande de devis.`,
+  pains: [
+    "Pas assez d’appels",
+    "Demandes hors zone",
+    "Concurrence locale",
+    "Site pas assez clair",
+  ],
+  intentExamples: ["urgence", "devis", "autour de moi", "prix", "disponible"],
+  faq: [
+    { q: "Ça marche pour mon métier ?", a: "Oui : on adapte la page, les messages et la zone selon ta réalité terrain." },
+    { q: "Je dois refaire mon site ?", a: "Souvent non : on améliore l’essentiel (contact, preuves, clarté)." },
+    { q: "Je veux des demandes qualifiées", a: "On filtre les recherches et on cadre la zone + les prestations." },
+    { q: "Quel est le plus rapide ?", a: "La pub peut aller vite. Le référencement local progresse durablement si on fait propre." },
+  ],
+};
+
+const pageTitle = `${jobName} | Horizon Conversion`;
+const pageDescription =
+  `Stratégie locale pour ${jobName} : être visible sur Google/Maps, obtenir des appels et demandes de devis, et cadrer la zone pour éviter les demandes hors secteur (Sud Oise & Nord 95).`;
+
+// Villes (on pousse vers /metiers/{metier}/{ville})
+const allCities = Array.isArray(villes) ? villes : [];
+
+// Tri simple : dept 60/95 d’abord si présent, puis alpha
+const citiesSorted = [...allCities].sort((a: any, b: any) => {
+  const da = String(a.dept || "");
+  const db = String(b.dept || "");
+  const prio = (d: string) => (d === "60" || d === "95" ? 0 : 1);
+  const p = prio(da) - prio(db);
+  if (p !== 0) return p;
+  return String(a.name || "").localeCompare(String(b.name || ""), "fr");
+});
+
+// Limites UI (évite l’effet “catalogue infini”)
+const citiesPrimary = citiesSorted.slice(0, 18);
+const citiesMore = citiesSorted.slice(18, 42); // optionnel
+
+const cta = {
+  href: "/contact",
+  line: `Tu es ${jobName.toLowerCase()} et tu veux plus d’appels ?`,
+  strong: "Demander un audit",
+};
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="content-wrap">
-    <div class="container py-6">
-      <h1 class="mb-3">{metier.name} : plus de demandes</h1>
-      <p class="lead">Pack SEO local + Google Ads + CRO/Analytics adapté aux {metier.name.toLowerCase()}.</p>
+<BaseLayout title={pageTitle} description={pageDescription} faq={copy.faq}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark">
+    <img src="/_assets_/images/slider/1.jpg" class="parallax-bg" alt="" />
+    <div class="container">
+      <div class="page-title-row">
+        <div class="page-title-content">
+          <h1>{copy.heroTitle}</h1>
+          <span>{copy.heroSubtitle}</span>
+        </div>
 
-      <div class="row col-mb-30 mt-4">
-        <div class="col-md-4">
-          <a class="button w-100 text-center" href="/seo-local">SEO local</a>
-        </div>
-        <div class="col-md-4">
-          <a class="button w-100 text-center" href="/google-ads">Google Ads</a>
-        </div>
-        <div class="col-md-4">
-          <a class="button w-100 text-center" href="/cro-analytics">CRO + Analytics</a>
-        </div>
-      </div>
-
-      <div class="mt-5">
-        <a class="button button-large button-dark" href="/contact">Demander un audit</a>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/metiers">Métiers</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{jobName}</li>
+          </ol>
+        </nav>
       </div>
     </div>
-  </section>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      <!-- Bande “promesse” -->
+      <div class="section header-stick">
+        <h2 class="text-center mb-0 ls-1">
+          Objectif : des appels &amp; des devis, pas du blabla.
+        </h2>
+      </div>
+
+      <div class="container">
+
+        <!-- 3 leviers simples (SEO / Ads / CRO) -->
+        <div class="row col-mb-50 mb-0">
+
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <a href="/seo-local"><img src="/_assets_/images/icons/building.png" alt="Google & Google Maps" /></a>
+              </div>
+              <div class="fbox-content">
+                <h3>Google &amp; Google Maps</h3>
+                <p>
+                  Être trouvé quand un client cherche <strong>{jobName.toLowerCase()}</strong> près de chez lui.
+                  Fiche Google propre, avis, photos, infos claires, et pages locales utiles.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <a href="/google-ads"><img src="/_assets_/images/icons/bank.png" alt="Demandes rapides" /></a>
+              </div>
+              <div class="fbox-content">
+                <h3>Demandes rapides</h3>
+                <p>
+                  Si tu veux des demandes <strong>tout de suite</strong> : on cible la zone, on filtre les mauvaises requêtes,
+                  et on pilote au concret (appels / demandes).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <a href="/cro-analytics"><img src="/_assets_/images/icons/drawer.png" alt="Site qui convertit" /></a>
+              </div>
+              <div class="fbox-content">
+                <h3>Site qui convertit</h3>
+                <p>
+                  Téléphone visible, bouton d’appel mobile, formulaire court, preuves (avis/photos) :
+                  on enlève ce qui freine l’appel.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Bloc “parle artisan” -->
+        <div class="row gx-5">
+          <div class="col-lg-6">
+            <h3>
+              <strong class="color">Concret :</strong> ce qui bloque souvent un {jobName.toLowerCase()}
+            </h3>
+            <ul class="iconlist iconlist-large">
+              {copy.pains.map((p: string) => (
+                <li><i class="fa-solid fa-check"></i> {p}</li>
+              ))}
+            </ul>
+
+            <div class="divider divider-right">
+              <a href="#villes" data-scrollto="#villes"><i class="fa-solid fa-chevron-down"></i></a>
+            </div>
+
+            <h3>
+              <strong class="color">Ce que cherchent tes clients</strong> (exemples)
+            </h3>
+            <p class="mb-2">
+              Ce sont des recherches “intention forte” : la personne veut une réponse rapide.
+            </p>
+            <ul class="iconlist">
+              {copy.intentExamples.map((k: string) => (
+                <li><i class="fa-solid fa-location-dot"></i> {k} + <strong>ville</strong></li>
+              ))}
+            </ul>
+
+            <a href="/contact" class="button button-3d mt-3">
+              Demander un audit
+            </a>
+          </div>
+
+          <div class="col-lg-6">
+            <h3>
+              <strong class="color">Le plus important :</strong> cadrer la zone (et éviter les demandes hors secteur)
+            </h3>
+            <p>
+              On ne cherche pas des visiteurs partout. On veut des demandes <strong>près de toi</strong>.
+              C’est pour ça que les pages <em>métier × ville</em> existent : elles rassurent, expliquent la zone,
+              et poussent vers l’appel.
+            </p>
+
+            <div class="card p-4 shadow-sm">
+              <div class="d-flex align-items-center gap-3">
+                <i class={`bi ${icon}`} style="font-size: 28px;"></i>
+                <div>
+                  <strong>{jobName}</strong>
+                  <div class="text-muted">Pages locales : /metiers/{jobSlug}/(ville)</div>
+                </div>
+              </div>
+              <div class="mt-3">
+                <a class="text-decoration-none" href="/methode">Voir la méthode →</a>
+                <span class="mx-2">•</span>
+                <a class="text-decoration-none" href="/tarifs">Voir les tarifs →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-center divider-border"><i class="bi-gem"></i></div>
+
+        <!-- GRID VILLES -> liens vers /metiers/{metier}/{ville} -->
+        <div id="villes" class="row text-center mx-auto" style="max-width: 1100px;">
+          <div class="col-lg-12">
+            <div class="heading-block text-center">
+              <h3>{jobName} : choisir ta ville</h3>
+              <span>
+                Clique sur ta ville : tu arrives sur une page locale (avec les alentours) faite pour déclencher un appel.
+              </span>
+            </div>
+
+            <div class="row align-items-stretch grid-border">
+              {citiesPrimary.map((v: any) => (
+                <div class="col-lg-3 col-md-6">
+                  <div class="feature-box fbox-center fbox-plain border-bottom-0">
+                    <div class="fbox-icon">
+                      <i class={`bi bi-geo-alt`} aria-hidden="true"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3>
+                        <a class="text-dark" href={`/metiers/${jobSlug}/${v.slug}`}>
+                          {v.name}
+                        </a>
+                      </h3>
+                      <small class="d-block text-muted">
+                        {v.dept ? `(${v.dept})` : ""} {v.regionHint ? `— ${v.regionHint}` : ""}
+                      </small>
+                      {Array.isArray(v.around) && v.around.length ? (
+                        <small class="d-block text-muted mt-1">
+                          Alentours : {v.around.slice(0, 2).join(", ")}{v.around.length > 2 ? "…" : ""}
+                        </small>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {citiesMore.length ? (
+              <div class="mt-4">
+                <p class="mb-2 text-muted">
+                  D’autres villes existent aussi (on évite d’afficher 200 liens d’un coup pour rester lisible).
+                </p>
+                <div class="row align-items-stretch grid-border">
+                  {citiesMore.slice(0, 12).map((v: any) => (
+                    <div class="col-lg-3 col-md-6">
+                      <div class="feature-box fbox-center fbox-plain border-bottom-0">
+                        <div class="fbox-content">
+                          <h3>
+                            <a class="text-dark" href={`/metiers/${jobSlug}/${v.slug}`}>
+                              {v.name}
+                            </a>
+                          </h3>
+                          <small class="d-block text-muted">
+                            {v.dept ? `(${v.dept})` : ""} {v.regionHint ? `— ${v.regionHint}` : ""}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA pleine largeur -->
+      <a
+        href={cta.href}
+        class="button button-3d border-bottom-0 button-full text-center text-end fw-light font-primary mt-5 footer-stick"
+        style="font-size: 26px;"
+      >
+        <div class="container">
+          {cta.line} <strong>{cta.strong}</strong>
+          <i class="uil uil-angle-right-b" style="top:3px;"></i>
+        </div>
+      </a>
+
+    </div>
+  </section><!-- #content end -->
 </BaseLayout>
