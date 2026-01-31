@@ -1,0 +1,8 @@
+[
+  { "slug": "senlis", "name": "Senlis", "dept": "60", "regionHint": "Sud Oise" },
+  { "slug": "chantilly", "name": "Chantilly", "dept": "60", "regionHint": "Sud Oise" },
+  { "slug": "creil", "name": "Creil", "dept": "60", "regionHint": "Sud Oise" },
+  { "slug": "nogent-sur-oise", "name": "Nogent-sur-Oise", "dept": "60", "regionHint": "Sud Oise" },
+  { "slug": "clermont-oise", "name": "Clermont", "dept": "60", "regionHint": "Oise" },
+  { "slug": "luzarches", "name": "Luzarches", "dept": "95", "regionHint": "Nord 95" }
+]
