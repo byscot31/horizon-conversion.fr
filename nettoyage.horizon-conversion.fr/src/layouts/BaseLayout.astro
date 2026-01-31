@@ -106,17 +106,52 @@ const baseSchema = [
 const allSchemas = [...baseSchema, ...schemaExtra];
 const isHome = reqUrl.pathname === "/" || pageType === "home";
 
-// Navigation (simple, stable, hub-friendly)
+// Navigation (courte, CRO-first)
 const nav = [
-  { href: "/", label: "Accueil" },
-  { href: "/seo-local", label: "SEO local" },
-  { href: "/google-ads", label: "Google Ads" },
-  { href: "/cro", label: "CRO & Tracking" },
-  { href: "/specialites", label: "Spécialités" },
-  { href: "/methode", label: "Méthode" },
-  { href: "/preuves", label: "Preuves" },
+  {
+    label: "Services",
+    href: "/#services",
+    children: [
+      { href: "/seo-local", label: "SEO local" },
+      { href: "/google-ads", label: "Google Ads" },
+      { href: "/cro", label: "CRO & Tracking" },
+    ],
+  },
+  {
+      label: "Marchés",
+      href: "/specialites",
+      children: [
+        { href: "/specialites/nettoyage-bureaux", label: "Bureaux" },
+        { href: "/specialites/nettoyage-coproprietes", label: "Copropriétés" },
+        { href: "/specialites/nettoyage-locaux-commerciaux", label: "Commerces" },
+        { href: "/specialites/nettoyage-medical", label: "Médical" },
+        { href: "/specialites/nettoyage-industrie", label: "Industrie" },
+        { href: "/specialites/nettoyage-fin-de-chantier", label: "Fin de chantier" },
+        { href: "/specialites/nettoyage-vitrerie", label: "Vitrerie" },
+        { href: "/specialites/remise-en-etat", label: "Remise en état" },
+      ],
+    },
+  {
+      label: "Zones 60/95",
+      href: "/#zones",
+      children: [
+        { href: "/ressources/senlis", label: "Senlis & alentours" },
+        { href: "/ressources/chantilly", label: "Chantilly & alentours" },
+        { href: "/ressources/creil", label: "Creil & alentours" },
+        { href: "/ressources/nogent-sur-oise", label: "Nogent-sur-Oise & alentours" },
+        { href: "/ressources/clermont", label: "Clermont & alentours" },
+        { href: "/ressources/luzarches", label: "Luzarches & alentours" },
+      ],
+    },
   { href: "/tarifs", label: "Tarifs" },
-  { href: "/contact", label: "Contact" },
+  {
+    label: "Ressources",
+    href: "/#ressources",
+    children: [
+      { href: "/methode", label: "Méthode" },
+      { href: "/preuves", label: "Preuves" },
+    ],
+  },
 ];
 
 const footerCities = [
@@ -161,8 +196,28 @@ const footerCities = [
     {preloadHeroImage ? <link rel="preload" as="image" href={preloadHeroImage} /> : null}
 
     <!-- CSS “Cleaner” (ajuste les paths selon ton projet) -->
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/cleaner.css" />
+    <link rel="stylesheet" href="/_assets_/style.css" />
+    <link rel="stylesheet" href="/_assets_/cleaner.css" />
+    <link rel="stylesheet" href="/_assets_/css/font-icons.css">
+    <link rel="stylesheet" href="/_assets_/css/custom.css">
+
+    <style>
+      .form-group > label.error {
+        display: block !important;
+        text-transform: none;
+      }
+
+      .form-group input.valid ~ label.error,
+      .form-group input[type="text"] ~ label.error,
+      .form-group input[type="email"] ~ label.error,
+      .form-group input[type="number"] ~ label.error,
+      .form-group select ~ label.error { display: none !important; }
+    </style>
+
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="http://fonts.googleapis.com/css?family=Heebo:400,500,700" rel="stylesheet">
 
     <!-- Slot head (meta spécifiques par page, CSS additionnelle, etc.) -->
     <slot name="head" />
@@ -253,8 +308,7 @@ const footerCities = [
             <div class="header-row">
               <div id="logo" class="col col-sm-auto">
                 <a href="/" aria-label={`${brandName} — Accueil`}>
-                  {/* Remplace par ton logo */}
-                  <img class="logo-default" src="/logo.png" alt={brandName} height="36" />
+                  <img class="logo-default" src="/_assets_/images/logo.png" alt={brandName} height="36" />
                 </a>
               </div>
 
@@ -285,12 +339,12 @@ const footerCities = [
               <nav class="primary-menu" aria-label="Navigation principale">
                 <ul class="menu-container border-end-0 me-0">
                   {nav.map((item) => (
-                    <li class="menu-item">
+                    <li class={`menu-item ${item.children?.length ? "menu-item-submenu" : ""}`}>
                       <a
                         class="menu-link ls-1 text-uppercase fw-bold"
                         href={item.href}
                         data-cta
-                        data-cta-id={`nav_${item.href.replace(/\W+/g, "_")}`}
+                        data-cta-id={`nav_${(item.href || item.label).replace(/\W+/g, "_")}`}
                         data-cta-label={item.label}
                         data-position="nav"
                         data-page-type={pageType}
@@ -298,8 +352,34 @@ const footerCities = [
                         data-ville={ville}
                         data-specialite={specialite}
                       >
-                        <div>{item.label}</div>
+                        <div>
+                          {item.label}
+                          {item.children?.length ? <i class="bi-chevron-down ms-1"></i> : null}
+                        </div>
                       </a>
+
+                      {item.children?.length ? (
+                        <ul class="sub-menu-container">
+                          {item.children.map((child) => (
+                            <li class="menu-item">
+                              <a
+                                class="menu-link"
+                                href={child.href}
+                                data-cta
+                                data-cta-id={`nav_${child.href.replace(/\W+/g, "_")}`}
+                                data-cta-label={child.label}
+                                data-position="nav_sub"
+                                data-page-type={pageType}
+                                data-service={service}
+                                data-ville={ville}
+                                data-specialite={specialite}
+                              >
+                                <div>{child.label}</div>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </li>
                   ))}
                 </ul>
@@ -312,9 +392,7 @@ const footerCities = [
       </header>
 
       {/* Main */}
-      <main id="main">
-        <slot />
-      </main>
+      <slot />
 
       {/* Footer (CRO-first : CTA + réassurance + liens hubs/locaux) */}
       <footer id="footer" class="dark">
@@ -426,6 +504,10 @@ const footerCities = [
 
     {/* Go to top */}
     <button id="gotoTop" class="uil uil-angle-up rounded-circle bg-color h-bg-dark" aria-label="Revenir en haut"></button>
+
+    {/* JavaScripts */}
+    <script is:inline src="/_assets_/js/plugins.min.js"></script>
+    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
 
     {/* Tracking + UTM persistence (vanilla, sans dépendance) */}
     <script is:inline>

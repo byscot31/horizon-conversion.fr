@@ -1,4 +1,918 @@
 ---
 // src/pages/[service]/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const services = ["seo-local", "google-ads", "cro"] as const;
+  return services.map((service) => ({ params: { service } }));
+}
+
+type ServiceSlug = "seo-local" | "google-ads" | "cro";
+
+const { service } = Astro.params as { service: ServiceSlug };
+
+const brandName = "Horizon Conversion";
+const regionLabel = "Sud Oise (60) & Nord Val-d’Oise (95)";
+
+const villes = [
+  { name: "Senlis", slug: "senlis", around: "Chamant, Vineuil-Saint-Firmin, Avilly-Saint-Léonard…" },
+  { name: "Chantilly", slug: "chantilly", around: "Gouvieux, Lamorlaye, Coye-la-Forêt…" },
+  { name: "Creil", slug: "creil", around: "Montataire, Saint-Maximin, Villers-Saint-Paul…" },
+  { name: "Nogent-sur-Oise", slug: "nogent-sur-oise", around: "Laigneville, Monchy-Saint-Éloi, Mogneville…" },
+  { name: "Clermont", slug: "clermont", around: "Agnetz, Fitz-James, Breuil-le-Sec…" },
+  { name: "Luzarches", slug: "luzarches", around: "Chaumontel, Jagny-sous-Bois, Seugy…" },
+];
+
+const specialites = [
+  { name: "Bureaux", slug: "nettoyage-bureaux" },
+  { name: "Fin de chantier", slug: "nettoyage-fin-de-chantier" },
+  { name: "Copropriétés", slug: "nettoyage-coproprietes" },
+  { name: "Vitrerie", slug: "nettoyage-vitrerie" },
+  { name: "Locaux commerciaux", slug: "nettoyage-locaux-commerciaux" },
+  { name: "Médical", slug: "nettoyage-medical" },
+  { name: "Industrie", slug: "nettoyage-industrie" },
+  { name: "Remise en état", slug: "remise-en-etat" },
+];
+
+const serviceData: Record<ServiceSlug, any> = {
+  "seo-local": {
+    label: "SEO local",
+    metaTitle:
+      "SEO local — Plus d’appels via Google Maps pour entreprises de nettoyage (Sud Oise / Nord 95)",
+    metaDescription:
+      "SEO local pour entreprises de nettoyage : Google Business Profile, pages ville + alentours, preuves & conversions. Senlis, Chantilly, Creil, Nogent-sur-Oise, Clermont, Luzarches.",
+    h1: "SEO local pour entreprises de nettoyage : Google Maps + pages ville",
+    heroLead:
+      "Objectif : être visible quand un prospect cherche “entreprise de nettoyage + ville”, puis transformer le clic en appel / devis. On aligne Google Business Profile, pages locales utiles et conversion — avec tracking clair.",
+    pillars: [
+      {
+        title: "Google Business Profile (GBP) structuré",
+        bullets: [
+          "Catégories, services, zones (ville + alentours) cohérents",
+          "Preuves : photos/process (selon vos assets), réponses avis",
+          "Signaux de confiance (sans pratiques risquées)",
+        ],
+        icon: "bi-pin-map",
+      },
+      {
+        title: "Pages locales qui rankent (et qui convertissent)",
+        bullets: [
+          "Pages “service + ville” utiles (pas des clones)",
+          "Preuve + FAQ + réassurance + CTA unique",
+          "Maillage hub → cluster pour amplifier la zone",
+        ],
+        icon: "bi-window-stack",
+      },
+      {
+        title: "Pilotage sur les leads (pas sur le trafic)",
+        bullets: [
+          "Tracking appels/formulaires/itinéraires",
+          "Optimisations mensuelles : contenu, preuves, conversion",
+          "Reporting lisible : ce qui génère des demandes qualifiées",
+        ],
+        icon: "bi-clipboard-data",
+      },
+    ],
+    proofTitle: "Preuve : mini-audit SEO local (ce qu’on vérifie)",
+    proofCards: [
+      {
+        title: "Cohérence locale",
+        bullets: [
+          "Zones d’intervention : pas trop large, pas floue",
+          "NAP cohérent (site/GBP/annuaires)",
+          "Catégories & services : alignés “nettoyage”",
+        ],
+        icon: "bi-geo-alt-fill",
+      },
+      {
+        title: "Page locale type (ville + alentours)",
+        bullets: [
+          "H1 + promesse claire + 2 CTA",
+          "Section unique locale (contexte + preuve)",
+          "FAQ : objections locales, délais, types de clients",
+        ],
+        icon: "bi-file-earmark-text",
+      },
+      {
+        title: "Conversion & tracking",
+        bullets: [
+          "Events GA4 (tel/mail/itinéraire/CTA/form)",
+          "UTMs conservées + champs cachés formulaires",
+          "Lecture business : leads & taux de conversion",
+        ],
+        icon: "bi-graph-up-arrow",
+      },
+    ],
+    faqs: [
+      {
+        q: "Vous faites du nettoyage ?",
+        a: "Non. Nous faisons du webmarketing (SEO local, Google Ads, CRO & tracking) pour les entreprises de nettoyage dans le Sud Oise (60) et le Nord 95.",
+      },
+      {
+        q: "SEO local : c’est surtout la fiche Google ?",
+        a: "La fiche GBP est centrale, mais elle ne suffit pas : pages locales utiles, preuves, cohérence des infos et conversion (CTA/formulaire) sont souvent ce qui fait la différence.",
+      },
+      {
+        q: "Combien de temps pour voir une amélioration ?",
+        a: "Selon le point de départ. On commence par des quick wins (tracking, structure GBP, page locale prioritaire), puis on itère mensuellement sur les contenus et la conversion.",
+      },
+      {
+        q: "Est-ce que vous “garantissez” une position ?",
+        a: "Non. On vise des objectifs mesurables (leads, taux de conversion) et on pilote avec une méthode : corrections, contenus, tests et suivi des conversions.",
+      },
+    ],
+    primaryCtaLabel: "Demander un audit SEO local (15 min)",
+    secondaryCtaLabel: "Voir les packs",
+    ogImage: "/og-seo-local.jpg",
+    relatedLinks: [
+      { href: "/google-ads", label: "Google Ads" },
+      { href: "/cro", label: "CRO & Tracking" },
+      { href: "/tarifs", label: "Tarifs" },
+    ],
+  },
+
+  "google-ads": {
+    label: "Google Ads",
+    metaTitle:
+      "Google Ads — Leads rapides et qualifiés pour entreprises de nettoyage (Sud Oise / Nord 95)",
+    metaDescription:
+      "Google Ads (Search) pour entreprises de nettoyage : ciblage local 60/95, landing de qualification, exclusions, tracking appels/formulaires, pilotage CPL. Senlis, Chantilly, Creil…",
+    h1: "Google Ads pour entreprises de nettoyage : leads rapides, pilotés",
+    heroLead:
+      "Objectif : capter la demande “chaude” (devis urgent, fin de chantier, bureaux…) sans brûler le budget. On structure la campagne, filtre les mauvais leads et mesure les conversions réelles (appels/formulaires).",
+    pillars: [
+      {
+        title: "Structure Search orientée intention",
+        bullets: [
+          "Groupes par services / spécialités (bureaux, fin de chantier…)",
+          "Annonces qui qualifient (B2B/B2C, zone, délais)",
+          "Extensions : appels, accroches, zones",
+        ],
+        icon: "bi-bullseye",
+      },
+      {
+        title: "Filtrage des leads (exclusions + landing)",
+        bullets: [
+          "Mots-clés négatifs (ménage, emploi, gratuit, etc.)",
+          "Landing page qui pose 3–4 questions utiles",
+          "Alignement annonce ↔ page ↔ offre",
+        ],
+        icon: "bi-funnel-fill",
+      },
+      {
+        title: "Pilotage CPL / taux de conversion",
+        bullets: [
+          "Tracking : appels, formulaires, CTA",
+          "Optimisation : requêtes, annonces, landing, zones",
+          "Reporting : CPL, taux conv., top requêtes utiles",
+        ],
+        icon: "bi-clipboard-data",
+      },
+    ],
+    proofTitle: "Preuve : ce qu’on met en place pour éviter les “mauvais leads”",
+    proofCards: [
+      {
+        title: "Qualif dès l’annonce",
+        bullets: [
+          "Zone (ville + alentours) explicitée",
+          "Type de clients (B2B/B2C) clarifié",
+          "Offre cadrée (devis, contrat, urgence)",
+        ],
+        icon: "bi-megaphone-fill",
+      },
+      {
+        title: "Négatifs & ciblage",
+        bullets: [
+          "Exclusions (emploi, ménage particulier, etc.)",
+          "Géociblage propre (60/95) + ajustements",
+          "Horaires / devices si pertinent",
+        ],
+        icon: "bi-slash-circle",
+      },
+      {
+        title: "Tracking conversions réelles",
+        bullets: [
+          "GA4 events + UTMs (attribution)",
+          "Suivi des appels (clic tel + logs si dispo)",
+          "Optimisation sur conversions, pas sur clics",
+        ],
+        icon: "bi-telephone-outbound",
+      },
+    ],
+    faqs: [
+      {
+        q: "Vous faites du nettoyage ?",
+        a: "Non. Nous faisons du webmarketing (SEO local, Google Ads, CRO & tracking) pour les entreprises de nettoyage dans le Sud Oise (60) et le Nord 95.",
+      },
+      {
+        q: "Le budget Ads est inclus ?",
+        a: "Non : le budget pub est payé à Google. Nos honoraires couvrent la stratégie, la mise en place, l’optimisation et le suivi des conversions (CPL, taux de conversion).",
+      },
+      {
+        q: "Comment évitez-vous les demandes non qualifiées ?",
+        a: "On filtre via exclusions, ciblage, annonces qui qualifient et landing pages structurées. Et surtout : on mesure les conversions (appels/formulaires) pour couper ce qui ne performe pas.",
+      },
+      {
+        q: "Est-ce que vous garantissez des leads ?",
+        a: "Non. On définit des objectifs réalistes, on met en place un tracking fiable et on pilote le coût par lead avec des itérations régulières.",
+      },
+    ],
+    primaryCtaLabel: "Demander un audit Google Ads (15 min)",
+    secondaryCtaLabel: "Voir la méthode",
+    ogImage: "/og-google-ads.jpg",
+    relatedLinks: [
+      { href: "/seo-local", label: "SEO local" },
+      { href: "/cro", label: "CRO & Tracking" },
+      { href: "/tarifs", label: "Tarifs" },
+    ],
+  },
+
+  "cro": {
+    label: "CRO & Tracking",
+    metaTitle:
+      "CRO & tracking — Convertir le trafic en appels/devis (entreprises de nettoyage 60/95)",
+    metaDescription:
+      "CRO & tracking pour entreprises de nettoyage : pages qui convertissent, preuves, CTA, formulaires, GA4 events, UTMs, pilotage taux de conversion. Sud Oise / Nord 95 (Senlis, Chantilly, Creil…).",
+    h1: "CRO & tracking : transformer votre trafic en appels et devis",
+    heroLead:
+      "Objectif : plus de demandes qualifiées sans forcément augmenter le budget. On réduit la friction (offres, preuves, CTA, formulaires) et on mesure ce qui compte (appels, formulaires, itinéraires, sources).",
+    pillars: [
+      {
+        title: "Offre lisible (en 10 secondes)",
+        bullets: [
+          "Promesse claire par service/spécialité",
+          "Réassurance : process, zones, délais, preuves",
+          "CTA principal + CTA secondaire (toujours)",
+        ],
+        icon: "bi-ui-checks-grid",
+      },
+      {
+        title: "Pages qui qualifient",
+        bullets: [
+          "Questions utiles (type clients, ville, urgence, surface)",
+          "FAQ qui lève les objections avant l’appel",
+          "Pages locales : 1 section unique “ville + alentours”",
+        ],
+        icon: "bi-window-stack",
+      },
+      {
+        title: "Tracking propre (GA4 + UTMs)",
+        bullets: [
+          "Events : tel/mail/itinéraire/CTA/form",
+          "Attribution : UTMs conservées + champs cachés",
+          "Pilotage : taux conv., mix SEO/Ads, CPL si Ads",
+        ],
+        icon: "bi-clipboard-data",
+      },
+    ],
+    proofTitle: "Preuve : checklist CRO (ce qu’on corrige en priorité)",
+    proofCards: [
+      {
+        title: "Friction",
+        bullets: ["CTA trop discret", "formulaire trop long", "offre floue / trop “générique”"],
+        icon: "bi-exclamation-triangle-fill",
+      },
+      {
+        title: "Réassurance",
+        bullets: ["preuves absentes", "FAQ insuffisante", "zones & process non explicités"],
+        icon: "bi-shield-check",
+      },
+      {
+        title: "Mesure",
+        bullets: ["appels non suivis", "UTMs perdues", "optimisations sans données"],
+        icon: "bi-activity",
+      },
+    ],
+    faqs: [
+      {
+        q: "Vous faites du nettoyage ?",
+        a: "Non. Nous faisons du webmarketing (SEO local, Google Ads, CRO & tracking) pour les entreprises de nettoyage dans le Sud Oise (60) et le Nord 95.",
+      },
+      {
+        q: "Pourquoi le CRO est important si j’ai déjà du trafic ?",
+        a: "Parce que du trafic sans conversion = budget perdu. Une amélioration du taux de conversion augmente les leads sans augmenter l’acquisition.",
+      },
+      {
+        q: "Que trackez-vous exactement ?",
+        a: "Les actions business : clic tel, formulaire, e-mail, itinéraire, CTA. Ensuite : taux de conversion, sources, et (si Ads) coût par lead.",
+      },
+      {
+        q: "Vous garantissez un taux de conversion ?",
+        a: "Non. On met en place une méthode : hypothèses, tests, mesures et itérations mensuelles, en visant l’amélioration continue.",
+      },
+    ],
+    primaryCtaLabel: "Demander un audit CRO/Tracking (15 min)",
+    secondaryCtaLabel: "Voir des preuves",
+    ogImage: "/og-cro.jpg",
+    relatedLinks: [
+      { href: "/seo-local", label: "SEO local" },
+      { href: "/google-ads", label: "Google Ads" },
+      { href: "/tarifs", label: "Tarifs" },
+    ],
+  },
+};
+
+const data = serviceData[service];
+
+// --- Schema.org ---
+const siteUrl = (Astro.site?.toString() || "").replace(/\/$/, "");
+const pageUrl = new URL(Astro.request.url).toString();
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: siteUrl ? `${siteUrl}/` : "/" },
+    { "@type": "ListItem", position: 2, name: data.label, item: siteUrl ? `${siteUrl}/${service}` : pageUrl },
+  ],
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${data.label} — entreprises de nettoyage`,
+  serviceType: data.label,
+  provider: {
+    "@type": "Organization",
+    name: brandName,
+    url: siteUrl || pageUrl,
+  },
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Oise" },
+    { "@type": "AdministrativeArea", name: "Val-d’Oise" },
+  ],
+  description: data.metaDescription,
+  url: siteUrl ? `${siteUrl}/${service}` : pageUrl,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.faqs.map((f: any) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+// internal links (min 3)
+const cityLinks = [
+  { name: "Senlis", href: `/${service}/senlis` },
+  { name: "Chantilly", href: `/${service}/chantilly` },
+  { name: "Creil", href: `/${service}/creil` },
+];
+
+// proof / tracking
+const primaryCtaHref = `/contact?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=cta_primary`;
+const secondaryCtaHref =
+  service === "google-ads"
+    ? `/methode?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=cta_secondary`
+    : service === "cro"
+    ? `/preuves?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=cta_secondary`
+    : `/tarifs?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=cta_secondary`;
 ---
 
+<BaseLayout
+  title={data.metaTitle}
+  description={data.metaDescription}
+  canonical={`/${service}`}
+  ogImage={data.ogImage}
+  pageType="service"
+  service={service}
+  brandName={brandName}
+  regionLabel={regionLabel}
+  primaryCta={{ href: primaryCtaHref, label: data.primaryCtaLabel, id: `${service}_audit_15min`, variant: "primary" }}
+  secondaryCta={{ href: secondaryCtaHref, label: data.secondaryCtaLabel, id: `${service}_secondary`, variant: "secondary" }}
+  schema={[breadcrumb, serviceSchema, faqSchema]}
+>
+  <script is:inline>
+    {String.raw`
+      document.documentElement.dataset.pageType = "service";
+      document.documentElement.dataset.service = "${service}";
+    `}
+  </script>
+
+  {/* HERO */}
+  <section
+    id="slider"
+    class="slider-element"
+    style="background: linear-gradient(135deg, rgba(51,94,238,0.18), rgba(0,0,0,0.0)); min-height: 560px;"
+    aria-label={data.label}
+  >
+    <div class="vertical-middle">
+      <div class="container py-5">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-lg-7">
+            <h1 class="mb-3">{data.h1}</h1>
+
+            <p class="mb-4" style="font-size: 1.075rem; max-width: 720px;">
+              {data.heroLead}{" "}
+              <strong>Zone :</strong>{" "}
+              {villes.map((v, i) => (
+                <span>
+                  <a href={`/ressources/${v.slug}`}>{v.name}</a>
+                  {i < villes.length - 1 ? ", " : ""}
+                </span>
+              ))}{" "}
+              + alentours.
+            </p>
+
+            <div class="d-flex gap-3 flex-wrap">
+              <a
+                href={primaryCtaHref}
+                class="button button-rounded bg-color text-white fw-semibold"
+                data-cta
+                data-cta-id={`${service}_hero_primary`}
+                data-cta-label={data.primaryCtaLabel}
+                data-position="hero"
+                data-page-type="service"
+                data-service={service}
+              >
+                {data.primaryCtaLabel} <i class="bi-arrow-right"></i>
+              </a>
+
+              <a
+                href={secondaryCtaHref}
+                class="button button-rounded button-light text-dark fw-semibold"
+                data-cta
+                data-cta-id={`${service}_hero_secondary`}
+                data-cta-label={data.secondaryCtaLabel}
+                data-position="hero"
+                data-page-type="service"
+                data-service={service}
+              >
+                {data.secondaryCtaLabel}
+              </a>
+            </div>
+
+            <div class="mt-4 text-black-50 small">
+              ✅ 1 CTA principal + 1 secondaire • ✅ preuve & réassurance • ✅ tracking leads (GA4/UTM) • ✅ pilotage mensuel (sans promesses garanties)
+            </div>
+          </div>
+
+          <div class="col-lg-5 mt-5 mt-lg-0">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <h2 class="h4 mb-2 text-transform-none ls-0">Ce que vous obtenez (concret)</h2>
+                <p class="text-black-50 mb-4">
+                  Pas une “prestation” vague : une mise en place + des décisions basées sur vos conversions (appels/devis).
+                </p>
+
+                <div class="feature-box fbox-plain mb-3">
+                  <div class="fbox-icon"><i class="bi-clipboard-check color"></i></div>
+                  <div class="fbox-content">
+                    <h3 class="h6 text-transform-none ls-0 mb-1">Plan d’action priorisé</h3>
+                    <p class="text-black-50 mb-0">Quick wins d’abord, puis itérations mensuelles.</p>
+                  </div>
+                </div>
+
+                <div class="feature-box fbox-plain mb-3">
+                  <div class="fbox-icon"><i class="bi-activity color"></i></div>
+                  <div class="fbox-content">
+                    <h3 class="h6 text-transform-none ls-0 mb-1">Tracking des leads</h3>
+                    <p class="text-black-50 mb-0">Tel / formulaires / itinéraires / CTA, reliés à vos sources.</p>
+                  </div>
+                </div>
+
+                <div class="feature-box fbox-plain mb-0">
+                  <div class="fbox-icon"><i class="bi-graph-up-arrow color"></i></div>
+                  <div class="fbox-content">
+                    <h3 class="h6 text-transform-none ls-0 mb-1">Pilotage ROI</h3>
+                    <p class="text-black-50 mb-0">Objectifs → mesure → décisions. Pas de promesse “garantie”.</p>
+                  </div>
+                </div>
+
+                <div class="line my-4"></div>
+
+                <a
+                  href={primaryCtaHref}
+                  class="button button-rounded bg-color text-white fw-semibold w-100 m-0"
+                  data-cta
+                  data-cta-id={`${service}_card_primary`}
+                  data-cta-label={data.primaryCtaLabel}
+                  data-position="hero_card"
+                  data-page-type="service"
+                  data-service={service}
+                >
+                  Démarrer par un audit (15 min) <i class="bi-arrow-right"></i>
+                </a>
+
+                <small class="d-block text-black-50 mt-2">
+                  Vous repartez avec des actions “next step” adaptées à votre zone (60/95) et vos services.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="svg-separator">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#FFF">
+          <path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="content-wrap pt-4 pb-0">
+      {/* PLAN (H2/H3) */}
+      <div class="container mt-5">
+        <div class="heading-block text-center mx-auto" style="max-width: 860px">
+          <h2 class="mb-2 text-transform-none ls-0">Ce qui fait la différence sur le 60/95</h2>
+          <span>
+            Les entreprises de nettoyage gagnent quand le message, la zone et la preuve sont alignés — puis mesurés (appels/devis).
+          </span>
+        </div>
+
+        <div class="row col-mb-30 mt-4">
+          {data.pillars.map((p: any) => (
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-3 text-transform-none ls-0">
+                    <i class={`${p.icon} color me-2`}></i>
+                    {p.title}
+                  </h3>
+                  <ul class="iconlist ms-0 mb-0 text-black-50">
+                    {p.bullets.map((b: string) => (
+                      <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-5">
+          <a
+            href={primaryCtaHref}
+            class="button button-rounded bg-color text-white fw-semibold"
+            data-cta
+            data-cta-id={`${service}_pillars_cta`}
+            data-cta-label={data.primaryCtaLabel}
+            data-position="pillars"
+            data-page-type="service"
+            data-service={service}
+          >
+            Valider votre priorité en 15 min <i class="bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      {/* METHODE */}
+      <div class="section mb-0 mt-6" style="padding: 90px 0; background-color: rgba(51,94,238,0.08);">
+        <div class="container" style="max-width: 980px">
+          <div class="heading-block text-center mx-auto" style="max-width: 860px">
+            <h2 class="mb-2 text-transform-none ls-0">Méthode : du concret, puis des itérations</h2>
+            <span>On part des conversions (appels/devis), pas d’une “liste de tâches” générique.</span>
+          </div>
+
+          <div class="row col-mb-30">
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-1-circle-fill color me-2"></i>Cadrage local</h3>
+                  <p class="text-black-50 mb-0">Zone (ville + alentours), offres, spécialités, types de clients (B2B/B2C), objectifs réalistes.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-2-circle-fill color me-2"></i>Tracking</h3>
+                  <p class="text-black-50 mb-0">GA4 events (tel/mail/itinéraire/CTA/form), UTMs, attribution (sinon on pilote à l’aveugle).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-3-circle-fill color me-2"></i>Mise en place</h3>
+                  <p class="text-black-50 mb-0">Déploiement des leviers du service : structure, contenus, preuves, campagnes/landing si besoin.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-4-circle-fill color me-2"></i>Pilotage mensuel</h3>
+                  <p class="text-black-50 mb-0">Mesure → décisions → tests : on garde ce qui apporte des demandes qualifiées, on coupe le reste.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <a
+              href={`/methode?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=methode`}
+              class="button button-rounded button-light text-dark fw-semibold"
+              data-cta
+              data-cta-id={`${service}_method_link`}
+              data-cta-label="Voir la méthode"
+              data-position="method"
+              data-page-type="service"
+              data-service={service}
+            >
+              Voir la méthode <i class="bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* PREUVE */}
+      <div class="container mt-6 mb-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 860px">
+          <h2 class="mb-2 text-transform-none ls-0">{data.proofTitle}</h2>
+          <span>Un extrait de notre grille : ce qu’on vérifie avant d’optimiser (pour éviter les actions inutiles).</span>
+        </div>
+
+        <div class="row col-mb-30 mt-4">
+          {data.proofCards.map((c: any) => (
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 text-transform-none ls-0 mb-3">
+                    <i class={`${c.icon} color me-2`}></i>
+                    {c.title}
+                  </h3>
+                  <ul class="iconlist ms-0 mb-0 text-black-50">
+                    {c.bullets.map((b: string) => (
+                      <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-5">
+          <a
+            href={`/preuves?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=proof`}
+            class="button button-rounded button-light text-dark fw-semibold"
+            data-cta
+            data-cta-id={`${service}_proof_link`}
+            data-cta-label="Voir les preuves"
+            data-position="proof"
+            data-page-type="service"
+            data-service={service}
+          >
+            Voir les preuves <i class="bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      {/* LOCAL (clusters ville) */}
+      <div class="section bg-transparent">
+        <div class="container">
+          <div class="heading-block text-center mx-auto" style="max-width: 860px">
+            <h2 class="mb-2 text-transform-none ls-0">Local-first : pages {data.label} par ville + alentours</h2>
+            <span>
+              Pour convertir dans le Sud Oise / Nord 95, on contextualise : ville, communes proches, types de clients, et offres réelles.
+            </span>
+          </div>
+
+          <div class="row col-mb-30 mt-4">
+            {villes.map((v) => (
+              <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body p-4">
+                    <h3 class="h5 mb-2 text-transform-none ls-0">
+                      <i class="bi-geo-alt-fill color me-2"></i> {v.name}
+                    </h3>
+                    <p class="text-black-50 mb-3">Alentours : {v.around}</p>
+                    <div class="d-flex gap-2 flex-wrap">
+                      <a
+                        href={`/${service}/${v.slug}`}
+                        class="button button-rounded bg-color text-white fw-semibold m-0"
+                        data-cta
+                        data-cta-id={`${service}_city_${v.slug}`}
+                        data-cta-label={`Voir ${data.label} ${v.name}`}
+                        data-position="cities"
+                        data-page-type="service"
+                        data-service={service}
+                      >
+                        {data.label} {v.name} <i class="bi-arrow-right"></i>
+                      </a>
+                      <a href={`/ressources/${v.slug}`} class="button button-rounded button-light text-dark fw-semibold m-0">
+                        Ressources
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-4 text-center text-black-50 small">
+            Liens rapides :{" "}
+            {cityLinks.map((l, i) => (
+              <span>
+                <a href={l.href}>{l.name}</a>
+                {i < cityLinks.length - 1 ? " • " : ""}
+              </span>
+            ))}{" "}
+            (exemples de pages locales).
+          </div>
+        </div>
+      </div>
+
+      {/* SPECIALITES (anti “générique”) */}
+      <div class="container mt-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 860px">
+          <h2 class="mb-2 text-transform-none ls-0">Spécialités nettoyage : adapter le message (et la conversion)</h2>
+          <span>
+            Les attentes ne sont pas les mêmes entre bureaux, fin de chantier, médical ou copropriétés. On structure vos pages/campagnes pour parler au bon décideur.
+          </span>
+        </div>
+
+        <div class="row col-mb-30 mt-4">
+          {specialites.slice(0, 4).map((s) => (
+            <div class="col-lg-3 col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h6 mb-2 text-transform-none ls-0">{s.name}</h3>
+                  <a
+                    href={`/specialites/${s.slug}`}
+                    class="btn second-bg-color px-3 fw-semibold"
+                    data-cta
+                    data-cta-id={`${service}_spec_${s.slug}`}
+                    data-cta-label={`Voir spécialité ${s.name}`}
+                    data-position="specialites"
+                    data-page-type="service"
+                    data-service={service}
+                  >
+                    Voir <i class="bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-5">
+          <a href="/specialites" class="button button-rounded button-light text-dark fw-semibold">
+            Voir toutes les spécialités <i class="bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      {/* OFFRES (teaser) */}
+      <div class="section mb-0 mt-6" style="padding: 90px 0; background-color: rgba(51,94,238,0.08);">
+        <div class="container" style="max-width: 980px">
+          <div class="heading-block text-center mx-auto" style="max-width: 860px">
+            <h2 class="mb-2 text-transform-none ls-0">Packs : Starter / Growth / Premium</h2>
+            <span>
+              On choisit le périmètre selon votre zone, votre urgence et votre niveau de maturité (site/GBP/tracking). Le but : des demandes qualifiées, pilotées.
+            </span>
+          </div>
+
+          <div class="row col-mb-30">
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 text-transform-none ls-0 mb-2">Starter</h3>
+                  <p class="text-black-50 mb-3">Bases propres + quick wins mesurables.</p>
+                  <a href="/tarifs#starter" class="button button-rounded button-light text-dark fw-semibold w-100 m-0">
+                    Voir Starter
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 text-transform-none ls-0 mb-2">Growth</h3>
+                  <p class="text-black-50 mb-3">Flux régulier via SEO local + conversion.</p>
+                  <a href="/tarifs#growth" class="button button-rounded bg-color text-white fw-semibold w-100 m-0">
+                    Voir Growth <i class="bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <h3 class="h5 text-transform-none ls-0 mb-2">Premium</h3>
+                  <p class="text-black-50 mb-3">Accélération avec Ads + landing + optimisation.</p>
+                  <a href="/tarifs#premium" class="button button-rounded button-light text-dark fw-semibold w-100 m-0">
+                    Voir Premium
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <a
+              href={`/tarifs?utm_source=site&utm_medium=organic&utm_campaign=${service}_hub_lead&utm_content=pricing`}
+              class="button button-rounded button-light text-dark fw-semibold"
+              data-cta
+              data-cta-id={`${service}_pricing_link`}
+              data-cta-label="Comparer les packs"
+              data-position="pricing"
+              data-page-type="service"
+              data-service={service}
+            >
+              Comparer les packs <i class="bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div class="container mt-6 mb-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 760px">
+          <h2 class="mb-2 text-transform-none ls-0">FAQ</h2>
+          <span>Réponses directes avant de lancer {data.label}.</span>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {data.faqs.map((f: any, idx: number) => (
+              <details class="toggle mb-3">
+                <summary class="toggle-header justify-content-between">
+                  <div class="toggle-icon">
+                    <i class="toggle-closed bi-plus-circle"></i>
+                    <i class="toggle-open bi-dash-circle"></i>
+                  </div>
+                  <div class="toggle-title fw-semibold">{f.q}</div>
+                </summary>
+                <div class="toggle-content text-black-50">{f.a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FINAL CTA */}
+      <div class="section text-center mb-0" style="padding: 110px 0; background-color: rgba(51,94,238,0.08);">
+        <div class="container" style="max-width: 860px">
+          <i class="bi-lightning-charge-fill color" style="font-size: 64px;"></i>
+          <h2 class="mt-3" style="font-size: 38px;">On valide votre plan {data.label} sur le 60/95</h2>
+          <p class="mb-5" style="font-size: 1.125rem;">
+            15 minutes pour confirmer : zone (ville + alentours), priorité (SEO/Ads/CRO), niveau de tracking, et quick wins.
+          </p>
+
+          <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a
+              href={primaryCtaHref}
+              class="button button-rounded bg-color text-white fw-semibold"
+              data-cta
+              data-cta-id={`${service}_final_primary`}
+              data-cta-label={data.primaryCtaLabel}
+              data-position="final"
+              data-page-type="service"
+              data-service={service}
+            >
+              {data.primaryCtaLabel} <i class="bi-arrow-right"></i>
+            </a>
+
+            <a
+              href={secondaryCtaHref}
+              class="button button-rounded button-light text-dark fw-semibold"
+              data-cta
+              data-cta-id={`${service}_final_secondary`}
+              data-cta-label={data.secondaryCtaLabel}
+              data-position="final"
+              data-page-type="service"
+              data-service={service}
+            >
+              {data.secondaryCtaLabel}
+            </a>
+          </div>
+
+          <div class="mt-4 text-black-50 small">
+            Maillage (3 liens utiles) :{" "}
+            {data.relatedLinks.map((l: any, i: number) => (
+              <span>
+                <a href={l.href}>{l.label}</a>
+                {i < data.relatedLinks.length - 1 ? " • " : ""}
+              </span>
+            ))}
+            .
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    {`
+      details.toggle > summary { list-style: none; cursor: pointer; }
+      details.toggle > summary::-webkit-details-marker { display: none; }
+      details.toggle[open] .toggle-closed { display: none; }
+      details.toggle:not([open]) .toggle-open { display: none; }
+      .toggle-content { padding: 0.75rem 1.25rem 1.25rem; }
+    `}
+  </style>
+</BaseLayout>
