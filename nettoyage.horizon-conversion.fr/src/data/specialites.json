@@ -1,0 +1,10 @@
+[
+  { "slug": "nettoyage-bureaux", "name": "Nettoyage de bureaux", "intent": "B2B récurrent" },
+  { "slug": "nettoyage-fin-de-chantier", "name": "Nettoyage fin de chantier", "intent": "urgent / forte valeur" },
+  { "slug": "nettoyage-coproprietes", "name": "Copropriétés & parties communes", "intent": "syndics" },
+  { "slug": "nettoyage-vitrerie", "name": "Nettoyage vitres & vitrines", "intent": "commerces" },
+  { "slug": "nettoyage-locaux-commerciaux", "name": "Locaux commerciaux", "intent": "TPE/PME" },
+  { "slug": "nettoyage-medical", "name": "Cabinets & locaux médicaux", "intent": "hygiène / confiance" },
+  { "slug": "nettoyage-industrie", "name": "Entrepôts & industrie légère", "intent": "B2B" },
+  { "slug": "remise-en-etat", "name": "Remise en état / états des lieux", "intent": "ponctuel" }
+]

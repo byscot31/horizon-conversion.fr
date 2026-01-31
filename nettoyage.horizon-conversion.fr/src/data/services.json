@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "seo-local",
+    "name": "SEO local",
+    "promise": "Être visible sur Google dans votre zone (Sud Oise / Nord 95) et générer des demandes régulières.",
+    "cta": "Demander un audit SEO",
+    "keywords": ["seo local entreprise nettoyage", "referencement local", "google business profile"]
+  },
+  {
+    "slug": "google-ads",
+    "name": "Google Ads",
+    "promise": "Des demandes rapides avec des campagnes rentables (Search + Local Services si pertinent).",
+    "cta": "Obtenir une estimation",
+    "keywords": ["google ads nettoyage", "devis nettoyage bureaux", "nettoyage fin de chantier ads"]
+  },
+  {
+    "slug": "cro",
+    "name": "CRO",
+    "promise": "Transformer votre trafic (SEO/Ads) en appels et formulaires — sans augmenter le budget.",
+    "cta": "Audit conversion",
+    "keywords": ["optimisation conversion", "landing page nettoyage", "formulaire devis"]
+  }
+]
