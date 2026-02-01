@@ -1,0 +1,411 @@
+---
+// src/pages/tarifs.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Tarifs | Packs pour obtenir plus de demandes (60/95)";
+const description =
+  "3 packs simples pour aider les déménageurs du Sud Oise (60) et du Nord Val-d’Oise (95) à obtenir plus d’appels et de demandes de devis. Prix selon vos villes et votre point de départ.";
+---
+
+<BaseLayout title={title} description={description}>
+
+	<!-- Page Title
+	============================================= -->
+	<section class="page-title bg-color dark py-6" style="border-bottom: 1px solid rgba(255, 255, 255, .1);">
+		<div class="container">
+			<div class="page-title-row">
+
+				<div class="page-title-content">
+					<h1>Tarifs</h1>
+					<span>Choisissez un pack clair, orienté appels & demandes de devis</span>
+				</div>
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Accueil</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Tarifs</li>
+					</ol>
+				</nav>
+
+			</div>
+		</div>
+	</section><!-- .page-title end -->
+
+	<!-- Content
+	============================================= -->
+	<section id="content">
+		<div class="content-wrap pb-0">
+
+			<!-- Titre + intro
+			============================================= -->
+			<div class="container mt-5 mb-5">
+				<div class="row justify-content-center">
+					<div class="col-lg-9 text-center">
+						<div class="heading-block border-bottom-0 mb-3">
+							<h2 class="text-transform-none fw-semibold ls-0 mb-3">3 packs selon votre point de départ</h2>
+							<p class="text-black-50 mb-0">
+								Le bon pack, c’est celui qui colle à vos villes prioritaires, à votre capacité à répondre, et à ce qui bloque aujourd’hui
+								(visibilité, pages, messages, suivi des demandes).
+							</p>
+						</div>
+						<a href="/contact" class="button button-rounded button-large mt-3">
+							Demander un devis
+						</a>
+						<div class="text-muted small mt-2">
+							Ou <a href="/contact" class="text-decoration-underline">demander un rappel</a> pour être guidé.
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Packs (cartes)
+			============================================= -->
+			<div class="container mb-6">
+				<div class="row col-mb-30">
+
+					<!-- Pack 1 -->
+					<div class="col-lg-4">
+						<div class="card shadow-sm border-0 rounded h-100">
+							<div class="card-body p-5">
+								<div class="d-flex justify-content-between align-items-start mb-3">
+									<div>
+										<h3 class="fw-semibold mb-1">Pack Démarrage</h3>
+										<p class="text-muted mb-0">Pour cadrer vite et corriger les blocages.</p>
+									</div>
+									<span class="badge bg-light text-dark border">Simple</span>
+								</div>
+
+								<div class="mb-4">
+									<div class="h2 fw-bold mb-0">Sur devis</div>
+									<div class="text-muted small">Selon vos villes & votre existant</div>
+								</div>
+
+								<ul class="iconlist mb-4">
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Diagnostic pages + messages + parcours contact</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Priorités sur 1 à 2 villes</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Améliorations rapides (CTA, preuves, formulaires)</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Base de suivi (appels + demandes)</span></li>
+								</ul>
+
+								<div class="text-muted small mb-4">
+									<strong>Limites :</strong> idéal si vous voulez un point de départ clair, pas une refonte complète.
+								</div>
+
+								<a href="/contact?pack=demarrage" class="button button-rounded w-100 m-0">
+									Demander un devis
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Pack 2 -->
+					<div class="col-lg-4">
+						<div class="card shadow-sm border-0 rounded h-100" style="border: 2px solid rgba(25,102,221,0.25);">
+							<div class="card-body p-5">
+								<div class="d-flex justify-content-between align-items-start mb-3">
+									<div>
+										<h3 class="fw-semibold mb-1">Pack Local</h3>
+										<p class="text-muted mb-0">Pour prendre des demandes sur vos villes clés.</p>
+									</div>
+									<span class="badge bg-color text-white">Le plus choisi</span>
+								</div>
+
+								<div class="mb-4">
+									<div class="h2 fw-bold mb-0">Sur devis</div>
+									<div class="text-muted small">Souvent 2 à 4 villes au départ</div>
+								</div>
+
+								<ul class="iconlist mb-4">
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Création / amélioration pages par ville</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Messages qui rassurent + filtres (zone/timing/type)</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Suivi clair des demandes (qualité incluse)</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Améliorations sur 4 semaines</span></li>
+								</ul>
+
+								<div class="text-muted small mb-4">
+									<strong>Limites :</strong> on démarre sur quelques villes prioritaires, puis on étend si la qualité suit.
+								</div>
+
+								<a href="/contact?pack=local" class="button button-rounded w-100 m-0">
+									Demander un devis
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Pack 3 -->
+					<div class="col-lg-4">
+						<div class="card shadow-sm border-0 rounded h-100">
+							<div class="card-body p-5">
+								<div class="d-flex justify-content-between align-items-start mb-3">
+									<div>
+										<h3 class="fw-semibold mb-1">Pack Accélération</h3>
+										<p class="text-muted mb-0">Pour étendre proprement sur plus de villes.</p>
+									</div>
+									<span class="badge bg-light text-dark border">Complet</span>
+								</div>
+
+								<div class="mb-4">
+									<div class="h2 fw-bold mb-0">Sur devis</div>
+									<div class="text-muted small">Selon volume de pages & priorités</div>
+								</div>
+
+								<ul class="iconlist mb-4">
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Plan par zone (60/95) + maillage cohérent</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Production pages (villes + services)</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Réassurance renforcée (preuves, process, FAQ)</span></li>
+									<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Améliorations continues sur 8 semaines</span></li>
+								</ul>
+
+								<div class="text-muted small mb-4">
+									<strong>Limites :</strong> nécessite d’être prêt à répondre (appels/devis) et à traiter la demande.
+								</div>
+
+								<a href="/contact?pack=acceleration" class="button button-rounded w-100 m-0">
+									Demander un devis
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="text-center text-muted small mt-4">
+					Vous hésitez ? Passez par <a href="/contact" class="text-decoration-underline">Contact</a> : on vous conseille le point de départ le plus simple.
+				</div>
+			</div>
+
+			<!-- Pourquoi le prix varie ?
+			============================================= -->
+			<div class="section bg-transparent mt-0">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-9">
+							<div class="heading-block border-bottom-0 mb-3 text-center">
+								<h2 class="text-transform-none fw-semibold ls-0 mb-3">Pourquoi le prix varie ?</h2>
+								<p class="text-black-50 mb-0">
+									Deux entreprises au même endroit peuvent avoir des besoins très différents. On chiffre selon le travail réel.
+								</p>
+							</div>
+
+							<div class="row col-mb-30 mt-4">
+								<div class="col-md-6">
+									<div class="feature-box fbox-plain">
+										<div class="fbox-icon"><i class="bi-geo-alt"></i></div>
+										<div class="fbox-content">
+											<h4 class="fw-semibold mb-1">Nombre de villes prioritaires</h4>
+											<p class="text-muted mb-0">1–2 villes au départ ≠ 9 villes d’un coup.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="feature-box fbox-plain">
+										<div class="fbox-icon"><i class="bi-file-earmark-text"></i></div>
+										<div class="fbox-content">
+											<h4 class="fw-semibold mb-1">Point de départ (site / pages)</h4>
+											<p class="text-muted mb-0">Pages existantes à améliorer vs pages à créer de zéro.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="feature-box fbox-plain">
+										<div class="fbox-icon"><i class="bi-chat-left-text"></i></div>
+										<div class="fbox-content">
+											<h4 class="fw-semibold mb-1">Clarté de l’offre</h4>
+											<p class="text-muted mb-0">Services, zones, types de déménagement : plus c’est clair, plus ça va vite.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="feature-box fbox-plain">
+										<div class="fbox-icon"><i class="bi-telephone"></i></div>
+										<div class="fbox-content">
+											<h4 class="fw-semibold mb-1">Capacité à répondre</h4>
+											<p class="text-muted mb-0">Si vous ne pouvez pas traiter plus de demandes, on adapte l’approche.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="text-center mt-4">
+								<a href="/contact" class="button button-rounded">Obtenir une estimation</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Ce que vous payez vraiment
+			============================================= -->
+			<div class="container mb-6">
+				<div class="row justify-content-center">
+					<div class="col-lg-9">
+						<div class="heading-block border-bottom-0 mb-3 text-center">
+							<h2 class="text-transform-none fw-semibold ls-0 mb-3">Ce que vous payez vraiment</h2>
+							<p class="text-black-50 mb-0">
+								Des pages utiles, des messages clairs et un suivi simple : pour transformer les visites en appels et demandes de devis.
+							</p>
+						</div>
+
+						<div class="row col-mb-30 mt-4">
+							<div class="col-md-6">
+								<div class="card shadow-sm border-0 rounded h-100">
+									<div class="card-body p-4">
+										<h4 class="fw-semibold mb-2"><i class="bi-wrench-adjustable-circle me-2"></i>Mise en place</h4>
+										<ul class="iconlist mb-0">
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Pages (villes / services) avec un plan clair</span></li>
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Textes orientés “preuves + action”</span></li>
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">CTA et formulaires simplifiés</span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="card shadow-sm border-0 rounded h-100">
+									<div class="card-body p-4">
+										<h4 class="fw-semibold mb-2"><i class="bi-graph-up me-2"></i>Suivi & amélioration</h4>
+										<ul class="iconlist mb-0">
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Suivi appels + demandes de devis</span></li>
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Lecture de la qualité (zone, timing, type)</span></li>
+											<li class="my-2"><i class="bi-check-circle-fill"></i><span class="ps-2">Améliorations ciblées (ce qui bloque)</span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="text-muted small mt-3 text-center">
+							Important : on ne promet pas un nombre garanti de demandes. On s’engage sur une méthode et des actions concrètes.
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- FAQ pricing
+			============================================= -->
+			<div class="container mb-5">
+				<div class="section-clients mx-auto" style="max-width: 820px">
+					<div class="text-center mb-4">
+						<span class="badge rounded-pill lightthemecolor color text-uppercase ls-1 fw-medium py-2 px-3">
+							FAQ Tarifs
+						</span>
+					</div>
+
+					<div class="toggle" data-state="open">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">
+								Est-ce qu’il y a un engagement ?
+							</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Non par défaut. Chaque pack correspond à une période de mise en place + améliorations. On peut ensuite continuer si c’est utile.
+						</div>
+					</div>
+
+					<div class="toggle">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">
+								Pourquoi “sur devis” ?
+							</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Parce que le prix dépend surtout du nombre de villes, du nombre de pages à créer/améliorer, et de votre situation actuelle.
+						</div>
+					</div>
+
+					<div class="toggle">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">
+								Quel pack choisir si je veux “plus de qualité” ?
+							</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Souvent le Pack Local : il sert à mieux cadrer les demandes (zone, timing, type), pas seulement à en avoir plus.
+						</div>
+					</div>
+
+					<div class="toggle">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">
+								Est-ce que vous travaillez hors 60/95 ?
+							</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Oui possible, mais la priorité du site est Sud Oise (60) + Nord Val-d’Oise (95). On adapte selon vos zones.
+						</div>
+					</div>
+
+					<div class="toggle border-0">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">
+								Quel est le prochain pas ?
+							</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Vous nous donnez vos villes prioritaires + votre objectif (appels, devis, qualité). On revient avec un plan + un devis clair.
+						</div>
+					</div>
+
+					<div class="text-center mt-4">
+						<a href="/contact" class="button button-rounded">Passer en contact</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- CTA final + lien contact
+			============================================= -->
+			<div class="section dark pt-0 mb-0 bg-color" style="background: url('/_assets_/images/bg-2.png') no-repeat center bottom / 100%; overflow: visible">
+				<svg viewBox="0 0 1960 206.8" class="bg-white">
+					<path class="svg-themecolor" style="opacity:0.2;" d="M0,142.8A2337.49,2337.49,0,0,1,297.5,56.3C569.33-3.53,783.89.22,849.5,2.3c215.78,6.86,382.12,45.39,503.25,73.45,158.87,36.8,283.09,79.13,458.75,54.55A816.49,816.49,0,0,0,1983,86.8v110H0Z"></path>
+					<path class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"></path>
+				</svg>
+				<div class="container">
+					<div class="row align-items-center justify-content-center text-center my-4">
+						<div class="col-sm-9">
+							<div class="heading-block border-bottom-0 mb-4">
+								<h2 class="fw-semibold ls-0 text-transform-none mb-3" style="font-size: 44px; line-height: 1.3">
+									Vous voulez un devis clair sur vos villes prioritaires ?
+								</h2>
+								<p class="text-white-50 mb-0">
+									Donnez 3 infos, on revient avec un plan + un chiffrage simple.
+								</p>
+							</div>
+							<a href="/contact" class="button button-white button-light button-rounded fw-medium m-0">
+								Demander un devis
+							</a>
+							<div class="text-white-50 small mt-3">
+								Ou voir <a href="/methode" class="text-white text-decoration-underline">la méthode</a> avant de nous écrire.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section><!-- #content end -->
+
+</BaseLayout>

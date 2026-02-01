@@ -1,4 +1,284 @@
 ---
 // src/layouts/BaseLayout.astro
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Déménagement | Horizon Conversion",
+  description = "",
+  canonical,
+  noindex = false
+} = Astro.props;
+
+const currentPath = Astro.url?.pathname || "/";
+
+// À personnaliser (téléphone + email)
+const CONTACT = {
+  phoneDisplay: "06 60 92 10 08",
+  phoneHref: "tel:+33660921008",
+  emailDisplay: "contact@horizon-conversion.fr",
+  emailHref: "mailto:contact@horizon-conversion.fr"
+};
+
+const NAV = [
+  { label: "Accueil", href: "/" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Méthode", href: "/methode" },
+  { label: "Preuves", href: "/preuves" },
+  { label: "Ressources", href: "/ressources" },
+  { label: "Contact", href: "/contact" }
+];
+
+const SERVICES = [
+  { label: "Visibilité Google locale", href: "/visibilite-google/" },
+  { label: "Publicité locale", href: "/publicite-locale/" },
+  { label: "Pages locales", href: "/pages-locales/" }
+];
+
+const isActive = (href: string) => {
+  // Active exact pour "/" ; sinon active si le path commence par href
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href.replace(/\/$/, "")) || currentPath.startsWith(href);
+};
+
+const year = new Date().getFullYear();
 ---
 
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="author" content="Horizon Conversion">
+  <meta name="description" content={description}>
+
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href="/_assets_/style.css">
+
+  <!-- Font Icons -->
+  <link rel="stylesheet" href="/_assets_/css/font-icons.css">
+
+  <!-- Niche -->
+  <link rel="stylesheet" href="/_assets_/movers.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/_assets_/css/custom.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{title}</title>
+</head>
+
+<body class="stretched">
+
+  <!-- Document Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="dark header-size-sm" data-sticky-shrink="false">
+      <div class="container">
+        <div class="header-row">
+
+          <!-- Logo -->
+          <div id="logo" class="ms-auto ms-md-0">
+            <a href="/">
+              <span class="d-flex align-items-center justify-content-center text-white" style="height: 100px;">Horizon Conversion</span>
+            </a>
+          </div><!-- #logo end -->
+
+          <ul class="header-extras d-none d-sm-flex mx-auto mx-md-0 mb-4 mb-md-0">
+            <li>
+              <i class="i-plain bi-telephone m-0"></i>
+              <div class="he-text fw-normal text-white-50">
+                Téléphone :
+                <span><a href={CONTACT.phoneHref} class="text-white fw-medium">{CONTACT.phoneDisplay}</a></span>
+              </div>
+            </li>
+            <li>
+              <i class="i-plain bi-envelope m-0"></i>
+              <div class="he-text fw-normal text-white-50">
+                Email :
+                <span><a href={CONTACT.emailHref} class="text-white fw-medium">{CONTACT.emailDisplay}</a></span>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div id="header-wrap">
+        <div class="container">
+          <div class="header-row justify-content-between flex-row-reverse flex-lg-row">
+
+            <div class="header-misc">
+
+              <!-- Header Buttons -->
+              <div class="header-buttons d-none d-sm-inline-block">
+                <a href="/contact" class="button button-rounded button-white button-light button-small m-0">
+                  Demander un rappel
+                </a>
+              </div>
+
+            </div>
+
+            <div class="primary-menu-trigger">
+              <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+                <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+              </button>
+            </div>
+
+            <!-- Primary Navigation -->
+            <nav class="primary-menu with-arrows">
+
+              <ul class="menu-container">
+
+                <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
+                  <a class="menu-link" href="/"><div>Accueil</div></a>
+                </li>
+
+                <li class={`menu-item ${SERVICES.some(s => isActive(s.href)) ? "current" : ""}`}>
+                  <a class="menu-link" href="/pages-locales/"><div>Services</div></a>
+                  <ul class="sub-menu-container" data-class="up-lg:not-dark">
+                    {SERVICES.map((s) => (
+                      <li class="menu-item">
+                        <a class="menu-link" href={s.href}><div>{s.label}</div></a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+
+                {NAV.filter(n => n.href !== "/").map((n) => (
+                  <li class={`menu-item ${isActive(n.href) ? "current" : ""}`}>
+                    <a class="menu-link" href={n.href}><div>{n.label}</div></a>
+                  </li>
+                ))}
+
+              </ul>
+
+            </nav><!-- #primary-menu end -->
+
+          </div>
+        </div>
+      </div>
+      <div class="header-wrap-clone"></div>
+    </header><!-- #header end -->
+
+    <slot />
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-transparent border-0">
+
+      <div class="container">
+
+        <!-- Footer Widgets -->
+        <div class="footer-widgets-wrap pb-4">
+          <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-6">
+              <div class="widget">
+                <h4 class="ls-0 mb-4 text-transform-none">Services</h4>
+                <ul class="list-unstyled iconlist ms-0">
+                  <li class="mb-2"><a href="/visibilite-google/">Visibilité Google locale</a></li>
+                  <li class="mb-2"><a href="/publicite-locale/">Publicité locale</a></li>
+                  <li class="mb-2"><a href="/pages-locales/">Pages locales</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-6">
+              <div class="widget">
+                <h4 class="ls-0 mb-4 text-transform-none">Pages</h4>
+                <ul class="list-unstyled iconlist ms-0">
+                  <li class="mb-2"><a href="/tarifs">Tarifs</a></li>
+                  <li class="mb-2"><a href="/methode">Méthode</a></li>
+                  <li class="mb-2"><a href="/preuves">Preuves</a></li>
+                  <li class="mb-2"><a href="/ressources">Ressources</a></li>
+                  <li class="mb-2"><a href="/contact">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-6">
+              <div class="widget">
+                <h4 class="ls-0 mb-4 text-transform-none">Zones</h4>
+                <ul class="list-unstyled iconlist ms-0">
+                  <li class="mb-2"><a href="/zones/">Zones couvertes</a></li>
+                  <li class="mb-2"><a href="/zones/sud-oise-60/">Sud Oise (60)</a></li>
+                  <li class="mb-2"><a href="/zones/nord-val-doise-95/">Nord Val-d’Oise (95)</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3">
+              <div class="widget">
+                <h4 class="ls-0 mb-4 text-transform-none">Contact</h4>
+                <div>
+                  <address class="mb-3">
+                    Sud Oise (60) &amp; Nord Val-d’Oise (95)<br>
+                    Intervention à distance (FR)<br>
+                  </address>
+
+                  <h3 class="mb-3">
+                    <a href={CONTACT.phoneHref}>
+                      <i class="fa-solid fa-phone me-1" style="font-size: 22px;"></i>
+                      {CONTACT.phoneDisplay}
+                    </a>
+                  </h3>
+
+                  <div class="text-black-50 mb-3">
+                    <a href={CONTACT.emailHref}>{CONTACT.emailDisplay}</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- .footer-widgets-wrap end -->
+
+      </div>
+
+      <!-- Copyrights -->
+      <div id="copyrights" class="bg-transparent">
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-md-6 text-black-50">
+              Copyright &copy; {year} Horizon Conversion — Tous droits réservés.
+            </div>
+
+            <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">
+              <div class="copyrights-menu copyright-links text-black-50">
+                <a href="/mentions-legales">Mentions légales</a>/<a href="/politique-confidentialite">Confidentialité</a>/<a href="/contact">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- #copyrights end -->
+
+    </footer><!-- #footer end -->
+
+  </div><!-- #wrapper end -->
+
+  <!-- Go To Top -->
+  <div id="gotoTop" class="uil uil-angle-up"></div>
+
+  <!-- JavaScripts -->
+  <script is:inline src="/_assets_/js/plugins.min.js"></script>
+  <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+
+</body>
+</html>

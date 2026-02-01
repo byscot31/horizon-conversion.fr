@@ -1,4 +1,145 @@
 ---
 // src/pages/mentions-legales.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Mentions légales | Horizon Conversion";
+const description =
+  "Mentions légales du site Horizon Conversion – vertical Déménagement : éditeur, hébergeur, propriété intellectuelle et contact.";
 ---
 
+<BaseLayout title={title} description={description}>
+
+	<!-- Page Title
+	============================================= -->
+	<section class="page-title bg-color dark py-6">
+		<div class="container">
+			<div class="page-title-row">
+				<div class="page-title-content">
+					<h1>Mentions légales</h1>
+					<span>Informations éditeur, hébergeur et contact</span>
+				</div>
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Accueil</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Mentions légales</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</section><!-- .page-title end -->
+
+	<!-- Content
+	============================================= -->
+	<section id="content">
+		<div class="content-wrap pb-0">
+
+			<div class="container mt-5 mb-6">
+				<div class="row justify-content-center">
+					<div class="col-lg-10">
+
+						<div class="heading-block border-bottom-0 mb-4 text-center">
+							<h2 class="text-transform-none fw-semibold ls-0 mb-3">Éditeur du site</h2>
+							<p class="text-black-50 mb-0">
+								Le site <strong>demenagement.horizon-conversion.fr</strong> est édité par Horizon Conversion,
+								marque de Control Online.
+							</p>
+						</div>
+
+						<div class="card shadow-sm border-0 rounded mb-4">
+							<div class="card-body p-4">
+								<h4 class="fw-semibold mb-3">Informations légales</h4>
+								<ul class="iconlist mb-0">
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>Nom / raison :</strong> DA COSTA FRANCOIS</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>Nom commercial :</strong> Control Online</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>Forme :</strong> Entrepreneur individuel</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>SIREN :</strong> 810 922 641</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>SIRET (siège) :</strong> 810 922 641 00024</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>TVA intracommunautaire :</strong> FR78810922641</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>RCS :</strong> 810 922 641 R.C.S. Pontoise</span></li>
+									<li class="my-2"><i class="bi-dot"></i><span class="ps-2"><strong>Adresse :</strong> 21 boulevard de l’Orangerie, 95160 Montmorency, France</span></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="card shadow-sm border-0 rounded mb-4">
+							<div class="card-body p-4">
+								<h4 class="fw-semibold mb-3">Contact</h4>
+								<p class="text-muted mb-0">
+									Email : <strong>contact@horizon-conversion.fr</strong><br>
+									Téléphone : <strong>06 60 92 10 08</strong><br>
+									Formulaire : <a href="/contact">page Contact</a>
+								</p>
+							</div>
+						</div>
+
+						<div class="heading-block border-bottom-0 mb-3">
+							<h3 class="text-transform-none fw-semibold ls-0 mb-2">Hébergeur</h3>
+							<p class="text-muted mb-0">
+								<strong>Scaleway SAS</strong> – 8 rue de la Ville-l’Évêque, 75008 Paris, France<br>
+								SIREN : 433 115 904
+							</p>
+						</div>
+
+						<div class="line my-5"></div>
+
+						<div class="heading-block border-bottom-0 mb-3">
+							<h3 class="text-transform-none fw-semibold ls-0 mb-2">Propriété intellectuelle</h3>
+							<p class="text-muted mb-0">
+								Sauf mention contraire, l’ensemble des contenus (textes, visuels, structure) est la propriété de Horizon Conversion / Control Online.
+								Toute reproduction, totale ou partielle, est interdite sans autorisation écrite préalable.
+							</p>
+						</div>
+
+						<div class="line my-5"></div>
+
+						<div class="heading-block border-bottom-0 mb-3">
+							<h3 class="text-transform-none fw-semibold ls-0 mb-2">Activité</h3>
+							<p class="text-muted mb-0">
+								Horizon Conversion propose des prestations d’accompagnement pour aider des entreprises de déménagement à obtenir plus de demandes (appels, devis, prises de contact).
+								<strong>Nous ne réalisons pas de déménagement.</strong>
+							</p>
+						</div>
+
+						<div class="line my-5"></div>
+
+						<div class="heading-block border-bottom-0 mb-3">
+							<h3 class="text-transform-none fw-semibold ls-0 mb-2">Données personnelles</h3>
+							<p class="text-muted mb-0">
+								Pour en savoir plus sur la collecte et l’utilisation de vos données, consultez la
+								<a href="/politique-confidentialite">politique de confidentialité</a>.
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- CTA final
+			============================================= -->
+			<div class="section dark pt-0 mb-0 bg-color" style="background: url('/_assets_/images/bg-2.png') no-repeat center bottom / 100%; overflow: visible">
+				<svg viewBox="0 0 1960 206.8" class="bg-white">
+					<path class="svg-themecolor" style="opacity:0.2;" d="M0,142.8A2337.49,2337.49,0,0,1,297.5,56.3C569.33-3.53,783.89.22,849.5,2.3c215.78,6.86,382.12,45.39,503.25,73.45,158.87,36.8,283.09,79.13,458.75,54.55A816.49,816.49,0,0,0,1983,86.8v110H0Z"></path>
+					<path class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"></path>
+				</svg>
+				<div class="container">
+					<div class="row align-items-center justify-content-center text-center my-4">
+						<div class="col-sm-9">
+							<div class="heading-block border-bottom-0 mb-4">
+								<h2 class="fw-semibold ls-0 text-transform-none mb-3" style="font-size: 44px; line-height: 1.3">
+									Besoin d’un point de départ clair ?
+								</h2>
+								<p class="text-white-50 mb-0">Dites vos villes prioritaires (60/95) et votre objectif (appels / devis).</p>
+							</div>
+							<a href="/contact" class="button button-white button-light button-rounded fw-medium m-0">
+								Nous contacter
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section><!-- #content end -->
+
+</BaseLayout>

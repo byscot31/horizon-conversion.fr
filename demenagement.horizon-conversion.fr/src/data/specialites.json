@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "particuliers",
+    "nom": "Déménagement particuliers",
+    "problemesTypiques": [
+      "Beaucoup de demandes “prix” sans infos",
+      "Questions répétées sur cartons, accès, étages, stationnement",
+      "Clients stressés : besoin de réassurance"
+    ],
+    "messagesEfficaces": [
+      "Devis rapide si vous donnez 5 infos (volume, étage, accès, date, adresses)",
+      "Protection incluse + équipe expérimentée",
+      "Conseils avant déménagement (checklist)"
+    ],
+    "pagesLocalesAProduire": [
+      "Service+Ville : pages locales orientées devis",
+      "Article : formulaire de devis simple",
+      "Article : checklist préparation client"
+    ],
+    "faq": [
+      { "q": "Comment filtrer les demandes “juste un prix” ?", "a": "Avec une page claire + un formulaire court qui récupère les infos essentielles." },
+      { "q": "Faut-il parler du prix ?", "a": "Oui, expliquer ce qui fait varier le prix rassure et qualifie." },
+      { "q": "Quoi mettre en avant ?", "a": "Protection, assurance, méthode, et avis clients." }
+    ]
+  },
+  {
+    "slug": "entreprises",
+    "nom": "Déménagement entreprises",
+    "problemesTypiques": [
+      "Décideurs pressés : besoin de clarté et d’un contact pro",
+      "Contraintes de site : horaires, accès, ascenseurs, confidentialité",
+      "Attentes de planning et de coordination"
+    ],
+    "messagesEfficaces": [
+      "Visite technique possible + planning clair",
+      "Engagement de communication (un seul interlocuteur)",
+      "Preuves : références, méthode, assurance"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : transfert bureaux",
+      "Service+Ville : annonces orientées contact pro",
+      "Article : check-list transfert bureaux"
+    ],
+    "faq": [
+      { "q": "Comment rassurer un pro ?", "a": "Planning, étapes, responsabilités, et exemples concrets." },
+      { "q": "Quel appel à l’action ?", "a": "Prise de contact rapide + créneau de rappel." },
+      { "q": "Que demander au premier échange ?", "a": "Adresse, volume, dates, contraintes, horaires, interlocuteurs." }
+    ]
+  },
+  {
+    "slug": "longue-distance",
+    "nom": "Longue distance",
+    "problemesTypiques": [
+      "Demandes nombreuses mais peu sérieuses",
+      "Délais et organisation mal compris",
+      "Besoin de cadrer assurance et conditions"
+    ],
+    "messagesEfficaces": [
+      "Devis cadré : volume + accès + dates",
+      "Étapes de prise en charge (chargement, route, livraison)",
+      "Options d’emballage et protection"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : longue distance",
+      "Article : filtrer les demandes longue distance",
+      "Page : expliquer le prix et les options"
+    ],
+    "faq": [
+      { "q": "Comment qualifier une demande ?", "a": "Dates, adresses, volume, accès, flexibilité et budget réaliste." },
+      { "q": "Quels éléments rassurent ?", "a": "Méthode, assurance, protection, et communication." },
+      { "q": "Faut-il annoncer une fourchette ?", "a": "On peut expliquer les variables sans promettre un prix fixe." }
+    ]
+  },
+  {
+    "slug": "garde-meubles",
+    "nom": "Garde-meubles",
+    "problemesTypiques": [
+      "Clients perdus sur durée, accès, conditions",
+      "Mauvaise compréhension des volumes",
+      "Besoin de sécurité et de transparence"
+    ],
+    "messagesEfficaces": [
+      "Conditions claires (durée, accès, sécurité)",
+      "Aide au calcul de volume",
+      "Process simple : dépôt / stockage / restitution"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : garde-meubles",
+      "Article : calcul volume simple",
+      "Page : questions fréquentes stockage"
+    ],
+    "faq": [
+      { "q": "Que doit contenir la page ?", "a": "Sécurité, accès, durée, assurance, et contact clair." },
+      { "q": "Comment éviter les incompréhensions ?", "a": "Exemples de volume et conditions affichées." },
+      { "q": "Quel CTA ?", "a": "Demande de devis + rappel si besoin." }
+    ]
+  },
+  {
+    "slug": "international",
+    "nom": "International",
+    "problemesTypiques": [
+      "Contraintes douanes et documents",
+      "Délais variables",
+      "Clients anxieux : besoin d’un parcours clair"
+    ],
+    "messagesEfficaces": [
+      "Étapes annoncées (préparation, emballage, transport, livraison)",
+      "Documents et conditions expliqués",
+      "Assurance et protection en avant"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : international",
+      "Article : étapes et documents",
+      "Page : formulaire qui qualifie bien"
+    ],
+    "faq": [
+      { "q": "Comment éviter les demandes floues ?", "a": "Formulaire avec pays, dates, volume, accès, contraintes." },
+      { "q": "Que mettre en avant ?", "a": "Méthode, expérience, et étapes." },
+      { "q": "Comment rassurer ?", "a": "Preuves, process, et contact direct." }
+    ]
+  },
+  {
+    "slug": "piano-objets-lourds",
+    "nom": "Piano & objets lourds",
+    "problemesTypiques": [
+      "Accès/étages non précisés",
+      "Matériel et protection non compris",
+      "Risque perçu : besoin de preuves"
+    ],
+    "messagesEfficaces": [
+      "Questions d’accès (étage, largeur, stationnement) dès le départ",
+      "Protection et matériel mentionnés",
+      "Photos/avis liés à des objets fragiles"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : piano & lourds",
+      "Article : checklist accès",
+      "Page : preuve et réassurance"
+    ],
+    "faq": [
+      { "q": "Quelles infos demander ?", "a": "Type d’objet, poids/volume, accès, étage, stationnement." },
+      { "q": "Que rassure le plus ?", "a": "Méthode, matériel, assurance, avis." },
+      { "q": "Comment filtrer ?", "a": "Formulaire avec accès + photos si possible." }
+    ]
+  },
+  {
+    "slug": "seniors",
+    "nom": "Seniors",
+    "problemesTypiques": [
+      "Besoin d’accompagnement (tri, protection, rythme)",
+      "Famille impliquée : coordination",
+      "Confiance : preuves et clarté"
+    ],
+    "messagesEfficaces": [
+      "Accompagnement étape par étape",
+      "Contact simple + rappel",
+      "Preuves : avis, méthode, équipe"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : seniors",
+      "Article : préparer le déménagement senior",
+      "Page : formulaire très simple"
+    ],
+    "faq": [
+      { "q": "Quel ton utiliser ?", "a": "Calme, clair, rassurant, orienté accompagnement." },
+      { "q": "Que mettre en avant ?", "a": "Organisation, protection, et présence." },
+      { "q": "Quel CTA ?", "a": "Être rappelé + demande de devis." }
+    ]
+  },
+  {
+    "slug": "urgent",
+    "nom": "Urgent",
+    "problemesTypiques": [
+      "Demandes à qualifier très vite",
+      "Disponibilités limitées",
+      "Risque de perdre du temps au téléphone"
+    ],
+    "messagesEfficaces": [
+      "Disponibilités affichées + rappel rapide",
+      "Questions de tri (date, accès, volume, zone)",
+      "Alternative : créneau de visite"
+    ],
+    "pagesLocalesAProduire": [
+      "Spécialité+Ville : urgent",
+      "Article : script téléphone",
+      "Page : formulaire ultra court"
+    ],
+    "faq": [
+      { "q": "Comment éviter les pertes de temps ?", "a": "Script + formulaire court qui récupère les infos clés." },
+      { "q": "Que promettre ?", "a": "On évite les promesses : on annonce un délai de réponse réaliste." },
+      { "q": "Quel canal privilégier ?", "a": "Téléphone + formulaire, selon vos capacités." }
+    ]
+  }
+]

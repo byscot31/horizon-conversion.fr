@@ -1,2 +1,135 @@
-// src/data/services.json
-
+[
+  {
+    "slug": "visibilite-google",
+    "nom": "Visibilité Google locale",
+    "promesseCourte": "Être plus visible localement et recevoir plus de demandes.",
+    "pourQui": [
+      "Déménageurs qui veulent plus d’appels et de demandes de devis dans leur zone",
+      "Entreprises avec une zone claire (Sud Oise / Nord Val-d’Oise) et des villes prioritaires"
+    ],
+    "problemesTraites": [
+      "On ne vous trouve pas quand on cherche un déménageur dans votre ville",
+      "Votre fiche et vos infos ne rassurent pas (photos, avis, services, zones)",
+      "Vous recevez des demandes peu qualifiées ou hors zone"
+    ],
+    "ceQuOnMetEnPlace": [
+      "Amélioration de la présence locale (infos, zones, services, preuves)",
+      "Structure de pages locales utiles (ville + service) pour répondre aux questions",
+      "Messages simples et rassurants (délais, assurance, accès, volumes, étapes)"
+    ],
+    "livrables": [
+      "Plan d’action priorisé (30 jours)",
+      "Pages locales (modèle + adaptation par ville)",
+      "Textes de réponses et scripts simples pour demander des avis"
+    ],
+    "commentOnMesure": [
+      "Nombre d’appels et de demandes de devis",
+      "Qualité des demandes (zone, type de déménagement, budget réaliste)",
+      "Évolution des actions clients : clics vers appel / formulaire"
+    ],
+    "faq": [
+      {
+        "q": "En combien de temps voit-on des effets ?",
+        "a": "Souvent en quelques semaines sur la clarté et le volume de demandes, surtout si des pages locales manquent. Ça dépend de votre zone et de votre concurrence."
+      },
+      {
+        "q": "Est-ce que vous gérez les avis ?",
+        "a": "On met en place une méthode simple et des messages prêts à l’emploi. Les avis restent publiés par vos clients, pas par nous."
+      },
+      {
+        "q": "Faut-il refaire tout le site ?",
+        "a": "Pas forcément. On peut améliorer l’existant et ajouter des pages utiles par ville et par spécialité."
+      },
+      {
+        "q": "Est-ce adapté au Sud Oise et au nord 95 ?",
+        "a": "Oui, l’approche est locale : villes prioritaires, repères du secteur, et cohérence zone par zone."
+      }
+    ]
+  },
+  {
+    "slug": "publicite-locale",
+    "nom": "Publicité locale (annonces)",
+    "promesseCourte": "Attirer des demandes rapidement avec des annonces claires et un suivi simple.",
+    "pourQui": [
+      "Déménageurs qui veulent accélérer les demandes sur des villes précises",
+      "Entreprises qui ont déjà une offre claire et un minimum de pages rassurantes"
+    ],
+    "problemesTraites": [
+      "Vous payez des annonces mais les demandes sont rares ou mal qualifiées",
+      "Les clients cliquent mais n’appellent pas / ne remplissent pas",
+      "Vos messages ne filtrent pas (zone, délais, type de prestation)"
+    ],
+    "ceQuOnMetEnPlace": [
+      "Groupes d’annonces par ville et par intention (devis, urgent, entreprise, etc.)",
+      "Pages d’arrivée adaptées (pas la page d’accueil pour tout)",
+      "Suivi des appels et des demandes pour savoir ce qui marche"
+    ],
+    "livrables": [
+      "Structure des annonces + messages prêts",
+      "Pages d’arrivée simples (avec preuve + FAQ + appel)",
+      "Tableau de suivi des demandes (appels / formulaires)"
+    ],
+    "commentOnMesure": [
+      "Coût par demande (appel ou formulaire)",
+      "Taux de transformation visite → appel/devis",
+      "Part des demandes dans la zone cible"
+    ],
+    "faq": [
+      {
+        "q": "Quel budget faut-il prévoir ?",
+        "a": "On commence souvent petit, sur 1 à 3 villes prioritaires. Le budget dépend de la concurrence et de votre capacité à répondre vite."
+      },
+      {
+        "q": "Est-ce que ça marche sans pages locales ?",
+        "a": "Ça peut marcher, mais c’est souvent moins efficace. Une bonne page locale améliore la qualité et le nombre de demandes."
+      },
+      {
+        "q": "Qui répond aux appels ?",
+        "a": "Vous. On peut vous aider à clarifier le script de qualification pour gagner du temps et mieux filtrer."
+      }
+    ]
+  },
+  {
+    "slug": "pages-locales",
+    "nom": "Pages locales & messages qui convertissent",
+    "promesseCourte": "Transformer les visites en appels et demandes de devis.",
+    "pourQui": [
+      "Déménageurs avec un site trop général ou peu clair",
+      "Entreprises qui veulent des pages par ville et par spécialité sans blabla"
+    ],
+    "problemesTraites": [
+      "Le site ne répond pas aux questions des clients (prix, accès, délais, assurance)",
+      "Les visiteurs ne savent pas quoi faire (CTA faible, formulaire confus)",
+      "Les pages se ressemblent et n’aident pas à trier les demandes"
+    ],
+    "ceQuOnMetEnPlace": [
+      "Structure de page : problème → solution → preuves → action",
+      "FAQ locale (accès, stationnement, étage, autorisations, délais)",
+      "Messages de réassurance (assurance, expérience, méthode, avis)"
+    ],
+    "livrables": [
+      "Modèles de pages (service, service+ville, spécialité+ville)",
+      "Textes courts prêts à publier",
+      "Recommandations de maillage interne (liens entre pages)"
+    ],
+    "commentOnMesure": [
+      "Taux de clic vers appel / demande de devis",
+      "Nombre de demandes par page",
+      "Qualité des demandes (type de prestation, zone, timing)"
+    ],
+    "faq": [
+      {
+        "q": "Est-ce que ça fait des pages “vides” ?",
+        "a": "Non. Chaque page doit répondre à un vrai besoin et apporter des infos utiles. Sinon, on ne la crée pas."
+      },
+      {
+        "q": "Combien de pages faut-il ?",
+        "a": "On démarre avec vos 3 à 5 villes prioritaires, puis on étend si la qualité suit."
+      },
+      {
+        "q": "On garde notre ton ?",
+        "a": "Oui. On écrit simple, pro, orienté client, sans promesses irréalistes."
+      }
+    ]
+  }
+]

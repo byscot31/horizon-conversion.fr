@@ -1,0 +1,205 @@
+---
+// src/pages/zones/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Zones couvertes | Sud Oise (60) & Nord Val-d’Oise (95)";
+const description =
+  "Zones couvertes pour les déménageurs : Sud Oise (60) et Nord Val-d’Oise (95). Une approche locale propre, sans pages inutiles.";
+---
+
+<BaseLayout title={title} description={description}>
+
+	<section class="page-title bg-color dark py-6">
+		<div class="container">
+			<div class="page-title-row">
+				<div class="page-title-content">
+					<h1>Zones couvertes</h1>
+					<span>Une approche locale cohérente (60/95)</span>
+				</div>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Accueil</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Zones</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</section>
+
+	<section id="content">
+		<div class="content-wrap pb-0">
+
+			<!-- Titre -->
+			<div class="container mt-5 mb-5">
+				<div class="row justify-content-center">
+					<div class="col-lg-9 text-center">
+						<div class="heading-block border-bottom-0 mb-3">
+							<h2 class="text-transform-none fw-semibold ls-0 mb-3">
+								Des zones claires pour attirer des demandes utiles
+							</h2>
+							<p class="text-black-50 mb-0">
+								On organise le site par zones pour rester cohérent : des pages utiles, proches du terrain, sans duplication.
+							</p>
+						</div>
+						<a href="/contact" class="button button-rounded button-large mt-2">Demander un plan d’action</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Grille zones -->
+			<div class="container mb-6">
+				<div class="row col-mb-30">
+
+					<div class="col-md-6">
+						<div class="card shadow-sm border-0 rounded h-100">
+							<div class="card-body p-5">
+								<h3 class="fw-semibold mb-2">Sud Oise (60)</h3>
+								<p class="text-muted mb-4">
+									Senlis, Chantilly, Creil, Nogent-sur-Oise, Méru, Gouvieux, Lamorlaye, Saint-Leu-d’Esserent, Chambly.
+								</p>
+								<a href="/zones/sud-oise-60/" class="button button-rounded m-0">Voir la zone</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="card shadow-sm border-0 rounded h-100">
+							<div class="card-body p-5">
+								<h3 class="fw-semibold mb-2">Nord Val-d’Oise (95)</h3>
+								<p class="text-muted mb-4">
+									Approche “frontière 60/95” : pages utiles par ville + messages cohérents + demandes mieux qualifiées.
+								</p>
+								<a href="/zones/nord-val-doise-95/" class="button button-rounded m-0">Voir la zone</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Pourquoi par zone -->
+			<div class="section bg-transparent mt-0">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-10">
+							<div class="heading-block border-bottom-0 text-center mb-4">
+								<h2 class="text-transform-none fw-semibold ls-0 mb-3">Pourquoi organiser par zone ?</h2>
+								<p class="text-black-50 mb-0">
+									Pour éviter les pages “copiées-collées” et garder un discours crédible, ville par ville.
+								</p>
+							</div>
+
+							<div class="row col-mb-30">
+								<div class="col-md-4">
+									<div class="card shadow-sm border-0 rounded h-100">
+										<div class="card-body p-4">
+											<h4 class="fw-semibold mb-2"><i class="bi-geo-alt me-2"></i>Cohérence locale</h4>
+											<p class="text-muted mb-0">On parle des vraies villes, des vraies attentes, et on reste crédible.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="card shadow-sm border-0 rounded h-100">
+										<div class="card-body p-4">
+											<h4 class="fw-semibold mb-2"><i class="bi-file-earmark-text me-2"></i>Pages utiles</h4>
+											<p class="text-muted mb-0">Chaque page doit aider à prendre une décision et mener à une demande.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="card shadow-sm border-0 rounded h-100">
+										<div class="card-body p-4">
+											<h4 class="fw-semibold mb-2"><i class="bi-slash-circle me-2"></i>Moins de “spam”</h4>
+											<p class="text-muted mb-0">On évite d’empiler des pages inutiles qui se ressemblent trop.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="text-center mt-4">
+								<a href="/methode" class="button button-rounded">Voir la méthode</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- FAQ -->
+			<div class="container mb-5">
+				<div class="section-clients mx-auto" style="max-width: 820px">
+					<div class="text-center mb-4">
+						<span class="badge rounded-pill lightthemecolor color text-uppercase ls-1 fw-medium py-2 px-3">FAQ</span>
+					</div>
+
+					<div class="toggle" data-state="open">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">Est-ce que vous créez une page pour chaque ville ?</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Seulement si ça a du sens. On démarre par vos villes prioritaires, puis on étend si la qualité des demandes suit.
+						</div>
+					</div>
+
+					<div class="toggle">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">Pourquoi éviter les pages trop similaires ?</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Parce qu’elles n’aident pas le visiteur. On préfère des pages utiles : contexte local, réponses concrètes, FAQ, preuves.
+						</div>
+					</div>
+
+					<div class="toggle border-0">
+						<div class="toggle-header flex-row-reverse">
+							<div class="toggle-icon">
+								<i class="toggle-closed bi-plus-circle"></i>
+								<i class="toggle-open bi-x-circle"></i>
+							</div>
+							<div class="toggle-title fw-medium">Quel est le prochain pas ?</div>
+						</div>
+						<div class="toggle-content text-black-50">
+							Envoyez vos 3 villes prioritaires + votre objectif. On vous répond avec un plan simple.
+						</div>
+					</div>
+
+					<div class="text-center mt-4">
+						<a href="/contact" class="button button-rounded">Demander un plan d’action</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- CTA final -->
+			<div class="section dark pt-0 mb-0 bg-color" style="background: url('/_assets_/images/bg-2.png') no-repeat center bottom / 100%; overflow: visible">
+				<svg viewBox="0 0 1960 206.8" class="bg-white">
+					<path class="svg-themecolor" style="opacity:0.2;" d="M0,142.8A2337.49,2337.49,0,0,1,297.5,56.3C569.33-3.53,783.89.22,849.5,2.3c215.78,6.86,382.12,45.39,503.25,73.45,158.87,36.8,283.09,79.13,458.75,54.55A816.49,816.49,0,0,0,1983,86.8v110H0Z"></path>
+					<path class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"></path>
+				</svg>
+				<div class="container">
+					<div class="row align-items-center justify-content-center text-center my-4">
+						<div class="col-sm-9">
+							<div class="heading-block border-bottom-0 mb-4">
+								<h2 class="fw-semibold ls-0 text-transform-none mb-3" style="font-size: 44px; line-height: 1.3">
+									On part de vos villes, pas d’un modèle générique
+								</h2>
+								<p class="text-white-50 mb-0">Dites vos priorités (60/95) et votre objectif (appels / devis).</p>
+							</div>
+							<a href="/contact" class="button button-white button-light button-rounded fw-medium m-0">Demander un plan d’action</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</BaseLayout>

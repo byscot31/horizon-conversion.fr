@@ -1,2 +1,101 @@
-// src/data/villes.json
-
+[
+  {
+    "slug": "senlis",
+    "nom": "Senlis",
+    "departement": "60",
+    "reperesLocaux": [
+      "Centre historique",
+      "Accès A1 (axe Paris–Lille)",
+      "Secteur résidentiel + petites entreprises"
+    ],
+    "villesProches": ["Chamant", "Vineuil-Saint-Firmin", "Orry-la-Ville"]
+  },
+  {
+    "slug": "chantilly",
+    "nom": "Chantilly",
+    "departement": "60",
+    "reperesLocaux": [
+      "Château et tourisme",
+      "Gare (liaisons vers Paris)",
+      "Quartiers pavillonnaires et copropriétés"
+    ],
+    "villesProches": ["Gouvieux", "Lamorlaye", "Vineuil-Saint-Firmin"]
+  },
+  {
+    "slug": "creil",
+    "nom": "Creil",
+    "departement": "60",
+    "reperesLocaux": [
+      "Gare et bassin de vie important",
+      "Zones d’activités et entreprises",
+      "Accès rapides vers communes voisines"
+    ],
+    "villesProches": ["Nogent-sur-Oise", "Montataire", "Saint-Leu-d'Esserent"]
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "nom": "Nogent-sur-Oise",
+    "departement": "60",
+    "reperesLocaux": [
+      "Proche Creil",
+      "Quartiers mixtes pavillons / immeubles",
+      "Déplacements fréquents intra-bassin"
+    ],
+    "villesProches": ["Creil", "Montataire", "Cramoisy"]
+  },
+  {
+    "slug": "meru",
+    "nom": "Méru",
+    "departement": "60",
+    "reperesLocaux": [
+      "Axe vers l’ouest (secteur Vexin / 95)",
+      "Zones résidentielles",
+      "Déplacements fréquents vers le 95"
+    ],
+    "villesProches": ["Andeville", "Lormaison", "Chambly"]
+  },
+  {
+    "slug": "gouvieux",
+    "nom": "Gouvieux",
+    "departement": "60",
+    "reperesLocaux": [
+      "Proche Chantilly",
+      "Clientèle exigeante : réassurance importante",
+      "Accès forêt / secteurs résidentiels"
+    ],
+    "villesProches": ["Chantilly", "Lamorlaye", "Saint-Leu-d'Esserent"]
+  },
+  {
+    "slug": "lamorlaye",
+    "nom": "Lamorlaye",
+    "departement": "60",
+    "reperesLocaux": [
+      "Secteur résidentiel",
+      "Proche forêt de Chantilly",
+      "Déplacements fréquents vers 95 et sud 60"
+    ],
+    "villesProches": ["Chantilly", "Gouvieux", "Viarmes"]
+  },
+  {
+    "slug": "saint-leu-d-esserent",
+    "nom": "Saint-Leu-d'Esserent",
+    "departement": "60",
+    "reperesLocaux": [
+      "Proche Creil",
+      "Accès vers plusieurs communes du bassin",
+      "Logements variés : pavillons / immeubles"
+    ],
+    "villesProches": ["Creil", "Cramoisy", "Thiverny"]
+  },
+  {
+    "slug": "chambly",
+    "nom": "Chambly",
+    "departement": "60",
+    "reperesLocaux": [
+      "Frontière 60/95 (secteur stratégique)",
+      "Trajets fréquents vers le nord du Val-d’Oise",
+      "Clientèle particuliers + petites entreprises"
+    ],
+    "villesProches": ["Méru", "Persan", "L'Isle-Adam"]
+  }
+]
