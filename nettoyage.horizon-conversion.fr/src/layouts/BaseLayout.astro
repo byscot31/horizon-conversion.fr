@@ -1,714 +1,459 @@
 ---
 // src/layouts/BaseLayout.astro
-// Layout “Cleaner” (sections courtes, titres forts, cards, CTA) + SEO + schema.org + tracking (GA4 + UTMs)
+// Layout basé sur ton template (structure conservée) + contenu dynamique via props.
 
-export type Cta = { href: string; label: string; id?: string; variant?: "primary" | "secondary" };
+import services from "../data/services.json";
+import specialites from "../data/specialites.json";
+import villes from "../data/villes.json";
+import zones from "../data/zones.json";
+
+type NavItem = { href: string; label: string };
+type SocialItem = { href: string; label: string; iconClass: string; bgClass: string };
 
 type Props = {
   title?: string;
   description?: string;
   canonical?: string;
-  ogImage?: string;
-  lang?: string;
+
+  // SEO (optionnel)
   noindex?: boolean;
 
-  // Contexte (utile pour tracking & schema)
-  pageType?: "home" | "service" | "service-ville" | "specialites" | "specialite" | "specialite-ville" | "ressources-ville" | "method" | "preuves" | "tarifs" | "contact" | "default";
-  service?: "seo-local" | "google-ads" | "cro";
-  ville?: string;
-  specialite?: string;
+  // OpenGraph/Twitter (optionnel)
+  ogImage?: string; // ex: "/_assets_/images/og-default.jpg"
+  ogType?: string;  // ex: "website"
+  twitterCard?: string; // ex: "summary_large_image"
 
-  // Branding / contact (facultatif)
-  brandName?: string;
-  regionLabel?: string;
-  phone?: string;
-  email?: string;
+  // Navigation (optionnel, sinon fallback)
+  nav?: NavItem[];
+  topLinks?: NavItem[];
 
-  // CTA globaux (facultatif)
-  primaryCta?: Cta;
-  secondaryCta?: Cta;
+  // Contact (optionnel)
+  phone?: string;   // ex: "+33 6 00 00 00 00"
+  email?: string;   // ex: "contact@horizon-conversion.fr"
 
-  // JSON-LD additionnel (par page)
+  // Social (optionnel)
+  socials?: SocialItem[];
+
+  // Schema JSON-LD (optionnel) : objet ou tableau d'objets
   schema?: Record<string, any> | Array<Record<string, any>>;
 
-  // Perfs
-  preloadHeroImage?: string;
+  // UX
+  headerCta?: { href: string; label: string; iconClass?: string }; // bouton header droite
 };
 
 const {
-  title = "Horizon Conversion — Marketing pour entreprises de nettoyage (Sud Oise / Nord 95)",
-  description = "SEO local, Google Ads, CRO & tracking pour entreprises de nettoyage : plus de demandes qualifiées à Senlis, Chantilly, Creil, Nogent-sur-Oise, Clermont, Luzarches et alentours.",
+  title = "Horizon Conversion | Webmarketing pour entreprises de nettoyage (60/95)",
+  description = "SEO local, Google Ads/Meta Ads et optimisation conversion pour entreprises de nettoyage en Sud Oise (60) et Nord 95. Audit gratuit.",
   canonical,
-  ogImage = "/og-default.jpg",
-  lang = "fr",
   noindex = false,
-
-  pageType = "default",
-  service,
-  ville,
-  specialite,
-
-  brandName = "Horizon Conversion",
-  regionLabel = "Sud Oise (60) & Nord Val-d’Oise (95)",
+  ogImage = "/_assets_/images/og-default.jpg",
+  ogType = "website",
+  twitterCard = "summary_large_image",
   phone,
   email,
-
-  primaryCta = { href: "/contact", label: "Demander un audit (15 min)", id: "global_audit_15min", variant: "primary" },
-  secondaryCta = { href: "/tarifs", label: "Voir les packs", id: "global_packs", variant: "secondary" },
-
-  schema = [],
-  preloadHeroImage,
+  schema,
+  headerCta = { href: "/tarifs", label: "Voir les tarifs", iconClass: "bi-currency-dollar" },
+  nav = [
+    { href: "/", label: "Accueil" },
+    { href: "/methode", label: "Méthode" },
+    { href: "/tarifs", label: "Tarifs" },
+    { href: "/preuves", label: "Preuves" },
+    { href: "/contact", label: "Contact" }
+  ],
+  topLinks = [
+    { href: "/", label: "Accueil" },
+    { href: "/ressources", label: "Ressources" },
+    { href: "/contact", label: "Contact" }
+  ],
+  socials = [
+    { href: "#", label: "Facebook", iconClass: "fa-brands fa-facebook-f", bgClass: "h-bg-facebook" },
+    { href: "#", label: "X", iconClass: "fa-brands fa-x-twitter", bgClass: "h-bg-x-twitter" },
+    { href: "#", label: "Instagram", iconClass: "fa-brands fa-instagram", bgClass: "h-bg-instagram" }
+  ]
 } = Astro.props as Props;
 
-const GA_ID = import.meta.env.PUBLIC_GA4_ID as string | undefined;
+const pageTitle = title?.trim() || "Horizon Conversion";
+const pageDesc = (description || "").trim();
 
-const site = (Astro.site?.toString() || "").replace(/\/$/, "");
-const reqUrl = new URL(Astro.request.url);
-const canonicalUrl = canonical
-  ? (site ? new URL(canonical, site).toString() : canonical)
-  : reqUrl.toString();
+// Canonical: si non fourni, on tente de le construire à partir de l’URL courante
+const canonicalUrl =
+  canonical ||
+  (Astro.url?.origin ? new URL(Astro.url.pathname, Astro.url.origin).toString() : undefined);
 
-const robots = noindex
-  ? "noindex,nofollow"
-  : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
+// JSON-LD (supporte objet ou tableau)
+const schemaArray = Array.isArray(schema) ? schema : schema ? [schema] : [];
 
-const resolvedOgImage = ogImage.startsWith("http")
-  ? ogImage
-  : (site ? new URL(ogImage, site).toString() : ogImage);
+// helpers
+const getVilleName = (slug) => (villes.find((v) => v.slug === slug)?.name ?? slug);
 
-const schemaExtra = Array.isArray(schema) ? schema : [schema].filter(Boolean);
+const pickZoneCities = (zoneSlug, max = 6) => {
+  const z = zones.find((x) => x.slug === zoneSlug);
+  if (!z?.cities?.length) return [];
+  return z.cities.slice(0, max).map((citySlug) => ({
+    href: `/zones/${zoneSlug}/${citySlug}`,
+    label: getVilleName(citySlug),
+  }));
+};
 
-// JSON-LD “socle” : Organization + WebSite (les pages ajoutent Service/FAQPage/etc.)
-const baseSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: brandName,
-    url: site || canonicalUrl,
-    ...(email ? { email } : {}),
-    ...(phone ? { telephone: phone } : {}),
-    areaServed: [
-      { "@type": "AdministrativeArea", name: "Oise" },
-      { "@type": "AdministrativeArea", name: "Val-d’Oise" },
-    ],
-    description:
-      "Consultant webmarketing pour entreprises de nettoyage : SEO local, Google Ads, CRO & tracking dans le Sud Oise (60) et le Nord 95.",
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: brandName,
-    url: site || canonicalUrl,
-    inLanguage: lang,
-  },
-];
-
-const allSchemas = [...baseSchema, ...schemaExtra];
-const isHome = reqUrl.pathname === "/" || pageType === "home";
-
-// Navigation (courte, CRO-first)
-const nav = [
+// --- MENU PRINCIPAL (data-driven) ---
+const menu = [
   {
     label: "Services",
-    href: "/#services",
+    href: "/seo-local",
     children: [
-      { href: "/seo-local", label: "SEO local" },
-      { href: "/google-ads", label: "Google Ads" },
-      { href: "/cro", label: "CRO & Tracking" },
-    ],
+      { label: "SEO Local", href: "/seo-local" },
+      { label: "Google / Meta Ads", href: "/google-ads" },
+      { label: "Optimisation Site", href: "/cro-tracking" }
+    ]
   },
   {
-      label: "Marchés",
-      href: "/specialites",
-      children: [
-        { href: "/specialites/nettoyage-bureaux", label: "Bureaux" },
-        { href: "/specialites/nettoyage-coproprietes", label: "Copropriétés" },
-        { href: "/specialites/nettoyage-locaux-commerciaux", label: "Commerces" },
-        { href: "/specialites/nettoyage-medical", label: "Médical" },
-        { href: "/specialites/nettoyage-industrie", label: "Industrie" },
-        { href: "/specialites/nettoyage-fin-de-chantier", label: "Fin de chantier" },
-        { href: "/specialites/nettoyage-vitrerie", label: "Vitrerie" },
-        { href: "/specialites/remise-en-etat", label: "Remise en état" },
-      ],
-    },
+    label: "Marchés",
+    href: "/specialites",
+    children: (specialites ?? []).slice(0, 6).map((sp) => ({
+      label: sp.name,
+      href: `/specialites/${sp.slug}`
+    }))
+  },
   {
-      label: "Zones 60/95",
-      href: "/#zones",
-      children: [
-        { href: "/ressources/senlis", label: "Senlis & alentours" },
-        { href: "/ressources/chantilly", label: "Chantilly & alentours" },
-        { href: "/ressources/creil", label: "Creil & alentours" },
-        { href: "/ressources/nogent-sur-oise", label: "Nogent-sur-Oise & alentours" },
-        { href: "/ressources/clermont", label: "Clermont & alentours" },
-        { href: "/ressources/luzarches", label: "Luzarches & alentours" },
-      ],
-    },
-  { href: "/tarifs", label: "Tarifs" },
+    label: "Zones 60/95",
+    href: "/zones",
+    children: [
+      {
+        label: "Sud Oise (60)",
+        href: "/zones/sud-oise",
+        children: pickZoneCities("sud-oise", 6)
+      },
+      {
+        label: "Nord Val-d’Oise (95)",
+        href: "/zones/nord-95",
+        children: pickZoneCities("nord-95", 6)
+      }
+    ]
+  },
   {
     label: "Ressources",
-    href: "/#ressources",
+    href: "/ressources",
     children: [
-      { href: "/methode", label: "Méthode" },
-      { href: "/preuves", label: "Preuves" },
-    ],
+      { label: "Méthode", href: "/methode" },
+      { label: "Preuves", href: "/preuves" },
+      { label: "Conseils", href: "/ressources" }
+    ]
   },
+  { label: "Contact", href: "/contact" }
 ];
 
-const footerCities = [
-  { href: "/ressources/senlis", label: "Senlis" },
-  { href: "/ressources/chantilly", label: "Chantilly" },
-  { href: "/ressources/creil", label: "Creil" },
-  { href: "/ressources/nogent-sur-oise", label: "Nogent-sur-Oise" },
-  { href: "/ressources/clermont", label: "Clermont" },
-  { href: "/ressources/luzarches", label: "Luzarches" },
-];
+// Active helper
+const isActive = (href) => {
+  const path = Astro.url?.pathname ?? "/";
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(href + "/");
+};
 ---
 
-<!doctype html>
-<html lang={lang}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta name="robots" content={robots} />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="author" content="Horizon Conversion">
+	<meta name="description" content={pageDesc}>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content={isHome ? "website" : "article"} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={resolvedOgImage} />
-    <meta property="og:locale" content="fr_FR" />
+	{noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow" />}
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={resolvedOgImage} />
+	{canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
 
-    <!-- Favicons (adapte si besoin) -->
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<!-- OpenGraph -->
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDesc} />
+	<meta property="og:type" content={ogType} />
+	{canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+	{ogImage ? <meta property="og:image" content={ogImage} /> : null}
 
-    {preloadHeroImage ? <link rel="preload" as="image" href={preloadHeroImage} /> : null}
+	<!-- Twitter -->
+	<meta name="twitter:card" content={twitterCard} />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDesc} />
+	{ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
 
-    <!-- CSS “Cleaner” (ajuste les paths selon ton projet) -->
-    <link rel="stylesheet" href="/_assets_/style.css" />
-    <link rel="stylesheet" href="/_assets_/cleaner.css" />
-    <link rel="stylesheet" href="/_assets_/css/font-icons.css">
-    <link rel="stylesheet" href="/_assets_/css/custom.css">
+	<!-- Font Imports -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="http://fonts.googleapis.com/css?family=Heebo:400,500,700" rel="stylesheet">
 
-    <style>
-      .form-group > label.error {
-        display: block !important;
-        text-transform: none;
-      }
+	<!-- Core Style -->
+	<link rel="stylesheet" href="/_assets_/style.css">
 
-      .form-group input.valid ~ label.error,
-      .form-group input[type="text"] ~ label.error,
-      .form-group input[type="email"] ~ label.error,
-      .form-group input[type="number"] ~ label.error,
-      .form-group select ~ label.error { display: none !important; }
-    </style>
+	<!-- Font Icons -->
+	<link rel="stylesheet" href="/_assets_/css/font-icons.css">
 
-    <!-- Font Imports -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="http://fonts.googleapis.com/css?family=Heebo:400,500,700" rel="stylesheet">
+	<!-- Cleaner Theme Custom CSS -->
+	<link rel="stylesheet" href="/_assets_/cleaner.css">
 
-    <!-- Slot head (meta spécifiques par page, CSS additionnelle, etc.) -->
-    <slot name="head" />
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/_assets_/css/custom.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- JSON-LD -->
-    {allSchemas.map((s) => (
-      <script type="application/ld+json" set:html={JSON.stringify(s)} />
-    ))}
+	<!-- Document Title -->
+	<title>{pageTitle}</title>
 
-    <!-- GA4 (optionnel via PUBLIC_GA4_ID) -->
-    {GA_ID ? (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
-        <script is:inline>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_ID}', { anonymize_ip: true });
-          `}
-        </script>
-      </>
-    ) : null}
-  </head>
+	<style>
+		.form-group > label.error {
+			display: block !important;
+			text-transform: none;
+		}
 
-  <body class="stretched">
-    <a class="visually-hidden-focusable" href="#main">Aller au contenu</a>
+		.form-group input.valid ~ label.error,
+		.form-group input[type="text"] ~ label.error,
+		.form-group input[type="email"] ~ label.error,
+		.form-group input[type="number"] ~ label.error,
+		.form-group select ~ label.error { display: none !important; }
+	</style>
 
-    <div id="wrapper">
-      {/* Top bar (facultatif) */}
-      <div id="top-bar" class="transparent-topbar">
-        <div class="container-fluid">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-12 col-md-auto">
-              <div class="small text-muted py-2">
-                <strong>{regionLabel}</strong>
-                {ville ? <span> — focus {ville}</span> : null}
-              </div>
-            </div>
-
-            {(phone || email) ? (
-              <div class="col-12 col-md-auto">
-                <ul id="top-social" class="mb-0">
-                  {phone ? (
-                    <li>
-                      <a
-                        href={`tel:${phone}`}
-                        class="h-bg-call"
-                        data-track="tel"
-                        data-page-type={pageType}
-                        data-service={service}
-                        data-ville={ville}
-                        data-specialite={specialite}
-                      >
-                        <span class="ts-icon"><i class="fa-solid fa-phone"></i></span>
-                        <span class="ts-text">{phone}</span>
-                      </a>
-                    </li>
-                  ) : null}
-
-                  {email ? (
-                    <li>
-                      <a
-                        href={`mailto:${email}`}
-                        class="h-bg-email3"
-                        data-track="email"
-                        data-page-type={pageType}
-                        data-service={service}
-                        data-ville={ville}
-                        data-specialite={specialite}
-                      >
-                        <span class="ts-icon"><i class="bi-envelope-fill"></i></span>
-                        <span class="ts-text">{email}</span>
-                      </a>
-                    </li>
-                  ) : null}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-
-      {/* Header */}
-      <header id="header" class="full-header header-size-md border-0" data-sticky-shrink="false">
-        <div id="header-wrap">
-          <div class="container-fluid pe-0">
-            <div class="header-row">
-              <div id="logo" class="col col-sm-auto">
-                <a href="/" aria-label={`${brandName} — Accueil`}>
-                  <img class="logo-default" src="/_assets_/images/logo.png" alt={brandName} height="36" />
-                </a>
-              </div>
-
-              <div class="primary-menu-trigger">
-                <button class="cnvs-hamburger" type="button" title="Ouvrir le menu" aria-label="Ouvrir le menu">
-                  <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-                </button>
-              </div>
-
-              <div class="header-misc">
-                <a
-                  href={primaryCta.href}
-                  class="button button-light text-dark fw-semibold ls-1 text-uppercase fw-bold"
-                  data-cta
-                  data-cta-id={primaryCta.id || "header_primary"}
-                  data-cta-label={primaryCta.label}
-                  data-position="header"
-                  data-page-type={pageType}
-                  data-service={service}
-                  data-ville={ville}
-                  data-specialite={specialite}
-                >
-                  <i class="bi-calendar-check me-1"></i>
-                  {primaryCta.label}
-                </a>
-              </div>
-
-              <nav class="primary-menu" aria-label="Navigation principale">
-                <ul class="menu-container border-end-0 me-0">
-                  {nav.map((item) => (
-                    <li class={`menu-item ${item.children?.length ? "menu-item-submenu" : ""}`}>
-                      <a
-                        class="menu-link ls-1 text-uppercase fw-bold"
-                        href={item.href}
-                        data-cta
-                        data-cta-id={`nav_${(item.href || item.label).replace(/\W+/g, "_")}`}
-                        data-cta-label={item.label}
-                        data-position="nav"
-                        data-page-type={pageType}
-                        data-service={service}
-                        data-ville={ville}
-                        data-specialite={specialite}
-                      >
-                        <div>
-                          {item.label}
-                          {item.children?.length ? <i class="bi-chevron-down ms-1"></i> : null}
-                        </div>
-                      </a>
-
-                      {item.children?.length ? (
-                        <ul class="sub-menu-container">
-                          {item.children.map((child) => (
-                            <li class="menu-item">
-                              <a
-                                class="menu-link"
-                                href={child.href}
-                                data-cta
-                                data-cta-id={`nav_${child.href.replace(/\W+/g, "_")}`}
-                                data-cta-label={child.label}
-                                data-position="nav_sub"
-                                data-page-type={pageType}
-                                data-service={service}
-                                data-ville={ville}
-                                data-specialite={specialite}
-                              >
-                                <div>{child.label}</div>
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-
-        <div class="header-wrap-clone"></div>
-      </header>
-
-      {/* Main */}
-      <slot />
-
-      {/* Footer (CRO-first : CTA + réassurance + liens hubs/locaux) */}
-      <footer id="footer" class="dark">
-        <div class="container">
-          <div class="footer-widgets-wrap pb-4">
-            <div class="row justify-content-between">
-              <div class="col-lg-4 mb-5 mb-lg-0">
-                <h3 class="text-white mb-2">{brandName}</h3>
-                <p class="text-white-50 mb-4">
-                  Webmarketing pour entreprises de nettoyage : <strong>SEO local</strong>, <strong>Google Ads</strong>,
-                  <strong> CRO & tracking</strong>. Objectif : plus de demandes qualifiées, pilotées (sans promesses “garanties”).
-                </p>
-
-                <div class="d-flex gap-2 flex-wrap">
-                  <a
-                    href={primaryCta.href}
-                    class="button button-rounded bg-color text-white fw-semibold"
-                    data-cta
-                    data-cta-id={primaryCta.id || "footer_primary"}
-                    data-cta-label={primaryCta.label}
-                    data-position="footer"
-                    data-page-type={pageType}
-                    data-service={service}
-                    data-ville={ville}
-                    data-specialite={specialite}
-                  >
-                    {primaryCta.label} <i class="bi-arrow-right"></i>
-                  </a>
-
-                  <a
-                    href={secondaryCta.href}
-                    class="button button-rounded button-light text-dark fw-semibold"
-                    data-cta
-                    data-cta-id={secondaryCta.id || "footer_secondary"}
-                    data-cta-label={secondaryCta.label}
-                    data-position="footer"
-                    data-page-type={pageType}
-                    data-service={service}
-                    data-ville={ville}
-                    data-specialite={specialite}
-                  >
-                    {secondaryCta.label}
-                  </a>
-                </div>
-
-                <div class="mt-4 text-white-50 small">
-                  <div>✅ Sud Oise / Nord 95 + alentours</div>
-                  <div>✅ Reporting & décisions (CPL, taux de conv., appels)</div>
-                  <div>✅ Tracking propre (GA4, UTMs, leads)</div>
-                </div>
-              </div>
-
-              <div class="col-6 col-lg-3">
-                <h4>Services</h4>
-                <ul class="list-unstyled mb-0 text-small">
-                  <li class="mb-2"><a href="/seo-local" class="text-light">SEO local</a></li>
-                  <li class="mb-2"><a href="/google-ads" class="text-light">Google Ads</a></li>
-                  <li class="mb-2"><a href="/cro" class="text-light">CRO & Tracking</a></li>
-                  <li class="mb-2"><a href="/tarifs" class="text-light">Packs & options</a></li>
-                </ul>
-              </div>
-
-              <div class="col-6 col-lg-3">
-                <h4>Zones</h4>
-                <ul class="list-unstyled mb-0 text-small">
-                  {footerCities.map((c) => (
-                    <li class="mb-2"><a href={c.href} class="text-light">{c.label}</a></li>
-                  ))}
-                </ul>
-              </div>
-
-              <div class="col-12 col-lg-2 mt-5 mt-lg-0">
-                <h4>Ressources</h4>
-                <ul class="list-unstyled mb-0 text-small">
-                  <li class="mb-2"><a href="/methode" class="text-light">Méthode</a></li>
-                  <li class="mb-2"><a href="/preuves" class="text-light">Preuves</a></li>
-                  <li class="mb-2"><a href="/specialites" class="text-light">Spécialités</a></li>
-                  <li><a href="/contact" class="text-light">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="copyrights" class="dark">
-          <div class="container">
-            <div class="row align-items-center justify-content-between">
-              <div class="col-md-6 text-white-50">
-                © {new Date().getFullYear()} {brandName}. Tous droits réservés.
-                <div class="copyright-links">
-                  <a href="/mentions-legales" class="text-white-50">Mentions légales</a>
-                  {" / "}
-                  <a href="/politique-confidentialite" class="text-white-50">Confidentialité</a>
-                </div>
-              </div>
-
-              <div class="col-md-6 d-flex justify-content-md-end mt-4 mt-md-0">
-                <div class="copyrights-menu copyright-links mb-0">
-                  <a href="/" class="text-white-50">Accueil</a>/
-                  <a href="/tarifs" class="text-white-50">Tarifs</a>/
-                  <a href="/contact" class="text-white-50">Contact</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-
-    {/* Go to top */}
-    <button id="gotoTop" class="uil uil-angle-up rounded-circle bg-color h-bg-dark" aria-label="Revenir en haut"></button>
-
-    {/* JavaScripts */}
-    <script is:inline src="/_assets_/js/plugins.min.js"></script>
-    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
-
-    {/* Tracking + UTM persistence (vanilla, sans dépendance) */}
-    <script is:inline>
-      {String.raw`
-        (function () {
-          // --- Helpers ---
-          var safe = function (v) { return (v == null ? "" : String(v)); };
-          var now = function () { return Date.now(); };
-          var STORAGE_KEY = "hc_attrib_v1";
-          var ATTR_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 jours (indicatif)
-
-          function readQueryAttribution() {
-            var p = new URLSearchParams(window.location.search);
-            var keys = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","wbraid","gbraid"];
-            var out = { ts: now(), landing_page: window.location.href, referrer: document.referrer || "" };
-            keys.forEach(function(k){ if (p.get(k)) out[k] = p.get(k); });
-            return out;
-          }
-
-          function loadAttrib() {
-            try {
-              var raw = sessionStorage.getItem(STORAGE_KEY) || localStorage.getItem(STORAGE_KEY);
-              if (!raw) return null;
-              var data = JSON.parse(raw);
-              if (!data.ts || (now() - data.ts) > ATTR_TTL_MS) return null;
-              return data;
-            } catch(e){ return null; }
-          }
-
-          function saveAttrib(data) {
-            try {
-              var raw = JSON.stringify(data);
-              sessionStorage.setItem(STORAGE_KEY, raw);
-              localStorage.setItem(STORAGE_KEY, raw);
-            } catch(e) {}
-          }
-
-          function merge(a, b) {
-            var out = Object.assign({}, a || {});
-            Object.keys(b || {}).forEach(function(k){
-              if (safe(b[k]) !== "") out[k] = b[k];
-            });
-            return out;
-          }
-
-          function currentContext(el) {
-            var ctx = {
-              page_type: el?.dataset?.pageType || document.documentElement.dataset?.pageType || "",
-              service: el?.dataset?.service || document.documentElement.dataset?.service || "",
-              ville: el?.dataset?.ville || document.documentElement.dataset?.ville || "",
-              specialite: el?.dataset?.specialite || document.documentElement.dataset?.specialite || ""
-            };
-            return ctx;
-          }
-
-          // --- Persist UTMs ---
-          var existing = loadAttrib();
-          var fromQuery = readQueryAttribution();
-          var merged = merge(existing, fromQuery);
-          // On ne sauvegarde que si au moins un champ d'attribution est présent (UTM / click id)
-          var hasAttrib = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","wbraid","gbraid"]
-            .some(function(k){ return safe(merged[k]) !== ""; });
-
-          if (hasAttrib) saveAttrib(merged);
-
-          // --- Inject hidden fields in forms ---
-          function ensureHidden(form, name, value) {
-            var input = form.querySelector('input[name="'+name+'"]');
-            if (!input) {
-              input = document.createElement("input");
-              input.type = "hidden";
-              input.name = name;
-              form.appendChild(input);
-            }
-            input.value = safe(value);
-          }
-
-          function hydrateForms() {
-            var attrib = loadAttrib() || {};
-            var forms = document.querySelectorAll("form");
-            forms.forEach(function(form){
-              ensureHidden(form, "landing_page", attrib.landing_page || window.location.href);
-              ensureHidden(form, "referrer", attrib.referrer || document.referrer || "");
-              ensureHidden(form, "page_path", window.location.pathname);
-              ensureHidden(form, "page_title", document.title);
-
-              ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","wbraid","gbraid"].forEach(function(k){
-                if (attrib[k]) ensureHidden(form, k, attrib[k]);
-              });
-            });
-          }
-
-          // --- GA4 event helper ---
-          function track(eventName, params) {
-            params = params || {};
-            // GA4 gtag
-            if (typeof window.gtag === "function") {
-              window.gtag("event", eventName, params);
-            }
-            // dataLayer (si GTM présent)
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push(Object.assign({ event: eventName }, params));
-          }
-
-          // --- Click tracking (tel/mail/cta/itinerary) ---
-          function onDocumentClick(e) {
-            var a = e.target.closest && e.target.closest("a,button");
-            if (!a) return;
-
-            var href = (a.getAttribute && a.getAttribute("href")) ? a.getAttribute("href") : "";
-            var ctx = currentContext(a);
-
-            // CTA (data-cta)
-            if (a.dataset && "cta" in a.dataset) {
-              track("click_cta", Object.assign(ctx, {
-                cta_id: a.dataset.ctaId || "",
-                cta_label: a.dataset.ctaLabel || (a.textContent || "").trim().slice(0, 80),
-                position: a.dataset.position || ""
-              }));
-            }
-
-            // Tel / Email
-            if (href && href.indexOf("tel:") === 0) {
-              track("click_tel", Object.assign(ctx, { href: href }));
-            }
-            if (href && href.indexOf("mailto:") === 0) {
-              track("click_email", Object.assign(ctx, { href: href }));
-            }
-
-            // Itinéraire (convention)
-            if (a.dataset && a.dataset.track === "itinerary") {
-              track("click_itinerary", Object.assign(ctx, { href: href }));
-            }
-          }
-
-          // --- Form tracking (start/submit) ---
-          function wireForms() {
-            var forms = document.querySelectorAll("form[data-track='lead'], form.hc-lead");
-            forms.forEach(function(form){
-              var started = false;
-
-              function startOnce() {
-                if (started) return;
-                started = true;
-                track("form_start", { form_id: form.id || "", form_name: form.getAttribute("name") || "" });
-              }
-
-              form.addEventListener("focusin", startOnce, { passive: true });
-              form.addEventListener("submit", function(){
-                track("form_submit", { form_id: form.id || "", form_name: form.getAttribute("name") || "" });
-                // Si ton backend renvoie une confirmation, tu peux déclencher generate_lead côté page "merci".
-              });
-            });
-          }
-
-          // Go to top
-          function wireGotoTop() {
-            var btn = document.getElementById("gotoTop");
-            if (!btn) return;
-            btn.addEventListener("click", function(){
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            });
-          }
-
-          // Init
-          document.addEventListener("click", onDocumentClick, { passive: true });
-          document.addEventListener("DOMContentLoaded", function(){
-            hydrateForms();
-            wireForms();
-            wireGotoTop();
-          });
-        })();
-      `}
+  {/* JSON-LD */}
+  {schemaArray.map((obj, i) => (
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify(obj)}
     </script>
+  ))}
 
-    {/* Petites améliorations UI (sans casser Cleaner) */}
-    <style>
-      :global(.visually-hidden-focusable) {
-        position: absolute;
-        left: -9999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      }
-      :global(.visually-hidden-focusable:focus) {
-        left: 1rem;
-        top: 1rem;
-        width: auto;
-        height: auto;
-        padding: .5rem .75rem;
-        background: #fff;
-        color: #000;
-        z-index: 9999;
-        border-radius: .5rem;
-        box-shadow: 0 8px 30px rgba(0,0,0,.12);
-      }
-      :global(#gotoTop) {
-        border: 0;
-        cursor: pointer;
-      }
-    </style>
-  </body>
+</head>
+
+<body class="stretched">
+
+	<!-- Document Wrapper -->
+	<div id="wrapper">
+
+		<!-- Top Bar -->
+		<div id="top-bar">
+			<div class="container">
+
+				<div class="row justify-content-between">
+					<div class="col-12 col-md-auto">
+
+						<!-- Top Links -->
+						<div class="top-links">
+							<ul class="top-links-container">
+                {topLinks.map((l) => (
+								  <li class="top-links-item"><a href={l.href}>{l.label}</a></li>
+                ))}
+							</ul>
+						</div><!-- .top-links end -->
+
+					</div>
+
+					<div class="col-12 col-md-auto">
+
+						<!-- Top Social -->
+						<ul id="top-social">
+              {socials.map((s) => (
+							  <li>
+                  <a href={s.href} class={s.bgClass}>
+                    <span class="ts-icon"><i class={s.iconClass}></i></span>
+                    <span class="ts-text">{s.label}</span>
+                  </a>
+                </li>
+              ))}
+
+              {phone ? (
+                <li>
+                  <a href={`tel:${phone}`} class="h-bg-call">
+                    <span class="ts-icon"><i class="fa-solid fa-phone"></i></span>
+                    <span class="ts-text">{phone}</span>
+                  </a>
+                </li>
+              ) : null}
+
+              {email ? (
+                <li>
+                  <a href={`mailto:${email}`} class="h-bg-email3">
+                    <span class="ts-icon"><i class="bi-envelope-fill"></i></span>
+                    <span class="ts-text">{email}</span>
+                  </a>
+                </li>
+              ) : null}
+						</ul><!-- #top-social end -->
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div><!-- #top-bar end -->
+
+		<!-- Header -->
+		<header id="header" class="full-header header-size-md border-0" data-sticky-shrink="false">
+
+			<div id="header-wrap">
+				<div class="container-fluid pe-0">
+					<div class="header-row">
+
+						<!-- Logo -->
+						<div id="logo" class="col col-sm-auto">
+							<a href="/">
+								<img class="logo-default" src="/_assets_/images/logo.png" alt="Horizon Conversion">
+							</a>
+						</div><!-- #logo end -->
+
+						<div class="primary-menu-trigger">
+							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+							</button>
+						</div>
+
+						<div class="header-misc">
+							<a href={headerCta.href} class="button button-light text-dark fw-semibold ls-1 text-uppercase fw-bold">
+                {headerCta.iconClass ? <i class={`${headerCta.iconClass} me-1`}></i> : null}
+                {headerCta.label}
+              </a>
+						</div>
+
+						<!-- Primary Navigation -->
+						<nav class="primary-menu with-arrows">
+                          <ul class="menu-container border-end-0 me-0">
+                            {menu.map((item) => (
+                              <li class={`menu-item ${isActive(item.href) ? "active" : ""}`}>
+                                <a class="menu-link ls-1 text-uppercase fw-bold" href={item.href}>
+                                  <div>{item.label}</div>
+                                </a>
+
+                                {item.children?.length ? (
+                                  <ul class="sub-menu-container">
+                                    {item.children.map((child) => (
+                                      <li class={`menu-item ${isActive(child.href) ? "active" : ""}`}>
+                                        <a class="menu-link" href={child.href}>
+                                          <div>{child.label}</div>
+                                        </a>
+
+                                        {child.children?.length ? (
+                                          <ul class="sub-menu-container">
+                                            {child.children.map((grand) => (
+                                              <li class={`menu-item ${isActive(grand.href) ? "active" : ""}`}>
+                                                <a class="menu-link" href={grand.href}>
+                                                  <div>{grand.label}</div>
+                                                </a>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        ) : null}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                ) : null}
+                              </li>
+                            ))}
+                          </ul>
+                        </nav><!-- #primary-menu end -->
+
+					</div>
+				</div>
+			</div>
+
+			<div class="header-wrap-clone"></div>
+
+		</header><!-- #header end -->
+
+		<slot />
+
+		<!-- Footer -->
+		<footer id="footer" class="border-0 dark bg-color">
+
+			<div class="container">
+
+				<!-- Footer Widgets -->
+				<div class="footer-widgets-wrap">
+
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<img class="mb-5" src="/_assets_/images/logo.png" alt="Horizon Conversion" width="123">
+							<p class="text-white-50">
+                Horizon Conversion accompagne les entreprises de nettoyage (Sud Oise 60 & Nord 95) sur le SEO local,
+                les campagnes Google/Meta et l’optimisation de la conversion (appels & devis).
+              </p>
+							<div class="d-flex">
+                {socials.slice(0, 4).map((s) => (
+                  <a href={s.href} class={`social-icon bg-white bg-opacity-25 border-transparent rounded-circle si-small ${s.bgClass}`}>
+                    <i class={s.iconClass}></i>
+                    <i class={s.iconClass}></i>
+                  </a>
+                ))}
+							</div>
+						</div>
+
+						<div class="col-6 col-lg-3 mt-5 mt-lg-0">
+							<h4>Services</h4>
+							<ul class="list-unstyled mb-0 text-small">
+								<li class="mb-2"><a href="/seo-local" class="text-light">SEO local (Google & Maps)</a></li>
+								<li class="mb-2"><a href="/google-ads" class="text-light">Google Ads & Meta Ads</a></li>
+								<li class="mb-2"><a href="/cro-tracking" class="text-light">CRO & tracking</a></li>
+								<li><a href="/tarifs" class="text-light">Tarifs</a></li>
+							</ul>
+						</div>
+
+						<div class="col-6 col-lg-3 mt-5 mt-lg-0">
+							<h4>Ressources</h4>
+							<ul class="list-unstyled mb-0 text-small">
+								<li class="mb-2"><a href="/ressources" class="text-light">Guides & articles</a></li>
+								<li class="mb-2"><a href="/methode" class="text-light">Méthode</a></li>
+								<li class="mb-2"><a href="/preuves" class="text-light">Preuves</a></li>
+								<li><a href="/zones" class="text-light">Zones (60/95)</a></li>
+							</ul>
+						</div>
+
+						<div class="col-6 col-lg-2 mt-5 mt-lg-0">
+							<h4>À propos</h4>
+							<ul class="list-unstyled mb-0 text-small">
+								<li class="mb-2"><a href="/contact" class="text-light">Contact</a></li>
+								<li class="mb-2"><a href="/mentions-legales" class="text-light">Mentions légales</a></li>
+								<li class="mb-2"><a href="/politique-confidentialite" class="text-light">Politique de confidentialité</a></li>
+								<li><a class="text-light" href="/tarifs">Tarifs</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div><!-- .footer-widgets-wrap end -->
+
+			</div>
+
+			<!-- Copyrights -->
+			<div id="copyrights" class="dark">
+
+				<div class="container">
+
+					<div class="row align-items-center justify-content-between">
+						<div class="col-md-6 text-white-50">
+							Copyrights &copy; {new Date().getFullYear()} Horizon Conversion. Tous droits réservés.<br>
+							<div class="copyright-links">
+                <a href="/mentions-legales" class="text-white-50">Mentions légales</a> /
+                <a href="/politique-confidentialite" class="text-white-50">Politique de confidentialité</a>
+              </div>
+						</div>
+
+						<div class="col-md-6 d-flex justify-content-md-end mt-4 mt-md-0">
+							<div class="copyrights-menu copyright-links mb-0">
+								<a href="/" class="text-white-50">Accueil</a>/
+                <a href="/methode" class="text-white-50">Méthode</a>/
+                <a href="/tarifs" class="text-white-50">Tarifs</a>/
+                <a href="/contact" class="text-white-50">Contact</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top -->
+	<div id="gotoTop" class="uil uil-angle-up rounded-circle bg-color h-bg-dark"></div>
+
+	<!-- JavaScripts -->
+	<script is:inline src="/_assets_/js/plugins.min.js"></script>
+	<script is:inline src="/_assets_/js/functions.bundle.js"></script>
+
+</body>
 </html>

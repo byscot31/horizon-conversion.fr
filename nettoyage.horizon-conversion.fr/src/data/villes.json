@@ -1,8 +1,211 @@
 [
-  { "slug": "senlis", "name": "Senlis", "dept": "60", "regionHint": "Sud Oise" },
-  { "slug": "chantilly", "name": "Chantilly", "dept": "60", "regionHint": "Sud Oise" },
-  { "slug": "creil", "name": "Creil", "dept": "60", "regionHint": "Sud Oise" },
-  { "slug": "nogent-sur-oise", "name": "Nogent-sur-Oise", "dept": "60", "regionHint": "Sud Oise" },
-  { "slug": "clermont-oise", "name": "Clermont", "dept": "60", "regionHint": "Oise" },
-  { "slug": "luzarches", "name": "Luzarches", "dept": "95", "regionHint": "Nord 95" }
+  {
+    "slug": "chantilly",
+    "name": "Chantilly",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["gouvieux", "lamorlaye", "senlis", "creil"]
+  },
+  {
+    "slug": "senlis",
+    "name": "Senlis",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["chantilly", "lamorlaye", "pont-sainte-maxence", "creil"]
+  },
+  {
+    "slug": "creil",
+    "name": "Creil",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["nogent-sur-oise", "montataire", "chantilly", "pont-sainte-maxence"]
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "name": "Nogent-sur-Oise",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["creil", "montataire", "pont-sainte-maxence", "clermont"]
+  },
+  {
+    "slug": "montataire",
+    "name": "Montataire",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["creil", "nogent-sur-oise", "clermont", "pont-sainte-maxence"]
+  },
+  {
+    "slug": "pont-sainte-maxence",
+    "name": "Pont-Sainte-Maxence",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["creil", "senlis", "nogent-sur-oise", "clermont"]
+  },
+  {
+    "slug": "clermont",
+    "name": "Clermont",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["liancourt", "montataire", "nogent-sur-oise", "pont-sainte-maxence"]
+  },
+  {
+    "slug": "liancourt",
+    "name": "Liancourt",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["clermont", "creil", "montataire", "nogent-sur-oise"]
+  },
+  {
+    "slug": "lamorlaye",
+    "name": "Lamorlaye",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["chantilly", "gouvieux", "senlis", "creil"]
+  },
+  {
+    "slug": "gouvieux",
+    "name": "Gouvieux",
+    "department": "60",
+    "departmentName": "Oise",
+    "zone": { "slug": "sud-oise", "name": "Sud Oise (60)" },
+    "nearby": ["chantilly", "lamorlaye", "creil", "senlis"]
+  },
+
+  {
+    "slug": "sarcelles",
+    "name": "Sarcelles",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["garges-les-gonesse", "villiers-le-bel", "gonesse", "domont"]
+  },
+  {
+    "slug": "garges-les-gonesse",
+    "name": "Garges-lès-Gonesse",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["sarcelles", "gonesse", "villiers-le-bel", "arnouville"]
+  },
+  {
+    "slug": "villiers-le-bel",
+    "name": "Villiers-le-Bel",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["sarcelles", "garges-les-gonesse", "gonesse", "domont"]
+  },
+  {
+    "slug": "gonesse",
+    "name": "Gonesse",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["roissy-en-france", "louvres", "sarcelles", "garges-les-gonesse"]
+  },
+  {
+    "slug": "arnouville",
+    "name": "Arnouville",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["garges-les-gonesse", "villiers-le-bel", "gonesse", "sarcelles"]
+  },
+  {
+    "slug": "louvres",
+    "name": "Louvres",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["roissy-en-france", "gonesse", "fosses", "survilliers"]
+  },
+  {
+    "slug": "roissy-en-france",
+    "name": "Roissy-en-France",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["gonesse", "louvres", "garges-les-gonesse", "villiers-le-bel"]
+  },
+  {
+    "slug": "fosses",
+    "name": "Fosses",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["louvres", "survilliers", "gonesse", "roissy-en-france"]
+  },
+  {
+    "slug": "survilliers",
+    "name": "Survilliers",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["fosses", "louvres", "roissy-en-france", "gonesse"]
+  },
+  {
+    "slug": "domont",
+    "name": "Domont",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["montmorency", "sarcelles", "villiers-le-bel", "arnouville"]
+  },
+  {
+    "slug": "montmorency",
+    "name": "Montmorency",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["domont", "sarcelles", "soisy-sous-montmorency", "deuil-la-barre"]
+  },
+  {
+    "slug": "soisy-sous-montmorency",
+    "name": "Soisy-sous-Montmorency",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["montmorency", "domont", "deuil-la-barre", "sarcelles"]
+  },
+  {
+    "slug": "deuil-la-barre",
+    "name": "Deuil-la-Barre",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["montmorency", "soisy-sous-montmorency", "sarcelles", "domont"]
+  },
+  {
+    "slug": "beaumont-sur-oise",
+    "name": "Beaumont-sur-Oise",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["persan", "l-isle-adam", "domont", "montmorency"]
+  },
+  {
+    "slug": "persan",
+    "name": "Persan",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["beaumont-sur-oise", "l-isle-adam", "domont", "montmorency"]
+  },
+  {
+    "slug": "l-isle-adam",
+    "name": "L'Isle-Adam",
+    "department": "95",
+    "departmentName": "Val-d'Oise",
+    "zone": { "slug": "nord-95", "name": "Nord Val-d'Oise (95)" },
+    "nearby": ["beaumont-sur-oise", "persan", "domont", "montmorency"]
+  }
 ]

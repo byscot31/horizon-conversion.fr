@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildSeo } from "../lib/seo";
+import { buildBreadcrumbs } from "../lib/seo";
+
+const seo = buildSeo({
+  pageType: "service_city",
+  serviceSlug: Astro.params.service,
+  villeSlug: Astro.params.ville,
+  origin: Astro.url.origin,
+  pathname: Astro.url.pathname
+});
+
+const bc = buildBreadcrumbs({
+  pageType: "service_city",
+  serviceSlug: Astro.params.service,
+  villeSlug: Astro.params.ville,
+  origin: Astro.url.origin
+});
+
+// Option : injecter schema breadcrumb + schema SEO (base + FAQ)
+const schema = Array.isArray(seo.schema) ? [...seo.schema, bc.schema] : [seo.schema, bc.schema];
+---
+
+<BaseLayout title={seo.title} description={seo.description} canonical={seo.canonical} ogImage={seo.ogImage} schema={schema}>
+  <nav aria-label="Fil d’Ariane" class="breadcrumb">
+    <ol>
+      {bc.items.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ol>
+  </nav>
+
+  <main>...</main>
+</BaseLayout>

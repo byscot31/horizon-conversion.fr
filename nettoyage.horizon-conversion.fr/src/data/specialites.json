@@ -1,10 +1,174 @@
 [
-  { "slug": "nettoyage-bureaux", "name": "Nettoyage de bureaux", "intent": "B2B récurrent" },
-  { "slug": "nettoyage-fin-de-chantier", "name": "Nettoyage fin de chantier", "intent": "urgent / forte valeur" },
-  { "slug": "nettoyage-coproprietes", "name": "Copropriétés & parties communes", "intent": "syndics" },
-  { "slug": "nettoyage-vitrerie", "name": "Nettoyage vitres & vitrines", "intent": "commerces" },
-  { "slug": "nettoyage-locaux-commerciaux", "name": "Locaux commerciaux", "intent": "TPE/PME" },
-  { "slug": "nettoyage-medical", "name": "Cabinets & locaux médicaux", "intent": "hygiène / confiance" },
-  { "slug": "nettoyage-industrie", "name": "Entrepôts & industrie légère", "intent": "B2B" },
-  { "slug": "remise-en-etat", "name": "Remise en état / états des lieux", "intent": "ponctuel" }
+  {
+    "slug": "nettoyage-bureaux",
+    "name": "Nettoyage de bureaux",
+    "short": "Clients récurrents, cycles mensuels, besoin de confiance : message + preuves + conversion.",
+    "painPoints": [
+      "Devis peu qualifiés (mauvais ciblage / mauvais message).",
+      "Difficulté à se différencier (tout le monde “fait du bureau”).",
+      "Manque de preuves (process, contrôle qualité, avis).",
+      "Besoin de récurrence (pas juste des demandes ponctuelles)."
+    ],
+    "positioningAngles": [
+      "Récurrence et fiabilité (process, contrôle qualité).",
+      "Clarté : zone d’intervention, créneaux, engagement qualité.",
+      "Preuves : avis, méthodes, checklists, transparence."
+    ],
+    "recommendedServices": ["seo-local", "cro-tracking", "google-ads"],
+    "messageHooks": [
+      "Demandez un devis clair en 24/48h (selon votre process).",
+      "Une méthode de contrôle qualité visible, pas du bla-bla.",
+      "Des prestations régulières : rassurer avant de vendre."
+    ],
+    "faq": [
+      {
+        "q": "Pour des bureaux, vaut-il mieux SEO local ou Ads ?",
+        "a": "Souvent un mix : SEO local pour la demande récurrente + Ads pour accélérer selon la concurrence. On priorise après audit."
+      },
+      {
+        "q": "Comment éviter les demandes non qualifiées ?",
+        "a": "On travaille le message (preuves, périmètre, minimum d’intervention), la page (friction) et les ciblages (si Ads)."
+      }
+    ]
+  },
+  {
+    "slug": "nettoyage-coproprietes",
+    "name": "Nettoyage de copropriétés",
+    "short": "Décision collective / syndic : besoin de preuve, de clarté d’offre et de réassurance.",
+    "painPoints": [
+      "Difficile d’atteindre les décideurs (syndics).",
+      "Offres perçues comme interchangeables.",
+      "Manque de preuves (organisation, passage, qualité).",
+      "Demandes irrégulières et longues à signer."
+    ],
+    "positioningAngles": [
+      "Organisation et suivi (passages, planification, contrôles).",
+      "Preuves et transparence (avis, process, points de contrôle).",
+      "Clarté des zones et des prestations incluses."
+    ],
+    "recommendedServices": ["seo-local", "cro-tracking"],
+    "messageHooks": [
+      "Une méthode visible : planning, passage, contrôle.",
+      "Une offre claire (ce qui est inclus / non inclus).",
+      "Des preuves qui rassurent un syndic."
+    ],
+    "faq": [
+      {
+        "q": "Quel contenu convertit le mieux pour les syndics ?",
+        "a": "Process, preuves, clarté des prestations, et un parcours devis simple. Les pages locales aident aussi à la confiance."
+      }
+    ]
+  },
+  {
+    "slug": "nettoyage-fin-chantier",
+    "name": "Nettoyage fin de chantier",
+    "short": "Intention forte, demandes rapides : Ads + landing + preuves + mesure.",
+    "painPoints": [
+      "Urgence : les prospects veulent une réponse rapide.",
+      "Concurrence sur les requêtes locales (prix, disponibilité).",
+      "Demandes peu qualifiées si ciblage flou.",
+      "Difficile de prouver le sérieux sans exemples."
+    ],
+    "positioningAngles": [
+      "Disponibilité, rapidité de réponse, process d’intervention.",
+      "Preuves : photos, checklists, avis (sans exagération).",
+      "Landing page ultra claire (zone, délais, formulaire court)."
+    ],
+    "recommendedServices": ["google-ads", "cro-tracking", "seo-local"],
+    "messageHooks": [
+      "Devis rapide + infos claires (zone, délais).",
+      "Process fin de chantier (checklist) affiché.",
+      "Formulaire simple : obtenir les infos utiles sans friction."
+    ],
+    "faq": [
+      {
+        "q": "Pourquoi Ads est souvent prioritaire ici ?",
+        "a": "Parce que la demande est très intentionnelle et urgente. Avec tracking + landing adaptée, on peut optimiser rapidement."
+      }
+    ]
+  },
+  {
+    "slug": "nettoyage-vitres",
+    "name": "Nettoyage de vitres",
+    "short": "Local + récurrence : SEO local, pages ville, preuves, prise de contact rapide.",
+    "painPoints": [
+      "Marché local très concurrentiel.",
+      "Devis qui n’aboutissent pas (manque de confiance / infos).",
+      "Difficulté à vendre la récurrence (abonnements).",
+      "Offres floues (particuliers vs pros)."
+    ],
+    "positioningAngles": [
+      "Clarté des offres (pros/particuliers, récurrence).",
+      "Preuves (avis, process, garanties de méthode).",
+      "Pages locales orientées conversion."
+    ],
+    "recommendedServices": ["seo-local", "cro-tracking"],
+    "messageHooks": [
+      "Réponse rapide + devis clair.",
+      "Options récurrentes (mensuel/trimestriel).",
+      "Zone et types de vitres clairement définis."
+    ],
+    "faq": [
+      {
+        "q": "Comment éviter les demandes “prix le plus bas” ?",
+        "a": "En cadrant l’offre (périmètre, fréquence, qualité) et en ajoutant des preuves. En Ads, on filtre via mots-clés et messages."
+      }
+    ]
+  },
+  {
+    "slug": "nettoyage-industriel",
+    "name": "Nettoyage industriel",
+    "short": "Décisions plus techniques : contenu de confiance + preuves + ciblage précis.",
+    "painPoints": [
+      "Cycles de décision plus longs.",
+      "Besoin de crédibilité (procédures, sécurité, conformité).",
+      "Difficulté à cibler les bons interlocuteurs.",
+      "Peu de preuves visibles (cas, méthode)."
+    ],
+    "positioningAngles": [
+      "Méthode, sécurité, process, traçabilité.",
+      "Pages dédiées par service + zone.",
+      "Ciblage Ads précis si besoin."
+    ],
+    "recommendedServices": ["seo-local", "cro-tracking", "google-ads"],
+    "messageHooks": [
+      "Procédures claires et rassurantes.",
+      "Demande de devis structurée (infos nécessaires).",
+      "Preuves orientées process (sans sur-promettre)."
+    ],
+    "faq": [
+      {
+        "q": "Faut-il du contenu technique ?",
+        "a": "Oui, à dose utile : assez pour rassurer et qualifier, sans noyer. Le but est d’obtenir une demande sérieuse."
+      }
+    ]
+  },
+  {
+    "slug": "nettoyage-apres-sinistre",
+    "name": "Nettoyage après sinistre",
+    "short": "Urgence + confiance : Ads + conversion + preuve + réponse rapide.",
+    "painPoints": [
+      "Prospects en situation urgente/stress.",
+      "Besoin de confiance immédiate (preuves + process).",
+      "Risque de leads non qualifiés si le message est trop large.",
+      "Absence de tracking : impossible d’optimiser."
+    ],
+    "positioningAngles": [
+      "Réassurance + clarté (délais, zone, type d’intervention).",
+      "Landing orientée urgence (appel / contact rapide).",
+      "Tracking et pilotage."
+    ],
+    "recommendedServices": ["google-ads", "cro-tracking"],
+    "messageHooks": [
+      "Contact rapide (appel + formulaire court).",
+      "Process d’intervention expliqué simplement.",
+      "Preuves visibles dès le hero."
+    ],
+    "faq": [
+      {
+        "q": "Quels canaux prioriser pour l’urgence ?",
+        "a": "Souvent Ads (Google) + landing dédiée + tracking. Le SEO local est utile en complément à moyen terme."
+      }
+    ]
+  }
 ]

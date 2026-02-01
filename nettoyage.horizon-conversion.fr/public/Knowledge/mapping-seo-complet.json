@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "table": "mapping_seo_complet",
+  "site": {
+    "domain": "nettoyage.horizon-conversion.fr",
+    "positioning_note": "Horizon Conversion vend du webmarketing (SEO local, Ads, CRO/Tracking) aux entreprises de nettoyage. Horizon Conversion ne fait pas de nettoyage.",
+    "zones": ["sud-oise-60", "nord-val-doise-95"]
+  },
+  "enums": {
+    "intent": [
+      "navigation",
+      "transactionnel",
+      "commercial",
+      "informationnel",
+      "trust",
+      "transactionnel_local",
+      "navigation_local",
+      "transactionnel_local_support"
+    ],
+    "schema_org": [
+      "ProfessionalService",
+      "Organization",
+      "FAQPage",
+      "ContactPage",
+      "WebPage",
+      "CollectionPage",
+      "Blog",
+      "Article",
+      "Product"
+    ]
+  },
+  "global": {
+    "cta_primary": ["Demander un audit gratuit", "Recevoir un plan d’action"],
+    "cta_secondary": ["Voir les tarifs", "Voir la méthode"],
+    "internal_links_min_per_page": 3
+  },
+  "rows": [
+    {
+      "page_type": "home",
+      "url_pattern": "/",
+      "objective": "Se positionner sur l’offre globale + orienter vers parcours (SEO/Ads/CRO) + zones 60/95",
+      "primary_keyword_pattern": "webmarketing entreprise de nettoyage",
+      "intent": "transactionnel",
+      "secondary_keywords": [
+        "seo local nettoyage",
+        "google ads nettoyage",
+        "agence marketing nettoyage oise",
+        "agence marketing nettoyage val-d-oise"
+      ],
+      "meta_title_pattern": "Webmarketing pour entreprises de nettoyage | SEO local & Ads (60/95)",
+      "meta_description_pattern": "Attirez plus de demandes qualifiées en Sud Oise (60) et Nord 95 : SEO local, Ads et optimisation conversion. Audit gratuit.",
+      "schema_org": ["ProfessionalService", "Organization", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/methode", "/tarifs", "/preuves", "/zones"]
+    },
+    {
+      "page_type": "contact",
+      "url_pattern": "/contact",
+      "objective": "Conversion directe (audit/plan d’action)",
+      "primary_keyword_pattern": "audit webmarketing nettoyage",
+      "intent": "transactionnel",
+      "secondary_keywords": ["audit seo local", "audit google ads", "plan d’action marketing"],
+      "meta_title_pattern": "Contact | Audit gratuit webmarketing (entreprises de nettoyage)",
+      "meta_description_pattern": "Décrivez votre zone et vos objectifs : recevez un plan d’action priorisé (SEO/Ads/CRO).",
+      "schema_org": ["ContactPage", "ProfessionalService"],
+      "cta_primary": "Envoyer la demande",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/methode", "/tarifs", "/preuves"]
+    },
+    {
+      "page_type": "pricing",
+      "url_pattern": "/tarifs",
+      "objective": "Qualifier + réduire friction (comparaison)",
+      "primary_keyword_pattern": "tarifs seo local nettoyage",
+      "intent": "commercial",
+      "secondary_keywords": ["prix gestion google ads", "pack seo local", "budget ads nettoyage"],
+      "meta_title_pattern": "Tarifs | SEO local, Google Ads & CRO (nettoyage)",
+      "meta_description_pattern": "Offres claires : inclus, options, pilotage, mesure. Demandez un audit gratuit.",
+      "schema_org": ["FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/methode", "/preuves", "/contact"]
+    },
+    {
+      "page_type": "method",
+      "url_pattern": "/methode",
+      "objective": "Réassurance + explication process (pilotage)",
+      "primary_keyword_pattern": "methode seo local pilotage ads",
+      "intent": "trust",
+      "secondary_keywords": ["suivi conversions", "tracking appels", "reporting marketing"],
+      "meta_title_pattern": "Notre méthode | SEO local, Ads & conversion pour le nettoyage",
+      "meta_description_pattern": "Audit, plan d’action, mise en place, pilotage mensuel. Objectif : plus de demandes qualifiées.",
+      "schema_org": ["FAQPage"],
+      "cta_primary": "Recevoir un plan d’action",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/tarifs", "/preuves", "/contact"]
+    },
+    {
+      "page_type": "proofs",
+      "url_pattern": "/preuves",
+      "objective": "Réassurance (preuves de travail + mesure)",
+      "primary_keyword_pattern": "etude de cas seo local nettoyage",
+      "intent": "trust",
+      "secondary_keywords": ["exemples campagnes ads", "suivi leads", "avant apres seo local"],
+      "meta_title_pattern": "Preuves & exemples | SEO local et Ads (nettoyage)",
+      "meta_description_pattern": "Exemples concrets : actions, livrables, ce qui est mesuré. Transparence sur la méthode.",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/methode", "/tarifs", "/contact"]
+    },
+    {
+      "page_type": "legal",
+      "url_pattern": "/mentions-legales",
+      "objective": "Conformité",
+      "primary_keyword_pattern": null,
+      "intent": "trust",
+      "secondary_keywords": [],
+      "meta_title_pattern": "Mentions légales",
+      "meta_description_pattern": "Informations légales du site.",
+      "schema_org": ["WebPage"],
+      "cta_primary": null,
+      "cta_secondary": null,
+      "internal_links_min": ["/politique-confidentialite", "/contact", "/"]
+    },
+    {
+      "page_type": "privacy",
+      "url_pattern": "/politique-confidentialite",
+      "objective": "Conformité + transparence tracking",
+      "primary_keyword_pattern": null,
+      "intent": "trust",
+      "secondary_keywords": ["rgpd", "cookies", "tracking conversions"],
+      "meta_title_pattern": "Politique de confidentialité",
+      "meta_description_pattern": "Données, cookies, mesure des conversions : transparence et conformité.",
+      "schema_org": ["WebPage"],
+      "cta_primary": null,
+      "cta_secondary": null,
+      "internal_links_min": ["/contact", "/methode", "/"]
+    },
+    {
+      "page_type": "service_hub",
+      "url_pattern": "/{service}/",
+      "objective": "Hub service (requête service non localisée) + renvoi vers pages ville",
+      "primary_keyword_pattern": "{service} entreprise de nettoyage",
+      "intent": "commercial",
+      "secondary_keywords": [
+        "seo local entreprise de nettoyage",
+        "gestion google ads nettoyage",
+        "optimisation conversion site nettoyage"
+      ],
+      "meta_title_pattern": "{Service} pour entreprises de nettoyage | Horizon Conversion",
+      "meta_description_pattern": "{benefice_principal}. Livrables, mesure, méthode. Zones : Sud Oise (60) + Nord 95. Audit gratuit.",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/{service}/{ville}", "/methode", "/preuves"]
+    },
+    {
+      "page_type": "service_city",
+      "url_pattern": "/{service}/{ville}",
+      "objective": "Page money : intention locale forte (achat)",
+      "primary_keyword_pattern": "{service} entreprise de nettoyage {ville}",
+      "intent": "transactionnel_local",
+      "secondary_keywords": [
+        "agence seo local {ville} nettoyage",
+        "google ads nettoyage {ville}",
+        "leads nettoyage {ville}"
+      ],
+      "meta_title_pattern": "{Service} pour entreprises de nettoyage à {Ville} | Audit gratuit",
+      "meta_description_pattern": "Développez vos demandes à {Ville} et autour ({alentos}) : {Service}, pilotage & mesure. Plan d’action gratuit.",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/{service}/", "/specialites/{specialite}/{ville}", "/zones/{zone}/{ville}"]
+    },
+    {
+      "page_type": "specialties_index",
+      "url_pattern": "/specialites/",
+      "objective": "Hub cas d’usage métier",
+      "primary_keyword_pattern": "marketing nettoyage par specialite",
+      "intent": "commercial",
+      "secondary_keywords": [
+        "acquisition nettoyage bureaux",
+        "fin de chantier leads",
+        "nettoyage vitres clients"
+      ],
+      "meta_title_pattern": "Spécialités | Webmarketing pour métiers du nettoyage",
+      "meta_description_pattern": "Pages par spécialité : enjeux, messages, canaux, pages locales 60/95.",
+      "schema_org": ["CollectionPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/specialites/{specialite}/", "/methode", "/preuves"]
+    },
+    {
+      "page_type": "specialty_hub",
+      "url_pattern": "/specialites/{specialite}/",
+      "objective": "Se positionner sur requêtes spécialité (non localisées) + renvoi vers pages ville",
+      "primary_keyword_pattern": "{specialite} attirer des clients",
+      "intent": "commercial",
+      "secondary_keywords": ["seo local {specialite}", "ads {specialite}", "devis {specialite}"],
+      "meta_title_pattern": "{Spécialité} : attirer plus de clients | SEO local & Ads",
+      "meta_description_pattern": "Pour {Spécialité} : mots-clés, messages et pages qui convertissent. Zones 60/95.",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Recevoir un plan d’action",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/specialites/", "/specialites/{specialite}/{ville}", "/preuves"]
+    },
+    {
+      "page_type": "specialty_city",
+      "url_pattern": "/specialites/{specialite}/{ville}",
+      "objective": "Intention locale + métier (très qualifiante)",
+      "primary_keyword_pattern": "{specialite} {ville} seo local ads",
+      "intent": "transactionnel_local",
+      "secondary_keywords": ["entreprise nettoyage {specialite} {ville}", "devis {specialite} {ville}"],
+      "meta_title_pattern": "{Spécialité} à {Ville} : SEO local & Ads | Audit gratuit",
+      "meta_description_pattern": "Développez {Spécialité} à {Ville} et alentours : stratégie mesurée (appels, devis, formulaires).",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/specialites/{specialite}/", "/{service}/{ville}", "/zones/{zone}/{ville}"]
+    },
+    {
+      "page_type": "zones_index",
+      "url_pattern": "/zones/",
+      "objective": "Hub géo (anti-spam) pour 60/95",
+      "primary_keyword_pattern": "webmarketing nettoyage 60 95",
+      "intent": "navigation_local",
+      "secondary_keywords": ["agence seo oise", "agence ads val-d-oise", "marketing local nettoyage"],
+      "meta_title_pattern": "Zones d’intervention | Sud Oise (60) & Nord 95",
+      "meta_description_pattern": "Zones + villes : pages locales propres pour SEO/Ads/CRO.",
+      "schema_org": ["CollectionPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/zones/{zone}/", "/preuves", "/methode"]
+    },
+    {
+      "page_type": "zone_hub",
+      "url_pattern": "/zones/{zone}/",
+      "objective": "Renforcer pertinence géo + distribuer vers villes et services",
+      "primary_keyword_pattern": "webmarketing nettoyage {zone}",
+      "intent": "navigation_local",
+      "secondary_keywords": ["seo local {zone}", "google ads {zone}"],
+      "meta_title_pattern": "Webmarketing pour entreprises de nettoyage | Zone {Zone}",
+      "meta_description_pattern": "Contexte, priorités, villes couvertes, ressources : SEO/Ads/CRO.",
+      "schema_org": ["WebPage", "FAQPage"],
+      "cta_primary": "Recevoir un plan d’action",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/zones/", "/zones/{zone}/{ville}", "/{service}/"]
+    },
+    {
+      "page_type": "zone_city",
+      "url_pattern": "/zones/{zone}/{ville}",
+      "objective": "Page support maillage géo (renvoyer vers pages fortes)",
+      "primary_keyword_pattern": "marketing entreprise nettoyage {ville}",
+      "intent": "transactionnel_local_support",
+      "secondary_keywords": ["seo local {ville}", "google ads {ville}"],
+      "meta_title_pattern": "À {Ville} (Zone {Zone}) : SEO/Ads & conversion | Audit gratuit",
+      "meta_description_pattern": "À {Ville}, attirez plus de demandes : SEO local, Ads et pages qui transforment.",
+      "schema_org": ["ProfessionalService", "FAQPage"],
+      "cta_primary": "Demander un audit gratuit",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/{service}/{ville}", "/specialites/{specialite}/{ville}", "/tarifs"]
+    },
+    {
+      "page_type": "resources_index",
+      "url_pattern": "/ressources/",
+      "objective": "Hub contenu (nurturing) + capture longue traîne",
+      "primary_keyword_pattern": "guide seo local nettoyage",
+      "intent": "informationnel",
+      "secondary_keywords": [
+        "conseils google business profile nettoyage",
+        "landing page devis nettoyage",
+        "tracking appels"
+      ],
+      "meta_title_pattern": "Ressources | SEO local, Ads & conversion (nettoyage)",
+      "meta_description_pattern": "Guides concrets : SEO local, Ads, conversion, tracking.",
+      "schema_org": ["Blog", "CollectionPage"],
+      "cta_primary": "Recevoir un plan d’action",
+      "cta_secondary": "Voir la méthode",
+      "internal_links_min": ["/methode", "/tarifs", "/contact"]
+    },
+    {
+      "page_type": "resource_article",
+      "url_pattern": "/ressources/{article}",
+      "objective": "Capturer longue traîne + faire remonter vers pages money",
+      "primary_keyword_pattern": "{mot_cle_article}",
+      "intent": "informationnel",
+      "secondary_keywords": [
+        "google business profile nettoyage",
+        "pages locales seo",
+        "cout lead google ads nettoyage"
+      ],
+      "meta_title_pattern": "{Titre} | Guide pour entreprises de nettoyage",
+      "meta_description_pattern": "{resume_benefice} + étapes + checklist. Plan d’action possible.",
+      "schema_org": ["Article", "FAQPage"],
+      "cta_primary": "Recevoir un plan d’action",
+      "cta_secondary": "Voir les tarifs",
+      "internal_links_min": ["/{service}/", "/preuves", "/{service}/{ville}"]
+    }
+  ]
+}

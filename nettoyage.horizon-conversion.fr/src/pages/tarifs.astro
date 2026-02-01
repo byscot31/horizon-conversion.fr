@@ -1,800 +1,317 @@
 ---
 // src/pages/tarifs.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageTitle from "../components/PageTitle.astro";
+import InternalLinksBlock from "../components/InternalLinksBlock.astro";
 
-const brandName = "Horizon Conversion";
-const regionLabel = "Sud Oise (60) & Nord Val-d’Oise (95)";
+import { buildSeo, buildBreadcrumbs } from "../lib/seo";
+import { buildInternalLinks } from "../lib/linking";
 
-const meta = {
-  title: "Tarifs — Packs SEO local, Google Ads & CRO pour entreprises de nettoyage (Sud Oise / Nord 95)",
-  description:
-    "Packs Starter / Growth / Premium + options (tracking, landing, GBP). Choisissez selon votre zone (Senlis, Chantilly, Creil, Nogent-sur-Oise, Clermont, Luzarches + alentours), urgence et objectif (leads qualifiés).",
-  ogImage: "/og-tarifs.jpg",
-};
+import services from "../data/services.json";
 
-const villes = [
-  { name: "Senlis", slug: "senlis" },
-  { name: "Chantilly", slug: "chantilly" },
-  { name: "Creil", slug: "creil" },
-  { name: "Nogent-sur-Oise", slug: "nogent-sur-oise" },
-  { name: "Clermont", slug: "clermont" },
-  { name: "Luzarches", slug: "luzarches" },
-];
+const seo = buildSeo({
+  pageType: "pricing",
+  origin: Astro.url.origin,
+  pathname: Astro.url.pathname
+});
 
+const bc = buildBreadcrumbs({
+  pageType: "pricing",
+  origin: Astro.url.origin
+});
+
+const internalLinks = buildInternalLinks({
+  pageType: "pricing"
+});
+
+const schema = Array.isArray(seo.schema) ? [...seo.schema, bc.schema] : [seo.schema, bc.schema];
+
+// Packs (structure JSON-like, pilotable facilement)
 const packs = [
   {
-    id: "starter",
-    name: "Starter",
-    tagline: "Bases propres + quick wins mesurables",
-    who: ["1 zone prioritaire", "besoin d’y voir clair (tracking)", "site/GBP à remettre en ordre"],
-    outcomes: ["tracking des leads", "messages clarifiés", "1er socle SEO local", "plan d’action priorisé"],
-    deliverables: [
-      "Instrumentation GA4 (events leads) + UTMs (attribution)",
-      "Mini-audit Google Business Profile + corrections prioritaires",
-      "1 page hub service OU 1 page locale (selon votre priorité)",
-      "Reporting simple (leads, taux de conv., sources)",
+    slug: "audit",
+    badge: "Recommandé pour démarrer",
+    title: "Audit + plan d’action",
+    price: "À partir de 390€",
+    cadence: "one-shot",
+    desc: "Une analyse claire + une liste d’actions priorisées (SEO/Ads/CRO) pour générer plus de demandes.",
+    included: [
+      "Audit visibilité locale (site + fiche Google + concurrence)",
+      "Audit conversion (messages, preuves, CTA, friction)",
+      "Plan d’action priorisé (quick wins + chantier 30/60/90 jours)",
+      "Recommandations tracking simple (appels, formulaires, clics contact)",
+      "Call de restitution + questions/réponses"
     ],
-    note: "Idéal si vous recevez des demandes, mais sans comprendre d’où elles viennent — ou si rien ne “décolle”.",
-    cta: { href: "/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=starter", label: "Choisir Starter" },
+    cta: { href: "/contact", label: "Demander l’audit gratuit" },
+    note: "L’audit est gratuit sur demande : on valide d’abord l’adéquation et vos objectifs."
   },
   {
-    id: "growth",
-    name: "Growth",
-    highlight: true,
-    tagline: "Flux régulier via SEO local + conversion",
-    who: ["objectif : régularité", "plusieurs villes/alentours", "B2B local (bureaux, syndics, commerces…)"],
-    outcomes: ["visibilité Maps + pages ville", "leads plus qualifiés", "meilleure conversion", "pilotage mensuel"],
-    deliverables: [
-      "Pages locales “ville + alentours” + maillage (hub → cluster)",
-      "Optimisation GBP continue (structure, contenus, cohérence)",
-      "CRO : CTA, preuve, FAQ, formulaires (réduction friction)",
-      "Tableau de bord + décisions mensuelles (tests / priorités)",
+    slug: "local",
+    badge: "Récurrence",
+    title: "SEO local (pilotage)",
+    price: "À partir de 590€/mois",
+    cadence: "mensuel",
+    desc: "Être visible sur Google/Maps dans le Sud Oise (60) et le Nord 95, et convertir cette visibilité en appels/devis.",
+    included: [
+      "Optimisation / structuration fiche Google (GBP)",
+      "Pages locales service+ville (priorisées)",
+      "Optimisation contenus + preuves (avis, process, réassurance)",
+      "Suivi conversions (appels, formulaires) et points mensuels",
+      "Itérations selon KPI (ce qui marche / ce qu’on teste)"
     ],
-    note: "Le meilleur compromis quand vous voulez stabiliser les demandes sans dépendre uniquement des Ads.",
-    cta: { href: "/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=growth", label: "Choisir Growth" },
+    cta: { href: "/contact", label: "Recevoir un plan d’action" },
+    note: "Le rythme dépend du point de départ et de la concurrence locale. Pas de promesse de position : pilotage + mesure."
   },
   {
-    id: "premium",
-    name: "Premium",
-    tagline: "Accélération avec Google Ads + landing + optimisation",
-    who: ["besoin de leads rapides", "zone concurrentielle", "volonté de filtrer les “mauvais” leads"],
-    outcomes: ["leads rapides", "qualification renforcée", "CPL piloté", "amélioration continue landing/ads"],
-    deliverables: [
-      "Google Ads Search : structure, annonces, exclusions, suivi conversions",
-      "Landing(s) orientée(s) qualification (service/ville/spécialité)",
-      "CRO + itérations : tests message/preuves/friction",
-      "Reporting avancé : CPL, taux conv., requêtes rentables",
+    slug: "ads",
+    badge: "Accélération",
+    title: "Google Ads / Meta (pilotage)",
+    price: "À partir de 490€/mois",
+    cadence: "mensuel",
+    desc: "Générer des demandes plus vite avec des campagnes structurées (sans gaspillage) + pages qui convertissent.",
+    included: [
+      "Création ou refonte structure campagnes (services/zones/intention)",
+      "Messages orientés conversion (preuves, différenciation)",
+      "Optimisations continues (requêtes, ciblages, budgets, annonces/créas)",
+      "Tracking conversions (appels, formulaires, événements clés)",
+      "Reporting simple : décisions et actions du mois"
     ],
-    note: "Recommandé si vous voulez remplir le planning vite — à condition de mesurer correctement appels & formulaires.",
-    cta: { href: "/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=premium", label: "Choisir Premium" },
-  },
+    cta: { href: "/contact", label: "Parler du budget pub" },
+    note: "Le budget publicitaire est séparé : on démarre souvent par un budget test mesurable, puis on ajuste."
+  }
 ];
 
-const options = [
-  {
-    id: "opt_tracking",
-    name: "Tracking avancé",
-    icon: "bi-clipboard-data",
-    bullets: [
-      "Events GA4 + GTM propres (tel/mail/itinéraire/CTA/form)",
-      "Conservation UTM + champs cachés formulaires",
-      "Call tracking (si vous utilisez un prestataire) / qualification",
-    ],
-  },
-  {
-    id: "opt_landing",
-    name: "Landing page (conversion)",
-    icon: "bi-window-stack",
-    bullets: [
-      "1 page ultra ciblée (service + ville + spécialité si besoin)",
-      "Preuve + réassurance + FAQ + formulaire court",
-      "Tracking & variantes de CTA (tests)",
-    ],
-  },
-  {
-    id: "opt_gbp",
-    name: "Google Business Profile (GBP)",
-    icon: "bi-pin-map",
-    bullets: [
-      "Optimisation structure (catégories, services, zones)",
-      "Posts & éléments de preuve (selon vos assets)",
-      "Plan avis (sans pratiques risquées) + réponses",
-    ],
-  },
-];
-
-// --- Schema.org ---
-const siteUrl = (Astro.site?.toString() || "").replace(/\/$/, "");
-const pageUrl = new URL(Astro.request.url).toString();
-
-const breadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Accueil", item: siteUrl ? `${siteUrl}/` : "/" },
-    { "@type": "ListItem", position: 2, name: "Tarifs", item: siteUrl ? `${siteUrl}/tarifs` : pageUrl },
-  ],
-};
-
-const offerCatalog = {
-  "@context": "https://schema.org",
-  "@type": "OfferCatalog",
-  name: "Packs & options",
-  itemListElement: [
-    ...packs.map((p) => ({
-      "@type": "Offer",
-      name: `Pack ${p.name}`,
-      description: `${p.tagline}. ${p.note}`,
-      url: siteUrl ? `${siteUrl}/tarifs#${p.id}` : `/tarifs#${p.id}`,
-      availability: "https://schema.org/InStock",
-    })),
-    ...options.map((o) => ({
-      "@type": "Offer",
-      name: `Option ${o.name}`,
-      description: o.bullets.join(" • "),
-      url: siteUrl ? `${siteUrl}/tarifs#options` : `/tarifs#options`,
-      availability: "https://schema.org/InStock",
-    })),
-  ],
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Vous faites du nettoyage ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Non. Horizon Conversion est un cabinet webmarketing : SEO local, Google Ads, CRO & tracking. On aide les entreprises de nettoyage à obtenir plus de demandes qualifiées (Sud Oise / Nord 95).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Les tarifs sont fixes ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Les packs donnent un cadre (méthode + livrables). Le périmètre exact dépend de votre zone (ville + alentours), du nombre de services/spécialités à pousser, de l’urgence (Ads) et de l’état du site/GBP. On confirme après un audit court.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Est-ce qu’il y a un engagement ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "On fonctionne au mois avec pilotage (tests, décisions, reporting). Selon le pack, on peut prévoir une phase de mise en place au démarrage (tracking, pages clés).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Le budget Google Ads est inclus ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Non : le budget pub est payé directement à Google. Nos honoraires couvrent la stratégie, la mise en place, l’optimisation, et le suivi des conversions. L’objectif est de piloter le coût par lead (sans promesses garanties).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Comment évitez-vous les leads non qualifiés ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "On combine : ciblage (mots-clés/zone), exclusions, landing pages de qualification, et tracking (appels/formulaires) pour couper ce qui n’apporte pas de demandes utiles. On optimise sur les conversions réelles.",
-      },
-    },
-  ],
-};
+// Liste “ce que vous achetez” par service (data-driven)
+const serviceCards = (services as any[]).map((s: any) => ({
+  slug: s.slug,
+  name: s.name,
+  short: s.short,
+  deliverables: (s.deliverables ?? []).slice(0, 6),
+  href: `/${s.slug}`
+}));
 ---
 
 <BaseLayout
-  title={meta.title}
-  description={meta.description}
-  canonical="/tarifs"
-  ogImage={meta.ogImage}
-  pageType="tarifs"
-  brandName={brandName}
-  regionLabel={regionLabel}
-  primaryCta={{ href: "/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=cta_primary", label: "Demander un audit (15 min)", id: "tarifs_audit_15min", variant: "primary" }}
-  secondaryCta={{ href: "/methode?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=cta_secondary", label: "Voir la méthode", id: "tarifs_method", variant: "secondary" }}
-  schema={[breadcrumb, offerCatalog, faqSchema]}
+  title={seo.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  schema={schema}
 >
-  <script is:inline>
-    {String.raw`
-      document.documentElement.dataset.pageType = "tarifs";
-    `}
-  </script>
 
-  {/* HERO */}
-  <section
-    id="slider"
-    class="slider-element"
-    style="background: linear-gradient(135deg, rgba(51,94,238,0.18), rgba(0,0,0,0.0)); min-height: 560px;"
-    aria-label="Tarifs"
-  >
-    <div class="vertical-middle">
-      <div class="container py-5">
-        <div class="row align-items-center justify-content-between">
-          <div class="col-lg-7">
-            <h1 class="mb-3">
-              Tarifs — packs webmarketing
-              <br />
-              pour entreprises de nettoyage
-              <br />
-              <span class="color">Sud Oise / Nord 95</span>
-            </h1>
+  <PageTitle
+    kicker="Offres & transparence"
+    titleHtml={"Tarifs webmarketing <br>(entreprises de nettoyage)"}
+    description="SEO local (Google & Maps), Google Ads/Meta Ads et optimisation conversion (CRO) avec tracking simple. L’objectif : plus de demandes (appels, devis) — via une méthode pilotée, sans promesses “garanties”."
+    bgImage="/_assets_/images/page-title.jpg"
+    breadcrumbs={bc.items}
+    ctas={[
+      { href: "/contact", label: "Demander un audit gratuit", variant: "primary" },
+      { href: "/methode", label: "Voir la méthode", variant: "secondary" }
+    ]}
+  />
 
-            <p class="mb-4" style="font-size: 1.075rem; max-width: 680px;">
-              3 packs (Starter / Growth / Premium) + options (tracking, landing, GBP).
-              Le but : <strong>plus de demandes qualifiées</strong> — via <a href="/seo-local">SEO local</a>, <a href="/google-ads">Google Ads</a>, et <a href="/cro">CRO & tracking</a>.
-              On pilote au mois, avec mesure des leads (appels/formulaires). Pas de promesse “garantie”.
-            </p>
-
-            <div class="d-flex gap-3 flex-wrap">
-              <a
-                href="/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=hero_audit"
-                class="button button-rounded bg-color text-white fw-semibold"
-                data-cta
-                data-cta-id="tarifs_hero_audit"
-                data-cta-label="Demander un audit (15 min)"
-                data-position="hero"
-                data-page-type="tarifs"
-              >
-                Demander un audit (15 min) <i class="bi-arrow-right"></i>
-              </a>
-
-              <a
-                href="#packs"
-                class="button button-rounded button-light text-dark fw-semibold"
-                data-cta
-                data-cta-id="tarifs_hero_compare"
-                data-cta-label="Comparer les packs"
-                data-position="hero"
-                data-page-type="tarifs"
-              >
-                Comparer les packs
-              </a>
-            </div>
-
-            <div class="mt-4 text-black-50 small">
-              Zones : {villes.map((v, i) => (
-                <span>
-                  <a href={`/ressources/${v.slug}`}>{v.name}</a>
-                  {i < villes.length - 1 ? ", " : ""}
-                </span>
-              ))}{" "}
-              + alentours.
-              <br />
-              Réassurance : reporting clair • tracking propre • décisions basées sur vos conversions.
-            </div>
-          </div>
-
-          <div class="col-lg-5 mt-5 mt-lg-0">
-            <div class="card border-0 shadow-sm">
-              <div class="card-body p-4">
-                <h2 class="h4 mb-2 text-transform-none ls-0">Comment choisir le bon pack ?</h2>
-                <p class="text-black-50 mb-4">
-                  Répondez à ces 3 questions — et on vous propose le périmètre le plus rentable.
-                </p>
-
-                <div class="feature-box fbox-plain mb-3">
-                  <div class="fbox-icon"><i class="bi-stopwatch color"></i></div>
-                  <div class="fbox-content">
-                    <h3 class="h6 text-transform-none ls-0 mb-1">Urgence</h3>
-                    <p class="text-black-50 mb-0">Vous voulez des leads rapidement ? → Ads + landing (Premium).</p>
-                  </div>
-                </div>
-
-                <div class="feature-box fbox-plain mb-3">
-                  <div class="fbox-icon"><i class="bi-pin-map color"></i></div>
-                  <div class="fbox-content">
-                    <h3 class="h6 text-transform-none ls-0 mb-1">Zone</h3>
-                    <p class="text-black-50 mb-0">1 ville vs 6 villes + alentours : le périmètre change.</p>
-                  </div>
-                </div>
-
-                <div class="feature-box fbox-plain mb-0">
-                  <div class="fbox-icon"><i class="bi-ui-checks-grid color"></i></div>
-                  <div class="fbox-content">
-                    <h3 class="h6 text-transform-none ls-0 mb-1">Qualification</h3>
-                    <p class="text-black-50 mb-0">Beaucoup de “mauvais” leads ? → tracking + filtres + CRO.</p>
-                  </div>
-                </div>
-
-                <div class="line my-4"></div>
-
-                <a
-                  href="/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=card_audit"
-                  class="button button-rounded bg-color text-white fw-semibold w-100 m-0"
-                  data-cta
-                  data-cta-id="tarifs_card_audit"
-                  data-cta-label="Recevoir une recommandation pack"
-                  data-position="hero_card"
-                  data-page-type="tarifs"
-                >
-                  Recevoir une recommandation pack <i class="bi-arrow-right"></i>
-                </a>
-
-                <small class="d-block text-black-50 mt-2">
-                  On ne vend pas “au hasard” : on part de votre zone, vos offres et vos conversions.
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="svg-separator">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#FFF">
-          <path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></path>
-        </svg>
-      </div>
-    </div>
-  </section>
-
+  <!-- Content
+  ============================================= -->
   <section id="content">
     <div class="content-wrap pt-4 pb-0">
-      {/* PACKS */}
-      <div id="packs" class="container mt-5">
-        <div class="heading-block text-center mx-auto" style="max-width: 860px">
-          <h2 class="mb-2 text-transform-none ls-0">Packs : comparatif clair (et orienté ROI)</h2>
-          <span>
-            Chaque pack inclut une méthode + un pilotage. La différence : le volume (villes/pages), l’accélération Ads, et le niveau d’optimisation conversion.
-          </span>
-        </div>
 
-        <div class="row col-mb-30 mt-4">
+      <!-- Packs -->
+      <div class="container">
+        <div class="row pricing col-mb-30 mb-4 justify-content-center">
+
           {packs.map((p) => (
-            <div class="col-lg-4" id={p.id}>
-              <div class={`card border-0 shadow-sm h-100 ${p.highlight ? "border border-2" : ""}`} style={p.highlight ? "border-color: rgba(51,94,238,0.35) !important;" : ""}>
-                <div class="card-body p-4">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <h3 class="h5 fw-semibold text-uppercase mb-0">{p.name}</h3>
-                    {p.highlight ? <span class="badge bg-color text-white">Recommandé</span> : null}
+            <div class="col-lg-4 col-md-6">
+              <div class="pricing-box rounded-3 h-shadow shadow-ts p-3">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <div class="text-uppercase ls-2 text-muted small">{p.badge}</div>
+                      <h3 class="mt-2 mb-2 text-transform-none fw-semibold ls-0">{p.title}</h3>
+                    </div>
+                    <span class="badge bg-color">{p.cadence}</span>
                   </div>
 
-                  <p class="text-black-50 mb-3">{p.tagline}</p>
-
-                  <div class="mb-3">
-                    <div class="small text-uppercase text-black-50 fw-bold mb-2">Pour qui</div>
-                    <ul class="iconlist ms-0 mb-0 text-black-50">
-                      {p.who.map((x) => (
-                        <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i>{x}</li>
-                      ))}
-                    </ul>
+                  <div class="my-3">
+                    <div class="h2 color fw-bold mb-0">{p.price}</div>
+                    <small class="text-muted">selon zone, concurrence, volume d’actions</small>
                   </div>
 
-                  <div class="mb-3">
-                    <div class="small text-uppercase text-black-50 fw-bold mb-2">Objectifs pilotés</div>
-                    <ul class="iconlist ms-0 mb-0 text-black-50">
-                      {p.outcomes.map((x) => (
-                        <li class="mb-2"><i class="bi-bullseye color me-2"></i>{x}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <p class="text-black-50">{p.desc}</p>
 
-                  <div class="mb-3">
-                    <div class="small text-uppercase text-black-50 fw-bold mb-2">Livrables clés</div>
-                    <ul class="iconlist ms-0 mb-0 text-black-50">
-                      {p.deliverables.map((x) => (
-                        <li class="mb-2"><i class="bi-list-check color me-2"></i>{x}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div class="line my-3"></div>
 
-                  <div class="text-black-50 small mb-4">
-                    <i class="bi-info-circle me-1"></i>
-                    {p.note}
-                  </div>
+                  <ul class="iconlist mb-4 text-black-50">
+                    {p.included.map((it) => <li><i class="bi-check-circle-fill color me-2"></i>{it}</li>)}
+                  </ul>
 
-                  <a
-                    href={p.cta.href}
-                    class={`button button-rounded fw-semibold w-100 m-0 ${p.highlight ? "bg-color text-white" : "button-light text-dark"}`}
-                    data-cta
-                    data-cta-id={`pack_select_${p.id}`}
-                    data-cta-label={`Choisir ${p.name}`}
-                    data-position="packs"
-                    data-page-type="tarifs"
-                  >
-                    {p.cta.label} {p.highlight ? <i class="bi-arrow-right"></i> : null}
-                  </a>
-
-                  <div class="mt-3 text-black-50 small">
-                    * Tarifs ajustés selon : nombre de villes, concurrence, spécialités, urgence, état du tracking/site/GBP.
+                  <div class="mt-auto">
+                    <a href={p.cta.href} class="btn btn-lg bg-color text-white fw-semibold px-4 w-100">{p.cta.label}</a>
+                    <small class="d-block mt-2 text-black-50">{p.note}</small>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
 
-        <div class="text-center mt-5">
-          <a
-            href="/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=packs_cta"
-            class="button button-rounded bg-color text-white fw-semibold"
-            data-cta
-            data-cta-id="tarifs_packs_audit"
-            data-cta-label="Demander une estimation"
-            data-position="packs_bottom"
-            data-page-type="tarifs"
-          >
-            Demander une estimation (audit 15 min) <i class="bi-arrow-right"></i>
-          </a>
-          <div class="mt-2 text-black-50 small">
-            On ne promet pas un “nombre de leads garanti” : on met en place un système mesurable et on optimise chaque mois.
-          </div>
         </div>
       </div>
 
-      {/* OPTIONS */}
-      <div id="options" class="section bg-transparent mt-6">
+      <div class="clear"></div>
+
+      <!-- What you get (service breakdown) -->
+      <div class="section mb-0 mt-6" style="padding-bottom: 100px; overflow: visible">
+        <div class="svg-separator top">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#F9F9F9"><path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></svg>
+          </div>
+        </div>
         <div class="container">
-          <div class="heading-block text-center mx-auto" style="max-width: 860px">
-            <h2 class="mb-2 text-transform-none ls-0">Options (à activer selon vos priorités)</h2>
+          <div class="heading-block text-center mx-auto" style="max-width: 820px">
+            <h2 class="mb-2 text-transform-none ls-0">Ce qui est inclus (concret)</h2>
             <span>
-              Certaines actions ont un impact disproportionné : tracking propre, landing de qualification, et Google Business Profile bien structuré.
+              Le but : transformer votre visibilité en demandes. Chaque service a ses livrables et ses KPI.
+              Pour le détail complet : pages service.
             </span>
           </div>
 
-          <div class="row col-mb-30 mt-4">
-            {options.map((o) => (
-              <div class="col-lg-4">
-                <div class="card border-0 shadow-sm h-100">
+          <div class="row col-mb-30">
+            {serviceCards.map((s) => (
+              <div class="col-lg-4 col-md-6">
+                <div class="card text-center border-0 shadow-sm">
                   <div class="card-body p-4">
-                    <h3 class="h5 mb-3 text-transform-none ls-0">
-                      <i class={`${o.icon} color me-2`}></i>
-                      {o.name}
-                    </h3>
-                    <ul class="iconlist ms-0 mb-0 text-black-50">
-                      {o.bullets.map((b) => (
-                        <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i>{b}</li>
+                    <h3 class="text-transform-none fw-semibold ls-0 mb-2">{s.name}</h3>
+                    <p class="text-black-50 mb-3">{s.short}</p>
+
+                    <ul class="iconlist text-black-50 mb-4">
+                      {s.deliverables.map((d: string) => (
+                        <li><i class="bi-dot color me-2"></i>{d}</li>
                       ))}
                     </ul>
 
-                    <div class="line my-4"></div>
-
-                    <a
-                      href={`/contact?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=${o.id}`}
-                      class="btn second-bg-color px-3 fw-semibold"
-                      data-cta
-                      data-cta-id={`opt_${o.id}`}
-                      data-cta-label={`Ajouter ${o.name}`}
-                      data-position="options"
-                      data-page-type="tarifs"
-                    >
-                      Ajouter / en parler <i class="bi-arrow-right"></i>
-                    </a>
+                    <div class="d-flex gap-2 flex-wrap">
+                      <a href={s.href} class="button button-rounded button-light button-large second-bg-color text-dark w-100 ls-0 m-0">Voir le service</a>
+                      <a href="/contact" class="button button-rounded button-light button-large second-bg-color text-dark w-100 ls-0 m-0">Audit gratuit</a>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div class="mt-4 text-center text-black-50 small">
-            Besoin d’une page locale solide ? → <a href="/seo-local">SEO local</a>. Besoin de leads rapides et filtrés ? → <a href="/google-ads">Google Ads</a>. Besoin d’augmenter le taux de conversion ? → <a href="/cro">CRO & tracking</a>.
+          <div class="mt-4 text-center">
+            <a href="/preuves" class="fw-semibold">Voir des preuves & exemples <i class="bi-arrow-right color"></i></a>
+            <a href="/zones" class="fw-semibold">Zones couvertes (60/95) <i class="bi-arrow-right color"></i></a>
           </div>
         </div>
       </div>
 
-      {/* METHODE (bloc court, “Cleaner”) */}
-      <div class="section mb-0" style="padding: 90px 0; background-color: rgba(51,94,238,0.08);">
-        <div class="container" style="max-width: 980px">
-          <div class="heading-block text-center mx-auto" style="max-width: 820px">
-            <h2 class="mb-2 text-transform-none ls-0">Ce que vous achetez vraiment : une méthode + du pilotage</h2>
-            <span>
-              Les “prestations” seules ne suffisent pas. Ce qui compte : la mesure des leads, la qualité des messages, et les itérations basées sur vos conversions.
-            </span>
-          </div>
+      <!-- Pricing FAQs (toggles style template) -->
+      <div class="container mb-6">
+        <div class="fancy-title title-border mt-5">
+          <h3 class="fw-semibold">FAQ tarifs</h3>
+        </div>
 
-          <div class="row col-mb-30">
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-1-circle-fill color me-2"></i>Cadrage & objectifs</h3>
-                  <p class="text-black-50 mb-0">Zone (ville + alentours), types de clients (B2B/B2C), spécialités, objectifs réalistes, priorités.</p>
-                </div>
-              </div>
+        <div class="toggle">
+          <div class="toggle-header justify-content-between">
+            <div class="toggle-icon">
+              <i class="toggle-closed bi-plus-circle"></i>
+              <i class="toggle-open bi-dash-circle"></i>
             </div>
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-2-circle-fill color me-2"></i>Instrumentation (tracking)</h3>
-                  <p class="text-black-50 mb-0">GA4 events (tel/mail/itinéraire/CTA/form), UTMs, attribution et lecture simple des leads.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-3-circle-fill color me-2"></i>Acquisition (SEO/Ads)</h3>
-                  <p class="text-black-50 mb-0">SEO local (GBP + pages ville) et/ou Ads Search : capter la demande réelle, au bon endroit.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0"><i class="bi-4-circle-fill color me-2"></i>Conversion (CRO)</h3>
-                  <p class="text-black-50 mb-0">Offres, preuves, FAQ, CTA, formulaires : réduire la friction et augmenter la part des leads qualifiés.</p>
-                </div>
-              </div>
+            <div class="toggle-title fw-semibold">
+              Pourquoi “à partir de” plutôt qu’un prix unique ?
             </div>
           </div>
+          <div class="toggle-content text-black-50">
+            Parce que l’effort dépend du point de départ (fiche Google, site, concurrence locale, nombre de villes/pages),
+            et de votre objectif (récurrence, urgence, types de clients). On préfère un cadrage clair après audit plutôt qu’un prix trompeur.
+          </div>
+        </div>
 
-          <div class="text-center mt-5">
-            <a
-              href="/methode?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=methode"
-              class="button button-rounded button-light text-dark fw-semibold"
-              data-cta
-              data-cta-id="tarifs_method_details"
-              data-cta-label="Voir la méthode en détail"
-              data-position="method_block"
-              data-page-type="tarifs"
-            >
-              Voir la méthode en détail <i class="bi-arrow-right"></i>
-            </a>
+        <div class="toggle">
+          <div class="toggle-header justify-content-between">
+            <div class="toggle-icon">
+              <i class="toggle-closed bi-plus-circle"></i>
+              <i class="toggle-open bi-dash-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold">
+              Est-ce que vous garantissez un nombre de leads ?
+            </div>
+          </div>
+          <div class="toggle-content text-black-50">
+            Non. On met en place un système piloté (tracking + optimisations) pour améliorer la quantité et la qualité des demandes,
+            sans promesse irréaliste. On mesure et on itère.
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="toggle-header justify-content-between">
+            <div class="toggle-icon">
+              <i class="toggle-closed bi-plus-circle"></i>
+              <i class="toggle-open bi-dash-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold">
+              Le budget publicitaire est-il inclus ?
+            </div>
+          </div>
+          <div class="toggle-content text-black-50">
+            Non. Les honoraires couvrent la stratégie, la mise en place, le tracking et le pilotage.
+            Le budget pub (Google/Meta) est séparé : on démarre souvent par un budget test mesurable, puis on ajuste.
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="toggle-header justify-content-between">
+            <div class="toggle-icon">
+              <i class="toggle-closed bi-plus-circle"></i>
+              <i class="toggle-open bi-dash-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold">
+              Combien de temps avant de voir des effets ?
+            </div>
+          </div>
+          <div class="toggle-content text-black-50">
+            Le SEO local progresse dans le temps (avec des quick wins possibles sur la fiche et les pages).
+            Les Ads peuvent produire des demandes plus vite… à condition d’avoir une landing/page qui convertit et un tracking fiable.
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="toggle-header justify-content-between">
+            <div class="toggle-icon">
+              <i class="toggle-closed bi-plus-circle"></i>
+              <i class="toggle-open bi-dash-circle"></i>
+            </div>
+            <div class="toggle-title fw-semibold">
+              Vous travaillez uniquement sur le Sud Oise (60) et le Nord 95 ?
+            </div>
+          </div>
+          <div class="toggle-content text-black-50">
+            Oui, c’est le cœur de notre dispositif local-first : pages locales structurées (zone → ville → service) et messages adaptés au terrain.
           </div>
         </div>
       </div>
 
-      {/* PREUVE (concrete) */}
-      <div class="container mt-6 mb-6">
-        <div class="heading-block text-center mx-auto" style="max-width: 860px">
-          <h2 class="mb-2 text-transform-none ls-0">Preuve : ce qu’on vérifie avant de vous “vendre” un pack</h2>
-          <span>
-            Le but : éviter le pack “trop petit” (ça n’avance pas) ou “trop gros” (budget inutile). On valide le point de départ et les quick wins.
-          </span>
-        </div>
-
-        <div class="row col-mb-30">
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0"><i class="bi-pin-map color me-2"></i>Google Business Profile</h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">Catégories & services alignés “nettoyage”</li>
-                  <li class="mb-2">Zones cohérentes (ville + alentours)</li>
-                  <li class="mb-2">Avis : récence, réponses, signaux de confiance</li>
-                  <li>Preuves (photos/process) si disponibles</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0"><i class="bi-window-stack color me-2"></i>Pages & conversion</h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">Pages locales utiles (pas des clones)</li>
-                  <li class="mb-2">CTA principal + secondaire + réassurance</li>
-                  <li class="mb-2">Preuve (process, checklists, cas types)</li>
-                  <li>Formulaire court + questions de qualification</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0"><i class="bi-clipboard-data color me-2"></i>Tracking & pilotage</h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">Events GA4 (tel/mail/itinéraire/CTA/form)</li>
-                  <li class="mb-2">UTMs + attribution (sinon Ads/SEO “à l’aveugle”)</li>
-                  <li class="mb-2">Lecture business : leads, taux conv., CPL</li>
-                  <li>Décisions mensuelles (stop/keep/test)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center mt-5">
-          <a
-            href="/preuves?utm_source=site&utm_medium=organic&utm_campaign=tarifs_lead&utm_content=preuves"
-            class="button button-rounded button-light text-dark fw-semibold"
-            data-cta
-            data-cta-id="tarifs_proof_link"
-            data-cta-label="Voir les preuves"
-            data-position="proof"
-            data-page-type="tarifs"
-          >
-            Voir les preuves <i class="bi-arrow-right"></i>
-          </a>
-        </div>
+      <!-- Internal links block (maillage auto) -->
+      <div class="container">
+        <InternalLinksBlock data={internalLinks} />
       </div>
 
-      {/* FORM (secondary conversion) */}
-      <div class="section text-center mb-0" style="padding: 110px 0; background-color: rgba(51,94,238,0.08);">
-        <div class="container" style="max-width: 860px">
-          <i class="bi-cash-coin color" style="font-size: 64px;"></i>
-          <h2 class="mt-3" style="font-size: 38px;">Recevoir une estimation adaptée à votre zone</h2>
+      <!-- Final CTA -->
+      <div class="section text-center mb-0" style="padding: 120px 0; background-color: rgba(51,94,238,0.08);">
+        <div class="container" style="max-width: 760px">
+          <img src="/_assets_/images/icons/apply.svg" alt="Audit Icon" height="200" class="mb-4">
+          <h2 style="font-size: 38px">On vous propose la bonne combinaison (SEO / Ads / CRO)</h2>
           <p class="mb-5" style="font-size: 1.125rem;">
-            Dites-nous votre ville (ou alentours), votre priorité (SEO/Ads/CRO) et votre type de clients. On revient avec une recommandation pack + options.
+            Indiquez votre ville/zone et votre objectif. Vous recevez un plan d’action priorisé et une recommandation adaptée
+            (sans survente, et avec mesure).
           </p>
-
-          <div class="card border-0 shadow-sm text-start">
-            <div class="card-body p-4">
-              <form
-                id="tarifs-lead"
-                class="row g-3 hc-lead"
-                method="post"
-                action="/api/lead"
-                data-track="lead"
-              >
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Pack envisagé</label>
-                  <select class="form-select" name="pack" required>
-                    <option value="" disabled selected>— Choisir —</option>
-                    <option value="starter">Starter</option>
-                    <option value="growth">Growth</option>
-                    <option value="premium">Premium</option>
-                    <option value="je-ne-sais-pas">Je ne sais pas</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Ville / zone</label>
-                  <select class="form-select" name="ville" required>
-                    <option value="" disabled selected>— Choisir —</option>
-                    {villes.map((v) => <option value={v.slug}>{v.name}</option>)}
-                    <option value="alentours">Alentours</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Email pro</label>
-                  <input class="form-control" type="email" name="email" placeholder="nom@entreprise.fr" required />
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Téléphone</label>
-                  <input class="form-control" type="tel" name="phone" placeholder="06…" required />
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label fw-semibold">Vos clients</label>
-                  <select class="form-select" name="type_clients" required>
-                    <option value="" disabled selected>— Choisir —</option>
-                    <option value="b2b">B2B (bureaux, syndics, commerces, industrie…)</option>
-                    <option value="b2c">B2C (particuliers)</option>
-                    <option value="mixte">Mixte</option>
-                  </select>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label fw-semibold">Contexte (2 lignes suffisent)</label>
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="3"
-                    placeholder="Ex : je veux +appels sur Chantilly, beaucoup de devis non qualifiés, je fais fin de chantier et bureaux…"
-                  ></textarea>
-                </div>
-
-                <div class="col-12">
-                  <button
-                    type="submit"
-                    class="btn btn-lg bg-color text-white fw-semibold w-100 mt-2"
-                    data-cta
-                    data-cta-id="tarifs_form_submit"
-                    data-cta-label="Envoyer — estimation"
-                    data-position="final_form"
-                    data-page-type="tarifs"
-                  >
-                    Envoyer — recevoir une estimation
-                  </button>
-
-                  <small class="d-block text-black-50 mt-2">
-                    Transparence : pas de “garantie” de position ou de volume de leads. On fixe des objectifs, on mesure, on optimise.
-                    <br />
-                    Besoin d’un appel direct ? <a href="/contact" data-track="email">Contact</a>.
-                  </small>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="mt-4 text-black-50 small">
-            Liens utiles : <a href="/seo-local">SEO local</a> • <a href="/google-ads">Google Ads</a> • <a href="/cro">CRO & tracking</a> • <a href="/methode">Méthode</a> • <a href="/preuves">Preuves</a>
-          </div>
+          <a href="/contact" class="btn btn-lg bg-color text-white fw-semibold px-4">Demander un audit gratuit</a>
+          <a href="/preuves" class="btn btn-lg bg-white fw-semibold color px-4 ms-2">Voir des preuves</a>
         </div>
       </div>
 
-      {/* FAQ */}
-      <div class="container mt-6 mb-6">
-        <div class="heading-block text-center mx-auto" style="max-width: 760px">
-          <h2 class="mb-2 text-transform-none ls-0">FAQ</h2>
-          <span>Questions fréquentes avant de choisir un pack.</span>
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Vous faites du nettoyage ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Non. On fait du webmarketing (SEO local, Google Ads, CRO & tracking) pour aider les entreprises de nettoyage à générer plus de demandes qualifiées dans le Sud Oise / Nord 95.
-              </div>
-            </details>
-
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Les tarifs sont fixes ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Les packs cadrent la méthode. Le prix final dépend du périmètre (villes, spécialités, urgence, état du site/GBP, niveau de tracking). L’audit (15 min) sert à définir ce qui est le plus rentable à déployer en premier.
-              </div>
-            </details>
-
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Le budget Google Ads est inclus ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Non : vous payez Google directement. Nos honoraires couvrent la stratégie, la mise en place, l’optimisation et le suivi des conversions (CPL, taux de conversion, requêtes rentables).
-              </div>
-            </details>
-
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Combien de temps avant des résultats ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Ça dépend du point de départ. Les quick wins (tracking, pages clés, structure GBP) peuvent améliorer la conversion rapidement.
-                Le SEO local se construit sur plusieurs semaines/mois. Dans tous les cas : on mesure les conversions et on itère mensuellement.
-              </div>
-            </details>
-
-            <details class="toggle">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Comment évitez-vous les leads non qualifiés ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Par la qualification + la mesure : ciblage par zone, mots-clés/exclusions, landing pages qui posent les bonnes questions (type de clients, fréquence, surface, ville), et suivi des appels/formulaires pour couper ce qui ne convertit pas.
-              </div>
-            </details>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+  </section><!-- #content end -->
 
-  <style>
-    {`
-      details.toggle > summary { list-style: none; cursor: pointer; }
-      details.toggle > summary::-webkit-details-marker { display: none; }
-      details.toggle[open] .toggle-closed { display: none; }
-      details.toggle:not([open]) .toggle-open { display: none; }
-      .toggle-content { padding: 0.75rem 1.25rem 1.25rem; }
-    `}
-  </style>
 </BaseLayout>

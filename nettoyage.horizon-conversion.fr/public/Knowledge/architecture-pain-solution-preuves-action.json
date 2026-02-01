@@ -1,0 +1,419 @@
+{
+  "schema_version": "1.0",
+  "table": "architecture_pain_solution_preuves_action",
+  "globals": {
+    "hero_rules": [
+      "Hero = pain + bénéfice + micro-preuve + CTA principal + CTA secondaire",
+      "CTA principal répété 3 fois (hero / milieu / fin)",
+      "FAQ 3–6 questions quand page SEO transactionnelle / locale",
+      "Pas de promesses garanties (positions, leads)"
+    ],
+    "standard_blocks": [
+      "sticky_cta",
+      "reassurance_badges",
+      "deliverables_cards",
+      "measurement_kpis",
+      "mini_cases",
+      "internal_links_block"
+    ]
+  },
+  "page_types": [
+    {
+      "page_type": "home",
+      "url_pattern": "/",
+      "h1_pattern": "Plus de demandes pour votre entreprise de nettoyage (SEO local + Ads + conversion)",
+      "breadcrumbs_pattern": [],
+      "hero": {
+        "pain_promise": "Stop au bouche-à-oreille et aux demandes irrégulières : mettez en place un système d’acquisition piloté.",
+        "micro_proof": "Suivi appels & formulaires + pilotage mensuel + actions priorisées",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        {
+          "id": "pain_points",
+          "title": "Les problèmes fréquents",
+          "type": "cards",
+          "items_hint": [
+            "Demandes irrégulières",
+            "Concurrence locale forte",
+            "Site/fiche Google qui ne convertit pas"
+          ]
+        },
+        {
+          "id": "services_overview",
+          "title": "Ce qu’on met en place",
+          "type": "service_cards",
+          "items_hint": ["SEO local", "Google Ads / Meta Ads", "CRO & tracking"],
+          "links_to": ["/{service}/"]
+        },
+        {
+          "id": "method_teaser",
+          "title": "Comment on travaille",
+          "type": "timeline_4_steps",
+          "steps": ["Audit", "Plan d’action", "Mise en place", "Pilotage"],
+          "links_to": ["/methode"]
+        },
+        {
+          "id": "proofs_teaser",
+          "title": "Preuves & réassurance",
+          "type": "mini_cases_or_deliverables",
+          "mini_case_template": ["Contexte", "Actions", "Mesure", "Prochain test"],
+          "links_to": ["/preuves"]
+        },
+        {
+          "id": "zones_teaser",
+          "title": "Zones couvertes",
+          "type": "zone_cards",
+          "links_to": ["/zones"]
+        },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_5" },
+        {
+          "id": "final_cta",
+          "title": "Prêt à clarifier vos priorités ?",
+          "type": "cta_block",
+          "cta_primary": "Demander un audit gratuit",
+          "cta_secondary": "Voir les tarifs"
+        }
+      ],
+      "footer_internal_links": ["/methode", "/tarifs", "/preuves", "/zones"]
+    },
+    {
+      "page_type": "contact",
+      "url_pattern": "/contact",
+      "h1_pattern": "Demander un audit gratuit",
+      "breadcrumbs_pattern": ["Accueil", "Contact"],
+      "hero": {
+        "pain_promise": "Recevez un plan d’action priorisé (SEO/Ads/CRO) adapté à votre zone.",
+        "micro_proof": "Réponse rapide + recommandations actionnables",
+        "cta_primary": "Envoyer la demande",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        {
+          "id": "form",
+          "title": "Votre demande",
+          "type": "form",
+          "fields_hint": [
+            "Ville/zone",
+            "Spécialité (type de clients)",
+            "Objectif (appels/devis/récurrence)",
+            "Lien site/GBP (optionnel)",
+            "Budget indicatif (optionnel)"
+          ]
+        },
+        {
+          "id": "what_you_get",
+          "title": "Ce que vous recevez",
+          "type": "bullets",
+          "items_hint": [
+            "Priorités et quick wins",
+            "Plan d’action 30 jours",
+            "Recommandations SEO local / Ads / pages",
+            "Conseils tracking simple",
+            "Prochaine étape proposée"
+          ]
+        },
+        {
+          "id": "reassurance",
+          "title": "Réassurance",
+          "type": "badges",
+          "items_hint": ["Pas d’engagement", "Données protégées", "Approche pilotée (tests & ajustements)"]
+        },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_5" },
+        {
+          "id": "internal_links",
+          "title": "Avant de valider",
+          "type": "internal_links",
+          "links_hint": ["/tarifs", "/methode", "/preuves"]
+        }
+      ],
+      "footer_internal_links": ["/tarifs", "/methode", "/preuves"]
+    },
+    {
+      "page_type": "pricing",
+      "url_pattern": "/tarifs",
+      "h1_pattern": "Des tarifs transparents, adaptés aux entreprises de nettoyage",
+      "breadcrumbs_pattern": ["Accueil", "Tarifs"],
+      "hero": {
+        "pain_promise": "Évitez le flou et le budget gaspillé : des offres claires et pilotées.",
+        "micro_proof": "Inclus détaillés + mesure + itérations",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "packs", "title": "Offres (packs)", "type": "pricing_cards", "items_hint": ["SEO local", "Ads", "CRO & tracking"] },
+        { "id": "included", "title": "Ce qui est inclus", "type": "deliverables_list" },
+        {
+          "id": "price_variation",
+          "title": "Ce qui fait varier le prix",
+          "type": "bullets",
+          "items_hint": ["Zone & concurrence", "Nombre de services/spécialités", "État du site/GBP", "Objectifs"]
+        },
+        { "id": "reassurance", "title": "Vous payez du pilotage", "type": "process_reassurance" },
+        { "id": "faq", "title": "FAQ tarifs", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir une recommandation adaptée", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Contacter" }
+      ],
+      "footer_internal_links": ["/methode", "/preuves", "/contact"]
+    },
+    {
+      "page_type": "method",
+      "url_pattern": "/methode",
+      "h1_pattern": "Une méthode claire pour générer des demandes (sans blabla)",
+      "breadcrumbs_pattern": ["Accueil", "Méthode"],
+      "hero": {
+        "pain_promise": "Vous savez où vous perdez des demandes, puis on corrige et on pilote.",
+        "micro_proof": "Mesure appels/formulaires + priorités + itérations",
+        "cta_primary": "Recevoir un plan d’action",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "timeline", "title": "La méthode en 4 étapes", "type": "timeline_4_steps", "steps": ["Audit", "Plan d’action", "Mise en place", "Pilotage"] },
+        { "id": "deliverables", "title": "Livrables concrets", "type": "cards", "items_hint": ["Pages locales", "Mots-clés/contenus", "Tracking", "Optimisations conversion", "Reporting"] },
+        { "id": "measurement", "title": "Comment on mesure", "type": "kpi_cards", "items_hint": ["Appels", "Formulaires", "Devis", "Coût par lead (Ads)"] },
+        { "id": "boundaries", "title": "Ce qu’on ne promet pas", "type": "reassurance_text", "items_hint": ["Pas de positions garanties", "Pas de leads garantis", "Objectifs + tests + pilotage"] },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Prêt à prioriser les bonnes actions ?", "type": "cta_block", "cta_primary": "Recevoir un plan d’action", "cta_secondary": "Voir les tarifs" }
+      ],
+      "footer_internal_links": ["/tarifs", "/preuves", "/contact"]
+    },
+    {
+      "page_type": "proofs",
+      "url_pattern": "/preuves",
+      "h1_pattern": "Des preuves : ce qu’on met en place et comment on mesure",
+      "breadcrumbs_pattern": ["Accueil", "Preuves"],
+      "hero": {
+        "pain_promise": "Évitez les promesses vagues : place à la méthode, la transparence et la mesure.",
+        "micro_proof": "Mini-cas + livrables + KPIs suivis",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "measurement", "title": "Ce qu’on mesure", "type": "kpi_cards", "items_hint": ["Appels", "Formulaires", "Devis", "Performance Ads"] },
+        { "id": "mini_cases", "title": "Exemples (format standard)", "type": "mini_case_list", "mini_case_template": ["Contexte", "Actions", "Mesure", "Prochain test"] },
+        { "id": "deliverables_examples", "title": "Exemples de livrables", "type": "deliverables_gallery" },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action clair", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir la méthode" }
+      ],
+      "footer_internal_links": ["/methode", "/tarifs", "/contact"]
+    },
+    {
+      "page_type": "service_hub",
+      "url_pattern": "/{service}/",
+      "h1_pattern": "{Service} pour entreprises de nettoyage : plus de demandes, mieux qualifiées",
+      "breadcrumbs_pattern": ["Accueil", "{Service}"],
+      "hero": {
+        "pain_promise": "Stop aux demandes irrégulières : {service} piloté et mesuré pour votre zone.",
+        "micro_proof": "Livrables clairs + suivi conversions + pilotage",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "pain_points", "title": "Problèmes fréquents", "type": "cards", "items_hint": ["3–5 pains spécifiques au service"] },
+        { "id": "solution", "title": "Ce qu’on met en place", "type": "deliverables_list" },
+        { "id": "measurement", "title": "Comment on mesure", "type": "kpi_cards", "items_hint": ["Appels", "Formulaires", "Devis", "Qualité des demandes"] },
+        { "id": "method", "title": "La méthode", "type": "timeline_4_steps", "steps": ["Audit", "Plan", "Mise en place", "Pilotage"], "links_to": ["/methode"] },
+        { "id": "proofs", "title": "Preuves & réassurance", "type": "mini_cases_or_process", "links_to": ["/preuves"] },
+        { "id": "cities", "title": "Villes couvertes", "type": "city_list", "links_to": ["/{service}/{ville}"] },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir la méthode" }
+      ],
+      "footer_internal_links": ["/methode", "/tarifs", "/preuves"]
+    },
+    {
+      "page_type": "service_city",
+      "url_pattern": "/{service}/{ville}",
+      "h1_pattern": "{Service} pour entreprises de nettoyage à {Ville}",
+      "breadcrumbs_pattern": ["Accueil", "{Service}", "{Ville}"],
+      "hero": {
+        "pain_promise": "Développez vos demandes à {Ville} + alentours (3–5) grâce à un plan {service} mesuré.",
+        "micro_proof": "Tracking appels/formulaires + pilotage",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "local_context", "title": "Contexte local", "type": "local_intro", "notes": "{Ville} + 3–5 alentours (sans spam)" },
+        { "id": "pain_points", "title": "Les défis fréquents à {Ville}", "type": "bullets", "items_hint": ["Concurrence", "Avis", "Zones d’intervention", "Demandes peu qualifiées"] },
+        { "id": "priorities", "title": "Plan d’action {Service} à {Ville}", "type": "top_3_priorities" },
+        { "id": "deliverables", "title": "Ce qui est inclus", "type": "deliverables_list" },
+        { "id": "measurement", "title": "Mesure", "type": "kpi_cards", "items_hint": ["Appels", "Formulaires", "Devis"] },
+        { "id": "proofs", "title": "Preuves & réassurance", "type": "mini_cases_or_process", "links_to": ["/preuves"] },
+        { "id": "faq", "title": "FAQ locale", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action pour {Ville}", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir les tarifs" },
+        {
+          "id": "internal_links",
+          "title": "Aller plus loin",
+          "type": "internal_links",
+          "links_hint": ["/{service}/", "/specialites/{specialite}/{ville}", "/zones/{zone}/{ville}", "/methode"]
+        }
+      ],
+      "footer_internal_links": ["/{service}/", "/methode", "/tarifs"]
+    },
+    {
+      "page_type": "specialties_index",
+      "url_pattern": "/specialites/",
+      "h1_pattern": "Spécialités : des stratégies adaptées à votre type de clients",
+      "breadcrumbs_pattern": ["Accueil", "Spécialités"],
+      "hero": {
+        "pain_promise": "Selon votre spécialité, les messages et les canaux efficaces changent.",
+        "micro_proof": "Angles + pages + mesure",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "specialties_grid", "title": "Choisissez votre spécialité", "type": "cards_grid", "links_to": ["/specialites/{specialite}/"] },
+        { "id": "adaptation", "title": "Adapter SEO/Ads/CRO selon la spécialité", "type": "mini_guide" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir les tarifs" }
+      ],
+      "footer_internal_links": ["/methode", "/preuves", "/tarifs"]
+    },
+    {
+      "page_type": "specialty_hub",
+      "url_pattern": "/specialites/{specialite}/",
+      "h1_pattern": "Développer {Spécialité} : plus de demandes, plus régulières",
+      "breadcrumbs_pattern": ["Accueil", "Spécialités", "{Spécialité}"],
+      "hero": {
+        "pain_promise": "Attirer les bons clients {spécialité} (pas juste plus de trafic).",
+        "micro_proof": "Messages + pages qui transforment + mesure",
+        "cta_primary": "Recevoir un plan d’action",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "pain_points", "title": "Enjeux spécifiques", "type": "cards", "items_hint": ["Devis peu qualifiés", "Urgence vs récurrence", "Différenciation", "Marge/panier"] },
+        { "id": "strategy", "title": "Stratégie recommandée", "type": "3_blocks", "blocks_hint": ["SEO local", "Ads", "CRO & tracking"] },
+        { "id": "messages", "title": "Messages qui convertissent", "type": "bullets", "items_hint": ["USP", "preuves", "process", "délais", "devis"] },
+        { "id": "cities", "title": "Exemples de pages locales", "type": "city_list", "links_to": ["/specialites/{specialite}/{ville}"] },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Recevoir un plan d’action", "cta_secondary": "Voir la méthode" }
+      ],
+      "footer_internal_links": ["/methode", "/tarifs", "/preuves"]
+    },
+    {
+      "page_type": "specialty_city",
+      "url_pattern": "/specialites/{specialite}/{ville}",
+      "h1_pattern": "Développer {Spécialité} à {Ville} (SEO local + Ads + conversion)",
+      "breadcrumbs_pattern": ["Accueil", "Spécialités", "{Spécialité}", "{Ville}"],
+      "hero": {
+        "pain_promise": "Développez {spécialité} à {Ville} avec un plan mesuré (appels, formulaires, devis).",
+        "micro_proof": "Tracking simple + pilotage",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "local_context", "title": "Contexte local", "type": "local_intro", "notes": "{Ville} + 3–5 alentours" },
+        { "id": "pain_points", "title": "Problèmes fréquents", "type": "cards" },
+        { "id": "priorities", "title": "Les 3 priorités", "type": "top_3_priorities" },
+        { "id": "deliverables", "title": "Livrables", "type": "deliverables_list" },
+        { "id": "measurement", "title": "Mesure", "type": "kpi_cards" },
+        { "id": "proofs", "title": "Preuves", "type": "mini_cases_or_process" },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir la méthode" },
+        { "id": "internal_links", "title": "Aller plus loin", "type": "internal_links", "links_hint": ["/specialites/{specialite}/", "/{service}/{ville}", "/zones/{zone}/{ville}"] }
+      ],
+      "footer_internal_links": ["/specialites/{specialite}/", "/methode", "/tarifs"]
+    },
+    {
+      "page_type": "zones_index",
+      "url_pattern": "/zones/",
+      "h1_pattern": "Sud Oise (60) & Nord 95 : nos zones d’intervention",
+      "breadcrumbs_pattern": ["Accueil", "Zones"],
+      "hero": {
+        "pain_promise": "Des pages locales propres (zone → ville) pour gagner en pertinence sans spam.",
+        "micro_proof": "Structure claire + maillage + conversion",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "zones_grid", "title": "Zones", "type": "cards_grid", "links_to": ["/zones/{zone}/"] },
+        { "id": "why_zones", "title": "Pourquoi une approche par zone", "type": "bullets", "items_hint": ["Cohérence locale", "Meilleur maillage", "Moins de duplication", "Meilleure conversion"] },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir les tarifs" }
+      ],
+      "footer_internal_links": ["/preuves", "/methode", "/contact"]
+    },
+    {
+      "page_type": "zone_hub",
+      "url_pattern": "/zones/{zone}/",
+      "h1_pattern": "Développer votre entreprise de nettoyage – Zone {Zone}",
+      "breadcrumbs_pattern": ["Accueil", "Zones", "{Zone}"],
+      "hero": {
+        "pain_promise": "Priorités d’acquisition dans {Zone} : visibilité + demandes + conversion.",
+        "micro_proof": "SEO/Ads/CRO adaptés au contexte local",
+        "cta_primary": "Recevoir un plan d’action",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "zone_pains", "title": "Contexte & défis de la zone", "type": "cards" },
+        { "id": "recommended_approach", "title": "Approche recommandée", "type": "3_blocks", "blocks_hint": ["SEO local", "Ads", "CRO & tracking"], "links_to": ["/{service}/"] },
+        { "id": "cities", "title": "Villes couvertes", "type": "city_list", "links_to": ["/zones/{zone}/{ville}"] },
+        { "id": "resources", "title": "Ressources utiles", "type": "links", "links_to": ["/ressources/", "/methode"] },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Recevoir un plan d’action", "cta_secondary": "Voir la méthode" }
+      ],
+      "footer_internal_links": ["/{service}/", "/ressources/", "/tarifs"]
+    },
+    {
+      "page_type": "zone_city",
+      "url_pattern": "/zones/{zone}/{ville}",
+      "h1_pattern": "À {Ville} (Zone {Zone}) : générer plus de demandes pour le nettoyage",
+      "breadcrumbs_pattern": ["Accueil", "Zones", "{Zone}", "{Ville}"],
+      "hero": {
+        "pain_promise": "À {Ville}, combinez visibilité + acquisition + conversion (sans promesses irréalistes).",
+        "micro_proof": "Plan mesuré (appels, formulaires, devis)",
+        "cta_primary": "Demander un audit gratuit",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "local_context", "title": "Contexte local", "type": "local_intro" },
+        { "id": "3_levers", "title": "Les 3 leviers", "type": "3_blocks", "blocks_hint": ["SEO local", "Ads", "CRO & tracking"] },
+        { "id": "steps_deliverables", "title": "Étapes & livrables", "type": "timeline_plus_deliverables" },
+        { "id": "proofs", "title": "Preuves", "type": "mini_cases_or_process" },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Demander un audit gratuit", "cta_secondary": "Voir les tarifs" },
+        { "id": "internal_links", "title": "Aller plus loin", "type": "internal_links", "links_hint": ["/{service}/{ville}", "/specialites/{specialite}/{ville}", "/tarifs"] }
+      ],
+      "footer_internal_links": ["/{service}/{ville}", "/tarifs", "/methode"]
+    },
+    {
+      "page_type": "resources_index",
+      "url_pattern": "/ressources/",
+      "h1_pattern": "Ressources pour développer une entreprise de nettoyage",
+      "breadcrumbs_pattern": ["Accueil", "Ressources"],
+      "hero": {
+        "pain_promise": "Des guides actionnables (SEO local, Ads, conversion) pour arrêter d’improviser.",
+        "micro_proof": "Checklists + étapes + erreurs à éviter",
+        "cta_primary": "Recevoir un plan d’action",
+        "cta_secondary": "Voir la méthode"
+      },
+      "sections_order": [
+        { "id": "categories", "title": "Par thème", "type": "category_cards", "items_hint": ["SEO local", "Ads", "CRO & tracking"] },
+        { "id": "latest", "title": "Derniers articles", "type": "article_cards" },
+        { "id": "pillars", "title": "Guides piliers", "type": "featured_articles" },
+        { "id": "soft_cta", "title": "Besoin d’un plan priorisé ?", "type": "cta_soft", "cta_primary": "Recevoir un plan d’action", "cta_secondary": "Voir les tarifs" }
+      ],
+      "footer_internal_links": ["/methode", "/tarifs", "/contact"]
+    },
+    {
+      "page_type": "resource_article",
+      "url_pattern": "/ressources/{article}",
+      "h1_pattern": "{Titre}",
+      "breadcrumbs_pattern": ["Accueil", "Ressources", "{Titre}"],
+      "hero": {
+        "pain_promise": "Symptôme → cause → méthode : corrigez ce qui bloque vos demandes.",
+        "micro_proof": "Étapes + checklist + erreurs fréquentes",
+        "cta_primary": "Recevoir un plan d’action",
+        "cta_secondary": "Voir les tarifs"
+      },
+      "sections_order": [
+        { "id": "symptom", "title": "Le problème", "type": "problem_intro" },
+        { "id": "why", "title": "Pourquoi ça arrive", "type": "explanation" },
+        { "id": "steps", "title": "Méthode étape par étape", "type": "step_by_step" },
+        { "id": "mistakes", "title": "Erreurs fréquentes", "type": "bullets" },
+        { "id": "checklist", "title": "Checklist / modèle", "type": "checklist" },
+        { "id": "faq", "title": "FAQ", "type": "faq_3_6" },
+        { "id": "final_cta", "title": "Recevoir un plan d’action", "type": "cta_block", "cta_primary": "Recevoir un plan d’action", "cta_secondary": "Voir les tarifs" },
+        { "id": "internal_links", "title": "Aller plus loin", "type": "internal_links", "links_hint": ["/{service}/", "/preuves", "/{service}/{ville}"] }
+      ],
+      "footer_internal_links": ["/{service}/", "/preuves", "/tarifs"]
+    }
+  ]
+}

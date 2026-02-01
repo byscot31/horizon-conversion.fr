@@ -1,975 +1,568 @@
 ---
 // src/pages/index.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildSeo } from "../lib/seo";
 
-const brandName = "Horizon Conversion";
-const regionLabel = "Sud Oise (60) & Nord Val-d’Oise (95)";
+import services from "../data/services.json";
+import zones from "../data/zones.json";
+import villes from "../data/villes.json";
 
-const meta = {
-  title: "Horizon Conversion — SEO local, Google Ads & CRO pour entreprises de nettoyage (Sud Oise / Nord 95)",
-  description:
-    "On aide les entreprises de nettoyage à générer plus de demandes qualifiées via SEO local (Google Maps), Google Ads et CRO/Tracking. Senlis, Chantilly, Creil, Nogent-sur-Oise, Clermont, Luzarches + alentours.",
-  ogImage: "/og-home.jpg",
-  preloadHeroImage: "/images/hero-marketing.jpg",
-};
+const seo = buildSeo({
+  pageType: "home",
+  origin: Astro.url.origin,
+  pathname: Astro.url.pathname
+});
 
-const villes = [
-  { name: "Senlis", slug: "senlis", around: "Chamant, Vineuil-Saint-Firmin, Avilly-Saint-Léonard…" },
-  { name: "Chantilly", slug: "chantilly", around: "Gouvieux, Lamorlaye, Coye-la-Forêt…" },
-  { name: "Creil", slug: "creil", around: "Montataire, Saint-Maximin, Villers-Saint-Paul…" },
-  { name: "Nogent-sur-Oise", slug: "nogent-sur-oise", around: "Laigneville, Monchy-Saint-Éloi, Mogneville…" },
-  { name: "Clermont", slug: "clermont", around: "Agnetz, Fitz-James, Breuil-le-Sec…" },
-  { name: "Luzarches", slug: "luzarches", around: "Chaumontel, Jagny-sous-Bois, Seugy…" },
-];
-
-const specialites = [
-  { name: "Bureaux", slug: "nettoyage-bureaux", hint: "contrats récurrents B2B" },
-  { name: "Fin de chantier", slug: "nettoyage-fin-de-chantier", hint: "pics de demande, urgence" },
-  { name: "Copropriétés", slug: "nettoyage-coproprietes", hint: "syndics, multi-sites" },
-  { name: "Vitrerie", slug: "nettoyage-vitrerie", hint: "prestations visibles, devis rapides" },
-  { name: "Locaux commerciaux", slug: "nettoyage-locaux-commerciaux", hint: "horaires, fréquence" },
-  { name: "Médical", slug: "nettoyage-medical", hint: "confiance & conformité" },
-  { name: "Industrie", slug: "nettoyage-industrie", hint: "prestations techniques" },
-  { name: "Remise en état", slug: "remise-en-etat", hint: "turnover locatif, sinistres" },
-];
-
-// --- Schema.org (Home) ---
-const siteUrl = (Astro.site?.toString() || "").replace(/\/$/, "");
-const pageUrl = new URL(Astro.request.url).toString();
-
-const breadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Accueil",
-      item: siteUrl ? `${siteUrl}/` : pageUrl,
-    },
-  ],
-};
-
-const professionalService = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: brandName,
-  url: siteUrl || pageUrl,
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Oise" },
-    { "@type": "AdministrativeArea", name: "Val-d’Oise" },
-  ],
-  serviceType: "Webmarketing pour entreprises de nettoyage",
-  knowsAbout: ["SEO local", "Google Ads", "CRO", "GA4", "Google Business Profile", "Tracking", "Landing pages"],
-  description:
-    "Acquisition (SEO local, Google Ads) + conversion (CRO/Tracking) pour entreprises de nettoyage : plus de demandes qualifiées, pilotées par la donnée.",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Services",
-    itemListElement: [
-      { "@type": "OfferCatalog", name: "SEO local", url: (siteUrl ? `${siteUrl}/seo-local` : "/seo-local") },
-      { "@type": "OfferCatalog", name: "Google Ads", url: (siteUrl ? `${siteUrl}/google-ads` : "/google-ads") },
-      { "@type": "OfferCatalog", name: "CRO & Tracking", url: (siteUrl ? `${siteUrl}/cro` : "/cro") },
-    ],
-  },
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Vous faites du nettoyage ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Non. Horizon Conversion est un cabinet webmarketing : SEO local, Google Ads, CRO & tracking. On aide les entreprises de nettoyage à obtenir plus de demandes qualifiées dans le Sud Oise (60) et le Nord 95.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "En combien de temps peut-on voir une amélioration ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Ça dépend du point de départ (site, Google Business Profile, concurrence locale, budget). En général, on démarre par des quick wins (tracking, pages clés, structure GBP), puis on itère chaque mois avec un pilotage sur les leads (appels, formulaires, CPL, taux de conversion).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Comment évitez-vous les leads non qualifiés ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "On filtre par le message et par la structure : mots-clés et annonces orientés “entreprises de nettoyage”, landing pages avec questions de qualification, exclusions Google Ads, et suivi des conversions (GA4 + appels) pour couper ce qui ne convertit pas.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Travaillez-vous sur Senlis, Chantilly, Creil, etc. ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Oui : Senlis, Chantilly, Creil, Nogent-sur-Oise, Clermont, Luzarches, et les communes alentours. L’important est d’aligner votre zone d’intervention réelle avec vos pages locales, votre GBP et vos campagnes.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Que mesurez-vous exactement ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:
-          "Les actions qui comptent : clics téléphone, envois de formulaire, clics e-mail, itinéraires, et (si possible) qualification. Ensuite on suit les ratios : taux de conversion, coût par lead (Ads), part des appels, et évolution du mix (SEO/Ads).",
-      },
-    },
-  ],
-};
+// (optionnel) zones + 6 villes “vitrine” pour liens rapides
+const zoneLinks = zones.map((z) => ({ slug: z.slug, name: z.name }));
+const featuredCities = villes.slice(0, 6);
 ---
 
 <BaseLayout
-  title={meta.title}
-  description={meta.description}
-  canonical="/"
-  ogImage={meta.ogImage}
-  pageType="home"
-  brandName={brandName}
-  regionLabel={regionLabel}
-  primaryCta={{ href: "/contact", label: "Demander un audit (15 min)", id: "home_audit_15min", variant: "primary" }}
-  secondaryCta={{ href: "/tarifs", label: "Voir les packs", id: "home_packs", variant: "secondary" }}
-  schema={[breadcrumb, professionalService, faqSchema]}
-  preloadHeroImage={meta.preloadHeroImage}
+  title={seo.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  schema={seo.schema}
 >
-  {/* Contexte global pour tracking (si besoin) */}
-  <script is:inline>
-    {String.raw`
-      document.documentElement.dataset.pageType = "home";
-    `}
-  </script>
+	<!-- Slider
+	============================================= -->
+	<section id="slider" class="slider-element" style="background: url('/_assets_/images/hero.jpg') center center no-repeat; background-size: cover; height: 700px">
+		<div class="vertical-middle">
+			<div class="container">
+				<div class="row py-5">
+					<div class="col-xl-6 col-lg-5 col-md-2"></div>
+					<div class="col-xl-6 col-lg-7 col-md-10">
+						<div class="slider-title dark">
+							<h1 class="">Plus de demandes pour votre entreprise de nettoyage (60/95)</h1>
+							<p>
+								SEO local (Google &amp; Maps), Google Ads/Meta Ads et optimisation de conversion pour transformer votre visibilité en
+								<strong>appels</strong> et <strong>demandes de devis</strong>.
+								Approche pilotée, sans promesses irréalistes.
+							</p>
+						</div>
 
-  {/* HERO */}
-  <section
-    id="slider"
-    class="slider-element"
-    style={`background: url('${meta.preloadHeroImage}') center center / cover no-repeat; min-height: 720px;`}
-    aria-label="Accueil"
-  >
-    <div class="vertical-middle">
-      <div class="container">
-        <div class="row py-5 align-items-center">
-          <div class="col-xl-6 col-lg-6">
-            <div class="slider-title dark">
-              <h1 class="mb-3">
-                Plus de demandes qualifiées
-                <br />
-                pour votre entreprise de nettoyage
-                <br />
-                <span class="color">Sud Oise / Nord 95</span>
-              </h1>
-              <p class="mb-4" style="font-size: 1.075rem; max-width: 560px;">
-                On combine <strong>SEO local (Google Maps)</strong>, <strong>Google Ads</strong> et <strong>CRO/Tracking</strong>
-                pour transformer la visibilité en <strong>appels</strong> et <strong>demandes de devis</strong>.
-                Pilotage au mois : objectifs, tests, décisions — sans promesses “garanties”.
-              </p>
+						<!-- Form (audit) -->
+						<div class="card border-0 p-3 shadow-lg" style="background-color: rgba(255,255,255,0.85)">
+							<div class="form-widget card-body" data-alert-type="inline">
+								<div class="form-result"></div>
 
-              <div class="d-flex gap-3 flex-wrap">
-                <a
-                  href="/contact"
-                  class="button button-rounded bg-color text-white fw-semibold"
-                  data-cta
-                  data-cta-id="hero_audit_15min"
-                  data-cta-label="Demander un audit (15 min)"
-                  data-position="hero"
-                  data-page-type="home"
-                >
-                  Demander un audit (15 min) <i class="bi-arrow-right"></i>
-                </a>
+								<form id="form-cleaning" name="form-cleaning" action="include/form.php" method="post" class="row form-cleaning mb-0">
+									<div class="form-process">
+										<div class="form-cleaning-loader css3-spinner" style="position: absolute;">
+											<div class="css3-spinner-double-bounce1"></div>
+											<div class="css3-spinner-double-bounce2"></div>
+										</div>
+									</div>
 
-                <a
-                  href="/tarifs"
-                  class="button button-rounded button-light text-dark fw-semibold"
-                  data-cta
-                  data-cta-id="hero_packs"
-                  data-cta-label="Voir les packs"
-                  data-position="hero"
-                  data-page-type="home"
-                >
-                  Voir les packs
-                </a>
-              </div>
+									<div class="col-sm-6">
+										<div class="input-group form-group">
+											<span class="input-group-text bg-color text-white">
+												<img src="/_assets_/images/icons/cleaner2.svg" alt="" width="20">
+											</span>
+											<select class="required form-select" name="form-cleaning-service" id="form-cleaning-service">
+												<option value="" disabled selected>-- Votre priorité --</option>
+												{services.map((s) => (
+													<option value={s.name}>{s.name}</option>
+												))}
+												<option value="Je ne sais pas (à définir ensemble)">Je ne sais pas (à définir ensemble)</option>
+											</select>
+										</div>
+									</div>
 
-              <div class="mt-4 text-white-50 small">
-                ✅ Local-first : pages ville + Google Business Profile cohérents
-                <br />
-                ✅ CRO-first : messages, preuves, formulaires, appels mesurés
-                <br />
-                ✅ Tracking propre : GA4, UTMs, événements “lead”
-              </div>
-            </div>
-          </div>
+									<div class="col-sm-6">
+										<div class="input-group form-group">
+											<span class="input-group-text bg-color text-white"><i class="bi-map"></i></span>
+											<input
+												type="text"
+												name="form-cleaning-location"
+												id="form-cleaning-location"
+												class="form-control required"
+												value=""
+												placeholder="Ville / zone (ex: Chantilly, Sarcelles...)"
+											>
+										</div>
+									</div>
 
-          {/* Mini-form (lead) façon Cleaner */}
-          <div class="col-xl-6 col-lg-6 mt-5 mt-lg-0">
-            <div class="card border-0 p-3 shadow-lg" style="background-color: rgba(255,255,255,0.90)">
-              <div class="card-body">
-                <h2 class="h4 mb-1 text-transform-none ls-0">Audit express — 15 minutes</h2>
-                <p class="text-black-50 mb-4">
-                  On regarde votre site + votre Google Business Profile + votre zone (60/95), puis on vous donne un plan d’action clair.
-                </p>
+									<div class="col-sm-6">
+										<div class="input-group form-group">
+											<span class="input-group-text bg-color text-white"><i class="bi-briefcase"></i></span>
+											<input
+												type="text"
+												name="form-cleaning-company"
+												id="form-cleaning-company"
+												class="form-control"
+												value=""
+												placeholder="Entreprise (optionnel)"
+											>
+										</div>
+									</div>
 
-                <form
-                  id="home-lead"
-                  class="row g-3 hc-lead"
-                  method="post"
-                  action="/api/lead"
-                  data-track="lead"
-                >
-                  <div class="col-sm-6">
-                    <div class="input-group form-group">
-                      <span class="input-group-text bg-color text-white"><i class="bi-megaphone"></i></span>
-                      <select class="form-select" name="service" required>
-                        <option value="" disabled selected>— Service —</option>
-                        <option value="seo-local">SEO local</option>
-                        <option value="google-ads">Google Ads</option>
-                        <option value="cro">CRO & Tracking</option>
-                      </select>
-                    </div>
-                  </div>
+									<div class="col-sm-6">
+										<div class="form-group input-group">
+											<span class="input-group-text bg-color text-white"><i class="bi-chat-left-text"></i></span>
+											<input
+												type="text"
+												name="form-cleaning-goal"
+												id="form-cleaning-goal"
+												class="form-control required"
+												value=""
+												placeholder="Objectif (appels, devis, récurrence...)"
+											>
+										</div>
+									</div>
 
-                  <div class="col-sm-6">
-                    <div class="input-group form-group">
-                      <span class="input-group-text bg-color text-white"><i class="bi-geo-alt"></i></span>
-                      <select class="form-select" name="ville" required>
-                        <option value="" disabled selected>— Ville / zone —</option>
-                        {villes.map((v) => <option value={v.slug}>{v.name}</option>)}
-                        <option value="alentours">Alentours</option>
-                      </select>
-                    </div>
-                  </div>
+									<div class="col-sm-6">
+										<div class="input-group form-group">
+											<span class="input-group-text bg-color text-white"><i class="bi-envelope-paper"></i></span>
+											<input type="email" name="form-cleaning-email" id="form-cleaning-email" class="form-control required" value="" placeholder="Votre email">
+										</div>
+									</div>
 
-                  <div class="col-sm-6">
-                    <div class="input-group form-group">
-                      <span class="input-group-text bg-color text-white"><i class="bi-envelope-paper"></i></span>
-                      <input class="form-control" type="email" name="email" placeholder="Email pro" required />
-                    </div>
-                  </div>
+									<div class="col-sm-6">
+										<div class="input-group form-group">
+											<span class="input-group-text bg-color text-white"><i class="bi-telephone-outbound"></i></span>
+											<input type="text" name="form-cleaning-phone" id="form-cleaning-phone" class="form-control required" value="" placeholder="Téléphone">
+										</div>
+									</div>
 
-                  <div class="col-sm-6">
-                    <div class="input-group form-group">
-                      <span class="input-group-text bg-color text-white"><i class="bi-telephone-outbound"></i></span>
-                      <input class="form-control" type="tel" name="phone" placeholder="Téléphone" required />
-                    </div>
-                  </div>
+									<input type="text" class="d-none" id="form-cleaning-botcheck" name="form-cleaning-botcheck" value="">
+									<input type="hidden" name="prefix" value="form-cleaning-">
+									<input type="hidden" name="subject" value="Demande Audit Gratuit - Horizon Conversion">
+									<input type="hidden" name="html_title" value="Audit Horizon Conversion">
 
-                  <div class="col-12">
-                    <div class="input-group form-group">
-                      <span class="input-group-text bg-color text-white"><i class="bi-buildings"></i></span>
-                      <select class="form-select" name="type_clients" required>
-                        <option value="" disabled selected>— Vos clients —</option>
-                        <option value="b2b">B2B (bureaux, syndics, industriels…)</option>
-                        <option value="b2c">B2C (particuliers)</option>
-                        <option value="mixte">Mixte</option>
-                      </select>
-                    </div>
-                  </div>
+									<div class="col-12">
+										<button type="submit" name="form-cleaning-submit" class="btn btn-lg bg-color text-white fw-semibold w-100 mt-2">
+											Demander un audit gratuit
+										</button>
+										<small class="d-block mt-2 text-black-50">
+											Ou <a href="/tarifs"><u>voir les tarifs</u></a> / <a href="/methode"><u>voir la méthode</u></a>.
+										</small>
+									</div>
 
-                  <div class="col-12">
-                    <textarea class="form-control" name="message" rows="3" placeholder="Objectif (ex : +10 demandes/mois, +appels sur Chantilly, réduire les leads non qualifiés…)"></textarea>
-                  </div>
+								</form>
+							</div>
+						</div>
 
-                  <div class="col-12">
-                    <button
-                      type="submit"
-                      class="btn btn-lg bg-color text-white fw-semibold w-100 mt-2"
-                      data-cta
-                      data-cta-id="form_submit_audit_15min"
-                      data-cta-label="Envoyer — Audit 15 min"
-                      data-position="hero_form"
-                      data-page-type="home"
-                    >
-                      Envoyer — Audit 15 min
-                    </button>
-                    <small class="d-block text-black-50 mt-2">
-                      Pas de promesse “magique” : on vous explique ce qui est faisable, comment le mesurer, et comment itérer.
-                    </small>
-                  </div>
-                </form>
-              </div>
-            </div>
+						<!-- Quick links -->
+						<div class="mt-4 d-flex flex-wrap gap-2">
+							<a href="/methode" class="btn btn-sm btn-light fw-semibold">Voir la méthode</a>
+							<a href="/tarifs" class="btn btn-sm btn-light fw-semibold">Voir les tarifs</a>
+							<a href="/preuves" class="btn btn-sm btn-light fw-semibold">Preuves &amp; exemples</a>
+							<a href="/zones" class="btn btn-sm btn-light fw-semibold">Zones 60/95</a>
+						</div>
 
-            <div class="mt-3 text-white-50 small">
-              Déjà actif sur Google ? On vérifie votre <strong>cohérence locale</strong> (zones, catégories, avis) et votre <strong>conversion</strong> (appels/formulaires).
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <div class="svg-separator">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#FFF">
-          <path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></path>
-        </svg>
-      </div>
-    </div>
-  </section>
+		<div class="svg-separator">
+			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#FFF"><path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></svg>
+			</div>
+		</div>
+	</section>
 
-  {/* CONTENT */}
-  <section id="content">
-    <div class="content-wrap pt-4 pb-0">
-      {/* HOW WE WORK (Cleaner-like feature boxes) */}
-      <div class="container">
-        <div class="heading-block text-center mx-auto" style="max-width: 760px">
-          <h2 class="mb-2 text-transform-none ls-0">Une méthode simple : acquisition → conversion → pilotage</h2>
-          <span>
-            Les entreprises de nettoyage gagnent quand la visibilité locale se transforme en demandes qualifiées.
-            Notre job : construire le système, mesurer, puis optimiser.
-          </span>
-        </div>
+	<!-- Content
+	============================================= -->
+	<section id="content">
+		<div class="content-wrap pt-4 pb-0">
 
-        <div class="row justify-content-center col-mb-50">
-          <div class="col-md-4">
-            <div class="feature-box mx-0 fbox-small fbox-center border-0">
-              <div class="fbox-img position-relative">
-                <i class="bi-search color" style="font-size: 64px;"></i>
-              </div>
-              <h3 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0">
-                <span>1.</span> Audit & quick wins
-              </h3>
-              <p class="text-black-50">
-                On identifie ce qui bloque : pages locales, Google Business Profile, tracking, messages.
-                On corrige vite ce qui impacte immédiatement les leads.
-              </p>
-              <a href="/methode" class="btn second-bg-color px-3 fw-semibold">
-                Voir la méthode <i class="bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+			<!-- How We Work -->
+			<div class="container">
+				<div class="heading-block text-center mx-auto" style="max-width: 700px">
+					<h2 class="mb-2 text-transform-none ls-0">Comment on travaille</h2>
+					<span>Une méthode simple : priorités, mise en place, puis pilotage avec mesure (appels, formulaires, devis).</span>
+				</div>
 
-          <div class="col-md-4">
-            <div class="feature-box mx-0 fbox-small fbox-center border-0">
-              <div class="fbox-img position-relative">
-                <i class="bi-geo-alt color" style="font-size: 64px;"></i>
-              </div>
-              <h3 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0">
-                <span>2.</span> Déploiement local
-              </h3>
-              <p class="text-black-50">
-                On construit vos pages ville, vos preuves, vos offres, et (si besoin) vos campagnes Google Ads
-                alignées sur votre zone réelle (60/95 + alentours).
-              </p>
-              <a href="/seo-local" class="btn second-bg-color px-3 fw-semibold">
-                SEO local <i class="bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+				<div class="row justify-content-center col-mb-50">
+					<div class="col-md-4">
+						<div class="feature-box mx-0 fbox-small fbox-center border-0">
+							<div class="fbox-img position-relative">
+								<img src="/_assets_/images/icons/book.svg" alt="Audit Icon" height="160">
+							</div>
+							<h2 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0"><span>1.</span> Audit &amp; priorités</h2>
+							<p>On identifie ce qui bloque la visibilité et la conversion dans votre zone (60/95) : fiche Google, pages, preuves, tracking.</p>
+							<a href="/contact" class="btn second-bg-color px-3 fw-semibold">Demander un audit <i class="bi-arrow-right"></i></a>
+						</div>
+					</div>
 
-          <div class="col-md-4">
-            <div class="feature-box mx-0 fbox-small fbox-center border-0">
-              <div class="fbox-img position-relative">
-                <i class="bi-graph-up-arrow color" style="font-size: 64px;"></i>
-              </div>
-              <h3 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0">
-                <span>3.</span> CRO & pilotage
-              </h3>
-              <p class="text-black-50">
-                On suit les conversions (appels, formulaires, itinéraires), on améliore la conversion et on coupe ce qui n’apporte
-                pas de demandes qualifiées.
-              </p>
-              <a href="/cro" class="btn second-bg-color px-3 fw-semibold">
-                CRO & Tracking <i class="bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+					<div class="col-md-4">
+						<div class="feature-box mx-0 fbox-small fbox-center border-0">
+							<div class="fbox-img position-relative">
+								<img src="/_assets_/images/icons/confirm3.svg" alt="Plan Icon" height="160">
+							</div>
+							<h2 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0"><span>2.</span> Plan d’action clair</h2>
+							<p>Un plan priorisé : SEO local, Ads, pages qui convertissent. On évite les actions “nice to have” qui ne génèrent pas de demandes.</p>
+							<a href="/methode" class="btn btn-light px-3 fw-semibold">Voir la méthode <i class="bi-arrow-right"></i></a>
+						</div>
+					</div>
 
-      {/* 3 PILLARS (cards) */}
-      <div class="section bg-transparent">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-              <div class="heading-block border-bottom-0">
-                <h2 class="mb-3 text-transform-none ls-0">Les 3 leviers qui font gagner des devis (sans hasard)</h2>
-                <p class="text-black-50 mb-0">
-                  Dans le Sud Oise / Nord 95, la concurrence se joue surtout sur :
-                  <strong> Google Maps</strong>, la <strong>pertinence des pages locales</strong>, et la <strong>capacité à convertir</strong>
-                  (appel / formulaire) avec un message clair.
-                </p>
-              </div>
+					<div class="col-md-4">
+						<div class="feature-box mx-0 fbox-small fbox-center border-0">
+							<div class="fbox-img position-relative">
+								<img src="/_assets_/images/icons/enjoy.svg" alt="Pilotage Icon" height="160">
+							</div>
+							<h2 class="mt-4 h5 mb-3 text-transform-none fw-semibold ls-0"><span>3.</span> Mise en place &amp; pilotage</h2>
+							<p>On mesure, on ajuste, on renforce ce qui marche. Objectif : plus de demandes qualifiées, et plus régulières.</p>
+							<a href="/preuves" class="btn btn-light px-3 fw-semibold">Voir des preuves <i class="bi-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-              <div class="feature-box fbox-plain mb-4">
-                <div class="fbox-icon">
-                  <i class="bi-pin-map color"></i>
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none fw-semibold ls-0">SEO local (GBP + pages ville)</h3>
-                  <p class="text-black-50 mb-0">
-                    Objectif : être visible quand on cherche “entreprise de nettoyage + ville”.
-                    Travail sur la fiche Google, la cohérence NAP, les preuves et les pages locales.
-                  </p>
-                </div>
-              </div>
+			<div class="clear"></div>
 
-              <div class="feature-box fbox-plain mb-4">
-                <div class="fbox-icon">
-                  <i class="bi-bullseye color"></i>
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none fw-semibold ls-0">Google Ads (leads rapides, filtrés)</h3>
-                  <p class="text-black-50 mb-0">
-                    Objectif : capter la demande “chaude” immédiatement.
-                    On travaille surtout la qualification (requêtes, exclusions, annonces, landing) + le coût/lead.
-                  </p>
-                </div>
-              </div>
+			<!-- Diagonal hero (positionnement) -->
+			<div class="text-center dark hero-diagonal mt-6 mb-6" style="padding: 170px 0">
+				<div class="container" style="max-width: 760px">
+					<h2 class="mb-4 h1 fw-normal">Un système d’acquisition piloté pour le nettoyage</h2>
+					<span class="lead">
+						Visibilité locale (Google/Maps) + campagnes (Ads) + pages qui convertissent (CRO).
+						Le tout mesuré : appels, formulaires, devis.
+					</span>
+					<div class="mt-4">
+						<a href="/contact" class="btn btn-lg bg-color text-white fw-semibold px-4">Recevoir un plan d’action</a>
+						<a href="/tarifs" class="btn btn-lg btn-light fw-semibold px-4 ms-2">Voir les tarifs</a>
+					</div>
+				</div>
+			</div>
 
-              <div class="feature-box fbox-plain mb-0">
-                <div class="fbox-icon">
-                  <i class="bi-ui-checks-grid color"></i>
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none fw-semibold ls-0">CRO & tracking (transformer le trafic)</h3>
-                  <p class="text-black-50 mb-0">
-                    Objectif : plus de conversions sans “pousser” le budget.
-                    Clarification des offres, réassurance, preuves, formulaires courts, suivi GA4 des appels.
-                  </p>
-                </div>
-              </div>
-            </div>
+			<div class="clear"></div>
 
-            <div class="col-lg-5">
-              <div class="card border-0 shadow-sm">
-                <div class="card-body second-bg-color rounded-bottom p-4">
-                  <h3 class="mb-2 text-transform-none ls-0">Ce qu’on optimise vraiment (ROI)</h3>
-                  <ul class="iconlist mb-0">
-                    <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i> Volume de demandes qualifiées (pas juste du trafic)</li>
-                    <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i> Part des appels / formulaires + taux de conversion</li>
-                    <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i> Coût par lead en Ads + mots-clés rentables</li>
-                    <li class="mb-2"><i class="bi-check-circle-fill color me-2"></i> Pages locales “ville + alentours” qui rankent et convertissent</li>
-                    <li><i class="bi-check-circle-fill color me-2"></i> Tracking propre (UTM, GA4 events, attribution)</li>
-                  </ul>
+			<!-- Why choose us -->
+			<div class="container mt-5 mb-6">
+				<div class="heading-block text-center mx-auto" style="max-width: 700px">
+					<h2 class="mb-2 text-transform-none ls-0">Pourquoi ça marche</h2>
+					<span>On optimise pour des demandes (appels/devis), pas pour “faire joli”. Et on documente ce qu’on fait.</span>
+				</div>
 
-                  <div class="line my-4"></div>
+				<div class="clear"></div>
 
-                  <div class="d-flex gap-2 flex-wrap">
-                    <a
-                      href="/google-ads"
-                      class="button button-rounded button-light text-dark fw-semibold m-0"
-                      data-cta
-                      data-cta-id="card_ads"
-                      data-cta-label="Découvrir Google Ads"
-                      data-position="piliers_card"
-                      data-page-type="home"
-                    >
-                      Découvrir Google Ads
-                    </a>
+				<div class="row col-mb-50 mt-3">
+					<div class="col-lg-4 text-center order-lg-last">
+						<img src="/_assets_/images/cleaner-icon.svg" alt="Local" width="340">
+						<small class="d-block tright" style="color:#DDD">Illustration : placeholder</small>
+					</div>
 
-                    <a
-                      href="/seo-local"
-                      class="button button-rounded bg-color text-white fw-semibold m-0"
-                      data-cta
-                      data-cta-id="card_seo_local"
-                      data-cta-label="Découvrir SEO local"
-                      data-position="piliers_card"
-                      data-page-type="home"
-                    >
-                      Découvrir SEO local <i class="bi-arrow-right"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+					<div class="col-lg-4 col-md-6 pb-0">
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/cleaner-man.svg" alt="Mesure">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Mesure simple (pas du flou)</h3>
+								<p>Tracking utile : appels, formulaires, clics contact. Vous voyez ce qui génère des demandes.</p>
+							</div>
+						</div>
 
-              <small class="d-block text-black-50 mt-3">
-                Important : on ne “garantit” pas une position ni un nombre de leads. On met en place un système mesurable et on l’améliore chaque mois.
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/cleaning-man.svg" alt="Local first">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Local-first (60/95)</h3>
+								<p>Pages par ville + structure par zone : cohérent, sans spam, et plus efficace pour convertir.</p>
+							</div>
+						</div>
 
-      {/* LOCAL-FIRST UNIQUE SECTION */}
-      <div class="section mb-0" style="padding: 90px 0; background-color: rgba(51,94,238,0.08);">
-        <div class="container" style="max-width: 980px">
-          <div class="heading-block text-center mx-auto" style="max-width: 780px">
-            <h2 class="mb-2 text-transform-none ls-0">Local-first : ce qui marche vraiment sur le 60/95</h2>
-            <span>
-              Une stratégie “générique” fait souvent perdre du budget. On adapte le message et la structure à la réalité terrain :
-              zones d’intervention, types de clients (B2B/B2C), et motifs de recherche.
-            </span>
-          </div>
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/guarantee.svg" alt="Preuves">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Preuves &amp; réassurance</h3>
+								<p>Process, livrables, transparence : on explique ce qu’on met en place et comment on pilote.</p>
+							</div>
+						</div>
+					</div>
 
-          <div class="row col-mb-30">
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0">
-                    <i class="bi-geo-fill color me-2"></i> Ville + alentours (pas “toute la France”)
-                  </h3>
-                  <p class="text-black-50 mb-3">
-                    Les pages locales qui performent sont celles qui collent à la zone réelle : <strong>Senlis</strong> + communes proches,
-                    <strong>Chantilly</strong> + bassin, <strong>Creil</strong> + périphérie… On évite le flou qui fait chuter la confiance.
-                  </p>
-                  <p class="mb-0">
-                    <a href="/ressources/senlis" class="fw-semibold">Voir un hub ville (ex : Senlis)</a> — ensuite on décline les pages service & spécialité.
-                  </p>
-                </div>
-              </div>
-            </div>
+					<div class="col-lg-4 col-md-6">
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/product.svg" alt="Ads">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Ads quand il faut accélérer</h3>
+								<p>Google Ads/Meta Ads pour générer des demandes plus vite, avec pages dédiées et optimisation continue.</p>
+							</div>
+						</div>
 
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0">
-                    <i class="bi-shield-check color me-2"></i> Preuves & réassurance (avant la vente)
-                  </h3>
-                  <p class="text-black-50 mb-3">
-                    Beaucoup d’entreprises de nettoyage ont des offres solides… mais ne les rendent pas “vérifiables”.
-                    On structure des preuves : process, checklists, photos (si vous en avez), certifications, zones, et cas types.
-                  </p>
-                  <p class="mb-0">
-                    <a href="/preuves" class="fw-semibold">Voir nos éléments de preuve</a> (sans bullshit, orienté décision).
-                  </p>
-                </div>
-              </div>
-            </div>
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/time.svg" alt="Priorités">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Priorités avant volume</h3>
+								<p>On choisit peu d’actions à fort impact, plutôt que 50 tâches qui n’améliorent pas les demandes.</p>
+							</div>
+						</div>
 
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0">
-                    <i class="bi-funnel-fill color me-2"></i> Qualification (pour stopper les “mauvais leads”)
-                  </h3>
-                  <p class="text-black-50 mb-3">
-                    On filtre avec le bon mix : requêtes, annonces, exclusions, landing pages et questions simples
-                    (type de clients, fréquence, surface, urgence, ville).
-                  </p>
-                  <p class="mb-0">
-                    <a href="/google-ads" class="fw-semibold">Google Ads</a> est souvent le levier le plus rapide… si la qualification est carrée.
-                  </p>
-                </div>
-              </div>
-            </div>
+						<div class="feature-box fbox-plain mb-5">
+							<div class="fbox-icon">
+								<img src="/_assets_/images/icons/price.svg" alt="Transparence">
+							</div>
+							<div class="fbox-content">
+								<h3 class="text-transform-none fw-semibold ls-0">Transparence sur le budget</h3>
+								<p>Offres claires : ce qui est inclus, ce qui est mesuré, et ce qu’on teste ensuite.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="col-md-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 mb-2 text-transform-none ls-0">
-                    <i class="bi-activity color me-2"></i> Mesure (sinon on pilote “à l’intuition”)
-                  </h3>
-                  <p class="text-black-50 mb-3">
-                    Sans tracking des appels/formulaires, impossible d’optimiser. On installe GA4 events, UTMs, et un suivi lisible.
-                    Ensuite, on prend des décisions (stop/keep/test).
-                  </p>
-                  <p class="mb-0">
-                    <a href="/cro" class="fw-semibold">CRO & tracking</a> : le “multiplicateur” de vos actions SEO/Ads.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+			<div class="clear"></div>
 
-          <div class="text-center mt-5">
-            <a
-              href="/contact"
-              class="button button-rounded bg-color text-white fw-semibold"
-              data-cta
-              data-cta-id="local_section_cta"
-              data-cta-label="Parler de votre zone & objectifs"
-              data-position="local_section"
-              data-page-type="home"
-            >
-              Parler de votre zone & objectifs <i class="bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+			<!-- Section "price" : on garde le design mais on le repurpose en "packs" + mini FAQ -->
+			<div id="section-price" class="section mb-0 mt-6" style="padding-bottom: 100px; overflow: visible">
+				<div class="svg-separator top">
+					<div>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#F9F9F9"><path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></svg>
+					</div>
+				</div>
 
-      {/* PREUVE (concrete audit excerpt) */}
-      <div class="container mt-6 mb-6">
-        <div class="heading-block text-center mx-auto" style="max-width: 760px">
-          <h2 class="mb-2 text-transform-none ls-0">Preuve : ce qu’on regarde pendant l’audit</h2>
-          <span>
-            L’audit n’est pas un PDF “générique”. On sort une liste d’actions priorisées : ce qui augmente vos demandes qualifiées, dans votre zone.
-          </span>
-        </div>
+				<div class="container">
+					<div class="row gutter-40">
+						<div class="col-lg-8">
+							<div class="heading-block border-bottom-0">
+								<h2 class="mb-3 text-transform-none ls-0">Choisir le bon levier (sans se disperser)</h2>
+								<p>
+									On démarre par un audit pour prioriser. Ensuite, on combine SEO local, Ads et optimisation de conversion selon vos objectifs.
+									<a href="/tarifs"><u>Voir les offres</u></a>.
+								</p>
+							</div>
 
-        <div class="row col-mb-30">
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0">
-                  <i class="bi-map color me-2"></i> Google Business Profile
-                </h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">Catégories + services alignés “nettoyage” (B2B/B2C)</li>
-                  <li class="mb-2">Zones d’intervention cohérentes (ville + alentours)</li>
-                  <li class="mb-2">Avis : volume, récence, réponses, mots-clés naturels</li>
-                  <li>Photos & preuves (process, équipes, matériel — si dispo)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+							<div class="row col-mb-30">
+								{services.map((s) => (
+									<div class="col-md-6">
+										<div class="card border-0 shadow-sm h-100">
+											<div class="card-body p-4">
+												<h4 class="fw-semibold mb-2">{s.name}</h4>
+												<p class="text-black-50 mb-3">{s.short}</p>
+												<div class="d-flex gap-2">
+													<a href={`/${s.slug}`} class="button button-rounded button-light second-bg-color text-dark ls-0 m-0">Découvrir</a>
+													<a href="/contact" class="btn btn-sm btn-light fw-semibold">Audit gratuit</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
 
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0">
-                  <i class="bi-window-stack color me-2"></i> Pages locales & offres
-                </h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">Pages service + ville (ex : SEO local Senlis)</li>
-                  <li class="mb-2">Preuves, FAQ, réassurance, différenciation</li>
-                  <li class="mb-2">CTA unique + CTA secondaire + friction minimale</li>
-                  <li>Maillage interne (hub → cluster → hub)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+							<div class="mt-4">
+								<a href="/methode" class="btn btn-light fw-semibold">Voir la méthode <i class="bi-arrow-right"></i></a>
+								<a href="/preuves" class="btn btn-light fw-semibold ms-2">Voir des preuves <i class="bi-arrow-right"></i></a>
+							</div>
+						</div>
 
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h5 text-transform-none ls-0">
-                  <i class="bi-clipboard-data color me-2"></i> Tracking & pilotage
-                </h3>
-                <ul class="iconlist ms-0 mb-0 text-black-50">
-                  <li class="mb-2">GA4 events : tel, mail, itinéraire, CTA, form_start, form_submit</li>
-                  <li class="mb-2">UTM standards + conservation (attribution)</li>
-                  <li class="mb-2">Suivi des leads : source, service, ville, spécialité</li>
-                  <li>Décisions mensuelles : tests, itérations, priorités</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+						<div class="col-lg-4 mt-4 mt-md-0">
+							<div class="card text-center border-0 shadow-sm">
+								<div class="card-body pt-4 pb-0">
+									<h4 class="card-title fw-semibold text-uppercase mb-0">Audit gratuit</h4>
+									<div class="py-3">
+										<div class="h2 color fw-bold m-0">Plan d’action</div>
+										<small class="text-muted">priorisé &amp; concret</small>
+									</div>
+								</div>
+								<div class="line my-1"></div>
+								<div class="card-body py-4">
+									<ul class="iconlist d-flex flex-column align-items-center ms-0 op-08">
+										<li class="mb-2">Priorités “quick wins”</li>
+										<li class="mb-2">Tracking utile (appels/formulaires)</li>
+										<li class="mb-2">Recommandations SEO/Ads/CRO</li>
+										<li>Prochaine étape proposée</li>
+									</ul>
+									<a href="/contact" class="button button-rounded button-light button-large second-bg-color text-dark w-100 ls-0 m-0">
+										Demander l’audit
+									</a>
+								</div>
+							</div>
 
-        <div class="text-center mt-5">
-          <a
-            href="/contact"
-            class="button button-rounded bg-color text-white fw-semibold"
-            data-cta
-            data-cta-id="proof_cta"
-            data-cta-label="Demander l’audit"
-            data-position="proof"
-            data-page-type="home"
-          >
-            Demander l’audit (15 min) <i class="bi-arrow-right"></i>
-          </a>
-          <div class="mt-2 text-black-50 small">Vous repartez avec un plan d’action priorisé, pas une “liste de vœux”.</div>
-        </div>
-      </div>
+							<div class="fancy-title title-border mt-5">
+								<h4 class="fw-semibold">Questions fréquentes</h4>
+							</div>
 
-      {/* PACKS (teaser) */}
-      <div id="section-price" class="section mb-0 mt-6" style="padding-bottom: 100px; overflow: visible">
-        <div class="svg-separator top">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#F9F9F9">
-              <path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></path>
-            </svg>
-          </div>
-        </div>
+							<div class="toggle">
+								<div class="toggle-header justify-content-between">
+									<div class="toggle-icon">
+										<i class="toggle-closed bi-plus-circle"></i>
+										<i class="toggle-open bi-dash-circle"></i>
+									</div>
+									<div class="toggle-title fw-semibold">
+										Est-ce que vous garantissez des résultats ?
+									</div>
+								</div>
+								<div class="toggle-content text-black-50">
+									Non. On travaille avec une méthode pilotée (priorités + tests + mesure). L’objectif est d’augmenter la visibilité et surtout les demandes qualifiées, sans promesse irréaliste.
+								</div>
+							</div>
 
-        <div class="container">
-          <div class="heading-block text-center mx-auto" style="max-width: 760px">
-            <h2 class="mb-2 text-transform-none ls-0">Packs simples, pilotés, orientés demandes qualifiées</h2>
-            <span>
-              Starter / Growth / Premium + options (tracking, landing, Google Business Profile). Choix selon votre zone, votre offre et votre urgence.
-            </span>
-          </div>
+							<div class="toggle">
+								<div class="toggle-header justify-content-between">
+									<div class="toggle-icon">
+										<i class="toggle-closed bi-plus-circle"></i>
+										<i class="toggle-open bi-dash-circle"></i>
+									</div>
+									<div class="toggle-title fw-semibold">
+										SEO local ou Ads : par quoi commencer ?
+									</div>
+								</div>
+								<div class="toggle-content text-black-50">
+									Ça dépend de votre urgence et de la concurrence. Souvent, on sécurise d’abord la conversion et le tracking, puis on combine SEO local et Ads de façon progressive.
+								</div>
+							</div>
 
-          <div class="row col-mb-30 mt-4">
-            <div class="col-lg-4">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 fw-semibold text-uppercase mb-2">Starter</h3>
-                  <p class="text-black-50 mb-3">Pour repartir sur des bases propres et mesurables.</p>
-                  <ul class="iconlist ms-0 mb-0 text-black-50">
-                    <li class="mb-2">Tracking GA4 + événements leads</li>
-                    <li class="mb-2">Audit GBP + quick wins</li>
-                    <li class="mb-2">1 page service (hub) + 1 page ville (cluster)</li>
-                    <li>Reporting simple (leads, taux de conversion)</li>
-                  </ul>
-                  <div class="line my-4"></div>
-                  <a href="/tarifs" class="button button-rounded button-light text-dark fw-semibold w-100 m-0">
-                    Détails Starter
-                  </a>
-                </div>
-              </div>
-            </div>
+							<div class="toggle">
+								<div class="toggle-header justify-content-between">
+									<div class="toggle-icon">
+										<i class="toggle-closed bi-plus-circle"></i>
+										<i class="toggle-open bi-dash-circle"></i>
+									</div>
+									<div class="toggle-title fw-semibold">
+										Vous intervenez où ?
+									</div>
+								</div>
+								<div class="toggle-content text-black-50">
+									Sud Oise (60) et Nord Val-d’Oise (95). On structure par zones et villes pour garder un SEO propre et utile.
+								</div>
+							</div>
 
-            <div class="col-lg-4">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 fw-semibold text-uppercase mb-2">Growth</h3>
-                  <p class="text-black-50 mb-3">Pour générer un flux régulier (SEO + conversion).</p>
-                  <ul class="iconlist ms-0 mb-0 text-black-50">
-                    <li class="mb-2">Pages locales (ville + alentours) + maillage</li>
-                    <li class="mb-2">Optimisation GBP continue</li>
-                    <li class="mb-2">Amélioration conversion (CTA, preuves, formulaires)</li>
-                    <li>Pilotage mensuel & priorisation</li>
-                  </ul>
-                  <div class="line my-4"></div>
-                  <a href="/tarifs" class="button button-rounded bg-color text-white fw-semibold w-100 m-0">
-                    Détails Growth <i class="bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
+							<p class="fw-semibold">
+								Vous voulez le détail ? <a href="/methode"><u>Voir la méthode</u></a> <i class="bi-caret-right-fill color"></i>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="col-lg-4">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h5 fw-semibold text-uppercase mb-2">Premium</h3>
-                  <p class="text-black-50 mb-3">Pour accélérer avec Ads + landing + optimisation.</p>
-                  <ul class="iconlist ms-0 mb-0 text-black-50">
-                    <li class="mb-2">Google Ads (Search) + exclusions + suivi CPL</li>
-                    <li class="mb-2">Landing pages orientées qualification</li>
-                    <li class="mb-2">Tests CRO (offre, preuves, friction)</li>
-                    <li>Reporting avancé & itérations</li>
-                  </ul>
-                  <div class="line my-4"></div>
-                  <a href="/tarifs" class="button button-rounded button-light text-dark fw-semibold w-100 m-0">
-                    Détails Premium
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+			<!-- Section preuves / local -->
+			<div class="section m-0 dark" style="background: linear-gradient(rgba(51,94,238,0.8), rgba(51,94,238,0.8)), url('/_assets_/images/section2.jpg') center center no-repeat; background-size: cover; padding: 80px 0 230px">
+				<div class="container">
+					<div class="heading-block text-center mx-auto" style="max-width: 820px">
+						<h5 class="fw-normal text-uppercase ls-2">Local-first</h5>
+						<h2 class="mb-2 text-transform-none ls-0">Sud Oise (60) &amp; Nord 95 : pages locales qui convertissent</h2>
+						<span>Une structure propre (zone → ville → service) + un message clair + une preuve visible.</span>
 
-          <div class="text-center mt-5">
-            <a
-              href="/tarifs"
-              class="button button-rounded button-light text-dark fw-semibold"
-              data-cta
-              data-cta-id="pricing_cta"
-              data-cta-label="Comparer les packs"
-              data-position="pricing"
-              data-page-type="home"
-            >
-              Comparer les packs <i class="bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+						<div class="mt-4 d-flex flex-wrap justify-content-center gap-2">
+							{zoneLinks.map((z) => (
+								<a href={`/zones/${z.slug}`} class="btn btn-light fw-semibold">{z.name}</a>
+							))}
+							<a href="/zones" class="btn btn-light fw-semibold">Voir toutes les zones</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      {/* SPECIALTIES */}
-      <div class="container mt-6">
-        <div class="heading-block text-center mx-auto" style="max-width: 760px">
-          <h2 class="mb-2 text-transform-none ls-0">Spécialités nettoyage : on adapte le message (et la conversion)</h2>
-          <span>
-            Les intentions ne sont pas les mêmes entre “bureaux”, “fin de chantier” ou “médical”.
-            On structure des pages et des campagnes qui parlent au bon décideur.
-          </span>
-        </div>
+			<!-- Carousel repurpose : villes "vitrine" -->
+			<div class="negetive-margin">
+				<div class="container">
+					<div id="cleaner-carousel" class="owl-carousel carousel-widget" data-margin="30" data-nav="true" data-pagi="true" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4" data-items-xl="4">
+						{featuredCities.map((c) => (
+							<div class="card border-0 shadow-sm">
+								<img src="/_assets_/images/cleaners/1.jpg" class="card-img-top" alt={`Entreprise de nettoyage - ${c.name}`}>
+								<div class="card-body second-bg-color rounded-bottom p-4">
+									<h4 class="card-title">{c.name}</h4>
+									<p class="card-text text-black-50 mb-3">
+										Pages locales &amp; acquisition dans le {c.department} ({c.departmentName}).
+									</p>
+									<a href={`/seo-local/${c.slug}`} class="btn btn-sm bg-color text-white fw-semibold">SEO local à {c.name}</a>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
 
-        <div class="row col-mb-30">
-          {specialites.map((s) => (
-            <div class="col-md-3 col-sm-6">
-              <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-                  <h3 class="h6 mb-2 text-transform-none ls-0">{s.name}</h3>
-                  <p class="text-black-50 small mb-3">{s.hint}</p>
-                  <a
-                    href={`/specialites/${s.slug}`}
-                    class="btn second-bg-color px-3 fw-semibold"
-                    data-cta
-                    data-cta-id={`spec_${s.slug}`}
-                    data-cta-label={`Voir spécialité ${s.name}`}
-                    data-position="specialites"
-                    data-page-type="home"
-                  >
-                    Voir <i class="bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+			<!-- Testimonials section repurpose -->
+			<div class="section bg-transparent">
+				<div class="container">
+					<div class="row justify-content-between align-items-center">
 
-        <div class="text-center mt-5">
-          <a href="/specialites" class="button button-rounded bg-color text-white fw-semibold">
-            Voir toutes les spécialités <i class="bi-arrow-right"></i>
-          </a>
-        </div>
-      </div>
+						<div class="col-md-5 text-center">
+							<img src="/_assets_/images/icons/reviews.svg" alt="Mesure" width="400">
+							<div class="row mt-5">
+								<div class="col-6">
+									<h3 class="color fw-normal h1 mb-3">Tracking</h3>
+									<h5 class="text-muted fw-normal">Appels, formulaires, devis : des KPI utiles pour piloter.</h5>
+								</div>
 
-      {/* CITIES HUBS */}
-      <div class="section bg-transparent">
-        <div class="container">
-          <div class="heading-block text-center mx-auto" style="max-width: 760px">
-            <h2 class="mb-2 text-transform-none ls-0">Pages locales : Senlis, Chantilly, Creil… + alentours</h2>
-            <span>
-              Chaque ville a son contexte et ses requêtes. On crée des hubs “ressources” + des pages services/villes reliées (maillage interne).
-            </span>
-          </div>
+								<div class="col-6">
+									<h3 class="color fw-normal h1 mb-3">Pilotage</h3>
+									<h5 class="text-muted fw-normal">Optimisation continue : on renforce ce qui marche, on coupe le reste.</h5>
+								</div>
+							</div>
+						</div>
 
-          <div class="row col-mb-30">
-            {villes.map((v) => (
-              <div class="col-lg-4 col-md-6">
-                <div class="card border-0 shadow-sm h-100">
-                  <div class="card-body p-4">
-                    <h3 class="h5 mb-2 text-transform-none ls-0">
-                      <i class="bi-geo-alt-fill color me-2"></i> {v.name}
-                    </h3>
-                    <p class="text-black-50 mb-3">
-                      Zone couverte : {v.around}
-                    </p>
-                    <div class="d-flex gap-2 flex-wrap">
-                      <a
-                        href={`/ressources/${v.slug}`}
-                        class="button button-rounded bg-color text-white fw-semibold m-0"
-                        data-cta
-                        data-cta-id={`ville_${v.slug}`}
-                        data-cta-label={`Voir ressources ${v.name}`}
-                        data-position="villes"
-                        data-page-type="home"
-                      >
-                        Ressources {v.name} <i class="bi-arrow-right"></i>
-                      </a>
-                      <a href={`/seo-local/${v.slug}`} class="button button-rounded button-light text-dark fw-semibold m-0">
-                        SEO local
-                      </a>
-                      <a href={`/google-ads/${v.slug}`} class="button button-rounded button-light text-dark fw-semibold m-0">
-                        Ads
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+						<div class="col-lg-6 col-md-7">
+							<div class="heading-block">
+								<h2 class="mb-2 text-transform-none ls-0">De la visibilité à la demande</h2>
+								<span>SEO local + Ads + CRO : l’objectif, c’est une demande plus régulière et plus qualifiée (pas juste “du trafic”).</span>
+							</div>
 
-      {/* FAQ (toggle-style with <details>) */}
-      <div class="container mt-5 mb-6">
-        <div class="heading-block text-center mx-auto" style="max-width: 760px">
-          <h2 class="mb-2 text-transform-none ls-0">FAQ</h2>
-          <span>Réponses directes — pour décider vite et éviter les malentendus.</span>
-        </div>
+							<div id="oc-testi" class="owl-carousel testimonials-carousel carousel-widget card" data-margin="10" data-nav="false" data-pagi="true" data-items="1" data-autoplay="5000" data-loop="true">
+								<div class="card-body p-4">
+									<div class="row">
+										<div class="col-auto">
+											<img class="rounded-circle" src="/_assets_/images/cleaners/2.jpg" alt="Process">
+										</div>
+										<div class="col">
+											<h4 class="fw-normal">
+												“On a clarifié les pages qui devaient convertir (local + landing), mis en place un tracking simple,
+												puis on a optimisé mois après mois. Résultat : des demandes plus régulières.”
+											</h4>
+											<h4 class="h6 mb-0 fw-medium">Exemple (placeholder)</h4>
+											<small class="text-muted">Entreprise de nettoyage (60/95)</small>
+										</div>
+									</div>
+								</div>
 
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Vous faites du nettoyage ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Non. On vend des prestations webmarketing (SEO local, Google Ads, CRO & tracking) aux entreprises de nettoyage, dans le Sud Oise (60) et le Nord 95.
-              </div>
-            </details>
+								<div class="card-body p-4">
+									<div class="row">
+										<div class="col-auto">
+											<img class="rounded-circle" src="/_assets_/images/cleaners/3.jpg" alt="Ads">
+										</div>
+										<div class="col">
+											<h4 class="fw-normal">
+												“On a arrêté de payer des clics inutiles : meilleure structure Ads + message plus clair + preuve visible.
+												Les demandes sont devenues plus qualifiées.”
+											</h4>
+											<h4 class="h6 mb-0 fw-medium">Exemple (placeholder)</h4>
+											<small class="text-muted">Entreprise de nettoyage (60/95)</small>
+										</div>
+									</div>
+								</div>
 
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Est-ce que Google Ads “marche” pour le nettoyage ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Oui, souvent, parce que ça capte la demande immédiate. Mais la rentabilité dépend de la zone, des mots-clés, de la landing page, et du tracking (sinon on “brûle” du budget). Notre approche : qualification + exclusions + mesure du coût/lead.
-              </div>
-            </details>
+							</div>
+							<div class="mt-3">
+								<a href="/preuves" class="btn btn-light fw-semibold">Voir des preuves <i class="bi-arrow-right"></i></a>
+							</div>
+						</div>
 
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Pourquoi le SEO local est si important ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Parce que beaucoup de recherches passent par Google Maps (“entreprise de nettoyage + ville”). Une fiche GBP bien structurée + des pages locales utiles + des preuves = plus de visibilité et une confiance plus élevée au moment du clic.
-              </div>
-            </details>
+					</div>
+				</div>
+			</div>
 
-            <details class="toggle mb-3">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Comment évitez-vous les leads non qualifiés ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                On filtre par la structure : mots-clés et annonces orientés “entreprises de nettoyage”, landing pages avec questions de qualification, exclusions Ads, et suivi des conversions (formulaires + appels) pour couper ce qui ne performe pas.
-              </div>
-            </details>
+			<!-- Final CTA -->
+			<div class="section text-center mb-0" style="padding: 120px 0; background-color: rgba(51,94,238,0.08);">
+				<div class="container" style="max-width: 700px">
+					<img src="/_assets_/images/icons/apply.svg" alt="Audit" height="200" class="mb-4">
+					<h2 style="font-size: 38px">Recevez un plan d’action concret</h2>
+					<p class="mb-5" style="font-size: 1.125rem;">
+						Dites-nous votre ville/zone et votre objectif (appels, devis, récurrence).
+						On vous propose une liste d’actions priorisées (SEO/Ads/CRO) pour générer plus de demandes qualifiées.
+					</p>
+					<a href="/contact" class="btn btn-lg bg-color text-white fw-semibold px-4">Demander un audit gratuit</a>
+					<a href="/tarifs" class="btn btn-lg bg-white fw-semibold color px-4 ms-2">Voir les tarifs</a>
+				</div>
+			</div>
 
-            <details class="toggle">
-              <summary class="toggle-header justify-content-between">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-plus-circle"></i>
-                  <i class="toggle-open bi-dash-circle"></i>
-                </div>
-                <div class="toggle-title fw-semibold">Que mesurez-vous exactement ?</div>
-              </summary>
-              <div class="toggle-content text-black-50">
-                Les actions business : clic téléphone, formulaire, email, itinéraire. Ensuite, on suit les ratios : taux de conversion, coût/lead (Ads), part des leads par service/ville, et on optimise sur ce qui apporte des demandes qualifiées.
-              </div>
-            </details>
-          </div>
-        </div>
-      </div>
+		</div>
+	</section><!-- #content end -->
 
-      {/* FINAL CTA */}
-      <div class="section text-center mb-0" style="padding: 110px 0; background-color: rgba(51,94,238,0.08);">
-        <div class="container" style="max-width: 760px">
-          <i class="bi-lightning-charge-fill color" style="font-size: 64px;"></i>
-          <h2 class="mt-3" style="font-size: 38px;">On fait le point sur votre zone et vos objectifs</h2>
-          <p class="mb-5" style="font-size: 1.125rem;">
-            15 minutes pour identifier vos quick wins (GBP, pages locales, tracking, Ads). Vous repartez avec un plan d’action priorisé.
-          </p>
-
-          <div class="d-flex gap-3 justify-content-center flex-wrap">
-            <a
-              href="/contact"
-              class="button button-rounded bg-color text-white fw-semibold"
-              data-cta
-              data-cta-id="final_cta_primary"
-              data-cta-label="Demander un audit (15 min)"
-              data-position="final"
-              data-page-type="home"
-            >
-              Demander un audit (15 min) <i class="bi-arrow-right"></i>
-            </a>
-
-            <a
-              href="/tarifs"
-              class="button button-rounded button-light text-dark fw-semibold"
-              data-cta
-              data-cta-id="final_cta_secondary"
-              data-cta-label="Voir les packs"
-              data-position="final"
-              data-page-type="home"
-            >
-              Voir les packs
-            </a>
-          </div>
-
-          <div class="mt-4 text-black-50 small">
-            Réassurance : pilotage mensuel • tracking clair • décisions basées sur vos leads (pas sur des “vanity metrics”).
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    {`
-      /* Améliore <details> en gardant l’esthétique "toggle" */
-      details.toggle > summary { list-style: none; cursor: pointer; }
-      details.toggle > summary::-webkit-details-marker { display: none; }
-      details.toggle[open] .toggle-closed { display: none; }
-      details.toggle:not([open]) .toggle-open { display: none; }
-      .toggle-content { padding: 0.75rem 1.25rem 1.25rem; }
-    `}
-  </style>
+	<div class="position-relative" style="background-color: rgba(51,94,238,0.08);">
+		<svg class="svg-separator" viewBox="0 0 1440 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+			<path d="M0 24H1440V0C722.5 52 0 0 0 0V24Z" fill="#335EEE"></path>
+		</svg>
+	</div>
 </BaseLayout>

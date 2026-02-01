@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { zones, villes } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return zones.map((z) => ({ params: { zone: z.slug } }));
+}
+
+const { zone } = Astro.params;
+const currentZone = zones.find((z) => z.slug === zone);
+
+if (!currentZone) throw new Error(`Zone not found: ${zone}`);
+
+const zoneCities = currentZone.cities
+  .map((slug) => villes.find((v) => v.slug === slug))
+  .filter(Boolean);
+---
+<BaseLayout
+  title={currentZone.page?.metaTitlePattern ?? `Zone ${currentZone.name}`}
+  description={currentZone.page?.metaDescriptionPattern ?? currentZone.short}
+>
+  <!-- 1) Fil d’Ariane -->
+  <!-- Accueil > Zones > {Zone} -->
+
+  <!-- 2) Hero -->
+  <!-- H1 : currentZone.page.h1Pattern -->
+
+  <!-- 3) Contexte / pains zone -->
+  <!-- currentZone.intro -->
+
+  <!-- 4) Approche recommandée (services) -->
+  <!-- currentZone.recommendedServices -->
+
+  <!-- 5) Villes couvertes -->
+  <!-- zoneCities list + liens /zones/{zone}/{ville} -->
+
+  <!-- 6) Ressources + réassurance -->
+  <!-- liens /methode /preuves /tarifs -->
+
+  <!-- 7) FAQ -->
+  <!-- currentZone.page.faq -->
+
+  <!-- 8) CTA final -->
+</BaseLayout>

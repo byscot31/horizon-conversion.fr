@@ -1,0 +1,124 @@
+[
+  {
+    "slug": "sud-oise",
+    "name": "Sud Oise (60)",
+    "departmentCodes": ["60"],
+    "short": "Zone Sud Oise : bassin Creil–Senlis–Chantilly et alentours.",
+    "intro": "Dans le Sud Oise, la concurrence locale sur Google/Maps est souvent forte. L’objectif : être visible dans les bonnes requêtes et transformer cette visibilité en demandes (appels, formulaires, devis) grâce à des pages locales claires et une preuve rassurante.",
+    "cities": [
+      "chantilly",
+      "senlis",
+      "creil",
+      "nogent-sur-oise",
+      "montataire",
+      "pont-sainte-maxence",
+      "clermont",
+      "liancourt",
+      "lamorlaye",
+      "gouvieux"
+    ],
+    "nearbyAreas": [
+      "Bassin creillois",
+      "Pays de Senlis",
+      "Secteur Chantilly",
+      "Vallée de l’Oise"
+    ],
+    "recommendedServices": ["seo-local", "google-ads", "cro-tracking"],
+    "recommendedSpecialites": [
+      "nettoyage-bureaux",
+      "nettoyage-coproprietes",
+      "nettoyage-fin-chantier"
+    ],
+    "page": {
+      "metaTitlePattern": "Webmarketing entreprises de nettoyage | Zone Sud Oise (60)",
+      "metaDescriptionPattern": "SEO local, Ads et conversion pour entreprises de nettoyage en Sud Oise (60) : pages locales, preuve, tracking et pilotage. Audit gratuit.",
+      "h1Pattern": "Développer votre entreprise de nettoyage en Sud Oise (60)",
+      "ctaPrimary": "Recevoir un plan d’action",
+      "ctaSecondary": "Voir les tarifs",
+      "faq": [
+        {
+          "q": "Intervenez-vous sur tout le Sud Oise ?",
+          "a": "Oui, on structure les pages par zone puis par ville pour rester cohérent. L’objectif est de travailler la visibilité locale et la conversion sur les secteurs prioritaires."
+        },
+        {
+          "q": "Quel levier prioriser en Sud Oise : SEO local ou Ads ?",
+          "a": "Ça dépend de votre situation (urgence, concurrence, budget). Souvent, on sécurise la conversion et le tracking, puis on combine SEO local et Ads de façon pilotée."
+        },
+        {
+          "q": "Comment éviter le contenu “spam” en local ?",
+          "a": "En évitant la duplication : 1 page par intention (service+ville / spécialité+ville), du contexte local utile (alentos), et un vrai contenu orienté demandes."
+        }
+      ],
+      "schema": ["WebPage", "FAQPage"]
+    },
+    "internalLinks": {
+      "primary": ["/zones", "/methode", "/preuves"],
+      "services": ["/seo-local", "/google-ads", "/cro-tracking"],
+      "exampleCityPagesHint": ["/seo-local/creil", "/google-ads/senlis", "/cro-tracking/chantilly"]
+    }
+  },
+  {
+    "slug": "nord-95",
+    "name": "Nord Val-d’Oise (95)",
+    "departmentCodes": ["95"],
+    "short": "Zone Nord 95 : Sarcelles–Gonesse–Louvres–Domont et alentours.",
+    "intro": "Dans le Nord 95, les requêtes locales sont concurrentielles et les prospects comparent vite. L’objectif : clarifier votre offre (services + zones), renforcer la confiance (preuves, méthode) et piloter les demandes via tracking pour améliorer en continu.",
+    "cities": [
+      "sarcelles",
+      "garges-les-gonesse",
+      "villiers-le-bel",
+      "gonesse",
+      "arnouville",
+      "louvres",
+      "roissy-en-france",
+      "fosses",
+      "survilliers",
+      "domont",
+      "montmorency",
+      "soisy-sous-montmorency",
+      "deuil-la-barre",
+      "beaumont-sur-oise",
+      "persan",
+      "l-isle-adam"
+    ],
+    "nearbyAreas": [
+      "Bassin de Sarcelles",
+      "Secteur Roissy–Louvres",
+      "Vallée de Montmorency",
+      "Vallée de l’Oise (95)"
+    ],
+    "recommendedServices": ["seo-local", "google-ads", "cro-tracking"],
+    "recommendedSpecialites": [
+      "nettoyage-bureaux",
+      "nettoyage-fin-chantier",
+      "nettoyage-apres-sinistre"
+    ],
+    "page": {
+      "metaTitlePattern": "Webmarketing entreprises de nettoyage | Nord Val-d’Oise (95)",
+      "metaDescriptionPattern": "SEO local, Ads et conversion pour entreprises de nettoyage dans le Nord 95 : pages locales, preuve, tracking et pilotage. Audit gratuit.",
+      "h1Pattern": "Développer votre entreprise de nettoyage dans le Nord 95 (Val-d’Oise)",
+      "ctaPrimary": "Recevoir un plan d’action",
+      "ctaSecondary": "Voir la méthode",
+      "faq": [
+        {
+          "q": "Pourquoi travailler par zone puis par ville ?",
+          "a": "Parce que ça évite la duplication : chaque page sert un objectif précis (zone, ville, service). C’est plus clair pour Google et plus efficace pour convertir."
+        },
+        {
+          "q": "Ads ou SEO local : qu’est-ce qui marche le mieux en Nord 95 ?",
+          "a": "Les deux peuvent fonctionner. On commence souvent par sécuriser le tracking + les pages qui convertissent, puis on pilote SEO local et Ads selon la concurrence et vos objectifs."
+        },
+        {
+          "q": "Comment améliorer la qualité des demandes ?",
+          "a": "En cadrant l’offre (zones, types de prestations), en ajoutant des preuves visibles, et en ajustant les ciblages/messages (si Ads)."
+        }
+      ],
+      "schema": ["WebPage", "FAQPage"]
+    },
+    "internalLinks": {
+      "primary": ["/zones", "/tarifs", "/preuves"],
+      "services": ["/seo-local", "/google-ads", "/cro-tracking"],
+      "exampleCityPagesHint": ["/seo-local/sarcelles", "/google-ads/gonesse", "/cro-tracking/domont"]
+    }
+  }
+]

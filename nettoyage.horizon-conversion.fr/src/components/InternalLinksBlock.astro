@@ -1,0 +1,44 @@
+---
+import type { InternalLinksGroups } from "../lib/linking";
+
+const { data } = Astro.props as { data: InternalLinksGroups };
+if (!data) throw new Error("InternalLinksBlock requires `data` prop");
+---
+
+<section class="internal-links">
+  <div class="container">
+    <h2 class="section-title">{data.title}</h2>
+
+    <div class="links-grid">
+      {data.groups.map((g) => (
+        <div class="links-col">
+          <h3 class="links-title">{g.title}</h3>
+          <ul class="links-list">
+            {g.links.map((l) => (
+              <li class="links-item">
+                <a href={l.href} class="links-link">
+                  <span>{l.label}</span>
+                  {l.badge ? <span class="links-badge">{l.badge}</span> : null}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Tu peux remplacer par tes classes template existantes */
+  .internal-links { padding: 48px 0; border-top: 1px solid rgba(0,0,0,.08); }
+  .section-title { font-size: 1.25rem; margin-bottom: 18px; }
+  .links-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 900px){ .links-grid { grid-template-columns: 1fr; } }
+  .links-col { padding: 16px; border: 1px solid rgba(0,0,0,.08); border-radius: 14px; }
+  .links-title { font-size: 1rem; margin-bottom: 12px; }
+  .links-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .links-link { display: flex; justify-content: space-between; align-items: center; text-decoration: none; padding: 10px 12px; border-radius: 10px; background: rgba(0,0,0,.03); }
+  .links-link:hover { background: rgba(0,0,0,.06); }
+  .links-badge { font-size: .75rem; opacity: .75; margin-left: 12px; white-space: nowrap; }
+</style>

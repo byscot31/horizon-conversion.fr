@@ -1,23 +1,228 @@
 [
   {
     "slug": "seo-local",
-    "name": "SEO local",
-    "promise": "Être visible sur Google dans votre zone (Sud Oise / Nord 95) et générer des demandes régulières.",
-    "cta": "Demander un audit SEO",
-    "keywords": ["seo local entreprise nettoyage", "referencement local", "google business profile"]
+    "name": "SEO local (Google & Maps)",
+    "short": "Être visible sur Google et Google Maps dans votre zone (60/95) et capter plus d’appels et demandes de devis.",
+    "hero": {
+      "title": "SEO local pour entreprises de nettoyage",
+      "subtitle": "Gagner en visibilité sur Google et Maps, puis transformer cette visibilité en demandes qualifiées.",
+      "proof": "Suivi des appels & formulaires + actions priorisées + pilotage mensuel.",
+      "ctaPrimary": "Demander un audit gratuit",
+      "ctaSecondary": "Voir la méthode"
+    },
+    "painPoints": [
+      "Vous dépendez trop du bouche-à-oreille et des recommandations.",
+      "Votre fiche Google n’apparaît pas (ou mal) sur les requêtes locales.",
+      "Vous avez des concurrents mieux notés / plus visibles sur Maps.",
+      "Votre site ne transforme pas les visites en appels ou demandes de devis."
+    ],
+    "deliverables": [
+      "Audit SEO local (site + fiche Google + concurrence locale).",
+      "Plan de mots-clés locaux (services + villes + intentions).",
+      "Optimisation / structuration de la fiche Google (Google Business Profile).",
+      "Création/optimisation de pages locales (service + ville) orientées conversion.",
+      "Optimisation de la preuve (avis, photos, éléments de confiance) et du parcours.",
+      "Mise en place d’un tracking simple (appels, formulaires, clics contact).",
+      "Pilotage et itérations (priorités, tests, reporting)."
+    ],
+    "kpis": [
+      "Clics depuis Google/Maps",
+      "Appels (clic-to-call)",
+      "Formulaires / demandes de devis",
+      "Positions locales (tendance) sur requêtes prioritaires",
+      "Taux de conversion des pages locales"
+    ],
+    "methodSteps": [
+      {
+        "title": "Audit & priorités",
+        "desc": "On identifie ce qui bloque la visibilité (fiche, pages, contenus, preuves, technique)."
+      },
+      {
+        "title": "Plan d’action",
+        "desc": "On définit une liste courte d’actions à impact (local-first, sans blabla)."
+      },
+      {
+        "title": "Mise en place",
+        "desc": "Pages locales, optimisation fiche, structure, preuves, tracking."
+      },
+      {
+        "title": "Pilotage",
+        "desc": "On mesure, on ajuste, on améliore — mois après mois."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Est-ce que vous garantissez une première position Google ?",
+        "a": "Non. On travaille avec une méthode pilotée (priorités + tests + mesure). L’objectif est d’augmenter la visibilité et surtout les demandes qualifiées, sans promesse irréaliste."
+      },
+      {
+        "q": "Est-ce utile si j’ai déjà une fiche Google ?",
+        "a": "Souvent oui. La majorité des fiches peuvent être améliorées (structure, catégories, contenu, preuves, cohérence site/pages locales), ce qui impacte la visibilité et les conversions."
+      },
+      {
+        "q": "En combien de temps voit-on des effets ?",
+        "a": "Le SEO local évolue progressivement. On vise des quick wins (conversion/fiche/pages) puis une amélioration continue via le pilotage."
+      },
+      {
+        "q": "Vous couvrez quelles zones ?",
+        "a": "Sud Oise (60) et Nord Val-d’Oise (95). Les pages locales sont structurées par ville et par zone pour rester cohérentes."
+      }
+    ],
+    "internalLinks": {
+      "primary": ["/methode", "/tarifs", "/preuves"],
+      "relatedServices": ["google-ads", "cro-tracking"],
+      "relatedSpecialites": ["nettoyage-bureaux", "nettoyage-coproprietes", "nettoyage-fin-chantier"]
+    },
+    "schema": {
+      "primary": ["ProfessionalService", "FAQPage"]
+    }
   },
   {
     "slug": "google-ads",
-    "name": "Google Ads",
-    "promise": "Des demandes rapides avec des campagnes rentables (Search + Local Services si pertinent).",
-    "cta": "Obtenir une estimation",
-    "keywords": ["google ads nettoyage", "devis nettoyage bureaux", "nettoyage fin de chantier ads"]
+    "name": "Publicité (Google Ads + Meta Ads)",
+    "short": "Obtenir des demandes plus vite grâce à des campagnes pilotées (Google Ads et/ou Meta), avec pages qui convertissent et tracking.",
+    "hero": {
+      "title": "Google Ads & Meta Ads pour entreprises de nettoyage",
+      "subtitle": "Lancer (ou corriger) des campagnes qui génèrent des demandes, pas juste des clics.",
+      "proof": "Tracking conversions + pilotage + optimisation des annonces et pages.",
+      "ctaPrimary": "Recevoir un plan d’action",
+      "ctaSecondary": "Voir les tarifs"
+    },
+    "painPoints": [
+      "Vous dépensez sans savoir ce que ça rapporte (tracking absent).",
+      "Vous avez des clics mais peu de demandes de devis.",
+      "Vos annonces attirent des demandes peu qualifiées.",
+      "Votre concurrence est agressive sur les mots-clés locaux."
+    ],
+    "deliverables": [
+      "Audit (ou création) des campagnes Google Ads / Meta Ads.",
+      "Structuration par services / zones / intentions (sans dispersion).",
+      "Rédaction annonces orientées conversion (preuves, différenciation).",
+      "Landing pages (ou amélioration pages existantes) pour convertir.",
+      "Mise en place du suivi conversions (appels, formulaires, événements clés).",
+      "Optimisations continues (requêtes, ciblages, créas, enchères, budgets).",
+      "Reporting simple (ce qui marche, ce qu’on teste ensuite)."
+    ],
+    "kpis": [
+      "Demandes (appels + formulaires)",
+      "Coût par demande (CPL)",
+      "Taux de conversion landing/pages",
+      "Qualité des leads (retours terrain)",
+      "Part des dépenses sur requêtes pertinentes"
+    ],
+    "methodSteps": [
+      {
+        "title": "Audit & tracking",
+        "desc": "On sécurise la mesure avant d’optimiser (sinon, on pilote à l’aveugle)."
+      },
+      {
+        "title": "Structure & messages",
+        "desc": "On clarifie les segments (services, zones, spécialités) et le message qui convertit."
+      },
+      {
+        "title": "Lancement / corrections",
+        "desc": "On met en ligne une version propre et mesurable, orientée demandes."
+      },
+      {
+        "title": "Pilotage",
+        "desc": "On coupe le gaspillage, on renforce ce qui marche, on teste."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Vous faites Google Ads et Meta Ads en même temps ?",
+        "a": "Oui si c’est pertinent. Souvent, Google Ads capte l’intention forte (devis maintenant) et Meta peut aider la visibilité locale. On priorise selon vos objectifs."
+      },
+      {
+        "q": "Quel budget pub faut-il prévoir ?",
+        "a": "Ça dépend de la zone et de la concurrence. On commence souvent par un budget test mesurable, puis on ajuste selon la qualité des demandes."
+      },
+      {
+        "q": "Est-ce que vous garantissez un nombre de leads ?",
+        "a": "Non. On met en place un système piloté (tracking + optimisation). L’objectif est d’améliorer la quantité et la qualité des demandes, sans promesse garantie."
+      }
+    ],
+    "internalLinks": {
+      "primary": ["/methode", "/tarifs", "/preuves"],
+      "relatedServices": ["seo-local", "cro-tracking"],
+      "relatedSpecialites": ["nettoyage-fin-chantier", "nettoyage-apres-sinistre", "nettoyage-industriel"]
+    },
+    "schema": {
+      "primary": ["ProfessionalService", "FAQPage"]
+    }
   },
   {
-    "slug": "cro",
-    "name": "CRO",
-    "promise": "Transformer votre trafic (SEO/Ads) en appels et formulaires — sans augmenter le budget.",
-    "cta": "Audit conversion",
-    "keywords": ["optimisation conversion", "landing page nettoyage", "formulaire devis"]
+    "slug": "cro-tracking",
+    "name": "Conversion (CRO) + tracking simple",
+    "short": "Transformer plus de visites en appels et devis : pages claires, preuves, formulaires efficaces, tracking simple pour piloter.",
+    "hero": {
+      "title": "CRO & tracking pour entreprises de nettoyage",
+      "subtitle": "Vous avez déjà de la visibilité ? On augmente les demandes en améliorant vos pages et votre parcours.",
+      "proof": "Optimisations rapides + tests + mesure (appels, formulaires).",
+      "ctaPrimary": "Demander un audit gratuit",
+      "ctaSecondary": "Voir la méthode"
+    },
+    "painPoints": [
+      "Votre site ne donne pas confiance (preuves insuffisantes).",
+      "Les visiteurs ne comprennent pas clairement votre zone / vos services.",
+      "Formulaire trop long ou parcours trop confus.",
+      "Aucune mesure fiable : impossible de savoir ce qui marche."
+    ],
+    "deliverables": [
+      "Audit conversion (pages, messages, preuves, friction).",
+      "Recommandations actionnables (priorisées).",
+      "Optimisation des pages clés (accueil, pages locales, landing Ads).",
+      "Bloc preuves (avis, process, garanties de méthode, transparence).",
+      "Optimisation CTA (position, libellés, répétitions, ancrages).",
+      "Tracking simple (appels, formulaires, événements clés) + tableau de bord basique.",
+      "Plan de tests (A/B léger ou itérations) selon le trafic."
+    ],
+    "kpis": [
+      "Taux de conversion",
+      "Appels / clics téléphone",
+      "Formulaires / devis",
+      "Taux de rebond sur pages money",
+      "Part des visites qui atteignent le contact"
+    ],
+    "methodSteps": [
+      {
+        "title": "Audit rapide",
+        "desc": "On repère les frictions et les manques de confiance (preuves, clarté, offre)."
+      },
+      {
+        "title": "Priorisation",
+        "desc": "On choisit 5–10 actions à fort impact plutôt que 50 micro-changements."
+      },
+      {
+        "title": "Mise en place",
+        "desc": "On améliore pages + tracking, sans complexifier."
+      },
+      {
+        "title": "Itération",
+        "desc": "On mesure, on ajuste, on stabilise ce qui convertit."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Le CRO sert si je n’ai pas beaucoup de trafic ?",
+        "a": "Oui, surtout sur les pages qui reçoivent déjà des visiteurs (fiche Google, Ads, pages locales). Même des ajustements simples peuvent améliorer la conversion."
+      },
+      {
+        "q": "Vous installez quoi comme tracking ?",
+        "a": "Un tracking simple et utile (appels, formulaires, événements clés). L’objectif est de piloter, pas d’empiler des outils."
+      },
+      {
+        "q": "Vous refaites le site complet ?",
+        "a": "Pas forcément. On peut optimiser l’existant (pages stratégiques) et ne refaire que ce qui bloque réellement la conversion."
+      }
+    ],
+    "internalLinks": {
+      "primary": ["/methode", "/tarifs", "/preuves"],
+      "relatedServices": ["seo-local", "google-ads"],
+      "relatedSpecialites": ["nettoyage-bureaux", "nettoyage-coproprietes", "nettoyage-vitres"]
+    },
+    "schema": {
+      "primary": ["ProfessionalService", "FAQPage"]
+    }
   }
 ]

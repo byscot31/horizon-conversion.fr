@@ -182,3 +182,7 @@
 	#oc-testi.owl-carousel .owl-dots .owl-dot { margin-top: 0; }
 
 }
+
+.iconlist li {
+	display: block;
+}

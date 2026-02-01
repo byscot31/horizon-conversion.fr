@@ -2,5 +2,5 @@ Build un seul sous-domaine depuis C:\dev\horizon-conversion
 .\build-one.ps1 avocats.horizon-conversion.fr
 
 init Astro sur 1 sous-domaine. Exemple pour “avocats” :
-.\init-astro-one.ps1 nettoyage.horizon-conversion.fr
+.\init-astro-one.ps1 demenagement.horizon-conversion.fr
 ensuite faire npm install et tu peux lancer npm run dev

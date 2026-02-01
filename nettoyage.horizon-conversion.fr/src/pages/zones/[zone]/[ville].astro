@@ -1,4 +1,48 @@
 ---
-// src/pages/specialites/[specialite]/[ville].astro
----
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { zones, villes } from "../../../../lib/data";
 
+export function getStaticPaths() {
+  const paths = [];
+  for (const z of zones) {
+    for (const citySlug of z.cities) {
+      paths.push({ params: { zone: z.slug, ville: citySlug } });
+    }
+  }
+  return paths;
+}
+
+const { zone, ville } = Astro.params;
+
+const currentZone = zones.find((z) => z.slug === zone);
+const currentVille = villes.find((v) => v.slug === ville);
+
+if (!currentZone) throw new Error(`Zone not found: ${zone}`);
+if (!currentVille) throw new Error(`Ville not found: ${ville}`);
+
+const nearby = (currentVille.nearby ?? [])
+  .map((slug) => villes.find((v) => v.slug === slug)?.name)
+  .filter(Boolean)
+  .slice(0, 5);
+
+const title = `À ${currentVille.name} (${currentZone.name}) : SEO/Ads & conversion | Audit gratuit`;
+const description = `À ${currentVille.name}, attirez plus de demandes : SEO local, Ads et pages qui transforment. Audit gratuit.`;
+
+import InternalLinksBlock from "../../../components/InternalLinksBlock.astro";
+import { buildInternalLinks } from "../../../lib/linking";
+
+const { zone, ville } = Astro.params;
+
+const internalLinks = buildInternalLinks({
+  pageType: "zone_city",
+  zoneSlug: zone,
+  villeSlug: ville
+});
+---
+<BaseLayout title={title} description={description}>
+  <!-- Breadcrumb: Accueil > Zones > Zone > Ville -->
+  <!-- Hero local: Ville + nearby -->
+  <InternalLinksBlock data={internalLinks} />
+  <!-- 3 leviers: SEO / Ads / CRO -->
+  <!-- Livrables + preuve + FAQ + CTA -->
+</BaseLayout>

@@ -1,4 +1,535 @@
 ---
 // src/pages/[service]/[ville].astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+import { buildSeo } from "../../lib/seo";
+
+export async function getStaticPaths() {
+  return services.flatMap((s) =>
+    villes.map((v) => ({
+      params: { service: s.slug, ville: v.slug },
+    })),
+  );
+}
+
+type Service = (typeof services)[number];
+type Ville = (typeof villes)[number];
+
+const { service: serviceSlug, ville: villeSlug } = Astro.params;
+
+const service = (services as Service[]).find((s) => s.slug === serviceSlug);
+const ville = (villes as Ville[]).find((v) => v.slug === villeSlug);
+
+if (!service || !ville) {
+  throw new Error("Page introuvable: service ou ville invalide.");
+}
+
+const siteUrl = "https://nettoyage.horizon-conversion.fr";
+const canonical = `${siteUrl}/${service.slug}/${ville.slug}/`;
+
+const applyTemplate = (tpl: string) => tpl.replaceAll("{ville}", ville.nom);
+
+const metaTitle = applyTemplate(service.meta.titleTemplate);
+const metaDescription = applyTemplate(service.meta.descriptionTemplate);
+const h1 = applyTemplate(service.hero.h1Template);
+const subtitle = applyTemplate(service.hero.subtitleTemplate);
+
+// --- Unicité déterministe (service + ville) ---
+function hashString(input: string) {
+  let h = 0;
+  for (let i = 0; i < input.length; i++) h = (h * 31 + input.charCodeAt(i)) >>> 0;
+  return h;
+}
+const seed = `${service.slug}::${ville.slug}`;
+const seedHash = hashString(seed);
+
+const pick = <T,>(arr: T[], offset = 0) => arr[(seedHash + offset) % arr.length];
+
+const angle = pick(service.angles, 0);
+const useCase = pick(service.useCases, 1);
+const localHook = pick(ville.localHooks, 2);
+
+const faqCount = Math.min(4, service.faqPool.length);
+const start = seedHash % service.faqPool.length;
+const faqSelected = Array.from({ length: faqCount }, (_, i) => service.faqPool[(start + i) % service.faqPool.length]);
+
+// Alentours cliquables uniquement si la ville existe dans villes.json
+const villeBySlug = new Map((villes as Ville[]).map((v) => [v.slug, v]));
+const alentoursDisponibles = (ville.alentours || []).filter((a) => villeBySlug.has(a.slug)).slice(0, 4);
+
+// 3 typologies max (utile, pas spam)
+const typologies = (ville.typologiesProbables || []).slice(0, 3);
+
+// Liens internes (min 3)
+const internalLinks = [
+  { label: "Voir la méthode", href: "/methode" },
+  { label: "Voir les tarifs", href: "/tarifs" },
+  { label: "Voir des preuves", href: "/preuves" },
+  { label: `Découvrir ${service.nom}`, href: `/${service.slug}/` },
+  { label: `Zones ${ville.zone === "sud-oise" ? "Sud Oise (60)" : "Nord 95"}`, href: `/zones/${ville.zone}/` },
+].slice(0, 5);
+
+const areaServed = [
+  { "@type": "City", name: ville.nom },
+  ...(ville.alentours || []).slice(0, 4).map((a) => ({ "@type": "City", name: a.nom })),
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `Horizon Conversion — ${service.nom} pour entreprises de nettoyage à ${ville.nom}`,
+    url: canonical,
+    serviceType: service.nom,
+    areaServed,
+    category: "MarketingAgency",
+    audience: { "@type": "Audience", audienceType: "Entreprises de nettoyage (TPE/PME)" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqSelected.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+
+// Helper copy
+const serviceLabel = service.nom;
+const villeLabel = ville.nom;
+const alentoursLabel = (ville.alentours || []).slice(0, 4).map((a) => a.nom).join(", ");
+const primaryCta = service.hero.ctaPrimary;
+const secondaryCta = service.hero.ctaSecondary;
+
+// Images (placeholders, à remplacer si besoin)
+const heroBg = "/_assets_/images/hero/hero-cleaning-marketing.jpg";
+const icon1 = "/_assets_/images/icons/plan.svg";
+const icon2 = "/_assets_/images/icons/tracking.svg";
+const icon3 = "/_assets_/images/icons/check.svg";
+
+import InternalLinksBlock from "../../components/InternalLinksBlock.astro";
+import { buildInternalLinks } from "../../lib/linking";
+
+const { service, ville } = Astro.params;
+
+const internalLinks = buildInternalLinks({
+  pageType: "service_city",
+  serviceSlug: service,
+  villeSlug: ville
+});
+
+const { service, ville } = Astro.params;
+
+const seo = buildSeo({
+  pageType: "service_city",
+  serviceSlug: service,
+  villeSlug: ville,
+  origin: Astro.url.origin,
+  pathname: Astro.url.pathname
+});
 ---
 
+<BaseLayout title={metaTitle} description={metaDescription} canonical={canonical}>
+  {/* Si ton BaseLayout expose un slot "head", ce script ira dans <head>. Sinon, il restera ici (OK pour Google). */}
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <!-- Slider / Hero (structure inspirée du template Cleaner) -->
+  <section
+    id="slider"
+    class="slider-element"
+    style={`background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${heroBg}') center center no-repeat; background-size: cover; height: 700px;`}
+  >
+    <div class="vertical-middle">
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-xl-6 col-lg-5 col-md-2"></div>
+
+          <div class="col-xl-6 col-lg-7 col-md-10">
+            <div class="slider-title dark">
+              <h1 class="">{h1}</h1>
+              <p>
+                {subtitle}
+                <span class="d-block mt-2 op-08">
+                  {localHook}
+                </span>
+              </p>
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <a class="btn btn-sm bg-color text-white fw-semibold px-3" href={primaryCta.href}>{primaryCta.label}</a>
+                <a class="btn btn-sm bg-white fw-semibold color px-3" href={secondaryCta.href}>{secondaryCta.label}</a>
+              </div>
+
+              <div class="mt-3 text-white-50" style="font-size: 0.95rem;">
+                <strong class="text-white">Zone :</strong> {villeLabel}
+                {alentoursLabel ? <span> • Autour : {alentoursLabel}</span> : null}
+              </div>
+            </div>
+
+            <!-- Carte “audit” (CRO-first) -->
+            <div class="card border-0 p-3 shadow-lg mt-4" style="background-color: rgba(255,255,255,0.9)">
+              <div class="card-body">
+                <div class="heading-block border-bottom-0 mb-3">
+                  <h2 class="mb-2 text-transform-none ls-0" style="font-size: 1.6rem;">
+                    Recevoir un plan d’action en 48h
+                  </h2>
+                  <p class="mb-0 text-black-50">
+                    Un audit court, utile, orienté demandes (appels + formulaires). Pas de promesse “magique” : une méthode et des priorités.
+                  </p>
+                </div>
+
+                <form class="row" action="/contact" method="get">
+                  <div class="col-sm-6 mb-3">
+                    <label class="text-black-50 mb-1" for="name">Nom</label>
+                    <input id="name" name="name" class="form-control" placeholder="Votre nom" required />
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <label class="text-black-50 mb-1" for="email">Email</label>
+                    <input id="email" name="email" type="email" class="form-control" placeholder="Votre email" required />
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <label class="text-black-50 mb-1" for="phone">Téléphone</label>
+                    <input id="phone" name="phone" class="form-control" placeholder="Optionnel" />
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <label class="text-black-50 mb-1" for="besoin">Votre besoin</label>
+                    <select id="besoin" name="besoin" class="form-select" required>
+                      <option value="" selected disabled>Choisir…</option>
+                      <option value={service.slug}>{serviceLabel}</option>
+                      <option value="seo-local+ads">SEO local + Ads</option>
+                      <option value="seo-local+cro">SEO local + CRO</option>
+                      <option value="ads+cro">Ads + CRO</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <input type="hidden" name="service" value={service.slug} />
+                    <input type="hidden" name="ville" value={ville.slug} />
+                    <button type="submit" class="btn btn-lg bg-color text-white fw-semibold w-100 mt-1">
+                      {primaryCta.label}
+                    </button>
+                    <div class="text-center text-black-50 mt-2" style="font-size: 0.9rem;">
+                      Réponse rapide • Tracking inclus • Objectifs réalistes, pilotage transparent
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /Carte -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="svg-separator">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2273 390" fill="#FFF">
+          <path d="M0,211.28s373-254,1119-205,765,173,1154,0v384H0Z"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pt-4 pb-0">
+
+    <InternalLinksBlock data={internalLinks} />
+
+      <!-- Intro locale courte + utile -->
+      <div class="container">
+        <div class="heading-block text-center mx-auto" style="max-width: 800px">
+          <h2 class="mb-2 text-transform-none ls-0">
+            {serviceLabel} à {villeLabel} : une page pensée “demande”, pas “blabla”
+          </h2>
+          <span>
+            Angle du jour : <strong>{angle.titre}</strong> — cas d’usage : <strong>{useCase.label}</strong>.
+          </span>
+        </div>
+
+        <div class="row justify-content-center col-mb-50">
+          <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <div class="row g-4 align-items-start">
+                  <div class="col-md-7">
+                    <h3 class="text-transform-none fw-semibold ls-0 mb-2" style="font-size: 1.25rem;">
+                      Ce qu’on vise (simplement)
+                    </h3>
+                    <ul class="iconlist ms-0 mb-0">
+                      <li class="mb-2"><i class="bi-check-circle color me-2"></i>Être trouvé facilement sur votre zone (ville + alentours) — au bon moment.</li>
+                      <li class="mb-2"><i class="bi-check-circle color me-2"></i>Transformer les visites en <strong>appels</strong> et <strong>formulaires</strong> (CRO).</li>
+                      <li class="mb-0"><i class="bi-check-circle color me-2"></i>Piloter sur des données simples (tracking inclus) : ce qui apporte des demandes, on garde.</li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-5">
+                    <div class="p-3 rounded-3" style="background: rgba(51,94,238,0.08);">
+                      <h4 class="text-transform-none fw-semibold ls-0 mb-2" style="font-size: 1.05rem;">
+                        Autour de {villeLabel}
+                      </h4>
+
+                      {alentoursDisponibles.length ? (
+                        <div class="d-flex flex-wrap gap-2">
+                          {alentoursDisponibles.map((a) => (
+                            <a class="btn btn-sm btn-outline-secondary fw-semibold" href={`/${service.slug}/${a.slug}/`}>
+                              {a.nom}
+                            </a>
+                          ))}
+                        </div>
+                      ) : (
+                        <p class="mb-0 text-black-50">Pages alentours à venir.</p>
+                      )}
+
+                      <div class="mt-3">
+                        <a class="button button-rounded button-light button-small second-bg-color text-dark w-100 ls-0 m-0" href={secondaryCta.href}>
+                          {secondaryCta.label}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {typologies.length ? (
+                  <div class="mt-4">
+                    <div class="fancy-title title-border">
+                      <h4 class="fw-semibold">Types de demandes fréquentes dans le secteur</h4>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                      {typologies.map((t) => (
+                        <span class="badge bg-light text-dark border">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problèmes (courts, concrets) -->
+      <div class="container mt-5 mb-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 700px">
+          <h2 class="mb-2 text-transform-none ls-0">Ce qui bloque souvent les entreprises de nettoyage</h2>
+          <span>On corrige les causes, pas les symptômes.</span>
+        </div>
+
+        <div class="row col-mb-50 mt-3">
+          <div class="col-md-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <img src={icon1} alt="Plan d'action" />
+              </div>
+              <div class="fbox-content">
+                <h3 class="text-transform-none fw-semibold ls-0">Dépendance au bouche-à-oreille</h3>
+                <p class="text-black-50 mb-0">Quand ça baisse, le planning se vide. On construit une base de demandes plus stable.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <img src={icon2} alt="Tracking" />
+              </div>
+              <div class="fbox-content">
+                <h3 class="text-transform-none fw-semibold ls-0">On ne sait pas ce qui marche</h3>
+                <p class="text-black-50 mb-0">Sans tracking (appels/formulaires), on pilote à l’intuition. On simplifie la mesure.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box fbox-plain">
+              <div class="fbox-icon">
+                <img src={icon3} alt="Conversion" />
+              </div>
+              <div class="fbox-content">
+                <h3 class="text-transform-none fw-semibold ls-0">Des demandes floues</h3>
+                <p class="text-black-50 mb-0">“Vous faites du nettoyage ?” → on clarifie l’offre et on qualifie dès la page.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inclus + mesure -->
+      <div class="section bg-transparent">
+        <div class="container">
+          <div class="row justify-content-between align-items-start">
+            <div class="col-lg-6">
+              <div class="heading-block">
+                <h2 class="mb-2 text-transform-none ls-0">Ce qui est inclus dans {serviceLabel}</h2>
+                <span>
+                  Du concret : des livrables, une méthode, et un pilotage basé sur les demandes.
+                </span>
+              </div>
+
+              <div class="row col-mb-30">
+                <div class="col-12">
+                  <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                      <h4 class="text-transform-none fw-semibold ls-0 mb-3">Livrables</h4>
+                      <ul class="iconlist ms-0 mb-0">
+                        {service.livrables.slice(0, 6).map((l) => (
+                          <li class="mb-2"><i class="bi-check2 color me-2"></i>{l}</li>
+                        ))}
+                      </ul>
+                      <div class="mt-3">
+                        <a class="btn btn-sm bg-color text-white fw-semibold px-3" href={primaryCta.href}>
+                          {primaryCta.label}
+                        </a>
+                        <a class="btn btn-sm bg-white fw-semibold color px-3 ms-2" href="/tarifs">
+                          Voir les tarifs
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                      <h4 class="text-transform-none fw-semibold ls-0 mb-3">Comment on mesure</h4>
+                      <div class="d-flex flex-wrap gap-2">
+                        {service.kpis.slice(0, 6).map((k) => (
+                          <span class="badge bg-light text-dark border">{k}</span>
+                        ))}
+                      </div>
+                      <p class="text-black-50 mt-3 mb-0">
+                        Objectif : savoir rapidement ce qui génère des demandes à {villeLabel}, et améliorer ce qui convertit.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bloc réassurance (court) -->
+            <div class="col-lg-5 mt-5 mt-lg-0">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <h4 class="text-transform-none fw-semibold ls-0 mb-2">Pourquoi ça marche mieux (souvent)</h4>
+                  <p class="text-black-50 mb-3">
+                    Parce qu’on évite les pages “SEO pour SEO” : on pense <strong>intention</strong>, <strong>preuve</strong> et <strong>action</strong>.
+                  </p>
+                  <ul class="iconlist ms-0 mb-0">
+                    {service.preuves.slice(0, 3).map((p) => (
+                      <li class="mb-2"><i class="bi-shield-check color me-2"></i>{p}</li>
+                    ))}
+                  </ul>
+                  <div class="mt-4">
+                    <a class="button button-rounded button-light button-large second-bg-color text-dark w-100 ls-0 m-0" href="/preuves">
+                      Voir des exemples & preuves
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div class="fancy-title title-border">
+                  <h4 class="fw-semibold">Raccourcis utiles</h4>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                  {internalLinks.slice(0, 4).map((l) => (
+                    <a class="btn btn-outline-secondary fw-semibold text-start" href={l.href}>
+                      {l.label} <i class="bi-caret-right-fill color"></i>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Méthode (structure “How We Work”) -->
+      <div class="container mt-5 mb-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 700px">
+          <h2 class="mb-2 text-transform-none ls-0">Méthode en 4 étapes</h2>
+          <span>Prioriser, mettre en place, mesurer, améliorer.</span>
+        </div>
+
+        <div class="row justify-content-center col-mb-50">
+          {service.methode.slice(0, 4).map((step, idx) => (
+            <div class="col-md-3">
+              <div class="feature-box mx-0 fbox-small fbox-center border-0">
+                <div class="fbox-img position-relative">
+                  <img src="/_assets_/images/icons/step.svg" alt="Étape" height="140" />
+                </div>
+                <h2 class="mt-4 h5 mb-2 text-transform-none fw-semibold ls-0">
+                  <span>{idx + 1}.</span> {step.titre}
+                </h2>
+                <p class="text-black-50 mb-0">{step.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ (toggles comme le template) -->
+      <div class="container mb-6">
+        <div class="heading-block text-center mx-auto" style="max-width: 700px">
+          <h2 class="mb-2 text-transform-none ls-0">FAQ — {serviceLabel} à {villeLabel}</h2>
+          <span>Réponses courtes, utiles, orientées décision.</span>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                {faqSelected.map((f) => (
+                  <div class="toggle">
+                    <div class="toggle-header justify-content-between">
+                      <div class="toggle-icon">
+                        <i class="toggle-closed bi-plus-circle"></i>
+                        <i class="toggle-open bi-dash-circle"></i>
+                      </div>
+                      <div class="toggle-title fw-semibold">{f.q}</div>
+                    </div>
+                    <div class="toggle-content text-black-50">{f.a}</div>
+                  </div>
+                ))}
+
+                <p class="fw-semibold mb-0 mt-3">
+                  Besoin d’un avis rapide sur votre cas à {villeLabel} ?
+                  <a href="/contact"><u>Demander un audit gratuit</u></a> <i class="bi-caret-right-fill color"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA final (structure “section text-center”) -->
+      <div class="section text-center mb-0" style="padding: 110px 0; background-color: rgba(51,94,238,0.08);">
+        <div class="container" style="max-width: 780px">
+          <img src="/_assets_/images/icons/apply.svg" alt="Audit" height="180" class="mb-4" />
+          <h2 style="font-size: 38px">Prêt à augmenter les demandes à {villeLabel} ?</h2>
+          <p class="mb-5" style="font-size: 1.125rem;">
+            On vous envoie un plan d’action clair (priorités + quick wins) pour {serviceLabel},
+            avec tracking simple (appels + formulaires) pour piloter sans perdre de temps.
+          </p>
+
+          <a href={primaryCta.href} class="btn btn-lg bg-color text-white fw-semibold px-4">
+            {primaryCta.label}
+          </a>
+          <a href={secondaryCta.href} class="btn btn-lg bg-white fw-semibold color px-4 ms-2">
+            {secondaryCta.label}
+          </a>
+
+          <div class="mt-4 text-black-50">
+            <strong>Note :</strong> on travaille sur des objectifs et une méthode, jamais sur des résultats “garantis”.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

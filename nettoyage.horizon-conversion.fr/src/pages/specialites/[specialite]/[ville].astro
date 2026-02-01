@@ -1,4 +1,16 @@
 ---
 // src/pages/specialites/[specialite]/[ville].astro
+
+import InternalLinksBlock from "../../../components/InternalLinksBlock.astro";
+import { buildInternalLinks } from "../../../lib/linking";
+
+const { specialite, ville } = Astro.params;
+
+const internalLinks = buildInternalLinks({
+  pageType: "specialty_city",
+  specialiteSlug: specialite,
+  villeSlug: ville
+});
 ---
 
+<InternalLinksBlock data={internalLinks} />
