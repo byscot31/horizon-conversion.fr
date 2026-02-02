@@ -6,8 +6,5 @@
 **/.env
 **/.env.*
 _deploy/
-
-_astro-template/public/_assets_/templates/**/*.psd
-_astro-template/public/_assets_/templates/templates.zip
 *.psd
 *.zip
