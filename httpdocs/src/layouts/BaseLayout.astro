@@ -119,10 +119,6 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
             <nav class="primary-menu with-arrows">
               <ul class="menu-container">
 
-                <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
-                  <a class="menu-link" href="/"><div>Accueil</div></a>
-                </li>
-
                 <!-- Offres (mega menu simple) -->
                 <li class={`menu-item mega-menu ${isActive("/seo-local") || isActive("/reseaux-sociaux") || isActive("/google-meta-ads") || isActive("/experience-utilisateur") || isActive("/web-analytics") || isActive("/marketing-contenu") ? "current" : ""}`}>
                   <a class="menu-link" href="/seo-local"><div>Offres</div></a>
@@ -206,12 +202,20 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
                   <a class="menu-link" href="/zones"><div>Zones</div></a>
                 </li>
 
-                <li class={`menu-item ${isActive("/ressources") ? "current" : ""}`}>
-                  <a class="menu-link" href="/ressources"><div>Ressources</div></a>
+                <li class={`menu-item ${isActive("/methode") ? "current" : ""}`}>
+                  <a class="menu-link" href="/methode"><div>Méthode</div></a>
                 </li>
 
-                <li class={`menu-item ${isActive("/contact") ? "current" : ""}`}>
-                  <a class="menu-link" href="/contact"><div>Contact</div></a>
+                <li class={`menu-item ${isActive("/preuves") ? "current" : ""}`}>
+                  <a class="menu-link" href="/preuves"><div>Preuves</div></a>
+                </li>
+
+                <li class={`menu-item ${isActive("/tarifs") ? "current" : ""}`}>
+                  <a class="menu-link" href="/tarifs"><div>Tarifs</div></a>
+                </li>
+
+                <li class={`menu-item ${isActive("/ressources") ? "current" : ""}`}>
+                  <a class="menu-link" href="/ressources"><div>Ressources</div></a>
                 </li>
 
               </ul>
