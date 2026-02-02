@@ -49,7 +49,7 @@ Structure Ressources / index
 - Section “Par ville” (chips) : Chantilly… + lien /zones (pas besoin d’un article par ville)
 - CTA final : “Audit gratuit : 10 min → plan d’action 30 jours”
 
-Structure Ressources / article
+5) Structure Ressources / article
 - Sommaire (anchors)
 - Bloc “À retenir” (3 bullets)
 - Bloc “Erreurs fréquentes”
@@ -58,7 +58,7 @@ Structure Ressources / article
 - FAQ courte (2–3)
 
 
-5) Contact “3 voies” (téléphone / rappel / devis)
+6) Contact “3 voies” (téléphone / rappel / devis)
 Objectif : laisser le prospect choisir son niveau d’effort.
 - Hero + microcopy “Choisis la façon la plus simple”
 - 3 cartes :
@@ -68,7 +68,7 @@ Objectif : laisser le prospect choisir son niveau d’effort.
 - Réassurance : “Interlocuteur unique + suivi mensuel”
 - FAQ + CTA
 
-6) Tarifs “par service” (utile si tu veux que ce soit très concret)
+7) Tarifs “par service” (utile si tu veux que ce soit très concret)
 Principe : 6 blocs services, chacun avec 3 packs.
 - Hero + “comment choisir”
 - Menu ancre : SEO local / Ads / UX / Social / Analytics / Contenu
@@ -79,12 +79,11 @@ Pour chaque service :
 - “idéal pour villes volume/premium”
 - Comparatif rapide (table transversale : reporting, tracking, contenu, design…)
 - FAQ + CTA
-
 ✅ Avantage : parfait pour “je veux du SEO local, combien ?”
 ⚠️ Risque : page longue → prévoir ancres + accordéons.
 
 
-6) Méthode — Gabarit #1 complet (structure)
+8) Méthode — Gabarit #1 complet (structure)
 Structure
 - Hero (problème → promesse → CTA)
 - Les 3 étapes (cartes)
@@ -100,7 +99,7 @@ Structure
 - CTA final (récap + action)
 
 
-7) Preuves — Gabarit 2 complet
+9) Preuves — Gabarit 2 complet
 - Hero (réassurance immédiate)
 - Ce que tu reçois chaque mois” (checklist)
 - Exemples de livrables (galerie + descriptions)
@@ -111,7 +110,7 @@ Structure
 - CTA final (récap + action)
 
 
-8) Gabarit “Local performance” (parfait pour villes volume)
+10) Gabarit “Local performance” (parfait pour villes volume)
 Pour : Creil, Nogent, Pont-Sainte-Maxence, Beaumont, Viarmes
 Ton : “vite, concret, appels”
 - Hero : “Pas assez d’appels à {Ville} ?” + CTA “Audit gratuit”
@@ -149,7 +148,7 @@ Ton : “on filtre, on qualifie”
 - FAQ + CTA
 
 
-9) Page “Zone × Ville”
+11) Page “Zone × Ville”
 - Hero local : “Webmarketing local à {Ville} (Zone {Zone})”
   1 phrase “pas assez d’appels / dépendance bouche-à-oreille”
   CTA : Audit gratuit / Être rappelé
@@ -164,7 +163,7 @@ Ton : “on filtre, on qualifie”
 - CTA final
 
 
-10) Structure “incontournable” d’une landing cible
+12) Structure “incontournable” d’une landing cible
 À garder pour toutes les cibles (et décliner ensuite) :
 - Hero : problème de la cible → promesse + 2 CTA (Audit / Rappel)
 - 3 bénéfices (appels, qualité des demandes, suivi simple)
@@ -179,7 +178,7 @@ Ton : “on filtre, on qualifie”
 - FAQ cible (5) + CTA final
 
 
-11) Gabarit “Stratégie recommandée” (le meilleur, polyvalent)
+13) Gabarit “Stratégie recommandée” (le meilleur, polyvalent)
 - Hero : “Plus de {appels/devis/réservations} pour {cible} à {ville}” + CTA
 - Problèmes typiques de la cible (3–5 bullets)
 - Mention naturelle des alentours (1 phrase)
