@@ -164,10 +164,32 @@ Ton : “on filtre, on qualifie”
 - CTA final
 
 
+10) Structure “incontournable” d’une landing cible
+À garder pour toutes les cibles (et décliner ensuite) :
+- Hero : problème de la cible → promesse + 2 CTA (Audit / Rappel)
+- 3 bénéfices (appels, qualité des demandes, suivi simple)
+- Offre recommandée (2–3 services max, pas 6)
+- Preuves (avis/mini cas/livrables)
+- Comment ça se passe (3 étapes)
+- “Ce que vous obtenez” (liste livrables en 30 sec)
+- “Ce qu’on mesure” (appels, formulaires, RDV, sources)
+- “Ce qu’on ne fait pas” (promesses #1, faux avis)
+- Formulaire court (Nom + Téléphone + Ville + Besoin)
+- Preuves minimales (même anonymisées)
+- FAQ cible (5) + CTA final
 
 
-
-
+11) Gabarit “Stratégie recommandée” (le meilleur, polyvalent)
+- Hero : “Plus de {appels/devis/réservations} pour {cible} à {ville}” + CTA
+- Problèmes typiques de la cible (3–5 bullets)
+- Mention naturelle des alentours (1 phrase)
+- La stratégie simple en 3 briques (cards)
+  Brique 1 : SEO local / Google Maps
+  Brique 2 : Ads (si besoin)
+  Brique 3 : Page qui convertit / preuve
+- Plan 30 jours à {ville} (checklist)
+- Preuves (livrables + mini cas anonymisé)
+- FAQ locale + CTA final
 
 
 
