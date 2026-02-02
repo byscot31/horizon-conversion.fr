@@ -19,7 +19,7 @@ if( typeof jQuery !== 'undefined' ) {
 		headerMobileSticky: false,
 		menuBreakpoint: 992,
 		pageMenuBreakpoint: 992,
-		gmapAPI: 'AIzaSyDPGIteNIY-9yjumkZa0U_Xr2fYs_P41Tg',
+		gmapAPI: '',
 		scrollOffset: 60,
 		scrollExternalLinks: true,
 		smoothScroll: false,
