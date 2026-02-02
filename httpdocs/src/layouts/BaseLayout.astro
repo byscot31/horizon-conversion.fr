@@ -1,4 +1,345 @@
 ---
 // src/layouts/BaseLayout.astro
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  ogImage?: string;
+};
+
+const {
+  title = "Horizon Conversion | Webmarketing local Sud Oise & Val d’Oise 95",
+  description = "SEO local, Ads, contenu et site qui convertit : plus d’appels et de demandes locales. Sud Oise & Nord 95.",
+  canonical,
+  noindex = false,
+  ogImage = "/_assets_/images/og-default.jpg"
+} = Astro.props as Props;
+
+// Canonical robuste : si Astro.site absent, on fait un canonical relatif
+const canonicalUrl = canonical
+  ? canonical
+  : Astro.site
+    ? new URL(Astro.url.pathname, Astro.site).toString()
+    : Astro.url.pathname;
+
+// Helpers: pour marquer le lien actif (simple)
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 ---
 
+<!doctype html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="author" content="Horizon Conversion" />
+  <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- OpenGraph -->
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Core Style -->
+  <link rel="stylesheet" href="/_assets_/style.css" />
+  <link rel="stylesheet" href="/_assets_/css/font-icons.css">
+  <link rel="stylesheet" href="/_assets_/seo.css" />
+
+  <title>{title}</title>
+</head>
+
+<body class="stretched">
+  <div id="wrapper">
+
+    <!-- Top Bar -->
+    <div id="top-bar" class="transparent-topbar">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-12 col-md-auto">
+            <div class="top-links">
+              <ul class="top-links-container">
+                <li class="top-links-item"><a href="/contact">Être rappelé</a></li>
+                <li class="top-links-item"><a href="/contact">Demander un audit gratuit</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-auto dark">
+            <ul id="top-social">
+              <li><a href="tel:+33660921008" class="h-bg-call"><span class="ts-icon"><i class="fa-solid fa-phone"></i></span><span class="ts-text">Appeler</span></a></li>
+              <li><a href="mailto:contact@horizonconversion.fr" class="h-bg-email3"><span class="ts-icon"><i class="bi-envelope-fill"></i></span><span class="ts-text">Email</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="transparent-header floating-header header-size-md">
+      <div id="header-wrap">
+        <div class="container">
+          <div class="header-row">
+
+            <!-- Logo -->
+            <div id="logo" class="d-flex align-items-center justify-content-center text-center">
+              <a href="/" aria-label="Accueil" class="text-decoration-none">
+                <span class="d-flex flex-column align-items-center">
+                  <span>Horizon Conversion</span>
+                  <small>Webmarketing</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="header-misc">
+              <a href="/contact" class="button button-rounded ms-3 d-none d-sm-block">Audit gratuit</a>
+            </div>
+
+            <div class="primary-menu-trigger">
+              <button class="cnvs-hamburger" type="button" title="Ouvrir le menu">
+                <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+              </button>
+            </div>
+
+            <!-- Primary Navigation -->
+            <nav class="primary-menu with-arrows">
+              <ul class="menu-container">
+
+                <li class={`menu-item ${isActive("/") ? "current" : ""}`}>
+                  <a class="menu-link" href="/"><div>Accueil</div></a>
+                </li>
+
+                <!-- Offres (mega menu simple) -->
+                <li class={`menu-item mega-menu ${isActive("/seo-local") || isActive("/reseaux-sociaux") || isActive("/google-meta-ads") || isActive("/experience-utilisateur") || isActive("/web-analytics") || isActive("/marketing-contenu") ? "current" : ""}`}>
+                  <a class="menu-link" href="/seo-local"><div>Offres</div></a>
+
+                  <div class="mega-menu-content mega-menu-style-2 px-0">
+                    <div class="container">
+                      <div class="row">
+
+                        <a href="/seo-local" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/seo.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">SEO local</h3>
+                              <p>Être visible sur Google & Google Maps, générer des appels.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a href="/google-meta-ads" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/adword.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">Google / Meta Ads</h3>
+                              <p>Des demandes rapides, budget piloté, suivi des appels.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a href="/experience-utilisateur" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/experience.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">Site qui convertit</h3>
+                              <p>Transformer les visites en appels et devis.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a href="/reseaux-sociaux" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/social.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">Réseaux sociaux</h3>
+                              <p>Du contenu simple, régulier, orienté business.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a href="/web-analytics" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/analysis.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">Analytics</h3>
+                              <p>Savoir d’où viennent vos demandes. Décider avec du concret.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a href="/marketing-contenu" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                          <div class="feature-box">
+                            <div class="fbox-icon mb-2"><img src="/_assets_/images/icons/content_marketing.svg" alt="" class="bg-transparent rounded-0" /></div>
+                            <div class="fbox-content">
+                              <h3 class="text-transform-none ls-0">Marketing de contenu</h3>
+                              <p>Pages utiles + articles qui attirent des clients locaux.</p>
+                            </div>
+                          </div>
+                        </a>
+
+                        <div class="mega-menu-column sub-menu-container col-12 p-0">
+                          <a href="/seo-local" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
+                            Voir toutes les offres <i class="bi-arrow-right"></i>
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class={`menu-item ${isActive("/zones") ? "current" : ""}`}>
+                  <a class="menu-link" href="/zones"><div>Zones</div></a>
+                </li>
+
+                <li class={`menu-item ${isActive("/ressources") ? "current" : ""}`}>
+                  <a class="menu-link" href="/ressources"><div>Ressources</div></a>
+                </li>
+
+                <li class={`menu-item ${isActive("/contact") ? "current" : ""}`}>
+                  <a class="menu-link" href="/contact"><div>Contact</div></a>
+                </li>
+
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+      <div class="header-wrap-clone"></div>
+    </header>
+
+    <slot />
+
+    <!-- Footer -->
+    <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+      <div class="container">
+        <div class="footer-widgets-wrap pb-5">
+
+          <div class="row col-mb-50">
+            <div class="col-md-8">
+              <div class="widget">
+                <img src="/_assets_/images/logo.png" alt="Horizon Conversion" class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;" />
+                <p>
+                  Webmarketing local pour générer des <strong>appels</strong> et des <strong>demandes</strong> :
+                  SEO Google/Maps, Ads, pages qui convertissent, contenu et suivi.
+                </p>
+
+                <div class="line line-sm"></div>
+
+                <div class="row g-4">
+                  <div class="col-lg-4 col-6 widget_links">
+                    <div class="h5 mb-2">Navigation</div>
+                    <ul>
+                      <li><a href="/seo-local">Offres</a></li>
+                      <li><a href="/zones">Zones</a></li>
+                      <li><a href="/ressources">Ressources</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-lg-8 col-6 widget_links">
+                    <div class="h5 mb-2">Services</div>
+                    <div class="row g-4">
+                      <div class="col-lg-6 col-12 widget_links">
+                        <ul>
+                          <li><a href="/seo-local">SEO local</a></li>
+                          <li><a href="/google-meta-ads">Google / Meta Ads</a></li>
+                          <li><a href="/experience-utilisateur">Site qui convertit</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-6 col-12 widget_links">
+                        <ul>
+                          <li><a href="/reseaux-sociaux">Réseaux sociaux</a></li>
+                          <li><a href="/web-analytics">Analytics</a></li>
+                          <li><a href="/marketing-contenu">Contenu</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="widget">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="feature-box fbox-plain fbox-sm align-items-center">
+                      <div class="fbox-icon"><i class="bi-telephone text-dark"></i></div>
+                      <div class="fbox-content">
+                        <span class="text-muted">Téléphone :</span><br />
+                        <h3 class="text-transform-none ls-0 fw-semibold">+33 6 60 92 10 08</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 mt-4">
+                    <div class="feature-box fbox-plain fbox-sm align-items-center">
+                      <div class="fbox-icon"><i class="bi-envelope text-dark"></i></div>
+                      <div class="fbox-content">
+                        <span class="text-muted">Email :</span><br />
+                        <h3 class="text-transform-none ls-0 fw-semibold">contact@horizonconversion.fr</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 mt-4">
+                    <a href="/contact" class="button button-rounded w-100 text-center">Demander un audit gratuit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div id="copyrights" style="background: url('/_assets_/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;">
+        <div class="container">
+          <div class="row justify-content-between col-mb-30">
+            <div class="col-12 col-lg-auto text-center text-lg-start">
+              © {new Date().getFullYear()} Horizon Conversion — Tous droits réservés.
+            </div>
+
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+              <div class="copyrights-menu copyright-links">
+                <a href="/mentions-legales" class="text-contrast-600">Mentions</a> /
+                <a href="/politique-confidentialite" class="text-contrast-600">Confidentialité</a> /
+                <a href="/contact" class="text-contrast-600">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Go To Top -->
+  <div id="gotoTop" class="uil uil-angle-up"></div>
+
+  <!-- JavaScripts -->
+  <script is:inline src="/_assets_/js/plugins.min.js"></script>
+  <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+
+  <!-- Parallax (optionnel) -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+  <script is:inline>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight:false});</script>
+</body>
+</html>

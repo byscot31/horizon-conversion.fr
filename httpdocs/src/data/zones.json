@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "sud-oise",
+    "nom": "Sud Oise",
+    "villes": ["chantilly", "senlis", "creil", "nogent-sur-oise", "pont-sainte-maxence"],
+    "specificites": "Zone mix volume/premium. Forte demande artisans & services. Priorité : Google Maps, pages qui convertissent, et suivi des appels."
+  },
+  {
+    "slug": "val-doise-95",
+    "nom": "Val d’Oise 95",
+    "villes": ["l-isle-adam", "beaumont-sur-oise", "viarmes", "luzarches"],
+    "specificites": "Nord 95 : mix résidentiel + commerces. Approche adaptée selon les villes : performance rapide (volume) ou image & qualité (premium)."
+  }
+]

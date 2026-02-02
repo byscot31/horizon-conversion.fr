@@ -1,0 +1,197 @@
+1) Accueil “Audit gratuit” (ultra conversion)
+- Hero : problème → promesse + 2 CTA (Audit / Être rappelé)
+- “Pour qui” (6 cartes : dépannage, rénovation, garage, commerce, TPE, libéral)
+- Offre d’entrée : “Audit gratuit + plan 30 jours”
+- 6 services (grille + bénéfices concrets)
+- “Villes volume vs premium” (2 blocs + liens)
+- Méthode (Audit → Mise en place → Suivi)
+- Preuves (avis / mini-cas / livrables)
+- FAQ (5 objections)
+- CTA final
+
+CTA principal : Demander un audit gratuit
+
+
+2) src/pages/[service]/index.astro
+Base commune (à garder sur les 6 pages)
+- Hero : problème → promesse + 2 CTA (Audit / Être rappelé)
+- 3 bénéfices concrets (appels, qualif, suivi simple)
+- Ce qu’on fait (livrables) (liste claire)
+- Tarifs / Packs
+- Comment ça se passe (Audit → Mise en place → Suivi mensuel)
+- Villes : “volume” vs “premium” + liens vers pages service×ville
+- FAQ (5) + CTA final
+
+Ensuite, tu ajoutes 2 blocs spécifiques par service et variantes de “structure” pour split consultant/agence.
+
+3) src/pages/[zone]/index.astro
+Structure recommandée pour une page zone
+Objectif : capter “webmarketing local + zone”, rassurer, pousser vers pages ville/service.
+- Hero : problème local + promesse + CTA (Audit / Être rappelé)
+- Pour qui dans la zone : artisans, commerces, TPE, libéraux (cartes)
+- Ce qu’on met en place : 6 services (grille) + lien vers pages service de la zone
+- Villes couvertes : chips + split volume vs premium
+- Pourquoi ça marche ici : 3 points (concurrence, Google Maps, preuve/avis)
+- Méthode : Audit → Mise en place → Suivi mensuel
+- FAQ zone : 5 questions “terrain”
+- CTA final : audit gratuit + lien contact
+
+
+4) Ressources “Hub SEO local” (recommandé)
+Objectif : devenir la page qui capte du trafic informatif puis renvoie vers tes offres.
+
+Structure Ressources / index
+- Hero : “Conseils concrets pour générer des appels localement” + CTA audit
+- Barre de recherche + filtres (Service / Cible / Niveau)
+- Blocs catégories (6 tuiles) = tes services
+- SEO local, Ads, UX, Social, Analytics, Contenu
+- Top 6 articles “à lire en premier” (anti-débutant)
+- Section “Par ville” (chips) : Chantilly… + lien /zones (pas besoin d’un article par ville)
+- CTA final : “Audit gratuit : 10 min → plan d’action 30 jours”
+
+Structure Ressources / article
+- Sommaire (anchors)
+- Bloc “À retenir” (3 bullets)
+- Bloc “Erreurs fréquentes”
+- Bloc “Checklist”
+- Bloc “Prochaine étape” (CTA vers service correspondant)
+- FAQ courte (2–3)
+
+
+5) Contact “3 voies” (téléphone / rappel / devis)
+Objectif : laisser le prospect choisir son niveau d’effort.
+- Hero + microcopy “Choisis la façon la plus simple”
+- 3 cartes :
+  📞 Appeler maintenant (tel:)
+  🔁 Être rappelé (form mini : tel + ville)
+  🧾 Recevoir un devis (form plus complet)
+- Réassurance : “Interlocuteur unique + suivi mensuel”
+- FAQ + CTA
+
+6) Tarifs “par service” (utile si tu veux que ce soit très concret)
+Principe : 6 blocs services, chacun avec 3 packs.
+- Hero + “comment choisir”
+- Menu ancre : SEO local / Ads / UX / Social / Analytics / Contenu
+Pour chaque service :
+- 3 packs
+- “livrables inclus”
+- “délai de démarrage”
+- “idéal pour villes volume/premium”
+- Comparatif rapide (table transversale : reporting, tracking, contenu, design…)
+- FAQ + CTA
+
+✅ Avantage : parfait pour “je veux du SEO local, combien ?”
+⚠️ Risque : page longue → prévoir ancres + accordéons.
+
+
+6) Méthode — Gabarit #1 complet (structure)
+Structure
+- Hero (problème → promesse → CTA)
+- Les 3 étapes (cartes)
+  Étape 1 — Audit & priorités (Semaine 1)
+  Étape 2 — Mise en place (Semaine 2–3)
+  Étape 3 — Suivi mensuel (Semaine 4 puis chaque mois)
+- Livrables par étape (checklist ultra concrète)
+- Mini bloc “Consultant vs Agence” (au milieu de page)
+- Ce qu’on mesure (sans jargon)
+- Ce qu’on te demande (charge client minimale)
+- Ce qu’on ne fait pas (anti-déception)
+- FAQ Méthode (5 questions)
+- CTA final (récap + action)
+
+
+7) Preuves — Gabarit 2 complet
+- Hero (réassurance immédiate)
+- Ce que tu reçois chaque mois” (checklist)
+- Exemples de livrables (galerie + descriptions)
+- “Ce qu’on mesure (et pourquoi)” (KPI utiles)
+- “Pourquoi ça marche” (méthode courte)
+- “Pourquoi ça marche” (méthode courte)
+- FAQ “Preuves” (anti-objections)
+- CTA final (récap + action)
+
+
+8) Gabarit “Local performance” (parfait pour villes volume)
+Pour : Creil, Nogent, Pont-Sainte-Maxence, Beaumont, Viarmes
+Ton : “vite, concret, appels”
+- Hero : “Pas assez d’appels à {Ville} ?” + CTA “Audit gratuit”
+- Bloc “Urgence / dépannage / demande rapide” (si cible artisan)
+- “Ce qu’on met en place en 30 jours à {Ville}” (3–5 bullets)
+- “Optimisations locales” : Google Maps, pages, tracking
+- “Zones proches” : alentours (liste naturelle)
+- Section “Tarifs”
+- FAQ + CTA
+👉 À l’intérieur, ajoute un mini bloc “Objectif 30 jours” très orienté résultat.
+
+Gabarit “Image & confiance” (parfait pour villes premium)
+Pour : Chantilly, Senlis, L’Isle-Adam, Luzarches
+Ton : “qualité, preuves, cohérence”
+- Hero : “Des demandes plus qualifiées à {Ville}”
+- Bloc “Preuves” (avis, réalisations, garanties)
+- Bloc “Message & positionnement” (ce qui te différencie localement)
+- Livrables version “premium” (plus de contenu/UX/finition)
+- “Pourquoi nous à {Ville}” (interlocuteur unique + livrables)
+- Section “Tarifs”
+- FAQ premium + CTA
+👉 Ici, la page doit être plus “sérieuse / rassurante” que “agressive”.
+
+Gabarit “Anti-mauvais leads” (spécial Ads ou SEO concurrentiel)
+Pour : Ads partout + SEO dans villes très concurrentielles
+Ton : “on filtre, on qualifie”
+- Hero : “Moins de mauvais leads à {Ville}”
+- “Pourquoi ça arrive” (4 causes simples)
+- “Nos garde-fous” :
+  ciblage zone/horaire
+  messages clairs
+  landing page qui filtre
+  tracking appels/formulaires
+- Pack “Starter / Croissance / Dominant” (mini)
+- FAQ + CTA
+
+
+9) Page “Zone × Ville”
+- Hero local : “Webmarketing local à {Ville} (Zone {Zone})”
+  1 phrase “pas assez d’appels / dépendance bouche-à-oreille”
+  CTA : Audit gratuit / Être rappelé
+- Spécificité de la ville (1 bloc)
+  ton villes.specificites + mention naturelle des alentours
+- Ce qu’on fait le plus souvent ici (3 cartes)
+  SEO local / Ads / Site qui convertit (par défaut)
+    badge “volume/premium” adapté
+- Tous les services (grille 6) avec liens vers /[service]/[ville]
+- Méthode en 3 étapes
+- FAQ locale (5)
+- CTA final
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

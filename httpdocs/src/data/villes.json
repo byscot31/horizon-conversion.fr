@@ -1,2 +1,83 @@
-// src/data/villes.json
-
+[
+  {
+    "slug": "chantilly",
+    "nom": "Chantilly",
+    "codePostal": "60500",
+    "zone": "sud-oise",
+    "tier": "premium",
+    "alentours": ["Gouvieux", "Lamorlaye", "Coye-la-Forêt", "Orry-la-Ville", "Précy-sur-Oise"],
+    "specificites": "Zone à forte exigence d’image. Prospects sensibles aux preuves, au sérieux et à la qualité perçue."
+  },
+  {
+    "slug": "senlis",
+    "nom": "Senlis",
+    "codePostal": "60300",
+    "zone": "sud-oise",
+    "tier": "premium",
+    "alentours": ["Chamant", "Barbery", "Pontarmé", "Aumont-en-Halatte", "Mont-l'Évêque"],
+    "specificites": "Centre-ville dynamique, mix commerces/libéraux. Bon potentiel pour SEO local + contenu de confiance."
+  },
+  {
+    "slug": "creil",
+    "nom": "Creil",
+    "codePostal": "60100",
+    "zone": "sud-oise",
+    "tier": "volume",
+    "alentours": ["Montataire", "Villers-Saint-Paul", "Thiverny", "Rousseloy", "Saint-Leu-d'Esserent"],
+    "specificites": "Zone volume et concurrentielle. Besoin de demandes rapides (SEO Maps + Ads) et pages conversion."
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "nom": "Nogent-sur-Oise",
+    "codePostal": "60180",
+    "zone": "sud-oise",
+    "tier": "volume",
+    "alentours": ["Laigneville", "Monchy-Saint-Éloi", "Cramoisy", "Mello", "Creil"],
+    "specificites": "Marché local orienté services. Important de filtrer les leads et de rassurer (avis, garanties)."
+  },
+  {
+    "slug": "pont-sainte-maxence",
+    "nom": "Pont-Sainte-Maxence",
+    "codePostal": "60700",
+    "zone": "sud-oise",
+    "tier": "volume",
+    "alentours": ["Les Ageux", "Brenouille", "Cinqueux", "Sacy-le-Grand", "Verneuil-en-Halatte"],
+    "specificites": "Bon potentiel artisans/rénovation. La demande se capte avec pages services + Google Maps + preuve."
+  },
+  {
+    "slug": "l-isle-adam",
+    "nom": "L'Isle-Adam",
+    "codePostal": "95290",
+    "zone": "val-doise-95",
+    "tier": "premium",
+    "alentours": ["Parmain", "Mériel", "Presles", "Champagne-sur-Oise", "Nerville-la-Forêt"],
+    "specificites": "Zone premium. Les prospects attendent une présentation soignée, des cas concrets et un discours clair."
+  },
+  {
+    "slug": "beaumont-sur-oise",
+    "nom": "Beaumont-sur-Oise",
+    "codePostal": "95260",
+    "zone": "val-doise-95",
+    "tier": "volume",
+    "alentours": ["Persan", "Bernes-sur-Oise", "Nointel", "Mours", "Bruyères-sur-Oise"],
+    "specificites": "Zone volume avec concurrence locale. Très adapté à Ads + SEO Maps + optimisation conversion."
+  },
+  {
+    "slug": "viarmes",
+    "nom": "Viarmes",
+    "codePostal": "95270",
+    "zone": "val-doise-95",
+    "tier": "volume",
+    "alentours": ["Asnières-sur-Oise", "Seugy", "Chaumontel", "Baillet-en-France", "Luzarches"],
+    "specificites": "Petites structures, besoin de simplicité et d’efficacité. Excellent pour packs cadrés."
+  },
+  {
+    "slug": "luzarches",
+    "nom": "Luzarches",
+    "codePostal": "95270",
+    "zone": "val-doise-95",
+    "tier": "premium",
+    "alentours": ["Chaumontel", "Le Plessis-Luzarches", "Jagny-sous-Bois", "Lassy", "Épinay-Champlâtreux"],
+    "specificites": "Zone à forte valeur perçue. L’argumentaire doit insister sur la qualité, la cohérence et la confiance."
+  }
+]

@@ -1,0 +1,374 @@
+---
+// src/pages/[service]/index.astro
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import services from "../../../data/services.json";
+import villes from "../../../data/villes.json";
+
+export function getStaticPaths() {
+  return services.map((s) => ({
+    params: { service: s.slug },
+    props: { serviceData: s }
+  }));
+}
+
+const { serviceData } = Astro.props;
+const { service } = Astro.params;
+
+const serviceObj = serviceData ?? services.find((s) => s.slug === service);
+
+if (!serviceObj) {
+  throw new Error(`Service introuvable: ${service}`);
+}
+
+const volumeVilles = villes.filter((v) => v.tier === "volume");
+const premiumVilles = villes.filter((v) => v.tier === "premium");
+
+// SEO
+const title = `${serviceObj.nom} | Sud Oise & Val d’Oise 95`;
+const description =
+  serviceObj.promesse
+    ? `${serviceObj.promesse} — Sud Oise & Nord 95. Audit gratuit, livrables clairs, suivi mensuel.`
+    : `Service ${serviceObj.nom} — Sud Oise & Nord 95. Audit gratuit, livrables clairs, suivi mensuel.`;
+
+const canonical = Astro.url.pathname; // canonical relatif (robuste si Astro.site absent)
+
+// UI helpers
+const isAds = serviceObj.slug === "google-meta-ads";
+const isSeo = serviceObj.slug === "seo-local";
+const isUx = serviceObj.slug === "experience-utilisateur";
+const isSocial = serviceObj.slug === "reseaux-sociaux";
+const isAnalytics = serviceObj.slug === "web-analytics";
+const isContent = serviceObj.slug === "marketing-contenu";
+
+// Images (tu peux remplacer par tes assets réels)
+const heroImageByService: Record<string, string> = {
+  "seo-local": "/_assets_/images/hero/hero-1.jpg",
+  "reseaux-sociaux": "/_assets_/images/hero/hero-1.jpg",
+  "google-meta-ads": "/_assets_/images/hero/hero-1.jpg",
+  "experience-utilisateur": "/_assets_/images/hero/hero-1.jpg",
+  "web-analytics": "/_assets_/images/hero/hero-1.jpg",
+  "marketing-contenu": "/_assets_/images/hero/hero-1.jpg",
+};
+
+const heroImage = heroImageByService[serviceObj.slug] ?? "/_assets_/images/hero/hero-1.jpg";
+
+// Copy (pain points / bénéfices)
+const badge = serviceObj.nom;
+const h1 = serviceObj.h1 ?? serviceObj.nom;
+
+const painTitle = isSeo
+  ? "Google ne vous apporte pas assez d’appels"
+  : isAds
+    ? "Vous voulez des demandes rapides (sans cramer le budget)"
+    : isUx
+      ? "Votre site a des visites… mais peu de demandes"
+      : isSocial
+        ? "Vous publiez peu (ou pas) et ça ne rapporte pas"
+        : isAnalytics
+          ? "Vous ne savez pas ce qui génère vraiment des demandes"
+          : isContent
+            ? "Vous manquez de pages utiles pour convaincre et être trouvé"
+            : "Vous voulez plus de demandes, avec une méthode claire";
+
+const heroPromise = serviceObj.promesse ?? "Un plan simple, des livrables, un suivi mensuel.";
+
+const benefitsDefault = [
+  { title: "Plus de demandes", desc: "Appels, formulaires, devis : on optimise pour convertir, pas juste pour “faire du trafic”." },
+  { title: "Moins de mauvais leads", desc: "Messages clairs + pages qui filtrent + ciblage précis (quand il y a des Ads)." },
+  { title: "Suivi simple", desc: "Tu sais ce qui marche, ce qu’on fait, et ce qu’on améliore chaque mois." },
+];
+
+// CTA
+const ctaPrimary = "Demander un audit gratuit";
+const ctaSecondary = "Être rappelé";
+const ctaHref = "/contact";
+
+// FAQ (fallback si tes data n’ont pas encore la FAQ)
+const faqFallback = [
+  "En combien de temps voit-on les premiers résultats ?",
+  "Quel budget faut-il prévoir pour que ça soit rentable ?",
+  "Qu’est-ce qui est inclus chaque mois (livrables) ?",
+  "Est-ce adapté aux artisans / commerces / TPE ?",
+  "Est-ce que je peux arrêter quand je veux ?",
+];
+
+const faqs: string[] = (serviceObj.faq && serviceObj.faq.length) ? serviceObj.faq : faqFallback;
+
+// Livrables
+const deliverables: string[] =
+  (serviceObj.livrables && serviceObj.livrables.length)
+    ? serviceObj.livrables
+    : [
+        "Audit + priorités (ce qui bloque / ce qui rapporte)",
+        "Mise en place (pages, tracking, campagnes selon besoin)",
+        "Optimisations mensuelles + reporting simple",
+      ];
+
+// Problèmes traités
+const pains: string[] =
+  (serviceObj.problemes && serviceObj.problemes.length)
+    ? serviceObj.problemes
+    : [
+        "Pas assez d’appels",
+        "Mauvais leads",
+        "Concurrents devant sur Google",
+        "Dépendance au bouche-à-oreille",
+        "Manque de temps",
+      ];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+
+  <!-- Page Title / Hero -->
+  <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
+    <img src={heroImage} class="parallax-bg" alt="" />
+    <div id="particles-line"></div>
+
+    <div class="container">
+      <div class="page-title-row">
+
+        <div class="page-title-content">
+          <div class="badge rounded-pill border border-light text-light">{badge}</div>
+          <h1 class="text-transform-none ls-0">{h1}</h1>
+          <p class="mt-3 mb-0" style="max-width: 820px; margin-inline: auto;">
+            <strong>{painTitle}.</strong> {heroPromise}
+          </p>
+
+          <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+            <a href={ctaHref} class="button button-rounded button-large text-transform-none ls-0">{ctaPrimary}</a>
+            <a href={ctaHref} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">{ctaSecondary}</a>
+          </div>
+        </div>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{serviceObj.nom}</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.45), #39384D);"></div>
+  </section>
+
+  <!-- Content -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <!-- Intro + pains -->
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-7">
+            <div class="badge rounded-pill badge-default">Problèmes fréquents</div>
+            <h2 class="display-6 fw-bold text-transform-none ls-0 mb-3">
+              On règle ce qui empêche vos prospects de vous contacter.
+            </h2>
+            <div class="row col-mb-30 mt-1">
+              {pains.slice(0, 6).map((p) => (
+                <div class="col-md-6">
+                  <div class="feature-box fbox-sm border-0">
+                    <div class="fbox-icon">
+                      <i class="fa-solid fa-check-circle color"></i>
+                    </div>
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger mb-0">{p}</h3>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-4">
+              <a href={ctaHref} class="button button-rounded text-transform-none ls-0">{ctaPrimary}</a>
+              <a href="/zones" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 ms-2">Voir les zones</a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card shadow-sm border-0 rounded-6">
+              <div class="card-body p-4">
+                <h3 class="text-transform-none ls-0 mb-2">Ce que tu obtiens</h3>
+                <p class="text-muted mb-3">Des livrables clairs + un rythme mensuel. Pas de promesse magique.</p>
+                <ul class="iconlist mb-0">
+                  {deliverables.slice(0, 7).map((d) => (
+                    <li class="mb-2 text-muted">
+                      <i class="fa-solid fa-check text-smaller color"></i> {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="small text-muted mt-3">
+              Sud Oise & Nord 95 • Un interlocuteur unique • Suivi appels/formulaires
+            </div>
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+        <!-- Benefits -->
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">Bénéfices</div>
+          <h3 class="text-transform-none ls-0">Ce qui change en pratique</h3>
+          <p class="text-muted mb-0">On vise des résultats mesurables : demandes, qualité, régularité.</p>
+        </div>
+
+        <div class="row mt-4 col-mb-50 mb-0">
+          {benefitsDefault.map((b) => (
+            <div class="col-sm-6 col-lg-4">
+              <div class="feature-box">
+                <div class="fbox-icon mb-4">
+                  <i class="fa-solid fa-bolt text-white" style="background: var(--cnvs-themecolor); border-radius: 50%; width: 46px; height: 46px; display:flex; align-items:center; justify-content:center;"></i>
+                </div>
+                <div class="fbox-content">
+                  <h3 class="text-transform-none">{b.title}</h3>
+                  <p class="text-muted mb-0">{b.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Villes (volume vs premium) -->
+      <div class="section mb-0">
+        <div class="container">
+          <div class="heading-block border-bottom-0 text-center">
+            <div class="badge rounded-pill badge-default">Local</div>
+            <h3 class="text-transform-none ls-0">Pages par ville (pour capter les recherches locales)</h3>
+            <p class="text-muted mb-0">Approche adaptée : villes volume (réactivité) / villes premium (image).</p>
+          </div>
+
+          <div class="row col-mb-30 align-content-stretch">
+            <div class="col-lg-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <h3 class="text-transform-none ls-0 text-larger mb-2">Villes volume</h3>
+                  <p class="text-muted mb-3">Objectif : générer des demandes rapidement (appels / devis).</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    {volumeVilles.map((v) => (
+                      <a class="button button-mini button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+                         href={`/${serviceObj.slug}/${v.slug}/`}>
+                        {v.nom}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <h3 class="text-transform-none ls-0 text-larger mb-2">Villes premium</h3>
+                  <p class="text-muted mb-3">Objectif : demandes qualifiées + image cohérente.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    {premiumVilles.map((v) => (
+                      <a class="button button-mini button-rounded button-light text-dark bg-white border text-transform-none ls-0"
+                         href={`/${serviceObj.slug}/${v.slug}/`}>
+                        {v.nom}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center mt-5">
+            <a href={ctaHref} class="button button-large button-rounded text-transform-none ls-0">{ctaPrimary}</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process -->
+      <div class="section mt-0" style="background: url('/_assets_/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 90px 0;">
+        <div class="container">
+          <div class="row justify-content-between align-items-center g-5">
+
+            <div class="col-lg-6">
+              <div class="heading-block border-bottom-0 mb-4">
+                <div class="badge rounded-pill badge-default">Comment ça se passe</div>
+                <h3 class="text-transform-none ls-0">Un process simple, sans perte de temps</h3>
+              </div>
+
+              <ul class="iconlist iconlist-large mb-0">
+                <li class="mb-3 text-white">
+                  <i class="fa-solid fa-1 bg-dark"></i>
+                  Audit rapide + priorités (ce qui bloque / ce qui rapporte)
+                </li>
+                <li class="mb-3 text-white">
+                  <i class="fa-solid fa-2 bg-dark"></i>
+                  Mise en place des livrables (pages / tracking / campagnes / contenus)
+                </li>
+                <li class="mb-0 text-white">
+                  <i class="fa-solid fa-3 bg-dark"></i>
+                  Suivi mensuel : optimisation + reporting simple + prochaines actions
+                </li>
+              </ul>
+
+              <div class="mt-4">
+                <a href={ctaHref} class="button button-rounded text-transform-none ls-0">{ctaPrimary}</a>
+                <a href="/contact" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 ms-2">Recevoir un devis</a>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="card shadow-sm border-0 rounded-6">
+                <div class="card-body p-4">
+                  <h4 class="mb-3">Audit gratuit (10–15 min)</h4>
+                  <p class="text-muted mb-3">
+                    Tu repars avec un plan d’action clair : quick wins + priorités.
+                  </p>
+                  <div class="small text-muted">
+                    Exemples : fiche Google, pages services, suivi appels, messages Ads, structure de landing.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="container pb-6">
+        <div class="heading-block border-bottom-0 text-center">
+          <div class="badge rounded-pill badge-default">FAQ</div>
+          <h3 class="text-transform-none ls-0">Questions fréquentes</h3>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="accordion accordion-bg" id="faq-accordion">
+              {faqs.slice(0, 7).map((q, idx) => (
+                <div class="accordion-header">
+                  <div class="accordion-icon">
+                    <i class="accordion-closed uil uil-plus"></i>
+                    <i class="accordion-open uil uil-minus"></i>
+                  </div>
+                  <div class="accordion-title">{q}</div>
+                </div>
+              ))}
+              <div class="small text-muted mt-3">
+                Besoin d’une réponse précise ? <a href="/contact">Contacte-moi</a>.
+              </div>
+            </div>
+
+            <div class="text-center mt-5">
+              <a href={ctaHref} class="button button-large button-rounded text-transform-none ls-0">
+                {ctaPrimary}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
