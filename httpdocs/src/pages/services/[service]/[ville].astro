@@ -1,4 +1,70 @@
 ---
 // src/pages/[service]/[ville].astro
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageTitle from "../../../components/PageTitle.astro";
+import services from "../../../data/services.json";
+import villes from "../../../data/villes.json";
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const s of services) {
+    for (const v of villes) {
+      paths.push({
+        params: { service: s.slug, ville: v.slug },
+        props: { serviceData: s, villeData: v }
+      });
+    }
+  }
+  return paths;
+}
+
+const { serviceData, villeData } = Astro.props;
+const serviceSlug = Astro.params.service;
+const villeSlug = Astro.params.ville;
+
+const serviceObj = serviceData ?? services.find((s) => s.slug === serviceSlug);
+const villeObj = villeData ?? villes.find((v) => v.slug === villeSlug);
+
+if (!serviceObj) throw new Error(`Service introuvable: ${serviceSlug}`);
+if (!villeObj) throw new Error(`Ville introuvable: ${villeSlug}`);
+
+const contactHref = `/contact?service=${encodeURIComponent(serviceObj.slug)}&ville=${encodeURIComponent(villeObj.slug)}`;
+
+const badge = `${serviceObj.pageTitleBadge ?? serviceObj.nom} • ${villeObj.nom}`;
+
+const title =
+  serviceObj.slug === "google-meta-ads"
+    ? `Campagnes ${serviceObj.nom} à ${villeObj.nom}`
+    : `${serviceObj.nom} à ${villeObj.nom}`;
+
+const alentours = (villeObj.alentours ?? []).slice(0, 4).join(", ");
+const subtitle =
+  `${serviceObj.promesse ?? "Un plan concret pour générer des demandes locales."} ` +
+  `Intervention à ${villeObj.nom}${alentours ? ` et autour : ${alentours}` : ""}.`;
+
+const image = serviceObj.heroImage ?? "/_assets_/images/hero/hero-1.jpg";
+
+const breadcrumbs = [
+  { label: "Accueil", href: "/" },
+  { label: serviceObj.nom, href: `/${serviceObj.slug}/` },
+  { label: villeObj.nom }
+];
+
+// SEO
+const pageTitle = `${serviceObj.nom} ${villeObj.nom} | Sud Oise & Val d’Oise 95`;
+const description = subtitle.slice(0, 160);
 ---
 
+<BaseLayout title={pageTitle} description={description} canonical={Astro.url.pathname}>
+  <PageTitle
+    badge={badge}
+    title={title}
+    subtitle={subtitle}
+    image={image}
+    primaryCta={{ label: "Demander un audit gratuit", href: contactHref }}
+    secondaryCta={{ label: "Recevoir un devis", href: contactHref, icon: true }}
+    breadcrumbs={breadcrumbs}
+  />
+
+  <!-- le reste de ta page service×ville -->
+</BaseLayout>

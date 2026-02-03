@@ -1,31 +1,137 @@
-<!-- Page Title
-		============================================= -->
-		<section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar">
-			<img src="demos/seo/images/services/adwords-title.jpg" class="parallax-bg">
-			<div id="particles-line"></div>
+---
+// src/components/PageTitle.astro
+type BreadcrumbItem = { label: string; href?: string };
 
-			<div class="container">
-				<div class="page-title-row">
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
 
-					<div class="page-title-content">
-						<div class="badge rounded-pill border border-light text-light">Adwords</div>
-						<h1>Adwords Campaign</h1>
-						<span class="fw-light">Providing exceptional IT, outsourcing, and customer relations services since 2006. We have a team of skilled professionals who are dedicated to delivering cutting-edge solutions to our clients.</span>
-						<div class="mt-4 pt-3">
-						    <a href="#" class="button button-rounded button-large text-transform-none ls-0 ms-0 mb-0">Work with Us</a>
-                        	<a href="#" class="button button-rounded button-large button-light text-dark bg-white text-transform-none ls-0 me-0 mb-0">Know More <i class="bi-arrow-up-right ms-1 me-0 small"></i></a>
-                        </div>
-					</div>
+  // background
+  image?: string; // ex: "/_assets_/images/hero/hero-1.jpg"
+  overlay?: string; // ex: "linear-gradient(to top, rgba(254,150,3,0.5), #39384D)"
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="demo-seo.html">Home</a></li>
-							<li class="breadcrumb-item"><a href="demo-seo-about.html">Services</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Adwords Campaign</li>
-						</ol>
-					</nav>
+  // CTA buttons
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string; icon?: boolean };
 
-				</div>
-			</div>
-			<div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
-		</section><!-- .page-title end -->
+  // Breadcrumbs
+  breadcrumbs?: BreadcrumbItem[];
+
+  // Layout tweaks
+  includeHeader?: boolean; // default true
+  includeTopbar?: boolean; // default true
+  center?: boolean; // default true
+}
+
+const {
+  badge,
+  title,
+  subtitle,
+  image = "/_assets_/images/hero/hero-1.jpg",
+  overlay = "linear-gradient(to top, rgba(254,150,3,0.5), #39384D)",
+  primaryCta,
+  secondaryCta,
+  breadcrumbs,
+  includeHeader = true,
+  includeTopbar = true,
+  center = true
+} = Astro.props as Props;
+
+const sectionClass = [
+  "page-title",
+  "page-title-parallax",
+  "parallax",
+  "scroll-detect",
+  center ? "page-title-center" : "",
+  "dark",
+  includeHeader ? "include-header" : "",
+  includeTopbar ? "include-topbar" : ""
+]
+  .filter(Boolean)
+  .join(" ");
+
+// Breadcrumbs auto (fallback)
+const autoCrumbs: BreadcrumbItem[] = (() => {
+  const path = Astro.url?.pathname ?? "/";
+  const segments = path.split("/").filter(Boolean);
+
+  // / => Home only
+  if (segments.length === 0) return [{ label: "Accueil", href: "/" }];
+
+  const items: BreadcrumbItem[] = [{ label: "Accueil", href: "/" }];
+  let acc = "";
+
+  for (let i = 0; i < segments.length; i++) {
+    acc += `/${segments[i]}`;
+    const isLast = i === segments.length - 1;
+    const label = decodeURIComponent(segments[i])
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
+    items.push(isLast ? { label } : { label, href: `${acc}/` });
+  }
+
+  return items;
+})();
+
+const crumbs = (breadcrumbs && breadcrumbs.length) ? breadcrumbs : autoCrumbs;
+---
+
+<!-- Page Title ============================================= -->
+<section class={sectionClass}>
+  <img src={image} class="parallax-bg" alt="" />
+  <div id="particles-line"></div>
+
+  <div class="container">
+    <div class="page-title-row">
+
+      <div class="page-title-content">
+        {badge ? (
+          <div class="badge rounded-pill border border-light text-light">{badge}</div>
+        ) : null}
+
+        <h1 class="text-transform-none ls-0">{title}</h1>
+
+        {subtitle ? (
+          <span class="fw-light" style="max-width: 860px; display: inline-block;">
+            {subtitle}
+          </span>
+        ) : null}
+
+        {(primaryCta || secondaryCta) ? (
+          <div class="mt-4 pt-3">
+            {primaryCta ? (
+              <a href={primaryCta.href} class="button button-rounded button-large text-transform-none ls-0 ms-0 mb-0">
+                {primaryCta.label}
+              </a>
+            ) : null}
+
+            {secondaryCta ? (
+              <a href={secondaryCta.href} class="button button-rounded button-large button-light text-dark bg-white text-transform-none ls-0 me-0 mb-0">
+                {secondaryCta.label}
+                {secondaryCta.icon ? <i class="bi-arrow-up-right ms-1 me-0 small"></i> : null}
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {crumbs.map((c, idx) => {
+            const isLast = idx === crumbs.length - 1;
+            return (
+              <li class={`breadcrumb-item ${isLast ? "active" : ""}`} aria-current={isLast ? "page" : undefined}>
+                {c.href && !isLast ? <a href={c.href}>{c.label}</a> : c.label}
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="video-overlay z-1" style={`background-image: ${overlay};`}></div>
+</section>
