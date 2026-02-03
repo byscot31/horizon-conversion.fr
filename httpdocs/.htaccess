@@ -1,0 +1,15 @@
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Laisser passer fichiers et dossiers réels
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2) Fallback SPA-like (utile si tu as des routes côté client)
+  # Si ton site est 100% statique avec dossiers, tu peux commenter cette ligne.
+  RewriteRule . /index.html [L]
+</IfModule>

@@ -1,0 +1,13 @@
+{
+  "premium": [
+    { "slug": "chantilly", "name": "Chantilly" },
+    { "slug": "lisle-adam", "name": "L’Isle-Adam" },
+    { "slug": "senlis", "name": "Senlis" },
+    { "slug": "luzarches", "name": "Luzarches" }
+  ],
+  "volume": [
+    { "slug": "creil", "name": "Creil" },
+    { "slug": "nogent-sur-oise", "name": "Nogent-sur-Oise" },
+    { "slug": "beaumont-sur-oise", "name": "Beaumont-sur-Oise" }
+  ]
+}

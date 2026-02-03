@@ -1,0 +1,57 @@
+---
+// src/pages/villes/[city]/services/[service].astro
+
+import PageLayout from "../../../../layouts/PageLayout.astro";
+import services from "../../../../data/services.json";
+import cities from "../../../../data/cities.json";
+import ctas from "../../../../data/ctas.json";
+
+const { city, service } = Astro.params;
+
+const cityObj = cities.premium.find(c => c.slug === city);
+const serviceObj = services.find(s => s.slug === service);
+
+if (!cityObj || !serviceObj) throw new Error("Not found");
+
+const title = `${serviceObj.title} à ${cityObj.name} — plus de demandes locales`;
+---
+
+<PageLayout title={title} description={`Consultant senior. ${serviceObj.title} à ${cityObj.name}. Plus d’appels, plus de formulaires.`}>
+  <section class="section bg-transparent m-0" style="padding: 80px 0;">
+    <div class="container">
+      <div class="badge rounded-pill badge-default">Premium • {cityObj.name}</div>
+      <h1 class="text-transform-none ls-0 mt-3">{serviceObj.title} à {cityObj.name}</h1>
+      <p class="lead mb-4">{serviceObj.benefit}</p>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <a class="button button-rounded" href={ctas.primary.href}>{ctas.primary.label}</a>
+        <a class="button button-rounded button-light text-dark bg-white border" href={ctas.secondary.href}>{ctas.secondary.label}</a>
+      </div>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-6">
+          <h3 class="text-transform-none ls-0">Ce qu’on fait</h3>
+          <ul>
+            <li>On corrige ce qui bloque les demandes.</li>
+            <li>On met en place 3 à 5 actions utiles.</li>
+            <li>On suit les résultats chaque mois.</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="text-transform-none ls-0">Pourquoi ça marche</h3>
+          <ul>
+            <li>Le message est clair. Les gens comprennent.</li>
+            <li>Les pages vont droit au but.</li>
+            <li>On mesure les appels et les formulaires.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+export async function getStaticPaths() {
+  return cities.premium.flatMap((c) =>
+    services.map((s) => ({ params: { city: c.slug, service: s.slug } }))
+  );
+}

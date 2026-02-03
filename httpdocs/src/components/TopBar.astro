@@ -1,0 +1,40 @@
+---
+// src/components/TopBar.astro
+
+import site from "../data/site.json";
+---
+
+<div id="top-bar" class="transparent-topbar">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-auto">
+        <div class="top-links">
+          <ul class="top-links-container">
+            <li class="top-links-item">
+              <a href="/zones/">
+                <i class="bi-geo-alt me-1"></i>{site.targetAreaLabel}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-auto dark">
+        <ul id="top-social" class="m-0">
+          <li>
+            <a href={`tel:${site.phone}`} class="h-bg-call">
+              <span class="ts-icon"><i class="fa-solid fa-phone"></i></span>
+              <span class="ts-text">{site.phone}</span>
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="h-bg-email3">
+              <span class="ts-icon"><i class="bi-envelope-fill"></i></span>
+              <span class="ts-text">{site.email}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

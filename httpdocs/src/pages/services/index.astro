@@ -1,4 +1,58 @@
 ---
-// src/pages/[service]/index.astro
+// src/pages/services/index.astro
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import services from "../../data/services.json";
+import ctas from "../../data/ctas.json";
+import site from "../../data/site.json";
 ---
 
+<PageLayout
+  title={`Services — ${site.brand}`}
+  description="SEO local, Ads, réseaux sociaux, UX, analytics, contenu. Orienté demandes."
+>
+  <section class="section bg-transparent m-0" style="padding: 80px 0 30px;">
+    <div class="container">
+      <div class="badge rounded-pill badge-default">Services</div>
+      <h1 class="text-transform-none ls-0 mt-3">Tout pour générer des demandes</h1>
+      <p class="lead mb-4">
+        On priorise. On met en place. On mesure.
+      </p>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <a href={ctas.primary.href} class="button button-rounded">{ctas.primary.label}</a>
+        <a href={ctas.secondary.href} class="button button-rounded button-light text-dark bg-white border">{ctas.secondary.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section bg-transparent m-0 pt-0">
+    <div class="container">
+      <div class="row g-4">
+        {services.map((s) => (
+          <div class="col-md-6 col-lg-4">
+            <a href={`/services/${s.slug}/`} class="text-decoration-none">
+              <div class="feature-box border-0 p-4 rounded-6 bg-white shadow-sm h-100">
+                <div class="fbox-content">
+                  <h3 class="text-transform-none ls-0 mb-2">{s.title}</h3>
+                  <p class="mb-0 text-contrast-600">{s.benefit}</p>
+                  <div class="mt-3 small text-contrast-600">
+                    Voir le détail →
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-5 p-4 rounded-6 bg-white shadow-sm">
+        <div class="fw-semibold mb-2">Vous ne savez pas par où commencer ?</div>
+        <div class="text-contrast-600 mb-3">
+          Faites l’audit 15 min. Je vous dis ce qui aura le plus d’impact.
+        </div>
+        <a href={ctas.primary.href} class="button button-rounded m-0">{ctas.primary.label}</a>
+      </div>
+    </div>
+  </div>
+</PageLayout>

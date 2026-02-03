@@ -1,0 +1,40 @@
+---
+// src/pages/zones/index.astro
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import zones from "../../data/zones.json";
+import ctas from "../../data/ctas.json";
+import site from "../../data/site.json";
+---
+
+<PageLayout
+  title={`Zones — ${site.brand}`}
+  description="Sud Oise et Nord 95. Marketing local orienté appels et formulaires."
+>
+  <section class="section bg-transparent m-0" style="padding: 80px 0 30px;">
+    <div class="container">
+      <div class="badge rounded-pill badge-default">Zones couvertes</div>
+      <h1 class="text-transform-none ls-0 mt-3">Sud Oise & Nord 95</h1>
+      <p class="lead mb-4">Proximité. Réactivité. Résultats mesurés.</p>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <a href={ctas.primary.href} class="button button-rounded">{ctas.primary.label}</a>
+        <a href={ctas.secondary.href} class="button button-rounded button-light text-dark bg-white border">{ctas.secondary.label}</a>
+      </div>
+
+      <div class="row g-4 mt-2">
+        {zones.map((z) => (
+          <div class="col-md-6">
+            <a href={`/zones/${z.slug}/`} class="text-decoration-none">
+              <div class="p-4 rounded-6 bg-white shadow-sm h-100">
+                <h3 class="text-transform-none ls-0 mb-2">{z.name}</h3>
+                <p class="mb-0 text-contrast-600">{z.summary}</p>
+                <div class="mt-3 small text-contrast-600">Voir la zone →</div>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

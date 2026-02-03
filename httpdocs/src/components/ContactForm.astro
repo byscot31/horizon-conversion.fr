@@ -1,0 +1,89 @@
+---
+// src/components/ContactForm.astro
+
+const url = new URL(Astro.request.url);
+const objet = (url.searchParams.get("objet") || "audit").toLowerCase();
+const prefix = "hc-";
+---
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="mb-3">On en parle ?</h3>
+    <p class="text-contrast-600 mb-4">Vous remplissez. Je réponds sous 24h.</p>
+
+    <div class="form-widget">
+      <div class="form-result"></div>
+
+      <form class="row mb-0" id="hc-contactform" name="hc-contactform"
+            action="/_assets_/include/form.php" method="post" enctype="multipart/form-data">
+
+        <div class="form-process">
+          <div class="css3-spinner" style="--cnvs-loader-color:var(--cnvs-themecolor);">
+            <div class="css3-spinner-scaler"></div>
+          </div>
+        </div>
+
+        <!-- Config Canvas/PHP -->
+        <input type="hidden" name="prefix" value="hc-">
+        <input type="hidden" name="subject" value="[Horizon Conversion] Nouveau contact">
+        <input type="hidden" name="replyto" value="hc-email,hc-nom">
+        <input type="hidden" name="template" value="html">
+        <input type="hidden" name="html_title" value="Nouveau message — Horizon Conversion">
+
+        <!-- Motif -->
+        <div class="col-6 form-group mb-3">
+          <label for="hc-objet">Motif</label>
+          <select id="hc-objet" name="hc-objet" class="form-select">
+            <option value="audit">Audit gratuit 15 min</option>
+            <option value="rappel">Être rappelé</option>
+            <option value="devis">Demander un devis</option>
+          </select>
+        </div>
+
+        <div class="col-6 form-group mb-3">
+          <label for="hc-nom">Nom *</label>
+          <input type="text" id="hc-nom" name="hc-nom" class="form-control input-sm required" value="" required>
+        </div>
+
+        <div class="col-6 form-group mb-3">
+          <label for="hc-email">Email *</label>
+          <input type="email" id="hc-email" name="hc-email" class="form-control input-sm required email" value="" required>
+        </div>
+
+        <div class="col-6 form-group mb-3">
+          <label for="hc-tel">Téléphone *</label>
+          <input type="tel" id="hc-tel" name="hc-tel" class="form-control input-sm required" value="" required>
+        </div>
+
+        <div class="col-6 form-group mb-3">
+          <label for="hc-site">Site (si vous en avez un)</label>
+          <input type="url" id="hc-site" name="hc-site" class="form-control input-sm" value="" placeholder="https://">
+        </div>
+
+        <div class="col-6 form-group mb-3">
+          <label for="hc-ville">Ville / zone</label>
+          <input type="text" id="hc-ville" name="hc-ville" class="form-control input-sm" value="" placeholder="ex. Chantilly, Creil…">
+        </div>
+
+        <div class="col-12 form-group mb-4">
+          <label for="hc-message">Message *</label>
+          <textarea id="hc-message" name="hc-message" class="form-control input-sm required" rows="4" required
+                    placeholder="En 2 lignes : ce que vous vendez + ce que vous voulez obtenir."></textarea>
+        </div>
+
+        <!-- Botcheck (doit exister et rester vide) -->
+        <div class="col-12 form-group d-none">
+          <input type="text" id="hc-botcheck" name="hc-botcheck" value="" class="form-control">
+        </div>
+
+        <div class="col-12 form-group mb-0">
+          <button class="button button-rounded w-100 text-transform-none ls-0 m-0"
+                  type="submit" id="hc-submit" name="hc-submit" value="submit">
+            Envoyer
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

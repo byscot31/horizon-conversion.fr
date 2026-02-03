@@ -1,0 +1,39 @@
+---
+// src/layouts/PageLayout.astro
+
+import TopBar from "../components/TopBar.astro";
+import HeaderNav from "../components/HeaderNav.astro";
+import Footer from "../components/Footer.astro";
+
+const { title = "Horizon Conversion", description = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <link rel="canonical" href={new URL(Astro.url.pathname, "https://horizon-conversion.fr").toString()} />
+
+    <!-- Canvas CSS -->
+    <link rel="stylesheet" href="/_assets_/style.css" />
+    <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
+    <link rel="stylesheet" href="/_assets_/seo.css" />
+  </head>
+
+  <body class="stretched">
+    <div id="wrapper">
+      <TopBar />
+      <HeaderNav />
+      <slot />
+      <Footer />
+    </div>
+
+    <!-- Canvas JS (à limiter au nécessaire) -->
+    <script is:inline src="/_assets_/js/plugins.min.js"></script>
+    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+  </body>
+</html>

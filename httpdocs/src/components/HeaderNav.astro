@@ -1,0 +1,64 @@
+---
+// src/components/HeaderNav.astro
+
+import site from "../data/site.json";
+
+const primaryCta = {
+  label: "Audit gratuit 15 min",
+  href: "/contact/?objet=audit"
+};
+---
+
+<header id="header" class="transparent-header floating-header header-size-md">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row">
+
+        <!-- Logo -->
+        <div id="logo">
+          <a href="/">
+            <img class="logo-default" src="/_assets_/images/logo.png" alt={site.brand} />
+          </a>
+        </div>
+
+        <div class="header-misc">
+          <a href={primaryCta.href} class="button button-rounded ms-3 d-none d-sm-block">
+            {primaryCta.label}
+          </a>
+        </div>
+
+        <div class="primary-menu-trigger">
+          <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
+
+        <nav class="primary-menu with-arrows">
+          <ul class="menu-container">
+            <li class="menu-item current">
+              <a class="menu-link" href="/"><div>Accueil</div></a>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/services/"><div>Services</div></a>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/zones/"><div>Zones</div></a>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/etudes-de-cas/"><div>Résultats</div></a>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/contact/"><div>Contact</div></a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>

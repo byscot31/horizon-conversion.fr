@@ -1,0 +1,93 @@
+---
+// src/pages/services/[service].astro
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import services from "../../data/services.json";
+import cities from "../../data/cities.json";
+import ctas from "../../data/ctas.json";
+import site from "../../data/site.json";
+
+const { service } = Astro.params;
+const s = services.find(x => x.slug === service);
+if (!s) throw new Error("Service not found");
+
+export async function getStaticPaths() {
+  return services.map(s => ({ params: { service: s.slug } }));
+}
+
+// exemples de liens locaux (maillage)
+const premiumLinks = cities.premium.slice(0, 3).map(c => ({
+  label: `${s.title} à ${c.name} (premium)`,
+  href: `/villes/${c.slug}/services/${s.slug}/`
+}));
+
+const volumeLinks = cities.volume.slice(0, 3).map(c => ({
+  label: `${s.title} à ${c.name} (pack)`,
+  href: `/local/${c.slug}/${s.slug}/`
+}));
+---
+
+<PageLayout
+  title={`${s.title} — ${site.brand}`}
+  description={`${s.title}. ${s.benefit} Sud Oise / Nord 95.`}
+>
+  <section class="section bg-transparent m-0" style="padding: 80px 0;">
+    <div class="container">
+      <div class="badge rounded-pill badge-default">Service</div>
+      <h1 class="text-transform-none ls-0 mt-3">{s.title}</h1>
+      <p class="lead mb-4">{s.benefit}</p>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <a href={ctas.primary.href} class="button button-rounded">{ctas.primary.label}</a>
+        <a href={ctas.secondary.href} class="button button-rounded button-light text-dark bg-white border">{ctas.secondary.label}</a>
+        <a href={ctas.tertiary.href} class="button button-rounded button-light text-dark bg-white border">{ctas.tertiary.label}</a>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="p-4 rounded-6 bg-white shadow-sm">
+            <h3 class="text-transform-none ls-0">Ce que vous gagnez</h3>
+            <ul class="mb-0">
+              <li>Plus de demandes.</li>
+              <li>Un plan clair.</li>
+              <li>Des chiffres simples.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 rounded-6 bg-white shadow-sm">
+            <h3 class="text-transform-none ls-0">Comment ça se passe</h3>
+            <ul class="mb-0">
+              <li>Audit rapide.</li>
+              <li>Mise en place.</li>
+              <li>Optimisation chaque mois.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h3 class="text-transform-none ls-0">Dans vos villes</h3>
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="p-4 rounded-6 bg-white shadow-sm">
+              <div class="fw-semibold mb-2">Premium</div>
+              <ul class="mb-0">
+                {premiumLinks.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="p-4 rounded-6 bg-white shadow-sm">
+              <div class="fw-semibold mb-2">Pack</div>
+              <ul class="mb-0">
+                {volumeLinks.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</PageLayout>

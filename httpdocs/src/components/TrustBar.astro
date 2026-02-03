@@ -1,0 +1,22 @@
+---
+// src/components/TrustBar.astro
+
+const items = [
+  "Un seul interlocuteur",
+  "Plan clair en 7 jours",
+  "Suivi mensuel simple",
+  "Sud Oise / Nord 95"
+];
+---
+
+<div class="section bg-transparent m-0 border-bottom py-4">
+  <div class="container">
+    <div class="row g-3 text-center">
+      {items.map((t) => (
+        <div class="col-6 col-lg-3">
+          <div class="px-3 py-2 rounded-6 bg-white shadow-sm">{t}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

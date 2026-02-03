@@ -336,7 +336,7 @@ input.switch-toggle-round + label::after { border-radius: 4px }
 
 	/* Slider Text
 	-----------------------------------------------------------------*/
-	.slider-title h2 {
+	.slider-title h1 {
 		font-size: 50px;
 		line-height: 1.3;
 		letter-spacing: -1px;
@@ -345,7 +345,7 @@ input.switch-toggle-round + label::after { border-radius: 4px }
 	}
 }
 
-.slider-title h3 {
+.slider-title h2 {
 	display: inline-block;
 	font-size: 18px;
 	color: var(--cnvs-contrast-500);
