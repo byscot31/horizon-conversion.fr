@@ -1,0 +1,2378 @@
+{
+  "site": {
+    "brand": "Horizon Conversion",
+    "positionnement": "Consultant senior webmarketing local avec exécution d’agence",
+    "baseline": "Plus d’appels et demandes qualifiés (SEO local + Ads + CRO)",
+    "defaultOgImage": "/_assets_/images/og-horizon-conversion.jpg",
+    "defaultLocale": "fr_FR"
+  },
+  "globals": {
+    "ctas": [
+      {
+        "label": "Demander un audit gratuit",
+        "href": "/contact"
+      },
+      {
+        "label": "Être rappelé",
+        "href": "/contact"
+      },
+      {
+        "label": "Recevoir un devis",
+        "href": "/contact"
+      }
+    ],
+    "commonFaq": [
+      {
+        "q": "En combien de temps puis-je avoir plus d’appels ?",
+        "a": "Les Ads peuvent générer des demandes rapidement. Le SEO local construit des résultats plus durables. On combine selon votre urgence et votre budget."
+      },
+      {
+        "q": "Est-ce que vous garantissez la première position sur Google ?",
+        "a": "Non. On ne promet pas une position. On met en place un système mesurable qui augmente la visibilité et surtout les demandes qualifiées."
+      },
+      {
+        "q": "Est-ce que je parle à la personne qui pilote ?",
+        "a": "Oui. Le pilotage est fait en direct : priorités, arbitrages, plan mensuel et suivi."
+      },
+      {
+        "q": "Qu’est-ce que je reçois chaque mois ?",
+        "a": "Un plan d’actions, des actions réalisées (journal d’actions), un reporting simple et un point mensuel."
+      },
+      {
+        "q": "Vous pouvez filtrer les mauvais leads ?",
+        "a": "Oui : exclusions Ads, pages qui qualifient (zones, types, délais) et formulaires adaptés."
+      }
+    ],
+    "internalLinkHubs": {
+      "method": "/methode",
+      "pricing": "/tarifs",
+      "proofs": "/preuves",
+      "resources": "/ressources",
+      "contact": "/contact",
+      "zones": "/zones"
+    }
+  },
+  "entities": {
+    "services": [
+      {
+        "slug": "seo-local",
+        "nom": "SEO local (Google & Maps)",
+        "intentRoot": "Trouver un prestataire SEO local orienté demandes (appels, formulaires) sur Google et Google Maps.",
+        "secondaryKeywordsBase": [
+          "google maps",
+          "fiche google business",
+          "avis google",
+          "seo local",
+          "consultant seo local"
+        ]
+      },
+      {
+        "slug": "ads-google-meta",
+        "nom": "Google Ads & Meta Ads",
+        "intentRoot": "Obtenir des demandes rapidement avec des campagnes pilotées, un filtrage des leads et un suivi clair.",
+        "secondaryKeywordsBase": [
+          "google ads",
+          "meta ads",
+          "campagne locale",
+          "leads qualifiés",
+          "agence ads"
+        ]
+      },
+      {
+        "slug": "optimisation-site-cro",
+        "nom": "Optimisation du site (CRO)",
+        "intentRoot": "Augmenter les appels et demandes à trafic égal en optimisant les pages clés (mobile, CTA, preuves).",
+        "secondaryKeywordsBase": [
+          "optimisation conversion",
+          "cta",
+          "site qui convertit",
+          "formulaire devis",
+          "conversion mobile"
+        ]
+      }
+    ],
+    "zones": [
+      {
+        "slug": "sud-oise",
+        "nom": "Sud Oise",
+        "specificites": "Zone concurrentielle sur Maps avec beaucoup de recherches “près de moi”. Les quick wins (GBP + CRO) comptent."
+      },
+      {
+        "slug": "val-doise-95",
+        "nom": "Val d’Oise (95)",
+        "specificites": "Nord 95 : demande locale forte. Ads + landing + filtrage améliorent vite la qualité des leads."
+      }
+    ],
+    "villes": [
+      {
+        "slug": "chantilly",
+        "nom": "Chantilly",
+        "codePostal": "60500",
+        "zone": "sud-oise",
+        "alentours": [
+          "gouvieux",
+          "lamorlaye",
+          "coye-la-foret",
+          "vineuil-saint-firmin",
+          "senlis",
+          "avilly-saint-leonard"
+        ],
+        "angleLocal": "Zone premium : la confiance (avis, preuves, process) et l’image comptent. Concurrence locale réelle."
+      },
+      {
+        "slug": "senlis",
+        "nom": "Senlis",
+        "codePostal": "60300",
+        "zone": "sud-oise",
+        "alentours": [
+          "chantilly",
+          "vineuil-saint-firmin",
+          "barbery",
+          "pontarme",
+          "plailly",
+          "ermont"
+        ],
+        "angleLocal": "Bassin d’activité (A1) : concurrence forte sur services. Besoin d’être visible et clair pour déclencher l’appel."
+      },
+      {
+        "slug": "creil",
+        "nom": "Creil",
+        "codePostal": "60100",
+        "zone": "sud-oise",
+        "alentours": [
+          "montataire",
+          "nogent-sur-oise",
+          "saint-leu-d-esserent",
+          "thiverny",
+          "verneuil-en-halatte",
+          "saint-maximin"
+        ],
+        "angleLocal": "Zone dense : volume + concurrence. Le filtrage (hors zone/hors service) et la landing qui qualifie font la différence."
+      },
+      {
+        "slug": "nogent-sur-oise",
+        "nom": "Nogent-sur-Oise",
+        "codePostal": "60180",
+        "zone": "sud-oise",
+        "alentours": [
+          "creil",
+          "montataire",
+          "laigneville",
+          "cauffry",
+          "thiverny",
+          "saint-leu-d-esserent"
+        ],
+        "angleLocal": "Marché très “service”. Objectif : demandes régulières et mieux qualifiées (zones, délais, types)."
+      },
+      {
+        "slug": "pont-sainte-maxence",
+        "nom": "Pont-Sainte-Maxence",
+        "codePostal": "60700",
+        "zone": "sud-oise",
+        "alentours": [
+          "sacy-le-grand",
+          "les-ageux",
+          "verberie",
+          "monchy-saint-eloi",
+          "pontpoint",
+          "rieux"
+        ],
+        "angleLocal": "Recherches d’urgence et mobile. Il faut déclencher l’appel rapidement (CTA, horaires, zones)."
+      },
+      {
+        "slug": "clermont",
+        "nom": "Clermont",
+        "codePostal": "60600",
+        "zone": "sud-oise",
+        "alentours": [
+          "fitz-james",
+          "agnetz",
+          "bailleval",
+          "breuil-le-sec",
+          "liancourt",
+          "neuilly-sous-clermont"
+        ],
+        "angleLocal": "Bassin mixte services/commerces. Les pages simples, rapides et rassurantes convertissent bien sur mobile."
+      },
+      {
+        "slug": "beaumont-sur-oise",
+        "nom": "Beaumont-sur-Oise",
+        "codePostal": "95260",
+        "zone": "val-doise-95",
+        "alentours": [
+          "persan",
+          "champagne-sur-oise",
+          "mours",
+          "nointel",
+          "boran-sur-oise",
+          "parmain"
+        ],
+        "angleLocal": "Porte Nord 95 / Sud Oise : zone élargie, besoin d’un message clair (périmètre) + tracking propre."
+      },
+      {
+        "slug": "persan",
+        "nom": "Persan",
+        "codePostal": "95340",
+        "zone": "val-doise-95",
+        "alentours": [
+          "beaumont-sur-oise",
+          "bernes-sur-oise",
+          "chambly",
+          "mours",
+          "nointel",
+          "boran-sur-oise"
+        ],
+        "angleLocal": "Zone “utile” : volume de demandes. Le filtrage Ads + landing qui qualifie évite le gaspillage."
+      },
+      {
+        "slug": "l-isle-adam",
+        "nom": "L'Isle-Adam",
+        "codePostal": "95290",
+        "zone": "val-doise-95",
+        "alentours": [
+          "parmain",
+          "meriel",
+          "butry-sur-oise",
+          "nesles-la-vallee",
+          "auvers-sur-oise",
+          "champagne-sur-oise"
+        ],
+        "angleLocal": "Valeur perçue élevée : réassurance, preuves, process et qualité des demandes prioritaires."
+      }
+    ]
+  },
+  "pages": [
+    {
+      "id": "home",
+      "type": "business",
+      "url": "/",
+      "h1": "Horizon Conversion : plus d’appels et demandes qualifiés en local",
+      "metaTitle": "Horizon Conversion | Appels qualifiés en local",
+      "metaDescription": "Méthode 3C : SEO local, Ads et optimisation du site (CRO). Pilotage consultant senior + exécution d’agence. Audit gratuit.",
+      "intent": "Trouver un prestataire local orienté résultats (appels/demandes) avec une méthode claire et des livrables.",
+      "secondaryKeywords": [
+        "consultant webmarketing local",
+        "appels qualifiés",
+        "leads qualifiés",
+        "seo local + ads",
+        "optimisation conversion"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/preuves",
+        "/contact",
+        "/zones",
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro"
+      ],
+      "faqRefs": [
+        "time-to-results",
+        "no-guarantee-positions",
+        "interlocuteur-unique",
+        "monthly-deliverables",
+        "filter-bad-leads"
+      ]
+    },
+    {
+      "id": "method",
+      "type": "business",
+      "url": "/methode",
+      "h1": "Méthode 3C : Captez, Convertissez, Contrôlez",
+      "metaTitle": "Méthode 3C | SEO local + Ads + CRO",
+      "metaDescription": "Un système pour générer des appels qualifiés : visibilité Google, Ads pilotées, site qui convertit. Interlocuteur unique + livrables mensuels.",
+      "intent": "Comprendre la méthode et le fonctionnement “consultant senior + exécution d’agence”.",
+      "secondaryKeywords": [
+        "methode webmarketing local",
+        "seo local ads cro",
+        "journal d'actions",
+        "reporting simple",
+        "interlocuteur unique"
+      ],
+      "linksOut": [
+        "/tarifs",
+        "/preuves",
+        "/contact",
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro"
+      ],
+      "faqRefs": [
+        "audit-how",
+        "monthly-deliverables",
+        "interlocuteur-unique",
+        "kpi-tracking",
+        "which-service-start"
+      ]
+    },
+    {
+      "id": "pricing",
+      "type": "business",
+      "url": "/tarifs",
+      "h1": "Tarifs : packs setup + mensuel",
+      "metaTitle": "Tarifs | Packs SEO + Ads + CRO (local)",
+      "metaDescription": "3 packs : Fondations, Accélérateur, Croissance. Setup + mensuel. Options : landing, avis, tracking. Devis clair.",
+      "intent": "Comparer les packs, comprendre ce qui est inclus et choisir le bon niveau.",
+      "secondaryKeywords": [
+        "tarifs seo local",
+        "tarifs google ads",
+        "pack webmarketing local",
+        "setup + mensuel",
+        "devis webmarketing"
+      ],
+      "linksOut": [
+        "/methode",
+        "/preuves",
+        "/contact"
+      ],
+      "faqRefs": [
+        "which-service-start",
+        "monthly-deliverables",
+        "filter-bad-leads",
+        "kpi-tracking",
+        "audit-how"
+      ]
+    },
+    {
+      "id": "proofs",
+      "type": "business",
+      "url": "/preuves",
+      "h1": "Preuves : ce que vous recevez chaque mois",
+      "metaTitle": "Preuves & livrables | Horizon Conversion",
+      "metaDescription": "Journal d’actions, reporting simple, points mensuels, exemples concrets. Pilotage senior + exécution structurée.",
+      "intent": "Être rassuré sur l’exécution, la transparence et la mesure des résultats.",
+      "secondaryKeywords": [
+        "journal d'actions",
+        "livrables mensuels",
+        "reporting simple",
+        "consultant senior",
+        "exécution agence"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/contact"
+      ],
+      "faqRefs": [
+        "interlocuteur-unique",
+        "proofs-month-typical",
+        "kpi-tracking",
+        "proofs-access-accounts",
+        "proofs-what-if-stagnates"
+      ]
+    },
+    {
+      "id": "contact",
+      "type": "business",
+      "url": "/contact",
+      "h1": "Audit gratuit : faites le point sur vos appels et demandes",
+      "metaTitle": "Contact | Audit gratuit (webmarketing local)",
+      "metaDescription": "Demandez un audit gratuit : visibilité Google/Maps, Ads, conversion du site. Réponse sous 24–48h ouvrées.",
+      "intent": "Prendre contact (audit / rappel / devis) rapidement.",
+      "secondaryKeywords": [
+        "audit seo local",
+        "audit google ads",
+        "audit conversion",
+        "consultant webmarketing local",
+        "devis webmarketing"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/preuves"
+      ],
+      "faqRefs": [
+        "contact-audit-duration",
+        "contact-prepare",
+        "contact-response-time",
+        "contact-no-commitment",
+        "contact-after-audit"
+      ]
+    },
+    {
+      "id": "service-seo-local",
+      "type": "service",
+      "service": "seo-local",
+      "url": "/seo-local",
+      "h1": "SEO local : être visible sur Google & Maps, générer des appels",
+      "metaTitle": "SEO local | Google Maps & appels qualifiés",
+      "metaDescription": "Optimisation Google Business Profile + pages locales + avis + suivi. Objectif : plus d’appels qualifiés dans votre zone.",
+      "intent": "Trouver une prestation SEO local orientée demandes (pas juste du trafic).",
+      "secondaryKeywords": [
+        "seo local",
+        "google maps",
+        "google business profile",
+        "avis google",
+        "consultant seo local"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/contact",
+        "/ads-google-meta",
+        "/optimisation-site-cro",
+        "/zones/sud-oise",
+        "/zones/val-doise-95",
+        "/seo-local/chantilly",
+        "/seo-local/senlis",
+        "/seo-local/creil",
+        "/seo-local/beaumont-sur-oise",
+        "/seo-local/persan",
+        "/seo-local/l-isle-adam"
+      ],
+      "faqRefs": [
+        "time-to-results",
+        "gbp-vs-site-first",
+        "get-reviews-regularly",
+        "multi-communes-alentours",
+        "kpi-tracking"
+      ]
+    },
+    {
+      "id": "service-ads",
+      "type": "service",
+      "service": "ads-google-meta",
+      "url": "/ads-google-meta",
+      "h1": "Google Ads & Meta Ads : des demandes rapides et pilotées",
+      "metaTitle": "Google Ads & Meta | demandes rapides en local",
+      "metaDescription": "Campagnes pilotées + filtrage des leads + landing qui convertit + reporting simple. Objectif : demandes qualifiées.",
+      "intent": "Obtenir des demandes rapidement sans gaspillage, avec suivi clair.",
+      "secondaryKeywords": [
+        "google ads local",
+        "meta ads local",
+        "leads qualifiés",
+        "filtrage leads",
+        "landing ads"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/contact",
+        "/seo-local",
+        "/optimisation-site-cro",
+        "/ads-google-meta/chantilly",
+        "/ads-google-meta/creil",
+        "/ads-google-meta/senlis",
+        "/ads-google-meta/beaumont-sur-oise",
+        "/ads-google-meta/persan",
+        "/ads-google-meta/l-isle-adam"
+      ],
+      "faqRefs": [
+        "ads-min-budget",
+        "ads-google-vs-meta",
+        "ads-avoid-bad-leads",
+        "ads-call-tracking",
+        "ads-first-leads-when"
+      ]
+    },
+    {
+      "id": "service-cro",
+      "type": "service",
+      "service": "optimisation-site-cro",
+      "url": "/optimisation-site-cro",
+      "h1": "CRO : transformer vos visites en appels et demandes",
+      "metaTitle": "CRO | optimiser un site pour générer des appels",
+      "metaDescription": "CTA, réassurance, mobile, formulaires courts : on optimise les pages clés pour gagner des demandes à trafic égal.",
+      "intent": "Améliorer la conversion sans refonte complète.",
+      "secondaryKeywords": [
+        "optimisation conversion",
+        "cta click-to-call",
+        "site mobile",
+        "formulaire devis",
+        "réassurance"
+      ],
+      "linksOut": [
+        "/methode",
+        "/tarifs",
+        "/contact",
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro/chantilly",
+        "/optimisation-site-cro/senlis",
+        "/optimisation-site-cro/creil",
+        "/optimisation-site-cro/pont-sainte-maxence",
+        "/optimisation-site-cro/beaumont-sur-oise",
+        "/optimisation-site-cro/persan",
+        "/optimisation-site-cro/l-isle-adam"
+      ],
+      "faqRefs": [
+        "cro-need-redesign",
+        "cro-which-pages-first",
+        "cro-iterations-per-month",
+        "cro-measure-impact",
+        "cro-compatible-site"
+      ]
+    },
+    {
+      "id": "zones-index",
+      "type": "zoneIndex",
+      "url": "/zones",
+      "h1": "Zones couvertes : Sud Oise & Val d’Oise (95)",
+      "metaTitle": "Zones | Sud Oise & Val d’Oise (95)",
+      "metaDescription": "Horizon Conversion intervient en Sud Oise et Val d’Oise (95) : SEO local, Ads et optimisation du site pour générer des demandes.",
+      "intent": "Vérifier la couverture géographique et accéder aux pages locales.",
+      "secondaryKeywords": [
+        "webmarketing sud oise",
+        "webmarketing val d'oise",
+        "seo local oise",
+        "google ads 95",
+        "consultant webmarketing local"
+      ],
+      "linksOut": [
+        "/zones/sud-oise",
+        "/zones/val-doise-95",
+        "/contact",
+        "/methode",
+        "/tarifs"
+      ],
+      "faqRefs": [
+        "zones-only",
+        "zones-multi-cities",
+        "which-service-start",
+        "audit-how",
+        "monthly-deliverables"
+      ]
+    },
+    {
+      "id": "zone-sud-oise",
+      "type": "zone",
+      "zone": "sud-oise",
+      "url": "/zones/sud-oise",
+      "h1": "Sud Oise : générer des appels qualifiés avec la méthode 3C",
+      "metaTitle": "Sud Oise | SEO local + Ads + CRO",
+      "metaDescription": "Sud Oise : SEO local, Ads et CRO pour générer des appels qualifiés. Pilotage senior + exécution d’agence. Audit gratuit.",
+      "intent": "Accéder aux villes du Sud Oise et comprendre l’approche locale.",
+      "secondaryKeywords": [
+        "seo local sud oise",
+        "google ads sud oise",
+        "consultant webmarketing sud oise",
+        "google maps oise",
+        "site qui convertit oise"
+      ],
+      "linksOut": [
+        "/zones/sud-oise/chantilly",
+        "/zones/sud-oise/senlis",
+        "/zones/sud-oise/creil",
+        "/zones/sud-oise/nogent-sur-oise",
+        "/zones/sud-oise/pont-sainte-maxence",
+        "/zones/sud-oise/clermont",
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro",
+        "/contact"
+      ],
+      "faqRefs": [
+        "which-service-start",
+        "thin-content-avoid",
+        "ads-google-vs-meta",
+        "filter-bad-leads",
+        "kpi-tracking"
+      ]
+    },
+    {
+      "id": "zone-val-doise-95",
+      "type": "zone",
+      "zone": "val-doise-95",
+      "url": "/zones/val-doise-95",
+      "h1": "Val d’Oise (95) : générer des demandes qualifiées en local",
+      "metaTitle": "Val d’Oise (95) | SEO local + Ads + CRO",
+      "metaDescription": "Nord 95 : SEO local, Ads et CRO pour générer des demandes qualifiées. Méthode 3C + exécution structurée.",
+      "intent": "Accéder aux villes du 95 et comprendre l’approche locale.",
+      "secondaryKeywords": [
+        "seo local 95",
+        "google ads 95",
+        "consultant webmarketing 95",
+        "google maps val d'oise",
+        "conversion site 95"
+      ],
+      "linksOut": [
+        "/zones/val-doise-95/beaumont-sur-oise",
+        "/zones/val-doise-95/persan",
+        "/zones/val-doise-95/l-isle-adam",
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro",
+        "/contact"
+      ],
+      "faqRefs": [
+        "which-service-start",
+        "thin-content-avoid",
+        "ads-google-vs-meta",
+        "filter-bad-leads",
+        "kpi-tracking"
+      ]
+    },
+    {
+      "id": "resources-index",
+      "type": "resourcesIndex",
+      "url": "/ressources",
+      "h1": "Ressources : conseils concrets pour générer des demandes locales",
+      "metaTitle": "Ressources | SEO local, Ads, CRO (local)",
+      "metaDescription": "Guides simples : Google Maps, Ads locales, pages qui convertissent, filtrage des leads. Objectif : plus d’appels qualifiés.",
+      "intent": "Trouver des contenus utiles et orientés action (local).",
+      "secondaryKeywords": [
+        "conseils seo local",
+        "google ads local",
+        "optimiser conversion site",
+        "google maps avis",
+        "filtrer leads"
+      ],
+      "linksOut": [
+        "/seo-local",
+        "/ads-google-meta",
+        "/optimisation-site-cro",
+        "/contact"
+      ],
+      "faqRefs": [
+        "which-service-start",
+        "filter-bad-leads",
+        "maps-not-visible",
+        "kpi-tracking",
+        "cro-measure-impact"
+      ]
+    },
+    {
+      "id": "legal-mentions",
+      "type": "legal",
+      "url": "/mentions-legales",
+      "h1": "Mentions légales",
+      "metaTitle": "Mentions légales | Horizon Conversion",
+      "metaDescription": "Mentions légales du site Horizon Conversion.",
+      "intent": "Accéder aux informations légales.",
+      "secondaryKeywords": [
+        "mentions légales",
+        "éditeur du site",
+        "hébergement",
+        "responsabilité",
+        "contact"
+      ],
+      "linksOut": [
+        "/politique-confidentialite",
+        "/contact"
+      ]
+    },
+    {
+      "id": "legal-privacy",
+      "type": "legal",
+      "url": "/politique-confidentialite",
+      "h1": "Politique de confidentialité",
+      "metaTitle": "Confidentialité | Horizon Conversion",
+      "metaDescription": "Politique de confidentialité et gestion des données du site Horizon Conversion.",
+      "intent": "Comprendre la gestion des données personnelles.",
+      "secondaryKeywords": [
+        "données personnelles",
+        "confidentialité",
+        "cookies",
+        "RGPD",
+        "contact"
+      ],
+      "linksOut": [
+        "/mentions-legales",
+        "/contact"
+      ]
+    }
+  ],
+  "generatedPages": {
+    "serviceVille": {
+      "pattern": "/{service}/{ville}",
+      "count": 27,
+      "defaults": {
+        "metaTitlePattern": "{serviceLabel} {villeNom} | appels & demandes qualifiés",
+        "metaDescriptionPattern": "À {villeNom}, générez des appels qualifiés : {serviceLabel} + méthode 3C. Pilotage senior + exécution d’agence. Audit gratuit."
+      }
+    },
+    "zoneVille": {
+      "pattern": "/zones/{zone}/{ville}",
+      "count": 9
+    },
+    "articles": {
+      "pattern": "/ressources/{article}",
+      "count": 12
+    }
+  },
+  "pageIndex": {
+    "services": {
+      "seo-local": [],
+      "ads-google-meta": [],
+      "optimisation-site-cro": []
+    },
+    "zones": {
+      "sud-oise": [
+        "chantilly",
+        "senlis",
+        "creil",
+        "nogent-sur-oise",
+        "pont-sainte-maxence",
+        "clermont"
+      ],
+      "val-doise-95": [
+        "beaumont-sur-oise",
+        "persan",
+        "l-isle-adam"
+      ]
+    }
+  },
+  "rules": {
+    "slugRules": {
+      "services": [
+        "seo-local",
+        "ads-google-meta",
+        "optimisation-site-cro"
+      ],
+      "zones": [
+        "sud-oise",
+        "val-doise-95"
+      ],
+      "villesMustMatch": true
+    },
+    "antiThinContent": {
+      "mustIncludeOnServiceVille": [
+        "angleLocal (texte unique par ville)",
+        "alentours (4–6, mention contextuelle)",
+        "section filtrage des demandes (zone/hors service)",
+        "FAQ locale (5 questions, reformulées)",
+        "liens vers Méthode + Tarifs + Contact"
+      ],
+      "avoid": [
+        "mêmes paragraphes copiés-collés d’une ville à l’autre",
+        "pages ‘ville’ sans bénéfice concret ni preuves",
+        "multiplication de pages sans intention (ex: 'CRO {ville}' vide)"
+      ]
+    }
+  },
+  "computed": {
+    "serviceLabels": {
+      "seo-local": "SEO local",
+      "ads-google-meta": "Google Ads & Meta Ads",
+      "optimisation-site-cro": "Optimisation du site (CRO)"
+    },
+    "serviceVillePages": [
+      {
+        "id": "seo-local-chantilly",
+        "type": "serviceVille",
+        "url": "/seo-local/chantilly",
+        "service": "seo-local",
+        "ville": "chantilly",
+        "zone": "sud-oise",
+        "h1": "SEO local à Chantilly : plus d’appels depuis Google & Maps",
+        "metaTitle": "SEO local Chantilly | Google Maps & appels",
+        "metaDescription": "Gagnez des appels qualifiés à Chantilly : fiche Google optimisée, avis, pages locales et suivi. Pilotage senior + exécution mensuelle.",
+        "intent": "Être visible sur Google/Maps à Chantilly et générer des appels qualifiés.",
+        "secondaryKeywords": [
+          "google maps chantilly",
+          "fiche google business chantilly",
+          "avis google chantilly",
+          "consultant seo chantilly",
+          "seo local chantilly"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/chantilly",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/senlis",
+          "/seo-local/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-senlis",
+        "type": "serviceVille",
+        "url": "/seo-local/senlis",
+        "service": "seo-local",
+        "ville": "senlis",
+        "zone": "sud-oise",
+        "h1": "SEO local à Senlis : visibilité Google qui génère des demandes",
+        "metaTitle": "SEO local Senlis | visibilité Google & demandes",
+        "metaDescription": "À Senlis, captez la demande locale : optimisation GBP, pages locales, avis et suivi positions. Objectif : appels qualifiés.",
+        "intent": "Capter la demande locale à Senlis dans un contexte concurrentiel.",
+        "secondaryKeywords": [
+          "seo senlis",
+          "google maps senlis",
+          "optimiser fiche google senlis",
+          "avis google senlis",
+          "consultant seo local senlis"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/senlis",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/chantilly",
+          "/seo-local/pont-sainte-maxence",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-creil",
+        "type": "serviceVille",
+        "url": "/seo-local/creil",
+        "service": "seo-local",
+        "ville": "creil",
+        "zone": "sud-oise",
+        "h1": "SEO local à Creil : sortir sur Maps et filtrer les demandes",
+        "metaTitle": "SEO local Creil | Google Maps & appels",
+        "metaDescription": "À Creil, la différence se fait sur la fiche Google + pages qui convertissent + avis. Suivi clair, actions mensuelles.",
+        "intent": "Être visible à Creil et limiter les demandes inutiles (hors zone/hors service).",
+        "secondaryKeywords": [
+          "seo local creil",
+          "google maps creil",
+          "fiche google creil",
+          "avis google creil",
+          "consultant seo creil"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/creil",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/nogent-sur-oise",
+          "/seo-local/pont-sainte-maxence",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-nogent-sur-oise",
+        "type": "serviceVille",
+        "url": "/seo-local/nogent-sur-oise",
+        "service": "seo-local",
+        "ville": "nogent-sur-oise",
+        "zone": "sud-oise",
+        "h1": "SEO local à Nogent-sur-Oise : appels qualifiés via Google & Maps",
+        "metaTitle": "SEO local Nogent-sur-Oise | appels qualifiés",
+        "metaDescription": "Optimisation GBP + pages locales + avis + suivi. Objectif : plus d’appels qualifiés à Nogent-sur-Oise.",
+        "intent": "Générer des appels via Maps à Nogent-sur-Oise et mieux qualifier.",
+        "secondaryKeywords": [
+          "seo nogent sur oise",
+          "google maps nogent",
+          "fiche google nogent",
+          "avis google nogent",
+          "consultant seo local"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/nogent-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/creil",
+          "/seo-local/clermont",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-pont-sainte-maxence",
+        "type": "serviceVille",
+        "url": "/seo-local/pont-sainte-maxence",
+        "service": "seo-local",
+        "ville": "pont-sainte-maxence",
+        "zone": "sud-oise",
+        "h1": "SEO local à Pont-Sainte-Maxence : plus d’appels, moins de demandes inutiles",
+        "metaTitle": "SEO local Pont-Sainte-Maxence | appels Google",
+        "metaDescription": "Générez des appels à Pont-Sainte-Maxence : Google Maps, pages locales, avis, suivi mensuel. Méthode orientée demandes.",
+        "intent": "Capter les recherches locales (souvent urgentes) et déclencher l’appel mobile.",
+        "secondaryKeywords": [
+          "seo pont sainte maxence",
+          "google maps pont sainte maxence",
+          "fiche google",
+          "avis google",
+          "consultant seo local"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/pont-sainte-maxence",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/creil",
+          "/seo-local/senlis",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-clermont",
+        "type": "serviceVille",
+        "url": "/seo-local/clermont",
+        "service": "seo-local",
+        "ville": "clermont",
+        "zone": "sud-oise",
+        "h1": "SEO local à Clermont : visibilité Google qui transforme en demandes",
+        "metaTitle": "SEO local Clermont Oise | Google & demandes",
+        "metaDescription": "À Clermont (Oise), gagnez des demandes via Maps : fiche Google + pages locales + avis + suivi. Pilotage senior + exécution.",
+        "intent": "Générer des demandes locales à Clermont avec une structure simple et efficace.",
+        "secondaryKeywords": [
+          "seo clermont oise",
+          "google maps clermont",
+          "fiche google clermont",
+          "avis google clermont",
+          "consultant seo local"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/sud-oise",
+          "/zones/sud-oise/clermont",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/nogent-sur-oise",
+          "/seo-local/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-beaumont-sur-oise",
+        "type": "serviceVille",
+        "url": "/seo-local/beaumont-sur-oise",
+        "service": "seo-local",
+        "ville": "beaumont-sur-oise",
+        "zone": "val-doise-95",
+        "h1": "SEO local à Beaumont-sur-Oise : attirer des appels sur Google Maps",
+        "metaTitle": "SEO local Beaumont-sur-Oise | appels Maps",
+        "metaDescription": "Optimisez Google Maps à Beaumont-sur-Oise : GBP, pages locales, avis et suivi. Objectif : demandes qualifiées.",
+        "intent": "Capter une zone élargie Nord 95 / Sud Oise avec un périmètre clair.",
+        "secondaryKeywords": [
+          "seo beaumont sur oise",
+          "google maps beaumont",
+          "fiche google beaumont",
+          "avis google beaumont",
+          "consultant seo local"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/val-doise-95",
+          "/zones/val-doise-95/beaumont-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/persan",
+          "/seo-local/l-isle-adam",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-persan",
+        "type": "serviceVille",
+        "url": "/seo-local/persan",
+        "service": "seo-local",
+        "ville": "persan",
+        "zone": "val-doise-95",
+        "h1": "SEO local à Persan : visibilité + conversion pour des leads qualifiés",
+        "metaTitle": "SEO local Persan | Google Maps & leads",
+        "metaDescription": "À Persan, améliorez visibilité et qualité des demandes : fiche Google, pages, avis, suivi mensuel. Objectif : appels qualifiés.",
+        "intent": "Être visible à Persan tout en qualifiant mieux les demandes.",
+        "secondaryKeywords": [
+          "seo persan",
+          "google maps persan",
+          "fiche google persan",
+          "avis google persan",
+          "consultant seo local"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/val-doise-95",
+          "/zones/val-doise-95/persan",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/beaumont-sur-oise",
+          "/seo-local/l-isle-adam",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "seo-local-l-isle-adam",
+        "type": "serviceVille",
+        "url": "/seo-local/l-isle-adam",
+        "service": "seo-local",
+        "ville": "l-isle-adam",
+        "zone": "val-doise-95",
+        "h1": "SEO local à L’Isle-Adam : plus d’appels qualifiés, image rassurante",
+        "metaTitle": "SEO local L’Isle-Adam | Google & appels",
+        "metaDescription": "À L’Isle-Adam, la confiance compte : avis, preuves, pages locales et GBP optimisés pour générer des appels qualifiés.",
+        "intent": "Générer des appels qualifiés sur une zone à forte exigence de confiance.",
+        "secondaryKeywords": [
+          "seo l isle adam",
+          "google maps l isle adam",
+          "avis google",
+          "consultant seo local",
+          "optimisation fiche google"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/zones/val-doise-95",
+          "/zones/val-doise-95/l-isle-adam",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/seo-local/persan",
+          "/seo-local/beaumont-sur-oise",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "maps-not-visible",
+          "competitors-ahead-maps",
+          "reviews-how-many",
+          "multi-communes-alentours",
+          "kpi-tracking"
+        ]
+      },
+      {
+        "id": "ads-chantilly",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/chantilly",
+        "service": "ads-google-meta",
+        "ville": "chantilly",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Chantilly : des demandes rapides et qualifiées",
+        "metaTitle": "Google Ads Chantilly | demandes rapides",
+        "metaDescription": "Campagnes Ads à Chantilly : ciblage local, exclusions, landing qui convertit, suivi appels/formulaires. Pilotage senior.",
+        "intent": "Obtenir des demandes rapidement à Chantilly avec une qualité maîtrisée.",
+        "secondaryKeywords": [
+          "google ads chantilly",
+          "meta ads chantilly",
+          "agence ads chantilly",
+          "leads chantilly",
+          "campagne locale"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/chantilly",
+          "/seo-local/chantilly",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/senlis",
+          "/ads-google-meta/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-senlis",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/senlis",
+        "service": "ads-google-meta",
+        "ville": "senlis",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Senlis : des leads locaux sans gaspillage",
+        "metaTitle": "Google Ads Senlis | leads locaux qualifiés",
+        "metaDescription": "À Senlis : campagnes Ads pilotées, exclusions, landing qui qualifie et reporting simple. Objectif : demandes qualifiées.",
+        "intent": "Générer des leads à Senlis avec ciblage et exclusions pour éviter le gaspillage.",
+        "secondaryKeywords": [
+          "google ads senlis",
+          "meta ads senlis",
+          "leads senlis",
+          "campagnes locales",
+          "filtrer leads ads"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/senlis",
+          "/seo-local/senlis",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/chantilly",
+          "/ads-google-meta/pont-sainte-maxence",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-creil",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/creil",
+        "service": "ads-google-meta",
+        "ville": "creil",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Creil : éviter le gaspillage et garder des leads qualifiés",
+        "metaTitle": "Google Ads Creil | éviter le gaspillage",
+        "metaDescription": "À Creil : ciblage local, exclusions, landing qui qualifie et optimisation hebdo. Objectif : demandes rentables.",
+        "intent": "Générer des demandes à Creil en limitant les leads inutiles.",
+        "secondaryKeywords": [
+          "google ads creil",
+          "meta ads creil",
+          "leads creil",
+          "exclusions google ads",
+          "landing ads creil"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/creil",
+          "/seo-local/creil",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/nogent-sur-oise",
+          "/ads-google-meta/persan",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-nogent-sur-oise",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/nogent-sur-oise",
+        "service": "ads-google-meta",
+        "ville": "nogent-sur-oise",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Nogent-sur-Oise : des demandes rapides et mieux qualifiées",
+        "metaTitle": "Google Ads Nogent-sur-Oise | demandes rapides",
+        "metaDescription": "À Nogent-sur-Oise : campagnes Ads pilotées, filtrage, landing mobile et suivi clair. Objectif : leads qualifiés.",
+        "intent": "Obtenir des demandes rapidement à Nogent-sur-Oise tout en qualifiant.",
+        "secondaryKeywords": [
+          "google ads nogent sur oise",
+          "meta ads nogent",
+          "leads nogent",
+          "filtrage leads",
+          "tracking ads"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/nogent-sur-oise",
+          "/seo-local/nogent-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/creil",
+          "/ads-google-meta/clermont",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-pont-sainte-maxence",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/pont-sainte-maxence",
+        "service": "ads-google-meta",
+        "ville": "pont-sainte-maxence",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Pont-Sainte-Maxence : capter les demandes d’urgence",
+        "metaTitle": "Google Ads Pont-Sainte-Maxence | appels rapides",
+        "metaDescription": "Campagnes Ads locales : extensions d’appel, ciblage, exclusions et landing mobile. Objectif : appels et demandes qualifiés.",
+        "intent": "Capter des demandes rapides (souvent urgentes) à Pont-Sainte-Maxence.",
+        "secondaryKeywords": [
+          "google ads pont sainte maxence",
+          "extensions d'appel",
+          "campagne locale",
+          "meta ads",
+          "leads urgents"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/pont-sainte-maxence",
+          "/seo-local/pont-sainte-maxence",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/senlis",
+          "/ads-google-meta/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-clermont",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/clermont",
+        "service": "ads-google-meta",
+        "ville": "clermont",
+        "zone": "sud-oise",
+        "h1": "Google Ads à Clermont : des leads locaux pilotés",
+        "metaTitle": "Google Ads Clermont Oise | leads locaux",
+        "metaDescription": "À Clermont (Oise) : campagnes locales, landing qui convertit, exclusions et optimisation hebdo. Suivi simple orienté demandes.",
+        "intent": "Générer des leads locaux à Clermont avec un pilotage clair.",
+        "secondaryKeywords": [
+          "google ads clermont oise",
+          "meta ads clermont",
+          "leads clermont",
+          "landing conversion",
+          "optimisation hebdo"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/clermont",
+          "/seo-local/clermont",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/nogent-sur-oise",
+          "/ads-google-meta/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-beaumont-sur-oise",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/beaumont-sur-oise",
+        "service": "ads-google-meta",
+        "ville": "beaumont-sur-oise",
+        "zone": "val-doise-95",
+        "h1": "Google Ads à Beaumont-sur-Oise : leads Nord 95 avec zone claire",
+        "metaTitle": "Google Ads Beaumont-sur-Oise | leads Nord 95",
+        "metaDescription": "À Beaumont-sur-Oise : ciblage local, exclusions, landing qui qualifie et suivi clair. Objectif : demandes qualifiées.",
+        "intent": "Générer des leads sur Beaumont-sur-Oise et alentours, sans demandes hors périmètre.",
+        "secondaryKeywords": [
+          "google ads beaumont sur oise",
+          "meta ads 95",
+          "leads nord 95",
+          "exclusions zones",
+          "landing locale"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/beaumont-sur-oise",
+          "/seo-local/beaumont-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/persan",
+          "/ads-google-meta/l-isle-adam",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-persan",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/persan",
+        "service": "ads-google-meta",
+        "ville": "persan",
+        "zone": "val-doise-95",
+        "h1": "Google Ads à Persan : filtrer les leads et garder les demandes rentables",
+        "metaTitle": "Google Ads Persan | filtrer les leads",
+        "metaDescription": "À Persan : exclusions, ciblage, messages clairs et landing mobile. Objectif : moins de demandes inutiles, plus de leads qualifiés.",
+        "intent": "Réduire les mauvais leads à Persan et améliorer la rentabilité Ads.",
+        "secondaryKeywords": [
+          "google ads persan",
+          "exclusions google ads",
+          "filtrer leads",
+          "landing conversion",
+          "meta ads persan"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/persan",
+          "/seo-local/persan",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/beaumont-sur-oise",
+          "/ads-google-meta/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "ads-l-isle-adam",
+        "type": "serviceVille",
+        "url": "/ads-google-meta/l-isle-adam",
+        "service": "ads-google-meta",
+        "ville": "l-isle-adam",
+        "zone": "val-doise-95",
+        "h1": "Google Ads à L’Isle-Adam : des demandes qualifiées (image + confiance)",
+        "metaTitle": "Google Ads L’Isle-Adam | demandes qualifiées",
+        "metaDescription": "À L’Isle-Adam : Ads locales pilotées + landing rassurante + exclusions. Objectif : demandes qualifiées et mesurées.",
+        "intent": "Obtenir des demandes qualifiées à L’Isle-Adam avec une forte réassurance.",
+        "secondaryKeywords": [
+          "google ads l isle adam",
+          "meta ads l isle adam",
+          "landing rassurante",
+          "leads qualifiés",
+          "publicité locale"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/optimisation-site-cro/l-isle-adam",
+          "/seo-local/l-isle-adam",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/beaumont-sur-oise",
+          "/ads-google-meta/persan",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "ads-min-budget",
+          "ads-google-vs-meta",
+          "ads-avoid-bad-leads",
+          "ads-need-landing",
+          "ads-call-tracking"
+        ]
+      },
+      {
+        "id": "cro-chantilly",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/chantilly",
+        "service": "optimisation-site-cro",
+        "ville": "chantilly",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Chantilly : plus d’appels à trafic égal",
+        "metaTitle": "CRO Chantilly | site qui génère des appels",
+        "metaDescription": "À Chantilly : CTA visibles, réassurance, mobile, formulaires courts. On optimise les pages clés pour transformer les visites en demandes.",
+        "intent": "Augmenter les appels/demandes à Chantilly sans refonte complète.",
+        "secondaryKeywords": [
+          "optimisation site chantilly",
+          "cta click-to-call",
+          "formulaire devis",
+          "réassurance avis",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/chantilly",
+          "/ads-google-meta/chantilly",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/senlis",
+          "/optimisation-site-cro/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-senlis",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/senlis",
+        "service": "optimisation-site-cro",
+        "ville": "senlis",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Senlis : transformer les visites en demandes",
+        "metaTitle": "CRO Senlis | plus de demandes sans refonte",
+        "metaDescription": "À Senlis : améliorez conversion mobile, CTA, preuves et formulaires. Objectif : plus d’appels et demandes qualifiés.",
+        "intent": "Augmenter la conversion à Senlis (site plus clair, plus rassurant).",
+        "secondaryKeywords": [
+          "optimisation site senlis",
+          "conversion mobile",
+          "cta",
+          "preuves",
+          "site qui convertit"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/senlis",
+          "/ads-google-meta/senlis",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/chantilly",
+          "/optimisation-site-cro/pont-sainte-maxence",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-creil",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/creil",
+        "service": "optimisation-site-cro",
+        "ville": "creil",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Creil : plus de demandes, moins de contacts inutiles",
+        "metaTitle": "CRO Creil | filtrer et convertir",
+        "metaDescription": "À Creil : formulaires plus courts mais qualifiants, CTA mobile, preuves et zones. Objectif : demandes utiles.",
+        "intent": "Améliorer conversion et qualification à Creil (zone dense).",
+        "secondaryKeywords": [
+          "optimisation site creil",
+          "formulaire qualifiant",
+          "cta mobile",
+          "réassurance",
+          "conversion locale"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/creil",
+          "/ads-google-meta/creil",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/nogent-sur-oise",
+          "/optimisation-site-cro/persan",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-nogent-sur-oise",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/nogent-sur-oise",
+        "service": "optimisation-site-cro",
+        "ville": "nogent-sur-oise",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Nogent-sur-Oise : plus d’appels, demandes mieux qualifiées",
+        "metaTitle": "CRO Nogent-sur-Oise | appels qualifiés",
+        "metaDescription": "À Nogent-sur-Oise : CTA, mobile, réassurance, zones et délais. On optimise les pages clés pour générer des demandes utiles.",
+        "intent": "Augmenter les appels et la qualité des demandes à Nogent-sur-Oise.",
+        "secondaryKeywords": [
+          "optimisation site nogent sur oise",
+          "cta click-to-call",
+          "réassurance",
+          "zones desservies",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/nogent-sur-oise",
+          "/ads-google-meta/nogent-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/creil",
+          "/optimisation-site-cro/clermont",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-pont-sainte-maxence",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/pont-sainte-maxence",
+        "service": "optimisation-site-cro",
+        "ville": "pont-sainte-maxence",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Pont-Sainte-Maxence : déclencher l’appel sur mobile",
+        "metaTitle": "CRO Pont-Sainte-Maxence | appels mobile",
+        "metaDescription": "À Pont-Sainte-Maxence : CTA visibles, click-to-call, preuves et formulaires courts. Objectif : plus d’appels et demandes.",
+        "intent": "Augmenter les appels mobiles et réduire la friction pour demander.",
+        "secondaryKeywords": [
+          "cta mobile",
+          "click-to-call",
+          "optimisation site pont sainte maxence",
+          "formulaire court",
+          "conversion locale"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/pont-sainte-maxence",
+          "/ads-google-meta/pont-sainte-maxence",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/senlis",
+          "/optimisation-site-cro/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-clermont",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/clermont",
+        "service": "optimisation-site-cro",
+        "ville": "clermont",
+        "zone": "sud-oise",
+        "h1": "Optimiser votre site à Clermont : plus de demandes avec des pages simples",
+        "metaTitle": "CRO Clermont Oise | pages qui convertissent",
+        "metaDescription": "À Clermont (Oise) : structure claire, bénéfices, preuves, CTA et mobile. On optimise les pages clés pour générer des demandes.",
+        "intent": "Améliorer la conversion à Clermont avec une structure simple et rassurante.",
+        "secondaryKeywords": [
+          "optimisation site clermont oise",
+          "site qui convertit",
+          "cta",
+          "preuves",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/clermont",
+          "/ads-google-meta/clermont",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/nogent-sur-oise",
+          "/optimisation-site-cro/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-beaumont-sur-oise",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/beaumont-sur-oise",
+        "service": "optimisation-site-cro",
+        "ville": "beaumont-sur-oise",
+        "zone": "val-doise-95",
+        "h1": "Optimiser votre site à Beaumont-sur-Oise : plus de demandes sur une zone élargie",
+        "metaTitle": "CRO Beaumont-sur-Oise | plus de demandes",
+        "metaDescription": "À Beaumont-sur-Oise : zones claires, preuves, CTA et mobile. On optimise les pages clés pour générer des demandes qualifiées.",
+        "intent": "Générer plus de demandes à Beaumont-sur-Oise tout en cadrant le périmètre.",
+        "secondaryKeywords": [
+          "optimisation site beaumont sur oise",
+          "zones desservies",
+          "cta",
+          "réassurance",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/beaumont-sur-oise",
+          "/ads-google-meta/beaumont-sur-oise",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/persan",
+          "/optimisation-site-cro/l-isle-adam",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-persan",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/persan",
+        "service": "optimisation-site-cro",
+        "ville": "persan",
+        "zone": "val-doise-95",
+        "h1": "Optimiser votre site à Persan : qualifier et convertir sans perdre du volume",
+        "metaTitle": "CRO Persan | qualifier et convertir",
+        "metaDescription": "À Persan : formulaires courts mais qualifiants, CTA mobile, preuves et zones. Objectif : demandes utiles et mesurées.",
+        "intent": "Améliorer conversion + qualification à Persan.",
+        "secondaryKeywords": [
+          "optimisation site persan",
+          "formulaire qualifiant",
+          "cta mobile",
+          "conversion locale",
+          "réassurance"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/persan",
+          "/ads-google-meta/persan",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/beaumont-sur-oise",
+          "/optimisation-site-cro/creil",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      },
+      {
+        "id": "cro-l-isle-adam",
+        "type": "serviceVille",
+        "url": "/optimisation-site-cro/l-isle-adam",
+        "service": "optimisation-site-cro",
+        "ville": "l-isle-adam",
+        "zone": "val-doise-95",
+        "h1": "Optimiser votre site à L’Isle-Adam : réassurer et déclencher la demande",
+        "metaTitle": "CRO L’Isle-Adam | réassurance & demandes",
+        "metaDescription": "À L’Isle-Adam : preuves, process, CTA et mobile. On optimise les pages clés pour générer des demandes qualifiées.",
+        "intent": "Augmenter les demandes qualifiées avec une forte réassurance.",
+        "secondaryKeywords": [
+          "optimisation site l isle adam",
+          "réassurance",
+          "preuves",
+          "cta",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local/l-isle-adam",
+          "/ads-google-meta/l-isle-adam",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/optimisation-site-cro/beaumont-sur-oise",
+          "/optimisation-site-cro/persan",
+          "/ressources"
+        ],
+        "faqRefs": [
+          "cro-need-redesign",
+          "cro-which-pages-first",
+          "cro-proofs-what",
+          "cro-measure-impact",
+          "cro-iterations-per-month"
+        ]
+      }
+    ],
+    "zoneVillePages": [
+      {
+        "id": "zone-sud-oise-chantilly",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/chantilly",
+        "zone": "sud-oise",
+        "ville": "chantilly",
+        "h1": "Chantilly : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Chantilly (Sud Oise) | appels & demandes qualifiés",
+        "metaDescription": "À Chantilly et alentours, Horizon Conversion aide à générer des demandes qualifiées : SEO local, Ads et CRO. Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ (zone) et naviguer vers les services à Chantilly.",
+        "secondaryKeywords": [
+          "webmarketing chantilly",
+          "seo local chantilly",
+          "google ads chantilly",
+          "site qui convertit chantilly",
+          "consultant webmarketing"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/chantilly",
+          "/ads-google-meta/chantilly",
+          "/optimisation-site-cro/chantilly",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-sud-oise-senlis",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/senlis",
+        "zone": "sud-oise",
+        "ville": "senlis",
+        "h1": "Senlis : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Senlis (Sud Oise) | appels & demandes qualifiés",
+        "metaDescription": "À Senlis et alentours, mettez en place un système local : SEO, Ads et CRO pour générer des appels qualifiés. Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ (zone) et naviguer vers les services à Senlis.",
+        "secondaryKeywords": [
+          "webmarketing senlis",
+          "seo local senlis",
+          "google ads senlis",
+          "optimisation site senlis",
+          "consultant webmarketing"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/senlis",
+          "/ads-google-meta/senlis",
+          "/optimisation-site-cro/senlis",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-sud-oise-creil",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/creil",
+        "zone": "sud-oise",
+        "ville": "creil",
+        "h1": "Creil : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Creil (Sud Oise) | appels & demandes qualifiés",
+        "metaDescription": "À Creil et alentours, SEO local + Ads + CRO pour générer des demandes utiles (moins de leads inutiles). Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ et naviguer vers services à Creil.",
+        "secondaryKeywords": [
+          "webmarketing creil",
+          "seo local creil",
+          "google ads creil",
+          "cpl creil",
+          "conversion site creil"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/creil",
+          "/ads-google-meta/creil",
+          "/optimisation-site-cro/creil",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-sud-oise-nogent-sur-oise",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/nogent-sur-oise",
+        "zone": "sud-oise",
+        "ville": "nogent-sur-oise",
+        "h1": "Nogent-sur-Oise : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Nogent-sur-Oise (Sud Oise) | demandes qualifiées",
+        "metaDescription": "À Nogent-sur-Oise, générez des appels qualifiés : SEO local, Ads pilotées et CRO. Pilotage senior + exécution d’agence.",
+        "intent": "Accéder à une vue ‘ville’ et naviguer vers services à Nogent-sur-Oise.",
+        "secondaryKeywords": [
+          "webmarketing nogent sur oise",
+          "seo local nogent",
+          "google ads nogent",
+          "conversion site",
+          "consultant local"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/nogent-sur-oise",
+          "/ads-google-meta/nogent-sur-oise",
+          "/optimisation-site-cro/nogent-sur-oise",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-sud-oise-pont-sainte-maxence",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/pont-sainte-maxence",
+        "zone": "sud-oise",
+        "ville": "pont-sainte-maxence",
+        "h1": "Pont-Sainte-Maxence : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Pont-Sainte-Maxence (Sud Oise) | appels qualifiés",
+        "metaDescription": "À Pont-Sainte-Maxence, déclenchez plus d’appels : SEO local, Ads et CRO (mobile-first). Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ et naviguer vers services à Pont-Sainte-Maxence.",
+        "secondaryKeywords": [
+          "webmarketing pont sainte maxence",
+          "seo local",
+          "google ads",
+          "cta mobile",
+          "appels urgents"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/pont-sainte-maxence",
+          "/ads-google-meta/pont-sainte-maxence",
+          "/optimisation-site-cro/pont-sainte-maxence",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-sud-oise-clermont",
+        "type": "zoneVille",
+        "url": "/zones/sud-oise/clermont",
+        "zone": "sud-oise",
+        "ville": "clermont",
+        "h1": "Clermont (Oise) : générer des demandes qualifiées (Sud Oise)",
+        "metaTitle": "Clermont Oise (Sud Oise) | demandes qualifiées",
+        "metaDescription": "À Clermont (Oise), augmentez vos demandes : SEO local, Ads pilotées et CRO. Interlocuteur unique + exécution structurée.",
+        "intent": "Accéder à une vue ‘ville’ et naviguer vers services à Clermont.",
+        "secondaryKeywords": [
+          "webmarketing clermont oise",
+          "seo local clermont",
+          "google ads clermont",
+          "site qui convertit",
+          "consultant webmarketing"
+        ],
+        "linksOut": [
+          "/zones/sud-oise",
+          "/seo-local/clermont",
+          "/ads-google-meta/clermont",
+          "/optimisation-site-cro/clermont",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-val-doise-95-beaumont-sur-oise",
+        "type": "zoneVille",
+        "url": "/zones/val-doise-95/beaumont-sur-oise",
+        "zone": "val-doise-95",
+        "ville": "beaumont-sur-oise",
+        "h1": "Beaumont-sur-Oise : générer des demandes qualifiées (Val d’Oise 95)",
+        "metaTitle": "Beaumont-sur-Oise (95) | demandes qualifiées",
+        "metaDescription": "À Beaumont-sur-Oise, générez des demandes mesurées : SEO local, Ads et CRO. Zone claire + filtrage des leads. Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ (95) et naviguer vers services à Beaumont-sur-Oise.",
+        "secondaryKeywords": [
+          "webmarketing beaumont sur oise",
+          "seo local 95",
+          "google ads 95",
+          "landing ads",
+          "conversion site 95"
+        ],
+        "linksOut": [
+          "/zones/val-doise-95",
+          "/seo-local/beaumont-sur-oise",
+          "/ads-google-meta/beaumont-sur-oise",
+          "/optimisation-site-cro/beaumont-sur-oise",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-val-doise-95-persan",
+        "type": "zoneVille",
+        "url": "/zones/val-doise-95/persan",
+        "zone": "val-doise-95",
+        "ville": "persan",
+        "h1": "Persan : générer des demandes qualifiées (Val d’Oise 95)",
+        "metaTitle": "Persan (95) | leads qualifiés",
+        "metaDescription": "À Persan, combinez SEO local, Ads et CRO pour générer des demandes utiles : filtrage, landing, tracking. Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ (95) et naviguer vers services à Persan.",
+        "secondaryKeywords": [
+          "webmarketing persan",
+          "google ads persan",
+          "seo local persan",
+          "filtrer leads",
+          "conversion mobile"
+        ],
+        "linksOut": [
+          "/zones/val-doise-95",
+          "/seo-local/persan",
+          "/ads-google-meta/persan",
+          "/optimisation-site-cro/persan",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      },
+      {
+        "id": "zone-val-doise-95-l-isle-adam",
+        "type": "zoneVille",
+        "url": "/zones/val-doise-95/l-isle-adam",
+        "zone": "val-doise-95",
+        "ville": "l-isle-adam",
+        "h1": "L’Isle-Adam : générer des demandes qualifiées (Val d’Oise 95)",
+        "metaTitle": "L’Isle-Adam (95) | appels qualifiés",
+        "metaDescription": "À L’Isle-Adam, la confiance compte : SEO local, Ads et CRO pour générer des demandes qualifiées. Audit gratuit.",
+        "intent": "Accéder à une vue ‘ville’ (95) et naviguer vers services à L’Isle-Adam.",
+        "secondaryKeywords": [
+          "webmarketing l isle adam",
+          "seo local l isle adam",
+          "google ads l isle adam",
+          "réassurance",
+          "landing premium"
+        ],
+        "linksOut": [
+          "/zones/val-doise-95",
+          "/seo-local/l-isle-adam",
+          "/ads-google-meta/l-isle-adam",
+          "/optimisation-site-cro/l-isle-adam",
+          "/contact",
+          "/tarifs",
+          "/methode"
+        ],
+        "faqRefs": [
+          "which-service-start",
+          "multi-communes-alentours",
+          "filter-bad-leads",
+          "monthly-deliverables",
+          "audit-how"
+        ]
+      }
+    ],
+    "articles": [
+      {
+        "id": "article-pourquoi-google-maps-ne-me-genere-pas-d-appels",
+        "type": "article",
+        "url": "/ressources/pourquoi-google-maps-ne-me-genere-pas-d-appels",
+        "slug": "pourquoi-google-maps-ne-me-genere-pas-d-appels",
+        "h1": "Pourquoi Google Maps ne me génère pas d’appels (et quoi corriger en 30 minutes)",
+        "metaTitle": "Google Maps : pas d’appels ? 7 causes fréquentes",
+        "metaDescription": "Fiche Google, avis, catégories, zones : les causes fréquentes et un plan d’actions rapide pour générer plus d’appels depuis Maps.",
+        "service": "seo-local",
+        "niveau": "debutant",
+        "intent": "Comprendre pourquoi la fiche Maps ne génère pas d’appels et corriger rapidement.",
+        "secondaryKeywords": [
+          "google business profile",
+          "maps",
+          "avis google",
+          "categories",
+          "zones desservies"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/methode",
+          "/contact",
+          "/seo-local/chantilly",
+          "/seo-local/senlis"
+        ]
+      },
+      {
+        "id": "article-seo-local-ou-google-ads-quoi-choisir",
+        "type": "article",
+        "url": "/ressources/seo-local-ou-google-ads-quoi-choisir",
+        "slug": "seo-local-ou-google-ads-quoi-choisir",
+        "h1": "SEO local ou Google Ads : quoi choisir pour avoir des demandes rapidement ?",
+        "metaTitle": "SEO local ou Google Ads : que choisir ?",
+        "metaDescription": "Urgence, concurrence, marge : comment choisir entre SEO local et Ads. Et pourquoi le combo est souvent le plus rentable.",
+        "service": "ads-google-meta",
+        "niveau": "debutant",
+        "intent": "Décider entre SEO local et Ads selon l’urgence et la rentabilité.",
+        "secondaryKeywords": [
+          "seo vs ads",
+          "budget pub",
+          "leads rapides",
+          "strategie locale",
+          "methode 3c"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/seo-local",
+          "/methode",
+          "/tarifs",
+          "/contact",
+          "/ads-google-meta/creil",
+          "/seo-local/senlis"
+        ]
+      },
+      {
+        "id": "article-landing-page-locale-qui-convertit",
+        "type": "article",
+        "url": "/ressources/landing-page-locale-qui-convertit",
+        "slug": "landing-page-locale-qui-convertit",
+        "h1": "La landing page locale qui convertit : structure simple pour plus d’appels",
+        "metaTitle": "Landing locale qui convertit : la structure",
+        "metaDescription": "Hero, preuves, FAQ, CTA : la structure mobile-first pour transformer les clics en appels et demandes qualifiées.",
+        "service": "optimisation-site-cro",
+        "niveau": "intermediaire",
+        "intent": "Créer/optimiser une landing locale qui convertit (surtout pour Ads).",
+        "secondaryKeywords": [
+          "landing ads",
+          "conversion mobile",
+          "cta",
+          "preuves",
+          "faq objections"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/ads-google-meta",
+          "/methode",
+          "/contact",
+          "/ads-google-meta/persan",
+          "/optimisation-site-cro/creil"
+        ]
+      },
+      {
+        "id": "article-comment-filtrer-les-mauvais-leads-en-ads",
+        "type": "article",
+        "url": "/ressources/comment-filtrer-les-mauvais-leads-en-ads",
+        "slug": "comment-filtrer-les-mauvais-leads-en-ads",
+        "h1": "Comment filtrer les mauvais leads en Ads (zones, requêtes, messages)",
+        "metaTitle": "Filtrer les mauvais leads en Ads (checklist)",
+        "metaDescription": "Exclusions, ciblage, messages et landing : une checklist simple pour réduire les leads inutiles et garder des demandes rentables.",
+        "service": "ads-google-meta",
+        "niveau": "intermediaire",
+        "intent": "Réduire les leads inutiles et améliorer la qualité en Ads.",
+        "secondaryKeywords": [
+          "exclusions google ads",
+          "mots-clés négatifs",
+          "ciblage local",
+          "qualif leads",
+          "cout par lead"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/methode",
+          "/contact",
+          "/ads-google-meta/creil",
+          "/ads-google-meta/persan"
+        ]
+      },
+      {
+        "id": "article-cro-5-optimisations-qui-font-gagner-des-appels",
+        "type": "article",
+        "url": "/ressources/cro-5-optimisations-qui-font-gagner-des-appels",
+        "slug": "cro-5-optimisations-qui-font-gagner-des-appels",
+        "h1": "CRO : 5 optimisations qui font gagner des appels à trafic égal",
+        "metaTitle": "CRO : 5 optimisations pour plus d’appels",
+        "metaDescription": "CTA, réassurance, mobile, formulaires : 5 optimisations simples pour augmenter les appels et demandes sans augmenter le trafic.",
+        "service": "optimisation-site-cro",
+        "niveau": "debutant",
+        "intent": "Obtenir plus d’appels à trafic égal grâce à des optimisations CRO simples.",
+        "secondaryKeywords": [
+          "cta click-to-call",
+          "réassurance",
+          "formulaire court",
+          "conversion mobile",
+          "pages clés"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/methode",
+          "/contact",
+          "/optimisation-site-cro/chantilly",
+          "/optimisation-site-cro/pont-sainte-maxence"
+        ]
+      },
+      {
+        "id": "article-tracking-simple-pour-savoir-ce-qui-rapporte",
+        "type": "article",
+        "url": "/ressources/tracking-simple-pour-savoir-ce-qui-rapporte",
+        "slug": "tracking-simple-pour-savoir-ce-qui-rapporte",
+        "h1": "Tracking simple : savoir d’où viennent vos demandes (sans usine à gaz)",
+        "metaTitle": "Tracking simple : mesurer appels & demandes",
+        "metaDescription": "Quels KPI suivre (appels, formulaires, sources) et comment mettre en place un suivi lisible pour piloter SEO + Ads.",
+        "service": "optimisation-site-cro",
+        "niveau": "debutant",
+        "intent": "Mettre en place un tracking simple et exploitable (pas du reporting complexe).",
+        "secondaryKeywords": [
+          "ga4",
+          "evenements",
+          "utm",
+          "sources leads",
+          "kpi business"
+        ],
+        "linksOut": [
+          "/methode",
+          "/contact",
+          "/optimisation-site-cro",
+          "/ads-google-meta",
+          "/seo-local"
+        ]
+      },
+      {
+        "id": "article-avis-google-comment-en-obtenir-regulierement",
+        "type": "article",
+        "url": "/ressources/avis-google-comment-en-obtenir-regulierement",
+        "slug": "avis-google-comment-en-obtenir-regulierement",
+        "h1": "Avis Google : comment en obtenir régulièrement (sans harceler vos clients)",
+        "metaTitle": "Avis Google : en obtenir régulièrement (process)",
+        "metaDescription": "Un process court, au bon moment, avec des messages prêts à envoyer. Objectif : confiance, clics et appels depuis Maps.",
+        "service": "seo-local",
+        "niveau": "debutant",
+        "intent": "Mettre en place un process simple pour obtenir des avis Google régulièrement.",
+        "secondaryKeywords": [
+          "collecte avis",
+          "reputation",
+          "google maps",
+          "taux de clic",
+          "confiance"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/methode",
+          "/contact",
+          "/seo-local/l-isle-adam",
+          "/seo-local/chantilly"
+        ]
+      },
+      {
+        "id": "article-pages-ville-seo-local-faut-il-en-faire",
+        "type": "article",
+        "url": "/ressources/pages-ville-seo-local-faut-il-en-faire",
+        "slug": "pages-ville-seo-local-faut-il-en-faire",
+        "h1": "Pages ‘ville’ en SEO local : faut-il en faire, et comment éviter le contenu inutile ?",
+        "metaTitle": "Pages ville SEO local : utiles ou risquées ?",
+        "metaDescription": "Quand une page service×ville est utile, comment la structurer, et les erreurs qui créent du thin content en SEO local.",
+        "service": "seo-local",
+        "niveau": "intermediaire",
+        "intent": "Comprendre quand créer des pages locales et comment éviter le thin content.",
+        "secondaryKeywords": [
+          "service x ville",
+          "thin content",
+          "maillage interne",
+          "intentions locales",
+          "structure page locale"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/methode",
+          "/contact",
+          "/seo-local/senlis",
+          "/seo-local/creil"
+        ]
+      },
+      {
+        "id": "article-pourquoi-mes-concurrents-me-passent-devant-sur-maps",
+        "type": "article",
+        "url": "/ressources/pourquoi-mes-concurrents-me-passent-devant-sur-maps",
+        "slug": "pourquoi-mes-concurrents-me-passent-devant-sur-maps",
+        "h1": "Pourquoi mes concurrents me passent devant sur Google Maps ? (plan d’action)",
+        "metaTitle": "Concurrents devant sur Maps : pourquoi ?",
+        "metaDescription": "Pertinence, distance, notoriété : ce qui fait vraiment la visibilité Maps. Un plan d’action concret pour remonter.",
+        "service": "seo-local",
+        "niveau": "intermediaire",
+        "intent": "Comprendre les leviers de visibilité Google Maps et appliquer un plan d’action.",
+        "secondaryKeywords": [
+          "pertinence",
+          "notoriété",
+          "avis google",
+          "categories",
+          "optimisation gbp"
+        ],
+        "linksOut": [
+          "/seo-local",
+          "/methode",
+          "/contact",
+          "/seo-local/senlis",
+          "/seo-local/chantilly"
+        ]
+      },
+      {
+        "id": "article-ads-locale-structure-campagnes-qui-evitent-le-gaspillage",
+        "type": "article",
+        "url": "/ressources/ads-locale-structure-campagnes-qui-evitent-le-gaspillage",
+        "slug": "ads-locale-structure-campagnes-qui-evitent-le-gaspillage",
+        "h1": "Ads locales : structure de campagnes pour éviter le gaspillage (et garder des leads qualifiés)",
+        "metaTitle": "Ads locales : structure anti-gaspillage",
+        "metaDescription": "Groupes, zones, extensions, exclusions : une structure simple pour améliorer la qualité des leads sans exploser le budget.",
+        "service": "ads-google-meta",
+        "niveau": "avance",
+        "intent": "Structurer des campagnes locales pour améliorer la qualité et réduire le gaspillage.",
+        "secondaryKeywords": [
+          "structure campagnes",
+          "extensions",
+          "exclusions",
+          "zones",
+          "qualité leads"
+        ],
+        "linksOut": [
+          "/ads-google-meta",
+          "/methode",
+          "/contact",
+          "/ads-google-meta/creil",
+          "/ads-google-meta/beaumont-sur-oise"
+        ]
+      },
+      {
+        "id": "article-site-local-preuves-qui-font-decider",
+        "type": "article",
+        "url": "/ressources/site-local-preuves-qui-font-decider",
+        "slug": "site-local-preuves-qui-font-decider",
+        "h1": "Les preuves qui font décider : quoi afficher sur un site local pour déclencher l’appel",
+        "metaTitle": "Preuves sur un site local : quoi afficher",
+        "metaDescription": "Avis, process, garanties, zones, avant/après : les éléments de réassurance qui augmentent la conversion et déclenchent l’appel.",
+        "service": "optimisation-site-cro",
+        "niveau": "debutant",
+        "intent": "Savoir quelles preuves afficher pour augmenter la conversion en local.",
+        "secondaryKeywords": [
+          "réassurance",
+          "preuves",
+          "avis",
+          "process",
+          "garanties"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/seo-local",
+          "/methode",
+          "/contact",
+          "/optimisation-site-cro/l-isle-adam",
+          "/optimisation-site-cro/chantilly"
+        ]
+      },
+      {
+        "id": "article-cta-click-to-call-mobile-les-erreurs-qui-coutent-des-appels",
+        "type": "article",
+        "url": "/ressources/cta-click-to-call-mobile-les-erreurs-qui-coutent-des-appels",
+        "slug": "cta-click-to-call-mobile-les-erreurs-qui-coutent-des-appels",
+        "h1": "CTA mobile ‘click-to-call’ : les erreurs qui coûtent des appels (et comment les corriger)",
+        "metaTitle": "CTA click-to-call : erreurs qui coûtent des appels",
+        "metaDescription": "Boutons invisibles, friction, formulaires trop longs : un check simple pour gagner des appels et demandes sur mobile.",
+        "service": "optimisation-site-cro",
+        "niveau": "intermediaire",
+        "intent": "Corriger les erreurs de CTA mobile qui bloquent les appels et demandes.",
+        "secondaryKeywords": [
+          "click-to-call",
+          "cta mobile",
+          "ux",
+          "friction",
+          "formulaire"
+        ],
+        "linksOut": [
+          "/optimisation-site-cro",
+          "/methode",
+          "/contact",
+          "/optimisation-site-cro/pont-sainte-maxence",
+          "/optimisation-site-cro/creil"
+        ]
+      }
+    ]
+  }
+}

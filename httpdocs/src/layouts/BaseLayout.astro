@@ -1,509 +1,225 @@
 ---
 // src/layouts/BaseLayout.astro
 
-type BreadcrumbItem = { name: string; url: string };
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+import reviewsData from "../data/reviews.json";
+
+import { getBreadcrumbs } from "../lib/routing";
+import {
+  buildBreadcrumbListJsonLd,
+  buildFaqPageJsonLd,
+  canonicalFromPageContext,
+  buildLocalBusinessJsonLd,
+  buildArticleJsonLd,
+  buildWebSiteJsonLd,
+  buildOrganizationJsonLd,
+  buildServiceJsonLd,
+  type PageContext
+} from "../lib/seo";
+import type { FaqItem } from "../lib/mapping";
 
 type Props = {
-  title?: string;
-  description?: string;
-  canonical?: string;
-  ogImage?: string;
-  noindex?: boolean;
+  title: string;
+  description: string;
 
-  // Schema
-  schemaType?: "website" | "service" | "cityService" | "contact";
-  breadcrumbs?: BreadcrumbItem[];
+  pageContext?: PageContext;
+
+  // options page-level
+  breadcrumbsJsonLd?: boolean;
+
+  // FAQ
+  faqItems?: FaqItem[];
+  faqJsonLd?: boolean;
+
+  // JSON-LD page-level
+  localBusinessJsonLd?: boolean;
+  articleJsonLd?: boolean;
+  serviceJsonLd?: boolean;
+
+  // Global
+  webSiteJsonLd?: boolean;
+  organizationJsonLd?: boolean;
+
+  // Organization enrich (facultatif)
+  organizationLogoUrl?: string;
+  organizationSameAs?: string[];
+
+  // ✅ Overrides optionnels (rare) : si tu veux surcharger ponctuellement
+  organizationReviewsEnabled?: boolean;
 };
 
 const {
-  title = "Horizon Conversion | Webmarketing local Sud Oise & Val d’Oise",
-  description = "SEO local, Ads et contenu pour générer des appels et demandes qualifiées (Sud Oise / Val d’Oise 95). Audit gratuit.",
-  canonical,
-  ogImage = "/_assets_/images/og-default.jpg",
-  noindex = false,
-
-  schemaType = "website",
-  breadcrumbs = [],
-} = Astro.props;
-
-const siteName = "Horizon Conversion";
-const brandName = "Horizon Conversion";
-const phoneDisplay = "06 60 92 10 08";
-const phoneTel = "0660921008";
-const email = "contact@horizon-conversion.fr";
-
-const siteUrl = "https://horizon-conversion.fr";
-
-const currentUrl = new URL(Astro.request.url);
-const canonicalUrl = canonical ?? currentUrl.toString();
-
-const year = new Date().getFullYear();
-
-// Helpers
-const abs = (pathOrUrl: string) => {
-  try {
-    // si déjà une URL
-    new URL(pathOrUrl);
-    return pathOrUrl;
-  } catch {
-    return new URL(pathOrUrl, siteUrl).toString();
-  }
-};
-
-// --- JSON-LD (Schema.org) ---
-const jsonLd: any[] = [];
-
-// 1) Organization
-jsonLd.push({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${siteUrl}/#organization`,
-  name: brandName,
-  url: siteUrl,
-  logo: abs("/_assets_/images/logo.png"),
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      telephone: `+33${phoneTel.substring(1)}`, // 06.. -> +336..
-      contactType: "customer support",
-      areaServed: "FR",
-      availableLanguage: ["fr"],
-      email,
-    },
-  ],
-});
-
-// 2) WebSite
-jsonLd.push({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${siteUrl}/#website`,
-  url: siteUrl,
-  name: siteName,
-  publisher: { "@id": `${siteUrl}/#organization` },
-  inLanguage: "fr-FR",
-});
-
-// 3) LocalBusiness
-jsonLd.push({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${siteUrl}/#localbusiness`,
-  name: brandName,
-  url: siteUrl,
-  image: abs("/_assets_/images/og-default.jpg"),
-  telephone: `+33${phoneTel.substring(1)}`,
-  email,
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Oise" },
-    { "@type": "AdministrativeArea", name: "Val-d’Oise" },
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "FR",
-  },
-});
-
-// 4) WebPage
-jsonLd.push({
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${canonicalUrl}#webpage`,
-  url: canonicalUrl,
-  name: title,
+  title,
   description,
-  isPartOf: { "@id": `${siteUrl}/#website` },
-  about: { "@id": `${siteUrl}/#organization` },
-  inLanguage: "fr-FR",
-});
+  pageContext,
 
-// 5) BreadcrumbList
-if (breadcrumbs && breadcrumbs.length > 0) {
-  jsonLd.push({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((b, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: b.name,
-      item: b.url.startsWith("http") ? b.url : abs(b.url),
-    })),
+  breadcrumbsJsonLd = true,
+
+  faqItems = [],
+  faqJsonLd = true,
+
+  localBusinessJsonLd = true,
+  articleJsonLd = true,
+  serviceJsonLd = true,
+
+  webSiteJsonLd = true,
+  organizationJsonLd = true,
+
+  organizationLogoUrl,
+  organizationSameAs,
+
+  organizationReviewsEnabled
+} = Astro.props as Props;
+
+// Base URL (Astro.site)
+const baseUrl = (Astro.site?.toString() || "").replace(/\/$/, "");
+
+// Canonical absolu auto
+let canonicalAbs: string | null = null;
+if (baseUrl && pageContext) {
+  const rel = canonicalFromPageContext(pageContext);
+  canonicalAbs = `${baseUrl}${rel.startsWith("/") ? rel : `/${rel}`}`;
+}
+
+// ----- Reviews auto depuis src/data/reviews.json
+const reviewsEnabledFromFile = Boolean((reviewsData as any)?.enabled);
+const reviewsEnabled =
+  typeof organizationReviewsEnabled === "boolean"
+    ? organizationReviewsEnabled
+    : reviewsEnabledFromFile;
+
+const aggregateRating = reviewsEnabled ? (reviewsData as any)?.aggregateRating : undefined;
+const reviews = reviewsEnabled ? (reviewsData as any)?.reviews : undefined;
+
+// Global WebSite / Organization JSON-LD
+let webSiteJsonLdObj: any = null;
+if (webSiteJsonLd && baseUrl) {
+  webSiteJsonLdObj = buildWebSiteJsonLd({ baseUrl, name: "Horizon Conversion" });
+}
+
+let organizationJsonLdObj: any = null;
+if (organizationJsonLd && baseUrl) {
+  organizationJsonLdObj = buildOrganizationJsonLd({
+    baseUrl,
+    name: "Horizon Conversion",
+    logoUrl: organizationLogoUrl,
+    sameAs: organizationSameAs,
+    aggregateRating,
+    reviews
   });
 }
 
-// 6) Service
-if (schemaType === "service" || schemaType === "cityService") {
-  jsonLd.push({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: title,
-    description,
-    provider: { "@id": `${siteUrl}/#localbusiness` },
-    areaServed: "FR",
-    serviceType: "Webmarketing local",
-    url: canonicalUrl,
-  });
+// Breadcrumbs JSON-LD auto
+let breadcrumbsJsonLdObj: any = null;
+if (breadcrumbsJsonLd && baseUrl && pageContext) {
+  const crumbs = getBreadcrumbs(pageContext as any);
+  breadcrumbsJsonLdObj = buildBreadcrumbListJsonLd({ baseUrl, crumbs });
 }
 
-// 7) ContactPage
-if (schemaType === "contact") {
-  jsonLd.push({
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "@id": `${canonicalUrl}#contactpage`,
-    url: canonicalUrl,
-    name: title,
-    description,
-    mainEntity: { "@id": `${siteUrl}/#organization` },
-    inLanguage: "fr-FR",
-  });
+// FAQPage JSON-LD auto
+let faqJsonLdObj: any = null;
+if (faqJsonLd && Array.isArray(faqItems) && faqItems.length) {
+  const filtered = faqItems.filter((x) => x?.q && x?.a);
+  if (filtered.length) faqJsonLdObj = buildFaqPageJsonLd({ faq: filtered });
+}
+
+// LocalBusiness JSON-LD auto (pages ville/zone)
+let localBusinessJsonLdObj: any = null;
+if (localBusinessJsonLd && baseUrl && pageContext) {
+  localBusinessJsonLdObj = buildLocalBusinessJsonLd({ baseUrl, ctx: pageContext });
+}
+
+// Service JSON-LD auto (pages service / service×ville)
+let serviceJsonLdObj: any = null;
+if (serviceJsonLd && baseUrl && pageContext) {
+  serviceJsonLdObj = buildServiceJsonLd({ baseUrl, ctx: pageContext });
+}
+
+// Article JSON-LD auto (pages ressources)
+let articleJsonLdObj: any = null;
+if (articleJsonLd && baseUrl && pageContext) {
+  articleJsonLdObj = buildArticleJsonLd({ baseUrl, ctx: pageContext });
 }
 ---
 
-<!DOCTYPE html>
-<html dir="ltr" lang="fr-FR">
+<!doctype html>
+<html lang="fr">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <meta name="author" content="Horizon Conversion" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonicalUrl} />
 
-    <!-- OpenGraph / Social -->
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImage} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {canonicalAbs ? <link rel="canonical" href={canonicalAbs} /> : null}
 
-    <!-- ✅ Schema.org JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {/* Global */}
+    {webSiteJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(webSiteJsonLdObj)} />
+    ) : null}
+
+    {organizationJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLdObj)} />
+    ) : null}
+
+    {/* Page-level */}
+    {breadcrumbsJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbsJsonLdObj)} />
+    ) : null}
+
+    {faqJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(faqJsonLdObj)} />
+    ) : null}
+
+    {localBusinessJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLdObj)} />
+    ) : null}
+
+    {serviceJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(serviceJsonLdObj)} />
+    ) : null}
+
+    {articleJsonLdObj ? (
+      <script type="application/ld+json" set:html={JSON.stringify(articleJsonLdObj)} />
+    ) : null}
 
     <!-- Font Imports -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
-      rel="stylesheet"
-    />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
+              rel="stylesheet"
+            />
 
-    <!-- Core Style -->
-    <link rel="stylesheet" href="/_assets_/style.css" />
-    <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
-    <link rel="stylesheet" href="/_assets_/seo.css" />
-    <link rel="stylesheet" href="/_assets_/css/custom.css" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+            <!-- Core Style -->
+            <link rel="stylesheet" href="/_assets_/style.css" />
+            <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
+            <link rel="stylesheet" href="/_assets_/seo.css" />
   </head>
 
   <body class="stretched">
-    <div id="wrapper">
+      <div id="wrapper">
 
-      <!-- Top Bar -->
-      <div id="top-bar" class="transparent-topbar">
-        <div class="container">
-          <div class="row justify-content-between">
-            <div class="col-12 col-md-auto">
-              <div class="top-links">
-                <ul class="top-links-container">
-                  <li class="top-links-item">
-                    <a href="/zones/">Zones Sud Oise / Val d’Oise 95</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <TopBar />
 
-            <div class="col-12 col-md-auto">
-              <div class="top-links">
-                <ul class="top-links-container">
-                  <li class="top-links-item">
-                    <a href={`tel:${phoneTel}`}>{phoneDisplay}</a>
-                  </li>
-                  <li class="top-links-item">
-                    <a href={`mailto:${email}`}>{email}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Header />
+
+        <slot />
+
+        <Footer />
+
       </div>
 
-      <!-- Header -->
-      <header id="header" class="transparent-header floating-header header-size-md">
-        <div id="header-wrap">
-          <div class="container">
-            <div class="header-row">
+      <div id="gotoTop" class="uil uil-angle-up"></div>
 
-              <!-- Logo -->
-              <div id="logo">
-                <a href="/">
-                  <img class="logo-default" src="/_assets_/images/logo.png" alt={siteName} />
-                </a>
-              </div>
+  	<div class="scw-switcher-wrap text-center d-none d-lg-block">
+  	  <a href="tel:+33660921008 class="scw-trigger-icon scw-trigger">
+      	<i class="bi-whatsapp align-baseline pt-1"></i>
+        </a>
+      </div>
 
-              <div class="header-misc">
-                <a href="/contact/" class="button button-rounded ms-3 d-none d-sm-block">
-                  Audit Gratuit
-                </a>
-              </div>
-
-              <div class="primary-menu-trigger">
-                <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-                  <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-                </button>
-              </div>
-
-              <!-- Primary Navigation -->
-              <nav class="primary-menu with-arrows">
-                <ul class="menu-container">
-                  <li class="menu-item mega-menu">
-                    <a class="menu-link" href="/services/"><div>Offres</div></a>
-
-                    <div class="mega-menu-content mega-menu-style-2 px-0">
-                      <div class="container">
-                        <div class="row">
-
-                          <!-- Services (liens cohérents avec /[service]/index.astro) -->
-                          <a href="/seo/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/seo.svg" alt="SEO local" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">SEO local</div>
-                                <p>Apparaître sur Google et Google Maps, attirer des demandes qualifiées.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/social/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/social.svg" alt="Marketing des réseaux sociaux" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Réseaux sociaux</div>
-                                <p>Des contenus simples, réguliers, qui rassurent et déclenchent des messages.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/adword.svg" alt="Google/Meta Ads" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Google/Meta Ads</div>
-                                <p>Obtenir des demandes rapidement, avec un budget maîtrisé.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/ux/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/experience.svg" alt="Expérience utilisateur UX" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">UX / Conversion</div>
-                                <p>Transformer plus de visites en appels, devis et prises de rendez-vous.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/analytics/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/analysis.svg" alt="Web analytics" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Analytics</div>
-                                <p>Mesurer ce qui marche, avec des chiffres simples et actionnables.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/contenu/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/content_marketing.svg" alt="Marketing de contenu" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Contenu</div>
-                                <p>Des pages utiles qui répondent aux questions et génèrent des leads.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="mega-menu-column sub-menu-container col-12 p-0">
-                            <a href="/services/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
-                              Tous les services <i class="bi-arrow-right"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li class="menu-item"><a class="menu-link" href="/methode/"><div>Méthode</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/preuves/"><div>Preuves</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/ressources/"><div>Ressources</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/tarifs/"><div>Tarifs</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
-                </ul>
-              </nav>
-
-            </div>
-          </div>
-        </div>
-        <div class="header-wrap-clone"></div>
-      </header>
-
-      <slot />
-
-      <!-- Footer -->
-      <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
-        <div class="container">
-          <div class="footer-widgets-wrap pb-5">
-            <div class="row col-mb-50">
-              <div class="col-md-8">
-                <div class="widget">
-                  <img
-                    src="/_assets_/images/footer-widget-logo.png"
-                    alt={siteName}
-                    class="alignleft"
-                    style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
-                  />
-
-                  <p>
-                    On aide les pros du <strong>Sud Oise (60)</strong> et du <strong>Val d’Oise (95)</strong> à générer
-                    des <strong>appels</strong> et <strong>demandes qualifiées</strong> grâce au SEO local, aux Ads et
-                    à des pages qui convertissent.
-                  </p>
-
-                  <div class="line line-sm"></div>
-
-                  <div class="row g-4">
-                    <div class="col-lg-3 col-6 widget_links">
-                      <ul>
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/services/">Offres</a></li>
-                        <li><a href="/methode/">Méthode</a></li>
-                        <li><a href="/preuves/">Preuves</a></li>
-                        <li><a href="/ressources/">Ressources</a></li>
-                        <li><a href="/tarifs/">Tarifs</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="col-lg-5 col-12 widget_links">
-                      <ul>
-                        <li><a href="/services/seo/">SEO Local</a></li>
-                        <li><a href="/services/social/">Réseaux sociaux</a></li>
-                        <li><a href="/services/ads/">Google/Meta Ads</a></li>
-                        <li><a href="/services/ux/">UX / Conversion</a></li>
-                        <li><a href="/services/analytics/">Web analytics</a></li>
-                        <li><a href="/services/contenu/">Marketing de contenu</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-6 widget_links">
-                      <ul>
-                        <li><a href="/zones/">Zones</a></li>
-                        <li><a href="/zones/sud-oise/">Sud Oise (60)</a></li>
-                        <li><a href="/zones/val-doise/">Val d’Oise (95)</a></li>
-                        <li><a href="/contact/">Contact</a></li>
-                        <li><a href="/mentions-legales/">Mentions légales</a></li>
-                        <li><a href="/politique-confidentialite/">Confidentialité</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="widget">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="feature-box fbox-plain fbox-sm align-items-center">
-                        <div class="fbox-icon">
-                          <i class="bi-telephone text-dark"></i>
-                        </div>
-                        <div class="fbox-content">
-                          <span class="text-muted">Appelez-nous :</span><br />
-                          <h3 class="text-transform-none ls-0 fw-semibold">
-                            <a href={`tel:${phoneTel}`} class="text-dark">{phoneDisplay}</a>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-12 mt-4">
-                      <div class="feature-box fbox-plain fbox-sm align-items-center">
-                        <div class="fbox-icon">
-                          <i class="bi-envelope text-dark"></i>
-                        </div>
-                        <div class="fbox-content">
-                          <span class="text-muted">Écrivez-nous :</span><br />
-                          <h3 class="text-transform-none ls-0 fw-semibold">
-                            <a href={`mailto:${email}`} class="text-dark">{email}</a>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <a href="/contact/" class="button button-rounded mt-4 d-block">
-                    Demander un audit gratuit
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="copyrights"
-          style="background: url('/_assets_/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;"
-        >
-          <div class="container">
-            <div class="row justify-content-between col-mb-30">
-              <div class="col-12 col-lg-auto text-center text-lg-start">
-                Copyright &copy; {year} {siteName}. Tous droits réservés.
-              </div>
-
-              <div class="col-12 col-lg-auto text-center text-lg-end">
-                <div class="copyrights-menu copyright-links">
-                  <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
-                  /
-                  <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
-                  /
-                  <a href="/contact/" class="text-contrast-600">Contact</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-
-    <div id="gotoTop" class="uil uil-angle-up"></div>
-
-	<div class="scw-switcher-wrap text-center d-none d-lg-block">
-	  <a href="tel:0660921008" class="scw-trigger-icon scw-trigger">
-    	<i class="bi-whatsapp align-baseline pt-1"></i>
-      </a>
-    </div>
-
-    <script is:inline src="/_assets_/js/plugins.min.js"></script>
-    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
-  </body>
+      <script is:inline src="/_assets_/js/plugins.min.js"></script>
+      <script is:inline src="/_assets_/js/functions.bundle.js"></script>
 </html>

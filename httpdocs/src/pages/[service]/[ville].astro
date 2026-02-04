@@ -1,0 +1,110 @@
+---
+// src/pages/[service]/[ville].astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+import {
+  getAllServiceVillePages,
+  normalizeLinksOut,
+  resolveFaqItems,
+  safeText
+} from "../../lib/mapping";
+
+import SectionHero from "../../components/SectionHero.astro";
+import SectionBenefits from "../../components/SectionBenefits.astro";
+import SectionDeliverables from "../../components/SectionDeliverables.astro";
+import SectionProcess from "../../components/SectionProcess.astro";
+import SectionFAQ from "../../components/SectionFAQ.astro";
+import SectionCTA from "../../components/SectionCTA.astro";
+import LinksOut from "../../components/LinksOut.astro";
+import InternalLinks from "../../components/InternalLinks.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+export async function getStaticPaths() {
+  const pages = getAllServiceVillePages();
+  return pages.map((p: any) => ({
+    params: { service: String(p.service), ville: String(p.ville) },
+    props: { page: p }
+  }));
+}
+
+const { service, ville } = Astro.params;
+const { page } = Astro.props as any;
+
+const title = safeText(page?.metaTitle, `${service} ${ville} | Horizon Conversion`);
+const description = safeText(page?.metaDescription, "Méthode 3C : SEO local, Ads et CRO.");
+const h1 = safeText(page?.h1, `${service} à ${ville}`);
+
+const linksOut = normalizeLinksOut(page?.linksOut);
+
+const svc = (services as any[]).find((s) => String(s.slug) === String(service)) || null;
+const vObj = (villes as any[]).find((v) => String(v.slug) === String(ville)) || null;
+
+const vName = safeText(vObj?.nom, String(ville));
+const around = Array.isArray(vObj?.alentours) ? vObj.alentours.slice(0, 6) : [];
+const localAngle = safeText(vObj?.specificites, safeText(vObj?.angleLocal, ""));
+
+const benefits = Array.isArray(svc?.benefices) ? svc.benefices : [
+  "Plus d’appels et demandes qualifiés (et moins de contacts inutiles)",
+  "Un message clair qui filtre (zones, délais, types de demandes)",
+  "Suivi simple pour piloter mois après mois"
+];
+
+const deliverables = Array.isArray(svc?.livrables) ? svc.livrables : [
+  "Plan d’actions et priorités",
+  "Optimisations mensuelles",
+  "Tracking appels/formulaires + reporting lisible"
+];
+
+const process = Array.isArray(svc?.process) ? svc.process : [
+  "Audit & cadrage (objectifs, zone, offre)",
+  "Mise en place des fondations",
+  "Optimisations + reporting + ajustements"
+];
+
+// ✅ FAQ: faqRefs
+const faqItems = resolveFaqItems({
+  pageFaqRefs: page?.faqRefs,
+  pageFaq: page?.faq,
+  serviceSlug: String(service)
+});
+const showFaq = Array.isArray(faqItems) && faqItems.length;
+
+const heroIntro = [
+  `À ${vName}, l’objectif n’est pas “plus de visites”, mais plus d’appels et demandes qualifiés.`,
+  localAngle ? `Contexte local : ${localAngle}` : "",
+  around.length ? `Zones couvertes : ${around.join(", ")}.` : ""
+].filter(Boolean).join(" ");
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "serviceVille", service, ville }}
+  faqItems={faqItems}
+>
+  <Breadcrumbs type="serviceVille" service={service} ville={ville} />
+
+  <SectionHero
+    h1={h1}
+    intro={heroIntro}
+    bullets={[
+      "Filtrage des demandes (hors zone / hors service)",
+      "Réassurance : preuves, avis, process",
+      "Pilotage senior + exécution d’agence"
+    ]}
+  />
+
+  <SectionBenefits items={benefits} />
+  <SectionDeliverables items={deliverables} />
+  <SectionProcess steps={process} />
+
+  {showFaq ? <SectionFAQ items={faqItems} /> : null}
+  <LinksOut links={linksOut} />
+
+  <InternalLinks type="serviceVille" service={service} ville={ville} max={10} title="Liens utiles (ville + services + ressources)" />
+
+  <SectionCTA />
+</BaseLayout>

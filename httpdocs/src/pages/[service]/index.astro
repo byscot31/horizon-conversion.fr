@@ -1,0 +1,91 @@
+---
+// src/pages/[service]/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import services from "../../data/services.json";
+
+import { getStaticPageByUrl, normalizeLinksOut, resolveFaqItems, safeText } from "../../lib/mapping";
+
+import SectionHero from "../../components/SectionHero.astro";
+import SectionBenefits from "../../components/SectionBenefits.astro";
+import SectionDeliverables from "../../components/SectionDeliverables.astro";
+import SectionProcess from "../../components/SectionProcess.astro";
+import SectionFAQ from "../../components/SectionFAQ.astro";
+import SectionCTA from "../../components/SectionCTA.astro";
+import LinksOut from "../../components/LinksOut.astro";
+import InternalLinks from "../../components/InternalLinks.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+export async function getStaticPaths() {
+  const svcs = services as any[];
+  return svcs.map((s) => ({ params: { service: String(s.slug) } }));
+}
+
+const { service } = Astro.params;
+
+const page = getStaticPageByUrl(`/${service}`);
+
+const title = safeText(page?.metaTitle, `${service} | Horizon Conversion`);
+const description = safeText(page?.metaDescription, "Méthode 3C : SEO local, Ads et CRO.");
+const h1 = safeText(page?.h1, `Offre : ${service}`);
+
+const linksOut = normalizeLinksOut(page?.linksOut);
+
+const svc = (services as any[]).find((s) => String(s.slug) === String(service)) || null;
+
+const benefits = Array.isArray(svc?.benefices) ? svc.benefices : [
+  "Plus de demandes qualifiées (et moins de contacts inutiles)",
+  "Une exécution structurée (pas du “one shot”)",
+  "Des actions mesurées et expliquées simplement"
+];
+
+const deliverables = Array.isArray(svc?.livrables) ? svc.livrables : [
+  "Audit + plan d’actions",
+  "Mises à jour et optimisations mensuelles",
+  "Suivi des demandes + reporting lisible"
+];
+
+const process = Array.isArray(svc?.process) ? svc.process : [
+  "Audit & cadrage : objectifs, zones, services",
+  "Mise en place des fondations",
+  "Optimisations mensuelles + suivi"
+];
+
+// ✅ FAQ: faqRefs prioritaire, fallback service.faq si vide
+const faqItems = resolveFaqItems({
+  pageFaqRefs: page?.faqRefs,
+  pageFaq: page?.faq,
+  serviceSlug: String(service)
+});
+const showFaq = Array.isArray(faqItems) && faqItems.length;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "service", service }}
+  faqItems={faqItems}
+>
+  <Breadcrumbs type="service" service={service} />
+
+  <SectionHero
+    h1={h1}
+    intro="Vous voulez plus d’appels et de demandes qualifiés, sans dépendre du bouche-à-oreille ? On construit un système mesurable, piloté au mois."
+    bullets={[
+      "Objectif : demandes utiles (pas du trafic)",
+      "Priorités claires + livrables mensuels",
+      "Suivi simple : appels, formulaires, sources"
+    ]}
+  />
+
+  <SectionBenefits items={benefits} />
+  <SectionDeliverables items={deliverables} />
+  <SectionProcess steps={process} />
+
+  {showFaq ? <SectionFAQ items={faqItems} /> : null}
+
+  <LinksOut links={linksOut} />
+  <InternalLinks type="service" service={service} max={10} title="Pages locales à forte intention" />
+
+  <SectionCTA />
+</BaseLayout>

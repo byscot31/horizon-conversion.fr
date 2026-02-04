@@ -1,0 +1,23 @@
+{
+  "enabled": false,
+  "aggregateRating": {
+    "ratingValue": 4.8,
+    "reviewCount": 27,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "reviews": [
+    {
+      "authorName": "Marc D.",
+      "ratingValue": 5,
+      "reviewBody": "Accompagnement clair et efficace. Plan d’actions concret.",
+      "datePublished": "2025-01-12"
+    },
+    {
+      "authorName": "Sophie L.",
+      "ratingValue": 5,
+      "reviewBody": "Enfin des demandes qualifiées, et un suivi simple.",
+      "datePublished": "2025-02-03"
+    }
+  ]
+}

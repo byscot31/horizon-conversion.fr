@@ -1,0 +1,246 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "time-to-results",
+      "q": "En combien de temps puis-je avoir plus d’appels ?",
+      "a": "Les Ads peuvent générer des demandes rapidement. Le SEO local construit des résultats plus durables. On combine selon votre urgence, votre budget et votre marge.",
+      "tags": ["global", "delais", "3c"]
+    },
+    {
+      "id": "no-guarantee-positions",
+      "q": "Est-ce que vous garantissez la première position sur Google ?",
+      "a": "Non. On ne promet pas une position. On met en place un système mesurable qui augmente la visibilité et surtout les demandes qualifiées.",
+      "tags": ["global", "ethique", "seo"]
+    },
+    {
+      "id": "interlocuteur-unique",
+      "q": "Est-ce que je parle à la personne qui pilote ?",
+      "a": "Oui. Le pilotage est fait en direct : priorités, arbitrages, plan mensuel et suivi. L’exécution est structurée (niveau agence).",
+      "tags": ["global", "process", "consultant"]
+    },
+    {
+      "id": "monthly-deliverables",
+      "q": "Qu’est-ce que je reçois chaque mois ?",
+      "a": "Un plan d’actions, un journal d’actions (ce qui a été fait), un reporting simple (appels/demandes/sources) et un point mensuel pour ajuster.",
+      "tags": ["global", "livrables", "reporting"]
+    },
+    {
+      "id": "filter-bad-leads",
+      "q": "Vous pouvez filtrer les mauvais leads ?",
+      "a": "Oui : exclusions Ads, zones et services cadrés, pages qui qualifient (délais, périmètre, types de demandes) et formulaires adaptés.",
+      "tags": ["global", "ads", "cro", "qualif"]
+    },
+
+    {
+      "id": "maps-not-visible",
+      "q": "Pourquoi je ne sors pas sur Google Maps ?",
+      "a": "Les causes fréquentes : fiche incomplète, catégories/services mal cadrés, manque de signaux locaux (avis, proximité, cohérence NAP), concurrence et site qui ne renforce pas la zone. On corrige d’abord les fondations (GBP + site + tracking).",
+      "tags": ["seo-local", "gbp", "maps"]
+    },
+    {
+      "id": "competitors-ahead-maps",
+      "q": "Pourquoi mes concurrents passent devant sur Maps ?",
+      "a": "Souvent : meilleure cohérence fiche/site, plus d’avis récents, zones mieux cadrées, contenu local utile, signaux d’autorité et meilleure conversion. On travaille ces leviers par priorité, avec suivi.",
+      "tags": ["seo-local", "maps", "concurrence"]
+    },
+    {
+      "id": "reviews-how-many",
+      "q": "Combien d’avis faut-il pour déclencher plus d’appels ?",
+      "a": "Il n’y a pas un chiffre magique. Ce qui compte : régularité, qualité perçue, cohérence avec vos services/zone et réponses aux avis. On vise un rythme réaliste et durable.",
+      "tags": ["seo-local", "avis", "gbp"]
+    },
+    {
+      "id": "get-reviews-regularly",
+      "q": "Comment obtenir des avis régulièrement ?",
+      "a": "On met en place un process simple : demande au bon moment, lien direct, script court, relance légère, et gestion des avis négatifs. L’objectif est la régularité, pas le “coup” ponctuel.",
+      "tags": ["seo-local", "avis", "process"]
+    },
+    {
+      "id": "manage-negative-reviews",
+      "q": "Comment gérer les avis négatifs sans perdre des appels ?",
+      "a": "Réponse rapide, factuelle et constructive. On montre qu’on prend en charge le problème, sans entrer en conflit. La qualité des réponses renforce souvent la confiance.",
+      "tags": ["seo-local", "avis", "reassurance"]
+    },
+    {
+      "id": "gbp-vs-site-first",
+      "q": "Faut-il optimiser la fiche Google ou le site en premier ?",
+      "a": "Les deux fonctionnent ensemble. En général : on sécurise d’abord les fondations (fiche complète + tracking + page/site qui qualifie), puis on optimise ce qui apporte le plus de demandes.",
+      "tags": ["seo-local", "gbp", "cro", "priorites"]
+    },
+    {
+      "id": "multi-communes-alentours",
+      "q": "Peut-on couvrir plusieurs communes autour ?",
+      "a": "Oui. On définit une zone réaliste, on structure les pages (service×ville) et la fiche pour éviter le thin content, et on mentionne les alentours de façon contextuelle.",
+      "tags": ["seo-local", "zone", "thin-content"]
+    },
+    {
+      "id": "service-ville-pages-needed",
+      "q": "Faut-il une page “service × ville” pour chaque commune ?",
+      "a": "Pas forcément. On priorise les villes à potentiel (demande + concurrence) et on évite les pages trop similaires. Mieux vaut moins de pages, mais plus utiles.",
+      "tags": ["seo-local", "content", "thin-content"]
+    },
+    {
+      "id": "kpi-tracking",
+      "q": "Quels KPI suivez-vous pour mesurer les demandes ?",
+      "a": "Les KPI utiles : appels, formulaires, sources (SEO/Ads), pages d’entrée, taux de conversion, coût par lead (Ads), qualité (hors zone/hors service). Le reporting reste simple et actionnable.",
+      "tags": ["tracking", "reporting", "ads", "seo-local", "cro"]
+    },
+
+    {
+      "id": "ads-min-budget",
+      "q": "Quel budget minimum pour démarrer ?",
+      "a": "On démarre avec un budget cohérent avec votre panier moyen et votre capacité à traiter les demandes. L’objectif est d’apprendre vite sans gaspiller : ciblage local, exclusions et messages qui qualifient.",
+      "tags": ["ads", "budget"]
+    },
+    {
+      "id": "ads-google-vs-meta",
+      "q": "Google Ads ou Meta Ads ?",
+      "a": "Google capte une intention existante (recherche). Meta crée de la demande et travaille l’audience. On choisit selon urgence, offre, marge et cycle de décision. Parfois le combo est le plus rentable.",
+      "tags": ["ads", "strategie"]
+    },
+    {
+      "id": "ads-avoid-bad-leads",
+      "q": "Comment éviter les mauvais leads en Ads ?",
+      "a": "Exclusions (requêtes / zones / horaires), messages qui cadrent, landing qui qualifie, formulaires adaptés et suivi des appels. On optimise d’abord la qualité avant d’augmenter le volume.",
+      "tags": ["ads", "qualif", "landing"]
+    },
+    {
+      "id": "ads-need-landing",
+      "q": "Faut-il une landing dédiée ?",
+      "a": "Souvent oui si tu veux filtrer et convertir. Une landing claire (zones, services, preuves, CTA) évite les leads inutiles et augmente les demandes utiles.",
+      "tags": ["ads", "landing", "cro"]
+    },
+    {
+      "id": "ads-call-tracking",
+      "q": "Suivez-vous les appels ?",
+      "a": "Oui : clics tel, formulaires et (si besoin) tracking d’appels. Objectif : savoir ce qui génère des demandes, pas seulement des clics.",
+      "tags": ["ads", "tracking"]
+    },
+    {
+      "id": "ads-first-leads-when",
+      "q": "Quand voit-on les premières demandes ?",
+      "a": "En Ads, on peut voir des demandes rapidement si l’offre et le cadrage sont bons. Les premières semaines servent aussi à filtrer, ajuster et stabiliser la qualité.",
+      "tags": ["ads", "delais"]
+    },
+
+    {
+      "id": "cro-need-redesign",
+      "q": "Faut-il refaire le site ?",
+      "a": "Pas forcément. Souvent, quelques optimisations ciblées (CTA, réassurance, sections, formulaire, mobile) suffisent pour gagner des demandes à trafic égal.",
+      "tags": ["cro", "site"]
+    },
+    {
+      "id": "cro-which-pages-first",
+      "q": "Quelles pages optimiser en priorité ?",
+      "a": "Celles qui reçoivent du trafic et déclenchent (ou devraient déclencher) une demande : accueil, pages service, pages locales, pages devis/contact. On choisit selon données et potentiel.",
+      "tags": ["cro", "priorites"]
+    },
+    {
+      "id": "cro-iterations-per-month",
+      "q": "Combien d’optimisations par mois ?",
+      "a": "On privilégie des itérations utiles : 2–6 changements ciblés (selon pack) plutôt qu’une liste interminable. Le but est de mesurer, apprendre et améliorer.",
+      "tags": ["cro", "process"]
+    },
+    {
+      "id": "cro-measure-impact",
+      "q": "Comment mesure-t-on l’impact ?",
+      "a": "On suit appels, formulaires, taux de conversion, pages d’entrée/sortie et micro-actions (clic tel). On compare avant/après sur une période suffisante.",
+      "tags": ["cro", "tracking"]
+    },
+    {
+      "id": "cro-compatible-site",
+      "q": "Est-ce compatible avec mon site actuel ?",
+      "a": "Oui dans la majorité des cas. On s’adapte au CMS (WordPress, etc.) et on priorise des changements simples, mesurables, et sans refonte lourde.",
+      "tags": ["cro", "tech"]
+    },
+    {
+      "id": "cro-proofs-what",
+      "q": "Quelles preuves affichent le plus de confiance ?",
+      "a": "Avis (récents), process clair, zones desservies, garanties réalistes, photos/avant-après, FAQ objections, et un CTA visible. L’objectif : rassurer en 10 secondes.",
+      "tags": ["cro", "reassurance"]
+    },
+
+    {
+      "id": "zones-only",
+      "q": "Intervenez-vous uniquement sur ces zones ?",
+      "a": "On est spécialisé Sud Oise / Nord 95. Si tu as une zone limitrophe, on peut l’étudier si c’est cohérent (demande, concurrence, logistique).",
+      "tags": ["zones", "couverture"]
+    },
+    {
+      "id": "zones-multi-cities",
+      "q": "Peut-on viser plusieurs villes autour ?",
+      "a": "Oui, en priorisant : 2–3 villes “phares” + des alentours cités de manière naturelle. On évite les pages trop similaires.",
+      "tags": ["zones", "thin-content"]
+    },
+    {
+      "id": "which-service-start",
+      "q": "Quel service pour démarrer ?",
+      "a": "Selon ton urgence et ton budget : Ads pour du rapide, SEO local pour du durable, CRO pour transformer ce que tu as déjà. On tranche après audit.",
+      "tags": ["global", "3c", "strategie"]
+    },
+    {
+      "id": "audit-how",
+      "q": "Comment se passe l’audit ?",
+      "a": "On analyse visibilité Google/Maps, Ads (si existantes), pages du site et tracking. Tu repars avec un plan 30 jours : priorités + quick wins + estimation du niveau d’effort.",
+      "tags": ["audit", "process"]
+    },
+
+    {
+      "id": "contact-audit-duration",
+      "q": "Combien de temps dure l’audit ?",
+      "a": "En général 30 à 60 minutes, selon ton activité et ce qui existe déjà (site, fiche Google, Ads).",
+      "tags": ["contact", "audit"]
+    },
+    {
+      "id": "contact-prepare",
+      "q": "Que dois-je préparer ?",
+      "a": "Ton URL, l’accès à la fiche Google (si possible), tes zones/services, et éventuellement tes campagnes Ads. Si tu n’as pas tout, on s’adapte.",
+      "tags": ["contact", "audit"]
+    },
+    {
+      "id": "contact-response-time",
+      "q": "Sous combien de temps vous répondez ?",
+      "a": "Sous 24–48h ouvrées.",
+      "tags": ["contact"]
+    },
+    {
+      "id": "contact-no-commitment",
+      "q": "Est-ce sans engagement ?",
+      "a": "Oui. L’audit sert à clarifier et prioriser. Tu décides ensuite.",
+      "tags": ["contact"]
+    },
+    {
+      "id": "contact-after-audit",
+      "q": "Que se passe-t-il après l’audit ?",
+      "a": "Si on travaille ensemble, on met en place les fondations puis on déroule un plan mensuel (actions + reporting + ajustements).",
+      "tags": ["contact", "process"]
+    },
+
+    {
+      "id": "proofs-month-typical",
+      "q": "À quoi ressemble un mois type ?",
+      "a": "Priorités du mois → exécution → contrôle des métriques → ajustements. Tu as un journal d’actions et un point mensuel.",
+      "tags": ["preuves", "process"]
+    },
+    {
+      "id": "proofs-access-accounts",
+      "q": "Ai-je accès aux comptes (GBP/Ads/Analytics) ?",
+      "a": "Oui. Transparence : accès et propriété des comptes. Le pilotage et la mesure restent lisibles.",
+      "tags": ["preuves", "transparence"]
+    },
+    {
+      "id": "proofs-what-if-stagnates",
+      "q": "Que fait-on si les résultats stagnent ?",
+      "a": "On analyse : qualité des leads, zones, messages, conversion, concurrence. Puis on ré-alloue l’effort vers ce qui a le plus d’impact (SEO, Ads, CRO).",
+      "tags": ["preuves", "optimisation"]
+    },
+
+    {
+      "id": "thin-content-avoid",
+      "q": "Comment éviter le thin content sur les pages locales ?",
+      "a": "Chaque page doit avoir une intention réelle + un angle local + des éléments utiles (FAQ, preuves, zones, process). On évite les pages “clone” uniquement pour la ville.",
+      "tags": ["seo", "content", "thin-content"]
+    }
+  ]
+}

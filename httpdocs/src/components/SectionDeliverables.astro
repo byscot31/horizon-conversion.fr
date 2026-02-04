@@ -1,0 +1,23 @@
+---
+// src/components/SectionDeliverables.astro
+
+type Props = { title?: string; items: string[] };
+const { title = "Ce qu’on met en place", items } = Astro.props as Props;
+if (!items?.length) return;
+---
+
+<section class="hc-section">
+  <div class="wrap">
+    <h2>{title}</h2>
+    <ul class="list">
+      {items.map((it) => <li>{it}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hc-section{padding:1.5rem 0}
+  .wrap{max-width:980px;margin:0 auto;padding:0 1rem}
+  h2{margin:0 0 .75rem;font-size:1.25rem}
+  .list{margin:0;padding-left:1.25rem;display:grid;gap:.35rem}
+</style>

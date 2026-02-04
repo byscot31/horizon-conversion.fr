@@ -1,0 +1,98 @@
+---
+// src/pages/zones/[zone]/[ville].astro
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import villes from "../../../data/villes.json";
+
+import { getAllZoneVillePages, normalizeLinksOut, resolveFaqItems, safeText } from "../../../lib/mapping";
+
+import SectionHero from "../../../components/SectionHero.astro";
+import SectionBenefits from "../../../components/SectionBenefits.astro";
+import SectionDeliverables from "../../../components/SectionDeliverables.astro";
+import SectionProcess from "../../../components/SectionProcess.astro";
+import SectionFAQ from "../../../components/SectionFAQ.astro";
+import SectionCTA from "../../../components/SectionCTA.astro";
+import LinksOut from "../../../components/LinksOut.astro";
+import InternalLinks from "../../../components/InternalLinks.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+
+export async function getStaticPaths() {
+  const pages = getAllZoneVillePages();
+  return pages.map((p: any) => ({
+    params: { zone: String(p.zone), ville: String(p.ville) },
+    props: { page: p }
+  }));
+}
+
+const { zone, ville } = Astro.params;
+const { page } = Astro.props as any;
+
+const title = safeText(page?.metaTitle, `${ville} | ${zone} | Horizon Conversion`);
+const description = safeText(page?.metaDescription, "SEO local, Ads et CRO pour générer des demandes qualifiées.");
+const h1 = safeText(page?.h1, `${ville} : générer des demandes qualifiées`);
+
+const linksOut = normalizeLinksOut(page?.linksOut);
+
+const vObj = (villes as any[]).find((v) => String(v.slug) === String(ville)) || null;
+const vName = safeText(vObj?.nom, String(ville));
+const around = Array.isArray(vObj?.alentours) ? vObj.alentours.slice(0, 6) : [];
+const localAngle = safeText(vObj?.specificites, safeText(vObj?.angleLocal, ""));
+
+const benefits = [
+  "Un système local qui génère des demandes (pas du bruit)",
+  "Filtrage des leads : zones, services, délais",
+  "Des pages et messages qui rassurent en 10 secondes"
+];
+
+const deliverables = [
+  "SEO local (Google/Maps) + Ads si besoin",
+  "Optimisation des pages (CRO) mobile-first",
+  "Tracking appels + formulaires"
+];
+
+const process = [
+  "Audit gratuit (situation, concurrence, opportunités)",
+  "Plan d’action 30 jours",
+  "Exécution + suivi mensuel"
+];
+
+// ✅ FAQ: faqRefs
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+const showFaq = Array.isArray(faqItems) && faqItems.length;
+
+const heroIntro = [
+  `À ${vName}, on vise des demandes qualifiées avec la méthode 3C (Captez, Convertissez, Contrôlez).`,
+  localAngle ? `Contexte local : ${localAngle}` : "",
+  around.length ? `Alentours : ${around.join(", ")}.` : ""
+].filter(Boolean).join(" ");
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "zoneVille", zone, ville }}
+  faqItems={faqItems}
+>
+  <Breadcrumbs type="zoneVille" zone={zone} ville={ville} />
+
+  <SectionHero
+    h1={h1}
+    intro={heroIntro}
+    bullets={[
+      "SEO local + Ads + CRO (selon priorité)",
+      "Interlocuteur unique + exécution d’agence",
+      "Suivi simple et transparent"
+    ]}
+  />
+
+  <SectionBenefits items={benefits} />
+  <SectionDeliverables items={deliverables} />
+  <SectionProcess steps={process} />
+
+  {showFaq ? <SectionFAQ items={faqItems} /> : null}
+  <LinksOut links={linksOut} />
+
+  <InternalLinks type="zoneVille" zone={zone} ville={ville} max={10} title="Services + villes proches + ressources" />
+
+  <SectionCTA />
+</BaseLayout>
