@@ -51,6 +51,19 @@ const process = Array.isArray(svc?.process) ? svc.process : [
   "Optimisations mensuelles + suivi"
 ];
 
+// ✅ bloc “preuves / mesures” (option data-driven)
+const mesures = Array.isArray(svc?.mesures) ? svc.mesures : [
+  "Appels (clic tel) + formulaires",
+  "Sources (SEO / Ads) et pages d’entrée",
+  "Taux de conversion et qualité (hors zone/hors service)"
+];
+
+const preuves = Array.isArray(svc?.preuves) ? svc.preuves : [
+  "Plan mensuel + priorités (ce qu’on fait et pourquoi)",
+  "Journal d’actions (preuve d’exécution)",
+  "Reporting lisible (ce qui génère des demandes)"
+];
+
 // ✅ FAQ: faqRefs prioritaire, fallback service.faq si vide
 const faqItems = resolveFaqItems({
   pageFaqRefs: page?.faqRefs,
@@ -58,6 +71,14 @@ const faqItems = resolveFaqItems({
   serviceSlug: String(service)
 });
 const showFaq = Array.isArray(faqItems) && faqItems.length;
+
+// Micro-copies adaptées service (évite le “clone”)
+const proofTitle =
+  service === "seo-local"
+    ? "Ce qu’on mesure (SEO local) / Ce qu’on livre"
+    : service === "ads-google-meta"
+      ? "Ce qu’on mesure (Ads) / Ce qu’on livre"
+      : "Ce qu’on mesure (CRO) / Ce qu’on livre";
 ---
 
 <BaseLayout
@@ -77,6 +98,35 @@ const showFaq = Array.isArray(faqItems) && faqItems.length;
       "Suivi simple : appels, formulaires, sources"
     ]}
   />
+
+  {/* ✅ Bloc “preuve” pour hubs services */}
+  <section style="padding:1rem 0">
+    <div style="max-width:980px;margin:0 auto;padding:0 1rem">
+      <div style="border:1px solid #e5e7eb;border-radius:12px;padding:1rem;background:#fff">
+        <strong style="display:block;margin:0 0 .5rem">{proofTitle}</strong>
+
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem">
+          <div>
+            <div style="font-weight:600;margin:0 0 .35rem">Ce qu’on mesure</div>
+            <ul style="margin:0;padding-left:1.15rem;display:grid;gap:.35rem;color:#374151">
+              {mesures.map((m: string) => <li>{m}</li>)}
+            </ul>
+          </div>
+
+          <div>
+            <div style="font-weight:600;margin:0 0 .35rem">Ce qu’on livre</div>
+            <ul style="margin:0;padding-left:1.15rem;display:grid;gap:.35rem;color:#374151">
+              {preuves.map((p: string) => <li>{p}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <p style="margin:.75rem 0 0;color:#6b7280;font-size:.95rem">
+          Pas de promesse “magique”. On pilote par demandes et on ajuste chaque mois.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <SectionBenefits items={benefits} />
   <SectionDeliverables items={deliverables} />

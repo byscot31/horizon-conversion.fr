@@ -4,71 +4,98 @@
     "nom": "Chantilly",
     "codePostal": "60500",
     "zone": "sud-oise",
-    "alentours": ["gouvieux", "lamorlaye", "coye-la-foret", "vineuil-saint-firmin", "senlis", "avilly-saint-leonard"],
-    "specificites": "Ville premium avec forte exigence d’image et concurrence locale. Beaucoup de recherches ‘près de moi’ et demandes qualifiées."
+    "alentours": ["Gouvieux", "Lamorlaye", "Vineuil-Saint-Firmin", "Avilly-Saint-Léonard", "Saint-Leu-d'Esserent", "Orry-la-Ville"],
+    "specificites": "Ville touristique avec une forte concurrence locale : il faut se différencier et rassurer vite.",
+    "angleLocal": "Concurrence forte + décisions rapides : preuve + réassurance = appels.",
+    "painPointLocal": "Vous êtes visible, mais les prospects comparent et appellent le concurrent qui rassure le plus vite.",
+    "preuveLocale": "On ajoute des preuves visibles en 10 secondes (avis, process, zones, CTA), puis on suit appels/formulaires."
   },
   {
     "slug": "senlis",
     "nom": "Senlis",
     "codePostal": "60300",
     "zone": "sud-oise",
-    "alentours": ["chantilly", "vineuil-saint-firmin", "barbery", "pontarme", "ermont", "plailly"],
-    "specificites": "Bassin d’activité dynamique (A1) et forte concurrence en services. Bonne zone pour capter Maps + demandes locales."
+    "alentours": ["Chamant", "Barbery", "Orry-la-Ville", "Aumont-en-Halatte", "Pontarmé", "Borest"],
+    "specificites": "Zone dynamique, entreprises et services : la demande existe, il faut capter l’intention locale.",
+    "angleLocal": "Intentions locales fortes : SEO Maps + pages qui qualifient.",
+    "painPointLocal": "Vous dépendez du bouche-à-oreille alors que les recherches “près de moi” tournent déjà.",
+    "preuveLocale": "Pages locales utiles + suivi des appels : on voit ce qui déclenche réellement une demande."
   },
   {
     "slug": "creil",
     "nom": "Creil",
     "codePostal": "60100",
     "zone": "sud-oise",
-    "alentours": ["montataire", "nogent-sur-oise", "saint-leu-d-esserent", "thiverny", "verneuil-en-halatte", "saint-maximin"],
-    "specificites": "Zone dense et concurrentielle : le filtrage des leads et les pages qui convertissent font la différence."
+    "alentours": ["Nogent-sur-Oise", "Montataire", "Thiverny", "Villers-Saint-Paul", "Saint-Leu-d'Esserent", "Verneuil-en-Halatte"],
+    "specificites": "Bassin dense : volume potentiel, mais beaucoup de demandes à filtrer.",
+    "angleLocal": "Priorité = qualité des leads (zone/service/délais) avant volume.",
+    "painPointLocal": "Vous recevez des demandes hors zone ou hors budget : perte de temps.",
+    "preuveLocale": "Exclusions + landing qui qualifie + tracking : moins de bruit, plus de demandes utiles."
   },
   {
-    "slug": "nogent-sur-oise",
-    "nom": "Nogent-sur-Oise",
-    "codePostal": "60180",
+    "slug": "clermont",
+    "nom": "Clermont (Oise)",
+    "codePostal": "60600",
     "zone": "sud-oise",
-    "alentours": ["creil", "montataire", "laigneville", "cauffry", "thiverny", "saint-leu-d-esserent"],
-    "specificites": "Marché local très ‘service’. Besoin de visibilité rapide + qualification des demandes pour éviter les contacts inutiles."
+    "alentours": ["Fitz-James", "Agnetz", "Breuil-le-Vert", "Breuil-le-Sec", "Catenoy", "Nointel"],
+    "specificites": "Ville carrefour : opportunités locales, mais visibilité à structurer par services/secteurs.",
+    "angleLocal": "Structurer l’offre et les pages : service×ville + preuves + CTA.",
+    "painPointLocal": "Vous avez un site “vitrine”, mais il ne transforme pas en appels.",
+    "preuveLocale": "Optimisations CRO ciblées + tracking clic tel/formulaire pour mesurer l’impact."
   },
   {
     "slug": "pont-sainte-maxence",
     "nom": "Pont-Sainte-Maxence",
     "codePostal": "60700",
     "zone": "sud-oise",
-    "alentours": ["sacy-le-grand", "les-ageux", "verberie", "monchy-saint-eloi", "pontpoint", "rieux"],
-    "specificites": "Zone de passage entre pôles d’emploi. Très bon potentiel sur requêtes d’urgence + itinéraires et appels mobile."
-  },
-  {
-    "slug": "clermont",
-    "nom": "Clermont",
-    "codePostal": "60600",
-    "zone": "sud-oise",
-    "alentours": ["fitz-james", "agnetz", "bailleval", "breuil-le-sec", "liancourt", "neuilly-sous-clermont"],
-    "specificites": "Bassin local mixte (services + commerces). Les pages locales bien structurées convertissent vite sur mobile."
+    "alentours": ["Sacy-le-Grand", "Les Ageux", "Verneuil-en-Halatte", "Brenouille", "Rieux", "Pontpoint"],
+    "specificites": "Zone résidentielle + services : besoin de demandes régulières et planifiées.",
+    "angleLocal": "Régularité : SEO durable + Ads en renfort selon la saison.",
+    "painPointLocal": "Votre activité est trop irrégulière : des semaines pleines puis plus rien.",
+    "preuveLocale": "Plan mensuel + actions + reporting : on stabilise la demande, puis on accélère."
   },
   {
     "slug": "beaumont-sur-oise",
     "nom": "Beaumont-sur-Oise",
     "codePostal": "95260",
     "zone": "val-doise-95",
-    "alentours": ["persan", "champagne-sur-oise", "mours", "nointel", "boran-sur-oise", "parmain"],
-    "specificites": "Porte d’entrée Nord 95 / Sud Oise. Bonne zone pour Ads + SEO local sur une zone élargie (alentours)."
+    "alentours": ["Persan", "Nointel", "Mours", "Bruyères-sur-Oise", "Bernes-sur-Oise", "Champagne-sur-Oise"],
+    "specificites": "Zone concurrentielle 95 : il faut un message clair et des pages locales propres.",
+    "angleLocal": "Capter + qualifier : annonces/SEO + landing qui filtre.",
+    "painPointLocal": "Vous payez des clics (ou vous êtes visible) mais ça ne se transforme pas.",
+    "preuveLocale": "Landing locale + réassurance + CTA : on augmente les demandes à trafic égal."
   },
   {
     "slug": "persan",
     "nom": "Persan",
     "codePostal": "95340",
     "zone": "val-doise-95",
-    "alentours": ["beaumont-sur-oise", "bernes-sur-oise", "chambly", "mours", "nointel", "boran-sur-oise"],
-    "specificites": "Zone ‘utile’ (services du quotidien). Nécessite un bon filtrage + landing qui qualifie (zones, délais, types)."
+    "alentours": ["Beaumont-sur-Oise", "Chambly", "Bruyères-sur-Oise", "Bernes-sur-Oise", "Méru", "Mours"],
+    "specificites": "Bassin mixte (résidentiel/activité) : demande, mais nécessité de filtrer et rassurer.",
+    "angleLocal": "Filtrage + rapidité : appels utiles, pas volume vide.",
+    "painPointLocal": "Vous perdez du temps au téléphone avec des demandes inadaptées.",
+    "preuveLocale": "Formulaire/CTA adaptés + exclusions Ads + pages qui cadrent : moins d’appels inutiles."
   },
   {
     "slug": "l-isle-adam",
     "nom": "L'Isle-Adam",
     "codePostal": "95290",
     "zone": "val-doise-95",
-    "alentours": ["parmain", "meriel", "butry-sur-oise", "nesles-la-vallee", "auvers-sur-oise", "champagne-sur-oise"],
-    "specificites": "Zone à forte valeur perçue : la réassurance (avis, preuves, process) et la qualité des demandes comptent beaucoup."
+    "alentours": ["Parmain", "Mériel", "Presles", "Nerville-la-Forêt", "Valmondois", "Auvers-sur-Oise"],
+    "specificites": "Zone premium : les prospects comparent beaucoup, la confiance fait la différence.",
+    "angleLocal": "Réassurance premium : preuves + clarté + expérience mobile.",
+    "painPointLocal": "Vous avez des prospects intéressés, mais ils ne passent pas à l’action.",
+    "preuveLocale": "Preuves visibles (avis/avant-après/process) + CTA + friction réduite sur mobile."
+  },
+  {
+    "slug": "domont",
+    "nom": "Domont",
+    "codePostal": "95330",
+    "zone": "val-doise-95",
+    "alentours": ["Montmorency", "Ezanville", "Bouffémont", "Moisselles", "Piscop", "Sarcelles"],
+    "specificites": "Zone très concurrentielle : il faut une stratégie claire et mesurable.",
+    "angleLocal": "Mesurable : on pilote par appels/demandes, pas par “visites”.",
+    "painPointLocal": "Vous ne savez pas d’où viennent vos demandes (ou pourquoi ça ne marche pas).",
+    "preuveLocale": "Tracking clair + reporting simple : on sait quoi garder, quoi couper, quoi amplifier."
   }
 ]

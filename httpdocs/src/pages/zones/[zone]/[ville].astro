@@ -36,7 +36,10 @@ const linksOut = normalizeLinksOut(page?.linksOut);
 const vObj = (villes as any[]).find((v) => String(v.slug) === String(ville)) || null;
 const vName = safeText(vObj?.nom, String(ville));
 const around = Array.isArray(vObj?.alentours) ? vObj.alentours.slice(0, 6) : [];
-const localAngle = safeText(vObj?.specificites, safeText(vObj?.angleLocal, ""));
+
+const localAngle = safeText(vObj?.angleLocal, safeText(vObj?.specificites, ""));
+const painPointLocal = safeText(vObj?.painPointLocal, "");
+const preuveLocale = safeText(vObj?.preuveLocale, "");
 
 const benefits = [
   "Un système local qui génère des demandes (pas du bruit)",
@@ -62,7 +65,8 @@ const showFaq = Array.isArray(faqItems) && faqItems.length;
 
 const heroIntro = [
   `À ${vName}, on vise des demandes qualifiées avec la méthode 3C (Captez, Convertissez, Contrôlez).`,
-  localAngle ? `Contexte local : ${localAngle}` : "",
+  painPointLocal ? `Problème fréquent : ${painPointLocal}` : "",
+  localAngle ? `Angle local : ${localAngle}` : "",
   around.length ? `Alentours : ${around.join(", ")}.` : ""
 ].filter(Boolean).join(" ");
 ---
@@ -84,6 +88,17 @@ const heroIntro = [
       "Suivi simple et transparent"
     ]}
   />
+
+  {preuveLocale ? (
+    <section style="padding:1rem 0">
+      <div style="max-width:980px;margin:0 auto;padding:0 1rem">
+        <div style="border:1px solid #e5e7eb;border-radius:12px;padding:1rem;background:#fff">
+          <strong style="display:block;margin:0 0 .25rem">Preuve locale (concret)</strong>
+          <p style="margin:0;color:#374151">{preuveLocale}</p>
+        </div>
+      </div>
+    </section>
+  ) : null}
 
   <SectionBenefits items={benefits} />
   <SectionDeliverables items={deliverables} />
