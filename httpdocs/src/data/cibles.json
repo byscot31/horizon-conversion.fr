@@ -1,0 +1,84 @@
+{
+  "cibles": [
+    {
+      "slug": "artisans",
+      "nom": "Artisans (BTP, dépannage, rénovation, services)",
+      "painPoints": [
+        "Besoin d'appels en urgence",
+        "Concurrence forte sur Google Maps",
+        "Trop de demandes non qualifiées",
+        "Peu d'avis ou note moyenne"
+      ],
+      "angles": [
+        "Être visible au bon moment sur Maps",
+        "Click-to-call mobile et demande rapide",
+        "Filtrer les mauvais leads (zones, exclusions, qualification)"
+      ],
+      "rassurance": [
+        "Pilotage en direct par un consultant senior",
+        "Exécution avec cadence : actions livrées + suivi",
+        "Transparence : journal d’actions + KPI appels"
+      ]
+    },
+    {
+      "slug": "commerces",
+      "nom": "Commerces (restaurant, coiffeur, garage, etc.)",
+      "painPoints": [
+        "Manque de trafic et de demandes",
+        "Infos Google pas à jour",
+        "Avis irréguliers",
+        "Concurrents mieux placés sur Maps"
+      ],
+      "angles": [
+        "Fiche Google optimisée (horaires, services, photos)",
+        "Avis et preuves visibles pour déclencher l’appel",
+        "Ads ponctuelles pour booster une période forte"
+      ],
+      "rassurance": [
+        "Interlocuteur unique + actions régulières",
+        "Livrables simples et concrets",
+        "Suivi appels/demandes, pas des stats incompréhensibles"
+      ]
+    },
+    {
+      "slug": "pme-tpe",
+      "nom": "PME/TPE",
+      "painPoints": [
+        "Besoin de leads réguliers",
+        "Cycle de décision plus long",
+        "Manque de crédibilité en ligne",
+        "Pub coûteuse sans suivi"
+      ],
+      "angles": [
+        "Pages qui rassurent (preuves, process, FAQ)",
+        "Tracking clair pour piloter",
+        "Ads ciblées + landing dédiée"
+      ],
+      "rassurance": [
+        "Pilotage senior (arbitrages et priorités)",
+        "Exécution structurée (checklists, QA)",
+        "Reporting orienté business (leads, coût/lead, qualité)"
+      ]
+    },
+    {
+      "slug": "liberaux",
+      "nom": "Professions libérales (hors médical si nécessaire)",
+      "painPoints": [
+        "Besoin de confiance et crédibilité",
+        "Offre mal comprise",
+        "Peu de demandes qualifiées",
+        "Site vitrine qui ne convertit pas"
+      ],
+      "angles": [
+        "Preuves et réassurance (FAQ, process, transparence)",
+        "Parcours ultra simple pour demander un rappel",
+        "SEO local + pages claires"
+      ],
+      "rassurance": [
+        "Un interlocuteur unique (pilotage)",
+        "Des livrables clairs (exécution)",
+        "Améliorations régulières et mesurées"
+      ]
+    }
+  ]
+}

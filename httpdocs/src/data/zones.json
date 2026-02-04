@@ -1,16 +1,14 @@
 [
   {
     "slug": "sud-oise",
-    "name": "Sud Oise",
-    "summary": "Pour capter la demande locale et transformer en appels.",
-    "citiesPremium": ["chantilly", "senlis"],
-    "citiesVolume": ["creil", "nogent-sur-oise"]
+    "nom": "Sud Oise",
+    "villes": ["chantilly", "senlis", "creil", "nogent-sur-oise", "pont-sainte-maxence", "clermont"],
+    "specificites": "Zone très concurrentielle sur Google Maps, avec beaucoup de recherches ‘près de moi’. Les quick wins (GBP + CRO) sont essentiels."
   },
   {
-    "slug": "nord-95",
-    "name": "Nord 95",
-    "summary": "Pour générer des demandes près de chez vous, sans blabla.",
-    "citiesPremium": ["lisle-adam", "luzarches"],
-    "citiesVolume": ["beaumont-sur-oise"]
+    "slug": "val-doise-95",
+    "nom": "Val d’Oise (95)",
+    "villes": ["beaumont-sur-oise", "persan", "l-isle-adam"],
+    "specificites": "Nord 95 : demande locale forte et saisonnalité possible. Ads + landing + filtrage améliorent vite la qualité des leads."
   }
 ]

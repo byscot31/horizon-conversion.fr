@@ -1,0 +1,49 @@
+{
+  "templates": {
+    "serviceVille": {
+      "sections": [
+        "hero",
+        "benefices",
+        "positionnement",
+        "methode3c",
+        "livrables",
+        "commentCaSePasse",
+        "preuves",
+        "cibles",
+        "faq",
+        "cta"
+      ],
+      "hero": {
+        "patternH1": "Générer des appels et demandes qualifiés à {ville}",
+        "patternLead": "Méthode 3C : SEO local pour capter, Ads pour accélérer, optimisation du site (CRO) pour convertir."
+      },
+      "positionnement": {
+        "titre": "Consultant senior + exécution d’agence",
+        "points": [
+          "Un interlocuteur unique pour piloter",
+          "Des livrables concrets chaque mois",
+          "Un suivi simple orienté demandes",
+          "Des optimisations régulières (pas du one-shot)"
+        ]
+      },
+      "preuves": {
+        "titre": "Ce que vous recevez chaque mois",
+        "items": [
+          "Plan d’actions (priorités du mois)",
+          "Actions livrées (journal d’actions)",
+          "Reporting simple (appels, demandes, coût/lead si Ads)",
+          "Point mensuel (30–45 min selon pack)"
+        ]
+      },
+      "commentCaSePasse": {
+        "titre": "Comment ça se passe",
+        "steps": [
+          "Audit rapide → 3 priorités",
+          "Setup → fondations (tracking, conversion, visibilité)",
+          "Accélération → Ads + filtrage (si besoin)",
+          "Optimisation mensuelle → amélioration continue"
+        ]
+      }
+    }
+  }
+}

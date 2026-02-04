@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "chantilly",
+    "nom": "Chantilly",
+    "codePostal": "60500",
+    "zone": "sud-oise",
+    "alentours": ["gouvieux", "lamorlaye", "coye-la-foret", "vineuil-saint-firmin", "senlis", "avilly-saint-leonard"],
+    "specificites": "Ville premium avec forte exigence d’image et concurrence locale. Beaucoup de recherches ‘près de moi’ et demandes qualifiées."
+  },
+  {
+    "slug": "senlis",
+    "nom": "Senlis",
+    "codePostal": "60300",
+    "zone": "sud-oise",
+    "alentours": ["chantilly", "vineuil-saint-firmin", "barbery", "pontarme", "ermont", "plailly"],
+    "specificites": "Bassin d’activité dynamique (A1) et forte concurrence en services. Bonne zone pour capter Maps + demandes locales."
+  },
+  {
+    "slug": "creil",
+    "nom": "Creil",
+    "codePostal": "60100",
+    "zone": "sud-oise",
+    "alentours": ["montataire", "nogent-sur-oise", "saint-leu-d-esserent", "thiverny", "verneuil-en-halatte", "saint-maximin"],
+    "specificites": "Zone dense et concurrentielle : le filtrage des leads et les pages qui convertissent font la différence."
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "nom": "Nogent-sur-Oise",
+    "codePostal": "60180",
+    "zone": "sud-oise",
+    "alentours": ["creil", "montataire", "laigneville", "cauffry", "thiverny", "saint-leu-d-esserent"],
+    "specificites": "Marché local très ‘service’. Besoin de visibilité rapide + qualification des demandes pour éviter les contacts inutiles."
+  },
+  {
+    "slug": "pont-sainte-maxence",
+    "nom": "Pont-Sainte-Maxence",
+    "codePostal": "60700",
+    "zone": "sud-oise",
+    "alentours": ["sacy-le-grand", "les-ageux", "verberie", "monchy-saint-eloi", "pontpoint", "rieux"],
+    "specificites": "Zone de passage entre pôles d’emploi. Très bon potentiel sur requêtes d’urgence + itinéraires et appels mobile."
+  },
+  {
+    "slug": "clermont",
+    "nom": "Clermont",
+    "codePostal": "60600",
+    "zone": "sud-oise",
+    "alentours": ["fitz-james", "agnetz", "bailleval", "breuil-le-sec", "liancourt", "neuilly-sous-clermont"],
+    "specificites": "Bassin local mixte (services + commerces). Les pages locales bien structurées convertissent vite sur mobile."
+  },
+  {
+    "slug": "beaumont-sur-oise",
+    "nom": "Beaumont-sur-Oise",
+    "codePostal": "95260",
+    "zone": "val-doise-95",
+    "alentours": ["persan", "champagne-sur-oise", "mours", "nointel", "boran-sur-oise", "parmain"],
+    "specificites": "Porte d’entrée Nord 95 / Sud Oise. Bonne zone pour Ads + SEO local sur une zone élargie (alentours)."
+  },
+  {
+    "slug": "persan",
+    "nom": "Persan",
+    "codePostal": "95340",
+    "zone": "val-doise-95",
+    "alentours": ["beaumont-sur-oise", "bernes-sur-oise", "chambly", "mours", "nointel", "boran-sur-oise"],
+    "specificites": "Zone ‘utile’ (services du quotidien). Nécessite un bon filtrage + landing qui qualifie (zones, délais, types)."
+  },
+  {
+    "slug": "l-isle-adam",
+    "nom": "L'Isle-Adam",
+    "codePostal": "95290",
+    "zone": "val-doise-95",
+    "alentours": ["parmain", "meriel", "butry-sur-oise", "nesles-la-vallee", "auvers-sur-oise", "champagne-sur-oise"],
+    "specificites": "Zone à forte valeur perçue : la réassurance (avis, preuves, process) et la qualité des demandes comptent beaucoup."
+  }
+]
