@@ -1,0 +1,103 @@
+---
+// src/pages/services/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+
+const page = getStaticPageByUrl("/services");
+
+const title = safeText(page?.metaTitle, "Offres | Horizon Conversion");
+const description = safeText(
+  page?.metaDescription,
+  "SEO local, Google/Meta Ads, CRO : une méthode pour générer des demandes qualifiées."
+);
+const h1 = safeText(page?.h1, "Offres : générer des appels et demandes qualifiés");
+
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+const svcs = Array.isArray(services) ? services : [];
+const vs = Array.isArray(villes) ? villes : [];
+
+function pickVilles(n = 6) {
+  return vs.slice(0, n);
+}
+
+// on limite aux 3 services “coeur”
+const core = ["seo-local", "ads-google-meta", "optimisation-site-cro"];
+const coreSvcs = svcs.filter((s: any) => core.includes(String(s.slug)));
+const topVilles = pickVilles(6);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "static", staticLabel: "Services", staticUrl: "/services" }}
+  faqItems={faqItems}
+>
+  <section class="section m-0">
+    <div class="container">
+      <div class="heading-block">
+        <h1>{h1}</h1>
+        <span>Vous voulez des demandes utiles (pas du trafic) : on aligne visibilité + conversion + mesure.</span>
+      </div>
+
+      <div class="row g-4">
+        {coreSvcs.map((s: any) => (
+          <div class="col-md-4">
+            <div class="card p-4 h-100">
+              <h3 class="mb-2">{s.nom}</h3>
+              <p class="text-muted mb-3">{s.promesse}</p>
+
+              <ul class="mb-3">
+                {(Array.isArray(s.problemes) ? s.problemes : []).slice(0, 3).map((p: string) => <li>{p}</li>)}
+              </ul>
+
+              <a class="button button-rounded" href={`/${s.slug}`}>
+                Voir l’offre
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card p-4 mt-5">
+        <h2 class="mb-2">La méthode 3C (simple)</h2>
+        <ol class="mb-0">
+          <li><strong>Captez</strong> : être visible sur l’intention locale (Google/Maps + Ads si besoin)</li>
+          <li><strong>Convertissez</strong> : pages qui rassurent et déclenchent l’appel (CRO)</li>
+          <li><strong>Contrôlez</strong> : tracking clair + décisions mensuelles (on coupe / on garde / on amplifie)</li>
+        </ol>
+      </div>
+
+      <div class="mt-5">
+        <h2 class="mb-3">Pages locales à forte intention</h2>
+        <div class="row g-3">
+          {core.map((slug) => (
+            <div class="col-12">
+              <div class="card p-4">
+                <h3 class="mb-2">
+                  {slug === "seo-local" ? "SEO local" : slug === "ads-google-meta" ? "Google/Meta Ads" : "Optimisation CRO"}
+                </h3>
+                <div class="d-flex flex-wrap gap-2">
+                  {topVilles.map((v: any) => (
+                    <a class="button button-small button-light" href={`/${slug}/${v.slug}`}>
+                      {v.nom}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <a class="button button-rounded button-dark" href="/contact">
+          Demander un audit gratuit
+        </a>
+        <span class="ms-3 text-muted">Réponse sous 24–48h ouvrées.</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

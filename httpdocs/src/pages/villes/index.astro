@@ -1,0 +1,73 @@
+---
+// src/pages/villes/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import villes from "../../data/villes.json";
+import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+
+const page = getStaticPageByUrl("/villes");
+
+const title = safeText(page?.metaTitle, "Villes couvertes | Horizon Conversion");
+const description = safeText(page?.metaDescription, "Sud Oise et Val d’Oise 95 : pages locales orientées demandes.");
+const h1 = safeText(page?.h1, "Villes couvertes : Sud Oise (60) / Val d’Oise (95)");
+
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+
+const vs = Array.isArray(villes) ? villes : [];
+const services = [
+  { slug: "seo-local", label: "SEO local" },
+  { slug: "ads-google-meta", label: "Google/Meta Ads" },
+  { slug: "optimisation-site-cro", label: "CRO / Conversion" }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "static", staticLabel: "Villes", staticUrl: "/villes" }}
+  faqItems={faqItems}
+>
+  <section class="section m-0">
+    <div class="container">
+      <div class="heading-block">
+        <h1>{h1}</h1>
+        <span>Chaque page locale apporte une intention claire + un CTA (anti “thin content”).</span>
+      </div>
+
+      <div class="row g-4">
+        {vs.map((v: any) => (
+          <div class="col-lg-6">
+            <div class="card p-4 h-100">
+              <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="mb-1">{v.nom}</h3>
+                  <div class="text-muted">{v.codePostal} • Zone : {v.zone}</div>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                  {services.map((s) => (
+                    <a class="button button-small button-light" href={`/${s.slug}/${v.slug}`}>
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {v.specificites ? <p class="mt-3 mb-2">{v.specificites}</p> : null}
+
+              {Array.isArray(v.alentours) && v.alentours.length ? (
+                <p class="mb-0 text-muted">
+                  <strong>Alentours :</strong> {v.alentours.join(", ")}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-5">
+        <a class="button button-rounded" href="/zones">Voir les zones</a>
+        <a class="button button-rounded button-dark ms-2" href="/contact">Demander un audit gratuit</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

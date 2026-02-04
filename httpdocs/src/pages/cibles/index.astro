@@ -1,0 +1,63 @@
+---
+// src/pages/cibles/index.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ciblesData from "../../data/cibles.json";
+import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+
+const page = getStaticPageByUrl("/cibles");
+
+const title = safeText(page?.metaTitle, "Cibles | Horizon Conversion");
+const description = safeText(page?.metaDescription, "Artisans, commerces, PME/TPE, libéraux : pages orientées demandes.");
+const h1 = safeText(page?.h1, "Pour qui : des demandes qualifiées selon votre métier");
+
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+
+const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).cibles : [];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "static", staticLabel: "Cibles", staticUrl: "/cibles" }}
+  faqItems={faqItems}
+>
+  <section class="section m-0">
+    <div class="container">
+      <div class="heading-block">
+        <h1>{h1}</h1>
+        <span>Chaque page cible part d’un problème concret et renvoie vers les pages locales utiles.</span>
+      </div>
+
+      <div class="row g-4">
+        {cibles.map((c: any) => (
+          <div class="col-md-6">
+            <div class="card p-4 h-100">
+              <h3 class="mb-2">{c.nom}</h3>
+              {Array.isArray(c.painPoints) ? (
+                <ul class="mb-3">
+                  {c.painPoints.slice(0, 3).map((p: string) => <li>{p}</li>)}
+                </ul>
+              ) : null}
+
+              <a class="button button-rounded" href={`/cibles/${c.slug}`}>
+                Voir la page
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card p-4 mt-5">
+        <h2 class="mb-2">Ce qu’on vise</h2>
+        <p class="mb-0">
+          Plus d’appels et de demandes <strong>qualifiés</strong> (zone, service, délai). Pas de promesse “magique” : du mesurable.
+        </p>
+      </div>
+
+      <div class="mt-5">
+        <a class="button button-rounded button-dark" href="/contact">Demander un audit gratuit</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

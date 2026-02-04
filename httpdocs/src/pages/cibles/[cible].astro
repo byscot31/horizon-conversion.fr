@@ -1,0 +1,126 @@
+---
+// src/pages/cibles/[cible].astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ciblesData from "../../data/cibles.json";
+import villes from "../../data/villes.json";
+import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+
+export async function getStaticPaths() {
+  const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).cibles : [];
+  return cibles.map((c: any) => ({
+    params: { cible: String(c.slug) }
+  }));
+}
+
+const { cible } = Astro.params;
+
+const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).cibles : [];
+const item = cibles.find((c: any) => String(c.slug) === String(cible)) || null;
+
+const url = `/cibles/${cible}`;
+const page = getStaticPageByUrl(url);
+
+const title = safeText(page?.metaTitle, `${item?.nom || cible} | Horizon Conversion`);
+const description = safeText(
+  page?.metaDescription,
+  "Générer des demandes qualifiées : SEO local, Ads et CRO, adaptés à votre métier."
+);
+const h1 = safeText(page?.h1, item?.nom || `Cible : ${cible}`);
+
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+
+const vs = Array.isArray(villes) ? villes : [];
+const topVilles = vs.slice(0, 6);
+
+const offers = [
+  { slug: "seo-local", label: "SEO local" },
+  { slug: "ads-google-meta", label: "Google/Meta Ads" },
+  { slug: "optimisation-site-cro", label: "CRO / Conversion" }
+];
+
+function renderList(arr: any[]) {
+  return Array.isArray(arr) ? arr : [];
+}
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "static", staticLabel: "Cible", staticUrl: url }}
+  faqItems={faqItems}
+>
+  <section class="section m-0">
+    <div class="container">
+      <div class="heading-block">
+        <h1>{h1}</h1>
+        <span>On part de vos contraintes métier, puis on construit un système “demandes” mesurable.</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card p-4 h-100">
+            <h2 class="mb-2">Problèmes fréquents</h2>
+            <ul class="mb-0">
+              {renderList(item?.painPoints).map((p: string) => <li>{p}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card p-4 h-100">
+            <h2 class="mb-2">Angles qui convertissent</h2>
+            <ul class="mb-0">
+              {renderList(item?.angles).map((a: string) => <li>{a}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-4 mt-4">
+        <h2 class="mb-2">Réassurance</h2>
+        <ul class="mb-0">
+          {renderList(item?.rassurance).map((r: string) => <li>{r}</li>)}
+        </ul>
+      </div>
+
+      <div class="mt-5">
+        <h2 class="mb-3">Les offres adaptées</h2>
+        <div class="d-flex flex-wrap gap-2">
+          {offers.map((o) => (
+            <a class="button button-rounded" href={`/${o.slug}`}>
+              {o.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h2 class="mb-3">Pages locales utiles (exemples)</h2>
+        <div class="row g-3">
+          {offers.map((o) => (
+            <div class="col-12">
+              <div class="card p-4">
+                <h3 class="mb-2">{o.label}</h3>
+                <div class="d-flex flex-wrap gap-2">
+                  {topVilles.map((v: any) => (
+                    <a class="button button-small button-light" href={`/${o.slug}/${v.slug}`}>
+                      {v.nom}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <a class="button button-rounded button-dark" href="/contact">
+          Demander un audit gratuit
+        </a>
+        <span class="ms-3 text-muted">Réponse sous 24–48h ouvrées.</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
