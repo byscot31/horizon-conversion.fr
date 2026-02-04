@@ -123,6 +123,26 @@ const tag =
   <SectionDeliverables items={deliverables} />
   <SectionProcess steps={process} />
 
+  {/* ✅ Filtrage des demandes : section dédiée anti thin content */}
+  <section style="padding:1rem 0">
+    <div style="max-width:980px;margin:0 auto;padding:0 1rem">
+      <h2 style="margin:0 0 .75rem;font-size:1.25rem">Filtrer les demandes (hors zone / hors service)</h2>
+      <div style="border:1px solid #e5e7eb;border-radius:12px;padding:1rem;background:#fff;display:grid;gap:.5rem">
+        <p style="margin:0;color:#374151">
+          À {vName}, l’objectif est simple : plus de demandes <strong>utiles</strong>, pas plus de bruit.
+          On cadre la <strong>zone</strong>, les <strong>services</strong> et les <strong>délais</strong> dès la page et dans le tracking.
+        </p>
+
+        <ul style="margin:0;padding-left:1.25rem;display:grid;gap:.35rem;color:#374151">
+          <li><strong>Zone</strong> : {around.length ? `on précise ${vName} + alentours (${around.slice(0, 4).join(", ")}…)` : `on précise le périmètre couvert`}, et on exclut le reste.</li>
+          <li><strong>Service</strong> : on affiche clairement ce qui est inclus / non inclus pour éviter les demandes hors scope.</li>
+          <li><strong>Ads (si concerné)</strong> : exclusions (requêtes/lieux), horaires, messages qui cadrent + landing qui qualifie.</li>
+          <li><strong>Tracking</strong> : clics téléphone, formulaires et sources pour savoir ce qui génère des demandes exploitables.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   {/* ✅ Mini-cas “le plus proche” (1 card) */}
   <MiniCases
     title="Un exemple concret (même problématique)"

@@ -33,6 +33,17 @@
     "preuveLocale": "Exclusions + landing qui qualifie + tracking : moins de bruit, plus de demandes utiles."
   },
   {
+    "slug": "nogent-sur-oise",
+    "nom": "Nogent-sur-Oise",
+    "codePostal": "60180",
+    "zone": "sud-oise",
+    "alentours": ["Creil", "Montataire", "Laigneville", "Cauffry", "Thiverny", "Saint-Leu-d'Esserent"],
+    "specificites": "Marché très orienté services : volume de demandes possible, mais il faut cadrer zones, délais et types de prestations.",
+    "angleLocal": "Qualification + rapidité : des demandes utiles, pas du volume inutile.",
+    "painPointLocal": "Vous recevez des demandes hors zone / hors service : vous perdez du temps et de l’énergie.",
+    "preuveLocale": "Pages qui cadrent + formulaires qualifiants + exclusions Ads : moins de bruit, plus de demandes rentables."
+  },
+  {
     "slug": "clermont",
     "nom": "Clermont (Oise)",
     "codePostal": "60600",
@@ -86,16 +97,5 @@
     "angleLocal": "Réassurance premium : preuves + clarté + expérience mobile.",
     "painPointLocal": "Vous avez des prospects intéressés, mais ils ne passent pas à l’action.",
     "preuveLocale": "Preuves visibles (avis/avant-après/process) + CTA + friction réduite sur mobile."
-  },
-  {
-    "slug": "domont",
-    "nom": "Domont",
-    "codePostal": "95330",
-    "zone": "val-doise-95",
-    "alentours": ["Montmorency", "Ezanville", "Bouffémont", "Moisselles", "Piscop", "Sarcelles"],
-    "specificites": "Zone très concurrentielle : il faut une stratégie claire et mesurable.",
-    "angleLocal": "Mesurable : on pilote par appels/demandes, pas par “visites”.",
-    "painPointLocal": "Vous ne savez pas d’où viennent vos demandes (ou pourquoi ça ne marche pas).",
-    "preuveLocale": "Tracking clair + reporting simple : on sait quoi garder, quoi couper, quoi amplifier."
   }
 ]
