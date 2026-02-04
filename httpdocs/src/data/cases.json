@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "artisan-sud-oise-appels",
+      "titre": "Artisan (Sud Oise) : plus d’appels sans dépendre du bouche-à-oreille",
+      "secteur": "Artisan / dépannage",
+      "zone": "Sud Oise",
+      "probleme": "Pas assez d’appels réguliers. Visibilité floue sur Google/Maps.",
+      "actions": [
+        "Optimisation Google Business Profile (services, zones, cohérence)",
+        "Page locale orientée conversion (preuves + FAQ + CTA)",
+        "Tracking clic tel + formulaires pour piloter"
+      ],
+      "mesure": "Appels, formulaires, sources (SEO/Maps).",
+      "tags": ["seo-local", "cro", "tracking"]
+    },
+    {
+      "id": "service-95-mauvais-leads-ads",
+      "titre": "Service local (95) : filtrer les mauvais leads en Ads",
+      "secteur": "Services",
+      "zone": "Val d’Oise (95)",
+      "probleme": "Trop de demandes hors zone / hors service. Budget Ads qui fuit.",
+      "actions": [
+        "Exclusions zones + requêtes (qualité avant volume)",
+        "Landing qui qualifie (zone, délais, types de demandes)",
+        "Optimisations hebdo (requêtes, annonces, ciblage)"
+      ],
+      "mesure": "Leads qualifiés, coût/lead, part hors zone/hors service.",
+      "tags": ["ads", "landing", "tracking"]
+    },
+    {
+      "id": "commerce-local-cro-mobile",
+      "titre": "Commerce local : site mobile qui ne convertit pas",
+      "secteur": "Commerce",
+      "zone": "Local",
+      "probleme": "Du trafic, mais peu de demandes. CTA peu visible sur mobile.",
+      "actions": [
+        "Refonte du hero (promesse + preuve + CTA visible)",
+        "Formulaire plus court + réassurance (avis, zones, process)",
+        "Mesure avant/après par page (clic tel, formulaire)"
+      ],
+      "mesure": "Taux de conversion, clics téléphone, formulaires.",
+      "tags": ["cro", "tracking"]
+    },
+    {
+      "id": "profession-liberale-local-visibilite",
+      "titre": "Profession libérale : être visible sur les requêtes locales qui comptent",
+      "secteur": "Profession libérale",
+      "zone": "Sud Oise / 95",
+      "probleme": "Présence en ligne dispersée. Les concurrents captent l’intention locale.",
+      "actions": [
+        "Cadrage des services + zones (ce que vous faites / pour qui)",
+        "Pages locales utiles (intentions + objections + preuve)",
+        "Plan avis : régularité + réponses"
+      ],
+      "mesure": "Clics depuis Maps, appels, pages d’entrée.",
+      "tags": ["seo-local", "avis", "cro"]
+    },
+    {
+      "id": "pme-local-pipeline",
+      "titre": "PME locale : créer un flux de demandes mesurable",
+      "secteur": "PME/TPE",
+      "zone": "Local",
+      "probleme": "Des actions marketing isolées, difficile de savoir ce qui marche.",
+      "actions": [
+        "Tracking simple (appels + formulaires + sources)",
+        "Priorisation 30 jours (quick wins + fondations)",
+        "Rythme mensuel : actions + reporting + décisions"
+      ],
+      "mesure": "Demandes par canal, pages qui convertissent, qualité.",
+      "tags": ["tracking", "seo-local", "ads", "cro"]
+    }
+  ]
+}

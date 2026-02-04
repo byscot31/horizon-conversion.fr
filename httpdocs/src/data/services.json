@@ -78,6 +78,19 @@
         "description": "Rédaction + intégration d’une page locale orientée conversion (FAQ + CTA + alentours)."
       }
     ],
+    "mesures": [
+      "Clics appel / itinéraire / site depuis Google Business Profile",
+      "Positions locales sur requêtes prioritaires (Maps + organique)",
+      "Appels et formulaires issus des pages locales",
+      "Évolution avis (récence + note moyenne)"
+    ],
+    "preuves": [
+      "Plan mensuel (priorités + impact attendu)",
+      "Journal d’actions (ce qui a été fait)",
+      "Optimisations GBP documentées (catégories, services, zones, posts si activés)",
+      "Pages locales utiles (service×ville) + maillage interne",
+      "Reporting simple orienté demandes"
+    ],
     "faq": [
       {
         "q": "En combien de temps le SEO local peut générer des appels ?",
@@ -184,6 +197,19 @@
         "typePrix": "one_time",
         "description": "Amélioration du suivi des conversions et nettoyage des données (selon stack)."
       }
+    ],
+    "mesures": [
+      "Leads (appels + formulaires) et sources (Google/Meta)",
+      "Coût par lead et coût par lead qualifié",
+      "Taux de conversion landing (mobile)",
+      "Part des demandes hors zone / hors service (qualité)"
+    ],
+    "preuves": [
+      "Structure campagnes + ciblages + exclusions (documentés)",
+      "Journal d’optimisations hebdo (requêtes, annonces, budget)",
+      "Landing(s) orientées qualification (zones, délais, services)",
+      "Tracking (UTM + événements) et reporting orienté demandes",
+      "Décisions mensuelles : on coupe / on garde / on amplifie"
     ],
     "faq": [
       {
@@ -292,6 +318,19 @@
         "typePrix": "monthly",
         "description": "1 contenu/mois orienté questions clients + maillage interne."
       }
+    ],
+    "mesures": [
+      "Taux de conversion (appels + formulaires)",
+      "Clics téléphone (mobile) et friction formulaire",
+      "Pages d’entrée et pages qui convertissent",
+      "Impact avant/après sur une période comparable"
+    ],
+    "preuves": [
+      "Audit conversion (impact/effort) + priorités",
+      "Itérations mensuelles (2–6 changements ciblés selon pack)",
+      "Journal d’actions (ce qui a été modifié)",
+      "Tracking événements (clic tel, formulaire) + lecture sources",
+      "Reporting conversion par page + décisions"
     ],
     "faq": [
       {

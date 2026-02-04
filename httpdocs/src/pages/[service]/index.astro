@@ -15,6 +15,7 @@ import SectionCTA from "../../components/SectionCTA.astro";
 import LinksOut from "../../components/LinksOut.astro";
 import InternalLinks from "../../components/InternalLinks.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import MiniCases from "../../components/MiniCases.astro";
 
 export async function getStaticPaths() {
   const svcs = services as any[];
@@ -51,7 +52,6 @@ const process = Array.isArray(svc?.process) ? svc.process : [
   "Optimisations mensuelles + suivi"
 ];
 
-// ✅ bloc “preuves / mesures” (option data-driven)
 const mesures = Array.isArray(svc?.mesures) ? svc.mesures : [
   "Appels (clic tel) + formulaires",
   "Sources (SEO / Ads) et pages d’entrée",
@@ -64,7 +64,6 @@ const preuves = Array.isArray(svc?.preuves) ? svc.preuves : [
   "Reporting lisible (ce qui génère des demandes)"
 ];
 
-// ✅ FAQ: faqRefs prioritaire, fallback service.faq si vide
 const faqItems = resolveFaqItems({
   pageFaqRefs: page?.faqRefs,
   pageFaq: page?.faq,
@@ -72,13 +71,19 @@ const faqItems = resolveFaqItems({
 });
 const showFaq = Array.isArray(faqItems) && faqItems.length;
 
-// Micro-copies adaptées service (évite le “clone”)
 const proofTitle =
   service === "seo-local"
     ? "Ce qu’on mesure (SEO local) / Ce qu’on livre"
     : service === "ads-google-meta"
       ? "Ce qu’on mesure (Ads) / Ce qu’on livre"
       : "Ce qu’on mesure (CRO) / Ce qu’on livre";
+
+const tag =
+  service === "seo-local"
+    ? "seo-local"
+    : service === "ads-google-meta"
+      ? "ads"
+      : "cro";
 ---
 
 <BaseLayout
@@ -99,7 +104,7 @@ const proofTitle =
     ]}
   />
 
-  {/* ✅ Bloc “preuve” pour hubs services */}
+  {/* Bloc “preuve” hubs */}
   <section style="padding:1rem 0">
     <div style="max-width:980px;margin:0 auto;padding:0 1rem">
       <div style="border:1px solid #e5e7eb;border-radius:12px;padding:1rem;background:#fff">
@@ -131,6 +136,15 @@ const proofTitle =
   <SectionBenefits items={benefits} />
   <SectionDeliverables items={deliverables} />
   <SectionProcess steps={process} />
+
+  {/* Mini-cas filtrés par tag */}
+  <MiniCases
+    title="Mini-cas liés à ce service"
+    intro="Exemples de situations typiques, orientées demandes."
+    limit={3}
+    columns={3}
+    tag={tag}
+  />
 
   {showFaq ? <SectionFAQ items={faqItems} /> : null}
 

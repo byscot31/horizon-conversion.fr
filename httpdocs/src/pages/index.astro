@@ -12,6 +12,7 @@ import SectionFAQ from "../components/SectionFAQ.astro";
 import SectionCTA from "../components/SectionCTA.astro";
 import LinksOut from "../components/LinksOut.astro";
 import InternalLinks from "../components/InternalLinks.astro";
+import MiniCases from "../components/MiniCases.astro";
 
 const page = getStaticPageByUrl("/");
 
@@ -39,7 +40,6 @@ const process = [
   "Exécution + point mensuel + ajustements"
 ];
 
-// ✅ FAQ: on lit faqRefs (nouveau), fallback legacy faq si besoin
 const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
 const showFaq = Array.isArray(faqItems) && faqItems.length;
 ---
@@ -64,10 +64,16 @@ const showFaq = Array.isArray(faqItems) && faqItems.length;
   <SectionDeliverables items={deliverables} />
   <SectionProcess steps={process} />
 
+  <MiniCases
+    title="Mini-cas : des situations locales typiques"
+    intro="Concret, orienté demandes. Sans promesse irréaliste."
+    limit={3}
+    columns={3}
+  />
+
   {showFaq ? <SectionFAQ items={faqItems} /> : null}
   <LinksOut links={linksOut} />
 
   <InternalLinks type="service" service="seo-local" max={8} title="Commencer par où ?" />
-
   <SectionCTA />
 </BaseLayout>

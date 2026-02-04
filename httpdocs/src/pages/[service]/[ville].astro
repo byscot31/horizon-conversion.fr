@@ -21,6 +21,7 @@ import SectionCTA from "../../components/SectionCTA.astro";
 import LinksOut from "../../components/LinksOut.astro";
 import InternalLinks from "../../components/InternalLinks.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import MiniCases from "../../components/MiniCases.astro";
 
 export async function getStaticPaths() {
   const pages = getAllServiceVillePages();
@@ -67,7 +68,6 @@ const process = Array.isArray(svc?.process) ? svc.process : [
   "Optimisations + reporting + ajustements"
 ];
 
-// ✅ FAQ: faqRefs
 const faqItems = resolveFaqItems({
   pageFaqRefs: page?.faqRefs,
   pageFaq: page?.faq,
@@ -81,6 +81,13 @@ const heroIntro = [
   localAngle ? `Angle local : ${localAngle}` : "",
   around.length ? `Zones couvertes : ${around.join(", ")}.` : ""
 ].filter(Boolean).join(" ");
+
+const tag =
+  service === "seo-local"
+    ? "seo-local"
+    : service === "ads-google-meta"
+      ? "ads"
+      : "cro";
 ---
 
 <BaseLayout
@@ -115,6 +122,15 @@ const heroIntro = [
   <SectionBenefits items={benefits} />
   <SectionDeliverables items={deliverables} />
   <SectionProcess steps={process} />
+
+  {/* ✅ Mini-cas “le plus proche” (1 card) */}
+  <MiniCases
+    title="Un exemple concret (même problématique)"
+    intro=""
+    limit={1}
+    columns={3}
+    tag={tag}
+  />
 
   {showFaq ? <SectionFAQ items={faqItems} /> : null}
   <LinksOut links={linksOut} />
