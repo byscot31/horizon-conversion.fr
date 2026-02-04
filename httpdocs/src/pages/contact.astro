@@ -33,6 +33,14 @@ const process = [
   "Vous repartez avec un plan 30 jours (priorités + actions)",
   "Si on travaille ensemble : setup puis mensuel (actions + mesure)"
 ];
+
+// ✅ coordonnées (évite le hardcode partout)
+const phoneLabel = "06 60 92 10 08";
+const phoneE164 = "+33660921008";
+const telHref = `tel:${phoneE164.replace(/\s+/g, "")}`;
+
+// WhatsApp (optionnel)
+const whatsappHref = "https://wa.me/33660921008";
 ---
 
 <BaseLayout
@@ -54,11 +62,46 @@ const process = [
   <SectionBenefits items={benefits} />
   <SectionProcess steps={process} />
 
+  {/* ✅ CTA rapides (clic tel / WhatsApp trackés) */}
+  <section style="padding:1rem 0">
+    <div style="max-width:980px;margin:0 auto;padding:0 1rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+      <a
+        href={telHref}
+        data-track="tel"
+        style="padding:.75rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800"
+      >
+        Appeler : {phoneLabel}
+      </a>
+
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="whatsapp"
+        style="padding:.75rem 1rem;border-radius:12px;background:#10b981;color:#fff;text-decoration:none;font-weight:800"
+      >
+        WhatsApp
+      </a>
+
+      <div style="color:#6b7280">
+        Réponse sous 24–48h ouvrées • Audit sans engagement
+      </div>
+    </div>
+  </section>
+
   <section style="padding:1.5rem 0">
     <div style="max-width:980px;margin:0 auto;padding:0 1rem">
       <h2 style="margin:0 0 .75rem;font-size:1.25rem">Demande</h2>
 
-      <form method="post" action="/contact" style="border:1px solid #e5e7eb;border-radius:14px;padding:1rem;background:#fff;display:grid;gap:.75rem">
+      {/* ✅ data-track="form" -> événement form_submit via track.js */}
+      <form
+        id="contact-form"
+        name="contact"
+        data-track="form"
+        method="post"
+        action="/contact"
+        style="border:1px solid #e5e7eb;border-radius:14px;padding:1rem;background:#fff;display:grid;gap:.75rem"
+      >
         <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem">
           <div style="display:grid;gap:.35rem">
             <label for="nom" style="font-weight:600">Nom</label>

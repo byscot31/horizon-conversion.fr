@@ -27,27 +27,21 @@ type Props = {
 
   pageContext?: PageContext;
 
-  // options page-level
   breadcrumbsJsonLd?: boolean;
 
-  // FAQ
   faqItems?: FaqItem[];
   faqJsonLd?: boolean;
 
-  // JSON-LD page-level
   localBusinessJsonLd?: boolean;
   articleJsonLd?: boolean;
   serviceJsonLd?: boolean;
 
-  // Global
   webSiteJsonLd?: boolean;
   organizationJsonLd?: boolean;
 
-  // Organization enrich (facultatif)
   organizationLogoUrl?: string;
   organizationSameAs?: string[];
 
-  // ✅ Overrides optionnels (rare) : si tu veux surcharger ponctuellement
   organizationReviewsEnabled?: boolean;
 };
 
@@ -143,6 +137,21 @@ let articleJsonLdObj: any = null;
 if (articleJsonLd && baseUrl && pageContext) {
   articleJsonLdObj = buildArticleJsonLd({ baseUrl, ctx: pageContext });
 }
+
+// ✅ GA4
+const ga4Id = import.meta.env.PUBLIC_GA4_ID || "";
+const debug = Astro.url?.searchParams?.get("debug") === "1";
+
+// ✅ body dataset depuis pageContext (fallbacks safe)
+const bodyPageType = (pageContext as any)?.type || (Astro.url?.pathname === "/" ? "home" : "page");
+const bodyService = (pageContext as any)?.service || "";
+const bodyVille = (pageContext as any)?.ville || "";
+const bodyZone = (pageContext as any)?.zone || "";
+
+// (Option) téléphone / WhatsApp
+const phoneE164 = "+33660921008";
+const phoneTelHref = `tel:${phoneE164.replace(/\s+/g, "")}`;
+const whatsappHref = "https://wa.me/33660921008";
 ---
 
 <!doctype html>
@@ -156,7 +165,22 @@ if (articleJsonLd && baseUrl && pageContext) {
 
     {canonicalAbs ? <link rel="canonical" href={canonicalAbs} /> : null}
 
-    {/* Global */}
+    {/* ✅ GA4 Option A (gtag direct) */}
+    {ga4Id ? (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+        <script is:inline>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${ga4Id}', { anonymize_ip: true });
+          `}
+        </script>
+      </>
+    ) : null}
+
+    {/* Global JSON-LD */}
     {webSiteJsonLdObj ? (
       <script type="application/ld+json" set:html={JSON.stringify(webSiteJsonLdObj)} />
     ) : null}
@@ -165,7 +189,7 @@ if (articleJsonLd && baseUrl && pageContext) {
       <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLdObj)} />
     ) : null}
 
-    {/* Page-level */}
+    {/* Page-level JSON-LD */}
     {breadcrumbsJsonLdObj ? (
       <script type="application/ld+json" set:html={JSON.stringify(breadcrumbsJsonLdObj)} />
     ) : null}
@@ -186,41 +210,63 @@ if (articleJsonLd && baseUrl && pageContext) {
       <script type="application/ld+json" set:html={JSON.stringify(articleJsonLdObj)} />
     ) : null}
 
-    <!-- Font Imports -->
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-            <link
-              href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
-              rel="stylesheet"
-            />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
 
-            <!-- Core Style -->
-            <link rel="stylesheet" href="/_assets_/style.css" />
-            <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
-            <link rel="stylesheet" href="/_assets_/seo.css" />
+    <!-- Core Style -->
+    <link rel="stylesheet" href="/_assets_/style.css" />
+    <link rel="stylesheet" href="/_assets_/css/font-icons.css" />
+    <link rel="stylesheet" href="/_assets_/seo.css" />
   </head>
 
-  <body class="stretched">
-      <div id="wrapper">
+  <body
+    class="stretched"
+    data-page-type={bodyPageType}
+    data-service={bodyService}
+    data-ville={bodyVille}
+    data-zone={bodyZone}
+  >
+    {debug ? (
+      <script is:inline>
+        {`window.__HC_DEBUG__ = true; console.log('[HC] debug=1');`}
+      </script>
+    ) : null}
 
-        <TopBar />
+    <div id="wrapper">
+      <TopBar />
+      <Header />
 
-        <Header />
+      <slot />
 
-        <slot />
+      <Footer />
+    </div>
 
-        <Footer />
+    <div id="gotoTop" class="uil uil-angle-up"></div>
 
-      </div>
+    {/* ✅ Floating quick action (tel + whatsapp) avec tracking */}
+    <div class="scw-switcher-wrap text-center d-none d-lg-block">
+      <a
+        href={whatsappHref}
+        class="scw-trigger-icon scw-trigger"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="whatsapp"
+        aria-label="WhatsApp"
+      >
+        <i class="bi-whatsapp align-baseline pt-1"></i>
+      </a>
+    </div>
 
-      <div id="gotoTop" class="uil uil-angle-up"></div>
+    {/* ✅ tracker MVP */}
+    <script defer src="/_assets_/js/track.js"></script>
 
-  	<div class="scw-switcher-wrap text-center d-none d-lg-block">
-  	  <a href="tel:+33660921008 class="scw-trigger-icon scw-trigger">
-      	<i class="bi-whatsapp align-baseline pt-1"></i>
-        </a>
-      </div>
-
-      <script is:inline src="/_assets_/js/plugins.min.js"></script>
-      <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+    {/* Scripts thème */}
+    <script is:inline src="/_assets_/js/plugins.min.js"></script>
+    <script is:inline src="/_assets_/js/functions.bundle.js"></script>
+  </body>
 </html>

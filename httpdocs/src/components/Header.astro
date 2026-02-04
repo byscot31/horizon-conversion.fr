@@ -1,138 +1,120 @@
 ---
 // src/components/Header.astro
 
-
+// ✅ Routes “nouveau site” (Astro mapping)
+const routes = {
+  offresHub: "/seo-local/", // ou "/services/" si tu as un hub global
+  seo: "/seo-local/",
+  ads: "/ads-google-meta/",
+  cro: "/optimisation-site-cro/",
+  methode: "/methode/",
+  preuves: "/preuves/",
+  ressources: "/ressources/",
+  tarifs: "/tarifs/",
+  contact: "/contact/"
+};
 ---
 
 <!-- Header -->
-      <header id="header" class="transparent-header floating-header header-size-md">
-        <div id="header-wrap">
-          <div class="container">
-            <div class="header-row">
+<header id="header" class="transparent-header floating-header header-size-md">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row">
 
-              <!-- Logo -->
-              <div id="logo">
-                <a href="/">
-                  <img class="logo-default" src="/_assets_/images/logo.png" alt="" />
-                </a>
-              </div>
+        <!-- Logo -->
+        <div id="logo">
+          <a href="/">
+            <img class="logo-default" src="/_assets_/images/logo.png" alt="Horizon Conversion" />
+          </a>
+        </div>
 
-              <div class="header-misc">
-                <a href="/contact/" class="button button-rounded ms-3 d-none d-sm-block">
-                  Audit Gratuit
-                </a>
-              </div>
+        <div class="header-misc">
+          <a
+            href={routes.contact}
+            class="button button-rounded ms-3 d-none d-sm-block"
+            data-track="cta_audit"
+            data-cta-label="Audit Gratuit"
+          >
+            Audit Gratuit
+          </a>
+        </div>
 
-              <div class="primary-menu-trigger">
-                <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-                  <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-                </button>
-              </div>
+        <div class="primary-menu-trigger">
+          <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
 
-              <!-- Primary Navigation -->
-              <nav class="primary-menu with-arrows">
-                <ul class="menu-container">
-                  <li class="menu-item mega-menu">
-                    <a class="menu-link" href="/services/"><div>Offres</div></a>
+        <!-- Primary Navigation -->
+        <nav class="primary-menu with-arrows">
+          <ul class="menu-container">
+            <li class="menu-item mega-menu">
+              <a class="menu-link" href={routes.offresHub}><div>Offres</div></a>
 
-                    <div class="mega-menu-content mega-menu-style-2 px-0">
-                      <div class="container">
-                        <div class="row">
+              <div class="mega-menu-content mega-menu-style-2 px-0">
+                <div class="container">
+                  <div class="row">
 
-                          <!-- Services (liens cohérents avec /[service]/index.astro) -->
-                          <a href="/seo/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/seo.svg" alt="SEO local" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">SEO local</div>
-                                <p>Apparaître sur Google et Google Maps, attirer des demandes qualifiées.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/social/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/social.svg" alt="Marketing des réseaux sociaux" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Réseaux sociaux</div>
-                                <p>Des contenus simples, réguliers, qui rassurent et déclenchent des messages.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/adword.svg" alt="Google/Meta Ads" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Google/Meta Ads</div>
-                                <p>Obtenir des demandes rapidement, avec un budget maîtrisé.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/ux/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/experience.svg" alt="Expérience utilisateur UX" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">UX / Conversion</div>
-                                <p>Transformer plus de visites en appels, devis et prises de rendez-vous.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/analytics/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/analysis.svg" alt="Web analytics" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Analytics</div>
-                                <p>Mesurer ce qui marche, avec des chiffres simples et actionnables.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <a href="/contenu/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-                            <div class="feature-box">
-                              <div class="fbox-icon mb-2">
-                                <img src="/_assets_/images/icons/content_marketing.svg" alt="Marketing de contenu" class="bg-transparent rounded-0" />
-                              </div>
-                              <div class="fbox-content">
-                                <div class="h3 text-transform-none ls-0">Contenu</div>
-                                <p>Des pages utiles qui répondent aux questions et génèrent des leads.</p>
-                              </div>
-                            </div>
-                          </a>
-
-                          <div class="mega-menu-column sub-menu-container col-12 p-0">
-                            <a href="/services/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
-                              Tous les services <i class="bi-arrow-right"></i>
-                            </a>
-                          </div>
-
+                    <a href={routes.seo} class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                      <div class="feature-box">
+                        <div class="fbox-icon mb-2">
+                          <img src="/_assets_/images/icons/seo.svg" alt="SEO local" class="bg-transparent rounded-0" />
+                        </div>
+                        <div class="fbox-content">
+                          <div class="h3 text-transform-none ls-0">SEO local</div>
+                          <p>Apparaître sur Google et Google Maps, attirer des demandes qualifiées.</p>
                         </div>
                       </div>
+                    </a>
+
+                    <a href={routes.ads} class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                      <div class="feature-box">
+                        <div class="fbox-icon mb-2">
+                          <img src="/_assets_/images/icons/adword.svg" alt="Google/Meta Ads" class="bg-transparent rounded-0" />
+                        </div>
+                        <div class="fbox-content">
+                          <div class="h3 text-transform-none ls-0">Google/Meta Ads</div>
+                          <p>Obtenir des demandes rapidement, avec un budget maîtrisé.</p>
+                        </div>
+                      </div>
+                    </a>
+
+                    <a href={routes.cro} class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+                      <div class="feature-box">
+                        <div class="fbox-icon mb-2">
+                          <img src="/_assets_/images/icons/experience.svg" alt="UX / Conversion" class="bg-transparent rounded-0" />
+                        </div>
+                        <div class="fbox-content">
+                          <div class="h3 text-transform-none ls-0">CRO / Conversion</div>
+                          <p>Transformer plus de visites en appels et demandes, surtout sur mobile.</p>
+                        </div>
+                      </div>
+                    </a>
+
+                    <div class="mega-menu-column sub-menu-container col-12 p-0">
+                      <a
+                        href={routes.offresHub}
+                        class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light"
+                      >
+                        Voir les offres <i class="bi-arrow-right"></i>
+                      </a>
                     </div>
-                  </li>
 
-                  <li class="menu-item"><a class="menu-link" href="/methode/"><div>Méthode</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/preuves/"><div>Preuves</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/ressources/"><div>Ressources</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/tarifs/"><div>Tarifs</div></a></li>
-                  <li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
-                </ul>
-              </nav>
+                  </div>
+                </div>
+              </div>
+            </li>
 
-            </div>
-          </div>
-        </div>
-        <div class="header-wrap-clone"></div>
-      </header>
+            <li class="menu-item"><a class="menu-link" href={routes.methode}><div>Méthode</div></a></li>
+            <li class="menu-item"><a class="menu-link" href={routes.preuves}><div>Preuves</div></a></li>
+            <li class="menu-item"><a class="menu-link" href={routes.ressources}><div>Ressources</div></a></li>
+            <li class="menu-item"><a class="menu-link" href={routes.tarifs}><div>Tarifs</div></a></li>
+            <li class="menu-item"><a class="menu-link" href={routes.contact}><div>Contact</div></a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>

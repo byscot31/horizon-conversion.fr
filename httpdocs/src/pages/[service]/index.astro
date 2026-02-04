@@ -16,6 +16,7 @@ import LinksOut from "../../components/LinksOut.astro";
 import InternalLinks from "../../components/InternalLinks.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import MiniCases from "../../components/MiniCases.astro";
+import Transparence from "../../components/Transparence.astro";
 
 export async function getStaticPaths() {
   const svcs = services as any[];
@@ -145,6 +146,9 @@ const tag =
     columns={3}
     tag={tag}
   />
+
+  {/* ✅ Transparence (3 points) */}
+  <Transparence columns={3} limit={3} />
 
   {showFaq ? <SectionFAQ items={faqItems} /> : null}
 

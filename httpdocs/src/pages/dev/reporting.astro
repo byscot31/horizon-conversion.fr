@@ -1,0 +1,82 @@
+---
+// src/pages/dev/reporting.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Dev • Reporting simple";
+const description = "Vérification events GA4 (click_tel, click_whatsapp, form_submit).";
+const ga4Id = import.meta.env.PUBLIC_GA4_ID || "";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "dev", url: "/dev/reporting" } as any}
+  breadcrumbsJsonLd={false}
+  localBusinessJsonLd={false}
+  serviceJsonLd={false}
+  articleJsonLd={false}
+>
+  <section class="section m-0">
+    <div class="container">
+      <div class="heading-block">
+        <h1>/dev/reporting</h1>
+        <span>Ajoute <code>?debug=1</code> pour logs console (hcTrack).</span>
+      </div>
+
+      <div class="card p-4">
+        <p class="mb-2"><strong>PUBLIC_GA4_ID :</strong> {ga4Id ? ga4Id : "❌ non défini (mettre PUBLIC_GA4_ID=G-XXXX)"} </p>
+        <p class="mb-2"><strong>Path :</strong> {Astro.url.pathname}</p>
+        <p class="mb-0 text-muted">
+          Vérifie dans GA4 : Temps réel + DebugView.
+        </p>
+      </div>
+
+      <div class="row mt-4 g-3">
+        <div class="col-md-4">
+          <button id="btnTel" class="button button-rounded w-100">Envoyer click_tel</button>
+        </div>
+        <div class="col-md-4">
+          <button id="btnForm" class="button button-rounded w-100 button-dark">Envoyer form_submit</button>
+        </div>
+        <div class="col-md-4">
+          <button id="btnWa" class="button button-rounded w-100 button-green">Envoyer click_whatsapp</button>
+        </div>
+      </div>
+
+      <div class="card mt-4 p-4">
+        <h3 class="mb-2">Reporting simple (GA4)</h3>
+        <ol class="mb-0">
+          <li>Admin → Événements : vérifier <code>click_tel</code>, <code>form_submit</code>, <code>click_whatsapp</code></li>
+          <li>Admin → Conversions : marquer <code>form_submit</code> (et optionnel <code>click_tel</code>)</li>
+          <li>Rapports → Acquisition : source/medium → conversions</li>
+          <li>Explorations : <code>page_path</code> × <code>event_name</code> × <code>service</code> × <code>ville</code></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    {`
+      function safeTrack(name, params){
+        if (typeof window.hcTrack === 'function') window.hcTrack(name, params || {});
+        else console.warn('[dev/reporting] hcTrack not ready');
+      }
+
+      document.getElementById('btnTel')?.addEventListener('click', function(){
+        safeTrack('click_tel', { href: 'tel:test' });
+        alert('Event click_tel envoyé (si GA4 chargé).');
+      });
+
+      document.getElementById('btnForm')?.addEventListener('click', function(){
+        safeTrack('form_submit', { form_id: 'dev', form_type: 'contact', selected_service: 'seo-local', entered_zone: 'yes' });
+        alert('Event form_submit envoyé (si GA4 chargé).');
+      });
+
+      document.getElementById('btnWa')?.addEventListener('click', function(){
+        safeTrack('click_whatsapp', { href: 'https://wa.me/test' });
+        alert('Event click_whatsapp envoyé (si GA4 chargé).');
+      });
+    `}
+  </script>
+</BaseLayout>

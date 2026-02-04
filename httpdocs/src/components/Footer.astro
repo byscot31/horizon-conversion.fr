@@ -1,130 +1,138 @@
 ---
 // src/components/Footer.astro
 
+const year = new Date().getFullYear();
+const siteName = "Horizon Conversion";
 
+const phoneLabel = "06 60 92 10 08";
+const phoneE164 = "+33660921008";
+const phoneTelHref = `tel:${phoneE164.replace(/\s+/g, "")}`;
+
+const email = "contact@horizon-conversion.fr";
+const emailHref = `mailto:${email}`;
 ---
 
 <!-- Footer -->
-      <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
-        <div class="container">
-          <div class="footer-widgets-wrap pb-5">
-            <div class="row col-mb-50">
-              <div class="col-md-8">
-                <div class="widget">
-                  <img
-                    src="/_assets_/images/footer-widget-logo.png"
-                    alt=""
-                    class="alignleft"
-                    style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
-                  />
+<footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+  <div class="container">
+    <div class="footer-widgets-wrap pb-5">
+      <div class="row col-mb-50">
+        <div class="col-md-8">
+          <div class="widget">
+            <img
+              src="/_assets_/images/footer-widget-logo.png"
+              alt=""
+              class="alignleft"
+              style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
+            />
 
-                  <p>
-                    On aide les pros du <strong>Sud Oise (60)</strong> et du <strong>Val d’Oise (95)</strong> à générer
-                    des <strong>appels</strong> et <strong>demandes qualifiées</strong> grâce au SEO local, aux Ads et
-                    à des pages qui convertissent.
-                  </p>
+            <p>
+              On aide les pros du <strong>Sud Oise (60)</strong> et du <strong>Val d’Oise (95)</strong> à générer
+              des <strong>appels</strong> et <strong>demandes qualifiées</strong> grâce au SEO local, aux Ads et
+              à des pages qui convertissent.
+            </p>
 
-                  <div class="line line-sm"></div>
+            <div class="line line-sm"></div>
 
-                  <div class="row g-4">
-                    <div class="col-lg-3 col-6 widget_links">
-                      <ul>
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/services/">Offres</a></li>
-                        <li><a href="/methode/">Méthode</a></li>
-                        <li><a href="/preuves/">Preuves</a></li>
-                        <li><a href="/ressources/">Ressources</a></li>
-                        <li><a href="/tarifs/">Tarifs</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="col-lg-5 col-12 widget_links">
-                      <ul>
-                        <li><a href="/services/seo/">SEO Local</a></li>
-                        <li><a href="/services/social/">Réseaux sociaux</a></li>
-                        <li><a href="/services/ads/">Google/Meta Ads</a></li>
-                        <li><a href="/services/ux/">UX / Conversion</a></li>
-                        <li><a href="/services/analytics/">Web analytics</a></li>
-                        <li><a href="/services/contenu/">Marketing de contenu</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-6 widget_links">
-                      <ul>
-                        <li><a href="/zones/">Zones</a></li>
-                        <li><a href="/zones/sud-oise/">Sud Oise (60)</a></li>
-                        <li><a href="/zones/val-doise/">Val d’Oise (95)</a></li>
-                        <li><a href="/contact/">Contact</a></li>
-                        <li><a href="/mentions-legales/">Mentions légales</a></li>
-                        <li><a href="/politique-confidentialite/">Confidentialité</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
+            <div class="row g-4">
+              <div class="col-lg-3 col-6 widget_links">
+                <ul>
+                  <li><a href="/">Accueil</a></li>
+                  <li><a href="/services/">Offres</a></li>
+                  <li><a href="/methode/">Méthode</a></li>
+                  <li><a href="/preuves/">Preuves</a></li>
+                  <li><a href="/ressources/">Ressources</a></li>
+                  <li><a href="/tarifs/">Tarifs</a></li>
+                </ul>
               </div>
 
-              <div class="col-md-4">
-                <div class="widget">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="feature-box fbox-plain fbox-sm align-items-center">
-                        <div class="fbox-icon">
-                          <i class="bi-telephone text-dark"></i>
-                        </div>
-                        <div class="fbox-content">
-                          <span class="text-muted">Appelez-nous :</span><br />
-                          <h3 class="text-transform-none ls-0 fw-semibold">
-                            <a href="" class="text-dark">phone</a>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
+              <div class="col-lg-5 col-12 widget_links">
+                <ul>
+                  <li><a href="/services/seo/">SEO Local</a></li>
+                  <li><a href="/services/social/">Réseaux sociaux</a></li>
+                  <li><a href="/services/ads/">Google/Meta Ads</a></li>
+                  <li><a href="/services/ux/">UX / Conversion</a></li>
+                  <li><a href="/services/analytics/">Web analytics</a></li>
+                  <li><a href="/services/contenu/">Marketing de contenu</a></li>
+                </ul>
+              </div>
 
-                    <div class="col-12 mt-4">
-                      <div class="feature-box fbox-plain fbox-sm align-items-center">
-                        <div class="fbox-icon">
-                          <i class="bi-envelope text-dark"></i>
-                        </div>
-                        <div class="fbox-content">
-                          <span class="text-muted">Écrivez-nous :</span><br />
-                          <h3 class="text-transform-none ls-0 fw-semibold">
-                            <a href="" class="text-dark">email</a>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <a href="/contact/" class="button button-rounded mt-4 d-block">
-                    Demander un audit gratuit
-                  </a>
-                </div>
+              <div class="col-lg-4 col-6 widget_links">
+                <ul>
+                  <li><a href="/zones/">Zones</a></li>
+                  <li><a href="/zones/sud-oise/">Sud Oise (60)</a></li>
+                  <li><a href="/zones/val-doise/">Val d’Oise (95)</a></li>
+                  <li><a href="/cibles/">Cibles</a></li>
+                  <li><a href="/villes/">Villes</a></li>
+                  <li><a href="/contact/">Contact</a></li>
+                </ul>
               </div>
             </div>
+
           </div>
         </div>
 
-        <div
-          id="copyrights"
-          style="background: url('/_assets_/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;"
-        >
-          <div class="container">
-            <div class="row justify-content-between col-mb-30">
-              <div class="col-12 col-lg-auto text-center text-lg-start">
-                Copyright &copy; year siteName. Tous droits réservés.
+        <div class="col-md-4">
+          <div class="widget">
+            <div class="row">
+              <div class="col-12">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-telephone text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Appelez-nous :</span><br />
+                    <h3 class="text-transform-none ls-0 fw-semibold">
+                      <a href={phoneTelHref} data-track="tel" class="text-dark">{phoneLabel}</a>
+                    </h3>
+                  </div>
+                </div>
               </div>
 
-              <div class="col-12 col-lg-auto text-center text-lg-end">
-                <div class="copyrights-menu copyright-links">
-                  <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
-                  /
-                  <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
-                  /
-                  <a href="/contact/" class="text-contrast-600">Contact</a>
+              <div class="col-12 mt-4">
+                <div class="feature-box fbox-plain fbox-sm align-items-center">
+                  <div class="fbox-icon">
+                    <i class="bi-envelope text-dark"></i>
+                  </div>
+                  <div class="fbox-content">
+                    <span class="text-muted">Écrivez-nous :</span><br />
+                    <h3 class="text-transform-none ls-0 fw-semibold">
+                      <a href={emailHref} class="text-dark">{email}</a>
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <a href="/contact/" class="button button-rounded mt-4 d-block">
+              Demander un audit gratuit
+            </a>
           </div>
         </div>
-      </footer>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="copyrights"
+    style="background: url('/_assets_/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;"
+  >
+    <div class="container">
+      <div class="row justify-content-between col-mb-30">
+        <div class="col-12 col-lg-auto text-center text-lg-start">
+          Copyright &copy; {year} {siteName}. Tous droits réservés.
+        </div>
+
+        <div class="col-12 col-lg-auto text-center text-lg-end">
+          <div class="copyrights-menu copyright-links">
+            <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+            /
+            <a href="/politique-confidentialite/" class="text-contrast-600">Confidentialité</a>
+            /
+            <a href="/contact/" class="text-contrast-600">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

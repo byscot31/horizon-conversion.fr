@@ -13,6 +13,7 @@ import SectionCTA from "../components/SectionCTA.astro";
 import LinksOut from "../components/LinksOut.astro";
 import InternalLinks from "../components/InternalLinks.astro";
 import MiniCases from "../components/MiniCases.astro";
+import Transparence from "../components/Transparence.astro";
 
 const page = getStaticPageByUrl("/");
 
@@ -70,6 +71,9 @@ const showFaq = Array.isArray(faqItems) && faqItems.length;
     limit={3}
     columns={3}
   />
+
+  {/* ✅ Transparence (3 points) */}
+  <Transparence columns={3} limit={3} />
 
   {showFaq ? <SectionFAQ items={faqItems} /> : null}
   <LinksOut links={linksOut} />
