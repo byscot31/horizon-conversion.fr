@@ -4,13 +4,16 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ciblesData from "../../data/cibles.json";
 import villes from "../../data/villes.json";
-import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+import seoMapping from "../../data/seo-mapping.json";
+
+import LinksOut from "../../components/LinksOut.astro";
+import SectionFAQ from "../../components/SectionFAQ.astro";
+
+import { getStaticPageByUrl, normalizeLinksOut, resolveFaqItems, safeText } from "../../lib/mapping";
 
 export async function getStaticPaths() {
   const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).cibles : [];
-  return cibles.map((c: any) => ({
-    params: { cible: String(c.slug) }
-  }));
+  return cibles.map((c: any) => ({ params: { cible: String(c.slug) } }));
 }
 
 const { cible } = Astro.params;
@@ -21,27 +24,70 @@ const item = cibles.find((c: any) => String(c.slug) === String(cible)) || null;
 const url = `/cibles/${cible}`;
 const page = getStaticPageByUrl(url);
 
-const title = safeText(page?.metaTitle, `${item?.nom || cible} | Horizon Conversion`);
-const description = safeText(
-  page?.metaDescription,
-  "Générer des demandes qualifiées : SEO local, Ads et CRO, adaptés à votre métier."
-);
-const h1 = safeText(page?.h1, item?.nom || `Cible : ${cible}`);
+const title = safeText(page?.metaTitle, `${item?.nom || "Cible"} | Horizon Conversion`);
+const description = safeText(page?.metaDescription, "SEO local, Ads et CRO : un système mesurable pour générer des demandes qualifiées.");
+const h1 = safeText(page?.h1, item?.nom || "Cible");
 
+const linksOut = normalizeLinksOut(page?.linksOut);
 const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
 
 const vs = Array.isArray(villes) ? villes : [];
-const topVilles = vs.slice(0, 6);
+const allPages = Array.isArray((seoMapping as any)?.pages) ? (seoMapping as any).pages : [];
 
-const offers = [
+const OFFERS = [
   { slug: "seo-local", label: "SEO local" },
   { slug: "ads-google-meta", label: "Google/Meta Ads" },
   { slug: "optimisation-site-cro", label: "CRO / Conversion" }
 ];
 
-function renderList(arr: any[]) {
-  return Array.isArray(arr) ? arr : [];
+const allArticles = Array.isArray((seoMapping as any)?.computed?.articles)
+  ? (seoMapping as any).computed.articles
+  : [];
+
+function pickArticlesByTags(tags: string[], n = 2) {
+  if (!tags?.length) return [];
+  return allArticles
+    .filter((a: any) => Array.isArray(a.tags) && a.tags.some((t: string) => tags.includes(t)))
+    .slice(0, n);
 }
+
+function arr(x: any) {
+  return Array.isArray(x) ? x : [];
+}
+
+function villeNameFromSlug(slug: string) {
+  const v = vs.find((x: any) => String(x.slug) === String(slug));
+  return v?.nom || slug;
+}
+
+function pickServiceVilleLinks(serviceSlug: string, limit = 6) {
+  const out: { href: string; label: string }[] = [];
+
+  const candidates = allPages
+    .filter((p: any) => p && typeof p.url === "string")
+    .filter((p: any) => p.url.startsWith(`/${serviceSlug}/`));
+
+  for (const p of candidates) {
+    const href = String(p.url);
+    const villeSlug = p.ville ? String(p.ville) : href.split("/").filter(Boolean)[1];
+    const label = villeNameFromSlug(villeSlug);
+
+    if (!out.some((x) => x.href === href)) out.push({ href, label });
+    if (out.length >= limit) break;
+  }
+
+  if (!out.length) {
+    return vs.slice(0, limit).map((v: any) => ({ href: `/${serviceSlug}/${v.slug}`, label: v.nom }));
+  }
+
+  return out;
+}
+
+const ressources = [
+  ...pickArticlesByTags(["seo-local"], 1),
+  ...pickArticlesByTags(["ads-google-meta"], 1),
+  ...pickArticlesByTags(["optimisation-site-cro"], 1)
+].slice(0, 2);
 ---
 
 <BaseLayout
@@ -54,73 +100,100 @@ function renderList(arr: any[]) {
     <div class="container">
       <div class="heading-block">
         <h1>{h1}</h1>
-        <span>On part de vos contraintes métier, puis on construit un système “demandes” mesurable.</span>
+        <span>On part de vos contraintes métier, puis on construit un système “demandes qualifiées” mesurable.</span>
       </div>
 
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <div class="card p-4 h-100">
-            <h2 class="mb-2">Problèmes fréquents</h2>
-            <ul class="mb-0">
-              {renderList(item?.painPoints).map((p: string) => <li>{p}</li>)}
-            </ul>
-          </div>
+      {!item ? (
+        <div class="card p-4">
+          <h2 class="mb-2">Cible introuvable</h2>
+          <p class="mb-0">Retour aux cibles :</p>
+          <a class="button button-rounded mt-3" href="/cibles">Voir les cibles</a>
         </div>
-
-        <div class="col-lg-6">
-          <div class="card p-4 h-100">
-            <h2 class="mb-2">Angles qui convertissent</h2>
-            <ul class="mb-0">
-              {renderList(item?.angles).map((a: string) => <li>{a}</li>)}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="card p-4 mt-4">
-        <h2 class="mb-2">Réassurance</h2>
-        <ul class="mb-0">
-          {renderList(item?.rassurance).map((r: string) => <li>{r}</li>)}
-        </ul>
-      </div>
-
-      <div class="mt-5">
-        <h2 class="mb-3">Les offres adaptées</h2>
-        <div class="d-flex flex-wrap gap-2">
-          {offers.map((o) => (
-            <a class="button button-rounded" href={`/${o.slug}`}>
-              {o.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div class="mt-5">
-        <h2 class="mb-3">Pages locales utiles (exemples)</h2>
-        <div class="row g-3">
-          {offers.map((o) => (
-            <div class="col-12">
-              <div class="card p-4">
-                <h3 class="mb-2">{o.label}</h3>
-                <div class="d-flex flex-wrap gap-2">
-                  {topVilles.map((v: any) => (
-                    <a class="button button-small button-light" href={`/${o.slug}/${v.slug}`}>
-                      {v.nom}
-                    </a>
-                  ))}
-                </div>
+      ) : (
+        <>
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card p-4 h-100">
+                <h2 class="mb-2">Problèmes fréquents</h2>
+                <ul class="mb-0">
+                  {arr(item.painPoints).map((p: string) => <li>{p}</li>)}
+                </ul>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <div class="mt-5">
-        <a class="button button-rounded button-dark" href="/contact">
-          Demander un audit gratuit
-        </a>
-        <span class="ms-3 text-muted">Réponse sous 24–48h ouvrées.</span>
-      </div>
+            <div class="col-lg-6">
+              <div class="card p-4 h-100">
+                <h2 class="mb-2">Angles qui convertissent</h2>
+                <ul class="mb-0">
+                  {arr(item.angles).map((a: string) => <li>{a}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-4 mt-4">
+            <h2 class="mb-2">Réassurance</h2>
+            <ul class="mb-0">
+              {arr(item.rassurance).map((r: string) => <li>{r}</li>)}
+            </ul>
+          </div>
+
+          <div class="mt-5">
+            <h2 class="mb-3">Les offres adaptées</h2>
+            <div class="d-flex flex-wrap gap-2">
+              {OFFERS.map((o) => (
+                <a class="button button-rounded" href={`/${o.slug}`}>{o.label}</a>
+              ))}
+              <a class="button button-rounded button-dark" href="/contact">Audit gratuit</a>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <h2 class="mb-3">Pages locales utiles (existantes)</h2>
+
+            {OFFERS.map((o) => {
+              const leafLinks = pickServiceVilleLinks(o.slug, 6);
+
+              return (
+                <div class="card p-4 mb-4">
+                  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <h3 class="mb-0">{o.label}</h3>
+                    <a class="button button-small button-light" href={`/${o.slug}`}>Voir le hub</a>
+                  </div>
+
+                  <div class="mt-3 d-flex flex-wrap gap-2">
+                    {leafLinks.map((l) => (
+                      <a class="button button-small button-light" href={l.href}>
+                        {l.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {ressources.length ? (
+            <div class="card p-4 mt-4">
+              <h2 class="mb-3">Ressources recommandées</h2>
+              <div class="d-flex flex-wrap gap-2">
+                {ressources.map((a: any) => (
+                  <a class="button button-small button-light" href={`/ressources/${a.slug}`}>{a.titre}</a>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          <div class="mt-5 d-flex flex-wrap gap-2">
+            <a class="button button-rounded button-dark" href="/contact">Demander un audit gratuit</a>
+            <a class="button button-rounded button-light" href="/services">Voir les offres</a>
+            <a class="button button-rounded button-light" href="/villes">Voir les villes</a>
+          </div>
+
+          <SectionFAQ items={faqItems} />
+          <LinksOut links={linksOut} />
+        </>
+      )}
     </div>
   </section>
 </BaseLayout>

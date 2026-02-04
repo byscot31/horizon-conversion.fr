@@ -3,17 +3,32 @@
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ciblesData from "../../data/cibles.json";
-import { getStaticPageByUrl, resolveFaqItems, safeText } from "../../lib/mapping";
+import seoMapping from "../../data/seo-mapping.json";
+
+import LinksOut from "../../components/LinksOut.astro";
+import SectionFAQ from "../../components/SectionFAQ.astro";
+
+import { getStaticPageByUrl, normalizeLinksOut, resolveFaqItems, safeText } from "../../lib/mapping";
 
 const page = getStaticPageByUrl("/cibles");
 
 const title = safeText(page?.metaTitle, "Cibles | Horizon Conversion");
-const description = safeText(page?.metaDescription, "Artisans, commerces, PME/TPE, libéraux : pages orientées demandes.");
+const description = safeText(page?.metaDescription, "Artisans, commerces, PME/TPE, libéraux : une approche orientée demandes qualifiées.");
 const h1 = safeText(page?.h1, "Pour qui : des demandes qualifiées selon votre métier");
 
+const linksOut = normalizeLinksOut(page?.linksOut);
 const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
 
 const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).cibles : [];
+
+const allArticles = Array.isArray((seoMapping as any)?.computed?.articles) ? (seoMapping as any).computed.articles : [];
+const ressources = allArticles.slice(0, 2);
+
+const SUGGESTED = [
+  { slug: "seo-local", label: "SEO local" },
+  { slug: "ads-google-meta", label: "Google/Meta Ads" },
+  { slug: "optimisation-site-cro", label: "CRO / Conversion" }
+];
 ---
 
 <BaseLayout
@@ -26,7 +41,7 @@ const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).
     <div class="container">
       <div class="heading-block">
         <h1>{h1}</h1>
-        <span>Chaque page cible part d’un problème concret et renvoie vers les pages locales utiles.</span>
+        <span>Chaque cible : problèmes → solution → preuves → CTA, puis liens vers pages locales utiles.</span>
       </div>
 
       <div class="row g-4">
@@ -34,30 +49,50 @@ const cibles = Array.isArray((ciblesData as any)?.cibles) ? (ciblesData as any).
           <div class="col-md-6">
             <div class="card p-4 h-100">
               <h3 class="mb-2">{c.nom}</h3>
+
               {Array.isArray(c.painPoints) ? (
                 <ul class="mb-3">
                   {c.painPoints.slice(0, 3).map((p: string) => <li>{p}</li>)}
                 </ul>
               ) : null}
 
-              <a class="button button-rounded" href={`/cibles/${c.slug}`}>
-                Voir la page
-              </a>
+              <div class="d-flex flex-wrap gap-2">
+                <a class="button button-rounded" href={`/cibles/${c.slug}`}>Voir la page</a>
+                <a class="button button-rounded button-light" href="/contact">Audit gratuit</a>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       <div class="card p-4 mt-5">
-        <h2 class="mb-2">Ce qu’on vise</h2>
-        <p class="mb-0">
-          Plus d’appels et de demandes <strong>qualifiés</strong> (zone, service, délai). Pas de promesse “magique” : du mesurable.
-        </p>
+        <h2 class="mb-2">Les 3 leviers (selon votre urgence)</h2>
+        <div class="d-flex flex-wrap gap-2">
+          {SUGGESTED.map((s) => (
+            <a class="button button-small button-light" href={`/${s.slug}`}>{s.label}</a>
+          ))}
+        </div>
       </div>
 
-      <div class="mt-5">
+      {ressources.length ? (
+        <div class="card p-4 mt-4">
+          <h2 class="mb-3">Ressources recommandées</h2>
+          <div class="d-flex flex-wrap gap-2">
+            {ressources.map((a: any) => (
+              <a class="button button-small button-light" href={`/ressources/${a.slug}`}>{a.titre}</a>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <div class="mt-5 d-flex flex-wrap gap-2">
         <a class="button button-rounded button-dark" href="/contact">Demander un audit gratuit</a>
+        <a class="button button-rounded button-light" href="/services">Voir les offres</a>
+        <a class="button button-rounded button-light" href="/villes">Voir les villes</a>
       </div>
+
+      <SectionFAQ items={faqItems} />
+      <LinksOut links={linksOut} />
     </div>
   </section>
 </BaseLayout>
