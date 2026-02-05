@@ -1,0 +1,21 @@
+{
+  "slugRules": {
+    "services": ["seo-local", "ads-google-meta", "optimisation-site-cro"],
+    "zones": ["sud-oise", "val-doise-95"],
+    "villesMustMatch": true
+  },
+  "antiThinContent": {
+    "mustIncludeOnServiceVille": [
+      "angleLocal (texte unique par ville)",
+      "alentours (4–6, mention contextuelle)",
+      "section filtrage des demandes (zone/hors service)",
+      "FAQ locale (5 questions, reformulées)",
+      "liens vers Méthode + Tarifs + Contact"
+    ],
+    "avoid": [
+      "mêmes paragraphes copiés-collés d’une ville à l’autre",
+      "pages ‘ville’ sans bénéfice concret ni preuves",
+      "multiplication de pages sans intention (ex: 'CRO {ville}' vide)"
+    ]
+  }
+}

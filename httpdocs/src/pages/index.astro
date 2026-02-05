@@ -1,83 +1,17 @@
 ---
 // src/pages/index.astro
-
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { getStaticPageByUrl, normalizeLinksOut, resolveFaqItems, safeText } from "../lib/mapping";
-
-import SectionHero from "../components/SectionHero.astro";
-import SectionBenefits from "../components/SectionBenefits.astro";
-import SectionDeliverables from "../components/SectionDeliverables.astro";
-import SectionProcess from "../components/SectionProcess.astro";
-import SectionFAQ from "../components/SectionFAQ.astro";
-import SectionCTA from "../components/SectionCTA.astro";
-import LinksOut from "../components/LinksOut.astro";
-import InternalLinks from "../components/InternalLinks.astro";
-import MiniCases from "../components/MiniCases.astro";
-import Transparence from "../components/Transparence.astro";
-
-const page = getStaticPageByUrl("/");
-
-const title = safeText(page?.metaTitle, "Horizon Conversion");
-const description = safeText(page?.metaDescription, "SEO local, Ads et CRO pour générer des demandes.");
-const h1 = safeText(page?.h1, "Plus d’appels et demandes qualifiés en local");
-
-const linksOut = normalizeLinksOut(page?.linksOut);
-
-const benefits = [
-  "Plus d’appels et demandes qualifiés (pas juste des clics)",
-  "Filtrage des mauvais leads (zones, services, délais)",
-  "Suivi simple : ce qui rapporte, ce qui coûte"
-];
-
-const deliverables = [
-  "Plan d’actions mensuel + priorités",
-  "Mise en place SEO local / Ads / CRO",
-  "Tracking des appels & formulaires + reporting lisible"
-];
-
-const process = [
-  "Audit gratuit : visibilité, Ads, conversion",
-  "Plan 30 jours : quick wins + priorités",
-  "Exécution + point mensuel + ajustements"
-];
-
-const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
-const showFaq = Array.isArray(faqItems) && faqItems.length;
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  pageContext={{ type: "static", staticLabel: "Accueil", staticUrl: "/" }}
-  faqItems={faqItems}
->
-  <SectionHero
-    h1={h1}
-    intro="Vous avez un site, une fiche Google, parfois des pubs… mais pas assez d’appels ? On met en place un système simple : Captez (SEO/Ads), Convertissez (CRO), Contrôlez (tracking)."
-    bullets={[
-      "Interlocuteur unique (consultant senior) + exécution d’agence",
-      "Livrables mensuels + transparence",
-      "Objectif : demandes utiles, pas du volume vide"
-    ]}
-  />
-
-  <SectionBenefits items={benefits} />
-  <SectionDeliverables items={deliverables} />
-  <SectionProcess steps={process} />
-
-  <MiniCases
-    title="Mini-cas : des situations locales typiques"
-    intro="Concret, orienté demandes. Sans promesse irréaliste."
-    limit={3}
-    columns={3}
-  />
-
-  {/* ✅ Transparence (3 points) */}
-  <Transparence columns={3} limit={3} />
-
-  {showFaq ? <SectionFAQ items={faqItems} /> : null}
-  <LinksOut links={linksOut} />
-
-  <InternalLinks type="service" service="seo-local" max={8} title="Commencer par où ?" />
-  <SectionCTA />
-</BaseLayout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+	</body>
+</html>

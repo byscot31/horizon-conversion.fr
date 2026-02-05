@@ -2,7 +2,4 @@
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-export default defineConfig({
-  site: "https://horizon-conversion.fr",
-  trailingSlash: "never",
-});
+export default defineConfig({});

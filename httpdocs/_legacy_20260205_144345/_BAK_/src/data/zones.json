@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "sud-oise",
+    "nom": "Sud Oise",
+    "villes": ["chantilly", "senlis", "creil", "nogent-sur-oise", "pont-sainte-maxence", "clermont"],
+    "specificites": "Zone très concurrentielle sur Google Maps, avec beaucoup de recherches ‘près de moi’. Les quick wins (GBP + CRO) sont essentiels."
+  },
+  {
+    "slug": "val-doise-95",
+    "nom": "Val d’Oise (95)",
+    "villes": ["beaumont-sur-oise", "persan", "l-isle-adam"],
+    "specificites": "Nord 95 : demande locale forte et saisonnalité possible. Ads + landing + filtrage améliorent vite la qualité des leads."
+  }
+]

@@ -1,0 +1,119 @@
+---
+// src/pages/tarifs.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import tarifs from "../data/tarifs.json";
+import services from "../data/services.json";
+
+import { getStaticPageByUrl, normalizeLinksOut, resolveFaqItems, safeText } from "../lib/mapping";
+
+import SectionHero from "../components/SectionHero.astro";
+import SectionBenefits from "../components/SectionBenefits.astro";
+import SectionProcess from "../components/SectionProcess.astro";
+import SectionFAQ from "../components/SectionFAQ.astro";
+import SectionCTA from "../components/SectionCTA.astro";
+import LinksOut from "../components/LinksOut.astro";
+
+const page = getStaticPageByUrl("/tarifs");
+
+const title = safeText(page?.metaTitle, "Tarifs | Horizon Conversion");
+const description = safeText(page?.metaDescription, "Packs clairs : setup + mensuel + options. Objectif : demandes qualifiées.");
+const h1 = safeText(page?.h1, "Tarifs : des packs clairs (setup + mensuel + options)");
+
+const linksOut = normalizeLinksOut(page?.linksOut);
+const faqItems = resolveFaqItems({ pageFaqRefs: page?.faqRefs, pageFaq: page?.faq });
+const showFaq = Array.isArray(faqItems) && faqItems.length;
+
+const benefits = [
+  "Vous savez ce qui est inclus (et ce qui ne l’est pas)",
+  "Vous payez pour des actions qui génèrent des demandes (pas du “reporting vide”)",
+  "Vous pouvez démarrer petit et monter en puissance"
+];
+
+const process = [
+  "Audit gratuit : on valide le levier (SEO / Ads / CRO) le plus rentable",
+  "Setup : fondations + tracking + priorités",
+  "Mensuel : actions + mesure + ajustements",
+  "Options : uniquement si utile (landing, avis, tracking avancé)"
+];
+
+const tarifsList = Array.isArray(tarifs) ? tarifs : [];
+const servicesList = Array.isArray(services) ? services : [];
+
+function serviceName(slug) {
+  const s = servicesList.find((x) => String(x.slug) === String(slug));
+  return s?.nom || slug;
+}
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageContext={{ type: "static", staticLabel: "Tarifs", staticUrl: "/tarifs" }}
+  faqItems={faqItems}
+>
+  <SectionHero
+    h1={h1}
+    intro="Vous voulez des demandes qualifiées, mais vous avez un budget limité ou une urgence ? On propose des packs lisibles : un setup pour démarrer proprement, puis un rythme mensuel."
+    bullets={[
+      "Pas de promesse magique, que du mesurable",
+      "Priorité à la qualité des leads",
+      "Transparence : plan + journal d’actions"
+    ]}
+  />
+
+  <SectionBenefits items={benefits} />
+  <SectionProcess steps={process} />
+
+  <section style="padding:1.5rem 0">
+    <div style="max-width:980px;margin:0 auto;padding:0 1rem">
+      <h2 style="margin:0 0 .75rem;font-size:1.25rem">Packs</h2>
+
+      <div style="display:grid;gap:1rem">
+        {tarifsList.map((t) => (
+          <div style="border:1px solid #e5e7eb;border-radius:14px;padding:1rem;background:#fff">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+              <strong style="font-size:1.05rem">{serviceName(t.slug)}</strong>
+              <span style="color:#6b7280;font-size:.95rem">Setup + Mensuel + Options</span>
+            </div>
+
+            {/* Packs */}
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin-top:.75rem">
+              {(Array.isArray(t.packs) ? t.packs : []).map((p) => (
+                <div style="border:1px solid #eef2f7;border-radius:12px;padding:.85rem;background:#fbfdff">
+                  <div style="font-weight:700;margin:0 0 .25rem">{p.nom}</div>
+
+                  <div style="display:grid;gap:.25rem;color:#374151;font-size:.95rem">
+                    {p.setup ? <div><strong>Setup :</strong> {p.setup}</div> : null}
+                    {p.mensuel ? <div><strong>Mensuel :</strong> {p.mensuel}</div> : null}
+                  </div>
+
+                  {Array.isArray(p.inclus) && p.inclus.length ? (
+                    <ul style="margin:.6rem 0 0;padding-left:1.15rem;display:grid;gap:.25rem;color:#374151">
+                      {p.inclus.map((x) => <li>{x}</li>)}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+
+            {/* Options */}
+            {Array.isArray(t.options) && t.options.length ? (
+              <div style="margin-top:.85rem">
+                <div style="font-weight:600;margin:0 0 .35rem">Options (si utile)</div>
+                <ul style="margin:0;padding-left:1.15rem;display:grid;gap:.25rem;color:#374151">
+                  {t.options.map((o) => <li>{o}</li>)}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {showFaq ? <SectionFAQ items={faqItems} /> : null}
+  <LinksOut links={linksOut} />
+
+  <SectionCTA />
+</BaseLayout>
