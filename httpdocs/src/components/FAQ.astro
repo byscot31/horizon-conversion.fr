@@ -1,0 +1,18 @@
+---
+type Item = { q: string; a: string };
+type Props = { items: Item[] };
+
+const { items } = Astro.props;
+---
+
+<section>
+  <h2>FAQ</h2>
+  <ul>
+    {items.map((it) => (
+      <li>
+        <strong>{it.q}</strong>
+        <div>{it.a}</div>
+      </li>
+    ))}
+  </ul>
+</section>

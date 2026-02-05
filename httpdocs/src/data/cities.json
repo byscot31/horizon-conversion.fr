@@ -1,0 +1,13 @@
+[
+  { "slug": "cergy", "name": "Cergy", "dept": "95", "near": ["pontoise","taverny"] },
+  { "slug": "pontoise", "name": "Pontoise", "dept": "95", "near": ["cergy","taverny"] },
+  { "slug": "argenteuil", "name": "Argenteuil", "dept": "95", "near": ["franconville"] },
+  { "slug": "franconville", "name": "Franconville", "dept": "95", "near": ["argenteuil","taverny"] },
+  { "slug": "taverny", "name": "Taverny", "dept": "95", "near": ["pontoise","franconville"] },
+
+  { "slug": "creil", "name": "Creil", "dept": "60", "near": ["senlis","chantilly"] },
+  { "slug": "senlis", "name": "Senlis", "dept": "60", "near": ["chantilly","creil"] },
+  { "slug": "chantilly", "name": "Chantilly", "dept": "60", "near": ["senlis","creil"] },
+  { "slug": "pont-sainte-maxence", "name": "Pont-Sainte-Maxence", "dept": "60", "near": ["senlis"] },
+  { "slug": "chambly", "name": "Chambly", "dept": "60", "near": ["cergy"] }
+]

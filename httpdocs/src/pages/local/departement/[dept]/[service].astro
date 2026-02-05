@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import SeoHead from "../../../../components/SeoHead.astro";
+import CTA from "../../../../components/CTA.astro";
+
+import { absUrl } from "../../../../lib/seo";
+import { seoTemplates } from "../../../../lib/content";
+import { departments, services, getDepartment, citiesByDept } from "../../../../lib/data";
+import type { ServiceKey } from "../../../../lib/types";
+
+const deptCode = Astro.params.dept!;
+const serviceKey = Astro.params.service as ServiceKey;
+
+const dept = getDepartment(deptCode);
+const tpl = seoTemplates[serviceKey];
+if (!dept || !tpl) throw new Error("Not found");
+
+const place = `${dept.name} (${dept.code})`;
+const title = tpl.title(place);
+const description = tpl.description(place);
+
+const path = `/local/departement/${dept.code}/${serviceKey}/`;
+const canonical = absUrl(path);
+
+const deptCities = citiesByDept(dept.code);
+---
+
+<BaseLayout>
+  <SeoHead title={title} description={description} canonical={canonical} />
+  <body>
+    <main style="max-width:900px;margin:0 auto;padding:24px;">
+      <h1>{tpl.h1(dept.name)}</h1>
+      <p>Pages locales {dept.code} : choisissez une ville.</p>
+
+      <ul>
+        {deptCities.map((c) => (
+          <li><a href={`/local/ville/${c.slug}/${serviceKey}/`}>{c.name}</a></li>
+        ))}
+      </ul>
+
+      <CTA />
+    </main>
+  </body>
+</BaseLayout>
+
+---
+export async function getStaticPaths() {
+  return departments.flatMap((d) =>
+    services.map((s) => ({ params: { dept: d.code, service: s.key } }))
+  );
+}

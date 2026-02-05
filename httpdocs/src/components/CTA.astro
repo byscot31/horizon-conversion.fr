@@ -1,3 +1,10 @@
 ---
-// src/components/CTA.astro
+type Props = { href?: string; label?: string; sub?: string };
+const { href = "/diagnostic/", label = "Réserver un diagnostic", sub } = Astro.props;
 ---
+<section>
+  <a href={href} style="display:inline-block;padding:12px 16px;border:1px solid #000;">
+    {label}
+  </a>
+  {sub && <p>{sub}</p>}
+</section>
