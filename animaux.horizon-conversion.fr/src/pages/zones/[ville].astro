@@ -9,6 +9,8 @@ import {
   type ZoneKey,
 } from "../../data/zones.ts";
 import { JOBS } from "../../data/jobs.ts";
+import { SERVICES } from "../../data/services.ts";
+import { getZoneFaq } from "../../data/faq-zones.ts";
 
 export const prerender = true;
 
@@ -59,13 +61,21 @@ const metierLinks = jobEntries.map(([metierSlug, job]) => ({
   href: `/zones/${slug}/${metierSlug}/`,
 }));
 
-// ✅ Liens services (pages réelles)
-const servicesLinks = [
-  { href: "/prestations/seo-local/", label: "SEO local & Google Maps" },
-  { href: "/prestations/google-ads/", label: "Google Ads (Search)" },
-  { href: "/prestations/meta-ads/", label: "Meta Ads (Facebook/Instagram)" },
-  { href: "/prestations/landing-pages/", label: "Landing pages & conversion" },
-  { href: "/prestations/tracking/", label: "Tracking & pilotage" },
+// ✅ VRAIES pages (money) : /zones/{ville}/services/{service}/
+const serviceEntries = Object.entries(SERVICES) as Array<[string, any]>;
+const serviceCityLinks = serviceEntries.map(([serviceSlug, svc]) => ({
+  serviceSlug,
+  label: svc.name as string,
+  href: `/zones/${slug}/services/${serviceSlug}/`,
+}));
+
+// (Optionnel) liens vers pages “prestations” (globales)
+const prestationsLinks = [
+  { href: "/prestations/seo-local/", label: "Prestation : SEO local & Google Maps" },
+  { href: "/prestations/google-ads/", label: "Prestation : Google Ads (Search)" },
+  { href: "/prestations/meta-ads/", label: "Prestation : Meta Ads" },
+  { href: "/prestations/landing-pages/", label: "Prestation : Landing pages" },
+  { href: "/prestations/tracking/", label: "Prestation : Tracking" },
   { href: "/tarifs/", label: "Tarifs / Packs" },
 ];
 
@@ -74,6 +84,22 @@ const otherTowns = (zone.towns as string[])
   .filter((t) => slugifyCity(t) !== slug)
   .slice(0, 12)
   .map((t) => ({ name: t, href: `/zones/${slugifyCity(t)}/` }));
+
+// ✅ FAQ contextualisée par zoneKey (60 vs 95) + ville
+const faqs = getZoneFaq(zoneKey, town, zone.name);
+
+const faqJsonLd =
+  faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
 
 const jsonLd = [
   {
@@ -94,17 +120,31 @@ const jsonLd = [
       item: b.item,
     })),
   },
-  // ✅ ItemList de VRAIES pages (anti placeholder)
+  // ✅ ItemList métier×ville
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: metierLinks.map((m, i) => ({
+    name: `Pages métier × ${town}`,
+    itemListElement: metierLinks.slice(0, 30).map((m, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: `${m.name} à ${town}`,
       url: `${baseUrl}${m.href}`,
     })),
   },
+  // ✅ ItemList service×ville
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Pages service × ${town}`,
+    itemListElement: serviceCityLinks.slice(0, 30).map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `${s.label} à ${town}`,
+      url: `${baseUrl}${s.href}`,
+    })),
+  },
+  ...(faqJsonLd ? [faqJsonLd] : []),
 ];
 ---
 
@@ -220,6 +260,12 @@ const jsonLd = [
       background: #fff;
     }
     .block ul { margin: 10px 0 0; padding-left: 18px; }
+
+    /* ✅ FAQ */
+    .faq{margin-top:16px}
+    .faq details{border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px;background:#fff;margin-bottom:10px}
+    .faq summary{cursor:pointer;font-weight:900}
+    .faq p{margin:10px 0 0}
   </style>
 
   <div class="wrap">
@@ -233,9 +279,9 @@ const jsonLd = [
     <header class="hero">
       <h1>{town}</h1>
       <p class="sub">
-        On déploie une stratégie locale orientée résultats pour les professionnels des animaux à{" "}
-        <strong>{town}</strong> : <strong>SEO local</strong> + <strong>Google Maps</strong> +{" "}
-        <strong>Ads</strong>, avec des pages dédiées (métier × ville) et un tracking propre.
+        Stratégie locale orientée résultats à <strong>{town}</strong> :
+        <strong> SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
+        avec des pages dédiées (métier × ville, service × ville) et un tracking propre.
         Zone : <strong>{zone.name}</strong>.
       </p>
     </header>
@@ -244,26 +290,32 @@ const jsonLd = [
       <div class="card">
         <h2>Comment on génère des demandes locales à {town}</h2>
         <p>
-          Le combo le plus efficace : une base SEO local (pages + schémas) + une Google Business Profile optimisée,
-          puis des Ads sur les intentions les plus rentables (pilotage au coût par lead).
+          Le combo le plus efficace : base SEO local (pages + schémas) + Google Business Profile optimisée,
+          puis Ads sur les intentions les plus rentables (pilotage au coût par lead).
         </p>
 
         <div class="note">
-          <strong>Anti “placeholder” :</strong> au lieu d’afficher des intentions “texte-type”, on pointe vers des{" "}
-          <strong>pages réelles</strong> (métier × ville + prestations). C’est ce cluster de pages qui aide Google à
-          comprendre la valeur et la couverture locale.
+          <strong>Anti “placeholder” :</strong> on affiche des <strong>liens vers des pages réelles</strong>
+          (métier × ville + service × ville) pour renforcer la valeur SEO et la compréhension du cluster.
         </div>
 
-        <h2 style="margin-top:16px;">Pages métier × {town} (liens réels)</h2>
+        <h2 style="margin-top:16px;">Pages métier × {town}</h2>
         <div class="pills" aria-label="Pages métier × ville">
           {metierLinks.map((m) => (
             <a class="pill" href={m.href}>{m.name} à {town}</a>
           ))}
         </div>
 
-        <h2 style="margin-top:16px;">Services (pages réelles)</h2>
-        <div class="pills" aria-label="Services">
-          {servicesLinks.map((s) => (
+        <h2 style="margin-top:16px;">Pages service × {town}</h2>
+        <div class="pills" aria-label="Pages service × ville">
+          {serviceCityLinks.map((s) => (
+            <a class="pill" href={s.href}>{s.label} à {town}</a>
+          ))}
+        </div>
+
+        <h3>Prestations (pages générales)</h3>
+        <div class="pills" aria-label="Prestations">
+          {prestationsLinks.map((s) => (
             <a class="pill" href={s.href}>{s.label}</a>
           ))}
         </div>
@@ -274,21 +326,39 @@ const jsonLd = [
         </div>
 
         <p class="meta">
-          Email :{" "}
-          <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+          Email : <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
         </p>
+
+        {faqs.length > 0 && (
+          <div class="faq" id="faq">
+            <h2 style="margin:0 0 10px;">FAQ locale (parking / circulation / saisonnalité)</h2>
+            {faqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        )}
       </div>
 
       <aside class="card">
-        <h2>Métiers à {town}</h2>
-        <p class="meta">Pages “métier + ville” (celles qui rankent le mieux) :</p>
+        <h2>Récap : liens utiles</h2>
 
         <div class="block">
+          <h3 style="margin:0;">Métiers à {town}</h3>
           <ul class="list">
             {metierLinks.map((m) => (
-              <li>
-                <a class="link" href={m.href}>{m.name} à {town}</a>
-              </li>
+              <li><a class="link" href={m.href}>{m.name} à {town}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="block">
+          <h3 style="margin:0;">Services à {town}</h3>
+          <ul class="list">
+            {serviceCityLinks.map((s) => (
+              <li><a class="link" href={s.href}>{s.label} à {town}</a></li>
             ))}
           </ul>
         </div>
@@ -306,7 +376,6 @@ const jsonLd = [
           <a class="pill" href="/metiers/">Métiers</a>
           <a class="pill" href="/prestations/">Prestations</a>
           <a class="pill" href="/tarifs/">Tarifs</a>
-          <a class="pill" href="/contact/">Contact</a>
         </div>
       </aside>
     </section>

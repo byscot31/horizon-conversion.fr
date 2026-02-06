@@ -2,12 +2,13 @@
 // src/pages/zones/val-doise-95/index.astro
 import LayoutSEO from "../../../layouts/LayoutSEO.astro";
 import { JOBS } from "../../../data/jobs.ts";
-import { ZONES, slugifyCity } from "../../../data/zones.ts";
+import { ZONES, slugifyCity, type ZoneKey } from "../../../data/zones.ts";
+import { getZoneHubFaq } from "../../../data/faq-zones.ts";
 
 const baseUrl = "https://animaux.horizon-conversion.fr";
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
-const zoneKey = "val-doise-95" as const;
+const zoneKey = "val-doise-95" as ZoneKey;
 const zone = (ZONES as any)[zoneKey];
 
 const zoneName = "Val d’Oise (95)";
@@ -91,20 +92,20 @@ const travel = {
   ],
 };
 
-const faq = [
-  {
-    q: `Quel rayon d’intervention pour ${zoneName} ?`,
-    a: "Souvent plus dense et concurrentiel : un rayon plus serré (15–25 km) peut mieux performer. On ajuste selon la réalité terrain et votre agenda.",
-  },
-  {
-    q: "Pourquoi la page “métier × ville” est-elle clé ?",
-    a: "Elle correspond exactement à la requête (“toiletteur chien Argenteuil”) : Google comprend mieux l’intention, et l’utilisateur convertit plus facilement.",
-  },
-  {
-    q: "Quand activer les Ads ?",
-    a: "Quand la concurrence est forte ou quand il faut remplir vite : Ads sur intentions rentables, pilotées au coût par lead + tracking propre.",
-  },
-];
+// ✅ FAQ contextualisée par zoneKey (pas de duplication)
+const faqs = getZoneHubFaq(zoneKey, zoneName);
+
+const faqJsonLd = faqs.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }
+  : null;
 
 const jsonLd = [
   {
@@ -147,15 +148,7 @@ const jsonLd = [
       url: `${baseUrl}${p.href}`,
     })),
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  },
+  ...(faqJsonLd ? [faqJsonLd] : []),
 ];
 ---
 
@@ -203,6 +196,12 @@ const jsonLd = [
   .miniCard strong{display:block;margin-bottom:6px}
   .link{color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.18)}
   .link:hover{border-bottom-color:rgba(15,23,42,.45)}
+
+  /* ✅ FAQ */
+  .faq{margin-top:16px}
+  .faq details{border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px;background:#fff;margin-bottom:10px}
+  .faq summary{cursor:pointer;font-weight:900}
+  .faq p{margin:10px 0 0;color:#334155;line-height:1.6}
 </style>
 
 <div class="wrap">
@@ -258,6 +257,17 @@ const jsonLd = [
             <strong>{q.q}</strong>
             <div class="meta" style="margin-top:0">{q.why}</div>
           </div>
+        ))}
+      </div>
+
+      {/* ✅ FAQ dynamique par zoneKey */}
+      <div class="faq" id="faq">
+        <h2 style="margin-top:16px;">FAQ locale (circulation / parking / saisonnalité)</h2>
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
         ))}
       </div>
 

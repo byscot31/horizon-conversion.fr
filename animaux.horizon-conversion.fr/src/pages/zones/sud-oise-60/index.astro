@@ -3,12 +3,13 @@
 import LayoutSEO from "../../../layouts/LayoutSEO.astro";
 import { JOBS } from "../../../data/jobs.ts";
 import { SERVICES } from "../../../data/services.ts";
-import { ZONES, slugifyCity } from "../../../data/zones.ts";
+import { ZONES, slugifyCity, type ZoneKey } from "../../../data/zones.ts";
+import { getZoneHubFaq } from "../../../data/faq-zones.ts";
 
 const baseUrl = "https://animaux.horizon-conversion.fr";
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
-const zoneKey = "sud-oise-60" as const;
+const zoneKey = "sud-oise-60" as ZoneKey;
 const zone = (ZONES as any)[zoneKey];
 const zoneName = "Sud Oise (60)";
 
@@ -72,29 +73,20 @@ const localProof = {
   note: "Données indicatives et anonymisées. Les résultats varient selon offre, concurrence, zone et budget.",
 };
 
-// ✅ FAQ spécifique zone (circulation, saisonnalité, déplacements)
-const faq = [
-  {
-    q: `Quelles communes prioriser en ${zoneName} ?`,
-    a: "On démarre par les communes “cœur” (demande + proximité) puis on étend aux villes proches. Priorisation = intention + concurrence + rentabilité.",
-  },
-  {
-    q: "Y a-t-il une saisonnalité (vacances, week-ends) ?",
-    a: "Souvent oui (pensions, pet-sitting, toilettage). On anticipe via pages dédiées + Ads saisonnières + planning de contenus GBP.",
-  },
-  {
-    q: "Déplacements : comment éviter les demandes hors zone ?",
-    a: "En affichant un rayon réaliste, une liste de communes couvertes, et une question de qualification (ville) en formulaire + exclusions Ads.",
-  },
-  {
-    q: "Circulation / temps de trajet : est-ce un frein ?",
-    a: "Oui si la zone est trop large. On conseille une zone maîtrisée (rayon) et des pages localisées cohérentes avec vos déplacements réels.",
-  },
-  {
-    q: "Comment prouver que les leads viennent bien du SEO/Maps/Ads ?",
-    a: "Tracking : clic-to-call, formulaires tagués, UTM, événements analytics + dashboard mensuel.",
-  },
-];
+// ✅ FAQ hub : contextualisée par zoneKey, sans duplication
+const faqs = getZoneHubFaq(zoneKey, zoneName);
+
+const faqJsonLd = faqs.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }
+  : null;
 
 const jsonLd = [
   {
@@ -148,15 +140,7 @@ const jsonLd = [
       url: `${baseUrl}${p.href}`,
     })),
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  },
+  ...(faqJsonLd ? [faqJsonLd] : []),
 ];
 ---
 
@@ -259,9 +243,10 @@ const jsonLd = [
         <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
       </div>
 
+      {/* ✅ FAQ dynamique par zoneKey */}
       <div class="faq" id="faq">
-        <h2 style="margin:0 0 10px;">FAQ (Sud Oise)</h2>
-        {faq.map((f) => (
+        <h2 style="margin:0 0 10px;">FAQ locale (déplacements / parking / saisonnalité)</h2>
+        {faqs.map((f) => (
           <details>
             <summary>{f.q}</summary>
             <p>{f.a}</p>
