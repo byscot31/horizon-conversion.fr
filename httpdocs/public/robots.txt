@@ -1,8 +1,4 @@
 User-agent: *
 Disallow: /
 
-Sitemap: https://YOUR-DOMAIN.TLD/sitemap.xml
-
-# Optionnel : bloquer des pages techniques si tu en as
-Disallow: /_astro/
-Disallow: /api/
+Sitemap: https://horizon-conversion.fr/sitemap-index.xml

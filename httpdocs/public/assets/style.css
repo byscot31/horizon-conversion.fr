@@ -24753,7 +24753,7 @@ td.actions {
   --cnvs-iconlist-size: 1rem;
   --cnvs-iconlist-color: var(--cnvs-themecolor);
   --cnvs-iconlist-margin: 0.5rem;
-  --cnvs-iconlist-gutter: 0.75rem;
+  --cnvs-iconlist-gutter: 0.05rem;
   --cnvs-iconlist-offset: 0;
   padding-left: 0;
   margin-left: 0;
@@ -24761,7 +24761,7 @@ td.actions {
 }
 .iconlist li {
   position: relative;
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   align-items: baseline;
   font-size: var(--cnvs-iconlist-size);
