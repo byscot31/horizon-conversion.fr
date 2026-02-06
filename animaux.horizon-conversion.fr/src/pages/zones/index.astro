@@ -1,0 +1,291 @@
+---
+// src/pages/zones/index.astro
+import LayoutSEO from "../../layouts/LayoutSEO.astro";
+
+const baseUrl = "https://animaux.horizon-conversion.fr";
+const canonical = `${baseUrl}${Astro.url.pathname}`;
+
+const title = "Zones | Horizon Conversion Animaux";
+const description =
+  "Zones d’intervention : Sud Oise (60) et Val d’Oise (95). Pages locales prêtes à ranker (1 intention = 1 page) pour SEO local, Google Maps et Ads.";
+
+const breadcrumbs = [
+  { name: "Accueil", item: `${baseUrl}/` },
+  { name: "Zones", item: canonical },
+];
+
+// ✅ Zones “hub” : ajoute/retire des villes facilement
+const zones = [
+  {
+    slug: "sud-oise-60",
+    title: "Oise (60) — Sud Oise",
+    badge: "Zone prioritaire",
+    intro:
+      "SEO local, Google Maps et Ads pour capter des demandes qualifiées dans le Sud de l’Oise.",
+    towns: ["Chantilly", "Senlis", "Lamorlaye", "Gouvieux", "Creil", "Nogent-sur-Oise", "Pont-Sainte-Maxence"],
+  },
+  {
+    slug: "val-doise-95",
+    title: "Val d’Oise (95)",
+    badge: "Zone prioritaire",
+    intro:
+      "Acquisition locale et pages dédiées par intention pour générer appels, formulaires et RDV.",
+    towns: ["Cergy", "Pontoise", "L’Isle-Adam", "Enghien-les-Bains", "Sannois", "Argenteuil", "Franconville"],
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Zones | Horizon Conversion Animaux",
+    url: canonical,
+    description,
+    isPartOf: { "@type": "WebSite", name: "Horizon Conversion Animaux", url: baseUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.name,
+      item: b.item,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: zones.map((z, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: z.title,
+      url: `${baseUrl}/zones/${z.slug}/`,
+    })),
+  },
+];
+---
+
+<LayoutSEO
+  title={title}
+  description={description}
+  baseUrl={baseUrl}
+  canonical={canonical}
+  ogType="website"
+  ogImage={`${baseUrl}/og/zones.jpg`}
+  ogImageAlt="Zones – Horizon Conversion Animaux"
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+
+<style>
+  :global(body) {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+      Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    color: #0f172a;
+    background: #ffffff;
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 28px 16px 72px;
+  }
+  .breadcrumbs {
+    font-size: 14px;
+    color: #475569;
+    margin: 4px 0 18px;
+  }
+  .breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  header.hero {
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #f8fafc, #fff);
+    padding: 22px;
+    display: grid;
+    gap: 10px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    margin: 0;
+    color: #334155;
+    max-width: 90ch;
+    line-height: 1.6;
+  }
+
+  .grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  a.cardLink {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card {
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 18px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    display: grid;
+    gap: 10px;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .top h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 900;
+  }
+  .intro {
+    margin: 0;
+    color: #334155;
+    line-height: 1.6;
+  }
+
+  .towns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .pill {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #334155;
+  }
+
+  .note {
+    margin-top: 14px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 14px;
+    color: #334155;
+    background: #f8fafc;
+    line-height: 1.6;
+  }
+
+  .ctaRow {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 720px) {
+    .ctaRow {
+      grid-template-columns: 1fr;
+    }
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #0f172a;
+    background: #0f172a;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .btn.secondary {
+    background: #fff;
+    color: #0f172a;
+  }
+  .meta {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="wrap">
+  <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+    <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Zones</span>
+  </nav>
+
+  <header class="hero">
+    <h1>Zones d’intervention</h1>
+    <p class="sub">
+      On se concentre sur des zones où le SEO local et les Ads peuvent performer vite :
+      <strong> Sud Oise (60)</strong> et <strong>Val d’Oise (95)</strong>.
+      Chaque zone peut être déclinée en pages locales “<strong>1 intention = 1 page</strong>”
+      (métier + ville + service) pour capter des requêtes à forte intention.
+    </p>
+  </header>
+
+  <section class="grid" aria-label="Liste des zones">
+    {zones.map((z) => (
+      <a class="cardLink" href={`/zones/${z.slug}/`}>
+        <article class="card">
+          <div class="top">
+            <h2>{z.title}</h2>
+            <span class="badge">{z.badge}</span>
+          </div>
+          <p class="intro">{z.intro}</p>
+          <div class="towns" aria-label="Villes couvertes">
+            {z.towns.map((t) => (
+              <span class="pill">{t}</span>
+            ))}
+          </div>
+        </article>
+      </a>
+    ))}
+  </section>
+
+  <div class="note">
+    <strong>Astuce SEO local :</strong> au lieu d’une page “générale” qui ne ranke pas,
+    on crée des pages dédiées par intention (ex : “toiletteur chien Chantilly”,
+    “éducateur canin Cergy”, “pension canine Senlis”) avec FAQ + schémas + CTA,
+    et on relie le tout via ce hub “Zones”.
+  </div>
+
+  <div class="ctaRow">
+    <a class="btn" href="/contact/">Demander un diagnostic</a>
+    <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+  </div>
+
+  <p class="meta">
+    Une ville n’est pas listée ? On peut l’ajouter :{" "}
+    <a
+      href="mailto:contact@horizon-conversion.fr"
+      style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
+    >
+      contact@horizon-conversion.fr
+    </a>
+  </p>
+</div>

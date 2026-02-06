@@ -1,0 +1,377 @@
+---
+// src/pages/contact.astro
+import LayoutSEO from "../layouts/LayoutSEO.astro";
+
+const baseUrl = "https://animaux.horizon-conversion.fr";
+const canonical = `${baseUrl}${Astro.url.pathname}`;
+
+// NAP (fixe)
+const NAP = {
+  name: "Horizon Conversion Animaux",
+  phoneDisplay: "06 60 92 10 08",
+  phoneE164: "+33660921008",
+  email: "contact@horizon-conversion.fr",
+  url: baseUrl,
+  areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { name: "Accueil", item: `${baseUrl}/` },
+  { name: "Contact", item: canonical },
+];
+
+// JSON-LD
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact | Horizon Conversion Animaux",
+    url: canonical,
+    description:
+      "Contactez Horizon Conversion Animaux pour développer votre activité webmarketing local (SEO, Google Maps, Ads) dans le Sud Oise (60) et le Val d’Oise (95).",
+    mainEntity: {
+      "@type": "Organization",
+      name: NAP.name,
+      url: NAP.url,
+      email: NAP.email,
+      telephone: NAP.phoneE164,
+      areaServed: NAP.areaServed,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: NAP.phoneE164,
+          contactType: "sales",
+          areaServed: ["FR"],
+          availableLanguage: ["fr"],
+          email: NAP.email,
+        },
+      ],
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.name,
+      item: b.item,
+    })),
+  },
+];
+
+const title = "Contact | Horizon Conversion Animaux";
+const description =
+  "Parlez-nous de votre activité animalière : SEO local, Google Maps, Google Ads, Meta Ads, tracking & conversion en Sud Oise (60) et Val d’Oise (95).";
+---
+
+<LayoutSEO
+  title={title}
+  description={description}
+  baseUrl={baseUrl}
+  canonical={canonical}
+  ogType="website"
+  ogImage={`${baseUrl}/og/contact.jpg`}
+  ogImageAlt="Contact Horizon Conversion Animaux"
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <style>
+    :global(body) {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+        Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #0f172a;
+      background: #ffffff;
+    }
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 16px 64px;
+    }
+    .breadcrumbs {
+      font-size: 14px;
+      color: #475569;
+      margin: 4px 0 18px;
+    }
+    .breadcrumbs a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .hero {
+      display: grid;
+      gap: 18px;
+      padding: 20px 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+    }
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 0;
+      color: #334155;
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 70ch;
+    }
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+    @media (max-width: 920px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .meta {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .row {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    label {
+      font-size: 14px;
+      color: #334155;
+    }
+    input,
+    textarea,
+    select {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #64748b;
+      box-shadow: 0 0 0 4px rgba(100, 116, 139, 0.15);
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #0f172a;
+      background: #0f172a;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+    }
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+    .small {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.45;
+    }
+    .infoList {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .infoItem {
+      padding: 12px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+    .infoItem strong {
+      display: block;
+      font-size: 13px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .infoItem a {
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.2);
+    }
+    .kpi {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #334155;
+      width: fit-content;
+    }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Contact</span>
+    </nav>
+
+    <header class="hero">
+      <h1>Contact</h1>
+      <p class="sub">
+        Décrivez votre activité (véto, éducateur canin, pension, toiletteur, ostéo,
+        comportementaliste, etc.). On revient vers vous avec une proposition claire
+        et orientée résultats pour le <strong>Sud Oise (60)</strong> et le
+        <strong>Val d’Oise (95)</strong>.
+      </p>
+    </header>
+
+    <section class="grid">
+      <!-- FORM -->
+      <div class="card">
+        <h2>Envoyer une demande</h2>
+        <p class="meta">
+          Objectif : qualifier vite (zone, métier, urgence, budget) pour éviter les
+          allers-retours.
+        </p>
+
+        <form method="POST" action="/_assets_/include/form.php" novalidate>
+          <div class="row">
+            <label for="name">Nom / Prénom</label>
+            <input id="name" name="name" autocomplete="name" required />
+          </div>
+
+          <div class="row">
+            <label for="business">Métier / Structure</label>
+            <input
+              id="business"
+              name="business"
+              placeholder="Ex : éducateur canin, clinique vétérinaire, pension…"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <label for="city">Ville principale</label>
+            <input id="city" name="city" placeholder="Ex : Senlis, Chantilly, Cergy…" required />
+          </div>
+
+          <div class="row">
+            <label for="department">Zone</label>
+            <select id="department" name="department" required>
+              <option value="">Choisir…</option>
+              <option value="Oise-60">Oise (60)</option>
+              <option value="Valdoise-95">Val d’Oise (95)</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="row">
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+
+          <div class="row">
+            <label for="goal">Objectif prioritaire</label>
+            <select id="goal" name="goal" required>
+              <option value="">Choisir…</option>
+              <option value="SEO local / Google Maps">SEO local / Google Maps</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="Meta Ads">Meta Ads</option>
+              <option value="Conversion & tracking">Conversion & tracking</option>
+              <option value="Pack complet">Pack complet</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="message">Votre message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Contexte, concurrence, ce que vous avez déjà tenté, délai…"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Anti-spam basique (honeypot) -->
+          <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
+            <label for="website">Website</label>
+            <input id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="row">
+            <button class="btn" type="submit">Envoyer</button>
+          </div>
+
+          <p class="small">
+            En envoyant ce formulaire, vous acceptez d’être recontacté par
+            <strong>{NAP.name}</strong>. Vos informations ne sont pas revendues.
+          </p>
+        </form>
+      </div>
+
+      <!-- INFOS -->
+      <aside class="card">
+        <h2>Coordonnées</h2>
+        <div class="infoList">
+          <div class="infoItem">
+            <strong>Téléphone</strong>
+            <a href={`tel:${NAP.phoneE164}`}>{NAP.phoneDisplay}</a>
+          </div>
+          <div class="infoItem">
+            <strong>Email</strong>
+            <a href={`mailto:${NAP.email}`}>{NAP.email}</a>
+          </div>
+          <div class="infoItem">
+            <strong>Zone</strong>
+            <div class="meta">Sud Oise (60) • Val d’Oise (95)</div>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <span class="pill">Qualification stricte des prospects</span>
+          <span class="pill">Preuves alternatives (process & tracking)</span>
+          <span class="pill">Pages locales : 1 intention = 1 page</span>
+        </div>
+
+        <h2 style="margin-top:16px;">Ce qu’on peut lancer vite</h2>
+        <p class="meta">
+          Sans attendre des avis : optimisation Google Business Profile, pages
+          locales, suivi des appels/formulaires, campagnes Ads orientées RDV.
+        </p>
+      </aside>
+    </section>
+  </div>

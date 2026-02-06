@@ -1,0 +1,439 @@
+---
+// src/layouts/LayoutSEO.astro
+import type { AstroGlobal } from "astro";
+
+type OgType = "website" | "article" | "profile";
+
+type BreadcrumbItem = {
+  name: string;
+  item: string; // absolute URL
+};
+
+type Address = {
+  streetAddress?: string;
+  postalCode?: string;
+  addressLocality?: string;
+  addressRegion?: string;
+  addressCountry?: string; // e.g. "FR"
+};
+
+type Geo = {
+  latitude: number;
+  longitude: number;
+};
+
+type OpeningHoursSpec = {
+  dayOfWeek: string[]; // e.g. ["Monday","Tuesday"]
+  opens: string; // "09:00"
+  closes: string; // "18:00"
+};
+
+type SeoProps = {
+  title: string;
+  description: string;
+
+  // URLs
+  canonical?: string; // absolute preferred, but relative accepted
+  baseUrl?: string; // used to absolutize canonical/og if they are relative
+
+  // Indexing
+  noindex?: boolean;
+  nofollow?: boolean;
+
+  // Social
+  ogType?: OgType;
+  ogImage?: string; // absolute preferred
+  ogImageAlt?: string;
+  twitterCard?: "summary" | "summary_large_image";
+
+  // Breadcrumbs (JSON-LD)
+  breadcrumbs?: BreadcrumbItem[];
+
+  // JSON-LD (Organization / LocalBusiness / Service / FAQ, etc.)
+  jsonLd?: Record<string, any> | Array<Record<string, any>>;
+  // If you want to auto-generate a LocalBusiness schema quickly:
+  business?: {
+    name: string;
+    url: string; // absolute
+    logo?: string; // absolute
+    image?: string[]; // absolute
+    telephone?: string;
+    email?: string;
+    priceRange?: string;
+    address?: Address;
+    geo?: Geo;
+    areaServed?: string[]; // e.g. ["Sud Oise", "Val d’Oise"]
+    openingHoursSpecification?: OpeningHoursSpec[];
+    sameAs?: string[];
+  };
+};
+
+const {
+  title,
+  description,
+  canonical,
+  baseUrl,
+  noindex,
+  nofollow,
+  ogType = "website",
+  ogImage,
+  ogImageAlt,
+  twitterCard = "summary_large_image",
+  breadcrumbs,
+  jsonLd,
+  business,
+} = (Astro.props ?? {}) as SeoProps;
+
+const site = Astro.site?.toString() || baseUrl || "";
+
+// Normalize URL -> absolute when possible
+const toAbs = (url?: string) => {
+  if (!url) return undefined;
+  try {
+    // Already absolute
+    return new URL(url).toString();
+  } catch {
+    // Relative + site
+    if (!site) return url;
+    return new URL(url.replace(/^\//, ""), site.endsWith("/") ? site : site + "/").toString();
+  }
+};
+
+const canonicalUrl = toAbs(canonical || Astro.url.toString());
+const ogUrl = canonicalUrl;
+const ogImageUrl = toAbs(ogImage);
+const robots = [
+  noindex ? "noindex" : "index",
+  nofollow ? "nofollow" : "follow",
+].join(", ");
+
+const makeBreadcrumbLd = (items?: BreadcrumbItem[]) => {
+  if (!items?.length) return undefined;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((b, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: b.name,
+      item: b.item,
+    })),
+  };
+};
+
+const makeBusinessLd = (b?: SeoProps["business"]) => {
+  if (!b) return undefined;
+  const ld: Record<string, any> = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: b.name,
+    url: b.url,
+  };
+  if (b.logo) ld.logo = b.logo;
+  if (b.image?.length) ld.image = b.image;
+  if (b.telephone) ld.telephone = b.telephone;
+  if (b.email) ld.email = b.email;
+  if (b.priceRange) ld.priceRange = b.priceRange;
+  if (b.sameAs?.length) ld.sameAs = b.sameAs;
+
+  if (b.address) {
+    ld.address = {
+      "@type": "PostalAddress",
+      ...b.address,
+    };
+    // default country if omitted
+    if (!ld.address.addressCountry) ld.address.addressCountry = "FR";
+  }
+  if (b.geo) {
+    ld.geo = {
+      "@type": "GeoCoordinates",
+      latitude: b.geo.latitude,
+      longitude: b.geo.longitude,
+    };
+  }
+  if (b.areaServed?.length) ld.areaServed = b.areaServed;
+
+  if (b.openingHoursSpecification?.length) {
+    ld.openingHoursSpecification = b.openingHoursSpecification.map((oh) => ({
+      "@type": "OpeningHoursSpecification",
+      ...oh,
+    }));
+  }
+  return ld;
+};
+
+const breadcrumbLd = makeBreadcrumbLd(breadcrumbs);
+const businessLd = makeBusinessLd(business);
+
+// Merge JSON-LD blocks cleanly (allow array or object)
+const ldBlocks: Array<Record<string, any>> = [];
+if (breadcrumbLd) ldBlocks.push(breadcrumbLd);
+if (businessLd) ldBlocks.push(businessLd);
+
+if (Array.isArray(jsonLd)) ldBlocks.push(...jsonLd);
+else if (jsonLd) ldBlocks.push(jsonLd);
+
+// De-duplicate by @type + name/url when possible
+const dedupeKey = (o: Record<string, any>) =>
+  `${o["@type"] || ""}::${o.name || ""}::${o.url || o.item || ""}`;
+
+const uniqueLdBlocks = Array.from(
+  new Map(ldBlocks.map((o) => [dedupeKey(o), o])).values()
+);
+
+const ldJson = uniqueLdBlocks.length ? JSON.stringify(uniqueLdBlocks, null, 0) : "";
+
+// ✅ Nav
+const nav = [
+  { href: "/methode/", label: "Méthode" },
+  { href: "/preuves/", label: "Preuves" },
+  { href: "/prestations/", label: "Prestations" },
+  { href: "/metiers/", label: "Métiers" },
+  { href: "/zones/", label: "Zones" },
+  { href: "/contact/", label: "Contact" },
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta name="robots" content={robots} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={ogUrl} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <!-- JSON-LD -->
+    {ldJson && <script type="application/ld+json" set:html={ldJson} />}
+  </head>
+
+  <body>
+    <style>
+      :global(body) {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+          Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: #0f172a;
+        background: #ffffff;
+      }
+      :global(a) { color: inherit; }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .headerRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 0;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0f172a, #334155);
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+      }
+      .brandText strong {
+        display: block;
+        font-size: 14px;
+        letter-spacing: -0.01em;
+      }
+      .brandText span {
+        display: block;
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 1px;
+      }
+      .nav {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .nav a {
+        text-decoration: none;
+        font-size: 13px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        color: #0f172a;
+      }
+      .nav a:hover {
+        border-color: #e2e8f0;
+        background: #f8fafc;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid #0f172a;
+        background: #0f172a;
+        color: #fff;
+        font-weight: 900;
+        text-decoration: none;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .cta.secondary {
+        background: #fff;
+        color: #0f172a;
+      }
+
+      .main {
+        min-height: 70vh;
+      }
+
+      .footer {
+        margin-top: 48px;
+        border-top: 1px solid #e2e8f0;
+        background: #fff;
+      }
+      .footerGrid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        padding: 22px 0;
+      }
+      @media (max-width: 920px) {
+        .footerGrid { grid-template-columns: 1fr; }
+      }
+      .footer h3 {
+        margin: 0 0 8px;
+        font-size: 14px;
+      }
+      .footer p {
+        margin: 0;
+        color: #334155;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+      .footerLinks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .footerLinks a {
+        font-size: 13px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.18);
+      }
+      .footerLinks a:hover {
+        border-bottom-color: rgba(15, 23, 42, 0.45);
+      }
+      .small {
+        font-size: 12px;
+        color: #64748b;
+        padding: 12px 0 18px;
+      }
+    </style>
+
+    <!-- ✅ HEADER -->
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="headerRow">
+          <a class="brand" href="/">
+            <span class="logo" aria-hidden="true"></span>
+            <span class="brandText">
+              <strong>Horizon Conversion Animaux</strong>
+              <span>SEO local • Google Maps • Ads • Conversion</span>
+            </span>
+          </a>
+
+          <nav class="nav" aria-label="Navigation principale">
+            {nav.map((l) => (
+              <a href={l.href}>{l.label}</a>
+            ))}
+          </nav>
+
+          <div style="display:flex;gap:10px;align-items:center;">
+            <a class="cta secondary" href="tel:+33660921008">06 60 92 10 08</a>
+            <a class="cta" href="/contact/">Diagnostic</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ✅ MAIN -->
+    <main class="main" role="main">
+      <slot />
+    </main>
+
+    <!-- ✅ FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footerGrid">
+          <div>
+            <h3>Horizon Conversion Animaux</h3>
+            <p>
+              Webmarketing local pour les professionnels des animaux (Sud Oise 60 / Val d’Oise 95) :
+              SEO local & Google Maps, Google Ads, Meta Ads, landing pages, conversion & tracking.
+            </p>
+
+            <div class="footerLinks" aria-label="Raccourcis">
+              <a href="/prestations/">Prestations</a>
+              <a href="/metiers/">Métiers</a>
+              <a href="/zones/">Zones</a>
+              <a href="/preuves/">Preuves</a>
+              <a href="/methode/">Méthode</a>
+              <a href="/contact/">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Contact</h3>
+            <p>
+              Téléphone : <a href="tel:+33660921008">06 60 92 10 08</a><br />
+              Email : <a href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+            </p>
+            <div class="footerLinks" style="margin-top:10px;">
+              <a href="/contact/">Demander un diagnostic</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="small">
+          © {new Date().getFullYear()} Horizon Conversion Animaux — Tous droits réservés.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
