@@ -1,4 +1,5 @@
 ---
+// src/pages/prestations/[prestation].astro
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
 import { PRESTATIONS, type PrestationKey } from "../../data/prestations.ts";
 
@@ -26,14 +27,152 @@ const breadcrumbs = [
   { name: offer.name, item: canonical },
 ];
 
+// ✅ Packs (liens réels)
+const packs = [
+  {
+    name: "Essentiel",
+    badge: "Socle rapide",
+    href: "/tarifs/#local-essentiel",
+    bullets: [
+      "Fondations SEO local / Maps",
+      "1–2 pages prioritaires (intentions fortes)",
+      "Tracking basique (appels + formulaires)",
+    ],
+  },
+  {
+    name: "Performance",
+    badge: "Optimisation continue",
+    href: "/tarifs/#local-performance",
+    bullets: [
+      "Pages locales + maillage + itérations",
+      "Pilotage Ads (si besoin) au coût/lead",
+      "Amélioration conversion (CTA, preuve, FAQ)",
+    ],
+  },
+  {
+    name: "Pack complet",
+    badge: "SEO + Ads + conversion",
+    href: "/tarifs/#pack-complet",
+    bullets: [
+      "SEO local + Google Maps + pages",
+      "Ads + landing pages orientées RDV",
+      "Tracking & dashboard (source → lead)",
+    ],
+  },
+];
+
+// ✅ Mini lien complémentaire
+const adsBooster = {
+  name: "Ads Booster",
+  hint: "Accélérer sur une offre / période",
+  href: "/tarifs/#ads-booster",
+};
+
+// ✅ Tracking “exemple”
+const trackingEvents = [
+  { name: "click_to_call", detail: "clic sur téléphone (header/page/footer)" },
+  { name: "form_submit", detail: "envoi formulaire contact (avec qualif)" },
+  { name: "cta_diagnostic", detail: "clic CTA “Demander un diagnostic”" },
+  { name: "utm_source", detail: "attribution Ads/SEO/Maps via UTM" },
+];
+
+// ✅ Preuves anonymisées (exemples “show, don’t tell”)
+const proofExamples = [
+  {
+    title: "Avant/Après — Ads + landing",
+    context:
+      "Structure campagnes + exclusions + page dédiée. Objectif : moins de bruit, plus de RDV utiles.",
+    kpis: [
+      { label: "CTR Ads", before: "2,1%", after: "4,6%" },
+      { label: "Conv. landing", before: "3,2%", after: "7,8%" },
+      { label: "Appels/sem", before: "4–6", after: "10–14" },
+    ],
+    // image: { src: "/proofs/proof-ads-anonyme.jpg", alt: "Exemple anonymisé Ads" },
+  },
+  {
+    title: "Exemple tracking — preuves par la donnée",
+    context:
+      "Événements + sources (SEO/Maps/Ads) reliés aux leads, pour piloter au coût/lead.",
+    kpis: [
+      { label: "Leads suivis", before: "flou", after: "clair" },
+      { label: "Sources", before: "inconnues", after: "attribuées" },
+      { label: "Décisions", before: "au feeling", after: "data-driven" },
+    ],
+    // image: { src: "/proofs/proof-tracking-anonyme.jpg", alt: "Exemple anonymisé tracking" },
+  },
+];
+
+// ✅ FAQ fallback si PRESTATIONS n’en fournit pas
+const fallbackFaq = [
+  {
+    q: `Combien de temps pour voir des résultats sur “${offer.name}” ?`,
+    a: "Ça dépend du point de départ. En général : quick wins en 2–4 semaines (tracking + pages/GBP/Ads), puis optimisation continue sur 2–3 mois.",
+  },
+  {
+    q: "Comment prouver que les demandes viennent bien du SEO, Maps ou Ads ?",
+    a: "UTM + événements (clic-to-call, form submit) + tableau de bord par source pour relier chaque lead à un canal.",
+  },
+  {
+    q: "Vous pouvez filtrer les demandes hors zone (60/95) ?",
+    a: "Oui : via pages locales, ciblages et exclusions Ads, messages, et formulaire qualifiant (ville, zone, besoin).",
+  },
+];
+
+const faqs = (offer.faq && offer.faq.length ? offer.faq : fallbackFaq) as Array<{ q: string; a: string }>;
+
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: (offer.faq || []).map((f) => ({
+  mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
+};
+
+// ✅ (optionnel) : clarifier “packs” côté Google via offers dans Service
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: offer.name,
+  areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
+  provider: {
+    "@type": "Organization",
+    name: "Horizon Conversion Animaux",
+    url: baseUrl,
+    telephone: "+33660921008",
+    email: "contact@horizon-conversion.fr",
+  },
+  offers: [
+    ...packs.map((p) => ({
+      "@type": "Offer",
+      name: p.name,
+      url: `${baseUrl}${p.href}`,
+      priceCurrency: "EUR",
+      price: "0",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "EUR",
+        price: "0",
+        description: "Tarif sur devis (voir page tarifs).",
+      },
+      availability: "https://schema.org/InStock",
+    })),
+    {
+      "@type": "Offer",
+      name: adsBooster.name,
+      url: `${baseUrl}${adsBooster.href}`,
+      priceCurrency: "EUR",
+      price: "0",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "EUR",
+        price: "0",
+        description: "Tarif sur devis (voir page tarifs).",
+      },
+      availability: "https://schema.org/InStock",
+    },
+  ],
 };
 
 const jsonLd = [
@@ -55,19 +194,7 @@ const jsonLd = [
       item: b.item,
     })),
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: offer.name,
-    areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
-    provider: {
-      "@type": "Organization",
-      name: "Horizon Conversion Animaux",
-      url: baseUrl,
-      telephone: "+33660921008",
-      email: "contact@horizon-conversion.fr",
-    },
-  },
+  serviceLd,
   faqJsonLd,
 ];
 ---
@@ -83,126 +210,233 @@ const jsonLd = [
   breadcrumbs={breadcrumbs}
   jsonLd={jsonLd}
 >
+  <style>
+    .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 72px}
+    .breadcrumbs{font-size:14px;color:#475569;margin:4px 0 18px}
+    .breadcrumbs a{color:inherit;text-decoration:none}
+    header.hero{border:1px solid #e2e8f0;border-radius:18px;background:linear-gradient(180deg,#f8fafc,#fff);padding:22px;display:grid;gap:10px}
+    h1{margin:0;font-size:34px;line-height:1.1;letter-spacing:-0.02em}
+    .sub{margin:0;color:#334155;max-width:90ch;line-height:1.6}
 
-<style>
-  :global(body){margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;color:#0f172a;background:#fff}
-  .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 72px}
-  .breadcrumbs{font-size:14px;color:#475569;margin:4px 0 18px}
-  .breadcrumbs a{color:inherit;text-decoration:none}
-  header.hero{border:1px solid #e2e8f0;border-radius:18px;background:linear-gradient(180deg,#f8fafc,#fff);padding:22px;display:grid;gap:10px}
-  h1{margin:0;font-size:34px;line-height:1.1;letter-spacing:-0.02em}
-  .sub{margin:0;color:#334155;max-width:90ch;line-height:1.6}
-  .grid{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
-  @media (max-width:920px){.grid{grid-template-columns:1fr}}
-  .card{border:1px solid #e2e8f0;border-radius:18px;padding:18px;background:#fff;box-shadow:0 6px 20px rgba(15,23,42,.06)}
-  h2{margin:0 0 10px;font-size:18px}
-  p{margin:0;color:#334155;line-height:1.6}
-  ul{margin:10px 0 0;padding-left:18px;color:#334155;line-height:1.55}
-  .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#f1f5f9;color:#334155;font-weight:900;width:fit-content}
-  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .pill{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#334155}
-  .kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-  .kpi{border:1px solid #e2e8f0;border-radius:16px;background:#f8fafc;padding:12px}
-  .kpi strong{display:block;font-size:14px}
-  .kpi span{display:block;font-size:12px;color:#64748b;margin-top:2px}
-  .ctaRow{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media (max-width:720px){.ctaRow{grid-template-columns:1fr}}
-  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:14px;border:1px solid #0f172a;background:#0f172a;color:#fff;cursor:pointer;font-weight:900;text-decoration:none}
-  .btn.secondary{background:#fff;color:#0f172a}
-  .faq{margin-top:16px}
-  .faq details{border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px;background:#fff;margin-bottom:10px}
-  .faq summary{cursor:pointer;font-weight:900}
-  .faq p{margin:10px 0 0}
-  .meta{color:#475569;font-size:14px;line-height:1.6;margin-top:10px}
-</style>
+    .grid{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+    @media (max-width:920px){.grid{grid-template-columns:1fr}}
 
-<div class="wrap">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-    <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
-    <a href="/prestations/">Prestations</a> <span aria-hidden="true">›</span>{" "}
-    <span>{offer.name}</span>
-  </nav>
+    .card{border:1px solid #e2e8f0;border-radius:18px;padding:18px;background:#fff;box-shadow:0 6px 20px rgba(15,23,42,.06)}
+    h2{margin:0 0 10px;font-size:18px}
+    h3{margin:16px 0 10px;font-size:15px}
+    p{margin:0;color:#334155;line-height:1.6}
+    ul{margin:10px 0 0;padding-left:18px;color:#334155;line-height:1.55}
 
-  <header class="hero">
-    <span class="badge">{offer.badge}</span>
-    <h1>{offer.name}</h1>
-    <p class="sub">
-      {offer.headline} Zones prioritaires : <strong>Sud Oise (60)</strong> &{" "}
-      <strong>Val d’Oise (95)</strong>.
-    </p>
-  </header>
+    .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#f1f5f9;color:#334155;font-weight:900;width:fit-content}
+    .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill,.pillLink{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#334155;text-decoration:none}
+    .pillLink:hover{background:#f8fafc}
 
-  <section class="grid">
-    <div class="card">
-      <h2>Pourquoi cette prestation</h2>
-      <p>On cible une seule chose : des demandes utiles (RDV, devis, réservations) — pas du volume.</p>
+    .kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .kpi{border:1px solid #e2e8f0;border-radius:16px;background:#f8fafc;padding:12px}
+    .kpi strong{display:block;font-size:14px}
+    .kpi span{display:block;font-size:12px;color:#64748b;margin-top:2px}
 
-      <div class="pills" aria-label="Pour qui">
-        {(offer.forWho || []).map((x) => <span class="pill">{x}</span>)}
-      </div>
+    .ctaRow{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:720px){.ctaRow{grid-template-columns:1fr}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:14px;border:1px solid #0f172a;background:#0f172a;color:#fff;cursor:pointer;font-weight:900;text-decoration:none}
+    .btn.secondary{background:#fff;color:#0f172a}
 
-      <h2 style="margin-top:16px;">Problèmes fréquents</h2>
-      <ul>{(offer.pains || []).map((x) => <li>{x}</li>)}</ul>
+    .meta{color:#475569;font-size:14px;line-height:1.6;margin-top:10px}
+    .link{color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2)}
+    .link:hover{border-bottom-color:rgba(15,23,42,.45)}
 
-      <h2 style="margin-top:16px;">Résultats visés</h2>
-      <ul>{(offer.outcomes || []).map((x) => <li>{x}</li>)}</ul>
+    .note{margin-top:12px;border:1px dashed #cbd5e1;border-radius:16px;padding:14px;background:#f8fafc;color:#334155;line-height:1.6}
 
-      <h2 style="margin-top:16px;">Ce que vous recevez</h2>
-      <ul>{(offer.deliverables || []).map((x) => <li>{x}</li>)}</ul>
+    .offerGrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+    .offerCard{border:1px solid #e2e8f0;border-radius:16px;padding:14px;background:#fff;display:grid;gap:8px}
+    .offerTop{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .offerTop strong{font-size:14px}
+    .offerBadge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#f8fafc;color:#334155;font-weight:900}
 
-      <div class="ctaRow">
-        <a class="btn" href="/contact/">Demander un diagnostic</a>
-        <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
-      </div>
+    .proofGrid{display:grid;gap:12px;margin-top:10px}
+    .proofCard{border:1px solid #e2e8f0;border-radius:16px;padding:14px;background:#fff}
+    .proofTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .proofKpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+    @media (max-width:720px){.proofKpis{grid-template-columns:1fr}}
+    .proofKpi{border:1px solid #e2e8f0;border-radius:14px;padding:10px;background:#f8fafc}
+    .proofKpi strong{display:block;font-size:13px}
+    .proofKpi span{display:block;font-size:12px;color:#64748b;margin-top:2px}
+    .proofKpi em{display:block;margin-top:8px;font-style:normal;font-weight:900;color:#0f172a}
 
-      <p class="meta">
-        Email :{" "}
-        <a
-          href="mailto:contact@horizon-conversion.fr"
-          style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
-        >
-          contact@horizon-conversion.fr
-        </a>
+    .faq{margin-top:16px}
+    .faq details{border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px;background:#fff;margin-bottom:10px}
+    .faq summary{cursor:pointer;font-weight:900}
+    .faq p{margin:10px 0 0}
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
+      <a href="/prestations/">Prestations</a> <span aria-hidden="true">›</span>{" "}
+      <span>{offer.name}</span>
+    </nav>
+
+    <header class="hero">
+      <span class="badge">{offer.badge}</span>
+      <h1>{offer.name}</h1>
+      <p class="sub">
+        {offer.headline} Zones prioritaires : <strong>Sud Oise (60)</strong> &{" "}
+        <strong>Val d’Oise (95)</strong>.
       </p>
+    </header>
 
-      <div class="faq" id="faq">
-        <h2 style="margin:0 0 10px;">FAQ</h2>
-        {(offer.faq || []).map((f) => (
-          <details>
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
-          </details>
-        ))}
+    <section class="grid">
+      <div class="card">
+        <h2>Pourquoi cette prestation</h2>
+        <p>
+          On cible une seule chose : des demandes utiles (RDV, devis, réservations) — pas du volume.
+          On “montre” la valeur via livrables, tracking et exemples anonymisés.
+        </p>
+
+        <div class="note">
+          <strong>Anti demandes parasites :</strong> pages dédiées + messages clairs + exclusions Ads + formulaire qualifiant.
+          Objectif : moins de bruit, plus de prospects exploitables.
+        </div>
+
+        <div class="pills" aria-label="Pour qui">
+          {(offer.forWho || []).map((x) => <span class="pill">{x}</span>)}
+        </div>
+
+        <h2 style="margin-top:16px;">Problèmes fréquents</h2>
+        <ul>{(offer.pains || []).map((x) => <li>{x}</li>)}</ul>
+
+        <h2 style="margin-top:16px;">Résultats visés</h2>
+        <ul>{(offer.outcomes || []).map((x) => <li>{x}</li>)}</ul>
+
+        <h2 style="margin-top:16px;">Ce que vous recevez</h2>
+        <ul>{(offer.deliverables || []).map((x) => <li>{x}</li>)}</ul>
+
+        <h2 style="margin-top:16px;">Offre (packs)</h2>
+        <p>
+          Pour rendre la prestation “compréhensible” (et éviter l’effet flou), on l’intègre dans des packs.
+          <a class="link" href="/tarifs/" style="margin-left:8px;">Voir tarifs</a>
+        </p>
+
+        <div class="offerGrid" aria-label="Packs">
+          {packs.map((p) => (
+            <a class="pillLink" href={p.href} style="border-radius:16px;padding:0;">
+              <div class="offerCard">
+                <div class="offerTop">
+                  <strong>{p.name}</strong>
+                  <span class="offerBadge">{p.badge}</span>
+                </div>
+                <ul>
+                  {p.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <p class="meta" style="margin-top:10px;">
+          Mini option : <a class="link" href={adsBooster.href}>{adsBooster.name}</a> — {adsBooster.hint}
+        </p>
+
+        <h2 style="margin-top:16px;">Exemples réels (anonymisés)</h2>
+        <p>
+          Pour déclencher la confiance sans dépendre des avis : KPIs, tracking, livrables (anonymisés).
+          (Tu peux ajouter des captures dans <span style="white-space:nowrap;">/public/proofs/</span> si tu veux.)
+        </p>
+
+        <div class="proofGrid" aria-label="Exemples anonymisés">
+          {proofExamples.map((ex) => (
+            <article class="proofCard">
+              <div class="proofTop">
+                <div>
+                  <strong style="display:block;font-size:14px;">{ex.title}</strong>
+                  <div class="meta" style="margin-top:4px;">{ex.context}</div>
+                </div>
+                <span class="pill">Anonymisé</span>
+              </div>
+              <div class="proofKpis" aria-label="KPIs">
+                {ex.kpis.map((k) => (
+                  <div class="proofKpi">
+                    <strong>{k.label}</strong>
+                    <span>Avant : {k.before}</span>
+                    <em>Après : {k.after}</em>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <h2 style="margin-top:16px;">Exemple de tracking</h2>
+        <p>Événements minimums pour relier chaque demande à une source (SEO / Maps / Ads) :</p>
+        <ul>
+          {trackingEvents.map((e) => (
+            <li><strong>{e.name}</strong> — {e.detail}</li>
+          ))}
+        </ul>
+
+        <div class="ctaRow">
+          <a class="btn" href="/contact/">Demander un diagnostic</a>
+          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        </div>
+
+        <p class="meta">
+          Email :{" "}
+          <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+        </p>
+
+        <div class="faq" id="faq">
+          <h2 style="margin:0 0 10px;">FAQ</h2>
+          {faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
-    </div>
 
-    <aside class="card">
-      <h2>Indicateurs suivis</h2>
-      <p>On pilote sur des métriques simples, orientées business.</p>
+      <aside class="card">
+        <h2>Indicateurs suivis</h2>
+        <p>On pilote sur des métriques simples, orientées business.</p>
 
-      <div class="kpis" aria-label="KPIs">
-        {(offer.kpis || []).map((k) => (
-          <div class="kpi">
-            <strong>{k}</strong>
-            <span>Suivi & optimisation</span>
-          </div>
-        ))}
-      </div>
+        <div class="kpis" aria-label="KPIs">
+          {(offer.kpis || []).map((k) => (
+            <div class="kpi">
+              <strong>{k}</strong>
+              <span>Suivi & optimisation</span>
+            </div>
+          ))}
+        </div>
 
-      <h2 style="margin-top:16px;">Preuves sans avis</h2>
-      <p>Process visible, livrables, tracking et transparence.</p>
-      <div class="pills">
-        <span class="pill">Process</span>
-        <span class="pill">Livrables</span>
-        <span class="pill">Tracking</span>
-        <span class="pill">Qualif stricte</span>
-      </div>
+        <h2 style="margin-top:16px;">Liens utiles</h2>
+        <div class="pills">
+          <a class="pillLink" href="/tarifs/">Tarifs</a>
+          <a class="pillLink" href="/preuves/">Preuves</a>
+          <a class="pillLink" href="/methode/">Méthode</a>
+          <a class="pillLink" href="/contact/">Contact</a>
+        </div>
 
-      <h2 style="margin-top:16px;">Zones</h2>
-      <div class="pills">
-        <span class="pill">Sud Oise (60)</span>
-        <span class="pill">Val d’Oise (95)</span>
-      </div>
-    </aside>
-  </section>
-</div>
+        <h2 style="margin-top:16px;">Preuves sans avis</h2>
+        <p>Process visible, livrables, tracking et transparence.</p>
+        <div class="pills">
+          <span class="pill">Process</span>
+          <span class="pill">Livrables</span>
+          <span class="pill">Tracking</span>
+          <span class="pill">Qualif stricte</span>
+        </div>
+
+        <h2 style="margin-top:16px;">Zones</h2>
+        <div class="pills">
+          <a class="pillLink" href="/zones/sud-oise-60/">Sud Oise (60)</a>
+          <a class="pillLink" href="/zones/val-doise-95/">Val d’Oise (95)</a>
+        </div>
+
+        <div class="note">
+          <strong>Astuce SEO :</strong> la perf vient surtout des pages “money” (métier × ville) reliées aux pages
+          prestations + preuves + tracking. D’où ce maillage interne.
+        </div>
+      </aside>
+    </section>
+  </div>
+</LayoutSEO>

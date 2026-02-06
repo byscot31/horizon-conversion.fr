@@ -1,7 +1,14 @@
 ---
+// src/pages/zones/[ville]/[metier].astro
 import LayoutSEO from "../../../layouts/LayoutSEO.astro";
 import { JOBS, type JobKey } from "../../../data/jobs.ts";
-import { VILLES, ZONES, slugifyCity, findCityBySlug, type ZoneKey } from "../../../data/zones.ts";
+import {
+  VILLES,
+  ZONES,
+  slugifyCity,
+  findCityBySlug,
+  type ZoneKey,
+} from "../../../data/zones.ts";
 
 export const prerender = true;
 
@@ -42,10 +49,35 @@ const { town, zoneKey, zone, slug } = resolvedCity;
 
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
+// ✅ Liens “vraies pages” (anti placeholder)
+const jobEntries = Object.entries(JOBS) as Array<[string, any]>;
+
+const otherMetierLinks = jobEntries
+  .filter(([k]) => k !== metier)
+  .slice(0, 10)
+  .map(([k, j]) => ({
+    slug: k,
+    name: j.name as string,
+    href: `/zones/${slug}/${k}/`,
+  }));
+
+const prestationsLinks = [
+  { href: "/prestations/seo-local/", label: "SEO local & Google Maps" },
+  { href: "/prestations/google-ads/", label: "Google Ads (Search)" },
+  { href: "/prestations/meta-ads/", label: "Meta Ads (Facebook/Instagram)" },
+  { href: "/prestations/landing-pages/", label: "Landing pages & conversion" },
+  { href: "/prestations/tracking/", label: "Tracking & pilotage" },
+];
+
+// Autres villes de la même zone
+const otherTowns = (zone.towns as string[])
+  .filter((t) => slugifyCity(t) !== slug)
+  .slice(0, 12)
+  .map((t) => ({ name: t, href: `/zones/${slugifyCity(t)}/` }));
+
 // SEO
 const title = `${job.name} à ${town} | SEO local & Ads – Horizon Conversion Animaux`;
-const description =
-  `Plus de demandes qualifiées pour ${job.name.toLowerCase()} à ${town} : SEO local & Google Maps + Ads, landing page, conversion & tracking. Zone : ${zone.name}.`;
+const description = `Plus de demandes qualifiées pour ${job.name.toLowerCase()} à ${town} : SEO local & Google Maps + Ads, landing page, conversion & tracking. Zone : ${zone.name}.`;
 
 const breadcrumbs = [
   { name: "Accueil", item: `${baseUrl}/` },
@@ -55,12 +87,7 @@ const breadcrumbs = [
   { name: job.name, item: canonical },
 ];
 
-const intents = (job.intents as string[]).map((x) =>
-  x
-    .replace(/\+\s*ville/gi, town)
-    .replace(/\bville\b/gi, town)
-);
-
+// FAQ (spécifique ville)
 const faq = [
   {
     q: `Est-ce que ça marche si je n’ai pas beaucoup d’avis à ${town} ?`,
@@ -71,8 +98,8 @@ const faq = [
     a: `On définit une zone réelle autour de ${town} (villes proches, rayon, limites) pour éviter les demandes hors secteur.`,
   },
   {
-    q: "Quels canaux sont prioritaires ?",
-    a: "En général : SEO local + Google Maps pour la base durable, puis Ads sur les intentions les plus rentables (pilotage au coût par lead).",
+    q: `Qu’est-ce qui fait ranker une page “${job.name.toLowerCase()} à ${town}” ?`,
+    a: "Une page vraiment utile (contenu local, objections traitées, preuves/livrables), FAQ spécifique, schémas (FAQ/Service), et un maillage interne vers les pages zone/ville/prestations.",
   },
 ];
 
@@ -108,6 +135,17 @@ const jsonLd = [
       email: "contact@horizon-conversion.fr",
     },
   },
+  // ✅ ItemList de VRAIES pages (anti placeholder)
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: otherMetierLinks.map((m, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `${m.name} à ${town}`,
+      url: `${baseUrl}${m.href}`,
+    })),
+  },
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -135,6 +173,7 @@ const jsonLd = [
     .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
     .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
     .breadcrumbs a { color: inherit; text-decoration: none; }
+
     header.hero {
       border: 1px solid #e2e8f0; border-radius: 18px;
       background: linear-gradient(180deg, #f8fafc, #fff);
@@ -142,22 +181,39 @@ const jsonLd = [
     }
     h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
     .sub { margin: 0; color: #334155; max-width: 92ch; line-height: 1.6; }
+
     .grid { margin-top: 18px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; align-items: start; }
     @media (max-width: 920px){ .grid{ grid-template-columns:1fr; } }
+
     .card { border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; background:#fff; box-shadow: 0 6px 20px rgba(15,23,42,.06); }
     h2 { margin: 0 0 10px; font-size: 18px; }
+    h3 { margin: 16px 0 10px; font-size: 15px; }
     p { margin: 0; color:#334155; line-height:1.6; }
     ul { margin: 10px 0 0; padding-left: 18px; color:#334155; line-height:1.55; }
+
+    .note { margin-top: 12px; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 14px; background:#f8fafc; color:#334155; line-height:1.6; }
+
     .pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-    .pill { display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#fff; color:#334155; }
+    .pillLink {
+      display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid #e2e8f0; background:#fff; color:#334155; text-decoration:none;
+    }
+    .pillLink:hover { background:#f8fafc; }
+
     .ctaRow { margin-top: 14px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     @media (max-width: 720px){ .ctaRow{ grid-template-columns:1fr; } }
     .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 14px; border-radius:14px; border:1px solid #0f172a; background:#0f172a; color:#fff; cursor:pointer; font-weight:900; text-decoration:none; }
     .btn.secondary { background:#fff; color:#0f172a; }
+
     .meta { color:#475569; font-size:14px; line-height:1.6; margin-top:10px; }
     .link { color:#0f172a; text-decoration:none; border-bottom:1px solid rgba(15,23,42,.2); }
     .link:hover { border-bottom-color: rgba(15,23,42,.45); }
-    .box { border:1px solid #e2e8f0; border-radius:16px; padding:14px; background:#f8fafc; }
+
+    .box { border:1px solid #e2e8f0; border-radius:16px; padding:14px; background:#fff; }
+    .boxMuted { border:1px solid #e2e8f0; border-radius:16px; padding:14px; background:#f8fafc; }
+
+    .miniList { margin: 10px 0 0; padding-left: 18px; }
+    .miniList li { margin: 6px 0; }
   </style>
 
   <div class="wrap">
@@ -173,7 +229,7 @@ const jsonLd = [
       <h1>{job.name} à {town}</h1>
       <p class="sub">
         {job.headline} On combine <strong>SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
-        avec une page dédiée “<strong>1 intention = 1 page</strong>” et un tracking propre.
+        avec une page dédiée (métier × ville) et un tracking propre.
         Zone : <strong>{zone.name}</strong>.
       </p>
     </header>
@@ -181,19 +237,35 @@ const jsonLd = [
     <section class="grid">
       <div class="card">
         <h2>Problèmes fréquents à {town}</h2>
-        <ul>
-          {(job.pains as string[]).map((x) => <li>{x}</li>)}
-        </ul>
+        <ul>{(job.pains as string[]).map((x) => <li>{x}</li>)}</ul>
 
         <h2 style="margin-top:16px;">Ce qu’on vise</h2>
+        <ul>{(job.outcomes as string[]).map((x) => <li>{x}</li>)}</ul>
+
+        <div class="note">
+          <strong>Anti “thin content” :</strong> au lieu d’afficher des intentions “texte-type”, on relie la page à de
+          <strong> vraies pages</strong> (prestations, zone, ville, autres métiers). C’est ce maillage qui aide Google
+          à comprendre le cluster local et la valeur réelle.
+        </div>
+
+        <h2 style="margin-top:16px;">Ce qu’on met en place (concret)</h2>
+        <p>
+          Un socle rapide + optimisation continue : pages locales, GBP, Ads si besoin, conversion et tracking.
+        </p>
         <ul>
-          {(job.outcomes as string[]).map((x) => <li>{x}</li>)}
+          {(job.services as string[]).map((s) => <li>{s}</li>)}
         </ul>
 
-        <h2 style="margin-top:16px;">Intentions SEO locales à capter</h2>
-        <p>On structure des pages ciblées (métier + ville + service) + FAQ + schémas + CTA.</p>
-        <div class="pills" aria-label="Intentions">
-          {intents.map((x) => <span class="pill">{x}</span>)}
+        <h2 style="margin-top:16px;">Exemple de structure de page locale</h2>
+        <div class="boxMuted">
+          <ul class="miniList">
+            <li><strong>H1 :</strong> {job.name} à {town} (promesse + zone réelle)</li>
+            <li><strong>Preuves :</strong> livrables / tracking / exemples anonymisés</li>
+            <li><strong>Offre :</strong> pack(s) + CTA (appel / diagnostic)</li>
+            <li><strong>FAQ :</strong> spécifique à {town} (pas copiée-collée)</li>
+            <li><strong>Schémas :</strong> Service + FAQPage + Breadcrumbs</li>
+            <li><strong>Maillage :</strong> ville ↔ zone ↔ prestations ↔ métiers</li>
+          </ul>
         </div>
 
         <div class="ctaRow">
@@ -204,22 +276,6 @@ const jsonLd = [
         <p class="meta">
           Email : <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
         </p>
-      </div>
-
-      <aside class="card">
-        <h2>Ce qu’on met en place</h2>
-        <p>Socle rapide + optimisation continue (SEO local, Maps, Ads, conversion).</p>
-        <ul>
-          {(job.services as string[]).map((s) => <li>{s}</li>)}
-        </ul>
-
-        <h2 style="margin-top:16px;">Ressources utiles</h2>
-        <div class="pills">
-          <a class="pill" href={`/metiers/${metier}/`} style="text-decoration:none;">Page métier</a>
-          <a class="pill" href={`/zones/${slug}/`} style="text-decoration:none;">Page ville</a>
-          <a class="pill" href={`/zones/${zoneKey}/`} style="text-decoration:none;">Hub zone</a>
-          <a class="pill" href="/prestations/" style="text-decoration:none;">Prestations</a>
-        </div>
 
         <h2 style="margin-top:16px;">FAQ</h2>
         <div class="box">
@@ -229,6 +285,50 @@ const jsonLd = [
               <div class="meta" style="margin-top:4px;">{f.a}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Prestations utiles</h2>
+        <p class="meta">Des pages “money” (réelles) pour renforcer le cluster :</p>
+        <div class="pills" aria-label="Prestations">
+          {prestationsLinks.map((l) => (
+            <a class="pillLink" href={l.href}>{l.label}</a>
+          ))}
+        </div>
+
+        <h2 style="margin-top:16px;">Autres métiers à {town}</h2>
+        <p class="meta">Pages métier×ville (liens réels, pas des “intentions”) :</p>
+        <div class="box">
+          <ul class="miniList">
+            {otherMetierLinks.map((m) => (
+              <li>
+                <a class="link" href={m.href}>{m.name} à {town}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <h2 style="margin-top:16px;">Villes proches ({zone.name})</h2>
+        <div class="pills" aria-label="Villes proches">
+          {otherTowns.map((t) => (
+            <a class="pillLink" href={t.href}>{t.name}</a>
+          ))}
+        </div>
+
+        <h2 style="margin-top:16px;">Raccourcis</h2>
+        <div class="pills" aria-label="Raccourcis">
+          <a class="pillLink" href={`/metiers/${metier}/`}>Page métier</a>
+          <a class="pillLink" href={`/zones/${slug}/`}>Page ville</a>
+          <a class="pillLink" href={`/zones/${zoneKey}/`}>Hub zone</a>
+          <a class="pillLink" href="/tarifs/">Tarifs</a>
+          <a class="pillLink" href="/contact/">Contact</a>
+        </div>
+
+        <div class="note">
+          <strong>Astuce :</strong> si une page (métier×ville) commence à performer, on la renforce avec
+          une section “preuves” (anonymisées), une FAQ plus précise, et des liens internes vers
+          la prestation la plus pertinente.
         </div>
       </aside>
     </section>

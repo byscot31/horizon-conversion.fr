@@ -2,6 +2,9 @@
 // src/layouts/LayoutSEO.astro
 import type { AstroGlobal } from "astro";
 
+import { NAP } from "../data/nap.ts";
+import NAPBlock from "../components/NAP.astro";
+
 type OgType = "website" | "article" | "profile";
 
 type BreadcrumbItem = {
@@ -51,7 +54,6 @@ type SeoProps = {
 
   // JSON-LD (Organization / LocalBusiness / Service / FAQ, etc.)
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
-  // If you want to auto-generate a LocalBusiness schema quickly:
   business?: {
     name: string;
     url: string; // absolute
@@ -62,7 +64,7 @@ type SeoProps = {
     priceRange?: string;
     address?: Address;
     geo?: Geo;
-    areaServed?: string[]; // e.g. ["Sud Oise", "Val d’Oise"]
+    areaServed?: string[];
     openingHoursSpecification?: OpeningHoursSpec[];
     sameAs?: string[];
   };
@@ -81,19 +83,29 @@ const {
   twitterCard = "summary_large_image",
   breadcrumbs,
   jsonLd,
-  business,
+  business: businessProp,
 } = (Astro.props ?? {}) as SeoProps;
 
 const site = Astro.site?.toString() || baseUrl || "";
+
+const defaultBusiness: SeoProps["business"] = {
+  name: NAP.name,
+  url: NAP.url,
+  telephone: NAP.phoneE164,
+  email: NAP.email,
+  areaServed: NAP.areaServed,
+  address: NAP.address,
+  sameAs: NAP.googleBusinessProfileUrl ? [NAP.googleBusinessProfileUrl] : undefined,
+};
+
+const business = businessProp ?? defaultBusiness;
 
 // Normalize URL -> absolute when possible
 const toAbs = (url?: string) => {
   if (!url) return undefined;
   try {
-    // Already absolute
     return new URL(url).toString();
   } catch {
-    // Relative + site
     if (!site) return url;
     return new URL(url.replace(/^\//, ""), site.endsWith("/") ? site : site + "/").toString();
   }
@@ -102,10 +114,7 @@ const toAbs = (url?: string) => {
 const canonicalUrl = toAbs(canonical || Astro.url.toString());
 const ogUrl = canonicalUrl;
 const ogImageUrl = toAbs(ogImage);
-const robots = [
-  noindex ? "noindex" : "index",
-  nofollow ? "nofollow" : "follow",
-].join(", ");
+const robots = [noindex ? "noindex" : "index", nofollow ? "nofollow" : "follow"].join(", ");
 
 const makeBreadcrumbLd = (items?: BreadcrumbItem[]) => {
   if (!items?.length) return undefined;
@@ -137,18 +146,11 @@ const makeBusinessLd = (b?: SeoProps["business"]) => {
   if (b.sameAs?.length) ld.sameAs = b.sameAs;
 
   if (b.address) {
-    ld.address = {
-      "@type": "PostalAddress",
-      ...b.address,
-    };
+    ld.address = { "@type": "PostalAddress", ...b.address };
     if (!ld.address.addressCountry) ld.address.addressCountry = "FR";
   }
   if (b.geo) {
-    ld.geo = {
-      "@type": "GeoCoordinates",
-      latitude: b.geo.latitude,
-      longitude: b.geo.longitude,
-    };
+    ld.geo = { "@type": "GeoCoordinates", latitude: b.geo.latitude, longitude: b.geo.longitude };
   }
   if (b.areaServed?.length) ld.areaServed = b.areaServed;
 
@@ -173,23 +175,19 @@ if (Array.isArray(jsonLd)) ldBlocks.push(...jsonLd);
 else if (jsonLd) ldBlocks.push(jsonLd);
 
 // De-duplicate by @type + name/url when possible
-const dedupeKey = (o: Record<string, any>) =>
-  `${o["@type"] || ""}::${o.name || ""}::${o.url || o.item || ""}`;
+const dedupeKey = (o: Record<string, any>) => `${o["@type"] || ""}::${o.name || ""}::${o.url || o.item || ""}`;
 
-const uniqueLdBlocks = Array.from(
-  new Map(ldBlocks.map((o) => [dedupeKey(o), o])).values()
-);
-
+const uniqueLdBlocks = Array.from(new Map(ldBlocks.map((o) => [dedupeKey(o), o])).values());
 const ldJson = uniqueLdBlocks.length ? JSON.stringify(uniqueLdBlocks, null, 0) : "";
 
 // ✅ Nav
 const nav = [
-  { href: "/methode/", label: "Méthode" },
-  { href: "/preuves/", label: "Preuves" },
+  { href: "/a-propos/", label: "À propos" },
   { href: "/prestations/", label: "Prestations" },
+  { href: "/methode/", label: "Méthode" },
+  { href: "/tarifs/", label: "Tarifs" },
   { href: "/metiers/", label: "Métiers" },
   { href: "/zones/", label: "Zones" },
-  { href: "/contact/", label: "Contact" },
 ];
 ---
 
@@ -203,7 +201,6 @@ const nav = [
     <meta name="description" content={description} />
 
     <link rel="canonical" href={canonicalUrl} />
-
     <meta name="robots" content={robots} />
 
     <!-- Open Graph -->
@@ -234,11 +231,8 @@ const nav = [
         background: #ffffff;
       }
       :global(a) { color: inherit; }
-      .container {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 0 16px;
-      }
+      .container { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
       .header {
         position: sticky;
         top: 0;
@@ -247,44 +241,18 @@ const nav = [
         backdrop-filter: blur(10px);
         border-bottom: 1px solid #e2e8f0;
       }
-      .headerRow {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 12px 0;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-      }
+      .headerRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
+
+      .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
       .logo {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
+        width: 34px; height: 34px; border-radius: 10px;
         background: linear-gradient(135deg, #0f172a, #334155);
         box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
       }
-      .brandText strong {
-        display: block;
-        font-size: 14px;
-        letter-spacing: -0.01em;
-      }
-      .brandText span {
-        display: block;
-        font-size: 12px;
-        color: #64748b;
-        margin-top: 1px;
-      }
-      .nav {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-end;
-      }
+      .brandText strong { display: block; font-size: 14px; letter-spacing: -0.01em; }
+      .brandText span { display: block; font-size: 12px; color: #64748b; margin-top: 1px; }
+
+      .nav { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
       .nav a {
         text-decoration: none;
         font-size: 13px;
@@ -293,10 +261,8 @@ const nav = [
         border: 1px solid transparent;
         color: #0f172a;
       }
-      .nav a:hover {
-        border-color: #e2e8f0;
-        background: #f8fafc;
-      }
+      .nav a:hover { border-color: #e2e8f0; background: #f8fafc; }
+
       .cta {
         display: inline-flex;
         align-items: center;
@@ -311,65 +277,24 @@ const nav = [
         font-size: 13px;
         white-space: nowrap;
       }
-      .cta.secondary {
-        background: #fff;
-        color: #0f172a;
-      }
+      .cta.secondary { background: #fff; color: #0f172a; }
 
-      .main {
-        min-height: 70vh;
-      }
+      .main { min-height: 70vh; }
 
-      .footer {
-        margin-top: 48px;
-        border-top: 1px solid #e2e8f0;
-        background: #fff;
-      }
-      .footerGrid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 18px;
-        padding: 22px 0;
-      }
-      @media (max-width: 920px) {
-        .footerGrid { grid-template-columns: 1fr; }
-      }
-      .footer h3 {
-        margin: 0 0 8px;
-        font-size: 14px;
-      }
-      .footer p {
-        margin: 0;
-        color: #334155;
-        line-height: 1.6;
-        font-size: 14px;
-      }
-      .footerLinks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .footerLinks a {
-        font-size: 13px;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.18);
-      }
-      .footerLinks a:hover {
-        border-bottom-color: rgba(15, 23, 42, 0.45);
-      }
-      .small {
-        font-size: 12px;
-        color: #64748b;
-        padding: 12px 0 18px;
-      }
-      .small a {
-        text-decoration: none;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.18);
-      }
-      .small a:hover {
-        border-bottom-color: rgba(15, 23, 42, 0.45);
-      }
+      .footer { margin-top: 48px; border-top: 1px solid #e2e8f0; background: #fff; }
+      .footerGrid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 18px; padding: 22px 0; }
+      @media (max-width: 920px) { .footerGrid { grid-template-columns: 1fr; } }
+
+      .footer h3 { margin: 0 0 8px; font-size: 14px; }
+      .footer p { margin: 0; color: #334155; line-height: 1.6; font-size: 14px; }
+
+      .footerLinks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+      .footerLinks a { font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(15, 23, 42, 0.18); }
+      .footerLinks a:hover { border-bottom-color: rgba(15, 23, 42, 0.45); }
+
+      .small { font-size: 12px; color: #64748b; padding: 12px 0 18px; }
+      .small a { text-decoration: none; border-bottom: 1px solid rgba(15, 23, 42, 0.18); }
+      .small a:hover { border-bottom-color: rgba(15, 23, 42, 0.45); }
     </style>
 
     <!-- ✅ HEADER -->
@@ -385,9 +310,7 @@ const nav = [
           </a>
 
           <nav class="nav" aria-label="Navigation principale">
-            {nav.map((l) => (
-              <a href={l.href}>{l.label}</a>
-            ))}
+            {nav.map((l) => <a href={l.href}>{l.label}</a>)}
           </nav>
 
           <div style="display:flex;gap:10px;align-items:center;">
@@ -416,14 +339,13 @@ const nav = [
 
             <div class="footerLinks" aria-label="Raccourcis">
               <a href="/prestations/">Prestations</a>
+              <a href="/tarifs/">Tarifs</a>
               <a href="/metiers/">Métiers</a>
               <a href="/zones/">Zones</a>
               <a href="/preuves/">Preuves</a>
               <a href="/methode/">Méthode</a>
               <a href="/contact/">Contact</a>
-              <!-- ✅ Ajouts -->
-              <a href="/mentions-legales/">Mentions légales</a>
-              <a href="/politique-confidentialite/">Politique de confidentialité</a>
+              <a href="/a-propos/">À propos</a>
             </div>
           </div>
 

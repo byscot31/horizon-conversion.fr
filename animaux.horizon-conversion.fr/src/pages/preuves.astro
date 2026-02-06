@@ -90,6 +90,43 @@ const kpis = [
   { label: "Visibilité locale", hint: "SEO + Maps", value: "Renforcée" },
 ];
 
+// ✅ Images (à placer dans public/proofs/)
+const proofImages = {
+  ads: "/proofs/ads-before-after.png",
+  tracking: "/proofs/tracking-events.png",
+  structure: "/proofs/local-page-structure.png",
+};
+
+// ✅ Fallback texte sous les images (ouvrable)
+const trackingText = `Événements suivis
+- click_to_call       : clic sur tel: (Header/CTA/pages locales) | params: page_path, utm_*, device
+- form_submit         : envoi formulaire (Contact/Landing)         | params: page_path, lead_type, city, department
+- cta_diagnostic_click: clic CTA “Diagnostic”                      | params: page_path, placement, utm_campaign`;
+
+const localPageText = `Structure type (métier + ville)
+- H1 clair : “Éducateur canin à Senlis”
+- Bloc réassurance (process + tracking + qualif)
+- Problèmes fréquents (3–5) + objectifs (3–5)
+- Services (SEO local / Maps / Ads / landing / tracking)
+- FAQ locale (3–6 questions) + CTA
+- Schémas : WebPage + BreadcrumbList + Service + FAQPage`;
+
+const schemaSnippet = `[
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "name":"Webmarketing local pour Éducateur canin à Senlis",
+    "areaServed":["Senlis","Sud Oise (60)"],
+    "provider":{
+      "@type":"Organization",
+      "name":"Horizon Conversion Animaux",
+      "telephone":"+33660921008",
+      "email":"contact@horizon-conversion.fr",
+      "url":"https://animaux.horizon-conversion.fr"
+    }
+  }
+]`;
+
 const faqs = [
   {
     q: "Quelles “preuves” si je démarre sans avis clients ?",
@@ -156,7 +193,6 @@ const jsonLd = [
   breadcrumbs={breadcrumbs}
   jsonLd={[...jsonLd, faqJsonLd]}
 >
-
 <style>
   :global(body) {
     margin: 0;
@@ -175,10 +211,8 @@ const jsonLd = [
     color: #475569;
     margin: 4px 0 18px;
   }
-  .breadcrumbs a {
-    color: inherit;
-    text-decoration: none;
-  }
+  .breadcrumbs a { color: inherit; text-decoration: none; }
+
   header.hero {
     border: 1px solid #e2e8f0;
     border-radius: 18px;
@@ -208,10 +242,9 @@ const jsonLd = [
     align-items: start;
   }
   @media (max-width: 920px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
+    .grid { grid-template-columns: 1fr; }
   }
+
   .card {
     border: 1px solid #e2e8f0;
     border-radius: 18px;
@@ -232,16 +265,8 @@ const jsonLd = [
     background: #f8fafc;
     padding: 12px;
   }
-  .kpi strong {
-    display: block;
-    font-size: 14px;
-  }
-  .kpi span {
-    display: block;
-    font-size: 12px;
-    color: #64748b;
-    margin-top: 2px;
-  }
+  .kpi strong { display: block; font-size: 14px; }
+  .kpi span { display: block; font-size: 12px; color: #64748b; margin-top: 2px; }
   .kpi em {
     display: inline-block;
     margin-top: 8px;
@@ -255,10 +280,7 @@ const jsonLd = [
     border-radius: 999px;
   }
 
-  .pillars {
-    display: grid;
-    gap: 12px;
-  }
+  .pillars { display: grid; gap: 12px; }
   .pillar {
     border: 1px solid #e2e8f0;
     border-radius: 16px;
@@ -266,21 +288,9 @@ const jsonLd = [
     display: grid;
     gap: 10px;
   }
-  .pillar h2 {
-    margin: 0;
-    font-size: 18px;
-  }
-  .pillar p {
-    margin: 0;
-    color: #334155;
-    line-height: 1.6;
-  }
-  .pillar ul {
-    margin: 0;
-    padding-left: 18px;
-    color: #334155;
-    line-height: 1.55;
-  }
+  .pillar h2 { margin: 0; font-size: 18px; }
+  .pillar p { margin: 0; color: #334155; line-height: 1.6; }
+  .pillar ul { margin: 0; padding-left: 18px; color: #334155; line-height: 1.55; }
 
   .pill {
     display: inline-block;
@@ -311,19 +321,71 @@ const jsonLd = [
     font-weight: 800;
     text-decoration: none;
   }
-  .btn.secondary {
+  .btn.secondary { background: #fff; color: #0f172a; }
+  .meta { color: #475569; font-size: 14px; line-height: 1.6; }
+
+  /* ✅ Exemples avec images */
+  .examples { margin-top: 18px; display: grid; gap: 12px; }
+  .exCard {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
     background: #fff;
-    color: #0f172a;
+    display: grid;
+    gap: 10px;
   }
-  .meta {
-    color: #475569;
-    font-size: 14px;
-    line-height: 1.6;
+  .mediaGrid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .figure {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f8fafc;
+  }
+  .figure a { text-decoration: none; }
+  .img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #f1f5f9;
+  }
+  .caption {
+    padding: 10px 12px 12px;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.55;
+    border-top: 1px solid #e2e8f0;
+    background: #fff;
+  }
+  .caption strong { display:block; font-size: 13px; margin-bottom: 2px; }
+  .caption span { color: #64748b; }
+
+  .details {
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 12px 14px;
+    background: #f8fafc;
+  }
+  details summary { cursor: pointer; font-weight: 900; }
+  .mono {
+    margin-top: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #0f172a;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 12px;
+    overflow-x: auto;
+    white-space: pre;
   }
 
-  .faq {
-    margin-top: 18px;
-  }
+  .faq { margin-top: 18px; }
   .faq details {
     border: 1px solid #e2e8f0;
     border-radius: 16px;
@@ -331,15 +393,8 @@ const jsonLd = [
     background: #fff;
     margin-bottom: 10px;
   }
-  .faq summary {
-    cursor: pointer;
-    font-weight: 800;
-  }
-  .faq p {
-    margin: 10px 0 0;
-    color: #334155;
-    line-height: 1.6;
-  }
+  .faq summary { cursor: pointer; font-weight: 800; }
+  .faq p { margin: 10px 0 0; color: #334155; line-height: 1.6; }
 </style>
 
 <div class="wrap">
@@ -366,12 +421,123 @@ const jsonLd = [
             <h2>{p.title}</h2>
             <p>{p.text}</p>
             <ul>
-              {p.bullets.map((b) => (
-                <li>{b}</li>
-              ))}
+              {p.bullets.map((b) => <li>{b}</li>)}
             </ul>
           </article>
         ))}
+      </div>
+
+      {/* ✅ IMAGES : Exemples */}
+      <div class="examples" id="exemples">
+        <h2 style="margin:0;">Exemples réels (anonymisés)</h2>
+        <p class="meta" style="margin:0;">
+          2–3 artefacts concrets valent mieux qu’un long discours : avant/après, tracking, et structure de page locale.
+        </p>
+
+        <section class="exCard" aria-label="Avant / Après Ads (anonymisé)">
+          <strong>Avant / Après (anonymisé)</strong>
+          <div class="meta" style="margin:0;">
+            Exemples de KPI : <strong>CTR Ads</strong>, <strong>taux de conversion landing</strong>, <strong>appels / semaine</strong>.
+          </div>
+
+          <div class="mediaGrid">
+            <figure class="figure">
+              <a href={proofImages.ads} target="_blank" rel="noopener noreferrer" aria-label="Ouvrir l’image Avant/Après Ads">
+                <img
+                  class="img"
+                  src={proofImages.ads}
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Avant / Après (anonymisé) : CTR Ads, taux de conversion landing, appels par semaine — exemple pour pros des animaux"
+                />
+              </a>
+              <figcaption class="caption">
+                <strong>Avant / Après (anonymisé)</strong>
+                <span>Optimisation annonces + landing + exclusions + tracking événements.</span>
+              </figcaption>
+            </figure>
+
+            <details class="details">
+              <summary>Voir la version texte (fallback)</summary>
+              <div class="mono">{`Cas A (anonymisé) — Google Ads Search
+- CTR Ads : 2,3% → 4,8%
+- Conv. landing : 3,1% → 7,4%
+- Appels / sem. : 3–5 → 9–13
+
+Cas B (anonymisé) — Meta Ads + landing
+- CTR Ads : 0,9% → 1,6%
+- Conv. landing : 2,7% → 5,9%
+- Appels / sem. : 2–4 → 6–10`}</div>
+            </details>
+          </div>
+        </section>
+
+        <section class="exCard" aria-label="Exemple de tracking">
+          <strong>Exemple de tracking</strong>
+          <div class="meta" style="margin:0;">
+            Événements qui prouvent d’où viennent les leads (clic-to-call, formulaire, CTA), reliés aux UTM.
+          </div>
+
+          <div class="mediaGrid">
+            <figure class="figure">
+              <a href={proofImages.tracking} target="_blank" rel="noopener noreferrer" aria-label="Ouvrir l’image Tracking">
+                <img
+                  class="img"
+                  src={proofImages.tracking}
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Exemple de tracking : événements click_to_call, form_submit, cta_diagnostic_click (GA4/Matomo)"
+                />
+              </a>
+              <figcaption class="caption">
+                <strong>Plan de tracking (exemple)</strong>
+                <span>Événements + paramètres (page_path, utm_*, device) → tableau de bord leads.</span>
+              </figcaption>
+            </figure>
+
+            <details class="details">
+              <summary>Voir la version texte (fallback)</summary>
+              <div class="mono">{trackingText}</div>
+            </details>
+          </div>
+        </section>
+
+        <section class="exCard" aria-label="Exemple de page locale">
+          <strong>Exemple de page locale</strong>
+          <div class="meta" style="margin:0;">
+            Structure “métier + ville” + FAQ + schémas : c’est ce qui ranke le mieux en local.
+          </div>
+
+          <div class="mediaGrid">
+            <figure class="figure">
+              <a href={proofImages.structure} target="_blank" rel="noopener noreferrer" aria-label="Ouvrir l’image Structure page locale">
+                <img
+                  class="img"
+                  src={proofImages.structure}
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Exemple de page locale : structure H1, réassurance, problèmes/objectifs, FAQ, schéma JSON-LD"
+                />
+              </a>
+              <figcaption class="caption">
+                <strong>Structure page locale (exemple)</strong>
+                <span>H1 → preuves → FAQ → schémas → CTA (1 intention = 1 page).</span>
+              </figcaption>
+            </figure>
+
+            <details class="details">
+              <summary>Voir la version texte (fallback)</summary>
+              <div class="mono">{localPageText}</div>
+              <div class="mono" style="margin-top:10px;">{schemaSnippet}</div>
+            </details>
+          </div>
+        </section>
       </div>
 
       <div class="faq" id="faq">
@@ -424,6 +590,15 @@ const jsonLd = [
           contact@horizon-conversion.fr
         </a>
       </p>
+
+      <div style="margin-top:14px;" class="details" aria-label="Accès rapide">
+        <strong>Accès rapide</strong>
+        <div style="margin-top:8px;">
+          <a class="pill" href="#exemples" style="text-decoration:none;">Exemples</a>
+          <a class="pill" href="#faq" style="text-decoration:none;">FAQ</a>
+        </div>
+      </div>
     </aside>
   </section>
 </div>
+</LayoutSEO>

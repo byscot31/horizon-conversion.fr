@@ -2,6 +2,10 @@
 // src/pages/prestations/index.astro
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
 
+import { PRESTATIONS } from "../../data/prestations.ts";
+import { JOBS } from "../../data/jobs.ts";
+import { ZONES, slugifyCity } from "../../data/zones.ts";
+
 const baseUrl = "https://animaux.horizon-conversion.fr";
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
@@ -14,83 +18,63 @@ const breadcrumbs = [
   { name: "Prestations", item: canonical },
 ];
 
-const offers = [
-  {
-    slug: "seo-local",
-    title: "SEO local & Google Maps",
-    badge: "Visibilité durable",
-    intro:
-      "Optimisation Google Business Profile + pages locales “1 intention = 1 page” pour générer appels, itinéraires et demandes qualifiées.",
-    bullets: [
-      "Audit SEO local + plan d’actions priorisé",
-      "Google Business Profile : catégories, services, zones, posts",
-      "Pages locales + Titles/Metas/H1 + FAQ + JSON-LD",
-      "NAP & citations locales (cohérence)",
-      "Suivi des conversions (appels, formulaires)",
-    ],
-    forWho: ["Toiletteurs", "Éducateurs canins", "Pensions", "Ostéos animaliers", "Vétos"],
-  },
-  {
-    slug: "google-ads",
-    title: "Google Ads (Search)",
-    badge: "Leads rapides",
-    intro:
-      "Campagnes Search orientées RDV : mots-clés intention forte, exclusions, extensions et landing pages dédiées.",
-    bullets: [
-      "Structure par service / ville / intention",
-      "Mots-clés + négatifs (anti-leads parasites)",
-      "Annonces & extensions (appel, lieu, sitelinks)",
-      "Landing pages dédiées (conversion)",
-      "Pilotage au coût par lead",
-    ],
-    forWho: ["Services urgents", "Créneaux à remplir", "Offres saisonnières"],
-  },
-  {
-    slug: "meta-ads",
-    title: "Meta Ads (Facebook/Instagram)",
-    badge: "Demande qualifiée",
-    intro:
-      "Ciblages locaux + messages adaptés aux métiers animaliers. Objectif : demandes qualifiées (pas du volume inutile).",
-    bullets: [
-      "Créatifs (UGC-like) + angles de confiance",
-      "Ciblage local (zones, centres d’intérêt)",
-      "Formulaire qualifiant (ville, besoin, urgence)",
-      "Retargeting (visiteurs / engagés)",
-      "Optimisation sur événements (tracking)",
-    ],
-    forWho: ["Éducateurs", "Toiletteurs", "Pensions", "Services à forte concurrence"],
-  },
-  {
-    slug: "landing-pages",
-    title: "Landing pages & conversion",
-    badge: "Plus de RDV",
-    intro:
-      "Pages d’atterrissage conçues pour convertir : preuves alternatives, réassurance, CTA, FAQ, et structure SEO.",
-    bullets: [
-      "Copywriting orienté bénéfices",
-      "Sections : process, preuve, offre, FAQ, CTA",
-      "Design léger & rapide (Core Web Vitals)",
-      "A/B tests (messages, CTA, formulaires)",
-      "Optimisation mobile-first",
-    ],
-    forWho: ["Ads", "SEO local", "Offres packagées", "Saisonniers"],
-  },
-  {
-    slug: "tracking",
-    title: "Tracking & pilotage",
-    badge: "Preuve par la donnée",
-    intro:
-      "On mesure ce qui compte : appels, formulaires, RDV, sources (SEO/Maps/Ads) pour décider vite et optimiser.",
-    bullets: [
-      "Plan de tracking (UTM, événements)",
-      "GA4 / Matomo + Pixel Meta (si besoin)",
-      "Suivi clic-to-call & formulaires",
-      "Dashboard (leads, coût, taux)",
-      "Recommandations mensuelles basées data",
-    ],
-    forWho: ["Tous métiers", "Ads", "SEO", "Croissance"],
-  },
-];
+// ✅ Ordre contrôlé (évite Object.entries aléatoire)
+const offerOrder = ["seo-local", "google-ads", "meta-ads", "landing-pages", "tracking"] as const;
+
+const offers = offerOrder
+  .map((slug) => {
+    const p: any = (PRESTATIONS as any)[slug];
+    if (!p) return null;
+
+    return {
+      slug,
+      title: p.name,
+      badge: p.badge,
+      intro: p.headline,
+      bullets: p.bullets ?? [],
+      // Optionnel: si tes données PRESTATIONS n'ont pas "forWho", on garde des valeurs par défaut
+      forWho: p.forWho ?? [],
+    };
+  })
+  .filter(Boolean) as Array<{
+    slug: string;
+    title: string;
+    badge: string;
+    intro: string;
+    bullets: string[];
+    forWho: string[];
+  }>;
+
+// ✅ Pastilles "Pour qui" -> liens métiers quand possible
+const metierLinkMap: Record<string, string> = {
+  "Éducateurs canins": "/metiers/educateur-canin/",
+  "Éducateur canin": "/metiers/educateur-canin/",
+  "Comportementalistes": "/metiers/comportementaliste/",
+  "Comportementaliste": "/metiers/comportementaliste/",
+  "Toiletteurs": "/metiers/toiletteur/",
+  "Toiletteur": "/metiers/toiletteur/",
+  "Pensions": "/metiers/pension-canine/",
+  "Pension canine": "/metiers/pension-canine/",
+  "Pet-sitter": "/metiers/pension-canine/",
+  "Vétos": "/metiers/veterinaire/",
+  "Vétérinaire": "/metiers/veterinaire/",
+  "Ostéos animaliers": "/metiers/osteo-animalier/",
+  "Ostéopathe animalier": "/metiers/osteo-animalier/",
+};
+
+// ✅ Villes cliquables (pages /zones/[ville]/ existent)
+const allTowns = Array.from(
+  new Set([
+    ...((ZONES as any)["sud-oise-60"]?.towns ?? []),
+    ...((ZONES as any)["val-doise-95"]?.towns ?? []),
+  ])
+).slice(0, 18);
+
+// ✅ mini liste métiers (liens réels)
+const jobs = Object.entries(JOBS).slice(0, 8).map(([slug, v]: any) => ({
+  slug,
+  name: v.name,
+}));
 
 const jsonLd = [
   {
@@ -111,7 +95,6 @@ const jsonLd = [
       item: b.item,
     })),
   },
-  // ItemList pour clarifier la liste de prestations
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -136,209 +119,253 @@ const jsonLd = [
   breadcrumbs={breadcrumbs}
   jsonLd={jsonLd}
 >
+  <style>
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
 
-<style>
-  :global(body) {
-    margin: 0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-      Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    color: #0f172a;
-    background: #ffffff;
-  }
-  .wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 28px 16px 72px;
-  }
-  .breadcrumbs {
-    font-size: 14px;
-    color: #475569;
-    margin: 4px 0 18px;
-  }
-  .breadcrumbs a {
-    color: inherit;
-    text-decoration: none;
-  }
-  header.hero {
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    background: linear-gradient(180deg, #f8fafc, #fff);
-    padding: 22px;
-    display: grid;
-    gap: 10px;
-  }
-  h1 {
-    margin: 0;
-    font-size: 34px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .sub {
-    margin: 0;
-    color: #334155;
-    max-width: 85ch;
-    line-height: 1.6;
-  }
+    .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
 
-  .grid {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  a.cardLink {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .card {
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    padding: 18px;
-    background: #fff;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-    display: grid;
-    gap: 10px;
-  }
-
-  .top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .top h2 {
-    margin: 0;
-    font-size: 18px;
-  }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #f8fafc;
-    color: #334155;
-    font-weight: 800;
-  }
-  .intro {
-    margin: 0;
-    color: #334155;
-    line-height: 1.6;
-  }
-  .bullets {
-    margin: 0;
-    padding-left: 18px;
-    color: #334155;
-    line-height: 1.55;
-  }
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  .pill {
-    display: inline-block;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #334155;
-  }
-
-  .ctaRow {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  @media (max-width: 720px) {
-    .ctaRow {
-      grid-template-columns: 1fr;
+    header.hero {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+      padding: 22px;
+      display: grid;
+      gap: 10px;
     }
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid #0f172a;
-    background: #0f172a;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 900;
-    text-decoration: none;
-  }
-  .btn.secondary {
-    background: #fff;
-    color: #0f172a;
-  }
-  .meta {
-    color: #475569;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-</style>
+    h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+    .sub { margin: 0; color: #334155; max-width: 85ch; line-height: 1.6; }
 
-<div class="wrap">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-    <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Prestations</span>
-  </nav>
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
 
-  <header class="hero">
-    <h1>Prestations</h1>
-    <p class="sub">
-      Des prestations orientées résultats pour les professionnels des animaux :
-      <strong> SEO local & Google Maps</strong>, <strong>Google Ads</strong>,
-      <strong> Meta Ads</strong>, <strong>landing pages</strong>,
-      <strong> conversion</strong> et <strong>tracking</strong>.
-      Priorité : <strong>Sud Oise (60)</strong> et <strong>Val d’Oise (95)</strong>.
-    </p>
-  </header>
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
 
-  <section class="grid" aria-label="Liste des prestations">
-    {offers.map((o) => (
-      <a class="cardLink" href={`/prestations/${o.slug}/`}>
-        <article class="card">
-          <div class="top">
-            <h2>{o.title}</h2>
-            <span class="badge">{o.badge}</span>
+    a.cardLink { text-decoration: none; color: inherit; display: block; }
+
+    .offerCard {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .top h2 { margin: 0; font-size: 18px; }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 900;
+    }
+
+    .intro { margin: 0; color: #334155; line-height: 1.6; }
+
+    .bullets { margin: 0; padding-left: 18px; color: #334155; line-height: 1.55; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #334155;
+    }
+    a.pillLink {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #334155;
+      text-decoration: none;
+    }
+    a.pillLink:hover { background: #f8fafc; }
+
+    .ctaRow {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 720px) { .ctaRow { grid-template-columns: 1fr; } }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #0f172a;
+      background: #0f172a;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .btn.secondary { background: #fff; color: #0f172a; }
+
+    .meta { color: #475569; font-size: 14px; line-height: 1.6; margin-top: 10px; }
+
+    .note {
+      margin-top: 12px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .asideBlock + .asideBlock { margin-top: 12px; }
+    .asideTitle { margin: 0 0 8px; font-size: 14px; }
+    .asideText { margin: 0; color: #334155; line-height: 1.6; font-size: 14px; }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Prestations</span>
+    </nav>
+
+    <header class="hero">
+      <h1>Prestations</h1>
+      <p class="sub">
+        Des prestations orientées résultats pour les professionnels des animaux :
+        <strong> SEO local & Google Maps</strong>, <strong>Google Ads</strong>,
+        <strong> Meta Ads</strong>, <strong>landing pages</strong>,
+        <strong> conversion</strong> et <strong>tracking</strong>.
+        Priorité : <strong>Sud Oise (60)</strong> et <strong>Val d’Oise (95)</strong>.
+      </p>
+    </header>
+
+    <section class="grid" aria-label="Prestations + liens utiles">
+      <!-- ✅ LISTE PRESTATIONS (liens réels) -->
+      <div class="card">
+        <h2 style="margin:0;">Toutes les prestations (pages réelles)</h2>
+        <p class="meta" style="margin-top:8px;">
+          Chaque carte renvoie vers une page dédiée (SEO + conversion + schémas).
+        </p>
+
+        <div style="margin-top:12px;">
+          {offers.map((o) => (
+            <a class="cardLink" href={`/prestations/${o.slug}/`}>
+              <article class="offerCard">
+                <div class="top">
+                  <h2>{o.title}</h2>
+                  <span class="badge">{o.badge}</span>
+                </div>
+                <p class="intro">{o.intro}</p>
+
+                {o.bullets?.length > 0 && (
+                  <ul class="bullets">
+                    {o.bullets.map((b) => <li>{b}</li>)}
+                  </ul>
+                )}
+
+                {(o.forWho?.length > 0) && (
+                  <div class="pills" aria-label="Pour qui (liens quand possible)">
+                    {o.forWho.map((x) => (
+                      metierLinkMap[x]
+                        ? <a class="pillLink" href={metierLinkMap[x]}>{x}</a>
+                        : <span class="pill">{x}</span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            </a>
+          ))}
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="/contact/">Demander un diagnostic</a>
+          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        </div>
+
+        <p class="meta">
+          Besoin d’une prestation “sur-mesure” (lancement, refonte, croissance) ?{" "}
+          <a
+            href="mailto:contact@horizon-conversion.fr"
+            style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
+          >
+            contact@horizon-conversion.fr
+          </a>
+        </p>
+      </div>
+
+      <!-- ✅ ASIDE : maillage interne vers vraies pages -->
+      <aside class="card">
+        <div class="asideBlock">
+          <h3 class="asideTitle">Offres (packs)</h3>
+          <p class="asideText">Tarifs & packs (ancres réelles) :</p>
+          <div class="pills" aria-label="Packs">
+            <a class="pillLink" href="/tarifs/#local-essentiel">Local Essentiel</a>
+            <a class="pillLink" href="/tarifs/#local-performance">Local Performance</a>
+            <a class="pillLink" href="/tarifs/#ads-booster">Ads Booster</a>
+            <a class="pillLink" href="/tarifs/#pack-complet">Pack Complet</a>
           </div>
-          <p class="intro">{o.intro}</p>
-          <ul class="bullets">
-            {o.bullets.map((b) => (
-              <li>{b}</li>
-            ))}
-          </ul>
-          <div class="pills" aria-label="Pour qui">
-            {o.forWho.map((x) => (
-              <span class="pill">{x}</span>
+        </div>
+
+        <div class="asideBlock">
+          <h3 class="asideTitle">Villes couvertes (cliquables)</h3>
+          <p class="asideText">Pages ville existantes :</p>
+          <div class="pills" aria-label="Villes">
+            {allTowns.map((t) => (
+              <a class="pillLink" href={`/zones/${slugifyCity(t)}/`}>{t}</a>
             ))}
           </div>
-        </article>
-      </a>
-    ))}
-  </section>
+          <a
+            href="/zones/"
+            style="display:inline-block;margin-top:10px;font-weight:900;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.18);padding-bottom:2px;"
+          >
+            Voir toutes les zones →
+          </a>
+        </div>
 
-  <div class="ctaRow">
-    <a class="btn" href="/contact/">Demander un diagnostic</a>
-    <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        <div class="asideBlock">
+          <h3 class="asideTitle">Métiers (cliquables)</h3>
+          <p class="asideText">Pages métier existantes :</p>
+          <div class="pills" aria-label="Métiers">
+            {jobs.map((j) => (
+              <a class="pillLink" href={`/metiers/${j.slug}/`}>{j.name}</a>
+            ))}
+          </div>
+          <a
+            href="/metiers/"
+            style="display:inline-block;margin-top:10px;font-weight:900;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.18);padding-bottom:2px;"
+          >
+            Voir tous les métiers →
+          </a>
+        </div>
+
+        <div class="note">
+          <strong>SEO :</strong> ici, aucun texte-type “service + ville” non relié.
+          On ne montre que des liens vers des pages réelles (prestations, villes, métiers, tarifs).
+        </div>
+      </aside>
+    </section>
   </div>
-
-  <p class="meta">
-    Besoin d’une prestation “sur-mesure” (ex : lancement, refonte, croissance) ?
-    Écrivez-nous :{" "}
-    <a
-      href="mailto:contact@horizon-conversion.fr"
-      style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
-    >
-      contact@horizon-conversion.fr
-    </a>
-  </p>
-</div>
+</LayoutSEO>

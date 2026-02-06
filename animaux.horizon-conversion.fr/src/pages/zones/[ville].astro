@@ -1,7 +1,13 @@
 ---
 // src/pages/zones/[ville].astro
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
-import { ZONES, VILLES, slugifyCity, findCityBySlug, type ZoneKey } from "../../data/zones.ts";
+import {
+  ZONES,
+  VILLES,
+  slugifyCity,
+  findCityBySlug,
+  type ZoneKey,
+} from "../../data/zones.ts";
 import { JOBS } from "../../data/jobs.ts";
 
 export const prerender = true;
@@ -20,7 +26,12 @@ const props = Astro.props as { town?: string; zoneKey?: ZoneKey };
 
 const resolved =
   props?.town && props?.zoneKey
-    ? { town: props.town, zoneKey: props.zoneKey, slug: ville, zone: ZONES[props.zoneKey] }
+    ? {
+        town: props.town,
+        zoneKey: props.zoneKey,
+        slug: ville,
+        zone: ZONES[props.zoneKey],
+      }
     : findCityBySlug(ville);
 
 if (!resolved) throw new Error(`Ville inconnue: ${ville}`);
@@ -31,8 +42,7 @@ const canonical = `${baseUrl}${Astro.url.pathname}`;
 
 // SEO
 const title = `${town} | SEO local & Ads pros animaux – Horizon Conversion`;
-const description =
-  `Acquisition locale à ${town} : SEO local, Google Maps, Ads, landing pages, conversion & tracking. Zone : ${zone.name}.`;
+const description = `Acquisition locale à ${town} : SEO local, Google Maps, Ads, landing pages, conversion & tracking. Zone : ${zone.name}.`;
 
 const breadcrumbs = [
   { name: "Accueil", item: `${baseUrl}/` },
@@ -41,26 +51,28 @@ const breadcrumbs = [
   { name: town, item: canonical },
 ];
 
-// Liens vers pages "money" /zones/{ville}/{metier}/
+// ✅ VRAIES pages (money) : /zones/{ville}/{metier}/
 const jobEntries = Object.entries(JOBS) as Array<[string, any]>;
 const metierLinks = jobEntries.map(([metierSlug, job]) => ({
   metierSlug,
   name: job.name as string,
   href: `/zones/${slug}/${metierSlug}/`,
-  intentExample: (job.intents?.[0] as string | undefined)
-    ?.replace(/\+\s*ville/gi, town)
-    ?.replace(/\bville\b/gi, town),
 }));
 
-const intentExamples = metierLinks
-  .map((m) => m.intentExample)
-  .filter(Boolean)
-  .slice(0, 6) as string[];
+// ✅ Liens services (pages réelles)
+const servicesLinks = [
+  { href: "/prestations/seo-local/", label: "SEO local & Google Maps" },
+  { href: "/prestations/google-ads/", label: "Google Ads (Search)" },
+  { href: "/prestations/meta-ads/", label: "Meta Ads (Facebook/Instagram)" },
+  { href: "/prestations/landing-pages/", label: "Landing pages & conversion" },
+  { href: "/prestations/tracking/", label: "Tracking & pilotage" },
+  { href: "/tarifs/", label: "Tarifs / Packs" },
+];
 
 // Autres villes de la même zone
 const otherTowns = (zone.towns as string[])
   .filter((t) => slugifyCity(t) !== slug)
-  .slice(0, 10)
+  .slice(0, 12)
   .map((t) => ({ name: t, href: `/zones/${slugifyCity(t)}/` }));
 
 const jsonLd = [
@@ -82,6 +94,7 @@ const jsonLd = [
       item: b.item,
     })),
   },
+  // ✅ ItemList de VRAIES pages (anti placeholder)
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -140,6 +153,7 @@ const jsonLd = [
     }
 
     h2 { margin: 0 0 10px; font-size: 18px; }
+    h3 { margin: 16px 0 10px; font-size: 15px; }
     p { margin: 0; color: #334155; line-height: 1.6; }
 
     .note {
@@ -163,6 +177,7 @@ const jsonLd = [
       color: #334155;
       text-decoration: none;
     }
+    .pill:hover { background: #f8fafc; }
 
     .list { margin: 10px 0 0; padding-left: 18px; color: #334155; line-height: 1.55; }
 
@@ -204,7 +219,6 @@ const jsonLd = [
       padding: 14px;
       background: #fff;
     }
-    .block a { text-decoration: none; }
     .block ul { margin: 10px 0 0; padding-left: 18px; }
   </style>
 
@@ -221,7 +235,7 @@ const jsonLd = [
       <p class="sub">
         On déploie une stratégie locale orientée résultats pour les professionnels des animaux à{" "}
         <strong>{town}</strong> : <strong>SEO local</strong> + <strong>Google Maps</strong> +{" "}
-        <strong>Ads</strong>, avec des pages dédiées (“<strong>1 intention = 1 page</strong>”) et un tracking propre.
+        <strong>Ads</strong>, avec des pages dédiées (métier × ville) et un tracking propre.
         Zone : <strong>{zone.name}</strong>.
       </p>
     </header>
@@ -235,14 +249,23 @@ const jsonLd = [
         </p>
 
         <div class="note">
-          <strong>Principe :</strong> au lieu d’une page “générale”, on crée des pages ultra ciblées
-          <strong> métier + ville + service</strong> avec FAQ + preuves alternatives + CTA, puis on relie le tout via
-          ce hub ville.
+          <strong>Anti “placeholder” :</strong> au lieu d’afficher des intentions “texte-type”, on pointe vers des{" "}
+          <strong>pages réelles</strong> (métier × ville + prestations). C’est ce cluster de pages qui aide Google à
+          comprendre la valeur et la couverture locale.
         </div>
 
-        <h2 style="margin-top:16px;">Exemples d’intentions à forte intention</h2>
-        <div class="pills" aria-label="Exemples de requêtes">
-          {intentExamples.map((x) => <span class="pill">{x}</span>)}
+        <h2 style="margin-top:16px;">Pages métier × {town} (liens réels)</h2>
+        <div class="pills" aria-label="Pages métier × ville">
+          {metierLinks.map((m) => (
+            <a class="pill" href={m.href}>{m.name} à {town}</a>
+          ))}
+        </div>
+
+        <h2 style="margin-top:16px;">Services (pages réelles)</h2>
+        <div class="pills" aria-label="Services">
+          {servicesLinks.map((s) => (
+            <a class="pill" href={s.href}>{s.label}</a>
+          ))}
         </div>
 
         <div class="ctaRow">
@@ -258,9 +281,7 @@ const jsonLd = [
 
       <aside class="card">
         <h2>Métiers à {town}</h2>
-        <p class="meta">
-          Pages “métier + ville” (celles qui rankent le mieux) :
-        </p>
+        <p class="meta">Pages “métier + ville” (celles qui rankent le mieux) :</p>
 
         <div class="block">
           <ul class="list">
@@ -284,6 +305,7 @@ const jsonLd = [
           <a class="pill" href={`/zones/${zoneKey}/`}>{zone.name}</a>
           <a class="pill" href="/metiers/">Métiers</a>
           <a class="pill" href="/prestations/">Prestations</a>
+          <a class="pill" href="/tarifs/">Tarifs</a>
           <a class="pill" href="/contact/">Contact</a>
         </div>
       </aside>

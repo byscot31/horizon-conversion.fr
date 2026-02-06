@@ -24,41 +24,180 @@ const business = {
   areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Horizon Conversion Animaux",
-    url: baseUrl,
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Horizon Conversion Animaux",
-    url: baseUrl,
-    telephone: "+33660921008",
-    email: "contact@horizon-conversion.fr",
-    areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
-  },
-];
-
 // UI helpers
-const featuredPrestations = [
-  "seo-local",
-  "google-ads",
-  "meta-ads",
-  "landing-pages",
-].map((k) => (PRESTATIONS as any)[k]).filter(Boolean);
+const featuredPrestations = ["seo-local", "google-ads", "meta-ads", "landing-pages"]
+  .map((k) => (PRESTATIONS as any)[k])
+  .filter(Boolean);
 
-const featuredMetiers = Object.entries(JOBS).slice(0, 6).map(([slug, v]: any) => ({
-  slug,
-  name: v.name,
-  headline: v.headline,
-}));
+const featuredMetiers = Object.entries(JOBS)
+  .slice(0, 6)
+  .map(([slug, v]: any) => ({
+    slug,
+    name: v.name,
+    headline: v.headline,
+  }));
 
 const zoneCards = [
   { key: "sud-oise-60", href: "/zones/sud-oise-60/", ...ZONES["sud-oise-60"] },
   { key: "val-doise-95", href: "/zones/val-doise-95/", ...ZONES["val-doise-95"] },
+];
+
+const offers = [
+  {
+    id: "local-essentiel",
+    name: "Local Essentiel",
+    tag: "Démarrer propre",
+    setupFrom: 490,
+    monthlyFrom: 390,
+    bullets: [
+      "GBP optimisée + socle SEO local",
+      "1 page “1 intention = 1 page” (modèle)",
+      "Tracking de base (appels / formulaires)",
+      "Plan d’actions priorisé",
+    ],
+  },
+  {
+    id: "local-performance",
+    name: "Local Performance",
+    tag: "Recommandé",
+    highlight: true,
+    setupFrom: 790,
+    monthlyFrom: 690,
+    bullets: [
+      "2–4 pages locales / mois (priorisées)",
+      "Optimisation conversion (preuves, FAQ, CTA)",
+      "Tracking avancé + tableau de bord",
+      "Pilotage continu (SEO/Maps) + itérations",
+    ],
+  },
+  {
+    id: "ads-booster",
+    name: "Ads Booster",
+    tag: "Leads rapides",
+    setupFrom: 450,
+    monthlyFrom: 450,
+    bullets: [
+      "Google Ads OU Meta Ads (structure propre)",
+      "Exclusions + ciblage local anti-parasites",
+      "Landing dédiée (ou optimisation)",
+      "Optimisation hebdo au coût/lead",
+    ],
+    footnote: "Budget pub non inclus.",
+  },
+  {
+    id: "pack-complet",
+    name: "Pack Complet",
+    tag: "Tout inclus",
+    setupFrom: 990,
+    monthlyFrom: 990,
+    bullets: [
+      "SEO local + Google Maps + pages locales",
+      "Ads (Google/Meta) + exclusions + pilotage",
+      "Conversion (offre, preuves, FAQ, CTA)",
+      "Tracking complet + tableau de bord",
+    ],
+  },
+];
+
+// ✅ JSON-LD OfferCatalog (packs) — explicite pour Google
+const provider = {
+  "@type": "Organization",
+  name: business.name,
+  url: business.url,
+  telephone: business.telephone,
+  email: business.email,
+};
+
+const offerCatalogLd = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  name: "Offres & packs (SEO local, Google Maps, Ads)",
+  url: canonical,
+  itemListElement: [
+    {
+      "@type": "Offer",
+      name: "Local Essentiel",
+      url: `${baseUrl}/tarifs/#local-essentiel`,
+      priceCurrency: "EUR",
+      priceSpecification: [
+        { "@type": "PriceSpecification", name: "Mise en place (one-shot)", priceCurrency: "EUR", price: 490, minPrice: 490 },
+        { "@type": "PriceSpecification", name: "Mensuel", priceCurrency: "EUR", price: 390, minPrice: 390 },
+      ],
+      itemOffered: {
+        "@type": "Service",
+        name: "Local Essentiel — SEO local & Google Maps",
+        areaServed: business.areaServed,
+        provider,
+      },
+      description: "Pack de démarrage : base SEO local + GBP + tracking. Tarifs à partir de.",
+    },
+    {
+      "@type": "Offer",
+      name: "Local Performance",
+      url: `${baseUrl}/tarifs/#local-performance`,
+      priceCurrency: "EUR",
+      priceSpecification: [
+        { "@type": "PriceSpecification", name: "Mise en place (one-shot)", priceCurrency: "EUR", price: 790, minPrice: 790 },
+        { "@type": "PriceSpecification", name: "Mensuel", priceCurrency: "EUR", price: 690, minPrice: 690 },
+      ],
+      itemOffered: {
+        "@type": "Service",
+        name: "Local Performance — Pages locales + conversion + tracking",
+        areaServed: business.areaServed,
+        provider,
+      },
+      description:
+        "Pack recommandé : pages locales régulières + optimisation conversion + tracking avancé. Tarifs à partir de.",
+    },
+    {
+      "@type": "Offer",
+      name: "Ads Booster",
+      url: `${baseUrl}/tarifs/#ads-booster`,
+      priceCurrency: "EUR",
+      priceSpecification: [
+        { "@type": "PriceSpecification", name: "Mise en place (one-shot)", priceCurrency: "EUR", price: 450, minPrice: 450 },
+        { "@type": "PriceSpecification", name: "Mensuel", priceCurrency: "EUR", price: 450, minPrice: 450 },
+      ],
+      itemOffered: {
+        "@type": "Service",
+        name: "Ads Booster — Google Ads ou Meta Ads",
+        areaServed: business.areaServed,
+        provider,
+      },
+      description: "Pack acquisition : Ads + exclusions + landing + tracking. Budget pub non inclus. Tarifs à partir de.",
+    },
+    {
+      "@type": "Offer",
+      name: "Pack Complet",
+      url: `${baseUrl}/tarifs/#pack-complet`,
+      priceCurrency: "EUR",
+      priceSpecification: [
+        { "@type": "PriceSpecification", name: "Mise en place (one-shot)", priceCurrency: "EUR", price: 990, minPrice: 990 },
+        { "@type": "PriceSpecification", name: "Mensuel", priceCurrency: "EUR", price: 990, minPrice: 990 },
+      ],
+      itemOffered: {
+        "@type": "Service",
+        name: "Pack Complet — SEO local + Ads + conversion",
+        areaServed: business.areaServed,
+        provider,
+      },
+      description: "Offre complète : pilotage global SEO/Maps + Ads + conversion + tracking. Tarifs à partir de.",
+    },
+  ],
+};
+
+const jsonLd = [
+  { "@context": "https://schema.org", "@type": "WebSite", name: business.name, url: baseUrl },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: business.name,
+    url: baseUrl,
+    telephone: business.telephone,
+    email: business.email,
+    areaServed: business.areaServed,
+  },
+  offerCatalogLd,
 ];
 ---
 
@@ -75,11 +214,7 @@ const zoneCards = [
   business={business}
 >
 <style>
-  .wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 28px 16px 72px;
-  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
 
   .hero {
     border: 1px solid #e2e8f0;
@@ -90,82 +225,28 @@ const zoneCards = [
     gap: 14px;
   }
 
-  h1 {
-    margin: 0;
-    font-size: 38px;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-  }
+  h1 { margin: 0; font-size: 38px; line-height: 1.05; letter-spacing: -0.03em; }
+  .sub { margin: 0; color: #334155; line-height: 1.6; max-width: 92ch; font-size: 16px; }
 
-  .sub {
-    margin: 0;
-    color: #334155;
-    line-height: 1.6;
-    max-width: 92ch;
-    font-size: 16px;
-  }
-
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 2px;
-  }
-
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
   .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #334155;
-    width: fit-content;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid #e2e8f0; background: #fff; color: #334155; width: fit-content;
   }
 
-  .ctaRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 6px;
-  }
-  @media (max-width: 720px) {
-    .ctaRow {
-      grid-template-columns: 1fr;
-    }
-  }
+  .ctaRow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+  @media (max-width: 720px) { .ctaRow { grid-template-columns: 1fr; } }
+
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid #0f172a;
-    background: #0f172a;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 900;
-    text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 12px 14px; border-radius: 14px; border: 1px solid #0f172a;
+    background: #0f172a; color: #fff; cursor: pointer; font-weight: 900; text-decoration: none;
   }
-  .btn.secondary {
-    background: #fff;
-    color: #0f172a;
-  }
+  .btn.secondary { background: #fff; color: #0f172a; }
 
-  .grid {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
-    align-items: start;
-  }
-  @media (max-width: 920px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
+  .grid { margin-top: 18px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; align-items: start; }
+  @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
 
   .card {
     border: 1px solid #e2e8f0;
@@ -175,122 +256,102 @@ const zoneCards = [
     box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
   }
 
-  h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-  }
+  h2 { margin: 0 0 10px; font-size: 18px; }
+  p { margin: 0; color: #334155; line-height: 1.6; }
+  ul { margin: 10px 0 0; padding-left: 18px; color: #334155; line-height: 1.55; }
 
-  p {
-    margin: 0;
-    color: #334155;
-    line-height: 1.6;
-  }
-
-  ul {
-    margin: 10px 0 0;
-    padding-left: 18px;
-    color: #334155;
-    line-height: 1.55;
-  }
-
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
   .pill {
-    display: inline-block;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #334155;
-    text-decoration: none;
+    display: inline-block; font-size: 12px; padding: 6px 10px;
+    border-radius: 999px; border: 1px solid #e2e8f0; background: #fff; color: #334155; text-decoration: none;
   }
 
-  .section {
-    margin-top: 18px;
+  .section { margin-top: 18px; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+  @media (max-width: 920px) { .cards { grid-template-columns: 1fr; } }
+
+  .miniCard { border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px; background: #fff; }
+  .miniTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .miniBadge {
+    font-size: 12px; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid #e2e8f0; background: #f1f5f9; color: #334155; font-weight: 900;
+  }
+  .miniCard h3 { margin: 0; font-size: 16px; line-height: 1.25; }
+  .miniCard p { margin-top: 6px; color: #475569; font-size: 14px; }
+
+  .link {
+    display: inline-flex; gap: 8px; align-items: center;
+    margin-top: 10px; font-weight: 900; text-decoration: none;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.18);
+    width: fit-content; padding-bottom: 2px;
+  }
+  .link:hover { border-bottom-color: rgba(15, 23, 42, 0.45); }
+
+  .note {
+    margin-top: 10px; border: 1px dashed #cbd5e1; border-radius: 16px;
+    padding: 14px; background: #f8fafc; color: #334155; line-height: 1.6;
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 10px;
-  }
-  @media (max-width: 920px) {
-    .cards {
-      grid-template-columns: 1fr;
-    }
-  }
+  .meta { color: #475569; font-size: 14px; line-height: 1.6; margin-top: 10px; }
 
-  .miniCard {
+  .offerGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+  @media (max-width: 1024px) { .offerGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 720px) { .offerGrid { grid-template-columns: 1fr; } }
+
+  .offerCard {
     border: 1px solid #e2e8f0;
     border-radius: 18px;
     padding: 16px;
     background: #fff;
-  }
-  .miniTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
     gap: 10px;
-    margin-bottom: 8px;
+    align-content: start;
   }
-  .miniBadge {
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #f1f5f9;
-    color: #334155;
-    font-weight: 900;
+  .offerCard.featured {
+    border-color: rgba(15, 23, 42, 0.35);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.09);
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
   }
-  .miniCard h3 {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.25;
-  }
-  .miniCard p {
-    margin-top: 6px;
-    color: #475569;
-    font-size: 14px;
-  }
+  .offerTop { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .offerTop h3 { margin: 0; font-size: 16px; line-height: 1.25; }
 
-  .link {
-    display: inline-flex;
-    gap: 8px;
-    align-items: center;
+  .offerTag {
+    font-size: 12px; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid #e2e8f0; background: #f1f5f9; color: #334155;
+    font-weight: 900; white-space: nowrap;
+  }
+  .offerTag.dark { border-color: #0f172a; background: #0f172a; color: #fff; }
+
+  .priceRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .priceBox { border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; background: #f8fafc; }
+  .priceBox strong { display: block; font-size: 12px; color: #475569; }
+  .priceBox em { display: block; margin-top: 4px; font-style: normal; font-weight: 950; font-size: 15px; color: #0f172a; }
+
+  .offerFoot { color: #64748b; font-size: 12px; line-height: 1.45; margin-top: -2px; }
+
+  .miniLine {
     margin-top: 10px;
-    font-weight: 900;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .miniLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
     border-bottom: 1px solid rgba(15, 23, 42, 0.18);
     width: fit-content;
     padding-bottom: 2px;
+    font-weight: 900;
+    color: #0f172a;
   }
-  .link:hover {
-    border-bottom-color: rgba(15, 23, 42, 0.45);
-  }
-
-  .note {
-    margin-top: 10px;
-    border: 1px dashed #cbd5e1;
-    border-radius: 16px;
-    padding: 14px;
-    background: #f8fafc;
-    color: #334155;
-    line-height: 1.6;
-  }
-
-  .meta {
-    color: #475569;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
+  .miniLink:hover { border-bottom-color: rgba(15, 23, 42, 0.45); }
 </style>
 
 <div class="wrap">
@@ -361,6 +422,65 @@ const zoneCards = [
     </aside>
   </section>
 
+  <!-- ✅ OFFRE (3 cartes) + mini lien "Offre complète" -->
+  <section class="section">
+    <div class="card">
+      <h2>Offre (packs)</h2>
+      <p>
+        Trois packs pour démarrer vite selon ton objectif : base locale (SEO/Maps),
+        accélération (pages + conversion + tracking), ou acquisition rapide (Ads).
+      </p>
+
+      <div class="offerGrid" aria-label="Offres">
+        {offers.map((o) => (
+          <article class={`offerCard ${o.highlight ? "featured" : ""}`}>
+            <div class="offerTop">
+              <h3>{o.name}</h3>
+              <span class={`offerTag ${o.highlight ? "dark" : ""}`}>{o.tag}</span>
+            </div>
+
+            <div class="priceRow" aria-label="Prix à partir de">
+              <div class="priceBox">
+                <strong>Mise en place</strong>
+                <em>À partir de {o.setupFrom}€</em>
+              </div>
+              <div class="priceBox">
+                <strong>Mensuel</strong>
+                <em>À partir de {o.monthlyFrom}€/mois</em>
+              </div>
+            </div>
+
+            <ul>
+              {o.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+
+            {o.footnote && <div class="offerFoot">{o.footnote}</div>}
+
+            <div class="ctaRow" style="margin-top:6px;">
+              <a class="btn" href={`/tarifs/#${o.id}`}>Voir le pack</a>
+              <a class="btn secondary" href="/contact/">Vérifier l’éligibilité</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="miniLine" aria-label="Offre complète">
+        <span>Besoin d’une variante / options ?</span>
+        <a class="miniLink" href="/tarifs/">Voir tous les tarifs →</a>
+      </div>
+
+      <div class="note" style="margin-top:12px;">
+        <strong>Important :</strong> on ne promet pas “la 1ère place”. On s’engage sur l’exécution, les livrables,
+        et un tracking propre (appels / formulaires / sources) pour piloter au réel.
+      </div>
+
+      <div class="ctaRow" style="margin-top:14px;">
+        <a class="btn" href="/tarifs/">Voir tous les tarifs</a>
+        <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="card">
       <h2>Prestations</h2>
@@ -374,7 +494,10 @@ const zoneCards = [
             </div>
             <h3>{p.name}</h3>
             <p>{p.headline}</p>
-            <a class="link" href={`/prestations/${Object.keys(PRESTATIONS).find((k) => (PRESTATIONS as any)[k] === p)}/`}>
+            <a
+              class="link"
+              href={`/prestations/${Object.keys(PRESTATIONS).find((k) => (PRESTATIONS as any)[k] === p)}/`}
+            >
               Voir la prestation
             </a>
           </div>
@@ -426,3 +549,4 @@ const zoneCards = [
     </div>
   </section>
 </div>
+</LayoutSEO>

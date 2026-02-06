@@ -1,20 +1,20 @@
 ---
 // src/pages/metiers/[metier].astro
-
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
 import { JOBS, type JobKey } from "../../data/jobs.ts";
+import { ZONES, slugifyCity } from "../../data/zones.ts";
+import { PROOF_EXAMPLES, TRACKING_EVENTS, LOCAL_PAGE_BLUEPRINT } from "../../data/proofs.ts";
 
 export const prerender = true;
 
 const baseUrl = "https://animaux.horizon-conversion.fr";
 
 export function getStaticPaths() {
-  return Object.keys(JOBS).map((metier) => ({ params: { metier } }));
+  return (Object.keys(JOBS) as JobKey[]).map((metier) => ({ params: { metier } }));
 }
 
 const { metier } = Astro.params as { metier: JobKey };
 const job = JOBS[metier];
-
 if (!job) throw new Error(`Métier inconnu: ${metier}`);
 
 const canonical = `${baseUrl}${Astro.url.pathname}`;
@@ -27,6 +27,143 @@ const breadcrumbs = [
   { name: "Métiers", item: `${baseUrl}/metiers/` },
   { name: job.name, item: canonical },
 ];
+
+// ✅ Villes cliquables (pages réelles /zones/{ville}/{metier}/)
+const featuredTowns = [
+  ...(ZONES["sud-oise-60"]?.towns?.slice(0, 7) ?? []),
+  ...(ZONES["val-doise-95"]?.towns?.slice(0, 7) ?? []),
+].filter(Boolean);
+
+const cityPages = featuredTowns.map((t) => ({
+  name: t,
+  slug: slugifyCity(t),
+  href: `/zones/${slugifyCity(t)}/${metier}/`,
+}));
+
+// ✅ Prestations (pages réelles)
+const prestationLinks = [
+  { href: "/prestations/seo-local/", label: "SEO local & Google Maps" },
+  { href: "/prestations/google-ads/", label: "Google Ads (Search)" },
+  { href: "/prestations/meta-ads/", label: "Meta Ads" },
+  { href: "/prestations/landing-pages/", label: "Landing pages & conversion" },
+  { href: "/prestations/tracking/", label: "Tracking & pilotage" },
+];
+
+// ✅ FAQ spécifique (variable) — tu peux étoffer métier par métier
+const jobFaq: Record<JobKey, Array<{ q: string; a: string }>> = {
+  "educateur-canin": [
+    {
+      q: "Comment éviter les demandes hors zone (ou trop loin) ?",
+      a: "On combine pages locales + messages clairs (rayon, communes couvertes) + exclusions Ads + formulaire qualifiant (ville, distance, urgence).",
+    },
+    {
+      q: "Qu’est-ce qui convertit le mieux pour un éducateur canin ?",
+      a: "Une promesse simple (bilan, rééducation, chiot) + preuve (process / cas anonymisé) + CTA rapide (appel + diagnostic) + pages par intention.",
+    },
+    {
+      q: "Je démarre et j’ai peu d’avis : c’est bloquant ?",
+      a: "Non. On renforce la confiance via livrables visibles, tracking, transparence et une offre structurée (packs) avec critères clairs.",
+    },
+  ],
+  "comportementaliste": [
+    {
+      q: "Comment filtrer les demandes “trop vagues” ?",
+      a: "Formulaire qualifiant (trouble, contexte, urgence, ville) + pages dédiées par problématique + messages qui cadrent le périmètre.",
+    },
+    {
+      q: "Est-ce qu’on peut cibler agressivité / anxiété / peur ?",
+      a: "Oui, via pages dédiées + Ads sur intentions fortes, avec wording prudent et réassurance (méthode, déroulé, résultats attendus).",
+    },
+    {
+      q: "Comment prouver la performance sans avis ?",
+      a: "Avec des preuves alternatives : cas anonymisés, exemples de livrables, tracking (appels/formulaires) et tableau de bord.",
+    },
+  ],
+  "toiletteur": [
+    {
+      q: "Comment remplir les créneaux creux ?",
+      a: "SEO local + Google Maps en base, puis Ads “créneaux à remplir” sur périodes clés (mue, été) avec landing dédiée + offre lisible.",
+    },
+    {
+      q: "Comment éviter les clients hors prestation ?",
+      a: "Pages par prestation (tonte, démêlage, chat…) + FAQ + formulaire (race, gabarit, contraintes) + exclusions Ads.",
+    },
+    {
+      q: "Google Maps peut suffire ?",
+      a: "Souvent oui comme socle, mais le combo Maps + pages locales + tracking permet de stabiliser et d’augmenter les demandes.",
+    },
+  ],
+  "pension-canine": [
+    {
+      q: "Comment réduire la dépendance aux plateformes ?",
+      a: "Pages locales + Meta Ads sur périodes (vacances) + formulaire filtrant (dates, taille, conditions) + retargeting.",
+    },
+    {
+      q: "Comment filtrer les demandes non sérieuses ?",
+      a: "Formulaire qualifiant + messages clairs (conditions, capacité, calendrier) + optimisation Ads sur leads qualifiés.",
+    },
+    {
+      q: "Qu’est-ce qui rassure le plus ?",
+      a: "Process + transparence (visite, protocole, sécurité) + preuves (cas anonymisé / tracking) + contenu local utile.",
+    },
+  ],
+  "veterinaire": [
+    {
+      q: "Peut-on séparer urgence / non urgence ?",
+      a: "Oui : pages services + parcours clair + CTA adaptés, et Ads sur services prioritaires selon les règles.",
+    },
+    {
+      q: "Comment mettre en avant certains services ?",
+      a: "Pages service + FAQ + schémas + GBP (services, catégories, posts), puis Ads ciblées sur intentions fortes.",
+    },
+    {
+      q: "Comment prouver l’origine des RDV ?",
+      a: "Tracking appels + formulaires + UTM Ads, et tableau de bord par canal (SEO/Maps/Ads).",
+    },
+  ],
+  "osteo-animalier": [
+    {
+      q: "Comment gérer une zone trop large ?",
+      a: "On définit un rayon rentable, on crée pages locales prioritaires, et on filtre via formulaire + ciblage Ads.",
+    },
+    {
+      q: "Peut-on cibler chien / cheval / chat ?",
+      a: "Oui : pages par espèce + ville, avec angles adaptés (douleur, boiterie, récupération) + preuve + CTA.",
+    },
+    {
+      q: "Sans avis, comment rassurer ?",
+      a: "Process visible, livrables, cas anonymisés, tracking et transparence sur les étapes / objectifs.",
+    },
+  ],
+};
+
+const faqs = jobFaq[metier] ?? [
+  { q: "Comment générez-vous des demandes locales ?", a: "SEO local + Google Maps + Ads + pages dédiées + tracking." },
+  { q: "Ça marche sans avis ?", a: "Oui : preuves alternatives (process, livrables, tracking) + pages utiles." },
+  { q: "Peut-on filtrer les demandes hors zone ?", a: "Oui : pages + formulaires + ciblages/exclusions Ads." },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+// ✅ JSON-LD : ajoute ItemList des pages ville (vraies URLs)
+const cityListLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: cityPages.slice(0, 10).map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: `${job.name} à ${c.name}`,
+    url: `${baseUrl}${c.href}`,
+  })),
+};
 
 const jsonLd = [
   {
@@ -60,6 +197,8 @@ const jsonLd = [
       email: "contact@horizon-conversion.fr",
     },
   },
+  cityListLd,
+  faqJsonLd,
 ];
 ---
 
@@ -74,250 +213,289 @@ const jsonLd = [
   breadcrumbs={breadcrumbs}
   jsonLd={jsonLd}
 >
+  <style>
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
+    .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
 
-<style>
-  :global(body) {
-    margin: 0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-      Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    color: #0f172a;
-    background: #ffffff;
-  }
-  .wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 28px 16px 72px;
-  }
-  .breadcrumbs {
-    font-size: 14px;
-    color: #475569;
-    margin: 4px 0 18px;
-  }
-  .breadcrumbs a {
-    color: inherit;
-    text-decoration: none;
-  }
+    header.hero {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+      padding: 22px;
+      display: grid;
+      gap: 10px;
+    }
+    h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+    .sub { margin: 0; color: #334155; max-width: 92ch; line-height: 1.6; }
 
-  header.hero {
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    background: linear-gradient(180deg, #f8fafc, #fff);
-    padding: 22px;
-    display: grid;
-    gap: 10px;
-  }
-  h1 {
-    margin: 0;
-    font-size: 34px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .sub {
-    margin: 0;
-    color: #334155;
-    max-width: 85ch;
-    line-height: 1.6;
-  }
-
-  .grid {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 18px;
-    align-items: start;
-  }
-  @media (max-width: 920px) {
     .grid {
-      grid-template-columns: 1fr;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: start;
     }
-  }
+    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
 
-  .card {
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    padding: 18px;
-    background: #fff;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-  }
-
-  h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-  }
-  p {
-    margin: 0;
-    color: #334155;
-    line-height: 1.6;
-  }
-
-  .cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 12px;
-  }
-  @media (max-width: 720px) {
-    .cols {
-      grid-template-columns: 1fr;
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
     }
-  }
 
-  .box {
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 14px;
-    background: #f8fafc;
-  }
-  .box ul {
-    margin: 8px 0 0;
-    padding-left: 18px;
-    color: #334155;
-    line-height: 1.55;
-  }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    h3 { margin: 16px 0 10px; font-size: 15px; }
+    p { margin: 0; color: #334155; line-height: 1.6; }
+    ul { margin: 10px 0 0; padding-left: 18px; color: #334155; line-height: 1.55; }
 
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .pill {
-    display: inline-block;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #334155;
-  }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
 
-  .ctaRow {
-    margin-top: 14px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  @media (max-width: 720px) {
-    .ctaRow {
-      grid-template-columns: 1fr;
+    .box { border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; background: #f8fafc; }
+    .box ul { margin: 8px 0 0; padding-left: 18px; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill, .pillLink {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #334155;
+      text-decoration: none;
     }
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid #0f172a;
-    background: #0f172a;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 900;
-    text-decoration: none;
-  }
-  .btn.secondary {
-    background: #fff;
-    color: #0f172a;
-  }
-  .meta {
-    color: #475569;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-</style>
+    .pillLink:hover { background: #f8fafc; }
 
-<div class="wrap">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-    <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
-    <a href="/metiers/">Métiers</a> <span aria-hidden="true">›</span>{" "}
-    <span>{job.name}</span>
-  </nav>
+    .ctaRow { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .ctaRow { grid-template-columns: 1fr; } }
 
-  <header class="hero">
-    <h1>{job.name}</h1>
-    <p class="sub">
-      {job.headline} Stratégie locale orientée résultats :
-      <strong> SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
-      avec des pages dédiées par intention et un tracking propre (Sud Oise 60 / Val d’Oise 95).
-    </p>
-  </header>
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #0f172a;
+      background: #0f172a;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .btn.secondary { background: #fff; color: #0f172a; }
 
-  <section class="grid">
-    <div class="card">
-      <h2>Problèmes fréquents</h2>
-      <div class="cols">
-        <div class="box">
-          <strong>Ce qu’on voit souvent</strong>
-          <ul>
-            {job.pains.map((x: string) => (
-              <li>{x}</li>
-            ))}
-          </ul>
+    .meta { color: #475569; font-size: 14px; line-height: 1.6; margin-top: 10px; }
+    .link { color: #0f172a; text-decoration: none; border-bottom: 1px solid rgba(15,23,42,.2); }
+    .link:hover { border-bottom-color: rgba(15,23,42,.45); }
+
+    .proofGrid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+    .proofCard { border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; background: #fff; }
+    .proofTop { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .kpis { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; margin-top:10px; }
+    @media (max-width: 720px) { .kpis { grid-template-columns: 1fr; } }
+    .kpi { border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; background:#f8fafc; }
+    .kpi strong { display:block; font-size: 13px; }
+    .kpi span { display:block; font-size: 12px; color:#64748b; margin-top:2px; }
+    .kpi em { display:block; margin-top:8px; font-style:normal; font-weight:900; color:#0f172a; }
+
+    figure { margin: 10px 0 0; }
+    img { max-width: 100%; height: auto; border-radius: 14px; border: 1px solid #e2e8f0; }
+
+    pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0b1220;
+      color: #e5e7eb;
+      border-radius: 14px;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .faq details {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: #fff;
+      margin-top: 10px;
+    }
+    .faq summary { cursor: pointer; font-weight: 900; }
+    .faq p { margin: 10px 0 0; }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
+      <a href="/metiers/">Métiers</a> <span aria-hidden="true">›</span>{" "}
+      <span>{job.name}</span>
+    </nav>
+
+    <header class="hero">
+      <h1>{job.name}</h1>
+      <p class="sub">
+        {job.headline} Stratégie locale orientée résultats :
+        <strong> SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
+        avec des pages dédiées (métier × ville) et un tracking propre sur <strong>Sud Oise (60)</strong> / <strong>Val d’Oise (95)</strong>.
+      </p>
+    </header>
+
+    <section class="grid">
+      <!-- ✅ CONTENU LONG (anti thin content) -->
+      <div class="card">
+        <h2>Problèmes fréquents (et objectifs concrets)</h2>
+
+        <div class="cols">
+          <div class="box">
+            <strong>Ce qu’on observe souvent</strong>
+            <ul>
+              {job.pains.map((x: string) => <li>{x}</li>)}
+            </ul>
+          </div>
+          <div class="box">
+            <strong>Ce qu’on vise</strong>
+            <ul>
+              {job.outcomes.map((x: string) => <li>{x}</li>)}
+            </ul>
+          </div>
         </div>
-        <div class="box">
-          <strong>Ce qu’on vise</strong>
-          <ul>
-            {job.outcomes.map((x: string) => (
-              <li>{x}</li>
-            ))}
-          </ul>
+
+        <h3>Ce qui marche en SEO local pour {job.name.toLowerCase()}</h3>
+        <p>
+          Pour performer localement, Google a besoin de <strong>pages utiles</strong>, reliées entre elles,
+          et qui répondent à une demande réelle. Sur les métiers animaliers, le combo qui gagne le plus souvent :
+          <strong> pages locales (métier × ville)</strong> + <strong>Google Business Profile</strong> + <strong>Ads</strong> quand il faut accélérer.
+        </p>
+
+        <h3>Villes couvertes (pages réelles)</h3>
+        <p>
+          Plutôt que d’afficher des “intentions” génériques, on crée des pages cliquables par ville,
+          avec FAQ + preuve + CTA. Voici des exemples de pages déjà prévues :
+        </p>
+        <div class="pills" aria-label="Pages ville (métier × ville)">
+          {cityPages.map((c) => (
+            <a class="pillLink" href={c.href}>{job.name} {c.name}</a>
+          ))}
         </div>
+
+        <h3>Prestations recommandées (liens réels)</h3>
+        <p>
+          Chaque prestation a sa page dédiée : utile pour comprendre le livrable, et pour renforcer la cohérence SEO.
+        </p>
+        <div class="pills" aria-label="Prestations">
+          {prestationLinks.map((p) => (
+            <a class="pillLink" href={p.href}>{p.label}</a>
+          ))}
+          <a class="pillLink" href="/tarifs/">Voir les packs & tarifs</a>
+        </div>
+
+        <h3>Exemples réels (anonymisés)</h3>
+        <p>
+          Pas d’avis ? On “montre” autrement : exemples de KPIs, structure de tracking, livrables.
+          Les chiffres ci-dessous sont <strong>anonymisés</strong> et servent à illustrer le type d’améliorations obtenues.
+        </p>
+
+        <div class="proofGrid" aria-label="Exemples anonymisés">
+          {PROOF_EXAMPLES.map((ex) => (
+            <article class="proofCard">
+              <div class="proofTop">
+                <div>
+                  <strong style="display:block;font-size:14px;">{ex.title}</strong>
+                  <div class="meta" style="margin-top:4px;">{ex.context}</div>
+                </div>
+                <span class="pill">Anonymisé</span>
+              </div>
+
+              <div class="kpis" aria-label="KPIs">
+                {ex.kpis.map((k) => (
+                  <div class="kpi">
+                    <strong>{k.label}</strong>
+                    <span>Avant : {k.before}</span>
+                    <em>Après : {k.after}</em>
+                    {k.note && <span style="margin-top:6px;display:block;">{k.note}</span>}
+                  </div>
+                ))}
+              </div>
+
+              {ex.image && (
+                <figure>
+                  <img src={ex.image.src} alt={ex.image.alt} loading="lazy" />
+                </figure>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <h3>Exemple de tracking (ce qu’on mesure)</h3>
+        <p>
+          Le but : prouver l’origine des leads (SEO / Maps / Ads) et optimiser au coût / lead.
+          Exemple d’événements :
+        </p>
+        <ul>
+          {TRACKING_EVENTS.map((e) => (
+            <li>
+              <strong>{e.name}</strong> — {e.detail}
+            </li>
+          ))}
+        </ul>
+
+        <h3>Exemple de page locale (structure + FAQ + schéma)</h3>
+        <p>{LOCAL_PAGE_BLUEPRINT.title}. Sections :</p>
+        <ul>
+          {LOCAL_PAGE_BLUEPRINT.sections.map((s) => <li>{s}</li>)}
+        </ul>
+
+        <p style="margin-top:10px;">Exemple JSON-LD (Service) :</p>
+        <pre><code>{LOCAL_PAGE_BLUEPRINT.jsonLdSnippet}</code></pre>
+
+        <div class="ctaRow">
+          <a class="btn" href="/contact/">Demander un diagnostic</a>
+          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        </div>
+
+        <p class="meta">
+          Email :{" "}
+          <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+        </p>
       </div>
 
-      <h2 style="margin-top:16px;">Intentions SEO locales à capter</h2>
-      <p>
-        On crée des pages “1 intention = 1 page” (métier + ville + service) avec FAQ + schémas + CTA.
-      </p>
-      <div class="pills" aria-label="Intentions">
-        {job.intents.map((x: string) => (
-          <span class="pill">{x}</span>
-        ))}
-      </div>
+      <!-- ✅ ASIDE (réassurance + contenu variable) -->
+      <aside class="card">
+        <h2>Ce qu’on met en place</h2>
+        <p>
+          Un socle rapide à déployer + optimisation continue (SEO local, Maps, Ads, conversion).
+        </p>
+        <ul>
+          {job.services.map((s: string) => <li>{s}</li>)}
+        </ul>
 
-      <div class="ctaRow">
-        <a class="btn" href="/contact/">Demander un diagnostic</a>
-        <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
-      </div>
+        <h2 style="margin-top:16px;">Zones prioritaires</h2>
+        <div class="pills" aria-label="Zones">
+          <a class="pillLink" href="/zones/sud-oise-60/">Sud Oise (60)</a>
+          <a class="pillLink" href="/zones/val-doise-95/">Val d’Oise (95)</a>
+        </div>
 
-      <p class="meta">
-        Email :{" "}
-        <a
-          href="mailto:contact@horizon-conversion.fr"
-          style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
-        >
-          contact@horizon-conversion.fr
-        </a>
-      </p>
-    </div>
+        <h2 style="margin-top:16px;">FAQ spécifique</h2>
+        <div class="faq" id="faq">
+          {faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
 
-    <aside class="card">
-      <h2>Ce qu’on met en place</h2>
-      <p>
-        Un socle rapide à déployer + optimisation continue (SEO local, Maps, Ads, conversion).
-      </p>
-      <ul style="margin:10px 0 0;padding-left:18px;color:#334155;line-height:1.55;">
-        {job.services.map((s: string) => (
-          <li>{s}</li>
-        ))}
-      </ul>
-
-      <h2 style="margin-top:16px;">Zones prioritaires</h2>
-      <div class="pills" aria-label="Zones">
-        <span class="pill">Sud Oise (60)</span>
-        <span class="pill">Val d’Oise (95)</span>
-      </div>
-
-      <h2 style="margin-top:16px;">Preuves sans avis</h2>
-      <p>
-        Process visible, livrables concrets, tracking (leads, appels, coûts) et transparence.
-      </p>
-      <div class="pills" aria-label="Preuves">
-        <span class="pill">Process</span>
-        <span class="pill">Livrables</span>
-        <span class="pill">Tracking</span>
-        <span class="pill">Qualif stricte</span>
-      </div>
-    </aside>
-  </section>
-</div>
+        <h2 style="margin-top:16px;">Offres</h2>
+        <div class="pills" aria-label="Offres">
+          <a class="pillLink" href="/tarifs/#local-essentiel">Essentiel</a>
+          <a class="pillLink" href="/tarifs/#local-performance">Performance</a>
+          <a class="pillLink" href="/tarifs/#pack-complet">Pack complet</a>
+          <a class="pillLink" href="/tarifs/#ads-booster">Ads Booster</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</LayoutSEO>
