@@ -141,7 +141,6 @@ const makeBusinessLd = (b?: SeoProps["business"]) => {
       "@type": "PostalAddress",
       ...b.address,
     };
-    // default country if omitted
     if (!ld.address.addressCountry) ld.address.addressCountry = "FR";
   }
   if (b.geo) {
@@ -364,6 +363,13 @@ const nav = [
         color: #64748b;
         padding: 12px 0 18px;
       }
+      .small a {
+        text-decoration: none;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.18);
+      }
+      .small a:hover {
+        border-bottom-color: rgba(15, 23, 42, 0.45);
+      }
     </style>
 
     <!-- ✅ HEADER -->
@@ -415,6 +421,9 @@ const nav = [
               <a href="/preuves/">Preuves</a>
               <a href="/methode/">Méthode</a>
               <a href="/contact/">Contact</a>
+              <!-- ✅ Ajouts -->
+              <a href="/mentions-legales/">Mentions légales</a>
+              <a href="/politique-confidentialite/">Politique de confidentialité</a>
             </div>
           </div>
 
@@ -431,7 +440,11 @@ const nav = [
         </div>
 
         <div class="small">
-          © {new Date().getFullYear()} Horizon Conversion Animaux — Tous droits réservés.
+          © {new Date().getFullYear()} Horizon Conversion Animaux — Tous droits réservés.{" "}
+          <span aria-hidden="true">•</span>{" "}
+          <a href="/mentions-legales/">Mentions légales</a>{" "}
+          <span aria-hidden="true">•</span>{" "}
+          <a href="/politique-confidentialite/">Politique de confidentialité</a>
         </div>
       </div>
     </footer>

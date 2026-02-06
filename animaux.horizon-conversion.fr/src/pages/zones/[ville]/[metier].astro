@@ -1,0 +1,236 @@
+---
+import LayoutSEO from "../../../layouts/LayoutSEO.astro";
+import { JOBS, type JobKey } from "../../../data/jobs.ts";
+import { VILLES, ZONES, slugifyCity, findCityBySlug, type ZoneKey } from "../../../data/zones.ts";
+
+export const prerender = true;
+
+const baseUrl = "https://animaux.horizon-conversion.fr";
+
+export function getStaticPaths() {
+  const jobKeys = Object.keys(JOBS) as JobKey[];
+  const paths = [];
+
+  for (const v of VILLES) {
+    const villeSlug = slugifyCity(v.town);
+    for (const metier of jobKeys) {
+      paths.push({
+        params: { ville: villeSlug, metier },
+        props: { town: v.town, zoneKey: v.zoneKey, metier },
+      });
+    }
+  }
+  return paths;
+}
+
+const { ville, metier } = Astro.params as { ville: string; metier: string };
+
+// Résolution ville (via props si dispo, sinon fallback)
+const props = Astro.props as { town?: string; zoneKey?: ZoneKey; metier?: JobKey };
+
+const resolvedCity =
+  props?.town && props?.zoneKey
+    ? { town: props.town, zoneKey: props.zoneKey, zone: ZONES[props.zoneKey], slug: ville }
+    : findCityBySlug(ville);
+
+if (!resolvedCity) throw new Error(`Ville inconnue: ${ville}`);
+
+const job = (JOBS as Record<string, any>)[metier];
+if (!job) throw new Error(`Métier inconnu: ${metier}`);
+
+const { town, zoneKey, zone, slug } = resolvedCity;
+
+const canonical = `${baseUrl}${Astro.url.pathname}`;
+
+// SEO
+const title = `${job.name} à ${town} | SEO local & Ads – Horizon Conversion Animaux`;
+const description =
+  `Plus de demandes qualifiées pour ${job.name.toLowerCase()} à ${town} : SEO local & Google Maps + Ads, landing page, conversion & tracking. Zone : ${zone.name}.`;
+
+const breadcrumbs = [
+  { name: "Accueil", item: `${baseUrl}/` },
+  { name: "Zones", item: `${baseUrl}/zones/` },
+  { name: zone.name, item: `${baseUrl}/zones/${zoneKey}/` },
+  { name: town, item: `${baseUrl}/zones/${slug}/` },
+  { name: job.name, item: canonical },
+];
+
+const intents = (job.intents as string[]).map((x) =>
+  x
+    .replace(/\+\s*ville/gi, town)
+    .replace(/\bville\b/gi, town)
+);
+
+const faq = [
+  {
+    q: `Est-ce que ça marche si je n’ai pas beaucoup d’avis à ${town} ?`,
+    a: "Oui : on renforce la confiance via un process clair, des livrables visibles, et un tracking (appels / formulaires) pour prouver l’impact rapidement.",
+  },
+  {
+    q: `Vous ciblez uniquement ${town} ?`,
+    a: `On définit une zone réelle autour de ${town} (villes proches, rayon, limites) pour éviter les demandes hors secteur.`,
+  },
+  {
+    q: "Quels canaux sont prioritaires ?",
+    a: "En général : SEO local + Google Maps pour la base durable, puis Ads sur les intentions les plus rentables (pilotage au coût par lead).",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    url: canonical,
+    description,
+    isPartOf: { "@type": "WebSite", name: "Horizon Conversion Animaux", url: baseUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.name,
+      item: b.item,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Webmarketing local pour ${job.name} à ${town}`,
+    areaServed: [town, zone.name],
+    provider: {
+      "@type": "Organization",
+      name: "Horizon Conversion Animaux",
+      url: baseUrl,
+      telephone: "+33660921008",
+      email: "contact@horizon-conversion.fr",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<LayoutSEO
+  title={title}
+  description={description}
+  baseUrl={baseUrl}
+  canonical={canonical}
+  ogType="website"
+  ogImage={`${baseUrl}/og/ville-metier-${slug}-${metier}.jpg`}
+  ogImageAlt={`${job.name} à ${town} – Horizon Conversion Animaux`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <style>
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
+    .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    header.hero {
+      border: 1px solid #e2e8f0; border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+      padding: 22px; display: grid; gap: 10px;
+    }
+    h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+    .sub { margin: 0; color: #334155; max-width: 92ch; line-height: 1.6; }
+    .grid { margin-top: 18px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; align-items: start; }
+    @media (max-width: 920px){ .grid{ grid-template-columns:1fr; } }
+    .card { border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; background:#fff; box-shadow: 0 6px 20px rgba(15,23,42,.06); }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    p { margin: 0; color:#334155; line-height:1.6; }
+    ul { margin: 10px 0 0; padding-left: 18px; color:#334155; line-height:1.55; }
+    .pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .pill { display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#fff; color:#334155; }
+    .ctaRow { margin-top: 14px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width: 720px){ .ctaRow{ grid-template-columns:1fr; } }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 14px; border-radius:14px; border:1px solid #0f172a; background:#0f172a; color:#fff; cursor:pointer; font-weight:900; text-decoration:none; }
+    .btn.secondary { background:#fff; color:#0f172a; }
+    .meta { color:#475569; font-size:14px; line-height:1.6; margin-top:10px; }
+    .link { color:#0f172a; text-decoration:none; border-bottom:1px solid rgba(15,23,42,.2); }
+    .link:hover { border-bottom-color: rgba(15,23,42,.45); }
+    .box { border:1px solid #e2e8f0; border-radius:16px; padding:14px; background:#f8fafc; }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
+      <a href="/zones/">Zones</a> <span aria-hidden="true">›</span>{" "}
+      <a href={`/zones/${zoneKey}/`}>{zone.name}</a> <span aria-hidden="true">›</span>{" "}
+      <a href={`/zones/${slug}/`}>{town}</a> <span aria-hidden="true">›</span>{" "}
+      <span>{job.name}</span>
+    </nav>
+
+    <header class="hero">
+      <h1>{job.name} à {town}</h1>
+      <p class="sub">
+        {job.headline} On combine <strong>SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
+        avec une page dédiée “<strong>1 intention = 1 page</strong>” et un tracking propre.
+        Zone : <strong>{zone.name}</strong>.
+      </p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Problèmes fréquents à {town}</h2>
+        <ul>
+          {(job.pains as string[]).map((x) => <li>{x}</li>)}
+        </ul>
+
+        <h2 style="margin-top:16px;">Ce qu’on vise</h2>
+        <ul>
+          {(job.outcomes as string[]).map((x) => <li>{x}</li>)}
+        </ul>
+
+        <h2 style="margin-top:16px;">Intentions SEO locales à capter</h2>
+        <p>On structure des pages ciblées (métier + ville + service) + FAQ + schémas + CTA.</p>
+        <div class="pills" aria-label="Intentions">
+          {intents.map((x) => <span class="pill">{x}</span>)}
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="/contact/">Demander un diagnostic</a>
+          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        </div>
+
+        <p class="meta">
+          Email : <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+        </p>
+      </div>
+
+      <aside class="card">
+        <h2>Ce qu’on met en place</h2>
+        <p>Socle rapide + optimisation continue (SEO local, Maps, Ads, conversion).</p>
+        <ul>
+          {(job.services as string[]).map((s) => <li>{s}</li>)}
+        </ul>
+
+        <h2 style="margin-top:16px;">Ressources utiles</h2>
+        <div class="pills">
+          <a class="pill" href={`/metiers/${metier}/`} style="text-decoration:none;">Page métier</a>
+          <a class="pill" href={`/zones/${slug}/`} style="text-decoration:none;">Page ville</a>
+          <a class="pill" href={`/zones/${zoneKey}/`} style="text-decoration:none;">Hub zone</a>
+          <a class="pill" href="/prestations/" style="text-decoration:none;">Prestations</a>
+        </div>
+
+        <h2 style="margin-top:16px;">FAQ</h2>
+        <div class="box">
+          {faq.map((f) => (
+            <div style="margin-bottom:12px;">
+              <strong>{f.q}</strong>
+              <div class="meta" style="margin-top:4px;">{f.a}</div>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </section>
+  </div>
+</LayoutSEO>

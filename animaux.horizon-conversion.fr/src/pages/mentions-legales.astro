@@ -1,0 +1,249 @@
+---
+// src/pages/mentions-legales.astro
+import LayoutSEO from "../layouts/LayoutSEO.astro";
+
+const baseUrl = "https://animaux.horizon-conversion.fr";
+const canonical = `${baseUrl}${Astro.url.pathname}`;
+
+const title = "Mentions légales | Horizon Conversion Animaux";
+const description =
+  "Mentions légales du site Horizon Conversion Animaux (éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité).";
+
+const breadcrumbs = [
+  { name: "Accueil", item: `${baseUrl}/` },
+  { name: "Mentions légales", item: canonical },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    url: canonical,
+    description,
+    isPartOf: { "@type": "WebSite", name: "Horizon Conversion Animaux", url: baseUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.name,
+      item: b.item,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Horizon Conversion Animaux",
+    url: baseUrl,
+    telephone: "+33660921008",
+    email: "contact@horizon-conversion.fr",
+  },
+];
+---
+
+<LayoutSEO
+  title={title}
+  description={description}
+  baseUrl={baseUrl}
+  canonical={canonical}
+  ogType="website"
+  ogImage={`${baseUrl}/og/mentions-legales.jpg`}
+  ogImageAlt="Mentions légales – Horizon Conversion Animaux"
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <style>
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 16px 72px;
+    }
+    .breadcrumbs {
+      font-size: 14px;
+      color: #475569;
+      margin: 4px 0 18px;
+    }
+    .breadcrumbs a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header.hero {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+      padding: 22px;
+      display: grid;
+      gap: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 0;
+      color: #334155;
+      max-width: 95ch;
+      line-height: 1.6;
+    }
+
+    .card {
+      margin-top: 18px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    p {
+      margin: 0;
+      color: #334155;
+      line-height: 1.7;
+    }
+    .section {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+    .list {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: #334155;
+      line-height: 1.7;
+    }
+    .meta {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    a.link {
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.2);
+    }
+    a.link:hover {
+      border-bottom-color: rgba(15, 23, 42, 0.45);
+    }
+    .note {
+      margin-top: 12px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.7;
+    }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Mentions légales</span>
+    </nav>
+
+    <header class="hero">
+      <h1>Mentions légales</h1>
+      <p class="sub">
+        Informations légales relatives au site <strong>animaux.horizon-conversion.fr</strong>.
+      </p>
+    </header>
+
+    <main class="card">
+      <div class="section">
+        <h2>Éditeur du site</h2>
+        <p>
+          Le site <strong>Horizon Conversion Animaux</strong> est édité par
+          <strong> Horizon Conversion</strong>, marque de <strong>Control Online</strong>.
+        </p>
+        <ul class="list">
+          <li>
+            Identité : <strong>DA COSTA François</strong> (Control Online)
+          </li>
+          <li>
+            Informations légales :{" "}
+            <a
+              class="link"
+              href="https://www.pappers.fr/entreprise/da-costa-francois-810922641"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              fiche Pappers
+            </a>
+          </li>
+          <li>
+            Contact :{" "}
+            <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>{" "}
+            –{" "}
+            <a class="link" href="tel:+33660921008">06 60 92 10 08</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Directeur de la publication</h2>
+        <p>Le directeur de la publication est <strong>DA COSTA François</strong>.</p>
+      </div>
+
+      <div class="section">
+        <h2>Hébergement</h2>
+        <p>
+          Le site est hébergé par <strong>Scaleway</strong>.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L’ensemble des contenus présents sur ce site (textes, graphismes, logos, éléments de
+          structure, etc.) est protégé par le droit de la propriété intellectuelle.
+          Toute reproduction, représentation, modification, publication, adaptation, totale ou partielle,
+          est interdite sans autorisation écrite préalable, sauf exceptions prévues par la loi.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Données personnelles</h2>
+        <p>
+          Les informations transmises via les formulaires (ex : page Contact) sont utilisées uniquement
+          pour traiter votre demande et vous recontacter. Elles ne sont pas revendues.
+        </p>
+        <p class="meta">
+          Pour exercer vos droits (accès, rectification, suppression), vous pouvez écrire à{" "}
+          <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Cookies</h2>
+        <p>
+          Le site peut utiliser des cookies et/ou traceurs à des fins de mesure d’audience et
+          d’amélioration de l’expérience utilisateur. Vous pouvez configurer votre navigateur
+          pour gérer ou refuser les cookies.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Responsabilité</h2>
+        <p>
+          L’éditeur s’efforce de fournir des informations fiables et à jour. Toutefois, il ne saurait
+          garantir l’exactitude, la complétude ou l’actualité des contenus. L’utilisation des informations
+          disponibles sur le site se fait sous la seule responsabilité de l’utilisateur.
+        </p>
+      </div>
+
+      <div class="note">
+        <strong>Contact rapide :</strong>{" "}
+        <a class="link" href="tel:+33660921008">06 60 92 10 08</a> –{" "}
+        <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+      </div>
+    </main>
+  </div>
+</LayoutSEO>

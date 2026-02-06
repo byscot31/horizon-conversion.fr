@@ -1,6 +1,8 @@
 ---
+// src/pages/zones/[ville].astro
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
-import { VILLES, ZONES, slugifyCity, findCityBySlug, type ZoneKey } from "../../data/zones.ts";
+import { ZONES, VILLES, slugifyCity, findCityBySlug, type ZoneKey } from "../../data/zones.ts";
+import { JOBS } from "../../data/jobs.ts";
 
 export const prerender = true;
 
@@ -9,39 +11,58 @@ const baseUrl = "https://animaux.horizon-conversion.fr";
 export function getStaticPaths() {
   return VILLES.map((v) => ({
     params: { ville: slugifyCity(v.town) },
-    props: { town: v.town, zoneKey: v.zoneKey },
+    props: v,
   }));
 }
 
 const { ville } = Astro.params as { ville: string };
-
-// On récupère via props si dispo (plus fiable), sinon fallback via slug
 const props = Astro.props as { town?: string; zoneKey?: ZoneKey };
+
 const resolved =
   props?.town && props?.zoneKey
-    ? { town: props.town, zone: ZONES[props.zoneKey], slug: ville, zoneKey: props.zoneKey }
+    ? { town: props.town, zoneKey: props.zoneKey, slug: ville, zone: ZONES[props.zoneKey] }
     : findCityBySlug(ville);
 
 if (!resolved) throw new Error(`Ville inconnue: ${ville}`);
 
-const { town, zone, zoneKey, slug } = resolved;
+const { town, zoneKey, zone, slug } = resolved;
 
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
 // SEO
-const title = `${town} | ${zone.name} – Horizon Conversion Animaux`;
+const title = `${town} | SEO local & Ads pros animaux – Horizon Conversion`;
 const description =
-  `Webmarketing local à ${town} : SEO local & Google Maps, pages “1 intention = 1 page”, Google Ads & Meta Ads, conversion & tracking. Zone : ${zone.name}.`;
+  `Acquisition locale à ${town} : SEO local, Google Maps, Ads, landing pages, conversion & tracking. Zone : ${zone.name}.`;
 
 const breadcrumbs = [
   { name: "Accueil", item: `${baseUrl}/` },
   { name: "Zones", item: `${baseUrl}/zones/` },
-  // si tu as déjà des pages /zones/sud-oise-60/ et /zones/val-doise-95/
   { name: zone.name, item: `${baseUrl}/zones/${zoneKey}/` },
   { name: town, item: canonical },
 ];
 
-// JSON-LD
+// Liens vers pages "money" /zones/{ville}/{metier}/
+const jobEntries = Object.entries(JOBS) as Array<[string, any]>;
+const metierLinks = jobEntries.map(([metierSlug, job]) => ({
+  metierSlug,
+  name: job.name as string,
+  href: `/zones/${slug}/${metierSlug}/`,
+  intentExample: (job.intents?.[0] as string | undefined)
+    ?.replace(/\+\s*ville/gi, town)
+    ?.replace(/\bville\b/gi, town),
+}));
+
+const intentExamples = metierLinks
+  .map((m) => m.intentExample)
+  .filter(Boolean)
+  .slice(0, 6) as string[];
+
+// Autres villes de la même zone
+const otherTowns = (zone.towns as string[])
+  .filter((t) => slugifyCity(t) !== slug)
+  .slice(0, 10)
+  .map((t) => ({ name: t, href: `/zones/${slugifyCity(t)}/` }));
+
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -63,26 +84,14 @@ const jsonLd = [
   },
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: `Webmarketing local à ${town}`,
-    areaServed: [town, zone.name],
-    provider: {
-      "@type": "Organization",
-      name: "Horizon Conversion Animaux",
-      url: baseUrl,
-      telephone: "+33660921008",
-      email: "contact@horizon-conversion.fr",
-    },
+    "@type": "ItemList",
+    itemListElement: metierLinks.map((m, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `${m.name} à ${town}`,
+      url: `${baseUrl}${m.href}`,
+    })),
   },
-];
-
-// Contenu “SEO local” (exemples)
-const intentExamples = [
-  `éducateur canin ${town}`,
-  `toiletteur chien ${town}`,
-  `pension canine ${town}`,
-  `comportementaliste chien ${town}`,
-  `ostéopathe animalier ${town}`,
 ];
 ---
 
@@ -93,108 +102,191 @@ const intentExamples = [
   canonical={canonical}
   ogType="website"
   ogImage={`${baseUrl}/og/ville-${slug}.jpg`}
-  ogImageAlt={`Webmarketing local à ${town}`}
+  ogImageAlt={`SEO local & Ads à ${town}`}
   breadcrumbs={breadcrumbs}
   jsonLd={jsonLd}
 >
+  <style>
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
+    .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
 
-<style>
-  :global(body){margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;color:#0f172a;background:#fff}
-  .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 72px}
-  .breadcrumbs{font-size:14px;color:#475569;margin:4px 0 18px}
-  .breadcrumbs a{color:inherit;text-decoration:none}
-  header.hero{border:1px solid #e2e8f0;border-radius:18px;background:linear-gradient(180deg,#f8fafc,#fff);padding:22px;display:grid;gap:10px}
-  h1{margin:0;font-size:34px;line-height:1.1;letter-spacing:-0.02em}
-  .sub{margin:0;color:#334155;max-width:92ch;line-height:1.6}
-  .grid{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
-  @media (max-width:920px){.grid{grid-template-columns:1fr}}
-  .card{border:1px solid #e2e8f0;border-radius:18px;padding:18px;background:#fff;box-shadow:0 6px 20px rgba(15,23,42,.06)}
-  h2{margin:0 0 10px;font-size:18px}
-  p{margin:0;color:#334155;line-height:1.6}
-  ul{margin:10px 0 0;padding-left:18px;color:#334155;line-height:1.55}
-  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .pill{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#334155}
-  .ctaRow{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media (max-width:720px){.ctaRow{grid-template-columns:1fr}}
-  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:14px;border:1px solid #0f172a;background:#0f172a;color:#fff;cursor:pointer;font-weight:900;text-decoration:none}
-  .btn.secondary{background:#fff;color:#0f172a}
-  .meta{color:#475569;font-size:14px;line-height:1.6;margin-top:10px}
-  .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #e2e8f0;background:#f1f5f9;color:#334155;font-weight:900;width:fit-content}
-</style>
+    header.hero {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fafc, #fff);
+      padding: 22px;
+      display: grid;
+      gap: 10px;
+    }
+    h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+    .sub { margin: 0; color: #334155; max-width: 92ch; line-height: 1.6; }
 
-<div class="wrap">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-    <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
-    <a href="/zones/">Zones</a> <span aria-hidden="true">›</span>{" "}
-    <a href={`/zones/${zoneKey}/`}>{zone.name}</a> <span aria-hidden="true">›</span>{" "}
-    <span>{town}</span>
-  </nav>
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
 
-  <header class="hero">
-    <span class="badge">{zone.deptLabel}</span>
-    <h1>{town}</h1>
-    <p class="sub">
-      Stratégie locale pour les professionnels des animaux à <strong>{town}</strong> :
-      <strong> SEO local</strong> + <strong>Google Maps</strong> + <strong>Ads</strong>,
-      avec des pages “<strong>1 intention = 1 page</strong>” et un tracking propre.
-    </p>
-  </header>
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
 
-  <section class="grid">
-    <div class="card">
-      <h2>Ce qu’on met en place à {town}</h2>
-      <ul>
-        <li>Pages locales dédiées (métier + {town} + service) + FAQ + JSON-LD</li>
-        <li>Optimisation Google Business Profile (catégories, services, zones)</li>
-        <li>Campagnes Ads orientées RDV (Google/Meta) + exclusions anti-parasites</li>
-        <li>Tracking : appels, formulaires, sources (SEO/Maps/Ads)</li>
-      </ul>
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    p { margin: 0; color: #334155; line-height: 1.6; }
 
-      <h2 style="margin-top:16px;">Exemples d’intentions locales</h2>
-      <div class="pills" aria-label="Intentions locales">
-        {intentExamples.map((x) => <span class="pill">{x}</span>)}
-      </div>
+    .note {
+      margin-top: 12px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
 
-      <div class="ctaRow">
-        <a class="btn" href="/contact/">Demander un diagnostic</a>
-        <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
-      </div>
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #334155;
+      text-decoration: none;
+    }
 
-      <p class="meta">
-        Email :{" "}
-        <a
-          href="mailto:contact@horizon-conversion.fr"
-          style="color:#0f172a;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.2);"
-        >
-          contact@horizon-conversion.fr
-        </a>
+    .list { margin: 10px 0 0; padding-left: 18px; color: #334155; line-height: 1.55; }
+
+    .ctaRow {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 720px) { .ctaRow { grid-template-columns: 1fr; } }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #0f172a;
+      background: #0f172a;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .btn.secondary { background: #fff; color: #0f172a; }
+
+    .meta { color: #475569; font-size: 14px; line-height: 1.6; margin-top: 10px; }
+    .link {
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.18);
+    }
+    .link:hover { border-bottom-color: rgba(15, 23, 42, 0.45); }
+
+    .block {
+      margin-top: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+    }
+    .block a { text-decoration: none; }
+    .block ul { margin: 10px 0 0; padding-left: 18px; }
+  </style>
+
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span>{" "}
+      <a href="/zones/">Zones</a> <span aria-hidden="true">›</span>{" "}
+      <a href={`/zones/${zoneKey}/`}>{zone.name}</a> <span aria-hidden="true">›</span>{" "}
+      <span>{town}</span>
+    </nav>
+
+    <header class="hero">
+      <h1>{town}</h1>
+      <p class="sub">
+        On déploie une stratégie locale orientée résultats pour les professionnels des animaux à{" "}
+        <strong>{town}</strong> : <strong>SEO local</strong> + <strong>Google Maps</strong> +{" "}
+        <strong>Ads</strong>, avec des pages dédiées (“<strong>1 intention = 1 page</strong>”) et un tracking propre.
+        Zone : <strong>{zone.name}</strong>.
       </p>
-    </div>
+    </header>
 
-    <aside class="card">
-      <h2>Zone</h2>
-      <p>{zone.headline}</p>
+    <section class="grid">
+      <div class="card">
+        <h2>Comment on génère des demandes locales à {town}</h2>
+        <p>
+          Le combo le plus efficace : une base SEO local (pages + schémas) + une Google Business Profile optimisée,
+          puis des Ads sur les intentions les plus rentables (pilotage au coût par lead).
+        </p>
 
-      <h2 style="margin-top:16px;">Villes proches</h2>
-      <div class="pills" aria-label="Villes proches">
-        {zone.towns
-          .filter((t) => t !== town)
-          .slice(0, 10)
-          .map((t) => (
-            <a class="pill" href={`/zones/${slugifyCity(t)}/`} style="text-decoration:none;">
-              {t}
-            </a>
+        <div class="note">
+          <strong>Principe :</strong> au lieu d’une page “générale”, on crée des pages ultra ciblées
+          <strong> métier + ville + service</strong> avec FAQ + preuves alternatives + CTA, puis on relie le tout via
+          ce hub ville.
+        </div>
+
+        <h2 style="margin-top:16px;">Exemples d’intentions à forte intention</h2>
+        <div class="pills" aria-label="Exemples de requêtes">
+          {intentExamples.map((x) => <span class="pill">{x}</span>)}
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="/contact/">Demander un diagnostic</a>
+          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+        </div>
+
+        <p class="meta">
+          Email :{" "}
+          <a class="link" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+        </p>
+      </div>
+
+      <aside class="card">
+        <h2>Métiers à {town}</h2>
+        <p class="meta">
+          Pages “métier + ville” (celles qui rankent le mieux) :
+        </p>
+
+        <div class="block">
+          <ul class="list">
+            {metierLinks.map((m) => (
+              <li>
+                <a class="link" href={m.href}>{m.name} à {town}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <h2 style="margin-top:16px;">Autres villes de {zone.name}</h2>
+        <div class="pills" aria-label="Autres villes">
+          {otherTowns.map((t) => (
+            <a class="pill" href={t.href}>{t.name}</a>
           ))}
-      </div>
+        </div>
 
-      <h2 style="margin-top:16px;">Preuves sans avis</h2>
-      <p>Process visible, livrables, tracking et transparence.</p>
-      <div class="pills">
-        <span class="pill">Process</span>
-        <span class="pill">Livrables</span>
-        <span class="pill">Tracking</span>
-        <span class="pill">Qualif stricte</span>
-      </div>
-    </aside>
-  </section>
-</div>
+        <h2 style="margin-top:16px;">Raccourcis</h2>
+        <div class="pills" aria-label="Raccourcis">
+          <a class="pill" href={`/zones/${zoneKey}/`}>{zone.name}</a>
+          <a class="pill" href="/metiers/">Métiers</a>
+          <a class="pill" href="/prestations/">Prestations</a>
+          <a class="pill" href="/contact/">Contact</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</LayoutSEO>
