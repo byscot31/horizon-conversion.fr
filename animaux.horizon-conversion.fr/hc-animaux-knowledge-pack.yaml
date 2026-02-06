@@ -1,0 +1,465 @@
+# hc-animaux-knowledge-pack.yaml
+# Horizon Conversion Animaux — Astro Data Pack
+# Date: 2026-02-06 (Europe/Paris)
+
+meta:
+  name: "HC - Animaux"
+  locale: "fr-FR"
+  timezone: "Europe/Paris"
+  updated_at: "2026-02-06"
+
+brand:
+  company: "Horizon Conversion Animaux"
+  phone: "06 60 92 10 08"
+  email: "contact@horizon-conversion.fr"
+  tagline: "Webmarketing local pour professionnels des animaux (60/95)"
+  positioning:
+  - "Consultant senior orienté résultats + exécution type agence"
+  - "Spécialiste SEO local / Google Maps / Google Ads / Meta Ads / CRO / tracking"
+  - "Progression rapide même sans avis via preuves alternatives (process, livrables, tracking)"
+  tone:
+  - "Direct"
+  - "Pragmatique"
+  - "Orienté livrables"
+  - "Localisé (Sud Oise 60 / Val d’Oise 95)"
+
+goals:
+  primary: "Générer des leads qualifiés (appels, formulaires, prise RDV) pour pros animaliers en 60/95."
+  kpis:
+  - "click_phone"
+  - "click_email"
+  - "click_whatsapp"
+  - "form_submit"
+  - "book_call"
+  - "click_directions"
+  - "conversion_rate"
+  - "cpl_if_ads"
+  - "gsc_impressions_clicks_positions"
+
+constraints:
+  stack: "Astro"
+  seo_strategy:
+    rule: "1 intention = 1 page"
+    no_surrounding_pages: true
+    surrounding_policy: "Citer les communes proches dans la page ville via une section dédiée, sans créer d’URL."
+  nap_everywhere: true
+  avoid_clone_pages: true
+  minimum_content_guidelines:
+    prestation_words: "900-1400"
+    metier_words: "900-1400"
+    ville_words: "700-1100"
+
+tracking:
+  recommended:
+  - "GTM"
+  - "GA4"
+  events:
+  - name: "click_phone"
+    trigger: "clic sur lien tel:"
+  - name: "click_email"
+    trigger: "clic sur lien mailto:"
+  - name: "click_whatsapp"
+    trigger: "clic sur bouton WhatsApp"
+  - name: "form_submit"
+    trigger: "submit formulaire contact/audit"
+  - name: "book_call"
+    trigger: "prise de RDV (Calendly ou autre)"
+  - name: "click_directions"
+    trigger: "clic itinéraire / maps"
+  params:
+  - "page_path"
+  - "page_type"
+  - "zone_departement"
+  - "zone_ville"
+  - "metier"
+  - "service"
+
+schemas_jsonld:
+  global:
+  - "Organization"
+  - "LocalBusiness"
+  - "BreadcrumbList"
+  by_page_type:
+    prestation:
+    - "Service"
+    - "FAQPage"
+    - "BreadcrumbList"
+    metier:
+    - "FAQPage"
+    - "BreadcrumbList"
+    ville:
+    - "FAQPage"
+    - "BreadcrumbList"
+
+priorities:
+  metiers:
+  # 5 verticales prioritaires (meilleur potentiel acquisition locale)
+  - id: "veterinaire"
+    label: "Vétérinaire / clinique vétérinaire"
+    intent_primary: "prendre des RDV"
+    typical_pains:
+    - "concurrence forte sur Maps"
+    - "avis et visibilité locale"
+    - "coût clic Ads élevé sans stratégie"
+    keywords_seed:
+    - "vétérinaire + ville"
+    - "clinique vétérinaire + ville"
+    - "urgence vétérinaire + ville"
+  - id: "educateur-canin"
+    label: "Éducateur canin / comportementaliste"
+    intent_primary: "demandes de bilan / séances"
+    typical_pains:
+    - "marché fragmenté"
+    - "difficulté à se différencier"
+    - "besoin de demandes qualifiées"
+    keywords_seed:
+    - "éducateur canin + ville"
+    - "comportementaliste chien + ville"
+    - "rééducation chien + ville"
+  - id: "toiletteur"
+    label: "Toiletteur"
+    intent_primary: "remplir l'agenda"
+    typical_pains:
+    - "saisonnalité"
+    - "concurrence locale directe"
+    - "réservations irrégulières"
+    keywords_seed:
+    - "toiletteur + ville"
+    - "toilettage chien + ville"
+    - "toilettage chat + ville"
+  - id: "pension-garderie"
+    label: "Pension / garderie / hôtel pour animaux"
+    intent_primary: "réservations"
+    typical_pains:
+    - "pics vacances"
+    - "comparaison prix/avis"
+    - "nécessité de rassurer (sécurité, visites)"
+    keywords_seed:
+    - "pension chien + ville"
+    - "garde chien + ville"
+    - "garderie chien + ville"
+  - id: "osteopathe-animalier"
+    label: "Ostéopathe animalier"
+    intent_primary: "prises de RDV"
+    typical_pains:
+    - "éducation marché (valeur de l’ostéo)"
+    - "besoin de preuves + pédagogie"
+    - "zonage déplacements"
+    keywords_seed:
+    - "ostéopathe animalier + ville"
+    - "ostéo chien + ville"
+    - "ostéo cheval + ville"
+
+  zones:
+    # Villes prioritaires + communes à citer (sans pages alentours)
+    sud_oise_60:
+      hub_slug: "sud-oise-60"
+      label: "Sud Oise (60)"
+      villes:
+      - id: "chantilly"
+        label: "Chantilly"
+        dept: "60"
+        around:
+        - "Gouvieux"
+        - "Lamorlaye"
+        - "Vineuil-Saint-Firmin"
+        - "Coye-la-Forêt"
+        - "Orry-la-Ville"
+      - id: "senlis"
+        label: "Senlis"
+        dept: "60"
+        around:
+        - "Chamant"
+        - "Mont-l’Évêque"
+        - "Barbery"
+        - "Pontarmé"
+        - "Fleurines"
+      - id: "creil"
+        label: "Creil"
+        dept: "60"
+        around:
+        - "Montataire"
+        - "Nogent-sur-Oise"
+        - "Villers-Saint-Paul"
+        - "Saint-Leu-d’Esserent"
+        - "Thiverny"
+      - id: "nogent-sur-oise"
+        label: "Nogent-sur-Oise"
+        dept: "60"
+        around:
+        - "Creil"
+        - "Montataire"
+        - "Laigneville"
+        - "Villers-Saint-Paul"
+        - "Rousseloy"
+      - id: "pont-sainte-maxence"
+        label: "Pont-Sainte-Maxence"
+        dept: "60"
+        around:
+        - "Brenouille"
+        - "Les Ageux"
+        - "Sacy-le-Grand"
+        - "Verneuil-en-Halatte"
+        - "Cinqueux"
+      - id: "clermont-oise"
+        label: "Clermont (Oise)"
+        dept: "60"
+        around:
+        - "Agnetz"
+        - "Fitz-James"
+        - "Liancourt"
+        - "Breuil-le-Vert"
+        - "Neuilly-sous-Clermont"
+      - id: "compiegne"
+        label: "Compiègne"
+        dept: "60"
+        optional: true
+        around:
+        - "Margny-lès-Compiègne"
+        - "Venette"
+        - "Le Meux"
+        - "Lacroix-Saint-Ouen"
+        - "Jaux"
+
+    val_doise_95:
+      hub_slug: "val-doise-95"
+      label: "Val d’Oise (95)"
+      villes:
+      - id: "cergy"
+        label: "Cergy"
+        dept: "95"
+        around:
+        - "Pontoise"
+        - "Osny"
+        - "Éragny"
+        - "Saint-Ouen-l’Aumône"
+        - "Jouy-le-Moutier"
+      - id: "pontoise"
+        label: "Pontoise"
+        dept: "95"
+        around:
+        - "Cergy"
+        - "Saint-Ouen-l’Aumône"
+        - "Osny"
+        - "Ennery"
+        - "Auvers-sur-Oise"
+      - id: "argenteuil"
+        label: "Argenteuil"
+        dept: "95"
+        around:
+        - "Bezons"
+        - "Sannois"
+        - "Cormeilles-en-Parisis"
+        - "Sartrouville"
+        - "Colombes"
+      - id: "franconville"
+        label: "Franconville"
+        dept: "95"
+        around:
+        - "Ermont"
+        - "Sannois"
+        - "Saint-Leu-la-Forêt"
+        - "Taverny"
+        - "Montigny-lès-Cormeilles"
+      - id: "taverny"
+        label: "Taverny"
+        dept: "95"
+        around:
+        - "Saint-Leu-la-Forêt"
+        - "Beauchamp"
+        - "Montigny-lès-Cormeilles"
+        - "Bessancourt"
+        - "Frépillon"
+      - id: "sarcelles"
+        label: "Sarcelles"
+        dept: "95"
+        around:
+        - "Garges-lès-Gonesse"
+        - "Villiers-le-Bel"
+        - "Arnouville"
+        - "Gonesse"
+        - "Saint-Brice-sous-Forêt"
+      - id: "gonesse"
+        label: "Gonesse"
+        dept: "95"
+        around:
+        - "Sarcelles"
+        - "Villiers-le-Bel"
+        - "Arnouville"
+        - "Goussainville"
+        - "Le Thillay"
+      - id: "lisle-adam"
+        label: "L’Isle-Adam"
+        dept: "95"
+        around:
+        - "Parmain"
+        - "Mériel"
+        - "Beaumont-sur-Oise"
+        - "Presles"
+        - "Champagne-sur-Oise"
+
+pages:
+  # Hubs (pages “mères”)
+  hubs:
+  - slug: "prestations"
+    title: "Prestations"
+    h1: "Acquisition locale pour professionnels des animaux"
+    intent: "Découvrir les offres"
+  - slug: "metiers"
+    title: "Métiers"
+    h1: "Solutions par métier animalier"
+    intent: "Choisir une approche adaptée"
+  - slug: "zones"
+    title: "Zones"
+    h1: "Sud Oise (60) & Val d’Oise (95)"
+    intent: "Trouver l’accompagnement local"
+  - slug: "methode"
+    title: "Méthode"
+    h1: "Une méthode trackée, des livrables clairs"
+    intent: "Comprendre le process"
+  - slug: "preuves"
+    title: "Preuves"
+    h1: "Preuves alternatives et exemples de livrables"
+    intent: "Rassurer sans dépendre des avis"
+  - slug: "contact"
+    title: "Contact"
+    h1: "Demander un audit local"
+    intent: "Convertir"
+
+  prestations:
+  - id: "seo-local"
+    slug: "seo-local"
+    label: "SEO local"
+    primary_intent: "être visible sur Google en local"
+    title_pattern: "SEO local {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Gagnez en visibilité locale en {zone}. SEO + contenu + maillage + tracking. Audit rapide. Appelez au {phone}."
+    h1_pattern: "SEO local pour professionnels des animaux en {zone}"
+    faq:
+    - q: "Combien de temps avant des résultats en SEO local ?"
+      a: "On vise des signaux dès les premières semaines (tech, contenu, maillage, indexation), puis une progression continue sur 2–4 mois selon concurrence."
+    - q: "Peut-on avancer sans avis Google ?"
+      a: "Oui : on s’appuie sur structure, contenu utile, preuves alternatives, optimisation Maps et tracking pour accélérer sans attendre les avis."
+  - id: "google-ads"
+    slug: "google-ads"
+    label: "Google Ads local"
+    primary_intent: "obtenir des demandes rapidement"
+    title_pattern: "Google Ads local {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Campagnes Google Ads locales en {zone} : mots-clés rentables, annonces, landing, suivi conversions. Appelez au {phone}."
+    h1_pattern: "Google Ads local pour professionnels des animaux en {zone}"
+    faq:
+    - q: "Quel budget minimum pour démarrer ?"
+      a: "On peut démarrer petit, mais le budget dépend du métier et de la concurrence. L’objectif : payer pour des demandes qualifiées, pas des clics."
+    - q: "Comment éviter les clics inutiles ?"
+      a: "Mots-clés exacts, exclusions, ciblage local, horaires, annonces orientées intention, landing dédiée et suivi conversions."
+  - id: "meta-ads"
+    slug: "meta-ads"
+    label: "Meta Ads (Facebook/Instagram)"
+    primary_intent: "créer de la demande + retargeting"
+    title_pattern: "Meta Ads {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Publicités Facebook/Instagram en {zone} : offres, créas, ciblage, retargeting, suivi. Appelez au {phone}."
+    h1_pattern: "Meta Ads pour professionnels des animaux en {zone}"
+    faq:
+    - q: "Meta Ads marche pour quels métiers animaliers ?"
+      a: "Très efficace pour éducateurs, toiletteurs, pensions (saisonnalité) et notoriété locale, avec une offre claire et une page d’atterrissage."
+    - q: "Faut-il beaucoup de contenus ?"
+      a: "Non : on part d’un kit créas minimal (3–5 angles) puis on itère sur ce qui convertit."
+  - id: "optimisation-google-maps"
+    slug: "optimisation-google-maps"
+    label: "Optimisation Google Maps (GBP)"
+    primary_intent: "remonter sur la carte"
+    title_pattern: "Optimisation Google Maps {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Optimisez Google Maps en {zone} : catégories, services, contenus, photos, posts, tracking. Appelez au {phone}."
+    h1_pattern: "Optimisation Google Maps pour professionnels des animaux en {zone}"
+    faq:
+    - q: "Que fait-on concrètement sur une fiche Google ?"
+      a: "Audit, catégories, services, description, photos, posts, FAQ, cohérence NAP, suivi appels/itinéraires et plan d’actions."
+    - q: "Et si la fiche est suspendue ?"
+      a: "On traite le dossier (cohérence infos, justificatifs, process) et on sécurise la présence locale."
+  - id: "creation-site-astro"
+    slug: "creation-site-astro"
+    label: "Création de site Astro"
+    primary_intent: "un site rapide qui convertit"
+    title_pattern: "Création site Astro {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Site Astro rapide + SEO + tracking en {zone}. Structure 1 intention = 1 page, gabarits métiers/zones. Appelez au {phone}."
+    h1_pattern: "Création de site Astro (SEO & conversion) en {zone}"
+    faq:
+    - q: "Pourquoi Astro plutôt qu’un CMS classique ?"
+      a: "Performance, SEO, stabilité : idéal pour des pages locales rapides, avec tracking propre et gabarits industrialisables."
+    - q: "Peut-on ajouter des pages facilement ?"
+      a: "Oui : via collections de contenu et gabarits (services, métiers, villes) pour scaler sans casser la qualité."
+  - id: "cro-tracking"
+    slug: "cro-tracking"
+    label: "CRO & Tracking"
+    primary_intent: "augmenter le taux de conversion"
+    title_pattern: "CRO & Tracking {zone} | Horizon Conversion Animaux"
+    meta_pattern: "Augmentez vos conversions en {zone} : CTA, formulaires, preuves, events GA4, GTM. Appelez au {phone}."
+    h1_pattern: "Optimisation conversion (CRO) & tracking en {zone}"
+    faq:
+    - q: "Quelles conversions suivre en priorité ?"
+      a: "Appels, formulaires, RDV, itinéraires. Ensuite : qualité des leads et pages qui déclenchent le plus de demandes."
+    - q: "Comment améliorer vite le taux de conversion ?"
+      a: "Offre claire, CTA visibles, formulaire court, preuves alternatives, FAQ objections, pages dédiées par intention."
+
+templates:
+  # Sections standard réutilisables (ordre conseillé)
+  prestation_sections:
+  - "Hero (promesse + zone + CTA)"
+  - "Douleurs / symptômes"
+  - "Solution (process 4–6 étapes)"
+  - "Livrables (checklist)"
+  - "Preuves alternatives (tracking/exemples)"
+  - "FAQ"
+  - "Liens internes métiers/zones"
+  - "CTA final + Contact rapide"
+  metier_sections:
+  - "Hero (bénéfice métier + CTA)"
+  - "Problèmes typiques du métier"
+  - "Pack (SEO/Maps/Ads) + livrables"
+  - "Exemples (annonces/contenu/tracking)"
+  - "FAQ métier"
+  - "CTA audit"
+  ville_sections:
+  - "Hero (acquisition locale + ville + CTA)"
+  - "Contexte local (spécifique)"
+  - "Interventions à {ville} et autour (liste)"
+  - "Ce qu’on met en place (process + livrables)"
+  - "Services associés (liens internes)"
+  - "FAQ locale"
+  - "CTA final + NAP"
+
+internal_linking:
+  rules:
+  - "Chaque page Prestation lie vers 5 pages Métiers + hubs Zones."
+  - "Chaque page Métier lie vers 2–3 Prestations + 2 hubs Zones + 3–5 pages Villes."
+  - "Chaque page Ville lie vers 3 Prestations + 3 pages Métiers + hub département."
+  anchor_examples:
+  - "SEO local pour {metier}"
+  - "Google Ads pour {metier}"
+  - "Optimisation Google Maps en {ville}"
+  - "Interventions en {zone}"
+
+copy_blocks:
+  # Blocs prêts à injecter (Astro components)
+  cta_primary:
+    title: "Demander un audit local"
+    bullets:
+    - "Plan d’action priorisé (SEO / Maps / Ads)"
+    - "Tracking des conversions (appels, formulaires)"
+    - "Recommandations adaptées à votre métier"
+    buttons:
+    - label: "Appeler"
+      href_pattern: "tel:{phone_compact}"
+    - label: "Demander un audit"
+      href: "/contact/"
+  proofs_alternatives:
+    items:
+    - "Méthode documentée + checklists"
+    - "Exemples de livrables (audit, structure pages, mots-clés)"
+    - "Tracking GA4/GTM + reporting mensuel"
+    - "Qualification stricte des demandes"
+
+utils:
+  phone_compact: "0660921008"
+  zones_labels:
+  - "Sud Oise (60)"
+  - "Val d’Oise (95)"
