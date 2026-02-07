@@ -256,37 +256,45 @@ const description =
 
     <section class="grid">
       <!-- FORM -->
-      <div class="card">
+      <div class="card form-widget">
         <h2>Envoyer une demande</h2>
         <p class="meta">
           Objectif : qualifier vite (zone, métier, urgence, budget) pour éviter les
           allers-retours.
         </p>
 
-        <form method="POST" action="/_assets_/include/form.php" novalidate>
-          <div class="row">
-            <label for="name">Nom / Prénom</label>
-            <input id="name" name="name" autocomplete="name" required />
+        <div class="form-result"></div>
+
+        <form method="POST" action="/_assets_/include/form.php" id="template-contactform" name="template-contactform">
+          <div class="form-process">
+          	<div class="css3-spinner">
+          	  <div class="css3-spinner-scaler"></div>
+          	</div>
           </div>
 
           <div class="row">
-            <label for="business">Métier / Structure</label>
+            <label for="template-contactform-name">Nom / Prénom</label>
+            <input id="template-contactform-name" name="template-contactform-name" required />
+          </div>
+
+          <div class="row">
+            <label for="template-contactform-business">Métier / Structure</label>
             <input
-              id="business"
-              name="business"
+              id="template-contactform-business"
+              name="template-contactform-business"
               placeholder="Ex : éducateur canin, clinique vétérinaire, pension…"
               required
             />
           </div>
 
           <div class="row">
-            <label for="city">Ville principale</label>
-            <input id="city" name="city" placeholder="Ex : Senlis, Chantilly, Cergy…" required />
+            <label for="template-contactform-city">Ville principale</label>
+            <input id="template-contactform-city" name="template-contactform-city" placeholder="Ex : Senlis, Chantilly, Cergy…" required />
           </div>
 
           <div class="row">
-            <label for="department">Zone</label>
-            <select id="department" name="department" required>
+            <label for="template-contactform-department">Zone</label>
+            <select id="template-contactform-department" name="template-contactform-department" required>
               <option value="">Choisir…</option>
               <option value="Oise-60">Oise (60)</option>
               <option value="Valdoise-95">Val d’Oise (95)</option>
@@ -295,18 +303,18 @@ const description =
           </div>
 
           <div class="row">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
+            <label for="template-contactform-email">Email</label>
+            <input id="etemplate-contactform-mail" name="template-contactform-email" type="email" required />
           </div>
 
           <div class="row">
-            <label for="phone">Téléphone</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            <label for="template-contactform-phone">Téléphone</label>
+            <input id="template-contactform-phone" name="template-contactform-phone" type="tel" />
           </div>
 
           <div class="row">
-            <label for="goal">Objectif prioritaire</label>
-            <select id="goal" name="goal" required>
+            <label for="template-contactform-goal">Objectif prioritaire</label>
+            <select id="template-contactform-goal" name="template-contactform-goal" required>
               <option value="">Choisir…</option>
               <option value="SEO local / Google Maps">SEO local / Google Maps</option>
               <option value="Google Ads">Google Ads</option>
@@ -317,24 +325,32 @@ const description =
           </div>
 
           <div class="row">
-            <label for="message">Votre message</label>
+            <label for="template-contactform-message">Votre message</label>
             <textarea
-              id="message"
-              name="message"
+              id="template-contactform-message"
+              name="template-contactform-message"
               placeholder="Contexte, concurrence, ce que vous avez déjà tenté, délai…"
               required
             ></textarea>
           </div>
 
+          <div class="col-12 form-group d-none">
+          	<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control">
+          </div>
+
           <!-- Anti-spam basique (honeypot) -->
           <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
-            <label for="website">Website</label>
-            <input id="website" name="website" tabindex="-1" autocomplete="off" />
+            <label for="template-contactform-website">Website</label>
+            <input id="template-contactform-website" name="template-contactform-website" tabindex="-1" autocomplete="off" />
           </div>
 
           <div class="row">
-            <button class="btn" type="submit">Envoyer</button>
+            <button class="btn" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Envoyer</button>
           </div>
+
+          <input type="hidden" name="prefix" value="template-contactform-">
+          <input type="hidden" name="replyto" value="template-contactform-email">
+          <input type="hidden" name="autoresponder" value="true">
 
           <p class="small">
             En envoyant ce formulaire, vous acceptez d’être recontacté par
