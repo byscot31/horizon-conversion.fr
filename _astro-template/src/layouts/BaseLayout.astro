@@ -3,15 +3,21 @@
 ---
 
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html dir="ltr" lang="fr-FR">
 <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Stylesheets & Title
 	============================================= -->
+
+	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 	...
 
 </head>
-<body>
+<body class="stretched page-transition" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
 
 	<!-- The Main Wrapper
 	============================================= -->
@@ -19,23 +25,55 @@
 
 		<!-- Header
 		============================================= -->
-		<header id="header">
+		<header id="header" class="full-header header-size-sm" data-mobile-sticky="true">
+
+		    <div id="logo">
+            	<a href="index.html">
+            		<img class="logo-default" srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Canvas Logo">
+            		<img class="logo-dark" srcset="images/logo-dark.png, images/logo-dark@2x.png 2x" src="images/logo-dark@2x.png" alt="Canvas Logo">
+            	</a>
+            </div>
+
+            <nav class="primary-menu mobile-menu-off-canvas">
+
+            	<ul class="menu-container">
+            		<li class="menu-item mega-menu">
+            			<a class="menu-link" href="#"><div>Shortcodes</div></a>
+            			<div class="mega-menu-content">
+            				<div class="container">
+            					<div class="row">
+            						<!-- Column 1 -->
+            						<ul class="sub-menu-container mega-menu-column col-lg-3">
+            							<li class="menu-item">
+            								<a class="menu-link" href="animations.html"><div><i class="icon-magic"></i>Animations</div></a>
+            							</li>
+            							<li class="menu-item">
+            								<a class="menu-link" href="buttons.html"><div><i class="icon-link"></i>Buttons</div></a>
+            							</li>
+            							<li class="menu-item">
+            								<a class="menu-link" href="carousel.html"><div><i class="icon-heart3"></i>Carousel</div></a>
+            							</li>
+            						</ul>
+
+            						<!-- Column 2 -->
+            						<ul class="sub-menu-container mega-menu-column col-lg-3">
+
+            							...
+
+            						</ul>
+            					</div>
+            				</div>
+            			</div>
+            		</li>
+            	</ul>
+
+            </nav>
 
 			...
 
 		</header>
 
-		<!-- Site Content
-		============================================= -->
-		<section id="content">
-			<div class="content-wrap">
-				<div class="container">
-
-					...
-
-				</div>
-			</div>
-		</section>
+		<slot />
 
 		<!-- Footer
 		============================================= -->
@@ -60,8 +98,13 @@
 
 	</div>
 
+    <!-- Go To Top -->
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
 	<!-- Scripts
 	============================================= -->
+	<script is:inline src="js/plugins.min.js"></script>
+    <script is:inline src="js/functions.bundle.js"></script>
 
 </body>
 </html>

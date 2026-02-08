@@ -1,17 +1,36 @@
 ---
 // src/pages/index.astro
+
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+
+  <section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-60 min-vh-md-100">
+  	<div class="slider-inner">
+
+  		<div class="swiper swiper-parent">
+  			<div class="swiper-wrapper">
+
+  				<!-- First Slide -->
+  				<div class="swiper-slide dark">
+  					<!-- Slider Content -->
+  					<div class="swiper-slide-bg" style="background-image: url('your-bg-image.jpg');"></div>
+  				</div>
+  			</div>
+  		</div>
+
+  	</div>
+  </section>
+
+  <!-- Site Content
+  ============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+
+      ...
+
+	</div><!-- #wrapper end -->
+  </section>
+
+</BaseLayout>
