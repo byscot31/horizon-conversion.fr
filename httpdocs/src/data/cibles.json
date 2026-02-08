@@ -1,2 +1,10 @@
+[
+  {
+    "slug": "artisans",
+    "nom": "Artisans",
+    "douleurs": ["Planning chargé", "Demandes peu qualifiées", "Concurrence locale"],
+    "faq_ids": { "volume": [], "premium": [], "mix": [] }
+  }
+]
 
 

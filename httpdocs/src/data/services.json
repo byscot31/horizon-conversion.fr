@@ -1,2 +1,17 @@
+[
+  {
+    "slug": "seo-local",
+    "nom": "SEO local",
+    "promesses": {
+      "volume": { "h1": "Être trouvé sur Google près de chez vous", "sub": "Des pages locales qui amènent des appels et des demandes." },
+      "premium": { "h1": "Renforcer votre visibilité locale, sans dégrader votre image", "sub": "Un travail propre et durable, centré sur la qualité des demandes." },
+      "mix": { "h1": "Plus de visibilité locale et plus de demandes", "sub": "Un plan équilibré : contenu + suivi + optimisations." }
+    },
+    "benefices": { "volume": [], "premium": [], "mix": [] },
+    "livrables": { "volume": [], "premium": [], "mix": [] },
+    "preuves_ids": { "volume": [], "premium": [], "mix": [] },
+    "faq_ids": { "volume": [], "premium": [], "mix": [] }
+  }
+]
 
 

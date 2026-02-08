@@ -1,2 +1,13 @@
+[
+  {
+    "slug": "chantilly",
+    "nom": "Chantilly",
+    "zoneSlug": "sud-oise",
+    "segment": "premium",
+    "priorite_services": ["seo-local", "google-ads", "landing"],
+    "specificites": ["À compléter : réalité locale, saisonnalité, accès, concurrence…"],
+    "voisines": ["gouvieux", "lamorlaye"]
+  }
+]
 
 
