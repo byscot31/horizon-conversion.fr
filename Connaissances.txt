@@ -33,9 +33,11 @@ src/pages/ressources/index.astro
 src/pages/ressources/[article].astro
 src/pages/cibles/index.astro
 src/pages/cibles/[cible].astro
-src/lib/slugs.ts
-src/lib/seo.ts
+src/lib/getProfile.ts
+src/lib/profiles.ts
 src/lib/schema.ts
+src/lib/seo.ts
+src/lib/slugs.ts
 src/layouts/BaseLayout.astro
 src/data/articles.json
 src/data/cibles.json
@@ -166,16 +168,17 @@ Composants sections : Benefices, Breadcrumbs, Cibles, CTA, Faqs, Form, Form, Lie
 
 Zéro CSS local dans les pages : uniquement global + classes.
 
-6) SEO technique (sans te prendre la tête)
+6) SEO technique
 Indispensable :
-canonical partout
+stratégie canonical
 sitemap.xml + robots.txt
-Schema.org :
+Schema.org centralisé dans /src/lib/schema.ts :
 Organization (site)
 LocalBusiness (Agence Marketing)
 Service (pages service)
 FAQPage
 BreadcrumbList
+Etc.
 
 Titles uniques (service×ville = title unique)
 

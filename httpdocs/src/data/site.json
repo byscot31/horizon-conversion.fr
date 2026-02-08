@@ -1,0 +1,27 @@
+{
+  "siteName": "Horizon Conversion",
+  "defaultLang": "fr-FR",
+  "contact": {
+    "phone": "06 60 92 10 08",
+    "email": "contact@horizon-conversion.fr"
+  },
+  "nap": {
+    "name": "Horizon Conversion",
+    "address": {
+      "streetAddress": "",
+      "postalCode": "",
+      "addressLocality": "",
+      "addressRegion": "",
+      "addressCountry": "FR"
+    }
+  },
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": ""
+  },
+  "ctas": {
+    "primaryCtaHref": "/contact/?cta=audit",
+    "secondaryCtaHref": "/contact/?cta=rappel"
+  }
+}

@@ -148,7 +148,7 @@ Exemple attendu (conceptuel, sans imposer le code exact) :
 - `LiensInternes({ contexte, limites })`
 
 ## 10) SEO technique (à respecter)
-- Canonical partout
+- Stratégie Canonical
 - sitemap + robots
 - Schema.org :
   - Organization (site)

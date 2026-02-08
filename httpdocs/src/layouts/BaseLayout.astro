@@ -1,40 +1,46 @@
 ---
 // src/layouts/BaseLayout.astro
 
+import site from "../data/site.json";
+
 export type Seo = {
   title: string;
   description: string;
   canonical?: string;
-  robots?: string; // ex: "index,follow"
-  lang?: string;   // "fr"
+  robots?: string;
   ogImage?: string;
 };
 
 export type BreadcrumbItem = { name: string; url: string };
 
 export interface Props {
-  seo: Seo;
-  schemaJsonLd?: any[];          // JSON-LD ready to stringify
-  breadcrumbs?: BreadcrumbItem[]; // optional if you have a component
-  phone?: string;               // "06 00 00 00 00"
-  email?: string;               // "contact@..."
-  siteName?: string;            // "HC - Webmarketing"
-  primaryCtaHref?: string;      // "/contact/?cta=audit"
-  secondaryCtaHref?: string;    // "/contact/?cta=rappel"
+  seo?: Seo;
+  schemaJsonLd?: any[];
+  breadcrumbs?: BreadcrumbItem[];
+  phone?: string;
+  email?: string;
+  siteName?: string;
+  primaryCtaHref?: string;
+  secondaryCtaHref?: string;
 }
 
 const {
-  seo,
+  seo: seoFromProps,
   schemaJsonLd = [],
   breadcrumbs = [],
-  phone = "06 60 92 10 08",
-  email = "contact@horizon-conversion.fr",
-  siteName = "Horizon Conversion",
-  primaryCtaHref = "/contact/?cta=audit",
-  secondaryCtaHref = "/contact/?cta=rappel",
+  phone = site?.contact?.phone ?? "",
+  email = site?.contact?.email ?? "",
+  siteName = site?.siteName ?? "Horizon Conversion",
+  primaryCtaHref = site?.ctas?.primaryCtaHref ?? "/contact/?cta=audit",
+  secondaryCtaHref = site?.ctas?.secondaryCtaHref ?? "/contact/?cta=rappel",
 } = Astro.props;
 
-const lang = seo.lang ?? "fr";
+const seo: Seo = seoFromProps ?? {
+  title: siteName,
+  description:
+    "Consultant en acquisition locale : SEO local + pages qui transforment, pour générer des appels et des demandes.",
+};
+
 const canonical = seo.canonical ?? Astro.url.href;
 const robots = seo.robots ?? "index,follow";
 
@@ -70,7 +76,7 @@ const inlineTracking = `
 ---
 
 <!DOCTYPE html>
-<html dir="ltr" lang={lang}>
+<html dir="ltr" lang=fr-FR>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
@@ -98,10 +104,8 @@ const inlineTracking = `
 
   <!-- Core Style -->
   <link rel="stylesheet" href="/assets/style.css" />
-  <link rel="stylesheet" href="/css/font-icons.css" />
-  <link rel="stylesheet" href="/css/components/bs-switches.css" />
-  <link rel="stylesheet" href="/demos/seo/seo.css" />
-  <link rel="stylesheet" href="/css/custom.css" />
+  <link rel="stylesheet" href="/assets/css/font-icons.css" />
+  <link rel="stylesheet" href="/assets/seo.css" />
 
   <!-- JSON-LD -->
   {schemaJsonLd?.length
@@ -119,35 +123,38 @@ const inlineTracking = `
           <div class="col-12 col-md-auto">
             <div class="top-links">
               <ul class="top-links-container">
-                <li class="top-links-item"><a href="/">Accueil</a></li>
-                <li class="top-links-item"><a href="/services/">Services</a></li>
-                <li class="top-links-item"><a href="/zones/">Zones</a></li>
-                <li class="top-links-item"><a href="/preuves/">Preuves</a></li>
-                <li class="top-links-item"><a href="/contact/">Contact</a></li>
+                <li class="top-links-item">
+                  <a href="/zones/">
+                    <span class="ts-icon"><i class="bi-geo-fill"></i></span>
+                    <span class="ts-text">Zones Sud Oise (60) / Nord Val d’Oise (95)</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
-          <div class="col-12 col-md-auto dark">
-            <ul id="top-social">
-              {phone ? (
-                <li>
-                  <a href={telHref(phone)} class="h-bg-call">
-                    <span class="ts-icon"><i class="fa-solid fa-phone"></i></span>
-                    <span class="ts-text">{phone}</span>
-                  </a>
-                </li>
-              ) : null}
+          <div class="col-12 col-md-auto">
+            <div class="top-links">
+              <ul class="top-links-container">
+                {phone ? (
+                  <li class="top-links-item">
+                    <a href={telHref(phone)}>
+                      <span class="ts-icon"><i class="bi-telephone-fill"></i></span>
+                      <span class="ts-text">{phone}</span>
+                    </a>
+                  </li>
+                ) : null}
 
-              {email ? (
-                <li>
-                  <a href={`mailto:${email}`} class="h-bg-email3">
-                    <span class="ts-icon"><i class="bi-envelope-fill"></i></span>
-                    <span class="ts-text">{email}</span>
-                  </a>
-                </li>
-              ) : null}
-            </ul>
+                {email ? (
+                  <li class="top-links-item">
+                    <a href={`mailto:${email}`}>
+                      <span class="ts-icon"><i class="bi-envelope-fill"></i></span>
+                      <span class="ts-text">{email}</span>
+                    </a>
+                  </li>
+                ) : null}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -160,14 +167,13 @@ const inlineTracking = `
           <div class="header-row">
             <div id="logo">
               <a href="/">
-                <img class="logo-default" src="/images/logo@2x.png" alt={siteName} />
-                <img class="logo-dark" src="/images/logo-dark@2x.png" alt={siteName} />
+                <img class="logo-default" src="/assets/images/logo.png" alt={siteName} />
               </a>
             </div>
 
             <div class="header-misc">
               <a href={primaryCtaHref} class="button button-rounded ms-3 d-none d-sm-block">
-                Demander un audit (gratuit)
+                Audit Gratuit
               </a>
             </div>
 
@@ -194,27 +200,7 @@ const inlineTracking = `
       <div class="header-wrap-clone"></div>
     </header>
 
-    <!-- (Optionnel) Breadcrumbs si tu as un composant -->
-    {breadcrumbs?.length ? (
-      <div class="container mt-4">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            {breadcrumbs.map((b, i) => (
-              <li class={`breadcrumb-item ${i === breadcrumbs.length - 1 ? "active" : ""}`}>
-                {i === breadcrumbs.length - 1 ? b.name : <a href={b.url}>{b.name}</a>}
-              </li>
-            ))}
-          </ol>
-        </nav>
-      </div>
-    ) : null}
-
-    <!-- CONTENT -->
-    <main id="content">
-      <section class="content-wrap pt-0">
-        <slot />
-      </section>
-    </main>
+    <slot />
 
     <!-- Footer (light refacto: français + coordonnées) -->
     <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
@@ -223,7 +209,7 @@ const inlineTracking = `
           <div class="row col-mb-50">
             <div class="col-md-8">
               <div class="widget">
-                <img src="/images/footer-widget-logo.png" alt={siteName} class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;" />
+                <img src="/assets/images/footer-widget-logo.png" alt={siteName} class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;" />
                 <p>
                   Consultant en acquisition locale : SEO local + pages qui transforment, pour générer des <strong>appels</strong> et des <strong>demandes</strong>
                   dans le <strong>Sud Oise (60)</strong> et le <strong>Nord Val d’Oise (95)</strong>.
@@ -232,22 +218,33 @@ const inlineTracking = `
                 <div class="line line-sm"></div>
 
                 <div class="row g-4">
-                  <div class="col-lg-3 col-6 widget_links">
+                  <div class="col-lg-4 col-6 widget_links">
                     <ul>
-                      <li><a href="/">Accueil</a></li>
-                      <li><a href="/services/">Services</a></li>
-                      <li><a href="/zones/">Zones</a></li>
+                      <li><a href="/a-propos/">À propos</a></li>
+                      <li><a href="/methode/">Méthode</a></li>
                       <li><a href="/tarifs/">Tarifs</a></li>
-                      <li><a href="/contact/">Contact</a></li>
+                      <li><a href="/preuves/">Preuves</a></li>
+                      <li><a href="/ressources/">Ressources</a></li>
                     </ul>
                   </div>
 
-                  <div class="col-lg-3 col-6 widget_links">
+                  <div class="col-lg-4 col-6 widget_links">
                     <ul>
-                      <li><a href="/preuves/">Preuves</a></li>
-                      <li><a href="/methode/">Méthode</a></li>
-                      <li><a href="/ressources/">Ressources</a></li>
-                      <li><a href="/a-propos/">À propos</a></li>
+                      <li><a href="/services/">Services</a></li>
+                      <li><a href="/seo-local/">SEO local</a></li>
+                      <li><a href="/ads/">Google Ads</a></li>
+                      <li><a href="/meta/">Meta Ads</a></li>
+                      <li><a href="/cro/">Optimisation site</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-lg-4 col-6 widget_links">
+                    <ul>
+                      <li><a href="/zones/">Zones</a></li>
+                      <li><a href="/zones/">Sud Oise (60)</a></li>
+                      <li><a href="/zones/">Nord Val d’Oise (95)</a></li>
+                      <li><a href="/villes/">Villes</a></li>
+                      <li><a href="/cibles/">Cibles</a></li>
                     </ul>
                   </div>
                 </div>
@@ -298,16 +295,21 @@ const inlineTracking = `
         </div>
       </div>
 
-      <div id="copyrights" style="background: url('/demos/seo/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;">
+      <div id="copyrights" style="background: url('/assets/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;">
         <div class="container">
           <div class="row justify-content-between col-mb-30">
             <div class="col-12 col-lg-auto text-center text-lg-start">
-              © {new Date().getFullYear()} {siteName}. Tous droits réservés.<br />
-              <div class="copyright-links">
-                <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a> /
-                <a href="/politique-de-confidentialite/" class="text-contrast-600">Confidentialité</a>
-              </div>
+              © {new Date().getFullYear()} {siteName}. Tous droits réservés.
             </div>
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+              <div class="copyrights-menu copyright-links">
+                <a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
+                /
+                <a href="/politique-de-confidentialite/" class="text-contrast-600">Confidentialité</a>
+                /
+                <a href="#" class="text-contrast-600">Contact</a>
+			  </div>
+			</div>
           </div>
         </div>
       </div>
@@ -317,8 +319,8 @@ const inlineTracking = `
   <div id="gotoTop" class="uil uil-angle-up"></div>
 
   <!-- JS Canvas -->
-  <script is:inline src="/js/plugins.min.js"></script>
-  <script is:inline src="/js/functions.bundle.js"></script>
+  <script is:inline src="/assets/js/plugins.min.js"></script>
+  <script is:inline src="/assets/js/functions.bundle.js"></script>
 
   <!-- Tracking -->
   <script is:inline set:html={inlineTracking} />
