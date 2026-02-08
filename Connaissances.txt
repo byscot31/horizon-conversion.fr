@@ -1,0 +1,213 @@
+Je suis consultant webmarketing local senior.
+Je vais créer un site web pour mon activité et proposer une méthode pour générer des leads qualifiés (appels et demandes) via SEO local, Google/Meta Ads, Optimisation site CRO pour mes cibles/personas : artisans, pme/tpe, commerces et professions libérales dans le sud de l'oise 60 et le nord val d'oise 95.
+Pour ce projet, j'ai besoin que tu sois un directreur marketing digital senior, un rédacteur web spécialisé SEO local en France et Dev fullstack Astro + PHPStorm + Github.
+Il faut un plan de cocon sémantique, pain-point, maillage matriochka et un mapping SEO complet.
+Contenu unqiue dans chaque page "anti thin content", utiliser les composants + datas pour enrichir le contenu et faire en sorte que les pages ne se ressemblent pas.
+Eviter jargon marketing ou technique (CRO, UTM, etc.), on s'adresse aux personas.
+Pas de style css dans les pages, on centralise dans un fichier global.css
+Stratégie SXO, accompagner les visiteurs jusu'à la conversion.
+Mon entreprise Horzon Conversion, tel: 06 60 92 10 08, mail: contact@horizon-conversion.fr, nom de domane: https://horizon-conversion.fr
+Tracking GA4 avec création d'un dashboard.
+Chemin des assets: /public/assets/
+
+L'arbo que j'ai mis en place :
+src/pages/tarifs.astro
+src/pages/sitemap.xml.ts
+src/pages/rss.xml
+src/pages/preuves.astro
+src/pages/politique-confidentialite.astro
+src/pages/methode.astro
+src/pages/mentions-legales.astro
+src/pages/index.astro
+src/pages/contact.astro
+src/pages/a-propos.astro
+src/pages/zones/index.astro
+src/pages/zones/[zone]/index.astro
+src/pages/zones/[zone]/[ville]/index.astro
+src/pages/zones/[zone]/[ville]/[cible]/index.astro
+src/pages/zones/[zone]/[ville]/[service]/index.astro
+src/pages/services/index.astro
+src/pages/services/[service].astro
+src/pages/ressources/index.astro
+src/pages/ressources/[article].astro
+src/pages/cibles/index.astro
+src/pages/cibles/[cible].astro
+src/lib/slugs.ts
+src/lib/seo.ts
+src/lib/schema.ts
+src/layouts/BaseLayout.astro
+src/data/villes.json
+src/data/zones.json
+src/data/services.json
+src/data/faqs.json
+src/data/cibles.json
+src/data/articles.json
+src/components/Zones.astro
+src/components/Villes.astro
+src/components/Tarifs.astro
+src/components/Services.astro
+src/components/Ressources.astro
+src/components/Promesse.astro
+src/components/Processus.astro
+src/components/Preuves.astro
+src/components/PageTitles.astro
+src/components/Methode.astro
+src/components/Objections.astro
+src/components/Benefices.astro
+src/components/Breadcrumbs.astro
+src/components/Cibles.astro
+src/components/CTA.astro
+src/components/Faqs.astro
+src/components/Form.astro
+src/components/FormHubspot.astro
+src/components/LiensInternes.astro
+src/components/Livrables.astro
+public/robots.txt
+public/favicon.ico
+public/assets/js
+public/assets/images
+public/assets/css
+
+1) Objectif du site (le plus important)
+Ton site doit répondre à 3 questions en 5 secondes :
+Tu aides qui ? (artisans / TPE / PME / professions libérales…)
+Tu fais quoi exactement ? (SEO local, Google Ads, CRO, site web…)
+Prochaine étape claire (demander un audit / devis / RDV)
+👉 CTA unique recommandé : “Demander un audit (gratuit)” + une variante “Être rappelé”.
+
+2) Positionnement global (sitewide)
+Marque unique : Consultant senior en acquisition locale.
+Promesse : j’exécute comme une agence (process, outils, reporting, réseau de partenaires si besoin).
+Objectif : adapter le discours et l’offre selon ville × cible (premium vs volume) sans dupliquer des pages identiques.
+
+Segmentation
+Créer 3 segments : premium / volume / mix.
+Tagger dans les datas :
+villes.json : segment, (optionnel : panier_moyen_estime, priorite_services)
+cibles.json : segment, (optionnel : sensibilite_prix, preuves_preferees)
+Règle : une page = une intention, mais contenu modulé par “profile” (narratif + blocs + offres + FAQ + preuves).
+
+2 modes de discours & d’offres
+Volume (consultant / ROI) : ton direct, budget maîtrisé, quick wins, packs/sprints, preuves chiffrées, objections prix/délais/“j’ai déjà essayé”.
+Premium (agence / accompagnement) : ton premium, continuité, image, qualité, accompagnement mensuel, process/itérations, cas clients détaillés, objections qualité/confidentialité/process.
+
+Implémentation site (Astro)
+Conserver les routes (ex : /zones/[zone]/[ville]/[service]/) mais appliquer un profil selon ville/cible/service.
+Ajouter un resolver getProfile({ ville, cible, service }) + profiles.ts (variants de tone/hero/offre/faq/preuves/maillage).
+Composants “data-driven” : Promesse, Tarifs, Faqs, Preuves, Objections, LiensInternes reçoivent un variant/ids.
+
+CRO & contenus
+Structure inchangée (H1 → bénéfices → livrables → preuves → process → FAQ → CTA+form), mais :
+Premium : réassurance + cas + accompagnement + qualité
+Volume : ROI + actions rapides + packs + tracking
+CTA principal : Demander un audit (gratuit) ; variante : Être rappelé (selon profil).
+
+Maillage interne
+Ne pas afficher “premium/volume” dans la navigation.
+Maillage vers :
+Tarifs (ancre vers le bon bloc pack/accompagnement)
+Preuves (cas du même segment)
+Méthode (sprint vs accompagnement)
+Ressources (contenu ROI vs premium)
+
+Garde-fous crédibilité/SEO
+Ne pas prétendre avoir une équipe si solo : parler de process + outils + partenaires.
+Anti thin content : chaque page doit avoir angle, exemples, preuves, FAQ spécifiques (pas de copier/coller).
+
+3) Architecture de pages (structure qui convertit + SEO)
+Pages “business” (peu nombreuses, très propres)
+/ Accueil (promesse + preuve + offres + CTA)
+/cibles/ (hub)
+/ressources/ (hub)
+/services/ (hub)
+/zones/ (hub)
+/tarifs/ (pack + ce qui est inclus + FAQ + CTA)
+/preuves/ (cas clients, screenshots, résultats)
+/methode/ (process + “comment ça se passe” + objections)
+/a-propos/ (crédibilité)
+/contact/ (form + tel + zone)
+/mentions-legales/ + /politique-confidentialite/
+
+Pages SEO locales
+/zones/[ville]/ (hub ville)
+/zones/[zone]/[ville]/[service]/ (landing service × ville)
+/zones/[zone]/[ville]/[cible]/ (même logique)
+✅ Règle : 1 page = 1 intention (et pas 10 variantes identiques).
+
+4) “Blocs” indispensables sur chaque landing (ta recette CRO)
+Sur chaque page service (et service×ville), tu mets toujours, dans cet ordre :
+H1 = promesse claire
+Bénéfices (3–6 bullets)
+Offre / livrables (concret)
+Preuves (logos, chiffres, mini cas)
+Process (3–5 étapes)
+FAQ (5–10 questions)
+CTA + Form
+Ça te donne un site cohérent, rapide à produire, et très testable.
+
+5) Implémentation Astro (propre et scalable)
+Structure recommandée (simple)
+src/layouts/BaseLayout.astro (head, meta + canonical + schema, header, footer)
+src/pages/ (routes)
+src/components/ (sections réutilisables)
+src/data/
+cibles.ts
+faqs.ts
+services.ts
+villes.ts
+zones.ts
+
+src/styles/style.css
+
+Principes
+Composants sections : Benefices, Breadcrumbs, Cibles, CTA, Faqs, Form, Form, LiensInternes, Livrables, Methode, Objections, PageTitles, Preuves, Processus, Promesse, Services, Tarifs, Villes, Zones
+
+Zéro CSS local dans les pages : uniquement global + classes.
+
+6) SEO technique (sans te prendre la tête)
+Indispensable :
+canonical partout
+sitemap.xml + robots.txt
+Schema.org :
+Organization (site)
+LocalBusiness (Agence Marketing)
+Service (pages service)
+FAQPage
+BreadcrumbList
+
+Titles uniques (service×ville = title unique)
+
+7) Conversion & Tracking (ton avantage)
+Minimum vital :
+utm_source, utm_medium, utm_campaign, utm_content, utm_term
+page_url, page_path
+
+service, ville, metier (auto depuis route)
+
+Évènements :
+form_view
+form_submit
+click_phone
+click_whatsapp (si présent)
+
+8) Ce que je te propose là, maintenant (sans questions)
+On avance en 2 étapes ultra concrètes :
+Étape A — on sort une V1
+Accueil
+Tarifs
+Preuves
+Méthode
+Contact (form + tracking propre)
+A propos
+/cibles/ (hub)
+/ressources/ (hub)
+/services/ (hub)
+/zones/ (hub)
+
+Étape B — on scale le SEO local
+Génération service × ville (et metier × ville) depuis tes data
+maillage interne automatique
+
+Dis moi ce que tu en penses ?
+
+Jai besoin d'un fichier md connaissance pour un gpt
