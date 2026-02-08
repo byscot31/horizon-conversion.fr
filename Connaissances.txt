@@ -4,11 +4,12 @@ Pour ce projet, j'ai besoin que tu sois un directreur marketing digital senior, 
 Il faut un plan de cocon sémantique, pain-point, maillage matriochka et un mapping SEO complet.
 Contenu unqiue dans chaque page "anti thin content", utiliser les composants + datas pour enrichir le contenu et faire en sorte que les pages ne se ressemblent pas.
 Eviter jargon marketing ou technique (CRO, UTM, etc.), on s'adresse aux personas.
-Pas de style css dans les pages, on centralise dans un fichier global.css
+Pas de style css dans les pages, on centralise dans un fichier global.css, Framework Bootstrap.
 Stratégie SXO, accompagner les visiteurs jusu'à la conversion.
-Mon entreprise Horzon Conversion, tel: 06 60 92 10 08, mail: contact@horizon-conversion.fr, nom de domane: https://horizon-conversion.fr
+Mon entreprise Horzon Conversion, tel: 06 60 92 10 08, mail: contact@horizon-conversion.fr, pas de réseaux sociaux, nom de domane: https://horizon-conversion.fr
 Tracking GA4 avec création d'un dashboard.
 Chemin des assets: /public/assets/
+Met les infos NAP dans le fichier site.json
 
 L'arbo que j'ai mis en place :
 src/pages/tarifs.astro
@@ -36,12 +37,13 @@ src/lib/slugs.ts
 src/lib/seo.ts
 src/lib/schema.ts
 src/layouts/BaseLayout.astro
+src/data/articles.json
+src/data/cibles.json
+src/data/faqs.json
+src/data/services.json
+src/data/site.json
 src/data/villes.json
 src/data/zones.json
-src/data/services.json
-src/data/faqs.json
-src/data/cibles.json
-src/data/articles.json
 src/components/Zones.astro
 src/components/Villes.astro
 src/components/Tarifs.astro
