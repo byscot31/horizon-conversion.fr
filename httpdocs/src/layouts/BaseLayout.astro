@@ -2,3 +2,118 @@
 // src/layouts/BaseLayout.astro
 ---
 
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="author" content="">
+    <meta name="description" content="">
+
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Core Style -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- Font Icons -->
+    <link rel="stylesheet" href="/assets/css/font-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Document Title
+    ============================================= -->
+    <title></title>
+
+</head>
+<body class="stretched page-transition" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
+
+	<!-- The Main Wrapper
+	============================================= -->
+	<div id="wrapper">
+
+		<!-- Header
+		============================================= -->
+		<header id="header" class="full-header header-size-sm" data-mobile-sticky="true">
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row">
+
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="index.html">
+								<img class="logo-default" src="/assets/images/logo.png" alt="">
+							</a>
+						</div><!-- #logo end -->
+
+						<div class="header-misc">
+
+						    ...
+
+						</div>
+
+						<div class="primary-menu-trigger">
+							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+							</button>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<nav class="primary-menu mobile-menu-off-canvas">
+
+							<ul class="menu-container">
+								<li class="menu-item">
+									<a class="menu-link" href="/"><div>Home</div></a>
+								</li>
+							</ul>
+
+						</nav><!-- #primary-menu end -->
+
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
+
+		<slot />
+
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+			<div class="container">
+
+				...
+
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+				<div class="container">
+
+					...
+
+				</div>
+			</div>
+
+		</footer>
+
+	</div>
+
+    <!-- Go To Top -->
+    <div id="gotoTop" class="uil uil-angle-up"></div>
+
+	<!-- Scripts
+	============================================= -->
+	<script is:inline src="/assets/js/plugins.min.js"></script>
+    <script is:inline src="/assets/js/functions.bundle.js"></script>
+
+</body>
+</html>
