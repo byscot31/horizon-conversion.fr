@@ -1,4 +1,54 @@
 ---
 // src/components/Processus.astro
+const { variantKey = "process-pedago", title = "Comment ça se passe" } = Astro.props;
+
+const processes = {
+  "process-sprint": [
+    { t: "Audit gratuit", d: "On repère les blocages et les priorités." },
+    { t: "Plan d’action", d: "3 à 5 actions utiles, dans le bon ordre." },
+    { t: "Mise en place", d: "On fait, on mesure, on corrige." },
+    { t: "Bilan simple", d: "Ce qui marche, ce qu’on garde, ce qu’on coupe." }
+  ],
+  "process-accompagnement": [
+    { t: "Audit gratuit", d: "On comprend la situation et vos objectifs." },
+    { t: "Base solide", d: "Structure, messages, pages, suivi." },
+    { t: "Suivi régulier", d: "Actions + ajustements + transparence." },
+    { t: "Amélioration continue", d: "On construit du stable, sur la durée." }
+  ],
+  "process-local": [
+    { t: "Audit gratuit", d: "Zone, offres, demandes actuelles." },
+    { t: "Clarté locale", d: "Prestations + zones + éléments qui rassurent." },
+    { t: "Mise en place", d: "Fiche Google / pages / campagnes selon besoin." },
+    { t: "Ajustements", d: "On améliore ce qui apporte des contacts utiles." }
+  ],
+  "process-pedago": [
+    { t: "Audit gratuit", d: "On vous explique ce qu’on voit, simplement." },
+    { t: "Plan clair", d: "Vous savez quoi faire et pourquoi." },
+    { t: "Mise en place", d: "On avance par étapes, sans tout casser." },
+    { t: "Suivi", d: "On garde le bon, on corrige le reste." }
+  ]
+};
+
+const steps = processes[variantKey] || processes["process-pedago"];
 ---
 
+<section class="container py-4">
+  <h2 class="h3 fw-bold mb-3">{title}</h2>
+
+  <div class="row g-3">
+    {steps.map((s, idx) => (
+      <div class="col-md-3">
+        <div class="p-3 border rounded-3 h-100">
+          <div class="text-muted small mb-1">Étape {idx + 1}</div>
+          <h3 class="h6 fw-semibold mb-2">{s.t}</h3>
+          <p class="mb-0">{s.d}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-4">
+    <a class="btn btn-primary" href="/audit">Demander un audit gratuit</a>
+    <a class="btn btn-link" href="/methode">Voir la méthode</a>
+  </div>
+</section>

@@ -1,17 +1,257 @@
-[
-  {
+{
+  "svc-google-ads": {
+    "id": "svc-google-ads",
+    "slug": "google-ads",
+    "name": "Google Ads",
+    "shortName": "Google Ads",
+    "segment": "mix",
+    "intents": [
+      "demandes-rapides",
+      "plus-appels",
+      "budget-maitrise"
+    ],
+    "primaryOutcomes": [
+      "Plus d’appels",
+      "Plus de formulaires",
+      "Demandes plus qualifiées"
+    ],
+    "positioningAngles": [
+      "Démarrer vite avec un budget maîtrisé",
+      "Couper ce qui ne marche pas",
+      "Rendre les demandes plus qualifiées"
+    ],
+    "deliverableTags": [
+      "socle",
+      "ads",
+      "tracking"
+    ],
+    "benefitTags": [
+      "rapidite",
+      "appels",
+      "qualif",
+      "rentable"
+    ],
+    "proofTags": [
+      "mini-case",
+      "checklist",
+      "mesures"
+    ],
+    "faqTags": [
+      "budget",
+      "delais",
+      "engagement",
+      "resultats"
+    ]
+  },
+  "svc-seo-local": {
+    "id": "svc-seo-local",
     "slug": "seo-local",
-    "nom": "SEO local",
-    "promesses": {
-      "volume": { "h1": "Être trouvé sur Google près de chez vous", "sub": "Des pages locales qui amènent des appels et des demandes." },
-      "premium": { "h1": "Renforcer votre visibilité locale, sans dégrader votre image", "sub": "Un travail propre et durable, centré sur la qualité des demandes." },
-      "mix": { "h1": "Plus de visibilité locale et plus de demandes", "sub": "Un plan équilibré : contenu + suivi + optimisations." }
-    },
-    "benefices": { "volume": [], "premium": [], "mix": [] },
-    "livrables": { "volume": [], "premium": [], "mix": [] },
-    "preuves_ids": { "volume": [], "premium": [], "mix": [] },
-    "faq_ids": { "volume": [], "premium": [], "mix": [] }
+    "name": "SEO local",
+    "shortName": "SEO local",
+    "segment": "premium",
+    "intents": [
+      "se-trouver-local",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Être trouvé près de chez vous",
+      "Plus d’appels depuis Google",
+      "Plus de demandes sur la durée"
+    ],
+    "positioningAngles": [
+      "Gagner en visibilité locale durable",
+      "Être présent quand les gens cherchent votre métier",
+      "Améliorer la confiance avant l’appel"
+    ],
+    "deliverableTags": [
+      "socle",
+      "seo",
+      "local"
+    ],
+    "benefitTags": [
+      "visibilite",
+      "local",
+      "confiance",
+      "intention"
+    ],
+    "proofTags": [
+      "method",
+      "qualite",
+      "local"
+    ],
+    "faqTags": [
+      "delais",
+      "concurrence",
+      "contenu",
+      "resultats"
+    ]
+  },
+  "svc-google-business-profile": {
+    "id": "svc-google-business-profile",
+    "slug": "google-business-profile",
+    "name": "Google Business Profile",
+    "shortName": "Fiche Google",
+    "segment": "mix",
+    "intents": [
+      "se-trouver-local",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Plus d’appels depuis la fiche",
+      "Plus d’itinéraires",
+      "Plus de confiance avant contact"
+    ],
+    "positioningAngles": [
+      "Optimiser ce qui déclenche un appel",
+      "Rassurer avec des infos claires",
+      "Garder une fiche propre et stable"
+    ],
+    "deliverableTags": [
+      "socle",
+      "gbp",
+      "local"
+    ],
+    "benefitTags": [
+      "local",
+      "appels",
+      "confiance",
+      "intention"
+    ],
+    "proofTags": [
+      "checklist",
+      "local",
+      "mesures"
+    ],
+    "faqTags": [
+      "avis",
+      "suspension",
+      "photos",
+      "delais"
+    ]
+  },
+  "svc-landing-page": {
+    "id": "svc-landing-page",
+    "slug": "landing-page",
+    "name": "Landing page qui convertit",
+    "shortName": "Landing page",
+    "segment": "premium",
+    "intents": [
+      "site-qui-convertit",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Plus de formulaires",
+      "Plus d’appels qualifiés",
+      "Moins de visiteurs perdus"
+    ],
+    "positioningAngles": [
+      "Clarifier l’offre en 5 secondes",
+      "Rassurer avant le contact",
+      "Faciliter la prise de rendez-vous"
+    ],
+    "deliverableTags": [
+      "socle",
+      "conversion",
+      "copy"
+    ],
+    "benefitTags": [
+      "conversion",
+      "clarte",
+      "confiance",
+      "qualif"
+    ],
+    "proofTags": [
+      "method",
+      "checklist",
+      "qualite"
+    ],
+    "faqTags": [
+      "contenu",
+      "delais",
+      "photos",
+      "tarifs"
+    ]
+  },
+  "svc-meta-ads": {
+    "id": "svc-meta-ads",
+    "slug": "meta-ads",
+    "name": "Publicités Meta (Facebook/Instagram)",
+    "shortName": "Meta Ads",
+    "segment": "volume",
+    "intents": [
+      "demandes-rapides",
+      "notoriete-locale"
+    ],
+    "primaryOutcomes": [
+      "Demandes rapides",
+      "Visibilité locale",
+      "Remplir un planning"
+    ],
+    "positioningAngles": [
+      "Campagnes simples, ciblage local",
+      "Créa claire, offre lisible",
+      "Suivi des demandes"
+    ],
+    "deliverableTags": [
+      "socle",
+      "ads",
+      "creative"
+    ],
+    "benefitTags": [
+      "rapidite",
+      "local",
+      "contacts"
+    ],
+    "proofTags": [
+      "mini-case",
+      "mesures"
+    ],
+    "faqTags": [
+      "budget",
+      "ciblage",
+      "delais",
+      "resultats"
+    ]
+  },
+  "svc-tracking": {
+    "id": "svc-tracking",
+    "slug": "tracking",
+    "name": "Tracking & mesure (GA4)",
+    "shortName": "Tracking",
+    "segment": "mix",
+    "intents": [
+      "mesurer-ce-qui-marche",
+      "qualifier-demandes"
+    ],
+    "primaryOutcomes": [
+      "Savoir d’où viennent les demandes",
+      "Mesurer appels et formulaires",
+      "Décider avec des faits"
+    ],
+    "positioningAngles": [
+      "Mesure simple, exploitable",
+      "Événements clés (formulaire, appel)",
+      "Tableau de bord lisible"
+    ],
+    "deliverableTags": [
+      "socle",
+      "tracking"
+    ],
+    "benefitTags": [
+      "clarte",
+      "rentable",
+      "priorites"
+    ],
+    "proofTags": [
+      "checklist",
+      "method",
+      "mesures"
+    ],
+    "faqTags": [
+      "ga4",
+      "rgpd",
+      "event",
+      "delais"
+    ]
   }
-]
-
-
+}

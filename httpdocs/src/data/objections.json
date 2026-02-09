@@ -1,0 +1,98 @@
+[
+  {
+    "id": "obj-deja-essaye",
+    "label": "J’ai déjà essayé (ça n’a pas marché)",
+    "text": "On repart de ce qui existe, on garde ce qui fonctionne, et on corrige le reste. L’objectif : des demandes mesurables, pas des “beaux mots”.",
+    "tags": ["confiance", "experience", "tpe", "artisans"]
+  },
+  {
+    "id": "obj-budget",
+    "label": "Je veux maîtriser mon budget",
+    "text": "On démarre simple : priorités claires, budget cadré, et on coupe ce qui ne donne rien. Vous voyez vite ce qui rapporte.",
+    "tags": ["budget", "volume", "tpe", "artisans", "commerces"]
+  },
+  {
+    "id": "obj-demandes-non-qualifiees",
+    "label": "J’ai trop de demandes non qualifiées",
+    "text": "On filtre : message plus précis, zones et prestations claires, et suivi des appels/formulaires. Moins de bruit, plus de demandes utiles.",
+    "tags": ["qualification", "volume", "artisans", "commerces"]
+  },
+  {
+    "id": "obj-pas-le-temps",
+    "label": "Je n’ai pas le temps de m’en occuper",
+    "text": "On vous demande le minimum : 1 point court, des décisions simples. Le reste est géré, avec un plan d’action clair.",
+    "tags": ["organisation", "tpe", "artisans", "pme"]
+  },
+  {
+    "id": "obj-saisonnalite",
+    "label": "C’est saisonnier, je veux lisser",
+    "text": "On ajuste selon vos périodes : offres, ciblage local et messages. Le but : éviter les creux et sécuriser un minimum constant.",
+    "tags": ["saisonnalite", "commerces", "volume"]
+  },
+  {
+    "id": "obj-concurrence",
+    "label": "Il y a beaucoup de concurrence",
+    "text": "On se différencie avec une offre lisible, des preuves, et un ciblage précis. Pas besoin d’être le moins cher pour être choisi.",
+    "tags": ["concurrence", "local", "commerces", "premium"]
+  },
+  {
+    "id": "obj-avis",
+    "label": "Je n’ai pas assez d’avis (ou pas les bons)",
+    "text": "On met en place une méthode simple pour récolter plus d’avis, et on valorise ce qui rassure : photos, infos, réponses claires.",
+    "tags": ["avis", "local", "commerces", "professions-liberales"]
+  },
+  {
+    "id": "obj-confiance",
+    "label": "Je dois rassurer avant qu’on m’appelle",
+    "text": "On travaille la clarté, la preuve et la prise de contact. Les gens doivent comprendre en 5 secondes pourquoi vous choisir.",
+    "tags": ["confiance", "premium", "professions-liberales", "pme"]
+  },
+  {
+    "id": "obj-image",
+    "label": "Mon image compte",
+    "text": "On vise une présentation propre, simple et cohérente : messages, photos, pages, et éléments qui rassurent.",
+    "tags": ["image", "premium", "professions-liberales", "pme"]
+  },
+  {
+    "id": "obj-confidentialite",
+    "label": "Confidentialité / discrétion",
+    "text": "On reste factuel, sans exposer vos clients. On utilise des preuves neutres (process, indicateurs, exemples anonymisés).",
+    "tags": ["confidentialite", "premium", "professions-liberales"]
+  },
+  {
+    "id": "obj-conformite",
+    "label": "Je veux rester dans les règles",
+    "text": "On garde une communication simple et conforme : pas de promesses impossibles, pas d’allégations risquées. Juste du clair.",
+    "tags": ["conformite", "premium", "professions-liberales"]
+  },
+  {
+    "id": "obj-qualite",
+    "label": "Je veux de la qualité et de la stabilité",
+    "text": "On préfère une base solide : structure, contenus utiles, suivi. Moins de coups d’éclat, plus de résultats durables.",
+    "tags": ["qualite", "premium", "pme"]
+  },
+  {
+    "id": "obj-pilotage",
+    "label": "Je veux piloter avec des chiffres simples",
+    "text": "On suit quelques indicateurs clairs : appels, formulaires, coût par demande, et ce qui apporte vraiment des contacts.",
+    "tags": ["mesure", "pme", "mix"]
+  },
+  {
+    "id": "obj-fiabilite",
+    "label": "Je veux savoir exactement ce qui est fait",
+    "text": "Vous avez un plan, des actions, et un suivi régulier. Transparence totale sur ce qui avance et pourquoi.",
+    "tags": ["transparence", "premium", "pme"]
+  },
+  {
+    "id": "obj-interne-deja",
+    "label": "On a déjà quelqu’un / une agence",
+    "text": "On peut intervenir en renfort : audit, correction, et priorités. Sans tout casser, juste améliorer ce qui compte.",
+    "tags": ["organisation", "pme", "premium"]
+  },
+  {
+    "id": "obj-priorites",
+    "label": "Je ne sais pas par quoi commencer",
+    "text": "On priorise : 3 actions qui font la différence, puis on avance par étapes. Pas de tunnel interminable.",
+    "tags": ["priorites", "tpe", "mix"]
+  }
+]

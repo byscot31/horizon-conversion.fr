@@ -1,4 +1,51 @@
 ---
 // src/components/Faqs.astro
+import faqs from "../data/faqs.json";
+import { resolveByIds } from "../lib/resolve";
+
+const { ids, title = "Questions fréquentes" } = Astro.props;
+const items = resolveByIds(faqs, ids || []);
 ---
 
+<section class="container py-4">
+  <h2 class="h3 fw-bold mb-3">{title}</h2>
+
+  <div class="accordion" id="faqAccordion">
+    {items.map((f, i) => (
+      <div class="accordion-item">
+        <h3 class="accordion-header" id={`faq-h-${f.id}`}>
+          <button
+            class={`accordion-button ${i === 0 ? "" : "collapsed"}`}
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target={`#faq-c-${f.id}`}
+            aria-expanded={i === 0 ? "true" : "false"}
+            aria-controls={`faq-c-${f.id}`}
+          >
+            {f.q}
+          </button>
+        </h3>
+        <div
+          id={`faq-c-${f.id}`}
+          class={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
+          aria-labelledby={`faq-h-${f.id}`}
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            {f.a}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-4 p-3 border rounded-3 bg-light">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <p class="mb-0"><strong>Vous voulez un avis clair ?</strong> Demandez l’audit gratuit.</p>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-primary" href="/audit">Demander un audit gratuit</a>
+        <a class="btn btn-outline-secondary" href="/contact?callback=1">Être rappelé</a>
+      </div>
+    </div>
+  </div>
+</section>

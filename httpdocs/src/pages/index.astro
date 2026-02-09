@@ -1,7 +1,66 @@
 ---
 // src/pages/index.astro
-
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Promesse from "../components/Promesse.astro";
+import Benefices from "../components/Benefices.astro";
+import Livrables from "../components/Livrables.astro";
+import Preuves from "../components/Preuves.astro";
+import Processus from "../components/Processus.astro";
+import Faqs from "../components/Faqs.astro";
+import LiensInternes from "../components/LiensInternes.astro";
+import Objections from "../components/Objections.astro";
+
+import JsonLdService from "../components/seo/JsonLdService.astro";
+import JsonLdBreadcrumbs from "../components/seo/JsonLdBreadcrumbs.astro";
+import JsonLdFaq from "../components/seo/JsonLdFaq.astro";
+
+import { getProfile } from "../lib/getProfile";
+import { resolveContent } from "../lib/resolveContent";
+
+import services from "../data/services.json";
+import villes from "../data/villes.json";
+import cibles from "../data/cibles.json";
+
+// params...
+let profile = getProfile(/* ... */);
+profile = resolveContent(profile);
+
+// objets utiles pour JsonLdService
+const serviceObj = Object.values(services).find((s) => s.slug === profile.tracking.service) || services[`svc-${profile.tracking.service}`];
+const cityObj = Object.values(villes).find((v) => v.slug === profile.tracking.ville);
+const cibleObj = Object.values(cibles).find((c) => c.slug === profile.tracking.metier);
+
+const profile = {
+  hero: {
+    h1: "Marketing local : plus d’appels et de formulaires",
+    sub: "Pour artisans, TPE/PME, commerces et professions libérales (Sud Oise + Nord Val-d’Oise).",
+    bullets: [
+      "Messages clairs, sans jargon",
+      "On mesure appels + formulaires",
+      "Audit gratuit pour savoir quoi faire"
+    ],
+    ctaPrimary: { label: "Demander un audit gratuit", href: "/audit" },
+    ctaSecondary: { label: "Être rappelé", href: "/contact?callback=1" }
+  },
+  variant: { tone: "pedago-simple", angle: "plus-appels", proofSet: "home" },
+  sections: {
+    benefits: ["ben-appels-plus", "ben-confiance", "ben-suivi", "ben-local", "ben-clair-5s"],
+    deliverables: ["deliv-socle-audit", "deliv-socle-plan", "deliv-track-events", "deliv-seo-structure"],
+    proofs: ["proof-method-5s", "proof-mesure-essentiel", "proof-process-transparence"],
+    process: "process-pedago",
+    faqs: ["faq-delais-premieres-demandes", "faq-engagement", "faq-tracking-utile", "faq-qualif-demandes"]
+  },
+  internalLinks: {
+    primary: [
+      { label: "Demander un audit gratuit", href: "/audit" },
+      { label: "Voir les tarifs", href: "/tarifs" }
+    ],
+    secondary: [
+      { label: "Notre méthode", href: "/methode" },
+      { label: "Preuves & exemples", href: "/preuves" }
+    ]
+  }
+};
 ---
 
 <BaseLayout>
@@ -28,7 +87,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section id="content">
     <div class="content-wrap">
 
-      ...
+      <JsonLdBreadcrumbs profile={profile} />
+      <JsonLdService profile={profile} service={serviceObj} city={cityObj} cible={cibleObj} />
+      <JsonLdFaq faqIds={profile.sections.faqs} canonical={profile.seo.canonical} />
+
+      <Promesse hero={profile.hero} variant={profile.variant} />
+      <Benefices ids={profile.sections.benefits} />
+      <Livrables ids={profile.sections.deliverables} />
+      <Preuves ids={profile.sections.proofs} />
+      <Processus variantKey={profile.sections.process} />
+      <Objections ids={profile.sections.objections ?? []} />
+      <Faqs ids={profile.sections.faqs} />
+      <LiensInternes primary={profile.internalLinks.primary} secondary={profile.internalLinks.secondary} />
 
 	</div><!-- #wrapper end -->
   </section>

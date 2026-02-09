@@ -1,0 +1,47 @@
+// src/components/JsonLdService.astro
+import site from "../data/site.json";
+
+// Props attendues:
+// - profile (ton objet getProfile)
+// - service (objet service depuis services.json)
+// - city (objet ville depuis villes.json)
+// - cible (objet cible depuis cibles.json)
+const { profile, service, city, cible } = Astro.props;
+
+const baseUrl = site?.url || ""; // si tu as un domaine dans site.json
+const url = baseUrl ? `${baseUrl}${profile.seo.canonical}` : profile.seo.canonical;
+
+// Un JSON-LD "Service" (souvent plus adapté que LocalBusiness pour des pages service)
+// On peut ajouter provider Organization + areaServed.
+const data = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": `${service.name} à ${city.name}`,
+  "description": profile.seo.meta,
+  "serviceType": service.name,
+  "provider": {
+    "@type": "Organization",
+    "name": site.name,
+    "telephone": site.phone,
+    "email": site.email,
+    "areaServed": site.zone || "Sud Oise (60) + Nord Val-d’Oise (95)"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": city.zoneName },
+    { "@type": "City", "name": city.name }
+  ],
+  "audience": cible?.name
+    ? { "@type": "Audience", "audienceType": cible.name }
+    : undefined,
+  "url": url
+};
+
+// remove undefined keys (simple)
+function clean(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+---
+
+<script type="application/ld+json">
+{JSON.stringify(clean(data))}
+</script>
