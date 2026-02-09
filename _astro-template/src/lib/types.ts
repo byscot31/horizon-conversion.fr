@@ -1,1 +1,1 @@
-// src/lib/types.ts
+// src/data/types.ts
