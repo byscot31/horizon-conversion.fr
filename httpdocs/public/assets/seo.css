@@ -168,7 +168,6 @@ input.switch-toggle-round + label::after { border-radius: 4px }
 	display: block;
 	font-weight: normal;
 	color: var(--cnvs-contrast-500);
-	text-transform: lowercase;
 }
 
 /* Pricing Boxes - Features

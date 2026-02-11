@@ -1,4 +1,36 @@
 ---
-// src/components/Breadcrumbs.astro
+export type BreadcrumbItem = { name: string; url: string };
+
+export interface Props {
+  items?: BreadcrumbItem[];
+  homeLabel?: string;
+  homeUrl?: string;
+}
+
+const { items = [], homeLabel = "Accueil", homeUrl = "/" } = Astro.props;
+
+const hasCrumbs = Array.isArray(items) && items.length > 0;
 ---
 
+{hasCrumbs ? (
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href={homeUrl}>{homeLabel}</a>
+		</li>
+
+    {items.map((item, idx) => {
+      const isLast = idx === items.length - 1;
+      return isLast ? (
+				<li class="breadcrumb-item active" aria-current="page">
+          {item.name}
+				</li>
+      ) : (
+				<li class="breadcrumb-item">
+					<a href={item.url}>{item.name}</a>
+				</li>
+      );
+    })}
+	</ol>
+</nav>
+  ) : null}

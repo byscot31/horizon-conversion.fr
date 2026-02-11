@@ -1,6 +1,8 @@
 ---
 // src/layouts/BaseLayout.astro
 
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
 import site from "../data/site.json";
 
 export type Seo = {
@@ -74,6 +76,13 @@ const inlineTracking = `
     // track('form_view', { path: location.pathname });
   });
 `;
+
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+const topBarClass = `transparent-topbar${isHome ? "" : " dark"}`;
+
+const pathname = Astro.url?.pathname ?? "/";
+const norm = (p: string) => (p === "/" ? "/" : (p.endsWith("/") ? p : `${p}/`));
+const isCurrent = (href: string) => norm(pathname) === norm(href);
 ---
 
 <!DOCTYPE html>
@@ -120,7 +129,7 @@ const inlineTracking = `
   <div id="wrapper">
 
     <!-- Top Bar -->
-    <div id="top-bar" class="transparent-topbar">
+		<div id="top-bar" class={topBarClass}>
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-12 col-md-auto">
@@ -186,18 +195,30 @@ const inlineTracking = `
               </button>
             </div>
 
-            <nav class="primary-menu with-arrows">
-              <ul class="menu-container">
-                <li class="menu-item"><a class="menu-link" href="/"><div>Accueil</div></a></li>
-                <li class="menu-item"><a class="menu-link" href="/methode/"><div>Méthode</div></a></li>
-                <li class="menu-item"><a class="menu-link" href="/services/"><div>Services</div></a></li>
-                <li class="menu-item"><a class="menu-link" href="/tarifs/"><div>Tarifs</div></a></li>
-                <li class="menu-item"><a class="menu-link" href="/preuves/"><div>Preuves</div></a></li>
-                <li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
-              </ul>
-            </nav>
+						<nav class="primary-menu with-arrows">
+							<ul class="menu-container">
+								<li class:list={["menu-item", { current: isCurrent("/") }]}>
+									<a class="menu-link" href="/"><div>Accueil</div></a>
+								</li>
+								<li class:list={["menu-item", { current: isCurrent("/methode/") }]}>
+									<a class="menu-link" href="/methode/"><div>Méthode</div></a>
+								</li>
+								<li class:list={["menu-item", { current: isCurrent("/services/") }]}>
+									<a class="menu-link" href="/services/"><div>Services</div></a>
+								</li>
+								<li class:list={["menu-item", { current: isCurrent("/tarifs/") }]}>
+									<a class="menu-link" href="/tarifs/"><div>Tarifs</div></a>
+								</li>
+								<li class:list={["menu-item", { current: isCurrent("/preuves/") }]}>
+									<a class="menu-link" href="/preuves/"><div>Preuves</div></a>
+								</li>
+								<li class:list={["menu-item", { current: isCurrent("/contact/") }]}>
+									<a class="menu-link" href="/contact/"><div>Contact</div></a>
+								</li>
+							</ul>
+						</nav>
 
-          </div>
+					</div>
         </div>
       </div>
       <div class="header-wrap-clone"></div>
