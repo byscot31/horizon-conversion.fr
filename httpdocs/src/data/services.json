@@ -1,0 +1,372 @@
+{
+  "_meta": {
+    "hub": {
+      "pageTitle": {
+        "badge": "Services",
+        "title": "Ce qu’on met en place",
+        "subtitle": "SEO local, Google Ads, Meta Ads, pages qui convertissent, suivi des conversions",
+        "image": "/assets/images/hero/page-title.jpg"
+      },
+      "breadcrumbs": [
+        { "name": "Accueil", "url": "/" },
+        { "name": "Services", "url": "/services/" }
+      ],
+      "seo": {
+        "title": "Services — Horizon Conversion",
+        "description": "SEO local, Google Ads, Meta Ads, pages locales qui convertissent et suivi des conversions. Objectif : plus d’appels et de demandes.",
+        "canonical": "https://horizon-conversion.fr/services/"
+      }
+    }
+  },
+  "svc-google-ads": {
+    "id": "svc-google-ads",
+    "slug": "google-ads",
+    "name": "Google Ads",
+    "shortName": "Google Ads",
+    "segment": "mix",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Google Ads",
+      "subtitle": "Objectif : plus d’appels et de demandes rapidement, avec un budget maîtrisé",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Google Ads", "url": "/services/google-ads/" }
+    ],
+    "seo": {
+      "title": "Google Ads — plus d’appels et de demandes | Horizon Conversion",
+      "description": "Campagnes Google Ads orientées demandes : ciblage clair, annonces efficaces, page qui convertit et suivi des appels/formulaires. Objectif : plus de demandes, sans gaspiller.",
+      "canonical": "https://horizon-conversion.fr/services/google-ads/"
+    },
+    "intents": [
+      "demandes-rapides",
+      "plus-appels",
+      "budget-maitrise"
+    ],
+    "primaryOutcomes": [
+      "Plus d’appels",
+      "Plus de formulaires",
+      "Demandes plus qualifiées"
+    ],
+    "positioningAngles": [
+      "Démarrer vite avec un budget maîtrisé",
+      "Couper ce qui ne marche pas",
+      "Rendre les demandes plus qualifiées"
+    ],
+    "deliverableTags": [
+      "socle",
+      "ads",
+      "tracking"
+    ],
+    "benefitTags": [
+      "rapidite",
+      "appels",
+      "qualif",
+      "rentable"
+    ],
+    "proofTags": [
+      "mini-case",
+      "checklist",
+      "mesures"
+    ],
+    "faqTags": [
+      "budget",
+      "delais",
+      "engagement",
+      "resultats"
+    ]
+  },
+  "svc-seo-local": {
+    "id": "svc-seo-local",
+    "slug": "seo-local",
+    "name": "SEO local",
+    "shortName": "SEO local",
+    "segment": "premium",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "SEO local",
+      "subtitle": "Objectif : être trouvé près de chez vous et générer des demandes sur la durée",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "SEO local", "url": "/services/seo-local/" }
+    ],
+    "seo": {
+      "title": "SEO local — être trouvé et recevoir plus d’appels | Horizon Conversion",
+      "description": "SEO local orienté demandes : visibilité durable sur Google, pages locales claires, preuves et contact simple. Objectif : plus d’appels et de formulaires dans votre zone.",
+      "canonical": "https://horizon-conversion.fr/services/seo-local/"
+    },
+    "intents": [
+      "se-trouver-local",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Être trouvé près de chez vous",
+      "Plus d’appels depuis Google",
+      "Plus de demandes sur la durée"
+    ],
+    "positioningAngles": [
+      "Gagner en visibilité locale durable",
+      "Être présent quand les gens cherchent votre métier",
+      "Améliorer la confiance avant l’appel"
+    ],
+    "deliverableTags": [
+      "socle",
+      "seo",
+      "local"
+    ],
+    "benefitTags": [
+      "visibilite",
+      "local",
+      "confiance",
+      "intention"
+    ],
+    "proofTags": [
+      "method",
+      "qualite",
+      "local"
+    ],
+    "faqTags": [
+      "delais",
+      "concurrence",
+      "contenu",
+      "resultats"
+    ]
+  },
+  "svc-pages-locales": {
+    "id": "svc-pages-locales",
+    "slug": "pages-locales",
+    "name": "Pages locales qui convertissent",
+    "shortName": "Landing page",
+    "segment": "premium",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Pages locales qui convertissent",
+      "subtitle": "Objectif : clarifier l’offre, rassurer et déclencher plus d’appels / formulaires",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Pages locales qui convertissent", "url": "/services/pages-locales/" }
+    ],
+    "seo": {
+      "title": "Pages locales — landing pages qui convertissent | Horizon Conversion",
+      "description": "Pages locales pensées pour convertir : promesse claire, preuves, FAQ, CTA visibles et contact simple. Objectif : transformer la visibilité en appels et demandes.",
+      "canonical": "https://horizon-conversion.fr/services/pages-locales/"
+    },
+    "intents": [
+      "site-qui-convertit",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Plus de formulaires",
+      "Plus d’appels qualifiés",
+      "Moins de visiteurs perdus"
+    ],
+    "positioningAngles": [
+      "Clarifier l’offre en 5 secondes",
+      "Rassurer avant le contact",
+      "Faciliter la prise de rendez-vous"
+    ],
+    "deliverableTags": [
+      "socle",
+      "conversion",
+      "copy"
+    ],
+    "benefitTags": [
+      "conversion",
+      "clarte",
+      "confiance",
+      "qualif"
+    ],
+    "proofTags": [
+      "method",
+      "checklist",
+      "qualite"
+    ],
+    "faqTags": [
+      "contenu",
+      "delais",
+      "photos",
+      "tarifs"
+    ]
+  },
+  "svc-google-business-profile": {
+    "id": "svc-google-business-profile",
+    "slug": "google-business-profile",
+    "name": "Google Business Profile",
+    "shortName": "Fiche Google",
+    "segment": "mix",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Google Business Profile",
+      "subtitle": "Objectif : plus d’appels, d’itinéraires et de confiance depuis votre fiche Google",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Google Business Profile", "url": "/services/google-business-profile/" }
+    ],
+    "seo": {
+      "title": "Google Business Profile — optimiser la fiche Google | Horizon Conversion",
+      "description": "Optimisation de votre fiche Google : infos claires, éléments qui déclenchent l’appel, photos/avis, et stabilité. Objectif : plus de contacts depuis Google Maps.",
+      "canonical": "https://horizon-conversion.fr/services/google-business-profile/"
+    },
+    "intents": [
+      "se-trouver-local",
+      "plus-appels"
+    ],
+    "primaryOutcomes": [
+      "Plus d’appels depuis la fiche",
+      "Plus d’itinéraires",
+      "Plus de confiance avant contact"
+    ],
+    "positioningAngles": [
+      "Optimiser ce qui déclenche un appel",
+      "Rassurer avec des infos claires",
+      "Garder une fiche propre et stable"
+    ],
+    "deliverableTags": [
+      "socle",
+      "gbp",
+      "local"
+    ],
+    "benefitTags": [
+      "local",
+      "appels",
+      "confiance",
+      "intention"
+    ],
+    "proofTags": [
+      "checklist",
+      "local",
+      "mesures"
+    ],
+    "faqTags": [
+      "avis",
+      "suspension",
+      "photos",
+      "delais"
+    ]
+  },
+  "svc-meta-ads": {
+    "id": "svc-meta-ads",
+    "slug": "meta-ads",
+    "name": "Publicités Meta (Facebook/Instagram)",
+    "shortName": "Meta Ads",
+    "segment": "volume",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Publicités Meta (Facebook/Instagram)",
+      "subtitle": "Objectif : générer des demandes rapidement avec un ciblage local simple",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Publicités Meta (Facebook/Instagram)", "url": "/services/meta-ads/" }
+    ],
+    "seo": {
+      "title": "Meta Ads — demandes rapides en local | Horizon Conversion",
+      "description": "Publicités Facebook/Instagram orientées demandes : offre lisible, créas claires, ciblage local et suivi des contacts. Objectif : remplir le planning sans flou.",
+      "canonical": "https://horizon-conversion.fr/services/meta-ads/"
+    },
+    "intents": [
+      "demandes-rapides",
+      "notoriete-locale"
+    ],
+    "primaryOutcomes": [
+      "Demandes rapides",
+      "Visibilité locale",
+      "Remplir un planning"
+    ],
+    "positioningAngles": [
+      "Campagnes simples, ciblage local",
+      "Créa claire, offre lisible",
+      "Suivi des demandes"
+    ],
+    "deliverableTags": [
+      "socle",
+      "ads",
+      "creative"
+    ],
+    "benefitTags": [
+      "rapidite",
+      "local",
+      "contacts"
+    ],
+    "proofTags": [
+      "mini-case",
+      "mesures"
+    ],
+    "faqTags": [
+      "budget",
+      "ciblage",
+      "delais",
+      "resultats"
+    ]
+  },
+  "svc-suivi-conversions": {
+    "id": "svc-suivi-conversions",
+    "slug": "suivi-conversions",
+    "name": "Suivi & mesure des conversions",
+    "shortName": "suivi des conversions",
+    "segment": "mix",
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Suivi & mesure des conversions",
+      "subtitle": "Objectif : savoir d’où viennent les demandes et décider avec des faits",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Suivi & mesure des conversions", "url": "/services/suivi-conversions/" }
+    ],
+    "seo": {
+      "title": "Suivi des conversions — mesurer appels & formulaires | Horizon Conversion",
+      "description": "Mise en place d’un suivi simple des demandes : appels + formulaires, événements clés et lecture compréhensible. Objectif : piloter ce qui marche vraiment.",
+      "canonical": "https://horizon-conversion.fr/services/suivi-conversions/"
+    },
+    "intents": [
+      "mesurer-ce-qui-marche",
+      "qualifier-demandes"
+    ],
+    "primaryOutcomes": [
+      "Savoir d’où viennent les demandes",
+      "Mesurer appels et formulaires",
+      "Décider avec des faits"
+    ],
+    "positioningAngles": [
+      "Mesure simple, exploitable",
+      "Événements clés (formulaire, appel)",
+      "Tableau de bord lisible"
+    ],
+    "deliverableTags": [
+      "socle",
+      "tracking"
+    ],
+    "benefitTags": [
+      "clarte",
+      "rentable",
+      "priorites"
+    ],
+    "proofTags": [
+      "checklist",
+      "method",
+      "mesures"
+    ],
+    "faqTags": [
+      "ga4",
+      "rgpd",
+      "event",
+      "delais"
+    ]
+  }
+}

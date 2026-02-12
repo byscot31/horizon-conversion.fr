@@ -1,0 +1,248 @@
+{
+  "_meta": {
+    "hub": {
+      "pageTitle": {
+        "badge": "Profils",
+        "title": "À qui on s’adresse",
+        "subtitle": "Artisans, TPE, PME, commerces, professions libérales : objectif appels & demandes",
+        "image": "/assets/images/hero/page-title.jpg"
+      },
+      "breadcrumbs": [
+        { "name": "Accueil", "url": "/" },
+        { "name": "Profils", "url": "/profils/" }
+      ],
+      "seo": {
+        "title": "Profils — Horizon Conversion",
+        "description": "Choisissez votre profil : artisans, TPE, PME, commerces, professions libérales. Approche simple pour générer plus d’appels et de demandes.",
+        "canonical": "https://horizon-conversion.fr/profils/"
+      }
+    }
+  },
+  "cible-artisans": {
+    "id": "cible-artisans",
+    "slug": "artisans",
+    "name": "artisans",
+    "segment": "mix",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "Artisans & chantiers",
+      "subtitle": "Objectif : plus d’appels et de demandes (devis, chantiers) dans votre zone",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "Artisans", "url": "/profils/artisans/" }
+    ],
+    "seo": {
+      "title": "Artisans — plus d’appels et de devis | Horizon Conversion",
+      "description": "Pour artisans : gagner en visibilité locale et transformer ça en appels et demandes de devis. Pages claires, preuves simples, contact en 1 clic.",
+      "canonical": "https://horizon-conversion.fr/profils/artisans/"
+    },
+    "sensibilite_prix": "haute",
+    "outcomes": ["appels", "devis", "chantiers", "demandes-qualifiees"],
+    "topIntents": ["demandes-rapides", "plus-appels", "se-trouver-local"],
+    "objections": [
+      "obj-deja-essaye",
+      "obj-budget",
+      "obj-demandes-non-qualifiees",
+      "obj-pas-le-temps"
+    ],
+    "preuves_preferees": ["mini-case", "checklist", "mesures", "method"],
+    "faq_tags": ["budget", "delais", "zone", "resultats", "qualification"],
+    "variant_preferences": {
+      "tone": ["direct-quickwins", "direct-budget", "local-ancrage"],
+      "angle": ["demandes-rapides", "plus-appels", "se-trouver-local"]
+    }
+  },
+
+  "cible-tpe": {
+    "id": "cible-tpe",
+    "slug": "tpe",
+    "name": "TPE",
+    "segment": "mix",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "Petites entreprises (TPE)",
+      "subtitle": "Objectif : des demandes régulières (appels, formulaires) avec une approche simple et claire",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "TPE", "url": "/profils/tpe/" }
+    ],
+    "seo": {
+      "title": "TPE — générer plus de demandes | Horizon Conversion",
+      "description": "Pour TPE : être trouvé localement et convertir les visites en demandes (appels, formulaires). Priorités claires, actions utiles, suivi simple.",
+      "canonical": "https://horizon-conversion.fr/profils/tpe/"
+    },
+    "sensibilite_prix": "moyenne",
+    "outcomes": ["demandes", "appels", "planning-rempli", "rentabilite"],
+    "topIntents": ["plus-appels", "demandes-rapides", "site-qui-convertit"],
+    "objections": [
+      "obj-budget",
+      "obj-pas-le-temps",
+      "obj-priorites",
+      "obj-deja-essaye"
+    ],
+    "preuves_preferees": ["mesures", "checklist", "mini-case"],
+    "faq_tags": ["budget", "delais", "engagement", "priorites", "resultats"],
+    "variant_preferences": {
+      "tone": ["pedago-simple", "direct-budget", "direct-quickwins"],
+      "angle": ["plus-appels", "demandes-rapides", "site-qui-convertit"]
+    }
+  },
+
+  "cible-pme": {
+    "id": "cible-pme",
+    "slug": "pme",
+    "name": "PME",
+    "segment": "premium",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "PME en croissance",
+      "subtitle": "Objectif : des leads qualifiés et un pilotage clair (visibilité, annonces, pages qui convertissent)",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "PME", "url": "/profils/pme/" }
+    ],
+    "seo": {
+      "title": "PME — leads qualifiés et pilotage | Horizon Conversion",
+      "description": "Pour PME : obtenir des leads qualifiés avec une présence locale claire, des pages qui rassurent et un suivi lisible des demandes.",
+      "canonical": "https://horizon-conversion.fr/profils/pme/"
+    },
+    "sensibilite_prix": "faible",
+    "outcomes": ["leads-qualifies", "pipeline", "croissance", "pilotage"],
+    "topIntents": ["plus-appels", "se-trouver-local", "site-qui-convertit"],
+    "objections": [
+      "obj-qualite",
+      "obj-pilotage",
+      "obj-fiabilite",
+      "obj-interne-deja"
+    ],
+    "preuves_preferees": ["method", "mesures", "qualite", "cas-detaille"],
+    "faq_tags": ["process", "reporting", "delais", "qualite", "organisation"],
+    "variant_preferences": {
+      "tone": ["reassure-accompagnement", "reassure-confiance", "pedago-simple"],
+      "angle": ["plus-appels", "se-trouver-local", "site-qui-convertit"]
+    }
+  },
+
+  "cible-commerces": {
+    "id": "cible-commerces",
+    "slug": "commerces",
+    "name": "commerces",
+    "segment": "volume",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "Commerces & points de vente",
+      "subtitle": "Objectif : plus de trafic local et de contacts (appels, réservations, RDV) sans perdre de temps",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "Commerces", "url": "/profils/commerces/" }
+    ],
+    "seo": {
+      "title": "Commerces — attirer plus de clients locaux | Horizon Conversion",
+      "description": "Pour commerces : apparaître localement, déclencher des appels/visites et améliorer les demandes. Message clair, zone cadrée, contact simple.",
+      "canonical": "https://horizon-conversion.fr/profils/commerces/"
+    },
+    "sensibilite_prix": "moyenne",
+    "outcomes": ["trafic-local", "rdv", "reservations", "appels"],
+    "topIntents": ["se-trouver-local", "demandes-rapides", "plus-appels"],
+    "objections": [
+      "obj-saisonnalite",
+      "obj-budget",
+      "obj-concurrence",
+      "obj-avis"
+    ],
+    "preuves_preferees": ["local", "mini-case", "mesures"],
+    "faq_tags": ["local", "zone", "avis", "budget", "delais"],
+    "variant_preferences": {
+      "tone": ["local-ancrage", "direct-quickwins", "direct-budget"],
+      "angle": ["se-trouver-local", "demandes-rapides", "plus-appels"]
+    }
+  },
+
+  "cible-professions-liberales": {
+    "id": "cible-professions-liberales",
+    "slug": "professions-liberales",
+    "name": "professions libérales",
+    "segment": "premium",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "Professions libérales",
+      "subtitle": "Objectif : des RDV qualifiés grâce à une image rassurante et un parcours de contact simple",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "Professions libérales", "url": "/profils/professions-liberales/" }
+    ],
+    "seo": {
+      "title": "Professions libérales — RDV qualifiés | Horizon Conversion",
+      "description": "Pour professions libérales : renforcer la confiance, clarifier l’offre et obtenir plus de demandes ciblées (RDV, appels) avec un contact évident.",
+      "canonical": "https://horizon-conversion.fr/profils/professions-liberales/"
+    },
+    "sensibilite_prix": "moyenne",
+    "outcomes": ["rdv-qualifies", "confiance", "image", "demandes-ciblees"],
+    "topIntents": ["site-qui-convertit", "se-trouver-local", "plus-appels"],
+    "objections": [
+      "obj-confiance",
+      "obj-image",
+      "obj-conformite",
+      "obj-confidentialite"
+    ],
+    "preuves_preferees": ["qualite", "method", "mesures", "pedago"],
+    "faq_tags": ["process", "confiance", "confidentialite", "contenu", "delais"],
+    "variant_preferences": {
+      "tone": ["reassure-confiance", "reassure-accompagnement", "pedago-simple"],
+      "angle": ["site-qui-convertit", "se-trouver-local", "plus-appels"]
+    }
+  },
+
+  "cible-reseaux-franchises": {
+    "id": "cible-reseaux-franchises",
+    "slug": "reseaux-franchises",
+    "name": "réseaux & franchises",
+    "segment": "premium",
+    "pageTitle": {
+      "badge": "Profils",
+      "title": "Réseaux & franchises",
+      "subtitle": "Objectif : générer des leads qualifiés point de vente par point de vente, avec un pilotage clair",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Profils", "url": "/profils/" },
+      { "name": "Réseaux & franchises", "url": "/profils/reseaux-franchises/" }
+    ],
+    "seo": {
+      "title": "Réseaux & franchises — leads qualifiés par point de vente | Horizon Conversion",
+      "description": "Pour réseaux & franchises : déployer une acquisition locale scalable (SEO local, Ads, CRO) point de vente par point de vente, avec des pages qui convertissent et un reporting lisible.",
+      "canonical": "https://horizon-conversion.fr/profils/reseaux-franchises/"
+    },
+    "sensibilite_prix": "faible",
+    "outcomes": ["leads-qualifies", "croissance", "pilotage", "standardisation", "reporting"],
+    "topIntents": ["se-trouver-local", "plus-appels", "site-qui-convertit"],
+    "objections": [
+      "obj-coherence-marque",
+      "obj-pilotage",
+      "obj-organisation-multi-sites",
+      "obj-qualite-leads"
+    ],
+    "preuves_preferees": ["method", "mesures", "cas-detaille", "qualite"],
+    "faq_tags": ["process", "reporting", "delais", "organisation", "qualite"],
+    "variant_preferences": {
+      "tone": ["reassure-accompagnement", "reassure-confiance", "pedago-simple"],
+      "angle": ["se-trouver-local", "site-qui-convertit", "plus-appels"]
+    }
+  }
+}

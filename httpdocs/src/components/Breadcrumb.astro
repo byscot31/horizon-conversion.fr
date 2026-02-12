@@ -1,0 +1,21 @@
+---
+// src/components/Breadcrumb.astro
+const safe = (v) => (typeof v === "string" ? v.trim() : "");
+const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
+---
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    {items.map((it, idx) => {
+      const isLast = idx === items.length - 1;
+      const name = safe(it?.name);
+      const url = safe(it?.url);
+
+      return (
+          <li class={`breadcrumb-item${isLast ? " active" : ""}`} aria-current={isLast ? "page" : undefined}>
+            {isLast || !url ? name : <a href={url}>{name}</a>}
+          </li>
+      );
+    })}
+  </ol>
+</nav>

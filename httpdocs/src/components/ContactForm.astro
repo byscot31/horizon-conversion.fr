@@ -1,0 +1,51 @@
+---
+// src/components/ContactForm.astro
+---
+
+<!-- Form Section ============================================= -->
+<div class="section mb-3" style="background: url('/assets/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+
+      <div class="col-md-6">
+        <div class="heading-block border-bottom-0 mb-4">
+          <div class="badge rounded-pill badge-default">Form Badge</div>
+          <h2 class="text-transform-none ls-0">Form H2</h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolore voluptatem assumenda quae possimus sunt dignissimos tempora officia.</p>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="h4 mb-3">Form H3</h3>
+            <div class="form-widget">
+              <div class="form-result"></div>
+              <form class="row mb-0" id="template-contactform" name="template-contactform" action="/assets/include/form.php" method="post">
+                <div class="col-12 form-group mb-3">
+                  <label for="template-contactform-name">Name:*</label>
+                  <input type="text" id="template-contactform-name" name="template-contactform-name" class="form-control input-sm required" value="">
+                </div>
+                <div class="col-12 form-group mb-3">
+                  <label for="template-contactform-email">Email Address:*</label>
+                  <input type="email" id="template-contactform-email" name="template-contactform-email" class="form-control input-sm required" value="">
+                </div>
+                <div class="col-12 form-group mb-4">
+                  <label for="template-contactform-website">Website:*</label>
+                  <input type="text" id="template-contactform-website" name="template-contactform-website" class="form-control input-sm required" value="">
+                </div>
+                <div class="col-12 form-group mb-0">
+                  <button class="button button-rounded w-100 text-transform-none ls-0 m-0" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Apply Now</button>
+                </div>
+
+                <input type="hidden" name="prefix" value="template-contactform-">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

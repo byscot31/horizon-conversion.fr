@@ -1,0 +1,81 @@
+---
+// src/pages/profils/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import HeroCard from "../../components/HeroCard.astro";
+import Process from "../../components/Process.astro";
+import Cibles from "../../components/Cibles.astro";
+import ZonesVilles from "../../components/ZonesVilles.astro";
+import Preuves from "../../components/Preuves.astro";
+import Faqs from "../../components/Faqs.astro";
+import MaillageInterne from "../../components/MaillageInterne.astro";
+
+import ciblesData from "../../data/cibles.json";
+
+const toObj = (v) => (v && typeof v === "object" ? v : {});
+const safe = (v, fb = "") => (typeof v === "string" && v.trim() ? v.trim() : fb);
+
+const ciblesObj = toObj(ciblesData);
+const meta = toObj(ciblesObj._meta);
+const hub = toObj(meta.hub);
+
+const hubPT = toObj(hub.pageTitle);
+const hubSEO = toObj(hub.seo);
+const hubBC = Array.isArray(hub.breadcrumbs) ? hub.breadcrumbs : [];
+
+const ciblesList = Object.entries(ciblesObj)
+  .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && v.slug)
+  .map(([k, c]) => ({
+    id: safe(c.id, k),
+    slug: safe(c.slug),
+    name: safe(c.name, safe(c.slug)),
+    segment: safe(c.segment, "mix"),
+  }))
+  .filter((c) => c.slug && c.name)
+  .sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
+
+const seo = {
+  title: safe(hubSEO.title, safe(hubPT.title, "Profils | Horizon Conversion")),
+  description: safe(hubSEO.description, safe(hubPT.subtitle, "")),
+  canonical: safe(hubSEO.canonical, "https://horizon-conversion.fr/profils/"),
+};
+
+const breadcrumbs =
+  hubBC.length
+    ? hubBC
+    : [
+      { name: "Accueil", url: "/" },
+      { name: safe(hubPT.badge, "Profils"), url: "/profils/" },
+    ];
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={safe(hubPT.badge)}
+      title={safe(hubPT.title)}
+      subtitle={safe(hubPT.subtitle)}
+      image={safe(hubPT.image, "/assets/images/hero/page-title.jpg")}
+      breadcrumbs={breadcrumbs}
+  />
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap py-0 overflow-visible">
+
+      <HeroCard />
+
+      <Process />
+
+      <Cibles />
+
+      <ZonesVilles />
+
+      <Preuves />
+
+      <Faqs />
+
+      <MaillageInterne />
+
+    </div>
+  </section>
+</BaseLayout>

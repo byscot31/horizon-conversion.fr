@@ -1,0 +1,113 @@
+---
+// src/pages/services/[service].astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import HeroBenefices from "../../components/HeroBenefices.astro";
+import Tarifs from "../../components/tarifs.astro";
+import Preuves from "../../components/preuves.astro";
+import Methode from "../../components/methode.astro";
+import ZonesVilles from "../../components/ZonesVilles.astro";
+import Ressources from "../../components/Ressources.astro";
+import Faqs from "../../components/Faqs.astro";
+import ContactForm from "../../components/ContactForm.astro";
+
+import servicesData from "../../data/services.json";
+
+/** Helpers */
+const toObj = (v) => (v && typeof v === "object" ? v : {});
+const s = (v) => (typeof v === "string" ? v.trim() : "");
+
+/** getStaticPaths */
+export async function getStaticPaths() {
+  const obj = servicesData && typeof servicesData === "object" ? servicesData : {};
+  const entries = Object.entries(obj).filter(([k, v]) => {
+    return k !== "_meta" && v && typeof v === "object" && v.slug;
+  });
+
+  return entries.map(([_, svc]) => ({
+    params: { service: String(svc.slug) },
+    props: { serviceSlug: String(svc.slug) },
+  }));
+}
+
+/** Props + params */
+const { serviceSlug } = Astro.props;
+const serviceParam = String(Astro.params.service || serviceSlug || "");
+
+/** Data normalisée */
+const servicesObj = toObj(servicesData);
+const servicesList = Object.values(servicesObj).filter((v) => v && typeof v === "object" && v.slug);
+
+/** Service courant */
+const service = servicesList.find((x) => String(x?.slug) === serviceParam) || null;
+
+if (!service) {
+  throw new Error(`[services/[service]] Service introuvable: "${serviceParam}"`);
+}
+
+/** Exige pageTitle complet */
+const pageTitle = toObj(service.pageTitle);
+
+if (!s(pageTitle.badge) || !s(pageTitle.title) || !s(pageTitle.subtitle) || !s(pageTitle.image)) {
+  throw new Error(
+    `[services/[service]] pageTitle incomplet pour "${serviceParam}". Requis: pageTitle.badge, pageTitle.title, pageTitle.subtitle, pageTitle.image`
+  );
+}
+
+/** Exige breadcrumbs (>= 2) */
+const breadcrumbs = Array.isArray(service.breadcrumbs) ? service.breadcrumbs : null;
+
+if (!breadcrumbs || breadcrumbs.length < 2) {
+  throw new Error(
+    `[services/[service]] breadcrumbs manquant/incomplet pour "${serviceParam}". Requis: breadcrumbs: [{name,url}...]`
+  );
+}
+
+/** Exige seo complet */
+const seoObj = toObj(service.seo);
+
+if (!s(seoObj.title) || !s(seoObj.description) || !s(seoObj.canonical)) {
+  throw new Error(
+    `[services/[service]] seo incomplet pour "${serviceParam}". Requis: seo.title, seo.description, seo.canonical`
+  );
+}
+
+const seo = {
+  title: s(seoObj.title),
+  description: s(seoObj.description),
+  canonical: s(seoObj.canonical),
+};
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={s(pageTitle.badge)}
+      title={s(pageTitle.title)}
+      subtitle={s(pageTitle.subtitle)}
+      image={s(pageTitle.image)}
+      breadcrumbs={breadcrumbs}
+  />
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <HeroBenefices />
+
+      <Tarifs />
+
+      <Preuves />
+
+      <Methode />
+
+      <ZonesVilles />
+
+      <Ressources />
+
+      <Faqs />
+
+      <ContactForm />
+
+    </div>
+  </section>
+</BaseLayout>

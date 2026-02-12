@@ -46,28 +46,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 			    <!-- Pour qui
 				============================================= -->
-				<div class="section bg-transparent m-0 border-bottom py-5">
+				<div class="section bg-transparent m-0 py-5">
 					<div class="container">
-					    <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 550px">
-                    		<div class="badge rounded-pill badge-default">Pour qui</div>
-                            <h2 class="text-transform-none ls-0 mb-3">4 profils, un objectif commun</h2>
-                    		<p>Obtenez des demandes locales qualifiées et développez votre activité sans dépendre du hasard.</p>
-                    	</div>
-                    	<div class="row col-mb-30 align-content-stretch">
+					  <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 550px">
+              <div class="badge rounded-pill badge-default">Pour qui</div>
+              <h2 class="text-transform-none ls-0 mb-3">4 profils, un objectif commun</h2>
+              <p>Obtenez des demandes locales qualifiées et développez votre activité sans dépendre du hasard.</p>
+            </div>
+            <div class="row col-mb-30 align-content-stretch">
 
-                    		<div class="col-lg-3 col-md-6 d-flex">
-                    			<div class="card h-shadow h-translate-y-sm all-ts">
-                    				<div class="card-body p-5">
-                    					<div class="feature-box flex-column">
-                    						<div class="fbox-content">
-                    							<h3 class="text-transform-none ls-0 text-larger">Artisans</h3>
-                    							<p class="text-smaller">Plus d’appels entrants, moins de demandes non pertinentes.</p>
-                    							<a class="more-link mt-2" href="#">Attirer des chantiers</a>
-                    						</div>
-                    					</div>
-                    				</div>
-                    			</div>
-                    		</div>
+              <div class="col-lg-3 col-md-6 d-flex">
+                <div class="card h-shadow h-translate-y-sm all-ts">
+                  <div class="card-body p-5">
+                    <div class="feature-box flex-column">
+                    	<div class="fbox-content">
+                    		<h3 class="text-transform-none ls-0 text-larger">Artisans</h3>
+                    		<p class="text-smaller">Plus d’appels entrants, moins de demandes non pertinentes.</p>
+                    		<a class="more-link mt-2" href="#">Attirer des chantiers</a>
+                    	</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
                     		<div class="col-lg-3 col-md-6 d-flex">
                     			<div class="card h-shadow h-translate-y-sm all-ts">
@@ -77,7 +77,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     							<h3 class="text-transform-none ls-0 text-larger">PME / TPE</h3>
                     							<p class="text-smaller">Un flux régulier de demandes qualifiées, sans y passer tes journées.</p>
                     						    <a class="more-link mt-2" href="#">Générer des leads</a>
-                                            </div>
+                                </div>
                     					</div>
                     				</div>
                     			</div>
@@ -120,12 +120,89 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                 Réponse rapide — si ce n’est pas pertinent pour toi, je te le dis.
                             </div>
                     	</div>
+                    	<div class="clear line my-6"></div>
                     </div>
 				</div>
 
+				<!-- Zone d’intervention
+				============================================= -->
+        <div class="section bg-transparent m-0 p-0" id="zone-intervention">
+          <div class="container">
+
+            <div class="heading-block border-bottom-0 text-center mx-auto mb-5" style="max-width: 760px;">
+              <div class="badge rounded-pill badge-default">Zone d’intervention</div>
+              <h2 class="text-transform-none ls-0 mb-3">Zone d’intervention (60 / 95)</h2>
+              <p class="text-muted mb-0">
+                J’accompagne les entreprises locales dans le sud de l’Oise (60) et le Val d’Oise (95).
+              </p>
+            </div>
+
+            <div class="row col-mb-30">
+
+              <!-- Sud Oise -->
+              <div class="col-lg-6">
+                <div class="card h-shadow h-translate-y-sm all-ts">
+                  <div class="card-body p-5">
+                    <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
+                      <div>
+                        <h3 class="text-transform-none ls-0 mb-1">Sud Oise (60)</h3>
+                        <p class="text-muted small mb-0">
+                          Secteur prioritaire : Chantilly, Senlis, Lamorlaye, Creil (et alentours).
+                        </p>
+                      </div>
+                    </div>
+                    <div class="text-muted small mb-4">
+                      Si ta ville est proche, c’est généralement couvert.
+                    </div>
+                    <a class="button button-small button-rounded text-transform-none ls-0 m-0"
+                       href="/zone/sud-oise/">
+                       Voir la zone
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Val d’Oise -->
+              <div class="col-lg-6">
+                <div class="card h-shadow h-translate-y-sm all-ts">
+                  <div class="card-body p-5">
+                    <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
+                      <div>
+                        <h3 class="text-transform-none ls-0 mb-1">Val d’Oise (95)</h3>
+                        <p class="text-muted small mb-0">
+                          Secteur prioritaire : Cergy, Pontoise, Taverny, L’Isle-Adam (et alentours).
+                        </p>
+                      </div>
+                    </div>
+                    <div class="text-muted small mb-4">
+                      Appelle-moi si tu veux valider ta commune en 10 secondes.
+                    </div>
+                    <a class="button button-small button-rounded text-transform-none ls-0 m-0"
+                       href="/zone/val-doise/">
+                       Voir la zone
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="text-center mt-5">
+              <a class="button button-large button-rounded text-transform-none ls-0 m-0 me-2"
+                 href="/zone/">
+                Voir toutes les villes couvertes
+              </a>
+              <div class="text-muted small mt-2">
+                Réponse rapide — tu me donnes ta ville, je te dis si c’est OK.
+              </div>
+            </div>
+            <div class="clear line my-6"></div>
+          </div>
+        </div>
+
 				<!-- Ce que tu obtiens (livrables)
 				============================================= -->
-				<div class="section bg-transparent mt-4 mb-0 pb-0">
+				<div class="section bg-transparent m-0 p-0">
 					<div class="container">
 						<div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 550px">
 							<div class="badge rounded-pill badge-default">Ce que tu obtiens</div>
@@ -756,7 +833,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                       <div class="col-md-5">
                         <div class="heading-block border-bottom-0 mb-4">
                           <div class="badge rounded-pill badge-default">Contact</div>
-                          <h3 class="text-transform-none ls-0 mb-3">On en parle 10 minutes ?</h3>
+                          <h2 class="text-transform-none ls-0 mb-3">On en parle 10 minutes ?</h2>
                         </div>
 
                         <p class="text-muted mb-4">
@@ -784,7 +861,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                       <div class="col-md-6">
                         <div class="card shadow-sm">
                           <div class="card-body">
-                            <h4 class="mb-1">Demande de rappel</h4>
+                            <h3 class="h4 mb-1">Demande de rappel</h3>
                             <p class="text-muted small mb-3">Ultra court : 2 champs, et c’est envoyé.</p>
 
                             <div class="form-widget">

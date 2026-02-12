@@ -1,0 +1,39 @@
+---
+// src/components/PageTitle.astro
+import Breadcrumb from "./Breadcrumb.astro";
+
+const safe = (v) => (typeof v === "string" ? v.trim() : "");
+
+const {
+  badge = "",
+  title = "",
+  subtitle = "",
+  image = "/assets/images/hero/page-title.jpg",
+  breadcrumbs = []
+} = Astro.props;
+
+const b = safe(badge);
+const t = safe(title);
+const sub = safe(subtitle);
+const img = safe(image) || "/assets/images/hero/page-title.jpg";
+const bc = Array.isArray(breadcrumbs) ? breadcrumbs : [];
+---
+
+<section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar" style="padding-bottom: 140px;">
+  <img src={img} class="parallax-bg" alt={t || b || "Page"} />
+  <div id="particles-line"></div>
+
+  <div class="container position-relative">
+    <div class="page-title-row">
+      <div class="page-title-content">
+        {b ? <div class="badge rounded-pill border border-light text-light">{b}</div> : null}
+        {t ? <h1>{t}</h1> : null}
+        {sub ? <span>{sub}</span> : null}
+      </div>
+
+      <Breadcrumb items={bc} />
+    </div>
+  </div>
+
+  <div class="video-overlay z-1" style="background-image: linear-gradient(to top, rgba(254,150,3,0.5), #39384D);"></div>
+</section>

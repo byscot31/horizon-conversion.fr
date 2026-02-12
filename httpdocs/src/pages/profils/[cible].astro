@@ -1,0 +1,120 @@
+---
+// src/pages/profils/[ville].astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import HeroPage from "../../components/HeroPage.astro";
+import ZonesVilles from "../../components/ZonesVilles.astro";
+import Ressources from "../../components/Ressources.astro";
+import Faqs from "../../components/Faqs.astro";
+import ContactForm from "../../components/ContactForm.astro";
+
+import ciblesData from "../../data/cibles.json";
+
+/** Helpers (hors getStaticPaths) */
+function safeStr(v) {
+  return typeof v === "string" ? v.trim() : "";
+}
+function requireStr(v, key) {
+  const s = safeStr(v);
+  if (!s) throw new Error(`[cibles/[cible]] Champ manquant: "${key}"`);
+  return s;
+}
+function requireObj(v, key) {
+  if (!v || typeof v !== "object" || Array.isArray(v)) {
+    throw new Error(`[cibles/[cible]] Champ manquant: "${key}" (object requis)`);
+  }
+  return v;
+}
+function requireArr(v, key) {
+  if (!Array.isArray(v) || v.length === 0) {
+    throw new Error(`[cibles/[cible]] Champ manquant/vide: "${key}" (array requis, non vide)`);
+  }
+  return v;
+}
+
+/** etStaticPaths */
+export async function getStaticPaths() {
+  const obj = (ciblesData && typeof ciblesData === "object" && !Array.isArray(ciblesData)) ? ciblesData : {};
+  const entries = Object.entries(obj).filter(([k, v]) => {
+    if (k === "_meta") return false;
+    if (!v || typeof v !== "object" || Array.isArray(v)) return false;
+    return typeof v.slug === "string" && v.slug.trim().length > 0;
+  });
+
+  return entries.map(([_, c]) => ({
+    params: { cible: String(c.slug) },
+    props: { cibleSlug: String(c.slug) },
+  }));
+}
+
+/** Params / props */
+const { cibleSlug } = Astro.props;
+const cibleParam = String(Astro.params.cible || cibleSlug || "");
+
+/** Data */
+const ciblesObj =
+  (ciblesData && typeof ciblesData === "object" && !Array.isArray(ciblesData)) ? ciblesData : {};
+
+const ciblesList = Object.values(ciblesObj).filter(
+  (v) => v && typeof v === "object" && !Array.isArray(v) && typeof v.slug === "string" && v.slug.trim()
+);
+
+const cible = ciblesList.find((c) => String(c?.slug) === cibleParam) || null;
+if (!cible) {
+  throw new Error(`[cibles/[cible]] Cible introuvable: "${cibleParam}"`);
+}
+
+/** Exigences “sans fallback” */
+const pageTitle = requireObj(cible.pageTitle, "cible.pageTitle");
+const breadcrumbsRaw = requireArr(cible.breadcrumbs, "cible.breadcrumbs");
+const seoObj = requireObj(cible.seo, "cible.seo");
+
+/** PageTitle requis */
+const pageTitleBadge = requireStr(pageTitle.badge, "cible.pageTitle.badge");
+const pageTitleTitle = requireStr(pageTitle.title, "cible.pageTitle.title");
+const pageTitleSubtitle = requireStr(pageTitle.subtitle, "cible.pageTitle.subtitle");
+const pageTitleImage = requireStr(pageTitle.image, "cible.pageTitle.image");
+
+/** Breadcrumbs requis (shape strict) */
+const breadcrumbs = breadcrumbsRaw.map((b, i) => {
+  const o = requireObj(b, `cible.breadcrumbs[${i}]`);
+  return {
+    name: requireStr(o.name, `cible.breadcrumbs[${i}].name`),
+    url: requireStr(o.url, `cible.breadcrumbs[${i}].url`),
+  };
+});
+
+/** SEO requis */
+const seo = {
+  title: requireStr(seoObj.title, "cible.seo.title"),
+  description: requireStr(seoObj.description, "cible.seo.description"),
+  canonical: requireStr(seoObj.canonical, "cible.seo.canonical"),
+};
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={pageTitleBadge}
+      title={pageTitleTitle}
+      subtitle={pageTitleSubtitle}
+      image={pageTitleImage}
+      breadcrumbs={breadcrumbs}
+  />
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <HeroPage />
+
+      <ZonesVilles />
+
+      <Ressources />
+
+      <Faqs />
+
+      <ContactForm />
+
+    </div>
+  </section>
+</BaseLayout>

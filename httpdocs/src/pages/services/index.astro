@@ -1,0 +1,99 @@
+---
+// src/pages/services/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import HeroCard from "../../components/HeroCard.astro";
+import Process from "../../components/Process.astro";
+import Services from "../../components/Services.astro";
+import ZonesVilles from "../../components/ZonesVilles.astro";
+import Preuves from "../../components/Preuves.astro";
+import Faqs from "../../components/Faqs.astro";
+import MaillageInterne from "../../components/MaillageInterne.astro";
+
+import servicesData from "../../data/services.json";
+
+/** Helpers (sécurité types, pas de fallback de contenu) */
+const toObj = (v) => (v && typeof v === "object" ? v : null);
+const safe = (v) => (typeof v === "string" ? v.trim() : "");
+
+/** Data services.json (objet attendu) */
+const root = toObj(servicesData);
+if (!root) {
+  throw new Error(`[services/index] services.json doit être un objet.`);
+}
+
+/** _meta.hub obligatoire */
+const meta = toObj(root._meta);
+const hub = meta ? toObj(meta.hub) : null;
+
+if (!hub) {
+  throw new Error(`[services/index] services.json._meta.hub manquant.`);
+}
+
+/** pageTitle obligatoire */
+const pageTitle = toObj(hub.pageTitle);
+if (
+  !pageTitle ||
+  !safe(pageTitle.badge) ||
+  !safe(pageTitle.title) ||
+  !safe(pageTitle.subtitle) ||
+  !safe(pageTitle.image)
+) {
+  throw new Error(
+    `[services/index] services.json._meta.hub.pageTitle incomplet. Requis: badge,title,subtitle,image`
+  );
+}
+
+/** breadcrumbs obligatoires */
+const breadcrumbs = Array.isArray(hub.breadcrumbs) ? hub.breadcrumbs : null;
+if (!breadcrumbs || breadcrumbs.length < 2) {
+  throw new Error(
+    `[services/index] services.json._meta.hub.breadcrumbs manquant/incomplet. Requis: [{name,url}...]`
+  );
+}
+
+/** seo obligatoire */
+const seoObj = toObj(hub.seo);
+if (!seoObj || !safe(seoObj.title) || !safe(seoObj.description) || !safe(seoObj.canonical)) {
+  throw new Error(
+    `[services/index] services.json._meta.hub.seo incomplet. Requis: title,description,canonical`
+  );
+}
+
+const seo = {
+  title: safe(seoObj.title),
+  description: safe(seoObj.description),
+  canonical: safe(seoObj.canonical),
+};
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={safe(pageTitle.badge)}
+      title={safe(pageTitle.title)}
+      subtitle={safe(pageTitle.subtitle)}
+      image={safe(pageTitle.image)}
+      breadcrumbs={breadcrumbs}
+  />
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap py-0 overflow-visible">
+
+      <HeroCard />
+
+      <Process />
+
+      <Services />
+
+      <ZonesVilles />
+
+      <Preuves />
+
+      <Faqs />
+
+      <MaillageInterne />
+
+    </div>
+  </section>
+</BaseLayout>

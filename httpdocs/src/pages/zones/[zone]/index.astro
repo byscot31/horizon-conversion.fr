@@ -1,0 +1,89 @@
+---
+// src/pages/zones/[zone]/index.astro
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageTitle from "../../../components/PageTitle.astro";
+
+import zonesData from "../../../data/zones.json";
+
+/** Helpers (fonctions => utilisables dans getStaticPaths) */
+function isPlainObject(v) {
+  return !!v && typeof v === "object" && !Array.isArray(v);
+}
+function s(v) {
+  return typeof v === "string" ? v.trim() : "";
+}
+
+/** ✅ getStaticPaths : /zones/:zone pour chaque entrée de zonesData.zones */
+export async function getStaticPaths() {
+  if (!isPlainObject(zonesData) || !isPlainObject(zonesData.zones)) {
+    throw new Error(`[zones/[zone]] zones.json invalide: attendu { zones: { ... } }`);
+  }
+
+  const entries = Object.entries(zonesData.zones).filter(
+    ([, z]) => isPlainObject(z) && s(z.slug)
+  );
+
+  return entries.map(([, z]) => ({
+    params: { zone: String(z.slug) },
+    props: { zoneSlug: String(z.slug) },
+  }));
+}
+
+/** Params / props */
+const { zoneSlug } = Astro.props;
+const zoneParam = String(Astro.params.zone || zoneSlug || "");
+
+/** Data: zonesData.zones obligatoire */
+if (!isPlainObject(zonesData) || !isPlainObject(zonesData.zones)) {
+  throw new Error(`[zones/[zone]] zones.json invalide: attendu { zones: { ... } }`);
+}
+
+const zonesObj = zonesData.zones;
+
+/** Trouver la zone par slug (sans fallback) */
+const zonesList = Object.values(zonesObj).filter((z) => isPlainObject(z) && s(z.slug));
+const zone = zonesList.find((z) => String(z.slug) === zoneParam) || null;
+
+if (!zone) {
+  throw new Error(`[zones/[zone]] Zone introuvable: "${zoneParam}"`);
+}
+
+/** Exigences "sans fallback" */
+const pageTitle = isPlainObject(zone.pageTitle) ? zone.pageTitle : null;
+const breadcrumbs = Array.isArray(zone.breadcrumbs) ? zone.breadcrumbs : null;
+const seoObj = isPlainObject(zone.seo) ? zone.seo : null;
+
+if (!pageTitle || !s(pageTitle.badge) || !s(pageTitle.title) || !s(pageTitle.subtitle) || !s(pageTitle.image)) {
+  throw new Error(
+    `[zones/[zone]] pageTitle incomplet pour "${zoneParam}". Requis: pageTitle.badge, pageTitle.title, pageTitle.subtitle, pageTitle.image`
+  );
+}
+
+if (!breadcrumbs || breadcrumbs.length < 2) {
+  throw new Error(
+    `[zones/[zone]] breadcrumbs manquant/incomplet pour "${zoneParam}". Requis: breadcrumbs: [{name,url}...]`
+  );
+}
+
+if (!seoObj || !s(seoObj.title) || !s(seoObj.description) || !s(seoObj.canonical)) {
+  throw new Error(
+    `[zones/[zone]] seo incomplet pour "${zoneParam}". Requis: seo.title, seo.description, seo.canonical`
+  );
+}
+
+const seo = {
+  title: s(seoObj.title),
+  description: s(seoObj.description),
+  canonical: s(seoObj.canonical),
+};
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={s(pageTitle.badge)}
+      title={s(pageTitle.title)}
+      subtitle={s(pageTitle.subtitle)}
+      image={s(pageTitle.image)}
+      breadcrumbs={breadcrumbs}
+  />
+</BaseLayout>
