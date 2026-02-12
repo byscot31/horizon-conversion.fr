@@ -2,6 +2,7 @@
 // src/pages/prestations/[prestation].astro
 import LayoutSEO from "../../layouts/LayoutSEO.astro";
 import { PRESTATIONS, type PrestationKey } from "../../data/prestations.ts";
+import { JOBS } from "../../data/jobs.ts";
 
 export const prerender = true;
 
@@ -18,8 +19,27 @@ if (!offer) throw new Error(`Prestation inconnue: ${prestation}`);
 
 const canonical = `${baseUrl}${Astro.url.pathname}`;
 
-const title = `${offer.name} | Prestations – Horizon Conversion Animaux`;
-const description = `Prestation : ${offer.name}. ${offer.headline} (Sud Oise 60 / Val d’Oise 95).`;
+// helpers
+const clampMeta = (s: string, max = 160) => {
+  const clean = String(s || "").replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > 80 ? cut.slice(0, lastSpace) : cut).trim() + "…";
+};
+
+const ZONE_SHORT = "Sud Oise (60) & Val d’Oise (95)";
+
+// ✅ Title / Meta uniques (data-first, fallback propre)
+const title =
+  (offer as any).seoTitle ||
+  `${offer.name} – plus de RDV (${ZONE_SHORT}) | Horizon Conversion`;
+
+const description = clampMeta(
+  (offer as any).seoDescription ||
+    `${offer.headline} Objectif : des demandes qualifiées (RDV/devis). Zones : ${ZONE_SHORT}. Tracking inclus (appels, formulaires, sources).`,
+  160
+);
 
 const breadcrumbs = [
   { name: "Accueil", item: `${baseUrl}/` },
@@ -61,7 +81,6 @@ const packs = [
   },
 ];
 
-// ✅ Mini lien complémentaire
 const adsBooster = {
   name: "Ads Booster",
   hint: "Accélérer sur une offre / période",
@@ -69,38 +88,208 @@ const adsBooster = {
 };
 
 // ✅ Tracking “exemple”
-const trackingEvents = [
-  { name: "click_to_call", detail: "clic sur téléphone (header/page/footer)" },
-  { name: "form_submit", detail: "envoi formulaire contact (avec qualif)" },
-  { name: "cta_diagnostic", detail: "clic CTA “Demander un diagnostic”" },
-  { name: "utm_source", detail: "attribution Ads/SEO/Maps via UTM" },
+const trackingEvents =
+  (offer as any).trackingEvents ||
+  [
+    { name: "click_to_call", detail: "clic sur téléphone (header/page/footer)" },
+    { name: "form_submit", detail: "envoi formulaire contact (avec qualif)" },
+    { name: "cta_diagnostic", detail: "clic CTA “Demander un diagnostic”" },
+    { name: "utm_source", detail: "attribution Ads/SEO/Maps via UTM" },
+  ];
+
+// ✅ Process (4–6 étapes) — data-first (objet) + fallback (string[])
+type Step = { title: string; detail?: string };
+
+const processStepsRaw =
+  (offer as any).processSteps ||
+  ({
+    "seo-local": [
+      "Audit SEO local + Google Business Profile (priorités rapides)",
+      "Structure pages locales “1 intention = 1 page” (ville/service)",
+      "Optimisation GBP : catégories, services, zones, posts",
+      "Cohérence NAP + citations locales",
+      "Tracking appels + formulaires + dashboard",
+    ],
+    "google-ads": [
+      "Audit compte / landing / tracking",
+      "Structure campagnes par intention (service/ville) + négatifs",
+      "Annonces + extensions + call-only si pertinent",
+      "Landing dédiée (preuve + CTA + FAQ) + qualif",
+      "Pilotage au coût/lead (optimisations hebdo)",
+    ],
+    "meta-ads": [
+      "Angles & créatifs (UGC-like, confiance, preuve)",
+      "Ciblage local + exclusions + messages",
+      "Formulaire qualifiant (ville, besoin, urgence)",
+      "Retargeting (visiteurs / engagés)",
+      "Optimisation sur événements (tracking)",
+    ],
+    "landing-pages": [
+      "Audit messages/offre + friction conversion",
+      "Structure landing : bénéfices → preuve → offre → FAQ → CTA",
+      "Design rapide (CWV) + mobile-first",
+      "A/B tests (CTA, formulaires, sections)",
+      "Optimisation continue (taux + qualité lead)",
+    ],
+    tracking: [
+      "Plan de tracking (UTM, events, objectifs)",
+      "Implémentation GA4/Matomo + pixels si besoin",
+      "Suivi clic-to-call + formulaires (qualif)",
+      "Dashboard leads / coût / taux / sources",
+      "Recommandations mensuelles basées data",
+    ],
+  } as Record<string, string[]>)[prestation] || [
+    "Audit + plan d’actions priorisé",
+    "Mise en place (pages/Ads/GBP selon besoin)",
+    "Tracking (appels/formulaires) + attribution",
+    "Optimisation continue (coût/lead, taux, qualité)",
+  ];
+
+const processSteps: Step[] = Array.isArray(processStepsRaw)
+  ? processStepsRaw.map((x: any) =>
+      typeof x === "string"
+        ? ({ title: x } as Step)
+        : ({ title: x.title || String(x), detail: x.detail } as Step)
+    )
+  : [];
+
+// ✅ Erreurs fréquentes (anti pages similaires)
+// data = offer.mistakes (nouveau) || offer.pitfalls (ancien) || fallback
+const mistakes: string[] =
+  (offer as any).mistakes ||
+  (offer as any).pitfalls ||
+  ({
+    "seo-local": [
+      "GBP non alignée avec les pages (services/zones incohérents)",
+      "Pages locales trop génériques (mêmes paragraphes partout)",
+      "Aucune preuve/CTA/tracking → impossible d’optimiser",
+    ],
+    "google-ads": [
+      "Mots-clés trop larges (leads parasites) + pas de négatifs",
+      "Même landing pour tout → faible conversion",
+      "Aucun tracking appels/formulaires → pilotage à l’aveugle",
+    ],
+    "meta-ads": [
+      "Ciblage trop large → volume inutile",
+      "Créatifs “catalogue” sans confiance/objections",
+      "Formulaire non qualifiant → perte de temps",
+    ],
+    "landing-pages": [
+      "Pages “jolies” mais sans structure de conversion",
+      "Pas de preuve/réassurance → hésitation",
+      "Formulaire trop long ou sans filtre utile",
+    ],
+    tracking: [
+      "UTM absents → sources “direct/unknown”",
+      "Clic-to-call non mesuré → sous-estimation SEO/Maps",
+      "Événements non standardisés → dashboard inexploitable",
+    ],
+  } as Record<string, string[]>)[prestation] || [
+    "Message flou (bénéfice non clair)",
+    "Pas de preuve (ni livrables visibles)",
+    "Pas de tracking (impossible de piloter)",
+  ];
+
+// ✅ Quand activer / scénarios
+const activationScenarios: string[] =
+  (offer as any).activationScenarios ||
+  (offer as any).scenarios ||
+  ({
+    "seo-local": [
+      "Vous voulez une visibilité durable sur 3–10 requêtes locales rentables",
+      "Vous dépendez trop des plateformes/annonces et voulez sécuriser la demande",
+      "Votre GBP ne génère pas assez d’appels/itinéraires",
+    ],
+    "google-ads": [
+      "Vous devez remplir des créneaux rapidement (semaines/jours)",
+      "Vous lancez une offre ou un nouveau service",
+      "Concurrence forte : Ads pour capter l’intention rentable",
+    ],
+    "meta-ads": [
+      "Vous avez besoin de demande qualifiée sur un angle précis",
+      "Vous voulez retargeter visiteurs/engagés",
+      "Marché concurrentiel : différenciation par preuve + message",
+    ],
+    "landing-pages": [
+      "Vous faites des Ads/SEO mais le taux de conversion est faible",
+      "Vous voulez packager une offre (et la rendre “compréhensible”)",
+      "Vous avez beaucoup de demandes non qualifiées",
+    ],
+    tracking: [
+      "Vous ne savez pas d’où viennent les demandes",
+      "Vous voulez piloter coût/lead et qualité lead",
+      "Vous combinez SEO/Maps/Ads et devez arbitrer vite",
+    ],
+  } as Record<string, string[]>)[prestation] || [
+    "Vous voulez plus de leads qualifiés",
+    "Vous devez réduire les demandes hors zone",
+    "Vous souhaitez piloter par la donnée",
+  ];
+
+// ✅ Preuves anonymisées (data-first)
+type Proof = {
+  title: string;
+  context: string;
+  kpis: Array<{ label: string; before: string; after: string }>;
+  note?: string;
+};
+
+const proofExamples: Proof[] =
+  (offer as any).proofs ||
+  [
+    {
+      title: "Avant/Après — Ads + landing",
+      context:
+        "Structure campagnes + exclusions + page dédiée. Objectif : moins de bruit, plus de RDV utiles.",
+      kpis: [
+        { label: "CTR Ads", before: "2,1%", after: "4,6%" },
+        { label: "Conv. landing", before: "3,2%", after: "7,8%" },
+        { label: "Appels/sem", before: "4–6", after: "10–14" },
+      ],
+    },
+    {
+      title: "Exemple tracking — preuves par la donnée",
+      context:
+        "Événements + sources (SEO/Maps/Ads) reliés aux leads, pour piloter au coût/lead.",
+      kpis: [
+        { label: "Leads suivis", before: "flou", after: "clair" },
+        { label: "Sources", before: "inconnues", after: "attribuées" },
+        { label: "Décisions", before: "au feeling", after: "data-driven" },
+      ],
+    },
+  ];
+
+// ✅ Maillage : métiers (3–6) + zones (2) — data-first via offer.internalLinks
+const defaultJobSlugs = [
+  "educateur-canin",
+  "toiletteur",
+  "pension-canine",
+  "comportementaliste",
+  "osteo-animalier",
+  "veterinaire",
 ];
 
-// ✅ Preuves anonymisées (exemples “show, don’t tell”)
-const proofExamples = [
-  {
-    title: "Avant/Après — Ads + landing",
-    context:
-      "Structure campagnes + exclusions + page dédiée. Objectif : moins de bruit, plus de RDV utiles.",
-    kpis: [
-      { label: "CTR Ads", before: "2,1%", after: "4,6%" },
-      { label: "Conv. landing", before: "3,2%", after: "7,8%" },
-      { label: "Appels/sem", before: "4–6", after: "10–14" },
-    ],
-    // image: { src: "/proofs/proof-ads-anonyme.jpg", alt: "Exemple anonymisé Ads" },
-  },
-  {
-    title: "Exemple tracking — preuves par la donnée",
-    context:
-      "Événements + sources (SEO/Maps/Ads) reliés aux leads, pour piloter au coût/lead.",
-    kpis: [
-      { label: "Leads suivis", before: "flou", after: "clair" },
-      { label: "Sources", before: "inconnues", after: "attribuées" },
-      { label: "Décisions", before: "au feeling", after: "data-driven" },
-    ],
-    // image: { src: "/proofs/proof-tracking-anonyme.jpg", alt: "Exemple anonymisé tracking" },
-  },
-];
+const relatedJobSlugs =
+  ((offer as any).internalLinks?.jobs as string[] | undefined) ||
+  ((offer as any).relatedJobs as string[] | undefined) ||
+  defaultJobSlugs;
+
+const relatedJobs = relatedJobSlugs
+  .map((slug) => ({ slug, name: (JOBS as any)[slug]?.name as string | undefined }))
+  .filter((x) => x.name)
+  .slice(0, 6)
+  .map((x) => ({ ...x, href: `/metiers/${x.slug}/` }));
+
+const zoneKeys =
+  ((offer as any).internalLinks?.zones as string[] | undefined) || [
+    "sud-oise-60",
+    "val-doise-95",
+  ];
+
+const zoneLinks = zoneKeys.slice(0, 2).map((k) => ({
+  href: `/zones/${k}/`,
+  label: k === "sud-oise-60" ? "Sud Oise (60)" : k === "val-doise-95" ? "Val d’Oise (95)" : k,
+}));
 
 // ✅ FAQ fallback si PRESTATIONS n’en fournit pas
 const fallbackFaq = [
@@ -114,23 +303,28 @@ const fallbackFaq = [
   },
   {
     q: "Vous pouvez filtrer les demandes hors zone (60/95) ?",
-    a: "Oui : via pages locales, ciblages et exclusions Ads, messages, et formulaire qualifiant (ville, zone, besoin).",
+    a: "Oui : via pages locales, ciblages/exclusions Ads, messages, et formulaire qualifiant (ville, zone, besoin).",
   },
 ];
 
-const faqs = (offer.faq && offer.faq.length ? offer.faq : fallbackFaq) as Array<{ q: string; a: string }>;
+const faqs = (offer.faq && offer.faq.length ? offer.faq : fallbackFaq) as Array<{
+  q: string;
+  a: string;
+}>;
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+const faqJsonLd = faqs.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }
+  : null;
 
-// ✅ (optionnel) : clarifier “packs” côté Google via offers dans Service
+// ✅ Service JSON-LD
 const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -143,36 +337,6 @@ const serviceLd = {
     telephone: "+33660921008",
     email: "contact@horizon-conversion.fr",
   },
-  offers: [
-    ...packs.map((p) => ({
-      "@type": "Offer",
-      name: p.name,
-      url: `${baseUrl}${p.href}`,
-      priceCurrency: "EUR",
-      price: "0",
-      priceSpecification: {
-        "@type": "PriceSpecification",
-        priceCurrency: "EUR",
-        price: "0",
-        description: "Tarif sur devis (voir page tarifs).",
-      },
-      availability: "https://schema.org/InStock",
-    })),
-    {
-      "@type": "Offer",
-      name: adsBooster.name,
-      url: `${baseUrl}${adsBooster.href}`,
-      priceCurrency: "EUR",
-      price: "0",
-      priceSpecification: {
-        "@type": "PriceSpecification",
-        priceCurrency: "EUR",
-        price: "0",
-        description: "Tarif sur devis (voir page tarifs).",
-      },
-      availability: "https://schema.org/InStock",
-    },
-  ],
 };
 
 const jsonLd = [
@@ -195,7 +359,7 @@ const jsonLd = [
     })),
   },
   serviceLd,
-  faqJsonLd,
+  ...(faqJsonLd ? [faqJsonLd] : []),
 ];
 ---
 
@@ -312,6 +476,23 @@ const jsonLd = [
         <h2 style="margin-top:16px;">Ce que vous recevez</h2>
         <ul>{(offer.deliverables || []).map((x) => <li>{x}</li>)}</ul>
 
+        <h2 style="margin-top:16px;">Process (4–6 étapes)</h2>
+        <p>Un process simple, piloté par la donnée (et itératif).</p>
+        <ul>
+          {processSteps.map((s) => (
+            <li>
+              <strong>{s.title}</strong>
+              {s.detail ? <span> — {s.detail}</span> : null}
+            </li>
+          ))}
+        </ul>
+
+        <h2 style="margin-top:16px;">Erreurs fréquentes à éviter</h2>
+        <ul>{mistakes.map((x) => <li>{x}</li>)}</ul>
+
+        <h2 style="margin-top:16px;">Quand activer cette prestation ?</h2>
+        <ul>{activationScenarios.map((x) => <li>{x}</li>)}</ul>
+
         <h2 style="margin-top:16px;">Offre (packs)</h2>
         <p>
           Pour rendre la prestation “compréhensible” (et éviter l’effet flou), on l’intègre dans des packs.
@@ -339,10 +520,7 @@ const jsonLd = [
         </p>
 
         <h2 style="margin-top:16px;">Exemples réels (anonymisés)</h2>
-        <p>
-          Pour déclencher la confiance sans dépendre des avis : KPIs, tracking, livrables (anonymisés).
-          (Tu peux ajouter des captures dans <span style="white-space:nowrap;">/public/proofs/</span> si tu veux.)
-        </p>
+        <p>KPIs, tracking, livrables (anonymisés) pour déclencher la confiance sans dépendre des avis.</p>
 
         <div class="proofGrid" aria-label="Exemples anonymisés">
           {proofExamples.map((ex) => (
@@ -363,6 +541,7 @@ const jsonLd = [
                   </div>
                 ))}
               </div>
+              {ex.note ? <div class="meta" style="margin-top:10px;">{ex.note}</div> : null}
             </article>
           ))}
         </div>
@@ -374,6 +553,16 @@ const jsonLd = [
             <li><strong>{e.name}</strong> — {e.detail}</li>
           ))}
         </ul>
+
+        <h2 style="margin-top:16px;">Métiers concernés (liens)</h2>
+        <div class="pills" aria-label="Métiers">
+          {relatedJobs.map((j) => <a class="pillLink" href={j.href}>{j.name}</a>)}
+        </div>
+
+        <h2 style="margin-top:16px;">Zones (liens)</h2>
+        <div class="pills" aria-label="Zones">
+          {zoneLinks.map((z) => <a class="pillLink" href={z.href}>{z.label}</a>)}
+        </div>
 
         <div class="ctaRow">
           <a class="btn" href="/contact/">Demander un diagnostic</a>
@@ -413,8 +602,7 @@ const jsonLd = [
         <div class="pills">
           <a class="pillLink" href="/tarifs/">Tarifs</a>
           <a class="pillLink" href="/preuves/">Preuves</a>
-          <a class="pillLink" href="/methode/">Méthode</a>
-          <a class="pillLink" href="/contact/">Contact</a>
+          <a class="pillLink" href="/a-propos/">À propos</a>
         </div>
 
         <h2 style="margin-top:16px;">Preuves sans avis</h2>
@@ -428,8 +616,9 @@ const jsonLd = [
 
         <h2 style="margin-top:16px;">Zones</h2>
         <div class="pills">
-          <a class="pillLink" href="/zones/sud-oise-60/">Sud Oise (60)</a>
-          <a class="pillLink" href="/zones/val-doise-95/">Val d’Oise (95)</a>
+          {zoneLinks.map((z) => (
+            <a class="pillLink" href={z.href}>{z.label}</a>
+          ))}
         </div>
 
         <div class="note">
