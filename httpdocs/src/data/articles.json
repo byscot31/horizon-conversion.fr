@@ -1,52 +1,32 @@
 {
-  "_meta": {
-    "hub": {
-      "ressources": {
-        "header": {
-          "badge": "Ressources",
-          "title": "À lire (court et utile)",
-          "subtitle": "Guides simples pour comprendre et appliquer : SEO local, Ads, pages qui convertissent."
-        }
-      }
+  "badge": "Ressources",
+  "title": "Ressources utiles",
+  "intro": "Des conseils simples pour générer plus de demandes (appels + formulaires).",
+  "maxItems": 3,
+  "items": [
+    {
+      "slug": "page-qui-convertit",
+      "title": "Page qui convertit : les 7 éléments indispensables",
+      "excerpt": "Ce qui doit être visible en 5 secondes pour déclencher une demande.",
+      "author": "Horizon Conversion",
+      "publishedAt": "2026-01-15",
+      "image": "/assets/images/blog/1.jpg"
+    },
+    {
+      "slug": "seo-local-fiche-google",
+      "title": "SEO local : quoi faire sur votre fiche Google",
+      "excerpt": "Les réglages qui aident vos clients à vous trouver près de chez vous.",
+      "author": "Horizon Conversion",
+      "publishedAt": "2026-01-20",
+      "image": "/assets/images/blog/2.jpg"
+    },
+    {
+      "slug": "tracking-appels-formulaires",
+      "title": "Suivre les appels et formulaires : le minimum utile",
+      "excerpt": "Mesurer ce qui marche sans se noyer dans les chiffres.",
+      "author": "Horizon Conversion",
+      "publishedAt": "2026-02-01",
+      "image": "/assets/images/blog/3.jpg"
     }
-  },
-  "art-1": {
-    "id": "art-1",
-    "slug": "seo-local-appels",
-    "title": "SEO local : obtenir plus d’appels (sans jargon)",
-    "excerpt": "Les 6 leviers qui font la différence en local : fiche Google, pages locales, preuves, CTA et suivi.",
-    "author": "Horizon Conversion",
-    "date": "2025-01-18",
-    "image": {
-      "src": "/assets/images/blog/1.jpg",
-      "alt": "SEO local"
-    },
-    "order": 1
-  },
-  "art-2": {
-    "id": "art-2",
-    "slug": "google-ads-budget",
-    "title": "Google Ads : budget test et erreurs à éviter",
-    "excerpt": "Comment démarrer proprement : ciblage, annonces, page, tracking — et ce qu’il faut couper vite.",
-    "author": "Horizon Conversion",
-    "date": "2025-01-25",
-    "image": {
-      "src": "/assets/images/blog/2.jpg",
-      "alt": "Google Ads"
-    },
-    "order": 2
-  },
-  "art-3": {
-    "id": "art-3",
-    "slug": "landing-pages-qui-convertissent",
-    "title": "Pages qui convertissent : la structure “recette”",
-    "excerpt": "Promesse → preuves → FAQ → CTA : une page utile qui déclenche appel / rappel / formulaire.",
-    "author": "Horizon Conversion",
-    "date": "2025-02-02",
-    "image": {
-      "src": "/assets/images/blog/3.jpg",
-      "alt": "Landing pages"
-    },
-    "order": 3
-  }
+  ]
 }

@@ -1,44 +1,37 @@
 ---
 // src/components/Methode.astro
+const { data, contexte, config } = Astro.props;
+
+const items = Array.isArray(data?.steps) ? data.steps : (Array.isArray(data?.items) ? data.items : []);
+const href = data?.href ?? "/methode/";
+
+if (!items.length) {
+  // rien
+}
 ---
 
-<!-- Méthode ============================================= -->
+{items.length > 0 && (
 <div class="container py-5 mb-5">
   <div class="row">
-    <div class="col-md-4 mt-5">
-      <div class="feature-box fbox-center border-0">
-        <div class="fbox-icon">
-          <a href="/methode/"><img src="/assets/images/icons/research.svg" alt="Méthode 1" class="bg-transparent rounded-0"></a>
+    {items.slice(0, 3).map((s, idx) => (
+        <div class="col-md-4 mt-5">
+          <div class="feature-box fbox-center border-0">
+            <div class="fbox-icon">
+              <a href={href}>
+                <img
+                    src={s.icon ?? "/assets/images/icons/research.svg"}
+                    alt={s.alt ?? `Méthode ${idx + 1}`}
+                    class="bg-transparent rounded-0"
+                />
+              </a>
+            </div>
+            <div class="fbox-content">
+              <h2 class="h3 text-transform-none ls-0">{s.title ?? `${idx + 1}. Méthode`}</h2>
+              <p>{s.text ?? ""}</p>
+            </div>
+          </div>
         </div>
-        <div class="fbox-content">
-          <h2 class="h3 text-transform-none ls-0">1. Méthode</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mt-5">
-      <div class="feature-box fbox-center border-0">
-        <div class="fbox-icon">
-          <a href="/methode/"><img src="/assets/images/icons/optimizing.svg" alt="Méthode 2" class="bg-transparent rounded-0"></a>
-        </div>
-        <div class="fbox-content">
-          <h2 class="h3 text-transform-none ls-0">2. Méthode</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, provident.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mt-5">
-      <div class="feature-box fbox-center border-0">
-        <div class="fbox-icon">
-          <a href="/methode/"><img src="/assets/images/icons/result.svg" alt="Méthode 3" class="bg-transparent rounded-0"></a>
-        </div>
-        <div class="fbox-content">
-          <h2 class="h3 text-transform-none ls-0">3. Méthode</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, ipsa!</p>
-        </div>
-      </div>
-    </div>
+    ))}
   </div>
 </div>
+  )}

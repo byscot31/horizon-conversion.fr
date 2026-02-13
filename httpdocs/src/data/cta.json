@@ -1,0 +1,4 @@
+{
+  "primary": { "label": "Demander un audit (gratuit)", "action": "audit" },
+  "secondary": { "label": "Être rappelé", "action": "callback" }
+}

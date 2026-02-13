@@ -1,79 +1,63 @@
 ---
 // src/pages/services/[service].astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { services, bySlug } from "../../lib/data";
+import { buildModel } from "../../lib/pageModel";
+
 import PageTitle from "../../components/PageTitle.astro";
 import HeroBenefices from "../../components/HeroBenefices.astro";
-import Tarifs from "../../components/Tarifs.astro";
-import Preuves from "../../components/Preuves.astro";
 import Methode from "../../components/Methode.astro";
-import ZonesVilles from "../../components/ZonesVilles.astro";
-import Ressources from "../../components/Ressources.astro";
+import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import ContactForm from "../../components/ContactForm.astro";
+import Tarifs from "../../components/Tarifs.astro";
+import Ressources from "../../components/Ressources.astro";
+import ZonesVilles from "../../components/ZonesVilles.astro";
 
-import siteData from "../../data/site.json";
-import seoData from "../../data/seo.json";
-import hero_benefData from "../../data/hero_benef.json";
-import tarifsData from "../../data/tarifs.json";
-
-// ✅ source des slugs pour générer /services/:service/
-import servicesData from "../../data/services.json";
-
-import zonesData from "../../data/zones.json";
-import villesData from "../../data/villes.json";
-import articlesData from "../../data/articles.json";
-import faqs_servicesData from "../../data/faqs_services.json";
-import formData from "../../data/form.json";
-
-/** ✅ getStaticPaths requis pour une route dynamique */
-export async function getStaticPaths() {
-  const root =
-    servicesData && typeof servicesData === "object" && !Array.isArray(servicesData)
-      ? servicesData
-      : null;
-
-  if (!root) {
-    throw new Error(`[services/[service]] services.json invalide (objet attendu)`);
-  }
-
-  const entries = Object.entries(root)
-    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
-    .map(([_, v]) => v)
-    .filter((svc) => typeof svc.slug === "string" && svc.slug.trim());
-
-  if (entries.length === 0) {
-    throw new Error(`[services/[service]] aucun service trouvé dans services.json`);
-  }
-
-  return entries.map((svc) => ({
-    params: { service: String(svc.slug).trim() },
-    props: { serviceSlug: String(svc.slug).trim() },
-  }));
+export function getStaticPaths() {
+  return (services ?? []).map((s) => ({ params: { service: s.slug } }));
 }
+
+const service = bySlug(services, Astro.params.service);
+
+const model = buildModel({
+  type: "service",
+  service,
+  canonical: `/services/${service.slug}/`,
+});
+
+const contexte = model.contexte;
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={model.seo} site={model.site}>
+  <PageTitle contexte={contexte} seo={model.seo} breadcrumbItems={model.breadcrumbItems} />
 
-  <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap pb-0">
 
-      <HeroBenefices />
+      <div class="container mb-5">
+        <HeroBenefices heroData={model.hero.page} beneficesData={model.blocks.benefices} contexte={contexte} />
+      </div>
 
-      <Tarifs />
+      <div class="clear"></div>
 
-      <Preuves />
+      <Tarifs data={model.blocks.tarifs} contexte={contexte} />
 
-      <Methode />
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
 
-      <ZonesVilles />
+      <Methode data={model.blocks.methode} contexte={contexte} />
 
-      <Ressources />
+      <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <Faqs />
+      <Ressources data={model.blocks.articles} contexte={contexte} />
 
-      <ContactForm />
+      <Faqs
+          items={model.faqs}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
+
+      <ContactForm data={model.cta} form={model.blocks.form} contexte={contexte} mode="audit" />
 
     </div>
   </section>

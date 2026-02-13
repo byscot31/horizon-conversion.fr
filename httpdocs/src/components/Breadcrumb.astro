@@ -1,10 +1,21 @@
 ---
 // src/components/Breadcrumb.astro
+const { items } = Astro.props;
+
+const list = Array.isArray(items) ? items : [
+  { label: "Accueil", href: "/" }
+];
 ---
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Breadcrumb</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Breadcrumb active</li>
+    {list.map((it, idx) => {
+      const isLast = idx === list.length - 1;
+      return isLast ? (
+          <li class="breadcrumb-item active" aria-current="page">{it.label}</li>
+      ) : (
+          <li class="breadcrumb-item"><a href={it.href ?? "#"}>{it.label}</a></li>
+      );
+    })}
   </ol>
 </nav>

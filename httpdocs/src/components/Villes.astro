@@ -1,36 +1,61 @@
 ---
 // src/components/Villes.astro
+const { data, zone, contexte, config } = Astro.props;
+
+const villes = Array.isArray(data) ? data : (data?.items ?? []);
+const max = config?.max ?? 12;
+
+const resolvedZone = zone ?? contexte?.zone;
+
+const badge = config?.badge ?? "Villes";
+const h2 = config?.title ?? `Villes dans ${resolvedZone?.name ?? ""}`;
+const subtitle = config?.subtitle ?? "Choisissez votre ville";
+
+if (!villes.length || !resolvedZone?.slug) {
+  // rien
+}
 ---
 
-<!-- Villes ============================================= -->
+{villes.length > 0 && resolvedZone?.slug && (
 <div class="section mt-0">
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
-      <div class="badge rounded-pill badge-default">Villes Badge</div>
-      <h2 class="text-transform-none ls-0">Villes H2</h2>
-      <span>Villes</span>
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h2 class="text-transform-none ls-0">{h2}</h2>
+      <span>{subtitle}</span>
     </div>
-    <div class="row col-mb-30 align-content-stretch">
 
-      <div class="col-md-4 d-flex">
-        <div class="card">
-          <div class="card-body p-5">
-            <div class="feature-box flex-column">
-              <div class="fbox-content">
-                <h3 class="text-transform-none ls-0 text-larger">
-                  <a href="#" class="link-dark h-text-color">Ville</a>
-                </h3>
-                <p class="text-smaller">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
+    <div class="row col-mb-30 align-content-stretch">
+      {villes.slice(0, max).map((v) => (
+          <div class="col-md-4 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <div class="feature-box flex-column">
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0 text-larger">
+                      <a href={`/zones/${resolvedZone.slug}/${v.slug}/`} class="link-dark h-text-color">
+                        {v.name ?? v.slug}
+                      </a>
+                    </h3>
+                    <p class="text-smaller">
+                      {v.excerpt ?? "Pages locales + suivi des demandes + leviers adaptés."}
+                    </p>
+                  </div>
+
+                  {Array.isArray(v.tags) && v.tags.length > 0 && (
+                      <ul class="nav nav-pills mt-4 mb-0">
+                        {v.tags.slice(0, 6).map((t) => (
+                            <li class="nav-item badge rounded-pill badge-color text-smaller me-2">{t}</li>
+                        ))}
+                      </ul>
+                  )}
+                </div>
               </div>
-              <ul class="nav nav-pills mt-4 mb-0">
-                <li class="nav-item badge rounded-pill badge-color text-smaller me-2">Allentours</li>
-                <li class="nav-item badge rounded-pill badge-color text-smaller">Allentours</li>
-              </ul>
             </div>
           </div>
-        </div>
-      </div>
-
+      ))}
     </div>
+
   </div>
 </div>
+  )}

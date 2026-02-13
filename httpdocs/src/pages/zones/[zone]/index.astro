@@ -3,82 +3,83 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../components/PageTitle.astro";
 import HeroPage from "../../../components/HeroPage.astro";
-import ServicesPage from "../../../components/ServicesPage.astro";
+import ServicesZones from "../../../components/ServicesZones.astro";
 import Villes from "../../../components/Villes.astro";
 import Faqs from "../../../components/Faqs.astro";
 import ContactForm from "../../../components/ContactForm.astro";
+import MaillageInterne from "../../../components/MaillageInterne.astro";
 
-import siteData from "../../../data/site.json";
-import seoData from "../../../data/seo.json";
-import hero_pageData from "../../../data/hero_page.json";
-import servicesData from "../../../data/services.json";
-import zonesData from "../../../data/zones.json";
-import villesData from "../../../data/villes.json";
-import faqs_zonesData from "../../../data/faqs_zones.json";
-import formData from "../../../data/form.json";
+import { buildModel } from "../../../lib/pageModel";
+import { zones, villes, services } from "../../../lib/data";
+import { bySlug } from "../../../lib/collection";
 
-/** ✅ getStaticPaths requis pour /zones/[zone]/ */
-export async function getStaticPaths() {
-  const root =
-    zonesData && typeof zonesData === "object" && !Array.isArray(zonesData)
-      ? zonesData
-      : null;
-
-  if (!root) {
-    throw new Error(`[zones/[zone]] zones.json invalide (objet attendu)`);
-  }
-
-  const zonesRoot =
-    root.zones && typeof root.zones === "object" && !Array.isArray(root.zones)
-      ? root.zones
-      : null;
-
-  if (!zonesRoot) {
-    throw new Error(`[zones/[zone]] zones.json.zones manquant (objet attendu)`);
-  }
-
-  const zonesList = Object.values(zonesRoot).filter(
-    (z) =>
-      z &&
-      typeof z === "object" &&
-      !Array.isArray(z) &&
-      typeof z.slug === "string" &&
-      z.slug.trim()
-  );
-
-  if (zonesList.length === 0) {
-    throw new Error(`[zones/[zone]] aucune zone trouvée dans zones.json.zones`);
-  }
-
-  return zonesList.map((z) => ({
-    params: { zone: String(z.slug).trim() },
-    props: { zoneSlug: String(z.slug).trim() },
-  }));
+export function getStaticPaths() {
+  return (zones ?? []).map((z) => ({ params: { zone: z.slug } }));
 }
+
+const zoneSlug = Astro.params.zone;
+const zone = bySlug(zones, zoneSlug, "zones");
+
+const canonical = `/zones/${zone.slug}/`;
+
+const model = buildModel({
+  type: "zone",
+  zone,
+  canonical,
+});
+
+const contexte = model.contexte;
+
+const seo = {
+  ...model.seo,
+  title: `Zone ${zone.name} | ${model.site.name}`,
+  description: `Obtenir plus de demandes dans la zone ${zone.name} : pages efficaces + suivi des appels et formulaires + leviers (SEO local / Ads). Audit gratuit.`,
+  canonical,
+};
+
+const breadcrumbItems = model.breadcrumbItems ?? [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+  { label: zone.name ?? zone.slug, href: canonical },
+];
+
+const villesZone = (villes ?? []).filter((v) => v.zoneSlug === zone.slug);
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: "Zone",
+        h1: `Générer plus de demandes — ${zone.name}`,
+        chapo: zone.excerpt ?? seo.description,
+      }}
+  />
 
-  <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap pb-0">
 
-      <!-- Hero + Services ============================================= -->
       <div class="container mb-5">
-
-        <HeroPage />
-
-        <ServicesPage />
-
+        <HeroPage data={model.hero.page} contexte={contexte} />
+        <ServicesZones data={services} contexte={contexte} config={{ title: "Services utiles", subtitle: "Choisir un levier" }} />
       </div>
 
       <div class="clear"></div>
 
-      <Villes />
+      <Villes data={villesZone} zone={zone} contexte={contexte} />
 
-      <Faqs />
-      <ContactForm />
+      <Faqs
+          items={model.faqs}
+          data={{ badge: "FAQ", title: `Questions fréquentes — ${zone.name}`, intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
+
+      <ContactForm data={model.site} form={model.blocks.form} contexte={contexte} mode="audit" />
+
+      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
+
     </div>
   </section>
 </BaseLayout>

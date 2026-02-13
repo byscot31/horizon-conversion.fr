@@ -2,112 +2,108 @@
 // src/pages/zones/[zone]/[ville]/[cible]/index.astro
 import BaseLayout from "../../../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../../../components/PageTitle.astro";
+import HeroPage from "../../../../../components/HeroPage.astro";
+import Preuves from "../../../../../components/Preuves.astro";
+import Faqs from "../../../../../components/Faqs.astro";
+import ContactForm from "../../../../../components/ContactForm.astro";
+import MaillageInterne from "../../../../../components/MaillageInterne.astro";
+import ServicesZones from "../../../../../components/ServicesZones.astro";
 
-import zonesData from "../../../../../data/zones.json";
-import villesData from "../../../../../data/villes.json";
-import ciblesData from "../../../../../data/cibles.json";
+import { buildModel } from "../../../../../lib/pageModel";
+import { zones, villes, cibles, services } from "../../../../../lib/data";
+import { bySlug } from "../../../../../lib/collection";
 
 /** ✅ getStaticPaths requis pour /zones/[zone]/[ville]/[cible]/ */
-export async function getStaticPaths() {
-  // --- zones.json : attend { zones: { ... } }
-  const zonesRoot =
-    zonesData && typeof zonesData === "object" && !Array.isArray(zonesData)
-      ? zonesData
-      : null;
-
-  if (!zonesRoot) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] zones.json invalide (objet attendu)`);
-  }
-
-  const zonesObj =
-    zonesRoot.zones && typeof zonesRoot.zones === "object" && !Array.isArray(zonesRoot.zones)
-      ? zonesRoot.zones
-      : null;
-
-  if (!zonesObj) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] zones.json.zones manquant (objet attendu)`);
-  }
-
-  const zoneSlugs = Object.values(zonesObj)
-    .filter((z) => z && typeof z === "object" && !Array.isArray(z))
-    .map((z) => (typeof z.slug === "string" ? z.slug.trim() : ""))
-    .filter(Boolean);
-
-  if (zoneSlugs.length === 0) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] aucune zone trouvée dans zones.json.zones (slug requis)`);
-  }
-
-  // --- villes.json : attend entries (hors _meta) avec { slug, zoneSlug }
-  const villesRoot =
-    villesData && typeof villesData === "object" && !Array.isArray(villesData)
-      ? villesData
-      : null;
-
-  if (!villesRoot) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] villes.json invalide (objet attendu)`);
-  }
-
-  const cities = Object.entries(villesRoot)
-    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
-    .map(([_, v]) => v)
-    .filter(
-      (c) =>
-        typeof c.slug === "string" &&
-        c.slug.trim() &&
-        typeof c.zoneSlug === "string" &&
-        c.zoneSlug.trim()
-    )
-    // on garde uniquement les villes dont la zone existe
-    .filter((c) => zoneSlugs.includes(String(c.zoneSlug).trim()));
-
-  if (cities.length === 0) {
-    throw new Error(
-      `[zones/[zone]/[ville]/[cible]] aucune ville valide trouvée (slug + zoneSlug requis et zoneSlug doit exister dans zones.json)`
-    );
-  }
-
-  // --- cibles.json : attend entries (hors _meta) avec { slug }
-  const ciblesRoot =
-    ciblesData && typeof ciblesData === "object" && !Array.isArray(ciblesData)
-      ? ciblesData
-      : null;
-
-  if (!ciblesRoot) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] cibles.json invalide (objet attendu)`);
-  }
-
-  const cibles = Object.entries(ciblesRoot)
-    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
-    .map(([_, v]) => v)
-    .map((c) => (typeof c.slug === "string" ? c.slug.trim() : ""))
-    .filter(Boolean);
-
-  if (cibles.length === 0) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] aucune cible trouvée dans cibles.json (slug requis)`);
-  }
-
-  // --- Combinaisons : zone/ville/cible
+export function getStaticPaths() {
   const paths = [];
-  for (const city of cities) {
-    const zone = String(city.zoneSlug).trim();
-    const ville = String(city.slug).trim();
-
-    for (const cible of cibles) {
-      paths.push({
-        params: { zone, ville, cible },
-        props: { zoneSlug: zone, villeSlug: ville, cibleSlug: cible },
-      });
+  for (const v of (villes ?? [])) {
+    for (const c of (cibles ?? [])) {
+      paths.push({ params: { zone: v.zoneSlug, ville: v.slug, cible: c.slug } });
     }
   }
-
-  if (paths.length === 0) {
-    throw new Error(`[zones/[zone]/[ville]/[cible]] aucune route générée (check data)`);
-  }
-
   return paths;
 }
+
+const zoneSlug = Astro.params.zone;
+const villeSlug = Astro.params.ville;
+const cibleSlug = Astro.params.cible;
+
+const zone = bySlug(zones, zoneSlug, "zones");
+const ville = bySlug((villes ?? []).filter((v) => v.zoneSlug === zoneSlug), villeSlug, "villes");
+const cible = bySlug(cibles, cibleSlug, "cibles");
+
+const canonical = `/zones/${zone.slug}/${ville.slug}/${cible.slug}/`;
+
+const model = buildModel({
+  type: "cibleVille",
+  zone,
+  ville,
+  cible,
+  canonical,
+});
+
+const contexte = model.contexte;
+
+// SEO local (tu peux laisser model.seo si tu préfères)
+const seo = {
+  ...model.seo,
+  title: `${cible.name} à ${ville.name} | ${model.site.name}`,
+  description: `Pour ${cible.name} à ${ville.name} (${zone.name}) : pages claires + suivi des appels et formulaires + leviers (SEO local / Ads). Audit gratuit.`,
+  canonical,
+};
+
+// Breadcrumb depuis le model (si tu as pickBreadcrumb dans pageModel.ts)
+const breadcrumbItems = model.breadcrumbItems ?? [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+  { label: zone.name ?? zone.slug, href: `/zones/${zone.slug}/` },
+  { label: ville.name ?? ville.slug, href: `/zones/${zone.slug}/${ville.slug}/` },
+  { label: cible.name ?? cible.slug, href: canonical },
+];
+
+// FAQ : model.faqs est déjà filtré par cible + zone + ville via pickFaqs
+const faqItems = model.faqs;
+
+// Services utiles (cards)
+const servicesList = services ?? [];
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: zone.name ?? "Zone",
+        h1: `${cible.name} à ${ville.name}`,
+        chapo: seo.description,
+      }}
+  />
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <div class="container mb-5">
+        <HeroPage data={model.hero.page} contexte={contexte} />
+        <ServicesZones
+            data={servicesList}
+            contexte={{ zone, ville }}
+            config={{ title: "Services utiles", subtitle: "Choisir un levier" }}
+        />
+      </div>
+
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
+
+      <Faqs
+          items={faqItems}
+          data={{ badge: "FAQ", title: `Questions fréquentes — ${cible.name} à ${ville.name}`, intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
+
+      <ContactForm data={model.site} form={model.blocks.form} contexte={contexte} mode="audit" />
+
+      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
+
+    </div>
+  </section>
 </BaseLayout>

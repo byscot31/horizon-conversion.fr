@@ -1,0 +1,22 @@
+{
+  "title": "Ce qu’on met en place",
+  "intro": "Des livrables concrets, utiles dès le départ.",
+  "items": [
+    {
+      "id": "landing",
+      "title": "Page qui convertit",
+      "text": "Une page claire avec un objectif : déclencher une demande."
+    },
+    {
+      "id": "tracking",
+      "title": "Suivi des demandes",
+      "text": "Mesure des formulaires + clics téléphone (GA4)."
+    },
+    {
+      "id": "campaign",
+      "title": "Campagnes (si besoin)",
+      "text": "Google/Meta avec réglages simples et ciblage local."
+    }
+  ],
+  "notes": "Les livrables exacts dépendent de votre situation. On valide tout pendant l’audit."
+}

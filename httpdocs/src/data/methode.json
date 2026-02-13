@@ -1,0 +1,8 @@
+{
+  "href": "/methode/",
+  "steps": [
+    { "title": "1. Comprendre", "text": "On analyse votre offre, votre zone et ce qui bloque.", "icon": "/assets/images/icons/research.svg", "alt": "Comprendre" },
+    { "title": "2. Mettre en place", "text": "Page + tracking + campagnes si besoin.", "icon": "/assets/images/icons/optimizing.svg", "alt": "Mettre en place" },
+    { "title": "3. Améliorer", "text": "On ajuste ce qui génère le plus de demandes.", "icon": "/assets/images/icons/result.svg", "alt": "Améliorer" }
+  ]
+}

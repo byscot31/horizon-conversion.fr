@@ -1,40 +1,70 @@
 ---
 // src/components/ServicesZones.astro
+const { data, contexte, config } = Astro.props;
+
+const services = Array.isArray(data) ? data : (data?.items ?? []);
+const badge = config?.badge ?? "Services";
+const h2 = config?.title ?? "Services disponibles";
+const subtitle = config?.subtitle ?? "Choisissez un service";
+
+const zoneSlug = contexte?.zone?.slug;
+const villeSlug = contexte?.ville?.slug;
+
+function serviceHref(serviceSlug) {
+  // si on a zone+ville => page locale, sinon page service générique
+  if (zoneSlug && villeSlug) return `/zones/${zoneSlug}/${villeSlug}/${serviceSlug}/`;
+  return `/services/${serviceSlug}/`;
+}
+
+if (!services.length) {
+  // rien
+}
 ---
 
-<!-- Services ============================================= -->
+{services.length > 0 && (
 <div class="section mt-0">
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
-      <div class="badge rounded-pill badge-default">Services Badge</div>
-      <h2 class="text-transform-none ls-0">Services H2</h2>
-      <span>Services</span>
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h2 class="text-transform-none ls-0">{h2}</h2>
+      <span>{subtitle}</span>
     </div>
-    <div class="row col-mb-30 align-content-stretch">
 
-      <div class="col-md-4 d-flex">
-        <div class="card">
-          <div class="card-body p-5">
-            <div class="feature-box flex-column">
-              <div class="fbox-image mb-5 text-center">
-                <img height="150" src="/assets/images/services/seo.svg" alt="Service">
+    <div class="row col-mb-30 align-content-stretch">
+      {services.map((s) => (
+          <div class="col-md-4 d-flex">
+            <div class="card w-100">
+              <div class="card-body p-5">
+                <div class="feature-box flex-column">
+                  <div class="fbox-image mb-5 text-center">
+                    <img height="150" src={s.icon ?? "/assets/images/services/seo.svg"} alt={s.name ?? "Service"} />
+                  </div>
+
+                  <div class="fbox-content">
+                    <h3 class="text-transform-none ls-0 text-larger">
+                      <a class="link-dark h-text-color" href={serviceHref(s.slug)}>
+                        {s.name ?? "Service"}
+                      </a>
+                    </h3>
+                    <p class="text-smaller">{s.excerpt ?? ""}</p>
+                  </div>
+
+                  {Array.isArray(s.bullets) && s.bullets.length > 0 && (
+                      <ul class="iconlist ms-3 mt-4 mb-0">
+                        {s.bullets.slice(0, 5).map((b) => (
+                            <li class="d-block mb-2 text-muted">
+                              <i class="fa-solid fa-check text-smaller color me-1"></i> {b}
+                            </li>
+                        ))}
+                      </ul>
+                  )}
+                </div>
               </div>
-              <div class="fbox-content">
-                <h3 class="text-transform-none ls-0 text-larger">Service</h3>
-                <p class="text-smaller">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-              </div>
-              <ul class="iconlist ms-3 mt-4 mb-0">
-                <li class="d-block mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> list</li>
-                <li class="d-block mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> list</li>
-                <li class="d-block mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> list</li>
-                <li class="d-block mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> list</li>
-                <li class="d-block text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> list</li>
-              </ul>
             </div>
           </div>
-        </div>
-      </div>
-
+      ))}
     </div>
+
   </div>
 </div>
+  )}

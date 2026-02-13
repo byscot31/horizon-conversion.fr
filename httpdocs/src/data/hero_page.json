@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "kickerTemplate": "{zone} • {ville}",
+    "titleTemplate": "Obtenir plus de demandes à {ville}",
+    "subtitleTemplate": "Audit gratuit et plan clair pour générer des appels et des formulaires à {ville}.",
+    "p2Template": "On adapte les actions à votre activité et à votre zone, sans jargon.",
+    "primaryCta": "Demander un audit (gratuit)",
+    "secondaryCta": "Être rappelé",
+    "rightTitle": "Points fréquents",
+    "rightIntro": "Ce qu’on règle en priorité :",
+    "problems": [
+      "Message flou sur la page",
+      "Peu d’appels / formulaires",
+      "Pas de suivi des demandes",
+      "Publicité non rentable",
+      "SEO local pas travaillé"
+    ],
+    "cta1": { "label": "Demander un audit (gratuit)", "href": "/contact/" },
+    "cta2": { "label": "Être rappelé", "href": "/contact/" }
+  },
+
+  "variants": [
+    {
+      "type": "serviceVille",
+      "kickerTemplate": "{service} • {ville}",
+      "titleTemplate": "{service} à {ville} : plus de demandes",
+      "subtitleTemplate": "Audit gratuit pour générer des appels et des formulaires à {ville} grâce à {service}.",
+      "p2Template": "On met en place une page claire, le suivi des demandes, puis les actions qui comptent."
+    },
+    {
+      "type": "cibleVille",
+      "kickerTemplate": "{cible} • {ville}",
+      "titleTemplate": "Plus de demandes pour {cible} à {ville}",
+      "subtitleTemplate": "Audit gratuit : une page claire et un suivi des demandes adaptés aux {cible} à {ville}.",
+      "p2Template": "On travaille la clarté, la confiance et le prochain pas (demander un audit)."
+    },
+    {
+      "type": "zone",
+      "kickerTemplate": "{zone}",
+      "titleTemplate": "Obtenir plus de demandes dans la zone {zone}",
+      "subtitleTemplate": "Audit gratuit : pages locales + suivi appels/formulaires + leviers (SEO local / Ads).",
+      "p2Template": "Choisissez votre ville, ou demandez un audit pour un plan clair."
+    },
+    {
+      "type": "servicesIndex",
+      "kickerTemplate": "Services",
+      "titleTemplate": "Choisir le bon levier",
+      "subtitleTemplate": "SEO local, Google Ads ou Meta Ads : on commence par un audit gratuit.",
+      "p2Template": "L’objectif : plus d’appels et de formulaires, avec un plan clair.",
+      "rightTitle": "Ce qu’on clarifie",
+      "rightIntro": "Avant de lancer :",
+      "problems": ["Offre", "Zone", "Page", "Suivi des demandes", "Budget"]
+    }
+
+  ],
+
+  "fallbacks": {
+    "kicker": "Sud Oise (60) • Nord Val-d’Oise (95)",
+    "title": "Obtenir plus de demandes",
+    "subtitle": "Audit gratuit, plan clair, mise en place simple."
+  }
+}

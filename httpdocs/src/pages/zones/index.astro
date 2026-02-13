@@ -10,38 +10,65 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
-import siteData from "../../data/site.json";
-import seoData from "../../data/seo.json";
-import hero_cardData from "../../data/hero_card.json";
-import processData from "../../data/process.json";
-import zonesData from "../../data/zones.json";
-import servicesData from "../../data/services.json";
-import villesData from "../../data/villes.json";
-import preuvesData from "../../data/preuves.json";
-import faqs_zonesData from "../../data/faqs_zones.json";
-import maillage_interneData from "../../data/maillage_interne.json";
+import { buildModel } from "../../lib/pageModel";
+
+const model = buildModel({
+  type: "home",
+  canonical: "/zones/",
+});
+
+const contexte = { ...model.contexte, type: "zonesIndex" };
+
+const seo = {
+  ...model.seo,
+  title: `Zones couvertes | ${model.site.name}`,
+  description:
+    "Sud Oise (60) et Nord Val-d’Oise (95) : pages locales + SEO local + Google/Meta Ads pour obtenir plus d’appels et de formulaires. Audit gratuit.",
+  canonical: "/zones/",
+};
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+];
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: "Zones",
+        h1: "Zones couvertes",
+        chapo: "Sud Oise (60) et Nord Val-d’Oise (95). Choisissez votre zone pour voir les villes et les services.",
+      }}
+  />
 
-  <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap py-0 overflow-visible">
 
-      <HeroCard />
+      <HeroCard data={model.hero.card} contexte={contexte} />
 
-      <Process />
+      <Process data={model.blocks.process} contexte={contexte} />
 
-      <Zones />
+      <Zones data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <ServicesZones />
+      <ServicesZones
+          data={model.blocks.services}
+          contexte={contexte}
+          config={{ title: "Services utiles", subtitle: "Choisir un levier" }}
+      />
 
-      <Preuves />
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
 
-      <Faqs />
+      <Faqs
+          items={model.faqs}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
 
-      <MaillageInterne />
+      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
 
     </div>
   </section>

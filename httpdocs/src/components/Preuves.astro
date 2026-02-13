@@ -1,32 +1,47 @@
 ---
 // src/components/Preuves.astro
+const { data, contexte } = Astro.props;
+
+const badge = data?.badge ?? "Preuves";
+const h2 = data?.title ?? "Preuves";
+const items = Array.isArray(data?.items) ? data.items : [];
+const style = data?.style ?? {};
+
+const backgroundImage = style.backgroundImage ?? "/assets/images/sections/3.jpg";
+const padding = style.padding ?? "0 0 70px";
+
+if (!items.length) {
+  // rien
+}
 ---
 
-<!-- Preuves ============================================= -->
-<div class="section mb-0" style="background: url('/assets/images/sections/3.jpg') no-repeat top center; background-size: cover; padding: 0 0 70px;">
+{items.length > 0 && (
+<div class="section mb-0" style={`background: url('${backgroundImage}') no-repeat top center; background-size: cover; padding: ${padding};`}>
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
-      <div class="badge rounded-pill badge-default">Preuves</div>
-      <h2 class="text-transform-none ls-0">Preuves</h2>
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h2 class="text-transform-none ls-0">{h2}</h2>
     </div>
 
     <div class="row col-mb-30 align-content-stretch">
-
-      <div class="col-lg-4 col-md-6 d-flex">
-        <div class="card rounded-6 shadow border-0">
-          <div class="card-body p-4 position-relative overflow-hidden">
-            <div class="row">
-              <div class="col-12 text-center">
-                <h3 class="h6 mb-0 fw-bold">Preuve</h3>
-                <p class="mb-4 font-primary fst-normal">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!</p>
-                <small class="text-muted">Preuve</small>
+      {items.map((p) => (
+          <div class="col-lg-4 col-md-6 d-flex">
+            <div class="card rounded-6 shadow border-0 w-100">
+              <div class="card-body p-4 position-relative overflow-hidden">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <h3 class="h6 mb-0 fw-bold">{p.title ?? "Preuve"}</h3>
+                    <p class="mb-4 font-primary fst-normal">{p.text ?? ""}</p>
+                    {p.meta && <small class="text-muted">{p.meta}</small>}
+                  </div>
+                </div>
+                <div class="bg-icon bi-quote op-02"></div>
               </div>
             </div>
-            <div class="bg-icon bi-quote op-02"></div>
           </div>
-        </div>
-      </div>
-
+      ))}
     </div>
+
   </div>
 </div>
+  )}

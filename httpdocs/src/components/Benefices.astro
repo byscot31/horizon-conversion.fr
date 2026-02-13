@@ -1,0 +1,43 @@
+---
+// src/components/Benefices.astro
+const { data, contexte, config } = Astro.props;
+
+const badge = data?.badge ?? "Bénéfices";
+const h2 = data?.title ?? "Ce que vous gagnez";
+const intro = data?.intro ?? "";
+
+const items = Array.isArray(data?.items) ? data.items : [];
+const max = config?.max ?? items.length;
+
+if (!items.length) {
+  // rien à afficher
+}
+---
+
+{items.length > 0 && (
+<>
+  <div class="heading-block border-bottom-0 text-center">
+    <div class="badge rounded-pill badge-default">{badge}</div>
+    <h2 class="text-transform-none ls-0">{h2}</h2>
+    {intro && <p class="text-muted mb-0">{intro}</p>}
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="row mt-4 col-mb-50 mb-0">
+    {items.slice(0, max).map((b) => (
+        <div class="col-sm-6 col-lg-4">
+          <div class="feature-box">
+            <div class="fbox-icon mb-4">
+              <i class={b.icon ?? "bi-file-earmark-richtext text-white bg-google"}></i>
+            </div>
+            <div class="fbox-content">
+              <h3 class="text-transform-none">{b.title ?? "Bénéfice"}</h3>
+              <p>{b.text ?? ""}</p>
+            </div>
+          </div>
+        </div>
+    ))}
+  </div>
+</>
+  )}

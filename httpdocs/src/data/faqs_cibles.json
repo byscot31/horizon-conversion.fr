@@ -1,0 +1,12 @@
+[
+  {
+    "q": "Est-ce adapté à mon profil ?",
+    "a": "Oui. On ajuste le message, la page et le suivi des demandes à votre activité. L’audit sert à choisir les bonnes priorités.",
+    "cibleSlugs": ["artisans", "professions-liberales"]
+  },
+  {
+    "q": "Est-ce que je peux commencer sans publicité ?",
+    "a": "Oui. On peut d’abord faire une page claire + le suivi des appels et formulaires, puis ajouter un levier si besoin.",
+    "cibleSlugs": ["artisans", "professions-liberales"]
+  }
+]

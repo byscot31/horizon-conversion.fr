@@ -10,37 +10,56 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
-import siteData from "../../data/site.json";
-import seoData from "../../data/seo.json";
-import hero_cardData from "../../data/hero_card.json";
-import processData from "../../data/process.json";
-import ciblesData from "../../data/cibles.json";
-import villesData from "../../data/villes.json";
-import preuvesData from "../../data/preuves.json";
-import faqs_ciblesData from "../../data/faqs_cibles.json";
-import maillage_interneData from "../../data/maillage_interne.json";
+import { buildModel } from "../../lib/pageModel";
+
+const model = buildModel({
+  type: "cible",
+  canonical: "/profils/",
+});
+
+const contexte = { ...model.contexte, type: "profilsIndex" }; // pour rules de maillage si tu veux
+const seo = {
+  ...model.seo,
+  title: `Profils | ${model.site.name}`,
+  description:
+    "Artisans, professions libérales… Des pages claires et un suivi des appels + formulaires pour générer des demandes. Audit gratuit.",
+  canonical: "/profils/",
+};
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Profils", href: "/profils/" },
+];
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{ badge: "Profils", h1: "Profils", chapo: seo.description }}
+  />
 
-  <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap py-0 overflow-visible">
 
-      <HeroCard />
+      <HeroCard data={model.hero.card} contexte={contexte} />
 
-      <Process />
+      <Process data={model.blocks.process} contexte={contexte} />
 
-      <Cibles />
+      <Cibles data={model.blocks.cibles} contexte={contexte} />
 
-      <ZonesVilles />
+      <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <Preuves />
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
 
-      <Faqs />
+      <Faqs
+          items={model.blocks.faqsCibles ?? model.faqs}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
 
-      <MaillageInterne />
+      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
 
     </div>
   </section>

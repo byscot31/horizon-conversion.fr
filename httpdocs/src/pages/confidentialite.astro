@@ -1,0 +1,141 @@
+---
+// src/pages/confidentialite.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageTitle from "../components/PageTitle.astro";
+
+const seo = {
+  title: "Politique de confidentialité | Horizon Conversion",
+  description:
+    "Comment vos données sont collectées, utilisées et protégées (formulaires, contact, mesures d’audience).",
+  canonical: "/confidentialite/",
+};
+
+const contexte = { type: "confidentialite" };
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Confidentialité", href: "/confidentialite/" },
+];
+---
+
+<BaseLayout seo={seo}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: "Confidentialité",
+        h1: "Politique de confidentialité",
+        chapo:
+          "Cette page explique quelles données sont collectées, pourquoi, et comment exercer vos droits.",
+      }}
+  />
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+      <div class="container mw-md">
+
+        <div class="card shadow-sm">
+          <div class="card-body p-5">
+
+            <h2 class="h4 mb-3">1) Responsable du traitement</h2>
+            <p class="text-muted mb-4">
+              Le responsable du traitement est <strong>Horizon Conversion</strong> (marque de <strong>Control Online</strong>).
+              Pour toute question :{" "}
+              <a class="link-dark" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>.
+            </p>
+
+            <h2 class="h4 mb-3">2) Données collectées</h2>
+            <p class="text-muted mb-2">
+              Nous collectons uniquement les données nécessaires au traitement de votre demande, notamment :
+            </p>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Données d’identification et de contact (ex. email, téléphone)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Données de contexte (ex. ville/secteur, site web si fourni)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Données techniques (adresse IP, logs, informations de navigation)</li>
+            </ul>
+
+            <h2 class="h4 mb-3">3) Finalités</h2>
+            <p class="text-muted mb-2">
+              Les données sont utilisées pour :
+            </p>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Répondre à votre demande (audit, rappel, devis, questions)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Assurer le suivi des échanges (relation commerciale)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Mesurer l’audience et améliorer le site (statistiques)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Sécuriser le site (prévention fraude/abus)</li>
+            </ul>
+
+            <h2 class="h4 mb-3">4) Bases légales</h2>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> <strong>Consentement</strong> (ex. cookies non essentiels, prise de contact si nécessaire)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> <strong>Intérêt légitime</strong> (amélioration du site, sécurité, mesure basique d’audience)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> <strong>Exécution de mesures précontractuelles</strong> (réponse à une demande d’audit/devis)</li>
+            </ul>
+
+            <h2 class="h4 mb-3">5) Durées de conservation</h2>
+            <p class="text-muted mb-2">
+              Les durées varient selon la nature des données :
+            </p>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Données de contact : le temps de traiter la demande puis archivage limité si nécessaire</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Données commerciales : durée de la relation + obligations légales</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Logs techniques : durée limitée pour sécurité et diagnostic</li>
+            </ul>
+
+            <h2 class="h4 mb-3">6) Destinataires</h2>
+            <p class="text-muted mb-4">
+              Les données sont destinées uniquement à Horizon Conversion et, si nécessaire, à des prestataires techniques
+              (hébergement, messagerie, outils de mesure) strictement pour fournir le service.
+              Nous ne revendons pas vos données.
+            </p>
+
+            <h2 class="h4 mb-3">7) Cookies & mesure d’audience</h2>
+            <p class="text-muted mb-2">
+              Le site peut utiliser des cookies ou technologies similaires :
+            </p>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Cookies nécessaires au fonctionnement</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Cookies de mesure d’audience (selon configuration)</li>
+            </ul>
+            <p class="text-muted mb-4">
+              Vous pouvez paramétrer votre navigateur pour refuser les cookies. Si un bandeau cookies est en place,
+              vous pouvez gérer vos préférences à tout moment.
+            </p>
+
+            <h2 class="h4 mb-3">8) Sécurité</h2>
+            <p class="text-muted mb-4">
+              Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger vos données
+              (accès limité, sécurisation des systèmes, sauvegardes, etc.).
+            </p>
+
+            <h2 class="h4 mb-3">9) Vos droits</h2>
+            <p class="text-muted mb-2">
+              Conformément au RGPD, vous disposez notamment des droits suivants :
+            </p>
+            <ul class="iconlist ms-3 mb-4">
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Accès, rectification, effacement</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Opposition et limitation</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Portabilité (si applicable)</li>
+              <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color me-1"></i> Retrait du consentement (quand c’est la base légale)</li>
+            </ul>
+            <p class="text-muted mb-4">
+              Pour exercer vos droits :{" "}
+              <a class="link-dark" href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>.
+              Vous pouvez également introduire une réclamation auprès de la CNIL.
+            </p>
+
+            <h2 class="h4 mb-3">10) Mise à jour</h2>
+            <p class="text-muted mb-0">
+              Cette politique peut être mise à jour. La version publiée sur le site est la version en vigueur.
+            </p>
+
+          </div>
+        </div>
+
+        <div class="clear line my-6"></div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

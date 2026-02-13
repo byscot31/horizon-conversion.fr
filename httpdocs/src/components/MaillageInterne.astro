@@ -1,19 +1,35 @@
 ---
 // src/components/MaillageInterne.astro
+const { data, contexte } = Astro.props;
+
+const defaults = data?.defaults ?? {};
+const rules = Array.isArray(data?.rules) ? data.rules : [];
+
+const type = contexte?.type ?? "default";
+const rule = rules.find((r) => r.type === type) ?? rules.find((r) => r.type === "default");
+
+const title = rule?.title ?? defaults.title ?? "À découvrir";
+const subtitle = rule?.subtitle ?? defaults.subtitle ?? "Continuez votre visite";
+
+const links = Array.isArray(rule?.links) ? rule.links : (Array.isArray(defaults.links) ? defaults.links : []);
+if (!links.length) {
+  // ne rien afficher si pas de liens
+}
 ---
 
-<!-- Maillage interne ============================================= -->
+{links.length > 0 && (
 <div class="section mt-5" style="padding: 100px 0; overflow: visible; background: url('/assets/images/sections/3.jpg') no-repeat top center; background-size: cover;">
   <div class="container">
     <div class="heading-block border-bottom-0 text-center">
-      <div class="h6 text-uppercase ls-1 mb-1">Maillage interne</div>
-      <h2 class="text-transform-none ls-0">Maillage interne <span>CTA</span></h2>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">services</a>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">zones</a>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">tarifs</a>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">profils</a>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">methode</a>
-      <a href="#" class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">contact</a>
+      <div class="h6 text-uppercase ls-1 mb-1">{subtitle}</div>
+      <h2 class="text-transform-none ls-0">{title}</h2>
+
+      {links.slice(0, (defaults.maxLinks ?? 6)).map((l) => (
+          <a href={l.href ?? "#"} class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">
+            {l.label ?? "Lien"}
+          </a>
+      ))}
     </div>
   </div>
 </div>
+  )}

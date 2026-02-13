@@ -1,0 +1,67 @@
+{
+  "seo": {
+    "title": "Services | Horizon Conversion",
+    "description": "SEO local, Google Ads et Meta Ads : des actions simples pour obtenir plus d’appels et de formulaires. Audit gratuit."
+  },
+  "hero": {
+    "kicker": "Services",
+    "title": "Obtenir plus de demandes",
+    "subtitle": "On met en place ce qui déclenche des appels et des formulaires. Audit gratuit, plan clair, mise en place simple.",
+    "primaryCta": "Demander un audit (gratuit)",
+    "secondaryCta": "Être rappelé"
+  },
+  "intro": {
+    "title": "Choisissez le bon levier",
+    "text": "Selon votre situation, on commence par la page, le suivi des demandes et le levier le plus direct (SEO local ou publicité)."
+  },
+  "sections": [
+    {
+      "id": "start",
+      "title": "Pour démarrer",
+      "text": "Idéal si vous voulez un plan clair et des bases solides.",
+      "serviceSlugs": ["seo-local", "google-ads"]
+    },
+    {
+      "id": "ads",
+      "title": "Pour accélérer",
+      "text": "Idéal si vous voulez des demandes plus vite via la publicité.",
+      "serviceSlugs": ["google-ads", "meta-ads"]
+    }
+  ],
+  "cards": {
+    "ctaLabel": "Voir le service",
+    "showBadges": true,
+    "badgesBySegment": {
+      "volume": ["Rapide", "Concret"],
+      "premium": ["Durable", "Qualité"]
+    }
+  },
+  "filters": {
+    "enabled": true,
+    "label": "Filtrer",
+    "items": [
+      { "id": "all", "label": "Tous" },
+      { "id": "volume", "label": "Actions rapides" },
+      { "id": "premium", "label": "Accompagnement" }
+    ]
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": [
+      {
+        "q": "Quel service choisir pour commencer ?",
+        "a": "On le décide pendant l’audit gratuit : on regarde votre offre, votre zone et ce qui peut générer des demandes le plus vite."
+      },
+      {
+        "q": "Est-ce que je peux démarrer petit ?",
+        "a": "Oui. On peut commencer simple, mesurer, puis renforcer ce qui marche."
+      }
+    ]
+  },
+  "bottomCta": {
+    "title": "On regarde ensemble ?",
+    "text": "En 20–30 minutes, vous repartez avec un plan clair.",
+    "primaryCta": "Demander un audit (gratuit)",
+    "secondaryCta": "Être rappelé"
+  }
+}

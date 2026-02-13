@@ -10,38 +10,53 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
-import siteData from "../../data/site.json";
-import seoData from "../../data/seo.json";
-import hero_cardData from "../../data/hero_card.json";
-import processData from "../../data/process.json";
-import servicesData from "../../data/services.json";
-import zonesData from "../../data/zones.json";
-import villesData from "../../data/villes.json";
-import preuvesData from "../../data/preuves.json";
-import faqs_servicesData from "../../data/faqs_services.json";
-import maillage_interneData from "../../data/maillage_interne.json";
+import { buildModel } from "../../lib/pageModel";
+
+const model = buildModel({
+  type: "home",
+  canonical: "/services/",
+});
+
+// contexte spécifique pour tes rules (maillage/hero variants)
+const contexte = { ...model.contexte, type: "servicesIndex" };
+
+// SEO : on laisse services_page.json piloter si présent
+const seo = model.blocks.servicesPage?.seo ?? {
+  title: `Services | ${model.site.name}`,
+  description:
+    "SEO local, Google Ads et Meta Ads : des actions simples pour obtenir plus d’appels et de formulaires. Audit gratuit.",
+  canonical: "/services/",
+};
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Services", href: "/services/" },
+];
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle contexte={contexte} seo={seo} breadcrumbItems={breadcrumbItems} />
 
-  <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap py-0 overflow-visible">
 
-      <HeroCard />
+      <HeroCard data={model.hero.card} contexte={contexte} cta={model.blocks.servicesPage?.hero} />
 
-      <Process />
+      <Process data={model.blocks.process} contexte={contexte} />
 
-      <Services />
+      <Services data={model.blocks.services} page={model.blocks.servicesPage} contexte={contexte} />
 
-      <ZonesVilles />
+      <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <Preuves />
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
 
-      <Faqs />
+      <Faqs
+          items={model.faqs}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
 
-      <MaillageInterne />
+      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
 
     </div>
   </section>

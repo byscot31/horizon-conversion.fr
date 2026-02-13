@@ -1,15 +1,75 @@
 ---
 // src/layouts/BaseLayout.astro
+const { seo, site } = Astro.props;
+
+// ✅ Fallbacks simples (si jamais une page n’envoie rien)
+const s = site ?? {};
+const meta = seo ?? {};
+
+const title =
+	meta.title ??
+	s.name ??
+	"Horizon Conversion";
+
+const description =
+	meta.description ??
+	s.defaultDescription ??
+	"Audit gratuit et plan clair pour générer des appels et des formulaires.";
+
+const canonicalPath = meta.canonical ?? Astro.url.pathname;
+const canonicalUrl = (() => {
+	const base = s.url ?? `${Astro.url.origin}`;
+	try {
+		return new URL(canonicalPath, base).toString();
+	} catch {
+		return canonicalPath;
+	}
+})();
+
+const ogImage = meta.ogImage ?? s.ogImage ?? "/assets/images/og.jpg";
+const noindex = meta.noindex === true;
+
+// JSON-LD (optionnel)
+const orgJsonLd = s?.name
+	? {
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		name: s.name,
+		url: s.url ?? Astro.url.origin,
+		email: s.email,
+		telephone: s.phone,
+		logo: s.logo ?? "/assets/images/logo.png",
+	}
+	: null;
 ---
 
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
-
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
-	<meta name="author" content="Horizon Conversion">
-	<meta name="description" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="author" content={s.author ?? "Horizon Conversion"}>
+	<meta name="description" content={description}>
+	{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+	<link rel="canonical" href={canonicalUrl} />
+
+	<!-- Open Graph -->
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={canonicalUrl} />
+	<meta property="og:image" content={ogImage} />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImage} />
 
 	<!-- Font Imports -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,490 +84,464 @@
 
 	<!-- Niche Demos -->
 	<link rel="stylesheet" href="/assets/seo.css">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Document Title
-	============================================= -->
-	<title></title>
+	<!-- Document Title -->
+	<title>{title}</title>
 
+	{orgJsonLd && (
+		<script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+	)}
 </head>
 
 <body class="stretched">
+<div id="wrapper">
 
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper">
+	<!-- Top Bar ============================================= -->
+	<div id="top-bar" class="transparent-topbar">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-12 col-md-auto">
+					<div class="top-links">
+						<ul class="top-links-container">
+							<li class="top-links-item"><a href="/zones">Zones Sud Oise (60) / Val d'Oise (95)</a></li>
+						</ul>
+					</div>
+				</div>
 
-		<!-- Top Bar
-		============================================= -->
-		<div id="top-bar" class="transparent-topbar">
+				<div class="col-12 col-md-auto">
+					<div class="top-links">
+						<ul class="top-links-container">
+							<li class="top-links-item">
+								<a href={`tel:${(s.phone ?? "+33660921008").replace(/\s/g, "")}`}>{s.phoneDisplay ?? "06 60 92 10 08"}</a>
+							</li>
+							<li class="top-links-item">
+								<a href={`mailto:${s.email ?? "contact@horizon-conversion.fr"}`}>{s.email ?? "contact@horizon-conversion.fr"}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div><!-- #top-bar end -->
+
+	<!-- Header ============================================= -->
+	<header id="header" class="transparent-header floating-header header-size-md">
+		<div id="header-wrap">
 			<div class="container">
+				<div class="header-row">
 
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-auto">
+					<!-- Logo -->
+					<div id="logo">
+						<a href="/" aria-label="Horizon Conversion - Accueil">
+							<img class="logo-default" src={s.logo ?? "/assets/images/logo.png"} alt={s.name ?? "Horizon Conversion"}>
+						</a>
+					</div><!-- #logo end -->
 
-						<!-- Top Links
-						============================================= -->
-						<div class="top-links">
-							<ul class="top-links-container">
-								<li class="top-links-item"><a href="/zones">Zones Sud Oise (60) / Val d'Oise (95)</a></li>
-							</ul>
-						</div><!-- .top-links end -->
-
+					<div class="header-misc">
+						<a href="/contact/" class="button button-rounded ms-2 d-none d-sm-inline-flex">
+							Demander un plan
+						</a>
 					</div>
 
-					<div class="col-12 col-md-auto">
+					<div class="primary-menu-trigger">
+						<button class="cnvs-hamburger" type="button" title="Open Mobile Menu" aria-label="Ouvrir le menu mobile">
+							<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+						</button>
+					</div>
 
-						<!-- Top Contact
-						============================================= -->
-						<div class="top-links">
-						    <ul class="top-links-container">
-                        		<li class="top-links-item"><a href="tel:+33660921008">06 60 92 10 08</a></li>
-                        		<li class="top-links-item"><a href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a></li>
-                        	</ul>
-                        </div><!-- .top-links end -->
+					<!-- Primary Navigation -->
+					<nav class="primary-menu with-arrows">
+						<ul class="menu-container">
+
+							<li class="menu-item mega-menu">
+								<a class="menu-link" href="/profils/"><div>Profils</div></a>
+
+								<div class="mega-menu-content mega-menu-style-2 px-0">
+									<div class="container">
+										<div class="row">
+
+											<a href="/profils/artisans/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Artisans & chantiers</div>
+														<p>Plus d’appels entrants, moins de demandes non pertinentes.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/profils/tpe/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Petites entreprises (TPE)</div>
+														<p>Des demandes régulières sans y passer tes journées.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/profils/pme/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">PME en croissance</div>
+														<p>Structurer l’acquisition et mieux convertir le trafic.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/profils/commerces/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Commerces & points de vente</div>
+														<p>Plus de visites, d’appels et d’actions locales.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/profils/professions-liberales/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Professions libérales</div>
+														<p>Rassurer vite et déclencher la prise de contact.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/profils/reseaux-franchises/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Réseaux & franchises</div>
+														<p>Déployer un système qui scale par zone.</p>
+													</div>
+												</div>
+											</a>
+
+											<div class="mega-menu-column sub-menu-container col-12 p-0">
+												<a href="/profils/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
+													Voir tous les profils <i class="bi-arrow-right"></i>
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="menu-item mega-menu">
+								<a class="menu-link" href="/services/"><div>Services</div></a>
+
+								<div class="mega-menu-content mega-menu-style-2 px-0">
+									<div class="container">
+										<div class="row">
+
+											<a href="/services/google-ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/adword.svg" alt="Google Ads" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Google Ads</div>
+														<p>Des campagnes simples pour générer des demandes rapidement.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/services/seo-local/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/seo.svg" alt="SEO local" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">SEO local</div>
+														<p>Être visible sur Google quand on vous cherche près de chez vous.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/services/pages-locales/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/experience.svg" alt="Pages locales qui convertissent" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Pages locales qui convertissent</div>
+														<p>Des pages orientées demande, pas juste présentation.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/services/google-business-profile/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/content_marketing.svg" alt="Google Business Profile" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Google Business Profile</div>
+														<p>Optimiser appels, itinéraires et visibilité Maps.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/services/meta-ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/social.svg" alt="Publicités Meta (Facebook/Instagram)" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Meta Ads</div>
+														<p>Des pubs simples pour obtenir plus de contacts.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/services/suivi-conversions/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-icon mb-2">
+														<img src="/assets/images/icons/analysis.svg" alt="Suivi & mesure des conversions" class="bg-transparent rounded-0">
+													</div>
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Suivi des conversions</div>
+														<p>Suivi appels + formulaires + sources pour piloter.</p>
+													</div>
+												</div>
+											</a>
+
+											<div class="mega-menu-column sub-menu-container col-12 p-0">
+												<a href="/services/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
+													Voir tous les services <i class="bi-arrow-right"></i>
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="menu-item mega-menu">
+								<a class="menu-link" href="/zones/"><div>Zones</div></a>
+
+								<div class="mega-menu-content mega-menu-style-2 px-0">
+									<div class="container">
+										<div class="row">
+
+											<div class="mega-menu-column sub-menu-container col-lg-2 border-bottom py-4"></div>
+
+											<a href="/zones/sud-oise/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Sud Oise (60)</div>
+														<p>Autour de Chantilly, Senlis et environs.</p>
+													</div>
+												</div>
+											</a>
+
+											<a href="/zones/nord-val-doise/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
+												<div class="feature-box">
+													<div class="fbox-content">
+														<div class="h3 text-transform-none ls-0">Nord Val d’Oise (95)</div>
+														<p>Autour de L’Isle-Adam et Persan.</p>
+													</div>
+												</div>
+											</a>
+
+											<div class="mega-menu-column sub-menu-container col-lg-2 border-bottom py-4"></div>
+
+											<div class="mega-menu-column sub-menu-container col-12 p-0">
+												<a href="/zones/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light">
+													Voir toutes les zones <i class="bi-arrow-right"></i>
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="menu-item"><a class="menu-link" href="/methode/"><div>Méthode</div></a></li>
+							<li class="menu-item"><a class="menu-link" href="/preuves/"><div>Preuves</div></a></li>
+							<li class="menu-item"><a class="menu-link" href="/tarifs/"><div>Tarifs</div></a></li>
+							<li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
+						</ul>
+					</nav><!-- #primary-menu end -->
+
+				</div>
+			</div>
+		</div>
+		<div class="header-wrap-clone"></div>
+	</header><!-- #header end -->
+
+	<slot />
+
+	<!-- Footer ============================================= -->
+	<footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
+		<div class="container">
+			<div class="footer-widgets-wrap pb-5">
+
+				<div class="row col-mb-50">
+					<div class="col-md-8">
+						<div class="widget">
+
+							<img
+								src="/assets/images/logo-horizon-conversion.svg"
+								onerror="this.onerror=null;this.src='images/footer-widget-logo.png';"
+								alt="Horizon Conversion"
+								class="alignleft"
+								style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;"
+							>
+
+							<p class="mb-0">
+								<strong>Horizon Conversion</strong> aide les <strong>artisans</strong>, <strong>PME/TPE</strong>,
+								<strong>commerces</strong> et <strong>professions libérales</strong> à générer des demandes qualifiées
+								(appels &amp; formulaires) via <strong>SEO local</strong>, <strong>Google/Meta Ads</strong> et
+								<strong>optimisation de conversion</strong>.
+							</p>
+							<p class="text-muted mt-2 mb-0">
+								Zone : <strong>Sud Oise (60)</strong> &amp; <strong>Val d’Oise (95)</strong>.
+							</p>
+
+							<div class="line line-sm"></div>
+
+							<div class="row g-4">
+								<div class="col-lg-3 col-6 widget_links">
+									<div class="h5 mb-2">Navigation</div>
+									<ul>
+										<li><a href="/">Accueil</a></li>
+										<li><a href="/methode/">Méthode</a></li>
+										<li><a href="/tarifs/">Tarifs</a></li>
+										<li><a href="/ressources/">Ressources</a></li>
+										<li><a href="/contact/">Contact</a></li>
+									</ul>
+								</div>
+
+								<div class="col-lg-5 col-6 widget_links">
+									<div class="h5 mb-2">Services</div>
+									<ul>
+										<li><a href="/services/seo-local/">SEO local</a></li>
+										<li><a href="/services/google-business-profile/">Google Business Profile (Maps)</a></li>
+										<li><a href="/services/google-ads/">Google Ads</a></li>
+										<li><a href="/services/meta-ads/">Meta Ads</a></li>
+										<li><a href="/services/suivi-conversions/">Suivi conversions</a></li>
+									</ul>
+								</div>
+
+								<div class="col-lg-4 col-12 widget_links">
+									<div class="h5 mb-2">Zones couvertes</div>
+									<ul>
+										<li><a href="/zones/sud-oise/">Sud Oise (60)</a></li>
+										<li><a href="/zones/nord-val-doise/">Nord Val d’Oise (95)</a></li>
+									</ul>
+									<div class="text-muted small mt-2">
+										Exemples : Chantilly, Senlis, Creil, L’Isle-Adam…
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="widget">
+							<div class="row">
+
+								<div class="col-12">
+									<div class="feature-box fbox-plain fbox-sm align-items-center">
+										<div class="fbox-icon">
+											<i class="bi-telephone text-dark"></i>
+										</div>
+										<div class="fbox-content">
+											<span class="text-muted">Appelez :</span><br>
+											<h3 class="text-transform-none ls-0 fw-semibold mb-0">
+												<a href={`tel:${(s.phone ?? "+33660921008").replace(/\s/g, "")}`} class="text-dark text-decoration-none">
+													{s.phoneDisplay ?? "06 60 92 10 08"}
+												</a>
+											</h3>
+											<small class="text-muted d-block">Lun–Ven · réponse rapide</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-12 mt-4">
+									<div class="feature-box fbox-plain fbox-sm align-items-center">
+										<div class="fbox-icon">
+											<i class="bi-envelope text-dark"></i>
+										</div>
+										<div class="fbox-content">
+											<span class="text-muted">Email :</span><br>
+											<h3 class="text-transform-none ls-0 fw-semibold mb-0">
+												<a href={`mailto:${s.email ?? "contact@horizon-conversion.fr"}`} class="text-dark text-decoration-none">
+													{s.email ?? "contact@horizon-conversion.fr"}
+												</a>
+											</h3>
+											<small class="text-muted d-block">Ou via le formulaire</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-12 mt-4">
+									<div class="card shadow-sm">
+										<div class="card-body">
+											<div class="h5 mb-2">Besoin de leads rapidement ?</div>
+											<p class="text-muted mb-3">Audit + plan d’action (SEO local / Ads / Conversion).</p>
+											<a href="/contact/" class="button button-rounded w-100 text-transform-none ls-0 m-0">Demander un audit</a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
 
 					</div>
 				</div>
 
+			</div><!-- .footer-widgets-wrap end -->
+		</div>
+
+		<!-- Copyrights -->
+		<div
+			id="copyrights"
+			style="background: url('/assets/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;"
+		>
+			<div class="container">
+				<div class="row justify-content-between col-mb-30">
+					<div class="col-12 col-lg-auto text-center text-lg-start">
+						&copy; <span id="hc-year"></span> <strong>Horizon Conversion</strong>. Tous droits réservés.<br>
+						<div class="copyright-links">
+							<a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a> /
+							<a href="/politique-confidentialite/" class="text-contrast-600">Politique de confidentialité</a> /
+							<a href="/cookies/" class="text-contrast-600">Cookies</a>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-auto text-center text-lg-end">
+						<div class="copyrights-menu copyright-links">
+							<a href="/" class="text-contrast-600">Accueil</a> /
+							<a href="/services/seo-local/" class="text-contrast-600">SEO local</a> /
+							<a href="/services/google-ads/" class="text-contrast-600">Google Ads</a> /
+							<a href="/tarifs/" class="text-contrast-600">Tarifs</a> /
+							<a href="/contact/" class="text-contrast-600">Contact</a>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div><!-- #top-bar end -->
-
-		<!-- Header
-    ============================================= -->
-    <header id="header" class="transparent-header floating-header header-size-md">
-    	<div id="header-wrap">
-    		<div class="container">
-    			<div class="header-row">
-
-    				<!-- Logo
-    				============================================= -->
-    				<div id="logo">
-    					<a href="/" aria-label="Horizon Conversion - Accueil">
-    						<img class="logo-default" src="/assets/images/logo.png" alt="Horizon Conversion">
-    					</a>
-    				</div><!-- #logo end -->
-
-    				<div class="header-misc">
-
-    					<a href="#contact" class="button button-rounded ms-2 d-none d-sm-inline-flex">
-    						Demander un plan
-    					</a>
-
-    				</div>
-
-    				<div class="primary-menu-trigger">
-    					<button class="cnvs-hamburger" type="button" title="Open Mobile Menu" aria-label="Ouvrir le menu mobile">
-    						<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-    					</button>
-    				</div>
-
-    				<!-- Primary Navigation
-    				============================================= -->
-    				<nav class="primary-menu with-arrows">
-
-    					<ul class="menu-container">
-
-								<li class="menu-item mega-menu">
-									<a class="menu-link" href="/profils/"><div>Profils</div></a>
-
-									<div class="mega-menu-content mega-menu-style-2 px-0">
-										<div class="container">
-											<div class="row">
-
-												<a href="/profils/artisans/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Artisans & chantiers</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/profils/tpe/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Petites entreprises (TPE)</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/profils/pme/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">PME en croissance</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/profils/commerces/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Commerces & points de vente</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/profils/professions-liberales/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Professions libérales</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/profils/reseaux-franchises/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Réseaux & franchises</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<div class="mega-menu-column sub-menu-container col-12 p-0">
-													<a href="/profils/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light ">
-														Voir tous les profils <i class="bi-arrow-right"></i>
-													</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</li>
-
-								<li class="menu-item mega-menu">
-									<a class="menu-link" href="/services/"><div>Services</div></a>
-
-									<div class="mega-menu-content mega-menu-style-2 px-0">
-										<div class="container">
-											<div class="row">
-
-												<a href="/services/google-ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/adword.svg" alt="Google Ads" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Google Ads</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/services/seo-local/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/seo.svg" alt="SEO local" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">SEO local</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/services/pages-locales/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/experience.svg" alt="Pages locales qui convertissent" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Pages locales qui convertissent</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/services/google-business-profile/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/content_marketing.svg" alt="Google Business Profile" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Google Business Profile</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/services/meta-ads/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/social.svg" alt="Publicités Meta (Facebook/Instagram)" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Publicités Meta (Facebook/Instagram)</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/services/suivi-conversions/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-icon mb-2">
-															<img src="/assets/images/icons/analysis.svg" alt="Suivi & mesure des conversions" class="bg-transparent rounded-0">
-														</div>
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Suivi & mesure des conversions</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<div class="mega-menu-column sub-menu-container col-12 p-0">
-													<a href="/services/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light ">
-														Voir tous les services <i class="bi-arrow-right"></i>
-													</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</li>
-
-								<li class="menu-item mega-menu">
-									<a class="menu-link" href="/zones/"><div>Zones</div></a>
-
-									<div class="mega-menu-content mega-menu-style-2 px-0">
-										<div class="container">
-											<div class="row">
-
-												<div class="mega-menu-column sub-menu-container col-lg-2 border-bottom py-4"></div>
-
-												<a href="/zones/sud-oise/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Sud Oise (60)</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<a href="/zones/nord-val-doise/" class="mega-menu-column sub-menu-container col-lg-4 border-bottom h-bg-light py-4">
-													<div class="feature-box">
-														<div class="fbox-content">
-															<div class="h3 text-transform-none ls-0">Nord Val d’Oise (95)</div>
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, dolore, voluptates!</p>
-														</div>
-													</div>
-												</a>
-
-												<div class="mega-menu-column sub-menu-container col-lg-2 border-bottom py-4"></div>
-
-												<div class="mega-menu-column sub-menu-container col-12 p-0">
-													<a href="/zones/" class="button button-rounded button-large text-transform-none ls-0 w-100 text-center m-0 rounded-0 py-3 button-light ">
-														Voir tous les zones <i class="bi-arrow-right"></i>
-													</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</li>
-
-    						<li class="menu-item"><a class="menu-link" href="/methode/"><div>Méthode</div></a></li>
-    						<li class="menu-item"><a class="menu-link" href="/preuves/"><div>Preuves</div></a></li>
-    						<li class="menu-item"><a class="menu-link" href="/tarifs/"><div>Tarifs</div></a></li>
-    						<li class="menu-item"><a class="menu-link" href="/contact/"><div>Contact</div></a></li>
-    					</ul>
-
-    				</nav><!-- #primary-menu end -->
-
-    			</div>
-    		</div>
-    	</div>
-    	<div class="header-wrap-clone"></div>
-    </header><!-- #header end -->
-
-		<slot />
-
-		<!-- Footer
-    ============================================= -->
-    <footer id="footer" class="border-0" style="background: var(--cnvs-contrast-0);">
-    	<div class="container">
-    		<!-- Footer Widgets
-    		============================================= -->
-    		<div class="footer-widgets-wrap pb-5">
-
-    			<div class="row col-mb-50">
-    				<div class="col-md-8">
-    					<div class="widget">
-
-    						<img src="/assets/images/logo-horizon-conversion.svg"
-    						     onerror="this.onerror=null;this.src='images/footer-widget-logo.png';"
-    						     alt="Horizon Conversion"
-    						     class="alignleft"
-    						     style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #DDD;">
-
-    						<p class="mb-0">
-    							<strong>Horizon Conversion</strong> aide les <strong>artisans</strong>, <strong>PME/TPE</strong>,
-    							<strong>commerces</strong> et <strong>professions libérales</strong> à générer des demandes qualifiées
-    							(appels &amp; formulaires) via <strong>SEO local</strong>, <strong>Google/Meta Ads</strong> et
-    							<strong>optimisation de conversion</strong>.
-    						</p>
-    						<p class="text-muted mt-2 mb-0">
-    							Zone : <strong>Sud Oise (60)</strong> &amp; <strong>Val d’Oise (95)</strong>.
-    						</p>
-
-    						<div class="line line-sm"></div>
-
-    						<div class="row g-4">
-    							<!-- Navigation -->
-    							<div class="col-lg-3 col-6 widget_links">
-    								<div class="h5 mb-2">Navigation</div>
-    								<ul>
-    									<li><a href="/">Accueil</a></li>
-    									<li><a href="/methode/">Méthode</a></li>
-    									<li><a href="/offres/">Offres &amp; tarifs</a></li>
-    									<li><a href="/ressources/">Ressources</a></li>
-    									<li><a href="/contact/">Contact</a></li>
-    								</ul>
-    							</div>
-
-    							<!-- Services -->
-    							<div class="col-lg-5 col-6 widget_links">
-    								<div class="h5 mb-2">Services</div>
-    								<ul>
-    									<li><a href="/seo-local/">SEO local</a></li>
-    									<li><a href="/google-business-profile/">Google Business Profile (Maps)</a></li>
-    									<li><a href="/google-ads-local/">Google Ads local</a></li>
-    									<li><a href="/meta-ads-local/">Meta Ads (retargeting)</a></li>
-    									<li><a href="/optimisation-conversion-cro/">Optimisation conversion (CRO)</a></li>
-    								</ul>
-    							</div>
-
-    							<!-- Zones -->
-    							<div class="col-lg-4 col-12 widget_links">
-    								<div class="h5 mb-2">Zones couvertes</div>
-    								<ul>
-    									<li><a href="/zone/sud-oise/">Sud Oise (60)</a></li>
-    									<li><a href="/zone/val-doise/">Val d’Oise (95)</a></li>
-    								</ul>
-    								<div class="text-muted small mt-2">Exemples : Chantilly, Senlis, Creil, Cergy, Pontoise, Taverny, L’Isle-Adam…</div>
-    							</div>
-    						</div>
-
-    					</div>
-    				</div>
-
-    				<div class="col-md-4">
-    					<div class="widget">
-
-    						<div class="row">
-    							<!-- Téléphone -->
-    							<div class="col-12">
-    								<div class="feature-box fbox-plain fbox-sm align-items-center">
-    									<div class="fbox-icon">
-    										<i class="bi-telephone text-dark"></i>
-    									</div>
-    									<div class="fbox-content">
-    										<span class="text-muted">Appelez :</span><br>
-    										<h3 class="text-transform-none ls-0 fw-semibold mb-0">
-    											<a href="tel:+33660921008" class="text-dark text-decoration-none">06 60 92 10 08</a>
-    										</h3>
-    										<small class="text-muted d-block">Lun–Ven · réponse rapide</small>
-    									</div>
-    								</div>
-    							</div>
-
-    							<!-- Email -->
-    							<div class="col-12 mt-4">
-    								<div class="feature-box fbox-plain fbox-sm align-items-center">
-    									<div class="fbox-icon">
-    										<i class="bi-envelope text-dark"></i>
-    									</div>
-    									<div class="fbox-content">
-    										<span class="text-muted">Email :</span><br>
-    										<h3 class="text-transform-none ls-0 fw-semibold mb-0">
-    											<a href="mailto:contact@horizon-conversion.fr" class="text-dark text-decoration-none">
-    												contact@horizon-conversion.fr
-    											</a>
-    										</h3>
-    										<small class="text-muted d-block">Ou via le formulaire</small>
-    									</div>
-    								</div>
-    							</div>
-
-    							<!-- CTA rapide -->
-    							<div class="col-12 mt-4">
-    								<div class="card shadow-sm">
-    								  <div class="card-body">
-    									  <div class="h5 mb-2">Besoin de leads rapidement ?</div>
-    									  <p class="text-muted mb-3">Audit express + plan d’action (SEO local / Ads / Conversion).</p>
-    									  <a href="/contact/" class="button button-rounded w-100 text-transform-none ls-0 m-0">Demander un plan</a>
-    								  </div>
-    								</div>
-    							</div>
-    						</div>
-
-    					</div>
-
-    				</div>
-    			</div>
-
-    		</div><!-- .footer-widgets-wrap end -->
-    	</div>
-
-    	<!-- Copyrights
-    	============================================= -->
-    	<div id="copyrights"
-    	     style="background: url('/assets/images/hero/footer.svg') no-repeat top center; background-size: cover; padding-top: 70px;">
-    		<div class="container">
-
-    			<div class="row justify-content-between col-mb-30">
-    				<div class="col-12 col-lg-auto text-center text-lg-start">
-    					&copy; <span id="hc-year"></span> <strong>Horizon Conversion</strong>. Tous droits réservés.<br>
-    					<div class="copyright-links">
-    						<a href="/mentions-legales/" class="text-contrast-600">Mentions légales</a>
-    						/
-    						<a href="/politique-confidentialite/" class="text-contrast-600">Politique de confidentialité</a>
-    						/
-    						<a href="/cookies/" class="text-contrast-600">Cookies</a>
-    					</div>
-    				</div>
-
-    				<div class="col-12 col-lg-auto text-center text-lg-end">
-    					<div class="copyrights-menu copyright-links">
-    						<a href="/" class="text-contrast-600">Accueil</a> /
-    						<a href="/seo-local/" class="text-contrast-600">SEO local</a> /
-    						<a href="/google-ads-local/" class="text-contrast-600">Google Ads</a> /
-    						<a href="/offres/" class="text-contrast-600">Offres</a> /
-    						<a href="/contact/" class="text-contrast-600">Contact</a>
-    					</div>
-    				</div>
-    			</div>
-
-    		</div>
-    	</div><!-- #copyrights end -->
-    </footer><!-- #footer end -->
-
-    <script>
-    	// Année automatique
-    	document.getElementById('hc-year').textContent = new Date().getFullYear();
-    </script>
-
-	</div><!-- #wrapper end -->
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="uil uil-angle-up"></div>
-
-	<div class="scw-switcher-wrap text-center d-none d-lg-block">
-        <a href="tel:+33660921008" class="scw-trigger-icon scw-trigger">
-            <i class="bi-whatsapp align-baseline pt-1"></i>
-        </a>
-    </div>
-
-	<!-- JavaScripts
-	============================================= -->
-	<script is:inline src="/assets/js/plugins.min.js"></script>
-	<script is:inline src="/assets/js/functions.bundle.js"></script>
-
+		</div><!-- #copyrights end -->
+	</footer><!-- #footer end -->
+
+	<script>
+		document.getElementById('hc-year').textContent = new Date().getFullYear();
+	</script>
+
+</div><!-- #wrapper end -->
+
+<!-- Go To Top ============================================= -->
+<div id="gotoTop" class="uil uil-angle-up"></div>
+
+<div class="scw-switcher-wrap text-center d-none d-lg-block">
+	<a href={`tel:${(s.phone ?? "+33660921008").replace(/\s/g, "")}`} class="scw-trigger-icon scw-trigger">
+		<i class="bi-whatsapp align-baseline pt-1"></i>
+	</a>
+</div>
+
+<!-- JavaScripts ============================================= -->
+<script is:inline src="/assets/js/plugins.min.js"></script>
+<script is:inline src="/assets/js/functions.bundle.js"></script>
 </body>
 </html>

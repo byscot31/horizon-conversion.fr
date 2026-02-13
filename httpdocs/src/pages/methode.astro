@@ -1,0 +1,87 @@
+---
+// src/pages/methode.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildModel } from "../lib/pageModel";
+
+import PageTitle from "../components/PageTitle.astro";
+import HeroCard from "../components/HeroCard.astro";
+import Process from "../components/Process.astro";
+import Methode from "../components/Methode.astro";
+import Preuves from "../components/Preuves.astro";
+import Faqs from "../components/Faqs.astro";
+import MaillageInterne from "../components/MaillageInterne.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const model = buildModel({
+  type: "home",
+  canonical: "/methode/",
+});
+
+const contexte = { type: "methode" };
+
+const seo = {
+  title: `Méthode | ${model.site?.name ?? "Horizon Conversion"}`,
+  description:
+    "Audit → Mise en place → Acquisition → Optimisation : une méthode simple pour générer plus d’appels et de formulaires (SEO local / Ads / Conversion).",
+  canonical: "/methode/",
+};
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Méthode", href: "/methode/" },
+];
+
+// FAQ (fallback) : tu peux remplacer par un data dédié plus tard
+const faqItems = [
+  {
+    q: "En combien de temps voit-on des résultats ?",
+    a: "Souvent 2 à 4 semaines pour les premiers signaux (meilleure conversion + suivi). Pour une vraie montée SEO local, compte plutôt 2 à 3 mois selon la concurrence.",
+  },
+  {
+    q: "Est-ce que vous refaites le site ?",
+    a: "Pas forcément. On améliore l’existant (pages clés + messages + preuves + conversion). Si le site est bloquant, on propose une refonte légère.",
+  },
+  {
+    q: "Est-ce adapté aux pros locaux ?",
+    a: "Oui : on priorise les actions qui génèrent des demandes locales (Google Business, pages locales, suivi appels/formulaires, Ads si besoin).",
+  },
+];
+---
+
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: "Méthode",
+        h1: "Une méthode simple pour générer plus de demandes",
+        chapo:
+          "Audit → Mise en place → Acquisition → Optimisation. Objectif : plus d’appels et de formulaires, avec un suivi clair.",
+      }}
+  />
+
+  <section id="content">
+    <div class="content-wrap py-0 overflow-visible">
+
+      <HeroCard data={model.hero?.card} contexte={contexte} />
+
+      <Process data={model.blocks?.process} contexte={contexte} />
+
+      <Methode data={model.blocks?.methode} contexte={contexte} />
+
+      <Preuves data={model.blocks?.preuves} contexte={contexte} />
+
+      <Faqs
+          items={faqItems}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
+
+      <MaillageInterne data={model.blocks?.maillageInterne} contexte={contexte} />
+
+      <ContactForm data={model.cta} form={model.blocks?.form} contexte={contexte} mode="audit" />
+
+    </div>
+  </section>
+</BaseLayout>

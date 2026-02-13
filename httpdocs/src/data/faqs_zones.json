@@ -1,0 +1,12 @@
+[
+  {
+    "q": "Travaillez-vous uniquement dans le Sud Oise et le Nord Val-d’Oise ?",
+    "a": "C’est notre zone principale. Si vous êtes juste à côté, on peut aussi en parler pendant l’audit.",
+    "zoneSlugs": ["sud-oise", "nord-val-doise"]
+  },
+  {
+    "q": "Est-ce que vous pouvez gérer uniquement la page, sans publicité ?",
+    "a": "Oui. On peut commencer par la page + le suivi des demandes, puis ajouter un levier ensuite si besoin.",
+    "zoneSlugs": ["sud-oise", "nord-val-doise"]
+  }
+]

@@ -2,11 +2,107 @@
 // src/pages/zones/[zone]/[ville]/[service]/index.astro
 import BaseLayout from "../../../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../../../components/PageTitle.astro";
+import HeroBenefices from "../../../../../components/HeroBenefices.astro";
+import Methode from "../../../../../components/Methode.astro";
+import Preuves from "../../../../../components/Preuves.astro";
+import Faqs from "../../../../../components/Faqs.astro";
+import ContactForm from "../../../../../components/ContactForm.astro";
+import Tarifs from "../../../../../components/Tarifs.astro";
+import Ressources from "../../../../../components/Ressources.astro";
 
-import villesData from "../../../../../data/villes.json";
-import servicesData from "../../../../../data/services.json";
+import { buildModel } from "../../../../../lib/pageModel";
+import { zones, villes, services } from "../../../../../lib/data";
+import { bySlug } from "../../../../../lib/collection";
+
+/** ✅ getStaticPaths requis pour /zones/[zone]/[ville]/[service]/ */
+export function getStaticPaths() {
+  const paths = [];
+  for (const v of (villes ?? [])) {
+    for (const s of (services ?? [])) {
+      paths.push({ params: { zone: v.zoneSlug, ville: v.slug, service: s.slug } });
+    }
+  }
+  return paths;
+}
+
+const zoneSlug = Astro.params.zone;
+const villeSlug = Astro.params.ville;
+const serviceSlug = Astro.params.service;
+
+const zone = bySlug(zones, zoneSlug, "zones");
+const ville = bySlug((villes ?? []).filter((v) => v.zoneSlug === zoneSlug), villeSlug, "villes");
+const service = bySlug(services, serviceSlug, "services");
+
+const canonical = `/zones/${zone.slug}/${ville.slug}/${service.slug}/`;
+
+const model = buildModel({
+  type: "serviceVille",
+  zone,
+  ville,
+  service,
+  canonical,
+});
+
+const contexte = model.contexte;
+
+const seo = {
+  ...model.seo,
+  title: `${service.name} à ${ville.name} | ${model.site.name}`,
+  description: `Obtenez plus d’appels et de formulaires à ${ville.name} grâce à ${service.name}. Audit gratuit.`,
+  canonical,
+};
+
+const breadcrumbItems = model.breadcrumbItems ?? [
+  { label: "Accueil", href: "/" },
+  { label: "Zones", href: "/zones/" },
+  { label: zone.name ?? zone.slug, href: `/zones/${zone.slug}/` },
+  { label: ville.name ?? ville.slug, href: `/zones/${zone.slug}/${ville.slug}/` },
+  { label: service.name ?? service.slug, href: canonical },
+];
 ---
 
-<BaseLayout>
-  <PageTitle />
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: zone.name ?? "Zone",
+        h1: `${service.name} à ${ville.name}`,
+        chapo: seo.description
+      }}
+  />
+
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <!-- ✅ Hero + bénéfices -->
+      <div class="container mb-5">
+        <HeroBenefices heroData={model.hero.page} beneficesData={model.blocks.benefices} contexte={contexte} />
+      </div>
+
+      <div class="clear"></div>
+
+      <Tarifs data={model.blocks.tarifs} contexte={contexte} />
+
+      <Preuves data={model.blocks.preuves} contexte={contexte} />
+
+      <Methode data={model.blocks.methode} contexte={contexte} />
+
+      <Ressources data={model.blocks.articles} contexte={contexte} />
+
+      <Faqs
+          items={model.faqs}
+          data={{
+            badge: "FAQ",
+            title: `Questions fréquentes — ${service.name} à ${ville.name}`,
+            intro: "Réponses simples et concrètes."
+          }}
+          contexte={contexte}
+      />
+
+      <ContactForm data={model.site} form={model.blocks.form} contexte={contexte} mode="audit" />
+
+    </div>
+  </section>
 </BaseLayout>

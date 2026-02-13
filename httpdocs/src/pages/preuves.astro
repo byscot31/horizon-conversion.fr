@@ -1,0 +1,81 @@
+---
+// src/pages/preuves.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildModel } from "../lib/pageModel";
+
+import PageTitle from "../components/PageTitle.astro";
+import HeroCard from "../components/HeroCard.astro";
+import Preuves from "../components/Preuves.astro";
+import Faqs from "../components/Faqs.astro";
+import MaillageInterne from "../components/MaillageInterne.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const model = buildModel({
+  type: "home",
+  canonical: "/preuves/",
+});
+
+const contexte = { type: "preuves" };
+
+const seo = {
+  title: `Preuves | ${model.site?.name ?? "Horizon Conversion"}`,
+  description:
+    "Ce qui rassure avant de vous lancer : méthode claire, suivi des demandes, et exemples concrets. Audit gratuit.",
+  canonical: "/preuves/",
+};
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Preuves", href: "/preuves/" },
+];
+
+// FAQ (fallback) : si tu veux, on pourra la basculer dans un json dédié plus tard
+const faqItems = [
+  {
+    q: "Qu’est-ce que vous suivez exactement ?",
+    a: "Les demandes (formulaires) et les clics importants (appel, contact). L’idée : savoir d’où viennent les demandes et quelles pages convertissent.",
+  },
+  {
+    q: "Vous pouvez promettre un nombre de leads ?",
+    a: "Non, parce que ça dépend de la zone, de l’offre et de la concurrence. En revanche, on met en place un plan clair, mesurable, et on optimise avec les données.",
+  },
+  {
+    q: "Est-ce que je garde la main ?",
+    a: "Oui : vous restez propriétaire de votre site et de vos comptes. On avance avec une méthode simple et des actions priorisées.",
+  },
+];
+---
+
+<BaseLayout seo={seo} site={model.site}>
+  <PageTitle
+      contexte={contexte}
+      seo={seo}
+      breadcrumbItems={breadcrumbItems}
+      data={{
+        badge: "Preuves",
+        h1: "Ce qui rassure avant de démarrer",
+        chapo:
+          "Méthode claire, suivi des appels/formulaires, et des exemples concrets. Objectif : générer des demandes mesurables.",
+      }}
+  />
+
+  <section id="content">
+    <div class="content-wrap py-0 overflow-visible">
+
+      <HeroCard data={model.hero?.card} contexte={contexte} />
+
+      <Preuves data={model.blocks?.preuves} contexte={contexte} />
+
+      <Faqs
+          items={faqItems}
+          data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
+          contexte={contexte}
+      />
+
+      <MaillageInterne data={model.blocks?.maillageInterne} contexte={contexte} />
+
+      <ContactForm data={model.cta} form={model.blocks?.form} contexte={contexte} mode="audit" />
+
+    </div>
+  </section>
+</BaseLayout>

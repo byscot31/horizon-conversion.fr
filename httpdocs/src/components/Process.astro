@@ -1,77 +1,67 @@
 ---
 // src/components/Process.astro
+const { data, contexte } = Astro.props;
+
+const badge = data?.badge ?? "Process";
+const h2 = data?.title ?? "Comment on travaille";
+const intro = data?.intro ?? "Une méthode simple, orientée demandes (appels + formulaires).";
+const label = data?.label ?? "Étapes";
+
+const steps = Array.isArray(data?.steps) ? data.steps : [];
+if (!steps.length) {
+  // rien à afficher si vide
+}
 ---
 
-<!-- Process ============================================= -->
+{steps.length > 0 && (
 <div class="section bg-transparent m-0 pt-3 pb-0">
   <div class="container mw-md">
-
     <div class="heading-block border-bottom-0 text-center mx-auto" style="max-width: 550px">
-      <div class="badge rounded-pill badge-default">Process</div>
-      <h2 class="text-transform-none ls-0 mb-3">Process</h2>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed velit quo, quis. Culpa reprehenderit quo nostrum facere quis maiores.</p>
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h2 class="text-transform-none ls-0 mb-3">{h2}</h2>
+      <p>{intro}</p>
     </div>
 
     <div class="text-md-center">
-      <h3 class="bg-color d-inline-block px-4 py-2 text-white mb-0 rounded-1">Process</h3>
+      <h3 class="bg-color d-inline-block px-4 py-2 text-white mb-0 rounded-1">{label}</h3>
     </div>
-    <div class="story-timeline">
 
+    <div class="story-timeline">
       <div class="clear mt-4"></div>
       <div class="story-timeline-line"></div>
-      <div class="row justify-content-md-center">
-        <div class="col-md-5 text-md-end">
-          <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">Feb, 2019</h4>
-        </div>
-        <div class="story-timeline-dots"></div>
-        <div class="col-md-5">
-          <h3 class="mb-3">We Started</h3>
-          Lorem ipsum, dolor sit amet consectetur, adipisicing elit. Corrupti quisquam molestiae consequuntur tempora recusandae impedit dolorum ex ipsum blanditiis similique?
-        </div>
-      </div>
 
-      <div class="clear my-5"></div>
+      {steps.map((s, idx) => {
+        const isRight = idx % 2 === 1;
+        const date = s.date ?? "";
+        const title = s.title ?? `Étape ${idx + 1}`;
+        const text = s.text ?? "";
 
-      <div class="row justify-content-md-center">
-        <div class="col-md-5 order-md-2">
-          <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">Oct, 2019</h4>
-        </div>
-        <div class="story-timeline-dots"></div>
-        <div class="col-md-5 text-md-end">
-          <h3 class="mb-3">Registration</h3>
-          Lorem ipsum, dolor sit amet consectetur, adipisicing elit. Corrupti quisquam molestiae consequuntur tempora recusandae impedit dolorum ex ipsum blanditiis similique?
-        </div>
-      </div>
+        return (
+            <>
+              <div class="row justify-content-md-center">
+                <div class={`col-md-5 ${isRight ? "order-md-2" : "text-md-end"}`}>
+                  {date && (
+                      <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">
+                        {date}
+                      </h4>
+                  )}
+                </div>
 
-      <div class="clear my-5"></div>
+                <div class="story-timeline-dots"></div>
 
-      <div class="row justify-content-md-center">
-        <div class="col-md-5 text-md-end">
-          <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">Mar, 2020</h4>
-        </div>
-        <div class="story-timeline-dots"></div>
-        <div class="col-md-5">
-          <h3 class="mb-3"><span class="counter counter-inherit text-dark"><span data-from="2" data-to="57" data-refresh-interval="10" data-speed="2000"></span>% Increase in Sales</span></h3>
-          Lorem ipsum, dolor sit amet consectetur, adipisicing elit. Corrupti quisquam molestiae consequuntur tempora recusandae impedit dolorum ex ipsum blanditiis similique?
-        </div>
-      </div>
+                <div class={`col-md-5 ${isRight ? "text-md-end" : ""}`}>
+                  <h3 class="mb-3">{title}</h3>
+                  {text}
+                </div>
+              </div>
 
-      <div class="clear my-5"></div>
-
-      <div class="row justify-content-md-center">
-        <div class="col-md-5 order-md-2">
-          <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">Nov, 2010</h4>
-        </div>
-        <div class="story-timeline-dots"></div>
-        <div class="col-md-5 text-md-end">
-          <h3 class="mb-3"><span class="counter counter-inherit text-dark"><span data-from="20" data-to="410" data-refresh-interval="10" data-speed="2000"></span>+ Employees</span></h3>
-          Lorem ipsum, dolor sit amet consectetur, adipisicing elit. Corrupti quisquam molestiae consequuntur tempora recusandae impedit dolorum ex ipsum blanditiis similique?
-        </div>
-      </div>
+              {idx < steps.length - 1 && <div class="clear my-5"></div>}
+            </>
+        );
+      })}
 
       <div class="clear mt-5"></div>
-
     </div>
-
   </div>
 </div>
+  )}
