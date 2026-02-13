@@ -1,0 +1,196 @@
+---
+// src/pages/zones/[zone]/[ville]/[cible]/index.astro
+import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import PageTitle from "../../../../../components/PageTitle.astro";
+
+import zonesData from "../../../../../data/zones.json";
+import villesData from "../../../../../data/villes.json";
+import ciblesData from "../../../../../data/cibles.json";
+
+/**
+ * ✅ getStaticPaths : 100% inline (aucun helper externe)
+ * Génère Zone × Ville × Cible
+ */
+export async function getStaticPaths() {
+  // zones (objet migré : { _meta, zones: {...} } OU ancien format array)
+  const zonesRoot =
+    zonesData && typeof zonesData === "object" && !Array.isArray(zonesData)
+      ? (zonesData.zones && typeof zonesData.zones === "object" && !Array.isArray(zonesData.zones)
+        ? zonesData.zones
+        : null)
+      : null;
+
+  const zonesList = Array.isArray(zonesData)
+    ? zonesData
+      .filter((z) => z && typeof z === "object" && typeof z.slug === "string" && z.slug.trim())
+      .map((z) => ({ slug: String(z.slug), nom: typeof z.nom === "string" ? z.nom : "" }))
+    : zonesRoot
+      ? Object.values(zonesRoot)
+        .filter((z) => z && typeof z === "object" && typeof z.slug === "string" && z.slug.trim())
+        .map((z) => ({ slug: String(z.slug), nom: typeof z.nom === "string" ? z.nom : "" }))
+      : [];
+
+  if (zonesList.length === 0) {
+    throw new Error(`[zones/[zone]/[ville]/[cible]] zones.json invalide ou vide`);
+  }
+
+  // villes (objet migré : { _meta, cities: {...} } OU direct city-*)
+  const villesRoot =
+    villesData && typeof villesData === "object" && !Array.isArray(villesData)
+      ? (villesData.cities && typeof villesData.cities === "object" && !Array.isArray(villesData.cities)
+        ? villesData.cities
+        : villesData)
+      : null;
+
+  if (!villesRoot) {
+    throw new Error(`[zones/[zone]/[ville]/[cible]] villes.json invalide (objet attendu)`);
+  }
+
+  const cities = Object.values(villesRoot).filter(
+    (c) =>
+      c &&
+      typeof c === "object" &&
+      !Array.isArray(c) &&
+      typeof c.slug === "string" &&
+      c.slug.trim() &&
+      typeof c.zoneSlug === "string" &&
+      c.zoneSlug.trim()
+  );
+
+  if (cities.length === 0) {
+    throw new Error(`[zones/[zone]/[ville]/[cible]] aucune ville valide trouvée dans villes.json`);
+  }
+
+  // cibles (objet migré : { _meta, ...cibles } )
+  const ciblesRoot =
+    ciblesData && typeof ciblesData === "object" && !Array.isArray(ciblesData)
+      ? ciblesData
+      : null;
+
+  if (!ciblesRoot) {
+    throw new Error(`[zones/[zone]/[ville]/[cible]] cibles.json invalide (objet attendu)`);
+  }
+
+  const targets = Object.entries(ciblesRoot)
+    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
+    .map(([_, v]) => v)
+    .filter((t) => typeof t.slug === "string" && t.slug.trim());
+
+  if (targets.length === 0) {
+    throw new Error(`[zones/[zone]/[ville]/[cible]] aucune cible valide trouvée dans cibles.json`);
+  }
+
+  // Zone × Ville × Cible (on ne filtre pas ici : si une ville a une zoneSlug inconnue, on throw au rendu)
+  const paths = [];
+  for (const city of cities) {
+    for (const cible of targets) {
+      paths.push({
+        params: {
+          zone: String(city.zoneSlug),
+          ville: String(city.slug),
+          cible: String(cible.slug),
+        },
+        props: {
+          cityId: typeof city.id === "string" ? city.id : "",
+          cibleSlug: String(cible.slug),
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+/** Helpers (hors getStaticPaths OK) */
+const trimStr = (v) => (typeof v === "string" ? v.trim() : "");
+const isObj = (v) => v && typeof v === "object" && !Array.isArray(v);
+
+/** Params / props */
+const { cityId, cibleSlug } = Astro.props;
+
+const zoneParam = String(Astro.params.zone || "");
+const villeParam = String(Astro.params.ville || "");
+const cibleParam = String(Astro.params.cible || cibleSlug || "");
+
+/** Resolve villes root */
+const villesRoot =
+  isObj(villesData)
+    ? (isObj(villesData.cities) ? villesData.cities : villesData)
+    : null;
+
+if (!villesRoot) throw new Error(`[zones/[zone]/[ville]/[cible]] villes.json invalide (objet attendu)`);
+
+const cities = Object.values(villesRoot).filter((c) => isObj(c));
+
+/** Resolve city */
+const city =
+  (trimStr(cityId) && isObj(villesRoot[cityId]) ? villesRoot[cityId] : null) ||
+  cities.find((c) => trimStr(c.slug) === villeParam && trimStr(c.zoneSlug) === zoneParam) ||
+  null;
+
+if (!city) {
+  throw new Error(`[zones/[zone]/[ville]/[cible]] Ville introuvable: zone="${zoneParam}" ville="${villeParam}"`);
+}
+
+if (trimStr(city.zoneSlug) !== zoneParam) {
+  throw new Error(
+    `[zones/[zone]/[ville]/[cible]] Incohérence zoneSlug: ville="${villeParam}" a zoneSlug="${trimStr(city.zoneSlug)}" attendu="${zoneParam}"`
+  );
+}
+
+const cityName = trimStr(city.name);
+if (!cityName) throw new Error(`[zones/[zone]/[ville]/[cible]] city.name manquant pour "${villeParam}"`);
+
+const zoneName = trimStr(city.zoneName);
+if (!zoneName) {
+  // si tu veux strict: throw (sans fallback)
+  throw new Error(`[zones/[zone]/[ville]/[cible]] city.zoneName manquant pour "${villeParam}"`);
+}
+
+/** Resolve cible */
+if (!isObj(ciblesData)) throw new Error(`[zones/[zone]/[ville]/[cible]] cibles.json invalide (objet attendu)`);
+
+const ciblesList = Object.entries(ciblesData)
+  .filter(([k, v]) => k !== "_meta" && isObj(v))
+  .map(([_, v]) => v);
+
+const cible = ciblesList.find((c) => trimStr(c.slug) === cibleParam) || null;
+if (!cible) throw new Error(`[zones/[zone]/[ville]/[cible]] Cible introuvable: "${cibleParam}"`);
+
+const cibleName = trimStr(cible.name);
+if (!cibleName) throw new Error(`[zones/[zone]/[ville]/[cible]] cible.name manquant pour "${cibleParam}"`);
+
+/** PageTitle (généré à partir des data — pas de texte “en dur” propre au template) */
+const pageTitle = {
+  badge: "Cible",
+  title: `${cibleName} à ${cityName}`,
+  subtitle: `${zoneName} • Objectif : appels & demandes`,
+  image: "/assets/images/hero/page-title.jpg",
+};
+
+/** Breadcrumbs (générés) */
+const breadcrumbs = [
+  { name: "Accueil", url: "/" },
+  { name: "Zones", url: "/zones/" },
+  { name: zoneName, url: `/zones/${zoneParam}/` },
+  { name: cityName, url: `/zones/${zoneParam}/${villeParam}/` },
+  { name: cibleName, url: `/zones/${zoneParam}/${villeParam}/${cibleParam}/` },
+];
+
+/** SEO (généré) */
+const seo = {
+  title: `${cibleName} à ${cityName} — Horizon Conversion`,
+  description: `À ${cityName} (${zoneName}), approche orientée demandes : clarté, confiance, contact simple et suivi des conversions.`,
+  canonical: `https://horizon-conversion.fr/zones/${zoneParam}/${villeParam}/${cibleParam}/`,
+};
+---
+
+<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
+  <PageTitle
+      badge={pageTitle.badge}
+      title={pageTitle.title}
+      subtitle={pageTitle.subtitle}
+      image={pageTitle.image}
+      breadcrumbs={breadcrumbs}
+  />
+</BaseLayout>
