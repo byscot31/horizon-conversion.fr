@@ -15,75 +15,237 @@
         "title": "Services — Horizon Conversion",
         "description": "SEO local, Google Ads, Meta Ads, pages locales qui convertissent et suivi des conversions. Objectif : plus d’appels et de demandes.",
         "canonical": "https://horizon-conversion.fr/services/"
+      },
+      "heroCard": {
+        "left": {
+          "badge": "Services",
+          "h2": "Ce qu’on met en place (pour générer des demandes)",
+          "description": "SEO local, Ads, pages qui convertissent et suivi des conversions — objectif : appels & demandes qualifiées.",
+          "ctas": [
+            { "label": "Demander un audit (gratuit)", "href": "/audit-gratuit" },
+            { "label": "Être rappelé", "href": "/contact/?cta=rappel", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Ce que vous obtenez",
+          "description": "Une approche simple : clarté → confiance → contact → suivi.",
+          "bullets": [
+            "Offre comprise en 5 secondes",
+            "CTA visibles (appel / rappel / formulaire)",
+            "Preuves avant le contact (FAQ, avis, cas)",
+            "Suivi appels + formulaires (décisions rapides)",
+            "Moins de demandes inutiles"
+          ]
+        }
+      },
+
+      "process": {
+        "header": {
+          "badge": "Process",
+          "title": "Comment on avance",
+          "description": "Audit → priorités → mise en place → suivi. Simple, lisible, orienté demandes."
+        },
+        "ribbon": { "label": "Une méthode en 4 étapes" },
+        "steps": [
+          { "tag": "Étape 1", "title": "Audit gratuit", "text": "On identifie ce qui bloque les demandes et ce qui peut bouger vite." },
+          { "tag": "Étape 2", "title": "Plan clair", "text": "Un ordre de priorité simple : quoi faire d’abord (et pourquoi)." },
+          { "tag": "Étape 3", "title": "Mise en place", "text": "SEO local / Ads / pages qui convertissent selon votre contexte." },
+          { "tag": "Étape 4", "title": "Suivi & ajustements", "text": "On mesure appels + formulaires, on renforce ce qui marche, on coupe le reste." }
+        ]
+      },
+
+      "zonesVilles": {
+        "header": {
+          "badge": "Zones",
+          "title": "Choisissez votre zone (et votre ville)",
+          "subtitle": "Accédez aux pages locales : ville → services → profils."
+        },
+        "items": [
+          {
+            "order": 1,
+            "href": "/zones/sud-oise/",
+            "title": "Sud Oise (60)",
+            "excerpt": "Pages locales par ville : visibilité, conversion, suivi des demandes.",
+            "cities": [
+              { "name": "Chantilly", "href": "/zones/sud-oise/chantilly/" },
+              { "name": "Senlis", "href": "/zones/sud-oise/senlis/" },
+              { "name": "Creil", "href": "/zones/sud-oise/creil/" }
+            ]
+          }
+        ]
+      },
+
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui rend les demandes plus fiables",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Contact mesuré",
+            "text": "Appels + formulaires suivis : on pilote avec des demandes réelles, pas des métriques de vanité.",
+            "meta": "Tracking",
+            "iconClass": "bi-graph-up"
+          },
+          {
+            "order": 2,
+            "title": "Pages qui convertissent",
+            "text": "Promesse claire, preuves, FAQ, CTA visibles : on transforme la visibilité en contacts.",
+            "meta": "CRO",
+            "iconClass": "bi-file-earmark-richtext"
+          },
+          {
+            "order": 3,
+            "title": "Qualification",
+            "text": "Cadrage simple (zone, contraintes, attentes) pour réduire le bruit et augmenter l’utilité des demandes.",
+            "meta": "Qualité",
+            "iconClass": "bi-check2-circle"
+          }
+        ]
+      },
+
+      "faqs": {
+        "header": {
+          "badge": "FAQ",
+          "title": "Questions fréquentes",
+          "subtitle": "Réponses simples sur la méthode, les délais, le budget et la qualité des demandes."
+        },
+        "items": [
+          { "order": 1, "q": "En combien de temps je peux voir des résultats ?", "a": "Ads : souvent dès les premiers jours. SEO local : progression sur plusieurs semaines. On commence par ce qui impacte vite (message, pages, contact, suivi)." },
+          { "order": 2, "q": "Est-ce que vous garantissez un nombre de leads ?", "a": "On garantit une exécution orientée demandes (structure, tracking, optimisation). Le volume dépend du marché, de l’offre et du budget." },
+          { "order": 3, "q": "Comment éviter les demandes non qualifiées ?", "a": "On clarifie l’offre (pour qui / quoi / zone / contraintes), on met des filtres (FAQ, cadrage) et on optimise selon les demandes reçues." }
+        ]
+      },
+
+      "maillageInterne": {
+        "backgroundImage": "/assets/images/sections/3.jpg",
+        "header": {
+          "kicker": "Maillage interne",
+          "title": "Explorer",
+          "titleEmphasis": "les pages clés"
+        },
+        "links": [
+          { "order": 1, "label": "Services", "href": "/services/" },
+          { "order": 2, "label": "Zones", "href": "/zones/" },
+          { "order": 3, "label": "Tarifs", "href": "/tarifs/" },
+          { "order": 4, "label": "Preuves", "href": "/preuves/" },
+          { "order": 5, "label": "Méthode", "href": "/methode/" },
+          { "order": 6, "label": "Contact", "href": "/contact/" }
+        ]
+      },
+      "services": {
+        "header": {
+          "badge": "Services",
+          "title": "Ce qu’on met en place",
+          "subtitle": "Des leviers concrets pour générer plus d’appels et de demandes, avec un suivi clair."
+        },
+        "items": [
+          {
+            "order": 1,
+            "href": "/services/seo-local/",
+            "title": "SEO local",
+            "excerpt": "Être trouvé près de chez vous et générer des demandes sur la durée grâce à une visibilité locale durable.",
+            "image": { "src": "/assets/images/icons/seo.svg", "alt": "SEO local" },
+            "bullets": [
+              "Priorités SEO locales (rapides + durables)",
+              "Pages locales claires (métier + zone + preuve)",
+              "Optimisation Google Maps/intentions",
+              "Amélioration de la confiance (preuves, FAQ)",
+              "Suivi des demandes (appels + formulaires)"
+            ]
+          },
+          {
+            "order": 2,
+            "href": "/services/google-ads/",
+            "title": "Google Ads",
+            "excerpt": "Déclencher des demandes rapidement avec un budget maîtrisé, et couper ce qui ne marche pas.",
+            "image": { "src": "/assets/images/icons/adword.svg", "alt": "Google Ads" },
+            "bullets": [
+              "Ciblage clair (mots-clés + zone)",
+              "Annonces orientées demande (pas du blabla)",
+              "Pages qui convertissent (CTA visibles)",
+              "Suivi appels + formulaires",
+              "Optimisation continue (stop gaspillage)"
+            ]
+          },
+          {
+            "order": 3,
+            "href": "/services/pages-locales/",
+            "title": "Pages locales qui convertissent",
+            "excerpt": "Clarifier l’offre, rassurer et faciliter la prise de contact pour transformer la visibilité en demandes.",
+            "image": { "src": "/assets/images/icons/content_marketing.svg", "alt": "Pages locales qui convertissent" },
+            "bullets": [
+              "Promesse comprise en 5 secondes",
+              "Preuves et réassurance avant contact",
+              "CTA appel / rappel / formulaire",
+              "FAQ objections (prix, délais, zone)",
+              "Structure stable (réutilisable par ville)"
+            ]
+          },
+          {
+            "order": 4,
+            "href": "/services/google-business-profile/",
+            "title": "Google Business Profile",
+            "excerpt": "Optimiser la fiche Google pour déclencher plus d’appels, d’itinéraires et inspirer confiance.",
+            "image": { "src": "/assets/images/icons/analysis.svg", "alt": "Google Business Profile" },
+            "bullets": [
+              "Infos clés propres (horaires, zone, services)",
+              "Éléments qui déclenchent l’appel",
+              "Photos/avis : réassurance rapide",
+              "Stabilité et cohérence NAP",
+              "Optimisation locale (sans surpromesse)"
+            ]
+          },
+          {
+            "order": 5,
+            "href": "/services/meta-ads/",
+            "title": "Publicités Meta (Facebook/Instagram)",
+            "excerpt": "Générer des demandes rapidement via Facebook/Instagram avec une offre lisible et un ciblage local simple.",
+            "image": { "src": "/assets/images/icons/social.svg", "alt": "Meta Ads" },
+            "bullets": [
+              "Offre lisible (créa + texte simples)",
+              "Ciblage local (sans usine à gaz)",
+              "Angles orientés demande (problème → solution)",
+              "Suivi des contacts (formulaires/appels)",
+              "Ajustements rapides selon les retours"
+            ]
+          },
+          {
+            "order": 6,
+            "href": "/services/suivi-conversions/",
+            "title": "Suivi & mesure des conversions",
+            "excerpt": "Mesurer appels et formulaires pour savoir d’où viennent les demandes et décider avec des faits.",
+            "image": { "src": "/assets/images/icons/experience.svg", "alt": "Suivi & mesure des conversions" },
+            "bullets": [
+              "Mesure appels + formulaires",
+              "Événements clés (clic tel, envoi, etc.)",
+              "Lecture simple (pas d’usine à gaz)",
+              "Pilotage : ce qui marche / ce qui s’arrête",
+              "Base saine pour Ads + SEO"
+            ]
+          }
+        ]
       }
     }
   },
-  "svc-google-ads": {
-    "id": "svc-google-ads",
-    "slug": "google-ads",
-    "name": "Google Ads",
-    "shortName": "Google Ads",
-    "segment": "mix",
-    "pageTitle": {
-      "badge": "Services",
-      "title": "Google Ads",
-      "subtitle": "Objectif : plus d’appels et de demandes rapidement, avec un budget maîtrisé",
-      "image": "/assets/images/hero/page-title.jpg"
-    },
-    "breadcrumbs": [
-      { "name": "Accueil", "url": "/" },
-      { "name": "Services", "url": "/services/" },
-      { "name": "Google Ads", "url": "/services/google-ads/" }
-    ],
-    "seo": {
-      "title": "Google Ads — plus d’appels et de demandes | Horizon Conversion",
-      "description": "Campagnes Google Ads orientées demandes : ciblage clair, annonces efficaces, page qui convertit et suivi des appels/formulaires. Objectif : plus de demandes, sans gaspiller.",
-      "canonical": "https://horizon-conversion.fr/services/google-ads/"
-    },
-    "intents": [
-      "demandes-rapides",
-      "plus-appels",
-      "budget-maitrise"
-    ],
-    "primaryOutcomes": [
-      "Plus d’appels",
-      "Plus de formulaires",
-      "Demandes plus qualifiées"
-    ],
-    "positioningAngles": [
-      "Démarrer vite avec un budget maîtrisé",
-      "Couper ce qui ne marche pas",
-      "Rendre les demandes plus qualifiées"
-    ],
-    "deliverableTags": [
-      "socle",
-      "ads",
-      "tracking"
-    ],
-    "benefitTags": [
-      "rapidite",
-      "appels",
-      "qualif",
-      "rentable"
-    ],
-    "proofTags": [
-      "mini-case",
-      "checklist",
-      "mesures"
-    ],
-    "faqTags": [
-      "budget",
-      "delais",
-      "engagement",
-      "resultats"
-    ]
-  },
+
   "svc-seo-local": {
     "id": "svc-seo-local",
     "slug": "seo-local",
     "name": "SEO local",
     "shortName": "SEO local",
     "segment": "premium",
+
+    "card": {
+      "order": 1,
+      "imageSrc": "/assets/images/icons/seo.svg",
+      "imageAlt": "SEO local",
+      "tag": "Levier principal",
+      "excerpt": "Être trouvé près de chez vous et générer des demandes sur la durée grâce à une visibilité locale durable."
+    },
+
     "pageTitle": {
       "badge": "Services",
       "title": "SEO local",
@@ -100,49 +262,72 @@
       "description": "SEO local orienté demandes : visibilité durable sur Google, pages locales claires, preuves et contact simple. Objectif : plus d’appels et de formulaires dans votre zone.",
       "canonical": "https://horizon-conversion.fr/services/seo-local/"
     },
-    "intents": [
-      "se-trouver-local",
-      "plus-appels"
-    ],
-    "primaryOutcomes": [
-      "Être trouvé près de chez vous",
-      "Plus d’appels depuis Google",
-      "Plus de demandes sur la durée"
-    ],
-    "positioningAngles": [
-      "Gagner en visibilité locale durable",
-      "Être présent quand les gens cherchent votre métier",
-      "Améliorer la confiance avant l’appel"
-    ],
-    "deliverableTags": [
-      "socle",
-      "seo",
-      "local"
-    ],
-    "benefitTags": [
-      "visibilite",
-      "local",
-      "confiance",
-      "intention"
-    ],
-    "proofTags": [
-      "method",
-      "qualite",
-      "local"
-    ],
-    "faqTags": [
-      "delais",
-      "concurrence",
-      "contenu",
-      "resultats"
-    ]
+
+    "intents": ["se-trouver-local", "plus-appels"],
+    "primaryOutcomes": ["Être trouvé près de chez vous", "Plus d’appels depuis Google", "Plus de demandes sur la durée"],
+    "positioningAngles": ["Gagner en visibilité locale durable", "Être présent quand les gens cherchent votre métier", "Améliorer la confiance avant l’appel"],
+    "deliverableTags": ["socle", "seo", "local"],
+    "benefitTags": ["visibilite", "local", "confiance", "intention"],
+    "proofTags": ["method", "qualite", "local"],
+    "faqTags": ["delais", "concurrence", "contenu", "resultats"]
   },
+
+  "svc-google-ads": {
+    "id": "svc-google-ads",
+    "slug": "google-ads",
+    "name": "Google Ads",
+    "shortName": "Google Ads",
+    "segment": "mix",
+
+    "card": {
+      "order": 2,
+      "imageSrc": "/assets/images/icons/adword.svg",
+      "imageAlt": "Google Ads",
+      "tag": "Levier principal",
+      "excerpt": "Déclencher des demandes rapidement avec un budget maîtrisé, et couper ce qui ne marche pas."
+    },
+
+    "pageTitle": {
+      "badge": "Services",
+      "title": "Google Ads",
+      "subtitle": "Objectif : plus d’appels et de demandes rapidement, avec un budget maîtrisé",
+      "image": "/assets/images/hero/page-title.jpg"
+    },
+    "breadcrumbs": [
+      { "name": "Accueil", "url": "/" },
+      { "name": "Services", "url": "/services/" },
+      { "name": "Google Ads", "url": "/services/google-ads/" }
+    ],
+    "seo": {
+      "title": "Google Ads — plus d’appels et de demandes | Horizon Conversion",
+      "description": "Campagnes Google Ads orientées demandes : ciblage clair, annonces efficaces, page qui convertit et suivi des appels/formulaires. Objectif : plus de demandes, sans gaspiller.",
+      "canonical": "https://horizon-conversion.fr/services/google-ads/"
+    },
+
+    "intents": ["demandes-rapides", "plus-appels", "budget-maitrise"],
+    "primaryOutcomes": ["Plus d’appels", "Plus de formulaires", "Demandes plus qualifiées"],
+    "positioningAngles": ["Démarrer vite avec un budget maîtrisé", "Couper ce qui ne marche pas", "Rendre les demandes plus qualifiées"],
+    "deliverableTags": ["socle", "ads", "tracking"],
+    "benefitTags": ["rapidite", "appels", "qualif", "rentable"],
+    "proofTags": ["mini-case", "checklist", "mesures"],
+    "faqTags": ["budget", "delais", "engagement", "resultats"]
+  },
+
   "svc-pages-locales": {
     "id": "svc-pages-locales",
     "slug": "pages-locales",
     "name": "Pages locales qui convertissent",
     "shortName": "Landing page",
     "segment": "premium",
+
+    "card": {
+      "order": 3,
+      "imageSrc": "/assets/images/icons/content_marketing.svg",
+      "imageAlt": "Pages locales qui convertissent",
+      "tag": "Socle conversion",
+      "excerpt": "Clarifier l’offre, rassurer et faciliter la prise de contact pour transformer la visibilité en demandes."
+    },
+
     "pageTitle": {
       "badge": "Services",
       "title": "Pages locales qui convertissent",
@@ -159,49 +344,31 @@
       "description": "Pages locales pensées pour convertir : promesse claire, preuves, FAQ, CTA visibles et contact simple. Objectif : transformer la visibilité en appels et demandes.",
       "canonical": "https://horizon-conversion.fr/services/pages-locales/"
     },
-    "intents": [
-      "site-qui-convertit",
-      "plus-appels"
-    ],
-    "primaryOutcomes": [
-      "Plus de formulaires",
-      "Plus d’appels qualifiés",
-      "Moins de visiteurs perdus"
-    ],
-    "positioningAngles": [
-      "Clarifier l’offre en 5 secondes",
-      "Rassurer avant le contact",
-      "Faciliter la prise de rendez-vous"
-    ],
-    "deliverableTags": [
-      "socle",
-      "conversion",
-      "copy"
-    ],
-    "benefitTags": [
-      "conversion",
-      "clarte",
-      "confiance",
-      "qualif"
-    ],
-    "proofTags": [
-      "method",
-      "checklist",
-      "qualite"
-    ],
-    "faqTags": [
-      "contenu",
-      "delais",
-      "photos",
-      "tarifs"
-    ]
+
+    "intents": ["site-qui-convertit", "plus-appels"],
+    "primaryOutcomes": ["Plus de formulaires", "Plus d’appels qualifiés", "Moins de visiteurs perdus"],
+    "positioningAngles": ["Clarifier l’offre en 5 secondes", "Rassurer avant le contact", "Faciliter la prise de rendez-vous"],
+    "deliverableTags": ["socle", "conversion", "copy"],
+    "benefitTags": ["conversion", "clarte", "confiance", "qualif"],
+    "proofTags": ["method", "checklist", "qualite"],
+    "faqTags": ["contenu", "delais", "photos", "tarifs"]
   },
+
   "svc-google-business-profile": {
     "id": "svc-google-business-profile",
     "slug": "google-business-profile",
     "name": "Google Business Profile",
     "shortName": "Fiche Google",
     "segment": "mix",
+
+    "card": {
+      "order": 4,
+      "imageSrc": "/assets/images/icons/analysis.svg",
+      "imageAlt": "Google Business Profile",
+      "tag": "Complément utile",
+      "excerpt": "Optimiser la fiche Google pour déclencher plus d’appels, d’itinéraires et inspirer confiance."
+    },
+
     "pageTitle": {
       "badge": "Services",
       "title": "Google Business Profile",
@@ -218,49 +385,31 @@
       "description": "Optimisation de votre fiche Google : infos claires, éléments qui déclenchent l’appel, photos/avis, et stabilité. Objectif : plus de contacts depuis Google Maps.",
       "canonical": "https://horizon-conversion.fr/services/google-business-profile/"
     },
-    "intents": [
-      "se-trouver-local",
-      "plus-appels"
-    ],
-    "primaryOutcomes": [
-      "Plus d’appels depuis la fiche",
-      "Plus d’itinéraires",
-      "Plus de confiance avant contact"
-    ],
-    "positioningAngles": [
-      "Optimiser ce qui déclenche un appel",
-      "Rassurer avec des infos claires",
-      "Garder une fiche propre et stable"
-    ],
-    "deliverableTags": [
-      "socle",
-      "gbp",
-      "local"
-    ],
-    "benefitTags": [
-      "local",
-      "appels",
-      "confiance",
-      "intention"
-    ],
-    "proofTags": [
-      "checklist",
-      "local",
-      "mesures"
-    ],
-    "faqTags": [
-      "avis",
-      "suspension",
-      "photos",
-      "delais"
-    ]
+
+    "intents": ["se-trouver-local", "plus-appels"],
+    "primaryOutcomes": ["Plus d’appels depuis la fiche", "Plus d’itinéraires", "Plus de confiance avant contact"],
+    "positioningAngles": ["Optimiser ce qui déclenche un appel", "Rassurer avec des infos claires", "Garder une fiche propre et stable"],
+    "deliverableTags": ["socle", "gbp", "local"],
+    "benefitTags": ["local", "appels", "confiance", "intention"],
+    "proofTags": ["checklist", "local", "mesures"],
+    "faqTags": ["avis", "suspension", "photos", "delais"]
   },
+
   "svc-meta-ads": {
     "id": "svc-meta-ads",
     "slug": "meta-ads",
     "name": "Publicités Meta (Facebook/Instagram)",
     "shortName": "Meta Ads",
     "segment": "volume",
+
+    "card": {
+      "order": 5,
+      "imageSrc": "/assets/images/icons/social.svg",
+      "imageAlt": "Meta Ads",
+      "tag": "Levier principal",
+      "excerpt": "Générer des demandes rapidement via Facebook/Instagram avec une offre lisible et un ciblage local simple."
+    },
+
     "pageTitle": {
       "badge": "Services",
       "title": "Publicités Meta (Facebook/Instagram)",
@@ -277,47 +426,31 @@
       "description": "Publicités Facebook/Instagram orientées demandes : offre lisible, créas claires, ciblage local et suivi des contacts. Objectif : remplir le planning sans flou.",
       "canonical": "https://horizon-conversion.fr/services/meta-ads/"
     },
-    "intents": [
-      "demandes-rapides",
-      "notoriete-locale"
-    ],
-    "primaryOutcomes": [
-      "Demandes rapides",
-      "Visibilité locale",
-      "Remplir un planning"
-    ],
-    "positioningAngles": [
-      "Campagnes simples, ciblage local",
-      "Créa claire, offre lisible",
-      "Suivi des demandes"
-    ],
-    "deliverableTags": [
-      "socle",
-      "ads",
-      "creative"
-    ],
-    "benefitTags": [
-      "rapidite",
-      "local",
-      "contacts"
-    ],
-    "proofTags": [
-      "mini-case",
-      "mesures"
-    ],
-    "faqTags": [
-      "budget",
-      "ciblage",
-      "delais",
-      "resultats"
-    ]
+
+    "intents": ["demandes-rapides", "notoriete-locale"],
+    "primaryOutcomes": ["Demandes rapides", "Visibilité locale", "Remplir un planning"],
+    "positioningAngles": ["Campagnes simples, ciblage local", "Créa claire, offre lisible", "Suivi des demandes"],
+    "deliverableTags": ["socle", "ads", "creative"],
+    "benefitTags": ["rapidite", "local", "contacts"],
+    "proofTags": ["mini-case", "mesures"],
+    "faqTags": ["budget", "ciblage", "delais", "resultats"]
   },
+
   "svc-suivi-conversions": {
     "id": "svc-suivi-conversions",
     "slug": "suivi-conversions",
     "name": "Suivi & mesure des conversions",
     "shortName": "suivi des conversions",
     "segment": "mix",
+
+    "card": {
+      "order": 6,
+      "imageSrc": "/assets/images/icons/experience.svg",
+      "imageAlt": "Suivi & mesure des conversions",
+      "tag": "Complément utile",
+      "excerpt": "Mesurer appels et formulaires pour savoir d’où viennent les demandes et décider avec des faits."
+    },
+
     "pageTitle": {
       "badge": "Services",
       "title": "Suivi & mesure des conversions",
@@ -334,39 +467,13 @@
       "description": "Mise en place d’un suivi simple des demandes : appels + formulaires, événements clés et lecture compréhensible. Objectif : piloter ce qui marche vraiment.",
       "canonical": "https://horizon-conversion.fr/services/suivi-conversions/"
     },
-    "intents": [
-      "mesurer-ce-qui-marche",
-      "qualifier-demandes"
-    ],
-    "primaryOutcomes": [
-      "Savoir d’où viennent les demandes",
-      "Mesurer appels et formulaires",
-      "Décider avec des faits"
-    ],
-    "positioningAngles": [
-      "Mesure simple, exploitable",
-      "Événements clés (formulaire, appel)",
-      "Tableau de bord lisible"
-    ],
-    "deliverableTags": [
-      "socle",
-      "tracking"
-    ],
-    "benefitTags": [
-      "clarte",
-      "rentable",
-      "priorites"
-    ],
-    "proofTags": [
-      "checklist",
-      "method",
-      "mesures"
-    ],
-    "faqTags": [
-      "ga4",
-      "rgpd",
-      "event",
-      "delais"
-    ]
+
+    "intents": ["mesurer-ce-qui-marche", "qualifier-demandes"],
+    "primaryOutcomes": ["Savoir d’où viennent les demandes", "Mesurer appels et formulaires", "Décider avec des faits"],
+    "positioningAngles": ["Mesure simple, exploitable", "Événements clés (formulaire, appel)", "Tableau de bord lisible"],
+    "deliverableTags": ["socle", "tracking"],
+    "benefitTags": ["clarte", "rentable", "priorites"],
+    "proofTags": ["checklist", "method", "mesures"],
+    "faqTags": ["ga4", "rgpd", "event", "delais"]
   }
 }

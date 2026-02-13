@@ -3,90 +3,57 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageTitle from "../../components/PageTitle.astro";
 import HeroBenefices from "../../components/HeroBenefices.astro";
-import Tarifs from "../../components/tarifs.astro";
-import Preuves from "../../components/preuves.astro";
-import Methode from "../../components/methode.astro";
+import Tarifs from "../../components/Tarifs.astro";
+import Preuves from "../../components/Preuves.astro";
+import Methode from "../../components/Methode.astro";
 import ZonesVilles from "../../components/ZonesVilles.astro";
 import Ressources from "../../components/Ressources.astro";
 import Faqs from "../../components/Faqs.astro";
 import ContactForm from "../../components/ContactForm.astro";
 
+import siteData from "../../data/site.json";
+import seoData from "../../data/seo.json";
+import hero_benefData from "../../data/hero_benef.json";
+import tarifsData from "../../data/tarifs.json";
+
+// ✅ source des slugs pour générer /services/:service/
 import servicesData from "../../data/services.json";
 
-/** Helpers */
-const toObj = (v) => (v && typeof v === "object" ? v : {});
-const s = (v) => (typeof v === "string" ? v.trim() : "");
+import zonesData from "../../data/zones.json";
+import villesData from "../../data/villes.json";
+import articlesData from "../../data/articles.json";
+import faqs_servicesData from "../../data/faqs_services.json";
+import formData from "../../data/form.json";
 
-/** getStaticPaths */
+/** ✅ getStaticPaths requis pour une route dynamique */
 export async function getStaticPaths() {
-  const obj = servicesData && typeof servicesData === "object" ? servicesData : {};
-  const entries = Object.entries(obj).filter(([k, v]) => {
-    return k !== "_meta" && v && typeof v === "object" && v.slug;
-  });
+  const root =
+    servicesData && typeof servicesData === "object" && !Array.isArray(servicesData)
+      ? servicesData
+      : null;
 
-  return entries.map(([_, svc]) => ({
-    params: { service: String(svc.slug) },
-    props: { serviceSlug: String(svc.slug) },
+  if (!root) {
+    throw new Error(`[services/[service]] services.json invalide (objet attendu)`);
+  }
+
+  const entries = Object.entries(root)
+    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
+    .map(([_, v]) => v)
+    .filter((svc) => typeof svc.slug === "string" && svc.slug.trim());
+
+  if (entries.length === 0) {
+    throw new Error(`[services/[service]] aucun service trouvé dans services.json`);
+  }
+
+  return entries.map((svc) => ({
+    params: { service: String(svc.slug).trim() },
+    props: { serviceSlug: String(svc.slug).trim() },
   }));
 }
-
-/** Props + params */
-const { serviceSlug } = Astro.props;
-const serviceParam = String(Astro.params.service || serviceSlug || "");
-
-/** Data normalisée */
-const servicesObj = toObj(servicesData);
-const servicesList = Object.values(servicesObj).filter((v) => v && typeof v === "object" && v.slug);
-
-/** Service courant */
-const service = servicesList.find((x) => String(x?.slug) === serviceParam) || null;
-
-if (!service) {
-  throw new Error(`[services/[service]] Service introuvable: "${serviceParam}"`);
-}
-
-/** Exige pageTitle complet */
-const pageTitle = toObj(service.pageTitle);
-
-if (!s(pageTitle.badge) || !s(pageTitle.title) || !s(pageTitle.subtitle) || !s(pageTitle.image)) {
-  throw new Error(
-    `[services/[service]] pageTitle incomplet pour "${serviceParam}". Requis: pageTitle.badge, pageTitle.title, pageTitle.subtitle, pageTitle.image`
-  );
-}
-
-/** Exige breadcrumbs (>= 2) */
-const breadcrumbs = Array.isArray(service.breadcrumbs) ? service.breadcrumbs : null;
-
-if (!breadcrumbs || breadcrumbs.length < 2) {
-  throw new Error(
-    `[services/[service]] breadcrumbs manquant/incomplet pour "${serviceParam}". Requis: breadcrumbs: [{name,url}...]`
-  );
-}
-
-/** Exige seo complet */
-const seoObj = toObj(service.seo);
-
-if (!s(seoObj.title) || !s(seoObj.description) || !s(seoObj.canonical)) {
-  throw new Error(
-    `[services/[service]] seo incomplet pour "${serviceParam}". Requis: seo.title, seo.description, seo.canonical`
-  );
-}
-
-const seo = {
-  title: s(seoObj.title),
-  description: s(seoObj.description),
-  canonical: s(seoObj.canonical),
-};
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={s(pageTitle.badge)}
-      title={s(pageTitle.title)}
-      subtitle={s(pageTitle.subtitle)}
-      image={s(pageTitle.image)}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
 
   <!-- Content ============================================= -->
   <section id="content">

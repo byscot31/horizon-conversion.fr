@@ -10,73 +10,20 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
+import siteData from "../../data/site.json";
+import seoData from "../../data/seo.json";
+import hero_cardData from "../../data/hero_card.json";
+import processData from "../../data/process.json";
 import zonesData from "../../data/zones.json";
-
-/** Helpers (sans fallback de contenu : seulement sécurité types) */
-const safe = (v) => (typeof v === "string" ? v.trim() : "");
-const toObj = (v) => (v && typeof v === "object" ? v : null);
-
-/**
- * Sans fallback :
- * - on exige _meta.hub
- * - on exige pageTitle + breadcrumbs + seo complets
- */
-const dataObj = toObj(zonesData);
-if (!dataObj) {
-  throw new Error(`[zones/index] zones.json doit être un objet.`);
-}
-
-const meta = toObj(dataObj._meta);
-if (!meta) {
-  throw new Error(`[zones/index] _meta manquant dans zones.json.`);
-}
-
-const hub = toObj(meta.hub);
-if (!hub) {
-  throw new Error(`[zones/index] _meta.hub manquant dans zones.json.`);
-}
-
-const pageTitle = toObj(hub.pageTitle);
-if (!pageTitle) {
-  throw new Error(`[zones/index] _meta.hub.pageTitle manquant dans zones.json.`);
-}
-
-if (!safe(pageTitle.badge) || !safe(pageTitle.title) || !safe(pageTitle.subtitle) || !safe(pageTitle.image)) {
-  throw new Error(
-    `[zones/index] _meta.hub.pageTitle incomplet. Requis: badge, title, subtitle, image`
-  );
-}
-
-const breadcrumbs = Array.isArray(hub.breadcrumbs) ? hub.breadcrumbs : null;
-if (!breadcrumbs || breadcrumbs.length < 2) {
-  throw new Error(`[zones/index] _meta.hub.breadcrumbs manquant/incomplet (>= 2 items requis).`);
-}
-
-const seoObj = toObj(hub.seo);
-if (!seoObj) {
-  throw new Error(`[zones/index] _meta.hub.seo manquant dans zones.json.`);
-}
-if (!safe(seoObj.title) || !safe(seoObj.description) || !safe(seoObj.canonical)) {
-  throw new Error(
-    `[zones/index] _meta.hub.seo incomplet. Requis: title, description, canonical`
-  );
-}
-
-const seo = {
-  title: safe(seoObj.title),
-  description: safe(seoObj.description),
-  canonical: safe(seoObj.canonical),
-};
+import servicesData from "../../data/services.json";
+import villesData from "../../data/villes.json";
+import preuvesData from "../../data/preuves.json";
+import faqs_zonesData from "../../data/faqs_zones.json";
+import maillage_interneData from "../../data/maillage_interne.json";
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={safe(pageTitle.badge)}
-      title={safe(pageTitle.title)}
-      subtitle={safe(pageTitle.subtitle)}
-      image={safe(pageTitle.image)}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
 
   <!-- Content ============================================= -->
   <section id="content">

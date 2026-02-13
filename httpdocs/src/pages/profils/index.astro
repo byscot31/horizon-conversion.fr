@@ -10,53 +10,19 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
+import siteData from "../../data/site.json";
+import seoData from "../../data/seo.json";
+import hero_cardData from "../../data/hero_card.json";
+import processData from "../../data/process.json";
 import ciblesData from "../../data/cibles.json";
-
-const toObj = (v) => (v && typeof v === "object" ? v : {});
-const safe = (v, fb = "") => (typeof v === "string" && v.trim() ? v.trim() : fb);
-
-const ciblesObj = toObj(ciblesData);
-const meta = toObj(ciblesObj._meta);
-const hub = toObj(meta.hub);
-
-const hubPT = toObj(hub.pageTitle);
-const hubSEO = toObj(hub.seo);
-const hubBC = Array.isArray(hub.breadcrumbs) ? hub.breadcrumbs : [];
-
-const ciblesList = Object.entries(ciblesObj)
-  .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && v.slug)
-  .map(([k, c]) => ({
-    id: safe(c.id, k),
-    slug: safe(c.slug),
-    name: safe(c.name, safe(c.slug)),
-    segment: safe(c.segment, "mix"),
-  }))
-  .filter((c) => c.slug && c.name)
-  .sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
-
-const seo = {
-  title: safe(hubSEO.title, safe(hubPT.title, "Profils | Horizon Conversion")),
-  description: safe(hubSEO.description, safe(hubPT.subtitle, "")),
-  canonical: safe(hubSEO.canonical, "https://horizon-conversion.fr/profils/"),
-};
-
-const breadcrumbs =
-  hubBC.length
-    ? hubBC
-    : [
-      { name: "Accueil", url: "/" },
-      { name: safe(hubPT.badge, "Profils"), url: "/profils/" },
-    ];
+import villesData from "../../data/villes.json";
+import preuvesData from "../../data/preuves.json";
+import faqs_ciblesData from "../../data/faqs_cibles.json";
+import maillage_interneData from "../../data/maillage_interne.json";
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={safe(hubPT.badge)}
-      title={safe(hubPT.title)}
-      subtitle={safe(hubPT.subtitle)}
-      image={safe(hubPT.image, "/assets/images/hero/page-title.jpg")}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
 
   <!-- Content ============================================= -->
   <section id="content">

@@ -2,102 +2,90 @@
 // src/pages/zones/[zone]/[ville]/index.astro
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../../components/PageTitle.astro";
+import HeroPage from "../../../../components/HeroPage.astro";
+import ServicesPage from "../../../../components/ServicesPage.astro";
+import Cibles from "../../../../components/Cibles.astro";
+import Preuves from "../../../../components/Preuves.astro";
+import Faqs from "../../../../components/Faqs.astro";
+import ContactForm from "../../../../components/ContactForm.astro";
+
+import siteData from "../../../../data/site.json";
+import seoData from "../../../../data/seo.json";
+import hero_pageData from "../../../../data/hero_page.json";
+import servicesData from "../../../../data/services.json";
+import ciblesData from "../../../../data/cibles.json";
+import preuvesData from "../../../../data/preuves.json";
+import faqs_villesData from "../../../../data/faqs_villes.json";
+import formData from "../../../../data/form.json";
 
 import villesData from "../../../../data/villes.json";
 
-/** Helpers (sans fallback de contenu : seulement sécurité types) */
-const safe = (v) => (typeof v === "string" ? v.trim() : "");
-const toObj = (v) => (v && typeof v === "object" ? v : null);
-
-/**
- * ✅ getStaticPaths : génère /zones/:zone/:ville/
- * - on ignore _meta
- * - on exige zoneSlug + slug
- */
+/** ✅ getStaticPaths requis pour /zones/[zone]/[ville]/ */
 export async function getStaticPaths() {
-  const obj = (villesData && typeof villesData === "object") ? villesData : {};
-  const entries = Object.entries(obj).filter(
-    ([k, v]) => k !== "_meta" && v && typeof v === "object" && v.slug && v.zoneSlug
-  );
+  const root =
+    villesData && typeof villesData === "object" && !Array.isArray(villesData)
+      ? villesData
+      : null;
 
-  return entries.map(([_, city]) => ({
+  if (!root) {
+    throw new Error(`[zones/[zone]/[ville]] villes.json invalide (objet attendu)`);
+  }
+
+  const entries = Object.entries(root)
+    .filter(([k, v]) => k !== "_meta" && v && typeof v === "object" && !Array.isArray(v))
+    .map(([_, v]) => v)
+    .filter(
+      (c) =>
+        typeof c.slug === "string" &&
+        c.slug.trim() &&
+        typeof c.zoneSlug === "string" &&
+        c.zoneSlug.trim()
+    );
+
+  if (entries.length === 0) {
+    throw new Error(`[zones/[zone]/[ville]] aucune ville trouvée dans villes.json (slug + zoneSlug requis)`);
+  }
+
+  return entries.map((city) => ({
     params: {
-      zone: String(city.zoneSlug),
-      ville: String(city.slug),
+      zone: String(city.zoneSlug).trim(),
+      ville: String(city.slug).trim(),
     },
     props: {
-      cityId: String(city.id || ""),
-      citySlug: String(city.slug),
-      zoneSlug: String(city.zoneSlug),
+      zoneSlug: String(city.zoneSlug).trim(),
+      villeSlug: String(city.slug).trim(),
+      cityId: typeof city.id === "string" || typeof city.id === "number" ? String(city.id) : "",
     },
   }));
 }
-
-/** Props + params */
-const { cityId, citySlug, zoneSlug: zoneFromProps } = Astro.props;
-
-const zoneParam = String(Astro.params.zone || zoneFromProps || "");
-const villeParam = String(Astro.params.ville || citySlug || "");
-
-/** Data */
-const villesObj = (villesData && typeof villesData === "object") ? villesData : {};
-const cities = Object.values(villesObj).filter((v) => v && typeof v === "object" && v.slug && v.zoneSlug);
-
-/** Ville courante (sans fallback) */
-const city =
-  (cityId && villesObj[cityId]) ||
-  cities.find((c) => String(c?.slug) === villeParam && String(c?.zoneSlug) === zoneParam) ||
-  null;
-
-if (!city) {
-  throw new Error(`[zones/[zone]/[ville]] Ville introuvable: zone="${zoneParam}" ville="${villeParam}"`);
-}
-
-/**
- * ❗️Sans fallback :
- * - on exige pageTitle + breadcrumbs + seo DANS la ville
- * (tu les ajoutes directement dans chaque entrée ville de villes.json)
- */
-const pageTitle = toObj(city.pageTitle);
-if (!pageTitle) {
-  throw new Error(`[zones/[zone]/[ville]] pageTitle manquant pour "${villeParam}". Requis: city.pageTitle{badge,title,subtitle,image}`);
-}
-if (!safe(pageTitle.badge) || !safe(pageTitle.title) || !safe(pageTitle.subtitle) || !safe(pageTitle.image)) {
-  throw new Error(
-    `[zones/[zone]/[ville]] pageTitle incomplet pour "${villeParam}". Requis: badge,title,subtitle,image`
-  );
-}
-
-const breadcrumbs = Array.isArray(city.breadcrumbs) ? city.breadcrumbs : null;
-if (!breadcrumbs || breadcrumbs.length < 3) {
-  throw new Error(
-    `[zones/[zone]/[ville]] breadcrumbs manquant/incomplet pour "${villeParam}". Requis: breadcrumbs (>= 3 items)`
-  );
-}
-
-const seoObj = toObj(city.seo);
-if (!seoObj) {
-  throw new Error(`[zones/[zone]/[ville]] seo manquant pour "${villeParam}". Requis: city.seo{title,description,canonical}`);
-}
-if (!safe(seoObj.title) || !safe(seoObj.description) || !safe(seoObj.canonical)) {
-  throw new Error(
-    `[zones/[zone]/[ville]] seo incomplet pour "${villeParam}". Requis: title,description,canonical`
-  );
-}
-
-const seo = {
-  title: safe(seoObj.title),
-  description: safe(seoObj.description),
-  canonical: safe(seoObj.canonical),
-};
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={safe(pageTitle.badge)}
-      title={safe(pageTitle.title)}
-      subtitle={safe(pageTitle.subtitle)}
-      image={safe(pageTitle.image)}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap pb-0">
+
+      <!-- Hero + Services ============================================= -->
+      <div class="container mb-5">
+
+        <HeroPage />
+
+        <ServicesPage />
+
+      </div>
+
+      <div class="clear"></div>
+
+      <Cibles />
+
+      <Preuves />
+
+      <Faqs />
+
+      <ContactForm />
+
+    </div>
+  </section>
 </BaseLayout>

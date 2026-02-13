@@ -10,71 +10,20 @@ import Preuves from "../../components/Preuves.astro";
 import Faqs from "../../components/Faqs.astro";
 import MaillageInterne from "../../components/MaillageInterne.astro";
 
+import siteData from "../../data/site.json";
+import seoData from "../../data/seo.json";
+import hero_cardData from "../../data/hero_card.json";
+import processData from "../../data/process.json";
 import servicesData from "../../data/services.json";
-
-/** Helpers (sécurité types, pas de fallback de contenu) */
-const toObj = (v) => (v && typeof v === "object" ? v : null);
-const safe = (v) => (typeof v === "string" ? v.trim() : "");
-
-/** Data services.json (objet attendu) */
-const root = toObj(servicesData);
-if (!root) {
-  throw new Error(`[services/index] services.json doit être un objet.`);
-}
-
-/** _meta.hub obligatoire */
-const meta = toObj(root._meta);
-const hub = meta ? toObj(meta.hub) : null;
-
-if (!hub) {
-  throw new Error(`[services/index] services.json._meta.hub manquant.`);
-}
-
-/** pageTitle obligatoire */
-const pageTitle = toObj(hub.pageTitle);
-if (
-  !pageTitle ||
-  !safe(pageTitle.badge) ||
-  !safe(pageTitle.title) ||
-  !safe(pageTitle.subtitle) ||
-  !safe(pageTitle.image)
-) {
-  throw new Error(
-    `[services/index] services.json._meta.hub.pageTitle incomplet. Requis: badge,title,subtitle,image`
-  );
-}
-
-/** breadcrumbs obligatoires */
-const breadcrumbs = Array.isArray(hub.breadcrumbs) ? hub.breadcrumbs : null;
-if (!breadcrumbs || breadcrumbs.length < 2) {
-  throw new Error(
-    `[services/index] services.json._meta.hub.breadcrumbs manquant/incomplet. Requis: [{name,url}...]`
-  );
-}
-
-/** seo obligatoire */
-const seoObj = toObj(hub.seo);
-if (!seoObj || !safe(seoObj.title) || !safe(seoObj.description) || !safe(seoObj.canonical)) {
-  throw new Error(
-    `[services/index] services.json._meta.hub.seo incomplet. Requis: title,description,canonical`
-  );
-}
-
-const seo = {
-  title: safe(seoObj.title),
-  description: safe(seoObj.description),
-  canonical: safe(seoObj.canonical),
-};
+import zonesData from "../../data/zones.json";
+import villesData from "../../data/villes.json";
+import preuvesData from "../../data/preuves.json";
+import faqs_servicesData from "../../data/faqs_services.json";
+import maillage_interneData from "../../data/maillage_interne.json";
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={safe(pageTitle.badge)}
-      title={safe(pageTitle.title)}
-      subtitle={safe(pageTitle.subtitle)}
-      image={safe(pageTitle.image)}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
 
   <!-- Content ============================================= -->
   <section id="content">

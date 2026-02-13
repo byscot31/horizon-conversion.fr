@@ -15,6 +15,247 @@
         "title": "Profils — Horizon Conversion",
         "description": "Choisissez votre profil : artisans, TPE, PME, commerces, professions libérales. Approche simple pour générer plus d’appels et de demandes.",
         "canonical": "https://horizon-conversion.fr/profils/"
+      },
+      "heroCard": {
+        "left": {
+          "badge": "Pour qui",
+          "h2": "Choisissez votre profil : on adapte la stratégie",
+          "description": "SEO local, Ads et pages qui convertissent — objectif : appels & demandes qualifiées.",
+          "ctas": [
+            { "label": "Demander un audit (gratuit)", "href": "/audit-gratuit" },
+            { "label": "Être rappelé", "href": "/contact/?cta=rappel", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Ce que ça change",
+          "description": "Une approche simple : clarté → confiance → contact → suivi.",
+          "bullets": [
+            "On comprend votre offre en 5 secondes",
+            "CTA visibles (appel / rappel / formulaire)",
+            "Preuves avant le contact (FAQ, cas, chiffres)",
+            "Suivi appels + formulaires (décisions rapides)",
+            "Moins de demandes inutiles"
+          ]
+        }
+      },
+      "process": {
+        "header": {
+          "badge": "Process",
+          "title": "Comment on avance",
+          "description": "Audit → priorités → mise en place → suivi. Simple, lisible, orienté demandes."
+        },
+        "ribbon": {
+          "label": "Une méthode en 4 étapes"
+        },
+        "steps": [
+          {
+            "tag": "Étape 1",
+            "title": "Audit gratuit",
+            "text": "On identifie ce qui bloque les demandes et ce qui peut bouger vite."
+          },
+          {
+            "tag": "Étape 2",
+            "title": "Plan clair",
+            "text": "Vous repartez avec un ordre de priorité simple : quoi faire d’abord (et pourquoi)."
+          },
+          {
+            "tag": "Étape 3",
+            "title": "Mise en place",
+            "text": "On met en place SEO local / Ads / pages qui convertissent selon votre contexte."
+          },
+          {
+            "tag": "Étape 4",
+            "title": "Suivi & ajustements",
+            "text": "On mesure appels + formulaires, on renforce ce qui marche, on coupe le reste."
+          }
+        ]
+      },
+      "cibles": {
+        "items": [
+          {
+            "order": 1,
+            "href": "/profils/artisans/",
+            "title": "Artisans & chantiers",
+            "excerpt": "Plus d’appels et de demandes de devis, avec des pages claires et un contact en 1 clic.",
+            "bullets": [
+              "Promesse claire (métier + zone + résultat)",
+              "CTA visibles : appel / rappel / formulaire",
+              "Qualification des demandes (moins de “bruit”)",
+              "Preuves simples : FAQ, avis, exemples",
+              "Suivi appels + formulaires (décisions rapides)"
+            ]
+          },
+          {
+            "order": 2,
+            "href": "/profils/tpe/",
+            "title": "Petites entreprises (TPE)",
+            "excerpt": "Des demandes régulières avec une approche simple : clarté → confiance → contact → suivi.",
+            "bullets": [
+              "Offre comprise en 5 secondes",
+              "Pages qui convertissent (structure “recette”)",
+              "SEO local + Ads si besoin (sans se disperser)",
+              "Moins de demandes inutiles (cadrage de l’offre)",
+              "Pilotage lisible des demandes"
+            ]
+          },
+          {
+            "order": 3,
+            "href": "/profils/pme/",
+            "title": "PME en croissance",
+            "excerpt": "Leads plus qualifiés et pilotage clair : visibilité, pages rassurantes, suivi des conversions.",
+            "bullets": [
+              "Message + positionnement plus “premium”",
+              "Demandes mieux qualifiées (pas juste du volume)",
+              "Parcours de contact maîtrisé (RDV, appel, formulaire)",
+              "Reporting simple : ce qui génère des leads",
+              "Process et priorités pour avancer sans friction"
+            ]
+          },
+          {
+            "order": 4,
+            "href": "/profils/commerces/",
+            "title": "Commerces & points de vente",
+            "excerpt": "Plus de trafic local et de contacts (appels, RDV, réservations) avec une exécution rapide.",
+            "bullets": [
+              "Visibilité locale + Google Maps",
+              "Campagnes locales simples (si nécessaire)",
+              "Offre lisible (horaires, zone, infos clés)",
+              "CTA immédiats : itinéraire / appel / réservation",
+              "Suivi des demandes pour optimiser vite"
+            ]
+          },
+          {
+            "order": 5,
+            "href": "/profils/professions-liberales/",
+            "title": "Professions libérales",
+            "excerpt": "Des RDV qualifiés grâce à une image rassurante et un parcours de contact simple.",
+            "bullets": [
+              "Réassurance : expertise, preuves, méthode",
+              "Pages orientées confiance avant l’appel",
+              "Prise de RDV / appel simplifiée",
+              "FAQ “objections” (tarifs, délais, confidentialité)",
+              "Suivi des demandes (qualité + sources)"
+            ]
+          },
+          {
+            "order": 6,
+            "href": "/profils/reseaux-franchises/",
+            "title": "Réseaux & franchises",
+            "excerpt": "Leads qualifiés point de vente par point de vente, avec une acquisition locale scalable.",
+            "bullets": [
+              "Déploiement multi-villes (structure + templates)",
+              "Cohérence de marque + adaptation locale",
+              "SEO local + Ads + CRO par point de vente",
+              "Standardisation : pages, tracking, reporting",
+              "Pilotage clair (ce qui marche, où, pourquoi)"
+            ]
+          }
+        ]
+      },
+      "zonesVilles": {
+        "header": {
+          "badge": "Zones",
+          "title": "Choisissez votre zone (et votre ville)",
+          "subtitle": "Accédez aux pages locales : ville → services → profils."
+        },
+        "items": [
+          {
+            "order": 1,
+            "href": "/zones/sud-oise/",
+            "title": "Sud Oise (60)",
+            "excerpt": "Pages locales par ville : visibilité, conversion, suivi des demandes.",
+            "cities": [
+              { "name": "Chantilly", "href": "/zones/sud-oise/chantilly/" },
+              { "name": "Senlis", "href": "/zones/sud-oise/senlis/" },
+              { "name": "Creil", "href": "/zones/sud-oise/creil/" },
+              { "name": "Montataire", "href": "/zones/sud-oise/montataire/" },
+              { "name": "Nogent-sur-Oise", "href": "/zones/sud-oise/nogent-sur-oise/" },
+              { "name": "Pont-Sainte-Maxence", "href": "/zones/sud-oise/pont-sainte-maxence/" },
+              { "name": "Lamorlaye", "href": "/zones/sud-oise/lamorlaye/" },
+              { "name": "Gouvieux", "href": "/zones/sud-oise/gouvieux/" },
+              { "name": "Pontpoint", "href": "/zones/sud-oise/pontpoint/" }
+            ]
+          },
+          {
+            "order": 2,
+            "href": "/zones/nord-val-doise/",
+            "title": "Nord Val d’Oise (95)",
+            "excerpt": "Pages locales : demandes rapides, qualification, et pilotage clair.",
+            "cities": [
+              { "name": "Beaumont-sur-Oise", "href": "/zones/nord-val-doise/beaumont-sur-oise/" },
+              { "name": "Luzarches", "href": "/zones/nord-val-doise/luzarches/" },
+              { "name": "Domont", "href": "/zones/nord-val-doise/domont/" },
+              { "name": "Écouen", "href": "/zones/nord-val-doise/ecouen/" },
+              { "name": "Goussainville", "href": "/zones/nord-val-doise/goussainville/" },
+              { "name": "Gonesse", "href": "/zones/nord-val-doise/gonesse/" },
+              { "name": "Sarcelles", "href": "/zones/nord-val-doise/sarcelles/" },
+              { "name": "Villiers-le-Bel", "href": "/zones/nord-val-doise/villiers-le-bel/" },
+              { "name": "Garges-lès-Gonesse", "href": "/zones/nord-val-doise/garges-les-gonesse/" },
+              { "name": "Arnouville", "href": "/zones/nord-val-doise/arnouville/" },
+              { "name": "Roissy-en-France", "href": "/zones/nord-val-doise/roissy-en-france/" },
+              { "name": "Montmorency", "href": "/zones/nord-val-doise/montmorency/" },
+              { "name": "Saint-Brice-sous-Forêt", "href": "/zones/nord-val-doise/saint-brice-sous-foret/" },
+              { "name": "Enghien-les-Bains", "href": "/zones/nord-val-doise/enghien-les-bains/" },
+              { "name": "L’Isle-Adam", "href": "/zones/nord-val-doise/l-isle-adam/" },
+              { "name": "Méry-sur-Oise", "href": "/zones/nord-val-doise/mery-sur-oise/" }
+            ]
+          }
+        ]
+      },
+      "faqs": {
+        "header": {
+          "badge": "FAQ",
+          "title": "Questions fréquentes",
+          "subtitle": "Réponses simples sur la méthode, les délais, le budget et la qualité des demandes."
+        },
+        "items": [
+          {
+            "order": 1,
+            "q": "En combien de temps je peux voir des résultats ?",
+            "a": "Ads : souvent dès les premiers jours. SEO local : progression sur plusieurs semaines. Dans tous les cas, on commence par ce qui a le plus d’impact rapidement (message, pages, contact, suivi)."
+          },
+          {
+            "order": 2,
+            "q": "Est-ce que vous garantissez un nombre de leads ?",
+            "a": "On garantit une exécution orientée demandes (structure, tracking, optimisation). Le volume dépend du marché local, de l’offre et du budget. L’objectif : plus de demandes et surtout des demandes plus utiles."
+          },
+          {
+            "order": 3,
+            "q": "Comment vous évitez les demandes non qualifiées ?",
+            "a": "On clarifie l’offre (pour qui / quoi / zone / contraintes), on met des filtres simples (FAQ, prérequis, cadrage) et on optimise selon les demandes reçues (appels + formulaires mesurés)."
+          },
+          {
+            "order": 4,
+            "q": "Est-ce que je dois refaire tout mon site ?",
+            "a": "Non. Souvent on part d’une base simple : pages locales qui convertissent + contact clair + preuves + suivi. Le but n’est pas “beau”, c’est “utile”."
+          },
+          {
+            "order": 5,
+            "q": "Quel budget minimum pour démarrer ?",
+            "a": "Ça dépend du levier (SEO/Ads) et de la zone. On définit un budget test cohérent et on coupe ce qui ne marche pas. L’objectif : éviter le gaspillage et piloter avec des faits."
+          },
+          {
+            "order": 6,
+            "q": "Comment je sais d’où viennent les appels ?",
+            "a": "On met en place un suivi des conversions (appels, formulaires, clics clés) et un reporting lisible. Vous voyez ce qui génère des demandes, et on optimise à partir de ça."
+          }
+        ]
+      },
+      "maillageInterne": {
+        "backgroundImage": "/assets/images/sections/3.jpg",
+        "header": {
+          "kicker": "Maillage interne",
+          "title": "Explorer",
+          "titleEmphasis": "les pages clés"
+        },
+        "links": [
+          { "order": 1, "label": "Services", "href": "/services/" },
+          { "order": 2, "label": "Zones", "href": "/zones/" },
+          { "order": 5, "label": "Méthode", "href": "/methode/" },
+          { "order": 4, "label": "Preuves", "href": "/preuves/" },
+          { "order": 3, "label": "Tarifs", "href": "/tarifs/" },
+          { "order": 6, "label": "Contact", "href": "/contact/" }
+        ]
       }
     }
   },
@@ -38,6 +279,61 @@
       "title": "Artisans — plus d’appels et de devis | Horizon Conversion",
       "description": "Pour artisans : gagner en visibilité locale et transformer ça en appels et demandes de devis. Pages claires, preuves simples, contact en 1 clic.",
       "canonical": "https://horizon-conversion.fr/profils/artisans/"
+    },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "Artisans",
+          "h2": "Plus d’appels et de demandes de devis dans votre zone",
+          "p1": "On clarifie votre offre, on renforce la confiance et on rend le contact évident (appel / rappel / formulaire).",
+          "p2": "Objectif : moins de demandes inutiles, plus de chantiers pertinents grâce au SEO local, Ads et pages qui convertissent.",
+          "ctas": [
+            { "label": "Demander un audit (gratuit)", "href": "/audit-gratuit" },
+            { "label": "Être rappelé", "href": "/contact/?cta=rappel", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Ce qui bloque souvent",
+          "description": "On corrige en priorité ce qui empêche un visiteur de vous appeler.",
+          "bullets": [
+            "Offre pas assez claire (métier / zone / délais)",
+            "CTA pas visibles (trop de clics avant contact)",
+            "Demandes “bruit” (hors zone, hors budget, urgences)",
+            "Manque de preuves (réassurance avant appel)",
+            "Aucune mesure fiable (appels / formulaires)"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui rassure avant le contact",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Demandes mesurées",
+            "text": "Appels + formulaires suivis : on sait ce qui génère vraiment des contacts, pas des “vues”.",
+            "meta": "Suivi conversions",
+            "iconClass": "bi-graph-up"
+          },
+          {
+            "order": 2,
+            "title": "Pages orientées devis",
+            "text": "Promesse claire, preuves, FAQ, CTA visibles : on réduit les demandes floues et on déclenche le devis.",
+            "meta": "Structure “recette”",
+            "iconClass": "bi-file-earmark-richtext"
+          },
+          {
+            "order": 3,
+            "title": "Qualification avant l’appel",
+            "text": "Infos clés + cadrage zone/horaires/urgence : moins de temps perdu, plus de demandes pertinentes.",
+            "meta": "Moins de bruit",
+            "iconClass": "bi-check2-circle"
+          }
+        ]
+      }
     },
     "sensibilite_prix": "haute",
     "outcomes": ["appels", "devis", "chantiers", "demandes-qualifiees"],
@@ -77,6 +373,61 @@
       "description": "Pour TPE : être trouvé localement et convertir les visites en demandes (appels, formulaires). Priorités claires, actions utiles, suivi simple.",
       "canonical": "https://horizon-conversion.fr/profils/tpe/"
     },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "TPE",
+          "h2": "Des demandes régulières, sans complexité",
+          "p1": "On met de l’ordre : message clair, page qui convertit, contact simple, suivi des demandes.",
+          "p2": "Objectif : générer des demandes utiles (appels / formulaires) et savoir d’où elles viennent pour décider vite.",
+          "ctas": [
+            { "label": "Voir la méthode", "href": "/methode/" },
+            { "label": "Demander un audit", "href": "/audit-gratuit", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Les blocages classiques",
+          "description": "On traite ce qui fait perdre des demandes au quotidien.",
+          "bullets": [
+            "Trop d’actions, pas de priorités",
+            "Site “vitrine” qui ne déclenche pas le contact",
+            "Trafic ok mais peu d’appels",
+            "Ads qui consomment sans qualifier",
+            "Pas de suivi (on pilote au ressenti)"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui déclenche des demandes régulières",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Priorités claires",
+            "text": "On commence par 3 actions qui impactent tout de suite : message, contact, mesure.",
+            "meta": "Plan simple",
+            "iconClass": "bi-lightning-charge"
+          },
+          {
+            "order": 2,
+            "title": "Contact sans friction",
+            "text": "Appel / rappel / formulaire : en 1 clic, au bon endroit, au bon moment.",
+            "meta": "Plus d’appels",
+            "iconClass": "bi-telephone"
+          },
+          {
+            "order": 3,
+            "title": "Suivi lisible",
+            "text": "Vous voyez d’où viennent les demandes et lesquelles sont utiles, pour décider vite.",
+            "meta": "Pilotage simple",
+            "iconClass": "bi-speedometer2"
+          }
+        ]
+      }
+    },
     "sensibilite_prix": "moyenne",
     "outcomes": ["demandes", "appels", "planning-rempli", "rentabilite"],
     "topIntents": ["plus-appels", "demandes-rapides", "site-qui-convertit"],
@@ -114,6 +465,61 @@
       "title": "PME — leads qualifiés et pilotage | Horizon Conversion",
       "description": "Pour PME : obtenir des leads qualifiés avec une présence locale claire, des pages qui rassurent et un suivi lisible des demandes.",
       "canonical": "https://horizon-conversion.fr/profils/pme/"
+    },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "PME",
+          "h2": "Des leads plus qualifiés, avec un pilotage clair",
+          "p1": "On structure l’acquisition : SEO local, Ads et CRO selon vos priorités et votre cycle de vente.",
+          "p2": "Objectif : améliorer la qualité des demandes et mettre en place un suivi lisible (sources, pages, taux de contact).",
+          "ctas": [
+            { "label": "Parler du projet", "href": "/contact/" },
+            { "label": "Voir les services", "href": "/services/", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Ce qui bloque la qualité",
+          "description": "On évite le volume inutile et on sécurise le parcours.",
+          "bullets": [
+            "Positionnement flou (vous ressemblez à tous les autres)",
+            "Pages qui ne rassurent pas (preuves / process)",
+            "Formulaires trop longs ou mal placés",
+            "Leads non qualifiés (pas de cadrage)",
+            "Reporting illisible (impossible d’arbitrer)"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui sécurise la qualité des leads",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Cadrage & qualification",
+            "text": "On structure l’offre et les critères : vous recevez moins de demandes, mais mieux qualifiées.",
+            "meta": "Qualité > volume",
+            "iconClass": "bi-shield-check"
+          },
+          {
+            "order": 2,
+            "title": "Preuves avant contact",
+            "text": "Réassurance (process, références, FAQ) pour filtrer et augmenter la confiance.",
+            "meta": "Confiance",
+            "iconClass": "bi-patch-check"
+          },
+          {
+            "order": 3,
+            "title": "Reporting exploitable",
+            "text": "Un suivi compréhensible : demandes, canaux, pages, points à optimiser — sans usine à gaz.",
+            "meta": "Pilotage",
+            "iconClass": "bi-clipboard-data"
+          }
+        ]
+      }
     },
     "sensibilite_prix": "faible",
     "outcomes": ["leads-qualifies", "pipeline", "croissance", "pilotage"],
@@ -153,6 +559,61 @@
       "description": "Pour commerces : apparaître localement, déclencher des appels/visites et améliorer les demandes. Message clair, zone cadrée, contact simple.",
       "canonical": "https://horizon-conversion.fr/profils/commerces/"
     },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "Commerces",
+          "h2": "Plus de trafic local et de contacts (appels, RDV, réservations)",
+          "p1": "On renforce votre présence locale (Google, Maps) et on optimise le parcours pour déclencher l’action tout de suite.",
+          "p2": "Objectif : rendre l’offre lisible, faciliter l’itinéraire/l’appel/la réservation, et suivre les demandes.",
+          "ctas": [
+            { "label": "Optimiser ma visibilité locale", "href": "/services/seo-local/" },
+            { "label": "Demander un audit", "href": "/audit-gratuit", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Ce qui fait perdre des clients",
+          "description": "On corrige ce qui empêche un client de passer à l’action.",
+          "bullets": [
+            "Infos clés introuvables (horaires, accès, tarifs)",
+            "Fiche Google pas optimisée (ou instable)",
+            "CTA “itinéraire / appel” pas mis en avant",
+            "Avis / preuves pas visibles",
+            "Aucun suivi des appels et demandes"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui fait venir des clients locaux",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Présence locale nette",
+            "text": "Fiche Google + pages locales propres : vous êtes visible quand les gens cherchent autour de vous.",
+            "meta": "Google Maps",
+            "iconClass": "bi-geo-alt"
+          },
+          {
+            "order": 2,
+            "title": "Offre lisible",
+            "text": "On comprend vite : pour qui, quoi, prix/infos utiles — ça déclenche l’appel ou la réservation.",
+            "meta": "Clarté",
+            "iconClass": "bi-card-text"
+          },
+          {
+            "order": 3,
+            "title": "Demandes suivies",
+            "text": "Appels / itinéraires / formulaires : on mesure et on ajuste pour générer des contacts régulièrement.",
+            "meta": "Régularité",
+            "iconClass": "bi-graph-up-arrow"
+          }
+        ]
+      }
+    },
     "sensibilite_prix": "moyenne",
     "outcomes": ["trafic-local", "rdv", "reservations", "appels"],
     "topIntents": ["se-trouver-local", "demandes-rapides", "plus-appels"],
@@ -191,6 +652,61 @@
       "description": "Pour professions libérales : renforcer la confiance, clarifier l’offre et obtenir plus de demandes ciblées (RDV, appels) avec un contact évident.",
       "canonical": "https://horizon-conversion.fr/profils/professions-liberales/"
     },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "Professions libérales",
+          "h2": "Plus de RDV qualifiés grâce à la confiance",
+          "p1": "On construit une présence qui rassure : clarté de l’offre, preuves, FAQ objections, parcours de contact simple.",
+          "p2": "Objectif : plus de RDV/appels qualifiés, avec un suivi des demandes pour optimiser ce qui marche.",
+          "ctas": [
+            { "label": "Demander un audit", "href": "/audit-gratuit" },
+            { "label": "Être rappelé", "href": "/contact/?cta=rappel", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Les freins fréquents",
+          "description": "On renforce ce qui déclenche la prise de RDV.",
+          "bullets": [
+            "Manque de réassurance (méthode, déroulé, preuves)",
+            "Offre trop vague (qui / quoi / pour quel besoin)",
+            "Contact compliqué (trop d’étapes)",
+            "Objections non traitées (tarifs, délais, confidentialité)",
+            "Pas de mesure (sources et qualité des demandes)"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui renforce la confiance (et les RDV)",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Image & réassurance",
+            "text": "Pages sobres et rassurantes : approche, déroulé, réponses aux questions fréquentes.",
+            "meta": "Confiance",
+            "iconClass": "bi-shield-check"
+          },
+          {
+            "order": 2,
+            "title": "Parcours RDV simple",
+            "text": "CTA visibles + prise de contact facile : appel, rappel, formulaire — sans friction.",
+            "meta": "Plus de RDV",
+            "iconClass": "bi-calendar-check"
+          },
+          {
+            "order": 3,
+            "title": "Mesure des demandes",
+            "text": "On suit les RDV/appels/formulaires pour optimiser ce qui génère des contacts qualifiés.",
+            "meta": "Pilotage",
+            "iconClass": "bi-clipboard-data"
+          }
+        ]
+      }
+    },
     "sensibilite_prix": "moyenne",
     "outcomes": ["rdv-qualifies", "confiance", "image", "demandes-ciblees"],
     "topIntents": ["site-qui-convertit", "se-trouver-local", "plus-appels"],
@@ -228,6 +744,61 @@
       "title": "Réseaux & franchises — leads qualifiés par point de vente | Horizon Conversion",
       "description": "Pour réseaux & franchises : déployer une acquisition locale scalable (SEO local, Ads, CRO) point de vente par point de vente, avec des pages qui convertissent et un reporting lisible.",
       "canonical": "https://horizon-conversion.fr/profils/reseaux-franchises/"
+    },
+    "blocks": {
+      "heroPage": {
+        "left": {
+          "badge": "Réseaux & franchises",
+          "h2": "Des leads qualifiés, point de vente par point de vente",
+          "p1": "On déploie une acquisition locale scalable : structure de pages, SEO local, Ads et CRO par zone.",
+          "p2": "Objectif : standardiser ce qui marche, comparer les sites, piloter la perf avec un reporting simple.",
+          "ctas": [
+            { "label": "Voir l’approche multi-sites", "href": "/methode/" },
+            { "label": "Parler du déploiement", "href": "/contact/", "variant": "light" }
+          ]
+        },
+        "right": {
+          "h3": "Les blocages multi-sites",
+          "description": "On évite les écarts de qualité et les effets “usine”.",
+          "bullets": [
+            "Pages locales incohérentes (marque vs local)",
+            "Même budget Ads, résultats inégaux",
+            "Pas de structure réplicable (perte de temps)",
+            "Tracking/reporting non standardisé",
+            "Leads non qualifiés (cadrage absent)"
+          ]
+        }
+      },
+      "preuves": {
+        "header": {
+          "badge": "Preuves",
+          "title": "Ce qui scale en multi-sites",
+          "backgroundImage": "/assets/images/sections/3.jpg"
+        },
+        "items": [
+          {
+            "order": 1,
+            "title": "Template déployable",
+            "text": "Une structure de pages reproductible par point de vente : cohérence, clarté, conversion.",
+            "meta": "Standardisation",
+            "iconClass": "bi-layers"
+          },
+          {
+            "order": 2,
+            "title": "Pilotage par site",
+            "text": "Demandes suivies point par point : appels, formulaires, sources — pour comparer et arbitrer.",
+            "meta": "Reporting",
+            "iconClass": "bi-diagram-3"
+          },
+          {
+            "order": 3,
+            "title": "Qualité des leads",
+            "text": "Cadrage des offres locales + FAQ + preuves : moins de demandes inutiles, meilleure qualification.",
+            "meta": "Qualité",
+            "iconClass": "bi-patch-check"
+          }
+        ]
+      }
     },
     "sensibilite_prix": "faible",
     "outcomes": ["leads-qualifies", "croissance", "pilotage", "standardisation", "reporting"],

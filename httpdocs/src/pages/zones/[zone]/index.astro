@@ -2,19 +2,22 @@
 // src/pages/zones/[zone]/index.astro
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../components/PageTitle.astro";
-
-import zonesData from "../../../data/zones.json";
-import ContactForm from "../../../components/ContactForm.astro";
-import Ressources from "../../../components/Ressources.astro";
-import Faqs from "../../../components/Faqs.astro";
 import HeroPage from "../../../components/HeroPage.astro";
-import ZonesVilles from "../../../components/ZonesVilles.astro";
+import ServicesPage from "../../../components/ServicesPage.astro";
+import Villes from "../../../components/Villes.astro";
+import Faqs from "../../../components/Faqs.astro";
+import ContactForm from "../../../components/ContactForm.astro";
 
-/**
- * ✅ getStaticPaths : inline only (aucun helper)
- * Attend zones.json migré :
- * { _meta: {...}, zones: { "zone-xxx": { slug, pageTitle, breadcrumbs, seo } } }
- */
+import siteData from "../../../data/site.json";
+import seoData from "../../../data/seo.json";
+import hero_pageData from "../../../data/hero_page.json";
+import servicesData from "../../../data/services.json";
+import zonesData from "../../../data/zones.json";
+import villesData from "../../../data/villes.json";
+import faqs_zonesData from "../../../data/faqs_zones.json";
+import formData from "../../../data/form.json";
+
+/** ✅ getStaticPaths requis pour /zones/[zone]/ */
 export async function getStaticPaths() {
   const root =
     zonesData && typeof zonesData === "object" && !Array.isArray(zonesData)
@@ -48,120 +51,34 @@ export async function getStaticPaths() {
   }
 
   return zonesList.map((z) => ({
-    params: { zone: String(z.slug) },
-    props: { zoneSlug: String(z.slug) },
+    params: { zone: String(z.slug).trim() },
+    props: { zoneSlug: String(z.slug).trim() },
   }));
 }
-
-/** Props + params */
-const { zoneSlug } = Astro.props;
-const zoneParam = String(Astro.params.zone || zoneSlug || "");
-
-/** Data zone (sans fallback) */
-const root =
-  zonesData && typeof zonesData === "object" && !Array.isArray(zonesData)
-    ? zonesData
-    : null;
-
-if (!root) {
-  throw new Error(`[zones/[zone]] zones.json invalide (objet attendu)`);
-}
-
-const zonesRoot =
-  root.zones && typeof root.zones === "object" && !Array.isArray(root.zones)
-    ? root.zones
-    : null;
-
-if (!zonesRoot) {
-  throw new Error(`[zones/[zone]] zones.json.zones manquant (objet attendu)`);
-}
-
-const zonesList = Object.values(zonesRoot).filter(
-  (z) => z && typeof z === "object" && !Array.isArray(z)
-);
-
-const zone = zonesList.find((z) => String(z.slug) === zoneParam);
-
-if (!zone) {
-  throw new Error(`[zones/[zone]] Zone introuvable: "${zoneParam}"`);
-}
-
-/** Exige pageTitle + breadcrumbs + seo dans la zone */
-const pageTitle =
-  zone.pageTitle && typeof zone.pageTitle === "object" && !Array.isArray(zone.pageTitle)
-    ? zone.pageTitle
-    : null;
-
-if (!pageTitle) {
-  throw new Error(`[zones/[zone]] pageTitle manquant pour "${zoneParam}"`);
-}
-
-const breadcrumbs = Array.isArray(zone.breadcrumbs) ? zone.breadcrumbs : null;
-if (!breadcrumbs || breadcrumbs.length < 2) {
-  throw new Error(`[zones/[zone]] breadcrumbs manquant/incomplet pour "${zoneParam}"`);
-}
-
-const seoObj =
-  zone.seo && typeof zone.seo === "object" && !Array.isArray(zone.seo)
-    ? zone.seo
-    : null;
-
-if (!seoObj) {
-  throw new Error(`[zones/[zone]] seo manquant pour "${zoneParam}"`);
-}
-
-if (
-  typeof seoObj.title !== "string" || !seoObj.title.trim() ||
-  typeof seoObj.description !== "string" || !seoObj.description.trim() ||
-  typeof seoObj.canonical !== "string" || !seoObj.canonical.trim()
-) {
-  throw new Error(`[zones/[zone]] seo incomplet pour "${zoneParam}" (title/description/canonical requis)`);
-}
-
-if (
-  typeof pageTitle.badge !== "string" || !pageTitle.badge.trim() ||
-  typeof pageTitle.title !== "string" || !pageTitle.title.trim() ||
-  typeof pageTitle.subtitle !== "string" || !pageTitle.subtitle.trim() ||
-  typeof pageTitle.image !== "string" || !pageTitle.image.trim()
-) {
-  throw new Error(`[zones/[zone]] pageTitle incomplet pour "${zoneParam}" (badge/title/subtitle/image requis)`);
-}
-
-const seo = {
-  title: pageTitle.title ? seoObj.title.trim() : seoObj.title.trim(),
-  description: seoObj.description.trim(),
-  canonical: seoObj.canonical.trim(),
-};
-
-const badge = pageTitle.badge.trim();
-const title = pageTitle.title.trim();
-const subtitle = pageTitle.subtitle.trim();
-const image = pageTitle.image.trim();
 ---
 
-<BaseLayout seo={seo} breadcrumbs={breadcrumbs}>
-  <PageTitle
-      badge={badge}
-      title={title}
-      subtitle={subtitle}
-      image={image}
-      breadcrumbs={breadcrumbs}
-  />
+<BaseLayout>
+  <PageTitle />
 
   <!-- Content ============================================= -->
   <section id="content">
     <div class="content-wrap pb-0">
 
-      <HeroPage />
+      <!-- Hero + Services ============================================= -->
+      <div class="container mb-5">
 
-      <ZonesVilles />
+        <HeroPage />
 
-      <Ressources />
+        <ServicesPage />
+
+      </div>
+
+      <div class="clear"></div>
+
+      <Villes />
 
       <Faqs />
-
       <ContactForm />
-
     </div>
   </section>
 </BaseLayout>

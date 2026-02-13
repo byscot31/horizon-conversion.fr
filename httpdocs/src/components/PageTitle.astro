@@ -1,37 +1,20 @@
 ---
 // src/components/PageTitle.astro
-import Breadcrumb from "./Breadcrumb.astro";
-
-const safe = (v) => (typeof v === "string" ? v.trim() : "");
-
-const {
-  badge = "",
-  title = "",
-  subtitle = "",
-  image = "/assets/images/hero/page-title.jpg",
-  breadcrumbs = []
-} = Astro.props;
-
-const b = safe(badge);
-const t = safe(title);
-const sub = safe(subtitle);
-const img = safe(image) || "/assets/images/hero/page-title.jpg";
-const bc = Array.isArray(breadcrumbs) ? breadcrumbs : [];
+import Breadcrumb from "../components/Breadcrumb.astro";
 ---
 
 <section class="page-title page-title-parallax parallax scroll-detect page-title-center dark include-header include-topbar" style="padding-bottom: 140px;">
-  <img src={img} class="parallax-bg" alt={t || b || "Page"} />
-  <div id="particles-line"></div>
+  <img src="/assets/images/page-title.jpg" class="parallax-bg" alt="" />
 
   <div class="container position-relative">
     <div class="page-title-row">
       <div class="page-title-content">
-        {b ? <div class="badge rounded-pill border border-light text-light">{b}</div> : null}
-        {t ? <h1>{t}</h1> : null}
-        {sub ? <span>{sub}</span> : null}
+        <div class="badge rounded-pill border border-light text-light">PageTitle Badge</div>
+        <h1>PageTitle H1</h1>
+        <span>Chapo</span>
       </div>
 
-      <Breadcrumb items={bc} />
+      <Breadcrumb />
     </div>
   </div>
 
