@@ -2,11 +2,15 @@
 import {
   site, seo, cta,
   heroPage, heroCard,
-  benefices, livrables, preuves, processData, methode,
+  benefices, livrables, preuves, preuvesVariants, processData, processVariants, methode,
   maillageInterne,
   faqsServices, faqsVilles, faqsZones, faqsCibles,
-  form, tarifs, articles, villes, zones, services, cibles, servicesPage,
+  form, tarifs, articles, ressourcesBlock, villes, zones, services, cibles, servicesPage,
 } from "./data";
+
+import { resolveProcess } from "./resolveProcess";
+import { resolvePreuves } from "./resolvePreuves";
+import { resolveRessourcesBlock } from "./resolveRessourcesBlock";
 
 type Entity = { slug: string; name?: string; title?: string; segment?: "volume" | "premium" };
 
@@ -21,7 +25,9 @@ type BuildParams = {
     | "ville"
     | "cible"
     | "serviceVille"
-    | "cibleVille";
+    | "cibleVille"
+    | "ressourcesIndex"
+    | "ressourceArticle";
   zone?: Entity;
   ville?: Entity;
   service?: Entity;
@@ -126,23 +132,65 @@ function pickBreadcrumb(params: BuildParams) {
 }
 
 function pickFaqs(params: BuildParams) {
+
+  function pickFirstNUniqueByQ(items: any[], n: number) {
+    const out: any[] = [];
+    const seen = new Set<string>();
+    for (const x of items) {
+      const k = String(x?.q ?? x?.question ?? "").trim();
+      if (!k || seen.has(k)) continue;
+      seen.add(k);
+      out.push(x);
+      if (out.length >= n) break;
+    }
+    return out;
+  }
+
+  // ✅ Cas spécial : pages ville = 2 générales + 4 spécifiques ville (0 zones), cap 6
+  if (params.type === "ville" && params.ville) {
+    const general = faqsVilles.filter((f: any) => !f.villeSlugs || f.villeSlugs.length === 0);
+    const villeSpecific = faqsVilles.filter(
+      (f: any) => Array.isArray(f.villeSlugs) && f.villeSlugs.includes(params.ville!.slug)
+    );
+
+    const picked = [
+      ...pickFirstNUniqueByQ(general, 2),
+      ...pickFirstNUniqueByQ(villeSpecific, 4),
+    ];
+
+    return pickFirstNUniqueByQ(picked, 6);
+  }
+
+  // ---- comportement normal pour le reste
   const list: any[] = [];
 
-  // Index pages
-  if (params.type === "servicesIndex") list.push(...faqsServices);
-  if (params.type === "zonesIndex") list.push(...faqsZones);
-  if (params.type === "profilsIndex") list.push(...faqsCibles);
+  // Index pages (uniquement générales)
+  if (params.type === "servicesIndex") {
+    list.push(...faqsServices.filter((f: any) => !f.serviceSlugs || f.serviceSlugs.length === 0));
+  }
+  if (params.type === "zonesIndex") {
+    list.push(...faqsZones.filter((f: any) => !f.zoneSlugs || f.zoneSlugs.length === 0));
+  }
+  if (params.type === "profilsIndex") {
+    list.push(...faqsCibles.filter((f: any) => !f.cibleSlugs || f.cibleSlugs.length === 0));
+  }
 
   // Pages “détails”
   if (params.type === "service" && params.service) {
     list.push(...faqsServices.filter((f: any) => !f.serviceSlugs || f.serviceSlugs.includes(params.service!.slug)));
   }
-  if ((params.type === "ville" || params.type === "serviceVille" || params.type === "cibleVille") && params.ville) {
-    list.push(...faqsVilles.filter((f: any) => !f.villeSlugs || f.villeSlugs.includes(params.ville!.slug)));
-  }
-  if ((params.type === "zone" || params.type === "ville" || params.type === "serviceVille" || params.type === "cibleVille") && params.zone) {
+
+  // ✅ Zone : uniquement sur page zone (pas sur ville)
+  if (params.type === "zone" && params.zone) {
     list.push(...faqsZones.filter((f: any) => !f.zoneSlugs || f.zoneSlugs.includes(params.zone!.slug)));
   }
+
+  // Ville + serviceVille + cibleVille : FAQ ville filtrées
+  if ((params.type === "serviceVille" || params.type === "cibleVille") && params.ville) {
+    list.push(...faqsVilles.filter((f: any) => !f.villeSlugs || f.villeSlugs.includes(params.ville!.slug)));
+  }
+
+  // Cible
   if ((params.type === "cible" || params.type === "cibleVille") && params.cible) {
     list.push(...faqsCibles.filter((f: any) => !f.cibleSlugs || f.cibleSlugs.includes(params.cible!.slug)));
   }
@@ -167,13 +215,26 @@ export function buildModel(params: BuildParams) {
     blocks: {
       benefices,
       livrables,
-      preuves,
-      process: processData,
+      preuves: resolvePreuves({
+        preuvesData: preuves,
+        preuvesVariants,
+        pageType: params.type,
+      }),
+      process: resolveProcess({
+        processData,
+        processVariants,
+        pageType: params.type,
+      }),
       methode,
       maillageInterne,
       form,
       tarifs,
       articles,
+      ressources: resolveRessourcesBlock({
+        ressourcesBlock,
+        pageType: params.type,
+        contexte: { ville: params.ville as any },
+      }),
       villes,
       zones,
       services,

@@ -3,7 +3,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../components/PageTitle.astro";
 import HeroPage from "../../../components/HeroPage.astro";
-import ServicesZones from "../../../components/ServicesZones.astro";
+import VillesPage from "../../../components/VillesPage.astro";
 import Villes from "../../../components/Villes.astro";
 import Faqs from "../../../components/Faqs.astro";
 import ContactForm from "../../../components/ContactForm.astro";
@@ -63,7 +63,7 @@ const villesZone = (villes ?? []).filter((v) => v.zoneSlug === zone.slug);
 
       <div class="container mb-5">
         <HeroPage data={model.hero.page} contexte={contexte} />
-        <ServicesZones data={services} contexte={contexte} config={{ title: "Services utiles", subtitle: "Choisir un levier" }} />
+        <VillesPage data={services} contexte={contexte} config={{ title: "Services utiles", subtitle: "Choisir un levier" }} />
       </div>
 
       <div class="clear"></div>

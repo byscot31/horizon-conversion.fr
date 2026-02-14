@@ -1,0 +1,89 @@
+---
+// src/components/VillesPage.astro
+// Affiche une grille de VILLES + leurs ALENTOURS (texte seulement, pas de pages “autour”)
+
+const { data, contexte, page } = Astro.props;
+
+// ✅ Supporte data = [] ou data={{ items: [] }} ou data={{ villes: [] }}
+const villes = Array.isArray(data)
+  ? data
+  : (Array.isArray(data?.items) ? data.items : (Array.isArray(data?.villes) ? data.villes : []));
+
+if (!villes.length) {
+  // rien
+}
+
+const badge = page?.hero?.kicker ?? page?.badge ?? "Villes";
+const h2 = page?.hero?.title ?? page?.title ?? "Villes couvertes";
+const intro = page?.intro?.text ?? page?.intro ?? "Choisissez votre ville (et repérez les communes proches).";
+
+const maxItems = page?.maxItems ?? 24;
+const maxAround = page?.maxAround ?? 6;
+
+// ✅ NEW: href intelligent
+// - si la ville a son zoneSlug => on l'utilise
+// - sinon on tombe sur contexte.zone.slug (si présent)
+function villeHref(v) {
+  const z = v?.zoneSlug ?? contexte?.zone?.slug;
+  const s = v?.slug;
+  if (z && s) return `/zones/${z}/${s}/`;
+  return "#";
+}
+
+// ✅ Helpers UI
+function safeAround(v) {
+  const arr = Array.isArray(v?.around) ? v.around : (Array.isArray(v?.tags) ? v.tags : []);
+  return arr.filter(Boolean).slice(0, maxAround);
+}
+---
+
+{villes.length > 0 && (
+<>
+  <div class="heading-block border-bottom-0 text-center">
+    <div class="badge rounded-pill badge-default">{badge}</div>
+    <h2 class="text-transform-none ls-0">{h2}</h2>
+    {intro && <p class="text-muted mb-0">{intro}</p>}
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="row mt-4 col-mb-50 mb-5">
+    {villes.slice(0, maxItems).map((v) => (
+        <div class="col-sm-6 col-lg-4 d-flex">
+          <div class="card w-100 h-shadow h-translate-y-sm all-ts">
+            <div class="card-body p-5">
+              <div class="feature-box flex-column">
+                <div class="fbox-content">
+                  <h3 class="text-transform-none ls-0 text-larger mb-1">
+                    <a class="link-dark h-text-color" href={villeHref(v)}>
+                      {v.name ?? v.slug ?? "Ville"}
+                    </a>
+                  </h3>
+
+                  {v.excerpt && <p class="text-smaller mb-0">{v.excerpt}</p>}
+                </div>
+
+                {safeAround(v).length > 0 && (
+                    <>
+                      <div class="text-muted small mt-4">Villes proches :</div>
+                      <ul class="nav nav-pills mt-2 mb-0">
+                        {safeAround(v).map((a) => (
+                            <li class="nav-item badge rounded-pill badge-color text-smaller me-2 mb-2">{a}</li>
+                        ))}
+                      </ul>
+                    </>
+                )}
+
+                <div class="mt-4">
+                  <a href={villeHref(v)} class="button button-rounded text-capitalize m-0 ls-0 w-100">
+                    Voir la ville
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    ))}
+  </div>
+</>
+  )}

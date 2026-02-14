@@ -4,11 +4,12 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import PageTitle from "../../../../components/PageTitle.astro";
 import HeroPage from "../../../../components/HeroPage.astro";
 import ServicesPage from "../../../../components/ServicesPage.astro";
-import Cibles from "../../../../components/Cibles.astro";
+import CiblesVille from "../../../../components/CiblesVille.astro";
 import Preuves from "../../../../components/Preuves.astro";
 import Faqs from "../../../../components/Faqs.astro";
 import ContactForm from "../../../../components/ContactForm.astro";
 import MaillageInterne from "../../../../components/MaillageInterne.astro";
+import Ressources from "../../../../components/Ressources.astro";
 
 import { buildModel } from "../../../../lib/pageModel";
 import { zones, villes, services, cibles } from "../../../../lib/data";
@@ -70,9 +71,11 @@ const breadcrumbItems = model.breadcrumbItems ?? [
         <ServicesPage data={services} contexte={contexte} />
       </div>
 
-      <Cibles data={cibles} contexte={contexte} />
+      <CiblesVille data={cibles} contexte={contexte} />
 
       <Preuves data={model.blocks.preuves} contexte={contexte} />
+
+      <Ressources block={model.blocks.ressources} articles={model.blocks.articles} contexte={contexte} />
 
       <Faqs
           items={model.faqs}

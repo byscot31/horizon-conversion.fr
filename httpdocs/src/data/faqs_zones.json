@@ -1,12 +1,49 @@
 [
   {
     "q": "Travaillez-vous uniquement dans le Sud Oise et le Nord Val-d’Oise ?",
-    "a": "C’est notre zone principale. Si vous êtes juste à côté, on peut aussi en parler pendant l’audit.",
-    "zoneSlugs": ["sud-oise", "nord-val-doise"]
+    "a": "C’est notre zone principale. Si vous êtes juste à côté, on peut aussi en parler pendant l’audit."
   },
   {
-    "q": "Est-ce que vous pouvez gérer uniquement la page, sans publicité ?",
-    "a": "Oui. On peut commencer par la page + le suivi des demandes, puis ajouter un levier ensuite si besoin.",
-    "zoneSlugs": ["sud-oise", "nord-val-doise"]
+    "q": "Est-ce que tout peut se faire à distance ?",
+    "a": "Oui. On avance par appels + visio. L’important est de cibler votre zone et de suivre les demandes (appels + formulaires)."
+  },
+  {
+    "q": "Est-ce que vous pouvez commencer sans publicité ?",
+    "a": "Oui. On peut démarrer par une page claire + le suivi des demandes, puis ajouter un levier ensuite si besoin."
+  },
+  {
+    "q": "Comment choisissez-vous les villes à traiter en priorité ?",
+    "a": "On priorise les zones qui comptent vraiment pour vous (là où vous intervenez et là où vos clients cherchent). Ensuite on étend si ça apporte de bonnes demandes."
+  },
+  {
+    "q": "Est-ce que vous faites une page différente pour chaque ville ?",
+    "a": "Oui si c’est utile. On évite le copier-coller : structure commune, mais contenu adapté (zone, offre, preuves, FAQ, maillage)."
+  },
+  {
+    "q": "Que contient l’audit gratuit pour une zone ?",
+    "a": "On vérifie la clarté de vos pages, votre présence Google (fiche), le suivi des appels/formulaires, et les opportunités rapides sur votre secteur."
+  },
+
+  {
+    "q": "Sud Oise : pouvez-vous couvrir plusieurs villes autour de Chantilly, Senlis, Creil… ?",
+    "a": "Oui. On peut structurer la couverture par priorités : une ville principale + quelques communes proches, puis élargir si les demandes restent bonnes.",
+    "zoneSlugs": ["sud-oise"]
+  },
+  {
+    "q": "Sud Oise : est-ce que vous pouvez travailler des zones plus étendues (Compiègne, Beauvais…) ?",
+    "a": "Oui. On évite juste de tout viser d’un coup : on démarre par une zone prioritaire, une page claire et un suivi des demandes pour piloter.",
+    "zoneSlugs": ["sud-oise"]
+  },
+
+  {
+    "q": "Nord Val-d’Oise : pouvez-vous cibler Cergy-Pontoise et les communes autour ?",
+    "a": "Oui. On adapte le message et le ciblage à votre zone réelle, puis on suit les demandes pour savoir ce qui rapporte.",
+    "zoneSlugs": ["nord-val-doise"]
+  },
+  {
+    "q": "Nord Val-d’Oise : est-ce que la concurrence change beaucoup selon les villes ?",
+    "a": "Oui, parfois. C’est pour ça qu’on fait l’audit : on regarde la concurrence locale et on ajuste la page et le levier (SEO local / Ads) en conséquence.",
+    "zoneSlugs": ["nord-val-doise"]
   }
 ]
+

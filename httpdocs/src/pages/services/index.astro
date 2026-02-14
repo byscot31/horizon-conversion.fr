@@ -13,12 +13,9 @@ import MaillageInterne from "../../components/MaillageInterne.astro";
 import { buildModel } from "../../lib/pageModel";
 
 const model = buildModel({
-  type: "home",
+  type: "servicesIndex",
   canonical: "/services/",
 });
-
-// contexte spécifique pour tes rules (maillage/hero variants)
-const contexte = { ...model.contexte, type: "servicesIndex" };
 
 // SEO : on laisse services_page.json piloter si présent
 const seo = model.blocks.servicesPage?.seo ?? {
@@ -35,28 +32,27 @@ const breadcrumbItems = [
 ---
 
 <BaseLayout seo={seo} site={model.site}>
-  <PageTitle contexte={contexte} seo={seo} breadcrumbItems={breadcrumbItems} />
+  <PageTitle seo={seo} breadcrumbItems={breadcrumbItems} />
 
   <section id="content">
     <div class="content-wrap py-0 overflow-visible">
 
-      <HeroCard data={model.hero.card} contexte={contexte} cta={model.blocks.servicesPage?.hero} />
+      <HeroCard data={model.hero.card} cta={model.blocks.servicesPage?.hero} />
 
-      <Process data={model.blocks.process} contexte={contexte} />
+      <Process data={model.blocks.process} />
 
-      <Services data={model.blocks.services} page={model.blocks.servicesPage} contexte={contexte} />
+      <Services data={model.blocks.services} page={model.blocks.servicesPage} />
 
-      <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
+      <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} />
 
-      <Preuves data={model.blocks.preuves} contexte={contexte} />
+      <Preuves data={model.blocks.preuves} />
 
       <Faqs
           items={model.faqs}
           data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
-          contexte={contexte}
       />
 
-      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
+      <MaillageInterne data={model.blocks.maillageInterne} />
 
     </div>
   </section>

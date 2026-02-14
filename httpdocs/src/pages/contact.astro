@@ -2,6 +2,14 @@
 // src/pages/contact.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageTitle from "../components/PageTitle.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+import { buildModel } from "../lib/pageModel";
+
+const model = buildModel({
+  type: "home",
+  canonical: "/contact/",
+});
 
 const seo = {
   title: "Contact | Horizon Conversion",
@@ -16,9 +24,15 @@ const breadcrumbItems = [
   { label: "Accueil", href: "/" },
   { label: "Contact", href: "/contact/" },
 ];
+
+// WhatsApp (format wa.me sans +)
+const whatsappRaw = String(model.site?.whatsapp ?? "").trim();
+const whatsappDigits = whatsappRaw ? whatsappRaw.replace(/[^\d]/g, "") : "";
+const whatsappUrl = whatsappDigits ? `https://wa.me/${whatsappDigits}` : "";
+const whatsappLabel = model.site?.whatsappDisplay ?? "WhatsApp";
 ---
 
-<BaseLayout seo={seo}>
+<BaseLayout seo={seo} site={model.site}>
   <PageTitle
       contexte={contexte}
       seo={seo}
@@ -67,7 +81,20 @@ const breadcrumbItems = [
                   Réponse rapide (lun–ven). Le plus simple : formulaire ci-dessous.
                 </p>
                 <div class="d-flex flex-column gap-2 align-items-center">
-                  <a class="btn btn-link p-0" href="tel:+33660921008"><u>06 60 92 10 08</u></a>
+                  <a data-track="click_phone" class="btn btn-link p-0" href="tel:+33660921008"><u>06 60 92 10 08</u></a>
+
+                  {whatsappUrl && (
+                      <a
+                          data-track="click_whatsapp"
+                          class="btn btn-link p-0"
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                      >
+                        <u>{whatsappLabel}</u>
+                      </a>
+                  )}
+
                   <a class="btn btn-link p-0" href="mailto:contact@horizon-conversion.fr"><u>contact@horizon-conversion.fr</u></a>
                 </div>
               </div>
@@ -85,9 +112,14 @@ const breadcrumbItems = [
                 <p class="text-smaller mb-3">
                   On vérifie : page, suivi des demandes, leviers (SEO local / Ads) et priorités actionnables.
                 </p>
-                <a href="#form" class="button button-rounded text-transform-none ls-0 m-0">
-                  Demander un audit
-                </a>
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+                  <a data-track="click_audit" href="#audit" data-scrollto="#audit" class="button button-rounded text-transform-none ls-0 m-0">
+                    Demander un audit
+                  </a>
+                  <a data-track="click_callback" href="#rappel" data-scrollto="#rappel" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 m-0">
+                    Être rappelé
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -97,155 +129,12 @@ const breadcrumbItems = [
 
       <div class="clear"></div>
 
-      <!-- Map (optionnel) -->
-      <section
-          class="gmap vh-60 mt-6"
-          data-address="Chantilly, France"
-          data-markers='[{address: "Chantilly, France"}]'>
-      </section>
+      <!-- Formulaires -->
+      <div id="audit"></div>
+      <ContactForm form={model.blocks.form} data={model.site} contexte={contexte} mode="audit" />
 
-      <!-- Form Section -->
-      <div
-          id="form"
-          class="section mt-0 mb-3"
-          style="background: url('/assets/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0;"
-      >
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-
-            <div class="col-md-6">
-              <div class="heading-block border-bottom-0 mb-4">
-                <div class="badge rounded-pill badge-default">Contact</div>
-                <h3 class="text-transform-none ls-0">Demander un audit (gratuit)</h3>
-              </div>
-              <p class="text-muted mb-0">
-                Donnez-moi votre ville, votre site (si vous en avez un) et ce que vous voulez améliorer (appels, formulaires, trafic).
-                Je reviens vers vous rapidement avec un plan simple.
-              </p>
-              <div class="mt-3 text-muted small">
-                Pas de spam, pas de revente. Juste pour vous répondre.
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h4 class="mb-1">Votre demande</h4>
-                  <p class="text-muted small mb-3">3 champs utiles — réponse rapide.</p>
-
-                  <div class="form-widget">
-                    <div class="form-result"></div>
-
-                    <form
-                        class="row mb-0"
-                        id="template-contactform"
-                        name="template-contactform"
-                        action="/assets/include/form.php"
-                        method="post"
-                    >
-                      <div class="col-12 form-group mb-3">
-                        <label for="template-contactform-name">Nom *</label>
-                        <input
-                            type="text"
-                            id="template-contactform-name"
-                            name="template-contactform-name"
-                            class="form-control input-sm required"
-                            value=""
-                            autocomplete="name"
-                        />
-                      </div>
-
-                      <div class="col-12 form-group mb-3">
-                        <label for="template-contactform-email">Email *</label>
-                        <input
-                            type="email"
-                            id="template-contactform-email"
-                            name="template-contactform-email"
-                            class="form-control input-sm required"
-                            value=""
-                            autocomplete="email"
-                        />
-                      </div>
-
-                      <div class="col-12 form-group mb-3">
-                        <label for="template-contactform-phone">Téléphone</label>
-                        <input
-                            type="tel"
-                            id="template-contactform-phone"
-                            name="template-contactform-phone"
-                            class="form-control input-sm"
-                            value=""
-                            placeholder="06 12 34 56 78"
-                            autocomplete="tel"
-                            inputmode="tel"
-                        />
-                        <small class="text-muted d-block mt-1">Optionnel (utile si vous souhaitez être rappelé).</small>
-                      </div>
-
-                      <div class="col-12 form-group mb-3">
-                        <label for="template-contactform-city">Ville / secteur *</label>
-                        <input
-                            type="text"
-                            id="template-contactform-city"
-                            name="template-contactform-city"
-                            class="form-control input-sm required"
-                            value=""
-                            placeholder="Ex : Chantilly, Senlis, L’Isle-Adam…"
-                            autocomplete="address-level2"
-                        />
-                      </div>
-
-                      <div class="col-12 form-group mb-4">
-                        <label for="template-contactform-website">Site web</label>
-                        <input
-                            type="text"
-                            id="template-contactform-website"
-                            name="template-contactform-website"
-                            class="form-control input-sm"
-                            value=""
-                            placeholder="https://"
-                        />
-                      </div>
-
-                      <div class="col-12 form-group mb-4">
-                        <label for="template-contactform-message">Message (optionnel)</label>
-                        <textarea
-                            id="template-contactform-message"
-                            name="template-contactform-message"
-                            class="form-control input-sm"
-                            rows="4"
-                            placeholder="Objectif, service, délais, etc."
-                        ></textarea>
-                      </div>
-
-                      <div class="col-12 form-group mb-0">
-                        <button
-                            class="button button-rounded w-100 text-transform-none ls-0 m-0"
-                            type="submit"
-                            id="template-contactform-submit"
-                            name="template-contactform-submit"
-                            value="submit"
-                        >
-                          Envoyer
-                        </button>
-                      </div>
-
-                      <input type="hidden" name="prefix" value="template-contactform-" />
-                    </form>
-                  </div>
-
-                  <div class="text-muted small mt-3">
-                    En envoyant, vous acceptez d’être recontacté au sujet de votre demande.
-                    Consultez la <a class="link-dark" href="/confidentialite/">politique de confidentialité</a>.
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
+      <div id="rappel"></div>
+      <ContactForm form={model.blocks.form} data={model.site} contexte={contexte} mode="callback" />
 
     </div>
   </section>

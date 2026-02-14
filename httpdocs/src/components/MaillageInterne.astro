@@ -15,6 +15,7 @@ const links = Array.isArray(rule?.links) ? rule.links : (Array.isArray(defaults.
 if (!links.length) {
   // ne rien afficher si pas de liens
 }
+const maxLinks = rule?.maxLinks ?? defaults.maxLinks ?? 6;
 ---
 
 {links.length > 0 && (
@@ -24,7 +25,7 @@ if (!links.length) {
       <div class="h6 text-uppercase ls-1 mb-1">{subtitle}</div>
       <h2 class="text-transform-none ls-0">{title}</h2>
 
-      {links.slice(0, (defaults.maxLinks ?? 6)).map((l) => (
+      {links.slice(0, maxLinks).map((l) => (
           <a href={l.href ?? "#"} class="button button-large button-rounded text-transform-none ms-0 ls-0 mt-4">
             {l.label ?? "Lien"}
           </a>

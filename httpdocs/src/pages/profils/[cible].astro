@@ -3,7 +3,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageTitle from "../../components/PageTitle.astro";
 import HeroPage from "../../components/HeroPage.astro";
-import ServicesZones from "../../components/ServicesZones.astro";
+import ServicesPage from "../../components/ServicesPage.astro";
 import ZonesVilles from "../../components/ZonesVilles.astro";
 import Ressources from "../../components/Ressources.astro";
 import Faqs from "../../components/Faqs.astro";
@@ -63,7 +63,7 @@ const faqItems = Array.isArray(model.blocks?.faqsCibles)
 
       <div class="container mb-5">
         <HeroPage data={model.hero.page} contexte={contexte} />
-        <ServicesZones
+        <ServicesPage
             data={model.blocks.services}
             contexte={contexte}
             config={{ title: "Services utiles", subtitle: "Choisir un levier" }}
@@ -74,7 +74,7 @@ const faqItems = Array.isArray(model.blocks?.faqsCibles)
 
       <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <Ressources data={model.blocks.articles} contexte={contexte} />
+      <Ressources block={model.blocks.ressources} articles={model.blocks.articles} contexte={contexte} />
 
       <Faqs
           items={faqItems}

@@ -36,7 +36,13 @@ const prefix = cfg?.prefix ?? "template-contactform-";
 
         {data?.phone && (
             <p class="mb-0">
-              <strong>Téléphone :</strong> <a href={`tel:${String(data.phone).replaceAll(" ", "")}`}>{data.phone}</a>
+              <strong>Téléphone :</strong>{" "}
+              <a
+                  data-track="click_phone"
+                  href={`tel:${String(data.phone).replaceAll(" ", "")}`}
+              >
+                {data.phone}
+              </a>
             </p>
         )}
         {data?.email && (
@@ -54,7 +60,15 @@ const prefix = cfg?.prefix ?? "template-contactform-";
             <div class="form-widget">
               <div class="form-result"></div>
 
-              <form class="row mb-0" id={formId} name={formId} action={action} method="post">
+              <form
+                  class="row mb-0"
+                  id={formId}
+                  name={formId}
+                  action={action}
+                  method="post"
+                  data-track="form"
+                  data-form-mode={m}
+              >
                 {fields.map((f) => (
                     <div class={`col-12 form-group mb-${f.type === "textarea" ? "4" : "3"}`}>
                       <label for={`${prefix}${f.name}`}>{f.label}{f.required ? ":*" : ":"}</label>

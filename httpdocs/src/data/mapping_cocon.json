@@ -38,7 +38,7 @@
     },
     {
       "slug": "franchises-reseaux",
-      "label": "Franchisés",
+      "label": "Franchisés / Réseaux",
       "focus": ["pages-locales", "seo-local", "tracking"],
       "secondary": ["google-business-profile", "google-ads", "meta-ads"]
     }

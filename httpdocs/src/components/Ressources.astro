@@ -1,14 +1,23 @@
 ---
 // src/components/Ressources.astro
-const { data, contexte } = Astro.props;
+import { pickRessources } from "../lib/pickRessources";
 
-// data attendu: articles.json
-const badge = data?.badge ?? "Ressources";
-const h2 = data?.title ?? "Ressources";
-const intro = data?.intro ?? "";
+const { block, articles, contexte } = Astro.props;
 
-const items = Array.isArray(data?.items) ? data.items : [];
-const max = data?.maxItems ?? 3;
+// block attendu: ressources_block.json (resolved variant)
+// articles attendu: articles.json (array)
+const badge = block?.badge ?? "Ressources";
+const h2 = block?.title ?? "À lire ensuite";
+const intro = block?.intro ?? "";
+const max = block?.maxItems ?? 3;
+
+// sélection
+const items = pickRessources({
+  articles: Array.isArray(articles) ? articles : [],
+  contexte,
+  max,
+  intentsPriority: block?.intentsPriority ?? [],
+});
 
 function formatDate(iso) {
   if (!iso) return "";
@@ -32,11 +41,12 @@ const hasItems = items.length > 0;
   </div>
 
   <div class="row mt-5">
-    {items.slice(0, max).map((a) => {
-      const href = a.href ?? (a.slug ? `/ressources/${a.slug}/` : "#");
+    {items.map((a) => {
+      const href = a.slug ? `/ressources/${a.slug}/` : "#";
       const img = a.image ?? "/assets/images/blog/1.jpg";
       const author = a.author ?? "Horizon Conversion";
       const date = formatDate(a.publishedAt);
+
       return (
           <div class="col-md-4">
             <article class="entry">
@@ -60,6 +70,5 @@ const hasItems = items.length > 0;
       );
     })}
   </div>
-
 </div>
   )}

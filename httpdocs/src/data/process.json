@@ -1,12 +1,14 @@
 {
-  "badge": "Process",
-  "title": "Comment on travaille",
-  "intro": "On avance en étapes simples, pour obtenir des demandes mesurables.",
-  "label": "Étapes",
-  "steps": [
-    { "date": "Étape 1", "title": "Audit gratuit", "text": "On regarde ce qui existe, ce qui bloque et ce qui peut générer des demandes rapidement." },
-    { "date": "Étape 2", "title": "Plan d’action", "text": "Priorités claires : message, page, suivi des demandes, puis levier (SEO local / Ads)." },
-    { "date": "Étape 3", "title": "Mise en place", "text": "On met en place la page, le tracking et les campagnes si besoin." },
-    { "date": "Étape 4", "title": "Amélioration", "text": "On ajuste ce qui marche le mieux pour augmenter les appels et formulaires." }
-  ]
+  "default": {
+    "badge": "Process",
+    "title": "Comment on travaille",
+    "intro": "On avance en étapes simples, pour obtenir des demandes mesurables.",
+    "label": "Étapes",
+    "steps": [
+      { "date": "Étape 1", "title": "Audit gratuit", "text": "On regarde ce qui existe, ce qui bloque et ce qui peut générer des demandes rapidement." },
+      { "date": "Étape 2", "title": "Plan d’action", "text": "Priorités claires : message, page, suivi des demandes, puis levier (SEO local / Ads)." },
+      { "date": "Étape 3", "title": "Mise en place", "text": "On met en place la page, le tracking et les campagnes si besoin." },
+      { "date": "Étape 4", "title": "Amélioration", "text": "On ajuste ce qui marche le mieux pour augmenter les appels et formulaires." }
+    ]
+  }
 }

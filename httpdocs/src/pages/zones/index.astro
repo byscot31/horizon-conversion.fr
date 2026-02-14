@@ -13,11 +13,9 @@ import MaillageInterne from "../../components/MaillageInterne.astro";
 import { buildModel } from "../../lib/pageModel";
 
 const model = buildModel({
-  type: "home",
+  type: "zonesIndex",
   canonical: "/zones/",
 });
-
-const contexte = { ...model.contexte, type: "zonesIndex" };
 
 const seo = {
   ...model.seo,
@@ -35,7 +33,6 @@ const breadcrumbItems = [
 
 <BaseLayout seo={seo} site={model.site}>
   <PageTitle
-      contexte={contexte}
       seo={seo}
       breadcrumbItems={breadcrumbItems}
       data={{
@@ -48,27 +45,22 @@ const breadcrumbItems = [
   <section id="content">
     <div class="content-wrap py-0 overflow-visible">
 
-      <HeroCard data={model.hero.card} contexte={contexte} />
+      <HeroCard data={model.hero.card} />
 
-      <Process data={model.blocks.process} contexte={contexte} />
+      <Process data={model.blocks.process} />
 
-      <Zones data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
+      <Zones data={{ zones: model.blocks.zones, villes: model.blocks.villes }} />
 
-      <ServicesZones
-          data={model.blocks.services}
-          contexte={contexte}
-          config={{ title: "Services utiles", subtitle: "Choisir un levier" }}
-      />
+      <ServicesZones data={model.blocks.services} />
 
-      <Preuves data={model.blocks.preuves} contexte={contexte} />
+      <Preuves data={model.blocks.preuves} />
 
       <Faqs
           items={model.faqs}
           data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
-          contexte={contexte}
       />
 
-      <MaillageInterne data={model.blocks.maillageInterne} contexte={contexte} />
+      <MaillageInterne data={model.blocks.maillageInterne} />
 
     </div>
   </section>

@@ -1,12 +1,122 @@
 [
   {
-    "q": "Est-ce adapté à mon profil ?",
-    "a": "Oui. On ajuste le message, la page et le suivi des demandes à votre activité. L’audit sert à choisir les bonnes priorités.",
-    "cibleSlugs": ["artisans", "professions-liberales"]
+    "q": "Est-ce adapté à mon activité ?",
+    "a": "Oui. On ajuste le message, la page et le suivi des demandes à votre contexte. L’audit sert à choisir les bonnes priorités."
   },
   {
     "q": "Est-ce que je peux commencer sans publicité ?",
-    "a": "Oui. On peut d’abord faire une page claire + le suivi des appels et formulaires, puis ajouter un levier si besoin.",
-    "cibleSlugs": ["artisans", "professions-liberales"]
+    "a": "Oui. On peut d’abord faire une page claire + le suivi des appels et formulaires, puis ajouter un levier si besoin."
+  },
+  {
+    "q": "Qu’est-ce que vous regardez pendant l’audit gratuit ?",
+    "a": "Votre page (clarté + CTA), votre suivi appels/formulaires, et vos opportunités rapides (SEO local / annonces). Puis on vous propose un plan d’action court."
+  },
+  {
+    "q": "Comment sait-on si ça marche ?",
+    "a": "On suit les appels + formulaires. Vous voyez ce qui génère des demandes et ce qu’il faut améliorer."
+  },
+  {
+    "q": "Est-ce que je garde la main sur mes comptes et mes accès ?",
+    "a": "Oui. Les accès restent à votre nom et vous gardez tout (site, statistiques, comptes publicitaires)."
+  },
+  {
+    "q": "Je reçois des demandes, mais pas les bonnes : vous pouvez aider ?",
+    "a": "Oui. On clarifie ce que vous faites (et ce que vous ne faites pas), on ajuste la page et on filtre mieux les demandes."
+  },
+
+  {
+    "q": "Artisans : pouvez-vous cibler ma zone d’intervention réelle ?",
+    "a": "Oui. On se base sur vos communes/secteurs réellement servis, puis on structure pages + ciblage pour éviter les demandes hors zone.",
+    "cibleSlugs": ["artisans"]
+  },
+  {
+    "q": "Artisans : comment réduire les demandes “petit budget” ?",
+    "a": "On pose un cadre clair : types d’interventions, fourchettes, délais, et ce qui n’est pas pris. Ça améliore la qualité des demandes.",
+    "cibleSlugs": ["artisans"]
+  },
+  {
+    "q": "Artisans : est-ce utile si je suis déjà visible sur Google Maps ?",
+    "a": "Oui. On peut améliorer la fiche Google Business, la page locale et le suivi des demandes pour mesurer l’impact et progresser.",
+    "cibleSlugs": ["artisans"]
+  },
+
+  {
+    "q": "TPE : je n’ai pas beaucoup de temps, c’est lourd à gérer ?",
+    "a": "Non. On va à l’essentiel : message simple, CTA visible, suivi des demandes. Vous validez les décisions clés, puis on met en place.",
+    "cibleSlugs": ["tpe"]
+  },
+  {
+    "q": "TPE : puis-je démarrer avec une seule page qui convertit ?",
+    "a": "Oui. Une page claire + un bon suivi des demandes peut suffire pour démarrer, puis on étend seulement si c’est utile.",
+    "cibleSlugs": ["tpe"]
+  },
+  {
+    "q": "TPE : comment éviter de “payer pour rien” en publicité ?",
+    "a": "On suit les appels + formulaires et on coupe ce qui ne génère pas de demandes utiles. On privilégie des campagnes simples et mesurées.",
+    "cibleSlugs": ["tpe"]
+  },
+
+  {
+    "q": "PME : comment passer à l’échelle sans perdre la qualité des leads ?",
+    "a": "On standardise ce qui marche : pages, messages, suivi, et campagnes. Puis on élargit progressivement (zones, services, volumes).",
+    "cibleSlugs": ["pme"]
+  },
+  {
+    "q": "PME : est-ce que vous pouvez reprendre des campagnes existantes ?",
+    "a": "Oui. On fait un état des lieux (structure, requêtes, coûts, conversions), puis on simplifie et on pilote avec les demandes réelles.",
+    "cibleSlugs": ["pme"]
+  },
+  {
+    "q": "PME : comment organiser le reporting sans y passer du temps ?",
+    "a": "On suit surtout l’essentiel : appels + formulaires. Vous avez une vue simple sur ce qui rapporte et ce qui doit être amélioré.",
+    "cibleSlugs": ["pme"]
+  },
+
+  {
+    "q": "Commerces : peut-on générer des actions locales (itinéraire, appel, réservation) ?",
+    "a": "Oui. On travaille la fiche Google Business, le contenu local, et des CTA visibles sur mobile (appeler, réserver, venir).",
+    "cibleSlugs": ["commerces"]
+  },
+  {
+    "q": "Commerces : est-ce utile si j’ai déjà une fiche Google ?",
+    "a": "Oui. Souvent il y a des gains rapides : catégories, services, photos, messages, liens, et suivi des appels pour mesurer l’impact.",
+    "cibleSlugs": ["commerces"]
+  },
+  {
+    "q": "Commerces : comment attirer des clients proches plutôt que “juste des vues” ?",
+    "a": "On cible les recherches locales utiles et on optimise les pages/annonces pour déclencher une action (appel, itinéraire, réservation).",
+    "cibleSlugs": ["commerces"]
+  },
+
+  {
+    "q": "Professions libérales : est-ce que vous respectez une communication sobre ?",
+    "a": "Oui. On fait simple et clair : explications, réassurance, et prochain pas. Pas de promesses exagérées, juste du concret.",
+    "cibleSlugs": ["professions-liberales"]
+  },
+  {
+    "q": "Professions libérales : comment rassurer avant le premier contact ?",
+    "a": "On met en avant vos éléments de confiance : parcours, méthode, cas typiques, FAQ, et un parcours de prise de contact très simple.",
+    "cibleSlugs": ["professions-liberales"]
+  },
+  {
+    "q": "Professions libérales : comment éviter les demandes hors sujet ?",
+    "a": "On précise vos spécialités, votre public, et les motifs de consultation. Ça réduit les demandes non pertinentes.",
+    "cibleSlugs": ["professions-liberales"]
+  },
+
+  {
+    "q": "Franchises & réseaux : comment éviter le copier-coller entre villes ?",
+    "a": "On utilise une structure commune (template) mais on adapte le contenu local : zone, offre, preuves, FAQ, maillage. Ça reste cohérent et utile.",
+    "cibleSlugs": ["franchises-reseaux"]
+  },
+  {
+    "q": "Franchises & réseaux : peut-on avoir un suivi standardisé pour toutes les zones ?",
+    "a": "Oui. On met un tracking homogène (appels + formulaires) pour comparer les zones et piloter avec les mêmes indicateurs.",
+    "cibleSlugs": ["franchises-reseaux"]
+  },
+  {
+    "q": "Franchises & réseaux : comment piloter plusieurs zones sans se perdre ?",
+    "a": "On priorise les zones qui comptent, on déploie un modèle réutilisable, et on améliore avec des retours mesurés (demandes).",
+    "cibleSlugs": ["franchises-reseaux"]
   }
 ]

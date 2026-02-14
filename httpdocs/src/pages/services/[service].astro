@@ -13,6 +13,7 @@ import ContactForm from "../../components/ContactForm.astro";
 import Tarifs from "../../components/Tarifs.astro";
 import Ressources from "../../components/Ressources.astro";
 import ZonesVilles from "../../components/ZonesVilles.astro";
+import Cibles from "../../components/Cibles.astro";
 
 export function getStaticPaths() {
   return (services ?? []).map((s) => ({ params: { service: s.slug } }));
@@ -47,9 +48,11 @@ const contexte = model.contexte;
 
       <Methode data={model.blocks.methode} contexte={contexte} />
 
+      <Cibles />
+
       <ZonesVilles data={{ zones: model.blocks.zones, villes: model.blocks.villes }} contexte={contexte} />
 
-      <Ressources data={model.blocks.articles} contexte={contexte} />
+      <Ressources block={model.blocks.ressources} articles={model.blocks.articles} contexte={contexte} />
 
       <Faqs
           items={model.faqs}

@@ -14,7 +14,9 @@ import heroCard from "../data/hero_card.json";
 import benefices from "../data/benefices.json";
 import livrables from "../data/livrables.json";
 import preuves from "../data/preuves.json";
+import preuvesVariants from "../data/preuves_variants.json";
 import processData from "../data/process.json";
+import processVariants from "../data/process_variants.json";
 import methode from "../data/methode.json";
 
 import maillageInterne from "../data/maillage_interne.json";
@@ -28,6 +30,7 @@ import faqsZonesRaw from "../data/faqs_zones.json";
 import faqsCiblesRaw from "../data/faqs_cibles.json";
 
 import articles from "../data/articles.json";
+import ressourcesBlock from "../data/ressources_block.json";
 
 // ---- Helpers
 function assertArray<T>(value: any, name: string): T[] {
@@ -52,10 +55,10 @@ export {
   site, seo, cta,
   zones, villes, services, cibles,
   heroPage, heroCard,
-  benefices, livrables, preuves, processData, methode,
+  benefices, livrables, preuves, preuvesVariants, processData, processVariants, methode,
   maillageInterne, servicesPage, tarifs, form,
   faqsServices, faqsVilles, faqsZones, faqsCibles,
-  articles,
+  articles, ressourcesBlock,
 };
 
 export function bySlug<T extends { slug: string }>(list: T[], slug: string): T {

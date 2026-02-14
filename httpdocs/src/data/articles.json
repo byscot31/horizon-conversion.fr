@@ -1,32 +1,147 @@
-{
-  "badge": "Ressources",
-  "title": "Ressources utiles",
-  "intro": "Des conseils simples pour générer plus de demandes (appels + formulaires).",
-  "maxItems": 3,
-  "items": [
-    {
-      "slug": "page-qui-convertit",
-      "title": "Page qui convertit : les 7 éléments indispensables",
-      "excerpt": "Ce qui doit être visible en 5 secondes pour déclencher une demande.",
-      "author": "Horizon Conversion",
-      "publishedAt": "2026-01-15",
-      "image": "/assets/images/blog/1.jpg"
-    },
-    {
-      "slug": "seo-local-fiche-google",
-      "title": "SEO local : quoi faire sur votre fiche Google",
-      "excerpt": "Les réglages qui aident vos clients à vous trouver près de chez vous.",
-      "author": "Horizon Conversion",
-      "publishedAt": "2026-01-20",
-      "image": "/assets/images/blog/2.jpg"
-    },
-    {
-      "slug": "tracking-appels-formulaires",
-      "title": "Suivre les appels et formulaires : le minimum utile",
-      "excerpt": "Mesurer ce qui marche sans se noyer dans les chiffres.",
-      "author": "Horizon Conversion",
-      "publishedAt": "2026-02-01",
-      "image": "/assets/images/blog/3.jpg"
-    }
-  ]
-}
+[
+  {
+    "slug": "page-qui-convertit",
+    "title": "Page qui convertit : les 7 éléments indispensables",
+    "excerpt": "Ce qui doit être visible en 5 secondes pour déclencher une demande.",
+    "author": "Horizon Conversion",
+    "publishedAt": "2026-01-15",
+    "image": "/assets/images/blog/1.jpg",
+    "type": "checklist",
+    "category": "conversion",
+    "intents": ["convertir", "demarrer", "qualifier"],
+    "serviceSlugs": ["pages-locales", "google-ads"],
+    "cibleSlugs": ["artisans", "tpe", "professions-liberales", "commerces", "pme", "franchises-reseaux"],
+    "villeSlugs": [],
+    "body": [
+      {
+        "h2": "Ce que la page doit dire en 5 secondes",
+        "p": "Une bonne page répond immédiatement : qui vous aidez, ce que vous faites, et quoi faire ensuite. Si ce n’est pas clair, le visiteur repart (même s’il a besoin de vous)."
+      },
+      {
+        "h2": "Les 7 éléments indispensables",
+        "p": "Voici une checklist simple. Si vous cochez ces points, vous améliorez mécaniquement vos appels et vos formulaires.",
+        "list": [
+          "Un H1 clair : service + résultat (pas de jargon).",
+          "Une promesse simple : ce que la personne obtient et pour qui c’est fait.",
+          "Des bénéfices concrets : 3 à 6 points maximum, faciles à scanner.",
+          "Une preuve : exemples, réalisations, éléments de confiance (sans en faire trop).",
+          "Un CTA visible : “Demander un audit (gratuit)” + “Être rappelé”.",
+          "Un formulaire court : nom + téléphone + besoin (le reste est optionnel).",
+          "Un suivi des demandes : clic téléphone + envoi formulaire (pour piloter)."
+        ]
+      },
+      {
+        "h2": "Erreurs fréquentes",
+        "list": [
+          "Un texte long qui n’explique pas l’essentiel.",
+          "Un CTA caché ou trop discret.",
+          "Un formulaire trop long (ça fait chuter les demandes).",
+          "Aucune preuve (on hésite à contacter).",
+          "Pas de suivi des appels et formulaires (on optimise à l’aveugle)."
+        ]
+      },
+      {
+        "h2": "Le prochain pas",
+        "p": "Si vous voulez un avis rapide : on fait un audit gratuit de votre page (clarté, CTA, preuves, suivi). Ensuite, on vous donne un plan simple avec 3 priorités."
+      }
+    ],
+    "faqSlugs": ["r-demarrer", "r-cta", "r-tracking"]
+  },
+
+  {
+    "slug": "seo-local-fiche-google",
+    "title": "SEO local : quoi faire sur votre fiche Google",
+    "excerpt": "Les réglages qui aident vos clients à vous trouver près de chez vous.",
+    "author": "Horizon Conversion",
+    "publishedAt": "2026-01-20",
+    "image": "/assets/images/blog/2.jpg",
+    "type": "guide",
+    "category": "gbp",
+    "intents": ["local", "demarrer", "qualifier"],
+    "serviceSlugs": ["seo-local", "google-business-profile"],
+    "cibleSlugs": ["artisans", "commerces", "tpe", "pme", "professions-liberales", "franchises-reseaux"],
+    "villeSlugs": [],
+    "body": [
+      {
+        "h2": "Pourquoi la fiche Google est souvent le 1er contact",
+        "p": "Avant d’aller sur un site, beaucoup de clients regardent la fiche Google : horaires, avis, photos, itinéraire, appel. Une fiche incomplète ou floue fait perdre des demandes."
+      },
+      {
+        "h2": "Les réglages prioritaires",
+        "list": [
+          "Nom, téléphone, zone : cohérents partout (NAP).",
+          "Catégorie principale + catégories secondaires pertinentes.",
+          "Services : liste claire (ce que vous faites vraiment).",
+          "Zone desservie : réaliste (pas “trop large” si vous ne couvrez pas).",
+          "Horaires à jour + jours spéciaux si besoin."
+        ]
+      },
+      {
+        "h2": "Ce qui donne confiance",
+        "list": [
+          "Photos récentes (lieu, équipe si pertinent, réalisations).",
+          "Avis : demander simplement, répondre proprement.",
+          "Description claire (1 écran) + 2–3 points forts.",
+          "Questions/Réponses : lever les doutes fréquents."
+        ]
+      },
+      {
+        "h2": "Comment mesurer l’impact (sans se compliquer)",
+        "p": "Le plus important : suivre les demandes. On mesure les clics vers le téléphone, les formulaires et ce qui déclenche une prise de contact."
+      },
+      {
+        "h2": "Le prochain pas",
+        "p": "On peut faire un audit gratuit de votre présence locale (fiche + pages + suivi). Vous repartez avec un plan simple, priorisé."
+      }
+    ],
+    "faqSlugs": ["r-seo-ou-ads", "r-local", "r-avis"]
+  },
+
+  {
+    "slug": "tracking-appels-formulaires",
+    "title": "Suivre les appels et formulaires : le minimum utile",
+    "excerpt": "Mesurer ce qui marche sans se noyer dans les chiffres.",
+    "author": "Horizon Conversion",
+    "publishedAt": "2026-02-01",
+    "image": "/assets/images/blog/3.jpg",
+    "type": "checklist",
+    "category": "tracking",
+    "intents": ["mesurer", "optimiser", "qualifier"],
+    "serviceSlugs": ["tracking", "google-ads", "pages-locales", "seo-local"],
+    "cibleSlugs": ["artisans", "tpe", "pme", "commerces", "professions-liberales", "franchises-reseaux"],
+    "villeSlugs": [],
+    "body": [
+      {
+        "h2": "Pourquoi le tracking change tout",
+        "p": "Sans suivi, on ne sait pas si une page ou une campagne génère vraiment des demandes. Le minimum utile : suivre appels + formulaires."
+      },
+      {
+        "h2": "Le minimum à suivre",
+        "list": [
+          "Envoi de formulaire (form_submit).",
+          "Clic sur le téléphone (click_phone).",
+          "Source de la visite (SEO, Ads, direct).",
+          "Pages d’entrée (celle qui déclenche la demande)."
+        ]
+      },
+      {
+        "h2": "Comment éviter les faux chiffres",
+        "list": [
+          "Tester les formulaires (vrai envoi).",
+          "Vérifier les événements GA4.",
+          "Éviter de compter 2 fois (doublons).",
+          "Séparer les appels “clic” et les appels réels si besoin."
+        ]
+      },
+      {
+        "h2": "À quoi servent les chiffres (simplement)",
+        "p": "Ils servent à décider quoi améliorer : message, page, zone, mots-clés, annonces. On garde ce qui génère des demandes utiles."
+      },
+      {
+        "h2": "Le prochain pas",
+        "p": "On peut corriger ou mettre en place le suivi (appels + formulaires) pendant l’audit, puis vous donner un plan clair."
+      }
+    ],
+    "faqSlugs": ["r-tracking", "r-temps", "r-demarrer"]
+  }
+]

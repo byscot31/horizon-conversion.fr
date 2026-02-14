@@ -28,11 +28,19 @@ const checklist = Array.isArray(d.checklist) ? d.checklist : (Array.isArray(d.bu
           <h2 class="text-transform-none ls-0 mb-3">{h2}</h2>
           <p>{description}</p>
 
-          <a href={cta1.href ?? "#"} class="button button-rounded text-capitalize m-0 ls-0">
+          <a
+              data-track="click_audit"
+              href={cta1.href ?? "#"}
+              class="button button-rounded text-capitalize m-0 ls-0"
+          >
             {cta1.label ?? "Demander un audit (gratuit)"}
           </a>
 
-          <a href={cta2.href ?? "#"} class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 ms-2">
+          <a
+              data-track="click_callback"
+              href={cta2.href ?? "#"}
+              class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 ms-2"
+          >
             {cta2.label ?? "Être rappelé"}
           </a>
         </div>

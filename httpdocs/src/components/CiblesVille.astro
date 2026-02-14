@@ -1,0 +1,91 @@
+---
+// src/components/ZonesVilles.astro
+import { pickVillesForZone, splitInTwoColumns } from "../lib/collection";
+
+const { data, contexte, config } = Astro.props;
+
+// ✅ Supporte data={{ zones, villes, ... }} ou data direct
+const zones = Array.isArray(data?.zones) ? data.zones : (Array.isArray(data) ? data : []);
+const villes = Array.isArray(data?.villes) ? data.villes : [];
+
+const badge = data?.badge ?? config?.badge ?? "Zones";
+const h2 = data?.title ?? config?.title ?? "Zones couvertes";
+const subtitle = data?.subtitle ?? config?.subtitle ?? "Choisissez votre ville";
+
+const maxVillesParZone = data?.maxVillesParZone ?? config?.maxVillesParZone ?? 10;
+
+if (!zones.length || !villes.length) {
+  // rien
+}
+---
+
+{zones.length > 0 && villes.length > 0 && (
+<div class="section mt-0">
+  <div class="container">
+    <div class="heading-block border-bottom-0 text-center">
+      <div class="badge rounded-pill badge-default">{badge}</div>
+      <h2 class="text-transform-none ls-0">{h2}</h2>
+      <span>{subtitle}</span>
+    </div>
+
+    <div class="row col-mb-30 align-content-stretch">
+      {zones.map((z) => {
+        const villesZone = pickVillesForZone(villes, z, maxVillesParZone);
+
+        // ✅ si aucune ville => on n’affiche pas la carte de zone
+          if (!villesZone.length) return null;
+
+        const [col1, col2] = splitInTwoColumns(villesZone);
+
+        return (
+            <div class="col-md-6 d-flex">
+              <div class="card w-100">
+                <div class="card-body p-5">
+                  <div class="feature-box flex-column">
+                    <div class="fbox-content">
+                      <h3 class="text-transform-none ls-0 text-larger">{z.name ?? "Zone"}</h3>
+                      <p class="text-smaller">{z.excerpt ?? z.description ?? ""}</p>
+                    </div>
+
+                    <div class="row col-mb-30 align-content-stretch">
+                      <div class="col-md-6 d-flex">
+                        <ul class="iconlist ms-3 mt-4 mb-0">
+                          {col1.map((v) => (
+                              <li class="d-block mb-2 text-muted">
+                                <a href={`/zones/${z.slug}/${v.slug}/`} class="link-dark h-text-color">
+                                  <i class="fa-solid fa-arrow-right text-smaller color me-1"></i> {v.name ?? "Ville"}
+                                </a>
+                              </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div class="col-md-6 d-flex">
+                        <ul class="iconlist ms-3 mt-4 mb-0">
+                          {col2.map((v) => (
+                              <li class="d-block mb-2 text-muted">
+                                <a href={`/zones/${z.slug}/${v.slug}/`} class="link-dark h-text-color">
+                                  <i class="fa-solid fa-arrow-right text-smaller color me-1"></i> {v.name ?? "Ville"}
+                                </a>
+                              </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div class="col-md-12">
+                        <a href={`/zones/${z.slug}/`} class="button button-rounded text-capitalize m-0 ls-0 w-100">
+                          Voir la zone
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
+  )}

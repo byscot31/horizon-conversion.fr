@@ -32,7 +32,6 @@ if (!Array.isArray(zones) || !zones.length) {
   <div class="container">
 
     <div class="heading-block border-bottom-0 text-center mb-5">
-      <div class="badge rounded-pill badge-default">{badge}</div>
       <h2 class="text-transform-none ls-0">{title}</h2>
       <p class="text-muted mb-0">{subtitle}</p>
     </div>
@@ -46,11 +45,11 @@ if (!Array.isArray(zones) || !zones.length) {
 
         return (
             <div class="col-md-6 d-flex">
-              <a href={zoneHref(z.slug)} class="card h-shadow h-translate-y-sm all-ts w-100">
+              <div class="card h-shadow h-translate-y-sm all-ts w-100">
                 <div class="card-body p-5">
                   <div class="feature-box flex-column">
                     <div class="fbox-content">
-                      <h2 class="text-transform-none ls-0 text-larger mb-0">{z.name ?? "Zone"}</h2>
+                      <h3 class="text-transform-none ls-0 text-larger mb-0">{z.name ?? "Zone"}</h3>
                       <p class="text-smaller">{z.excerpt ?? "Zone couverte : pages locales + leviers adaptés."}</p>
                     </div>
 
@@ -65,9 +64,13 @@ if (!Array.isArray(zones) || !zones.length) {
                           ))}
                         </ul>
                     )}
+
+                    <div class="mt-4">
+                      <a href={zoneHref(z.slug)} class="button button-rounded text-capitalize m-0 ls-0 w-100">Voir la zone</a>
+                    </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
         );
       })}

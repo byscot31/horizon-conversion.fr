@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "r-demarrer",
+    "q": "Par quoi commencer pour obtenir plus de demandes ?",
+    "a": "Commencez par une page claire, un CTA visible, et le suivi des appels + formulaires. Ensuite seulement, ajoutez SEO local ou Ads."
+  },
+  {
+    "slug": "r-cta",
+    "q": "Quel CTA marche le mieux sur une page locale ?",
+    "a": "Un prochain pas simple : “Demander un audit (gratuit)”. En secondaire : “Être rappelé”. Il doit être visible rapidement, surtout sur mobile."
+  },
+  {
+    "slug": "r-tracking",
+    "q": "Qu’est-ce qu’il faut suivre au minimum ?",
+    "a": "Deux choses : envoi de formulaire et clic sur le téléphone. Ensuite, on relie ça aux sources (SEO, Ads) pour savoir ce qui rapporte."
+  },
+  {
+    "slug": "r-seo-ou-ads",
+    "q": "SEO local ou Google Ads : je choisis quoi ?",
+    "a": "Si vous avez besoin vite : Ads. Si vous voulez du durable : SEO local. Souvent, le meilleur départ : page claire + suivi, puis le levier le plus rentable."
+  },
+  {
+    "slug": "r-local",
+    "q": "Est-ce que la fiche Google suffit pour être visible ?",
+    "a": "Non. La fiche aide beaucoup, mais les pages (service/ville) et la cohérence des infos (NAP) font la différence. Et il faut mesurer les demandes."
+  },
+  {
+    "slug": "r-avis",
+    "q": "Les avis sont-ils vraiment importants ?",
+    "a": "Oui, surtout pour la confiance. L’objectif n’est pas d’en avoir “beaucoup”, mais d’avoir des avis récents et des réponses propres."
+  },
+  {
+    "slug": "r-temps",
+    "q": "Combien de temps avant de voir des résultats ?",
+    "a": "En Ads, on peut voir des demandes en quelques jours. En SEO local, c’est plus progressif (souvent plusieurs semaines)."
+  }
+]

@@ -38,6 +38,45 @@
       ]
     },
     {
+      "type": "profilsIndex",
+      "title": "Choisir un profil",
+      "subtitle": "Prochaines étapes",
+      "links": [
+        { "label": "Services", "href": "/services/" },
+        { "label": "Preuves", "href": "/preuves/" },
+        { "label": "Tarifs", "href": "/tarifs/" },
+        { "label": "Méthode", "href": "/methode/" },
+        { "label": "Zones", "href": "/zones/" },
+        { "label": "Contact", "href": "/contact/" }
+      ]
+    },
+    {
+      "type": "service",
+      "title": "Valider ce service",
+      "subtitle": "Prochaines étapes",
+      "links": [
+        { "label": "Tarifs", "href": "/tarifs/" },
+        { "label": "Preuves", "href": "/preuves/" },
+        { "label": "Méthode", "href": "/methode/" },
+        { "label": "Zones", "href": "/zones/" },
+        { "label": "Profils", "href": "/profils/" },
+        { "label": "Contact", "href": "/contact/" }
+      ]
+    },
+    {
+      "type": "cible",
+      "title": "Pour ce profil",
+      "subtitle": "Prochaines étapes",
+      "links": [
+        { "label": "Services", "href": "/services/" },
+        { "label": "Tarifs", "href": "/tarifs/" },
+        { "label": "Preuves", "href": "/preuves/" },
+        { "label": "Méthode", "href": "/methode/" },
+        { "label": "Zones", "href": "/zones/" },
+        { "label": "Contact", "href": "/contact/" }
+      ]
+    },
+    {
       "type": "zone",
       "title": "Aller plus loin",
       "subtitle": "Après la zone",
@@ -82,18 +121,6 @@
         { "label": "Services", "href": "/services/" },
         { "label": "Tarifs", "href": "/tarifs/" },
         { "label": "Preuves", "href": "/preuves/" },
-        { "label": "Méthode", "href": "/methode/" },
-        { "label": "Contact", "href": "/contact/" }
-      ]
-    },
-    {
-      "type": "profilsIndex",
-      "title": "Choisir un profil",
-      "subtitle": "Prochaines étapes",
-      "links": [
-        { "label": "Services", "href": "/services/" },
-        { "label": "Zones", "href": "/zones/" },
-        { "label": "Tarifs", "href": "/tarifs/" },
         { "label": "Méthode", "href": "/methode/" },
         { "label": "Contact", "href": "/contact/" }
       ]

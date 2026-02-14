@@ -13,11 +13,12 @@ import MaillageInterne from "../../components/MaillageInterne.astro";
 import { buildModel } from "../../lib/pageModel";
 
 const model = buildModel({
-  type: "cible",
+  type: "profilsIndex",
   canonical: "/profils/",
 });
 
-const contexte = { ...model.contexte, type: "profilsIndex" }; // pour rules de maillage si tu veux
+const contexte = model.contexte;
+
 const seo = {
   ...model.seo,
   title: `Profils | ${model.site.name}`,
@@ -54,7 +55,7 @@ const breadcrumbItems = [
       <Preuves data={model.blocks.preuves} contexte={contexte} />
 
       <Faqs
-          items={model.blocks.faqsCibles ?? model.faqs}
+          items={model.faqs}
           data={{ badge: "FAQ", title: "Questions fréquentes", intro: "Réponses simples et concrètes." }}
           contexte={contexte}
       />
