@@ -42,9 +42,9 @@ if (!villes.length || !resolvedZone?.slug) {
                     </p>
                   </div>
 
-                  {Array.isArray(v.tags) && v.tags.length > 0 && (
+                  {Array.isArray(v.around) && v.around.length > 0 && (
                       <ul class="nav nav-pills mt-4 mb-0">
-                        {v.tags.slice(0, 6).map((t) => (
+                        {v.around.slice(0, 6).map((t) => (
                             <li class="nav-item badge rounded-pill badge-color text-smaller me-2">{t}</li>
                         ))}
                       </ul>

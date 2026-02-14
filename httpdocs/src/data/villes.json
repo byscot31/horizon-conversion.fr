@@ -1,5 +1,141 @@
 [
-  { "slug": "chantilly", "name": "Chantilly", "zoneSlug": "sud-oise", "tags": ["Gouvieux", "Lamorlaye"] },
-  { "slug": "senlis", "name": "Senlis", "zoneSlug": "sud-oise" },
-  { "slug": "l-isle-adam", "name": "L’Isle-Adam", "zoneSlug": "nord-val-doise" }
+  {
+    "slug": "chantilly",
+    "name": "Chantilly",
+    "zoneSlug": "sud-oise",
+    "around": ["Lamorlaye", "Gouvieux", "Coye-la-Forêt", "Vineuil-Saint-Firmin", "Orry-la-Ville", "Avilly-Saint-Léonard"]
+  },
+  {
+    "slug": "senlis",
+    "name": "Senlis",
+    "zoneSlug": "sud-oise",
+    "around": ["Pont-Sainte-Maxence", "Verneuil-en-Halatte", "Chamant", "Barbery", "Mont-l’Évêque", "Aumont-en-Halatte"]
+  },
+  {
+    "slug": "creil",
+    "name": "Creil",
+    "zoneSlug": "sud-oise",
+    "around": ["Nogent-sur-Oise", "Montataire", "Saint-Leu-d’Esserent", "Thiverny", "Villers-Saint-Paul", "Verneuil-en-Halatte"]
+  },
+  {
+    "slug": "nogent-sur-oise",
+    "name": "Nogent-sur-Oise",
+    "zoneSlug": "sud-oise",
+    "around": ["Creil", "Montataire", "Laigneville", "Mogneville", "Villers-Saint-Paul", "Rousseloy"]
+  },
+  {
+    "slug": "pont-sainte-maxence",
+    "name": "Pont-Sainte-Maxence",
+    "zoneSlug": "sud-oise",
+    "around": ["Sacy-le-Grand", "Saint-Martin-Longueau", "Pontpoint", "Verberie", "Brenouille", "Cinqueux"]
+  },
+  {
+    "slug": "compiegne",
+    "name": "Compiègne",
+    "zoneSlug": "sud-oise",
+    "around": ["Margny-lès-Compiègne", "Venette", "Le Meux", "Jaux", "Lacroix-Saint-Ouen", "Choisy-au-Bac"]
+  },
+  {
+    "slug": "noyon",
+    "name": "Noyon",
+    "zoneSlug": "sud-oise",
+    "around": ["Guiscard", "Cuts", "Pont-l’Évêque", "Passel", "Tracy-le-Mont", "Ribécourt-Dreslincourt"]
+  },
+  {
+    "slug": "clermont-oise",
+    "name": "Clermont",
+    "zoneSlug": "sud-oise",
+    "around": ["Fitz-James", "Agnetz", "Breuil-le-Sec", "Breuil-le-Vert", "Liancourt", "Laigneville"]
+  },
+  {
+    "slug": "beauvais",
+    "name": "Beauvais",
+    "zoneSlug": "sud-oise",
+    "around": ["Allonne", "Goincourt", "Tillé", "Saint-Paul", "Bresles", "Noailles"]
+  },
+  {
+    "slug": "meru",
+    "name": "Méru",
+    "zoneSlug": "sud-oise",
+    "around": ["Andeville", "Amblainville", "Laboissière-en-Thelle", "Corbeil-Cerf", "Chambly", "Bornel"]
+  },
+
+  {
+    "slug": "l-isle-adam",
+    "name": "L’Isle-Adam",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Parmain", "Mériel", "Presles", "Valmondois", "Champagne-sur-Oise", "Chambly"]
+  },
+  {
+    "slug": "beaumont-sur-oise",
+    "name": "Beaumont-sur-Oise",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Persan", "Bernes-sur-Oise", "Nointel", "Mours", "Bruyères-sur-Oise", "Champagne-sur-Oise"]
+  },
+  {
+    "slug": "persan",
+    "name": "Persan",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Beaumont-sur-Oise", "Chambly", "Bernes-sur-Oise", "Bruyères-sur-Oise", "L’Isle-Adam", "Boran-sur-Oise"]
+  },
+  {
+    "slug": "cergy",
+    "name": "Cergy",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Pontoise", "Osny", "Éragny", "Vauréal", "Courdimanche", "Neuville-sur-Oise"]
+  },
+  {
+    "slug": "pontoise",
+    "name": "Pontoise",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Cergy", "Saint-Ouen-l’Aumône", "Osny", "Ennery", "Éragny", "Auvers-sur-Oise"]
+  },
+  {
+    "slug": "saint-ouen-l-aumone",
+    "name": "Saint-Ouen-l’Aumône",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Pontoise", "Cergy", "Osny", "Éragny", "Méry-sur-Oise", "Herblay-sur-Seine"]
+  },
+  {
+    "slug": "taverny",
+    "name": "Taverny",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Saint-Leu-la-Forêt", "Beauchamp", "Bessancourt", "Franconville", "Montigny-lès-Cormeilles", "Herblay-sur-Seine"]
+  },
+  {
+    "slug": "argenteuil",
+    "name": "Argenteuil",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Bezons", "Colombes", "Sartrouville", "Sannois", "Franconville", "Cormeilles-en-Parisis"]
+  },
+  {
+    "slug": "sarcelles",
+    "name": "Sarcelles",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Garges-lès-Gonesse", "Villiers-le-Bel", "Arnouville", "Gonesse", "Saint-Brice-sous-Forêt", "Écouen"]
+  },
+  {
+    "slug": "enghien-les-bains",
+    "name": "Enghien-les-Bains",
+    "zoneSlug": "nord-val-doise",
+    "around": ["Soisy-sous-Montmorency", "Montmorency", "Deuil-la-Barre", "Saint-Gratien", "Eaubonne", "Sannois"]
+  },
+  {
+    "zoneSlug": "nord-val-doise",
+    "slug": "herblay-sur-seine",
+    "name": "Herblay-sur-Seine",
+    "around": ["Montigny-lès-Cormeilles", "La Frette-sur-Seine", "Conflans-Sainte-Honorine", "Taverny", "Franconville", "Saint-Ouen-l’Aumône"]
+  },
+  {
+    "zoneSlug": "nord-val-doise",
+    "slug": "franconville",
+    "name": "Franconville",
+    "around": ["Ermont", "Eaubonne", "Sannois", "Beauchamp", "Taverny", "Saint-Leu-la-Forêt"]
+  },
+  {
+    "zoneSlug": "nord-val-doise",
+    "slug": "ermont",
+    "name": "Ermont",
+    "around": ["Eaubonne", "Franconville", "Saint-Gratien", "Sannois", "Enghien-les-Bains", "Deuil-la-Barre"]
+  }
 ]

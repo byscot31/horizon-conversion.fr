@@ -2,17 +2,37 @@
   {
     "slug": "artisans",
     "name": "Artisans",
-    "excerpt": "Pour obtenir plus d’appels et mieux convertir vos visiteurs.",
-    "bullets": ["Page claire", "Suivi des demandes", "Ciblage local", "Actions simples", "Améliorations"],
-    "kicker": "BTP & services",
-    "examples": ["Plombier", "Électricien", "Menuisier", "Couvreur"]
+    "excerpt": "Plus d’appels entrants et moins de demandes non pertinentes.",
+    "bullets": ["Pages claires", "Suivi des demandes", "Ciblage local", "Actions simples", "Optimisations continues"]
+  },
+  {
+    "slug": "tpe",
+    "name": "TPE",
+    "excerpt": "Un flux régulier de demandes qualifiées, sans y passer tes journées.",
+    "bullets": ["Acquisition maîtrisée", "Tracking complet", "Pages qui convertissent", "Optimisations", "Reporting simple"]
+  },
+  {
+    "slug": "pme",
+    "name": "PME",
+    "excerpt": "Accélérer la génération de leads et industrialiser ce qui marche.",
+    "bullets": ["Scaling", "Process clair", "Pilotage Ads", "SEO local structuré", "Conversion"]
+  },
+  {
+    "slug": "commerces",
+    "name": "Commerces",
+    "excerpt": "Plus de visites, d’appels et d’actions locales (itinéraire, réservation).",
+    "bullets": ["Fiche Google", "SEO local", "Campagnes locales", "Offres & preuves", "Conversion mobile"]
   },
   {
     "slug": "professions-liberales",
     "name": "Professions libérales",
-    "excerpt": "Pour inspirer confiance et déclencher des prises de contact.",
-    "bullets": ["Réassurance", "Preuves", "SEO local", "Campagnes si besoin", "Suivi"],
-    "kicker": "Conseil & santé",
-    "examples": ["Avocat", "Ostéopathe", "Notaire", "Architecte"]
+    "excerpt": "Inspirer confiance et déclencher des prises de contact.",
+    "bullets": ["Réassurance", "Preuves", "SEO local", "Ads si besoin", "Suivi"]
+  },
+  {
+    "slug": "franchises-reseaux",
+    "name": "Franchises & réseaux",
+    "excerpt": "Du lead local cohérent, mesurable, et duplicable par zone.",
+    "bullets": ["Templates pages", "Tracking standardisé", "Pilotage multi-zones", "Guidelines SEO", "Reporting consolidé"]
   }
 ]

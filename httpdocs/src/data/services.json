@@ -4,12 +4,13 @@
     "name": "SEO local",
     "excerpt": "Être visible sur Google quand on vous cherche près de chez vous.",
     "icon": "/assets/images/services/seo.svg",
+    "tier": "primary",
     "bullets": [
-      "Fiche Google optimisée",
+      "Audit SEO local + plan d’action",
+      "Fiche Google optimisée (GBP)",
       "Pages locales qui convertissent",
-      "Suivi des appels + formulaires",
       "Maillage interne local",
-      "Améliorations continues"
+      "Suivi des positions + demandes"
     ]
   },
   {
@@ -17,25 +18,70 @@
     "name": "Google Ads",
     "excerpt": "Des campagnes simples pour générer des demandes rapidement.",
     "icon": "/assets/images/services/adwords.svg",
+    "tier": "primary",
     "bullets": [
-      "Ciblage local",
-      "Annonces claires",
-      "Landing page efficace",
-      "Suivi des conversions",
+      "Ciblage local et mots-clés rentables",
+      "Annonces claires + extensions",
+      "Landing page dédiée si besoin",
+      "Suivi des conversions (appels, formulaires)",
       "Optimisations régulières"
     ]
   },
   {
-    "slug": "meta-ads",
-    "name": "Meta Ads",
-    "excerpt": "Des pubs Facebook/Instagram pour obtenir plus de contacts.",
-    "icon": "/assets/images/services/social.svg",
+    "slug": "pages-locales",
+    "name": "Pages locales qui convertissent",
+    "excerpt": "Des pages “service × ville” pensées pour obtenir des appels et des formulaires.",
+    "icon": "/assets/images/services/experience.svg",
+    "tier": "primary",
     "bullets": [
-      "Ciblage par zone",
-      "Créa simple",
-      "Formulaire ou landing",
-      "Suivi des demandes",
-      "Ajustements"
+      "Message clair (problème → solution)",
+      "CTA visibles et rassurance",
+      "Preuves (avis, cas, réalisations)",
+      "Structure SEO propre (Hn, schema, maillage)",
+      "Améliorations continues"
+    ]
+  },
+
+  {
+    "slug": "google-business-profile",
+    "name": "Fiche Google (Google Business Profile)",
+    "excerpt": "Optimiser votre présence Maps pour générer plus d’appels et d’itinéraires.",
+    "icon": "/assets/images/services/content_marketing.svg",
+    "tier": "secondary",
+    "bullets": [
+      "Catégories, services, zones",
+      "Photos, posts et FAQ",
+      "Optimisation avis + réponses",
+      "Cohérence NAP (nom/adresse/tel)",
+      "Suivi appels et actions"
+    ]
+  },
+  {
+    "slug": "meta-ads",
+    "name": "Meta Ads (Facebook/Instagram)",
+    "excerpt": "Des pubs locales pour obtenir plus de contacts et relancer les visiteurs.",
+    "icon": "/assets/images/services/social.svg",
+    "tier": "secondary",
+    "bullets": [
+      "Ciblage par zone et profils",
+      "Créa simple orientée demande",
+      "Formulaire instantané ou landing",
+      "Retargeting (ne pas perdre les visiteurs)",
+      "Ajustements selon les résultats"
+    ]
+  },
+  {
+    "slug": "tracking",
+    "name": "Suivi & mesure des conversions",
+    "excerpt": "Savoir exactement d’où viennent les demandes (appels, formulaires, coût).",
+    "icon": "/assets/images/services/analysis.svg",
+    "tier": "secondary",
+    "bullets": [
+      "Tracking formulaires + appels",
+      "GA4 / Tag Manager / événements",
+      "UTM + sources (SEO, Ads, réseaux)",
+      "Tableau de bord simple",
+      "Pilotage par la donnée"
     ]
   }
 ]
