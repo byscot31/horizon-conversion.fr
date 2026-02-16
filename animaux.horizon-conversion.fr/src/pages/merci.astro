@@ -1,0 +1,50 @@
+---
+import LayoutSeo from "../layouts/LayoutSEO.astro";
+import CTA from "../components/CTA.astro";
+
+const metier = Astro.url.searchParams.get("metier");
+const zone = Astro.url.searchParams.get("zone");
+const objectif = Astro.url.searchParams.get("objectif");
+
+const pretty = (v) => {
+  if (!v) return "";
+  const map = {
+    veterinaire: "Vétérinaire",
+    toiletteur: "Toiletteur",
+    "sud-oise-60": "Sud Oise (60)",
+    "val-doise-95": "Val d’Oise (95)",
+    maps: "Remonter sur Google Maps",
+    seo: "SEO local",
+    ads: "Google Ads",
+    "plus-appels": "Plus d’appels",
+    "plus-rdv": "Plus de RDV"
+  };
+  return map[v] ?? v;
+};
+---
+
+<LayoutSeo
+    title="Merci | Horizon Conversion Animaux"
+    description="Demande reçue. Nous vous recontactons rapidement."
+    h1="Merci, c’est bien reçu !"
+>
+  <section>
+    <p>
+      On a bien pris en compte ta demande. Si c’est urgent, appelle-nous maintenant :
+      <a href="tel:+33660921008">06 60 92 10 08</a>.
+    </p>
+
+    {(metier || zone || objectif) ? (
+        <div style="margin-top:16px; padding:14px; border:1px solid #eee; border-radius:12px;">
+          <strong>Récap :</strong>
+          <ul style="margin:10px 0 0; padding-left:18px;">
+            {metier ? <li>Métier : {pretty(metier)}</li> : null}
+            {zone ? <li>Zone : {pretty(zone)}</li> : null}
+            {objectif ? <li>Objectif : {pretty(objectif)}</li> : null}
+          </ul>
+        </div>
+    ) : null}
+  </section>
+
+  <CTA button="Appeler maintenant" />
+</LayoutSeo>

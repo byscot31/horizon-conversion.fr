@@ -1,0 +1,58 @@
+---
+import { getEntry } from "astro:content";
+const { data } = Astro.props;
+
+const services = data.services ?? [];
+const metiers = data.metiers ?? [];
+const cities = data.cities ?? [];
+const zone = data.zone;
+
+const serviceEntries = await Promise.all(services.map((s) => getEntry("services", s)));
+const metierEntries = await Promise.all(metiers.map((m) => getEntry("metiers", m)));
+const cityEntries = await Promise.all(cities.map((c) => getEntry("villes", c)));
+
+let zoneEntry = null;
+if (zone) zoneEntry = await getEntry("zones", zone);
+
+const clean = (arr) => arr.filter(Boolean);
+---
+
+<section style="margin-top: 32px;">
+  <h2>Explorez aussi</h2>
+
+  {clean(serviceEntries).length ? (
+      <>
+        <h3>Services</h3>
+        <ul>
+          {clean(serviceEntries).map((e) => <li><a href={`/prestations/${e.id}/`}>{e.data.h1}</a></li>)}
+        </ul>
+      </>
+  ) : null}
+
+  {clean(metierEntries).length ? (
+      <>
+        <h3>Métiers</h3>
+        <ul>
+          {clean(metierEntries).map((e) => <li><a href={`/metiers/${e.id}/`}>{e.data.h1}</a></li>)}
+        </ul>
+      </>
+  ) : null}
+
+  {zoneEntry ? (
+      <>
+        <h3>Zone</h3>
+        <ul>
+          <li><a href={`/zones/${zoneEntry.data.slug}/`}>{zoneEntry.data.h1}</a></li>
+        </ul>
+      </>
+  ) : null}
+
+  {clean(cityEntries).length ? (
+      <>
+        <h3>Villes prioritaires</h3>
+        <ul>
+          {clean(cityEntries).map((e) => <li><a href={`/villes/${e.id}/`}>{e.data.h1}</a></li>)}
+        </ul>
+      </>
+  ) : null}
+</section>

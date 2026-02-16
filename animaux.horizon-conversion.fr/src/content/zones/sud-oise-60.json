@@ -1,0 +1,24 @@
+{
+  "type": "zone",
+  "slug": "sud-oise-60",
+  "title": "Marketing local Sud Oise (60) | Horizon Conversion Animaux",
+  "h1": "Acquisition locale en Sud Oise (60) pour pros animaliers",
+  "metaDescription": "SEO local & Google Ads pour pros animaliers en Sud Oise : Creil, Chantilly et alentours. Méthode + livrables + tracking. 06 60 92 10 08.",
+  "cities": ["creil", "chantilly"],
+  "services": ["seo-local", "google-ads"],
+  "metiers": ["veterinaire", "toiletteur"],
+  "faqs": [
+    {
+      "q": "Intervenez-vous uniquement à Creil et Chantilly ?",
+      "a": "Non. Ce sont des villes prioritaires, mais on couvre aussi les communes autour. La page ville sert d’ancrage principal sans multiplier les pages clones."
+    },
+    {
+      "q": "Quelle est la meilleure approche en Sud Oise : SEO ou Ads ?",
+      "a": "Souvent un mix : Ads pour des demandes rapides, SEO local pour construire une visibilité durable sur Google et Maps."
+    },
+    {
+      "q": "Comment s’assurer que le site convertit ?",
+      "a": "En travaillant l’offre, les CTA, les preuves (process/livrables) et surtout le tracking des appels et formulaires."
+    }
+  ]
+}

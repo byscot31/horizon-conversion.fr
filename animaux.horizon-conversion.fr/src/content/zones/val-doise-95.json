@@ -1,0 +1,24 @@
+{
+  "type": "zone",
+  "slug": "val-doise-95",
+  "title": "Marketing local Val d’Oise (95) | Horizon Conversion Animaux",
+  "h1": "Acquisition locale dans le Val d’Oise (95) pour pros animaliers",
+  "metaDescription": "SEO local & Google Ads pour pros animaliers dans le Val d’Oise : Sarcelles, L’Isle-Adam et alentours. Tracking inclus. 06 60 92 10 08.",
+  "cities": ["sarcelles", "lisle-adam"],
+  "services": ["seo-local", "google-ads"],
+  "metiers": ["veterinaire", "toiletteur"],
+  "faqs": [
+    {
+      "q": "Pouvez-vous cibler uniquement certaines zones du 95 ?",
+      "a": "Oui. On cible via pages locales (zone/ville) et, côté Ads, via un ciblage géographique serré avec exclusions si besoin."
+    },
+    {
+      "q": "Comment éviter d’attirer des demandes hors zone ?",
+      "a": "Avec une communication claire sur les zones couvertes, des pages locales bien structurées, et en Ads un ciblage + mots-clés négatifs + annonces précises."
+    },
+    {
+      "q": "Comment prouvez-vous la performance ?",
+      "a": "Avec un suivi des conversions (clics appels, formulaires) et un reporting régulier pour optimiser ce qui génère réellement des demandes."
+    }
+  ]
+}

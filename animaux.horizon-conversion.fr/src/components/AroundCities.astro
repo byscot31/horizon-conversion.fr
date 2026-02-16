@@ -1,0 +1,22 @@
+---
+const { citySlug } = Astro.props;
+
+const around = {
+  creil: ["Montataire", "Nogent-sur-Oise", "Villers-Saint-Paul", "Saint-Leu-d'Esserent", "Thiverny"],
+  chantilly: ["Gouvieux", "Lamorlaye", "Vineuil-Saint-Firmin", "Coye-la-Forêt", "Orry-la-Ville"],
+  sarcelles: ["Garges-lès-Gonesse", "Villiers-le-Bel", "Arnouville", "Gonesse", "Saint-Brice-sous-Forêt"],
+  "lisle-adam": ["Parmain", "Mériel", "Beaumont-sur-Oise", "Presles", "Champagne-sur-Oise"]
+};
+
+const list = around[citySlug] ?? [];
+---
+
+{list.length ? (
+<section style="margin-top: 24px;">
+  <h2>Autour de la ville</h2>
+  <p>Nous intervenons aussi sur :</p>
+  <ul>
+    {list.map((c) => <li>{c}</li>)}
+  </ul>
+</section>
+  ) : null}

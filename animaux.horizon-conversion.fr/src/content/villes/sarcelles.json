@@ -1,0 +1,24 @@
+{
+  "type": "ville",
+  "slug": "sarcelles",
+  "zone": "val-doise-95",
+  "title": "SEO local & Ads à Sarcelles | Horizon Conversion Animaux",
+  "h1": "Acquisition locale à Sarcelles pour pros animaliers",
+  "metaDescription": "Plus d’appels et demandes à Sarcelles : SEO local + Google Ads + tracking. 06 60 92 10 08.",
+  "services": ["seo-local", "google-ads"],
+  "metiers": ["veterinaire", "toiletteur"],
+  "faqs": [
+    {
+      "q": "Comment se démarquer en zone concurrentielle comme Sarcelles ?",
+      "a": "En améliorant la pertinence (profil + pages locales), en cadrant l’offre, et en captant l’intention via Ads tout en optimisant sur les conversions."
+    },
+    {
+      "q": "Comment éviter de payer pour des clics hors zone ?",
+      "a": "Ciblage serré, exclusions, ajustements géographiques et mots-clés négatifs. Puis optimisation sur les conversions."
+    },
+    {
+      "q": "Le SEO local suffit-il ?",
+      "a": "Souvent, Ads accélère la captation au départ. Ensuite le SEO consolide une acquisition durable."
+    }
+  ]
+}

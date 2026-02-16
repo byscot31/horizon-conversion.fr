@@ -1,0 +1,102 @@
+---
+const GA_ID = "G-21RH96QG1J";
+---
+
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+
+<script define:vars={{ GA_ID }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // On désactive le page_view auto pour gérer nous-mêmes (compatible transitions)
+  gtag('config', GA_ID, { send_page_view: false });
+</script>
+
+<script>
+  const getPageType = (path) => {
+    if (path.startsWith('/prestations/')) return 'service';
+    if (path.startsWith('/metiers/')) return 'metier';
+    if (path.startsWith('/zones/')) return 'zone';
+    if (path.startsWith('/villes/')) return 'ville';
+    return 'other';
+  };
+
+  const getSlug = (path) => {
+    const parts = path.split('/').filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : '';
+  };
+
+  const getZoneFromPath = (path) => {
+    if (path.startsWith('/zones/')) return getSlug(path);
+    return '';
+  };
+
+  const baseParams = () => ({
+    page_location: location.href,
+    page_path: location.pathname,
+    page_type: getPageType(location.pathname),
+    slug: getSlug(location.pathname),
+    zone: getZoneFromPath(location.pathname)
+  });
+
+  let lastPagePathSent = null;
+
+  const sendPageView = () => {
+    // gtag pousse dans dataLayer, mais on sécurise quand même
+    if (typeof window.gtag !== 'function') return;
+
+    // évite de renvoyer 2x le même page_view si rien n'a bougé
+    if (lastPagePathSent === location.pathname) return;
+    lastPagePathSent = location.pathname;
+
+    window.gtag('event', 'page_view', baseParams());
+  };
+
+  // 1) Page view initial
+  sendPageView();
+  // Retry léger (cas rares de chargement)
+  setTimeout(sendPageView, 250);
+
+  // 2) Back/forward
+  window.addEventListener('popstate', () => sendPageView());
+
+  // 3) pushState/replaceState (si transitions ou SPA plus tard)
+  const wrapHistory = (type) => {
+    const original = history[type];
+    history[type] = function () {
+      const ret = original.apply(this, arguments);
+      Promise.resolve().then(sendPageView);
+      return ret;
+    };
+  };
+  wrapHistory('pushState');
+  wrapHistory('replaceState');
+
+  // Tracking tel/mail + CTA + forms
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(!a) return;
+
+    const href = a.getAttribute('href') || '';
+    const txt = (a.textContent || '').trim().slice(0, 80);
+
+    if(href.startsWith('tel:')) {
+      window.gtag('event', 'click_phone', { ...baseParams(), link_text: txt, link_url: href });
+    }
+    if(href.startsWith('mailto:')) {
+      window.gtag('event', 'click_email', { ...baseParams(), link_text: txt, link_url: href });
+    }
+    if(a.dataset?.cta === '1') {
+      window.gtag('event', 'click_cta', { ...baseParams(), link_text: txt, link_url: href });
+    }
+  });
+
+  document.addEventListener('submit', function(e){
+    const form = e.target;
+    if(form && form.tagName === 'FORM') {
+      const formId = form.getAttribute('id') || '';
+      window.gtag('event', 'form_submit', { ...baseParams(), form_id: formId });
+    }
+  });
+</script>

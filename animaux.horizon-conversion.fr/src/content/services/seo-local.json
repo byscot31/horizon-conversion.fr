@@ -1,0 +1,32 @@
+{
+  "type": "service",
+  "slug": "seo-local",
+  "title": "SEO local 60/95 | Horizon Conversion Animaux",
+  "h1": "SEO local pour pros animaliers en Sud Oise (60) et Val d’Oise (95)",
+  "metaDescription": "Générez des demandes qualifiées via Google & Maps en Sud Oise (60) et Val d’Oise (95). Audit + plan d’action + tracking. 06 60 92 10 08.",
+  "metiers": ["veterinaire", "toiletteur"],
+  "services": ["google-ads"],
+  "cities": ["creil", "chantilly", "sarcelles", "lisle-adam"],
+  "faqs": [
+    {
+      "q": "Combien de temps avant de voir des résultats en SEO local ?",
+      "a": "On observe souvent des premiers signaux en quelques semaines (indexation, longue traîne), puis une progression plus nette sur 2 à 4 mois selon la concurrence locale et l’état initial."
+    },
+    {
+      "q": "Est-ce que ça marche même si je n’ai pas (ou peu) d’avis Google ?",
+      "a": "Oui. On renforce la crédibilité autrement : optimisation complète du profil, cohérence NAP, pages locales solides, contenus utiles et suivi des conversions pour prouver la performance."
+    },
+    {
+      "q": "Qu’est-ce qui compte le plus pour remonter sur Google Maps ?",
+      "a": "La pertinence (catégories/services, contenu), la distance (couverture locale) et la notoriété (signaux externes). On agit sur ce qui est contrôlable : profil, site, contenus et tracking."
+    },
+    {
+      "q": "Ciblez-vous des villes précises comme Creil, Chantilly, Sarcelles ou L’Isle-Adam ?",
+      "a": "Oui. On structure le site par intentions (service/métier/zone/ville) et on renforce chaque zone avec un maillage interne et des éléments locaux spécifiques."
+    },
+    {
+      "q": "Comment mesurez-vous les appels et formulaires ?",
+      "a": "On met en place un tracking (GA4/GTM) pour suivre les clics téléphone, emails et formulaires, afin d’optimiser ce qui génère réellement des demandes."
+    }
+  ]
+}

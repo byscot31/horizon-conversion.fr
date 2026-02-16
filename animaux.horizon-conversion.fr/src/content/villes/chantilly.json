@@ -1,0 +1,24 @@
+{
+  "type": "ville",
+  "slug": "chantilly",
+  "zone": "sud-oise-60",
+  "title": "SEO local & Ads à Chantilly | Horizon Conversion Animaux",
+  "h1": "Acquisition locale à Chantilly pour pros animaliers",
+  "metaDescription": "Attirez des demandes qualifiées à Chantilly avec SEO local + Google Ads + tracking. Mini-audit 15 min : 06 60 92 10 08.",
+  "services": ["seo-local", "google-ads"],
+  "metiers": ["veterinaire", "toiletteur"],
+  "faqs": [
+    {
+      "q": "Comment capter des recherches ‘près de moi’ à Chantilly ?",
+      "a": "Avec une base SEO locale solide, un profil Google optimisé, des pages locales utiles et un maillage interne cohérent."
+    },
+    {
+      "q": "Peut-on cibler Chantilly et les communes autour ?",
+      "a": "Oui : on ancre la page Chantilly et on cite les communes proches dans le contenu sans créer de pages supplémentaires."
+    },
+    {
+      "q": "Quelle est la meilleure combinaison : SEO ou Ads ?",
+      "a": "Souvent les deux : Ads pour accélérer, SEO pour pérenniser. Le tracking sert à arbitrer selon la qualité des demandes."
+    }
+  ]
+}

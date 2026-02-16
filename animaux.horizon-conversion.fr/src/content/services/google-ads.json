@@ -1,0 +1,32 @@
+{
+  "type": "service",
+  "slug": "google-ads",
+  "title": "Google Ads local 60/95 | Horizon Conversion Animaux",
+  "h1": "Google Ads pour pros animaliers en Sud Oise (60) et Val d’Oise (95)",
+  "metaDescription": "Obtenez des appels et formulaires en local avec Google Ads + tracking. Idéal vétérinaires & toiletteurs. Mini-audit 15 min : 06 60 92 10 08.",
+  "metiers": ["veterinaire", "toiletteur"],
+  "services": ["seo-local"],
+  "cities": ["creil", "chantilly", "sarcelles", "lisle-adam"],
+  "faqs": [
+    {
+      "q": "Quel budget minimum pour générer des appels en local ?",
+      "a": "Ça dépend de la concurrence et de la zone, mais l’objectif est surtout d’éviter le gaspillage : ciblage géographique serré, mots-clés pertinents, négatifs et suivi des conversions."
+    },
+    {
+      "q": "Comment éviter les clics inutiles ?",
+      "a": "Avec une structure propre (groupes d’annonces), des mots-clés négatifs, des annonces orientées intention et des pages adaptées. Le tracking permet d’optimiser sur les vraies demandes."
+    },
+    {
+      "q": "Peut-on recevoir des appels directement depuis l’annonce ?",
+      "a": "Oui. On peut activer des extensions d’appel et mesurer les clics/contacts pour piloter l’optimisation."
+    },
+    {
+      "q": "Combien de temps pour voir des résultats ?",
+      "a": "En Ads, les premiers contacts peuvent arriver rapidement si la page et le tracking sont prêts. Ensuite on optimise semaine après semaine pour stabiliser le coût et la qualité."
+    },
+    {
+      "q": "Faut-il faire Ads + SEO local ?",
+      "a": "Souvent oui : Ads pour capter tout de suite la demande, SEO local pour construire une acquisition durable et réduire la dépendance au budget publicitaire."
+    }
+  ]
+}

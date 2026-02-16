@@ -1,0 +1,51 @@
+---
+import LayoutSeo from "../../layouts/LayoutSEO.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import FAQ from "../../components/FAQ.astro";
+import InternalLinks from "../../components/InternalLinks.astro";
+import CTA from "../../components/CTA.astro";
+import { getCollection } from "astro:content";
+import Proof from "../../components/Proof.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("services");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+---
+
+<LayoutSeo title={d.title} description={d.metaDescription} h1={d.h1}>
+  <JsonLd type="service" data={d} />
+
+  <section>
+    <h2>Pour qui ?</h2>
+    <p>Vétérinaires et toiletteurs qui veulent plus de demandes qualifiées en local (Google/Maps) sur le 60 et le 95.</p>
+  </section>
+
+  <section style="margin-top: 18px;">
+    <h2>Ce que vous obtenez</h2>
+    <ul>
+      <li>Audit + plan d’action priorisé</li>
+      <li>Optimisations (site + Google/Maps)</li>
+      <li>Tracking des appels et formulaires</li>
+      <li>Optimisation continue sur la qualité des demandes</li>
+    </ul>
+  </section>
+
+  <section style="margin-top: 18px;">
+    <h2>Notre méthode (simple et mesurable)</h2>
+    <p>
+      On démarre par l’essentiel : comprendre votre zone, vos services, et ce qui génère réellement des demandes.
+      Ensuite on exécute par priorité et on suit les conversions pour optimiser ce qui marche.
+    </p>
+  </section>
+
+  <Proof />
+
+  <CTA />
+
+  <FAQ items={d.faqs ?? []} />
+  <InternalLinks data={d} />
+</LayoutSeo>

@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+
+const services = (await getCollection("services")).sort((a,b)=>a.id.localeCompare(b.id));
+const metiers  = (await getCollection("metiers")).sort((a,b)=>a.id.localeCompare(b.id));
+const zones    = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id));
+const villes   = (await getCollection("villes")).sort((a,b)=>a.id.localeCompare(b.id));
+
+// Labels propres (optionnel)
+const labelFromId = (id) => {
+  const map = {
+    "seo-local": "SEO local",
+    "google-ads": "Google Ads",
+    "veterinaire": "Vétérinaire",
+    "toiletteur": "Toiletteur",
+    "sud-oise-60": "Sud Oise (60)",
+    "val-doise-95": "Val d’Oise (95)",
+    "lisle-adam": "L’Isle-Adam"
+  };
+  return map[id] ?? id;
+};
+---
+
+<header id="header" class="transparent-header dark" data-sticky-class="not-dark">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row">
+        <div id="logo">
+          <a href="/">
+            <img class="logo-default" src="/assets/images/logo.png" alt="Logo" />
+          </a>
+        </div>
+
+        <div class="primary-menu-trigger">
+          <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
+
+        <nav class="primary-menu">
+          <ul class="menu-container">
+            <li class="menu-item">
+              <a class="menu-link" href="/"><div>Accueil</div></a>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/prestations/"><div>Prestations</div></a>
+              <ul class="sub-menu-container">
+                {services.map((e) => (
+                    <li class="menu-item">
+                      <a class="menu-link" href={`/prestations/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                    </li>
+                ))}
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/metiers/"><div>Métiers</div></a>
+              <ul class="sub-menu-container">
+                {metiers.map((e) => (
+                    <li class="menu-item">
+                      <a class="menu-link" href={`/metiers/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                    </li>
+                ))}
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/zones/"><div>Zones</div></a>
+              <ul class="sub-menu-container">
+                {zones.map((e) => (
+                    <li class="menu-item">
+                      <a class="menu-link" href={`/zones/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                    </li>
+                ))}
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a class="menu-link" href="/villes/"><div>Villes</div></a>
+              <ul class="sub-menu-container">
+                {villes.map((e) => (
+                    <li class="menu-item">
+                      <a class="menu-link" href={`/villes/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                    </li>
+                ))}
+              </ul>
+            </li>
+
+            <li class="menu-item bg-color h-bg-dark px-xl-3">
+              <a class="menu-link" href="/contact/"><div>Contact</div></a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>

@@ -1,0 +1,47 @@
+---
+import LayoutSeo from "../../layouts/LayoutSEO.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import FAQ from "../../components/FAQ.astro";
+import InternalLinks from "../../components/InternalLinks.astro";
+import CTA from "../../components/CTA.astro";
+import { getCollection } from "astro:content";
+import Proof from "../../components/Proof.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("metiers");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+---
+
+<LayoutSeo title={d.title} description={d.metaDescription} h1={d.h1}>
+  <JsonLd type="metier" data={d} />
+
+  <section>
+    <h2>Ce qu’on vise</h2>
+    <p>Plus de demandes qualifiées autour de votre établissement, avec une méthode claire et mesurable (appels / formulaires).</p>
+  </section>
+
+  <section style="margin-top: 18px;">
+    <h2>Les 3 leviers</h2>
+    <ol>
+      <li><strong>SEO local</strong> : visibilité durable sur Google & Maps</li>
+      <li><strong>Google Ads</strong> : capter la demande immédiate</li>
+      <li><strong>Conversion + tracking</strong> : optimiser sur la qualité des demandes</li>
+    </ol>
+  </section>
+
+  <section style="margin-top: 18px;">
+    <h2>Même sans avis, on avance</h2>
+    <p>On s’appuie sur des preuves alternatives : process, livrables, tracking et reporting pour piloter la performance.</p>
+  </section>
+
+  <Proof />
+
+  <CTA />
+
+  <FAQ items={d.faqs ?? []} />
+  <InternalLinks data={d} />
+</LayoutSeo>

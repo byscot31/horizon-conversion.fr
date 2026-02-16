@@ -1,0 +1,31 @@
+{
+  "type": "metier",
+  "slug": "toiletteur",
+  "title": "Acquisition locale Toiletteur 60/95 | Horizon Conversion Animaux",
+  "h1": "Remplir l’agenda d’un toiletteur en 60/95",
+  "metaDescription": "Générez plus de RDV en local : SEO local + Google Ads + tracking. Idéal pour lisser la saisonnalité. 06 60 92 10 08.",
+  "services": ["seo-local", "google-ads"],
+  "cities": ["creil", "chantilly", "sarcelles", "lisle-adam"],
+  "faqs": [
+    {
+      "q": "Comment lisser la saisonnalité des RDV ?",
+      "a": "En sécurisant une base SEO locale et en utilisant Google Ads pour renforcer la demande sur les périodes creuses, avec un pilotage sur les vraies conversions."
+    },
+    {
+      "q": "Comment éviter les demandes ‘prix bas’ ?",
+      "a": "En cadrant l’offre (positionnement, services, valeur), en filtrant via FAQ/formulaire, et en évitant les mots-clés trop génériques en Ads."
+    },
+    {
+      "q": "Peut-on mettre en avant des services spécifiques (bain, tonte, démêlage) ?",
+      "a": "Oui. On structure les pages et les annonces autour des intentions (service recherché) pour capter une demande plus qualifiée."
+    },
+    {
+      "q": "Comment apparaître quand on cherche ‘toiletteur autour de moi’ ?",
+      "a": "Avec un SEO local solide (site + profil Google), des pages zones/villes, et éventuellement Ads pour capter l’intention immédiate."
+    },
+    {
+      "q": "Comment suivez-vous les demandes ?",
+      "a": "Tracking des clics d’appel et formulaires, et optimisation en continu pour baisser le coût par demande."
+    }
+  ]
+}

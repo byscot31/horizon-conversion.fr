@@ -1,393 +1,107 @@
 ---
-// src/pages/contact.astro
-import LayoutSEO from "../layouts/LayoutSEO.astro";
-
-const baseUrl = "https://animaux.horizon-conversion.fr";
-const canonical = `${baseUrl}${Astro.url.pathname}`;
-
-// NAP (fixe)
-const NAP = {
-  name: "Horizon Conversion Animaux",
-  phoneDisplay: "06 60 92 10 08",
-  phoneE164: "+33660921008",
-  email: "contact@horizon-conversion.fr",
-  url: baseUrl,
-  areaServed: ["Sud Oise (60)", "Val d’Oise (95)"],
-};
-
-// Breadcrumbs
-const breadcrumbs = [
-  { name: "Accueil", item: `${baseUrl}/` },
-  { name: "Contact", item: canonical },
-];
-
-// JSON-LD
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "Contact | Horizon Conversion Animaux",
-    url: canonical,
-    description:
-      "Contactez Horizon Conversion Animaux pour développer votre activité webmarketing local (SEO, Google Maps, Ads) dans le Sud Oise (60) et le Val d’Oise (95).",
-    mainEntity: {
-      "@type": "Organization",
-      name: NAP.name,
-      url: NAP.url,
-      email: NAP.email,
-      telephone: NAP.phoneE164,
-      areaServed: NAP.areaServed,
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          telephone: NAP.phoneE164,
-          contactType: "sales",
-          areaServed: ["FR"],
-          availableLanguage: ["fr"],
-          email: NAP.email,
-        },
-      ],
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((b, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: b.name,
-      item: b.item,
-    })),
-  },
-];
-
-const title = "Contact | Horizon Conversion Animaux";
-const description =
-  "Parlez-nous de votre activité animalière : SEO local, Google Maps, Google Ads, Meta Ads, tracking & conversion en Sud Oise (60) et Val d’Oise (95).";
+import LayoutSeo from "../layouts/LayoutSEO.astro";
+import CTA from "../components/CTA.astro";
+import Proof from "../components/Proof.astro";
 ---
 
-<LayoutSEO
-  title={title}
-  description={description}
-  baseUrl={baseUrl}
-  canonical={canonical}
-  ogType="website"
-  ogImage={`${baseUrl}/og/contact.jpg`}
-  ogImageAlt="Contact Horizon Conversion Animaux"
-  breadcrumbs={breadcrumbs}
-  jsonLd={jsonLd}
+<LayoutSeo
+    title="Contact | Horizon Conversion Animaux"
+    description="Demandez un mini-audit local (15 min) : SEO local / Google Ads pour vétérinaires & toiletteurs en Sud Oise (60) et Val d’Oise (95)."
+    h1="Contact — Mini-audit local (15 min)"
 >
-  <style>
-    :global(body) {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-        Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #0f172a;
-      background: #ffffff;
-    }
-    .wrap {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 28px 16px 64px;
-    }
-    .breadcrumbs {
-      font-size: 14px;
-      color: #475569;
-      margin: 4px 0 18px;
-    }
-    .breadcrumbs a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .hero {
-      display: grid;
-      gap: 18px;
-      padding: 20px 20px;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #f8fafc, #fff);
-    }
-    h1 {
-      margin: 0;
-      font-size: 34px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .sub {
-      margin: 0;
-      color: #334155;
-      font-size: 16px;
-      line-height: 1.5;
-      max-width: 70ch;
-    }
-    .grid {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-    }
-    @media (max-width: 920px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .card {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-    }
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-    .meta {
-      color: #475569;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .row {
-      display: grid;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    label {
-      font-size: 14px;
-      color: #334155;
-    }
-    input,
-    textarea,
-    select {
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 14px;
-      outline: none;
-    }
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #64748b;
-      box-shadow: 0 0 0 4px rgba(100, 116, 139, 0.15);
-    }
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid #0f172a;
-      background: #0f172a;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 600;
-      width: 100%;
-    }
-    .btn:hover {
-      filter: brightness(1.05);
-    }
-    .small {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.45;
-    }
-    .infoList {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .infoItem {
-      padding: 12px;
-      border-radius: 14px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-    }
-    .infoItem strong {
-      display: block;
-      font-size: 13px;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
-    .infoItem a {
-      color: #0f172a;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.2);
-    }
-    .kpi {
-      display: grid;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .pill {
-      display: inline-block;
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid #e2e8f0;
-      background: #fff;
-      color: #334155;
-      width: fit-content;
-    }
-  </style>
+  <section>
+    <p>
+      Décris ta situation en 30 secondes : on te renvoie un plan d’action clair (priorités + prochaines étapes).
+      Si c’est urgent, appelle directement : <a href="tel:+33660921008">06 60 92 10 08</a>.
+    </p>
+  </section>
 
-  <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Contact</span>
-    </nav>
+  <Proof />
 
-    <header class="hero">
-      <h1>Contact</h1>
-      <p class="sub">
-        Décrivez votre activité (véto, éducateur canin, pension, toiletteur, ostéo,
-        comportementaliste, etc.). On revient vers vous avec une proposition claire
-        et orientée résultats pour le <strong>Sud Oise (60)</strong> et le
-        <strong>Val d’Oise (95)</strong>.
-      </p>
-    </header>
+  <form
+      id="contact_qualif"
+      method="get"
+      action="/merci/"
+      style="margin-top: 24px; padding: 18px; border: 1px solid #eee; border-radius: 14px; background:#fafafa;"
+  >
+    <h2 style="margin:0 0 10px;">Votre demande</h2>
 
-    <section class="grid">
-      <!-- FORM -->
-      <div class="card form-widget">
-        <h2>Envoyer une demande</h2>
-        <p class="meta">
-          Objectif : qualifier vite (zone, métier, urgence, budget) pour éviter les
-          allers-retours.
-        </p>
+    <label style="display:block; margin:10px 0 6px;">Vous êtes</label>
+    <select name="metier" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
+      <option value="">Choisir…</option>
+      <option value="veterinaire">Vétérinaire</option>
+      <option value="toiletteur">Toiletteur</option>
+      <option value="autre">Autre</option>
+    </select>
 
-        <div class="form-result"></div>
+    <label style="display:block; margin:10px 0 6px;">Zone</label>
+    <select name="zone" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
+      <option value="">Choisir…</option>
+      <option value="sud-oise-60">Sud Oise (60)</option>
+      <option value="val-doise-95">Val d’Oise (95)</option>
+      <option value="autre">Autre</option>
+    </select>
 
-        <form method="POST" action="/_assets_/include/form.php" id="template-contactform" name="template-contactform">
-          <div class="form-process">
-          	<div class="css3-spinner">
-          	  <div class="css3-spinner-scaler"></div>
-          	</div>
-          </div>
+    <label style="display:block; margin:10px 0 6px;">Objectif principal</label>
+    <select name="objectif" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
+      <option value="">Choisir…</option>
+      <option value="maps">Remonter sur Google Maps</option>
+      <option value="seo">SEO local (site + contenus)</option>
+      <option value="ads">Lancer / optimiser Google Ads</option>
+      <option value="plus-appels">Plus d’appels</option>
+      <option value="plus-rdv">Plus de RDV</option>
+    </select>
 
-          <div class="row">
-            <label for="template-contactform-name">Nom / Prénom</label>
-            <input id="template-contactform-name" name="template-contactform-name" required />
-          </div>
+    <label style="display:block; margin:10px 0 6px;">Ville principale (optionnel)</label>
+    <input
+        name="ville"
+        placeholder="Ex : Chantilly"
+        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
+    />
 
-          <div class="row">
-            <label for="template-contactform-business">Métier / Structure</label>
-            <input
-              id="template-contactform-business"
-              name="template-contactform-business"
-              placeholder="Ex : éducateur canin, clinique vétérinaire, pension…"
-              required
-            />
-          </div>
+    <label style="display:block; margin:10px 0 6px;">Téléphone</label>
+    <input
+        name="telephone"
+        required
+        inputmode="tel"
+        placeholder="06…"
+        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
+    />
 
-          <div class="row">
-            <label for="template-contactform-city">Ville principale</label>
-            <input id="template-contactform-city" name="template-contactform-city" placeholder="Ex : Senlis, Chantilly, Cergy…" required />
-          </div>
+    <label style="display:block; margin:10px 0 6px;">Email</label>
+    <input
+        type="email"
+        name="email"
+        required
+        placeholder="contact@..."
+        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
+    />
 
-          <div class="row">
-            <label for="template-contactform-department">Zone</label>
-            <select id="template-contactform-department" name="template-contactform-department" required>
-              <option value="">Choisir…</option>
-              <option value="Oise-60">Oise (60)</option>
-              <option value="Valdoise-95">Val d’Oise (95)</option>
-              <option value="Autre">Autre</option>
-            </select>
-          </div>
+    <label style="display:block; margin:10px 0 6px;">Message (optionnel)</label>
+    <textarea
+        name="message"
+        rows="4"
+        placeholder="Contexte, offre à pousser, zone exacte, urgence, budget si tu veux…"
+        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
+    ></textarea>
 
-          <div class="row">
-            <label for="template-contactform-email">Email</label>
-            <input id="etemplate-contactform-mail" name="template-contactform-email" type="email" required />
-          </div>
+    <button
+        type="submit"
+        data-cta="1"
+        style="margin-top:12px; padding:10px 14px; border-radius:12px; background:#111; color:#fff; border:0;"
+    >
+      Envoyer
+    </button>
 
-          <div class="row">
-            <label for="template-contactform-phone">Téléphone</label>
-            <input id="template-contactform-phone" name="template-contactform-phone" type="tel" />
-          </div>
+    <p style="margin-top:10px; font-size: 14px;">
+      Ou appelez directement : <a href="tel:+33660921008">06 60 92 10 08</a> ·
+      <a href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+    </p>
 
-          <div class="row">
-            <label for="template-contactform-goal">Objectif prioritaire</label>
-            <select id="template-contactform-goal" name="template-contactform-goal" required>
-              <option value="">Choisir…</option>
-              <option value="SEO local / Google Maps">SEO local / Google Maps</option>
-              <option value="Google Ads">Google Ads</option>
-              <option value="Meta Ads">Meta Ads</option>
-              <option value="Conversion & tracking">Conversion & tracking</option>
-              <option value="Pack complet">Pack complet</option>
-            </select>
-          </div>
+    <p style="margin-top:8px; font-size: 12px; color:#666;">
+      (Formulaire en mode “préparation” : il redirige vers une page de confirmation pour l’instant.)
+    </p>
+  </form>
 
-          <div class="row">
-            <label for="template-contactform-message">Votre message</label>
-            <textarea
-              id="template-contactform-message"
-              name="template-contactform-message"
-              placeholder="Contexte, concurrence, ce que vous avez déjà tenté, délai…"
-              required
-            ></textarea>
-          </div>
-
-          <div class="col-12 form-group d-none">
-          	<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control">
-          </div>
-
-          <!-- Anti-spam basique (honeypot) -->
-          <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
-            <label for="template-contactform-website">Website</label>
-            <input id="template-contactform-website" name="template-contactform-website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <div class="row">
-            <button class="btn" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Envoyer</button>
-          </div>
-
-          <input type="hidden" name="prefix" value="template-contactform-">
-          <input type="hidden" name="replyto" value="template-contactform-email">
-          <input type="hidden" name="autoresponder" value="true">
-
-          <p class="small">
-            En envoyant ce formulaire, vous acceptez d’être recontacté par
-            <strong>{NAP.name}</strong>. Vos informations ne sont pas revendues.
-          </p>
-        </form>
-      </div>
-
-      <!-- INFOS -->
-      <aside class="card">
-        <h2>Coordonnées</h2>
-        <div class="infoList">
-          <div class="infoItem">
-            <strong>Téléphone</strong>
-            <a href={`tel:${NAP.phoneE164}`}>{NAP.phoneDisplay}</a>
-          </div>
-          <div class="infoItem">
-            <strong>Email</strong>
-            <a href={`mailto:${NAP.email}`}>{NAP.email}</a>
-          </div>
-          <div class="infoItem">
-            <strong>Zone</strong>
-            <div class="meta">Sud Oise (60) • Val d’Oise (95)</div>
-          </div>
-        </div>
-
-        <div class="kpi">
-          <span class="pill">Qualification stricte des prospects</span>
-          <span class="pill">Preuves alternatives (process & tracking)</span>
-          <span class="pill">Pages locales : 1 intention = 1 page</span>
-        </div>
-
-        <h2 style="margin-top:16px;">Ce qu’on peut lancer vite</h2>
-        <p class="meta">
-          Sans attendre des avis : optimisation Google Business Profile, pages
-          locales, suivi des appels/formulaires, campagnes Ads orientées RDV.
-        </p>
-      </aside>
-    </section>
-  </div>
+  <CTA title="Besoin d’aller vite ?" text="Si tu veux des leads rapidement, on peut démarrer par Google Ads + tracking, puis consolider le SEO local." />
+</LayoutSeo>

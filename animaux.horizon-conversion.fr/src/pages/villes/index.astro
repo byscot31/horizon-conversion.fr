@@ -3,13 +3,13 @@ import LayoutSeo from "../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 import PageTitle from "../../components/PageTitle.astro";
 
-const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id));
+const villes = (await getCollection("villes")).sort((a,b)=>a.id.localeCompare(b.id));
 ---
 
 <LayoutSeo
-    title="Zones | Horizon Conversion Animaux"
-    description="Nos zones couvertes : Sud Oise (60) et Val d’Oise (95)."
-    h1="Zones"
+    title="Villes | Horizon Conversion Animaux"
+    description="Nos pages villes : Creil, Chantilly, Sarcelles, L’Isle-Adam."
+    h1="Villes"
 >
 
   <PageTitle />
@@ -227,8 +227,8 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
       </div>
 
       <ul>
-        {zones.map((e) => (
-            <li><a href={`/zones/${e.id}/`}>{e.data.h1}</a></li>
+        {villes.map((e) => (
+            <li><a href={`/villes/${e.id}/`}>{e.data.h1}</a></li>
         ))}
       </ul>
 

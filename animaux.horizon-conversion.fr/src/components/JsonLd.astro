@@ -1,0 +1,42 @@
+---
+const { type, data } = Astro.props;
+
+const org = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Horizon Conversion Animaux",
+  telephone: "+33660921008",
+  email: "contact@horizon-conversion.fr"
+};
+
+const faq =
+  data?.faqs?.length
+    ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: data.faqs.map((x) => ({
+        "@type": "Question",
+        name: x.q,
+        acceptedAnswer: { "@type": "Answer", text: x.a }
+      }))
+    }
+    : null;
+
+const service =
+  type === "service"
+    ? {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: data?.h1 ?? "Service",
+      provider: { "@type": "Organization", name: org.name, telephone: org.telephone, email: org.email },
+      areaServed: ["Oise", "Val-d’Oise"],
+      serviceType: "Marketing local"
+    }
+    : null;
+
+const graph = [org, service, faq].filter(Boolean);
+---
+
+<script type="application/ld+json">
+  {JSON.stringify(graph)}
+</script>

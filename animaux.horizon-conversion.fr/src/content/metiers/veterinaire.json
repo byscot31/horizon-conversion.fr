@@ -1,0 +1,31 @@
+{
+  "type": "metier",
+  "slug": "veterinaire",
+  "title": "Acquisition locale Vétérinaire 60/95 | Horizon Conversion Animaux",
+  "h1": "Remplir l’agenda d’un vétérinaire en 60/95",
+  "metaDescription": "Attirez des clients qualifiés autour de votre clinique : SEO local + Google Ads + tracking. Méthode claire, livrables concrets. 06 60 92 10 08.",
+  "services": ["seo-local", "google-ads"],
+  "cities": ["creil", "chantilly", "sarcelles", "lisle-adam"],
+  "faqs": [
+    {
+      "q": "Comment attirer de nouveaux clients autour de la clinique ?",
+      "a": "En combinant visibilité Google/Maps (SEO local), captation immédiate (Ads) et pages qui convertissent (CTA + preuves + suivi des demandes)."
+    },
+    {
+      "q": "Peut-on prioriser certaines communes ?",
+      "a": "Oui. On structure la couverture avec des pages zones/villes, un ciblage géographique en Ads, et un maillage interne qui pousse les zones prioritaires."
+    },
+    {
+      "q": "Comment gérer la concurrence sur Google Maps ?",
+      "a": "On travaille la pertinence du profil et du site (services, contenus), la cohérence NAP, et des signaux de confiance (process, contenus, suivi)."
+    },
+    {
+      "q": "Comment filtrer les demandes non qualifiées ?",
+      "a": "Avec une offre claire, des pages orientées ‘qualif’, des FAQ qui cadrent (zones couvertes, types de demandes), et des formulaires structurés."
+    },
+    {
+      "q": "Comment mesurez-vous ce qui marche ?",
+      "a": "Tracking des clics (téléphone/email) et formulaires, pour relier trafic → demandes → optimisation."
+    }
+  ]
+}

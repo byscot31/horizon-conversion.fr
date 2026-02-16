@@ -1,283 +1,238 @@
 ---
-// src/pages/metiers/index.astro
-import LayoutSEO from "../../layouts/LayoutSEO.astro";
+import LayoutSeo from "../../layouts/LayoutSEO.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import { getCollection } from "astro:content";
 
-// ✅ On réutilise les données du projet (évite duplication)
-import { JOBS } from "../../data/jobs.ts";
-import { PRESTATIONS } from "../../data/prestations.ts";
-import { ZONES, slugifyCity } from "../../data/zones.ts";
-
-const baseUrl = "https://animaux.horizon-conversion.fr";
-const canonical = `${baseUrl}${Astro.url.pathname}`;
-
-const title = "Métiers | Horizon Conversion Animaux";
-const description =
-  "Webmarketing local pour les métiers animaliers : SEO local, Google Maps, Google Ads, Meta Ads, conversion & tracking en Sud Oise (60) et Val d’Oise (95).";
-
-const breadcrumbs = [
-  { name: "Accueil", item: `${baseUrl}/` },
-  { name: "Métiers", item: canonical },
-];
-
-// ✅ Liste des métiers depuis JOBS
-const jobs = Object.entries(JOBS).map(([slug, v]: any) => ({
-  slug,
-  name: v.name,
-  headline: v.headline,
-}));
-
-// ✅ Services cliquables (prestations existantes)
-const services = Object.entries(PRESTATIONS).map(([slug, p]: any) => ({
-  slug,
-  name: p.name,
-}));
-
-// ✅ Villes cliquables (pages /zones/[ville]/)
-const allTowns = Array.from(
-  new Set([
-    ...((ZONES as any)["sud-oise-60"]?.towns ?? []),
-    ...((ZONES as any)["val-doise-95"]?.towns ?? []),
-  ])
-).slice(0, 18);
-
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "Métiers | Horizon Conversion Animaux",
-    url: canonical,
-    description,
-    isPartOf: { "@type": "WebSite", name: "Horizon Conversion Animaux", url: baseUrl },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((b, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: b.name,
-      item: b.item,
-    })),
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: jobs.map((j, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: j.name,
-      url: `${baseUrl}/metiers/${j.slug}/`,
-    })),
-  },
-];
+const metiers = (await getCollection("metiers")).sort((a,b)=>a.id.localeCompare(b.id));
 ---
 
-<LayoutSEO
-  title={title}
-  description={description}
-  baseUrl={baseUrl}
-  canonical={canonical}
-  ogType="website"
-  ogImage={`${baseUrl}/og/metiers.jpg`}
-  ogImageAlt="Métiers animaliers – Horizon Conversion Animaux"
-  breadcrumbs={breadcrumbs}
-  jsonLd={jsonLd}
+<LayoutSeo
+    title="Métiers | Horizon Conversion Animaux"
+    description="Nos pages par métier : vétérinaire et toiletteur (60/95)."
+    h1="Métiers"
 >
-  <style>
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 28px 16px 72px; }
 
-    .breadcrumbs { font-size: 14px; color: #475569; margin: 4px 0 18px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
+  <PageTitle />
 
-    header.hero {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #f8fafc, #fff);
-      padding: 22px;
-      display: grid;
-      gap: 10px;
-    }
-    h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
-    .sub { margin: 0; color: #334155; max-width: 90ch; line-height: 1.6; }
+  <section id="content">
+    <div class="content-wrap pt-0">
 
-    .grid {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: start;
-    }
-    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
+      <!-- Bénéfices -->
+      <section class="section m-0" style="background-color: #eef2f5;">
+        <div class="container">
 
-    .card {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-    }
+          <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
+            <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">2 façons de remplir votre agenda</h2>
+            <span>Choisis l’approche selon ton objectif : durable (SEO local) ou immédiat (Ads). Idéalement : les deux.</span>
+          </div>
 
-    .list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    a.cardLink { text-decoration: none; color: inherit; display: block; }
-    .jobCard {
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 16px;
-      background: #fff;
-      display: grid;
-      gap: 8px;
-    }
-
-    .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    .top h2 { margin: 0; font-size: 18px; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      color: #334155;
-      font-weight: 900;
-      width: fit-content;
-    }
-
-    .meta { margin: 0; color: #334155; line-height: 1.6; }
-
-    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    a.pillLink {
-      display: inline-block;
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid #e2e8f0;
-      background: #fff;
-      color: #334155;
-      text-decoration: none;
-    }
-    a.pillLink:hover { background: #f8fafc; }
-
-    .ctaRow {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 720px) { .ctaRow { grid-template-columns: 1fr; } }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid #0f172a;
-      background: #0f172a;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 900;
-      text-decoration: none;
-    }
-    .btn.secondary { background: #fff; color: #0f172a; }
-
-    .note {
-      margin-top: 12px;
-      border: 1px dashed #cbd5e1;
-      border-radius: 16px;
-      padding: 14px;
-      background: #f8fafc;
-      color: #334155;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-  </style>
-
-  <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Fil d’Ariane">
-      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>Métiers</span>
-    </nav>
-
-    <header class="hero">
-      <h1>Métiers animaliers</h1>
-      <p class="sub">
-        Choisis ton métier : chaque page métier détaille une approche locale orientée RDV
-        (SEO local, Google Maps, Ads, conversion & tracking) pour le <strong>60</strong> et le <strong>95</strong>.
-      </p>
-    </header>
-
-    <section class="grid" aria-label="Métiers + liens utiles">
-      <div class="card">
-        <h2 style="margin:0;">Pages métier (réelles)</h2>
-        <p class="meta" style="margin-top:8px;">
-          Ici on liste des pages existantes (pas des “intents placeholder”). Clique un métier :
-        </p>
-
-        <div class="list" aria-label="Liste des métiers">
-          {jobs.map((j) => (
-            <a class="cardLink" href={`/metiers/${j.slug}/`}>
-              <article class="jobCard">
-                <div class="top">
-                  <h2>{j.name}</h2>
-                  <span class="pill">Page métier</span>
+          <div class="row align-items-stretch g-4">
+            <div class="col-lg-6 col-md-6">
+              <div class="feature-box media-box fbox-bg h-100">
+                <div class="fbox-content border-0">
+                  <h3 class="text-transform-none ls-0 fw-semibold">
+                    SEO local (Google & Maps)
+                    <span class="subtitle fw-light ls-0">Visibilité durable sur vos zones prioritaires</span>
+                  </h3>
+                  <ul class="iconlist my-4">
+                    <li><i class="bi-check-lg"></i> Optimisation Google Business Profile + site</li>
+                    <li><i class="bi-check-lg"></i> Pages “service / métier / zone / ville” (sans clones)</li>
+                    <li><i class="bi-check-lg"></i> Suivi des demandes (clics appel + formulaires)</li>
+                  </ul>
+                  <a href="/prestations/seo-local/" class="button-link border-0 color" data-cta="1">Voir SEO local</a>
                 </div>
-                <p class="meta">{j.headline}</p>
-              </article>
-            </a>
-          ))}
-        </div>
+              </div>
+            </div>
 
-        <div class="ctaRow">
-          <a class="btn" href="/contact/">Demander un diagnostic</a>
-          <a class="btn secondary" href="tel:+33660921008">Appeler : 06 60 92 10 08</a>
+            <div class="col-lg-6 col-md-6">
+              <div class="feature-box media-box fbox-bg h-100">
+                <div class="fbox-content border-0">
+                  <h3 class="text-transform-none ls-0 fw-semibold">
+                    Google Ads (Search local)
+                    <span class="subtitle fw-light ls-0">Des demandes rapidement, pilotées à la conversion</span>
+                  </h3>
+                  <ul class="iconlist my-4">
+                    <li><i class="bi-check-lg"></i> Ciblage géographique serré (60/95)</li>
+                    <li><i class="bi-check-lg"></i> Mots-clés + négatifs anti “clics inutiles”</li>
+                    <li><i class="bi-check-lg"></i> Optimisation hebdo sur demandes réelles</li>
+                  </ul>
+                  <a href="/prestations/google-ads/" class="button-link border-0 color" data-cta="1">Voir Google Ads</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="/contact/?objectif=plus-rdv" class="button button-large button-rounded" data-cta="1">Objectif : + de RDV</a>
+            <a href="/contact/?objectif=maps" class="button button-large button-rounded bg-transparent button-border" data-cta="1">Objectif : Google Maps</a>
+            <a href="/contact/?objectif=ads" class="button button-large button-rounded bg-transparent button-border" data-cta="1">Objectif : Google Ads</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Livrables -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            Métiers
+          </h2>
+          <span>Messages et pages adaptées à votre métier pour générer des demandes qui se transforment en RDV.</span>
+        </div>
+        <div class="row contact-properties">
+          {metiers.sort(sortById).map((e) =>
+              <div class="col-md-6">
+                <a href={`/metiers/${e.id}/`} data-cta="1" style="background: url('/assets/images/help/1.jpg') no-repeat center center; background-size: cover;">
+                  <div class="vertical-middle dark text-center">
+                    <div class="heading-block m-0 border-0">
+                      <h3 class="text-capitalize fw-normal font-secondary">{e.data.h1}</h3>
+                      <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+											{metierBlurb(e.id)} <br/>
+                        Tracking appels & formulaires
+										</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          )}
         </div>
       </div>
 
-      <aside class="card">
-        <h2 style="margin:0;">Villes couvertes (cliquables)</h2>
-        <p class="meta" style="margin-top:8px;">
-          Pour éviter le contenu générique, on pointe vers des pages ville existantes :
-        </p>
-        <div class="pills" aria-label="Villes">
-          {allTowns.map((t) => (
-            <a class="pillLink" href={`/zones/${slugifyCity(t)}/`}>{t}</a>
-          ))}
+      <!-- Preuves -->
+      <div class="section mb-0">
+        <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            Zones
+          </h2>
+          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
         </div>
-        <a
-          href="/zones/"
-          style="display:inline-block;margin-top:10px;font-weight:900;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.18);padding-bottom:2px;"
-        >
-          Voir toutes les zones →
-        </a>
+        <div class="container mt-5">
+          <div class="row">
+            {zones.sort(sortById).map((e) =>
+                <div class="col-lg-6">
+                  <div class="card border-light shadow-sm mb-3">
+                    <div class="card-body">
+                      <h3 class="h5 ls-1 text-uppercase mb-0">
+                        {e.data.h1}
+                        <small class="d-block op-07 fw-normal text-capitalize">Stratégie locale + pages villes + suivi des RDV</small>
+                      </h3>
+                      <p class="my-3 fw-medium">On structure l’acquisition locale sur la zone : pages intention, maillage interne, et optimisation continue
+                        basée sur les demandes réelles (appels / formulaires).</p>
+                      <a class="button-link border-0 color" href={`/zones/${e.id}/`} data-cta="1">Voir la zone</a>
+                    </div>
+                  </div>
+                </div>
+            )}
+          </div>
+        </div>
+      </div>
 
-        <h2 style="margin:18px 0 0;">Services (cliquables)</h2>
-        <p class="meta" style="margin-top:8px;">
-          Pages prestations existantes :
-        </p>
-        <div class="pills" aria-label="Services">
-          {services.slice(0, 10).map((s) => (
-            <a class="pillLink" href={`/prestations/${s.slug}/`}>{s.name}</a>
-          ))}
-        </div>
-        <a
-          href="/prestations/"
-          style="display:inline-block;margin-top:10px;font-weight:900;text-decoration:none;border-bottom:1px solid rgba(15,23,42,.18);padding-bottom:2px;"
-        >
-          Voir toutes les prestations →
-        </a>
+      <!-- Process -->
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="heading-block border-bottom-0 mt-4 mb-0">
+              <h2 class="font-secondary ls-1 text-transform-none fw-normal">
+                Preuves
+              </h2>
+              <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates deserunt facere placeat est animi, sunt?</span>
+            </div>
+            <div class="row">
+              <ul class="iconlist my-4">
+                <li><i class="bi-check-lg"></i> Audit rapide : site + Google/Maps + concurrence locale</li>
+                <li><i class="bi-check-lg"></i> Plan d’action “1 intention = 1 page” (services / métiers / zones / villes)</li>
+                <li><i class="bi-check-lg"></i> Tracking : clics appel, formulaires, sources (SEO/Ads)</li>
+                <li><i class="bi-check-lg"></i> Optimisation continue : on pilote sur la qualité des demandes → RDV</li>
+              </ul>
+              <a href="/methode/" class="button button-large button-rounded mt-4 ms-0 w-auto" data-cta="1">Voir la méthode</a>
+            </div>
+          </div>
 
-        <div class="note">
-          <strong>Pourquoi c’est mieux ?</strong><br />
-          Google voit un maillage vers des pages réelles (villes + services) plutôt qu’un texte-type “métier + ville”.
+          <div class="col-lg-5 d-none d-lg-block">
+            <img class="mt-5" src="/assets/images/others/1.png" alt="Dogs">
+          </div>
+
         </div>
-      </aside>
-    </section>
-  </div>
-</LayoutSEO>
+      </div>
+
+      <!-- CTA -->
+      <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
+        <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="heading-block border-bottom-0 mb-0">
+                <div class="before-heading text-lowercase ls-1 text-white fw-normal">Prêt à remplir l’agenda ?</div>
+                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+                  Mini-audit local (15 min) : on te donne un plan clair pour générer des RDV
+                </h2>
+                <a href="/contact/" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                  Demander le mini-audit
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            FAQ
+          </h2>
+          <span>Les questions qu’on nous pose avant de démarrer.</span>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="toggle">
+              <div class="toggle-header">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-question-circle"></i>
+                  <i class="toggle-open bi-question-circle"></i>
+                </div>
+                <div class="toggle-title">
+                  Combien de temps avant de voir des demandes ?
+                </div>
+              </div>
+              <div class="toggle-content">Ads peut générer des contacts rapidement si le tracking et la page sont prêts. Le SEO local progresse sur quelques semaines/mois selon concurrence.</div>
+            </div>
+
+            <div class="toggle">
+              <div class="toggle-header">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-question-circle"></i>
+                  <i class="toggle-open bi-question-circle"></i>
+                </div>
+                <div class="toggle-title">
+                  Je n’ai pas (ou peu) d’avis Google : c’est bloquant ?
+                </div>
+              </div>
+              <div class="toggle-content">Non. On compense par la structure (profil, pages locales, cohérence NAP) + preuves de process et suivi conversions.</div>
+            </div>
+
+            <div class="toggle">
+              <div class="toggle-header">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-question-circle"></i>
+                  <i class="toggle-open bi-question-circle"></i>
+                </div>
+                <div class="toggle-title">
+                  Vous intervenez sur quelles zones ?
+                </div>
+              </div>
+              <div class="toggle-content">Sud Oise (60) et Val d’Oise (95), avec des pages dédiées (Creil, Chantilly, Sarcelles, L’Isle-Adam).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul>
+        {metiers.map((e) => (
+            <li><a href={`/metiers/${e.id}/`}>{e.data.h1}</a></li>
+        ))}
+      </ul>
+
+    </div>
+  </section>
+
+</LayoutSeo>
