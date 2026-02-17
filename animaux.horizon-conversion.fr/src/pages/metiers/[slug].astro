@@ -1,47 +1,393 @@
 ---
+// src/pages/metiers/[slug].astro
 import LayoutSeo from "../../layouts/LayoutSEO.astro";
-import JsonLd from "../../components/JsonLd.astro";
-import FAQ from "../../components/FAQ.astro";
-import InternalLinks from "../../components/InternalLinks.astro";
-import CTA from "../../components/CTA.astro";
 import { getCollection } from "astro:content";
-import Proof from "../../components/Proof.astro";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("metiers");
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  const intentions = await getCollection("intentions");
+  const metiers = intentions.filter((e) => e.id.startsWith("metier_"));
+
+  return metiers.map((entry) => ({
+    params: { slug: entry.id.replace("metier_", "") },
+    props: { metierId: entry.id },
+  }));
 }
 
-const { entry } = Astro.props;
-const d = entry.data;
+// --- Helpers ---
+const isObject = (v) => v && typeof v === "object" && !Array.isArray(v);
+
+function deepMerge(base, patch) {
+  if (!isObject(base) || !isObject(patch)) return patch ?? base;
+
+  const out = { ...base };
+  for (const [k, v] of Object.entries(patch)) {
+    if (Array.isArray(v)) out[k] = v;
+    else if (isObject(v)) out[k] = deepMerge(base?.[k] ?? {}, v);
+    else out[k] = v;
+  }
+  return out;
+}
+
+// Charge TOUTES les intentions UNE fois (dispo partout dans la page)
+const intentions = await getCollection("intentions");
+
+// --- Load villes (global, accessible partout) ---
+const villesData = intentions
+  .filter((e) => e.id.startsWith("ville_"))
+  .map((e) => e.data);
+
+const villesByZone = (zoneSlug, limit = 6) =>
+  villesData
+    .filter((v) => v.zoneSlug === zoneSlug)
+    .sort((a, b) =>
+      (a.breadcrumbLabel ?? a.slug).localeCompare(b.breadcrumbLabel ?? b.slug, "fr")
+    )
+    .slice(0, limit);
+
+// --- Load base metier JSON ---
+const { metierId } = Astro.props;
+
+const metierEntry = intentions.find((e) => e.id === metierId);
+if (!metierEntry) throw new Error(`Metier not found: ${metierId}`);
+
+let page = structuredClone(metierEntry.data);
+
+// --- Optional persona override via query string ---
+const personaParam = Astro.url.searchParams.get("persona");
+let persona = null;
+
+if (personaParam) {
+  const personas = await getCollection("personas");
+  persona =
+    personas.find((p) => p.id === `persona_${personaParam}`) ||
+    personas.find((p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam) ||
+    null;
+
+  if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
+}
+
+// --- SEO props ---
+const title = page.metaTitle ?? "Horizon Conversion Animaux";
+const description = page.metaDescription ?? "";
+const canonical = undefined;
+const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
+
+// --- Convenience aliases ---
+const {
+  pageTitleH1,
+  pageTitleLead,
+  pageTitleALT,
+  proofs = [],
+  intentionsSearch,
+  prestationsBlocks,
+  proofsBlocks,
+  objectives = [],
+  process,
+  cta,
+  zonesBlocks,
+  faqs,
+} = page;
 ---
 
-<LayoutSeo title={d.title} description={d.metaDescription} h1={d.h1}>
-  <JsonLd type="metier" data={d} />
+<LayoutSeo title={title} description={description} canonical={canonical} robots={robots}>
 
-  <section>
-    <h2>Ce qu’on vise</h2>
-    <p>Plus de demandes qualifiées autour de votre établissement, avec une méthode claire et mesurable (appels / formulaires).</p>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
+    <img src="/assets/images/page-title.jpg" class="parallax-bg" alt={pageTitleALT ?? ""} />
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+
+        <div class="page-title-content">
+          <h1 style="font-size: 40px; line-height: 1.2; font-weight: 700; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+            <Fragment set:html={pageTitleH1 ?? ""} />
+          </h1>
+          <span class="fw-light d-none d-md-block" style="font-size: 16px; opacity: .85; max-width: 720px;">
+            {pageTitleLead}
+          </span>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+            <a href={cta?.buttonHref ?? "/contact/"} class="button button-large button-rounded ms-0" data-cta="1">
+              {cta?.buttonLabel ?? "Mini-audit (15 min)"}
+            </a>
+            <a href="tel:+33660921008" class="button button-large button-rounded button-border button-white button-light ms-0" data-cta="1">
+              Appeler : 06 60 92 10 08
+            </a>
+          </div>
+
+          {!!proofs?.length && (
+              <div class="row mt-4" style="max-width: 820px;">
+                {proofs.slice(0, 3).map((p) => (
+                    <div class="col-md-4">
+                      <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                        <strong>{p.title}</strong>
+                        <br /><small style="opacity:.85;">{p.subtitle}</small>
+                      </div>
+                    </div>
+                ))}
+              </div>
+          )}
+        </div>
+
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
+            <li class="breadcrumb-item">
+              <a href="/"><i class="uil uil-home"></i></a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/metiers/">Métiers</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{page.breadcrumbLabel ?? Astro.params.slug}</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
   </section>
 
-  <section style="margin-top: 18px;">
-    <h2>Les 3 leviers</h2>
-    <ol>
-      <li><strong>SEO local</strong> : visibilité durable sur Google & Maps</li>
-      <li><strong>Google Ads</strong> : capter la demande immédiate</li>
-      <li><strong>Conversion + tracking</strong> : optimiser sur la qualité des demandes</li>
-    </ol>
+  <section id="content">
+    <div class="content-wrap pt-0">
+
+      <!-- Intentions de recherche -->
+      {intentionsSearch && (
+          <section class="section m-0" style="background-color: #eef2f5;">
+            <div class="container">
+              <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
+                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                  {intentionsSearch.h2}
+                </h2>
+                <span>{intentionsSearch.lead}</span>
+              </div>
+
+              <div class="row align-items-stretch g-4">
+                {intentionsSearch.items?.map((it) => (
+                    <div class="col-md-3">
+                      <div class="feature-box media-box fbox-bg h-100">
+                        <div class="fbox-content border-0">
+                          <h3 class="text-transform-none ls-0 fw-semibold">{it.title}</h3>
+                          <p class="mb-0">{it.text}</p>
+                        </div>
+                      </div>
+                    </div>
+                ))}
+              </div>
+
+            </div>
+          </section>
+      )}
+
+      <!-- Prestations adaptées au métier -->
+      {prestationsBlocks && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {prestationsBlocks.h2}
+              </h2>
+              <span>{prestationsBlocks.lead}</span>
+            </div>
+
+            <div class="row align-items-stretch g-4">
+              {prestationsBlocks.items?.map((b, i) => (
+                  <>
+                    <div class="col-md-4">
+                      <div class="feature-box media-box h-100">
+                        <div class="fbox-content text-center border-0">
+                          <h3 class="text-transform-none ls-0 fw-semibold">{b.title}</h3>
+                          <ul class="iconlist my-4">
+                            {b.items?.slice(0, 6).map((x) => (
+                                <li class="d-block"><i class="bi-check-lg me-1"></i> {x}</li>
+                            ))}
+                          </ul>
+                          <a href={b.button?.href ?? "/prestations/"} class="button" data-cta="1">
+                            {b.button?.label ?? "Voir"}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    {prestationsBlocks.items.length > 3 && i === 2 && (
+                        <div class="col-12">
+                          <div class="line line-sm"></div>
+                        </div>
+                    )}
+                  </>
+              ))}
+            </div>
+          </div>
+      )}
+
+      <!-- Preuves -->
+      {proofsBlocks && (
+          <div class="section mb-0">
+            <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {proofsBlocks.h2}
+              </h2>
+              <span>{proofsBlocks.lead}</span>
+            </div>
+
+            <div class="container mt-5">
+              <div class="row feature-box">
+                {proofsBlocks.items?.map((card) => (
+                    <div class="col-lg-6">
+                      <div class="card border-light shadow-sm mb-3">
+                        <div class="card-body">
+                          <h3 class="text-transform-none ls-0 fw-semibold mb-0">{card.title}</h3>
+                          <ul class="iconlist my-3">
+                            {card.items?.map((li) => (
+                                <li class="d-block"><i class="bi-check-lg me-1"></i> {li}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                ))}
+              </div>
+
+              {!!objectives?.length && (
+                  <div class="text-center mt-4">
+                    {objectives.map((o) => (
+                        <a href={o.href ?? "/contact/"} class={`button ${o.style === "outline" ? "button-border" : ""}`} data-cta="1">
+                          {o.label}
+                        </a>
+                    ))}
+                  </div>
+              )}
+            </div>
+          </div>
+      )}
+
+      <!-- Process -->
+      {process && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {process.h2}
+              </h2>
+              <span>{process.lead}</span>
+            </div>
+
+            <ul class="process-steps process-2 feature-box row col-mb-30 justify-content-center mb-4">
+              {process.items?.map((s, idx) => (
+                  <li class="col-sm-3">
+                    <a href={s.href ?? "/methode/"} class="i-style rounded-circle i-alt mx-auto bg-color">{idx + 1}</a>
+                    <h3 class="text-transform-none ls-0 fw-semibold mt-3 mb-0">{s.title}</h3>
+                    <p class="mt-3 mb-0">{s.text}</p>
+                  </li>
+              ))}
+            </ul>
+          </div>
+      )}
+
+      <!-- CTA -->
+      {cta && (
+          <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
+            <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt={cta.alt ?? ""} />
+            <div class="container text-center">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading text-lowercase ls-1 text-white fw-normal">{cta.eyebrow}</div>
+                    <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+                      {cta.title}
+                    </h2>
+                    <a href={cta.buttonHref ?? "/contact/"} class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                      {cta.buttonLabel ?? "Contact"}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      )}
+
+      <!-- Zones / Villes -->
+      {zonesBlocks && (
+          <div class="section mt-0 mb-0">
+            <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {zonesBlocks.h2}
+              </h2>
+              <span>{zonesBlocks.lead}</span>
+            </div>
+
+            <div class="container mt-5">
+              <div class="row feature-box">
+                {zonesBlocks.items?.map((z) => (
+                    <div class="col-lg-6">
+                      <div class="card border-light shadow-sm mb-3">
+                        <div class="card-body">
+                          <h3 class="text-transform-none ls-0 fw-semibold mb-0">
+                            {z.title}
+                            {z.subTitle && (
+                                <small class="d-block subtitle fw-light ls-0 mt-1">{z.subTitle}</small>
+                            )}
+                          </h3>
+
+                          <p class="my-3 fw-medium">{z.description}</p>
+
+                          {z.slug && (() => {
+                            const villes = villesByZone(z.slug, 6);
+                            if (!villes.length) return null;
+
+                            return (
+                                <div class="text-center mt-4">
+                                  {villes.map((v) => (
+                                      <a
+                                          class="button button-mini button-circle button-border h-bg-dark"
+                                          href={v.button?.href ?? `/zones/${z.slug}/${v.slug}/`}
+                                          data-cta="1"
+                                      >
+                                        {v.breadcrumbLabel ?? v.title ?? v.slug}
+                                      </a>
+                                  ))}
+                                </div>
+                            );
+                          })()}
+
+                          <div class="mt-4">
+                            <a class="button button-large button-rounded" href={z.button?.href ?? "/zones/"} data-cta="1">
+                              {z.button?.label ?? "Voir la zone"}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                ))}
+              </div>
+            </div>
+          </div>
+      )}
+
+      <!-- FAQ -->
+      {faqs?.items?.length && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {faqs.h2 ?? "FAQs"}
+              </h2>
+              <span>{faqs.lead ?? ""}</span>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                {faqs.items.map((f) => (
+                    <div class="toggle">
+                      <div class="toggle-header">
+                        <div class="toggle-icon">
+                          <i class="toggle-closed bi-question-circle"></i>
+                          <i class="toggle-open bi-question-circle"></i>
+                        </div>
+                        <div class="toggle-title">{f.q}</div>
+                      </div>
+                      <div class="toggle-content">{f.a}</div>
+                    </div>
+                ))}
+              </div>
+            </div>
+          </div>
+      )}
+
+    </div>
   </section>
 
-  <section style="margin-top: 18px;">
-    <h2>Même sans avis, on avance</h2>
-    <p>On s’appuie sur des preuves alternatives : process, livrables, tracking et reporting pour piloter la performance.</p>
-  </section>
-
-  <Proof />
-
-  <CTA />
-
-  <FAQ items={d.faqs ?? []} />
-  <InternalLinks data={d} />
 </LayoutSeo>

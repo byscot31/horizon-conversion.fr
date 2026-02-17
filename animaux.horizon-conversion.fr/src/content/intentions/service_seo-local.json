@@ -1,0 +1,219 @@
+{
+  "key": "service:seo-local",
+  "slug": "seo-local",
+  "breadcrumbLabel": "SEO local",
+  "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
+
+  "primaryKeyword": "SEO local",
+  "secondaryKeywords": [
+    "seo-local",
+    "seo-local",
+    "seo-local",
+    "seo-local"
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "forWho": {
+    "h2": "Pour qui",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Pour 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Pour 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Pour 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Pour 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ]
+  },
+
+  "deliverables": {
+    "h2": "Livrables",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Livrable 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ]
+      },
+      {
+        "title": "Livrable 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ]
+      },
+      {
+        "title": "Livrable 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ]
+      },
+      {
+        "title": "Livrable 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ]
+      }
+    ]
+  },
+
+  "proofsBlocks": {
+    "h2": "Preuves",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Preuve 1",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      },
+      {
+        "title": "Preuve 2",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      }
+    ]
+  },
+
+  "objectives": [
+    { "label": "Objectif : 1", "href": "/contact/?objectif=1", "style": "primary" },
+    { "label": "Objectif : 2", "href": "/contact/?objectif=2", "style": "outline" },
+    { "label": "Objectif : 3", "href": "/contact/?objectif=3", "style": "outline" }
+  ],
+
+  "process": {
+    "h2": "Processus",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Processus 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "alt": "alt",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/?prestation=seo-local"
+  },
+
+  "zonesBlocks": {
+    "h2": "Zones",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Sud Oise (60)",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/", "label": "Voir la zone" }
+      },
+      {
+        "title": "Val d’Oise (95)",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/", "label": "Voir la zone" }
+      }
+    ]
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

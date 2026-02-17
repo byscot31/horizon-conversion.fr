@@ -1,6 +1,6 @@
 ---
-// src/pages/zones/index.astro
-import LayoutSeo from "../../layouts/LayoutSEO.js";
+// src/pages/zones/[zone]/index.astro
+import LayoutSeo from "../../../layouts/LayoutSEO.js";
 ---
 
 <LayoutSeo>
@@ -66,36 +66,38 @@ import LayoutSeo from "../../layouts/LayoutSEO.js";
   <section id="content">
     <div class="content-wrap pt-0">
 
-      <!-- Bénéfices -->
+      <!-- Villes -->
       <section class="section m-0" style="background-color: #eef2f5;">
         <div class="container">
 
           <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
             <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-              benefits h2
+              villesBlocks h2
             </h2>
-            <span>benefits lead</span>
+            <span>villesBlocks lead</span>
           </div>
 
           <div class="row align-items-stretch g-4">
             <div class="col-md-3">
               <div class="feature-box media-box fbox-bg h-100">
                 <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">benefits title 1</h3>
-                  <p class="mb-0">benefits text 1</p>
+                  <h3 class="text-transform-none ls-0 fw-semibold">villesBlocks title 1</h3>
+                  <p class="mb-0">villesBlocks text 1</p>
+                  <a class="button-link border-0 color" href="villesBlocks href" data-cta="1">villesBlocks label</a>
                 </div>
               </div>
             </div>
+
             <div class="col-md-3">
               <div class="feature-box media-box fbox-bg h-100">
                 <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">benefits title 2</h3>
-                  <p class="mb-0">benefits text 2</p>
+                  <h3 class="text-transform-none ls-0 fw-semibold">villesBlocks title 2</h3>
+                  <p class="mb-0">villesBlocks text 2</p>
+                  <a class="button-link border-0 color" href="villesBlocks href" data-cta="1">villesBlocks label</a>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -261,40 +263,39 @@ import LayoutSeo from "../../layouts/LayoutSEO.js";
         </div>
       </div>
 
-      <!-- Zones -->
-      <div class="section mt-0 mb-0">
-        <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+      <!-- Métiers -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
           <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            zonesBlocks h2
+            metiersBlocks h2
           </h2>
-          <span>zonesBlocks lead</span>
+          <span>metiersBlocks lead</span>
         </div>
-        <div class="container mt-5">
-          <div class="row feature-box">
-            <div class="col-lg-6">
-              <div class="card border-light shadow-sm mb-3">
-                <div class="card-body">
-                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
-                    zonesBlocks title 1
-                    <small class="d-block subtitle fw-light ls-0 mt-1">zonesBlocks subTitle 1</small>
-                  </h3>
-                  <p class="my-3 fw-medium">zonesBlocks description 1</p>
-                  <a class="button-link border-0 color" href="zonesBlocks href" data-cta="1">zonesBlocks label</a>
+
+        <div class="row contact-properties">
+          <div class="col-md-6">
+            <a href="metiersBlocks href" data-cta="1" style={`background: url('metiersBlocks background') no-repeat center center; background-size: cover;`}>
+              <div class="vertical-middle dark text-center">
+                <div class="heading-block m-0 border-0">
+                  <h3 class="text-capitalize fw-normal font-secondary">metiersBlocks title 1</h3>
+                  <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+                    metiersBlocks description 1
+                  </span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="card border-light shadow-sm mb-3">
-                <div class="card-body">
-                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
-                    zonesBlocks title 2
-                    <small class="d-block subtitle fw-light ls-0 mt-1">zonesBlocks subTitle 2</small>
-                  </h3>
-                  <p class="my-3 fw-medium">zonesBlocks description 2</p>
-                  <a class="button-link border-0 color" href="zonesBlocks href" data-cta="1">zonesBlocks label</a>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <a href="metiersBlocks href" data-cta="1" style={`background: url('metiersBlocks background') no-repeat center center; background-size: cover;`}>
+              <div class="vertical-middle dark text-center">
+                <div class="heading-block m-0 border-0">
+                  <h3 class="text-capitalize fw-normal font-secondary">metiersBlocks title 2</h3>
+                  <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+                    metiersBlocks description 2
+                  </span>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

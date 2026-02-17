@@ -1,29 +1,67 @@
 ---
+// src/pages/prestations/index.astro
 import LayoutSeo from "../../layouts/LayoutSEO.astro";
-import { getCollection } from "astro:content";
-import PageTitle from "../../components/PageTitle.astro";
-
-const services = (await getCollection("services")).sort((a,b)=>a.id.localeCompare(b.id));
-const metiers = (await getCollection("metiers")).sort((a,b)=>a.id.localeCompare(b.id));
-const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id));
 ---
 
-<LayoutSeo
-    title="Prestations | Horizon Conversion Animaux"
-    description="Toutes nos prestations : SEO local et Google Ads pour pros animaliers en 60/95."
-    h1="2 leviers pour remplir votre agenda en local : SEO + Google Ads"
->
+<LayoutSeo>
 
-  <PageTitle
-      h1="2 leviers pour remplir votre agenda <br>en local : SEO + Google Ads"
-      lead="On transforme Google/Maps en RDV qualifiés pour vétérinaires & toiletteurs (Sud Oise 60 / Val d’Oise 95)."
-      proofs={[
-        { title: "RDV qualifiés", subtitle: "appels + formulaires" },
-        { title: "Méthode & livrables", subtitle: "exécution cadrée" },
-        { title: "Tracking inclus", subtitle: "pilotage conversion" }
-      ]}
-      breadcrumbs={[{ label: "Prestations", href: "/prestations/" }]}
-  />
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
+    <img src="/assets/images/page-title.jpg" class="parallax-bg" alt="pageTitleALT" />
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+
+        <div class="page-title-content">
+          <h1 style="font-size: 40px; line-height: 1.2; font-weight: 700; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+            pageTitleH1
+          </h1>
+          <span class="fw-light d-none d-md-block" style="font-size: 16px; opacity: .85; max-width: 720px;">
+            pageTitleLead
+          </span>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+            <a href="/contact/" class="button button-large button-rounded ms-0" data-cta="1">
+              Mini-audit (15 min)
+            </a>
+            <a href="tel:+33660921008" class="button button-large button-rounded button-border button-white button-light ms-0" data-cta="1">
+              Appeler : 06 60 92 10 08
+            </a>
+          </div>
+
+          <div class="row mt-4" style="max-width: 820px;">
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 1</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 1</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 2</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 2</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 3</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 3</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
+            <li class="breadcrumb-item">
+              <a href="/"><i class="uil uil-home"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Métiers</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+  </section>
 
   <section id="content">
     <div class="content-wrap pt-0">
@@ -34,107 +72,66 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
 
           <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
             <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-              Bénéfices
+              benefits h2
             </h2>
-            <span>Une acquisition locale pensée pour générer des RDV (pas juste du trafic).</span>
+            <span>benefits lead</span>
           </div>
 
           <div class="row align-items-stretch g-4">
             <div class="col-md-3">
               <div class="feature-box media-box fbox-bg h-100">
                 <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">+ de RDV locaux</h3>
-                  <p class="mb-0">En captant les requêtes “proches de moi” : urgence véto, toilettage, vaccination, etc.</p>
+                  <h3 class="text-transform-none ls-0 fw-semibold">benefits title 1</h3>
+                  <p class="mb-0">benefits text 1</p>
                 </div>
               </div>
             </div>
-
             <div class="col-md-3">
               <div class="feature-box media-box fbox-bg h-100">
                 <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">Trafic utile</h3>
-                  <p class="mb-0">Moins de clics hors zone / hors intention grâce à une structure claire (SEO) et du ciblage serré (Ads).</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="feature-box media-box fbox-bg h-100">
-                <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">Pilotage conversion</h3>
-                  <p class="mb-0">On optimise sur les signaux utiles : appels, formulaires, qualité des demandes → RDV.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="feature-box media-box fbox-bg h-100">
-                <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">SEO + Ads</h3>
-                  <p class="mb-0">Ads = immédiat. SEO local = durable. Ensemble = un agenda plus stable.</p>
+                  <h3 class="text-transform-none ls-0 fw-semibold">benefits title 2</h3>
+                  <p class="mb-0">benefits text 2</p>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      <!-- Livrables -->
+      <!-- Prestations -->
       <div class="container mt-6">
         <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
           <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            Livrables
+            prestationsBlocks h2
           </h2>
-          <span>Du concret : ce que vous recevez, ce qu’on met en place, et ce qu’on mesure.</span>
+          <span>prestationsBlocks lead</span>
         </div>
+
         <div class="row align-items-stretch g-4">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="feature-box media-box h-100">
               <div class="fbox-content border-0">
-                <h3 class="text-transform-none ls-0 fw-semibold">
-                  Fondation (SEO local)
-                </h3>
+                <h3 class="text-transform-none ls-0 fw-semibold">prestationsBlocks title 1</h3>
                 <ul class="iconlist my-4">
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Audit + plan d’action priorisé (site + GBP + concurrence)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Pages “1 intention = 1 page” (service / métier / zone / ville)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Optimisations Google Business Profile (catégories, services, contenu)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Maillage interne (triangle service ↔ métier ↔ ville ↔ zone)</li>
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> prestationsBlocks items 1</li>
                 </ul>
-                <a href="/prestations/seo-local/" class="button-link border-0 color" data-cta="1">Voir SEO local</a>
+                <a href="prestationsBlocks button" class="button button-large button-rounded" data-cta="1">
+                  prestationsBlocks label
+                </a>
               </div>
             </div>
           </div>
-
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="feature-box media-box h-100">
               <div class="fbox-content border-0">
-                <h3 class="text-transform-none ls-0 fw-semibold">
-                  Accélération (Google Ads)
-                </h3>
+                <h3 class="text-transform-none ls-0 fw-semibold">prestationsBlocks title 2</h3>
                 <ul class="iconlist my-4">
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Setup Ads : structure campagne, mots-clés, annonces</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Négatifs anti “clics inutiles” + ciblage géographique serré (60/95)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Landing/Pages adaptées à l’intention (prise de RDV)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Optimisation continue sur demandes réelles → RDV</li>
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> prestationsBlocks items 2</li>
                 </ul>
-                <a href="/prestations/google-ads/" class="button-link border-0 color" data-cta="1">Voir Google Ads</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="line line-sm"></div>
-
-          <div class="col-md-6">
-            <div class="feature-box media-box h-100">
-              <div class="fbox-content border-0">
-                <h3 class="text-transform-none ls-0 fw-semibold">
-                  Mesure & reporting
-                </h3>
-                <ul class="iconlist my-4">
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Tracking : clic téléphone, formulaires, sources (SEO/Ads)</li>
-                  <li class="d-block"><i class="bi-check-lg me-1"></i> Reporting simple (hebdo / mensuel) orienté RDV et qualité des demandes</li>
-                </ul>
-                <a href="/prestations/google-ads/" class="button-link border-0 color" data-cta="1">Voir Mesure & reporting</a>
+                <a href="prestationsBlocks button" class="button button-large button-rounded" data-cta="1">
+                  prestationsBlocks label
+                </a>
               </div>
             </div>
           </div>
@@ -145,41 +142,38 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
       <div class="section mb-0">
         <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
           <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            Preuves
+            proofsBlocks h2
           </h2>
-          <span>On avance vite même sans avis : méthode, livrables, tracking, et exécution.</span>
+          <span>proofsBlocks lead</span>
         </div>
+
         <div class="container mt-5">
           <div class="row feature-box">
             <div class="col-lg-6">
               <div class="card border-light shadow-sm mb-3">
                 <div class="card-body">
-                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
-                    Checklist livrables
-                  </h3>
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">proofsBlocks title 1</h3>
                   <ul class="iconlist my-3">
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Méthode + livrables visibles (checklist)</li>
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Structure “1 intention = 1 page” (anti-clone)</li>
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Maillage interne (triangle)</li>
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks items 1</li>
                   </ul>
                 </div>
               </div>
             </div>
-
             <div class="col-lg-6">
               <div class="card border-light shadow-sm mb-3">
                 <div class="card-body">
-                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
-                    Mesure & suivi
-                  </h3>
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">proofsBlocks title 2</h3>
                   <ul class="iconlist my-3">
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Captures de tracking (events, appels, formulaires)</li>
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Garantie de moyens : optimisations/mois + suivi</li>
-                    <li class="d-block"><i class="bi-check-lg me-1"></i> Optimisation sur demandes réelles → RDV</li>
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks items 2</li>
                   </ul>
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="objectives href" class="objectives style" data-cta="1">objectives label 1</a>
+            <a href="objectives href" class="objectives style" data-cta="1">objectives label 2</a>
           </div>
         </div>
       </div>
@@ -188,47 +182,38 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
       <div class="container mt-6">
         <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
           <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            Process
+            process h2
           </h2>
-          <span>Simple, cadré, et orienté résultat.</span>
+          <span>process lead</span>
         </div>
+
         <ul class="process-steps process-2 feature-box row col-mb-30 justify-content-center mb-4">
           <li class="col-sm-3">
-            <i class="i-style rounded-circle i-alt mx-auto bg-color" style="cursor: default;">1</i>
-            <h3 class="text-transform-none ls-0 fw-semibold mb-0">Diagnostic</h3>
-            <p class="mt-3 mb-0">30–60 min : site, Google/Maps (GBP), concurrence, opportunités rapides.</p>
+            <a href="process href" class="i-style rounded-circle i-alt mx-auto bg-color">1</a>
+            <h3 class="text-transform-none ls-0 fw-semibold mb-0">process title</h3>
+            <p class="mt-3 mb-0">process text</p>
           </li>
           <li class="col-sm-3">
-            <i class="i-style rounded-circle i-alt mx-auto bg-color" style="cursor: default;">2</i>
-            <h3 class="text-transform-none ls-0 fw-semibold mb-0">Mise en place</h3>
-            <p class="mt-3 mb-0">Pages + tracking + GBP / Ads. Ciblage + structure orientée prise de RDV.</p>
-          </li>
-          <li class="col-sm-3">
-            <i class="i-style rounded-circle i-alt mx-auto bg-color" style="cursor: default;">3</i>
-            <h3 class="text-transform-none ls-0 fw-semibold mb-0">Lancement</h3>
-            <p class="mt-3 mb-0">Indexation, campagnes, réglages, et premiers retours sur les demandes.</p>
-          </li>
-          <li class="col-sm-3">
-            <i class="i-style rounded-circle i-alt mx-auto bg-color" style="cursor: default;">4</i>
-            <h3 class="text-transform-none ls-0 fw-semibold mb-0">Optimisation</h3>
-            <p class="mt-3 mb-0">On pilote les demandes réelles → plus de RDV, moins de demandes inutiles.</p>
+            <a href="process href" class="i-style rounded-circle i-alt mx-auto bg-color">2</a>
+            <h3 class="text-transform-none ls-0 fw-semibold mb-0">process title</h3>
+            <p class="mt-3 mb-0">process text</p>
           </li>
         </ul>
       </div>
 
       <!-- CTA -->
       <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
-        <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="">
+        <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="cta alt">
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-6">
               <div class="heading-block border-bottom-0 mb-0">
-                <div class="before-heading text-lowercase ls-1 text-white fw-normal">Prêt à remplir l’agenda ?</div>
+                <div class="before-heading text-lowercase ls-1 text-white fw-normal">cta eyebrow</div>
                 <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
-                  Mini-audit local (15 min) : on te donne un plan clair pour générer des RDV
+                  cta title
                 </h2>
-                <a href="/contact/" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
-                  Demander le mini-audit
+                <a href="cta buttonHref" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                  cta buttonLabel
                 </a>
               </div>
             </div>
@@ -240,10 +225,11 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
       <div class="container mt-6">
         <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
           <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            FAQ
+            faqs h2
           </h2>
-          <span>Les questions fréquentes avant de démarrer.</span>
+          <span>faqs lead</span>
         </div>
+
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <div class="toggle">
@@ -252,86 +238,19 @@ const zones = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id
                   <i class="toggle-closed bi-question-circle"></i>
                   <i class="toggle-open bi-question-circle"></i>
                 </div>
-                <div class="toggle-title">SEO local ou Google Ads : par quoi commencer ?</div>
+                <div class="toggle-title">faqs q 1</div>
               </div>
-              <div class="toggle-content">Si vous voulez des RDV vite : Ads. Pour stabiliser sur le long terme : SEO local. Le mix est souvent le plus rentable.</div>
+              <div class="toggle-content">faqs a 1</div>
             </div>
-
             <div class="toggle">
               <div class="toggle-header">
                 <div class="toggle-icon">
                   <i class="toggle-closed bi-question-circle"></i>
                   <i class="toggle-open bi-question-circle"></i>
                 </div>
-                <div class="toggle-title">Combien de temps pour obtenir des RDV ?</div>
+                <div class="toggle-title">faqs q 2</div>
               </div>
-              <div class="toggle-content">Ads peut générer des contacts rapidement si la page et le tracking sont prêts. Le SEO local progresse sur quelques semaines/mois selon la concurrence.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Est-ce que ça marche sans avis Google ?</div>
-              </div>
-              <div class="toggle-content">Oui. On compense par la structure (GBP + pages locales), la cohérence NAP et un pilotage sur conversions.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Comment vous mesurez les résultats (appels / RDV) ?</div>
-              </div>
-              <div class="toggle-content">On suit les clics téléphone, formulaires, et les sources (SEO/Ads). L’objectif est d’augmenter les demandes qui deviennent des RDV.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Est-ce que vous gérez Google Business Profile ?</div>
-              </div>
-              <div class="toggle-content">Oui : catégories, services, contenu, optimisation de la visibilité locale et cohérence avec les pages du site.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Quel budget Ads minimum pour du local ?</div>
-              </div>
-              <div class="toggle-content">Ça dépend de la concurrence et de la zone. On démarre souvent avec un budget test pour valider les mots-clés qui génèrent des RDV.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Vous travaillez uniquement sur 60/95 ?</div>
-              </div>
-              <div class="toggle-content">Oui, focus Sud Oise (60) et Val d’Oise (95) pour garder une stratégie locale précise et efficace.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">Comment éviter les demandes non qualifiées ?</div>
-              </div>
-              <div class="toggle-content">Ciblage géographique, mots-clés négatifs, messages clairs, et formulaire qualifiant. On optimise sur la qualité des demandes.</div>
+              <div class="toggle-content">faqs a 2</div>
             </div>
           </div>
         </div>

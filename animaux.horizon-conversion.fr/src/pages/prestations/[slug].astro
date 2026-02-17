@@ -1,51 +1,353 @@
 ---
+// src/pages/prestations/[slug].astro
 import LayoutSeo from "../../layouts/LayoutSEO.astro";
-import JsonLd from "../../components/JsonLd.astro";
-import FAQ from "../../components/FAQ.astro";
-import InternalLinks from "../../components/InternalLinks.astro";
-import CTA from "../../components/CTA.astro";
-import { getCollection } from "astro:content";
-import Proof from "../../components/Proof.astro";
-
-export async function getStaticPaths() {
-  const entries = await getCollection("services");
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
-}
-
-const { entry } = Astro.props;
-const d = entry.data;
 ---
 
-<LayoutSeo title={d.title} description={d.metaDescription} h1={d.h1}>
-  <JsonLd type="service" data={d} />
+<LayoutSeo>
 
-  <section>
-    <h2>Pour qui ?</h2>
-    <p>Vétérinaires et toiletteurs qui veulent plus de demandes qualifiées en local (Google/Maps) sur le 60 et le 95.</p>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
+    <img src="/assets/images/page-title.jpg" class="parallax-bg" alt="pageTitleALT" />
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+
+        <div class="page-title-content">
+          <h1 style="font-size: 40px; line-height: 1.2; font-weight: 700; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+            pageTitleH1
+          </h1>
+          <span class="fw-light d-none d-md-block" style="font-size: 16px; opacity: .85; max-width: 720px;">
+            pageTitleLead
+          </span>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+            <a href="/contact/" class="button button-large button-rounded ms-0" data-cta="1">
+              Mini-audit (15 min)
+            </a>
+            <a href="tel:+33660921008" class="button button-large button-rounded button-border button-white button-light ms-0" data-cta="1">
+              Appeler : 06 60 92 10 08
+            </a>
+          </div>
+
+          <div class="row mt-4" style="max-width: 820px;">
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 1</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 1</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 2</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 2</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                <strong>proofs title 3</strong>
+                <br/><small style="opacity:.85;">proofs subtitle 3</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
+            <li class="breadcrumb-item">
+              <a href="/"><i class="uil uil-home"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Métiers</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
   </section>
 
-  <section style="margin-top: 18px;">
-    <h2>Ce que vous obtenez</h2>
-    <ul>
-      <li>Audit + plan d’action priorisé</li>
-      <li>Optimisations (site + Google/Maps)</li>
-      <li>Tracking des appels et formulaires</li>
-      <li>Optimisation continue sur la qualité des demandes</li>
-    </ul>
+  <section id="content">
+    <div class="content-wrap pt-0">
+
+      <!-- Pour qui -->
+      <section class="section m-0" style="background-color: #eef2f5;">
+        <div class="container">
+          <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
+            <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+              forWho h2
+            </h2>
+            <span>forWho lead</span>
+          </div>
+
+          <div class="row align-items-stretch g-4">
+            <div class="col-md-3">
+              <div class="feature-box media-box fbox-bg h-100">
+                <div class="fbox-content border-0">
+                  <h3 class="text-transform-none ls-0 fw-semibold">forWho title 1</h3>
+                  <p class="mb-0">forWho text 1</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="feature-box media-box fbox-bg h-100">
+                <div class="fbox-content border-0">
+                  <h3 class="text-transform-none ls-0 fw-semibold">forWho title 2</h3>
+                  <p class="mb-0">forWho text 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Livrables -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            deliverables h2
+          </h2>
+          <span>deliverables lead</span>
+        </div>
+
+        <div class="row align-items-stretch g-4">
+          <div class="col-md-6">
+            <div class="feature-box media-box h-100">
+              <div class="fbox-content border-0">
+                <h3 class="text-transform-none ls-0 fw-semibold">deliverables title 1</h3>
+                <ul class="iconlist my-4">
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 1</li>
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 2</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="feature-box media-box h-100">
+              <div class="fbox-content border-0">
+                <h3 class="text-transform-none ls-0 fw-semibold">deliverables title 2</h3>
+                <ul class="iconlist my-4">
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 1</li>
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 2</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="line line-sm"></div>
+
+          <div class="col-md-6">
+            <div class="feature-box media-box h-100">
+              <div class="fbox-content border-0">
+                <h3 class="text-transform-none ls-0 fw-semibold">deliverables title 3</h3>
+                <ul class="iconlist my-4">
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 1</li>
+                  <li class="d-block"><i class="bi-check-lg me-1"></i> deliverables item 2</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preuves -->
+      <div class="section mb-0">
+        <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            proofsBlocks h2
+          </h2>
+          <span>proofsBlocks lead</span>
+        </div>
+
+        <div class="container mt-5">
+          <div class="row feature-box">
+            <div class="col-lg-6">
+              <div class="card border-light shadow-sm mb-3">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">proofsBlocks title 1</h3>
+                  <ul class="iconlist my-3">
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks item 1</li>
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks item 2</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card border-light shadow-sm mb-3">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">proofsBlocks title 2</h3>
+                  <ul class="iconlist my-3">
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks item 1</li>
+                    <li class="d-block"><i class="bi-check-lg me-1"></i> proofsBlocks item 2</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="objectives href" class="objectives style" data-cta="1">objectives label 1</a>
+            <a href="objectives href" class="objectives style" data-cta="1">objectives label 2</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            process h2
+          </h2>
+          <span>process lead</span>
+        </div>
+
+        <ul class="process-steps process-2 feature-box row col-mb-30 justify-content-center mb-4">
+          <li class="col-sm-3">
+            <a href="/methode/" class="i-style rounded-circle i-alt mx-auto bg-color">1</a>
+            <h3 class="text-transform-none ls-0 fw-semibold mb-0">process title 1</h3>
+            <p class="mt-3 mb-0">process text 1</p>
+          </li>
+          <li class="col-sm-3">
+            <a href="/methode/" class="i-style rounded-circle i-alt mx-auto bg-color">2</a>
+            <h3 class="text-transform-none ls-0 fw-semibold mb-0">process title 2</h3>
+            <p class="mt-3 mb-0">process text 2</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
+        <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="cta alt">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="heading-block border-bottom-0 mb-0">
+                <div class="before-heading text-lowercase ls-1 text-white fw-normal">
+                  cta eyebrow
+                </div>
+                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+                  cta title
+                </h2>
+                <a href="cta buttonHref" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                  cta buttonLabel
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zones / Villes -->
+      <div class="section mt-0 mb-0">
+        <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            zonesBlocks h2
+          </h2>
+          <span>zonesBlocks lead</span>
+        </div>
+
+        <div class="container mt-5">
+          <div class="row feature-box">
+            <div class="col-lg-6">
+              <div class="card border-light shadow-sm mb-3">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
+                    zonesBlocks title 1
+                    <small class="d-block subtitle fw-light ls-0 mt-1">
+                      zonesBlocks subTitle 1
+                    </small>
+                  </h3>
+
+                  <p class="my-3 fw-medium">
+                    zonesBlocks description 1
+                  </p>
+
+                  <div class="text-center mt-4">
+                    <a class="button button-small button-circle button-border h-bg-dark" href="villes href" data-cta="1">
+                      villes 1
+                    </a>
+                    <a class="button button-small button-circle button-border h-bg-dark" href="villes href" data-cta="1">
+                      villes 2
+                    </a>
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <a class="button button-large button-rounded" href="zonesBlocks href" data-cta="1">
+                      zonesBlocks label 1
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card border-light shadow-sm mb-3">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-0">
+                    zonesBlocks title 1
+                    <small class="d-block subtitle fw-light ls-0 mt-1">
+                      zonesBlocks subTitle 1
+                    </small>
+                  </h3>
+
+                  <p class="my-3 fw-medium">
+                    zonesBlocks description 1
+                  </p>
+
+                  <div class="text-center mt-4">
+                    <a class="button button-small button-circle button-border h-bg-dark" href="villes href" data-cta="1">
+                      villes 1
+                    </a>
+                    <a class="button button-small button-circle button-border h-bg-dark" href="villes href" data-cta="1">
+                      villes 2
+                    </a>
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <a class="button button-large button-rounded" href="zonesBlocks href" data-cta="1">
+                      zonesBlocks label 1
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="container mt-6">
+        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+            faqs h2
+          </h2>
+          <span>faqs lead</span>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="toggle">
+              <div class="toggle-header">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-question-circle"></i>
+                  <i class="toggle-open bi-question-circle"></i>
+                </div>
+                <div class="toggle-title">faqs q 1</div>
+              </div>
+              <div class="toggle-content">faqs a 1</div>
+            </div>
+            <div class="toggle">
+              <div class="toggle-header">
+                <div class="toggle-icon">
+                  <i class="toggle-closed bi-question-circle"></i>
+                  <i class="toggle-open bi-question-circle"></i>
+                </div>
+                <div class="toggle-title">faqs q 2</div>
+              </div>
+              <div class="toggle-content">faqs a 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <section style="margin-top: 18px;">
-    <h2>Notre méthode (simple et mesurable)</h2>
-    <p>
-      On démarre par l’essentiel : comprendre votre zone, vos services, et ce qui génère réellement des demandes.
-      Ensuite on exécute par priorité et on suit les conversions pour optimiser ce qui marche.
-    </p>
-  </section>
-
-  <Proof />
-
-  <CTA />
-
-  <FAQ items={d.faqs ?? []} />
-  <InternalLinks data={d} />
 </LayoutSeo>

@@ -1,0 +1,268 @@
+{
+  "key": "ville:garges-les-gonesse",
+  "slug": "garges-les-gonesse",
+  "zoneSlug": "val-doise-95",
+  "breadcrumbLabel": "Garges-lès-Gonesse",
+  "breadcrumbs": [
+    { "label": "Zones", "href": "/zones/" },
+    { "label": "Val d’Oise (95)", "href": "/zones/val-doise-95/" }
+  ],
+
+  "primaryKeyword": "garges les gonesse",
+  "secondaryKeywords": [
+    "garges les gonesse"
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "villesBlocks": {
+    "h2": "Villes",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Ville 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Ville 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Ville 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Ville 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "button": { "label": "Voir la ville" }
+      }
+    ]
+  },
+
+  "prestationsBlocks": {
+    "h2": "Prestations",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "SEO local",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir SEO local", "href": "/prestations/seo-local/" }
+      },
+      {
+        "title": "Google Ads",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Ads", "href": "/prestations/google-ads/" }
+      },
+      {
+        "title": "Google Business Profile",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Business Profile", "href": "/prestations/google-business-profile/" }
+      },
+      {
+        "title": "Page de conversion",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Page de conversion", "href": "/prestations/page-conversion/" }
+      },
+      {
+        "title": "Pages locales",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Pages locales", "href": "/prestations/pages-locales/" }
+      },
+      {
+        "title": "Tracking conversions",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Tracking conversions", "href": "/prestations/tracking-conversions/" }
+      }
+    ]
+  },
+
+  "methode": {
+    "h2": "Méthode",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Méthode 1",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      },
+      {
+        "title": "Méthode 2",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      }
+    ]
+  },
+
+  "objectives": [
+    { "label": "Objectif : 1", "href": "/contact/?objectif=1", "style": "primary" },
+    { "label": "Objectif : 2", "href": "/contact/?objectif=2", "style": "outline" },
+    { "label": "Objectif : 3", "href": "/contact/?objectif=3", "style": "outline" }
+  ],
+
+  "process": {
+    "h2": "Processus",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Processus 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "alt": "alt",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/?zone=val-doise-95&ville=garges-les-gonesse"
+  },
+
+  "metiersBlocks": {
+    "h2": "Métiers",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Éducateur canin",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/educateur-canin.jpg" },
+        "href": "/metiers/educateur-canin/"
+      },
+      {
+        "title": "Ostéopathe animalier",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/osteopathe-animalier.jpg" },
+        "href": "/metiers/osteopathe-animalier/"
+      },
+      {
+        "title": "Pension canine",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pension-canine.jpg" },
+        "href": "/metiers/pension-canine/"
+      },
+      {
+        "title": "Pet sitter",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pet-sitter.jpg" },
+        "href": "/metiers/pet-sitter/"
+      },
+      {
+        "title": "Toiletteur",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/toiletteur.jpg" },
+        "href": "/metiers/toiletteur/"
+      },
+      {
+        "title": "Vétérinaire",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/veterinaire.jpg" },
+        "href": "/metiers/veterinaire/"
+      }
+    ]
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

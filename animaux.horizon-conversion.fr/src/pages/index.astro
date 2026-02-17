@@ -1,5 +1,5 @@
 ---
-// src/pages/index.astro
+// src/pages/[ville].astro
 import LayoutSeo from "../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
@@ -158,14 +158,14 @@ const metierBlurb = (id) =>
           <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
         </div>
         <div class="container mt-5">
-          <div class="row">
+          <div class="row feature-box">
             {zones.sort(sortById).map((e) =>
                 <div class="col-lg-6">
                   <div class="card border-light shadow-sm mb-3">
                     <div class="card-body">
-                      <h3 class="h6 ls-1 text-uppercase mb-0">
+                      <h3 class="text-transform-none ls-0 fw-semibold mb-0">
                         {e.data.h1}
-                        <small class="d-block op-07 fw-normal text-capitalize">Stratégie locale + pages villes + suivi des RDV</small>
+                        <small class="d-block subtitle fw-light ls-0 mt-1">Stratégie locale + pages villes + suivi des RDV</small>
                       </h3>
                       <p class="my-3 fw-medium">On structure l’acquisition locale sur la zone : pages intention, maillage interne, et optimisation continue
                         basée sur les demandes réelles (appels / formulaires).</p>

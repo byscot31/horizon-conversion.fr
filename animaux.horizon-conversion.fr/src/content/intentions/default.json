@@ -1,0 +1,18 @@
+{
+  "key": "default",
+  "breadcrumbLabel": "",
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "keyWords": "keyWord1, keyWord2, keyWord3",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ]
+}

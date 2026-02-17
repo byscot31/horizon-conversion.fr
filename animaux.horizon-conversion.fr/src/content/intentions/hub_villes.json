@@ -1,0 +1,296 @@
+{
+  "key": "hub:villes",
+  "breadcrumbLabel": "Villes",
+
+  "primaryKeyword": "Villes",
+  "secondaryKeywords": [
+    "villes",
+    "villes",
+    "villes",
+    "villes"
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "benefits": {
+    "h2": "Bénéfices",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Bénéfice 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Bénéfice 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Bénéfice 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Bénéfice 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ]
+  },
+
+  "prestationsBlocks": {
+    "h2": "Prestations",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "SEO local",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir SEO local", "href": "/prestations/seo-local/" }
+      },
+      {
+        "title": "Google Ads",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Ads", "href": "/prestations/google-ads/" }
+      },
+      {
+        "title": "Google Business Profile",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Business Profile", "href": "/prestations/google-business-profile/" }
+      },
+      {
+        "title": "Page de conversion",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Page de conversion", "href": "/prestations/page-conversion/" }
+      },
+      {
+        "title": "Pages locales",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Pages locales", "href": "/prestations/pages-locales/" }
+      },
+      {
+        "title": "Tracking conversions",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Tracking conversions", "href": "/prestations/tracking-conversions/" }
+      }
+    ]
+  },
+
+  "proofsBlocks": {
+    "h2": "Preuves",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Preuve 1",
+        "items": [
+          "item 1",
+          "item 1",
+          "item 1"
+        ]
+      },
+      {
+        "title": "Preuve 2",
+        "items": [
+          "item 2",
+          "item 2",
+          "item 2"
+        ]
+      }
+    ]
+  },
+
+  "objectives": [
+    { "label": "Objectif : 1", "href": "/contact/?objectif=1", "style": "primary" },
+    { "label": "Objectif : 2", "href": "/contact/?objectif=2", "style": "outline" },
+    { "label": "Objectif : 3", "href": "/contact/?objectif=3", "style": "outline" }
+  ],
+
+  "process": {
+    "h2": "Processus",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Processus 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/"
+  },
+
+  "villesBlocks": {
+    "h2": "Villes",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Arnouville",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/arnouville/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Chantilly",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/chantilly/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Creil",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/creil/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Domont",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/domont/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Garges-lès-Gonesse",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/garges-les-gonesse/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Lamorlaye",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/lamorlaye/", "label": "Voir la ville" }
+      },
+      {
+        "title": "L'Isle-Adam",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/lisle-adam/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Montataire",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/montataire/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Nogent-sur-Oise",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/nogent-sur-oise/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Sarcelles",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/sarcelles/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Senlis",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/sud-oise-60/senlis/", "label": "Voir la ville" }
+      },
+      {
+        "title": "Villiers-le-Bel",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "href": "/zones/val-doise-95/villiers-le-bel/", "label": "Voir la ville" }
+      }
+    ]
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

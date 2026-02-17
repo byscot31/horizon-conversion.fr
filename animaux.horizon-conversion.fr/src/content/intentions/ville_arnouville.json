@@ -1,0 +1,331 @@
+{
+  "key": "ville:arnouville",
+  "breadcrumbLabel": "Arnouville",
+  "breadcrumbs": [
+    { "label": "Zones", "href": "/zones/" },
+    { "label": "Val d’Oise (95)", "href": "/zones/val-doise-95/" }
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "keyWords": "keyWord1, keyWord2, keyWord3",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "localContext": {
+    "h2": "Contexte local",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Contexte 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Contexte 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Contexte 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "title": "Contexte 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ]
+  },
+
+  "metiersBlocks": {
+    "h2": "Métiers",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Éducateur canin",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/educateur-canin.jpg" },
+        "href": "/metiers/educateur-canin/"
+      },
+      {
+        "title": "Ostéopathe animalier",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/osteopathe-animalier.jpg" },
+        "href": "/metiers/osteopathe-animalier/"
+      },
+      {
+        "title": "Pension canine",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pension-canine.jpg" },
+        "href": "/metiers/pension-canine/"
+      },
+      {
+        "title": "Pet sitter",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pet-sitter.jpg" },
+        "href": "/metiers/pet-sitter/"
+      },
+      {
+        "title": "Toiletteur",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/toiletteur.jpg" },
+        "href": "/metiers/toiletteur/"
+      },
+      {
+        "title": "Vétérinaire",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/veterinaire.jpg" },
+        "href": "/metiers/veterinaire/"
+      }
+    ]
+  },
+
+  "prestationsBlocks": {
+    "h2": "Prestations",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "SEO local",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir SEO local", "href": "/prestations/seo-local/" }
+      },
+      {
+        "title": "Google Ads",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Ads", "href": "/prestations/google-ads/" }
+      },
+      {
+        "title": "Google Business Profile",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Google Business Profile", "href": "/prestations/google-business-profile/" }
+      },
+      {
+        "title": "Page de conversion",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Page de conversion", "href": "/prestations/page-conversion/" }
+      },
+      {
+        "title": "Pages locales",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Pages locales", "href": "/prestations/pages-locales/" }
+      },
+      {
+        "title": "Tracking conversions",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3",
+          "item 4"
+        ],
+        "button": { "label": "Voir Tracking conversions", "href": "/prestations/tracking-conversions/" }
+      }
+    ]
+  },
+
+  "proofsBlocks": {
+    "h2": "Preuves",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Preuve 1",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      },
+      {
+        "title": "Preuve 2",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      }
+    ]
+  },
+
+  "process": {
+    "h2": "Processus",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Processus 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "alt": "alt",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/?zone=val-doise-95&ville=arnouville"
+  },
+
+  "villesBlocks": {
+    "h2": "Villes autours",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Arnouville",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Chantilly",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Creil",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Domont",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Garges-lès-Gonesse",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Lamorlaye",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "L'Isle-Adam",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Montataire",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Nogent-sur-Oise",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Sarcelles",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Senlis",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      },
+      {
+        "title": "Villiers-le-Bel",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville" }
+      }
+    ]
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "key": "persona:veterinaire_indep",
+  "breadcrumbLabel": "Vétérinaire",
+  "sections": {
+    "forWho": { "h2": "Pour qui", "lead": "Vétérinaires : remplissez l’agenda avec des demandes proches (60/95)." }
+  },
+  "forWho": [
+    { "title": "Vétérinaire indépendant", "text": "Plus de demandes locales sur vos villes prioritaires, sans clics hors-zone." },
+    { "title": "Salon avec équipe", "text": "Stabiliser le flux et lisser la saisonnalité." },
+    { "title": "Spécialités", "text": "Mettre en avant vos prestations (tonte, coupe ciseaux, races…)." },
+    { "title": "Objectif agenda", "text": "Pilotage sur appels + formulaires, pas sur trafic." }
+  ]
+}

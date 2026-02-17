@@ -1,24 +1,19 @@
 ---
+// src/components/Header.astro
+
 import { getCollection } from "astro:content";
 
-const services = (await getCollection("services")).sort((a,b)=>a.id.localeCompare(b.id));
-const metiers  = (await getCollection("metiers")).sort((a,b)=>a.id.localeCompare(b.id));
-const zones    = (await getCollection("zones")).sort((a,b)=>a.id.localeCompare(b.id));
-const villes   = (await getCollection("villes")).sort((a,b)=>a.id.localeCompare(b.id));
+// helper (si tu l'as déjà ailleurs, garde ta version)
+const labelFromId = (id) =>
+  id
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
-// Labels propres (optionnel)
-const labelFromId = (id) => {
-  const map = {
-    "seo-local": "SEO local",
-    "google-ads": "Google Ads",
-    "veterinaire": "Vétérinaire",
-    "toiletteur": "Toiletteur",
-    "sud-oise-60": "Sud Oise (60)",
-    "val-doise-95": "Val d’Oise (95)",
-    "lisle-adam": "L’Isle-Adam"
-  };
-  return map[id] ?? id;
-};
+// Charge les collections (retourne des entries avec { id, data, ... })
+const services = await getCollection("services").catch(() => []);
+const metiers = await getCollection("metiers").catch(() => []);
+const zones = await getCollection("zones").catch(() => []);
+const villes = await getCollection("villes").catch(() => []);
 ---
 
 <header id="header" class="transparent-header dark" data-sticky-class="not-dark">
@@ -59,7 +54,7 @@ const labelFromId = (id) => {
               <ul class="sub-menu-container">
                 {metiers.map((e) => (
                     <li class="menu-item">
-                      <a class="menu-link" href={`/metiers/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                      <a class="menu-link" href={`/metiers/${e.data.slug}/`}><div>{labelFromId(e.id)}</div></a>
                     </li>
                 ))}
               </ul>
@@ -71,17 +66,6 @@ const labelFromId = (id) => {
                 {zones.map((e) => (
                     <li class="menu-item">
                       <a class="menu-link" href={`/zones/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
-                    </li>
-                ))}
-              </ul>
-            </li>
-
-            <li class="menu-item">
-              <a class="menu-link" href="/villes/"><div>Villes</div></a>
-              <ul class="sub-menu-container">
-                {villes.map((e) => (
-                    <li class="menu-item">
-                      <a class="menu-link" href={`/villes/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
                     </li>
                 ))}
               </ul>
