@@ -1,0 +1,114 @@
+{
+  "key": "hub:preuves",
+  "breadcrumbLabel": "Preuves",
+
+  "primaryKeyword": "preuves",
+  "secondaryKeywords": [
+    "preuves"
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "proofsBlocks": {
+    "h2": "Preuves",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Preuve 1",
+        "items": [
+          "item 1",
+          "item 1",
+          "item 1"
+        ]
+      },
+      {
+        "title": "Preuve 2",
+        "items": [
+          "item 2",
+          "item 2",
+          "item 2"
+        ]
+      }
+    ]
+  },
+
+  "methode": {
+    "h2": "Méthode",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Méthode 1",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      },
+      {
+        "title": "Méthode 2",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/?page=hub-metiers"
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

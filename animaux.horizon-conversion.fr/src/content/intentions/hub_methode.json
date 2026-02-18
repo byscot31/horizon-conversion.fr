@@ -1,0 +1,118 @@
+{
+  "key": "hub:methode",
+  "breadcrumbLabel": "Méthode",
+
+  "primaryKeyword": "methode",
+  "secondaryKeywords": [
+    "methode"
+  ],
+
+  "metaTitle": "Meta Title | Horizon Conversion Animaux",
+  "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+  "pageTitleH1": "Page Title :<br> H1",
+  "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "pageTitleALT": "ALT",
+
+  "proofs": [
+    { "title": "Promesse 1", "subtitle": "subtitle" },
+    { "title": "Promesse 2", "subtitle": "subtitle" },
+    { "title": "Promesse 3", "subtitle": "subtitle" }
+  ],
+
+  "methode": {
+    "h2": "Méthode",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Méthode 1",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      },
+      {
+        "title": "Méthode 2",
+        "items": [
+          "item 1",
+          "item 2",
+          "item 3"
+        ]
+      }
+    ]
+  },
+
+  "process": {
+    "h2": "Processus",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Processus 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      },
+      {
+        "title": "Processus 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "href": "/methode/"
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "eyebrow",
+    "title": "title",
+    "buttonLabel": "CTA",
+    "buttonHref": "/contact/?page=hub-metiers"
+  },
+
+  "faqs": {
+    "h2": "FAQs",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "q": "Question 1",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 2",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 3",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 4",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 5",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 6",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 7",
+        "a": "Answers"
+      },
+      {
+        "q": "Question 8",
+        "a": "Answers"
+      }
+    ]
+  }
+}

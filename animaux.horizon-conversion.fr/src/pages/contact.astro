@@ -1,5 +1,54 @@
 ---
+// src/pages/contact.astro
 import LayoutSeo from "../layouts/LayoutSEO.astro";
+import { getCollection } from "astro:content";
+
+// 🔹 Options dynamiques (Metiers/Zones/Villes) via JSON "intentions"
+const intentions = await getCollection("intentions");
+
+// Zones = fichiers zone_*.json
+const zones = intentions
+  .filter((e) => e.id.startsWith("zone_"))
+  .map((e) => ({
+    value: e.data?.slug ?? e.id.replace(/^zone_/, ""),
+    label: e.data?.breadcrumbLabel ?? e.data?.pageTitleH1 ?? e.data?.primaryKeyword ?? e.id.replace(/^zone_/, ""),
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label, "fr"));
+
+// Métiers = si tu as des pages /metiers/... en collection "intentions" (sinon fallback simple)
+const metiersFallback = [
+  { value: "veterinaire", label: "Vétérinaire" },
+  { value: "toiletteur", label: "Toiletteur" },
+  { value: "autre", label: "Autre" },
+];
+
+// Villes = fichiers ville_*.json + on infère zone depuis breadcrumbs href "/zones/<zone>/"
+const inferZoneSlug = (e) => {
+  const href =
+    e.data?.breadcrumbs?.find((b) => typeof b?.href === "string" && b.href.startsWith("/zones/"))?.href ?? "";
+  const m = href.match(/^\/zones\/([^/]+)\/?/);
+  return m?.[1] ?? null;
+};
+
+const villes = intentions
+  .filter((e) => e.id.startsWith("ville_"))
+  .map((e) => ({
+    value: e.data?.slug ?? e.id.replace(/^ville_/, ""),
+    label: e.data?.breadcrumbLabel ?? e.data?.pageTitleH1 ?? e.id.replace(/^ville_/, ""),
+    zone: e.data?.zoneSlug ?? inferZoneSlug(e) ?? "",
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label, "fr"));
+
+// 🔹 Préremplissage via query string (?objectif=..., ?zone=..., ?ville=..., ?metier=...)
+const q = Astro.url.searchParams;
+
+const preset = {
+  metier: q.get("metier") ?? "",
+  zone: q.get("zone") ?? "",
+  ville: q.get("ville") ?? "",
+  objectif: q.get("objectif") ?? "",
+  prestation: q.get("prestation") ?? "",
+};
 ---
 
 <LayoutSeo
@@ -7,99 +56,224 @@ import LayoutSeo from "../layouts/LayoutSEO.astro";
     description="Demandez un mini-audit local (15 min) : SEO local / Google Ads pour vétérinaires & toiletteurs en Sud Oise (60) et Val d’Oise (95)."
     h1="Contact — Mini-audit local (15 min)"
 >
-  <section>
-    <p>
-      Décris ta situation en 30 secondes : on te renvoie un plan d’action clair (priorités + prochaines étapes).
-      Si c’est urgent, appelle directement : <a href="tel:+33660921008">06 60 92 10 08</a>.
-    </p>
+  <!-- HERO -->
+  <section class="section m-0" style="background-color:#eef2f5;">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="heading-block border-bottom-0 mb-3">
+            <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 34px;">
+              Mini-audit local (15 min)
+            </h2>
+            <span>
+              Décris ta situation en 30 secondes : je te renvoie un plan d’action clair (priorités + prochaines étapes).
+              Si c’est urgent : <a href="tel:+33660921008">06 60 92 10 08</a>.
+            </span>
+          </div>
+
+          <div class="row g-3 mt-1" style="max-width: 720px;">
+            <div class="col-md-4">
+              <div style="background:#fff; border:1px solid #e9ecef; border-radius:14px; padding:12px 14px;">
+                <strong>15 min</strong><br/>
+                <small style="opacity:.8;">cadrage + priorités</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background:#fff; border:1px solid #e9ecef; border-radius:14px; padding:12px 14px;">
+                <strong>Tracking</strong><br/>
+                <small style="opacity:.8;">appels + formulaires</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="background:#fff; border:1px solid #e9ecef; border-radius:14px; padding:12px 14px;">
+                <strong>Local 60/95</strong><br/>
+                <small style="opacity:.8;">Maps + Google</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+            <a href="#contact_qualif" class="button button-large button-rounded ms-0" data-cta="1">
+              Remplir le formulaire
+            </a>
+            <a href="tel:+33660921008" class="button button-large button-rounded button-border ms-0" data-cta="1">
+              Appeler : 06 60 92 10 08
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div style="background:#111; color:#fff; border-radius:18px; padding:18px;">
+            <h3 class="text-transform-none ls-0 fw-semibold mb-2" style="color:#fff;">Ce que tu obtiens</h3>
+            <ul class="iconlist mb-0">
+              <li class="d-block"><i class="bi-check-lg me-1"></i> Diagnostic rapide (site + Google/Maps + concurrence)</li>
+              <li class="d-block"><i class="bi-check-lg me-1"></i> Recos priorisées (quick wins + plan 30 jours)</li>
+              <li class="d-block"><i class="bi-check-lg me-1"></i> Estimation “effort → résultats” (SEO / Ads)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <Proof />
+  <!-- FORM -->
+  <section class="section m-0">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
 
-  <form
-      id="contact_qualif"
-      method="get"
-      action="/merci/"
-      style="margin-top: 24px; padding: 18px; border: 1px solid #eee; border-radius: 14px; background:#fafafa;"
-  >
-    <h2 style="margin:0 0 10px;">Votre demande</h2>
+          <form id="contact_qualif" method="get" action="/merci/" class="p-4 p-md-5"
+                style="border:1px solid #eee; border-radius:18px; background:#fff;">
 
-    <label style="display:block; margin:10px 0 6px;">Vous êtes</label>
-    <select name="metier" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
-      <option value="">Choisir…</option>
-      <option value="veterinaire">Vétérinaire</option>
-      <option value="toiletteur">Toiletteur</option>
-      <option value="autre">Autre</option>
-    </select>
+            <div class="row g-4">
+              <div class="col-12">
+                <h2 class="text-transform-none font-secondary fw-normal mb-0" style="font-size: 28px;">
+                  Votre demande
+                </h2>
+                <p class="mb-0" style="opacity:.8;">
+                  Plus c’est précis, plus le mini-audit est utile.
+                </p>
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Zone</label>
-    <select name="zone" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
-      <option value="">Choisir…</option>
-      <option value="sud-oise-60">Sud Oise (60)</option>
-      <option value="val-doise-95">Val d’Oise (95)</option>
-      <option value="autre">Autre</option>
-    </select>
+              {/* METIER */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Vous êtes</label>
+                <select name="metier" required class="form-select"
+                        style="border-radius:12px; padding:12px;"
+                        value={preset.metier}>
+                  <option value="">Choisir…</option>
+                  {metiersFallback.map((m) => (
+                      <option value={m.value}>{m.label}</option>
+                  ))}
+                </select>
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Objectif principal</label>
-    <select name="objectif" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
-      <option value="">Choisir…</option>
-      <option value="maps">Remonter sur Google Maps</option>
-      <option value="seo">SEO local (site + contenus)</option>
-      <option value="ads">Lancer / optimiser Google Ads</option>
-      <option value="plus-appels">Plus d’appels</option>
-      <option value="plus-rdv">Plus de RDV</option>
-    </select>
+              {/* ZONE */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Zone</label>
+                <select name="zone" required class="form-select"
+                        style="border-radius:12px; padding:12px;"
+                        value={preset.zone}>
+                  <option value="">Choisir…</option>
+                  {zones.map((z) => (
+                      <option value={z.value}>{z.label}</option>
+                  ))}
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Ville principale (optionnel)</label>
-    <input
-        name="ville"
-        placeholder="Ex : Chantilly"
-        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
-    />
+              {/* OBJECTIF */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Objectif principal</label>
+                <select name="objectif" required class="form-select"
+                        style="border-radius:12px; padding:12px;"
+                        value={preset.objectif}>
+                  <option value="">Choisir…</option>
+                  <option value="maps">Remonter sur Google Maps</option>
+                  <option value="seo">SEO local (site + contenus)</option>
+                  <option value="ads">Lancer / optimiser Google Ads</option>
+                  <option value="plus-appels">Plus d’appels</option>
+                  <option value="plus-rdv">Plus de RDV</option>
+                </select>
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Téléphone</label>
-    <input
-        name="telephone"
-        required
-        inputmode="tel"
-        placeholder="06…"
-        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
-    />
+              {/* VILLE (filtrable côté back, mais ici on laisse simple) */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Ville principale (optionnel)</label>
+                <input
+                    name="ville"
+                    class="form-control"
+                    placeholder="Ex : Chantilly"
+                    style="border-radius:12px; padding:12px;"
+                    value={preset.ville}
+                />
+                <small style="opacity:.75;">
+                  Astuce : tu peux aussi mettre “Ville + secteur”.
+                </small>
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Email</label>
-    <input
-        type="email"
-        name="email"
-        required
-        placeholder="contact@..."
-        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
-    />
+              {/* TEL */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Téléphone</label>
+                <input
+                    name="telephone"
+                    required
+                    inputmode="tel"
+                    class="form-control"
+                    placeholder="06…"
+                    style="border-radius:12px; padding:12px;"
+                />
+              </div>
 
-    <label style="display:block; margin:10px 0 6px;">Message (optionnel)</label>
-    <textarea
-        name="message"
-        rows="4"
-        placeholder="Contexte, offre à pousser, zone exacte, urgence, budget si tu veux…"
-        style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;"
-    ></textarea>
+              {/* EMAIL */}
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    class="form-control"
+                    placeholder="contact@..."
+                    style="border-radius:12px; padding:12px;"
+                />
+              </div>
 
-    <button
-        type="submit"
-        data-cta="1"
-        style="margin-top:12px; padding:10px 14px; border-radius:12px; background:#111; color:#fff; border:0;"
-    >
-      Envoyer
-    </button>
+              {/* MESSAGE */}
+              <div class="col-12">
+                <label class="form-label fw-semibold">Message (optionnel)</label>
+                <textarea
+                    name="message"
+                    rows="5"
+                    class="form-control"
+                    placeholder="Contexte, offre à pousser, zone exacte, urgence, budget si tu veux…"
+                    style="border-radius:12px; padding:12px;"
+                ></textarea>
+              </div>
 
-    <p style="margin-top:10px; font-size: 14px;">
-      Ou appelez directement : <a href="tel:+33660921008">06 60 92 10 08</a> ·
-      <a href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
-    </p>
+              {/* SUBMIT */}
+              <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
+                <button type="submit" class="button button-large button-rounded m-0" data-cta="1">
+                  Envoyer la demande
+                </button>
 
-    <p style="margin-top:8px; font-size: 12px; color:#666;">
-      (Formulaire en mode “préparation” : il redirige vers une page de confirmation pour l’instant.)
-    </p>
-  </form>
+                <div style="opacity:.85;">
+                  ou <a href="tel:+33660921008">06 60 92 10 08</a> ·
+                  <a href="mailto:contact@horizon-conversion.fr">contact@horizon-conversion.fr</a>
+                </div>
+              </div>
 
-  <CTA title="Besoin d’aller vite ?" text="Si tu veux des leads rapidement, on peut démarrer par Google Ads + tracking, puis consolider le SEO local." />
+              <div class="col-12">
+                <div style="font-size:12px; color:#666;">
+                  (Formulaire en mode “préparation” : redirection vers une page de confirmation.)
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="section dark parallax scroll-detect mt-0 mb-0" style="padding: 110px 0;">
+    <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="" />
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="heading-block border-bottom-0 mb-0">
+            <div class="before-heading text-lowercase ls-1 text-white fw-normal">
+              Besoin d’aller vite ?
+            </div>
+            <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 30px;">
+              On peut démarrer par Google Ads + tracking, puis consolider le SEO local.
+            </h2>
+            <a href="/contact/?objectif=ads" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+              Objectif : Ads
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </LayoutSeo>

@@ -1,19 +1,162 @@
 ---
 // src/components/Header.astro
-
 import { getCollection } from "astro:content";
 
-// helper (si tu l'as déjà ailleurs, garde ta version)
-const labelFromId = (id) =>
+// ---------- Helpers ----------
+const labelFromId = (id: string) =>
   id
     .replace(/[-_]/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
-// Charge les collections (retourne des entries avec { id, data, ... })
-const services = await getCollection("services").catch(() => []);
-const metiers = await getCollection("metiers").catch(() => []);
-const zones = await getCollection("zones").catch(() => []);
-const villes = await getCollection("villes").catch(() => []);
+const safeArray = <T,>(v: any): T[] => (Array.isArray(v) ? v : []);
+
+// ---------- Load intentions (single source of truth) ----------
+const intentions = await getCollection("intentions");
+
+// hubs (JSON dans src/content/intentions/hub_*.json)
+const hubPrestations =
+  intentions.find((e) => e.data?.key === "hub:prestations") ??
+  intentions.find((e) => e.id === "hub_prestations") ??
+  null;
+
+const hubMetiers =
+  intentions.find((e) => e.data?.key === "hub:metiers") ??
+  intentions.find((e) => e.id === "hub_metiers") ??
+  null;
+
+const hubZones =
+  intentions.find((e) => e.data?.key === "hub:zones") ??
+  intentions.find((e) => e.id === "hub_zones") ??
+  null;
+
+const hubVilles =
+  intentions.find((e) => e.data?.key === "hub:villes") ??
+  intentions.find((e) => e.id === "hub_villes") ??
+  null;
+
+// ---------- Build menus from hubs (preferred) ----------
+const prestationsItems = safeArray<any>(hubPrestations?.data?.prestationsBlocks?.items).map((it) => ({
+  label: it.title ?? "Prestation",
+  href: it.button?.href ?? "/prestations/",
+}));
+
+const metiersItems = safeArray<any>(hubMetiers?.data?.metiersBlocks?.items).map((it) => ({
+  label: it.title ?? "Métier",
+  href: it.href ?? "/metiers/",
+}));
+
+const zonesItems = safeArray<any>(hubZones?.data?.zonesBlocks?.items).map((it) => ({
+  label: it.title ?? "Zone",
+  href: it.button?.href ?? "/zones/",
+}));
+
+const villesItems = safeArray<any>(hubVilles?.data?.villesBlocks?.items).map((it) => ({
+  label: it.title ?? "Ville",
+  href: it.button?.href ?? "/zones/",
+}));
+
+// ---------- Fallback (si un hub est vide) ----------
+const fallbackServices = intentions
+  .filter((e) => String(e.data?.key ?? "").startsWith("service:"))
+  .map((e) => ({
+    label: e.data?.breadcrumbLabel ?? labelFromId(e.id.replace(/^service_/, "")),
+    href: `/prestations/${e.data?.slug ?? e.id.replace(/^service_/, "")}/`,
+  }));
+
+const fallbackMetiers = intentions
+  .filter((e) => e.id.startsWith("metier_"))
+  .map((e) => ({
+    label: e.data?.breadcrumbLabel ?? labelFromId(e.id.replace(/^metier_/, "")),
+    href: `/metiers/${e.data?.slug ?? e.id.replace(/^metier_/, "")}/`,
+  }));
+
+const fallbackZones = intentions
+  .filter((e) => e.id.startsWith("zone_"))
+  .map((e) => ({
+    label: e.data?.breadcrumbLabel ?? labelFromId(e.id.replace(/^zone_/, "")),
+    href: `/zones/${e.data?.slug ?? e.id.replace(/^zone_/, "")}/`,
+  }));
+
+const fallbackVilles = intentions
+  .filter((e) => e.id.startsWith("ville_"))
+  .map((e) => {
+    // essaie d’inférer /zones/<zone>/<ville>/
+    const villeSlug = e.data?.slug ?? e.id.replace(/^ville_/, "");
+    const zoneSlug =
+      e.data?.zoneSlug ??
+      (() => {
+        const href =
+          e.data?.breadcrumbs?.find((b) => typeof b?.href === "string" && b.href.startsWith("/zones/"))?.href ?? "";
+        const m = href.match(/^\/zones\/([^/]+)\/?/);
+        return m?.[1] ?? null;
+      })();
+
+    return {
+      label: e.data?.breadcrumbLabel ?? labelFromId(villeSlug),
+      href: zoneSlug ? `/zones/${zoneSlug}/${villeSlug}/` : `/zones/`,
+    };
+  });
+
+// final menus (hub > fallback)
+const menuPrestations = prestationsItems.length ? prestationsItems : fallbackServices;
+const menuMetiers = metiersItems.length ? metiersItems : fallbackMetiers;
+const menuZones = zonesItems.length ? zonesItems : fallbackZones;
+const menuVilles = villesItems.length ? villesItems : fallbackVilles;
+
+// option : trier si tu veux (ici tri alpha)
+const sortByLabel = (a, b) => (a.label ?? "").localeCompare(b.label ?? "", "fr");
+menuPrestations.sort(sortByLabel);
+menuMetiers.sort(sortByLabel);
+menuZones.sort(sortByLabel);
+menuVilles.sort(sortByLabel);
+
+// Helpers pour grouper villes par zone via l'URL
+const zoneSlugFromHref = (href: string) => {
+  const m = String(href || "").match(/^\/zones\/([^/]+)\//);
+  return m?.[1] ?? null; // /zones/<zone>/<ville>/
+};
+
+const zoneSlugFromZoneHref = (href: string) => {
+  const m = String(href || "").match(/^\/zones\/([^/]+)\/?$/);
+  return m?.[1] ?? null; // /zones/<zone>/
+};
+
+// Construire un index des zones depuis le menu zones (hub_zones)
+const zonesIndex = new Map<string, { label: string; href: string }>();
+for (const z of menuZones) {
+  const slug = zoneSlugFromZoneHref(z.href);
+  if (slug) zonesIndex.set(slug, { label: z.label, href: z.href });
+}
+
+// Grouper les villes par zoneSlug (depuis le menu villes)
+const villesByZone = new Map<string, { label: string; href: string }[]>();
+for (const v of menuVilles) {
+  const zoneSlug = zoneSlugFromHref(v.href);
+  if (!zoneSlug) continue;
+  const arr = villesByZone.get(zoneSlug) ?? [];
+  arr.push(v);
+  villesByZone.set(zoneSlug, arr);
+}
+
+// Sort villes within each zone
+for (const [k, arr] of villesByZone.entries()) {
+  arr.sort(sortByLabel);
+  villesByZone.set(k, arr);
+}
+
+// Colonnes du mega-menu = les zones (ordre = menuZones)
+const megaZones = menuZones
+  .map((z) => {
+    const slug = zoneSlugFromZoneHref(z.href);
+    if (!slug) return null;
+    return {
+      slug,
+      label: z.label,
+      href: z.href,
+      villes: villesByZone.get(slug) ?? [],
+    };
+  })
+  .filter(Boolean);
 ---
 
 <header id="header" class="transparent-header dark" data-sticky-class="not-dark">
@@ -41,9 +184,9 @@ const villes = await getCollection("villes").catch(() => []);
             <li class="menu-item">
               <a class="menu-link" href="/prestations/"><div>Prestations</div></a>
               <ul class="sub-menu-container">
-                {services.map((e) => (
+                {menuPrestations.map((it) => (
                     <li class="menu-item">
-                      <a class="menu-link" href={`/prestations/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
+                      <a class="menu-link" href={it.href}><div>{it.label}</div></a>
                     </li>
                 ))}
               </ul>
@@ -52,23 +195,38 @@ const villes = await getCollection("villes").catch(() => []);
             <li class="menu-item">
               <a class="menu-link" href="/metiers/"><div>Métiers</div></a>
               <ul class="sub-menu-container">
-                {metiers.map((e) => (
+                {menuMetiers.map((it) => (
                     <li class="menu-item">
-                      <a class="menu-link" href={`/metiers/${e.data.slug}/`}><div>{labelFromId(e.id)}</div></a>
+                      <a class="menu-link" href={it.href}><div>{it.label}</div></a>
                     </li>
                 ))}
               </ul>
             </li>
 
-            <li class="menu-item">
+            <li class="menu-item mega-menu">
               <a class="menu-link" href="/zones/"><div>Zones</div></a>
-              <ul class="sub-menu-container">
-                {zones.map((e) => (
-                    <li class="menu-item">
-                      <a class="menu-link" href={`/zones/${e.id}/`}><div>{labelFromId(e.id)}</div></a>
-                    </li>
-                ))}
-              </ul>
+
+              <div class="mega-menu-content mega-menu-style-2">
+                <div class="container">
+                  <div class="row">
+                    {megaZones.map((z) => (
+                        <ul class="sub-menu-container mega-menu-column col-lg-6">
+                          <li class="menu-item mega-menu-title">
+                            <a class="menu-link" href={z.href}><div>{z.label}</div></a>
+
+                            <ul class="sub-menu-container">
+                              {z.villes.map((v) => (
+                                  <li class="menu-item">
+                                    <a class="menu-link" href={v.href}><div>{v.label}</div></a>
+                                  </li>
+                              ))}
+                            </ul>
+                          </li>
+                        </ul>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </li>
 
             <li class="menu-item bg-color h-bg-dark px-xl-3">
