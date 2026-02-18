@@ -26,29 +26,68 @@
     { "title": "Promesse 3", "subtitle": "subtitle" }
   ],
 
-  "villesBlocks": {
-    "h2": "Villes",
+  "localContext": {
+    "h2": "Contexte local",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "items": [
       {
-        "title": "Ville 1",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "button": { "label": "Voir la ville" }
+        "title": "Contexte 1",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       },
       {
-        "title": "Ville 2",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "button": { "label": "Voir la ville" }
+        "title": "Contexte 2",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       },
       {
-        "title": "Ville 3",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "button": { "label": "Voir la ville" }
+        "title": "Contexte 3",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       },
       {
-        "title": "Ville 4",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "button": { "label": "Voir la ville" }
+        "title": "Contexte 4",
+        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ]
+  },
+
+  "metiersBlocks": {
+    "h2": "Métiers",
+    "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "items": [
+      {
+        "title": "Éducateur canin",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/educateur-canin.jpg" },
+        "href": "/metiers/educateur-canin/"
+      },
+      {
+        "title": "Ostéopathe animalier",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/osteopathe-animalier.jpg" },
+        "href": "/metiers/osteopathe-animalier/"
+      },
+      {
+        "title": "Pension canine",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pension-canine.jpg" },
+        "href": "/metiers/pension-canine/"
+      },
+      {
+        "title": "Pet sitter",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/pet-sitter.jpg" },
+        "href": "/metiers/pet-sitter/"
+      },
+      {
+        "title": "Toiletteur",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/toiletteur.jpg" },
+        "href": "/metiers/toiletteur/"
+      },
+      {
+        "title": "Vétérinaire",
+        "description": "description",
+        "background": { "image": "/assets/images/metiers/veterinaire.jpg" },
+        "href": "/metiers/veterinaire/"
       }
     ]
   },
@@ -143,12 +182,6 @@
     ]
   },
 
-  "objectives": [
-    { "label": "Objectif : 1", "href": "/contact/?objectif=1", "style": "primary" },
-    { "label": "Objectif : 2", "href": "/contact/?objectif=2", "style": "outline" },
-    { "label": "Objectif : 3", "href": "/contact/?objectif=3", "style": "outline" }
-  ],
-
   "process": {
     "h2": "Processus",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -181,48 +214,89 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?zone=sud-oise-60&ville=lamorlaye"
+    "buttonHref": "/contact/?zone=val-doise-95&ville=arnouville"
   },
 
-  "metiersBlocks": {
-    "h2": "Métiers",
+  "villesBlocks": {
+    "h2": "Autres villes",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "items": [
       {
-        "title": "Éducateur canin",
+        "title": "Arnouville",
+        "slug": "arnouville",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/educateur-canin.jpg" },
-        "href": "/metiers/educateur-canin/"
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/arnouville/" }
       },
       {
-        "title": "Ostéopathe animalier",
+        "title": "Chantilly",
+        "slug": "chantilly",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/osteopathe-animalier.jpg" },
-        "href": "/metiers/osteopathe-animalier/"
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/chantilly/" }
       },
       {
-        "title": "Pension canine",
+        "title": "Creil",
+        "slug": "creil",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/pension-canine.jpg" },
-        "href": "/metiers/pension-canine/"
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/creil/" }
       },
       {
-        "title": "Pet sitter",
+        "title": "Domont",
+        "slug": "domont",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/pet-sitter.jpg" },
-        "href": "/metiers/pet-sitter/"
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/domont/" }
       },
       {
-        "title": "Toiletteur",
+        "title": "Garges-lès-Gonesse",
+        "slug": "garges-les-gonesse",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/toiletteur.jpg" },
-        "href": "/metiers/toiletteur/"
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/garges-les-gonesse/" }
       },
       {
-        "title": "Vétérinaire",
+        "title": "L'Isle-Adam",
+        "slug": "lisle-adam",
+        "subTitle": "subTitle",
         "description": "description",
-        "background": { "image": "/assets/images/metiers/veterinaire.jpg" },
-        "href": "/metiers/veterinaire/"
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/lisle-adam/" }
+      },
+      {
+        "title": "Montataire",
+        "slug": "montataire",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/montataire/" }
+      },
+      {
+        "title": "Nogent-sur-Oise",
+        "slug": "nogent-sur-oise",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/nogent-sur-oise/" }
+      },
+      {
+        "title": "Sarcelles",
+        "slug": "sarcelles",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/sarcelles/" }
+      },
+      {
+        "title": "Senlis",
+        "slug": "senlis",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/senlis/" }
+      },
+      {
+        "title": "Villiers-le-Bel",
+        "slug": "villiers-le-bel",
+        "subTitle": "subTitle",
+        "description": "description",
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/villiers-le-bel/" }
       }
     ]
   },

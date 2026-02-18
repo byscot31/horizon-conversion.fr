@@ -165,12 +165,14 @@
     "items": [
       {
         "title": "Sud Oise (60)",
+        "slug": "sud-oise-60",
         "subTitle": "subTitle",
         "description": "description",
         "button": { "href": "/zones/sud-oise-60/", "label": "Voir la zone" }
       },
       {
         "title": "Val d’Oise (95)",
+        "slug": "val-doise-95",
         "subTitle": "subTitle",
         "description": "description",
         "button": { "href": "/zones/val-doise-95/", "label": "Voir la zone" }

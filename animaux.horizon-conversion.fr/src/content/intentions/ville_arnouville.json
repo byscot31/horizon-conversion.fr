@@ -1,14 +1,20 @@
 {
   "key": "ville:arnouville",
+  "slug": "arnouville",
+  "zoneSlug": "val-doise-95",
   "breadcrumbLabel": "Arnouville",
   "breadcrumbs": [
     { "label": "Zones", "href": "/zones/" },
     { "label": "Val d’Oise (95)", "href": "/zones/val-doise-95/" }
   ],
 
+  "primaryKeyword": "arnouville",
+  "secondaryKeywords": [
+    "arnouville"
+  ],
+
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
   "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  "keyWords": "keyWord1, keyWord2, keyWord3",
 
   "pageTitleH1": "Page Title :<br> H1",
   "pageTitleLead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -153,12 +159,12 @@
     ]
   },
 
-  "proofsBlocks": {
-    "h2": "Preuves",
+  "methode": {
+    "h2": "Méthode",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "items": [
       {
-        "title": "Preuve 1",
+        "title": "Méthode 1",
         "items": [
           "item 1",
           "item 2",
@@ -166,7 +172,7 @@
         ]
       },
       {
-        "title": "Preuve 2",
+        "title": "Méthode 2",
         "items": [
           "item 1",
           "item 2",
@@ -212,80 +218,85 @@
   },
 
   "villesBlocks": {
-    "h2": "Villes autours",
+    "h2": "Autres villes",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "items": [
       {
-        "title": "Arnouville",
-        "subTitle": "subTitle",
-        "description": "description",
-        "button": { "label": "Voir la ville" }
-      },
-      {
         "title": "Chantilly",
+        "slug": "chantilly",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/chantilly/" }
       },
       {
         "title": "Creil",
+        "slug": "creil",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/creil/" }
       },
       {
         "title": "Domont",
+        "slug": "domont",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/domont/" }
       },
       {
         "title": "Garges-lès-Gonesse",
+        "slug": "garges-les-gonesse",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/garges-les-gonesse/" }
       },
       {
         "title": "Lamorlaye",
+        "slug": "lamorlaye",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/lamorlaye/" }
       },
       {
         "title": "L'Isle-Adam",
+        "slug": "lisle-adam",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/lisle-adam/" }
       },
       {
         "title": "Montataire",
+        "slug": "montataire",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/montataire/" }
       },
       {
         "title": "Nogent-sur-Oise",
+        "slug": "nogent-sur-oise",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/nogent-sur-oise/" }
       },
       {
         "title": "Sarcelles",
+        "slug": "sarcelles",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/sarcelles/" }
       },
       {
         "title": "Senlis",
+        "slug": "senlis",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/sud-oise-60/senlis/" }
       },
       {
         "title": "Villiers-le-Bel",
+        "slug": "villiers-le-bel",
         "subTitle": "subTitle",
         "description": "description",
-        "button": { "label": "Voir la ville" }
+        "button": { "label": "Voir la ville", "href": "/zones/val-doise-95/villiers-le-bel/" }
       }
     ]
   },

@@ -113,24 +113,24 @@
     ]
   },
 
-  "proofsBlocks": {
-    "h2": "Preuves",
+  "methode": {
+    "h2": "Méthode",
     "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "items": [
       {
-        "title": "Preuve 1",
+        "title": "Méthode 1",
         "items": [
           "item 1",
-          "item 1",
-          "item 1"
+          "item 2",
+          "item 3"
         ]
       },
       {
-        "title": "Preuve 2",
+        "title": "Méthode 2",
         "items": [
+          "item 1",
           "item 2",
-          "item 2",
-          "item 2"
+          "item 3"
         ]
       }
     ]

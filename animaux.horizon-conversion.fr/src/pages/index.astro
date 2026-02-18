@@ -1,65 +1,114 @@
 ---
-// src/pages/[ville].astro
+// src/pages/index.astro
 import LayoutSeo from "../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
-const services = await getCollection("services");
-const metiers = await getCollection("metiers");
-const zones = await getCollection("zones");
-const villes = await getCollection("villes");
+// --- Helpers ---
+const isObject = (v) => v && typeof v === "object" && !Array.isArray(v);
 
-const sortById = (a, b) => a.id.localeCompare(b.id);
+function deepMerge(base, patch) {
+  if (!isObject(base) || !isObject(patch)) return patch ?? base;
 
-const metierBlurb = (id) =>
-  id === "veterinaire"
-    ? "Urgence / nouveaux clients / soins : captez les recherches locales"
-    : "Toilettage chien/chat : captez les recherches proches + prise de RDV";
+  const out = { ...base };
+  for (const [k, v] of Object.entries(patch)) {
+    if (Array.isArray(v)) out[k] = v;
+    else if (isObject(v)) out[k] = deepMerge(base?.[k] ?? {}, v);
+    else out[k] = v;
+  }
+  return out;
+}
+
+// --- Load hub_home.json depuis intentions ---
+const intentions = await getCollection("intentions");
+const homeEntry =
+    intentions.find((e) => e.id === "hub_home") ||
+    intentions.find((e) => e.data?.key === "hub:home");
+
+if (!homeEntry) throw new Error("hub_home.json introuvable dans src/content/intentions/");
+
+let page = structuredClone(homeEntry.data);
+
+// --- Optional persona override via query string ---
+const personaParam = Astro.url.searchParams.get("persona");
+let persona = null;
+
+if (personaParam) {
+  const personas = await getCollection("personas");
+  persona =
+      personas.find((p) => p.id === `persona_${personaParam}`) ||
+      personas.find(
+          (p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam
+      ) ||
+      null;
+
+  if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
+}
+
+// --- SEO ---
+const title = page.metaTitle ?? "Accueil | Horizon Conversion Animaux";
+const description = page.metaDescription ?? "";
+const canonical = undefined;
+
+// IMPORTANT : si persona active => noindex par défaut (modifiable via persona.data.seo.robots)
+const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
+
+// --- Aliases ---
+const {
+  pageTitleH1,
+  pageTitleLead,
+  proofs = [],
+  prestationsBlocks,
+  objectives = [],
+  metiersBlocks,
+  zonesBlocks,
+  methode,
+  cta,
+  faqs,
+} = page;
 ---
 
-<LayoutSeo
-    title="Accueil | Horizon Conversion Animaux"
-    description="SEO local & Google Ads pour vétérinaires et toiletteurs en Sud Oise (60) et Val d’Oise (95)."
-    h1="Remplissez votre agenda de RDV en local (60/95)"
->
-  <!-- Slider -->
-  <section id="slider" class="slider-element min-vh-60 min-vh-md-100 include-header" style="background: url('/assets/images/hero-image.jpg') center right no-repeat; background-size: cover;">
+<LayoutSeo title={title} description={description} canonical={canonical} robots={robots}>
+
+  <!-- HERO -->
+  <section
+      id="slider"
+      class="slider-element min-vh-60 min-vh-md-100 include-header"
+      style="background: url('/assets/images/hero-image.jpg') center right no-repeat; background-size: cover;"
+  >
     <div class="slider-inner">
       <div class="vertical-middle">
         <div class="container py-5">
           <div class="emphasis-title dark m-0">
             <h1 style="font-size: 40px; line-height: 1.2; font-weight: 700; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
-              Remplissez votre agenda de RDV<br/>en local (Vétérinaires & Toiletteurs – 60/95)
+              <Fragment set:html={pageTitleH1 ?? ""} />
             </h1>
 
             <p class="fw-light d-none d-md-block" style="font-size: 16px; opacity: .85; max-width: 720px;">
-              SEO local + Google Ads + tracking : on convertit Google/Maps en <strong>prises de RDV</strong> (appels + formulaires),
-              avec une méthode claire et des livrables.
+              {pageTitleLead}
             </p>
 
             <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
-              <a href="/contact/" class="button button-large button-rounded ms-0" data-cta="1">Mini-audit (15 min)</a>
+              <a href={cta?.buttonHref ?? "/contact/"} class="button button-large button-rounded ms-0" data-cta="1">
+                {cta?.buttonLabel ?? "Mini-audit (15 min)"}
+              </a>
               <a href="tel:+33660921008" class="button button-large button-rounded button-border button-white button-light ms-0" data-cta="1">
                 Appeler : 06 60 92 10 08
               </a>
             </div>
 
-            <div class="row mt-4" style="max-width: 820px;">
-              <div class="col-md-4">
-                <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
-                  <strong>Process + livrables</strong><br/><small style="opacity:.85;">pas de blabla</small>
+            {!!proofs?.length && (
+                <div class="row mt-4" style="max-width: 820px;">
+                  {proofs.slice(0, 3).map((p) => (
+                      <div class="col-md-4">
+                        <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                          <strong>{p.title}</strong>
+                          <br /><small style="opacity:.85;">{p.subtitle}</small>
+                        </div>
+                      </div>
+                  ))}
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
-                  <strong>Tracking inclus</strong><br/><small style="opacity:.85;">appels / formulaires</small>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
-                  <strong>Zones : 60/95</strong><br/><small style="opacity:.85;">Creil, Chantilly, Sarcelles…</small>
-                </div>
-              </div>
-            </div>
+            )}
+
           </div>
         </div>
       </div>
@@ -69,216 +118,226 @@ const metierBlurb = (id) =>
   <section id="content">
     <div class="content-wrap pt-0">
 
-      <!-- Prestations -->
-      <section class="section m-0" style="background-color: #eef2f5;">
-        <div class="container">
-
-          <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
-            <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">2 façons de remplir votre agenda</h2>
-            <span>Choisis l’approche selon ton objectif : durable (SEO local) ou immédiat (Ads). Idéalement : les deux.</span>
-          </div>
-
-          <div class="row align-items-stretch g-4">
-            <div class="col-lg-6 col-md-6">
-              <div class="feature-box media-box fbox-bg h-100">
-                <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">
-                    SEO local (Google & Maps)
-                    <span class="subtitle fw-light ls-0">Visibilité durable sur vos zones prioritaires</span>
-                  </h3>
-                  <ul class="iconlist my-4">
-                    <li><i class="bi-check-lg"></i> Optimisation Google Business Profile + site</li>
-                    <li><i class="bi-check-lg"></i> Pages “service / métier / zone / ville” (sans clones)</li>
-                    <li><i class="bi-check-lg"></i> Suivi des demandes (clics appel + formulaires)</li>
-                  </ul>
-                  <a href="/prestations/seo-local/" class="button-link border-0 color" data-cta="1">Voir SEO local</a>
-                </div>
+      <!-- PRESTATIONS -->
+      {prestationsBlocks && (
+          <section class="section m-0" style="background-color: #eef2f5;">
+            <div class="container">
+              <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 640px">
+                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                  {prestationsBlocks.h2}
+                </h2>
+                <span>{prestationsBlocks.lead}</span>
               </div>
-            </div>
 
-            <div class="col-lg-6 col-md-6">
-              <div class="feature-box media-box fbox-bg h-100">
-                <div class="fbox-content border-0">
-                  <h3 class="text-transform-none ls-0 fw-semibold">
-                    Google Ads (Search local)
-                    <span class="subtitle fw-light ls-0">Des demandes rapidement, pilotées à la conversion</span>
-                  </h3>
-                  <ul class="iconlist my-4">
-                    <li><i class="bi-check-lg"></i> Ciblage géographique serré (60/95)</li>
-                    <li><i class="bi-check-lg"></i> Mots-clés + négatifs anti “clics inutiles”</li>
-                    <li><i class="bi-check-lg"></i> Optimisation hebdo sur demandes réelles</li>
-                  </ul>
-                  <a href="/prestations/google-ads/" class="button-link border-0 color" data-cta="1">Voir Google Ads</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-center mt-4">
-            <a href="/contact/?objectif=plus-rdv" class="button button-large button-rounded" data-cta="1">Objectif : + de RDV</a>
-            <a href="/contact/?objectif=maps" class="button button-large button-rounded bg-transparent button-border" data-cta="1">Objectif : Google Maps</a>
-            <a href="/contact/?objectif=ads" class="button button-large button-rounded bg-transparent button-border" data-cta="1">Objectif : Google Ads</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Métiers -->
-      <div class="container mt-6">
-        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
-          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            Métiers
-          </h2>
-          <span>Messages et pages adaptées à votre métier pour générer des demandes qui se transforment en RDV.</span>
-        </div>
-        <div class="row contact-properties">
-          {metiers.sort(sortById).map((e) =>
-              <div class="col-md-6">
-                <a href={`/metiers/${e.id}/`} data-cta="1" style="background: url('/assets/images/help/1.jpg') no-repeat center center; background-size: cover;">
-                  <div class="vertical-middle dark text-center">
-                    <div class="heading-block m-0 border-0">
-                      <h3 class="text-capitalize fw-normal font-secondary">{e.data.h1}</h3>
-                      <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
-											{metierBlurb(e.id)} <br/>
-                        Tracking appels & formulaires
-										</span>
+              <div class="row align-items-stretch g-4">
+                {prestationsBlocks.items?.map((b, i) => (
+                    <div class="col-lg-6 col-md-6">
+                      <div class="feature-box media-box fbox-bg h-100">
+                        <div class="fbox-content border-0">
+                          <h3 class="text-transform-none ls-0 fw-semibold">
+                            {b.title}
+                            <span class="subtitle fw-light ls-0">{b.subtitle}</span>
+                          </h3>
+                          <ul class="iconlist my-4">
+                            {b.items?.slice(0, 6).map((x) => (
+                                <li class="d-block"><i class="bi-check-lg me-1"></i> {x}</li>
+                            ))}
+                          </ul>
+                          <a href={b.button?.href ?? "/prestations/"} class="button-link border-0 color" data-cta="1">
+                            {b.button?.label ?? "Voir"}
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                ))}
               </div>
-          )}
-        </div>
-      </div>
 
-      <!-- Zones -->
-      <div class="section mb-0">
-        <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
-          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            Zones
-          </h2>
-          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
-        </div>
-        <div class="container mt-5">
-          <div class="row feature-box">
-            {zones.sort(sortById).map((e) =>
-                <div class="col-lg-6">
-                  <div class="card border-light shadow-sm mb-3">
-                    <div class="card-body">
-                      <h3 class="text-transform-none ls-0 fw-semibold mb-0">
-                        {e.data.h1}
-                        <small class="d-block subtitle fw-light ls-0 mt-1">Stratégie locale + pages villes + suivi des RDV</small>
-                      </h3>
-                      <p class="my-3 fw-medium">On structure l’acquisition locale sur la zone : pages intention, maillage interne, et optimisation continue
-                        basée sur les demandes réelles (appels / formulaires).</p>
-                      <a class="button-link border-0 color" href={`/zones/${e.id}/`} data-cta="1">Voir la zone</a>
-                    </div>
+              {!!objectives?.length && (
+                  <div class="text-center mt-4">
+                    {objectives.map((o) => (
+                        <a href={o.href ?? "/contact/"} class={`button ${o.style === "outline" ? "button-border" : ""}`} data-cta="1">
+                          {o.label}
+                        </a>
+                    ))}
                   </div>
-                </div>
-            )}
-          </div>
-        </div>
-      </div>
+              )}
+            </div>
+          </section>
+      )}
 
-      <!-- Preuves -->
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="heading-block border-bottom-0 mt-4 mb-0">
-              <h2 class="font-secondary ls-1 text-transform-none fw-normal">
-                Preuves
+      <!-- METIERS -->
+      {metiersBlocks && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {metiersBlocks.h2}
               </h2>
-              <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates deserunt facere placeat est animi, sunt?</span>
+              <span>{metiersBlocks.lead}</span>
             </div>
+
+            <div class="row contact-properties">
+              {metiersBlocks.items?.map((m) => (
+                  <div class="col-md-6">
+                    <a
+                        href={m.href ?? "/metiers/"}
+                        data-cta="1"
+                        style={`background: url('${m.background?.image ?? "/assets/images/page-title.jpg"}') no-repeat center center; background-size: cover;`}
+                    >
+                      <div class="vertical-middle dark text-center">
+                        <div class="heading-block m-0 border-0">
+                          <h3 class="text-capitalize fw-normal font-secondary">{m.title}</h3>
+                          {m.description && (
+                              <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+                          {m.description}
+                        </span>
+                          )}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+              ))}
+            </div>
+          </div>
+      )}
+
+      <!-- PROCESS -->
+      {process && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {process.h2}
+              </h2>
+              <span>{process.lead}</span>
+            </div>
+
+            <ul class="process-steps process-2 feature-box row col-mb-30 justify-content-center mb-4">
+              {process.items?.map((s, idx) => (
+                  <li class="col-sm-3">
+                    <a href={s.href ?? "/methode/"} class="i-style rounded-circle i-alt mx-auto bg-color">{idx + 1}</a>
+                    <h3 class="text-transform-none ls-0 fw-semibold mt-3 mb-0">{s.title}</h3>
+                    <p class="mt-3 mb-0">{s.text}</p>
+                  </li>
+              ))}
+            </ul>
+          </div>
+      )}
+
+      <!-- ZONES -->
+      {zonesBlocks && (
+          <div class="section mt-0 mb-0">
+            <div class="heading-block text-center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {zonesBlocks.h2}
+              </h2>
+              <span>{zonesBlocks.lead}</span>
+            </div>
+
+            <div class="container mt-5">
+              <div class="row feature-box">
+                {zonesBlocks.items?.map((z) => (
+                    <div class="col-lg-6">
+                      <div class="card border-light shadow-sm mb-3">
+                        <div class="card-body">
+                          <h3 class="text-transform-none ls-0 fw-semibold mb-0">
+                            {z.title}
+                            {z.subTitle && (
+                                <small class="d-block subtitle fw-light ls-0 mt-1">{z.subTitle}</small>
+                            )}
+                          </h3>
+                          <p class="my-3 fw-medium">{z.description}</p>
+                          <a class="button-link border-0 color" href={z.button?.href ?? "/zones/"} data-cta="1">
+                            {z.button?.label ?? "Voir la zone"}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                ))}
+              </div>
+            </div>
+          </div>
+      )}
+
+      <!-- METHODE -->
+      {methode && (
+          <div class="container mt-5">
             <div class="row">
-              <ul class="iconlist my-4">
-                <li><i class="bi-check-lg"></i> Audit rapide : site + Google/Maps + concurrence locale</li>
-                <li><i class="bi-check-lg"></i> Plan d’action “1 intention = 1 page” (services / métiers / zones / villes)</li>
-                <li><i class="bi-check-lg"></i> Tracking : clics appel, formulaires, sources (SEO/Ads)</li>
-                <li><i class="bi-check-lg"></i> Optimisation continue : on pilote sur la qualité des demandes → RDV</li>
-              </ul>
-              <a href="/methode/" class="button button-large button-rounded mt-4 ms-0 w-auto" data-cta="1">Voir la méthode</a>
+              {methode.items?.map((card) => (
+                  <div class="col-lg-6">
+                    <div class="heading-block border-bottom-0 mt-4 mb-0">
+                      <h2 class="font-secondary ls-1 text-transform-none fw-normal">
+                        {methode.h2}
+                      </h2>
+                      <span>{methode.lead}</span>
+                    </div>
+
+                    <ul class="iconlist my-4">
+                      {card.items?.map((li) => (
+                          <li class="d-block"><i class="bi-check-lg me-1"></i> {li}</li>
+                      ))}
+                    </ul>
+
+                    <a href="/methode/" class="button button-large button-rounded mt-4 ms-0 w-auto" data-cta="1">Voir la méthode</a>
+                  </div>
+              ))}
+
+              <div class="col-lg-5 d-none d-lg-block">
+                <img class="mt-5" src="/assets/images/others/1.png" alt="Dogs" />
+              </div>
             </div>
           </div>
-
-          <div class="col-lg-5 d-none d-lg-block">
-            <img class="mt-5" src="/assets/images/others/1.png" alt="Dogs">
-          </div>
-
-        </div>
-      </div>
+      )}
 
       <!-- CTA -->
-      <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
-        <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt="">
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="heading-block border-bottom-0 mb-0">
-                <div class="before-heading text-lowercase ls-1 text-white fw-normal">Prêt à remplir l’agenda ?</div>
-                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
-                  Mini-audit local (15 min) : on te donne un plan clair pour générer des RDV
-                </h2>
-                <a href="/contact/" class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
-                  Demander le mini-audit
-                </a>
+      {cta && (
+          <div class="section dark parallax scroll-detect mb-0" style="padding: 140px 0;">
+            <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt={cta.alt ?? ""} />
+            <div class="container text-center">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading text-lowercase ls-1 text-white fw-normal">{cta.eyebrow}</div>
+                    <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+                      {cta.title}
+                    </h2>
+                    <a href={cta.buttonHref ?? "/contact/"} class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                      {cta.buttonLabel ?? "Contact"}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      )}
 
       <!-- FAQ -->
-      <div class="container mt-6">
-        <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
-          <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
-            FAQ
-          </h2>
-          <span>Les questions qu’on nous pose avant de démarrer.</span>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">
-                  Combien de temps avant de voir des demandes ?
-                </div>
-              </div>
-              <div class="toggle-content">Ads peut générer des contacts rapidement si le tracking et la page sont prêts. Le SEO local progresse sur quelques semaines/mois selon concurrence.</div>
+      {faqs?.items?.length && (
+          <div class="container mt-6">
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
+                {faqs.h2 ?? "FAQs"}
+              </h2>
+              <span>{faqs.lead ?? ""}</span>
             </div>
 
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">
-                  Je n’ai pas (ou peu) d’avis Google : c’est bloquant ?
-                </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                {faqs.items.map((f) => (
+                    <div class="toggle">
+                      <div class="toggle-header">
+                        <div class="toggle-icon">
+                          <i class="toggle-closed bi-question-circle"></i>
+                          <i class="toggle-open bi-question-circle"></i>
+                        </div>
+                        <div class="toggle-title">{f.q}</div>
+                      </div>
+                      <div class="toggle-content">{f.a}</div>
+                    </div>
+                ))}
               </div>
-              <div class="toggle-content">Non. On compense par la structure (profil, pages locales, cohérence NAP) + preuves de process et suivi conversions.</div>
-            </div>
-
-            <div class="toggle">
-              <div class="toggle-header">
-                <div class="toggle-icon">
-                  <i class="toggle-closed bi-question-circle"></i>
-                  <i class="toggle-open bi-question-circle"></i>
-                </div>
-                <div class="toggle-title">
-                  Vous intervenez sur quelles zones ?
-                </div>
-              </div>
-              <div class="toggle-content">Sud Oise (60) et Val d’Oise (95), avec des pages dédiées (Creil, Chantilly, Sarcelles, L’Isle-Adam).</div>
             </div>
           </div>
-        </div>
-      </div>
+      )}
 
     </div>
   </section>
-
 </LayoutSeo>

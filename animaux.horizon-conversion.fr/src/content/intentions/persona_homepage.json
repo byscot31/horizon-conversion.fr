@@ -1,0 +1,24 @@
+{
+  "queryKey": "persona",
+  "queryValue": "homepage",
+  "seo": {
+    "robots": "noindex,follow"
+  },
+  "overrides": {
+    "metaTitle": "Accueil — Version TEST | Horizon Conversion Animaux",
+    "metaDescription": "Variante TEST de la home (persona).",
+    "pageTitleH1": "Version TEST :<br/> + de RDV en local (60/95)",
+    "pageTitleLead": "Message adapté à un persona spécifique (ex: urgence, promo, etc.)",
+    "proofs": [
+      { "title": "TEST Proof 1", "subtitle": "subtitle" },
+      { "title": "TEST Proof 2", "subtitle": "subtitle" },
+      { "title": "TEST Proof 3", "subtitle": "subtitle" }
+    ],
+    "cta": {
+      "eyebrow": "Persona TEST",
+      "title": "CTA spécifique à cette variante",
+      "buttonLabel": "Réserver un mini-audit",
+      "buttonHref": "/contact/?persona=test"
+    }
+  }
+}
