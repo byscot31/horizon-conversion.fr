@@ -1,15 +1,15 @@
 {
-  "key": "service:tracking-conversions",
-  "slug": "tracking-conversions",
-  "breadcrumbLabel": "Tracking conversions",
+  "key": "prestation:google-ads",
+  "slug": "google-ads",
+  "breadcrumbLabel": "Google Ads local",
   "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
 
-  "primaryKeyword": "Tracking conversions",
+  "primaryKeyword": "Google Ads local",
   "secondaryKeywords": [
-    "tracking-conversions",
-    "tracking-conversions",
-    "tracking-conversions",
-    "tracking-conversions"
+    "google-ads",
+    "google-ads",
+    "google-ads",
+    "google-ads"
   ],
 
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
@@ -156,7 +156,7 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?prestation=tracking-conversions"
+    "buttonHref": "/contact/?prestation=google-ads"
   },
 
   "zonesBlocks": {

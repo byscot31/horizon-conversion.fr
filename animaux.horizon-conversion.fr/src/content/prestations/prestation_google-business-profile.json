@@ -1,15 +1,15 @@
 {
-  "key": "service:pages-locales",
-  "slug": "pages-locales",
-  "breadcrumbLabel": "Pages locales",
+  "key": "prestation:google-business-profile",
+  "slug": "google-business-profile",
+  "breadcrumbLabel": "Google Business Profile",
   "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
 
-  "primaryKeyword": "Pages locales",
+  "primaryKeyword": "Google Business Profile",
   "secondaryKeywords": [
-    "page-locales",
-    "page-locales",
-    "page-locales",
-    "page-locales"
+    "google-business-profile",
+    "google-business-profile",
+    "google-business-profile",
+    "google-business-profile"
   ],
 
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
@@ -156,7 +156,7 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?prestation=pages-locales"
+    "buttonHref": "/contact/?prestation=google-business-profile"
   },
 
   "zonesBlocks": {

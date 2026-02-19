@@ -4,16 +4,15 @@ import LayoutSeo from "../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const intentions = await getCollection("intentions");
-  const metiers = intentions.filter((e) => e.id.startsWith("metier_"));
+  const metiersEntries = await getCollection("metiers");
+  const metiers = metiersEntries.filter((e) => e.id.startsWith("metier_"));
 
   return metiers.map((entry) => ({
-    params: { slug: entry.id.replace("metier_", "") },
-    props: { metierId: entry.id },
+    params: { slug: entry.id.replace(/^metier_/, "") },
   }));
 }
 
-// --- Helpers ---
+// ---------- Helpers ----------
 const isObject = (v) => v && typeof v === "object" && !Array.isArray(v);
 
 function deepMerge(base, patch) {
@@ -28,31 +27,24 @@ function deepMerge(base, patch) {
   return out;
 }
 
-// Charge TOUTES les intentions UNE fois (dispo partout dans la page)
-const intentions = await getCollection("intentions");
+const safeArray = (v) => (Array.isArray(v) ? v : []);
 
-// --- Load villes (global, accessible partout) ---
-const villesData = intentions
-  .filter((e) => e.id.startsWith("ville_"))
-  .map((e) => e.data);
+// slug zone depuis un href /zones/<zone>/...
+const zoneSlugFromHref = (href) => {
+  const m = String(href || "").match(/^\/zones\/([^/]+)\//) || String(href || "").match(/^\/zones\/([^/]+)\/?$/);
+  return m?.[1] ?? null;
+};
 
-const villesByZone = (zoneSlug, limit = 6) =>
-  villesData
-    .filter((v) => v.zoneSlug === zoneSlug)
-    .sort((a, b) =>
-      (a.breadcrumbLabel ?? a.slug).localeCompare(b.breadcrumbLabel ?? b.slug, "fr")
-    )
-    .slice(0, limit);
+// ---------- Load base metier ----------
+const slug = Astro.params.slug;
+const metiersEntries = await getCollection("metiers");
+const metierEntry = metiersEntries.find((e) => e.id === `metier_${slug}`);
 
-// --- Load base metier JSON ---
-const { metierId } = Astro.props;
-
-const metierEntry = intentions.find((e) => e.id === metierId);
-if (!metierEntry) throw new Error(`Metier not found: ${metierId}`);
+if (!metierEntry) throw new Error(`Metier not found: metier_${slug}`);
 
 let page = structuredClone(metierEntry.data);
 
-// --- Optional persona override via query string ---
+// ---------- Persona override ----------
 const personaParam = Astro.url.searchParams.get("persona");
 let persona = null;
 
@@ -66,14 +58,42 @@ if (personaParam) {
   if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
 }
 
-// --- SEO props ---
+// ---------- Load villes (collection séparée maintenant) ----------
+const villesEntries = await getCollection("villes");
+
+// on garde l'entry complète (id+data) au cas où
+const villesData = villesEntries
+  .filter((e) => e.id.startsWith("ville_"))
+  .map((e) => ({
+    id: e.id,
+    ...e.data,
+  }));
+
+// essaye de déduire zoneSlug si absent (fallback via breadcrumbs href)
+const inferZoneSlug = (ville) => {
+  if (ville.zoneSlug) return ville.zoneSlug;
+
+  const href =
+    safeArray(ville.breadcrumbs).find((b) => typeof b?.href === "string" && b.href.startsWith("/zones/"))?.href ?? "";
+  const m = String(href).match(/^\/zones\/([^/]+)\//) || String(href).match(/^\/zones\/([^/]+)\/?$/);
+  return m?.[1] ?? null;
+};
+
+const villesByZone = (zoneSlug, limit = 6) =>
+  villesData
+    .filter((v) => inferZoneSlug(v) === zoneSlug)
+    .sort((a, b) => (a.breadcrumbLabel ?? a.title ?? a.slug ?? "").localeCompare(b.breadcrumbLabel ?? b.title ?? b.slug ?? "", "fr"))
+    .slice(0, limit);
+
+// ---------- SEO ----------
 const title = page.metaTitle ?? "Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
 const canonical = undefined;
 const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
 
-// --- Convenience aliases ---
+// ---------- Aliases ----------
 const {
+  breadcrumbLabel,
   pageTitleH1,
   pageTitleLead,
   pageTitleALT,

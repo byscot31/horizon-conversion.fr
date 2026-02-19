@@ -1,0 +1,140 @@
+---
+// src/pages/ressources/[categorie]/[article].astro
+import LayoutSeo from "../../../../layouts/LayoutSEO.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const ressources = await getCollection("ressources");
+  const posts = ressources.filter((e) => String(e.data?.key ?? "").startsWith("ressource:"));
+
+  return posts
+    .map((e) => {
+      const categorySlug = e.data?.categorySlug;
+      const slug = e.data?.slug ?? e.id.replace(/^ressource_/, "");
+      if (!categorySlug || !slug) return null;
+
+      return {
+        params: { categorie: categorySlug, slug },
+        props: { postId: e.id },
+      };
+    })
+    .filter(Boolean);
+}
+
+const { postId } = Astro.props;
+
+const ressources = await getCollection("ressources");
+const post = ressources.find((e) => e.id === postId);
+if (!post) throw new Error(`Missing ressource: ${postId}`);
+
+const page = post.data;
+
+const title = page.metaTitle ?? page.title ?? "Ressource";
+const description = page.metaDescription ?? "";
+
+const sections = page.sections ?? [];
+const inCategory = page.links?.inCategory ?? [];
+const goFurther = page.links?.goFurther ?? [];
+const contextLinks = page.links?.context ?? [];
+---
+
+<LayoutSeo title={title} description={description} h1={page.h1 ?? page.title ?? "Ressource"}>
+  <section class="section m-0" style="background-color:#eef2f5;">
+    <div class="container">
+      <div class="heading-block border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 860px">
+        <h1 class="text-transform-none font-secondary fw-normal" style="font-size: 40px;">
+          <Fragment set:html={page.h1 ?? page.title ?? ""} />
+        </h1>
+        <span>{page.lead ?? ""}</span>
+      </div>
+
+      <div class="mx-auto" style="max-width: 860px">
+        {sections.map((s) => (
+            <div class="mb-5">
+              {s.h2 && <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 28px;">{s.h2}</h2>}
+              {s.text && <p class="mb-3">{s.text}</p>}
+              {!!(s.items?.length) && (
+                  <ul class="iconlist">
+                    {s.items.map((li) => (
+                        <li class="d-block"><i class="bi-check-lg me-1"></i> {li}</li>
+                    ))}
+                  </ul>
+              )}
+            </div>
+        ))}
+      </div>
+
+      <div class="line my-5"></div>
+
+      <div class="row g-4">
+        {!!inCategory.length && (
+            <div class="col-lg-4">
+              <div class="card border-light shadow-sm h-100">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold">Dans cette catégorie</h3>
+                  <ul class="iconlist mt-3">
+                    {inCategory.map((l) => (
+                        <li class="d-block">
+                          <a class="color" href={l.href}>{l.label}</a>
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+        )}
+
+        {!!goFurther.length && (
+            <div class="col-lg-4">
+              <div class="card border-light shadow-sm h-100">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold">Aller plus loin</h3>
+                  <ul class="iconlist mt-3">
+                    {goFurther.map((l) => (
+                        <li class="d-block">
+                          <a class="color" href={l.href}>{l.label}</a>
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+        )}
+
+        {!!contextLinks.length && (
+            <div class="col-lg-4">
+              <div class="card border-light shadow-sm h-100">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold">Adapté à votre contexte</h3>
+                  <ul class="iconlist mt-3">
+                    {contextLinks.map((l) => (
+                        <li class="d-block">
+                          <a class="color" href={l.href}>{l.label}</a>
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+        )}
+      </div>
+
+      {page.cta?.title && (
+          <div class="section dark parallax scroll-detect mt-6 mb-0" style="padding: 90px 0;">
+            <img src="/assets/images/others/section-bg.jpg" class="parallax-bg" alt={page.cta.alt ?? ""} />
+            <div class="container">
+              <div class="heading-block border-bottom-0 mb-0">
+                <div class="before-heading text-lowercase ls-1 text-white fw-normal">{page.cta.eyebrow ?? ""}</div>
+                <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 30px;">
+                  {page.cta.title}
+                </h2>
+                <a href={page.cta.buttonHref ?? "/contact/"} class="button button-large button-circle button-border button-white button-light mt-4 ms-0" data-cta="1">
+                  {page.cta.buttonLabel ?? "Contact"}
+                </a>
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+  </section>
+</LayoutSeo>

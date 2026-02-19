@@ -1,15 +1,15 @@
 {
-  "key": "service:google-ads",
-  "slug": "google-ads",
-  "breadcrumbLabel": "Google Ads local",
+  "key": "prestation:pages-locales",
+  "slug": "pages-locales",
+  "breadcrumbLabel": "Pages locales",
   "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
 
-  "primaryKeyword": "Google Ads local",
+  "primaryKeyword": "Pages locales",
   "secondaryKeywords": [
-    "google-ads",
-    "google-ads",
-    "google-ads",
-    "google-ads"
+    "page-locales",
+    "page-locales",
+    "page-locales",
+    "page-locales"
   ],
 
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
@@ -156,7 +156,7 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?prestation=google-ads"
+    "buttonHref": "/contact/?prestation=pages-locales"
   },
 
   "zonesBlocks": {

@@ -17,10 +17,10 @@ function deepMerge(base, patch) {
 }
 
 // Load hub
-const intentions = await getCollection("intentions");
+const zones = await getCollection("zones");
 const hubEntry =
-    intentions.find((e) => e.id === "hub_zones") ||
-    intentions.find((e) => e.data?.key === "hub:zones");
+  zones.find((e) => e.id === "hub_zones") ||
+  zones.find((e) => e.data?.key === "hub:zones");
 if (!hubEntry) throw new Error("Hub not found: hub_zones");
 
 let page = structuredClone(hubEntry.data);

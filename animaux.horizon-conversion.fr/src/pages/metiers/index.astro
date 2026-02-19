@@ -19,10 +19,10 @@ function deepMerge(base, patch) {
 }
 
 // --- Load hub JSON ---
-const intentions = await getCollection("intentions");
+const metiers = await getCollection("metiers");
 const hubEntry =
-    intentions.find((e) => e.id === "hub_metiers") ||
-    intentions.find((e) => e.data?.key === "hub:metiers");
+  metiers.find((e) => e.id === "hub_metiers") ||
+  metiers.find((e) => e.data?.key === "hub:metiers");
 
 if (!hubEntry) throw new Error("Hub not found: hub_metiers");
 

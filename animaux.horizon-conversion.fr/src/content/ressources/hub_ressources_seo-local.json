@@ -1,0 +1,34 @@
+{
+ "key": "hub:ressources:seo-local",
+ "categorySlug": "seo-local",
+
+ "metaTitle": "Guides SEO local | Horizon Conversion Animaux",
+ "metaDescription": "Guides SEO local : Google Maps, pages locales, NAP, structure site et priorités pour générer plus d’appels et de RDV.",
+
+ "pageTitleH1": "SEO local :<br>remonter sur Google & Maps",
+ "pageTitleLead": "Guides actionnables : structure, pages locales, GBP, et conversion.",
+
+ "items": [
+  {
+   "title": "Checklist SEO local : quoi faire en priorité",
+   "description": "Les actions les plus rentables (GBP + site + pages locales + NAP).",
+   "href": "/ressources/seo-local/checklist-seo-local/",
+   "label": "Lire"
+  },
+  {
+   "title": "Pages locales sans duplicate : la méthode",
+   "description": "Éviter les pages “clones” et faire des pages utiles qui rankent.",
+   "href": "/ressources/seo-local/pages-locales-sans-duplicate/",
+   "label": "Lire"
+  },
+  {
+   "title": "Remonter sur Google Maps sans avis : plan d’action",
+   "description": "Ce qui marche quand tu as peu d’avis (ou pas encore).",
+   "href": "/ressources/seo-local/google-maps-sans-avis/",
+   "label": "Lire"
+  }
+ ],
+
+ "relatedPrestationsTitle": "Besoin qu’on le fasse pour vous ?",
+ "relatedPrestationsLead": "Mise en place + pages locales + suivi des demandes.",
+ "relatedPrest

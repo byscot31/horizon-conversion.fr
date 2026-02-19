@@ -4,8 +4,8 @@ import LayoutSeo from "../../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const intentions = await getCollection("intentions");
-  const villes = intentions.filter((e) => e.id.startsWith("ville_"));
+  const zones = await getCollection("zones");
+  const villes = villes.filter((e) => e.id.startsWith("ville_"));
 
   const inferVilleSlug = (e) => e.data?.slug ?? e.id.replace(/^ville_/, "");
   const inferZoneSlug = (e) => {
@@ -48,8 +48,8 @@ function deepMerge(base, patch) {
 // --- Load base ville JSON ---
 const { villeId } = Astro.props;
 
-const intentions = await getCollection("intentions");
-const villeEntry = intentions.find((e) => e.id === villeId);
+const zones = await getCollection("zones");
+const villeEntry = villes.find((e) => e.id === villeId);
 if (!villeEntry) throw new Error(`Ville not found: ${villeId}`);
 
 let page = structuredClone(villeEntry.data);

@@ -4,19 +4,22 @@ import LayoutSeo from "../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const intentions = await getCollection("intentions");
-  const services = intentions.filter((e) => e.id.startsWith("service_"));
+  const prestationsEntries = await getCollection("prestations");
+  const services = prestationsEntries.filter((e) => e.id.startsWith("prestation_"));
 
   return services.map((entry) => ({
-    params: { slug: entry.id.replace("service_", "") },
-    props: { serviceId: entry.id },
+    params: { slug: entry.data?.slug ?? entry.id.replace(/^prestation_/, "") },
+    props: { prestationId: entry.id },
   }));
 }
 
-// Helpers
+// ---------- Helpers ----------
 const isObject = (v) => v && typeof v === "object" && !Array.isArray(v);
+const safeArray = (v) => (Array.isArray(v) ? v : []);
+
 function deepMerge(base, patch) {
   if (!isObject(base) || !isObject(patch)) return patch ?? base;
+
   const out = { ...base };
   for (const [k, v] of Object.entries(patch)) {
     if (Array.isArray(v)) out[k] = v;
@@ -26,44 +29,62 @@ function deepMerge(base, patch) {
   return out;
 }
 
-const intentions = await getCollection("intentions");
+// fallback: extraire /zones/<slug>/...
+const zoneSlugFromHref = (href) => {
+  const m =
+    String(href || "").match(/^\/zones\/([^/]+)\//) ||
+    String(href || "").match(/^\/zones\/([^/]+)\/?$/);
+  return m?.[1] ?? null;
+};
 
-// Villes (pour lister sous les zones)
-const villesData = intentions
-    .filter((e) => e.id.startsWith("ville_"))
-    .map((e) => e.data);
+// ---------- Load base prestation JSON ----------
+const { prestationId } = Astro.props;
 
-const villesByZone = (zoneSlug, limit = 6) =>
-    villesData
-        .filter((v) => v.zoneSlug === zoneSlug)
-        .sort((a, b) => (a.breadcrumbLabel ?? a.slug).localeCompare(b.breadcrumbLabel ?? b.slug, "fr"))
-        .slice(0, limit);
+const prestationsEntries = await getCollection("prestations");
+const prestationEntry = prestationsEntries.find((e) => e.id === prestationId);
 
-// Load base service JSON
-const { serviceId } = Astro.props;
-const serviceEntry = intentions.find((e) => e.id === serviceId);
-if (!serviceEntry) throw new Error(`Service not found: ${serviceId}`);
+if (!prestationEntry) throw new Error(`prestation not found: ${prestationId}`);
 
-let page = structuredClone(serviceEntry.data);
+let page = structuredClone(prestationEntry.data);
 
-// Optional persona override via query string (si tu veux la même logique)
+// ---------- Persona override via query string ----------
 const personaParam = Astro.url.searchParams.get("persona");
 let persona = null;
+
 if (personaParam) {
   const personas = await getCollection("personas");
   persona =
-      personas.find((p) => p.id === `persona_${personaParam}`) ||
-      personas.find((p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam) ||
-      null;
+    personas.find((p) => p.id === `persona_${personaParam}`) ||
+    personas.find((p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam) ||
+    null;
 
   if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
 }
 
+// ---------- Load villes (CORRECT collection) ----------
+const villesEntries = await getCollection("villes");
+const villesData = villesEntries
+  .filter((e) => e.id.startsWith("ville_"))
+  .map((e) => e.data);
+
+const villesByZone = (zoneSlug, limit = 6) =>
+  villesData
+    .filter((v) => v.zoneSlug === zoneSlug)
+    .sort((a, b) =>
+      (a.breadcrumbLabel ?? a.slug).localeCompare(b.breadcrumbLabel ?? b.slug, "fr")
+    )
+    .slice(0, limit);
+
+// ---------- SEO ----------
 const title = page.metaTitle ?? "Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
+const canonical = undefined;
 const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
 
+// ---------- Aliases ----------
 const {
+  breadcrumbLabel,
+  breadcrumbs = [],
   pageTitleH1,
   pageTitleLead,
   pageTitleALT,

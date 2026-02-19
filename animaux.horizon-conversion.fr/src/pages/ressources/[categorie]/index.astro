@@ -1,0 +1,92 @@
+---
+// src/pages/ressources/[categorie]/index.astro
+import LayoutSeo from "../../../layouts/LayoutSEO.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const ressources = await getCollection("ressources");
+  const hubs = ressources.filter((e) => String(e.data?.key ?? "").startsWith("hub:ressources:"));
+
+  return hubs
+    .map((e) => {
+      const categorySlug = e.data?.categorySlug ?? String(e.data?.key ?? "").split(":")[2];
+      if (!categorySlug) return null;
+      return {
+        params: { categorie: categorySlug },
+        props: { hubId: e.id },
+      };
+    })
+    .filter(Boolean);
+}
+
+const { hubId } = Astro.props;
+
+const ressources = await getCollection("ressources");
+const hub = ressources.find((e) => e.id === hubId);
+if (!hub) throw new Error(`Missing category hub: ${hubId}`);
+
+const page = hub.data;
+
+const title = page.metaTitle ?? `Ressources | ${page.pageTitleH1 ?? "Catégorie"}`;
+const description = page.metaDescription ?? "";
+
+const items = page.items ?? [];
+const relatedPrestations = page.relatedPrestations ?? [];
+---
+
+<LayoutSeo title={title} description={description} h1={page.pageTitleH1 ?? "Ressources"}>
+  <section class="section m-0" style="background-color:#eef2f5;">
+    <div class="container">
+      <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 760px">
+        <h1 class="text-transform-none font-secondary fw-normal" style="font-size: 40px;">
+          <Fragment set:html={page.pageTitleH1 ?? ""} />
+        </h1>
+        <span>{page.pageTitleLead ?? ""}</span>
+      </div>
+
+      <div class="row g-4">
+        {items.map((it) => (
+            <div class="col-lg-4">
+              <div class="card border-light shadow-sm h-100">
+                <div class="card-body">
+                  <h3 class="text-transform-none ls-0 fw-semibold mb-2">{it.title}</h3>
+                  <p class="mb-3">{it.description}</p>
+                  <a class="button-link border-0 color" href={it.href} data-cta="1">
+                    {it.label ?? "Lire"}
+                  </a>
+                </div>
+              </div>
+            </div>
+        ))}
+      </div>
+
+      {!!relatedPrestations.length && (
+          <>
+            <div class="line my-5"></div>
+            <div class="heading-block text-center border-bottom-0 mb-4 mx-auto" style="max-width: 760px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+                {page.relatedPrestationsTitle ?? "Besoin d’aide pour le mettre en place ?"}
+              </h2>
+              <span>{page.relatedPrestationsLead ?? ""}</span>
+            </div>
+
+            <div class="row g-4">
+              {relatedPrestations.map((p) => (
+                  <div class="col-lg-6">
+                    <div class="feature-box media-box fbox-bg h-100">
+                      <div class="fbox-content border-0">
+                        <h3 class="text-transform-none ls-0 fw-semibold">{p.title}</h3>
+                        <p class="mb-0">{p.description}</p>
+                        <a class="button-link border-0 color" href={p.href} data-cta="1">
+                          {p.label ?? "Voir"}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              ))}
+            </div>
+          </>
+      )}
+    </div>
+  </section>
+</LayoutSeo>

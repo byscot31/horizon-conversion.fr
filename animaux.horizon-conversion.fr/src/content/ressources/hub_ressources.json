@@ -1,0 +1,60 @@
+{
+  "key": "hub:ressources",
+  "breadcrumbLabel": "Ressources",
+
+  "metaTitle": "Ressources | Horizon Conversion Animaux",
+  "metaDescription": "Guides et conseils SEO local, Google Ads, Google Business Profile et tracking pour générer plus de demandes (appels + formulaires).",
+
+  "pageTitleH1": "Ressources :<br>guides & conseils actionnables",
+  "pageTitleLead": "4 catégories : SEO local, Google Ads, Google Business Profile, Tracking. Des checklists simples, orientées RDV.",
+
+  "categories": [
+    {
+      "title": "SEO local",
+      "description": "Maps + pages locales + structure : ce qui fait remonter et convertit.",
+      "href": "/ressources/seo-local/",
+      "label": "Voir les guides"
+    },
+    {
+      "title": "Google Ads",
+      "description": "Search local : mots-clés, négatifs, annonces, pilotage à la conversion.",
+      "href": "/ressources/google-ads/",
+      "label": "Voir les guides"
+    },
+    {
+      "title": "Google Business Profile",
+      "description": "Optimisations GBP : catégories, posts, photos, avis, signaux locaux.",
+      "href": "/ressources/google-business-profile/",
+      "label": "Voir les guides"
+    },
+    {
+      "title": "Tracking & conversions",
+      "description": "Suivre appels + formulaires, GA4/GTM, KPI, tableau de pilotage.",
+      "href": "/ressources/tracking-conversions/",
+      "label": "Voir les guides"
+    }
+  ],
+
+  "featuredTitle": "Guides à lire en premier",
+  "featuredLead": "Les 3 contenus “piliers” pour démarrer vite.",
+  "featured": [
+    {
+      "title": "Checklist SEO local : quoi faire en priorité",
+      "description": "Les 20 actions qui font la différence (GBP + site + pages locales + NAP).",
+      "href": "/ressources/seo-local/checklist-seo-local/",
+      "label": "Lire"
+    },
+    {
+      "title": "Google Ads local : structure simple qui convertit",
+      "description": "Campagne Search locale : ciblage, mots-clés, annonces, extensions, suivi.",
+      "href": "/ressources/google-ads/structure-campagne-locale/",
+      "label": "Lire"
+    },
+    {
+      "title": "Tracking minimal : suivre appels + formulaires",
+      "description": "Le setup propre pour piloter sur les demandes réelles (pas les clics).",
+      "href": "/ressources/tracking-conversions/tracking-minimal-appels-formulaires/",
+      "label": "Lire"
+    }
+  ]
+}

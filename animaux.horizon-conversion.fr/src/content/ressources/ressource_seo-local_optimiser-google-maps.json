@@ -1,0 +1,229 @@
+{
+ "key": "ressource:seo-local:optimiser-google-maps",
+ "breadcrumbLabel": "Ressources",
+
+ "primaryKeyword": "optimiser google maps",
+ "secondaryKeywords": [
+  "optimiser google maps"
+ ],
+
+ "metaTitle": "Meta Title | Horizon Conversion Animaux",
+ "metaDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+
+ "pageTitleH1": "H1 :<br> intention claire",
+ "pageTitleLead": "Intro courte (problème)",
+
+ "proofs": [
+  { "title": "Promesse 1", "subtitle": "subtitle" },
+  { "title": "Promesse 2", "subtitle": "subtitle" },
+  { "title": "Promesse 3", "subtitle": "subtitle" }
+ ],
+
+ "benefits": {
+  "h2": "Ce que vous allez obtenir",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "items": [
+   {
+    "title": "Bénéfice 1",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+   },
+   {
+    "title": "Bénéfice 2",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+   },
+   {
+    "title": "Bénéfice 3",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+   },
+   {
+    "title": "Bénéfice 4",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+   }
+  ]
+ },
+
+ "process": {
+  "h2": "Étapes (checklist concrète)",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "items": [
+   {
+    "title": "Processus 1",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 2",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 3",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 4",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   }
+  ]
+ },
+
+ "errorsBlocks": {
+  "h2": "Erreurs fréquentes",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "items": [
+   {
+    "title": "Processus 1",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 2",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 3",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 4",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   }
+  ]
+ },
+
+ "exemplesBlocks": {
+  "h2": "Exemples (templates, scripts, paramètres…)",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "items": [
+   {
+    "title": "Processus 1",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 2",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 3",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   },
+   {
+    "title": "Processus 4",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "href": "/methode/"
+   }
+  ]
+ },
+
+ "methode": {
+  "h2": "Méthode",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "buttonLabel1": "Méthode",
+  "buttonHref1": "/methode/?page=ressource_seo-local_optimiser-google-maps",
+  "buttonLabel2": "Contact",
+  "buttonHref2": "/contact/?page=ressource_seo-local_optimiser-google-maps",
+  "items": [
+   {
+    "title": "Méthode 1",
+    "items": [
+     "item 1",
+     "item 2",
+     "item 3"
+    ]
+   },
+   {
+    "title": "Méthode 2",
+    "items": [
+     "item 1",
+     "item 2",
+     "item 3"
+    ]
+   }
+  ]
+ },
+
+ "proofsBlocks": {
+  "h2": "Preuves",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "buttonLabel1": "Preuves",
+  "buttonHref1": "/preuves/?page=ressource_seo-local_optimiser-google-maps",
+  "buttonLabel2": "Contact",
+  "buttonHref2": "/contact/?page=ressource_seo-local_optimiser-google-maps",
+  "items": [
+   {
+    "title": "Preuve 1",
+    "items": [
+     "item 1",
+     "item 1",
+     "item 1"
+    ]
+   },
+   {
+    "title": "Preuve 2",
+    "items": [
+     "item 2",
+     "item 2",
+     "item 2"
+    ]
+   }
+  ]
+ },
+
+ "cta": {
+  "eyebrow": "eyebrow",
+  "title": "Vous voulez qu’on le fasse pour vous ?",
+  "buttonLabel1": "Prestation",
+  "buttonHref1": "/prestations/?page=ressource_seo-local_optimiser-google-maps",
+  "buttonLabel2": "Métier",
+  "buttonHref2": "/metiers/?page=ressource_seo-local_optimiser-google-maps",
+  "buttonLabel3": "Zones",
+  "buttonHref3": "/zones/?page=ressource_seo-local_optimiser-google-maps"
+ },
+
+ "faqs": {
+  "h2": "FAQs",
+  "lead": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "items": [
+   {
+    "q": "Question 1",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 2",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 3",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 4",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 5",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 6",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 7",
+    "a": "Answers"
+   },
+   {
+    "q": "Question 8",
+    "a": "Answers"
+   }
+  ]
+ }
+}

@@ -4,8 +4,8 @@ import LayoutSeo from "../../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const intentions = await getCollection("intentions");
-  const zones = intentions.filter((e) => e.id.startsWith("zone_"));
+  const zones = await getCollection("zones");
+  const zones = zones.filter((e) => e.id.startsWith("zone_"));
 
   return zones.map((entry) => ({
     params: { zone: entry.data.slug ?? entry.id.replace("zone_", "") },
@@ -15,8 +15,8 @@ export async function getStaticPaths() {
 
 const { zoneId } = Astro.props;
 
-const intentions = await getCollection("intentions");
-const zoneEntry = intentions.find((e) => e.id === zoneId);
+const zones = await getCollection("zones");
+const zoneEntry = zones.find((e) => e.id === zoneId);
 if (!zoneEntry) throw new Error(`Zone not found: ${zoneId}`);
 
 const page = structuredClone(zoneEntry.data);

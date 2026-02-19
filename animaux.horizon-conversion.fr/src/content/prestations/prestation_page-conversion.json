@@ -1,15 +1,15 @@
 {
-  "key": "service:seo-local",
-  "slug": "seo-local",
-  "breadcrumbLabel": "SEO local",
+  "key": "prestation:page-conversion",
+  "slug": "page-conversion",
+  "breadcrumbLabel": "Page de conversion",
   "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
 
-  "primaryKeyword": "SEO local",
+  "primaryKeyword": "Page de conversion",
   "secondaryKeywords": [
-    "seo-local",
-    "seo-local",
-    "seo-local",
-    "seo-local"
+    "page-conversion",
+    "page-conversion",
+    "page-conversion",
+    "page-conversion"
   ],
 
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
@@ -156,7 +156,7 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?prestation=seo-local"
+    "buttonHref": "/contact/?prestation=page-conversion"
   },
 
   "zonesBlocks": {

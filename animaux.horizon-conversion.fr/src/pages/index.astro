@@ -18,13 +18,13 @@ function deepMerge(base, patch) {
   return out;
 }
 
-// --- Load hub_home.json depuis intentions ---
-const intentions = await getCollection("intentions");
+// --- Load hub_home.json depuis site ---
+const site = await getCollection("site");
 const homeEntry =
-    intentions.find((e) => e.id === "hub_home") ||
-    intentions.find((e) => e.data?.key === "hub:home");
+  site.find((e) => e.id === "hub_home") ||
+  site.find((e) => e.data?.key === "hub:home");
 
-if (!homeEntry) throw new Error("hub_home.json introuvable dans src/content/intentions/");
+if (!homeEntry) throw new Error("hub_home.json introuvable dans src/content/site/");
 
 let page = structuredClone(homeEntry.data);
 

@@ -1,15 +1,15 @@
 {
-  "key": "service:google-business-profile",
-  "slug": "google-business-profile",
-  "breadcrumbLabel": "Google Business Profile",
+  "key": "prestation:tracking-conversions",
+  "slug": "tracking-conversions",
+  "breadcrumbLabel": "Tracking conversions",
   "breadcrumbs": [{ "label": "Prestations", "href": "/prestations/" }],
 
-  "primaryKeyword": "Google Business Profile",
+  "primaryKeyword": "Tracking conversions",
   "secondaryKeywords": [
-    "google-business-profile",
-    "google-business-profile",
-    "google-business-profile",
-    "google-business-profile"
+    "tracking-conversions",
+    "tracking-conversions",
+    "tracking-conversions",
+    "tracking-conversions"
   ],
 
   "metaTitle": "Meta Title | Horizon Conversion Animaux",
@@ -156,7 +156,7 @@
     "title": "title",
     "alt": "alt",
     "buttonLabel": "CTA",
-    "buttonHref": "/contact/?prestation=google-business-profile"
+    "buttonHref": "/contact/?prestation=tracking-conversions"
   },
 
   "zonesBlocks": {
