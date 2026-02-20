@@ -52,6 +52,7 @@
     "items": [
       {
         "title": "SEO local",
+        "slug": "seo-local",
         "items": [
           "item 1",
           "item 2",
@@ -62,6 +63,7 @@
       },
       {
         "title": "Google Ads",
+        "slug": "google-ads",
         "items": [
           "item 1",
           "item 2",
@@ -72,6 +74,7 @@
       },
       {
         "title": "Google Business Profile",
+        "slug": "google-business-profile",
         "items": [
           "item 1",
           "item 2",
@@ -82,6 +85,7 @@
       },
       {
         "title": "Page de conversion",
+        "slug": "page-conversion",
         "items": [
           "item 1",
           "item 2",
@@ -92,6 +96,7 @@
       },
       {
         "title": "Pages locales",
+        "slug": "pages-locales",
         "items": [
           "item 1",
           "item 2",
@@ -102,6 +107,7 @@
       },
       {
         "title": "Tracking conversions",
+        "slug": "tracking-conversions",
         "items": [
           "item 1",
           "item 2",

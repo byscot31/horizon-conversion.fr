@@ -3,30 +3,75 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Analytics from "../components/Analytics.astro";
+import JsonLd from "../components/JsonLd.astro";
 
-const { title, description, canonical: canonicalProp, robots: robotsProp } = Astro.props;
+const {
+  title,
+  description,
 
-const canonicalDefault = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site).toString()
-  : new URL(Astro.url.pathname, Astro.url).toString();
+  canonical: canonicalProp,
+  robots: robotsProp,
 
-const canonical = canonicalProp ?? canonicalDefault;
+  schemaType: schemaTypeProp = "page",
+  breadcrumbs: breadcrumbsProp,
+  faqs: faqsProp,
+  pageTitleH1: pageTitleH1Prop,
+  service: serviceProp,
+} = Astro.props;
 
+// ---------------- Canonical (sans query) ----------------
+const canonicalBase = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : new URL(Astro.url.pathname, Astro.url);
+
+const canonicalDefault = canonicalBase.toString();
+
+let canonical = canonicalProp ?? canonicalDefault;
+// Sécurise même si quelqu’un passe un canonicalProp avec query
+try {
+  const u = new URL(canonical);
+  u.search = "";
+  canonical = u.toString();
+} catch {}
+
+// ---------------- Robots (safe) ----------------
 const robotsDefault =
   "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
 
-const hasPersona = Astro.url.searchParams.has("persona");
-const robots = robotsProp ?? (hasPersona ? "noindex,follow" : robotsDefault);
+// noindex seulement si explicitement demandé (ou via ?noindex=1)
+const forceNoindex = Astro.url.searchParams.get("noindex") === "1";
+const robots = forceNoindex ? "noindex,follow" : (robotsProp ?? robotsDefault);
+
+// ---------------- Description fallback ----------------
+const metaDescription =
+  description?.trim() ||
+  "Horizon Conversion Animaux : SEO local, Google Ads, pages locales et tracking pour professionnels des animaux (60/95).";
+
+// ---------------- OG/Twitter image (absolue si possible) ----------------
+const siteBase = Astro.site?.toString?.().replace(/\/$/, "") || "";
+const ogImageAbs = siteBase ? `${siteBase}/assets/images/page-title.jpg` : null;
+const ogImage = ogImageAbs ?? "/assets/images/page-title.jpg";
+
+// ---------------- Schema ----------------
+const schemaType = schemaTypeProp ?? "page";
+const schemaData = {
+  metaTitle: title,
+  metaDescription: metaDescription,
+  pageTitleH1: pageTitleH1Prop,
+  breadcrumbs: breadcrumbsProp,
+  faqs: faqsProp,
+  service: serviceProp,
+};
 ---
 
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Control Online">
+  <meta name="author" content="Control Online" />
 
   <title>{title}</title>
-  <meta name="description" content={description} />
+  <meta name="description" content={metaDescription} />
   <link rel="canonical" href={canonical} />
 
   <meta name="robots" content={robots} />
@@ -34,33 +79,34 @@ const robots = robotsProp ?? (hasPersona ? "noindex,follow" : robotsDefault);
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
+  <meta property="og:description" content={metaDescription} />
   <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
 
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={ogImage} />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&family=Chewy&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&family=Chewy&display=swap"
+      rel="stylesheet"
+  />
 
-  <link rel="stylesheet" href="/assets/style.css">
-  <link rel="stylesheet" href="/assets/css/font-icons.css">
-  <link rel="stylesheet" href="/assets/pet.css">
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="stylesheet" href="/assets/css/font-icons.css" />
+  <link rel="stylesheet" href="/assets/pet.css" />
 
-
+  {schemaType !== "none" && <JsonLd type={schemaType} data={schemaData} />}
 </head>
 
 <body class="stretched">
 <div id="wrapper">
-
   <Header />
-
   <slot />
-
   <Footer />
-
 </div>
 
 <div id="gotoTop" class="uil uil-angle-up"></div>
@@ -69,6 +115,5 @@ const robots = robotsProp ?? (hasPersona ? "noindex,follow" : robotsDefault);
 <script is:inline src="/assets/js/functions.bundle.js"></script>
 
 <Analytics />
-
 </body>
 </html>

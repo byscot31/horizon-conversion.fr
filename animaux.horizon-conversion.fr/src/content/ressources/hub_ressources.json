@@ -11,24 +11,28 @@
   "categories": [
     {
       "title": "SEO local",
+      "slug": "seo-local",
       "description": "Maps + pages locales + structure : ce qui fait remonter et convertit.",
       "href": "/ressources/seo-local/",
       "label": "Voir les guides"
     },
     {
       "title": "Google Ads",
+      "slug": "google-ads",
       "description": "Search local : mots-clés, négatifs, annonces, pilotage à la conversion.",
       "href": "/ressources/google-ads/",
       "label": "Voir les guides"
     },
     {
       "title": "Google Business Profile",
+      "slug": "google-business-profile",
       "description": "Optimisations GBP : catégories, posts, photos, avis, signaux locaux.",
       "href": "/ressources/google-business-profile/",
       "label": "Voir les guides"
     },
     {
       "title": "Tracking & conversions",
+      "slug": "tracking-conversions",
       "description": "Suivre appels + formulaires, GA4/GTM, KPI, tableau de pilotage.",
       "href": "/ressources/tracking-conversions/",
       "label": "Voir les guides"

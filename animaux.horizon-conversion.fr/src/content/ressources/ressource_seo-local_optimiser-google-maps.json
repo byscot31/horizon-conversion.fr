@@ -1,5 +1,13 @@
 {
  "key": "ressource:seo-local:optimiser-google-maps",
+
+ "schemaType": "service",
+ "service": {
+  "serviceType": "Google Ads",
+  "name": "Guide Google Ads pour pros des animaux"
+ },
+ "prestationSlug": "google-ads",
+
  "breadcrumbLabel": "Ressources",
 
  "primaryKeyword": "optimiser google maps",

@@ -1,34 +1,35 @@
 ---
-// src/pages/zones/[zone]/[ville].astro
-import LayoutSeo from "../../../layouts/LayoutSEO.astro";
+// src/pages/zones/[zone]/[ville]/index.astro
+import LayoutSeo from "../../../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const zones = await getCollection("zones");
-  const villes = villes.filter((e) => e.id.startsWith("ville_"));
+  const villesEntries = await getCollection("villes");
 
   const inferVilleSlug = (e) => e.data?.slug ?? e.id.replace(/^ville_/, "");
   const inferZoneSlug = (e) => {
     if (e.data?.zoneSlug) return e.data.zoneSlug;
 
-    // fallback: parse breadcrumbs href: "/zones/<zone>/"
-    const href = e.data?.breadcrumbs?.find((b) => typeof b?.href === "string" && b.href.startsWith("/zones/"))?.href ?? "";
+    const href =
+      e.data?.breadcrumbs?.find(
+        (b) => typeof b?.href === "string" && b.href.startsWith("/zones/")
+      )?.href ?? "";
+
     const m = href.match(/^\/zones\/([^/]+)\/?/);
     return m?.[1] ?? null;
   };
 
-  return villes
-      .map((e) => {
-        const zone = inferZoneSlug(e);
-        const ville = inferVilleSlug(e);
-        if (!zone || !ville) return null;
+  const villes = villesEntries.filter((e) => e.id.startsWith("ville_"));
 
-        return {
-          params: { zone, ville },
-          props: { villeId: e.id },
-        };
-      })
-      .filter(Boolean);
+  return villes
+    .map((e) => {
+      const zone = inferZoneSlug(e);
+      const ville = inferVilleSlug(e);
+      if (!zone || !ville) return null;
+
+      return { params: { zone, ville } };
+    })
+    .filter(Boolean);
 }
 
 // --- Helpers ---
@@ -45,25 +46,52 @@ function deepMerge(base, patch) {
   return out;
 }
 
-// --- Load base ville JSON ---
-const { villeId } = Astro.props;
+// --- Load base ville JSON via params ---
+const zoneSlug = Astro.params.zone;
+const villeSlug = Astro.params.ville;
 
-const zones = await getCollection("zones");
-const villeEntry = villes.find((e) => e.id === villeId);
-if (!villeEntry) throw new Error(`Ville not found: ${villeId}`);
+const villesEntries = await getCollection("villes");
+const villeEntry = villesEntries.find((e) => {
+  if (!e.id.startsWith("ville_")) return false;
+  const s = e.data?.slug ?? e.id.replace(/^ville_/, "");
+  const z = e.data?.zoneSlug ?? null;
+  return s === villeSlug && z === zoneSlug;
+});
 
-let page = structuredClone(villeEntry.data);
+// fallback si zoneSlug pas renseigné, on tente via breadcrumbs
+const villeEntryFallback =
+  villeEntry ??
+  villesEntries.find((e) => {
+    if (!e.id.startsWith("ville_")) return false;
+    const s = e.data?.slug ?? e.id.replace(/^ville_/, "");
+    if (s !== villeSlug) return false;
 
-// --- Optional persona override via query string (si tu veux le même système) ---
+    const href =
+      e.data?.breadcrumbs?.find(
+        (b) => typeof b?.href === "string" && b.href.startsWith("/zones/")
+      )?.href ?? "";
+    const m = href.match(/^\/zones\/([^/]+)\/?/);
+    return (m?.[1] ?? null) === zoneSlug;
+  });
+
+if (!villeEntryFallback) {
+  throw new Error(`Ville not found for /zones/${zoneSlug}/${villeSlug}/`);
+}
+
+let page = structuredClone(villeEntryFallback.data);
+
+// --- Optional persona override via query string ---
 const personaParam = Astro.url.searchParams.get("persona");
 let persona = null;
 
 if (personaParam) {
   const personas = await getCollection("personas");
   persona =
-      personas.find((p) => p.id === `persona_${personaParam}`) ||
-      personas.find((p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam) ||
-      null;
+    personas.find((p) => p.id === `persona_${personaParam}`) ||
+    personas.find(
+      (p) => p.data?.queryKey === "persona" && p.data?.queryValue === personaParam
+    ) ||
+    null;
 
   if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
 }
@@ -71,10 +99,8 @@ if (personaParam) {
 // --- SEO props ---
 const title = page.metaTitle ?? "Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
-const canonical = undefined;
-const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
 
-// --- Convenience aliases ---
+// --- Aliases ---
 const {
   pageTitleH1,
   pageTitleLead,
@@ -92,9 +118,31 @@ const {
   breadcrumbs = [],
   breadcrumbLabel,
 } = page;
+
+// Breadcrumbs (pour JSON-LD + UI) : fallback si absent
+const fallbackBreadcrumbs = [
+  { label: "Zones", href: "/zones/" },
+  { label: zoneSlug, href: `/zones/${zoneSlug}/` },
+];
+
+const finalBreadcrumbs = breadcrumbs?.length ? breadcrumbs : fallbackBreadcrumbs;
+
+// Label final breadcrumb (UI)
+const finalCrumbLabel =
+  breadcrumbLabel ??
+  (typeof pageTitleH1 === "string" ? pageTitleH1.replace(/<[^>]*>/g, "").trim() : "") ??
+  page.title ??
+  villeSlug;
 ---
 
-<LayoutSeo title={title} description={description} canonical={canonical} robots={robots}>
+<LayoutSeo
+    title={title}
+    description={description}
+    schemaType="page"
+    pageTitleH1={pageTitleH1}
+    breadcrumbs={finalBreadcrumbs}
+    faqs={faqs}
+>
 
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
@@ -136,17 +184,17 @@ const {
         <nav aria-label="breadcrumb" class="d-none d-lg-block">
           <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
             <li class="breadcrumb-item">
-              <a href="/"><i class="uil uil-home"></i></a>
+              <a href="/public"><i class="uil uil-home"></i></a>
             </li>
 
-            {(breadcrumbs ?? []).map((b) => (
+            {(finalBreadcrumbs ?? []).map((b) => (
                 <li class="breadcrumb-item">
                   <a href={b.href ?? "/"}>{b.label}</a>
                 </li>
             ))}
 
             <li class="breadcrumb-item active" aria-current="page">
-              {breadcrumbLabel ?? page.slug ?? villeId}
+              {finalCrumbLabel}
             </li>
           </ol>
         </nav>
@@ -196,26 +244,28 @@ const {
             </div>
 
             <div class="row contact-properties">
-              {metiersBlocks.items?.map((m) => (
-                  <div class="col-md-6">
-                    <a
-                        href={m.href ?? "/metiers/"}
-                        data-cta="1"
-                        style={`background: url('${m.background?.image ?? "/assets/images/page-title.jpg"}') no-repeat center center; background-size: cover;`}
-                    >
-                      <div class="vertical-middle dark text-center">
-                        <div class="heading-block m-0 border-0">
-                          <h3 class="text-capitalize fw-normal font-secondary">{m.title}</h3>
-                          {m.description && (
-                              <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
-                          {m.description}
-                        </span>
-                          )}
+              {metiersBlocks.items
+                ?.filter((m) => !!m?.href)
+                .map((m) => (
+                    <div class="col-md-6">
+                      <a
+                          href={m.href}
+                          data-cta="1"
+                          style={`background: url('${m.background?.image ?? "/assets/images/page-title.jpg"}') no-repeat center center; background-size: cover;`}
+                      >
+                        <div class="vertical-middle dark text-center">
+                          <div class="heading-block m-0 border-0">
+                            <h3 class="text-capitalize fw-normal font-secondary">{m.title}</h3>
+                            {m.description && (
+                                <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+                            {m.description}
+                          </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  </div>
-              ))}
+                      </a>
+                    </div>
+                ))}
             </div>
           </div>
       )}

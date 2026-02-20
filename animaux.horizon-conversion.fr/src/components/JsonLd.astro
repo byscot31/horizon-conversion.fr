@@ -1,40 +1,156 @@
 ---
+// src/components/JsonLd.astro
 const { type, data } = Astro.props;
 
-const org = {
-  "@context": "https://schema.org",
+const siteUrl = Astro.site?.toString?.().replace(/\/$/, "") || "";
+const pageUrl = siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+
+// Helpers
+const stripHtml = (s) => String(s ?? "").replace(/<[^>]*>/g, "").trim();
+const asArray = (v) => (Array.isArray(v) ? v : []);
+
+// IDs stables
+const orgId = siteUrl ? `${siteUrl}/#organization` : undefined;
+const lbId = siteUrl ? `${siteUrl}/#localbusiness` : undefined;
+
+// ---------------- Base entities ----------------
+
+// 1) Organization (marque / entité mère)
+const organization = {
   "@type": "Organization",
+  ...(orgId ? { "@id": orgId } : {}),
   name: "Horizon Conversion Animaux",
   telephone: "+33660921008",
-  email: "contact@horizon-conversion.fr"
+  email: "contact@horizon-conversion.fr",
+  ...(siteUrl ? { url: siteUrl + "/" } : {}),
 };
 
+// 2) LocalBusiness (entité locale / “vitrine”, plus adapté aux SERP locales)
+// NB : “ProfessionalService” est un sous-type utile, mais on le met en plus du LocalBusiness via additionalType.
+const localBusiness = {
+  "@type": "LocalBusiness",
+  ...(lbId ? { "@id": lbId } : {}),
+  ...(siteUrl ? { url: siteUrl + "/" } : {}),
+  name: "Horizon Conversion Animaux",
+  telephone: "+33660921008",
+  email: "contact@horizon-conversion.fr",
+  // Sous-type optionnel “plus précis”
+  additionalType: "https://schema.org/ProfessionalService",
+
+  // Relation propre vers l’Organization
+  ...(orgId ? { parentOrganization: { "@id": orgId } } : {}),
+
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Oise" },
+    { "@type": "AdministrativeArea", name: "Val-d’Oise" },
+  ],
+};
+
+// ---------------- FAQ ----------------
+const faqItems =
+  Array.isArray(data?.faqs) ? data.faqs :
+    Array.isArray(data?.faqs?.items) ? data.faqs.items :
+      [];
+
 const faq =
-  data?.faqs?.length
+  faqItems.length
     ? {
-      "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: data.faqs.map((x) => ({
+      ...(pageUrl ? { "@id": `${pageUrl}#faq` } : {}),
+      mainEntity: faqItems.map((x) => ({
         "@type": "Question",
-        name: x.q,
-        acceptedAnswer: { "@type": "Answer", text: x.a }
-      }))
+        name: stripHtml(x?.q),
+        acceptedAnswer: { "@type": "Answer", text: stripHtml(x?.a) },
+      })),
     }
     : null;
+
+// ---------------- BreadcrumbList ----------------
+const crumbs = asArray(data?.breadcrumbs);
+
+const breadcrumbList =
+  crumbs.length
+    ? {
+      "@type": "BreadcrumbList",
+      ...(pageUrl ? { "@id": `${pageUrl}#breadcrumbs` } : {}),
+      itemListElement: [
+        ...(siteUrl
+          ? [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Accueil",
+              item: `${siteUrl}/`,
+            },
+          ]
+          : []),
+
+        ...crumbs.map((c, idx) => {
+          const position = (siteUrl ? 2 : 1) + idx;
+          const itemUrl =
+            siteUrl && c?.href ? new URL(c.href, siteUrl).toString() : c?.href;
+
+          return {
+            "@type": "ListItem",
+            position,
+            name: stripHtml(c?.label),
+            ...(itemUrl ? { item: itemUrl } : {}),
+          };
+        }),
+      ],
+    }
+    : null;
+
+// ---------------- WebPage ----------------
+const serviceName =
+  stripHtml(data?.pageTitleH1) ||
+  stripHtml(data?.h1) ||
+  stripHtml(data?.metaTitle) ||
+  "Marketing local pour professionnels des animaux";
+
+const webPage =
+  pageUrl
+    ? {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: stripHtml(data?.metaTitle) || serviceName,
+      ...(stripHtml(data?.metaDescription)
+        ? { description: stripHtml(data?.metaDescription) }
+        : {}),
+      ...(breadcrumbList?.["@id"] ? { breadcrumb: { "@id": breadcrumbList["@id"] } } : {}),
+      ...(faq?.["@id"] ? { mainEntity: { "@id": faq["@id"] } } : {}),
+    }
+    : null;
+
+// ---------------- Service (optionnel) ----------------
+// Supporte aussi un objet data.service (optionnel) si tu veux enrichir
+// ex: serviceType, audience, offers, etc.
+const serviceData = data?.service ?? {};
 
 const service =
   type === "service"
     ? {
-      "@context": "https://schema.org",
       "@type": "Service",
-      name: data?.h1 ?? "Service",
-      provider: { "@type": "Organization", name: org.name, telephone: org.telephone, email: org.email },
-      areaServed: ["Oise", "Val-d’Oise"],
-      serviceType: "Marketing local"
+      ...(pageUrl ? { "@id": `${pageUrl}#service` } : {}),
+      name: stripHtml(serviceData?.name) || serviceName,
+      serviceType: stripHtml(serviceData?.serviceType) || "Webmarketing local",
+      provider: lbId ? { "@id": lbId } : localBusiness,
+      areaServed: localBusiness.areaServed,
+
+      ...(webPage?.["@id"] ? { subjectOf: { "@id": webPage["@id"] } } : {}),
+
+      // Extras (optionnels)
+      ...(serviceData?.audience ? { audience: serviceData.audience } : {}),
+      ...(serviceData?.offers ? { offers: serviceData.offers } : {}),
     }
     : null;
 
-const graph = [org, service, faq].filter(Boolean);
+// ---------------- Graph ----------------
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [organization, localBusiness, webPage, breadcrumbList, service, faq].filter(Boolean),
+};
 ---
 
 <script type="application/ld+json">

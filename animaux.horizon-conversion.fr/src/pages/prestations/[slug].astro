@@ -61,30 +61,38 @@ if (personaParam) {
   if (persona?.data?.overrides) page = deepMerge(page, persona.data.overrides);
 }
 
-// ---------- Load villes (CORRECT collection) ----------
+// ---------- Load villes ----------
 const villesEntries = await getCollection("villes");
 const villesData = villesEntries
   .filter((e) => e.id.startsWith("ville_"))
-  .map((e) => e.data);
+  .map((e) => ({ id: e.id, ...e.data }));
+
+const inferZoneSlug = (ville) => {
+  if (ville.zoneSlug) return ville.zoneSlug;
+  const href =
+    safeArray(ville.breadcrumbs).find((b) => typeof b?.href === "string" && b.href.startsWith("/zones/"))?.href ?? "";
+  return zoneSlugFromHref(href);
+};
 
 const villesByZone = (zoneSlug, limit = 6) =>
   villesData
-    .filter((v) => v.zoneSlug === zoneSlug)
+    .filter((v) => inferZoneSlug(v) === zoneSlug)
     .sort((a, b) =>
-      (a.breadcrumbLabel ?? a.slug).localeCompare(b.breadcrumbLabel ?? b.slug, "fr")
+      (a.breadcrumbLabel ?? a.title ?? a.slug ?? "").localeCompare(
+        b.breadcrumbLabel ?? b.title ?? b.slug ?? "",
+        "fr"
+      )
     )
     .slice(0, limit);
 
 // ---------- SEO ----------
 const title = page.metaTitle ?? "Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
-const canonical = undefined;
-const robots = persona ? (persona.data?.seo?.robots ?? "noindex,follow") : undefined;
 
 // ---------- Aliases ----------
 const {
   breadcrumbLabel,
-  breadcrumbs = [],
+  breadcrumbs = [{ label: "Prestations", href: "/prestations/" }],
   pageTitleH1,
   pageTitleLead,
   pageTitleALT,
@@ -100,7 +108,14 @@ const {
 } = page;
 ---
 
-<LayoutSeo title={title} description={description} robots={robots}>
+<LayoutSeo
+    title={title}
+    description={description}
+    schemaType="service"
+    pageTitleH1={pageTitleH1}
+    breadcrumbs={breadcrumbs}
+    faqs={faqs}
+>
 
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
@@ -143,7 +158,7 @@ const {
           <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
             <li class="breadcrumb-item"><a href="/"><i class="uil uil-home"></i></a></li>
             <li class="breadcrumb-item"><a href="/prestations/">Prestations</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{page.breadcrumbLabel ?? "Prestation"}</li>
+            <li class="breadcrumb-item active" aria-current="page">{breadcrumbLabel ?? "Prestation"}</li>
           </ol>
         </nav>
 

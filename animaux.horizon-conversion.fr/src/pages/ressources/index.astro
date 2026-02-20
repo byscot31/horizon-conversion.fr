@@ -19,9 +19,22 @@ const featured = page.featured ?? [];
 
 const title = page.metaTitle ?? "Ressources | Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
+
+// Breadcrumbs hub (pour JSON-LD)
+const breadcrumbs = [{ label: "Ressources", href: "/ressources/" }];
+
+// FAQ optionnelle (si ton JSON hub la fournit)
+const faqs = page.faqs ?? null;
 ---
 
-<LayoutSeo title={title} description={description} h1={page.pageTitleH1 ?? "Ressources"}>
+<LayoutSeo
+    title={title}
+    description={description}
+    schemaType="page"
+    pageTitleH1={page.pageTitleH1 ?? "Ressources"}
+    breadcrumbs={breadcrumbs}
+    faqs={faqs}
+>
   <section class="section m-0" style="background-color:#eef2f5;">
     <div class="container">
       <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 760px">

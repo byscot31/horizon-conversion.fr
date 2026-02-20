@@ -4,26 +4,31 @@ import LayoutSeo from "../../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const zones = await getCollection("zones");
-  const zones = zones.filter((e) => e.id.startsWith("zone_"));
+  const entries = await getCollection("zones");
+  const zones = entries.filter((e) => e.id.startsWith("zone_"));
 
   return zones.map((entry) => ({
-    params: { zone: entry.data.slug ?? entry.id.replace("zone_", "") },
-    props: { zoneId: entry.id },
+    params: { zone: entry.data?.slug ?? entry.id.replace(/^zone_/, "") },
   }));
 }
 
-const { zoneId } = Astro.props;
+const zonesEntries = await getCollection("zones");
+const zoneSlug = Astro.params.zone;
 
-const zones = await getCollection("zones");
-const zoneEntry = zones.find((e) => e.id === zoneId);
-if (!zoneEntry) throw new Error(`Zone not found: ${zoneId}`);
+// retrouve la bonne zone par slug (ou fallback id)
+const zoneEntry = zonesEntries.find((e) => {
+  if (!e.id.startsWith("zone_")) return false;
+  const slug = e.data?.slug ?? e.id.replace(/^zone_/, "");
+  return slug === zoneSlug;
+});
+
+if (!zoneEntry) throw new Error(`Zone not found for slug: ${zoneSlug}`);
 
 const page = structuredClone(zoneEntry.data);
 
+// SEO
 const title = page.metaTitle ?? "Horizon Conversion Animaux";
 const description = page.metaDescription ?? "";
-const canonical = undefined;
 
 // aliases
 const {
@@ -40,10 +45,24 @@ const {
   cta,
   metiersBlocks,
   faqs,
+  breadcrumbLabel,
 } = page;
----
 
-<LayoutSeo title={title} description={description} canonical={canonical}>
+// Breadcrumbs (pour JSON-LD) : fallback si absent dans le JSON
+const schemaBreadcrumbs =
+  breadcrumbs?.length
+    ? breadcrumbs
+    : [{ label: "Zones", href: "/zones/" }];
+
+---
+<LayoutSeo
+    title={title}
+    description={description}
+    schemaType="page"
+    pageTitleH1={pageTitleH1}
+    breadcrumbs={schemaBreadcrumbs}
+    faqs={faqs}
+>
 
   <!-- Page Title -->
   <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
@@ -87,12 +106,17 @@ const {
             <li class="breadcrumb-item">
               <a href="/"><i class="uil uil-home"></i></a>
             </li>
-            {breadcrumbs.map((b) => (
+
+            {/* breadcrumbs UI : si ton JSON en a, on l'affiche */}
+            {(breadcrumbs?.length ? breadcrumbs : [{ label: "Zones", href: "/zones/" }]).map((b) => (
                 <li class="breadcrumb-item">
                   <a href={b.href}>{b.label}</a>
                 </li>
             ))}
-            <li class="breadcrumb-item active" aria-current="page">{page.breadcrumbLabel}</li>
+
+            <li class="breadcrumb-item active" aria-current="page">
+              {breadcrumbLabel ?? page.pageTitleH1 ?? zoneSlug}
+            </li>
           </ol>
         </nav>
 
@@ -262,14 +286,8 @@ const {
       <!-- Métiers -->
       {metiersBlocks && (
           <div class="container mt-6">
-            <div
-                class="heading-block text-center border-bottom-0 mx-auto"
-                style="max-width: 640px"
-            >
-              <h2
-                  class="text-transform-none font-secondary fw-normal"
-                  style="font-size: 36px;"
-              >
+            <div class="heading-block text-center border-bottom-0 mx-auto" style="max-width: 640px">
+              <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 36px;">
                 {metiersBlocks.h2}
               </h2>
               <span>{metiersBlocks.lead}</span>
@@ -285,15 +303,11 @@ const {
                     >
                       <div class="vertical-middle dark text-center">
                         <div class="heading-block m-0 border-0">
-                          <h3 class="text-capitalize fw-normal font-secondary">
-                            {m.title}
-                          </h3>
+                          <h3 class="text-capitalize fw-normal font-secondary">{m.title}</h3>
                           {m.description && (
-                              <span
-                                  style="margin-top: 100px; font-size: 17px; font-weight: 500;"
-                              >
-                    {m.description}
-                  </span>
+                              <span style="margin-top: 100px; font-size: 17px; font-weight: 500;">
+                          {m.description}
+                        </span>
                           )}
                         </div>
                       </div>

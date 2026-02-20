@@ -1,0 +1,37 @@
+Intro locale (2–3 paragraphes)
+
+mention du métier + zone + bénéfice concret (appels/formulaires)
+
+rappeler les canaux : GBP / SEO local / Ads / pages locales / tracking
+
+“Ce que cherchent vos clients dans {zoneLabel}” (H2)
+
+exploite intentionsSearch.items (tu l’as dans le metier JSON)
+
+ajoute une phrase de contexte local : villes principales + départementCode si dispo
+
+“Points de friction / erreurs fréquentes pour {metier}” (H2)
+
+même si tu n’as pas de data, tu peux te baser sur methode.items en reformulant (sans dupliquer mot-pour-mot)
+
+l’objectif : créer une section éditoriale, pas seulement une liste.
+
+“Couverture locale” (H2)
+
+liste 8–12 villes (tu as déjà un fallback villesByZone)
+
+et explique comment tu gères la proximité (zones, déplacements, intent local).
+
+FAQ dynamique (H2)
+
+ne garde pas seulement la FAQ générique JSON : ajoute 3–5 Q/R générées à partir de {metierLabel}, {zoneLabel}, villes.
+
+ça te crée du contenu unique par page sans inventer des chiffres
+
+Sur chaque page combo, ajoute un bloc “Ressources liées” (H2) avec 3 liens :
+
+1 ressource catégorie = la prestation associée
+
+1 ressource “tracking”
+
+1 ressource “pages locales”

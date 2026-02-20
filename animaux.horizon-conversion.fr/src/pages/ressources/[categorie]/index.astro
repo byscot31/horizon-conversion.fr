@@ -3,45 +3,160 @@
 import LayoutSeo from "../../../layouts/LayoutSEO.astro";
 import { getCollection } from "astro:content";
 
+const safeArray = (v) => (Array.isArray(v) ? v : []);
+const stripHtml = (s) => String(s ?? "").replace(/<[^>]*>/g, "").trim();
+
+// Labels humains du serviceType
+const SERVICE_TYPE_LABEL = {
+  "seo-local": "SEO local",
+  "google-ads": "Google Ads",
+  "google-business-profile": "Google Business Profile",
+  "tracking-conversions": "Tracking & conversions",
+  "page-conversion": "Page de conversion",
+  "pages-locales": "Pages locales",
+};
+
+const PRESTATION_SLUGS = new Set(Object.keys(SERVICE_TYPE_LABEL));
+
 export async function getStaticPaths() {
-  const ressources = await getCollection("ressources");
-  const hubs = ressources.filter((e) => String(e.data?.key ?? "").startsWith("hub:ressources:"));
+  const entries = await getCollection("ressources");
+  const hubs = entries.filter((e) => e.id.startsWith("hub_ressources_"));
 
   return hubs
     .map((e) => {
-      const categorySlug = e.data?.categorySlug ?? String(e.data?.key ?? "").split(":")[2];
-      if (!categorySlug) return null;
-      return {
-        params: { categorie: categorySlug },
-        props: { hubId: e.id },
-      };
+      const categorie = e.data?.categorySlug ?? e.id.replace(/^hub_ressources_/, "");
+      if (!categorie) return null;
+      return { params: { categorie } };
     })
     .filter(Boolean);
 }
 
-const { hubId } = Astro.props;
+// load hub via params
+const categorie = Astro.params.categorie;
 
-const ressources = await getCollection("ressources");
-const hub = ressources.find((e) => e.id === hubId);
-if (!hub) throw new Error(`Missing category hub: ${hubId}`);
+const entries = await getCollection("ressources");
+const hub =
+  entries.find((e) => {
+    if (!e.id.startsWith("hub_ressources_")) return false;
+    const cat = e.data?.categorySlug ?? e.id.replace(/^hub_ressources_/, "");
+    return cat === categorie;
+  }) ?? null;
+
+if (!hub) throw new Error(`Missing category hub: ${categorie}`);
 
 const page = hub.data;
 
-const title = page.metaTitle ?? `Ressources | ${page.pageTitleH1 ?? "Catégorie"}`;
+// SEO
+const title = page.metaTitle ?? `Ressources | ${stripHtml(page.pageTitleH1) || "Catégorie"}`;
 const description = page.metaDescription ?? "";
 
-const items = page.items ?? [];
-const relatedPrestations = page.relatedPrestations ?? [];
+// items attendu: [{ title, description, href, label? }]
+const items = safeArray(page.items);
+
+// related prestations (optionnel)
+const relatedPrestations = safeArray(page.relatedPrestations);
+
+// FAQ optionnelle
+const faqs = page.faqs ?? null;
+
+// Breadcrumbs (pour JSON-LD + UI)
+const categoryLabel = page.breadcrumbLabel ?? (stripHtml(page.pageTitleH1) || categorie);
+const breadcrumbs = [
+  { label: "Ressources", href: "/ressources/" },
+  { label: categoryLabel, href: `/ressources/${categorie}/` },
+];
+
+// ---------------- SchemaType AUTO (catégorie => Service si elle mappe sur une prestation) ----------------
+
+// explicite > inférence
+const inferredPrestationSlug =
+  page.prestationSlug ??
+  (PRESTATION_SLUGS.has(page.categorySlug ?? categorie) ? (page.categorySlug ?? categorie) : null);
+
+const schemaType = page.schemaType ?? (inferredPrestationSlug ? "service" : "page");
+
+// Service data auto (seulement si schemaType=service)
+const service =
+  schemaType === "service"
+    ? {
+      serviceType: SERVICE_TYPE_LABEL[inferredPrestationSlug] ?? inferredPrestationSlug ?? "Webmarketing local",
+      name: page.service?.name ?? (stripHtml(page.pageTitleH1) || categoryLabel || "Service"),
+    }
+    : null;
 ---
 
-<LayoutSeo title={title} description={description} h1={page.pageTitleH1 ?? "Ressources"}>
+<LayoutSeo
+    title={title}
+    description={description}
+    schemaType={schemaType}
+    pageTitleH1={page.pageTitleH1 ?? "Ressources"}
+    breadcrumbs={breadcrumbs}
+    faqs={faqs}
+    service={service}
+>
+  <!-- Page Title -->
+  <section class="page-title page-title-parallax parallax scroll-detect dark include-header">
+    <img src="/assets/images/page-title.jpg" class="parallax-bg" alt={page.pageTitleALT ?? ""} />
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+
+        <div class="page-title-content">
+          <h1 style="font-size: 40px; line-height: 1.2; font-weight: 700; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+            <Fragment set:html={page.pageTitleH1 ?? ""} />
+          </h1>
+          <span class="fw-light d-none d-md-block" style="font-size: 16px; opacity: .85; max-width: 720px;">
+            {page.pageTitleLead ?? ""}
+          </span>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+            <a href={page.cta?.buttonHref ?? "/contact/"} class="button button-large button-rounded ms-0" data-cta="1">
+              {page.cta?.buttonLabel ?? "Mini-audit (15 min)"}
+            </a>
+            <a href="tel:+33660921008" class="button button-large button-rounded button-border button-white button-light ms-0" data-cta="1">
+              Appeler : 06 60 92 10 08
+            </a>
+          </div>
+
+          {!!page.proofs?.length && (
+              <div class="row mt-4" style="max-width: 820px;">
+                {page.proofs.slice(0, 3).map((p) => (
+                    <div class="col-md-4">
+                      <div style="background: rgba(0,0,0,.35); padding: 12px 14px; border-radius: 12px;">
+                        <strong>{p.title}</strong>
+                        <br /><small style="opacity:.85;">{p.subtitle}</small>
+                      </div>
+                    </div>
+                ))}
+              </div>
+          )}
+        </div>
+
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
+            <li class="breadcrumb-item">
+              <a href="/"><i class="uil uil-home"></i></a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/ressources/">Ressources</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {categoryLabel}
+            </li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+  </section>
+
   <section class="section m-0" style="background-color:#eef2f5;">
     <div class="container">
+
       <div class="heading-block text-center border-bottom-0 mb-5 mt-4 mx-auto" style="max-width: 760px">
-        <h1 class="text-transform-none font-secondary fw-normal" style="font-size: 40px;">
-          <Fragment set:html={page.pageTitleH1 ?? ""} />
-        </h1>
-        <span>{page.pageTitleLead ?? ""}</span>
+        <h2 class="text-transform-none font-secondary fw-normal" style="font-size: 32px;">
+          {page.listTitle ?? "Articles & guides"}
+        </h2>
+        <span>{page.listLead ?? ""}</span>
       </div>
 
       <div class="row g-4">
@@ -89,4 +204,5 @@ const relatedPrestations = page.relatedPrestations ?? [];
       )}
     </div>
   </section>
+
 </LayoutSeo>
