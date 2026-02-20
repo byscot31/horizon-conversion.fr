@@ -1,0 +1,16 @@
+---
+const { items = [] } = Astro.props; // [{q,a}]
+---
+{items?.length ? (
+<section>
+  <h2>FAQ</h2>
+  <div>
+    {items.map((it) => (
+        <details>
+          <summary>{it.q}</summary>
+          <p>{it.a}</p>
+        </details>
+    ))}
+  </div>
+</section>
+  ) : null}

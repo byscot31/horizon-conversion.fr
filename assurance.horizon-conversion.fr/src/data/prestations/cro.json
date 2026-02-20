@@ -1,0 +1,25 @@
+{
+  "id": "presta_cro",
+  "slug": "cro",
+  "label": "CRO (conversion rate optimization)",
+  "shortLabel": "CRO",
+  "meta": {
+    "title": "CRO assurance | Augmenter demandes de devis & RDV",
+    "description": "Optimisation pages, formulaires, preuve, messages : augmentez la conversion sans augmenter le budget pub.",
+    "canonical": "/prestations/cro/"
+  },
+  "promise": "Transformer plus de visiteurs en appels et formulaires (à trafic égal).",
+  "scope": {
+    "analyse": ["analytics", "heatmaps (option)", "parcours", "points de friction"],
+    "optim": ["copywriting offres", "preuve (avis, chiffres)", "UX formulaire", "CTA & rassurance"],
+    "tests": ["A/B (si stack OK)", "itérations rapides"]
+  },
+  "deliverables": [
+    "Checklist conversion assurance (page + formulaire)",
+    "Refonte bloc hero + preuve + FAQ",
+    "Formulaire pré-qualifiant",
+    "Suivi conversion (events)"
+  ],
+  "kpis": ["Taux conversion", "Taux appels", "Taux dossiers éligibles", "Baisse CPL effectif"],
+  "cta": { "primary": { "label": "Optimiser mes pages", "href": "/contact/" } }
+}

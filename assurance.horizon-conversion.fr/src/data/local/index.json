@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "serviceArea": {
+    "label": "Sud de l’Oise (60) & Nord du Val-d’Oise (95)",
+    "departements": ["60", "95"],
+    "secteurs": [
+      "Chantilly",
+      "Senlis",
+      "Lamorlaye",
+      "Gouvieux",
+      "Creil",
+      "Nogent-sur-Oise",
+      "Clermont (Oise)",
+      "Persan",
+      "Beaumont-sur-Oise",
+      "L'Isle-Adam",
+      "Méry-sur-Oise",
+      "Domont",
+      "Sarcelles (Nord)",
+      "Gonesse (Nord)"
+    ]
+  },
+  "modulesDefaults": {
+    "zones": {
+      "title": "Zones couvertes",
+      "intro": "Interventions et acquisition locale sur :"
+    },
+    "requeteIntentions": {
+      "title": "Intentions locales captées",
+      "intro": "Exemples de recherches locales qu’on transforme en demandes de devis/RDV."
+    },
+    "preuvesLocales": {
+      "title": "Preuves & signaux de confiance",
+      "items": [
+        "Tracking appels + formulaires pour attribuer chaque lead à sa source",
+        "Pages offres avec preuve, rassurance et FAQ (réduction de friction)",
+        "Process rappel < 10 min (option CRM/workflow)"
+      ]
+    },
+    "faqLocale": {
+      "title": "FAQ locale",
+      "items": [
+        { "q": "Intervenez-vous sur {ville} ?", "a": "Oui. On adapte le ciblage (SEO/Ads) et les messages aux intentions locales de {ville} et alentours." },
+        { "q": "Comment évitez-vous les demandes hors zone ?", "a": "Géociblage, exclusions, wording, pré-qualification formulaire et call tracking." },
+        { "q": "Peut-on prioriser 1-2 offres au départ ?", "a": "Oui : on démarre avec l’offre d’entrée la plus rentable, puis on élargit une fois le CPL stabilisé." }
+      ]
+    },
+    "antiSpam": {
+      "enabled": true,
+      "zones": {
+        "basePinned": ["Chantilly", "Senlis", "Creil"],
+        "limitMin": 6,
+        "limitMax": 10
+      },
+      "queries": {
+        "max": 10
+      }
+    },
+    "antiDuplicate": {
+      "enabled": true,
+      "patterns": {
+        "pickMin": 2,
+        "pickMax": 4,
+        "rotate": true
+      },
+      "queries": {
+        "maxMin": 8,
+        "maxMax": 12
+      }
+    },
+    "antiCannibal": {
+      "enabled": true,
+      "metier": {
+        "preferContains": ["{metier}"],
+        "avoidContains": ["{presta}"],
+        "minSharePrefer": 0.7
+      },
+      "cross": {
+        "preferContains": ["{presta}"],
+        "avoidContains": [],
+        "minSharePrefer": 0.7
+      }
+    }
+  }
+}

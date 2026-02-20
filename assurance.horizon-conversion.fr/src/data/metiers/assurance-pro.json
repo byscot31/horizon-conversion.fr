@@ -1,0 +1,54 @@
+{
+  "id": "metier_assurance_pro",
+  "slug": "assurance-pro",
+  "label": "Assureurs Pro (RC Pro / décennale / multirisque)",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Leads assurance pro (RC Pro, décennale) | 60/95",
+    "description": "Attirez des demandes pro qualifiées (BTP, artisans, TPE) via SEO local + Ads + landing devis.",
+    "robots": "index,follow",
+    "canonical": "/metiers/assurance-pro/"
+  },
+  "hero": {
+    "h1": "Des leads pro qualifiés (RC Pro, décennale, multirisque)",
+    "sub": "On vise les artisans/TPE locaux avec preuve, offres et pré-qualification (activité, CA, effectif).",
+    "ctaPrimary": { "label": "Obtenir des devis entrants", "href": "/contact/" }
+  },
+  "intentionsSEO": [
+    { "cluster": "activité", "queries": ["décennale couvreur Senlis", "rc pro électricien Chantilly", "assurance pro plombier Creil"] },
+    { "cluster": "urgence", "queries": ["décennale rapide Oise", "rc pro immédiate Val-d'Oise"] }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "Les prospects pro sont difficiles à joindre.", "reponse": "On optimise formulaires + créneaux RDV + rappel immédiat + SMS/email." }
+  ],
+  "kpis": [
+    { "name": "Taux de contact < 10 min", "target": "maximiser via workflow" },
+    { "name": "Taux devis émis", "target": "hausse via qualification" }
+  ],
+  "faq": [
+    { "q": "Vous pouvez cibler par métier (BTP, commerce) ?", "a": "Oui, pages dédiées par activité et annonces adaptées." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": ["presta_ads_local", "presta_seo_local", "presta_crm_workflow"]
+  }
+}

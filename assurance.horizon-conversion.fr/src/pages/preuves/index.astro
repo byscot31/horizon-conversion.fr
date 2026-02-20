@@ -1,0 +1,124 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import FAQ from "../../components/FAQ.astro";
+
+const seo = {
+  title: "Preuves & process | Acquisition assurance (60/95)",
+  description:
+    "Notre process : qualification, tracking, pages qui convertissent, optimisation continue. Exemples de livrables et mini-cas (format MVP).",
+  canonical: "/preuves/"
+};
+
+const proofBlocks = [
+  {
+    title: "Tracking & attribution (leads mesurés)",
+    bullets: [
+      "Suivi formulaires + clics appels",
+      "UTM standardisées (source/campagne/offre/métier)",
+      "Tableau de bord simple : CPL, conversion, éligibilité"
+    ]
+  },
+  {
+    title: "Pages orientées conversion",
+    bullets: [
+      "Hero : promesse + preuve + CTA",
+      "Objections traitées (qualité, zone, prix, délais)",
+      "FAQ + schémas (FAQPage) + maillage matriochka"
+    ]
+  },
+  {
+    title: "Process de traitement des leads",
+    bullets: [
+      "Rappel < 10 minutes (option CRM/workflow)",
+      "Pré-qualification : offre, zone, urgence, profil",
+      "Réduction no-show via confirmation SMS/email"
+    ]
+  }
+];
+
+const miniCases = [
+  {
+    title: "Mini-cas (exemple) : baisse du CPL via landing + exclusions",
+    context:
+      "CPL élevé sur Ads, volume instable.",
+    actions: [
+      "Refonte landing (preuve + FAQ + formulaire pré-qualifiant)",
+      "Exclusions de requêtes + resserrage zones",
+      "Tracking appels + formulaires"
+    ],
+    outcome:
+      "CPL stabilisé et meilleure part de leads éligibles (à chiffrer après vos données)."
+  },
+  {
+    title: "Mini-cas (exemple) : SEO local sans pages ville",
+    context:
+      "Site existant, peu de requêtes transactionnelles.",
+    actions: [
+      "Pages métiers + prestations + croisements",
+      "Modules locaux anti-spam/anti-duplicate",
+      "Maillage interne matriochka"
+    ],
+    outcome:
+      "Montée progressive des leads organiques sur les intentions locales."
+  }
+];
+
+const faq = [
+  { q: "Vous garantissez un nombre de leads ?", a: "On pilote un système (canaux + conversion + tracking). Le volume dépend budget, concurrence, offres et réactivité commerciale." },
+  { q: "Comment prouvez-vous ce qui marche ?", a: "Attribution appels/formulaires, UTMs, et tableau de bord (source/campagne/offre/métier) pour relier investissement et leads." },
+  { q: "Pourquoi pas de pages ville ?", a: "Ton domaine principal gère déjà les hubs zones/villes. Ici on renforce la pertinence locale via modules locaux contextualisés et intentionnels." }
+];
+---
+<SiteLayout
+    seo={seo}
+    h1="Preuves & process"
+    intro="MVP : ce qu’on met en place, comment on mesure, et pourquoi ça convertit."
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Preuves", href: "/preuves/" }
+    ]}
+    ctas={{
+      primary: { label: "Voir la méthode", href: "/methode/" },
+      secondary: { label: "Demander un diagnostic", href: "/contact/" }
+    }}
+    schema={{ faq }}
+>
+  <section>
+    <h2>Le process (concret)</h2>
+    {proofBlocks.map((b) => (
+        <section style="margin:16px 0;">
+          <h3>{b.title}</h3>
+          <ul>
+            {b.bullets.map((x) => <li>{x}</li>)}
+          </ul>
+        </section>
+    ))}
+  </section>
+
+  <section>
+    <h2>Mini-cas (format MVP)</h2>
+    {miniCases.map((c) => (
+        <article style="margin:16px 0; padding:12px; border:1px solid #eee; border-radius:12px;">
+          <h3 style="margin-top:0;">{c.title}</h3>
+          <p><strong>Contexte :</strong> {c.context}</p>
+          <p><strong>Actions :</strong></p>
+          <ul>
+            {c.actions.map((a) => <li>{a}</li>)}
+          </ul>
+          <p><strong>Résultat :</strong> {c.outcome}</p>
+        </article>
+    ))}
+  </section>
+
+  <FAQ items={faq} />
+
+  <section style="margin-top:24px; padding-top:16px; border-top:1px solid #eee;">
+    <h2>Aller plus loin</h2>
+    <ul>
+      <li><a href="/metiers/">Métiers</a></li>
+      <li><a href="/prestations/">Prestations</a></li>
+      <li><a href="/tarifs/">Tarifs</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </section>
+</SiteLayout>

@@ -1,0 +1,108 @@
+{
+  "id": "metier_agence_assurance",
+  "slug": "agence-assurance",
+  "label": "Agences d’assurance",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Génération de leads pour agence d’assurance | Sud Oise & Nord Val-d’Oise",
+    "description": "Plus de prospects qualifiés en assurance (auto, habitation, santé) avec une méthode locale : SEO + Ads + CRO, orientée RDV et devis.",
+    "robots": "index,follow",
+    "canonical": "/metiers/agence-assurance/"
+  },
+  "hero": {
+    "h1": "Générez des leads qualifiés pour votre agence d’assurance",
+    "sub": "Une méthode locale (60/95) pour transformer vos pages et campagnes en demandes de devis et RDV.",
+    "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
+    "ctaSecondary": { "label": "Voir la méthode", "href": "/methode/" }
+  },
+  "positionnement": {
+    "promesse": "Augmenter le volume de demandes de devis locales, sans dépendre uniquement du réseau ou de l’agence centrale.",
+    "angle": "Pages locales + preuves + tunnel de conversion + tracking appels/formulaires."
+  },
+  "icp": {
+    "taille": ["1-5 conseillers", "6-20 conseillers"],
+    "maturite": ["déjà présent sur Google", "campagnes Ads existantes", "refonte récente mais peu de leads"],
+    "offresPrioritaires": ["auto", "habitation", "santé", "prévoyance"]
+  },
+  "intentionsSEO": [
+    {
+      "cluster": "transactionnel",
+      "queries": [
+        "agence assurance Chantilly",
+        "assurance auto Senlis devis",
+        "assurance habitation Lamorlaye",
+        "mutuelle santé Creil agence"
+      ]
+    },
+    {
+      "cluster": "comparatif",
+      "queries": [
+        "meilleure assurance auto Chantilly",
+        "tarif assurance habitation Senlis",
+        "devis mutuelle santé Creil"
+      ]
+    },
+    {
+      "cluster": "local pack",
+      "queries": [
+        "assureur près de moi Chantilly",
+        "agence assurance ouverte Senlis",
+        "courtier assurance autour de Creil"
+      ]
+    }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "On a déjà un site corporate, ça suffit.", "reponse": "Un site corporate ne cible pas les intentions locales. On ajoute des pages transactionnelles + maillage + preuve + CTA." },
+    { "id": "obj_02", "texte": "Leads = beaucoup de non qualifiés.", "reponse": "On filtre via offres, zones, formulaires, call tracking, et scoring simple (motif, urgence, profil)." },
+    { "id": "obj_03", "texte": "Google Ads coûte trop cher.", "reponse": "On combine SEO local + Ads ciblées (marque / zones / produits) + landing CRO pour baisser le CPL." }
+  ],
+  "kpis": [
+    { "name": "CPL (coût par lead)", "target": "baisse progressive sur 60-90 jours" },
+    { "name": "Taux de conversion landing", "target": "x1.5 à x3 selon point de départ" },
+    { "name": "Part de leads locaux", "target": ">= 80%" },
+    { "name": "Appels trackés", "target": "100% des numéros campagne" }
+  ],
+  "livrables": [
+    "Arborescence locale (pages offres × zones)",
+    "Templates pages offres (preuves, FAQ, CTA)",
+    "Tracking appels + formulaires + événements",
+    "Tableau de bord leads (source / campagne / produit)"
+  ],
+  "faq": [
+    { "q": "En combien de temps on voit des leads ?", "a": "Ads : immédiat. SEO local : montée en puissance 4-12 semaines selon concurrence et historique." },
+    { "q": "Vous travaillez avec plusieurs agences sur la même zone ?", "a": "Non sur un micro-secteur défini : on évite la cannibalisation et on protège l’investissement." },
+    { "q": "On peut cibler auto + habitation + santé ?", "a": "Oui, mais on priorise 1-2 offres d’entrée pour stabiliser le CPL et augmenter le taux de RDV." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": [
+      "presta_seo_local",
+      "presta_ads_local",
+      "presta_cro"
+    ],
+    "pagesAssociees": [
+      "/preuves/",
+      "/methode/",
+      "/tarifs/"
+    ]
+  }
+}

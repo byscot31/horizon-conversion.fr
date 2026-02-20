@@ -1,0 +1,54 @@
+{
+  "id": "metier_mutuelle_sante",
+  "slug": "mutuelle-sante",
+  "label": "Mutuelles santé locales",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Acquisition locale pour mutuelle santé | 60/95",
+    "description": "Attirez des adhérents (familles, seniors, indépendants) via SEO local + Ads + pages mutuelle orientées conversion.",
+    "robots": "index,follow",
+    "canonical": "/metiers/mutuelle-sante/"
+  },
+  "hero": {
+    "h1": "Des demandes d’adhésion mutuelle sur votre zone (60/95)",
+    "sub": "Ciblage par profil + preuve + landing = plus de dossiers complets.",
+    "ctaPrimary": { "label": "Recevoir un plan d’action", "href": "/contact/" }
+  },
+  "intentionsSEO": [
+    { "cluster": "profil", "queries": ["mutuelle senior Chantilly", "mutuelle famille Senlis", "mutuelle TNS Creil"] },
+    { "cluster": "comparatif", "queries": ["mutuelle pas cher Persan", "meilleure mutuelle senior Oise"] }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "La santé est très concurrentielle.", "reponse": "On segmente par profil + offres d’entrée + preuve + FAQ : on augmente le taux de dossier complet." }
+  ],
+  "kpis": [
+    { "name": "Taux dossier complet", "target": "hausse via pré-qualification" },
+    { "name": "CPL santé", "target": "maîtrise via ciblage + landing" }
+  ],
+  "faq": [
+    { "q": "Vous gérez les profils (senior/famille/TNS) ?", "a": "Oui, chaque profil a ses pages, messages, preuves et FAQ dédiés." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": ["presta_seo_local", "presta_cro", "presta_content_proof"]
+  }
+}

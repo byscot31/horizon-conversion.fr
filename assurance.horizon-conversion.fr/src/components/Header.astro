@@ -1,0 +1,92 @@
+---
+const phoneTel = "+33660921008";
+const phoneDisplay = "06 60 92 10 08";
+const waLink = "https://wa.me/33660921008";
+
+const path = Astro.url?.pathname ?? "/";
+const isActive = (href) => (href === "/" ? path === "/" : path.startsWith(href));
+
+const items = [
+  { href: "/metiers/", label: "Métiers" },
+  { href: "/prestations/", label: "Prestations" },
+  { href: "/methode/", label: "Méthode" },
+  { href: "/preuves/", label: "Preuves" },
+  { href: "/tarifs/", label: "Tarifs" },
+  { href: "/contact/", label: "Contact" }
+];
+---
+
+<header id="header">
+  <div id="header-wrap">
+    <div class="container">
+      <div class="header-row">
+
+        <div id="logo" class="me-lg-4">
+          <a href="/" class="mb-0 fw-bold">
+            <span>H C</span>
+            <small class="d-block color mt-n2">Assurance</small>
+          </a>
+        </div>
+
+        <div class="header-misc">
+          <a
+              href={waLink}
+              class="button button-rounded text-transform-none text-dark ls-0 fw-normal m-0 me-2 bg-whatsapp"
+              aria-label={`WhatsApp : ${phoneDisplay}`}
+              data-track="click_whatsapp"
+          >
+            <i class="fa-brands fa-whatsapp me-0"></i>
+            <span class="d-none d-md-inline ms-2">{phoneDisplay}</span>
+          </a>
+
+          <a
+              href="/contact/"
+              class="button button-rounded text-transform-none ls-0 fw-normal m-0"
+              data-track="click_cta_audit"
+          >
+            <i class="bi-calendar3 m-0"></i>
+            <span class="d-none d-md-inline ms-2">Diagnostic Gratuit</span>
+          </a>
+        </div>
+
+        <div class="primary-menu-trigger ms-3">
+          <button class="cnvs-hamburger" type="button" title="Open Mobile Menu" aria-label="Ouvrir le menu">
+            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+          </button>
+        </div>
+
+        <nav class="primary-menu me-lg-auto" aria-label="Navigation principale">
+          <ul class="menu-container">
+            {items.map((it) => (
+                <li class={`menu-item ${isActive(it.href) ? "current" : ""}`}>
+                  <a class="menu-link" href={it.href}>
+                    <div>{it.label}</div>
+                  </a>
+                </li>
+            ))}
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-wrap-clone"></div>
+</header>
+
+<!-- Tracking minimal (si dataLayer présent) -->
+<script>
+  {`
+    (function(){
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', function(e){
+        var a = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+        if(!a) return;
+        window.dataLayer.push({
+          event: a.getAttribute('data-track'),
+          page_path: window.location.pathname,
+          href: a.getAttribute('href') || ''
+        });
+      });
+    })();
+  `}
+</script>

@@ -1,0 +1,23 @@
+{
+  "id": "presta_content_proof",
+  "slug": "contenus-preuves",
+  "label": "Contenus & preuves (pages offres, avis, cas)",
+  "shortLabel": "Contenus",
+  "meta": {
+    "title": "Contenus assurance qui convertissent | Preuves, FAQ, pages offres",
+    "description": "Pages offres locales + preuves (avis, cas, chiffres) : augmentez la confiance et la conversion.",
+    "canonical": "/prestations/contenus-preuves/"
+  },
+  "promise": "Rassurer vite et convertir : preuve + réponses aux objections + CTA clairs.",
+  "scope": {
+    "assets": ["pages offres", "pages preuves", "FAQ", "mini-cas clients"],
+    "seo": ["structure Hn", "schémas FAQ", "maillage interne"],
+    "conversion": ["promesse", "rassurance", "formulaire orienté qualification"]
+  },
+  "deliverables": [
+    "Kit de pages preuve (avis, résultats, process)",
+    "Pages offres (1 à 6 selon plan)",
+    "FAQ locale utile (zones + cas fréquents)"
+  ],
+  "cta": { "primary": { "label": "Créer mes pages offres", "href": "/contact/" } }
+}

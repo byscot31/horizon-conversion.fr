@@ -1,0 +1,33 @@
+{
+  "id": "presta_seo_local",
+  "slug": "seo-local",
+  "label": "SEO local (Google + pages locales)",
+  "shortLabel": "SEO local",
+  "meta": {
+    "title": "SEO local assurance (60/95) | Google + pages locales qui convertissent",
+    "description": "Structure locale, contenus transactionnels, maillage, GBP : captez des leads assurance sur Chantilly, Senlis, Creil, Persan…",
+    "canonical": "/prestations/seo-local/"
+  },
+  "promise": "Gagner des positions locales et transformer le trafic en demandes de devis.",
+  "pourQui": ["agences d’assurance", "courtiers", "mutuelles", "assurance pro", "emprunteur"],
+  "scope": {
+    "audit": ["technique", "sémantique", "concurrentiel local", "GBP"],
+    "build": ["arborescence hubs/cocons", "templates pages offres", "FAQ locales", "maillage interne matriochka"],
+    "ops": ["publication régulière", "optimisations GBP", "netlinking local (sélectif)"]
+  },
+  "deliverables": [
+    "Mapping mots-clés local (offres × villes/secteurs)",
+    "Création/optimisation pages offres locales",
+    "Optimisation Google Business Profile",
+    "Sitemap + canonicals + schémas FAQ/LocalBusiness"
+  ],
+  "kpis": [
+    "Top 3 local pack (requêtes ciblées)",
+    "Clics appels/itinéraires (GBP)",
+    "Leads organiques (forms + calls)"
+  ],
+  "cta": {
+    "primary": { "label": "Audit SEO local", "href": "/contact/" },
+    "secondary": { "label": "Voir la méthode", "href": "/methode/" }
+  }
+}

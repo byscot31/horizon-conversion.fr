@@ -1,0 +1,64 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import { getPrestationBySlug, listMetiers } from "../../lib/data";
+
+export async function getStaticPaths() {
+  const { listPrestations } = await import("../../lib/data");
+  return listPrestations().map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const presta = await getPrestationBySlug(slug);
+
+const seo = presta.meta;
+
+const metiers = listMetiers();
+const decliLinks = metiers.map((m) => ({
+  label: `${presta.label} pour ${m.title}`,
+  href: `/prestations/${presta.slug}/${m.slug}/`,
+  desc: "Déclinaison métier (angle + objections + CTA)."
+}));
+
+const keyLinks = [
+  { label: "Métiers", href: "/metiers/", desc: "Choisis ton métier et vois les angles de conversion." },
+  { label: "Méthode", href: "/methode/", desc: "Le système complet acquisition + conversion." },
+  { label: "Contact", href: "/contact/", desc: "Diagnostic et plan d’action." }
+];
+---
+<SiteLayout
+    seo={seo}
+    h1={presta.label}
+    intro={presta.promise}
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Prestations", href: "/prestations/" },
+      { label: presta.label, href: `/prestations/${presta.slug}/` }
+    ]}
+    schema={{
+      // includeWebsite: true, // optionnel si ton SiteLayout le met déjà par défaut
+    // includeSearchAction: false, // optionnel
+    service: {
+        name: presta.shortLabel ?? presta.label,
+        description: presta.meta?.description
+      }
+      // faq: [...] // si tu as une FAQ sur cette page
+  }}
+>
+  {presta.deliverables?.length ? (
+      <section>
+        <h2>Livrables</h2>
+        <ul>{presta.deliverables.map((d) => <li>{d}</li>)}</ul>
+      </section>
+  ) : null}
+
+  {presta.kpis?.length ? (
+      <section>
+        <h2>KPIs pilotés</h2>
+        <ul>{presta.kpis.map((k) => <li>{k}</li>)}</ul>
+      </section>
+  ) : null}
+
+  <RelatedLinks title="Déclinaisons par métier" links={decliLinks} />
+  <RelatedLinks title="Maillage utile" links={keyLinks} />
+</SiteLayout>

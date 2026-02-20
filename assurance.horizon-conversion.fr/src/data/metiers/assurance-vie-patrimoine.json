@@ -1,0 +1,53 @@
+{
+  "id": "metier_gestion_patrimoine",
+  "slug": "assurance-vie-patrimoine",
+  "label": "Conseil patrimonial (assurance-vie / prévoyance)",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Leads conseil patrimonial (assurance-vie, prévoyance) | 60/95",
+    "description": "Captez des demandes de bilan et RDV patrimonial localement via SEO, contenus preuves, et pages conversion.",
+    "robots": "index,follow",
+    "canonical": "/metiers/assurance-vie-patrimoine/"
+  },
+  "hero": {
+    "h1": "Des demandes de bilan patrimonial sur votre zone",
+    "sub": "On attire les bons profils via contenus intentionnels + preuves + prise de RDV.",
+    "ctaPrimary": { "label": "Réserver un échange", "href": "/contact/" }
+  },
+  "intentionsSEO": [
+    { "cluster": "bilan", "queries": ["bilan patrimonial Chantilly", "conseil assurance vie Senlis"] },
+    { "cluster": "protection", "queries": ["prévoyance dirigeant Oise", "assurance vie optimisation Val-d'Oise"] }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "On veut éviter les petits tickets.", "reponse": "On qualifie via seuils (encours, objectif, horizon), et messages de positionnement." }
+  ],
+  "kpis": [
+    { "name": "RDV qualifiés / mois", "target": "pilotage sur critères d’entrée" }
+  ],
+  "faq": [
+    { "q": "Comment filtrer les demandes non pertinentes ?", "a": "Formulaire avec seuils + pages positionnement + prise de RDV conditionnelle." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": ["presta_seo_local", "presta_content_proof", "presta_cro"]
+  }
+}

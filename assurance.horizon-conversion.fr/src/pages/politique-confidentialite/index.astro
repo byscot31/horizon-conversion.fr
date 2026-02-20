@@ -1,0 +1,73 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const seo = {
+  title: "Politique de confidentialité | RGPD",
+  description: "Traitement des données (formulaire, analytics, attribution) et droits RGPD.",
+  canonical: "/politique-confidentialite/"
+};
+
+// ⚠️ Complète ces champs
+const dpoEmail = "—";
+const retention = "12 mois"; // exemple
+---
+<SiteLayout
+    seo={seo}
+    h1="Politique de confidentialité (RGPD)"
+    intro="Nous collectons uniquement les données nécessaires au traitement des demandes et à la mesure de performance."
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Confidentialité", href: "/politique-confidentialite/" }
+    ]}
+>
+  <section>
+    <h2>Données collectées</h2>
+    <ul>
+      <li>Données de contact : nom, email, téléphone, société</li>
+      <li>Données de contexte : métier, offres, message</li>
+      <li>Données de mesure : UTMs, page d’entrée, événements (submit, clic appel)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Finalités</h2>
+    <ul>
+      <li>Répondre à votre demande et vous recontacter</li>
+      <li>Améliorer les pages et campagnes (CRO/SEO/Ads)</li>
+      <li>Mesurer l’efficacité (attribution source/campagne/offre)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Base légale</h2>
+    <ul>
+      <li>Consentement (case à cocher sur le formulaire)</li>
+      <li>Intérêt légitime (mesure et amélioration du service, dans les limites RGPD)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Durée de conservation</h2>
+    <p>Les données sont conservées pendant {retention}, puis supprimées ou anonymisées.</p>
+  </section>
+
+  <section>
+    <h2>Destinataires</h2>
+    <p>Les données sont destinées à l’éditeur du site et aux sous-traitants techniques (hébergement, outils de mesure) strictement nécessaires.</p>
+  </section>
+
+  <section>
+    <h2>Vos droits</h2>
+    <ul>
+      <li>Accès, rectification, suppression</li>
+      <li>Opposition, limitation, portabilité</li>
+      <li>Retrait du consentement à tout moment</li>
+    </ul>
+    <p>Pour exercer vos droits : {dpoEmail} ou via <a href="/contact/">le formulaire</a>.</p>
+  </section>
+
+  <section>
+    <h2>Cookies / mesure d’audience</h2>
+    <p>MVP : nous utilisons des paramètres d’URL (UTM) et des événements (submit, clic appel) pour attribuer les leads. Si des cookies analytics sont utilisés, un bandeau de consentement sera mis en place.</p>
+  </section>
+</SiteLayout>

@@ -1,0 +1,24 @@
+{
+  "id": "presta_crm_workflow",
+  "slug": "crm-workflow",
+  "label": "CRM & workflows (rappel, RDV, nurturing)",
+  "shortLabel": "CRM",
+  "meta": {
+    "title": "CRM assurance | Réduire la perte de leads et augmenter le taux de RDV",
+    "description": "Automatisations rappel <10 min, prise de RDV, nurturing : plus de dossiers transformés.",
+    "canonical": "/prestations/crm-workflow/"
+  },
+  "promise": "Ne plus perdre de leads : contacter plus vite, mieux qualifier, mieux relancer.",
+  "scope": {
+    "process": ["pipeline", "scoring simple", "routage par offre/zone"],
+    "automation": ["SMS/email", "rappels", "prise de RDV", "nurturing"],
+    "ops": ["scripts d’appel", "templates messages"]
+  },
+  "deliverables": [
+    "Pipeline + champs qualification",
+    "Workflows rappel et relance",
+    "Scripts + templates",
+    "Tableau suivi (leads -> RDV -> devis -> signé)"
+  ],
+  "cta": { "primary": { "label": "Automatiser le suivi", "href": "/contact/" } }
+}

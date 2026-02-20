@@ -1,0 +1,64 @@
+---
+import Seo from "../components/Seo.astro";
+import { buildJsonLd } from "../lib/schema";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  seo,
+  h1,
+  intro,
+  breadcrumbs = [],
+  ctas = null,
+  schema = {} // { includeWebsite?, includeSearchAction?, service?, faq? }
+} = Astro.props;
+
+// Assemble JSON-LD
+const jsonLd = buildJsonLd({
+  pageCanonical: seo?.canonical ?? "/",
+  breadcrumbs,
+  includeWebsite: schema?.includeWebsite ?? true,
+  includeSearchAction: schema?.includeSearchAction ?? false,
+  service: schema?.service,
+  faq: schema?.faq
+});
+---
+<html lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Horizon Conversion">
+
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&family=Roboto:wght@400;500;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+  <!-- Css -->
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/css/font-icons.css">
+  <link rel="stylesheet" href="/assets/css/swiper.css">
+  <link rel="stylesheet" href="/assets/insurance.css">
+
+  <Seo {...seo} jsonLd={jsonLd} />
+
+</head>
+<body class="stretched">
+<div id="wrapper">
+
+  <Header />
+
+  <slot />
+
+  <Footer />
+
+</div><!-- #wrapper end -->
+
+<div id="gotoTop" class="uil uil-angle-double-up"></div>
+
+<script is:inline src="https://unpkg.com/phosphor-icons"></script>
+<script is:inline src="/assets/js/plugins.min.js"></script>
+<script is:inline src="/assets/js/functions.bundle.js"></script>
+</body>
+</html>

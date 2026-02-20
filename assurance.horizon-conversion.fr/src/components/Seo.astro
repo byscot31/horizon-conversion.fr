@@ -1,0 +1,26 @@
+---
+const {
+  title,
+  description,
+  canonical,
+  robots = "index,follow",
+  jsonLd // objet OU tableau d’objets
+} = Astro.props;
+
+const site = "https://assurance.horizon-conversion.fr";
+const canonicalUrl = canonical?.startsWith("http") ? canonical : `${site}${canonical}`;
+
+const jsonLdArray = Array.isArray(jsonLd) ? jsonLd : (jsonLd ? [jsonLd] : []);
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content="website" />
+
+{jsonLdArray.map((obj) => (
+<script type="application/ld+json" set:html={JSON.stringify(obj)} />
+  ))}

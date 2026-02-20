@@ -1,0 +1,28 @@
+{
+  "id": "presta_ads_local",
+  "slug": "ads-local",
+  "label": "Ads local (Google Ads orienté leads)",
+  "shortLabel": "Google Ads",
+  "meta": {
+    "title": "Google Ads assurance local (60/95) | Leads & RDV",
+    "description": "Campagnes locales (zones/offres), landing pages, tracking appels : pilotez CPL et volume de devis.",
+    "canonical": "/prestations/ads-local/"
+  },
+  "promise": "Générer des leads immédiatement avec un CPL maîtrisé via structure + landing + tracking.",
+  "scope": {
+    "setup": ["structure compte", "groupes par offre", "extensions", "exclusions", "géociblage fin"],
+    "landing": ["pages dédiées par offre", "preuve + FAQ", "CTA appels/formulaire"],
+    "optim": ["tests annonces", "ajustements zones", "négatifs", "pilotage CPL"]
+  },
+  "deliverables": [
+    "Plan de campagnes (offres × zones)",
+    "Landing pages Ads (1 à 3)",
+    "Call tracking + conversions",
+    "Dashboard (leads / source / coût)"
+  ],
+  "kpis": ["CPL", "Taux de conversion landing", "Part leads éligibles", "Taux de contact < 10 min"],
+  "cta": {
+    "primary": { "label": "Lancer une campagne", "href": "/contact/" },
+    "secondary": { "label": "Voir les preuves", "href": "/preuves/" }
+  }
+}

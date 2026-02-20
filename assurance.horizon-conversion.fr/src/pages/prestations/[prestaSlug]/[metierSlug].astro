@@ -1,0 +1,99 @@
+---
+import SiteLayout from "../../../layouts/SiteLayout.astro";
+import FAQ from "../../../components/FAQ.astro";
+import RelatedLinks from "../../../components/RelatedLinks.astro";
+import { getPrestationBySlug, getMetierBySlug, getDeclinaison, listMetiers, listPrestations } from "../../../lib/data";
+import LocalModules from "../../../components/LocalModules.astro";
+
+export async function getStaticPaths() {
+  const { listPrestations, listMetiers } = await import("../../../lib/data");
+  const ps = listPrestations();
+  const ms = listMetiers();
+  return ps.flatMap((p) => ms.map((m) => ({ params: { prestaSlug: p.slug, metierSlug: m.slug } })));
+}
+
+const { prestaSlug, metierSlug } = Astro.params;
+
+const presta = await getPrestationBySlug(prestaSlug);
+const metier = await getMetierBySlug(metierSlug);
+const decl = getDeclinaison(prestaSlug, metierSlug);
+
+const canonical = `/prestations/${prestaSlug}/${metierSlug}/`;
+const title = `${presta.label} pour ${metier.label} | Sud Oise (60) & Nord Val-d’Oise (95)`;
+const description =
+  decl?.cell?.angle
+    ? `${decl.cell.angle}. Déploiement orienté leads (tracking inclus) sur 60/95.`
+    : `Déclinaison ${presta.label} pour ${metier.label} sur 60/95 : angles, objections, livrables et CTA.`;
+
+const seo = { title, description, canonical };
+
+const faq = [
+  { q: "Est-ce adapté à ma zone (60/95) ?", a: "Oui : Contactez-nous au 06 12 34 56 78 !!! contact@msn.com https:// ciblage géographique + pages locales + messages orientés intentions locales." },
+  { q: "Comment éviter les leads hors cible ?", a: "Exclusions + géociblage + pré-qualification formulaire + call tracking." },
+  { q: "Quel canal pour démarrer ?", a: "Ads = immédiat, SEO local = stabilité, CRO = conversion plus haute à budget égal." }
+];
+
+const links = [
+  { label: `Retour à la prestation : ${presta.label}`, href: `/prestations/${presta.slug}/`, desc: "Vue globale, livrables, KPIs." },
+  { label: `Retour au métier : ${metier.label}`, href: `/metiers/${metier.slug}/`, desc: "Objections, recos, FAQ métier." },
+  { label: "Méthode", href: "/methode/", desc: "Le système complet." },
+  { label: "Contact", href: "/contact/", desc: "Diagnostic." }
+];
+---
+<SiteLayout
+    seo={seo}
+    h1={`${presta.label} pour ${metier.label}`}
+    intro={decl?.cell?.angle ?? "Déclinaison métier orientée conversion."}
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Prestations", href: "/prestations/" },
+      { label: presta.label, href: `/prestations/${presta.slug}/` },
+      { label: `${presta.shortLabel ?? presta.label} × ${metier.label}`, href: canonical }
+    ]}
+    schema={{
+      service: {
+        name: `${presta.shortLabel ?? presta.label} pour ${metier.label}`,
+        description
+      }
+      // faq: [...] // si tu as une FAQ sur cette page
+  }}
+>
+  <section>
+    <h2>Ce qu’on met en place</h2>
+    <ul>
+      {(presta.deliverables ?? []).slice(0, 6).map((d) => <li>{d}</li>)}
+    </ul>
+  </section>
+
+  {metier.objections?.length ? (
+      <section>
+        <h2>Objections qu’on traite (et comment)</h2>
+        <ul>
+          {metier.objections.slice(0, 3).map((o) => (
+              <li><strong>{o.texte}</strong><br />{o.reponse}</li>
+          ))}
+        </ul>
+      </section>
+  ) : null}
+
+  <FAQ items={faq} />
+
+  <LocalModules
+      mode="cross"
+      canonicalSeed={canonical}
+      context={{
+        metierLabel: metier.label,
+        prestationLabel: presta.label,
+        prestationShortLabel: presta.shortLabel ?? presta.label,
+        offres: metier.offres
+      }}
+      config={{
+        enabled: true,
+        zones: { enabled: true, limitMin: 6, limitMax: 8 },
+        requeteIntentions: { enabled: true, minSharePrefer: 0.8 },
+        faqLocale: { enabled: true, limit: 3 }
+      }}
+  />
+
+  <RelatedLinks title="Maillage interne" links={links} />
+</SiteLayout>

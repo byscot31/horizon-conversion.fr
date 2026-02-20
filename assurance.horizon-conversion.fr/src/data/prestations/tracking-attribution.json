@@ -1,0 +1,24 @@
+{
+  "id": "presta_tracking_attribution",
+  "slug": "tracking-attribution",
+  "label": "Tracking & attribution (calls + forms)",
+  "shortLabel": "Tracking",
+  "meta": {
+    "title": "Tracking assurance | Attribuer appels & formulaires à la bonne source",
+    "description": "Call tracking, événements, UTM, dashboard : sachez ce qui génère des leads rentables.",
+    "canonical": "/prestations/tracking-attribution/"
+  },
+  "promise": "Mesurer précisément appels & formulaires pour piloter ROI et budget.",
+  "scope": {
+    "tracking": ["UTM", "events formulaires", "call tracking", "numéros dynamiques (option)"],
+    "dashboard": ["leads par source", "campagne", "offre", "zone"],
+    "rgpd": ["consentement", "durées", "mentions"]
+  },
+  "deliverables": [
+    "Plan de marquage (events)",
+    "Call tracking opérationnel",
+    "Dashboard simple (Looker/Sheet/CRM)",
+    "Convention UTM"
+  ],
+  "cta": { "primary": { "label": "Mettre le tracking en place", "href": "/contact/" } }
+}

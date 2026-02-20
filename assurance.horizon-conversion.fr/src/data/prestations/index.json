@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "items": [
+    { "id": "presta_seo_local", "slug": "seo-local", "title": "SEO local (Google + pages locales)" },
+    { "id": "presta_ads_local", "slug": "ads-local", "title": "Ads local (Google Ads orienté leads)" },
+    { "id": "presta_cro", "slug": "cro", "title": "CRO (conversion rate optimization)" },
+    { "id": "presta_tracking_attribution", "slug": "tracking-attribution", "title": "Tracking & attribution (calls + forms)" },
+    { "id": "presta_content_proof", "slug": "contenus-preuves", "title": "Contenus & preuves (pages offres, avis, cas)" },
+    { "id": "presta_crm_workflow", "slug": "crm-workflow", "title": "CRM & workflows (rappel, RDV, nurturing)" }
+  ]
+}

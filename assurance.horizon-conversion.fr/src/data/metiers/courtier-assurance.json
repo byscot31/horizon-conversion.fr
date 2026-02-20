@@ -1,0 +1,57 @@
+{
+  "id": "metier_courtier_assurance",
+  "slug": "courtier-assurance",
+  "label": "Courtiers en assurance",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Leads qualifiés pour courtier en assurance | 60/95",
+    "description": "Générez des demandes de devis qualifiées (emprunteur, pro, santé) avec SEO local + Ads + pages de conversion.",
+    "robots": "index,follow",
+    "canonical": "/metiers/courtier-assurance/"
+  },
+  "hero": {
+    "h1": "Des leads assurance vraiment qualifiés pour votre cabinet de courtage",
+    "sub": "Positionnement, pages offres, preuve et tracking : on vise le RDV, pas le trafic.",
+    "ctaPrimary": { "label": "Audit gratuit 20 min", "href": "/contact/" },
+    "ctaSecondary": { "label": "Voir les tarifs", "href": "/tarifs/" }
+  },
+  "intentionsSEO": [
+    { "cluster": "transactionnel", "queries": ["courtier assurance Senlis", "courtier assurance Persan", "cabinet courtage Beaumont-sur-Oise"] },
+    { "cluster": "produit", "queries": ["assurance emprunteur courtier", "rc pro courtier Oise", "mutuelle senior Val-d'Oise"] }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "Nos prospects viennent surtout par recommandation.", "reponse": "On industrialise une source stable de RDV sans dégrader la qualité (filtrage + landing + preuves)." },
+    { "id": "obj_02", "texte": "On a déjà des campagnes, mais ça plafonne.", "reponse": "On corrige la structure compte, le ciblage zones/offres, et on refait les landing orientées devis." }
+  ],
+  "kpis": [
+    { "name": "RDV / semaine", "target": "+30% à +100% selon volume actuel" },
+    { "name": "Taux de no-show", "target": "baisse via confirmation + pré-qualification" }
+  ],
+  "faq": [
+    { "q": "Vous pouvez cibler emprunteur uniquement ?", "a": "Oui. On crée un tunnel dédié (pages + Ads + preuve + FAQ loi Lemoine/équivalences)." },
+    { "q": "Comment éviter les demandes hors zone ?", "a": "Géociblage + exclusions + wording + champs formulaire + call tracking." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": ["presta_ads_local", "presta_seo_local", "presta_tracking_attribution"]
+  }
+}

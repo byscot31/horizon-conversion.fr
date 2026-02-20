@@ -1,0 +1,209 @@
+---
+import {
+  pickSectorsAntiSpam,
+  buildLocalQueries,
+  getLocalDefaults,
+  interpolate,
+  pickPatternsAntiDuplicate,
+  pickMaxQueriesAntiDuplicate,
+  applyAntiCannibalPatterns,
+  enforceMinShareQueries
+} from "../lib/local";
+
+const { context = {}, config = {}, mode = "metier", canonicalSeed = "" } = Astro.props;
+
+const defaults = getLocalDefaults() ?? {};
+const antiSpam = defaults?.antiSpam ?? { enabled: false };
+const antiCannibal = defaults?.antiCannibal ?? { enabled: false };
+
+const enabled = config?.enabled ?? true;
+
+const seedBase =
+  canonicalSeed ||
+  (mode + (context?.metierLabel ?? "") + (context?.prestationLabel ?? ""));
+
+const zonesEnabled = config?.zones?.enabled ?? true;
+const zonesMin = config?.zones?.limitMin ?? antiSpam?.zones?.limitMin ?? 6;
+const zonesMax = config?.zones?.limitMax ?? antiSpam?.zones?.limitMax ?? 10;
+
+const sectors = pickSectorsAntiSpam({
+  canonicalSeed: seedBase,
+  limitMin: zonesMin,
+  limitMax: zonesMax,
+  pinned: antiSpam?.zones?.basePinned ?? []
+});
+
+const reqEnabled = config?.requeteIntentions?.enabled ?? true;
+
+// Fallback patterns safe (évite crash si defaults.requeteIntentions.patterns absent)
+const fallbackPatterns = [
+  "{metier} {ville}",
+  "devis {offre} {ville}",
+  "{offre} {ville}",
+  "{offre} près de moi {ville}",
+  "{presta} {metier} {ville}"
+];
+
+const basePatterns =
+  config?.requeteIntentions?.patterns ??
+  defaults?.requeteIntentions?.patterns ??
+  fallbackPatterns;
+
+// 1) prioriser selon mode (metier vs cross)
+const prioritizedPatterns = applyAntiCannibalPatterns({
+  canonicalSeed: seedBase,
+  mode,
+  patterns: basePatterns,
+  minSharePrefer: config?.requeteIntentions?.minSharePrefer,
+  preferContains: config?.requeteIntentions?.preferContains,
+  avoidContains: config?.requeteIntentions?.avoidContains
+});
+
+// 2) ensuite anti-duplicate (sous-échantillon + rotation)
+const patterns = pickPatternsAntiDuplicate({
+  canonicalSeed: seedBase,
+  patterns: prioritizedPatterns,
+  pickMin: config?.requeteIntentions?.pickMin,
+  pickMax: config?.requeteIntentions?.pickMax,
+  rotate: config?.requeteIntentions?.rotatePatterns
+});
+
+const offres = (context?.offres?.length ? context.offres : ["assurance", "devis"]) as string[];
+const offre = offres[0];
+
+const fallbackMax = config?.requeteIntentions?.max ?? 10;
+
+// variation stable du nombre de requêtes affichées (anti-duplicate)
+const maxQueries = pickMaxQueriesAntiDuplicate({
+  canonicalSeed: seedBase,
+  fallbackMax,
+  maxMin: config?.requeteIntentions?.maxMin,
+  maxMax: config?.requeteIntentions?.maxMax
+});
+
+const prestaToken = (context?.prestationShortLabel ?? context?.prestationLabel ?? "acquisition").toString();
+
+let queries = reqEnabled
+  ? buildLocalQueries({
+    patterns,
+    sectors,
+    vars: {
+      metier: context?.metierLabel ?? "assurance",
+      offre,
+      presta: prestaToken
+    },
+    max: maxQueries
+  })
+  : [];
+
+// STRICT anti-cannibal : sur les pages cross, X% des requêtes doivent contenir la presta (shortLabel)
+if (mode === "cross") {
+  const minShare =
+    config?.requeteIntentions?.minSharePrefer ??
+    antiCannibal?.cross?.minSharePrefer ??
+    0.7;
+
+  const mustContain = prestaToken;
+
+  // Patterns "presta-first"
+  const replacementPatterns =
+    config?.requeteIntentions?.replacementPatterns ?? [
+      "{presta} {metier} {ville}",
+      "{presta} devis {offre} {ville}",
+      "{presta} {offre} {ville}",
+      "{presta} {ville}"
+    ];
+
+  // On génère plus large pour maximiser l’unicité après dédup/replace
+  const strictReplacements = buildLocalQueries({
+    patterns: replacementPatterns,
+    sectors,
+    vars: {
+      metier: context?.metierLabel ?? "assurance",
+      offre,
+      presta: prestaToken
+    },
+    max: Math.max(maxQueries * 2, 12)
+  });
+
+  queries = enforceMinShareQueries({
+    queries,
+    minShare,
+    mustContain,
+    buildReplacement: (count) => strictReplacements.slice(0, count)
+  });
+}
+
+const faqEnabled = config?.faqLocale?.enabled ?? true;
+const faqLimit = config?.faqLocale?.limit ?? 3;
+
+const faqItems = ((defaults?.faqLocale?.items as any[]) ?? [])
+  .slice(0, faqLimit)
+  .map((it) => ({
+    q: interpolate(it.q, { ville: sectors[0] ?? "votre ville" }),
+    a: interpolate(it.a, { ville: sectors[0] ?? "votre ville" })
+  }));
+
+const zonesTitle = defaults?.zones?.title ?? "Zones couvertes";
+const zonesIntro = defaults?.zones?.intro ?? "Interventions et acquisition locale sur :";
+
+const intentsTitle = defaults?.requeteIntentions?.title ?? "Intentions locales captées";
+const intentsIntro = defaults?.requeteIntentions?.intro ?? "Exemples de recherches locales qu’on transforme en demandes de devis/RDV.";
+
+const preuvesTitle = defaults?.preuvesLocales?.title ?? "Preuves & signaux de confiance";
+const preuvesItems = (defaults?.preuvesLocales?.items as string[]) ?? [];
+
+const faqTitle = defaults?.faqLocale?.title ?? "FAQ locale";
+---
+{enabled ? (
+<section style="margin-top:24px; padding-top:16px; border-top:1px solid #eee;">
+  <h2>Local : {mode === "cross" ? "déploiement & ciblage" : "zone d’acquisition"}</h2>
+
+  {zonesEnabled ? (
+      <section style="margin-top:12px;">
+        <h3>{zonesTitle}</h3>
+        <p>{zonesIntro}</p>
+        <p style="line-height:1.6;">
+          {sectors.map((s, i) => (
+              <>
+                {i > 0 ? " · " : ""}{s}
+              </>
+          ))}
+        </p>
+      </section>
+  ) : null}
+
+  {reqEnabled ? (
+      <section style="margin-top:12px;">
+        <h3>{intentsTitle}</h3>
+        <p>{intentsIntro}</p>
+        <ul>
+          {queries.map((q) => <li>{q}</li>)}
+        </ul>
+      </section>
+  ) : null}
+
+  <section style="margin-top:12px;">
+    <h3>{preuvesTitle}</h3>
+    <ul>
+      {preuvesItems.length
+        ? preuvesItems.map((x) => <li>{x}</li>)
+        : <li>Tracking appels + formulaires, pages offres optimisées, process de rappel rapide.</li>}
+    </ul>
+  </section>
+
+  {faqEnabled && faqItems.length ? (
+      <section style="margin-top:12px;">
+        <h3>{faqTitle}</h3>
+        <div>
+          {faqItems.map((it) => (
+              <details>
+                <summary>{it.q}</summary>
+                <p>{it.a}</p>
+              </details>
+          ))}
+        </div>
+      </section>
+  ) : null}
+</section>
+  ) : null}

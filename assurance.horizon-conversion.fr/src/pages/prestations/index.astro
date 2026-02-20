@@ -1,0 +1,24 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { listPrestations } from "../../lib/data";
+
+const prestations = listPrestations();
+
+const seo = {
+  title: "Prestations acquisition assurance | SEO local, Ads, CRO...",
+  description: "SEO local, Google Ads local, CRO, tracking, contenus preuves, CRM & workflows : packagés pour générer des leads.",
+  canonical: "/prestations/"
+};
+---
+<SiteLayout
+    seo={seo}
+    h1="Prestations"
+    intro="Des prestations pensées pour générer des leads (et mesurer le ROI) sur Sud Oise (60) & Nord Val-d’Oise (95)."
+    breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Prestations", href: "/prestations/" }]}
+>
+  <ul>
+    {prestations.map((p) => (
+        <li><a href={`/prestations/${p.slug}/`}>{p.title}</a></li>
+    ))}
+  </ul>
+</SiteLayout>

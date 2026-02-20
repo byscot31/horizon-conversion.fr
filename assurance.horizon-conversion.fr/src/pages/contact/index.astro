@@ -1,0 +1,178 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import FAQ from "../../components/FAQ.astro";
+
+const seo = {
+  title: "Contact | Diagnostic acquisition assurance (60/95)",
+  description:
+    "Demande de diagnostic : SEO local, Google Ads, CRO, tracking. Réponse rapide avec plan d’action.",
+  canonical: "/contact/"
+};
+
+// ⚠️ Remplace par ton numéro
+const phoneDisplay = "03 00 00 00 00";
+const phoneTel = "+33300000000";
+
+const faq = [
+  { q: "Sous combien de temps vous répondez ?", a: "MVP : réponse sous 24–48h ouvrées avec un plan d’action et les prochaines étapes." },
+  { q: "Vous travaillez avec plusieurs acteurs sur la même zone ?", a: "Non sur un micro-secteur défini : on évite la cannibalisation." },
+  { q: "Quelles infos préparer ?", a: "Offres prioritaires, zone, budget Ads (si existant), accès Analytics/Ads (optionnel), objectif leads/mois." }
+];
+---
+<SiteLayout
+    seo={seo}
+    h1="Contact / Diagnostic"
+    intro="Décris ton métier assurance, tes offres prioritaires et ton objectif. On te répond avec un plan d’action."
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Contact", href: "/contact/" }
+    ]}
+    ctas={{
+      primary: { label: `Appeler : ${phoneDisplay}`, href: `tel:${phoneTel}` },
+      secondary: { label: "Voir la méthode", href: "/methode/" }
+    }}
+    schema={{ faq }}
+>
+  <section>
+    <h2>Demande de diagnostic</h2>
+
+    <form id="leadForm" method="post" action="/api/lead" style="display:grid; gap:10px; max-width:720px;">
+      <div>
+        <label for="name"><strong>Nom / Société</strong></label><br />
+        <input id="name" name="name" required style="width:100%; padding:10px;" />
+      </div>
+
+      <div>
+        <label for="email"><strong>Email</strong></label><br />
+        <input id="email" name="email" type="email" required style="width:100%; padding:10px;" />
+      </div>
+
+      <div>
+        <label for="phone"><strong>Téléphone</strong></label><br />
+        <input id="phone" name="phone" type="tel" required style="width:100%; padding:10px;" />
+      </div>
+
+      <div>
+        <label for="metier"><strong>Métier</strong></label><br />
+        <select id="metier" name="metier" required style="width:100%; padding:10px;">
+          <option value="">— Choisir —</option>
+          <option>Agence d’assurance</option>
+          <option>Courtier en assurance</option>
+          <option>Mutuelle santé</option>
+          <option>Assurance emprunteur</option>
+          <option>Assurance Pro</option>
+          <option>Assurance-vie / Patrimoine</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="offres"><strong>Offres prioritaires</strong></label><br />
+        <input id="offres" name="offres" placeholder="ex: auto, habitation, santé…" style="width:100%; padding:10px;" />
+      </div>
+
+      <div>
+        <label for="budget"><strong>Budget Ads (si existant)</strong></label><br />
+        <input id="budget" name="budget" placeholder="ex: 500€/mois" style="width:100%; padding:10px;" />
+      </div>
+
+      <div>
+        <label for="message"><strong>Contexte & objectif</strong></label><br />
+        <textarea id="message" name="message" rows="5" required style="width:100%; padding:10px;"></textarea>
+      </div>
+
+      <div>
+        <label style="display:flex; gap:10px; align-items:flex-start;">
+          <input id="consent" name="consent" type="checkbox" required />
+          <span>
+            J’accepte d’être recontacté. J’ai lu la <a href="/politique-confidentialite/">politique de confidentialité</a>.
+          </span>
+        </label>
+      </div>
+
+      {/* champs UTM cachés (remplis par script) */}
+      <input type="hidden" name="utm_source" />
+      <input type="hidden" name="utm_medium" />
+      <input type="hidden" name="utm_campaign" />
+      <input type="hidden" name="utm_content" />
+      <input type="hidden" name="utm_term" />
+      <input type="hidden" name="page_path" />
+
+      <button type="submit" style="padding:12px; cursor:pointer;">Envoyer</button>
+      <small>⚠️ MVP : l’endpoint /api/lead est à implémenter côté back (ou via Formspree/Make/Zapier). Tracking inclus ci-dessous.</small>
+    </form>
+  </section>
+
+  <section style="margin-top:24px;">
+    <h2>Appel direct</h2>
+    <p>
+      <a id="callLink" href={`tel:${phoneTel}`}>{phoneDisplay}</a>
+      <br />
+      <small>Zone : Sud Oise (60) & Nord Val-d’Oise (95)</small>
+    </p>
+  </section>
+
+  <FAQ items={faq} />
+
+  {/* Tracking events minimal (sans dépendance) */}
+  <script>
+    {`
+      (function () {
+        function getParams() {
+          var p = new URLSearchParams(window.location.search);
+          return {
+            utm_source: p.get('utm_source') || '',
+            utm_medium: p.get('utm_medium') || '',
+            utm_campaign: p.get('utm_campaign') || '',
+            utm_content: p.get('utm_content') || '',
+            utm_term: p.get('utm_term') || ''
+          };
+        }
+
+        function fillHiddenFields(form) {
+          var u = getParams();
+          form.querySelector('input[name="utm_source"]').value = u.utm_source;
+          form.querySelector('input[name="utm_medium"]').value = u.utm_medium;
+          form.querySelector('input[name="utm_campaign"]').value = u.utm_campaign;
+          form.querySelector('input[name="utm_content"]').value = u.utm_content;
+          form.querySelector('input[name="utm_term"]').value = u.utm_term;
+          form.querySelector('input[name="page_path"]').value = window.location.pathname;
+        }
+
+        function track(eventName, payload) {
+          // ✅ MVP: dataLayer si présent, sinon log
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: eventName, ...payload });
+          // console.log('[track]', eventName, payload);
+        }
+
+        var form = document.getElementById('leadForm');
+        if (form) {
+          fillHiddenFields(form);
+          form.addEventListener('submit', function () {
+            var u = getParams();
+            track('form_submit', {
+              form_id: 'leadForm',
+              page_path: window.location.pathname,
+              utm_source: u.utm_source,
+              utm_medium: u.utm_medium,
+              utm_campaign: u.utm_campaign
+            });
+          });
+        }
+
+        var call = document.getElementById('callLink');
+        if (call) {
+          call.addEventListener('click', function () {
+            var u = getParams();
+            track('click_call', {
+              page_path: window.location.pathname,
+              utm_source: u.utm_source,
+              utm_medium: u.utm_medium,
+              utm_campaign: u.utm_campaign
+            });
+          });
+        }
+      })();
+    `}
+  </script>
+</SiteLayout>

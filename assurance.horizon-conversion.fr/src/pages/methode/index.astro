@@ -1,0 +1,115 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const seo = {
+  title: "Méthode Horizon Conversion | Leads assurance (60/95) : SEO local + Ads + CRO",
+  description:
+    "Une méthode simple et mesurable pour générer des leads assurance sur le Sud Oise (60) & Nord Val-d’Oise (95) : structure, acquisition, conversion, tracking.",
+  canonical: "/methode/"
+};
+
+const steps = [
+  {
+    title: "1) Diagnostic & cadrage",
+    bullets: [
+      "Analyse offres, zones (sans pages villes), concurrence et historique",
+      "Choix 1–2 offres d’entrée (CPL maîtrisé + conversion)",
+      "Plan de tracking (appels + formulaires + UTMs)"
+    ]
+  },
+  {
+    title: "2) Pages qui convertissent",
+    bullets: [
+      "Pages métiers + prestations + croisements (presta × métier)",
+      "Blocs preuves, objections, FAQ, CTA et formulaires pré-qualifiants",
+      "Modules locaux anti-spam/anti-duplicate/anti-cannibal"
+    ]
+  },
+  {
+    title: "3) Acquisition locale",
+    bullets: [
+      "SEO local : structure + contenus transactionnels + maillage",
+      "Google Ads : campagnes offres × zones, exclusions, extensions",
+      "Ciblage orienté RDV/devis (pas du trafic)"
+    ]
+  },
+  {
+    title: "4) CRO & itérations",
+    bullets: [
+      "Optimisation hero, preuves, formulaires, CTA, friction",
+      "Amélioration du taux de contact et du taux RDV",
+      "Itérations rapides (priorisées ROI)"
+    ]
+  },
+  {
+    title: "5) Mesure & pilotage",
+    bullets: [
+      "Attribution source / campagne / offre / métier",
+      "Tableau de bord CPL, conversion, leads éligibles",
+      "Décisions : scaling, arrêt, duplication"
+    ]
+  }
+];
+
+const deliverables = [
+  "Arborescence data-driven (hubs + croisements)",
+  "Templates Astro SEO (meta/canonical/schema/FAQ)",
+  "Tracking événements + call tracking (si activé)",
+  "Dashboard simple : leads / source / coût / éligibilité",
+  "Process de traitement des leads (rappel < 10 min, scripts)"
+];
+
+const links = [
+  { label: "Métiers", href: "/metiers/" },
+  { label: "Prestations", href: "/prestations/" },
+  { label: "Preuves", href: "/preuves/" },
+  { label: "Tarifs", href: "/tarifs/" },
+  { label: "Contact", href: "/contact/" }
+];
+---
+<SiteLayout
+    seo={seo}
+    h1="La méthode : générer des leads assurance (60/95) de façon mesurable"
+    intro="On combine structure SEO locale, campagnes Ads orientées leads, et optimisation de conversion. Objectif : demandes de devis/RDV, pas juste du trafic."
+    breadcrumbs={[
+      { label: "Accueil", href: "/" },
+      { label: "Méthode", href: "/methode/" }
+    ]}
+    ctas={{
+      primary: { label: "Obtenir un diagnostic", href: "/contact/" },
+      secondary: { label: "Voir les tarifs", href: "/tarifs/" }
+    }}
+    schema={{
+      // FAQ optionnelle (si tu la crées)
+    // faq: [
+    //   { q: "En combien de temps on voit des leads ?", a: "Ads : immédiat. SEO local : 4–12 semaines selon historique/concurrence." },
+    //   { q: "Vous travaillez sans pages villes ?", a: "Oui : modules locaux + intentions + maillage, sans créer de pages ville." }
+    // ]
+  }}
+>
+  <section>
+    <h2>Ce que vous obtenez</h2>
+    <ul>
+      {deliverables.map((d) => <li>{d}</li>)}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Les étapes</h2>
+    {steps.map((s) => (
+        <section style="margin:16px 0;">
+          <h3>{s.title}</h3>
+          <ul>
+            {s.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </section>
+    ))}
+  </section>
+
+  <section style="margin-top:24px; padding-top:16px; border-top:1px solid #eee;">
+    <h2>Navigation</h2>
+    <ul>
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </section>
+</SiteLayout>

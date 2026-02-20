@@ -1,0 +1,16 @@
+---
+const { title = "À découvrir", links = [] } = Astro.props; // [{label, href, desc?}]
+---
+{links?.length ? (
+<section style="margin-top:24px; padding-top:16px; border-top:1px solid #eee;">
+  <h2 style="margin:0 0 12px;">{title}</h2>
+  <ul>
+    {links.map((l) => (
+        <li style="margin:0 0 8px;">
+          <a href={l.href}><strong>{l.label}</strong></a>
+          {l.desc ? <div style="font-size:14px;">{l.desc}</div> : null}
+        </li>
+    ))}
+  </ul>
+</section>
+  ) : null}

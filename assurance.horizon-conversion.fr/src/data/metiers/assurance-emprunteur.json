@@ -1,0 +1,54 @@
+{
+  "id": "metier_assurance_emprunteur",
+  "slug": "assurance-emprunteur",
+  "label": "Spécialistes assurance emprunteur",
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "meta": {
+    "title": "Leads assurance emprunteur | Sud Oise & Nord Val-d’Oise",
+    "description": "Générez des demandes de substitution / nouveaux prêts via SEO local + Ads et pages orientées équivalence + économies.",
+    "robots": "index,follow",
+    "canonical": "/metiers/assurance-emprunteur/"
+  },
+  "hero": {
+    "h1": "Plus de demandes en assurance emprunteur (substitution & nouveaux prêts)",
+    "sub": "On cible l’intention “économies / équivalence / changement” et on sécurise la pré-qualification.",
+    "ctaPrimary": { "label": "Simuler votre potentiel", "href": "/contact/" }
+  },
+  "intentionsSEO": [
+    { "cluster": "substitution", "queries": ["changer assurance emprunteur Senlis", "substitution assurance prêt Chantilly"] },
+    { "cluster": "économies", "queries": ["économiser assurance prêt Creil", "assurance emprunteur moins cher Persan"] }
+  ],
+  "objections": [
+    { "id": "obj_01", "texte": "Les leads ne sont pas prêts.", "reponse": "On qualifie : montant, date de prêt, assureur actuel, délais, documents." }
+  ],
+  "kpis": [
+    { "name": "Taux de dossiers éligibles", "target": "hausse via formulaire intelligent" },
+    { "name": "Coût par dossier", "target": "pilotage via tracking et exclusions" }
+  ],
+  "faq": [
+    { "q": "Vous pouvez filtrer par montant / date de prêt ?", "a": "Oui, via champs + logique de formulaire + routage des leads." }
+  ],
+  "localModules": {
+    "enabled": true,
+    "zones": { "enabled": true, "limit": 10 },
+    "requeteIntentions": {
+      "enabled": true,
+      "pickMin": 2,
+      "pickMax": 3,
+      "rotatePatterns": true,
+      "maxMin": 8,
+      "maxMax": 10,
+      "patterns": [
+        "{metier} {ville}",
+        "devis {offre} {ville}",
+        "{offre} près de moi {ville}",
+        "meilleur {offre} {ville}"
+      ]
+    },
+    "faqLocale": { "enabled": true, "limit": 3 }
+  },
+  "internalLinks": {
+    "hubMetiers": "/metiers/",
+    "prestationsRecommandees": ["presta_ads_local", "presta_cro", "presta_tracking_attribution"]
+  }
+}
