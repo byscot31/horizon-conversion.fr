@@ -1,0 +1,39 @@
+---
+// src/components/blocks/PromoCall.astro
+const { data, site } = Astro.props as { data: any; site: any };
+const content = data?.content ?? {};
+const cta = data?.cta ?? {};
+
+const phoneDisplay = site?.phoneDisplay;
+const phoneTel = site?.phoneTel;
+---
+
+<div class="container" id={data?.id}>
+  <div class="promo mb-5">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg">
+        {content?.title && (
+            <h2 class="h3">
+              {content.title}
+              {phoneTel && (
+                  <span>
+                <a id="callLink" href={`tel:${phoneTel}`}>
+                  {phoneDisplay}
+                </a>
+              </span>
+              )}
+            </h2>
+        )}
+        {content?.subtitle && <span>{content.subtitle}</span>}
+      </div>
+
+      <div class="col-12 col-lg-auto mt-4 mt-lg-0">
+        {cta?.href && cta?.label && (
+            <a href={cta.href} class={cta.variantClass} data-track={cta.track}>
+              {cta.label}
+            </a>
+        )}
+      </div>
+    </div>
+  </div>
+</div>

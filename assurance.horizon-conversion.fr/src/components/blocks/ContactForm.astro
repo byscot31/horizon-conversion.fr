@@ -1,0 +1,362 @@
+---
+// src/components/blocks/ContactForm.astro
+const { data, site, metiersOptions = [], offresBySlug = {} } = Astro.props as {
+  data: any;
+  site: any;
+  metiersOptions: Array<{ value: string; label: string }>;
+  offresBySlug: Record<string, string[]>;
+};
+
+const content = data?.header ?? {};
+const theme = data?.theme ?? {};
+const form = data?.form ?? {};
+const fields = data?.fields ?? {};
+const hidden = data?.hidden ?? {};
+const submit = data?.submit ?? {};
+const legal = data?.legal ?? {};
+const recaptcha = data?.recaptcha ?? { enabled: false };
+const tracking = data?.tracking ?? {};
+
+const phoneDisplay = site?.phoneDisplay;
+const phoneTel = site?.phoneTel;
+const waLink = site?.whatsapp;
+---
+
+<div id={data?.id} class={theme?.class} style={theme?.style}>
+  <div class="container">
+    <img src="/assets/images/dotted-bg.svg" alt="" class="position-absolute pos-x-end icon-flip-horizontal" style="top: -30px" />
+
+    {content?.badge && <p class="mb-4 text-uppercase fw-normal color text-smaller ls-2 op-08">{content.badge}</p>}
+    {content?.title && <h2 class="mb-4 h1">{content.title}</h2>}
+    {content?.subtitle && <p class="mb-5 mt-4 op-07">{content.subtitle}</p>}
+
+    <div class="form-widget">
+      <div class="form-result"></div>
+
+      <form
+          class="row not-dark mb-0"
+          id={form?.id}
+          name={form?.name}
+          action={form?.action}
+          method={form?.method}
+      >
+        <div class="form-process">
+          <div class="css3-spinner">
+            <div class="css3-spinner-scaler"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.name?.id}>
+            {fields?.name?.label} {fields?.name?.required && <small>*</small>}
+          </label>
+          <input
+              type={fields?.name?.type ?? "text"}
+              id={fields?.name?.id}
+              name={fields?.name?.name}
+              class={`form-control ${fields?.name?.required ? "required" : ""}`}
+          />
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.metier?.id}>
+            {fields?.metier?.label}
+          </label>
+
+          <select
+              id={fields?.metier?.id}
+              name={fields?.metier?.name}
+              class="form-select"
+              data-offres-map={JSON.stringify(offresBySlug)}
+          >
+            <option value="">{fields?.metier?.placeholder ?? ""}</option>
+            {metiersOptions.map((m) => (
+                <option value={m.value}>{m.label}</option>
+            ))}
+            {fields?.metier?.includeOther && <option value="Autre">{fields?.metier?.otherLabel ?? ""}</option>}
+          </select>
+
+          <input type="hidden" id={hidden?.metier_slug?.id} name={hidden?.metier_slug?.name} value="" />
+          <input type="hidden" id={hidden?.metier_label?.id} name={hidden?.metier_label?.name} value="" />
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.email?.id}>
+            {fields?.email?.label} {fields?.email?.required && <small>*</small>}
+          </label>
+          <input
+              type={fields?.email?.type ?? "email"}
+              id={fields?.email?.id}
+              name={fields?.email?.name}
+              class={`form-control ${fields?.email?.required ? "required email" : ""}`}
+          />
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.phone?.id}>
+            {fields?.phone?.label} {fields?.phone?.required && <small>*</small>}
+          </label>
+          <input
+              type={fields?.phone?.type ?? "text"}
+              id={fields?.phone?.id}
+              name={fields?.phone?.name}
+              class={`form-control ${fields?.phone?.required ? "required" : ""}`}
+          />
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.offers?.id}>
+            {fields?.offers?.label}{" "}
+            {fields?.offers?.hintSuffix && <small class="op-07">{fields.offers.hintSuffix}</small>}
+          </label>
+
+          <input
+              type="text"
+              id={fields?.offers?.id}
+              name={fields?.offers?.name}
+              class="form-control"
+              list="offers-suggestions"
+              placeholder={fields?.offers?.placeholder ?? ""}
+          />
+
+          <datalist id="offers-suggestions"></datalist>
+
+          {fields?.offers?.hint && <small class="d-block mt-2 op-07">{fields.offers.hint}</small>}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="text-white" for={fields?.budget?.id}>
+            {fields?.budget?.label}
+          </label>
+          <input
+              type="text"
+              id={fields?.budget?.id}
+              name={fields?.budget?.name}
+              class="form-control"
+              placeholder={fields?.budget?.placeholder ?? ""}
+          />
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-12 form-group">
+          <label class="text-white" for={fields?.message?.id}>
+            {fields?.message?.label} {fields?.message?.required && <small>*</small>}
+          </label>
+          <textarea
+              class={`form-control ${fields?.message?.required ? "required" : ""}`}
+              id={fields?.message?.id}
+              name={fields?.message?.name}
+              rows={fields?.message?.rows ?? 6}
+              cols="30"
+          ></textarea>
+        </div>
+
+        <div class="col-12 form-group d-none">
+          <input type="text" id={form?.botcheckField} name={form?.botcheckField} value="" class="form-control" />
+        </div>
+
+        {(hidden?.utm ?? []).map((k: string) => (
+            <input type="hidden" name={k} />
+        ))}
+        <input type="hidden" name={hidden?.page_path ?? "page_path"} />
+
+        <div class="col-12 form-group">
+          <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+
+          {recaptcha?.enabled && recaptcha?.siteKey && (
+              <>
+                <script is:inline src={`https://www.google.com/recaptcha/api.js?render=${recaptcha.siteKey}`}></script>
+                <script is:inline>
+                  {`
+                  grecaptcha.ready(function() {
+                    grecaptcha.execute('${recaptcha.siteKey}', {action: '${recaptcha.action ?? "contact_page"}'}).then(function(token) {
+                      var el = document.getElementById('g-recaptcha-response');
+                      if (el) el.value = token;
+                    });
+                  });
+                `}
+                </script>
+              </>
+          )}
+        </div>
+
+        <div class="col-12 form-group">
+          <button
+              class={submit?.class}
+              type="submit"
+              id={`${form?.id}-submit`}
+              name={`${form?.name}-submit`}
+              value="submit"
+              data-track={submit?.track}
+          >
+            {submit?.label}
+          </button>
+
+          {legal?.text && (
+              <small class="d-block mt-3 text-white op-07">
+                {legal.text}{" "}
+                {legal?.link?.href && (
+                    <a class="text-white" href={legal.link.href}>
+                      <u>{legal.link.label}</u>
+                    </a>
+                )}
+                .
+              </small>
+          )}
+        </div>
+
+        <input type="hidden" name="prefix" value={form?.prefix} />
+        <input type="hidden" name="replyto" value="template-contactform-email">
+        <input type="hidden" name="autoresponder" value="true">
+
+        <input type="hidden" name="ar_subject" value="Objet de l’auto-réponse">
+        <input type="hidden" name="ar_title" value="Merci pour votre message">
+        <input type="hidden" name="ar_message" value="Bonjour {template-contactform-name},<br><br>Nous avons bien reçu votre message et nous reviendrons vers vous rapidement.<br><br>En attendant, vous pouvez consulter notre méthode : https://assurance.horizon-conversion.fr/methode/<br><br>Merci.">
+        <input type="hidden" name="ar_footer" value="© Horizon Conversion">
+      </form>
+    </div>
+  </div>
+
+  {/* Script: tracking + utm + select -> offres suggestions */}
+  <script is:inline>
+    {`
+      (function () {
+        function onReady(fn) {
+          if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+          else fn();
+        }
+
+        function getParams() {
+          var p = new URLSearchParams(window.location.search);
+          return {
+            utm_source: p.get('utm_source') || '',
+            utm_medium: p.get('utm_medium') || '',
+            utm_campaign: p.get('utm_campaign') || '',
+            utm_content: p.get('utm_content') || '',
+            utm_term: p.get('utm_term') || ''
+          };
+        }
+
+        function track(eventName, payload) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: eventName, ...payload });
+        }
+
+        function safeParseAttrJson(attrValue) {
+          try {
+            var raw = attrValue || "{}";
+            var ta = document.createElement("textarea");
+            ta.innerHTML = raw;
+            var decoded = ta.value;
+            return JSON.parse(decoded);
+          } catch (e) {
+            console.warn("[contact] data-offres-map JSON parse failed:", e);
+            return {};
+          }
+        }
+
+        function fillHiddenFields(form) {
+          var u = getParams();
+          var set = function(name, val){
+            var el = form.querySelector('input[name="'+name+'"]');
+            if (el) el.value = val;
+          };
+          set('utm_source', u.utm_source);
+          set('utm_medium', u.utm_medium);
+          set('utm_campaign', u.utm_campaign);
+          set('utm_content', u.utm_content);
+          set('utm_term', u.utm_term);
+          set('${hidden?.page_path ?? "page_path"}', window.location.pathname);
+        }
+
+        function setDatalistOptions(listEl, items) {
+          if (!listEl) return;
+          listEl.innerHTML = "";
+          (items || []).forEach(function (txt) {
+            var opt = document.createElement("option");
+            opt.value = txt;
+            listEl.appendChild(opt);
+          });
+        }
+
+        function uniq(arr) {
+          var seen = {};
+          var out = [];
+          (arr || []).forEach(function(x){
+            var k = (x || "").toLowerCase().trim();
+            if (!k || seen[k]) return;
+            seen[k] = true;
+            out.push(x);
+          });
+          return out;
+        }
+
+        onReady(function () {
+          var form = document.getElementById('${form?.id}');
+          if (form) {
+            fillHiddenFields(form);
+            form.addEventListener('submit', function () {
+              var u = getParams();
+              track('${tracking?.events?.submit ?? "form_submit"}', {
+                form_id: '${form?.id}',
+                page_path: window.location.pathname,
+                utm_source: u.utm_source,
+                utm_medium: u.utm_medium,
+                utm_campaign: u.utm_campaign
+              });
+            });
+          }
+
+          document.addEventListener('click', function(e){
+            var a = e.target && e.target.closest ? e.target.closest('[data-track="click_whatsapp"]') : null;
+            if (!a) return;
+            var u = getParams();
+            track('${tracking?.events?.whatsapp ?? "click_whatsapp"}', {
+              page_path: window.location.pathname,
+              utm_source: u.utm_source,
+              utm_medium: u.utm_medium,
+              utm_campaign: u.utm_campaign
+            });
+          });
+
+          var select = document.getElementById('${fields?.metier?.id}');
+          var hiddenSlug = document.getElementById('${hidden?.metier_slug?.id}');
+          var hiddenLabel = document.getElementById('${hidden?.metier_label?.id}');
+          var offersInput = document.getElementById('${fields?.offers?.id}');
+          var datalist = document.getElementById('offers-suggestions');
+
+          if (!select) return;
+
+          var offresMap = safeParseAttrJson(select.getAttribute('data-offres-map'));
+
+          function refreshOffers() {
+            var slug = select.value || "";
+            if (hiddenSlug) hiddenSlug.value = slug;
+
+            if (hiddenLabel) {
+              var opt = select.options[select.selectedIndex];
+              hiddenLabel.value = opt ? (opt.text || "") : "";
+            }
+
+            var offers = (slug && offresMap[slug]) ? offresMap[slug] : [];
+            offers = uniq(offers);
+
+            setDatalistOptions(datalist, offers);
+
+            if (offersInput && (!offersInput.value || !offersInput.value.trim()) && offers.length) {
+              offersInput.value = offers.slice(0, 2).join(", ");
+            }
+          }
+
+          select.addEventListener('change', refreshOffers);
+          refreshOffers();
+        });
+      })();
+    `}
+  </script>
+</div>

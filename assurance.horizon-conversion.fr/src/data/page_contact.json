@@ -1,0 +1,156 @@
+{
+  "key": "page:contact",
+
+  "seo": {
+    "canonical": "/contact/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "transactionnel",
+      "secondary": ["commercial"],
+      "stage": "conversion",
+      "microConversions": ["form_submit", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"]
+    },
+    "kw": {
+      "primary": "contact génération leads assurance",
+      "secondary": ["diagnostic acquisition assurance", "audit SEO local assurance", "audit Google Ads assurance"]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking"
+    }
+  },
+
+  "seoTemplates": {
+    "title": "Contact | Diagnostic acquisition assurance (60/95) — {brand}",
+    "description": "Demande de diagnostic : {tokens.method}, tracking et plan d’action. Objectif : {tokens.goal} sur {geo.core}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Sous combien de temps vous répondez ?", "a": "Réponse sous 24–48h ouvrées avec un plan d’action et les prochaines étapes." },
+      { "q": "Vous travaillez avec plusieurs acteurs sur la même zone ?", "a": "Non sur un micro-secteur défini : on évite la cannibalisation et on protège votre investissement." },
+      { "q": "Quelles infos préparer ?", "a": "Offres prioritaires, zone, budget Ads (si existant), objectif leads/mois. L’accès Analytics/Ads est optionnel." },
+      { "q": "Faites-vous le suivi des leads (relances, RDV) ?", "a": "Oui en option : scripts d’appel, relances, prise de RDV et automatisations (CRM/workflows) pour réduire la perte." },
+      { "q": "Comment éviter les demandes hors zone ou non qualifiées ?", "a": "Ciblage géographique + exclusions + messages clairs + formulaire pré-qualifiant + call tracking si nécessaire." },
+      { "q": "Je dois choisir SEO ou Google Ads ?", "a": "Ads pour du volume immédiat, SEO local pour stabiliser le coût. On priorise selon le besoin et le contexte." }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Diagnostic acquisition Assurance (60/95)",
+    "titleHtml": "Parlez-nous de votre métier.<br />On vous rend un plan d’action.",
+    "subtitle": "Objectif : {tokens.goal} (agences, courtiers, mutuelles), avec {tokens.method} et tracking propre.",
+    "ctas": [
+      { "label": "Demander un diagnostic", "href": "#contact-form", "icon": "bi-arrow-right", "variant": "primary", "scrollTo": "#contact-form" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true, "track": "click_whatsapp" }
+    ],
+    "note": "{geo.core}"
+  },
+
+  "sections": {
+    "contactForm": {
+      "id": "contact-form",
+      "theme": {
+        "class": "section dark text-center mt-0",
+        "style": "background-color: #021b4c"
+      },
+      "header": {
+        "badge": "Contact",
+        "title": "Demande de diagnostic",
+        "subtitle": "Dites-nous votre métier, vos offres prioritaires et votre objectif. On revient avec un plan d’action (pages + acquisition + tracking)."
+      },
+      "form": {
+        "id": "template-contactform",
+        "name": "template-contactform",
+        "action": "/assets/include/form.php",
+        "method": "post",
+        "prefix": "template-contactform-",
+        "botcheckField": "template-contactform-botcheck"
+      },
+      "fields": {
+        "name": { "id": "template-contactform-name", "name": "template-contactform-name", "label": "Nom / Société", "type": "text", "required": true },
+        "metier": { "id": "template-contactform-service", "name": "template-contactform-service", "label": "Métier", "type": "select", "required": false, "placeholder": "— Choisir —", "includeOther": true, "otherLabel": "Autre" },
+        "email": { "id": "template-contactform-email", "name": "template-contactform-email", "label": "Email", "type": "email", "required": true },
+        "phone": { "id": "template-contactform-phone", "name": "template-contactform-phone", "label": "Téléphone", "type": "text", "required": true },
+        "offers": {
+          "id": "template-contactform-offers",
+          "name": "template-contactform-offers",
+          "label": "Offres prioritaires",
+          "type": "datalist",
+          "required": false,
+          "placeholder": "ex: assurance auto, mutuelle santé…",
+          "hint": "Astuce : sépare par virgules (ex: \"assurance auto, habitation\").",
+          "hintSuffix": "(suggestions selon métier)"
+        },
+        "budget": { "id": "template-contactform-budget", "name": "template-contactform-budget", "label": "Budget Ads (si existant)", "type": "text", "required": false, "placeholder": "ex: 500€/mois" },
+        "message": { "id": "template-contactform-message", "name": "template-contactform-message", "label": "Contexte & objectif", "type": "textarea", "required": true, "rows": 6 }
+      },
+      "hidden": {
+        "metier_slug": { "id": "metier_slug", "name": "metier_slug" },
+        "metier_label": { "id": "metier_label", "name": "metier_label" },
+        "utm": ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"],
+        "page_path": "page_path"
+      },
+      "submit": {
+        "label": "Envoyer",
+        "class": "button button-rounded button-light button-border border-width-1 ls-0 fw-medium me-2",
+        "track": "form_submit"
+      },
+      "legal": {
+        "text": "En envoyant ce formulaire, vous acceptez d’être recontacté.",
+        "link": { "label": "Politique de confidentialité", "href": "/politique-confidentialite/" }
+      },
+      "recaptcha": {
+        "enabled": true,
+        "siteKey": "6Lf-G1ksAAAAALdQETmoBmaQ7DyLsAioibBXyrgZ",
+        "action": "contact_page"
+      },
+      "tracking": {
+        "events": {
+          "submit": "form_submit",
+          "call": "click_call",
+          "whatsapp": "click_whatsapp"
+        }
+      }
+    },
+
+    "promoCall": {
+      "id": "promo-call",
+      "content": {
+        "title": "Appel direct",
+        "subtitle": "Zone : {geo.core}"
+      },
+      "cta": {
+        "label": "Voir la méthode",
+        "href": "/methode/",
+        "variantClass": "button button-large button-circle m-0",
+        "track": "click_method"
+      }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Méthode",
+        "title": "La méthode complète.",
+        "text": "{tokens.system}. Objectif : {tokens.goal}.",
+        "cta": { "label": "Voir la méthode", "href": "/methode/", "variant": "dark" }
+      }
+    }
+  }
+}

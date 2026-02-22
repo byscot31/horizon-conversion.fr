@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "defaults": {
     "localBoost": {
       "enabled": true,
@@ -10,139 +10,72 @@
     {
       "metierId": "metier_agence_assurance",
       "prestations": [
-        {
-          "prestaId": "presta_seo_local",
-          "priority": 1,
-          "angle": "pages offres locales + GBP + maillage",
-          "cta": "Audit SEO local"
-        },
-        {
-          "prestaId": "presta_ads_local",
-          "priority": 2,
-          "angle": "campagnes offres (auto/habitation/santé) + call tracking",
-          "cta": "Lancer Ads"
-        },
-        {
-          "prestaId": "presta_cro",
-          "priority": 3,
-          "angle": "landing & formulaires pré-qualifiants",
-          "cta": "Optimiser conversion"
-        }
+        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages offres locales + GBP + maillage", "cta": "Audit SEO local" },
+        { "prestaId": "presta_ads_local", "priority": 2, "angle": "campagnes offres (auto/habitation/santé) + call tracking", "cta": "Lancer Ads" },
+        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "attribuer appels & formulaires au bon canal (SEO/Ads/GBP)", "cta": "Mettre le tracking" },
+        { "prestaId": "presta_cro", "priority": 4, "angle": "landing + preuves + formulaires pré-qualifiants", "cta": "Optimiser conversion" },
+        { "prestaId": "presta_content_proof", "priority": 5, "angle": "preuves + FAQ + pages offres pour rassurer et convertir", "cta": "Créer contenus" },
+        { "prestaId": "presta_crm_workflow", "priority": 6, "angle": "rappel <10 min + scripts + relances pour augmenter RDV", "cta": "Automatiser le suivi" }
       ]
     },
+
     {
       "metierId": "metier_courtier_assurance",
       "prestations": [
-        {
-          "prestaId": "presta_ads_local",
-          "priority": 1,
-          "angle": "tunnels par offre (emprunteur/pro/santé)",
-          "cta": "Générer des RDV"
-        },
-        {
-          "prestaId": "presta_tracking_attribution",
-          "priority": 2,
-          "angle": "attribuer appels & formulaires au bon canal",
-          "cta": "Mettre le tracking"
-        },
-        {
-          "prestaId": "presta_cro",
-          "priority": 3,
-          "angle": "qualif + prise de RDV",
-          "cta": "Augmenter le taux RDV"
-        }
+        { "prestaId": "presta_ads_local", "priority": 1, "angle": "tunnels par offre (emprunteur/pro/santé) + ciblage", "cta": "Générer des RDV" },
+        { "prestaId": "presta_tracking_attribution", "priority": 2, "angle": "attribuer appels & formulaires au bon canal et piloter ROI", "cta": "Mettre le tracking" },
+        { "prestaId": "presta_cro", "priority": 3, "angle": "qualification + prise de RDV + friction réduite", "cta": "Augmenter le taux RDV" },
+        { "prestaId": "presta_seo_local", "priority": 4, "angle": "capteur organique local stable (offres prioritaires) + maillage", "cta": "Plan SEO local" },
+        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "pipeline + scoring + relances pour réduire la perte", "cta": "Réduire la perte" },
+        { "prestaId": "presta_content_proof", "priority": 6, "angle": "preuves + objections pour éviter les chasseurs de prix", "cta": "Renforcer la confiance" }
       ]
     },
+
     {
       "metierId": "metier_mutuelle_sante",
       "prestations": [
-        {
-          "prestaId": "presta_seo_local",
-          "priority": 1,
-          "angle": "pages profils (senior/famille/TNS) + local",
-          "cta": "Plan SEO"
-        },
-        {
-          "prestaId": "presta_content_proof",
-          "priority": 2,
-          "angle": "preuves + FAQ remboursements/attentes",
-          "cta": "Créer contenus"
-        },
-        {
-          "prestaId": "presta_cro",
-          "priority": 3,
-          "angle": "dossier complet via formulaire",
-          "cta": "Optimiser formulaire"
-        }
+        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages profils (senior/famille/TNS) + local + GBP", "cta": "Plan SEO" },
+        { "prestaId": "presta_content_proof", "priority": 2, "angle": "preuves + FAQ remboursements/attentes + réassurance", "cta": "Créer contenus" },
+        { "prestaId": "presta_cro", "priority": 3, "angle": "dossier complet via formulaire pré-qualifiant", "cta": "Optimiser formulaire" },
+        { "prestaId": "presta_ads_local", "priority": 4, "angle": "segmentation (seniors/familles/TNS) + landing dédiée", "cta": "Lancer Ads" },
+        { "prestaId": "presta_tracking_attribution", "priority": 5, "angle": "piloter CPL et éligibilité par segment", "cta": "Attribuer ROI" },
+        { "prestaId": "presta_crm_workflow", "priority": 6, "angle": "rappel/relances + prise RDV pour augmenter transformation", "cta": "Automatiser le suivi" }
       ]
     },
+
     {
       "metierId": "metier_assurance_emprunteur",
       "prestations": [
-        {
-          "prestaId": "presta_ads_local",
-          "priority": 1,
-          "angle": "substitution + économies + équivalence",
-          "cta": "Démarrer Ads"
-        },
-        {
-          "prestaId": "presta_cro",
-          "priority": 2,
-          "angle": "pré-qualification (montant/date/assureur)",
-          "cta": "Qualifier mieux"
-        },
-        {
-          "prestaId": "presta_tracking_attribution",
-          "priority": 3,
-          "angle": "mesurer coût par dossier éligible",
-          "cta": "Attribuer ROI"
-        }
+        { "prestaId": "presta_ads_local", "priority": 1, "angle": "substitution + économies + équivalence + ciblage fort", "cta": "Démarrer Ads" },
+        { "prestaId": "presta_cro", "priority": 2, "angle": "pré-qualification stricte (montant/date/assureur/profil)", "cta": "Qualifier mieux" },
+        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "mesurer coût par dossier éligible + sources", "cta": "Attribuer ROI" },
+        { "prestaId": "presta_content_proof", "priority": 4, "angle": "preuves + objections (équivalence, délais) pour convertir en RDV", "cta": "Renforcer la confiance" },
+        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "rappel <10 min + relances pour augmenter jointure", "cta": "Réduire la perte" },
+        { "prestaId": "presta_seo_local", "priority": 6, "angle": "SEO local pour stabiliser l’acquisition sur requêtes clés", "cta": "Plan SEO local" }
       ]
     },
+
     {
       "metierId": "metier_assurance_pro",
       "prestations": [
-        {
-          "prestaId": "presta_ads_local",
-          "priority": 1,
-          "angle": "offres par activité + urgence décennale",
-          "cta": "Avoir des devis"
-        },
-        {
-          "prestaId": "presta_crm_workflow",
-          "priority": 2,
-          "angle": "rappel <10 min + scripts + RDV",
-          "cta": "Réduire la perte"
-        },
-        {
-          "prestaId": "presta_seo_local",
-          "priority": 3,
-          "angle": "pages par activité (couvreur, élec…)",
-          "cta": "Se positionner local"
-        }
+        { "prestaId": "presta_ads_local", "priority": 1, "angle": "offres par activité + urgence décennale + exclusions", "cta": "Avoir des devis" },
+        { "prestaId": "presta_crm_workflow", "priority": 2, "angle": "rappel <10 min + scripts + RDV pour limiter la perte", "cta": "Réduire la perte" },
+        { "prestaId": "presta_cro", "priority": 3, "angle": "formulaire qualifiant (activité/SIRET/urgence) + conversion", "cta": "Optimiser conversion" },
+        { "prestaId": "presta_tracking_attribution", "priority": 4, "angle": "piloter coût par lead éligible (activité/zone)", "cta": "Mettre le tracking" },
+        { "prestaId": "presta_seo_local", "priority": 5, "angle": "pages par activité (couvreur, élec…) + local", "cta": "Se positionner local" },
+        { "prestaId": "presta_content_proof", "priority": 6, "angle": "preuves + objections par activité pour rassurer", "cta": "Créer contenus" }
       ]
     },
+
     {
       "metierId": "metier_assurance_vie_patrimoine",
       "prestations": [
-        {
-          "prestaId": "presta_content_proof",
-          "priority": 1,
-          "angle": "preuves + positionnement + cas",
-          "cta": "Renforcer la confiance"
-        },
-        {
-          "prestaId": "presta_seo_local",
-          "priority": 2,
-          "angle": "requêtes bilan patrimonial local",
-          "cta": "Attirer les bons profils"
-        },
-        {
-          "prestaId": "presta_cro",
-          "priority": 3,
-          "angle": "filtrage par seuils + prise de RDV",
-          "cta": "Qualifier les demandes"
-        }
+        { "prestaId": "presta_content_proof", "priority": 1, "angle": "preuves + positionnement + cas + pédagogie RDV", "cta": "Renforcer la confiance" },
+        { "prestaId": "presta_cro", "priority": 2, "angle": "filtrage par seuils + prise de RDV + friction réduite", "cta": "Qualifier les demandes" },
+        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "attribuer les RDV aux sources + piloter coût par RDV", "cta": "Mettre le tracking" },
+        { "prestaId": "presta_seo_local", "priority": 4, "angle": "requêtes bilan patrimonial local + pages RDV", "cta": "Plan SEO local" },
+        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "confirmation RDV + relances + nurturing", "cta": "Automatiser le suivi" },
+        { "prestaId": "presta_ads_local", "priority": 6, "angle": "Ads ciblées RDV (si offres et ciblage OK) + landing", "cta": "Générer des RDV" }
       ]
     }
   ]

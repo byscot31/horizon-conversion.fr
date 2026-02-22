@@ -1,0 +1,66 @@
+{
+  "brand": { "href": "/", "title": "Horizon Conversion", "subtitle": "Assurance" },
+  "theme": { "leftBg": "#021b4c", "rightBg": "#FDE3A1" },
+
+  "left": {
+    "heading": "Ce que nous faisons",
+    "paragraphs": [
+      "Nous aidons les acteurs de l’assurance (agences, courtiers, mutuelles) à générer des leads locaux qualifiés sur le Sud de l’Oise (60) et le Nord du Val-d’Oise (95), avec une méthode mesurable.",
+      "SEO local, Google Ads, CRO, tracking & attribution : plus de demandes de devis et de RDV, moins de perte."
+    ],
+    "ctas": [
+      { "label": "Demander un diagnostic", "href": "/contact/", "variant": "button button-small button-border button-light", "track": "click_cta_footer_diagnostic" },
+      { "label": "Voir la méthode", "href": "/methode/", "variant": "button button-small button-border button-light", "track": "click_cta_footer_methode" }
+    ],
+    "contact": {
+      "enabled": true,
+      "showPhone": true,
+      "showWhatsApp": true,
+      "zoneText": "Zone : Sud de l’Oise (60) & Nord du Val-d’Oise (95)"
+    }
+  },
+
+  "columns": [
+    {
+      "title": "Démarrer",
+      "mode": "static",
+      "links": [
+        { "label": "Méthode", "href": "/methode/" },
+        { "label": "Preuves", "href": "/preuves/" },
+        { "label": "Tarifs", "href": "/tarifs/" },
+        { "label": "Contact", "href": "/contact/" }
+      ]
+    },
+
+    {
+      "title": "Métiers",
+      "mode": "auto",
+      "auto": { "source": "metiers", "limit": 4 },
+      "featuredSlugs": ["agence-assurance", "courtier-assurance", "mutuelle-sante", "assurance-pro"],
+      "viewAll": { "label": "Voir tous les métiers", "href": "/metiers/" }
+    },
+
+    {
+      "title": "Prestations",
+      "mode": "auto",
+      "auto": { "source": "prestations", "limit": 4 },
+      "featuredSlugs": ["seo-local", "ads-local", "cro", "tracking-attribution"],
+      "viewAll": { "label": "Voir toutes les prestations", "href": "/prestations/" }
+    },
+
+    {
+      "title": "Ressources",
+      "mode": "auto",
+      "auto": { "source": "ressources", "limit": 3, "sort": "date_desc" },
+      "viewAll": { "label": "Voir toutes les ressources", "href": "/ressources/" }
+    }
+  ],
+
+  "legal": {
+    "textPrefix": "© {year} Horizon Conversion. Tous droits réservés.",
+    "links": [
+      { "label": "Mentions légales", "href": "/mentions-legales/" },
+      { "label": "Politique de confidentialité", "href": "/politique-confidentialite/" }
+    ]
+  }
+}

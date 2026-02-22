@@ -27,8 +27,13 @@ require 'phpmailer/src/SMTP.php';
 $toemails = array();
 
 $toemails[] = array(
-	'email' => 'your-email@website.com', // Your Email Address
-	'name' => 'Your Name' // Your Name
+  'email' => 'f.dacosta@aol.fr', // Your Email Address
+  'name' => 'Horizon Conversion' // Your Name
+);
+
+$toemails[] = array(
+	'email' => 'byscot31@msn.com', // Your Email Address
+	'name' => 'Horizon Conversion' // Your Name
 );
 
 
@@ -38,7 +43,7 @@ $toemails[] = array(
 
 $fromemail = array(
 	'email' => 'no-reply@website.com', // Company's Email Address (preferably currently used Domain Name)
-	'name' => 'Company Name' // Company Name
+	'name' => 'Horizon Conversion' // Company Name
 );
 
 
@@ -47,7 +52,7 @@ $fromemail = array(
 ---------------------------------------------------*/
 
 // Add this only if you use reCaptcha with your Contact Forms
-$recaptcha_secret = ''; // Your reCaptcha Secret
+$recaptcha_secret = '6Lf-G1ksAAAAALdQETmoBmaQ7DyLsAioibBXyrgZ'; // Your reCaptcha Secret
 
 
 /*-------------------------------------------------
@@ -75,12 +80,12 @@ $mail = new PHPMailer();
 ---------------------------------------------------*/
 
 $message = array(
-	'success'			=> 'We have <strong>successfully</strong> received your Message and will get Back to you as soon as possible.',
-	'error'				=> 'Email <strong>could not</strong> be sent due to some Unexpected Error. Please Try Again later.',
-	'error_bot'			=> 'Bot Detected! Form could not be processed! Please Try Again!',
-	'error_unexpected'	=> 'An <strong>unexpected error</strong> occured. Please Try Again later.',
-	'captcha_invalid'	=> 'Captcha not Validated! Please Try Again!',
-	'captcha_error'		=> 'Captcha not Submitted! Please Try Again.'
+  'success'			=> 'Nous avons <strong>bien</strong> reçu votre message et nous vous recontacterons dès que possible.',
+  'error'				=> 'L’e-mail <strong>n’a pas pu</strong> être envoyé en raison d’une erreur inattendue. Veuillez réessayer plus tard.',
+  'error_bot'			=> 'Bot détecté ! Le formulaire n’a pas pu être traité. Veuillez réessayer.',
+  'error_unexpected'	=> 'Une <strong>erreur inattendue</strong> s’est produite. Veuillez réessayer plus tard.',
+  'captcha_invalid'	=> 'Captcha non validé ! Veuillez réessayer.',
+  'captcha_error'		=> 'Captcha non transmis ! Veuillez réessayer.'
 );
 
 
@@ -246,8 +251,8 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	---------------------------------------------------*/
 
 	$autores	= ( !empty( $submits['autoresponder'] ) && $submits['autoresponder'] != 'false' ) ? true : false;
-	$ar_subject	= !empty( $submits['ar_subject'] ) ? $submits['ar_subject'] : 'Thanks for your Email';
-	$ar_title	= !empty( $submits['ar_title'] ) ? $submits['ar_title'] : 'Its so good to hear from You!';
+	$ar_subject	= !empty( $submits['ar_subject'] ) ? $submits['ar_subject'] : 'Merci pour votre email';
+	$ar_title	= !empty( $submits['ar_title'] ) ? $submits['ar_title'] : 'Quel plaisir d\'avoir de vos nouvelles !';
 	$ar_message	= !empty( $submits['ar_message'] ) ? $submits['ar_message'] : 'Autoresponder Message';
 
 	preg_match_all('#\{(.*?)\}#', $ar_message, $ar_matches);
@@ -257,9 +262,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		}
 	}
 
-	$ar_footer	= !empty( $submits['ar_footer'] ) ? $submits['ar_footer'] : 'Copyrights &copy; ' . date('Y') . ' <strong>SemiColonWeb</strong>. All Rights Reserved.';
+	$ar_footer	= !empty( $submits['ar_footer'] ) ? $submits['ar_footer'] : 'Copyrights &copy; ' . date('Y') . ' <strong>Horizon Conversion</strong>. Tous droits réservés.';
 
-	$mail->Subject = !empty( $submits['subject'] ) ? $submits['subject'] : 'Form Response from your Website';
+	$mail->Subject = !empty( $submits['subject'] ) ? $submits['subject'] : 'Formulaire de réponse de votre site web';
 	$mail->SetFrom( $fromemail['email'] , $fromemail['name'] );
 
 	if( !empty( $replyto ) ) {
@@ -464,7 +469,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 		echo '{ "alert": "success", "message": "' . $message['success'] . '" }';
 	else:
-		echo '{ "alert": "error", "message": "' . $message['error'] . '<br><br><strong>Reason:</strong><br>' . $mail->ErrorInfo . '" }';
+		echo '{ "alert": "error", "message": "' . $message['error'] . '<br><br><strong>Raison :</strong><br>' . $mail->ErrorInfo . '" }';
 	endif;
 
 } else {

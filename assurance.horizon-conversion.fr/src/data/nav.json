@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "href": "/metiers/",
+      "label": "Métiers",
+      "children": [
+        { "href": "/metiers/agence-assurance/", "label": "Agences d’assurance" },
+        { "href": "/metiers/courtier-assurance/", "label": "Courtiers" },
+        { "href": "/metiers/mutuelle-sante/", "label": "Mutuelles" },
+        { "href": "/metiers/assurance-emprunteur/", "label": "Emprunteur" },
+        { "href": "/metiers/assurance-pro/", "label": "Assurance pro" },
+        { "href": "/metiers/assurance-vie-patrimoine/", "label": "Vie & patrimoine" }
+      ]
+    },
+    {
+      "href": "/prestations/",
+      "label": "Prestations",
+      "children": [
+        { "href": "/prestations/seo-local/", "label": "SEO local" },
+        { "href": "/prestations/ads-local/", "label": "Google Ads" },
+        { "href": "/prestations/cro/", "label": "CRO" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking" },
+        { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves" },
+        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows" }
+      ]
+    },
+    { "href": "/methode/", "label": "Méthode" },
+    { "href": "/preuves/", "label": "Preuves" },
+    { "href": "/tarifs/", "label": "Tarifs" },
+    {
+      "href": "/ressources/",
+      "label": "Ressources",
+      "children": [
+        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance" },
+        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking" },
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing" }
+      ]
+    },
+    { "href": "/contact/", "label": "Contact" }
+  ]
+}

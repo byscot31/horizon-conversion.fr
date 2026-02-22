@@ -1,20 +1,14 @@
 ---
-const phoneTel = "+33660921008";
-const phoneDisplay = "06 60 92 10 08";
-const waLink = "https://wa.me/33660921008";
+// src/components/Header.astro
+import siteData from "../data/site.json";
+import nav from "../data/nav.json";
+
+const { phoneDisplay, whatsapp: waLink } = siteData;
 
 const path = Astro.url?.pathname ?? "/";
 const isActive = (href) => (href === "/" ? path === "/" : path.startsWith(href));
 
-const items = [
-  { href: "/metiers/", label: "Métiers" },
-  { href: "/prestations/", label: "Prestations" },
-  { href: "/methode/", label: "Méthode" },
-  { href: "/preuves/", label: "Preuves" },
-  { href: "/tarifs/", label: "Tarifs" },
-  { href: "/ressources/", label: "Ressources" },
-  { href: "/contact/", label: "Contact" }
-];
+const items = nav.items;
 ---
 
 <header id="header">
@@ -37,7 +31,7 @@ const items = [
               data-track="click_whatsapp"
           >
             <i class="fa-brands fa-whatsapp me-0"></i>
-            <span class="d-none d-md-inline ms-2">{phoneDisplay}</span>
+            <span class="d-none d-xxl-inline ms-2">{phoneDisplay}</span>
           </a>
 
           <a
@@ -46,7 +40,7 @@ const items = [
               data-track="click_cta_audit"
           >
             <i class="bi-calendar3 m-0"></i>
-            <span class="d-none d-md-inline ms-2">Audit Gratuit</span>
+            <span class="d-none d-md-inline ms-2">Diagnostic</span>
           </a>
         </div>
 
@@ -56,15 +50,31 @@ const items = [
           </button>
         </div>
 
-        <nav class="primary-menu me-lg-auto" aria-label="Navigation principale">
+        <nav class="primary-menu with-arrows mobile-menu-off-canvas" aria-label="Navigation principale">
           <ul class="menu-container">
-            {items.map((it) => (
-                <li class={`menu-item ${isActive(it.href) ? "current" : ""}`}>
-                  <a class="menu-link" href={it.href}>
-                    <div>{it.label}</div>
-                  </a>
-                </li>
-            ))}
+            {items.map((it) => {
+              const hasChildren = Array.isArray(it.children) && it.children.length > 0;
+
+              return (
+                  <li class={`menu-item ${isActive(it.href) ? "current" : ""}`}>
+                    <a class="menu-link" href={it.href}>
+                      <div>{it.label}</div>
+                    </a>
+
+                    {hasChildren && (
+                        <ul class="sub-menu-container">
+                          {it.children.map((ch) => (
+                              <li class={`menu-item ${isActive(ch.href) ? "current" : ""}`}>
+                                <a class="menu-link" href={ch.href}>
+                                  <div>{ch.label}</div>
+                                </a>
+                              </li>
+                          ))}
+                        </ul>
+                    )}
+                  </li>
+              );
+            })}
           </ul>
         </nav>
 

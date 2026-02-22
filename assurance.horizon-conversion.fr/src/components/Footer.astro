@@ -1,89 +1,188 @@
 ---
+// src/components/Footer.astro
+import footer from "../data/footer.json";
+import site from "../data/site.json";
+
+import metiersIndex from "../data/metiers/index.json";
+import prestationsIndex from "../data/prestations/index.json";
+import ressourcesIndex from "../data/ressources/index.json";
+
 const year = new Date().getFullYear();
+
+const brand = footer?.brand ?? {};
+const theme = footer?.theme ?? {};
+const left = footer?.left ?? {};
+const columns = Array.isArray(footer?.columns) ? footer.columns : [];
+const legal = footer?.legal ?? {};
+
+const phoneDisplay = site?.phoneDisplay;
+const phoneTel = site?.phoneTel;
+const waLink = site?.whatsapp;
+
+const legalText = String(legal?.textPrefix ?? "").replaceAll("{year}", String(year));
+
+const metiersItems = ((metiersIndex as any).items ?? []) as Array<{ slug: string; title: string }>;
+const prestationsItems = ((prestationsIndex as any).items ?? []) as Array<{ slug: string; title: string }>;
+const ressourcesItems = ((ressourcesIndex as any).items ?? []) as Array<{ slug: string; title: string; date?: string }>;
+
+function pickByFeatured<T extends { slug: string }>(items: T[], featuredSlugs: string[] | undefined, limit: number) {
+  const out: T[] = [];
+  const seen = new Set<string>();
+
+  const featured = Array.isArray(featuredSlugs) ? featuredSlugs : [];
+  for (const s of featured) {
+    const it = items.find((x) => x.slug === s);
+    if (!it) continue;
+    if (seen.has(it.slug)) continue;
+    seen.add(it.slug);
+    out.push(it);
+    if (out.length >= limit) return out;
+  }
+
+  for (const it of items) {
+    if (seen.has(it.slug)) continue;
+    seen.add(it.slug);
+    out.push(it);
+    if (out.length >= limit) break;
+  }
+
+  return out;
+}
+
+function sortRessources(items: any[], sort: string | undefined) {
+  if (sort !== "date_desc") return items;
+  return [...items].sort((a, b) => String(b?.date ?? "").localeCompare(String(a?.date ?? "")));
+}
+
+function buildColumnLinks(col: any) {
+  const mode = col?.mode ?? "static";
+  if (mode === "static") return (col?.links ?? []) as any[];
+
+  const src = col?.auto?.source;
+  const limit = col?.auto?.limit ?? 4;
+
+  if (src === "metiers") {
+    const picked = pickByFeatured(metiersItems, col?.featuredSlugs, limit);
+    return picked.map((m) => ({ label: m.title, href: `/metiers/${m.slug}/` }));
+  }
+
+  if (src === "prestations") {
+    const picked = pickByFeatured(prestationsItems, col?.featuredSlugs, limit);
+    return picked.map((p) => ({ label: p.title, href: `/prestations/${p.slug}/` }));
+  }
+
+  if (src === "ressources") {
+    const sort = col?.auto?.sort;
+    const sorted = sortRessources(ressourcesItems, sort);
+    const picked = sorted.slice(0, limit);
+    return picked.map((r) => ({ label: r.title, href: `/ressources/${r.slug}/` }));
+  }
+
+  return [];
+}
 ---
 
 <footer id="footer" class="bg-white border-0 overflow-hidden">
   <div class="row">
 
-    <div class="col-md-4 col-padding dark" style="background-color: #021b4c">
+    <!-- Left -->
+    <div class="col-md-4 col-padding dark" style={`background-color: ${theme?.leftBg ?? "#021b4c"}`}>
       <div class="row justify-content-between align-items-center">
-        <a href="/" class="fw-bold col color h1 font-primary d-block">
-          Horizon Conversion<br> <span class="text-white">Assurance</span>
+        <a href={brand?.href ?? "/"} class="fw-bold col color h1 font-primary d-block">
+          {brand?.title ?? ""}
+          <br />
+          <span class="text-white">{brand?.subtitle ?? ""}</span>
         </a>
       </div>
 
-      <hr>
+      <hr />
 
-      <h5 class="font-body text-uppercase ls-2 mt-4">Ce que nous faisons</h5>
-      <p class="op-08">
-        Nous aidons les acteurs de l’assurance (agences, courtiers, mutuelles) à générer des leads locaux qualifiés
-        sur le Sud de l’Oise (60) et le Nord du Val-d’Oise (95), avec une méthode mesurable.
-      </p>
-      <p class="op-08">
-        SEO local, Google Ads, CRO, tracking & attribution : l’objectif est simple — plus de demandes de devis et de RDV, moins de perte.
-      </p>
+      {left?.heading && <h5 class="font-body text-uppercase ls-2 mt-4">{left.heading}</h5>}
 
-      <div class="mt-3">
-        <a href="/contact/" class="button button-small button-border button-light">
-          Demander un diagnostic
-        </a>
-      </div>
+      {(left?.paragraphs ?? []).map((p: string) => (
+          <p class="op-08">{p}</p>
+      ))}
+
+      {Array.isArray(left?.ctas) && left.ctas.length > 0 && (
+          <div class="mt-3 d-flex flex-wrap gap-2">
+            {left.ctas.map((c: any) => (
+                <a href={c.href} class={c.variant ?? "button button-small button-border button-light"} data-track={c.track}>
+                  {c.label}
+                </a>
+            ))}
+          </div>
+      )}
+
+      {left?.contact?.enabled && (
+          <div class="mt-4 op-08">
+            {left?.contact?.zoneText && <small class="d-block op-07">{left.contact.zoneText}</small>}
+
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              {left?.contact?.showPhone && phoneTel && (
+                  <a href={`tel:${phoneTel}`} class="button button-small button-border button-light" data-track="click_call_footer">
+                    {phoneDisplay ?? phoneTel}
+                  </a>
+              )}
+              {left?.contact?.showWhatsApp && waLink && (
+                  <a href={waLink} class="button button-small button-border button-light" data-track="click_whatsapp_footer">
+                    WhatsApp {phoneDisplay ?? ""}
+                  </a>
+              )}
+            </div>
+          </div>
+      )}
     </div>
 
-    <div class="col-md-8" style="background-color: #FDE3A1">
+    <!-- Right -->
+    <div class="col-md-8" style={`background-color: ${theme?.rightBg ?? "#FDE3A1"}`}>
       <div class="footer-widgets-wrap">
         <div class="row px-5">
 
-          <div class="col-6 col-lg-4">
-            <div class="widget">
-              <h4>Accès rapide</h4>
-              <ul class="widget_links">
-                <li class="mb-1"><a href="/methode/" class="op-08">Méthode</a></li>
-                <li class="mb-1"><a href="/preuves/" class="op-08">Preuves</a></li>
-                <li class="mb-1"><a href="/tarifs/" class="op-08">Tarifs</a></li>
-                <li class="mb-1"><a href="/contact/" class="op-08">Contact</a></li>
-              </ul>
-            </div>
-          </div>
+          {columns.map((col: any, idx: number) => {
+            const links = buildColumnLinks(col);
+            return (
+                <div class={`col-6 ${idx >= 2 ? "mt-5 mt-lg-0" : ""}`}>
+                  <div class="widget">
+                    {col?.title && <h4>{col.title}</h4>}
 
-          <div class="col-6 col-lg-4">
-            <div class="widget">
-              <h4>Métiers</h4>
-              <ul class="widget_links">
-                <li class="mb-1"><a href="/metiers/" class="op-08">Hub métiers</a></li>
-                <li class="mb-1"><a href="/metiers/agence-assurance/" class="op-08">Agences d’assurance</a></li>
-                <li class="mb-1"><a href="/metiers/courtier-assurance/" class="op-08">Courtiers</a></li>
-                <li class="mb-1"><a href="/metiers/mutuelle-sante/" class="op-08">Mutuelles santé</a></li>
-                <li class="mb-1"><a href="/metiers/assurance-pro/" class="op-08">Assurance Pro</a></li>
-              </ul>
-            </div>
-          </div>
+                    <ul class="widget_links">
+                      {links.map((l: any) => (
+                          <li class="mb-1">
+                            <a href={l.href} class="op-08" data-track={l.track}>
+                              {l.label}
+                            </a>
+                          </li>
+                      ))}
 
-          <div class="col-6 col-lg-4 mt-5 mt-lg-0">
-            <div class="widget">
-              <h4>Prestations</h4>
-              <ul class="widget_links">
-                <li class="mb-1"><a href="/prestations/" class="op-08">Hub prestations</a></li>
-                <li class="mb-1"><a href="/prestations/seo-local/" class="op-08">SEO local</a></li>
-                <li class="mb-1"><a href="/prestations/ads-local/" class="op-08">Google Ads local</a></li>
-                <li class="mb-1"><a href="/prestations/cro/" class="op-08">CRO (conversion)</a></li>
-                <li class="mb-1"><a href="/prestations/tracking-attribution/" class="op-08">Tracking & attribution</a></li>
-              </ul>
-            </div>
-          </div>
+                      {col?.viewAll?.href && col?.viewAll?.label && (
+                          <li class="mb-1">
+                            <a href={col.viewAll.href} class="op-08" data-track={col.viewAll.track}>
+                              {col.viewAll.label}
+                            </a>
+                          </li>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+            );
+          })}
 
         </div>
 
         <div class="row px-5">
           <div class="col-12">
-            <hr>
+            <hr />
             <div class="mt-4 pt-1 op-08">
               <small class="op-06 copyright-links">
-                © {year} Horizon Conversion. Tous droits réservés.
-                <span class="mx-2">|</span>
-                <a href="/mentions-legales/" class="op-08">Mentions légales</a>
-                <span class="mx-2">|</span>
-                <a href="/politique-confidentialite/" class="op-08">Politique de confidentialité</a>
+                {legalText}
+                {(legal?.links ?? []).map((l: any) => (
+                    <>
+                      <span class="mx-2">|</span>
+                      <a href={l.href} class="op-08">
+                        {l.label}
+                      </a>
+                    </>
+                ))}
               </small>
             </div>
           </div>
@@ -94,3 +193,20 @@ const year = new Date().getFullYear();
 
   </div>
 </footer>
+
+<script is:inline>
+  {`
+    (function(){
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', function(e){
+        var a = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+        if(!a) return;
+        window.dataLayer.push({
+          event: a.getAttribute('data-track'),
+          page_path: window.location.pathname,
+          href: a.getAttribute('href') || ''
+        });
+      });
+    })();
+  `}
+</script>
