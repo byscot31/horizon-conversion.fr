@@ -1,0 +1,57 @@
+{
+  "id": "res_utm_convention",
+  "slug": "utm-assurance-convention",
+  "meta": {
+    "title": "UTM assurance : convention simple pour attribuer les leads | 60/95",
+    "description": "Convention UTM simple pour attribuer les leads (appels/formulaires) à la source/campagne/offre et piloter le CPL.",
+    "robots": "index,follow",
+    "canonical": "/ressources/utm-assurance-convention/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Tracking)",
+    "titleHtml": "UTM assurance :<br />une convention simple.",
+    "subtitle": "Retrouver la source/campagne/offre sans ambiguïté pour piloter CPL, conversion et éligibilité.",
+    "ctas": [
+      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir Tracking & attribution", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "À quoi servent les UTM ?", "a": "À identifier la source et la campagne d’un lead afin de mesurer et piloter le ROI." },
+      { "q": "UTM et Ads, c’est obligatoire ?", "a": "Fortement recommandé : sans UTMs, l’attribution est partielle et les décisions sont plus risquées." }
+    ]
+  },
+  "contentHtml": "<h2>Objectif</h2><p>Attribuer chaque lead (appel/formulaire) à une source et une campagne.</p><h2>Convention minimale</h2><ul><li><strong>utm_source</strong> : google / facebook / email</li><li><strong>utm_medium</strong> : cpc / organic / referral</li><li><strong>utm_campaign</strong> : offre-zone-intention</li><li><strong>utm_content</strong> : variation annonce / créa</li></ul><h2>Bonnes pratiques</h2><ul><li>Règles d’écriture uniques (minuscules, tirets)</li><li>Pas de doublons (campagnes nommées pareil)</li><li>Convention partagée par l’équipe</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
+        { "href": "/methode/", "label": "Méthode", "anchor": "méthode SEO + Ads + CRO" },
+        { "href": "/prestations/ads-local/", "label": "Google Ads", "anchor": "Google Ads orienté leads" },
+        { "href": "/contact/", "label": "Diagnostic", "anchor": "obtenir un diagnostic" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking assurance", "anchor": "call tracking assurance" },
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing assurance", "anchor": "checklist landing assurance" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ]
+  }
+}

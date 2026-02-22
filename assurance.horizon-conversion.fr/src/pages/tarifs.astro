@@ -1,0 +1,43 @@
+---
+// src/pages/tarifs.astro
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Hero from "../components/blocks/Hero.astro";
+import Packs3Cols from "../components/blocks/Packs3Cols.astro";
+import MethodVideoProof from "../components/blocks/MethodVideoProof.astro";
+import PrestationsTabs from "../components/blocks/PrestationsTabs.astro";
+import MetiersGrid from "../components/blocks/MetiersGrid.astro";
+import CtaBand from "../components/blocks/CtaBand.astro";
+import SupportBand from "../components/blocks/SupportBand.astro";
+import FaqToggles from "../components/blocks/FaqToggles.astro";
+
+import rawPageData from "../data/page_tarifs.json";
+import { hydrateStandardPage } from "../lib/seoTokens";
+import { getPrestationBySlug, getMetierBySlug } from "../lib/data.ts";
+
+const pageData = hydrateStandardPage(rawPageData);
+
+const prestations = await Promise.all(
+  pageData.sections.prestationsTabs.items.slugs.map((s) => getPrestationBySlug(s))
+);
+
+const metiers = await Promise.all(
+  pageData.sections.metiersGrid.items.slugs.map((s) => getMetierBySlug(s))
+);
+
+const faq = pageData.schema?.faq ?? [];
+---
+<SiteLayout seo={pageData.seo} schema={pageData.schema}>
+  <Hero {...pageData.hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <Packs3Cols data={pageData.sections.packs3cols} />
+      <MethodVideoProof data={pageData.sections.videoProof} />
+      <PrestationsTabs data={pageData.sections.prestationsTabs} prestations={prestations} />
+      <MetiersGrid data={pageData.sections.metiersGrid} metiers={metiers} />
+      <CtaBand data={pageData.sections.ctaBand} />
+      <SupportBand data={pageData.sections.supportBand} />
+      <FaqToggles data={pageData.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
+</SiteLayout>

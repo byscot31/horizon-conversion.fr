@@ -1,0 +1,56 @@
+{
+  "id": "res_objections_framework",
+  "slug": "objections-assurance-framework-reponses",
+  "meta": {
+    "title": "Objections assurance : framework pour répondre et convertir | 60/95",
+    "description": "Framework objections : leads non qualifiés, Ads trop cher, pas de mesure. Réponses structurées + preuve + CTA.",
+    "robots": "index,follow",
+    "canonical": "/ressources/objections-assurance-framework-reponses/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Contenus)",
+    "titleHtml": "Objections assurance :<br />framework de réponses.",
+    "subtitle": "Répondre aux doutes pour augmenter conversion : preuve, objections, FAQ et CTA.",
+    "ctas": [
+      { "label": "Créer mes pages offres", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir Contenus & preuves", "href": "/prestations/contenus-preuves/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Quelle objection traiter en premier ?", "a": "Leads non qualifiés / coût Ads / manque de mesure : ce sont les freins majeurs à la décision." },
+      { "q": "Où placer les objections ?", "a": "Sous la preuve et avant le formulaire, pour réduire la friction." }
+    ]
+  },
+  "contentHtml": "<h2>Framework</h2><ol><li>Reconnaître l’objection</li><li>Apporter une preuve</li><li>Donner la méthode</li><li>Proposer une action simple</li></ol><h2>Top objections</h2><ul><li>Leads non qualifiés</li><li>Ads trop cher</li><li>Pas de mesure</li><li>Manque de temps pour rappeler</li></ul><h2>Où l’intégrer</h2><p>Pages offres, pages métiers et FAQ : aligner message + preuve + CTA.</p>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves", "anchor": "preuves et contenus" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
+        { "href": "/preuves/", "label": "Preuves", "anchor": "preuves" },
+        { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "landing qui convertit" },
+        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualifiant" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Créer mes pages offres", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

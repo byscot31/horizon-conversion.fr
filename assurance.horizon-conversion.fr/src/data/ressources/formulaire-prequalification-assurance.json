@@ -1,0 +1,56 @@
+{
+  "id": "res_form_qualif",
+  "slug": "formulaire-prequalification-assurance",
+  "meta": {
+    "title": "Formulaire pré-qualifiant assurance : réduire les leads non éligibles | 60/95",
+    "description": "Champs utiles, friction minimale et scoring simple : améliorer la qualité des leads assurance (appels/formulaires).",
+    "robots": "index,follow",
+    "canonical": "/ressources/formulaire-prequalification-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (CRO)",
+    "titleHtml": "Formulaire pré-qualifiant :<br />mieux qualifier.",
+    "subtitle": "Réduire les leads non éligibles via champs utiles, message clair et scoring simple.",
+    "ctas": [
+      { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Quel est le minimum de champs ?", "a": "Offre, zone, besoin/urgence, coordonnées. Puis 1–2 champs de qualification selon métier/offre." },
+      { "q": "Plus de champs = moins de conversion ?", "a": "Oui, donc on privilégie peu de champs mais très utiles pour filtrer." }
+    ]
+  },
+  "contentHtml": "<h2>Objectif</h2><p>Qualifier avant l’appel : moins de perte, meilleure éligibilité.</p><h2>Champs utiles</h2><ul><li>Zone (commune/secteur)</li><li>Offre (auto/habitation/santé…)</li><li>Besoin/urgence</li><li>Critère métier (ex: montant/délai en emprunteur)</li></ul><h2>Scoring simple</h2><ul><li>Éligible / à rappeler / hors cible</li><li>Motif + offre + zone</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
+        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "CRM & workflows" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking" },
+        { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "checklist landing" },
+        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel", "anchor": "process rappel" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

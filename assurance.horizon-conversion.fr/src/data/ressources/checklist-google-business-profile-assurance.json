@@ -1,0 +1,56 @@
+{
+  "id": "res_gbp_checklist",
+  "slug": "checklist-google-business-profile-assurance",
+  "meta": {
+    "title": "Checklist Google Business Profile assurance : appels, itinéraires, leads | 60/95",
+    "description": "Checklist GBP assurance : catégories, services, avis, posts et cohérence NAP pour améliorer le local pack et générer des leads.",
+    "robots": "index,follow",
+    "canonical": "/ressources/checklist-google-business-profile-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (SEO local)",
+    "titleHtml": "Checklist Google Business Profile :<br />gagner en local.",
+    "subtitle": "Optimiser GBP pour appels, itinéraires et demandes locales sur 60/95.",
+    "ctas": [
+      { "label": "Audit SEO local", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir SEO local", "href": "/prestations/seo-local/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "GBP suffit-il sans pages ?", "a": "GBP est puissant, mais des pages offres transactionnelles améliorent conversion et couverture intentionnelle." },
+      { "q": "Quels KPIs GBP suivre ?", "a": "Appels, itinéraires, clics site, et requêtes principales." }
+    ]
+  },
+  "contentHtml": "<h2>Checklist rapide</h2><ul><li>Catégorie principale + secondaires</li><li>Services (offres d’entrée)</li><li>Photos (équipe, agence)</li><li>Avis (collecte et réponses)</li><li>Posts (si utile)</li><li>NAP cohérent</li></ul><h2>Alignement pages</h2><p>Relier GBP à des pages offres orientées conversion pour améliorer les demandes actionnables.</p>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/seo-local/", "label": "SEO local", "anchor": "SEO local assurance" },
+        { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves", "anchor": "preuves" },
+        { "href": "/metiers/", "label": "Métiers", "anchor": "pages métiers assurance" },
+        { "href": "/contact/", "label": "Audit SEO local", "anchor": "audit SEO local" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/architecture-seo-local-assurance-sans-pages-villes/", "label": "Architecture SEO local", "anchor": "architecture SEO local" },
+        { "href": "/ressources/objections-assurance-framework-reponses/", "label": "Framework objections", "anchor": "objections assurance" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Audit SEO local", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

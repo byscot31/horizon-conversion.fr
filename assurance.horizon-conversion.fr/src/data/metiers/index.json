@@ -1,56 +1,10 @@
 {
-  "version": "1.0",
-  "baseUrl": "https://assurance.horizon-conversion.fr",
-  "zoneCible": {
-    "nom": "Sud de l’Oise (60) & Nord du Val-d’Oise (95)",
-    "departements": ["60", "95"],
-    "secteurs": [
-      "Chantilly",
-      "Senlis",
-      "Lamorlaye",
-      "Gouvieux",
-      "Creil",
-      "Nogent-sur-Oise",
-      "Clermont (Oise)",
-      "Persan",
-      "Beaumont-sur-Oise",
-      "L'Isle-Adam",
-      "Méry-sur-Oise",
-      "Domont",
-      "Sarcelles (Nord)",
-      "Gonesse (Nord)"
-    ]
-  },
   "items": [
-    {
-      "id": "metier_agence_assurance",
-      "slug": "agence-assurance",
-      "title": "Agences d’assurance"
-    },
-    {
-      "id": "metier_courtier_assurance",
-      "slug": "courtier-assurance",
-      "title": "Courtiers en assurance"
-    },
-    {
-      "id": "metier_mutuelle_sante",
-      "slug": "mutuelle-sante",
-      "title": "Mutuelles santé locales"
-    },
-    {
-      "id": "metier_assurance_emprunteur",
-      "slug": "assurance-emprunteur",
-      "title": "Spécialistes assurance emprunteur"
-    },
-    {
-      "id": "metier_assurance_pro",
-      "slug": "assurance-pro",
-      "title": "Assureurs Pro (RC Pro / décennale / multirisque)"
-    },
-    {
-      "id": "metier_gestion_patrimoine",
-      "slug": "assurance-vie-patrimoine",
-      "title": "Conseil patrimonial (assurance-vie / prévoyance)"
-    }
+    { "id": "metier_agence_assurance", "slug": "agence-assurance", "title": "Agences d’assurance" },
+    { "id": "metier_courtier_assurance", "slug": "courtier-assurance", "title": "Courtiers en assurance" },
+    { "id": "metier_mutuelle_sante", "slug": "mutuelle-sante", "title": "Mutuelles locales" },
+    { "id": "metier_assurance_emprunteur", "slug": "assurance-emprunteur", "title": "Assurance emprunteur" },
+    { "id": "metier_assurance_pro", "slug": "assurance-pro", "title": "Assurance pro" },
+    { "id": "metier_assurance_vie_patrimoine", "slug": "assurance-vie-patrimoine", "title": "Assurance vie & patrimoine" }
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "id": "res_process_rappel",
+  "slug": "process-rappel-leads-assurance",
+  "meta": {
+    "title": "Process rappel leads assurance : rappel <10 min, scripts, relances | 60/95",
+    "description": "Process de rappel : scripts d’appel, cadence de relance, suivi RDV/devis/signé pour réduire la perte et augmenter le taux RDV.",
+    "robots": "index,follow",
+    "canonical": "/ressources/process-rappel-leads-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Process)",
+    "titleHtml": "Process rappel leads :<br />moins de perte.",
+    "subtitle": "Rappel <10 min, scripts et relances : transformer plus de leads en RDV/devis.",
+    "ctas": [
+      { "label": "Automatiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Pourquoi <10 min est important ?", "a": "Parce que la joignabilité chute vite. Rappeler tôt augmente contact et RDV." },
+      { "q": "Que suivre ?", "a": "Délai de rappel, taux contact, taux RDV, taux devis, taux signé, et source du lead." }
+    ]
+  },
+  "contentHtml": "<h2>Objectif</h2><p>Rappeler vite, qualifier, relancer, et suivre jusqu’au RDV/devis/signé.</p><h2>Cadence recommandée</h2><ul><li>0–10 min : appel 1</li><li>J0 : appel 2 + SMS</li><li>J1 : appel 3</li><li>J3 : relance</li></ul><h2>Scripts</h2><ul><li>Motif + offre + zone</li><li>Qualification (critères simples)</li><li>Prochaine étape (RDV/devis)</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "CRM & workflows" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking & attribution" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
+        { "href": "/contact/", "label": "Automatiser le suivi", "anchor": "automatiser le suivi" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking", "anchor": "call tracking" },
+        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "pré-qualification" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Automatiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

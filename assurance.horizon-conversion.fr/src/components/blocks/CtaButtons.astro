@@ -1,0 +1,64 @@
+---
+// src/components/blocks/CtaButtons.astro
+import siteData from "../../data/site.json";
+
+type CTA = {
+  label: string;
+  href: string; // URL | "WHATSAPP" | "TEL"
+  icon?: string;
+  variant?: "primary" | "secondary" | "light" | "dark" | "linkUnderline";
+  external?: boolean;
+  };
+
+const { ctas = [], className = "" } = Astro.props as {
+  ctas?: CTA[];
+  className?: string;
+  };
+
+const phoneDisplay = siteData.phoneDisplay;
+const phoneTel = siteData.phoneTel;
+const whatsapp = siteData.whatsapp;
+
+function resolveHref(href: string) {
+  if (href === "WHATSAPP") return whatsapp;
+  if (href === "TEL") return `tel:${phoneTel}`;
+  return href;
+  }
+
+function resolveLabel(label: string) {
+  return label.replace("{phoneDisplay}", phoneDisplay);
+  }
+
+function resolveClass(variant?: CTA["variant"]) {
+  switch (variant) {
+  case "secondary":
+  return "button button-xlarge button-rounded button-dark button-border border-width-1 ls-0 fw-medium m-0";
+  case "light":
+  return "button button-rounded button-light button-border border-width-1 ls-0 fw-medium";
+  case "dark":
+  return "button button-rounded button-dark button-border border-width-1 ls-0 fw-medium";
+  case "linkUnderline":
+  return "btn btn-link p-0";
+  case "primary":
+  default:
+  return "button button-xlarge button-rounded ls-1 button-reveal py-3 px-5 m-0";
+  }
+  }
+---
+
+{ctas?.length > 0 && (
+<div class={`d-flex flex-wrap gap-3 ${className}`}>
+  {ctas.map((cta) => (
+      <a
+          href={resolveHref(cta.href)}
+          class={resolveClass(cta.variant)}
+          style={cta.variant === "secondary" ? "display:inline-flex; align-items:center;" : undefined}
+          target={cta.external ? "_blank" : undefined}
+          rel={cta.external ? "noopener noreferrer" : undefined}
+      >
+        {cta.icon && <i class={cta.icon}></i>}
+        {cta.variant === "linkUnderline" ? <u>{resolveLabel(cta.label)}</u> : <span>{resolveLabel(cta.label)}</span>}
+      </a>
+  ))}
+</div>
+  )}

@@ -1,82 +1,58 @@
 ---
+// src/pages/metiers/[slug].astro
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import FAQ from "../../components/FAQ.astro";
-import RelatedLinks from "../../components/RelatedLinks.astro";
-import { getMetierBySlug, listPrestations, getDeclinaisonsForMetier } from "../../lib/data";
-import LocalModules from "../../components/LocalModules.astro";
+import Hero from "../../components/blocks/Hero.astro";
+import MethodVideoProof from "../../components/blocks/MethodVideoProof.astro";
+import PrestationsTabs from "../../components/blocks/PrestationsTabs.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import SupportBand from "../../components/blocks/SupportBand.astro";
+import FaqToggles from "../../components/blocks/FaqToggles.astro";
+import ResourcesGrid from "../../components/blocks/ResourcesGrid.astro";
+
+import metiersIndex from "../../data/metiers/index.json";
+import ressourcesIndex from "../../data/ressources/index.json";
+import { getMetierBySlug, getPrestationBySlug, normalizeHero } from "../../lib/data.ts";
 
 export async function getStaticPaths() {
-  const { listMetiers } = await import("../../lib/data");
-  return listMetiers().map((m) => ({ params: { slug: m.slug } }));
+  const items = (metiersIndex as any).items as Array<{ slug: string }>;
+  return items.map((m) => ({
+    params: { slug: m.slug }
+  }));
 }
 
 const { slug } = Astro.params;
+
 const metier = await getMetierBySlug(slug);
 
-const allPrestations = listPrestations();
-const declis = getDeclinaisonsForMetier(metier.id).slice().sort((a: any, b: any) => a.priority - b.priority);
+const rItems = ((ressourcesIndex as any).items ?? []) as any[];
+const ressources = rItems
+  .filter((r) => (r?.targets?.metiers ?? []).includes(metier.slug))
+  .slice(0, metier?.sections?.resourcesGrid?.items?.limit ?? 6);
 
-const pageUrl = `https://assurance.horizon-conversion.fr${metier.meta.canonical}`;
+const hero = normalizeHero(metier.hero);
 
-const seo = { ...metier.meta };
+const prestaSlugs: string[] = metier?.sections?.prestationsTabs?.items?.slugs ?? [];
+const prestations = await Promise.all(prestaSlugs.map((s) => getPrestationBySlug(s)));
 
-const linksPrestations = declis
-  .map((d: any) => {
-    const p = allPrestations.find((x) => x.id === d.prestaId);
-    if (!p) return null;
-    return {
-      label: p.title,
-      href: `/prestations/${p.slug}/${metier.slug}/`,
-      desc: d.angle || ""
-    };
-  })
-  .filter(Boolean);
-
-const matriLinks = [
-  { label: "La méthode", href: "/methode/", desc: "La logique complète : SEO local + Ads + CRO + tracking." },
-  { label: "Preuves", href: "/preuves/", desc: "Exemples, résultats, process." },
-  { label: "Tarifs", href: "/tarifs/", desc: "Packages et options." },
-  { label: "Contact", href: "/contact/", desc: "Diagnostic et plan d’action." }
-];
+const faq = metier?.faq ?? [];
 ---
-<SiteLayout
-    seo={seo}
-    h1={metier.hero?.h1 ?? metier.label}
-    intro={metier.hero?.sub}
-    breadcrumbs={[
-      { label: "Accueil", href: "/" },
-      { label: "Métiers", href: "/metiers/" },
-      { label: metier.label, href: `/metiers/${metier.slug}/` }
-    ]}
-    ctas={{
-      primary: metier.hero?.ctaPrimary ?? { label: "Obtenir un diagnostic", href: "/contact/" },
-      secondary: metier.hero?.ctaSecondary ?? { label: "Voir la méthode", href: "/methode/" }
-    }}
-    schema={{
-      faq: metier.faq ?? []
-    }}
->
-  {metier.objections?.length ? (
-      <section>
-        <h2>Objections fréquentes</h2>
-        <ul>
-          {metier.objections.map((o) => (
-              <li><strong>{o.texte}</strong><br />{o.reponse}</li>
-          ))}
-        </ul>
-      </section>
-  ) : null}
 
-  <RelatedLinks title="Prestations recommandées (déclinaisons)" links={linksPrestations} />
+<SiteLayout seo={metier.meta} schema={{ includeWebsite: true, includeSearchAction: false, faq }}>
+  <Hero {...hero} />
 
-  <FAQ items={metier.faq ?? []} />
-
-  <LocalModules
-      mode="metier"
-      canonicalSeed={metier.meta.canonical}
-      context={{ metierLabel: metier.label, offres: metier.offres }}
-      config={metier.localModules ?? { enabled: true }}
-  />
-
-  <RelatedLinks title="Ressources & pages clés" links={matriLinks} />
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <MethodVideoProof data={metier.sections.videoProof} />
+      <PrestationsTabs
+          data={{ ...metier.sections.prestationsTabs, linkMode: "cross", metierSlug: metier.slug }}
+          prestations={prestations}
+      />
+      {metier?.sections?.resourcesGrid && ressources?.length > 0 && (
+          <ResourcesGrid data={metier.sections.resourcesGrid} items={ressources} />
+      )}
+      <CtaBand data={metier.sections.ctaBand} />
+      <SupportBand data={{ ...metier.sections.supportBand, linkMode: "cross", metierSlug: metier.slug }} />
+      <FaqToggles data={metier.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
 </SiteLayout>

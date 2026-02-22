@@ -1,0 +1,56 @@
+{
+  "id": "res_ads_structure",
+  "slug": "structure-google-ads-assurance",
+  "meta": {
+    "title": "Google Ads assurance : structure par offre et intention | 60/95",
+    "description": "Structure Google Ads orientée leads : campagnes par offre, exclusions, extensions, messages et landing dédiée pour stabiliser le CPL.",
+    "robots": "index,follow",
+    "canonical": "/ressources/structure-google-ads-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Ads)",
+    "titleHtml": "Google Ads assurance :<br />structure orientée leads.",
+    "subtitle": "Campagnes par offre, messages, exclusions et landing : piloter CPL et qualité.",
+    "ctas": [
+      { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir Ads local", "href": "/prestations/ads-local/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Pourquoi structurer par offre ?", "a": "Pour aligner annonce/landing et améliorer conversion et CPL." },
+      { "q": "Faut-il une landing dédiée ?", "a": "Oui : c’est un levier majeur de conversion et de qualité." }
+    ]
+  },
+  "contentHtml": "<h2>Principe</h2><p>Structurer par offre d’entrée et intention, pas pour “faire du trafic”.</p><h2>Setup minimal</h2><ul><li>1 campagne = 1 offre d’entrée</li><li>Groupes par intention</li><li>Extensions (appel, accroches)</li><li>Exclusions + géo fin</li></ul><h2>Pilotage</h2><ul><li>KPIs : CPL, conversion, éligibilité</li><li>Décisions : scale/stop/dupliquer</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking & attribution" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
+        { "href": "/contact/", "label": "Lancer Ads", "anchor": "lancer Ads" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/mots-cles-negatifs-google-ads-assurance/", "label": "Mots-clés négatifs", "anchor": "mots-clés négatifs Ads assurance" },
+        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance", "anchor": "UTM" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

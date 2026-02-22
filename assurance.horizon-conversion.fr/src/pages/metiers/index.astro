@@ -1,24 +1,31 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import { listMetiers } from "../../lib/data";
+import Hero from "../../components/blocks/Hero.astro";
+import MetiersGrid from "../../components/blocks/MetiersGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import FaqToggles from "../../components/blocks/FaqToggles.astro";
 
-const metiers = listMetiers();
+import rawPageData from "../../data/page_metiers.json";
+import { hydrateStandardPage } from "../../lib/seoTokens";
+import { getMetierBySlug } from "../../lib/data.ts";
 
-const seo = {
-  title: "Métiers assurance | Sud Oise (60) & Nord Val-d’Oise (95)",
-  description: "Agences, courtiers, mutuelles, emprunteur, pro, patrimoine : pages métiers et offres associées.",
-  canonical: "/metiers/"
-};
+const pageData = hydrateStandardPage(rawPageData);
+
+const metiers = await Promise.all(
+  pageData.sections.metiersGrid.items.slugs.map((s) => getMetierBySlug(s))
+);
+
+const faq = pageData.schema?.faq ?? [];
 ---
-<SiteLayout
-    seo={seo}
-    h1="Métiers assurance"
-    intro="Choisis ton métier : on te montre la méthode, les prestations recommandées et les angles qui convertissent sur 60/95."
-    breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Métiers", href: "/metiers/" }]}
->
-  <ul>
-    {metiers.map((m) => (
-        <li><a href={`/metiers/${m.slug}/`}>{m.title}</a></li>
-    ))}
-  </ul>
+
+<SiteLayout seo={pageData.seo} schema={pageData.schema}>
+  <Hero {...pageData.hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <MetiersGrid data={pageData.sections.metiersGrid} metiers={metiers} />
+      <CtaBand data={pageData.sections.ctaBand} />
+      <FaqToggles data={pageData.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
 </SiteLayout>

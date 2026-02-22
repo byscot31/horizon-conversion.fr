@@ -1,0 +1,121 @@
+---
+// src/pages/politique-confidentialite.astro
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const seo = {
+  title: "Politique de confidentialité | RGPD | Assurance Horizon Conversion",
+  description: "Traitement des données (formulaire, attribution/UTM, reCAPTCHA) et droits RGPD.",
+  canonical: "/politique-confidentialite/"
+};
+
+// À compléter (évite de laisser "—" en prod)
+const dpoEmail = "contact@horizon-conversion.fr"; // ou email dédié RGPD
+const retention = "12 mois";
+
+// Contexte technique (réel)
+const siteDomain = "assurance.horizon-conversion.fr";
+const host = "Scaleway";
+---
+<SiteLayout seo={seo}>
+
+  <!-- Page Title ============================================= -->
+  <section class="page-title bg-transparent border-0">
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+        <div class="page-title-content" style="max-width: 780px;">
+          <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">RGPD</p>
+          <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem; line-height: 1.2;">
+            Politique de confidentialité
+          </h1>
+          <p class="fs-5 mb-0">
+            Cette politique décrit comment <strong>{siteDomain}</strong> collecte et traite vos données personnelles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap py-0">
+      <div class="section bg-transparent my-0">
+        <div class="container">
+
+          <h2>1) Données collectées</h2>
+          <ul class="iconlist">
+            <li class="d-block"><strong>Données de contact :</strong> nom/société, email, téléphone.</li>
+            <li class="d-block"><strong>Données de contexte :</strong> métier, offres prioritaires, budget (optionnel), message.</li>
+            <li class="d-block"><strong>Données de mesure (attribution) :</strong> paramètres UTM (utm_source, utm_medium, utm_campaign, utm_content, utm_term) et page_path.</li>
+            <li class="d-block"><strong>Données anti-spam :</strong> score/token reCAPTCHA v3 (si activé) + champ “botcheck”.</li>
+          </ul>
+
+          <h2>2) Finalités</h2>
+          <ul class="iconlist">
+            <li class="d-block">Répondre à votre demande et vous recontacter.</li>
+            <li class="d-block">Qualifier votre besoin (métier/offres/zone) pour vous proposer un plan d’action.</li>
+            <li class="d-block">Mesurer l’efficacité des actions marketing (attribution des demandes par source/campagne).</li>
+            <li class="d-block">Sécuriser le formulaire contre le spam et les abus.</li>
+          </ul>
+
+          <h2>3) Base légale</h2>
+          <ul class="iconlist">
+            <li class="d-block"><strong>Consentement :</strong> lorsque vous nous contactez via le formulaire et acceptez d’être recontacté.</li>
+            <li class="d-block"><strong>Intérêt légitime :</strong> amélioration du service et mesure de performance (attribution), dans les limites prévues par le RGPD.</li>
+            <li class="d-block"><strong>Obligation légale :</strong> si une conservation est nécessaire pour respecter une obligation applicable.</li>
+          </ul>
+
+          <h2>4) Durée de conservation</h2>
+          <p>
+            Les données sont conservées pendant <strong>{retention}</strong> à compter du dernier échange,
+            puis supprimées ou anonymisées, sauf obligation légale contraire.
+          </p>
+
+          <h2>5) Destinataires et sous-traitants</h2>
+          <p>
+            Les données sont destinées à l’éditeur du site et aux prestataires techniques strictement nécessaires :
+          </p>
+          <ul class="iconlist">
+            <li class="d-block"><strong>Hébergement :</strong> {host}.</li>
+            <li class="d-block"><strong>Protection anti-spam :</strong> Google reCAPTCHA (si activé).</li>
+            <li class="d-block"><strong>Mesure :</strong> événements front (dataLayer) et paramètres UTM (pas de cookie requis pour ce MVP).</li>
+          </ul>
+
+          <h2>6) Cookies / mesure d’audience</h2>
+          <p>
+            Dans ce MVP, l’attribution peut fonctionner via les paramètres d’URL (UTM) et des événements (submit, clic appel, clic WhatsApp)
+            sans nécessiter de cookies. Si des cookies de mesure d’audience (ex. analytics) sont ajoutés, un bandeau de consentement sera mis en place
+            conformément au RGPD/ePrivacy.
+          </p>
+
+          <h2>7) Sécurité</h2>
+          <p>
+            Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger vos données
+            contre l’accès non autorisé, la perte, l’altération ou la divulgation.
+          </p>
+
+          <h2>8) Vos droits</h2>
+          <ul class="iconlist">
+            <li class="d-block">Accès, rectification, suppression.</li>
+            <li class="d-block">Opposition, limitation, portabilité.</li>
+            <li class="d-block">Retrait du consentement à tout moment.</li>
+          </ul>
+          <p>
+            Pour exercer vos droits : <strong>{dpoEmail}</strong> ou via <a href="/contact/#contact-form"><u>le formulaire de contact</u></a>.
+          </p>
+
+          <h2>9) Contact</h2>
+          <p>
+            Pour toute question relative à cette politique : <a href="/contact/#contact-form"><u>contactez-nous</u></a>.
+          </p>
+
+          <hr class="my-5" />
+
+          <small class="op-07">
+            Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}.
+          </small>
+
+        </div>
+      </div>
+    </div>
+  </section><!-- #content end -->
+</SiteLayout>

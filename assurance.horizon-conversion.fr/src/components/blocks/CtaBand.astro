@@ -1,0 +1,26 @@
+---
+// src/components/blocks/CtaBand.astro
+import CtaButtons from "./CtaButtons.astro";
+
+const { data } = Astro.props as { data: any };
+
+const theme = data?.theme ?? {};
+const style = theme?.bgImage
+  ? `background: url('${theme.bgImage}') ${theme.bgRepeat ?? "no-repeat"} ${theme.bgPosition ?? "center"} / ${theme.bgSize ?? "cover"};`
+  : undefined;
+
+const content = data?.content ?? {};
+---
+
+<div class="section my-0 py-6" id={data?.id} style={style}>
+  <div class="container">
+    <div class="row py-5">
+      <div class="col-md-7">
+        {content?.eyebrow && <p class="text-uppercase ls-4 text-smaller mb-3 fw-bold">{content.eyebrow}</p>}
+        {content?.title && <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.6rem;">{content.title}</h2>}
+        {content?.text && <p class="fs-5 mb-5">{content.text}</p>}
+        <CtaButtons ctas={data?.ctas ?? []} />
+      </div>
+    </div>
+  </div>
+</div>

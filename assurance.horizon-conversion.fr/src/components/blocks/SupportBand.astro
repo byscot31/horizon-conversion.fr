@@ -1,0 +1,60 @@
+---
+// src/components/blocks/SupportBand.astro
+const { data } = Astro.props as { data: any };
+const content = data?.content ?? {};
+
+const linkMode: "direct" | "cross" = data?.linkMode ?? "direct";
+const metierSlug: string | undefined = data?.metierSlug;
+
+const ctas = Array.isArray(data?.ctas) ? data.ctas : [];
+const media = data?.media ?? {};
+
+const currentPrestaSlug: string | undefined = data?.prestaSlug;
+
+const resolveHref = (cta: any) => {
+  if (cta?.href) return cta.href;
+
+  const prestaSlug = cta?.prestaSlug;
+  if (prestaSlug) {
+    if (linkMode === "cross" && metierSlug) {
+      return `/prestations/${prestaSlug}/${metierSlug}/`;
+    }
+    return `/prestations/${prestaSlug}/`;
+  }
+
+  if (cta?.target === "currentCross" && currentPrestaSlug && metierSlug) {
+    return `/prestations/${currentPrestaSlug}/${metierSlug}/`;
+  }
+
+  return "#";
+};
+---
+
+<div class="section my-0 py-6" id={data?.id}>
+  <div class="container">
+    <div class="row justify-content-center align-items-center gutter-50">
+      <div class="col-md-6">
+        {content?.eyebrow && <p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">{content.eyebrow}</p>}
+        {content?.title && <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">{content.title}</h2>}
+        {content?.text && <p class="fs-5 mb-5">{content.text}</p>}
+
+        {ctas.length > 0 && (
+            <div class="d-flex flex-wrap gap-2">
+              {ctas.map((cta: any, idx: number) => (
+                  <a
+                      href={resolveHref(cta)}
+                      class={`button button-rounded button-${cta?.variant ?? "dark"} button-border border-width-1 ls-0 fw-medium ${idx > 0 ? "ms-2" : ""}`}
+                  >
+                    {cta?.label}
+                  </a>
+              ))}
+            </div>
+        )}
+      </div>
+
+      <div class="col-md-5">
+        {media?.img?.src && <img src={media.img.src} alt={media.img.alt ?? ""} />}
+      </div>
+    </div>
+  </div>
+</div>

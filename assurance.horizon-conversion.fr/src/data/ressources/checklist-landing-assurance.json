@@ -1,0 +1,56 @@
+{
+  "id": "res_landing_checklist",
+  "slug": "checklist-landing-assurance",
+  "meta": {
+    "title": "Checklist landing assurance : preuve, objections, CTA, formulaire | 60/95",
+    "description": "Checklist landing assurance orientée devis/RDV : structure, preuve, objections, FAQ, formulaire pré-qualifiant.",
+    "robots": "index,follow",
+    "canonical": "/ressources/checklist-landing-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (CRO)",
+    "titleHtml": "Checklist landing assurance :<br />convertir mieux.",
+    "subtitle": "Structure de page orientée devis/RDV : preuve, objections, CTA et formulaire.",
+    "ctas": [
+      { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir CRO", "href": "/prestations/cro/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Faut-il une landing par offre ?", "a": "Oui au démarrage : une offre d’entrée + une landing dédiée améliore la conversion et la qualité." },
+      { "q": "Quel est le bloc le plus important ?", "a": "Le couple promesse + preuve, puis le formulaire pré-qualifiant." }
+    ]
+  },
+  "contentHtml": "<h2>Structure recommandée</h2><ol><li>Hero (promesse + CTA)</li><li>Preuve (avis/chiffres/cas)</li><li>Objections + FAQ</li><li>Formulaire pré-qualifiant</li><li>Rassurance (process, délais, zone)</li></ol><h2>Checklist rapide</h2><ul><li>1 offre d’entrée claire</li><li>CTA visibles (appel + formulaire)</li><li>Preuve au-dessus de la ligne de flottaison</li><li>FAQ sur objections</li><li>Tracking events + appels</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
+        { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves", "anchor": "preuves et contenus" },
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads orienté leads" },
+        { "href": "/contact/", "label": "Audit conversion", "anchor": "audit conversion" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualifiant assurance" },
+        { "href": "/ressources/objections-assurance-framework-reponses/", "label": "Framework objections", "anchor": "objections assurance" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

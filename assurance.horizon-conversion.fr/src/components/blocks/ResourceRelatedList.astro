@@ -1,0 +1,36 @@
+---
+// src/components/blocks/ResourceRelatedList.astro
+const { data } = Astro.props as {
+  data: {
+    id?: string;
+    title?: string;
+    items?: Array<{ href: string; label: string; anchor?: string; rel?: string; target?: string }>;
+  };
+};
+
+const items = Array.isArray(data?.items) ? data.items : [];
+---
+{items.length > 0 && (
+<div class="section bg-transparent pt-0 pb-lg-0" id={data?.id}>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {data?.title && <h2 class="h3 mb-4">{data.title}</h2>}
+        <div class="d-flex flex-column gap-2">
+          {items.map((it) => (
+              <a
+                  href={it.href}
+                  class="button button-rounded button-dark button-border border-width-1 ls-0 fw-medium m-0"
+                  target={it.target}
+                  rel={it.rel}
+                  aria-label={it.anchor ?? it.label}
+              >
+                {it.label}
+              </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  )}

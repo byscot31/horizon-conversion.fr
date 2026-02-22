@@ -72,7 +72,7 @@
 	--cnvs-grid-border-opacity: 0;
 }
 
-.grid-border .fbox-content h3 {
+.grid-border .fbox-content h2 {
 	font-size: 1.375rem;
 }
 
@@ -129,6 +129,10 @@
 
 .widget {
 	--cnvs-widget-title-font-weight: 600;
+}
+
+.toggle-bg .toggle-header {
+	background-color: #E3EAF1;
 }
 
 .copyright-links {

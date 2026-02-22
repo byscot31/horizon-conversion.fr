@@ -1,3 +1,4 @@
+// src/lib/schema.ts
 const SITE = "https://assurance.horizon-conversion.fr";
 
 type Crumb = { label: string; href: string };

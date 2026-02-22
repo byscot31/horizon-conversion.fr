@@ -1,0 +1,269 @@
+{
+  "key": "page:methode",
+
+  "seo": {
+    "canonical": "/methode/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "transactionnel",
+      "secondary": ["commercial", "informationnel"],
+      "stage": "consideration",
+      "microConversions": ["audit", "diagnostic", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "positioning": "local-sans-pages-villes"
+    },
+    "audience": {
+      "segments": [
+        { "id": "agences", "label": "Agences d’assurance", "priority": 1 },
+        { "id": "courtiers", "label": "Courtiers en assurance", "priority": 1 },
+        { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
+      ],
+      "painPoints": [
+        "Leads non qualifiés",
+        "CPL instable",
+        "Dépendance aux recommandations / réseau",
+        "Trafic sans demandes de devis",
+        "Attribution floue (appels, formulaires, campagnes)"
+      ],
+      "desiredOutcomes": [
+        "Plus de demandes de devis",
+        "Plus de RDV qualifiés",
+        "Mesure fiable des sources",
+        "Baisse progressive du CPL",
+        "Scaling des campagnes rentables"
+      ]
+    },
+    "kw": {
+      "primary": "méthode génération leads assurance",
+      "secondary": [
+        "génération de leads assurance",
+        "leads assurance 60 95",
+        "méthode leads courtier assurance",
+        "SEO local assurance",
+        "Google Ads assurance",
+        "CRO assurance",
+        "landing page assurance",
+        "tracking appels formulaires",
+        "attribution leads assurance",
+        "coût par lead assurance"
+      ],
+      "supporting": [
+        "devis assurance en ligne",
+        "RDV assurance",
+        "formulaire pré-qualification assurance",
+        "call tracking assurance",
+        "tableau de bord leads",
+        "UTM Google Ads",
+        "Google Business Profile assurance"
+      ],
+      "entities": [
+        "assurance",
+        "agence d’assurance",
+        "courtier",
+        "mutuelle",
+        "devis",
+        "rendez-vous",
+        "SEO local",
+        "Google Ads",
+        "CRO",
+        "tracking",
+        "attribution"
+      ]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking"
+    },
+    "internalLinks": [
+      { "href": "/preuves/", "anchor": "preuves & résultats" },
+      { "href": "/tarifs/", "anchor": "tarifs" },
+      { "href": "/contact/", "anchor": "diagnostic" },
+      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
+      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
+      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" },
+      { "href": "/prestations/crm-workflow/", "anchor": "CRM & workflows" }
+    ]
+  },
+
+  "seoTemplates": {
+    "title": "Méthode {brand} | {tokens.offer} ({geo.core}) : {tokens.method}",
+    "description": "Méthode orientée conversion pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Pour {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      {
+        "q": "En combien de temps voit-on des leads ?",
+        "a": "Google Ads : immédiat (dès la mise en ligne). SEO local : 4 à 12 semaines selon historique, concurrence et qualité du tracking."
+      },
+      {
+        "q": "Pourquoi combiner SEO local, Ads et CRO ?",
+        "a": "Le SEO local stabilise l’acquisition, les Ads accélèrent le volume, et le CRO améliore le taux de conversion. Ensemble, cela réduit le coût par lead et augmente les RDV qualifiés."
+      },
+      {
+        "q": "Comment évitez-vous les leads non qualifiés ?",
+        "a": "On filtre par offres prioritaires, zones, messages d’annonce, formulaires pré-qualifiants et call tracking. Ensuite, on suit un scoring simple pour qualifier rapidement."
+      },
+      {
+        "q": "Travaillez-vous avec des pages villes ?",
+        "a": "Non. On privilégie une structure intentionnelle (offres, preuves, objections, FAQ) et des modules locaux, sans multiplier des pages villes."
+      },
+      {
+        "q": "Que mesurez-vous exactement ?",
+        "a": "Les appels et formulaires, la source/campagne/offre, le coût par lead, le taux de conversion et la part de leads éligibles via un tableau de bord simple."
+      },
+      {
+        "q": "Quelle est la première étape ?",
+        "a": "Définir l’offre d’entrée, la zone et le tracking, puis construire la page de conversion avant d’activer l’acquisition."
+      }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Méthode ({tokens.method})",
+    "titleHtml": "Générer {tokens.offer} ({geo.departements.0}/{geo.departements.1}),<br />de façon mesurable.",
+    "subtitle": "{tokens.system}. Objectif : {tokens.goal}.",
+    "ctas": [
+      {
+        "label": "Obtenir un diagnostic",
+        "href": "/contact/",
+        "icon": "bi-arrow-right",
+        "variant": "primary"
+      },
+      {
+        "label": "WhatsApp {phoneDisplay}",
+        "href": "WHATSAPP",
+        "icon": "fa-brands fa-whatsapp",
+        "variant": "secondary",
+        "external": true
+      }
+    ],
+    "note": "Pour {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label} — {geo.core}"
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "Méthode de génération de leads assurance : structure, acquisition, conversion, tracking"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Système",
+        "title": "Un système orienté {tokens.goal}, pas du trafic.",
+        "text": "On aligne intention locale, preuve, conversion et mesure. Le but est de transformer la demande (SEO/Ads) en contacts actionnables avec une attribution claire.",
+        "bullets": [
+          "Offre d’entrée priorisée pour stabiliser le coût par lead.",
+          "Pages de conversion : preuves, objections, FAQ, formulaires pré-qualifiants.",
+          "Tracking appels + formulaires : source, campagne, offre, éligibilité."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir les preuves", "href": "/preuves/", "variant": "light" },
+        { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "light" }
+      ]
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "content": {
+        "eyebrow": "Leviers",
+        "title": "{tokens.method} : ce qui fait la différence pour générer {tokens.offer}."
+      },
+      "cta": {
+        "label": "Voir toutes les prestations",
+        "href": "/prestations/",
+        "variant": "light"
+      },
+      "itemCta": { "label": "Voir le détail" },
+      "items": {
+        "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"]
+      }
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Pages métiers + croisements prestation × métier : capter l’intention locale et la convertir en {tokens.goal}.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Plan d’action priorisé pour générer {tokens.offer}.",
+        "text": "Tu repars avec l’ordre d’exécution : offre d’entrée, page de conversion, tracking, puis canal prioritaire ({kw.secondary.3} / {kw.secondary.4})."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "traitement-leads",
+      "content": {
+        "eyebrow": "Exécution",
+        "title": "Leads traités vite = plus de RDV, moins de perte.",
+        "text": "On met en place un process simple : rappel rapide, qualification, relances, et suivi des sources. Option : CRM + workflows si tu veux industrialiser."
+      },
+      "ctas": [
+        { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+      ],
+      "media": {
+        "img": { "src": "/assets/images/app.svg", "alt": "Workflow & dashboard : suivi des leads par source et qualification" }
+      }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "SEO local",
+        "title": "Captez {tokens.offer} sans multiplier des pages villes.",
+        "text": "On travaille la structure intentionnelle et des modules locaux. Couverture : {geo.places.0}, {geo.places.1}, {geo.places.2}, {geo.places.3}, {geo.places.4}…",
+        "cta": { "label": "Voir les prestations", "href": "/prestations/", "variant": "dark" }
+      }
+    }
+  }
+}

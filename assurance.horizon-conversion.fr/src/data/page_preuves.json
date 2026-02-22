@@ -1,0 +1,251 @@
+{
+  "key": "page:preuves",
+
+  "seo": {
+    "canonical": "/preuves/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "transactionnel",
+      "secondary": ["commercial", "informationnel"],
+      "stage": "decision",
+      "microConversions": ["audit", "diagnostic", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "positioning": "local-sans-pages-villes"
+    },
+    "audience": {
+      "segments": [
+        { "id": "agences", "label": "Agences d’assurance", "priority": 1 },
+        { "id": "courtiers", "label": "Courtiers en assurance", "priority": 1 },
+        { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
+      ],
+      "painPoints": [
+        "Doute sur la qualité des leads",
+        "Doute sur la mesure (attribution)",
+        "Doute sur la rentabilité (CPL)",
+        "Manque de preuves avant de lancer"
+      ],
+      "desiredOutcomes": [
+        "Preuves concrètes (process + livrables)",
+        "KPIs suivis et décisions claires",
+        "Mesure appels + formulaires",
+        "Plan d’action priorisé"
+      ]
+    },
+    "kw": {
+      "primary": "preuves génération leads assurance",
+      "secondary": [
+        "résultats leads assurance",
+        "cas clients assurance",
+        "preuves seo local assurance",
+        "preuves google ads assurance",
+        "kpi coût par lead assurance",
+        "tracking attribution leads",
+        "tableau de bord leads"
+      ],
+      "supporting": [
+        "call tracking assurance",
+        "suivi formulaires assurance",
+        "qualification leads assurance",
+        "taux conversion landing assurance",
+        "UTM google ads",
+        "dashboard CPL"
+      ],
+      "entities": [
+        "preuves",
+        "résultats",
+        "cas clients",
+        "KPI",
+        "CPL",
+        "conversion",
+        "tracking",
+        "attribution",
+        "SEO local",
+        "Google Ads",
+        "CRO"
+      ]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking",
+      "proof": "preuves, KPIs et livrables"
+    },
+    "internalLinks": [
+      { "href": "/methode/", "anchor": "méthode" },
+      { "href": "/tarifs/", "anchor": "tarifs" },
+      { "href": "/contact/", "anchor": "diagnostic" },
+      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
+      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
+      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" }
+    ]
+  },
+
+  "seoTemplates": {
+    "title": "Preuves {brand} | {tokens.offer} ({geo.core}) : {tokens.proof}",
+    "description": "Preuves et indicateurs pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Mesure appels + formulaires, attribution et pilotage."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      {
+        "q": "Quelles preuves fournissez-vous avant de lancer ?",
+        "a": "Des exemples de structure (pages, modules), des livrables attendus, des KPIs suivis et une logique de pilotage (attribution, CPL, conversion, éligibilité)."
+      },
+      {
+        "q": "Mesurez-vous les appels et les formulaires ?",
+        "a": "Oui. Le tracking couvre les appels et formulaires, avec source/campagne/offre quand possible, et un tableau de bord de suivi."
+      },
+      {
+        "q": "Les résultats sont-ils garantis ?",
+        "a": "Les résultats dépendent de l’offre, de la zone, de la concurrence et du budget. La méthode vise des décisions mesurables : ce qui marche est amplifié, ce qui ne marche pas est arrêté."
+      },
+      {
+        "q": "Comment évitez-vous les leads non qualifiés ?",
+        "a": "Par ciblage offres/zones, messages, formulaires pré-qualifiants, call tracking et un scoring simple pour qualifier rapidement."
+      },
+      {
+        "q": "Quels KPIs suivez-vous en priorité ?",
+        "a": "CPL, taux de conversion, volume de leads, part de leads éligibles, appels trackés, performance par offre et par campagne."
+      },
+      {
+        "q": "Peut-on démarrer sans refonte complète du site ?",
+        "a": "Oui. On peut démarrer par une page de conversion et un setup tracking + acquisition, puis étendre la structure progressivement."
+      }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Preuves ({tokens.proof})",
+    "titleHtml": "Des preuves pour décider,<br />pas des promesses.",
+    "subtitle": "KPIs, livrables et pilotage : {tokens.system}. Objectif : {tokens.goal}.",
+    "ctas": [
+      { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "Pour {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label} — {geo.core}"
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "Preuves et KPIs : génération de leads assurance, conversion, tracking et pilotage"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Preuves",
+        "title": "Ce qui est mesuré se pilote.",
+        "text": "On documente les livrables, les KPIs et le pilotage : attribution, CPL, conversion, éligibilité. L’objectif est d’itérer vite et d’allouer le budget aux actions rentables.",
+        "bullets": [
+          "KPIs : CPL, conversion, leads éligibles, performance par offre/campagne.",
+          "Tracking : appels + formulaires, UTMs et événements.",
+          "Décisions : scaling, stop, duplication selon données."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
+        { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "light" }
+      ]
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "content": {
+        "eyebrow": "Leviers",
+        "title": "{tokens.method} : preuves par levier et par KPI."
+      },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": {
+        "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"]
+      }
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Pages métiers + croisements prestation × métier : capter l’intention locale et la convertir en {tokens.goal}.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Décision",
+        "title": "On valide la faisabilité et le plan d’action avant d’investir.",
+        "text": "Tu repars avec des priorités claires : offre d’entrée, page de conversion, tracking, et canal prioritaire. Pilotage par KPI et attribution."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "pilotage",
+      "content": {
+        "eyebrow": "Pilotage",
+        "title": "Tableau de bord simple, décisions rapides.",
+        "text": "On suit la performance par source/campagne/offre : volume, CPL, conversion et éligibilité. Objectif : améliorer {tokens.goal} et réduire les pertes."
+      },
+      "ctas": [
+        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" },
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "dark" }
+      ],
+      "media": {
+        "img": {
+          "src": "/assets/images/app.svg",
+          "alt": "Dashboard : suivi des leads assurance par source, coût et qualification"
+        }
+      }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Zone",
+        "title": "Preuves et exécution sur {geo.core}.",
+        "text": "Couverture locale : {geo.places.0}, {geo.places.1}, {geo.places.2}, {geo.places.3}, {geo.places.4}…",
+        "cta": { "label": "Demander un diagnostic", "href": "/contact/", "variant": "dark" }
+      }
+    }
+  }
+}

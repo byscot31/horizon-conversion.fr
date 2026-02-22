@@ -2,34 +2,48 @@
   "id": "metier_agence_assurance",
   "slug": "agence-assurance",
   "label": "Agences d’assurance",
-  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "cardTeaser": "Plus de demandes de devis auto/habitation/santé sur 60/95, avec une offre d’entrée et une page qui convertit.",
+
+  "offres": [
+    "assurance auto",
+    "assurance habitation",
+    "mutuelle santé",
+    "prévoyance",
+    "assurance scolaire",
+    "assurance moto"
+  ],
+
   "meta": {
     "title": "Génération de leads pour agence d’assurance | Sud Oise & Nord Val-d’Oise",
     "description": "Plus de prospects qualifiés en assurance (auto, habitation, santé) avec une méthode locale : SEO + Ads + CRO, orientée RDV et devis.",
     "robots": "index,follow",
     "canonical": "/metiers/agence-assurance/"
   },
+
   "hero": {
     "h1": "Générez des leads qualifiés pour votre agence d’assurance",
-    "sub": "Une méthode locale (60/95) pour transformer vos pages et campagnes en demandes de devis et RDV.",
+    "sub": "Méthode locale (60/95) : pages qui convertissent + acquisition (SEO/Ads) + tracking appels/formulaires.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir la méthode", "href": "/methode/" }
   },
+
   "positionnement": {
     "promesse": "Augmenter le volume de demandes de devis locales, sans dépendre uniquement du réseau ou de l’agence centrale.",
-    "angle": "Pages locales + preuves + tunnel de conversion + tracking appels/formulaires."
+    "angle": "Offre d’entrée + landing CRO + acquisition locale + mesure (CPL, RDV, éligibilité)."
   },
+
   "icp": {
     "taille": ["1-5 conseillers", "6-20 conseillers"],
-    "maturite": ["déjà présent sur Google", "campagnes Ads existantes", "refonte récente mais peu de leads"],
+    "maturite": ["déjà présent sur Google", "campagnes Ads existantes", "site vitrine sans leads"],
     "offresPrioritaires": ["auto", "habitation", "santé", "prévoyance"]
   },
+
   "intentionsSEO": [
     {
       "cluster": "transactionnel",
       "queries": [
         "agence assurance Chantilly",
-        "assurance auto Senlis devis",
+        "devis assurance auto Senlis",
         "assurance habitation Lamorlaye",
         "mutuelle santé Creil agence"
       ]
@@ -47,32 +61,58 @@
       "queries": [
         "assureur près de moi Chantilly",
         "agence assurance ouverte Senlis",
-        "courtier assurance autour de Creil"
+        "assurance habitation autour de Creil"
       ]
     }
   ],
+
   "objections": [
-    { "id": "obj_01", "texte": "On a déjà un site corporate, ça suffit.", "reponse": "Un site corporate ne cible pas les intentions locales. On ajoute des pages transactionnelles + maillage + preuve + CTA." },
-    { "id": "obj_02", "texte": "Leads = beaucoup de non qualifiés.", "reponse": "On filtre via offres, zones, formulaires, call tracking, et scoring simple (motif, urgence, profil)." },
-    { "id": "obj_03", "texte": "Google Ads coûte trop cher.", "reponse": "On combine SEO local + Ads ciblées (marque / zones / produits) + landing CRO pour baisser le CPL." }
+    {
+      "id": "obj_01",
+      "texte": "On a déjà un site corporate, ça suffit.",
+      "reponse": "Un site corporate ne cible pas l’intention locale transactionnelle. On ajoute une page d’entrée orientée devis/RDV + preuve + FAQ + CTA + maillage."
+    },
+    {
+      "id": "obj_02",
+      "texte": "Leads = beaucoup de non qualifiés.",
+      "reponse": "On filtre par offre, zone, messages, formulaires pré-qualifiants, call tracking et un scoring simple (profil, urgence, motif)."
+    },
+    {
+      "id": "obj_03",
+      "texte": "Google Ads coûte trop cher.",
+      "reponse": "On priorise une offre d’entrée, on travaille la conversion (CRO) et on combine SEO local + Ads ciblées pour stabiliser le CPL."
+    }
   ],
+
   "kpis": [
-    { "name": "CPL (coût par lead)", "target": "baisse progressive sur 60-90 jours" },
+    { "name": "CPL (coût par lead)", "target": "baisse progressive sur 60–90 jours" },
     { "name": "Taux de conversion landing", "target": "x1.5 à x3 selon point de départ" },
     { "name": "Part de leads locaux", "target": ">= 80%" },
     { "name": "Appels trackés", "target": "100% des numéros campagne" }
   ],
+
   "livrables": [
-    "Arborescence locale (pages offres × zones)",
-    "Templates pages offres (preuves, FAQ, CTA)",
-    "Tracking appels + formulaires + événements",
-    "Tableau de bord leads (source / campagne / produit)"
+    "Page d’entrée (offre d’entrée) orientée devis/RDV",
+    "Modules preuve/objections/FAQ + formulaire pré-qualifiant",
+    "Tracking appels + formulaires + UTMs",
+    "Plan d’acquisition locale (SEO/Ads) et itérations CRO"
   ],
+
   "faq": [
-    { "q": "En combien de temps on voit des leads ?", "a": "Ads : immédiat. SEO local : montée en puissance 4-12 semaines selon concurrence et historique." },
-    { "q": "Vous travaillez avec plusieurs agences sur la même zone ?", "a": "Non sur un micro-secteur défini : on évite la cannibalisation et on protège l’investissement." },
-    { "q": "On peut cibler auto + habitation + santé ?", "a": "Oui, mais on priorise 1-2 offres d’entrée pour stabiliser le CPL et augmenter le taux de RDV." }
+    {
+      "q": "En combien de temps on voit des leads ?",
+      "a": "Ads : immédiat. SEO local : montée en puissance 4–12 semaines selon concurrence et historique."
+    },
+    {
+      "q": "Peut-on cibler auto + habitation + santé ?",
+      "a": "Oui, mais on priorise d’abord 1–2 offres d’entrée pour stabiliser le CPL et augmenter le taux de RDV."
+    },
+    {
+      "q": "Comment évitez-vous les leads hors zone ?",
+      "a": "Ciblage géo (Ads), contenus et modules locaux, exclusions, et formulaires qui cadrent la zone/commune."
+    }
   ],
+
   "localModules": {
     "enabled": true,
     "zones": { "enabled": true, "limit": 10 },
@@ -92,17 +132,119 @@
     },
     "faqLocale": { "enabled": true, "limit": 3 }
   },
+
   "internalLinks": {
     "hubMetiers": "/metiers/",
-    "prestationsRecommandees": [
-      "presta_seo_local",
-      "presta_ads_local",
-      "presta_cro"
-    ],
-    "pagesAssociees": [
-      "/preuves/",
-      "/methode/",
-      "/tarifs/"
-    ]
+    "prestationsRecommandees": ["seo-local", "ads-local", "cro", "tracking-attribution"],
+    "pagesAssociees": ["/preuves/", "/methode/", "/tarifs/"]
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "Méthode et preuves : génération de leads pour agences d’assurance"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Agences d’assurance",
+        "title": "Transformer l’intention locale en devis et RDV.",
+        "text": "On part d’une offre d’entrée, on crée une landing qui convertit, on active l’acquisition locale (SEO/Ads) et on mesure appels/formulaires pour optimiser le CPL.",
+        "bullets": [
+          "Offre d’entrée + page d’entrée orientée conversion.",
+          "Ciblage local + exclusions + messages par produit.",
+          "Tracking + itérations CRO pour améliorer la qualité."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir les preuves", "href": "/preuves/", "variant": "light" },
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" }
+      ]
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "linkMode": "cross",
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Les leviers les plus rentables pour une agence d’assurance."
+      },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"] }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Plan d’action par offre d’entrée et par zone.",
+        "text": "On définit l’offre prioritaire, la zone, la page d’entrée et le tracking, puis on choisit le canal prioritaire (SEO/Ads)."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "execution",
+      "linkMode": "cross",
+      "content": {
+        "eyebrow": "Traitement des leads",
+        "title": "Rappel rapide, qualification, RDV : moins de perte.",
+        "text": "On structure le traitement : scripts, relances, scoring simple et suivi des sources. Option : CRM/workflows pour industrialiser."
+      },
+      "ctas": [
+        { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+      ],
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow de traitement des leads et suivi des sources" } }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "metier.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Chiffrage basé sur une offre d’entrée et un canal prioritaire.",
+        "text": "On commence simple : 1 offre d’entrée, 1 page d’entrée, tracking propre, puis extension si les KPIs sont bons.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    },
+
+    "resourcesGrid": {
+      "id": "ressources",
+      "header": {
+        "badge": "Ressources",
+        "title": "Guides utiles pour générer plus de devis",
+        "subtitle": "Landing, tracking et process : capter l’intention locale et la convertir en RDV."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-3"
+      },
+      "items": { "mode": "byTarget", "limit": 6 },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    }
   }
 }

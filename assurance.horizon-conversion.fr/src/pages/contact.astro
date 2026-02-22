@@ -1,0 +1,439 @@
+---
+// src/pages/contact/methode.astro
+import SiteLayout from "../layouts/SiteLayout.js";
+import FAQ from "../components/FAQ.js";
+import { listMetiers, getMetierBySlug } from "../lib/data.ts";
+
+const seo = {
+  title: "Contact | Diagnostic acquisition assurance (60/95)",
+  description:
+    "Demande de diagnostic : SEO local, Google Ads, CRO, tracking. Réponse rapide avec plan d’action.",
+  canonical: "/contact/"
+};
+
+const phoneDisplay = "06 60 92 10 08";
+const phoneTel = "+33660921008";
+const waLink = "https://wa.me/33660921008";
+
+const metiersIndex = listMetiers();
+
+// options : value = slug (stable), label = title
+const metiersOptions = metiersIndex.map((m) => ({
+  value: m.slug,
+  label: m.title
+}));
+
+// map slug -> offres[]
+const metiersDetails = await Promise.all(metiersIndex.map((m) => getMetierBySlug(m.slug)));
+const offresBySlug = Object.fromEntries(
+  metiersDetails.map((m) => [m.slug, Array.isArray((m as any).offres) ? (m as any).offres : []])
+);
+
+const faq = [
+  {
+    q: "Sous combien de temps vous répondez ?",
+    a: "Réponse sous 24–48h ouvrées avec un plan d’action et les prochaines étapes."
+  },
+  {
+    q: "Vous travaillez avec plusieurs acteurs sur la même zone ?",
+    a: "Non sur un micro-secteur défini : on évite la cannibalisation et on protège votre investissement."
+  },
+  {
+    q: "Quelles infos préparer ?",
+    a: "Offres prioritaires, zone, budget Ads (si existant), objectif leads/mois. L’accès Analytics/Ads est optionnel."
+  },
+  {
+    q: "Est-ce que vous faites aussi le suivi des leads (relances, RDV) ?",
+    a: "Oui en option : scripts d’appel, relances, prise de RDV et automatisations (CRM/workflows) pour réduire la perte."
+  },
+  {
+    q: "Comment évitez-vous les demandes hors zone ou non qualifiées ?",
+    a: "Ciblage géographique + exclusions + messages clairs + formulaire pré-qualifiant + call tracking si nécessaire."
+  },
+  {
+    q: "Je dois choisir SEO ou Google Ads ?",
+    a: "Ads pour du volume immédiat, SEO local pour stabiliser le coût. On priorise selon votre besoin et votre contexte."
+  }
+];
+---
+<SiteLayout
+    seo={seo}
+    schema={{ faq }}
+>
+
+  <!-- Page Title ============================================= -->
+  <section class="page-title bg-transparent border-0">
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+
+        <div class="page-title-content" style="max-width: 650px;">
+          <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">
+            Diagnostic acquisition Assurance (60/95)
+          </p>
+          <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem; line-height: 1.5;">
+            Parlez-nous de votre métier.<br />On vous rend un plan d’action.
+          </h1>
+
+          <p class="fs-5 mb-5">
+            Objectif : générer des demandes de devis & RDV qualifiés (agences, courtiers, mutuelles),
+            avec SEO local, Ads, CRO et tracking propre.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#contact-form" data-scrollto="#contact-form" class="button button-large button-rounded ls-1 button-reveal py-3 px-5 m-0">
+              <i class="bi-arrow-right"></i><span>Demander un diagnostic</span>
+            </a>
+            <a href={waLink} class="button button-large button-rounded button-dark button-border border-width-1 ls-0 fw-medium m-0" data-track="click_whatsapp">
+              <i class="fa-brands fa-whatsapp"></i><span>WhatsApp {phoneDisplay}</span>
+            </a>
+          </div>
+        </div>
+
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&#62;';">
+            <li class="breadcrumb-item"><a href="#"><i class="uil uil-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="#">Templates</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Page Titles</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+
+      <div id="contact-form" class="section dark text-center mt-0" style="background-color: #021b4c">
+        <div class="container">
+          <img src="/assets/images/dotted-bg.svg" alt="" class="position-absolute pos-x-end icon-flip-horizontal" style="top: -30px">
+          <p class="mb-4 text-uppercase fw-normal color text-smaller ls-2 op-08">Contact</p>
+          <h2 class="mb-4 h1">Demande de diagnostic</h2>
+          <p class="mb-5 mt-4 op-07">
+            Dites-nous votre métier, vos offres prioritaires et votre objectif.
+            On revient vers vous avec un plan d’action concret (pages + acquisition + tracking).
+          </p>
+          <div class="form-widget">
+
+            <div class="form-result"></div>
+
+            <form class="row not-dark mb-0" id="template-contactform" name="template-contactform" action="/assets/include/form.php" method="post">
+
+              <div class="form-process">
+                <div class="css3-spinner">
+                  <div class="css3-spinner-scaler"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-name">Nom / Société <small>*</small></label>
+                <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="required form-control">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-service">Métier</label>
+                <select
+                    id="template-contactform-service"
+                    name="template-contactform-service"
+                    class="form-select"
+                    data-offres-map={JSON.stringify(offresBySlug)}
+                >
+                  <option value="">— Choisir —</option>
+                  {metiersOptions.map((m) => (
+                      <option value={m.value}>{m.label}</option>
+                  ))}
+                  <option value="Autre">Autre</option>
+                </select>
+
+                <!-- slug stable -->
+                <input type="hidden" id="metier_slug" name="metier_slug" value="" />
+                <!-- optionnel : label lisible -->
+                <input type="hidden" id="metier_label" name="metier_label" value="" />
+              </div>
+
+              <div class="w-100"></div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-email">Email <small>*</small></label>
+                <input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email form-control">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-phone">Téléphone <small>*</small></label>
+                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="required form-control">
+              </div>
+
+              <div class="w-100"></div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-offers">
+                  Offres prioritaires <small class="op-07">(suggestions selon métier)</small>
+                </label>
+                <input
+                    type="text"
+                    id="template-contactform-offers"
+                    name="template-contactform-offers"
+                    class="form-control"
+                    list="offers-suggestions"
+                    placeholder="ex: assurance auto, mutuelle santé…"
+                />
+                <datalist id="offers-suggestions"></datalist>
+
+                <small class="d-block mt-2 op-07">
+                  Astuce : sépare par virgules (ex: "assurance auto, habitation").
+                </small>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label class="text-white" for="template-contactform-budget">Budget Ads (si existant)</label>
+                <input type="text" placeholder="ex: 500€/mois" id="template-contactform-budget" name="template-contactform-budget" value="" class="form-control">
+              </div>
+
+              <div class="w-100"></div>
+
+              <div class="col-12 form-group">
+                <label class="text-white" for="template-contactform-message">Contexte & objectif <small>*</small></label>
+                <textarea class="required form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
+              </div>
+
+              <div class="col-12 form-group d-none">
+                <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control">
+              </div>
+
+              <input type="hidden" name="utm_source" />
+              <input type="hidden" name="utm_medium" />
+              <input type="hidden" name="utm_campaign" />
+              <input type="hidden" name="utm_content" />
+              <input type="hidden" name="utm_term" />
+              <input type="hidden" name="page_path" />
+
+              <div class="col-12 form-group">
+                <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+
+                <script src="https://www.google.com/recaptcha/api.js?render=6LeL4HsUAAAAAP-TtLxY0OHX0ykl9p_mAvslYWJM"></script>
+                <script>
+                  grecaptcha.ready(function() {
+                    grecaptcha.execute('6LeL4HsUAAAAAP-TtLxY0OHX0ykl9p_mAvslYWJM', {action: 'contact_page'}).then(function(token) {
+                      // add token value to form
+                      document.getElementById('g-recaptcha-response').value = token;
+                    });
+                  });
+                </script>
+
+              </div>
+
+              <div class="col-12 form-group">
+                <button
+                    class="button button-rounded button-light button-border border-width-1 ls-0 fw-medium me-2"
+                    type="submit"
+                    id="template-contactform-submit"
+                    name="template-contactform-submit"
+                    value="submit"
+                    data-track="form_submit"
+                >
+                  Envoyer
+                </button>
+                <small class="d-block mt-3 text-white op-07">
+                  En envoyant ce formulaire, vous acceptez d’être recontacté. <a class="text-white" href="/politique-confidentialite/"><u>Politique de confidentialité</u></a>.
+                </small>
+              </div>
+
+              <input type="hidden" name="prefix" value="template-contactform-">
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="promo mb-5">
+          <div class="row align-items-center">
+            <div class="col-12 col-lg">
+              <h2 class="h3">
+                Appel direct
+                <span><a id="callLink" href={`tel:${phoneTel}`}>{phoneDisplay}</a></span>
+              </h2>
+              <span>Zone : Sud Oise (60) & Nord Val-d’Oise (95)</span>
+            </div>
+            <div class="col-12 col-lg-auto mt-4 mt-lg-0">
+              <a href="/methode/" class="button button-large button-circle m-0" data-track="click_method">
+                Voir la méthode
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <FAQ items={faq} />
+
+      {/* Tracking events + select métier + suggestions offres (clean) */}
+      <script>
+        {`
+    (function () {
+      function onReady(fn) {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", fn);
+        } else {
+          fn();
+        }
+      }
+
+      function getParams() {
+        var p = new URLSearchParams(window.location.search);
+        return {
+          utm_source: p.get('utm_source') || '',
+          utm_medium: p.get('utm_medium') || '',
+          utm_campaign: p.get('utm_campaign') || '',
+          utm_content: p.get('utm_content') || '',
+          utm_term: p.get('utm_term') || ''
+        };
+      }
+
+      function track(eventName, payload) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: eventName, ...payload });
+      }
+
+      // ✅ Decode HTML entities (ex: &quot;) then JSON.parse
+      function safeParseAttrJson(attrValue) {
+        try {
+          var raw = attrValue || "{}";
+          // decode entities via textarea trick
+          var ta = document.createElement("textarea");
+          ta.innerHTML = raw;
+          var decoded = ta.value;
+
+          return JSON.parse(decoded);
+        } catch (e) {
+          // debug utile
+          console.warn("[contact] data-offres-map JSON parse failed:", e);
+          return {};
+        }
+      }
+
+      function fillHiddenFields(form) {
+        var u = getParams();
+        var set = function(name, val){
+          var el = form.querySelector('input[name="'+name+'"]');
+          if (el) el.value = val;
+        };
+        set('utm_source', u.utm_source);
+        set('utm_medium', u.utm_medium);
+        set('utm_campaign', u.utm_campaign);
+        set('utm_content', u.utm_content);
+        set('utm_term', u.utm_term);
+        set('page_path', window.location.pathname);
+      }
+
+      function setDatalistOptions(listEl, items) {
+        if (!listEl) return;
+        listEl.innerHTML = "";
+        (items || []).forEach(function (txt) {
+          var opt = document.createElement("option");
+          opt.value = txt;
+          listEl.appendChild(opt);
+        });
+      }
+
+      function uniq(arr) {
+        var seen = {};
+        var out = [];
+        (arr || []).forEach(function(x){
+          var k = (x || "").toLowerCase().trim();
+          if (!k || seen[k]) return;
+          seen[k] = true;
+          out.push(x);
+        });
+        return out;
+      }
+
+      onReady(function () {
+        // --- Form tracking + UTM fill
+        var form = document.getElementById('template-contactform');
+        if (form) {
+          fillHiddenFields(form);
+          form.addEventListener('submit', function () {
+            var u = getParams();
+            track('form_submit', {
+              form_id: 'template-contactform',
+              page_path: window.location.pathname,
+              utm_source: u.utm_source,
+              utm_medium: u.utm_medium,
+              utm_campaign: u.utm_campaign
+            });
+          });
+        }
+
+        // --- Call click
+        var call = document.getElementById('callLink');
+        if (call) {
+          call.addEventListener('click', function () {
+            var u = getParams();
+            track('click_call', {
+              page_path: window.location.pathname,
+              utm_source: u.utm_source,
+              utm_medium: u.utm_medium,
+              utm_campaign: u.utm_campaign
+            });
+          });
+        }
+
+        // --- WhatsApp click
+        document.addEventListener('click', function(e){
+          var a = e.target && e.target.closest ? e.target.closest('[data-track="click_whatsapp"]') : null;
+          if (!a) return;
+          var u = getParams();
+          track('click_whatsapp', {
+            page_path: window.location.pathname,
+            utm_source: u.utm_source,
+            utm_medium: u.utm_medium,
+            utm_campaign: u.utm_campaign
+          });
+        });
+
+        // --- Métier (slug) -> hidden + Offres suggestions
+        var select = document.getElementById('template-contactform-service');
+        var hiddenSlug = document.getElementById('metier_slug');
+        var hiddenLabel = document.getElementById('metier_label');
+        var offersInput = document.getElementById('template-contactform-offers');
+        var datalist = document.getElementById('offers-suggestions');
+
+        if (!select) return;
+
+        var offresMap = safeParseAttrJson(select.getAttribute('data-offres-map'));
+
+        function refreshOffers() {
+          var slug = select.value || "";
+          if (hiddenSlug) hiddenSlug.value = slug;
+
+          if (hiddenLabel) {
+            var opt = select.options[select.selectedIndex];
+            hiddenLabel.value = opt ? (opt.text || "") : "";
+          }
+
+          var offers = (slug && offresMap[slug]) ? offresMap[slug] : [];
+          offers = uniq(offers);
+
+          setDatalistOptions(datalist, offers);
+
+          // Pré-remplissage optionnel si vide
+          if (offersInput && (!offersInput.value || !offersInput.value.trim()) && offers.length) {
+            offersInput.value = offers.slice(0, 2).join(", ");
+          }
+
+          // Debug (tu peux laisser en dev)
+          // console.log("[contact] slug:", slug, "offers:", offers, "mapHas:", !!offresMap[slug]);
+        }
+
+        select.addEventListener('change', refreshOffers);
+        refreshOffers();
+      });
+    })();
+  `}
+      </script>
+
+    </div>
+  </section><!-- #content end -->
+</SiteLayout>

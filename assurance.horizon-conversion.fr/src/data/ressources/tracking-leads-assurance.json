@@ -1,0 +1,68 @@
+{
+  "id": "res_tracking_leads",
+  "slug": "tracking-leads-assurance",
+  "meta": {
+    "title": "Tracking leads assurance : attribuer appels & formulaires | 60/95",
+    "description": "Guide simple : UTM, events, call tracking et dashboard pour attribuer les leads et piloter le CPL.",
+    "robots": "index,follow",
+    "canonical": "/ressources/tracking-leads-assurance/"
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource",
+    "titleHtml": "Tracking leads assurance :<br />attribuer appels & formulaires.",
+    "subtitle": "UTM + events + call tracking : mesurer, décider, scaler ce qui marche.",
+    "ctas": [
+      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir la prestation Tracking", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Faut-il un call tracking ?", "a": "Recommandé si le téléphone est un canal majeur. Sinon, events formulaires + UTMs minimum." },
+      { "q": "Que doit contenir un dashboard ?", "a": "Leads par source/campagne/offre, CPL, conversion et (si possible) éligibilité." }
+    ]
+  },
+
+  "contentHtml": "<h2>Objectif</h2><p>Attribuer chaque lead (appel/formulaire) à une source et prendre des décisions.</p><h2>Checklist</h2><ul><li>Convention UTM</li><li>Events formulaires</li><li>Call tracking (option)</li><li>Dashboard simple</li></ul><h2>À relier à la méthode</h2><p>Sans mesure fiable, impossible d’optimiser CPL, conversion et leads éligibles.</p>",
+
+  "related": {
+    "items": [
+      { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution" },
+      { "href": "/methode/", "label": "Méthode" },
+      { "href": "/tarifs/", "label": "Tarifs" }
+    ]
+  },
+
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation conversion" },
+        { "href": "/methode/", "label": "Méthode", "anchor": "méthode SEO + Ads + CRO" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/landing-assurance-qui-convertit/", "label": "Landing assurance qui convertit", "anchor": "landing assurance qui convertit" }
+      ]
+    }
+  },
+
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ]
+  }
+}

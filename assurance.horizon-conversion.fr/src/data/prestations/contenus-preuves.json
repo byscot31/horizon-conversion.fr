@@ -6,6 +6,7 @@
   "meta": {
     "title": "Contenus assurance qui convertissent | Preuves, FAQ, pages offres",
     "description": "Pages offres locales + preuves (avis, cas, chiffres) : augmentez la confiance et la conversion.",
+    "robots": "index,follow",
     "canonical": "/prestations/contenus-preuves/"
   },
   "promise": "Rassurer vite et convertir : preuve + réponses aux objections + CTA clairs.",
@@ -19,5 +20,161 @@
     "Pages offres (1 à 6 selon plan)",
     "FAQ locale utile (zones + cas fréquents)"
   ],
-  "cta": { "primary": { "label": "Créer mes pages offres", "href": "/contact/" } }
+  "cta": { "primary": { "label": "Créer mes pages offres", "href": "/contact/" } },
+
+  "faq": [
+    {
+      "q": "Pourquoi des contenus “preuves” en assurance ?",
+      "a": "Parce que la confiance fait la conversion : preuves, objections et FAQ réduisent l’hésitation et augmentent les demandes de devis/RDV."
+    },
+    {
+      "q": "Qu’est-ce qu’une “page offre” qui convertit ?",
+      "a": "Une page structurée : promesse, preuve (avis/chiffres/cas), objections, FAQ, CTA clairs et formulaire pré-qualifiant."
+    },
+    {
+      "q": "Est-ce utile même avec Google Ads ?",
+      "a": "Oui : une landing avec preuve et FAQ baisse la friction, augmente le taux de conversion et améliore le CPL effectif."
+    },
+    {
+      "q": "Combien de pages faut-il créer ?",
+      "a": "On démarre avec 1–2 offres d’entrée, puis on duplique si les KPIs sont bons (conversion, éligibilité, CPL)."
+    },
+    {
+      "q": "Vous intégrez le schema FAQ ?",
+      "a": "Oui : FAQ utile + schema (si pertinent), et maillage interne pour renforcer les pages transactionnelles."
+    }
+  ],
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Contenus & preuves",
+    "titleHtml": "Rassurer vite,<br />convertir mieux.",
+    "subtitle": "Pages offres + preuves + FAQ : baisse de friction, meilleure conversion, et message plus clair pour Ads/SEO.",
+    "ctas": [
+      { "label": "Créer mes pages offres", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "Cible : agences, courtiers, mutuelles — Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "Contenus & preuves : pages offres, objections, FAQ et conversion"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Preuve",
+        "title": "Preuves + objections + FAQ : le trio qui convertit.",
+        "text": "On structure des pages qui répondent aux doutes : preuve, objections, FAQ utile et CTA. Objectif : plus de demandes de devis/RDV à trafic égal.",
+        "bullets": [
+          "Pages offres orientées conversion (promesse, preuve, CTA).",
+          "Pages preuves (avis, cas, chiffres, process).",
+          "FAQ utile + schémas + maillage interne."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir les preuves", "href": "/preuves/", "variant": "light" },
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" }
+      ]
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "linkMode": "cross",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Preuves adaptées par métier : objections, promesses et CTA alignés sur l’offre d’entrée et le niveau de confiance.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "On définit les preuves et la structure avant d’écrire.",
+        "text": "Offre d’entrée, objections à traiter, preuves disponibles, FAQ utile, CTA et formulaire : tu repars avec un plan de contenus actionnable."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "conversion",
+      "content": {
+        "eyebrow": "Conversion",
+        "title": "Plus de conversion sans augmenter le budget.",
+        "text": "Preuve et clarté réduisent la friction. On optimise aussi le formulaire (pré-qualification) pour améliorer la qualité des leads."
+      },
+      "ctas": [
+        { "label": "Voir CRO", "prestaSlug": "cro", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+      ],
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Conversion : preuve, CTA, formulaire pré-qualifiant" } }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "prestation.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Diagnostic → setup → pilotage.",
+        "text": "Tarifs HT, priorisés ROI : démarrer par une offre d’entrée, une page de conversion et des preuves, puis dupliquer.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    },
+
+    "resourcesGrid": {
+      "id": "ressources",
+      "header": {
+        "badge": "Ressources",
+        "title": "Guides contenus : rassurer vite et convertir mieux",
+        "subtitle": "Preuves, FAQ, objections : réduire l’hésitation et augmenter devis/RDV."
+      },
+      "headerCross": {
+        "badge": "Ressources",
+        "title": "Guides preuves & contenus pour {metierLabel}",
+        "subtitle": "Rassurer vite : preuves, FAQ et objections pour convertir davantage en devis/RDV."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-3"
+      },
+      "items": { "mode": "byTarget", "limit": 3 },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    }
+  }
 }

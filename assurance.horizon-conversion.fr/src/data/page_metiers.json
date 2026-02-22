@@ -1,0 +1,214 @@
+{
+  "key": "page:metiers",
+
+  "seo": {
+    "canonical": "/metiers/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "commercial",
+      "secondary": ["transactionnel", "informationnel"],
+      "stage": "consideration",
+      "microConversions": ["diagnostic", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "positioning": "local-sans-pages-villes"
+    },
+    "audience": {
+      "segments": [
+        { "id": "agences", "label": "Agences d’assurance", "priority": 1 },
+        { "id": "courtiers", "label": "Courtiers en assurance", "priority": 1 },
+        { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
+      ],
+      "painPoints": [
+        "Trafic sans demandes de devis",
+        "Leads non qualifiés",
+        "CPL instable",
+        "Attribution floue (appels, formulaires, campagnes)"
+      ],
+      "desiredOutcomes": [
+        "Pages métiers orientées conversion",
+        "Acquisition locale (SEO/Ads) priorisée ROI",
+        "Mesure fiable des sources",
+        "Plus de demandes de devis & RDV qualifiés"
+      ]
+    },
+    "kw": {
+      "primary": "génération de leads assurance par métier",
+      "secondary": [
+        "leads agence assurance",
+        "leads courtier assurance",
+        "leads mutuelle locale",
+        "leads assurance emprunteur",
+        "leads assurance pro",
+        "leads assurance vie patrimoine"
+      ],
+      "supporting": [
+        "pages métiers assurance",
+        "acquisition locale assurance",
+        "landing page assurance",
+        "conversion devis assurance",
+        "tracking leads assurance"
+      ],
+      "entities": [
+        "assurance",
+        "agence d’assurance",
+        "courtier",
+        "mutuelle",
+        "assurance emprunteur",
+        "assurance pro",
+        "assurance vie",
+        "patrimoine"
+      ]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking",
+      "hub": "hub métiers"
+    },
+    "internalLinks": [
+      { "href": "/methode/", "anchor": "méthode" },
+      { "href": "/preuves/", "anchor": "preuves" },
+      { "href": "/tarifs/", "anchor": "tarifs" },
+      { "href": "/contact/", "anchor": "diagnostic" },
+      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
+      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
+      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" }
+    ]
+  },
+
+  "seoTemplates": {
+    "title": "Métiers {brand} | {tokens.offer} ({geo.core})",
+    "description": "Hub métiers pour générer {tokens.offer} sur {geo.core}. {tokens.method} avec {tokens.system}. Objectif : {tokens.goal}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      {
+        "q": "Pourquoi une page par métier ?",
+        "a": "Parce que les intentions, objections et preuves diffèrent selon agences, courtiers et mutuelles. Une page métier améliore la conversion vers devis/RDV."
+      },
+      {
+        "q": "Quels métiers sont couverts ?",
+        "a": "Agences d’assurance, courtiers, mutuelles locales, assurance emprunteur, assurance pro, assurance vie & patrimoine."
+      },
+      {
+        "q": "Quelle est la prochaine étape ?",
+        "a": "Un diagnostic pour cadrer l’offre d’entrée, la zone, le tracking et le canal prioritaire (SEO/Ads)."
+      },
+      {
+        "q": "SEO local ou Ads en premier ?",
+        "a": "Ads pour lancer vite, SEO local pour stabiliser. Le choix dépend du délai, du budget et de la concurrence."
+      },
+      {
+        "q": "Comment éviter les leads non qualifiés ?",
+        "a": "Par ciblage offre/zone, pages orientées conversion, formulaires pré-qualifiants, call tracking et pilotage sur leads éligibles."
+      }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "{tokens.hub}",
+    "titleHtml": "Choisir votre métier,<br />et générer {tokens.offer}.",
+    "subtitle": "{tokens.method}. Objectif : {tokens.goal}.",
+    "ctas": [
+      { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "{geo.core} — {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label}"
+  },
+
+  "sections": {
+    "metiersGrid": {
+      "id": "metiers",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Chaque page métier cadre l’offre d’entrée, répond aux objections et guide vers {tokens.goal}.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Les leviers à activer selon le métier."
+      },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"] }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Plan d’action par métier, priorisé ROI.",
+        "text": "Offre d’entrée, zone, tracking, page(s) à créer, canal prioritaire (SEO/Ads) et ordre d’exécution."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "support",
+      "content": {
+        "eyebrow": "Traitement des leads",
+        "title": "Moins de perte : rappel rapide, qualification, RDV.",
+        "text": "On structure le traitement : scripts, relances, scoring simple et suivi des sources. Option : CRM/workflows."
+      },
+      "ctas": [
+        { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+      ],
+      "media": {
+        "img": {
+          "src": "/assets/images/app.svg",
+          "alt": "Workflow et dashboard : suivi des leads par source et qualification"
+        }
+      }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Méthode",
+        "title": "La méthode complète : {tokens.method}.",
+        "text": "{tokens.system}. Objectif : {tokens.goal}.",
+        "cta": { "label": "Voir la méthode", "href": "/methode/", "variant": "dark" }
+      }
+    }
+  }
+}

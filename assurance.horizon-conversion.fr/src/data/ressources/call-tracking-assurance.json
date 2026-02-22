@@ -1,0 +1,56 @@
+{
+  "id": "res_call_tracking",
+  "slug": "call-tracking-assurance",
+  "meta": {
+    "title": "Call tracking assurance : mesurer les appels et piloter le CPL | 60/95",
+    "description": "Guide call tracking : mesurer les appels, attribuer les sources, réduire le bruit et piloter CPL et qualité des leads.",
+    "robots": "index,follow",
+    "canonical": "/ressources/call-tracking-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Tracking)",
+    "titleHtml": "Call tracking assurance :<br />mesurer les appels.",
+    "subtitle": "Attribuer les appels aux campagnes et piloter CPL, conversion et leads éligibles.",
+    "ctas": [
+      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir Tracking & attribution", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Quand le call tracking est-il utile ?", "a": "Quand une part significative des leads arrive par téléphone ou quand Ads/SEO génèrent des appels." },
+      { "q": "Peut-on mesurer la qualité des appels ?", "a": "Oui via qualification et catégorisation (éligible/non, motif, offre, zone) dans un suivi simple." }
+    ]
+  },
+  "contentHtml": "<h2>Objectif</h2><p>Attribuer les appels à une source/campagne et piloter au réel.</p><h2>Setup minimal</h2><ul><li>Numéro tracké (campagne / canal)</li><li>Consolidation appels + formulaires</li><li>Tag “éligible/non” après appel</li></ul><h2>À éviter</h2><ul><li>Pas de qualification → données inutiles</li><li>Pas de convention UTM → attribution partielle</li><li>Pas de process rappel → perte de leads</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
+        { "href": "/preuves/", "label": "Preuves", "anchor": "preuves" },
+        { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance", "anchor": "UTM assurance" },
+        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel <10 min", "anchor": "process rappel leads" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

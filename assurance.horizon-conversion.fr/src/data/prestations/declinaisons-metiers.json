@@ -1,63 +1,149 @@
 {
-  "version": "1.0",
+  "version": "1.1",
+  "defaults": {
+    "localBoost": {
+      "enabled": true,
+      "extraPatterns": ["{presta} {metier} {ville}", "agence {metier} {ville}"]
+    }
+  },
   "matrix": [
     {
       "metierId": "metier_agence_assurance",
       "prestations": [
-        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages offres locales + GBP + maillage", "cta": "Audit SEO local" },
-        { "prestaId": "presta_ads_local", "priority": 2, "angle": "campagnes offres (auto/habitation/santé) + call tracking", "cta": "Lancer Ads" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "landing & formulaires pré-qualifiants", "cta": "Optimiser conversion" }
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 1,
+          "angle": "pages offres locales + GBP + maillage",
+          "cta": "Audit SEO local"
+        },
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 2,
+          "angle": "campagnes offres (auto/habitation/santé) + call tracking",
+          "cta": "Lancer Ads"
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "landing & formulaires pré-qualifiants",
+          "cta": "Optimiser conversion"
+        }
       ]
     },
     {
       "metierId": "metier_courtier_assurance",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "tunnels par offre (emprunteur/pro/santé)", "cta": "Générer des RDV" },
-        { "prestaId": "presta_tracking_attribution", "priority": 2, "angle": "attribuer appels & formulaires au bon canal", "cta": "Mettre le tracking" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "qualif + prise de RDV", "cta": "Augmenter le taux RDV" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "tunnels par offre (emprunteur/pro/santé)",
+          "cta": "Générer des RDV"
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 2,
+          "angle": "attribuer appels & formulaires au bon canal",
+          "cta": "Mettre le tracking"
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "qualif + prise de RDV",
+          "cta": "Augmenter le taux RDV"
+        }
       ]
     },
     {
       "metierId": "metier_mutuelle_sante",
       "prestations": [
-        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages profils (senior/famille/TNS) + local", "cta": "Plan SEO" },
-        { "prestaId": "presta_content_proof", "priority": 2, "angle": "preuves + FAQ remboursements/attentes", "cta": "Créer contenus" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "dossier complet via formulaire", "cta": "Optimiser formulaire" }
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 1,
+          "angle": "pages profils (senior/famille/TNS) + local",
+          "cta": "Plan SEO"
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 2,
+          "angle": "preuves + FAQ remboursements/attentes",
+          "cta": "Créer contenus"
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "dossier complet via formulaire",
+          "cta": "Optimiser formulaire"
+        }
       ]
     },
     {
       "metierId": "metier_assurance_emprunteur",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "substitution + économies + équivalence", "cta": "Démarrer Ads" },
-        { "prestaId": "presta_cro", "priority": 2, "angle": "pré-qualification (montant/date/assureur)", "cta": "Qualifier mieux" },
-        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "mesurer coût par dossier éligible", "cta": "Attribuer ROI" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "substitution + économies + équivalence",
+          "cta": "Démarrer Ads"
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 2,
+          "angle": "pré-qualification (montant/date/assureur)",
+          "cta": "Qualifier mieux"
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 3,
+          "angle": "mesurer coût par dossier éligible",
+          "cta": "Attribuer ROI"
+        }
       ]
     },
     {
       "metierId": "metier_assurance_pro",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "offres par activité + urgence décennale", "cta": "Avoir des devis" },
-        { "prestaId": "presta_crm_workflow", "priority": 2, "angle": "rappel <10 min + scripts + RDV", "cta": "Réduire la perte" },
-        { "prestaId": "presta_seo_local", "priority": 3, "angle": "pages par activité (couvreur, élec…)", "cta": "Se positionner local" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "offres par activité + urgence décennale",
+          "cta": "Avoir des devis"
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 2,
+          "angle": "rappel <10 min + scripts + RDV",
+          "cta": "Réduire la perte"
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 3,
+          "angle": "pages par activité (couvreur, élec…)",
+          "cta": "Se positionner local"
+        }
       ]
     },
     {
-      "metierId": "metier_gestion_patrimoine",
+      "metierId": "metier_assurance_vie_patrimoine",
       "prestations": [
-        { "prestaId": "presta_content_proof", "priority": 1, "angle": "preuves + positionnement + cas", "cta": "Renforcer la confiance" },
-        { "prestaId": "presta_seo_local", "priority": 2, "angle": "requêtes bilan patrimonial local", "cta": "Attirer les bons profils" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "filtrage par seuils + prise de RDV", "cta": "Qualifier les demandes" }
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 1,
+          "angle": "preuves + positionnement + cas",
+          "cta": "Renforcer la confiance"
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 2,
+          "angle": "requêtes bilan patrimonial local",
+          "cta": "Attirer les bons profils"
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "filtrage par seuils + prise de RDV",
+          "cta": "Qualifier les demandes"
+        }
       ]
-    },
-    {
-      "prestaId": "presta_ads_local",
-      "priority": 1,
-      "angle": "tunnels par offre (emprunteur/pro/santé)",
-      "cta": "Générer des RDV",
-      "localBoost": {
-        "enabled": true,
-        "extraPatterns": ["{presta} {metier} {ville}", "agence {metier} {ville}"]
-      }
     }
   ]
 }

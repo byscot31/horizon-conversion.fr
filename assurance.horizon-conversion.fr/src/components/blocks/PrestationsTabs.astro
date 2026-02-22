@@ -1,0 +1,93 @@
+---
+// src/components/blocks/PrestationsTabs.astro
+const { data, prestations = [] } = Astro.props as {
+  data: any;
+  prestations: any[];
+  };
+
+const id = data?.id;
+const content = data?.content;
+const cta = data?.cta;
+const itemCta = data?.itemCta;
+
+const slugs: string[] = data?.items?.slugs ?? [];
+const items = slugs.map((slug) => prestations.find((p) => p.slug === slug)).filter(Boolean);
+
+const linkMode: "prestation" | "cross" = data?.linkMode ?? "prestation";
+const metierSlug: string | undefined = data?.metierSlug;
+
+const itemCtaLabel: string | undefined = data?.itemCta?.label;
+
+const hrefFor = (prestaSlug: string) => {
+  if (linkMode === "cross" && metierSlug) return `/prestations/${prestaSlug}/${metierSlug}/`;
+  return `/prestations/${prestaSlug}/`;
+};
+---
+
+<div class="section my-0 mb-lg-5 pt-0 pt-lg-5" style="background: linear-gradient(0deg, #FFF 78%, #FFF 78%);">
+  <div class="container">
+    <div class="row ins-categories justify-content-around align-items-center mt-lg-4 gy-4" id={id}>
+
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        {content?.eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{content.eyebrow}</p>}
+        {content?.title && <h2 class="mb-5 h2 lh-sm">{content.title}</h2>}
+
+        <div class="nav flex-lg-column" id="side-tab" role="tablist" aria-orientation="vertical">
+          {items.map((p: any, idx: number) => (
+              <a
+                  class={`nav-link ${idx === 0 ? "active" : ""}`}
+                  id={`${p.slug}-tab`}
+                  data-bs-toggle="pill"
+                  href={`#${p.slug}`}
+                  role="tab"
+                  aria-controls={p.slug}
+                  aria-selected={idx === 0 ? "true" : "false"}
+              >
+                <div class="tab-header d-flex align-items-center">
+                  <img src="/assets/images/icons/online.svg" alt="" />
+                  <span>{p.shortLabel ?? p.label}</span>
+                </div>
+                <div class="tab-desc mt-2">
+                  <p class="mb-0 lh-base">{p.promise ?? p.meta?.description}</p>
+                </div>
+              </a>
+          ))}
+        </div>
+
+        {cta?.href && cta?.label && (
+            <div class="mt-4">
+              <a href={cta.href} class="button button-rounded button-light button-border border-width-1 ls-0 fw-medium">
+                {cta.label}
+              </a>
+            </div>
+        )}
+      </div>
+
+      <div class="col-lg-6">
+        <div class="tab-content" id="insurance-tabContent">
+          {prestations.map((p, idx) => (
+              <div
+                  class={`tab-pane fade ${idx === 0 ? "show active" : ""}`}
+                  id={p.slug}
+                  role="tabpanel"
+                  aria-labelledby={`${p.slug}-tab`}
+              >
+                <div class="d-flex flex-column mw-sm mx-auto align-items-center text-center">
+                  <img src="/assets/images/services/home.svg" alt="" class="mb-5" width="440" />
+                  <h3 class="h1 mb-3">{p.label}</h3>
+                  <p>{p.meta?.description}</p>
+
+                  {itemCtaLabel && (
+                      <a href={hrefFor(p.slug)} class="btn btn-link">
+                        <u>{itemCtaLabel}</u> <i class="ph-arrow-right position-relative" style="top:2px"></i>
+                      </a>
+                  )}
+                </div>
+              </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

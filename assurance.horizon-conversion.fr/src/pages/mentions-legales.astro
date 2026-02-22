@@ -1,0 +1,99 @@
+---
+// src/pages/mentions-legales.astro
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const seo = {
+  title: "Mentions légales | Assurance Horizon Conversion",
+  description: "Mentions légales du site assurance.horizon-conversion.fr",
+  canonical: "/mentions-legales/"
+};
+
+// Données à compléter (ne pas inventer l’adresse/email si tu ne veux pas les publier)
+const company = {
+  brand: "Horizon Conversion",
+  ownerName: "DA COSTA FRANCOIS",
+  legalForm: "Entrepreneur individuel (EI)",
+  siret: "810 922 641 00024",
+  email: "contact@horizon-conversion.fr",
+  director: "DA COSTA FRANCOIS",
+  host: "Scaleway",
+  hostAddress: "8 rue de la Ville l'Evêque 75008 Paris"
+};
+
+// Source interne (pour toi) : pappers.fr/entreprise/da-costa-francois-810922641
+---
+
+<SiteLayout seo={seo}>
+  <!-- Page Title ============================================= -->
+  <section class="page-title bg-transparent border-0">
+    <div class="container">
+      <div class="page-title-row pt-5 pb-3">
+        <div class="page-title-content" style="max-width: 780px;">
+          <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">Informations légales</p>
+          <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem; line-height: 1.2;">
+            Mentions légales
+          </h1>
+          <p class="fs-5 mb-0">
+            Les informations ci-dessous concernent le site <strong>assurance.horizon-conversion.fr</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section><!-- .page-title end -->
+
+  <!-- Content ============================================= -->
+  <section id="content">
+    <div class="content-wrap py-0">
+
+      <div class="section bg-transparent my-0">
+        <div class="container">
+
+          <h2>Éditeur du site</h2>
+          <ul class="iconlist">
+            <li class="d-block"><strong>Marque :</strong> {company.brand}</li>
+            <li class="d-block"><strong>Propriétaire :</strong> {company.ownerName}</li>
+            <li class="d-block"><strong>Forme juridique :</strong> {company.legalForm}</li>
+            <li class="d-block"><strong>SIRET / Identifiant :</strong> {company.siret}</li>
+            <li class="d-block"><strong>Email :</strong> {company.email}</li>
+            <li class="d-block"><strong>Directeur de publication :</strong> {company.director}</li>
+          </ul>
+
+          <hr class="my-5" />
+
+          <h2>Hébergement</h2>
+          <ul class="iconlist">
+            <li class="d-block"><strong>Hébergeur :</strong> {company.host}</li>
+            <li class="d-block"><strong>Adresse :</strong> {company.hostAddress}</li>
+          </ul>
+
+          <hr class="my-5" />
+
+          <h2>Propriété intellectuelle</h2>
+          <p>
+            L’ensemble des contenus présents sur ce site (textes, éléments graphiques, logos, marques)
+            est protégé par le droit de la propriété intellectuelle. Toute reproduction, représentation,
+            modification ou diffusion, totale ou partielle, sans autorisation préalable est interdite.
+          </p>
+
+          <hr class="my-5" />
+
+          <h2>Responsabilité</h2>
+          <p>
+            Les informations publiées sont fournies à titre indicatif. Malgré le soin apporté à leur
+            mise à jour, l’éditeur ne saurait être tenu responsable d’erreurs ou d’omissions, ni d’un
+            usage qui pourrait être fait des informations.
+          </p>
+
+          <hr class="my-5" />
+
+          <h2>Contact</h2>
+          <p>
+            Pour toute demande : <a href="/contact/"><u>page contact</u></a>.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #content end -->
+</SiteLayout>

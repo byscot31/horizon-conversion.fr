@@ -1,0 +1,48 @@
+---
+// src/components/blocks/MetiersGrid.astro
+const { data, metiers = [] } = Astro.props as {
+  data: any;
+  metiers: Array<{ slug: string; label: string; cardTeaser?: string }>;
+};
+
+const slugs: string[] = data?.items?.slugs ?? [];
+const items = slugs.map((s) => metiers.find((m) => m.slug === s)).filter(Boolean);
+
+const card = data?.card ?? {};
+const icon = card?.icon ?? {};
+const defaultText = card?.text;
+const cardCta = card?.cta ?? {};
+
+const linkMode: "metier" | "cross" = data?.linkMode ?? "metier";
+const prestaSlug: string | undefined = data?.prestaSlug;
+const hrefFor = (metierSlug: string) => {
+  if (linkMode === "cross" && prestaSlug) return `/prestations/${prestaSlug}/${metierSlug}/`;
+  return `/metiers/${metierSlug}/`;
+};
+---
+
+<div class="row align-items-stretch grid-border border-top border-bottom border-f5" id={data?.id}>
+  {items.map((m: any, idx: number) => (
+      <div class={`col-lg-4 col-sm-6 col-padding ${idx % 2 === 1 ? "bg-light" : ""}`}>
+        <div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+          <div class="fbox-icon mb-4">
+            {icon?.src && <img src={icon.src} alt={icon.alt ?? ""} />}
+          </div>
+
+          <div class="fbox-content">
+            <h3 class="text-transform-none ls-0 font-primary mb-3">{m.label}</h3>
+
+            {(m.cardTeaser || defaultText) && (
+                <p class="text-dark op-06">{m.cardTeaser ?? defaultText}</p>
+            )}
+
+            {cardCta?.label && (
+                <a href={hrefFor(m.slug)} class="btn btn-link p-0">
+                  <u>{cardCta.label}</u>
+                </a>
+            )}
+          </div>
+        </div>
+      </div>
+  ))}
+</div>

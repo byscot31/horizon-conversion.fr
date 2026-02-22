@@ -1,0 +1,56 @@
+{
+  "id": "res_ads_negatifs",
+  "slug": "mots-cles-negatifs-google-ads-assurance",
+  "meta": {
+    "title": "Mots-clés négatifs Ads assurance : filtrer et baisser le CPL | 60/95",
+    "description": "Méthode mots-clés négatifs : filtrer trafic hors cible et réduire le CPL effectif sur Google Ads assurance.",
+    "robots": "index,follow",
+    "canonical": "/ressources/mots-cles-negatifs-google-ads-assurance/"
+  },
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressource (Ads)",
+    "titleHtml": "Mots-clés négatifs :<br />baisser le CPL.",
+    "subtitle": "Filtrer les requêtes hors cible et améliorer la qualité des leads Ads assurance.",
+    "ctas": [
+      { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir Ads local", "href": "/prestations/ads-local/", "icon": "bi-arrow-right", "variant": "secondary" }
+    ],
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "À quoi servent les négatifs ?", "a": "À éviter les requêtes hors cible et réduire le gaspillage budget." },
+      { "q": "On les ajoute quand ?", "a": "Dès le départ (liste de base) puis en continu via rapport termes de recherche." }
+    ]
+  },
+  "contentHtml": "<h2>Objectif</h2><p>Réduire le gaspillage et améliorer la qualité en filtrant les requêtes.</p><h2>Liste de départ</h2><ul><li>Gratuit, emploi, stage</li><li>Définition, avis général</li><li>Résiliation (si hors offre)</li><li>Comparateurs non souhaités</li></ul><h2>Routine</h2><ul><li>Analyse termes de recherche</li><li>Ajout négatifs par thème</li><li>Contrôle zones et extensions</li></ul>",
+  "links": {
+    "outbound": {
+      "id": "liens-utiles",
+      "title": "Aller plus loin",
+      "items": [
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking" },
+        { "href": "/contact/", "label": "Diagnostic Ads", "anchor": "diagnostic Ads" }
+      ]
+    },
+    "related": {
+      "id": "ressources-liees",
+      "title": "Ressources liées",
+      "items": [
+        { "href": "/ressources/structure-google-ads-assurance/", "label": "Structure Google Ads", "anchor": "structure Google Ads" },
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "landing qui convertit" }
+      ]
+    }
+  },
+  "cta": {
+    "enabled": true,
+    "ctas": [
+      { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+---
+// src/components/blocks/FaqToggles.astro
+const { data, faq = [] } = Astro.props as {
+  data: any;
+  faq: Array<{ q: string; a: string }>;
+};
+
+const sidebar = data?.sidebar ?? {};
+const sidebarCta = sidebar?.cta ?? {};
+---
+
+{faq?.length > 0 && (
+<div class="section my-0 mb-lg-5 pt-0 pt-lg-5" id={data?.id} style="background: linear-gradient(0deg, #FFF 78%, #FFF 78%);">
+  <div class="container">
+    <div class="row ins-categories justify-content-around align-items-center mt-lg-4 gy-4">
+
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        {faq.map((it) => (
+            <div class="toggle toggle-bg">
+              <div class="toggle-header rounded-top fw-normal flex-row-reverse">
+                <div class="toggle-icon"><i class="bi-plus-circle"></i></div>
+                <div class="toggle-title">
+                  {data?.qPrefix && <strong class="me-1">{data.qPrefix}</strong>}
+                  {it.q}
+                </div>
+              </div>
+              <div class="toggle-content rounded-bottom">{it.a}</div>
+            </div>
+        ))}
+      </div>
+
+      <div class="col-lg-4">
+        {sidebar?.eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{sidebar.eyebrow}</p>}
+        {sidebar?.title && <h2 class="mb-5 h2 lh-sm">{sidebar.title}</h2>}
+        {sidebar?.text && <p>{sidebar.text}</p>}
+
+        {sidebarCta?.href && sidebarCta?.label && (
+            <div class="mt-4">
+              <a href={sidebarCta.href} class="button button-rounded button-dark button-border border-width-1 ls-0 fw-medium">
+                {sidebarCta.label}
+              </a>
+            </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+</div>
+  )}

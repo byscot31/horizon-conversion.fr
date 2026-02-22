@@ -1,33 +1,68 @@
 {
   "id": "metier_assurance_pro",
   "slug": "assurance-pro",
-  "label": "Assureurs Pro (RC Pro / décennale / multirisque)",
-  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "label": "Assurance pro",
+  "cardTeaser": "Décennale/RC Pro : ciblage niche + formulaire qualifiant pour obtenir des demandes pro éligibles.",
+
+  "offres": ["RC pro", "multirisque pro", "décennale", "flotte", "cyber", "prévoyance dirigeant"],
+
   "meta": {
-    "title": "Leads assurance pro (RC Pro, décennale) | 60/95",
-    "description": "Attirez des demandes pro qualifiées (BTP, artisans, TPE) via SEO local + Ads + landing devis.",
+    "title": "Leads assurance pro (RC Pro, décennale…) | Sud Oise & Nord Val-d’Oise",
+    "description": "Générez des leads assurance pro : intention transactionnelle locale, landing CRO, Ads/SEO, tracking appels/formulaires et qualification.",
     "robots": "index,follow",
     "canonical": "/metiers/assurance-pro/"
   },
+
   "hero": {
-    "h1": "Des leads pro qualifiés (RC Pro, décennale, multirisque)",
-    "sub": "On vise les artisans/TPE locaux avec preuve, offres et pré-qualification (activité, CA, effectif).",
-    "ctaPrimary": { "label": "Obtenir des devis entrants", "href": "/contact/" }
+    "h1": "Générez des leads qualifiés en assurance pro",
+    "sub": "Méthode locale (60/95) : offres pro prioritaires + landing CRO + acquisition + tracking + pilotage.",
+    "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
+    "ctaSecondary": { "label": "Voir la méthode", "href": "/methode/" }
   },
+
+  "positionnement": {
+    "promesse": "Plus de demandes de devis pro éligibles, sur des niches et zones maîtrisées.",
+    "angle": "Offre pro = qualification + preuve + process + attribution."
+  },
+
+  "icp": {
+    "taille": ["cabinet", "agence", "courtier spécialisé"],
+    "maturite": ["Ads coûteuses", "SEO faible", "pas de tracking appels"],
+    "offresPrioritaires": ["décennale", "RC pro", "multirisque pro"]
+  },
+
   "intentionsSEO": [
-    { "cluster": "activité", "queries": ["décennale couvreur Senlis", "rc pro électricien Chantilly", "assurance pro plombier Creil"] },
-    { "cluster": "urgence", "queries": ["décennale rapide Oise", "rc pro immédiate Val-d'Oise"] }
+    { "cluster": "transactionnel", "queries": ["assurance décennale Chantilly", "RC pro Senlis devis", "multirisque pro Creil", "assurance flotte Persan"] },
+    { "cluster": "comparatif", "queries": ["prix RC pro Chantilly", "devis décennale Senlis", "meilleure multirisque pro Creil"] },
+    { "cluster": "local pack", "queries": ["assurance pro près de moi", "décennale autour de Creil", "RC pro ouverte Senlis"] }
   ],
+
   "objections": [
-    { "id": "obj_01", "texte": "Les prospects pro sont difficiles à joindre.", "reponse": "On optimise formulaires + créneaux RDV + rappel immédiat + SMS/email." }
+    { "id": "obj_01", "texte": "La décennale génère des leads hors cible.", "reponse": "On filtre par métier/niche, zone, messages, et formulaire (SIRET, activité, urgence, zone)." },
+    { "id": "obj_02", "texte": "Les prospects pro veulent un devis rapide.", "reponse": "Landing orientée devis + preuve + formulaire court mais qualifiant + rappel rapide." },
+    { "id": "obj_03", "texte": "On ne sait pas ce qui marche.", "reponse": "Tracking appels + formulaires + dashboard : source/campagne/offre, et décisions." }
   ],
+
   "kpis": [
-    { "name": "Taux de contact < 10 min", "target": "maximiser via workflow" },
-    { "name": "Taux devis émis", "target": "hausse via qualification" }
+    { "name": "Leads éligibles", "target": "hausse via qualification" },
+    { "name": "CPL/CPA", "target": "stabilisation puis baisse via CRO + filtres" },
+    { "name": "Taux de conversion", "target": "amélioration via landing" },
+    { "name": "Attribution", "target": "tracking complet" }
   ],
+
+  "livrables": [
+    "Landing assurance pro (niche prioritaire)",
+    "Formulaire qualifiant (activité, statut, zone)",
+    "Tracking complet + dashboard",
+    "Acquisition (Ads/SEO) pilotée KPI"
+  ],
+
   "faq": [
-    { "q": "Vous pouvez cibler par métier (BTP, commerce) ?", "a": "Oui, pages dédiées par activité et annonces adaptées." }
+    { "q": "Peut-on cibler la décennale ?", "a": "Oui : on filtre par métier/activité, zone, urgence, et on optimise sur leads éligibles." },
+    { "q": "Quel canal est prioritaire ?", "a": "Ads pour lancer vite, SEO local pour stabiliser. Le choix dépend budget/délai." },
+    { "q": "Comment suivre l’efficacité ?", "a": "Tracking appels/formulaires + UTMs + reporting : CPL, conversion, éligibilité." }
   ],
+
   "localModules": {
     "enabled": true,
     "zones": { "enabled": true, "limit": 10 },
@@ -38,17 +73,112 @@
       "rotatePatterns": true,
       "maxMin": 8,
       "maxMax": 10,
-      "patterns": [
-        "{metier} {ville}",
-        "devis {offre} {ville}",
-        "{offre} près de moi {ville}",
-        "meilleur {offre} {ville}"
-      ]
+      "patterns": ["assurance {offre} {ville}", "devis {offre} {ville}", "{offre} pro {ville}", "{offre} près de moi {ville}"]
     },
     "faqLocale": { "enabled": true, "limit": 3 }
   },
+
   "internalLinks": {
     "hubMetiers": "/metiers/",
-    "prestationsRecommandees": ["presta_ads_local", "presta_seo_local", "presta_crm_workflow"]
+    "prestationsRecommandees": ["ads-local", "cro", "tracking-attribution", "seo-local"],
+    "pagesAssociees": ["/preuves/", "/methode/", "/tarifs/"]
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance pro : qualification, conversion et pilotage" },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Assurance pro",
+        "title": "Devis pro : ciblage niche + qualification + pilotage.",
+        "text": "On démarre par une niche (décennale/RC pro), une landing CRO et du tracking, puis on active acquisition locale et itérations.",
+        "bullets": [
+          "Formulaire qualifiant (activité, statut, zone).",
+          "Tracking appels/formulaires et optimisation.",
+          "Itérations CRO pour augmenter conversion."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir les preuves", "href": "/preuves/", "variant": "light" },
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" }
+      ]
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "linkMode": "cross",
+      "content": { "eyebrow": "Prestations", "title": "Leviers pour générer des devis pro éligibles." },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Choisir la niche pro prioritaire et cadrer la qualification.",
+        "text": "On fixe niche, zone, landing, tracking et canal prioritaire, puis on étend si KPIs OK."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "process",
+      "linkMode": "cross",
+      "content": {
+        "eyebrow": "Process",
+        "title": "Traitement rapide = plus de conversion.",
+        "text": "Scripts, relances, scoring simple, et option CRM/workflows pour industrialiser."
+      },
+      "ctas": [
+        { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+      ],
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow et dashboard de suivi des leads pro" } }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "metier.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Chiffrage par niche et par canal.",
+        "text": "On chiffre sur une niche prioritaire + landing + tracking + canal, puis duplication si KPIs OK.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    },
+
+    "resourcesGrid": {
+      "id": "ressources",
+      "header": {
+        "badge": "Ressources",
+        "title": "Guides pour obtenir des devis pro éligibles",
+        "subtitle": "Ciblage niche, scripts et relances : convertir vite et limiter les leads hors cible."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-3"
+      },
+      "items": { "mode": "byTarget", "limit": 6 },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    }
   }
 }

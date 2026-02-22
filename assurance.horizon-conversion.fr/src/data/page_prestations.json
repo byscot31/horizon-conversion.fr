@@ -1,0 +1,110 @@
+{
+  "key": "page:prestations",
+
+  "seo": {
+    "canonical": "/prestations/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "commercial",
+      "secondary": ["transactionnel", "informationnel"],
+      "stage": "consideration",
+      "microConversions": ["diagnostic", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux"]
+    },
+    "kw": {
+      "primary": "prestations génération leads assurance",
+      "secondary": [
+        "SEO local assurance",
+        "Google Ads assurance",
+        "CRO assurance",
+        "tracking attribution leads assurance",
+        "CRM workflow leads"
+      ]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking"
+    }
+  },
+
+  "seoTemplates": {
+    "title": "Prestations {brand} | {tokens.offer} ({geo.core})",
+    "description": "Prestations pour générer {tokens.offer} sur {geo.core} : {tokens.method} avec {tokens.system}. Objectif : {tokens.goal}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      { "q": "Quelle prestation choisir en premier ?", "a": "On choisit le canal prioritaire selon délai et concurrence : Ads pour lancer vite, SEO local pour stabiliser, CRO pour améliorer la conversion." },
+      { "q": "Mesurez-vous appels et formulaires ?", "a": "Oui : tracking et attribution (UTMs, événements, call tracking si besoin), puis reporting et décisions." },
+      { "q": "Est-ce adapté aux agences, courtiers et mutuelles ?", "a": "Oui, les pages et le message sont adaptés par métier via les pages dédiées." }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Prestations",
+    "titleHtml": "Activer les bons leviers,<br />dans le bon ordre.",
+    "subtitle": "{tokens.method}. Objectif : {tokens.goal}.",
+    "ctas": [
+      { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "{geo.core}"
+  },
+
+  "sections": {
+    "prestationsTabs": {
+      "id": "prestations",
+      "content": { "eyebrow": "Leviers", "title": "Choisir le canal prioritaire, puis étendre." },
+      "cta": { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"] }
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "items": {
+        "slugs": ["agence-assurance", "courtier-assurance", "mutuelle-sante", "assurance-emprunteur", "assurance-pro", "assurance-vie-patrimoine"]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Chaque métier a ses objections et ses offres d’entrée : on adapte pages et leviers pour convertir en demandes actionnables.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
+      "content": { "eyebrow": "Diagnostic", "title": "Ordre d’exécution + estimation + priorités.", "text": "Offre d’entrée, zone, page de conversion, tracking, canal prioritaire (SEO/Ads)." },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Packs et pilotage.",
+        "text": "Tarifs HT, priorisés ROI : diagnostic → setup → pilotage.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    }
+  }
+}

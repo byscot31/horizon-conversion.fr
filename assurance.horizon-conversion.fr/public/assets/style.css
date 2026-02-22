@@ -20738,12 +20738,6 @@ body:not(.has-plugin-html5video) .video-wrap video {
     line-height: 1.5;
   }
 }
-.page-title-content span {
-  display: block;
-  margin-top: 1rem;
-  color: var(--cnvs-contrast-600);
-  font-size: var(--cnvs-page-title-subtitle-size);
-}
 
 .breadcrumb {
   position: relative;

@@ -1,16 +1,68 @@
 ---
-const { items = [] } = Astro.props; // [{q,a}]
+// src/components/FAQ.astro
+const {
+  items = [],                 // [{q,a}]
+  kicker = "FAQ",
+  title = "Questions fréquentes",
+  subtitle = "On répond aux points qui bloquent le plus souvent avant de démarrer.",
+  ctas = [],                  // [{label, href, variant?:"dark"|"light"}]
+  id = null                   // string (unique) sinon auto
+} = Astro.props;
+
+const uid = id ?? `faqs-${Math.random().toString(36).slice(2, 9)}`;
 ---
+
 {items?.length ? (
-<section>
-  <h2>FAQ</h2>
-  <div>
-    {items.map((it) => (
-        <details>
-          <summary>{it.q}</summary>
-          <p>{it.a}</p>
-        </details>
-    ))}
+<div class="section my-0 py-6">
+  <div class="container">
+
+    <div class="row justify-content-center align-items-center gutter-50">
+      <div class="col-md-5">
+        <p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">{kicker}</p>
+
+        <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">
+          {title}
+        </h2>
+
+        {subtitle ? (
+            <p class="fs-5 mb-5">{subtitle}</p>
+        ) : null}
+
+        {ctas?.length ? (
+            <div class="d-flex flex-wrap gap-2">
+              {ctas.map((c, i) => (
+                  <a
+                      href={c.href}
+                      class={`button button-rounded button-${c.variant === "light" ? "light" : "dark"} button-border border-width-1 ls-0 fw-medium ${i > 0 ? "ms-2" : ""}`}
+                  >
+                    {c.label}
+                  </a>
+              ))}
+            </div>
+        ) : null}
+      </div>
+
+      <div class="col-md-6">
+        <div id={uid} class="faqs">
+          {items.map((it, idx) => (
+              <div class="toggle faq">
+                <div class="toggle-header">
+                  <div class="toggle-icon">
+                    <i class="toggle-closed bi-question-circle"></i>
+                    <i class="toggle-open bi-question-circle"></i>
+                  </div>
+                  <div class="toggle-title">
+                    {it.q}
+                  </div>
+                </div>
+                <div class="toggle-content">{it.a}</div>
+              </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
   </div>
-</section>
+</div>
   ) : null}

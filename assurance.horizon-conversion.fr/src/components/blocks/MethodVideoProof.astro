@@ -1,0 +1,47 @@
+---
+// src/components/blocks/MethodVideoProof.astro
+import CtaButtons from "./CtaButtons.astro";
+
+const { data } = Astro.props as { data: any };
+
+const variant = data?.variant;
+const media = data?.media ?? {};
+const content = data?.content ?? {};
+
+const gradient =
+  variant === "darkSplit"
+    ? "background: linear-gradient(180deg, #FFF 4rem, #021b4c 4rem, #021b4c 100%);"
+    : "";
+---
+
+<div class="section dark pt-0 pb-lg-0" id={data?.id} style={gradient}>
+  <div class="container">
+    <div class="row justify-content-center align-items-lg-center gx-5">
+      <div class="col-lg-7 col-xl-6 col-xxl-5">
+        <a href={media?.href}>
+          {media?.img?.src && <img src={media.img.src} alt={media.img.alt ?? ""} />}
+          {media?.iconClass && <i class={media.iconClass}></i>}
+        </a>
+      </div>
+
+      <div class="col-lg-5 mt-5">
+        <img src="/assets/images/dotted-bg.svg" alt="" class="position-absolute pos-x-end icon-flip-horizontal" style="top: -30px" />
+
+        {content?.eyebrow && <p class="mb-4 text-uppercase fw-normal color text-smaller ls-2 op-08">{content.eyebrow}</p>}
+        {content?.title && <h2 class="mb-4 h1">{content.title}</h2>}
+        {content?.text && <p class="mb-5 mt-4 op-07">{content.text}</p>}
+
+        <dl class="row mb-4">
+          {(content?.bullets ?? []).map((b: string) => (
+              <>
+                <dt class="col-sm-1 op-05"><i class="uil uil-plus"></i></dt>
+                <dd class="col-sm-11 mb-3">{b}</dd>
+              </>
+          ))}
+        </dl>
+
+        <CtaButtons ctas={data?.ctas ?? []} />
+      </div>
+    </div>
+  </div>
+</div>

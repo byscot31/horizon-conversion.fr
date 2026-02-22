@@ -1,24 +1,38 @@
 ---
+// src/pages/prestations/index.astro
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import { listPrestations } from "../../lib/data";
+import Hero from "../../components/blocks/Hero.astro";
+import PrestationsTabs from "../../components/blocks/PrestationsTabs.astro";
+import MetiersGrid from "../../components/blocks/MetiersGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import FaqToggles from "../../components/blocks/FaqToggles.astro";
 
-const prestations = listPrestations();
+import rawPageData from "../../data/page_prestations.json";
+import { hydrateStandardPage } from "../../lib/seoTokens";
+import { getPrestationBySlug, getMetierBySlug } from "../../lib/data.ts";
 
-const seo = {
-  title: "Prestations acquisition assurance | SEO local, Ads, CRO...",
-  description: "SEO local, Google Ads local, CRO, tracking, contenus preuves, CRM & workflows : packagés pour générer des leads.",
-  canonical: "/prestations/"
-};
+const pageData = hydrateStandardPage(rawPageData);
+
+const prestations = await Promise.all(
+  pageData.sections.prestationsTabs.items.slugs.map((s) => getPrestationBySlug(s))
+);
+
+const metiers = await Promise.all(
+  pageData.sections.metiersGrid.items.slugs.map((s) => getMetierBySlug(s))
+);
+
+const faq = pageData.schema?.faq ?? [];
 ---
-<SiteLayout
-    seo={seo}
-    h1="Prestations"
-    intro="Des prestations pensées pour générer des leads (et mesurer le ROI) sur Sud Oise (60) & Nord Val-d’Oise (95)."
-    breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Prestations", href: "/prestations/" }]}
->
-  <ul>
-    {prestations.map((p) => (
-        <li><a href={`/prestations/${p.slug}/`}>{p.title}</a></li>
-    ))}
-  </ul>
+
+<SiteLayout seo={pageData.seo} schema={pageData.schema}>
+  <Hero {...pageData.hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <PrestationsTabs data={pageData.sections.prestationsTabs} prestations={prestations} />
+      <MetiersGrid data={pageData.sections.metiersGrid} metiers={metiers} />
+      <CtaBand data={pageData.sections.ctaBand} />
+      <FaqToggles data={pageData.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
 </SiteLayout>

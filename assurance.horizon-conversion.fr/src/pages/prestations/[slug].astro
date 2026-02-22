@@ -1,64 +1,55 @@
 ---
+// src/pages/prestations/[slug].astro
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import RelatedLinks from "../../components/RelatedLinks.astro";
-import { getPrestationBySlug, listMetiers } from "../../lib/data";
+import Hero from "../../components/blocks/Hero.astro";
+import MethodVideoProof from "../../components/blocks/MethodVideoProof.astro";
+import MetiersGrid from "../../components/blocks/MetiersGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import SupportBand from "../../components/blocks/SupportBand.astro";
+import FaqToggles from "../../components/blocks/FaqToggles.astro";
+import ResourcesGrid from "../../components/blocks/ResourcesGrid.astro";
+
+import prestationsIndex from "../../data/prestations/index.json";
+import ressourcesIndex from "../../data/ressources/index.json";
+import { getPrestationBySlug, getMetierBySlug } from "../../lib/data.ts";
 
 export async function getStaticPaths() {
-  const { listPrestations } = await import("../../lib/data");
-  return listPrestations().map((p) => ({ params: { slug: p.slug } }));
+  const items = (prestationsIndex as any).items as Array<{ slug: string }>;
+  return items.map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
-const presta = await getPrestationBySlug(slug);
 
-const seo = presta.meta;
+const prestation = await getPrestationBySlug(slug);
 
-const metiers = listMetiers();
-const decliLinks = metiers.map((m) => ({
-  label: `${presta.label} pour ${m.title}`,
-  href: `/prestations/${presta.slug}/${m.slug}/`,
-  desc: "Déclinaison métier (angle + objections + CTA)."
-}));
+const rItems = ((ressourcesIndex as any).items ?? []) as any[];
+const ressources = rItems
+  .filter((r) => (r?.targets?.prestations ?? []).includes(prestation.slug))
+  .slice(0, prestation?.sections?.resourcesGrid?.items?.limit ?? 6);
 
-const keyLinks = [
-  { label: "Métiers", href: "/metiers/", desc: "Choisis ton métier et vois les angles de conversion." },
-  { label: "Méthode", href: "/methode/", desc: "Le système complet acquisition + conversion." },
-  { label: "Contact", href: "/contact/", desc: "Diagnostic et plan d’action." }
-];
+const metiers = await Promise.all(
+  (prestation?.sections?.metiersGrid?.items?.slugs ?? []).map((s: string) => getMetierBySlug(s))
+);
+
+const faq = prestation?.faq ?? [];
 ---
-<SiteLayout
-    seo={seo}
-    h1={presta.label}
-    intro={presta.promise}
-    breadcrumbs={[
-      { label: "Accueil", href: "/" },
-      { label: "Prestations", href: "/prestations/" },
-      { label: presta.label, href: `/prestations/${presta.slug}/` }
-    ]}
-    schema={{
-      // includeWebsite: true, // optionnel si ton SiteLayout le met déjà par défaut
-    // includeSearchAction: false, // optionnel
-    service: {
-        name: presta.shortLabel ?? presta.label,
-        description: presta.meta?.description
-      }
-      // faq: [...] // si tu as une FAQ sur cette page
-  }}
->
-  {presta.deliverables?.length ? (
-      <section>
-        <h2>Livrables</h2>
-        <ul>{presta.deliverables.map((d) => <li>{d}</li>)}</ul>
-      </section>
-  ) : null}
 
-  {presta.kpis?.length ? (
-      <section>
-        <h2>KPIs pilotés</h2>
-        <ul>{presta.kpis.map((k) => <li>{k}</li>)}</ul>
-      </section>
-  ) : null}
+<SiteLayout seo={prestation.meta} schema={{ includeWebsite: true, includeSearchAction: false, faq }}>
+  <Hero {...prestation.hero} />
 
-  <RelatedLinks title="Déclinaisons par métier" links={decliLinks} />
-  <RelatedLinks title="Maillage utile" links={keyLinks} />
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <MethodVideoProof data={prestation.sections.videoProof} />
+      <MetiersGrid
+          data={{ ...prestation.sections.metiersGrid, linkMode: "cross", prestaSlug: prestation.slug }}
+          metiers={metiers}
+      />
+      {prestation?.sections?.resourcesGrid && ressources?.length > 0 && (
+          <ResourcesGrid data={prestation.sections.resourcesGrid} items={ressources} />
+      )}
+      <CtaBand data={prestation.sections.ctaBand} />
+      <SupportBand data={prestation.sections.supportBand} />
+      <FaqToggles data={prestation.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
 </SiteLayout>

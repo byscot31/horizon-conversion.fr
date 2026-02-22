@@ -1,0 +1,155 @@
+{
+  "key": "page:ressources",
+
+  "seo": {
+    "canonical": "/ressources/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+    "intent": {
+      "primary": "informationnel",
+      "secondary": ["commercial", "transactionnel"],
+      "stage": "consideration",
+      "microConversions": ["diagnostic", "appel", "whatsapp"]
+    },
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux"]
+    },
+    "kw": {
+      "primary": "ressources génération leads assurance",
+      "secondary": [
+        "tracking leads assurance",
+        "landing assurance conversion",
+        "SEO local assurance",
+        "Google Ads assurance",
+        "CRO assurance"
+      ]
+    },
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & RDV qualifiés",
+      "method": "SEO local + Ads + CRO",
+      "system": "pages qui convertissent + acquisition locale + tracking"
+    }
+  },
+
+  "seoTemplates": {
+    "title": "Ressources {brand} | {tokens.offer} ({geo.core})",
+    "description": "Guides et checklists pour générer {tokens.offer} : {tokens.system}. Objectif : {tokens.goal}. Zone : {geo.core}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      {
+        "q": "À qui s’adressent ces ressources ?",
+        "a": "Aux agences, courtiers et mutuelles qui veulent un système mesurable pour générer des demandes de devis/RDV."
+      },
+      {
+        "q": "Par quoi commencer ?",
+        "a": "Par le diagnostic : offre d’entrée, zone, tracking, puis canal prioritaire (SEO/Ads)."
+      }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "Ressources",
+    "titleHtml": "Guides & checklists,<br />orientés conversion.",
+    "subtitle": "{tokens.method}. Objectif : {tokens.goal}.",
+    "ctas": [
+      {
+        "label": "Obtenir un diagnostic",
+        "href": "/contact/",
+        "icon": "bi-arrow-right",
+        "variant": "primary"
+      },
+      {
+        "label": "WhatsApp {phoneDisplay}",
+        "href": "WHATSAPP",
+        "icon": "fa-brands fa-whatsapp",
+        "variant": "secondary",
+        "external": true
+      }
+    ],
+    "note": "{geo.core}"
+  },
+
+  "sections": {
+    "resourcesGrid": {
+      "id": "ressources",
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-5"
+      },
+      "items": {
+        "slugs": [
+          "utm-assurance-convention",
+          "call-tracking-assurance",
+          "checklist-landing-assurance",
+          "formulaire-prequalification-assurance",
+          "structure-google-ads-assurance",
+          "mots-cles-negatifs-google-ads-assurance",
+          "checklist-google-business-profile-assurance",
+          "architecture-seo-local-assurance-sans-pages-villes",
+          "objections-assurance-framework-reponses",
+          "process-rappel-leads-assurance"
+        ]
+      },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Plan d’action priorisé, avant d’investir.",
+        "text": "Offre d’entrée, zone, page de conversion, tracking, puis canal prioritaire (SEO/Ads)."
+      },
+      "ctas": [
+        {
+          "label": "Réserver un diagnostic",
+          "href": "/contact/",
+          "icon": "bi-arrow-right",
+          "variant": "primary"
+        },
+        {
+          "label": "Appeler {phoneDisplay}",
+          "href": "TEL",
+          "icon": "bi-telephone",
+          "variant": "secondary"
+        }
+      ]
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Méthode",
+        "title": "La méthode complète.",
+        "text": "{tokens.system}. Objectif : {tokens.goal}.",
+        "cta": { "label": "Voir la méthode", "href": "/methode/", "variant": "dark" }
+      }
+    }
+  }
+}

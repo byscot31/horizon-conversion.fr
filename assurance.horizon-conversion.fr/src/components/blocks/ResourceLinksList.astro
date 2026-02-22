@@ -1,0 +1,38 @@
+---
+// src/components/blocks/ResourceLinksList.astro
+const { data } = Astro.props as {
+  data: {
+    id?: string;
+    title?: string;
+    items?: Array<{ href: string; label: string; anchor?: string; rel?: string; target?: string }>;
+  };
+};
+
+const items = Array.isArray(data?.items) ? data.items : [];
+---
+{items.length > 0 && (
+<div class="section bg-transparent pt-0 pb-0" id={data?.id}>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {data?.title && <h2 class="h3 mb-4">{data.title}</h2>}
+        <ul class="iconlist iconlist-sm fw-medium text-muted mb-0">
+          {items.map((it) => (
+              <li>
+                <i class="bi-check-circle-fill"></i>
+                <a
+                    href={it.href}
+                    target={it.target}
+                    rel={it.rel}
+                    aria-label={it.anchor ?? it.label}
+                >
+                  <span>{it.label}</span>
+                </a>
+              </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+  )}

@@ -1,0 +1,34 @@
+---
+// src/pages/ressources/index.astro
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Hero from "../../components/blocks/Hero.astro";
+import ResourcesGrid from "../../components/blocks/ResourcesGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import FaqToggles from "../../components/blocks/FaqToggles.astro";
+
+import rawPageData from "../../data/page_ressources.json";
+import { hydrateStandardPage } from "../../lib/seoTokens";
+
+import ressourcesIndex from "../../data/ressources/index.json";
+
+const pageData = hydrateStandardPage(rawPageData);
+
+const bySlug = new Map((ressourcesIndex as any).items.map((x: any) => [x.slug, x]));
+const items = (pageData.sections.resourcesGrid.items.slugs as string[])
+  .map((s) => bySlug.get(s))
+  .filter(Boolean);
+
+const faq = pageData.schema?.faq ?? [];
+---
+
+<SiteLayout seo={pageData.seo} schema={pageData.schema}>
+  <Hero {...pageData.hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <ResourcesGrid data={pageData.sections.resourcesGrid} items={items} />
+      <CtaBand data={pageData.sections.ctaBand} />
+      <FaqToggles data={pageData.sections.faqToggles} faq={faq} />
+    </div>
+  </section>
+</SiteLayout>

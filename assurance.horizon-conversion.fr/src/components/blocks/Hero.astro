@@ -1,0 +1,53 @@
+---
+// src/components/blocks/Hero.astro
+import CtaButtons from "./CtaButtons.astro";
+
+type CTA = {
+  label: string;
+  href: string;
+  icon?: string;
+  variant?: "primary" | "secondary" | "light" | "dark" | "linkUnderline";
+  external?: boolean;
+};
+
+type HeroProps = {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  titleHtml?: string;
+  subtitle?: string;
+  ctas?: CTA[];
+  note?: string;
+};
+
+const { id = "slider", eyebrow, title, titleHtml, subtitle, ctas = [], note } =
+  Astro.props as HeroProps;
+---
+
+<section id={id} class="slider-element">
+  <div class="container">
+    <div class="row align-items-center justify-content-center gx-5 pt-6 pb-0">
+      <div class="col-lg-9">
+        {eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{eyebrow}</p>}
+
+        {(titleHtml || title) && (
+            <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem;">
+              {titleHtml ? <Fragment set:html={titleHtml} /> : title}
+            </h1>
+        )}
+
+        {subtitle && <p class="fs-5 mb-5">{subtitle}</p>}
+
+        <CtaButtons ctas={ctas} />
+
+        {note && (
+            <div class="mt-4 op-08">
+              <small>{note}</small>
+            </div>
+        )}
+      </div>
+
+      <div class="col-lg-2">&nbsp;</div>
+    </div>
+  </div>
+</section>

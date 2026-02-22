@@ -1,99 +1,152 @@
 ---
+// src/pages/prestations/[prestaSlug]/[metierSlug].astro
 import SiteLayout from "../../../layouts/SiteLayout.astro";
-import FAQ from "../../../components/FAQ.astro";
-import RelatedLinks from "../../../components/RelatedLinks.astro";
-import { getPrestationBySlug, getMetierBySlug, getDeclinaison, listMetiers, listPrestations } from "../../../lib/data";
-import LocalModules from "../../../components/LocalModules.astro";
+import Hero from "../../../components/blocks/Hero.astro";
+import MethodVideoProof from "../../../components/blocks/MethodVideoProof.astro";
+import CtaBand from "../../../components/blocks/CtaBand.astro";
+import SupportBand from "../../../components/blocks/SupportBand.astro";
+import FaqToggles from "../../../components/blocks/FaqToggles.astro";
+import ResourcesGrid from "../../../components/blocks/ResourcesGrid.astro";
+
+import metiersIndex from "../../../data/metiers/index.json";
+import prestationsIndex from "../../../data/prestations/index.json";
+import declinaisons from "../../../data/prestations/declinaisons-metiers.json";
+import ressourcesIndex from "../../../data/ressources/index.json";
+
+import { getDeclinaison, getMetierBySlug, getPrestationBySlug, normalizeHero } from "../../../lib/data.ts";
 
 export async function getStaticPaths() {
-  const { listPrestations, listMetiers } = await import("../../../lib/data");
-  const ps = listPrestations();
-  const ms = listMetiers();
-  return ps.flatMap((p) => ms.map((m) => ({ params: { prestaSlug: p.slug, metierSlug: m.slug } })));
+  const metierItems = (metiersIndex as any).items as Array<{ id: string; slug: string }>;
+  const prestaItems = (prestationsIndex as any).items as Array<{ id: string; slug: string }>;
+
+  const metierIdToSlug = new Map(metierItems.map((m) => [m.id, m.slug]));
+  const prestaIdToSlug = new Map(prestaItems.map((p) => [p.id, p.slug]));
+
+  const rows = (declinaisons as any).matrix as Array<{
+    metierId: string;
+    prestations: Array<{ prestaId: string }>;
+  }>;
+
+  const paths: Array<{ params: { prestaSlug: string; metierSlug: string } }> = [];
+
+  for (const r of rows) {
+    const metierSlug = metierIdToSlug.get(r.metierId);
+    if (!metierSlug) continue;
+
+    for (const cell of (r.prestations ?? [])) {
+      const prestaSlug = prestaIdToSlug.get(cell.prestaId);
+      if (!prestaSlug) continue;
+
+      paths.push({ params: { prestaSlug, metierSlug } });
+    }
+  }
+
+  return paths;
 }
 
 const { prestaSlug, metierSlug } = Astro.params;
 
-const presta = await getPrestationBySlug(prestaSlug);
-const metier = await getMetierBySlug(metierSlug);
 const decl = getDeclinaison(prestaSlug, metierSlug);
+if (!decl) throw new Error(`Croisement introuvable: ${prestaSlug} x ${metierSlug}`);
 
-const canonical = `/prestations/${prestaSlug}/${metierSlug}/`;
-const title = `${presta.label} pour ${metier.label} | Sud Oise (60) & Nord Val-d’Oise (95)`;
-const description =
-  decl?.cell?.angle
-    ? `${decl.cell.angle}. Déploiement orienté leads (tracking inclus) sur 60/95.`
-    : `Déclinaison ${presta.label} pour ${metier.label} sur 60/95 : angles, objections, livrables et CTA.`;
+const metier = await getMetierBySlug(metierSlug);
+const prestation = await getPrestationBySlug(prestaSlug);
 
-const seo = { title, description, canonical };
+// SEO basé sur data existante
+const seo = {
+  title: `${prestation.label} × ${metier.label} | Horizon Conversion`,
+  description: `${prestation.meta?.description ?? ""}`.trim(),
+  canonical: `/prestations/${prestaSlug}/${metierSlug}/`,
+  robots: "index,follow"
+};
 
-const faq = [
-  { q: "Est-ce adapté à ma zone (60/95) ?", a: "Oui : Contactez-nous au 06 12 34 56 78 !!! contact@msn.com https:// ciblage géographique + pages locales + messages orientés intentions locales." },
-  { q: "Comment éviter les leads hors cible ?", a: "Exclusions + géociblage + pré-qualification formulaire + call tracking." },
-  { q: "Quel canal pour démarrer ?", a: "Ads = immédiat, SEO local = stabilité, CRO = conversion plus haute à budget égal." }
-];
+// Hero : priorité cellule > prestation > métier
+const hero =
+  (decl?.cell as any)?.hero ??
+  prestation?.hero ??
+  normalizeHero(metier.hero);
 
-const links = [
-  { label: `Retour à la prestation : ${presta.label}`, href: `/prestations/${presta.slug}/`, desc: "Vue globale, livrables, KPIs." },
-  { label: `Retour au métier : ${metier.label}`, href: `/metiers/${metier.slug}/`, desc: "Objections, recos, FAQ métier." },
-  { label: "Méthode", href: "/methode/", desc: "Le système complet." },
-  { label: "Contact", href: "/contact/", desc: "Diagnostic." }
-];
+// FAQ : cellule > métier > prestation
+const faq =
+  (decl?.cell as any)?.faq ??
+  metier?.faq ??
+  prestation?.faq ??
+  [];
+
+// ------------------------------
+// Ressources : intersection + fallback
+// ------------------------------
+const rItems = ((ressourcesIndex as any).items ?? []) as any[];
+
+const limit =
+  prestation?.sections?.resourcesGrid?.items?.limit ??
+  3;
+
+const targetedByPresta = (r: any) => (r?.targets?.prestations ?? []).includes(prestaSlug);
+const targetedByMetier = (r: any) => (r?.targets?.metiers ?? []).includes(metierSlug);
+
+// 1) intersection presta ∩ métier
+const intersection = rItems.filter((r) => targetedByPresta(r) && targetedByMetier(r));
+
+// 2) fallback : d’abord presta-only, puis métier-only (sans doublons)
+const prestaOnly = rItems.filter((r) => targetedByPresta(r) && !targetedByMetier(r));
+const metierOnly = rItems.filter((r) => targetedByMetier(r) && !targetedByPresta(r));
+
+const pickUnique = (arr: any[]) => {
+  const seen = new Set<string>();
+  const out: any[] = [];
+  for (const r of arr) {
+    const k = String(r?.slug ?? "");
+    if (!k || seen.has(k)) continue;
+    seen.add(k);
+    out.push(r);
+    if (out.length >= limit) break;
+  }
+  return out;
+};
+
+let ressources = pickUnique(intersection);
+if (ressources.length < limit) {
+  const combined = [...ressources, ...prestaOnly, ...metierOnly];
+  ressources = pickUnique(combined);
+}
+
+// ------------------------------
+// ResourcesGrid header : headerCross ?? header
+// ------------------------------
+const rg = prestation?.sections?.resourcesGrid ?? null;
+
+const chosenHeader =
+  rg?.headerCross ??
+  rg?.header ??
+  null;
+
+const hydrateHeader = (h: any) => h ? { ...h, title: String(h.title ?? "").replaceAll("{metierLabel}", metier.label), subtitle: String(h.subtitle ?? "").replaceAll("{metierLabel}", metier.label) } : h;
+const resourcesGridData = rg ? { ...rg, header: hydrateHeader(chosenHeader) } : null;
 ---
-<SiteLayout
-    seo={seo}
-    h1={`${presta.label} pour ${metier.label}`}
-    intro={decl?.cell?.angle ?? "Déclinaison métier orientée conversion."}
-    breadcrumbs={[
-      { label: "Accueil", href: "/" },
-      { label: "Prestations", href: "/prestations/" },
-      { label: presta.label, href: `/prestations/${presta.slug}/` },
-      { label: `${presta.shortLabel ?? presta.label} × ${metier.label}`, href: canonical }
-    ]}
-    schema={{
-      service: {
-        name: `${presta.shortLabel ?? presta.label} pour ${metier.label}`,
-        description
-      }
-      // faq: [...] // si tu as une FAQ sur cette page
-  }}
->
-  <section>
-    <h2>Ce qu’on met en place</h2>
-    <ul>
-      {(presta.deliverables ?? []).slice(0, 6).map((d) => <li>{d}</li>)}
-    </ul>
+
+<SiteLayout seo={seo} schema={{ includeWebsite: true, includeSearchAction: false, faq }}>
+  <Hero {...hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <MethodVideoProof data={prestation.sections.videoProof} />
+      <CtaBand data={prestation.sections.ctaBand} />
+
+      {resourcesGridData && ressources?.length > 0 && (
+          <ResourcesGrid data={resourcesGridData} items={ressources} />
+      )}
+
+      <SupportBand
+          data={{
+            ...prestation.sections.supportBand,
+            linkMode: "cross",
+            metierSlug,
+            prestaSlug
+          }}
+      />
+
+      <FaqToggles data={prestation.sections.faqToggles} faq={faq} />
+    </div>
   </section>
-
-  {metier.objections?.length ? (
-      <section>
-        <h2>Objections qu’on traite (et comment)</h2>
-        <ul>
-          {metier.objections.slice(0, 3).map((o) => (
-              <li><strong>{o.texte}</strong><br />{o.reponse}</li>
-          ))}
-        </ul>
-      </section>
-  ) : null}
-
-  <FAQ items={faq} />
-
-  <LocalModules
-      mode="cross"
-      canonicalSeed={canonical}
-      context={{
-        metierLabel: metier.label,
-        prestationLabel: presta.label,
-        prestationShortLabel: presta.shortLabel ?? presta.label,
-        offres: metier.offres
-      }}
-      config={{
-        enabled: true,
-        zones: { enabled: true, limitMin: 6, limitMax: 8 },
-        requeteIntentions: { enabled: true, minSharePrefer: 0.8 },
-        faqLocale: { enabled: true, limit: 3 }
-      }}
-  />
-
-  <RelatedLinks title="Maillage interne" links={links} />
 </SiteLayout>

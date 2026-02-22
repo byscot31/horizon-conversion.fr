@@ -1,0 +1,66 @@
+---
+// src/pages/ressources/[slug].astro
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Hero from "../../components/blocks/Hero.astro";
+import CtaButtons from "../../components/blocks/CtaButtons.astro";
+import ResourceLinksList from "../../components/blocks/ResourceLinksList.astro";
+import ResourceRelatedList from "../../components/blocks/ResourceRelatedList.astro";
+
+import ressourcesIndex from "../../data/ressources/index.json";
+
+export async function getStaticPaths() {
+  const items = (ressourcesIndex as any).items as Array<{ slug: string }>;
+  return items.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const loaders = import.meta.glob("../../data/ressources/*.json");
+const key = `../../data/ressources/${slug}.json`;
+
+const loader = loaders[key];
+if (!loader) throw new Error(`Ressource introuvable: ${slug}`);
+
+const resMod: any = await (loader as any)();
+const res = resMod.default ?? resMod;
+
+const faq = res?.schema?.faq ?? [];
+const outbound = res?.links?.outbound;
+const related = res?.links?.related;
+
+const ctaEnabled = !!res?.cta?.enabled;
+const ctas = res?.cta?.ctas ?? [];
+---
+
+<SiteLayout seo={res.meta} schema={{ includeWebsite: true, includeSearchAction: false, faq }}>
+  <Hero {...res.hero} />
+
+  <section id="content">
+    <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      {res?.contentHtml && (
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <div set:html={res.contentHtml} />
+              </div>
+            </div>
+          </div>
+      )}
+
+      <ResourceLinksList data={outbound} />
+      <ResourceRelatedList data={related} />
+
+      {ctaEnabled && ctas?.length > 0 && (
+          <div class="section bg-transparent pt-0 pb-lg-0">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <CtaButtons ctas={ctas} />
+                </div>
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+  </section>
+</SiteLayout>

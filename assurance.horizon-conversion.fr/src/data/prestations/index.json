@@ -1,5 +1,4 @@
 {
-  "version": "1.0",
   "items": [
     { "id": "presta_seo_local", "slug": "seo-local", "title": "SEO local (Google + pages locales)" },
     { "id": "presta_ads_local", "slug": "ads-local", "title": "Ads local (Google Ads orienté leads)" },

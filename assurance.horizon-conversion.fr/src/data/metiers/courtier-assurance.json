@@ -2,35 +2,67 @@
   "id": "metier_courtier_assurance",
   "slug": "courtier-assurance",
   "label": "Courtiers en assurance",
-  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance"],
+  "cardTeaser": "Des leads mieux qualifiés (pas des chasseurs de prix) : ciblage + formulaire pré-qualifiant + tracking.",
+
+  "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance", "RC pro", "assurance emprunteur"],
+
   "meta": {
-    "title": "Leads qualifiés pour courtier en assurance | 60/95",
-    "description": "Générez des demandes de devis qualifiées (emprunteur, pro, santé) avec SEO local + Ads + pages de conversion.",
+    "title": "Leads pour courtier en assurance | Sud Oise & Nord Val-d’Oise",
+    "description": "Générez des leads qualifiés pour votre cabinet de courtage : acquisition locale (SEO/Ads), pages qui convertissent, tracking appels/formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/courtier-assurance/"
   },
+
   "hero": {
-    "h1": "Des leads assurance vraiment qualifiés pour votre cabinet de courtage",
-    "sub": "Positionnement, pages offres, preuve et tracking : on vise le RDV, pas le trafic.",
-    "ctaPrimary": { "label": "Audit gratuit 20 min", "href": "/contact/" },
-    "ctaSecondary": { "label": "Voir les tarifs", "href": "/tarifs/" }
+    "h1": "Générez des leads qualifiés pour votre cabinet de courtage",
+    "sub": "Méthode locale (60/95) : ciblage offres + landing CRO + acquisition SEO/Ads + attribution.",
+    "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
+    "ctaSecondary": { "label": "Voir les preuves", "href": "/preuves/" }
   },
+
+  "positionnement": {
+    "promesse": "Remplir l’agenda avec des demandes de devis/RDV qualifiées, sur une zone maîtrisée.",
+    "angle": "Spécialisation offre d’entrée + preuve + formulaire pré-qualifiant + pilotage par CPL et éligibilité."
+  },
+
+  "icp": {
+    "taille": ["solo", "1-5 collaborateurs", "6-15 collaborateurs"],
+    "maturite": ["réseau existant mais irrégulier", "Ads instables", "site sans conversion mesurée"],
+    "offresPrioritaires": ["emprunteur", "santé", "auto", "RC pro"]
+  },
+
   "intentionsSEO": [
-    { "cluster": "transactionnel", "queries": ["courtier assurance Senlis", "courtier assurance Persan", "cabinet courtage Beaumont-sur-Oise"] },
-    { "cluster": "produit", "queries": ["assurance emprunteur courtier", "rc pro courtier Oise", "mutuelle senior Val-d'Oise"] }
+    { "cluster": "transactionnel", "queries": ["courtier assurance Chantilly", "devis assurance Senlis", "courtier mutuelle Creil", "courtier assurance Persan"] },
+    { "cluster": "comparatif", "queries": ["meilleure mutuelle Chantilly", "devis assurance emprunteur Senlis", "tarif RC pro Oise"] },
+    { "cluster": "local pack", "queries": ["courtier assurance près de moi", "courtier assurance ouvert", "courtier mutuelle autour de Creil"] }
   ],
+
   "objections": [
-    { "id": "obj_01", "texte": "Nos prospects viennent surtout par recommandation.", "reponse": "On industrialise une source stable de RDV sans dégrader la qualité (filtrage + landing + preuves)." },
-    { "id": "obj_02", "texte": "On a déjà des campagnes, mais ça plafonne.", "reponse": "On corrige la structure compte, le ciblage zones/offres, et on refait les landing orientées devis." }
+    { "id": "obj_01", "texte": "On veut des leads, mais pas des chasseurs de prix.", "reponse": "On cadre l’offre d’entrée et le message, on qualifie par formulaire, et on optimise sur leads éligibles (pas sur clics)." },
+    { "id": "obj_02", "texte": "On a déjà des partenaires, on ne veut pas diluer.", "reponse": "On démarre avec une offre prioritaire et une zone, puis on duplique seulement si les KPIs sont bons." },
+    { "id": "obj_03", "texte": "On ne sait jamais d’où viennent les leads.", "reponse": "Tracking appels + formulaires + UTMs et dashboard : source/campagne/offre, et décisions claires." }
   ],
+
   "kpis": [
-    { "name": "RDV / semaine", "target": "+30% à +100% selon volume actuel" },
-    { "name": "Taux de no-show", "target": "baisse via confirmation + pré-qualification" }
+    { "name": "Leads éligibles", "target": "hausse progressive via filtres + CRO" },
+    { "name": "CPL", "target": "stabilisation puis baisse sur 60–90 jours" },
+    { "name": "Taux RDV / lead", "target": "amélioration via scripts + rappel rapide" },
+    { "name": "Attribution", "target": "appels + formulaires trackés" }
   ],
+
+  "livrables": [
+    "Landing offre d’entrée + preuves + objections + FAQ",
+    "Formulaire pré-qualifiant + call tracking",
+    "Campagnes Ads ou SEO local (priorité ROI)",
+    "Dashboard simple (source, coût, éligibilité)"
+  ],
+
   "faq": [
-    { "q": "Vous pouvez cibler emprunteur uniquement ?", "a": "Oui. On crée un tunnel dédié (pages + Ads + preuve + FAQ loi Lemoine/équivalences)." },
-    { "q": "Comment éviter les demandes hors zone ?", "a": "Géociblage + exclusions + wording + champs formulaire + call tracking." }
+    { "q": "Peut-on cibler plusieurs offres ?", "a": "Oui, mais on commence par 1–2 offres d’entrée pour stabiliser le CPL et la qualité, puis on duplique." },
+    { "q": "Comment qualifier avant l’appel ?", "a": "Formulaire pré-qualifiant (profil, urgence, zone, besoin) + scripts de rappel et scoring simple." },
+    { "q": "Est-ce compatible avec un CRM ?", "a": "Oui, option CRM/workflows pour relances, rendez-vous, et suivi des sources." }
   ],
+
   "localModules": {
     "enabled": true,
     "zones": { "enabled": true, "limit": 10 },
@@ -41,17 +73,112 @@
       "rotatePatterns": true,
       "maxMin": 8,
       "maxMax": 10,
-      "patterns": [
-        "{metier} {ville}",
-        "devis {offre} {ville}",
-        "{offre} près de moi {ville}",
-        "meilleur {offre} {ville}"
-      ]
+      "patterns": ["courtier assurance {ville}", "devis {offre} {ville}", "{offre} {ville}", "courtier {offre} près de moi {ville}"]
     },
     "faqLocale": { "enabled": true, "limit": 3 }
   },
+
   "internalLinks": {
     "hubMetiers": "/metiers/",
-    "prestationsRecommandees": ["presta_ads_local", "presta_seo_local", "presta_tracking_attribution"]
+    "prestationsRecommandees": ["ads-local", "cro", "tracking-attribution", "seo-local"],
+    "pagesAssociees": ["/preuves/", "/methode/", "/tarifs/"]
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/preuves/",
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Preuves : génération de leads pour courtiers en assurance" },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Courtiers",
+        "title": "Plus de RDV qualifiés, moins de perte.",
+        "text": "On travaille l’offre d’entrée, le message et la qualification. Puis on pilote l’acquisition (Ads/SEO) et la conversion (CRO) sur des leads éligibles.",
+        "bullets": [
+          "Formulaire pré-qualifiant + scripts de rappel.",
+          "Tracking appels/formulaires pour piloter au réel.",
+          "Itérations rapides (CRO) pour réduire le CPL."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir les preuves", "href": "/preuves/", "variant": "light" },
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" }
+      ]
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "linkMode": "cross",
+      "content": { "eyebrow": "Prestations", "title": "Les leviers les plus efficaces pour un cabinet de courtage." },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Prioriser l’offre d’entrée et le canal rentable.",
+        "text": "On cadre la zone, l’offre, la page de conversion, le tracking, puis on choisit Ads ou SEO selon le ROI attendu."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "execution",
+      "linkMode": "cross",
+      "content": {
+        "eyebrow": "Qualification",
+        "title": "Des leads exploitables, pas des clics.",
+        "text": "Qualification avant appel, rappel rapide, relances et suivi des sources. Option CRM/workflows si tu veux industrialiser."
+      },
+      "ctas": [
+        { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+      ],
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Qualification et suivi : workflow + dashboard" } }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "metier.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Une offre claire, priorisée ROI.",
+        "text": "On chiffre sur une offre d’entrée + un canal prioritaire, avec tracking et pilotage mesurable.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    },
+
+    "resourcesGrid": {
+      "id": "ressources",
+      "header": {
+        "badge": "Ressources",
+        "title": "Guides pour mieux qualifier (et éviter les chasseurs de prix)",
+        "subtitle": "Pré-qualification, suivi et attribution : piloter sur leads éligibles, pas sur volume."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-3"
+      },
+      "items": { "mode": "byTarget", "limit": 6 },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    }
   }
 }

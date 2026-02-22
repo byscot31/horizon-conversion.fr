@@ -6,6 +6,7 @@
   "meta": {
     "title": "CRO assurance | Augmenter demandes de devis & RDV",
     "description": "Optimisation pages, formulaires, preuve, messages : augmentez la conversion sans augmenter le budget pub.",
+    "robots": "index,follow",
     "canonical": "/prestations/cro/"
   },
   "promise": "Transformer plus de visiteurs en appels et formulaires (à trafic égal).",
@@ -21,5 +22,161 @@
     "Suivi conversion (events)"
   ],
   "kpis": ["Taux conversion", "Taux appels", "Taux dossiers éligibles", "Baisse CPL effectif"],
-  "cta": { "primary": { "label": "Optimiser mes pages", "href": "/contact/" } }
+  "cta": { "primary": { "label": "Optimiser mes pages", "href": "/contact/" } },
+
+  "faq": [
+    {
+      "q": "Pourquoi faire du CRO en assurance ?",
+      "a": "Parce que chaque point de conversion gagné baisse le CPL effectif et augmente le volume de demandes à budget égal."
+    },
+    {
+      "q": "Qu’est-ce que vous optimisez en premier ?",
+      "a": "Le hero, les preuves, les CTA, le formulaire (pré-qualification) et les objections/FAQ. Puis on itère sur les points de friction."
+    },
+    {
+      "q": "Faut-il beaucoup de trafic pour itérer ?",
+      "a": "Non : on commence par des quick wins (structure/copy/formulaire), puis tests si le volume le permet."
+    },
+    {
+      "q": "CRO et Ads, c’est lié ?",
+      "a": "Oui : une landing optimisée augmente la conversion, améliore la qualité et stabilise le CPL."
+    },
+    {
+      "q": "Comment mesurez-vous l’impact ?",
+      "a": "Via events formulaires/appels, taux de conversion, leads éligibles, et CPL effectif par canal/offre."
+    }
+  ],
+
+  "hero": {
+    "id": "slider",
+    "eyebrow": "CRO (conversion)",
+    "titleHtml": "Convertir plus,<br />à trafic égal.",
+    "subtitle": "Optimiser hero, preuves, formulaires et CTA : augmenter devis/RDV sans augmenter le budget.",
+    "ctas": [
+      { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "Cible : agences, courtiers, mutuelles — Sud Oise (60) & Nord Val-d’Oise (95)"
+  },
+
+  "sections": {
+    "videoProof": {
+      "id": "video-proof",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/methode/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "CRO assurance : conversion, preuve, formulaires et pilotage"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Conversion",
+        "title": "Levier direct sur CPL et qualité.",
+        "text": "On améliore ce qui fait la conversion : message, preuve, objections, formulaire et CTA. Puis on mesure et on itère.",
+        "bullets": [
+          "Refonte hero + preuves + FAQ orientées objections.",
+          "Formulaire pré-qualifiant (meilleure éligibilité).",
+          "Suivi conversion via events et dashboard."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
+        { "label": "Voir tracking", "href": "/prestations/tracking-attribution/", "variant": "light" }
+      ]
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "linkMode": "cross",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Optimisations adaptées par métier : objections, preuves et qualification alignées sur l’offre d’entrée.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Audit conversion",
+        "title": "On trouve les points de friction et on priorise.",
+        "text": "Hero, preuve, objections, formulaire, CTA : tu repars avec une liste d’actions priorisées et mesurables."
+      },
+      "ctas": [
+        { "label": "Réserver un audit", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "pilotage",
+      "content": {
+        "eyebrow": "Itérations",
+        "title": "Améliorer en continu : conversion et éligibilité.",
+        "text": "Quick wins puis itérations (et A/B si stack/volume). Objectif : améliorer devis/RDV et réduire le CPL effectif."
+      },
+      "ctas": [
+        { "label": "Voir Ads local", "prestaSlug": "ads-local", "variant": "dark" },
+        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+      ],
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Itérations CRO : suivi conversion et qualité" } }
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "prestation.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "Tarifs",
+        "title": "Diagnostic → setup → pilotage.",
+        "text": "Tarifs HT : on démarre par l’audit conversion, puis optimisation des pages et suivi.",
+        "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
+      }
+    },
+
+    "resourcesGrid": {
+      "id": "ressources",
+      "header": {
+        "badge": "Ressources",
+        "title": "Guides CRO : augmenter la conversion à trafic égal",
+        "subtitle": "Preuve, objections, formulaire : plus d’appels et formulaires, moins de perte."
+      },
+      "headerCross": {
+        "badge": "Ressources",
+        "title": "Guides CRO pour {metierLabel}",
+        "subtitle": "Preuve, objections et formulaire : augmenter la conversion et l’éligibilité à trafic égal."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-3"
+      },
+      "items": { "mode": "byTarget", "limit": 3 },
+      "card": {
+        "metaLineKeys": ["category", "readingTime"],
+        "cta": { "label": "Lire la ressource", "variant": "linkUnderline" }
+      }
+    }
+  }
 }

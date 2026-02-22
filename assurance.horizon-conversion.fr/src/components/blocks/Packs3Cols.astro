@@ -1,0 +1,100 @@
+---
+// src/components/blocks/Packs3Cols.astro
+const { data } = Astro.props as { data: any };
+
+const layout = data?.layout ?? {};
+const packs = Array.isArray(data?.packs) ? data.packs : [];
+const texts = data?.texts ?? {};
+
+const sectionClass = layout.sectionClass ?? "";
+const containerClass = layout.containerClass ?? "";
+const rowClass = layout.rowClass ?? "";
+const colClass = layout.colClass ?? "";
+const cardClass = layout.cardClass ?? "";
+const cardBodyClass = layout.cardBodyClass ?? "";
+
+const pricePrefix = texts?.pricePrefix ?? "";
+const priceSuffix = texts?.priceSuffix ?? "";
+---
+
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+    <div class={rowClass}>
+      {packs.map((p: any) => {
+        const featured = !!p?.featured;
+        const badge = p?.badge ?? null;
+        const extra = p?.cardExtraClass ?? "";
+        const cardCls = `${cardClass} ${extra}`.trim();
+
+        return (
+            <div class={colClass}>
+              <div class="grid-inner">
+                <div class={cardCls} data-featured={featured ? "true" : "false"}>
+                  <div class={cardBodyClass}>
+                    {/* Badge */}
+                    {badge?.label && (
+                        <div class="d-flex justify-content-end">
+                          <span class={badge?.class ?? ""}>{badge.label}</span>
+                        </div>
+                    )}
+
+                    {/* Icon SVG */}
+                    {p?.icon?.svg && <div set:html={p.icon.svg} />}
+
+                    {/* Kicker */}
+                    {p?.kicker && (
+                        <h2 class="fs-6 fw-semibold text-uppercase mb-0 mt-4">
+                          {p.kicker}
+                        </h2>
+                    )}
+
+                    {/* Price + optional note */}
+                    {(p?.price || p?.priceNote) && (
+                        <div class="my-3">
+                          {p?.price && (
+                              <h3 class="display-5 fw-bold mb-1">
+                                {pricePrefix}{p.price}{priceSuffix}
+                              </h3>
+                          )}
+                          {p?.priceNote && (
+                              <div class="text-muted fw-medium">{p.priceNote}</div>
+                          )}
+                        </div>
+                    )}
+
+                    {/* Description */}
+                    {p?.description && <p class="fw-light">{p.description}</p>}
+
+                    {/* CTA */}
+                    {p?.cta?.href && p?.cta?.label && (
+                        <a href={p.cta.href} class={p.cta.class ?? ""}>
+                          {p.cta.label}
+                        </a>
+                    )}
+
+                    {/* Included */}
+                    {p?.included?.title && (
+                        <h4 class="fs-6 fw-bold mt-4 mb-3 pt-1">
+                          {p.included.title}
+                        </h4>
+                    )}
+
+                    {Array.isArray(p?.included?.items) && p.included.items.length > 0 && (
+                        <ul class={p?.included?.listClass ?? ""}>
+                          {p.included.items.map((it: any) => (
+                              <li>
+                                {it?.iconClass && <i class={it.iconClass}></i>}
+                                {it?.text && <span>{it.text}</span>}
+                              </li>
+                          ))}
+                        </ul>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+        );
+      })}
+    </div>
+  </div>
+</div>

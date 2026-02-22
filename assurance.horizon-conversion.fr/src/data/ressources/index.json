@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "id": "res_utm_convention",
+      "slug": "utm-assurance-convention",
+      "title": "UTM assurance : convention simple pour attribuer les leads",
+      "excerpt": "Nommage UTM, règles d’équipe, exemples : retrouver la source/campagne/offre sans ambiguïté.",
+      "category": "Tracking",
+      "readingTime": "6 min",
+      "date": "2026-02-01",
+      "image": { "src": "/assets/images/ressources/01-utm.png", "alt": "Convention UTM assurance" },
+      "targets": {
+        "prestations": ["tracking-attribution","ads-local"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_call_tracking",
+      "slug": "call-tracking-assurance",
+      "title": "Call tracking assurance : mesurer les appels et piloter le CPL",
+      "excerpt": "Quand l’activer, quoi mesurer, comment éviter le bruit : appels = une part clé des leads.",
+      "category": "Tracking",
+      "readingTime": "7 min",
+      "date": "2026-02-02",
+      "image": { "src": "/assets/images/ressources/02-call-tracking.png", "alt": "Call tracking assurance" },
+      "targets": {
+        "prestations": ["tracking-attribution","ads-local","crm-workflow"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_landing_checklist",
+      "slug": "checklist-landing-assurance",
+      "title": "Checklist landing assurance : preuve, objections, CTA, formulaire",
+      "excerpt": "Structure de page orientée devis/RDV + check rapide des points qui font monter la conversion.",
+      "category": "CRO",
+      "readingTime": "7 min",
+      "date": "2026-02-03",
+      "image": { "src": "/assets/images/ressources/03-ads-target-cpl.png", "alt": "Checklist landing assurance orientée conversion" },
+      "targets": {
+        "prestations": ["cro","contenus-preuves","ads-local"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_form_qualif",
+      "slug": "formulaire-prequalification-assurance",
+      "title": "Formulaire pré-qualifiant assurance : réduire les leads non éligibles",
+      "excerpt": "Champs utiles par offre, friction minimale, et scoring simple pour qualifier vite.",
+      "category": "CRO",
+      "readingTime": "6 min",
+      "date": "2026-02-04",
+      "image": { "src": "/assets/images/ressources/04-ads-analytics-offres.png", "alt": "Formulaire pré-qualifiant assurance" },
+      "targets": {
+        "prestations": ["cro","crm-workflow","tracking-attribution"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_ads_structure",
+      "slug": "structure-google-ads-assurance",
+      "title": "Google Ads assurance : structure par offre et par intention (pas par trafic)",
+      "excerpt": "Groupes par offre, exclusions, extensions, messages : stabiliser CPL et qualité.",
+      "category": "Ads",
+      "readingTime": "8 min",
+      "date": "2026-02-05",
+      "image": { "src": "/assets/images/ressources/05-negatifs-filtrage.png", "alt": "Structure Google Ads assurance" },
+      "targets": {
+        "prestations": ["ads-local","tracking-attribution","cro"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro"]
+      }
+    },
+    {
+      "id": "res_ads_negatifs",
+      "slug": "mots-cles-negatifs-google-ads-assurance",
+      "title": "Mots-clés négatifs Ads assurance : baisser le CPL en filtrant",
+      "excerpt": "Liste de départ + méthode d’enrichissement : éviter le gaspillage et les leads hors cible.",
+      "category": "Ads",
+      "readingTime": "6 min",
+      "date": "2026-02-06",
+      "image": { "src": "/assets/images/ressources/06-gbp-local-pack.png", "alt": "Mots-clés négatifs Google Ads assurance" },
+      "targets": {
+        "prestations": ["ads-local","tracking-attribution","cro"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro"]
+      }
+    },
+    {
+      "id": "res_gbp_checklist",
+      "slug": "checklist-google-business-profile-assurance",
+      "title": "Checklist Google Business Profile assurance : appels, itinéraires, leads",
+      "excerpt": "Catégories, services, posts, avis, cohérence NAP : optimiser le local pack.",
+      "category": "SEO local",
+      "readingTime": "7 min",
+      "date": "2026-02-07",
+      "image": { "src": "/assets/images/ressources/07-segmentation-metiers.png", "alt": "Checklist Google Business Profile assurance" },
+      "targets": {
+        "prestations": ["seo-local","contenus-preuves"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_seo_archi",
+      "slug": "architecture-seo-local-assurance-sans-pages-villes",
+      "title": "SEO local assurance sans pages villes : architecture + modules locaux",
+      "excerpt": "Hubs, pages offres, maillage : couvrir 60/95 sans cannibalisation et sans duplication.",
+      "category": "SEO local",
+      "readingTime": "9 min",
+      "date": "2026-02-08",
+      "image": { "src": "/assets/images/ressources/10-seo-architecture.png", "alt": "Architecture SEO local assurance sans pages villes" },
+      "targets": {
+        "prestations": ["seo-local","contenus-preuves","cro"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_objections_framework",
+      "slug": "objections-assurance-framework-reponses",
+      "title": "Objections assurance : framework pour répondre et convertir",
+      "excerpt": "Leads non qualifiés, Ads trop cher, pas de mesure : réponses structurées + preuve.",
+      "category": "Contenus",
+      "readingTime": "7 min",
+      "date": "2026-02-09",
+      "image": { "src": "/assets/images/ressources/08-objections-framework.png", "alt": "Framework objections assurance" },
+      "targets": {
+        "prestations": ["contenus-preuves","cro"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    },
+    {
+      "id": "res_process_rappel",
+      "slug": "process-rappel-leads-assurance",
+      "title": "Process rappel leads assurance : rappel <10 min, scripts, relances",
+      "excerpt": "Moins de perte : scripts d’appel, cadence de relance, et suivi RDV/devis/signé.",
+      "category": "Process",
+      "readingTime": "8 min",
+      "date": "2026-02-10",
+      "image": { "src": "/assets/images/ressources/09-process-rappel.png", "alt": "Process rappel leads assurance" },
+      "targets": {
+        "prestations": ["crm-workflow","tracking-attribution","cro"],
+        "metiers": ["agence-assurance","courtier-assurance","mutuelle-sante","assurance-emprunteur","assurance-pro","assurance-vie-patrimoine"]
+      }
+    }
+  ]
+}
