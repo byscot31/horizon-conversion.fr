@@ -1,0 +1,87 @@
+---
+// src/components/blocks/Cases3.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const items = Array.isArray(data?.items) ? data.items : [];
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section bg-transparent pt-0 pb-lg-0";
+const containerClass = layout.containerClass ?? "container";
+const rowClass = layout.rowClass ?? "row g-4";
+const colClass = layout.colClass ?? "col-lg-4";
+const cardClass = layout.cardClass ?? "card rounded-6 shadow-sm border-0 h-100";
+const cardBodyClass = layout.cardBodyClass ?? "card-body p-4";
+---
+
+{items?.length > 0 && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+
+    {/* Header optionnel */}
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center mb-6">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="mb-3 h2 lh-sm">{header.title}</h2>}
+            {header?.subtitle && <p class="fs-5 mb-0">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class={rowClass}>
+      {items.map((it: any) => (
+          <div class={colClass}>
+            {(it?.titleHtml || it?.title) && (
+                <div class="heading-block fancy-title border-bottom-0 title-bottom-border mb-3">
+                  <h3 class="h4 text-transform-none ls-0 font-primary mb-0">
+                    {it.titleHtml ? <Fragment set:html={it.titleHtml} /> : it.title}
+                  </h3>
+                </div>
+            )}
+
+            <dl class="row mb-0">
+              {it?.context && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Contexte</dt>
+                    <dd class="col-12 mb-3">{it.context}</dd>
+                  </>
+              )}
+              {it?.action && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Action</dt>
+                    <dd class="col-12 mb-3">{it.action}</dd>
+                  </>
+              )}
+              {it?.result && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Résultat</dt>
+                    <dd class="col-12 mb-3">{it.result}</dd>
+                  </>
+              )}
+              {it?.lesson && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Leçon</dt>
+                    <dd class="col-12 mb-0"><strong>{it.lesson}</strong></dd>
+                  </>
+              )}
+            </dl>
+
+            {it?.cta?.href && it?.cta?.label && (
+                <div class="mt-4">
+                  <a href={it.cta.href} class={it.cta.class ?? "btn btn-link p-0"}>
+                    <u>{it.cta.label}</u>
+                  </a>
+                </div>
+            )}
+          </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+  )}

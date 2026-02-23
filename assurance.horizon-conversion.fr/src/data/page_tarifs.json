@@ -28,67 +28,67 @@
       ],
       "painPoints": [
         "Besoin de visibilité sur les coûts",
-        "Peur d’un engagement long sans résultats",
-        "Budget Ads mal maîtrisé",
-        "CPL trop élevé"
+        "Peur d’un engagement long sans visibilité sur les demandes reçues",
+        "Budget annonces mal maîtrisé",
+        "Coût par demande trop élevé"
       ],
       "desiredOutcomes": [
         "Offre claire et actionnable",
-        "Priorisation ROI",
-        "Tracking et pilotage",
-        "Scaling progressif"
+        "Priorisation selon la rentabilité",
+        "Suivi des appels et formulaires",
+        "Amélioration progressive et régulière"
       ]
     },
     "kw": {
       "primary": "tarifs génération leads assurance",
       "secondary": [
         "prix génération leads assurance",
-        "tarif SEO local assurance",
-        "prix Google Ads assurance",
-        "tarif CRO assurance",
-        "audit marketing assurance",
-        "coût par lead assurance"
+        "tarif référencement local assurance",
+        "prix annonces Google assurance",
+        "tarifs page devis assurance",
+        "diagnostic acquisition assurance",
+        "coût par demande assurance"
       ],
       "supporting": [
-        "pack acquisition locale",
-        "forfait seo local",
-        "pilotage google ads",
-        "mise en place tracking",
-        "tableau de bord leads"
+        "pack acquisition locale assurance",
+        "forfait référencement local",
+        "gestion annonces Google",
+        "mise en place suivi appels formulaires",
+        "tableau de suivi demandes"
       ],
       "entities": [
         "tarifs",
         "prix",
-        "audit",
-        "SEO local",
-        "Google Ads",
-        "CRO",
-        "tracking",
-        "attribution",
-        "CPL"
+        "diagnostic",
+        "référencement local",
+        "annonces Google",
+        "page de demande de devis",
+        "suivi des appels",
+        "suivi des formulaires",
+        "coût par demande"
       ]
     },
     "tokens": {
       "offer": "leads assurance",
       "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking",
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages utiles + acquisition locale + suivi des appels et formulaires",
       "pricing": "tarifs & packs"
     },
     "internalLinks": [
       { "href": "/methode/", "anchor": "méthode" },
       { "href": "/preuves/", "anchor": "preuves" },
       { "href": "/contact/", "anchor": "diagnostic" },
-      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
-      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
-      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
-      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" }
+      { "href": "/prestations/seo-local/", "anchor": "référencement local assurance" },
+      { "href": "/prestations/ads-local/", "anchor": "annonces Google assurance" },
+      { "href": "/prestations/cro/", "anchor": "optimisation des pages" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "suivi des appels et formulaires" }
     ]
   },
 
   "seoTemplates": {
     "title": "Tarifs {brand} | {tokens.offer} ({geo.core}) : {tokens.pricing}",
-    "description": "Tarifs et packs pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Diagnostic, mise en place, pilotage et optimisation."
+    "description": "Tarifs et packs pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Diagnostic, mise en place et suivi mensuel."
   },
 
   "schema": {
@@ -97,27 +97,27 @@
     "faq": [
       {
         "q": "Quels sont les tarifs pour démarrer ?",
-        "a": "On démarre par un diagnostic puis un plan d’action. Le budget dépend de l’offre d’entrée, de la zone et du canal prioritaire (SEO/Ads)."
+        "a": "On démarre par un diagnostic, puis un plan d’action. Le budget dépend de l’offre d’entrée, de la zone et du canal prioritaire (référencement local ou annonces Google)."
       },
       {
         "q": "Y a-t-il un engagement ?",
-        "a": "Le diagnostic est sans engagement long. Ensuite, l’engagement dépend du pack choisi (mise en place ou pilotage)."
+        "a": "Le diagnostic est sans engagement long. Ensuite, l’engagement dépend du pack choisi (mise en place ou suivi mensuel)."
       },
       {
         "q": "Le budget publicitaire est-il inclus ?",
-        "a": "Non. Les frais de gestion et d’optimisation sont séparés du budget média, qui reste maîtrisé et transparent."
+        "a": "Non. Les honoraires de mise en place et de suivi sont séparés du budget média. Votre budget reste maîtrisé et transparent."
       },
       {
         "q": "Comment savoir si c’est rentable ?",
-        "a": "On suit CPL, conversion, volume, éligibilité et performance par offre. Les décisions se prennent sur données : scaling ou arrêt."
+        "a": "On suit le volume de demandes (appels et formulaires), leur qualité, et la performance par offre. Les décisions se prennent sur du concret : renforcer ou arrêter."
       },
       {
         "q": "Peut-on commencer petit ?",
-        "a": "Oui. On priorise une offre d’entrée et un canal. Puis on étend (offres, zones, pages) si les KPIs sont bons."
+        "a": "Oui. On priorise une offre d’entrée et un canal. Puis on étend (offres, pages, zone) si les indicateurs sont bons."
       },
       {
-        "q": "Qu’est-ce qui est inclus dans le pilotage ?",
-        "a": "Optimisations Ads/SEO, améliorations de conversion (CRO), tracking et reporting. Objectif : augmenter les RDV qualifiés et stabiliser le CPL."
+        "q": "Qu’est-ce qui est inclus dans le suivi mensuel ?",
+        "a": "Des optimisations régulières sur le canal choisi, des améliorations de la page (preuves, clarté, formulaire) et un suivi des demandes pour améliorer les rendez-vous qualifiés."
       }
     ]
   },
@@ -125,8 +125,8 @@
   "hero": {
     "id": "slider",
     "eyebrow": "{tokens.pricing}",
-    "titleHtml": "Tarifs clairs,<br />priorisés ROI.",
-    "subtitle": "Diagnostic + exécution + pilotage : {tokens.system}. Objectif : {tokens.goal}.",
+    "titleHtml": "Tarifs clairs,<br />priorisés sur les demandes de devis.",
+    "subtitle": "Diagnostic + mise en place + suivi : {tokens.system}. Objectif : {tokens.goal}.",
     "ctas": [
       { "label": "Demander un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -158,10 +158,10 @@
           "icon": {
             "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" fill=\"#FF6049\" viewBox=\"0 0 256 256\"><path d=\"M63.81,192.19c-47.89-79.81,16-159.62,151.64-151.64C223.43,176.23,143.62,240.08,63.81,192.19Z\" opacity=\"0.2\"></path><path d=\"M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z\"></path></svg>"
           },
-          "kicker": "Diagnostic",
+          "kicker": "Démarrage",
           "price": "690 €",
-          "priceNote": "Démarrage",
-          "description": "Cadrage, priorités, tracking et plan d’action.",
+          "priceNote": "À partir de",
+          "description": "Cadrage, priorités, suivi des demandes et plan d’action.",
           "cta": {
             "label": "Demander un diagnostic",
             "href": "/contact/",
@@ -172,9 +172,9 @@
             "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
             "items": [
               { "iconClass": "bi-check-circle-fill", "text": "Offre d’entrée + zone + objectifs" },
-              { "iconClass": "bi-check-circle-fill", "text": "Plan tracking appels + formulaires" },
+              { "iconClass": "bi-check-circle-fill", "text": "Plan de suivi appels + formulaires" },
               { "iconClass": "bi-check-circle-fill", "text": "Roadmap 30/60/90 jours" },
-              { "iconClass": "bi-check-circle-fill", "text": "Priorité canal (SEO/Ads)" }
+              { "iconClass": "bi-check-circle-fill", "text": "Priorité canal (référencement local / annonces Google)" }
             ]
           }
         },
@@ -189,7 +189,7 @@
           "kicker": "Setup",
           "price": "3 490 €",
           "priceNote": "À partir de",
-          "description": "Page(s) de conversion + tracking + canal prioritaire.",
+          "description": "Page de demande + suivi + canal prioritaire.",
           "cta": {
             "label": "Démarrer le setup",
             "href": "/contact/",
@@ -200,9 +200,9 @@
             "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
             "items": [
               { "iconClass": "bi-plus-circle-fill text-contrast-1000", "text": "Tout le pack Diagnostic" },
-              { "iconClass": "bi-check-circle-fill", "text": "Landing offre d’entrée (CRO-ready)" },
-              { "iconClass": "bi-check-circle-fill", "text": "Tracking events + UTMs + call/form" },
-              { "iconClass": "bi-check-circle-fill", "text": "Activation canal 1 (SEO local OU Ads)" }
+              { "iconClass": "bi-check-circle-fill", "text": "Page d’offre d’entrée (prise de contact facilitée)" },
+              { "iconClass": "bi-check-circle-fill", "text": "Suivi des appels et des formulaires" },
+              { "iconClass": "bi-check-circle-fill", "text": "Activation canal 1 (référencement local OU annonces Google)" }
             ]
           }
         },
@@ -217,7 +217,7 @@
           "kicker": "Pilotage",
           "price": "1 090 €/mois",
           "priceNote": "À partir de",
-          "description": "Optimisation CPL, conversion et qualification.",
+          "description": "Optimisation du coût par demande, de la page et de la qualité des demandes.",
           "cta": {
             "label": "Lancer le pilotage",
             "href": "/contact/",
@@ -228,9 +228,9 @@
             "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
             "items": [
               { "iconClass": "bi-plus-circle-fill text-contrast-1000", "text": "Tout le pack Setup" },
-              { "iconClass": "bi-check-circle-fill", "text": "Optimisations SEO/Ads (selon canal)" },
-              { "iconClass": "bi-check-circle-fill", "text": "Itérations CRO (preuves, formulaires, CTA)" },
-              { "iconClass": "bi-check-circle-fill", "text": "Reporting + décisions (scale/stop)" }
+              { "iconClass": "bi-check-circle-fill", "text": "Optimisations sur le canal choisi" },
+              { "iconClass": "bi-check-circle-fill", "text": "Améliorations de la page (preuves, clarté, formulaire)" },
+              { "iconClass": "bi-check-circle-fill", "text": "Suivi des demandes et décisions : renforcer ou arrêter" }
             ]
           }
         }
@@ -244,18 +244,18 @@
         "href": "/tarifs/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Tarifs et packs : génération de leads assurance, tracking et pilotage"
+          "alt": "Tarifs et packs pour générer des leads assurance en 60/95 : diagnostic, mise en place et suivi mensuel"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "Packs",
-        "title": "Des packs alignés sur l’exécution, pas sur le blabla.",
-        "text": "Le prix suit la réalité : cadrage, mise en place, pilotage. On priorise une offre d’entrée et on mesure dès le départ (appels + formulaires).",
+        "title": "Des packs alignés sur l’exécution et le suivi des demandes.",
+        "text": "Le prix suit la réalité du travail : cadrage, mise en place, puis améliorations régulières. On priorise une offre d’entrée et on suit dès le départ les appels et formulaires, pour éviter de décider à l’aveugle.",
         "bullets": [
-          "Diagnostic : offre d’entrée, zone, tracking, plan d’action.",
-          "Mise en place : page(s) de conversion + acquisition + tracking.",
-          "Pilotage : optimisation CPL, conversion et éligibilité."
+          "Diagnostic : offre d’entrée, zone, suivi des demandes, plan d’action.",
+          "Mise en place : page de demande + canal prioritaire + suivi.",
+          "Suivi mensuel : amélioration du coût par demande et de la qualité des rendez-vous."
         ]
       },
       "ctas": [
@@ -268,7 +268,7 @@
       "id": "prestations",
       "content": {
         "eyebrow": "Leviers",
-        "title": "{tokens.method} : choisir le canal prioritaire puis étendre."
+        "title": "Référencement local ou annonces Google : on démarre par le plus utile, puis on étend."
       },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
@@ -291,7 +291,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Tarifs adaptés au contexte : offre d’entrée, zone, concurrence, canal. Objectif : {tokens.goal}.",
+        "text": "Tarifs adaptés à votre contexte : offre d’entrée, zone 60/95, concurrence et canal. Objectif : {tokens.goal}.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -307,7 +307,7 @@
       "content": {
         "eyebrow": "Devis",
         "title": "On chiffre sur un plan clair, pas à l’aveugle.",
-        "text": "Diagnostic = priorités + ordre d’exécution + estimation du coût (setup/pilotage) et du budget média si Ads."
+        "text": "Le diagnostic sert à cadrer l’offre d’entrée, la zone et le canal prioritaire. Ensuite, on chiffre la mise en place et le suivi mensuel selon vos objectifs de demandes de devis et rendez-vous."
       },
       "ctas": [
         { "label": "Demander un devis", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -318,18 +318,18 @@
     "supportBand": {
       "id": "pilotage",
       "content": {
-        "eyebrow": "Pilotage",
-        "title": "Optimisations continues : CPL, conversion, éligibilité.",
-        "text": "On suit la performance par source/campagne/offre : ce qui marche est amplifié, ce qui ne marche pas est stoppé. Objectif : {tokens.goal} avec un CPL maîtrisé."
+        "eyebrow": "Suivi mensuel",
+        "title": "Améliorations continues : coût par demande, page, qualité des demandes.",
+        "text": "On suit la performance par source et par offre : volume de demandes, coût par demande et part de demandes pertinentes. Ce qui fonctionne est renforcé, le reste est corrigé ou arrêté. Objectif : {tokens.goal} avec un coût maîtrisé."
       },
       "ctas": [
         { "label": "Voir les preuves", "href": "/preuves/", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+        { "label": "Voir le suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "dark" }
       ],
       "media": {
         "img": {
           "src": "/assets/images/app.svg",
-          "alt": "Pilotage : suivi CPL, conversion et qualification des leads assurance"
+          "alt": "Suivi mensuel : coût par demande, demandes de devis et qualification des contacts assurance"
         }
       }
     },
@@ -340,9 +340,9 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Contact",
-        "title": "On te répond avec un plan et un chiffrage.",
-        "text": "Zone : {geo.core}. Démarrage : diagnostic, puis mise en place/pilotage selon canal prioritaire et objectifs.",
-        "cta": { "label": "Obtenir un diagnostic", "href": "/contact/", "variant": "dark" }
+        "title": "On vous répond avec un plan et un chiffrage.",
+        "text": "Zone : {geo.core}. Démarrage : diagnostic, puis mise en place et suivi selon le canal prioritaire et vos objectifs.",
+        "cta": { "label": "Demander un diagnostic", "href": "/contact/", "variant": "dark" }
       }
     }
   }

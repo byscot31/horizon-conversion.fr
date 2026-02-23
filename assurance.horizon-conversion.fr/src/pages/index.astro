@@ -1,269 +1,47 @@
 ---
 // src/pages/index.astro
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { listMetiers, listPrestations, getPrestationBySlug } from "../lib/data";
 
-const seo = {
-	title: "Assurance Horizon Conversion | Génération de leads locaux (60/95) pour acteurs de l’assurance",
-	description:
-		"Méthode mesurable pour générer des leads assurance (agences, courtiers, mutuelles) sur Sud Oise (60) & Nord Val-d’Oise (95) : SEO local, Google Ads, CRO, tracking.",
-	canonical: "/"
-};
+import Hero from "../components/blocks/Hero.astro";
+import MethodVideoProof from "../components/blocks/MethodVideoProof.astro";
+import PrestationsTabs from "../components/blocks/PrestationsTabs.astro";
+import MetiersGrid from "../components/blocks/MetiersGrid.astro";
+import CtaBand from "../components/blocks/CtaBand.astro";
+import SupportBand from "../components/blocks/SupportBand.astro";
+import Packs3Cols from "../components/blocks/Packs3Cols.astro";
+import FaqToggles from "../components/blocks/FaqToggles.astro";
 
-const breadcrumbs = [{ label: "Accueil", href: "/" }];
+import rawPageData from "../data/page_home.json";
+import { hydrateStandardPage } from "../lib/seoTokens";
 
-const prestationsIndex = listPrestations();
-const prestations = await Promise.all(
-	prestationsIndex.slice(0, 4).map((p) => getPrestationBySlug(p.slug))
+import { getMetierBySlug, getPrestationBySlug } from "../lib/data.ts";
+
+const pageData = hydrateStandardPage(rawPageData);
+
+// Hydratation data-driven depuis les slugs du JSON
+const metiers = await Promise.all(
+	pageData.sections.metiersGrid.items.slugs.map((s) => getMetierBySlug(s))
 );
 
-const metiers = listMetiers().slice(0, 6);
+const prestations = await Promise.all(
+	pageData.sections.prestationsTabs.items.slugs.map((s) => getPrestationBySlug(s))
+);
 
-const phoneDisplay = "06 60 92 10 08";
-const phoneTel = "+33660921008";
-const waLink = "https://wa.me/33660921008";
+const faq = pageData.schema?.faq ?? [];
 ---
 
-<SiteLayout
-	seo={seo}
-	h1={null}
-	breadcrumbs={breadcrumbs}
-	schema={{ includeWebsite: true, includeSearchAction: false }}
->
+<SiteLayout seo={pageData.seo} schema={pageData.schema} breadcrumbs={pageData.breadcrumbs}>
+	<Hero {...pageData.hero} />
 
-	<!-- Hero ============================================= -->
-	<section id="slider" class="slider-element">
-		<div class="container">
-			<div class="row flex-row-reverse align-items-center justify-content-center gx-5 py-4 col-mb-50">
-
-				<div class="col-lg-6 col-10 d-flex justify-content-center justify-content-lg-end">
-					<img src="/assets/images/hero.svg" alt="Illustration acquisition & conversion" class="card-img px-4 px-lg-0">
-				</div>
-
-				<div class="col-lg-5">
-					<p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">
-						Acquisition locale Assurance (60/95)
-					</p>
-
-					<h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem;">
-						Générez des leads assurance qualifiés.<br />Mesurés. Scalables.
-					</h1>
-
-					<p class="fs-5 mb-5">
-						Une méthode simple : pages qui convertissent + SEO local + Google Ads + tracking.
-						Objectif : demandes de devis & RDV (pas juste du trafic).
-					</p>
-
-					<div class="d-flex flex-wrap gap-3">
-						<a href="/contact/" class="button button-xlarge button-rounded ls-1 button-reveal py-3 px-5 m-0">
-							<i class="bi-arrow-right"></i><span>Demander un diagnostic</span>
-						</a>
-
-						<a href={waLink} class="button button-xlarge button-rounded button-dark button-border border-width-1 ls-0 fw-medium m-0">
-							<i class="fa-brands fa-whatsapp"></i><span>WhatsApp {phoneDisplay}</span>
-						</a>
-					</div>
-
-					<div class="mt-4 op-08">
-						<small>
-							Cible : agences, courtiers, mutuelles — Sud Oise (60) & Nord Val-d’Oise (95)
-						</small>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<!-- Content ============================================= -->
 	<section id="content">
 		<div class="content-wrap pb-0 pt-0 pt-lg-5">
-
-			<!-- Bloc “preuve / vidéo / process” -->
-			<div class="section dark pt-0 pb-lg-0" style="background: linear-gradient(180deg, #FFF 4rem, #021b4c 4rem, #021b4c 100%);">
-				<div class="container">
-					<div class="row justify-content-center align-items-lg-center gx-5">
-						<div class="col-lg-7 col-xl-6 col-xxl-5">
-							<a href="/methode/">
-								<img src="/assets/images/section-1.jpg" alt="Méthode génération de leads assurance">
-								<i class="uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"></i>
-							</a>
-						</div>
-
-						<div class="col-lg-5 mt-5">
-							<img src="/assets/images/dotted-bg.svg" alt="" class="position-absolute pos-x-end icon-flip-horizontal" style="top: -30px">
-							<p class="mb-4 text-uppercase fw-normal color text-smaller ls-2 op-08">Méthode</p>
-							<h2 class="mb-4 h1">Leads locaux : plus vite, mieux qualifiés, mieux mesurés.</h2>
-							<p class="mb-5 mt-4 op-07">
-								On construit un système complet : pages métiers + prestations + croisements (presta × métier),
-								avec modules locaux (sans pages ville) et un tracking propre.
-							</p>
-
-							<dl class="row mb-4">
-								<dt class="col-sm-1 op-05"><i class="uil uil-plus"></i></dt>
-								<dd class="col-sm-11 mb-3">1–2 offres d’entrée pour stabiliser le coût par lead.</dd>
-
-								<dt class="col-sm-1 op-05"><i class="uil uil-plus"></i></dt>
-								<dd class="col-sm-11 mb-3">CRO : preuve, objections, FAQ, formulaires pré-qualifiants.</dd>
-
-								<dt class="col-sm-1 op-05"><i class="uil uil-plus"></i></dt>
-								<dd class="col-sm-11 mb-3">Attribution appels + formulaires (UTM, events, dashboard).</dd>
-							</dl>
-
-							<div class="d-flex align-items-center">
-								<a href="/methode/" class="button button-rounded button-light button-border border-width-1 ls-0 fw-medium me-2">
-									Voir la méthode
-								</a>
-								<a href="/preuves/" class="button button-rounded button-light button-border border-width-1 ls-0 fw-medium">
-									Voir les preuves
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Prestations (data-driven) -->
-			<div class="section my-0 mb-lg-5 pt-0 pt-lg-5" style="background: linear-gradient(0deg, #FFF 78%, #FFF 78%);">
-				<div class="container">
-					<div class="row ins-categories justify-content-around align-items-center mt-lg-4 gy-4">
-
-						<div class="col-lg-4 mb-5 mb-lg-0">
-							<p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">Prestations</p>
-							<h2 class="mb-5 h2 lh-sm">Des leviers pensés pour générer des leads, pas du trafic.</h2>
-
-							<div class="nav flex-lg-column" id="side-tab" role="tablist" aria-orientation="vertical">
-								{prestations.map((p, idx) => (
-									<a
-										class={`nav-link ${idx === 0 ? "active" : ""}`}
-										id={`${p.slug}-tab`}
-										data-bs-toggle="pill"
-										href={`#${p.slug}`}
-										role="tab"
-										aria-controls={p.slug}
-										aria-selected={idx === 0 ? "true" : "false"}
-									>
-										<div class="tab-header d-flex align-items-center">
-											<img src="/assets/images/icons/online.svg" alt="" />
-											<span>{p.shortLabel ?? p.label}</span>
-										</div>
-										<div class="tab-desc mt-2">
-											<p class="mb-0 lh-base">{p.promise ?? p.meta?.description}</p>
-										</div>
-									</a>
-								))}
-							</div>
-
-							<div class="mt-4">
-								<a href="/prestations/" class="button button-rounded button-dark button-border border-width-1 ls-0 fw-medium">
-									Voir toutes les prestations
-								</a>
-							</div>
-						</div>
-
-						<div class="col-lg-6">
-							<div class="tab-content" id="insurance-tabContent">
-								{prestations.map((p, idx) => (
-									<div
-										class={`tab-pane fade ${idx === 0 ? "show active" : ""}`}
-										id={p.slug}
-										role="tabpanel"
-										aria-labelledby={`${p.slug}-tab`}
-									>
-										<div class="d-flex flex-column mw-sm mx-auto align-items-center text-center">
-											<img src="/assets/images/services/home.svg" alt="" class="mb-5" width="440">
-											<h3 class="h1 mb-3">{p.label}</h3>
-											<p>{p.meta?.description}</p>
-											<a href={`/prestations/${p.slug}/`} class="btn btn-link">
-												<u>Voir le détail</u> <i class="ph-arrow-right position-relative" style="top:2px"></i>
-											</a>
-										</div>
-									</div>
-								))}
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			<!-- Métiers (data-driven) -->
-			<div class="row align-items-stretch grid-border border-top border-bottom border-f5">
-				{metiers.map((m, idx) => (
-					<div class={`col-lg-4 col-sm-6 col-padding ${idx % 2 === 1 ? "bg-light" : ""}`}>
-						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
-							<div class="fbox-icon mb-4">
-								<img src="/assets/images/icons/contract.svg" alt="">
-							</div>
-							<div class="fbox-content">
-								<h3 class="text-transform-none ls-0 font-primary mb-3">{m.title}</h3>
-								<p class="text-dark op-06">
-									Pages métiers + croisements prestation × métier : on capte l’intention locale et on la transforme en demandes de devis/RDV.
-								</p>
-								<a href={`/metiers/${m.slug}/`} class="btn btn-link p-0">
-									<u>Voir la page métier</u>
-								</a>
-							</div>
-						</div>
-					</div>
-				))}
-			</div>
-
-			<!-- Bandeau CTA -->
-			<div class="section my-0 py-6" style="background: url('/assets/images/section-bg.jpg') no-repeat center 70% / cover;">
-				<div class="container">
-					<div class="row py-5">
-						<div class="col-md-7">
-							<p class="text-uppercase ls-4 text-smaller mb-3 fw-bold">Diagnostic</p>
-							<h2 class="text-dark mb-3 fw-normal" style="font-size: 2.6rem;">
-								On te dit quoi faire (et dans quel ordre) pour générer des leads.
-							</h2>
-							<p class="fs-5 mb-5">
-								Tu repars avec un plan actionnable : offre d’entrée, pages à créer, tracking, et canal prioritaire (SEO/Ads).
-							</p>
-
-							<div class="d-flex flex-wrap gap-3">
-								<a href="/contact/" class="button button-xlarge button-rounded ls-1 button-reveal m-0">
-									<i class="bi-arrow-right"></i><span>Réserver un audit</span>
-								</a>
-								<a href={`tel:${phoneTel}`} class="button button-xlarge button-rounded button-light button-border border-width-1 ls-0 fw-medium m-0">
-									<i class="bi-telephone"></i><span>Appeler {phoneDisplay}</span>
-								</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Support (recyclé en “traitement des leads”) -->
-			<div class="section my-0 py-6">
-				<div class="container">
-					<div class="row justify-content-center align-items-center gutter-50">
-						<div class="col-md-6">
-							<p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">Traitement des leads</p>
-							<h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">
-								Moins de perte : rappel rapide, qualification, RDV.
-							</h2>
-							<p class="fs-5 mb-5">
-								On ne “génère” pas des leads pour les perdre : scripts, relances, tracking, et (option) CRM/workflows.
-							</p>
-							<a href="/prestations/crm-workflow/" class="button button-rounded button-dark button-border border-width-1 ls-0 fw-medium">
-								Voir CRM & workflows
-							</a>
-							<a href="/prestations/tracking-attribution/" class="button button-rounded button-dark button-border border-width-1 ls-0 fw-medium ms-2">
-								Voir tracking
-							</a>
-						</div>
-
-						<div class="col-md-5">
-							<img src="/assets/images/app.svg" alt="Illustration workflow & dashboard">
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<MethodVideoProof data={pageData.sections.methodVideoProof} />
+			<PrestationsTabs data={pageData.sections.prestationsTabs} prestations={prestations} />
+			<MetiersGrid data={pageData.sections.metiersGrid} metiers={metiers} />
+			<CtaBand data={pageData.sections.ctaBand} />
+			<SupportBand data={pageData.sections.supportBand} />
+			<Packs3Cols data={pageData.sections.offersPacks} />
+			<FaqToggles data={pageData.sections.faqToggles} faq={faq} />
 		</div>
-	</section><!-- #content end -->
-
+	</section>
 </SiteLayout>

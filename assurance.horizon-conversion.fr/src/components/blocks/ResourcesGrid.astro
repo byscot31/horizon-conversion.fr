@@ -33,7 +33,7 @@ const cardBodyClass: string = data?.layout?.cardBodyClass ?? "card-body p-3";
 
     {/* Header optionnel : badge + h2 + subtitle */}
     {(header?.badge || header?.title || header?.subtitle) && (
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-4">
           <div class="col-lg-10">
             {header?.badge && (
                 <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">

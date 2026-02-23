@@ -65,7 +65,7 @@ const hrefFor = (prestaSlug: string) => {
 
       <div class="col-lg-6">
         <div class="tab-content" id="insurance-tabContent">
-          {prestations.map((p, idx) => (
+          {items.map((p: any, idx: number) => (
               <div
                   class={`tab-pane fade ${idx === 0 ? "show active" : ""}`}
                   id={p.slug}

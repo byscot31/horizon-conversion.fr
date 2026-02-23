@@ -28,15 +28,15 @@
       ],
       "painPoints": [
         "Trafic sans demandes de devis",
-        "Leads non qualifiés",
-        "CPL instable",
-        "Attribution floue (appels, formulaires, campagnes)"
+        "Demandes hors cible ou difficiles à joindre",
+        "Coût par demande instable",
+        "Difficulté à relier appels et formulaires aux actions menées"
       ],
       "desiredOutcomes": [
-        "Pages métiers orientées conversion",
-        "Acquisition locale (SEO/Ads) priorisée ROI",
-        "Mesure fiable des sources",
-        "Plus de demandes de devis & RDV qualifiés"
+        "Pages par métier orientées demandes de devis",
+        "Acquisition locale adaptée au 60/95",
+        "Suivi clair des appels et des formulaires",
+        "Plus de demandes de devis et de rendez-vous qualifiés"
       ]
     },
     "kw": {
@@ -51,10 +51,10 @@
       ],
       "supporting": [
         "pages métiers assurance",
-        "acquisition locale assurance",
-        "landing page assurance",
-        "conversion devis assurance",
-        "tracking leads assurance"
+        "acquisition locale assurance 60 95",
+        "page demande de devis assurance",
+        "rendez-vous assurance",
+        "suivi des appels et formulaires"
       ],
       "entities": [
         "assurance",
@@ -65,13 +65,32 @@
         "assurance pro",
         "assurance vie",
         "patrimoine"
+      ],
+      "longTail": [
+        "générer des leads pour agence d’assurance en 60/95",
+        "obtenir des demandes de devis pour courtier en assurance Sud Oise",
+        "leads mutuelle locale Nord Val-d’Oise",
+        "augmenter les rendez-vous assurance emprunteur en 60/95",
+        "prospects assurance pro dans l’Oise et le Val-d’Oise"
+      ],
+      "semantic": [
+        "intention de recherche",
+        "zone de chalandise",
+        "offre d’entrée",
+        "messages de réassurance",
+        "avis clients",
+        "pré-qualification",
+        "appels entrants",
+        "devis en ligne",
+        "prise de rendez-vous",
+        "qualité des demandes"
       ]
     },
     "tokens": {
       "offer": "leads assurance",
       "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking",
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages par métier + acquisition locale + suivi des appels et formulaires",
       "hub": "hub métiers"
     },
     "internalLinks": [
@@ -79,16 +98,16 @@
       { "href": "/preuves/", "anchor": "preuves" },
       { "href": "/tarifs/", "anchor": "tarifs" },
       { "href": "/contact/", "anchor": "diagnostic" },
-      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
-      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
-      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
-      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" }
+      { "href": "/prestations/seo-local/", "anchor": "référencement local assurance" },
+      { "href": "/prestations/ads-local/", "anchor": "annonces Google assurance" },
+      { "href": "/prestations/cro/", "anchor": "optimisation des pages" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "suivi des appels et formulaires" }
     ]
   },
 
   "seoTemplates": {
     "title": "Métiers {brand} | {tokens.offer} ({geo.core})",
-    "description": "Hub métiers pour générer {tokens.offer} sur {geo.core}. {tokens.method} avec {tokens.system}. Objectif : {tokens.goal}."
+    "description": "Choisissez votre métier (agence, courtier, mutuelle…) et obtenez plus de {tokens.offer} en 60/95. {tokens.method} avec {tokens.system}. Objectif : {tokens.goal}."
   },
 
   "schema": {
@@ -97,23 +116,23 @@
     "faq": [
       {
         "q": "Pourquoi une page par métier ?",
-        "a": "Parce que les intentions, objections et preuves diffèrent selon agences, courtiers et mutuelles. Une page métier améliore la conversion vers devis/RDV."
+        "a": "Parce que les recherches, les objections et les preuves attendues diffèrent selon agences, courtiers et mutuelles. Une page dédiée aide à obtenir plus de demandes de devis et de rendez-vous."
       },
       {
         "q": "Quels métiers sont couverts ?",
-        "a": "Agences d’assurance, courtiers, mutuelles locales, assurance emprunteur, assurance pro, assurance vie & patrimoine."
+        "a": "Agences d’assurance, courtiers, mutuelles locales, assurance emprunteur, assurance pro, assurance vie et patrimoine."
       },
       {
         "q": "Quelle est la prochaine étape ?",
-        "a": "Un diagnostic pour cadrer l’offre d’entrée, la zone, le tracking et le canal prioritaire (SEO/Ads)."
+        "a": "Un diagnostic pour cadrer l’offre d’entrée, la zone 60/95, le suivi des demandes (appels et formulaires) et le canal à activer en premier."
       },
       {
-        "q": "SEO local ou Ads en premier ?",
-        "a": "Ads pour lancer vite, SEO local pour stabiliser. Le choix dépend du délai, du budget et de la concurrence."
+        "q": "Référencement local ou annonces Google en premier ?",
+        "a": "Les annonces permettent de démarrer vite. Le référencement local stabilise dans la durée. Le choix dépend de votre délai, de votre budget et de la concurrence sur votre zone."
       },
       {
-        "q": "Comment éviter les leads non qualifiés ?",
-        "a": "Par ciblage offre/zone, pages orientées conversion, formulaires pré-qualifiants, call tracking et pilotage sur leads éligibles."
+        "q": "Comment éviter les demandes non qualifiées ?",
+        "a": "En clarifiant l’offre et la zone, en ajoutant des messages de réassurance, puis une pré-qualification simple dans le formulaire. Le suivi des appels aide aussi à trier rapidement."
       }
     ]
   },
@@ -121,7 +140,7 @@
   "hero": {
     "id": "slider",
     "eyebrow": "{tokens.hub}",
-    "titleHtml": "Choisir votre métier,<br />et générer {tokens.offer}.",
+    "titleHtml": "Choisissez votre métier,<br />et obtenez des demandes de devis en 60/95.",
     "subtitle": "{tokens.method}. Objectif : {tokens.goal}.",
     "ctas": [
       { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -145,7 +164,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Chaque page métier cadre l’offre d’entrée, répond aux objections et guide vers {tokens.goal}.",
+        "text": "Chaque page métier clarifie l’offre, répond aux objections et facilite la demande de devis pour générer {tokens.goal}.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -154,7 +173,8 @@
       "id": "prestations",
       "content": {
         "eyebrow": "Prestations",
-        "title": "Les leviers à activer selon le métier."
+        "title": "Les leviers à activer selon votre métier.",
+        "text": "Référencement local, annonces Google et pages claires : on démarre par le plus utile, puis on étend selon la qualité des demandes."
       },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
@@ -171,8 +191,8 @@
       },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Plan d’action par métier, priorisé ROI.",
-        "text": "Offre d’entrée, zone, tracking, page(s) à créer, canal prioritaire (SEO/Ads) et ordre d’exécution."
+        "title": "Plan d’action par métier, priorisé sur la rentabilité.",
+        "text": "Offre d’entrée, zone, suivi des appels et formulaires, pages à créer, canal prioritaire (référencement local ou annonces Google) et ordre d’exécution."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -183,18 +203,18 @@
     "supportBand": {
       "id": "support",
       "content": {
-        "eyebrow": "Traitement des leads",
-        "title": "Moins de perte : rappel rapide, qualification, RDV.",
-        "text": "On structure le traitement : scripts, relances, scoring simple et suivi des sources. Option : CRM/workflows."
+        "eyebrow": "Traitement des demandes",
+        "title": "Moins de perte : rappel rapide, qualification, rendez-vous.",
+        "text": "On structure le traitement des demandes : questions simples, relances et suivi des sources. Objectif : transformer plus de demandes en rendez-vous utiles."
       },
       "ctas": [
         { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "dark" }
       ],
       "media": {
         "img": {
           "src": "/assets/images/app.svg",
-          "alt": "Workflow et dashboard : suivi des leads par source et qualification"
+          "alt": "Suivi des demandes : appels, formulaires et qualification par source"
         }
       }
     },

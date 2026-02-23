@@ -1,0 +1,67 @@
+---
+// src/components/blocks/ProcessSteps3.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const steps = Array.isArray(data?.steps) ? data.steps : [];
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section bg-transparent my-0 mb-lg-5 pt-0 pt-lg-5";
+const containerClass = layout.containerClass ?? "container";
+const rowClass = layout.rowClass ?? "row g-4";
+const colClass = layout.colClass ?? "col-lg-4";
+const cardClass = layout.cardClass ?? "card rounded-6 shadow-sm border-0 h-100";
+const cardBodyClass = layout.cardBodyClass ?? "card-body p-4";
+---
+{steps.length > 0 && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class={rowClass}>
+      {steps.map((s: any, idx: number) => (
+          <div class={colClass}>
+            <div class={cardClass}>
+              <div class={cardBodyClass}>
+                <div class="text-uppercase ls-2 text-smaller op-06 mb-2">
+                  Étape {idx + 1}
+                </div>
+                {s?.title && <h3 class="h4 mb-2">{s.title}</h3>}
+                {s?.text && <p class="op-08 mb-3">{s.text}</p>}
+
+                {Array.isArray(s?.bullets) && s.bullets.length > 0 && (
+                    <ul class="iconlist mb-0">
+                      {s.bullets.map((b: string) => (
+                          <li class="d-block op-08 mb-2"><i class="bi-check-lg"></i> {b}</li>
+                      ))}
+                    </ul>
+                )}
+
+                {s?.cta?.href && s?.cta?.label && (
+                    <div class="mt-3">
+                      <a href={s.cta.href} class={s.cta.class ?? "btn btn-link p-0"}>
+                        <u>{s.cta.label}</u>
+                      </a>
+                    </div>
+                )}
+              </div>
+            </div>
+          </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+  )}

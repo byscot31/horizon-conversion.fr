@@ -1,0 +1,85 @@
+---
+// src/components/blocks/ProcessBenchmarks.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+
+const steps = Array.isArray(data?.steps) ? data.steps : [];
+const deliverables: string[] = Array.isArray(data?.deliverables) ? data.deliverables : [];
+const benchmarks = data?.benchmarks ?? null;
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section bg-transparent pt-0 pb-lg-0";
+const containerClass = layout.containerClass ?? "container";
+---
+{(steps.length > 0 || deliverables.length > 0 || benchmarks?.items?.length > 0) && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center mb-4">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">{header.badge}</p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class="row g-4">
+      {/* Steps */}
+      {steps.length > 0 && (
+          <div class="col-lg-6">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                <h3 class="h4 mb-3">{data?.labels?.stepsTitle ?? "Process (5 étapes)"}</h3>
+                <ol class="iconlist mb-0">
+                  {steps.map((s: any) => (
+                      <li class="d-block mb-2">
+                        <strong>{s?.title ?? ""}</strong>
+                        {s?.text ? <span class="op-07"> — {s.text}</span> : null}
+                      </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+      )}
+
+      {/* Deliverables + Benchmarks */}
+      <div class="col-lg-6">
+        <div class="card rounded-6 shadow-sm border-0 h-100">
+          <div class="card-body p-4">
+            {deliverables.length > 0 && (
+                <>
+                  <h3 class="h4 mb-3">{data?.labels?.deliverablesTitle ?? "Livrables tangibles"}</h3>
+                  <ul class="iconlist mb-4">
+                    {deliverables.map((x) => <li class="d-block mb-2"><i class="bi-check-lg"></i> {x}</li>)}
+                  </ul>
+                </>
+            )}
+
+            {benchmarks?.items?.length > 0 && (
+                <>
+                  <h3 class="h4 mb-3">{benchmarks?.title ?? "Benchmarks réalistes"}</h3>
+                  <ul class="iconlist mb-0">
+                    {benchmarks.items.map((b: any) => (
+                        <li class="d-block mb-3">
+                          <div class="fw-bold">
+                            {b?.label}{b?.range ? <span class="op-07"> — {b.range}</span> : null}
+                          </div>
+                          {b?.note && <div class="op-07">{b.note}</div>}
+                        </li>
+                    ))}
+                  </ul>
+                </>
+            )}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+  )}

@@ -1,0 +1,120 @@
+---
+// src/components/blocks/ProofAssets.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const screenshots = Array.isArray(data?.screenshots) ? data.screenshots : [];
+
+const attribution = data?.attribution ?? null;
+const benchmarks = data?.benchmarks ?? null;
+const reassurance = data?.reassurance ?? null;
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section my-0 py-6";
+const containerClass = layout.containerClass ?? "container";
+---
+
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+
+    {/* Header optionnel */}
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">{header.title}</h2>}
+            {header?.subtitle && <p class="fs-5 mb-5">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    {/* Captures */}
+    {screenshots.length > 0 && (
+        <div class="row g-4 mb-5">
+          {screenshots.map((s: any) => (
+              <div class="col-lg-4">
+                <div class="card rounded-6 shadow-sm border-0 h-100 overflow-hidden">
+                  {s?.src && <img src={s.src} alt={s.alt ?? ""} />}
+                  {(s?.caption || s?.title) && (
+                      <div class="card-body p-3">
+                        {s?.title && <div class="fw-bold mb-1">{s.title}</div>}
+                        {s?.caption && <div class="op-07">{s.caption}</div>}
+                      </div>
+                  )}
+                </div>
+              </div>
+          ))}
+        </div>
+    )}
+
+    <div class="row g-4">
+      {/* Attribution */}
+      {attribution?.text && (
+          <div class="col-lg-6">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                {attribution?.title && <h3 class="h4 mb-3">{attribution.title}</h3>}
+                <p class="mb-0 op-08">{attribution.text}</p>
+              </div>
+            </div>
+          </div>
+      )}
+
+      {/* Benchmarks */}
+      {benchmarks?.items?.length > 0 && (
+          <div class="col-lg-6">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                {benchmarks?.title && <h3 class="h4 mb-3">{benchmarks.title}</h3>}
+
+                <ul class="iconlist mb-0">
+                  {benchmarks.items.map((b: any) => (
+                      <li class="d-block mb-3">
+                        <div class="fw-bold">
+                          {b?.kpi}{b?.range ? <span class="op-07"> — {b.range}</span> : null}
+                        </div>
+                        {b?.note && <div class="op-07">{b.note}</div>}
+                      </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+      )}
+
+      {/* Réassurance */}
+      {(reassurance?.deliverables?.length > 0 || reassurance?.refusals?.length > 0) && (
+          <div class="col-12">
+            <div class="card rounded-6 shadow-sm border-0">
+              <div class="card-body p-4">
+                <div class="row g-4">
+                  {reassurance?.deliverables?.length > 0 && (
+                      <div class="col-lg-6">
+                        {reassurance?.deliverablesTitle && <h3 class="h4 mb-3">{reassurance.deliverablesTitle}</h3>}
+                        <ul class="iconlist">
+                          {reassurance.deliverables.map((x: string) => <li class="d-block op-08"><i class="bi-check-lg"></i> {x}</li>)}
+                        </ul>
+                      </div>
+                  )}
+
+                  {reassurance?.refusals?.length > 0 && (
+                      <div class="col-lg-6">
+                        {reassurance?.refusalsTitle && <h3 class="h4 mb-3">{reassurance.refusalsTitle}</h3>}
+                        <ul class="iconlist">
+                          {reassurance.refusals.map((x: string) => <li class="d-block op-08"><i class="bi-x-circle"></i> {x}</li>)}
+                        </ul>
+                      </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,93 @@
+---
+// src/components/blocks/CrossProof.astro
+// data.proof.mode: "miniCases" | "metrics"
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const proof = data?.proof ?? {};
+const mode: "miniCases" | "metrics" = proof?.mode ?? "miniCases";
+
+const miniCases = Array.isArray(proof?.miniCases) ? proof.miniCases : [];
+const metricsItems = Array.isArray(proof?.metrics?.items) ? proof.metrics.items : [];
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section my-0 py-6";
+const containerClass = layout.containerClass ?? "container";
+---
+
+{(miniCases.length > 0 || metricsItems.length > 0) && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">{header.badge}</p>
+            )}
+            {header?.title && <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">{header.title}</h2>}
+            {header?.subtitle && <p class="fs-5 mb-5">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    {mode === "miniCases" && miniCases.length > 0 && (
+        <div class="row g-4">
+          {miniCases.map((it: any) => (
+              <div class="col-lg-6">
+                <div class="card rounded-6 shadow-sm border-0 h-100">
+                  <div class="card-body p-4">
+                    {it?.title && <h3 class="h4 mb-3">{it.title}</h3>}
+                    <dl class="row mb-0">
+                      {it?.context && (
+                          <>
+                            <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Contexte</dt>
+                            <dd class="col-12 mb-3">{it.context}</dd>
+                          </>
+                      )}
+                      {it?.action && (
+                          <>
+                            <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Action</dt>
+                            <dd class="col-12 mb-3">{it.action}</dd>
+                          </>
+                      )}
+                      {it?.result && (
+                          <>
+                            <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Résultat</dt>
+                            <dd class="col-12 mb-0"><strong>{it.result}</strong></dd>
+                          </>
+                      )}
+                    </dl>
+                  </div>
+                </div>
+              </div>
+          ))}
+        </div>
+    )}
+
+    {mode === "metrics" && metricsItems.length > 0 && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card rounded-6 shadow-sm border-0">
+              <div class="card-body p-4">
+                {proof?.metrics?.title && <h3 class="h4 mb-3">{proof.metrics.title}</h3>}
+                <ul class="list-unstyled mb-0">
+                  {metricsItems.map((m: any) => (
+                      <li class="mb-3">
+                        <div class="fw-bold">
+                          {m?.label}{m?.range ? <span class="op-07"> — {m.range}</span> : null}
+                        </div>
+                        {m?.note && <div class="op-07">{m.note}</div>}
+                      </li>
+                  ))}
+                </ul>
+                {proof?.metrics?.microcopy && <p class="op-06 mt-3 mb-0">{proof.metrics.microcopy}</p>}
+              </div>
+            </div>
+          </div>
+        </div>
+    )}
+
+  </div>
+</div>
+  )}

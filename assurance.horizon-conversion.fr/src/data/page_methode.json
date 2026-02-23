@@ -8,18 +8,30 @@
 
   "seoMap": {
     "brand": "Horizon Conversion",
+
     "intent": {
-      "primary": "transactionnel",
-      "secondary": ["commercial", "informationnel"],
+      "primary": "commercial",
+      "secondary": ["transactionnel", "informationnel"],
       "stage": "consideration",
-      "microConversions": ["audit", "diagnostic", "appel", "whatsapp"]
+      "microConversions": ["diagnostic", "appel", "whatsapp"]
     },
+
     "geo": {
       "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
       "departements": ["60", "95"],
-      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "places": [
+        "Chantilly",
+        "Senlis",
+        "Creil",
+        "Persan",
+        "Lamorlaye",
+        "Gouvieux",
+        "Nogent-sur-Oise",
+        "Clermont (Oise)"
+      ],
       "positioning": "local-sans-pages-villes"
     },
+
     "audience": {
       "segments": [
         { "id": "agences", "label": "Agences d’assurance", "priority": 1 },
@@ -27,78 +39,110 @@
         { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
       ],
       "painPoints": [
-        "Leads non qualifiés",
-        "CPL instable",
-        "Dépendance aux recommandations / réseau",
-        "Trafic sans demandes de devis",
-        "Attribution floue (appels, formulaires, campagnes)"
+        "Des demandes hors cible ou difficiles à joindre",
+        "Un coût par demande qui varie trop",
+        "Une dépendance aux recommandations et au réseau",
+        "Un site qui attire, mais génère peu de demandes de devis",
+        "Des appels et formulaires difficiles à relier aux actions menées"
       ],
       "desiredOutcomes": [
-        "Plus de demandes de devis",
-        "Plus de RDV qualifiés",
-        "Mesure fiable des sources",
-        "Baisse progressive du CPL",
-        "Scaling des campagnes rentables"
+        "Plus de demandes de devis en local",
+        "Plus de rendez-vous cohérents avec vos offres",
+        "Une vision claire des sources (appels et formulaires)",
+        "Une baisse progressive du coût par demande",
+        "Renforcer ce qui fonctionne, arrêter ce qui ne fonctionne pas"
       ]
     },
-    "kw": {
+
+    "keywords": {
       "primary": "méthode génération leads assurance",
+      "longTail": [
+        "méthode pour générer des leads assurance en 60/95",
+        "méthode pour obtenir des demandes de devis assurance dans le Sud de l’Oise",
+        "générer des rendez-vous qualifiés pour agence d’assurance 60 95",
+        "méthode leads pour courtier en assurance dans l’Oise et le Val-d’Oise",
+        "comment attirer des prospects assurance locaux 60 95"
+      ],
       "secondary": [
         "génération de leads assurance",
         "leads assurance 60 95",
-        "méthode leads courtier assurance",
-        "SEO local assurance",
-        "Google Ads assurance",
-        "CRO assurance",
-        "landing page assurance",
-        "tracking appels formulaires",
-        "attribution leads assurance",
-        "coût par lead assurance"
-      ],
-      "supporting": [
-        "devis assurance en ligne",
-        "RDV assurance",
-        "formulaire pré-qualification assurance",
-        "call tracking assurance",
-        "tableau de bord leads",
-        "UTM Google Ads",
+        "référencement local assurance",
+        "annonces Google assurance",
+        "page de demande de devis assurance",
+        "suivi des appels",
+        "suivi des formulaires",
+        "qualifier des demandes de devis",
+        "coût par demande assurance",
         "Google Business Profile assurance"
       ],
-      "entities": [
-        "assurance",
-        "agence d’assurance",
-        "courtier",
-        "mutuelle",
-        "devis",
-        "rendez-vous",
-        "SEO local",
-        "Google Ads",
-        "CRO",
-        "tracking",
-        "attribution"
+      "semantic": [
+        "zone de chalandise",
+        "intention de recherche",
+        "offre d’entrée",
+        "messages de réassurance",
+        "avis clients",
+        "preuves et cas concrets",
+        "pré-qualification",
+        "appels entrants",
+        "prise de rendez-vous",
+        "taux de transformation",
+        "concurrence locale"
       ]
     },
+
     "tokens": {
       "offer": "leads assurance",
-      "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking"
+      "goal": "demandes de devis et rendez-vous qualifiés",
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages par métier + acquisition locale + suivi des appels et formulaires",
+      "hub": "Assurance Horizon Conversion"
     },
+
     "internalLinks": [
-      { "href": "/preuves/", "anchor": "preuves & résultats" },
+      { "href": "/preuves/", "anchor": "preuves et exemples" },
       { "href": "/tarifs/", "anchor": "tarifs" },
-      { "href": "/contact/", "anchor": "diagnostic" },
-      { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
-      { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
-      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
-      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" },
-      { "href": "/prestations/crm-workflow/", "anchor": "CRM & workflows" }
-    ]
+      { "href": "/contact/", "anchor": "demander un diagnostic" },
+      { "href": "/prestations/seo-local/", "anchor": "référencement local pour assureurs" },
+      { "href": "/prestations/ads-local/", "anchor": "annonces Google pour assureurs" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "suivi des appels et formulaires" }
+    ],
+
+    "contentPlan": {
+      "promise": "Une méthode simple pour obtenir plus de demandes de devis assurance en 60/95, avec un suivi clair des appels et formulaires.",
+      "benefits": [
+        "Des demandes mieux ciblées (moins de hors zone / hors besoin)",
+        "Des pages adaptées à votre métier et à vos offres prioritaires",
+        "Un démarrage possible rapidement via les annonces, puis une stabilité via le référencement local",
+        "Une vision claire des demandes reçues (appels + formulaires) pour décider sur du factuel"
+      ],
+      "proof": [
+        "Exemples de pages et retours sur la page Preuves",
+        "Approche par micro-secteur quand c’est possible",
+        "Méthode structurée : priorités, exécution, suivi"
+      ],
+      "h1": "Méthode pour générer des leads assurance en 60/95",
+      "h2": [
+        "Le principe : capter une intention locale et obtenir une demande de devis",
+        "Étape 1 : cadrer l’offre et la zone de chalandise",
+        "Étape 2 : construire une page qui donne envie de contacter",
+        "Étape 3 : activer le référencement local et les annonces Google",
+        "Étape 4 : suivre les appels et formulaires, puis améliorer ce qui fonctionne",
+        "Questions fréquentes"
+      ],
+      "h3": [
+        "Agence d’assurance : demandes de devis auto, habitation, pro",
+        "Courtier : prospects mieux filtrés et rendez-vous utiles",
+        "Mutuelle : demandes cohérentes avec vos garanties",
+        "Pré-qualification : limiter les demandes hors cible",
+        "Google Business Profile : présence locale crédible",
+        "Messages de réassurance : avis, preuves, clarté"
+      ]
+    }
   },
 
   "seoTemplates": {
-    "title": "Méthode {brand} | {tokens.offer} ({geo.core}) : {tokens.method}",
-    "description": "Méthode orientée conversion pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Pour {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label}."
+    "title": "Méthode | Générer des leads assurance en 60/95 — {brand}",
+    "description": "Méthode pour obtenir plus de demandes de devis assurance en 60/95 : référencement local, annonces Google, pages claires et suivi des appels et formulaires. Pour agences, courtiers et mutuelles."
   },
 
   "schema": {
@@ -106,40 +150,40 @@
     "includeSearchAction": false,
     "faq": [
       {
-        "q": "En combien de temps voit-on des leads ?",
-        "a": "Google Ads : immédiat (dès la mise en ligne). SEO local : 4 à 12 semaines selon historique, concurrence et qualité du tracking."
+        "q": "En combien de temps voit-on des demandes ?",
+        "a": "Les annonces Google peuvent générer des demandes dès la mise en ligne. Le référencement local progresse sur plusieurs semaines selon l’historique, la concurrence et la qualité des pages."
       },
       {
-        "q": "Pourquoi combiner SEO local, Ads et CRO ?",
-        "a": "Le SEO local stabilise l’acquisition, les Ads accélèrent le volume, et le CRO améliore le taux de conversion. Ensemble, cela réduit le coût par lead et augmente les RDV qualifiés."
+        "q": "Pourquoi combiner référencement local et annonces Google ?",
+        "a": "Les annonces aident à démarrer rapidement. Le référencement local stabilise dans la durée. Ensemble, vous obtenez du volume et une acquisition plus régulière."
       },
       {
-        "q": "Comment évitez-vous les leads non qualifiés ?",
-        "a": "On filtre par offres prioritaires, zones, messages d’annonce, formulaires pré-qualifiants et call tracking. Ensuite, on suit un scoring simple pour qualifier rapidement."
+        "q": "Comment évitez-vous les demandes non qualifiées ?",
+        "a": "On clarifie l’offre et la zone, on travaille les messages de réassurance, puis on ajoute une pré-qualification simple dans le formulaire. Objectif : réduire les demandes hors cible et augmenter les rendez-vous utiles."
       },
       {
-        "q": "Travaillez-vous avec des pages villes ?",
-        "a": "Non. On privilégie une structure intentionnelle (offres, preuves, objections, FAQ) et des modules locaux, sans multiplier des pages villes."
+        "q": "Travaillez-vous avec des pages par ville ?",
+        "a": "Non. Nous privilégions une structure par intention (métier, offre, objections, FAQ) et des modules locaux, sans multiplier des pages par commune."
       },
       {
-        "q": "Que mesurez-vous exactement ?",
-        "a": "Les appels et formulaires, la source/campagne/offre, le coût par lead, le taux de conversion et la part de leads éligibles via un tableau de bord simple."
+        "q": "Que suivez-vous exactement ?",
+        "a": "Les demandes reçues (appels et formulaires) et leur qualité, afin de savoir ce qui génère réellement des demandes de devis et des rendez-vous."
       },
       {
         "q": "Quelle est la première étape ?",
-        "a": "Définir l’offre d’entrée, la zone et le tracking, puis construire la page de conversion avant d’activer l’acquisition."
+        "a": "Cadrer l’offre d’entrée et la zone, puis construire une page claire avant d’activer l’acquisition."
       }
     ]
   },
 
   "hero": {
     "id": "slider",
-    "eyebrow": "Méthode ({tokens.method})",
-    "titleHtml": "Générer {tokens.offer} ({geo.departements.0}/{geo.departements.1}),<br />de façon mesurable.",
-    "subtitle": "{tokens.system}. Objectif : {tokens.goal}.",
+    "eyebrow": "Méthode (60/95) : demandes de devis et rendez-vous",
+    "titleHtml": "Générer des leads assurance en 60/95,<br />de façon simple et mesurable.",
+    "subtitle": "Référencement local + annonces Google + suivi des appels et formulaires. Objectif : {tokens.goal}.",
     "ctas": [
       {
-        "label": "Obtenir un diagnostic",
+        "label": "Demander un diagnostic",
         "href": "/contact/",
         "icon": "bi-arrow-right",
         "variant": "primary"
@@ -163,18 +207,18 @@
         "href": "/preuves/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Méthode de génération de leads assurance : structure, acquisition, conversion, tracking"
+          "alt": "Méthode pour générer des demandes de devis assurance : pages claires, acquisition locale, suivi des appels et formulaires"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Système",
-        "title": "Un système orienté {tokens.goal}, pas du trafic.",
-        "text": "On aligne intention locale, preuve, conversion et mesure. Le but est de transformer la demande (SEO/Ads) en contacts actionnables avec une attribution claire.",
+        "eyebrow": "Le principe",
+        "title": "Un système orienté demandes de devis, pas seulement des visites.",
+        "text": "La méthode repose sur 4 points : une offre d’entrée claire, une page qui rassure, une acquisition locale (référencement et/ou annonces), et un suivi simple des appels et formulaires. Le but est de transformer une recherche locale en demande de devis exploitable.",
         "bullets": [
-          "Offre d’entrée priorisée pour stabiliser le coût par lead.",
-          "Pages de conversion : preuves, objections, FAQ, formulaires pré-qualifiants.",
-          "Tracking appels + formulaires : source, campagne, offre, éligibilité."
+          "Offre d’entrée priorisée pour attirer les bons profils et stabiliser le coût par demande.",
+          "Page de demande : preuves, réponses aux objections, FAQ utile, formulaire clair avec pré-qualification.",
+          "Suivi des demandes : appels et formulaires, pour décider sur du factuel (qualité et volume)."
         ]
       },
       "ctas": [
@@ -183,11 +227,41 @@
       ]
     },
 
+    "methodSteps": {
+      "id": "method-steps",
+      "variant": "light",
+      "content": {
+        "eyebrow": "Étapes",
+        "title": "La méthode en 4 étapes (dans le bon ordre).",
+        "text": "Chaque étape renforce la suivante : cadrage, page, acquisition locale, puis amélioration continue à partir des demandes reçues."
+      },
+      "steps": [
+        {
+          "title": "1) Cadrer l’offre et la zone de chalandise",
+          "text": "On choisit 1 à 2 offres prioritaires (celles qui déclenchent des demandes), et on définit la zone 60/95 : Sud Oise et Nord Val-d’Oise. Résultat : moins de demandes hors zone."
+        },
+        {
+          "title": "2) Construire une page qui rassure et donne envie de contacter",
+          "text": "Une page claire avec vos preuves (avis, éléments concrets), des réponses aux objections, et un formulaire simple. Objectif : faciliter la demande de devis et le rendez-vous."
+        },
+        {
+          "title": "3) Activer l’acquisition locale (référencement et/ou annonces Google)",
+          "text": "On capte l’intention locale : recherches liées à vos offres, à votre métier (agence, courtier, mutuelle) et à la zone 60/95. Objectif : générer des appels et formulaires réguliers."
+        },
+        {
+          "title": "4) Suivre les appels et formulaires, puis améliorer ce qui fonctionne",
+          "text": "On regarde le volume et la qualité des demandes. On renforce les pages et les messages qui apportent des demandes pertinentes, et on corrige ce qui attire hors cible."
+        }
+      ],
+      "cta": { "label": "Demander un diagnostic", "href": "/contact/", "variant": "dark" }
+    },
+
     "prestationsTabs": {
       "id": "prestations",
       "content": {
         "eyebrow": "Leviers",
-        "title": "{tokens.method} : ce qui fait la différence pour générer {tokens.offer}."
+        "title": "Référencement local et annonces Google : les deux moteurs de vos demandes.",
+        "text": "Selon votre timing et votre zone, on démarre par l’un, puis on renforce l’autre pour stabiliser."
       },
       "cta": {
         "label": "Voir toutes les prestations",
@@ -195,9 +269,7 @@
         "variant": "light"
       },
       "itemCta": { "label": "Voir le détail" },
-      "items": {
-        "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"]
-      }
+      "items": { "slugs": ["seo-local", "ads-local", "tracking-attribution"] }
     },
 
     "metiersGrid": {
@@ -214,9 +286,37 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Pages métiers + croisements prestation × métier : capter l’intention locale et la convertir en {tokens.goal}.",
+        "text": "Pages par métier : capter l’intention locale et transformer en {tokens.goal}.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
+    },
+
+    "socialProof": {
+      "id": "social-proof",
+      "variant": "light",
+      "content": {
+        "eyebrow": "Preuves",
+        "title": "Ce qui rassure avant de se lancer",
+        "text": "Vous devez pouvoir décider sur du concret : exemples, retours, et éléments de confiance."
+      },
+      "items": [
+        {
+          "type": "proof",
+          "title": "Exemples et résultats",
+          "text": "Pages, messages de réassurance, et retours disponibles sur la page Preuves.",
+          "cta": { "label": "Voir les preuves", "href": "/preuves/" }
+        },
+        {
+          "type": "proof",
+          "title": "Approche locale maîtrisée (60/95)",
+          "text": "Ciblage zone de chalandise : Sud Oise et Nord Val-d’Oise, sans multiplier des pages par commune."
+        },
+        {
+          "type": "proof",
+          "title": "Méthode structurée",
+          "text": "Priorités claires : cadrage, page, acquisition locale, puis amélioration selon la qualité des demandes."
+        }
+      ]
     },
 
     "ctaBand": {
@@ -229,8 +329,8 @@
       },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Plan d’action priorisé pour générer {tokens.offer}.",
-        "text": "Tu repars avec l’ordre d’exécution : offre d’entrée, page de conversion, tracking, puis canal prioritaire ({kw.secondary.3} / {kw.secondary.4})."
+        "title": "Recevez un plan d’action priorisé pour générer des leads assurance en 60/95.",
+        "text": "Vous repartez avec l’ordre d’exécution : offre d’entrée, page, suivi des demandes, puis canal prioritaire (référencement local ou annonces Google)."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -239,18 +339,21 @@
     },
 
     "supportBand": {
-      "id": "traitement-leads",
+      "id": "traitement-demandes",
       "content": {
-        "eyebrow": "Exécution",
-        "title": "Leads traités vite = plus de RDV, moins de perte.",
-        "text": "On met en place un process simple : rappel rapide, qualification, relances, et suivi des sources. Option : CRM + workflows si tu veux industrialiser."
+        "eyebrow": "Traitement des demandes",
+        "title": "Des demandes traitées vite = plus de rendez-vous, moins de perte.",
+        "text": "Une demande non rappelée se perd. Nous vous aidons à organiser le rappel, la qualification et la prise de rendez-vous, avec un suivi simple des sources."
       },
       "ctas": [
-        { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+        { "label": "Voir le suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "dark" },
+        { "label": "Demander un diagnostic", "href": "/contact/", "variant": "dark" }
       ],
       "media": {
-        "img": { "src": "/assets/images/app.svg", "alt": "Workflow & dashboard : suivi des leads par source et qualification" }
+        "img": {
+          "src": "/assets/images/app.svg",
+          "alt": "Suivi des appels et formulaires : demandes de devis et rendez-vous par source"
+        }
       }
     },
 
@@ -259,9 +362,9 @@
       "source": "schema.faq",
       "qPrefix": "Q.",
       "sidebar": {
-        "eyebrow": "SEO local",
-        "title": "Captez {tokens.offer} sans multiplier des pages villes.",
-        "text": "On travaille la structure intentionnelle et des modules locaux. Couverture : {geo.places.0}, {geo.places.1}, {geo.places.2}, {geo.places.3}, {geo.places.4}…",
+        "eyebrow": "Local (60/95)",
+        "title": "Captez des demandes sans multiplier des pages par ville.",
+        "text": "Structure par métier et par offre + modules locaux : Chantilly, Senlis, Creil, Persan, Lamorlaye… sur {geo.core}.",
         "cta": { "label": "Voir les prestations", "href": "/prestations/", "variant": "dark" }
       }
     }

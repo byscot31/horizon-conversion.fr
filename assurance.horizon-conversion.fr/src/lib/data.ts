@@ -9,8 +9,12 @@ type Meta = { title: string; description: string; canonical: string; robots?: st
 type Hero = {
   h1: string;
   sub?: string;
-  ctaPrimary?: { label: string; href: string; icon?: string };
-  ctaSecondary?: { label: string; href: string; icon?: string };
+  ctaPrimary?: { label: string; href: string; icon?: string; external?: boolean };
+  ctaSecondary?: { label: string; href: string; icon?: string; external?: boolean };
+  variant?: "default" | "home";
+  image?: { src: string; alt?: string };
+  eyebrow?: string;
+  note?: string;
 };
 
 // UI hero unifié (pour ton composant Hero.astro + CtaButtons)
@@ -28,6 +32,9 @@ export type HeroUi = {
     external?: boolean;
   }>;
   note?: string;
+
+  variant?: "default" | "home";
+  image?: { src: string; alt?: string };
 };
 
 export type Metier = {
@@ -125,7 +132,7 @@ export function getDeclinaison(prestaSlug: string, metierSlug: string) {
 export function normalizeHero(input: any): HeroUi {
   if (!input) return {};
 
-  // Si c'est déjà un hero "page" (eyebrow/title/titleHtml/subtitle/ctas/note)
+  // Hero "page" déjà au bon format
   if (
     "ctas" in input ||
     "titleHtml" in input ||
@@ -141,6 +148,8 @@ export function normalizeHero(input: any): HeroUi {
       subtitle: input.subtitle,
       ctas: Array.isArray(input.ctas) ? input.ctas : [],
       note: input.note,
+      variant: input.variant, // ✅
+      image: input.image      // ✅
     };
   }
 
@@ -154,6 +163,7 @@ export function normalizeHero(input: any): HeroUi {
       href: h.ctaPrimary.href,
       icon: h.ctaPrimary.icon,
       variant: "primary",
+      external: h.ctaPrimary.external // ✅
     });
   }
   if (h.ctaSecondary?.label && h.ctaSecondary?.href) {
@@ -162,12 +172,17 @@ export function normalizeHero(input: any): HeroUi {
       href: h.ctaSecondary.href,
       icon: h.ctaSecondary.icon,
       variant: "secondary",
+      external: h.ctaSecondary.external // ✅
     });
   }
 
   return {
+    eyebrow: h.eyebrow,  // ✅ optionnel
+    note: h.note,        // ✅ optionnel
     title: h.h1,
     subtitle: h.sub,
     ctas,
+    variant: h.variant,  // ✅ optionnel
+    image: h.image       // ✅ optionnel
   };
 }

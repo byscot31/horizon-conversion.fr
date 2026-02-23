@@ -1,0 +1,71 @@
+---
+// src/components/blocks/FitBlock.astro
+import CtaButtons from "./CtaButtons.astro";
+
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const fit = data?.fit ?? null;
+
+const conditions: string[] = Array.isArray(fit?.conditions) ? fit.conditions : [];
+const avoid: string[] = Array.isArray(fit?.avoid) ? fit.avoid : [];
+const ctas = Array.isArray(fit?.ctas) ? fit.ctas : (fit?.cta ? [fit.cta] : []);
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section bg-transparent my-0 py-6";
+const containerClass = layout.containerClass ?? "container";
+---
+
+{fit && (conditions.length > 0 || avoid.length > 0) && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">{header.badge}</p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class="row g-4 justify-content-center">
+      {conditions.length > 0 && (
+          <div class="col-lg-5">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                <h3 class="h4 mb-3">{fit?.title ?? "Si vous êtes concerné et que…"}</h3>
+                <ul class="iconlist">
+                  {conditions.map((x) => <li class="d-block mb-2"><i class="bi-check-lg"></i> {x}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+      )}
+
+      {avoid.length > 0 && (
+          <div class="col-lg-5">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                <h3 class="h4 mb-3">{fit?.avoidTitle ?? "Vous évitez…"}</h3>
+                <ul class="iconlist">
+                  {avoid.map((x) => <li class="d-block mb-2"><i class="bi-x-circle"></i> {x}</li>)}
+                </ul>
+
+                {ctas.length > 0 && (
+                    <div class="mt-4">
+                      <CtaButtons ctas={ctas} />
+                    </div>
+                )}
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+
+  </div>
+</div>
+  )}

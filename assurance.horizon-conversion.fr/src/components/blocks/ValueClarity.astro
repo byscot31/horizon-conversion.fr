@@ -1,0 +1,59 @@
+---
+// src/components/blocks/ValueClarity.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+
+const impacts: string[] = Array.isArray(data?.impacts) ? data.impacts : [];
+const notThis: string[] = Array.isArray(data?.notThis) ? data.notThis : [];
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section my-0 py-6";
+const containerClass = layout.containerClass ?? "container";
+---
+{(impacts.length > 0 || notThis.length > 0) && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller mb-3 fw-bold">{header.badge}</p>
+            )}
+            {header?.title && <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.4rem;">{header.title}</h2>}
+            {header?.subtitle && <p class="fs-5 mb-5">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class="row g-4 justify-content-center">
+      {impacts.length > 0 && (
+          <div class="col-lg-5">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                <h3 class="h4 mb-3">{data?.labels?.impactsTitle ?? "Ce que ça change"}</h3>
+                <ul class="iconlist mb-0">
+                  {impacts.map((x) => <li class="d-block mb-2"><i class="bi-check-lg"></i> {x}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+      )}
+
+      {notThis.length > 0 && (
+          <div class="col-lg-5">
+            <div class="card rounded-6 shadow-sm border-0 h-100">
+              <div class="card-body p-4">
+                <h3 class="h4 mb-3">{data?.labels?.notThisTitle ?? "Ce que ce n’est pas"}</h3>
+                <ul class="iconlist mb-0">
+                  {notThis.map((x) => <li class="d-block mb-2"><i class="bi-x-circle"></i> {x}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+
+  </div>
+</div>
+  )}

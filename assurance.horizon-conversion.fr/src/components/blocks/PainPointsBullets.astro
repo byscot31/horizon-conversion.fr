@@ -1,0 +1,49 @@
+---
+// src/components/blocks/PainPointsBullets.astro
+import CtaButtons from "./CtaButtons.astro";
+
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const items: string[] = Array.isArray(data?.items) ? data.items : [];
+const ctas = Array.isArray(data?.ctas) ? data.ctas : [];
+
+const layout = data?.layout ?? {};
+const sectionClass = layout.sectionClass ?? "section bg-transparent pt-0 pb-lg-0";
+const containerClass = layout.containerClass ?? "container";
+---
+{items.length > 0 && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <ul class="iconlist">
+          {items.map((it) => (
+              <li class="d-block op-08 mb-2"><i class="bi-x-circle"></i> {it}</li>
+          ))}
+        </ul>
+
+        {ctas.length > 0 && (
+            <div class="mt-4">
+              <CtaButtons ctas={ctas} />
+            </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+  )}

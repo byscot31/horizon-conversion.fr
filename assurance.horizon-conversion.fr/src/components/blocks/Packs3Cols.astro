@@ -6,6 +6,8 @@ const layout = data?.layout ?? {};
 const packs = Array.isArray(data?.packs) ? data.packs : [];
 const texts = data?.texts ?? {};
 
+const header = data?.header ?? null;
+
 const sectionClass = layout.sectionClass ?? "";
 const containerClass = layout.containerClass ?? "";
 const rowClass = layout.rowClass ?? "";
@@ -19,6 +21,19 @@ const priceSuffix = texts?.priceSuffix ?? "";
 
 <div class={sectionClass} id={data?.id}>
   <div class={containerClass}>
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
     <div class={rowClass}>
       {packs.map((p: any) => {
         const featured = !!p?.featured;

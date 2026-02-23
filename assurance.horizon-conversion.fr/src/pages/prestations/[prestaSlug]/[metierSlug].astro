@@ -3,17 +3,22 @@
 import SiteLayout from "../../../layouts/SiteLayout.astro";
 import Hero from "../../../components/blocks/Hero.astro";
 import MethodVideoProof from "../../../components/blocks/MethodVideoProof.astro";
-import CtaBand from "../../../components/blocks/CtaBand.astro";
 import SupportBand from "../../../components/blocks/SupportBand.astro";
 import FaqToggles from "../../../components/blocks/FaqToggles.astro";
 import ResourcesGrid from "../../../components/blocks/ResourcesGrid.astro";
+import CtaButtons from "../../../components/blocks/CtaButtons.astro";
+
+import CrossProof from "../../../components/blocks/CrossProof.astro";
+import DeliverablesList from "../../../components/blocks/DeliverablesList.astro";
+import FitBlock from "../../../components/blocks/FitBlock.astro";
 
 import metiersIndex from "../../../data/metiers/index.json";
 import prestationsIndex from "../../../data/prestations/index.json";
 import declinaisons from "../../../data/prestations/declinaisons-metiers.json";
 import ressourcesIndex from "../../../data/ressources/index.json";
+import siteData from "../../../data/site.json";
 
-import { getDeclinaison, getMetierBySlug, getPrestationBySlug, normalizeHero } from "../../../lib/data.ts";
+import { getDeclinaison, getMetierBySlug, getPrestationBySlug } from "../../../lib/data.ts";
 
 export async function getStaticPaths() {
   const metierItems = (metiersIndex as any).items as Array<{ id: string; slug: string }>;
@@ -52,7 +57,9 @@ if (!decl) throw new Error(`Croisement introuvable: ${prestaSlug} x ${metierSlug
 const metier = await getMetierBySlug(metierSlug);
 const prestation = await getPrestationBySlug(prestaSlug);
 
-// SEO basé sur data existante
+// ------------------------------
+// SEO cross (simple + stable)
+// ------------------------------
 const seo = {
   title: `${prestation.label} × ${metier.label} | Horizon Conversion`,
   description: `${prestation.meta?.description ?? ""}`.trim(),
@@ -60,27 +67,137 @@ const seo = {
   robots: "index,follow"
 };
 
-// Hero : priorité cellule > prestation > métier
-const hero =
-  (decl?.cell as any)?.hero ??
-  prestation?.hero ??
-  normalizeHero(metier.hero);
+// ------------------------------
+// UTM contact (source unique pour CTA cross)
+// ------------------------------
+const contactUtm =
+  `/contact/?utm_source=assurance.horizon-conversion.fr` +
+  `&utm_medium=cross` +
+  `&utm_campaign=${encodeURIComponent(prestaSlug)}` +
+  `&utm_content=${encodeURIComponent(metierSlug)}`;
 
-// FAQ : cellule > métier > prestation
-const faq =
-  (decl?.cell as any)?.faq ??
-  metier?.faq ??
-  prestation?.faq ??
-  [];
+// Remplace CONTACT_UTM partout (hero/fit/deliverables/…)
+const replaceHrefDeep = (node: any): any => {
+  if (typeof node === "string") return node === "CONTACT_UTM" ? contactUtm : node;
+  if (Array.isArray(node)) return node.map(replaceHrefDeep);
+  if (node && typeof node === "object") {
+    const out: any = {};
+    for (const [k, v] of Object.entries(node)) out[k] = replaceHrefDeep(v);
+    return out;
+  }
+  return node;
+};
 
 // ------------------------------
-// Ressources : intersection + fallback
+// HERO cross (priorité cellule, sinon template auto)
+// ------------------------------
+const defaultCrossHero = {
+  id: "slider",
+  eyebrow: `${prestation.shortLabel ?? prestation.label} × ${metier.label}`,
+  titleHtml: `${prestation.shortLabel ?? prestation.label} :<br/> ${metier.label} — 60/95`,
+  subtitle: "Plan 30/60/90 jours + estimation réaliste (zone/offre/concurrence).",
+  ctas: [
+    {
+      label: `Recevoir mon plan ${prestation.shortLabel ?? prestation.label} ${metier.label}`,
+      href: "CONTACT_UTM",
+      icon: "bi-arrow-right",
+      variant: "primary"
+    },
+    {
+      label: `WhatsApp ${siteData.phoneDisplay}`,
+      href: "WHATSAPP",
+      icon: "fa-brands fa-whatsapp",
+      variant: "secondary",
+      external: true
+    }
+  ],
+  note: "Réponse sous 24–48h • Tracking appels + formulaires • Pas de promesses irréalistes"
+};
+
+const heroRaw = (decl?.cell as any)?.hero ?? defaultCrossHero;
+const hero = replaceHrefDeep(heroRaw);
+
+// ------------------------------
+// PROOF / DELIVERABLES / FIT : cellule prioritaire
+// ------------------------------
+const cellProof = (decl?.cell as any)?.proof ?? null;
+const cellDeliverables = (decl?.cell as any)?.deliverables ?? null;
+const cellFit = (decl?.cell as any)?.fit ?? null;
+
+// Wrappers data pour les blocks (header optionnel + payload)
+const crossProofData = replaceHrefDeep({
+  id: "proof",
+  header: {
+    badge: "Preuve",
+    title: "Preuve orientée métier (anonymisée)",
+    subtitle: "Mini-cas ou fourchettes réalistes — pas de promesses absolues."
+  },
+  proof: cellProof
+});
+
+const crossDeliverablesData = replaceHrefDeep({
+  id: "deliverables",
+  header: {
+    badge: "Ce que vous recevez",
+    title: "Livrables avant d’investir",
+    subtitle: "Concret, actionnable, orienté devis/RDV."
+  },
+  deliverables: cellDeliverables,
+  // CTA #2 (dans ce bloc, comme demandé)
+  ctas: [
+    { label: "Voir si applicable à ma zone", href: "CONTACT_UTM", icon: "bi-arrow-right", variant: "primary" },
+    { label: `Appeler ${siteData.phoneDisplay}`, href: "TEL", icon: "bi-telephone", variant: "secondary" }
+  ]
+});
+
+const crossFitData = replaceHrefDeep({
+  id: "fit",
+  header: {
+    badge: "Fit",
+    title: "Projection rapide",
+    subtitle: "Est-ce que ça colle à votre contexte ?"
+  },
+  fit: cellFit
+});
+
+// ------------------------------
+// OBJECTIONS (2–4 Q/R) : cellule > métier (converti) + fallback
+// ------------------------------
+const cellObj = (decl?.cell as any)?.objections ?? {};
+const cellObjItems = Array.isArray(cellObj?.items) ? cellObj.items : [];
+const maxFromMetier = Number.isFinite(cellObj?.maxFromMetier) ? Number(cellObj.maxFromMetier) : 2;
+
+const metierObj = Array.isArray(metier?.objections) ? metier.objections : [];
+const metierAsFaq = metierObj
+  .filter((o) => o?.texte && o?.reponse)
+  .slice(0, maxFromMetier)
+  .map((o) => ({ q: o.texte, a: o.reponse }));
+
+const mergedObjectionsFaq = [
+  ...cellObjItems,
+  ...(cellObjItems.length < 4 ? metierAsFaq.slice(0, 4 - cellObjItems.length) : [])
+];
+
+// FAQ final : priorité cell.faq > objections merge > metier.faq > prestation.faq
+const cellFaq = (decl?.cell as any)?.faq ?? null;
+
+let faqFinal: Array<{ q: string; a: string }> = [];
+if (Array.isArray(cellFaq) && cellFaq.length > 0) {
+  faqFinal = cellFaq;
+} else if (mergedObjectionsFaq.length > 0) {
+  faqFinal = mergedObjectionsFaq;
+} else if (Array.isArray(metier?.faq) && metier.faq.length > 0) {
+  faqFinal = metier.faq;
+} else if (Array.isArray(prestation?.faq) && prestation.faq.length > 0) {
+  faqFinal = prestation.faq;
+}
+
+// ------------------------------
+// Ressources : intersection + fallback (inchangé, mais utile cross)
 // ------------------------------
 const rItems = ((ressourcesIndex as any).items ?? []) as any[];
 
-const limit =
-  prestation?.sections?.resourcesGrid?.items?.limit ??
-  3;
+const limit = prestation?.sections?.resourcesGrid?.items?.limit ?? 3;
 
 const targetedByPresta = (r: any) => (r?.targets?.prestations ?? []).includes(prestaSlug);
 const targetedByMetier = (r: any) => (r?.targets?.metiers ?? []).includes(metierSlug);
@@ -88,7 +205,7 @@ const targetedByMetier = (r: any) => (r?.targets?.metiers ?? []).includes(metier
 // 1) intersection presta ∩ métier
 const intersection = rItems.filter((r) => targetedByPresta(r) && targetedByMetier(r));
 
-// 2) fallback : d’abord presta-only, puis métier-only (sans doublons)
+// 2) fallback : presta-only puis metier-only (sans doublons)
 const prestaOnly = rItems.filter((r) => targetedByPresta(r) && !targetedByMetier(r));
 const metierOnly = rItems.filter((r) => targetedByMetier(r) && !targetedByPresta(r));
 
@@ -112,41 +229,87 @@ if (ressources.length < limit) {
 }
 
 // ------------------------------
-// ResourcesGrid header : headerCross ?? header
+// ResourcesGrid header : headerCross ?? header + hydrate {metierLabel}
 // ------------------------------
 const rg = prestation?.sections?.resourcesGrid ?? null;
 
-const chosenHeader =
-  rg?.headerCross ??
-  rg?.header ??
-  null;
+const chosenHeader = rg?.headerCross ?? rg?.header ?? null;
 
-const hydrateHeader = (h: any) => h ? { ...h, title: String(h.title ?? "").replaceAll("{metierLabel}", metier.label), subtitle: String(h.subtitle ?? "").replaceAll("{metierLabel}", metier.label) } : h;
+const hydrateHeader = (h: any) =>
+  h
+    ? {
+      ...h,
+      title: String(h.title ?? "").replaceAll("{metierLabel}", metier.label),
+      subtitle: String(h.subtitle ?? "").replaceAll("{metierLabel}", metier.label)
+    }
+    : h;
+
 const resourcesGridData = rg ? { ...rg, header: hydrateHeader(chosenHeader) } : null;
 ---
 
-<SiteLayout seo={seo} schema={{ includeWebsite: true, includeSearchAction: false, faq }}>
+<SiteLayout seo={seo} schema={{ includeWebsite: true, includeSearchAction: false, faq: faqFinal }}>
   <Hero {...hero} />
 
   <section id="content">
     <div class="content-wrap pb-0 pt-0 pt-lg-5">
-      <MethodVideoProof data={prestation.sections.videoProof} />
-      <CtaBand data={prestation.sections.ctaBand} />
 
+      {/* CTA #1 : dans Hero */}
+
+      {/* Preuve (critique) */}
+      {cellProof && <CrossProof data={crossProofData} />}
+
+      {/* Ce que vous recevez + CTA #2 */}
+      {cellDeliverables && <DeliverablesList data={crossDeliverablesData} />}
+
+      {/* Fit / projection */}
+      {cellFit && <FitBlock data={crossFitData} />}
+
+      {/* Bloc “process/preuve” générique presta (si tu veux le garder) */}
+      {prestation?.sections?.videoProof && <MethodVideoProof data={prestation.sections.videoProof} />}
+
+      {/* Ressources (intersection) */}
       {resourcesGridData && ressources?.length > 0 && (
           <ResourcesGrid data={resourcesGridData} items={ressources} />
       )}
 
-      <SupportBand
-          data={{
-            ...prestation.sections.supportBand,
-            linkMode: "cross",
-            metierSlug,
-            prestaSlug
-          }}
-      />
+      {/* Support (tracking/traitement) */}
+      {prestation?.sections?.supportBand && (
+          <SupportBand
+              data={{
+                ...prestation.sections.supportBand,
+                linkMode: "cross",
+                metierSlug,
+                prestaSlug
+              }}
+          />
+      )}
 
-      <FaqToggles data={prestation.sections.faqToggles} faq={faq} />
+      {/* FAQ : objections cross (2–4) */}
+      {prestation?.sections?.faqToggles && (
+          <FaqToggles data={prestation.sections.faqToggles} faq={faqFinal} />
+      )}
+
+      {/* CTA #3 fin de page (contact UTM + tel/WA) */}
+      <div class="section my-0 py-6" id="cta-3" style="background: url('/assets/images/section-bg.jpg') no-repeat center 70% / cover;">
+        <div class="container">
+          <div class="row py-5">
+            <div class="col-md-7">
+              <p class="text-uppercase ls-4 text-smaller mb-3 fw-bold">Dernière étape</p>
+              <h2 class="text-dark mb-3 fw-normal" style="font-size: 2.6rem;">Recevoir le plan adapté à votre métier et votre zone</h2>
+              <p class="fs-5 mb-5">Faisabilité, ordre d’exécution, tracking, angles d’offre. Réponse rapide.</p>
+              <div class="d-flex flex-wrap gap-3">
+                <CtaButtons
+                    ctas={[
+                      { label: "Recevoir mon plan (ville + rayon)", href: contactUtm, icon: "bi-arrow-right", variant: "primary" },
+                      { label: `WhatsApp ${siteData.phoneDisplay}`, href: "WHATSAPP", icon: "fa-brands fa-whatsapp", variant: "secondary", external: true }
+                    ]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 </SiteLayout>

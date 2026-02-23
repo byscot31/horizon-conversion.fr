@@ -1,5 +1,6 @@
 // src/lib/seoTokens.ts
 type AnyObj = Record<string, any>;
+import siteData from "../data/site.json";
 
 function getByPath(obj: AnyObj, path: string): any {
   // support "kw.secondary.2"
@@ -42,7 +43,12 @@ function deepHydrate(node: any, ctx: AnyObj): any {
  */
 export function hydrateStandardPage<T extends AnyObj>(raw: T): T {
   const seoMap = raw?.seoMap ?? {};
-  const ctx: AnyObj = { ...seoMap };
+  const ctx: AnyObj = {
+    ...seoMap,
+    phoneDisplay: siteData.phoneDisplay,
+    phoneTel: siteData.phoneTel,
+    whatsapp: siteData.whatsapp
+  };
 
   // 1) hydrate tout le JSON (hero/sections/schema/…)
   const hydrated: AnyObj = deepHydrate(raw, ctx);

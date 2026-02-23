@@ -1,81 +1,2065 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "defaults": {
     "localBoost": {
       "enabled": true,
-      "extraPatterns": ["{presta} {metier} {ville}", "agence {metier} {ville}"]
+      "extraPatterns": ["{presta} {metier} {ville}", "{metier} {ville} devis", "agence {metier} {ville}"]
+    },
+    "cross": {
+      "objections": { "maxFromMetier": 2 },
+      "proof": { "mode": "miniCases" }
     }
   },
   "matrix": [
     {
       "metierId": "metier_agence_assurance",
       "prestations": [
-        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages offres locales + GBP + maillage", "cta": "Audit SEO local" },
-        { "prestaId": "presta_ads_local", "priority": 2, "angle": "campagnes offres (auto/habitation/santé) + call tracking", "cta": "Lancer Ads" },
-        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "attribuer appels & formulaires au bon canal (SEO/Ads/GBP)", "cta": "Mettre le tracking" },
-        { "prestaId": "presta_cro", "priority": 4, "angle": "landing + preuves + formulaires pré-qualifiants", "cta": "Optimiser conversion" },
-        { "prestaId": "presta_content_proof", "priority": 5, "angle": "preuves + FAQ + pages offres pour rassurer et convertir", "cta": "Créer contenus" },
-        { "prestaId": "presta_crm_workflow", "priority": 6, "angle": "rappel <10 min + scripts + relances pour augmenter RDV", "cta": "Automatiser le suivi" }
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 1,
+          "angle": "pages offres locales + GBP + maillage",
+          "cta": "Audit SEO local",
+          "hero": {
+            "eyebrow": "SEO local × Agence",
+            "titleHtml": "SEO local agence d’assurance :<br/> capter des intentions “devis” en 60/95",
+            "subtitle": "Plan 30/60/90 jours + estimation réaliste (offre/zone/concurrence).",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans pages villes “copiées-collées” • Tracking appels/formulaires recommandé"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Agence : plus de demandes locales via structure métier/offre",
+                "context": "Présence Google OK, mais peu de demandes de devis depuis le site.",
+                "action": "Page d’entrée (offre d’entrée) + modules locaux + preuves/FAQ + optimisation GBP.",
+                "result": "Progression requêtes locales + hausse des demandes qualifiées (appels/form)."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan SEO local 30/60/90 (pages à créer + priorités)",
+              "Optimisations Google Business Profile (checklist exécution)",
+              "Structure pages : preuve/objections/FAQ + CTA appels/form",
+              "Recommandations technique & schema (FAQ/Service/Breadcrumbs)",
+              "Plan contenus preuves + maillage (sans pages villes)"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On a déjà un site corporate, ça suffit ?", "a": "Corporate ≠ intention “devis local”. On ajoute une page d’entrée orientée conversion + preuve + FAQ + tracking." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vous dépendez trop du réseau/reco pour le flux",
+              "vous voulez capter Maps + requêtes “devis” locales",
+              "vous voulez stabiliser l’acquisition (moins dépendre d’Ads)"
+            ],
+            "avoid": [
+              "Créer des dizaines de pages villes similaires",
+              "Publier du blog sans intention devis"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 2,
+          "angle": "campagnes offres (auto/habitation/santé) + call tracking",
+          "cta": "Lancer Ads",
+          "hero": {
+            "eyebrow": "Ads local × Agence",
+            "titleHtml": "Google Ads agence d’assurance :<br/> générer des demandes de devis en 60/95",
+            "subtitle": "Offre d’entrée + landing + tracking : pilotage CPL & éligibilité.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage zone/offre • Call tracking recommandé"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Fourchettes réalistes (indicatif)",
+              "items": [
+                { "label": "Délai d’impact", "range": "immédiat", "note": "Une fois campagnes + landing + conversions en place." },
+                { "label": "Stabilisation qualité", "range": "2–4 semaines", "note": "Via négatifs, messages, zones, landing, scoring." }
+              ],
+              "microcopy": "Les résultats dépendent de l’offre, de la concurrence et du budget. Pilotage sur leads éligibles."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan campagnes (offres × zones) + structure compte",
+              "1–2 landing(s) offre d’entrée (preuve/FAQ/form)",
+              "Setup conversions + (option) call tracking",
+              "Liste mots-clés négatifs + exclusions zone",
+              "Routine optimisation CPL/éligibilité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Ads trop cher en assurance", "a": "On priorise 1–2 offres d’entrée, on améliore la conversion, et on pilote avec exclusions + tracking appels/form." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vous voulez des leads rapidement",
+              "vous pouvez traiter les leads en < 10 min",
+              "vous êtes prêt à prioriser 1 offre d’entrée"
+            ],
+            "avoid": [
+              "Lancer Ads sans landing dédiée",
+              "Optimiser sans conversions/call tracking"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 3,
+          "angle": "attribuer appels & formulaires au bon canal (SEO/Ads/GBP)",
+          "cta": "Mettre le tracking",
+          "hero": {
+            "eyebrow": "Tracking × Agence",
+            "titleHtml": "Tracking agence d’assurance :<br/> attribuer appels & formulaires (SEO/Ads/GBP)",
+            "subtitle": "Mesure simple → décisions : scale/stop/dupliquer par offre & zone.",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • UTM + events + call tracking (option) • Dashboard lisible"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Agence : arrêter de “deviner” ce qui marche",
+                "context": "Leads reçus mais aucune attribution fiable (appels, formulaires).",
+                "action": "UTM + events + call tracking + dashboard par source/offre.",
+                "result": "Décisions rapides : budget déplacé vers les sources qui génèrent des leads éligibles."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Convention UTM + tagging campagnes",
+              "Tracking formulaires (events + conversion)",
+              "(Option) call tracking : numéros & sources",
+              "Dashboard : leads / source / offre / coût",
+              "Checklist QA + recette tracking"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas de CRM", "a": "OK : on peut démarrer avec un tableau simple + tags appels. Le CRM vient ensuite si besoin." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vous lancez Ads/SEO mais ne savez pas ce qui génère des RDV",
+              "vous voulez réduire les leads non qualifiés",
+              "vous voulez piloter par éligibilité, pas seulement par volume"
+            ],
+            "avoid": [
+              "Mesurer uniquement les clics",
+              "Optimiser sans call tracking ni events"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 4,
+          "angle": "landing + preuves + formulaires pré-qualifiants",
+          "cta": "Optimiser conversion",
+          "hero": {
+            "eyebrow": "CRO × Agence",
+            "titleHtml": "CRO agence d’assurance :<br/> plus de devis, moins de non qualifiés (60/95)",
+            "subtitle": "Plan 30/60/90 : preuve + objections + formulaire qui filtre + tracking.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Pré-qualification zone/offre • Pilotage sur leads éligibles"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on vise (sans promesse absolue)",
+              "items": [
+                { "label": "Conversion landing", "range": "↑", "note": "via preuve/FAQ/CTA/formulaire et réduction friction." },
+                { "label": "Leads non qualifiés", "range": "↓", "note": "via pré-qualification (zone, offre, urgence, profil)." }
+              ],
+              "microcopy": "Le point de départ compte : on mesure avant/après et on itère."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit de friction + messages (page actuelle)",
+              "Wireframe sections : preuve/objections/FAQ",
+              "Formulaire pré-qualifiant (offre/zone/profil)",
+              "Plan tests CTA + microcopy (tel/WA/form)",
+              "Tracking events (clic tel/WA, scroll, submit)"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Le problème c’est le trafic, pas la page", "a": "Souvent l’inverse : une meilleure page baisse le CPL et augmente les RDV à trafic constant." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vous avez du trafic/clics mais peu de demandes",
+              "vous perdez du temps sur des appels hors cible",
+              "vous voulez améliorer la qualité sans augmenter le budget"
+            ],
+            "avoid": [
+              "Ajouter des champs inutiles (friction)",
+              "Ne pas traiter objections/preuves"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 5,
+          "angle": "preuves + FAQ + pages offres pour rassurer et convertir",
+          "cta": "Créer contenus",
+          "hero": {
+            "eyebrow": "Contenus preuves × Agence",
+            "titleHtml": "Contenus & preuves agence d’assurance :<br/> rassurer avant le contact (60/95)",
+            "subtitle": "Cas anonymisés + objections + FAQ utile : conversion plus haute, meilleur tri.",
+            "ctas": [
+              { "label": "Recevoir mon plan contenus agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Réassurance métier • Utile SEO + Ads + CRO"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Agence : réduire le doute avant RDV",
+                "context": "Demande de devis mais faible transformation, comparateurs en face.",
+                "action": "Blocs preuve + mini-cas + FAQ métier + objections en page d’entrée.",
+                "result": "Plus de demandes “intention devis”, moins de chasseurs de prix."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan contenus preuves (3–6 pièces) orientées conversion",
+              "Framework objections + réponses courtes",
+              "FAQ métier + FAQ locale (si utile)",
+              "Mini-cas anonymisés (contexte/action/résultat/leçon)",
+              "Blocs réassurance (ce qu’on refuse / livrables)"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas de cas client publiable", "a": "OK : anonymisé + captures floutées + focus sur process/KPI/livrables." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vos prospects comparent beaucoup avant d’appeler",
+              "vos leads manquent de confiance",
+              "vous voulez améliorer conversion SEO/Ads sans plus de budget"
+            ],
+            "avoid": [
+              "Des contenus génériques non orientés devis",
+              "Ne pas traiter objections et preuve"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 6,
+          "angle": "rappel <10 min + scripts + relances pour augmenter RDV",
+          "cta": "Automatiser le suivi",
+          "hero": {
+            "eyebrow": "CRM/workflow × Agence",
+            "titleHtml": "CRM & workflows agence d’assurance :<br/> moins de perte, plus de RDV",
+            "subtitle": "Rappel rapide + scripts + relances : transformer mieux les leads entrants.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow agence", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans usine à gaz • Scoring simple & suivi sources"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Impact attendu (logique)",
+              "items": [
+                { "label": "Taux de contact", "range": "↑", "note": "avec rappel rapide + relances." },
+                { "label": "Transformation en RDV", "range": "↑", "note": "avec scripts + pipeline + suivi." }
+              ],
+              "microcopy": "Dépend du process actuel : on mesure avant/après."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline simple (statuts éligible/non éligible/RDV)",
+              "Scripts d’appel + objections + relance",
+              "Workflows (email/SMS) si pertinents",
+              "Règles de routing (offre/zone/urgence)",
+              "Dashboard : volume, contact, RDV, sources"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas le temps de gérer un CRM", "a": "On démarre simple : statuts + scripts + rappel. Le CRM complet vient ensuite si besoin." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes une agence et que…",
+            "conditions": [
+              "vous perdez des leads (rappel trop tard)",
+              "vous manquez de structure de qualification",
+              "vous voulez améliorer RDV à volume constant"
+            ],
+            "avoid": [
+              "Mettre un CRM avant le process",
+              "Ne pas suivre les sources/éligibilité"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     },
 
     {
       "metierId": "metier_courtier_assurance",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "tunnels par offre (emprunteur/pro/santé) + ciblage", "cta": "Générer des RDV" },
-        { "prestaId": "presta_tracking_attribution", "priority": 2, "angle": "attribuer appels & formulaires au bon canal et piloter ROI", "cta": "Mettre le tracking" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "qualification + prise de RDV + friction réduite", "cta": "Augmenter le taux RDV" },
-        { "prestaId": "presta_seo_local", "priority": 4, "angle": "capteur organique local stable (offres prioritaires) + maillage", "cta": "Plan SEO local" },
-        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "pipeline + scoring + relances pour réduire la perte", "cta": "Réduire la perte" },
-        { "prestaId": "presta_content_proof", "priority": 6, "angle": "preuves + objections pour éviter les chasseurs de prix", "cta": "Renforcer la confiance" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "tunnels par offre (emprunteur/pro/santé) + ciblage",
+          "cta": "Générer des RDV",
+          "hero": {
+            "eyebrow": "Ads local × Courtier",
+            "titleHtml": "Google Ads courtier :<br/> générer des RDV qualifiés en 60/95",
+            "subtitle": "Tunnel par offre + pré-qualification + tracking : pilotage sur dossiers éligibles.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Pré-qualification stricte • Tracking inclus"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Courtier : réduire les demandes “non dossier”",
+                "context": "Beaucoup de clics, peu de dossiers éligibles.",
+                "action": "Segmentation par offre + landing + formulaire qualifiant + négatifs.",
+                "result": "Moins de non pertinents, meilleurs RDV, CPL utile plus stable."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan tunnel par offre (emprunteur/pro/santé)",
+              "Landing(s) par offre + preuve/FAQ",
+              "Conversions + UTMs + (option) call tracking",
+              "Exclusions/négatifs + réglages zones",
+              "Routine optimisation basée sur éligibilité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "J’ai peur des leads non qualifiés", "a": "On filtre par offre/zone + formulaire (profil, urgence, budget) + tracking appels/form." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vous pouvez traiter vite les demandes",
+              "vous savez quelle offre prioriser",
+              "vous voulez des RDV rapidement"
+            ],
+            "avoid": [
+              "Tout mélanger dans une campagne",
+              "Optimiser sans conversions qualifiées"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 2,
+          "angle": "attribuer appels & formulaires au bon canal et piloter ROI",
+          "cta": "Mettre le tracking",
+          "hero": {
+            "eyebrow": "Tracking × Courtier",
+            "titleHtml": "Tracking courtier :<br/> piloter le coût par dossier éligible",
+            "subtitle": "Form + appels + statut éligible/RDV : attribution par source/campagne.",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans CRM possible • Décisions scale/stop"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on mesure (priorités)",
+              "items": [
+                { "label": "Coût par lead éligible", "range": "↓", "note": "en coupant ce qui génère du non dossier." },
+                { "label": "Part de leads éligibles", "range": "↑", "note": "via scoring + tracking + messages." }
+              ],
+              "microcopy": "On arrête de piloter au CPL brut : on pilote à l’éligibilité."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "UTM + conventions campagne/offre",
+              "Tracking formulaires + événements clés",
+              "(Option) call tracking + tagging appels",
+              "Statuts (éligible/non éligible/RDV) dans tableau/CRM",
+              "Dashboard : source/campagne/offre → éligibilité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Sans CRM, ça marche ?", "a": "Oui : tableau simple + tags appels suffisent pour piloter (puis CRM si besoin)." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vous ne savez pas d’où viennent vos meilleurs dossiers",
+              "vous voulez couper les sources à non éligibles",
+              "vous voulez structurer qualification + attribution"
+            ],
+            "avoid": [
+              "Piloter au clic",
+              "Oublier les appels dans l’attribution"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "qualification + prise de RDV + friction réduite",
+          "cta": "Augmenter le taux RDV",
+          "hero": {
+            "eyebrow": "CRO × Courtier",
+            "titleHtml": "CRO courtier :<br/> plus de RDV, moins de dossiers non éligibles",
+            "subtitle": "Formulaire qualifiant + preuve + objections + tracking events.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage strict • Pilotage sur RDV"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Courtier : passer du “lead” au “RDV”",
+                "context": "Demandes nombreuses mais faible transformation.",
+                "action": "Pré-qualification (profil/urgence) + preuve + friction réduite + CTA RDV.",
+                "result": "Hausse des demandes éligibles et RDV, baisse des pertes."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit friction + preuves + objections",
+              "Wireframe page : sections + microcopy",
+              "Formulaire qualifiant (profil, urgence, zone)",
+              "Plan tests CTA (tel/WA/RDV)",
+              "Tracking events + reporting conversion"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Trop de questions = moins de leads", "a": "On choisit les champs utiles : moins de volume, plus d’éligibles = meilleur ROI." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vous voulez réduire le temps perdu",
+              "vous voulez augmenter le taux de RDV",
+              "vous voulez filtrer sans casser la conversion"
+            ],
+            "avoid": [
+              "Formulaire trop long sans valeur",
+              "Ne pas traiter les objections clés"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 4,
+          "angle": "capteur organique local stable (offres prioritaires) + maillage",
+          "cta": "Plan SEO local",
+          "hero": {
+            "eyebrow": "SEO local × Courtier",
+            "titleHtml": "SEO local courtier :<br/> capter des requêtes “devis” en 60/95",
+            "subtitle": "Pages par offre prioritaire + GBP + preuve/FAQ : montée progressive et stable.",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans pages villes risquées • Orienté intention devis"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Premiers signaux", "range": "6–12 semaines", "note": "selon historique et concurrence." },
+                { "label": "Stabilisation", "range": "3–6 mois", "note": "si structure + contenus + liens locaux sont tenus." }
+              ],
+              "microcopy": "On priorise 1–2 offres d’entrée : meilleur focus, meilleurs signaux."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan pages (offres × intention) + priorisation",
+              "Optimisations GBP (catégories/services/avis)",
+              "Schema & technique (FAQ/Service/Perf)",
+              "Plan contenus preuves/objections",
+              "Maillage & recommandations liens locaux"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "SEO trop long", "a": "On combine souvent avec Ads pour démarrer vite, pendant que le SEO stabilise." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vous voulez réduire la dépendance Ads",
+              "vous ciblez des requêtes locales “devis”",
+              "vous pouvez produire des preuves/FAQ utiles"
+            ],
+            "avoid": [
+              "Du contenu générique non local",
+              "Ne pas optimiser GBP"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 5,
+          "angle": "pipeline + scoring + relances pour réduire la perte",
+          "cta": "Réduire la perte",
+          "hero": {
+            "eyebrow": "CRM/workflow × Courtier",
+            "titleHtml": "CRM & workflows courtier :<br/> transformer plus de leads en RDV",
+            "subtitle": "Scoring simple + relances + pipeline : moins de pertes, meilleure jointure.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Process d’abord • CRM ensuite si besoin"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Logique d’impact",
+              "items": [
+                { "label": "Taux de contact", "range": "↑", "note": "rappel + relances structurées." },
+                { "label": "RDV pris", "range": "↑", "note": "scripts + pipeline + suivi." }
+              ],
+              "microcopy": "On suit la source et le statut éligible/RDV pour piloter."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline (statuts) + règles de qualification",
+              "Scripts d’appel + objections",
+              "Relances (email/SMS) si pertinent",
+              "Routing par offre/urgence/zone",
+              "Dashboard contact/RDV par source"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Ça va être trop lourd à mettre en place", "a": "On démarre simple : statuts + scripts + relance. L’automatisation vient après." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vous rappelez trop tard",
+              "vous perdez des dossiers faute de suivi",
+              "vous voulez industrialiser sans usine à gaz"
+            ],
+            "avoid": [
+              "Ajouter un CRM avant le process",
+              "Ne pas mesurer contact/RDV"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 6,
+          "angle": "preuves + objections pour éviter les chasseurs de prix",
+          "cta": "Renforcer la confiance",
+          "hero": {
+            "eyebrow": "Contenus preuves × Courtier",
+            "titleHtml": "Preuves & contenus courtier :<br/> filtrer les prospects et augmenter les RDV",
+            "subtitle": "Objections, cas anonymisés, FAQ utile : plus de confiance avant contact.",
+            "ctas": [
+              { "label": "Recevoir mon plan contenus courtier", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Réassurance métier • Utile Ads/SEO/CRO"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Courtier : moins de “chasseurs de prix”",
+                "context": "Beaucoup de demandes comparatives, faible intent.",
+                "action": "FAQ objections + preuve + cadrage offre/zone + microcopy anti-risque.",
+                "result": "Demandes plus qualifiées, meilleure conversion RDV."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan objections (2–4) + réponses courtes",
+              "Mini-cas anonymisé (contexte/action/résultat/leçon)",
+              "FAQ utile (zone, concurrence, process)",
+              "Blocs réassurance (livrables/refus)",
+              "Plan contenus “intention devis”"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas de preuves publiables", "a": "Anonymisation + captures floutées + process + livrables : crédible et publiable." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes courtier et que…",
+            "conditions": [
+              "vos prospects hésitent beaucoup",
+              "vous voulez réduire les non pertinents",
+              "vous voulez améliorer la conversion sans plus de budget"
+            ],
+            "avoid": [
+              "Contenus génériques non orientés conversion",
+              "Ne pas cadrer l’offre/zone"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     },
 
     {
       "metierId": "metier_mutuelle_sante",
       "prestations": [
-        { "prestaId": "presta_seo_local", "priority": 1, "angle": "pages profils (senior/famille/TNS) + local + GBP", "cta": "Plan SEO" },
-        { "prestaId": "presta_content_proof", "priority": 2, "angle": "preuves + FAQ remboursements/attentes + réassurance", "cta": "Créer contenus" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "dossier complet via formulaire pré-qualifiant", "cta": "Optimiser formulaire" },
-        { "prestaId": "presta_ads_local", "priority": 4, "angle": "segmentation (seniors/familles/TNS) + landing dédiée", "cta": "Lancer Ads" },
-        { "prestaId": "presta_tracking_attribution", "priority": 5, "angle": "piloter CPL et éligibilité par segment", "cta": "Attribuer ROI" },
-        { "prestaId": "presta_crm_workflow", "priority": 6, "angle": "rappel/relances + prise RDV pour augmenter transformation", "cta": "Automatiser le suivi" }
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 1,
+          "angle": "pages profils (senior/famille/TNS) + local + GBP",
+          "cta": "Plan SEO",
+          "hero": {
+            "eyebrow": "SEO local × Mutuelle",
+            "titleHtml": "SEO local mutuelle :<br/> capter seniors/familles/TNS en 60/95",
+            "subtitle": "Pages profils + GBP + preuve/FAQ : capter intention “devis” local.",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Segmentation profils • Sans pages villes risquées"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Premiers signaux", "range": "6–12 semaines", "note": "selon concurrence locale et historique." },
+                { "label": "Stabilisation", "range": "3–6 mois", "note": "si pages profils + preuves + liens locaux sont tenus." }
+              ],
+              "microcopy": "On priorise 1–2 profils d’entrée : meilleur focus, meilleure conversion."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan pages profils (senior/famille/TNS) + priorisation",
+              "Optimisations GBP (services, avis, cohérence)",
+              "Schema & SEO technique (FAQ/Service/Perf)",
+              "Plan contenus preuves (remboursements/attentes)",
+              "Maillage + recommandations liens locaux"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Sans pages villes, ça marche ?", "a": "Oui : modules locaux + pages profils + GBP + preuve/FAQ. On vise l’intention, pas le volume de pages." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vous voulez capter des profils précis (senior/famille/TNS)",
+              "vous voulez stabiliser l’acquisition",
+              "vous pouvez cadrer un profil d’entrée"
+            ],
+            "avoid": [
+              "Tout mettre sur une page générique",
+              "Ignorer GBP et avis"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 2,
+          "angle": "preuves + FAQ remboursements/attentes + réassurance",
+          "cta": "Créer contenus",
+          "hero": {
+            "eyebrow": "Contenus preuves × Mutuelle",
+            "titleHtml": "Preuves mutuelle :<br/> rassurer (remboursements/attentes) avant contact",
+            "subtitle": "FAQ utile + objections + cas anonymisés : meilleure conversion et tri.",
+            "ctas": [
+              { "label": "Recevoir mon plan contenus mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Réassurance profils • Utile SEO/Ads/CRO"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Mutuelle : réduire les demandes “hors profil”",
+                "context": "Beaucoup de questions générales, faible intent devis.",
+                "action": "FAQ profils + objections + preuve + formulaire qualifiant.",
+                "result": "Plus de demandes alignées profil, meilleure conversion."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan FAQ (remboursements/attentes/délais) par profil",
+              "Objections clés + réponses courtes",
+              "Mini-cas anonymisé (contexte/action/résultat/leçon)",
+              "Blocs réassurance (livrables/refus)",
+              "Contenus “intention devis” par profil"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On risque d’attirer du support, pas du devis", "a": "On cadre messages + CTA + formulaire, et on traite l’intention “devis” en priorité." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vos prospects veulent être rassurés avant contact",
+              "vous avez besoin de filtrer par profil",
+              "vous voulez améliorer la conversion sans plus de budget"
+            ],
+            "avoid": [
+              "FAQ trop longue sans cadrage",
+              "Absence de preuve et microcopy"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "dossier complet via formulaire pré-qualifiant",
+          "cta": "Optimiser formulaire",
+          "hero": {
+            "eyebrow": "CRO × Mutuelle",
+            "titleHtml": "CRO mutuelle :<br/> plus de dossiers complets, moins de pertes",
+            "subtitle": "Formulaire pré-qualifiant + preuve + friction réduite + tracking.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Qualification par profil • Pilotage sur dossiers"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on vise (logique)",
+              "items": [
+                { "label": "Dossiers complets", "range": "↑", "note": "avec champs utiles + microcopy + preuve." },
+                { "label": "Demandes hors cible", "range": "↓", "note": "filtrage profil/zone/besoins." }
+              ],
+              "microcopy": "On optimise sur la qualité (dossier), pas uniquement sur le volume."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit friction + champs + messages",
+              "Formulaire qualifiant (profil, besoins, zone)",
+              "Wireframe sections preuve/FAQ",
+              "Plan tests CTA + microcopy",
+              "Tracking events + reporting conversion"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On va perdre du volume si on filtre", "a": "Oui, et c’est souvent une bonne chose : plus de dossiers exploitables = meilleur ROI." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vous recevez des demandes incomplètes",
+              "vous voulez qualifier par profil",
+              "vous voulez réduire le temps perdu"
+            ],
+            "avoid": [
+              "Formulaire trop long sans valeur",
+              "Ne pas expliquer “pourquoi on demande”"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 4,
+          "angle": "segmentation (seniors/familles/TNS) + landing dédiée",
+          "cta": "Lancer Ads",
+          "hero": {
+            "eyebrow": "Ads local × Mutuelle",
+            "titleHtml": "Google Ads mutuelle :<br/> capter des profils (senior/famille/TNS) en 60/95",
+            "subtitle": "Segmentation + landing dédiée + tracking : pilotage CPL & éligibilité.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • 1 profil d’entrée d’abord • Conversions & exclusions"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Mutuelle : passer du clic au dossier",
+                "context": "Clics mais faible conversion, profils mélangés.",
+                "action": "Campagnes par profil + landing + formulaire qualifiant + négatifs.",
+                "result": "Demandes plus alignées profil, meilleure conversion."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan campagnes par profil (senior/famille/TNS)",
+              "Landing(s) dédiée(s) + preuve/FAQ",
+              "Conversions + UTMs + (option) call tracking",
+              "Négatifs + exclusions + ajustements zones",
+              "Routine optimisation sur dossiers"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Les CPC sont trop hauts", "a": "On segmente, on filtre, on améliore conversion. On pilote au dossier exploitable, pas au volume brut." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vous savez quel profil prioriser",
+              "vous pouvez traiter vite les demandes",
+              "vous êtes OK pour une landing dédiée"
+            ],
+            "avoid": [
+              "Tout mélanger dans une seule campagne",
+              "Pas de conversions / pas de tracking"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 5,
+          "angle": "piloter CPL et éligibilité par segment",
+          "cta": "Attribuer ROI",
+          "hero": {
+            "eyebrow": "Tracking × Mutuelle",
+            "titleHtml": "Tracking mutuelle :<br/> piloter par profil (senior/famille/TNS)",
+            "subtitle": "Attribution source/campagne + statut dossier : décisions par segment.",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • UTM + events + (option) call tracking • Dashboard segment"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on cherche à rendre visible",
+              "items": [
+                { "label": "Performance par profil", "range": "visible", "note": "volume, conversion, dossier exploitable." },
+                { "label": "Sources rentables", "range": "identifiées", "note": "pour scaler et couper le reste." }
+              ],
+              "microcopy": "On arrête de piloter globalement : on pilote par profil/segment."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Conventions UTM + segments/profils",
+              "Tracking formulaires + events",
+              "(Option) call tracking + tags appels",
+              "Statuts dossier (éligible/non éligible/RDV)",
+              "Dashboard par profil/source/campagne"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne sait pas mesurer l’éligibilité", "a": "On définit 3 statuts simples + champs utiles. Ça suffit pour piloter." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vous mixez plusieurs profils",
+              "vous voulez couper les sources non rentables",
+              "vous voulez mieux mesurer que le CPL brut"
+            ],
+            "avoid": [
+              "Optimiser sans statuts dossier",
+              "Oublier les appels dans l’attribution"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 6,
+          "angle": "rappel/relances + prise RDV pour augmenter transformation",
+          "cta": "Automatiser le suivi",
+          "hero": {
+            "eyebrow": "CRM/workflow × Mutuelle",
+            "titleHtml": "CRM & workflows mutuelle :<br/> améliorer transformation en RDV",
+            "subtitle": "Rappel + relances + pipeline : moins de pertes, meilleur suivi par profil.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow mutuelle", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Process simple • Suivi sources possible"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Logique d’impact",
+              "items": [
+                { "label": "Taux de contact", "range": "↑", "note": "rappel rapide + relances." },
+                { "label": "RDV pris", "range": "↑", "note": "scripts + pipeline + suivi." }
+              ],
+              "microcopy": "On mesure avant/après et on itère."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline + statuts dossier",
+              "Scripts d’appel + relance",
+              "Workflows (email/SMS) si pertinent",
+              "Règles de routing par profil",
+              "Dashboard contact/RDV par source"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Nos équipes sont déjà chargées", "a": "On cible 2–3 actions à fort impact : rappel + statuts + relance. Pas d’usine à gaz." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous êtes mutuelle et que…",
+            "conditions": [
+              "vous perdez des demandes faute de suivi",
+              "vous voulez industrialiser la relance",
+              "vous voulez améliorer RDV à volume constant"
+            ],
+            "avoid": [
+              "Mettre un CRM complet sans process",
+              "Ne pas suivre contact/RDV"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     },
 
     {
       "metierId": "metier_assurance_emprunteur",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "substitution + économies + équivalence + ciblage fort", "cta": "Démarrer Ads" },
-        { "prestaId": "presta_cro", "priority": 2, "angle": "pré-qualification stricte (montant/date/assureur/profil)", "cta": "Qualifier mieux" },
-        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "mesurer coût par dossier éligible + sources", "cta": "Attribuer ROI" },
-        { "prestaId": "presta_content_proof", "priority": 4, "angle": "preuves + objections (équivalence, délais) pour convertir en RDV", "cta": "Renforcer la confiance" },
-        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "rappel <10 min + relances pour augmenter jointure", "cta": "Réduire la perte" },
-        { "prestaId": "presta_seo_local", "priority": 6, "angle": "SEO local pour stabiliser l’acquisition sur requêtes clés", "cta": "Plan SEO local" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "substitution + économies + équivalence + ciblage fort",
+          "cta": "Démarrer Ads",
+          "hero": {
+            "eyebrow": "Ads local × Emprunteur",
+            "titleHtml": "Google Ads assurance emprunteur :<br/> dossiers qualifiés en 60/95",
+            "subtitle": "Pré-qualification stricte + landing + tracking : pilotage sur dossiers exploitables.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Formulaire qualifiant • Tracking inclus"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Emprunteur : filtrer par critères dossier",
+                "context": "Demandes nombreuses, peu d’éligibles (montant/date/profil).",
+                "action": "Campagnes par angle + landing + formulaire strict + négatifs.",
+                "result": "Moins de non dossiers, plus de demandes exploitables."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan campagnes (angles × zones) + structure compte",
+              "Landing emprunteur + preuve/FAQ + CTA",
+              "Formulaire qualifiant (montant, date, profil, assureur)",
+              "Conversions + UTMs + (option) call tracking",
+              "Négatifs/exclusions + routine optimisation"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Trop de leads non éligibles en emprunteur", "a": "On filtre dès la page : critères dossier + zone + urgence, puis pilotage sur éligibilité." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vous voulez des dossiers rapidement",
+              "vous acceptez une pré-qualification stricte",
+              "vous pouvez traiter vite (rappel < 10 min)"
+            ],
+            "avoid": [
+              "Ads sans formulaire dossier",
+              "Optimiser sur CPL brut sans éligibilité"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 2,
+          "angle": "pré-qualification stricte (montant/date/assureur/profil)",
+          "cta": "Qualifier mieux",
+          "hero": {
+            "eyebrow": "CRO × Emprunteur",
+            "titleHtml": "CRO assurance emprunteur :<br/> plus de dossiers éligibles (60/95)",
+            "subtitle": "Pré-qualification + preuves + friction réduite + tracking events.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Moins de volume, plus d’éligibles • Pilotage dossier"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on cherche à améliorer",
+              "items": [
+                { "label": "Part de dossiers éligibles", "range": "↑", "note": "via champs utiles + microcopy + preuve." },
+                { "label": "Temps perdu", "range": "↓", "note": "moins de non dossiers, meilleur tri." }
+              ],
+              "microcopy": "On optimise sur la qualité (dossier), pas seulement sur le volume."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit friction + objections + preuve",
+              "Formulaire dossier (montant/date/profil/assureur)",
+              "Wireframe sections preuve/FAQ",
+              "Plan tests CTA (tel/WA/RDV)",
+              "Tracking events + reporting conversion"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Filtrer va faire chuter le volume", "a": "Oui, mais c’est le but : meilleur ROI avec plus d’éligibles et moins de perte." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vous recevez trop de non dossiers",
+              "vous voulez augmenter les dossiers exploitables",
+              "vous voulez piloter sur un KPI utile"
+            ],
+            "avoid": [
+              "Formulaire court qui n’exclut rien",
+              "Ne pas traiter objections (équivalence/délais)"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 3,
+          "angle": "mesurer coût par dossier éligible + sources",
+          "cta": "Attribuer ROI",
+          "hero": {
+            "eyebrow": "Tracking × Emprunteur",
+            "titleHtml": "Tracking emprunteur :<br/> piloter le coût par dossier éligible",
+            "subtitle": "UTM + events + statuts dossier : attribution fiable (SEO/Ads).",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans CRM possible • Dashboard exploitable"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Emprunteur : piloter par éligibilité",
+                "context": "CPL “ok” mais dossiers non exploitables.",
+                "action": "Ajout statuts + tracking events + dashboard par campagne/offre.",
+                "result": "Coupe des sources non rentables, focus sur dossiers exploitables."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Convention UTM + structure campagne/offre",
+              "Tracking formulaire + événements clés",
+              "(Option) call tracking + tags appels",
+              "Statuts dossier (éligible/non éligible/RDV)",
+              "Dashboard : source/campagne → éligibilité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne sait pas qualifier un dossier", "a": "On définit 3 statuts simples + 4 champs clés. Ça suffit pour piloter." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vous voulez couper les campagnes “non dossier”",
+              "vous voulez un KPI utile (dossier éligible)",
+              "vous voulez une attribution claire"
+            ],
+            "avoid": [
+              "Piloter au clic",
+              "Ignorer les appels"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 4,
+          "angle": "preuves + objections (équivalence, délais) pour convertir en RDV",
+          "cta": "Renforcer la confiance",
+          "hero": {
+            "eyebrow": "Contenus preuves × Emprunteur",
+            "titleHtml": "Preuves emprunteur :<br/> traiter équivalence/délais avant contact",
+            "subtitle": "Objections + cas anonymisés + FAQ utile : meilleure conversion RDV.",
+            "ctas": [
+              { "label": "Recevoir mon plan preuves emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Réassurance dossier • Utile Ads/SEO/CRO"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Emprunteur : lever le doute avant appel",
+                "context": "Beaucoup de prospects hésitent (équivalence, délais, économies).",
+                "action": "FAQ objections + preuve + microcopy anti-risque + CTA clair.",
+                "result": "Demandes plus alignées et meilleure prise de RDV."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Framework objections (équivalence/délais/économies)",
+              "FAQ utile (critères dossier, process)",
+              "Mini-cas anonymisé (contexte/action/résultat/leçon)",
+              "Blocs réassurance (livrables/refus)",
+              "Plan contenus “intention devis/RDV”"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne peut pas promettre des économies", "a": "Justement : on cadre, on compare, on explique le process et on évite les promesses absolues." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vos prospects doutent avant d’appeler",
+              "vous voulez augmenter les RDV",
+              "vous voulez filtrer les non dossiers"
+            ],
+            "avoid": [
+              "Promesses irréalistes",
+              "Pages sans preuve ni objections"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 5,
+          "angle": "rappel <10 min + relances pour augmenter jointure",
+          "cta": "Réduire la perte",
+          "hero": {
+            "eyebrow": "CRM/workflow × Emprunteur",
+            "titleHtml": "Workflows emprunteur :<br/> plus de jointure, plus de RDV",
+            "subtitle": "Rappel rapide + relances + pipeline : transformer mieux les dossiers entrants.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Process simple • Suivi sources possible"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Logique d’impact",
+              "items": [
+                { "label": "Taux de contact", "range": "↑", "note": "rappel + relances." },
+                { "label": "RDV pris", "range": "↑", "note": "scripts + pipeline." }
+              ],
+              "microcopy": "On mesure avant/après et on itère."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline dossier (statuts) + scoring simple",
+              "Scripts d’appel + relances",
+              "Workflows (email/SMS) si pertinent",
+              "Règles routing (urgence/profil)",
+              "Dashboard contact/RDV par source"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas le temps de relancer", "a": "On met 2–3 relances automatiques simples + scripts : gros impact sans charge." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vous perdez des dossiers faute de suivi",
+              "vous rappelez trop tard",
+              "vous voulez améliorer RDV à volume constant"
+            ],
+            "avoid": [
+              "CRM avant le process",
+              "Pas de statut dossier"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 6,
+          "angle": "SEO local pour stabiliser l’acquisition sur requêtes clés",
+          "cta": "Plan SEO local",
+          "hero": {
+            "eyebrow": "SEO local × Emprunteur",
+            "titleHtml": "SEO local emprunteur :<br/> capter des requêtes dossier en 60/95",
+            "subtitle": "Pages offres + preuve/FAQ + liens locaux : stabiliser l’acquisition.",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO emprunteur", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Intention dossier • Benchmarks réalistes"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Premiers signaux", "range": "6–12 semaines", "note": "selon historique et concurrence." },
+                { "label": "Stabilisation", "range": "3–6 mois", "note": "si structure + preuves + liens sont tenus." }
+              ],
+              "microcopy": "Souvent pertinent en complément Ads pour stabiliser."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan pages (angles dossier) + priorisation",
+              "Schema & technique (FAQ/Service/Perf)",
+              "Plan contenus objections (équivalence/délais)",
+              "Optimisations GBP si pertinent",
+              "Recommandations liens locaux"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "SEO trop long vs Ads", "a": "On lance Ads pour le court terme, SEO pour stabiliser. Le diagnostic fixe la priorité." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’emprunteur et que…",
+            "conditions": [
+              "vous voulez réduire dépendance Ads",
+              "vous ciblez des requêtes “devis/dossier” locales",
+              "vous pouvez produire des preuves/FAQ"
+            ],
+            "avoid": [
+              "Blog générique",
+              "Absence de preuve et objections"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     },
 
     {
       "metierId": "metier_assurance_pro",
       "prestations": [
-        { "prestaId": "presta_ads_local", "priority": 1, "angle": "offres par activité + urgence décennale + exclusions", "cta": "Avoir des devis" },
-        { "prestaId": "presta_crm_workflow", "priority": 2, "angle": "rappel <10 min + scripts + RDV pour limiter la perte", "cta": "Réduire la perte" },
-        { "prestaId": "presta_cro", "priority": 3, "angle": "formulaire qualifiant (activité/SIRET/urgence) + conversion", "cta": "Optimiser conversion" },
-        { "prestaId": "presta_tracking_attribution", "priority": 4, "angle": "piloter coût par lead éligible (activité/zone)", "cta": "Mettre le tracking" },
-        { "prestaId": "presta_seo_local", "priority": 5, "angle": "pages par activité (couvreur, élec…) + local", "cta": "Se positionner local" },
-        { "prestaId": "presta_content_proof", "priority": 6, "angle": "preuves + objections par activité pour rassurer", "cta": "Créer contenus" }
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 1,
+          "angle": "offres par activité + urgence décennale + exclusions",
+          "cta": "Avoir des devis",
+          "hero": {
+            "eyebrow": "Ads local × Assurance pro",
+            "titleHtml": "Google Ads assurance pro :<br/> devis par activité en 60/95",
+            "subtitle": "Segmentation activité + landing + tracking : piloter sur devis exploitables.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads assurance pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage activité/zone/urgence • Tracking inclus"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Pro : réduire les demandes hors activité",
+                "context": "Demandes trop variées, faible exploitabilité.",
+                "action": "Campagnes par activité + landing + formulaire qualifiant (SIRET/activité/urgence).",
+                "result": "Plus de devis exploitables, moins de temps perdu."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan campagnes par activité (décennale/RCP/…)",
+              "Landing(s) par activité + preuve/FAQ",
+              "Formulaire qualifiant (activité/SIRET/urgence/zone)",
+              "Conversions + UTMs + (option) call tracking",
+              "Négatifs + exclusions + routine optimisation"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On reçoit trop de demandes hors cible", "a": "Segmentation activité + formulaire qualifiant + exclusions : on pilote sur devis exploitables." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous pouvez prioriser 1–2 activités",
+              "vous voulez des devis rapidement",
+              "vous êtes OK pour une landing dédiée"
+            ],
+            "avoid": [
+              "Tout mélanger dans une seule campagne",
+              "Pas de formulaire activité/SIRET"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 2,
+          "angle": "rappel <10 min + scripts + RDV pour limiter la perte",
+          "cta": "Réduire la perte",
+          "hero": {
+            "eyebrow": "CRM/workflow × Pro",
+            "titleHtml": "Workflows assurance pro :<br/> transformer plus de devis en RDV",
+            "subtitle": "Rappel rapide + scripts + pipeline : moins de pertes, meilleure jointure.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Process simple • Suivi sources possible"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Logique d’impact",
+              "items": [
+                { "label": "Taux de contact", "range": "↑", "note": "rappel + relances." },
+                { "label": "RDV pris", "range": "↑", "note": "scripts + pipeline." }
+              ],
+              "microcopy": "On mesure avant/après et on itère."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline devis (statuts) + scoring simple",
+              "Scripts d’appel (activité/urgence) + relances",
+              "Workflows (email/SMS) si pertinent",
+              "Routing par activité/urgence/zone",
+              "Dashboard contact/RDV par source"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas le temps de relancer", "a": "On automatise l’essentiel (2–3 relances) + scripts : fort impact sans charge." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous rappelez trop tard",
+              "vous perdez des devis en cours de route",
+              "vous voulez industrialiser sans usine à gaz"
+            ],
+            "avoid": [
+              "CRM complet avant le process",
+              "Pas de statuts devis"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 3,
+          "angle": "formulaire qualifiant (activité/SIRET/urgence) + conversion",
+          "cta": "Optimiser conversion",
+          "hero": {
+            "eyebrow": "CRO × Assurance pro",
+            "titleHtml": "CRO assurance pro :<br/> plus de devis exploitables (60/95)",
+            "subtitle": "Formulaire activité/SIRET + preuve + friction réduite + tracking events.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage activité • Pilotage sur devis"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on cherche à améliorer",
+              "items": [
+                { "label": "Devis exploitables", "range": "↑", "note": "avec champs utiles + microcopy + preuve." },
+                { "label": "Demandes hors activité", "range": "↓", "note": "filtrage activité/SIRET/urgence." }
+              ],
+              "microcopy": "On optimise sur l’exploitabilité, pas sur le volume brut."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit friction + objections + preuve",
+              "Formulaire qualifiant (activité/SIRET/urgence/zone)",
+              "Wireframe sections preuve/FAQ",
+              "Plan tests CTA (tel/WA/form)",
+              "Tracking events + reporting conversion"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Trop de champs = moins de demandes", "a": "Moins de volume, plus d’exploitables = meilleur ROI. On choisit les champs utiles." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous perdez du temps sur des demandes hors cible",
+              "vous voulez augmenter le taux de devis exploitables",
+              "vous voulez filtrer sans casser la conversion"
+            ],
+            "avoid": [
+              "Formulaire court qui n’exclut rien",
+              "Absence de preuve et objections"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 4,
+          "angle": "piloter coût par lead éligible (activité/zone)",
+          "cta": "Mettre le tracking",
+          "hero": {
+            "eyebrow": "Tracking × Pro",
+            "titleHtml": "Tracking assurance pro :<br/> piloter par activité & éligibilité",
+            "subtitle": "UTM + events + statuts devis : attribution par source/campagne.",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Dashboard par activité • Décisions scale/stop"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Pro : couper les campagnes hors activité",
+                "context": "CPL correct mais devis non exploitables (activité non ciblée).",
+                "action": "Statuts + champs activité + dashboard par campagne.",
+                "result": "Budget déplacé vers les sources qui génèrent des devis exploitables."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Convention UTM + structure campagne/activité",
+              "Tracking formulaires + events",
+              "(Option) call tracking + tags appels",
+              "Statuts devis (éligible/non éligible/RDV)",
+              "Dashboard : source/campagne → exploitabilité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne sait pas définir l’éligibilité", "a": "On commence simple : 3 statuts + 3–4 champs (activité, zone, urgence)." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous mixez plusieurs activités",
+              "vous voulez couper les sources non rentables",
+              "vous voulez piloter au devis exploitable"
+            ],
+            "avoid": [
+              "Piloter au clic",
+              "Ignorer les appels"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 5,
+          "angle": "pages par activité (couvreur, élec…) + local",
+          "cta": "Se positionner local",
+          "hero": {
+            "eyebrow": "SEO local × Pro",
+            "titleHtml": "SEO local assurance pro :<br/> capter des requêtes par activité en 60/95",
+            "subtitle": "Pages activité + preuve/FAQ + liens locaux : montée progressive et stable.",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Intention devis • Benchmarks réalistes"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Premiers signaux", "range": "6–12 semaines", "note": "selon historique et concurrence." },
+                { "label": "Stabilisation", "range": "3–6 mois", "note": "si pages activité + preuves + liens sont tenus." }
+              ],
+              "microcopy": "Le diagnostic fixe l’activité prioritaire et la zone."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan pages par activité + priorisation",
+              "Schema & technique (FAQ/Service/Perf)",
+              "Plan contenus objections par activité",
+              "Optimisations GBP si pertinent",
+              "Recommandations liens locaux"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On n’a pas le temps de faire du contenu", "a": "On priorise 1 activité + 1 page forte + preuves/FAQ. On étend ensuite." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous voulez réduire la dépendance Ads",
+              "vous ciblez 1 activité prioritaire",
+              "vous voulez des requêtes locales “devis”"
+            ],
+            "avoid": [
+              "Du contenu générique",
+              "Absence de preuve et objections"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 6,
+          "angle": "preuves + objections par activité pour rassurer",
+          "cta": "Créer contenus",
+          "hero": {
+            "eyebrow": "Contenus preuves × Pro",
+            "titleHtml": "Preuves assurance pro :<br/> rassurer par activité avant contact",
+            "subtitle": "Objections + mini-cas + FAQ utile : meilleure conversion en devis.",
+            "ctas": [
+              { "label": "Recevoir mon plan preuves pro", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Réassurance activité • Utile SEO/Ads/CRO"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Pro : mieux cadrer l’activité",
+                "context": "Prospects hésitent, demandes peu exploitables.",
+                "action": "FAQ par activité + objections + preuve + formulaire qualifiant.",
+                "result": "Devis plus exploitables, meilleure conversion."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Framework objections par activité",
+              "FAQ utile (activité, urgence, process)",
+              "Mini-cas anonymisé (contexte/action/résultat/leçon)",
+              "Blocs réassurance (livrables/refus)",
+              "Plan contenus “intention devis” par activité"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Chaque activité a ses spécificités", "a": "Justement : on crée des blocs dédiés par activité prioritaire (1–2) pour convertir." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites de l’assurance pro et que…",
+            "conditions": [
+              "vous voulez filtrer par activité",
+              "vos prospects doutent avant contact",
+              "vous voulez améliorer conversion sans plus de budget"
+            ],
+            "avoid": [
+              "Pages génériques non orientées activité",
+              "Absence de preuve/objections"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     },
 
     {
       "metierId": "metier_assurance_vie_patrimoine",
       "prestations": [
-        { "prestaId": "presta_content_proof", "priority": 1, "angle": "preuves + positionnement + cas + pédagogie RDV", "cta": "Renforcer la confiance" },
-        { "prestaId": "presta_cro", "priority": 2, "angle": "filtrage par seuils + prise de RDV + friction réduite", "cta": "Qualifier les demandes" },
-        { "prestaId": "presta_tracking_attribution", "priority": 3, "angle": "attribuer les RDV aux sources + piloter coût par RDV", "cta": "Mettre le tracking" },
-        { "prestaId": "presta_seo_local", "priority": 4, "angle": "requêtes bilan patrimonial local + pages RDV", "cta": "Plan SEO local" },
-        { "prestaId": "presta_crm_workflow", "priority": 5, "angle": "confirmation RDV + relances + nurturing", "cta": "Automatiser le suivi" },
-        { "prestaId": "presta_ads_local", "priority": 6, "angle": "Ads ciblées RDV (si offres et ciblage OK) + landing", "cta": "Générer des RDV" }
+        {
+          "prestaId": "presta_content_proof",
+          "priority": 1,
+          "angle": "preuves + positionnement + cas + pédagogie RDV",
+          "cta": "Renforcer la confiance",
+          "hero": {
+            "eyebrow": "Contenus preuves × Patrimoine",
+            "titleHtml": "Preuves patrimoine :<br/> générer des demandes de RDV qualifiées (60/95)",
+            "subtitle": "Cas anonymisés + objections + pédagogie : plus de confiance avant RDV.",
+            "ctas": [
+              { "label": "Recevoir mon plan preuves patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Positionnement clair • Anti-promesse (pas de volume garanti)"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Patrimoine : cadrer l’intention RDV",
+                "context": "Beaucoup de demandes “curiosité”, peu de RDV sérieux.",
+                "action": "Preuves + objections + cadrage (seuils/objectif) + CTA RDV.",
+                "result": "Moins de non pertinents, RDV plus qualifiés."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Positionnement + angles de confiance",
+              "Objections clés + réponses courtes",
+              "Mini-cas anonymisés (contexte/action/résultat/leçon)",
+              "FAQ utile (process RDV, confidentialité, seuils)",
+              "Blocs réassurance (livrables/refus)"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne peut pas afficher des performances", "a": "On prouve par process, cas anonymisés, livrables et cadrage — sans promesse absolue." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous voulez des RDV plus sérieux",
+              "vous voulez filtrer les curieux",
+              "vous voulez renforcer la confiance avant contact"
+            ],
+            "avoid": [
+              "Pages sans preuve ni cadrage",
+              "CTA trop génériques"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_cro",
+          "priority": 2,
+          "angle": "filtrage par seuils + prise de RDV + friction réduite",
+          "cta": "Qualifier les demandes",
+          "hero": {
+            "eyebrow": "CRO × Patrimoine",
+            "titleHtml": "CRO patrimoine :<br/> plus de RDV qualifiés, moins de curieux",
+            "subtitle": "Filtrage par seuils + preuve + CTA RDV + tracking events.",
+            "ctas": [
+              { "label": "Recevoir mon plan CRO patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage seuils • Pilotage sur RDV"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Ce qu’on vise (logique)",
+              "items": [
+                { "label": "RDV qualifiés", "range": "↑", "note": "cadrage + preuve + CTA RDV." },
+                { "label": "Demandes non pertinentes", "range": "↓", "note": "filtrage par seuils/objectifs." }
+              ],
+              "microcopy": "On optimise sur la qualité RDV, pas sur le volume brut."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Audit friction + objections + preuve",
+              "Formulaire filtrant (seuils/objectifs)",
+              "Wireframe page (preuve/FAQ/CTA RDV)",
+              "Plan tests microcopy (confidentialité)",
+              "Tracking events + reporting RDV"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Filtrer va faire baisser les demandes", "a": "Oui, et c’est l’objectif : plus de RDV sérieux = meilleur ROI." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous voulez réduire les curieux",
+              "vous voulez des RDV mieux qualifiés",
+              "vous voulez cadrer confidentialité et process"
+            ],
+            "avoid": [
+              "CTA “contact” trop vague",
+              "Absence de preuve et cadrage"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_tracking_attribution",
+          "priority": 3,
+          "angle": "attribuer les RDV aux sources + piloter coût par RDV",
+          "cta": "Mettre le tracking",
+          "hero": {
+            "eyebrow": "Tracking × Patrimoine",
+            "titleHtml": "Tracking patrimoine :<br/> piloter le coût par RDV qualifié",
+            "subtitle": "UTM + events + statuts RDV : attribution par source/campagne.",
+            "ctas": [
+              { "label": "Recevoir mon plan tracking patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Sans CRM possible • Dashboard RDV"
+          },
+          "proof": {
+            "mode": "miniCases",
+            "miniCases": [
+              {
+                "title": "Patrimoine : arrêter de piloter au volume",
+                "context": "Demandes mais peu de RDV qualifiés, attribution floue.",
+                "action": "Tracking events + statuts RDV + dashboard source/campagne.",
+                "result": "Budget déplacé vers les sources qui génèrent de vrais RDV."
+              }
+            ]
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Convention UTM + tagging campagnes",
+              "Tracking événements (clic tel/WA, RDV)",
+              "(Option) call tracking + tags appels",
+              "Statuts RDV (qualifié/non qualifié/confirmé)",
+              "Dashboard : source/campagne → RDV"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne veut pas trop tracer", "a": "On trace l’essentiel (source/événements) sans données sensibles. RGPD-friendly." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous voulez savoir quelle source génère de vrais RDV",
+              "vous voulez piloter coût par RDV",
+              "vous voulez réduire la perte"
+            ],
+            "avoid": [
+              "Mesurer uniquement les clics",
+              "Ne pas qualifier les RDV"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_seo_local",
+          "priority": 4,
+          "angle": "requêtes bilan patrimonial local + pages RDV",
+          "cta": "Plan SEO local",
+          "hero": {
+            "eyebrow": "SEO local × Patrimoine",
+            "titleHtml": "SEO local patrimoine :<br/> capter des requêtes RDV en 60/95",
+            "subtitle": "Pages RDV + preuve + objections : montée progressive et stable.",
+            "ctas": [
+              { "label": "Recevoir mon plan SEO patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Intent RDV • Benchmarks réalistes"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Premiers signaux", "range": "6–12 semaines", "note": "selon historique et concurrence." },
+                { "label": "Stabilisation", "range": "3–6 mois", "note": "si pages RDV + preuves + liens sont tenus." }
+              ],
+              "microcopy": "Le diagnostic fixe l’angle RDV prioritaire et la zone."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan pages RDV (angles) + priorisation",
+              "Schema & technique (FAQ/Service/Perf)",
+              "Plan contenus objections (confidentialité, process)",
+              "Optimisations GBP si pertinent",
+              "Recommandations liens locaux"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Le SEO attire des curieux", "a": "On cadre : preuves + filtrage + CTA RDV + microcopy. On vise l’intention RDV." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous voulez des RDV plus réguliers",
+              "vous voulez réduire la dépendance Ads",
+              "vous voulez cadrer l’intention RDV"
+            ],
+            "avoid": [
+              "Pages génériques sans preuve",
+              "CTA non orientés RDV"
+            ],
+            "cta": { "label": "Voir si je peux ranker sur ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_crm_workflow",
+          "priority": 5,
+          "angle": "confirmation RDV + relances + nurturing",
+          "cta": "Automatiser le suivi",
+          "hero": {
+            "eyebrow": "CRM/workflow × Patrimoine",
+            "titleHtml": "Workflows patrimoine :<br/> confirmer et transformer les RDV",
+            "subtitle": "Confirmation RDV + relances + nurturing : moins de no-show, meilleure transformation.",
+            "ctas": [
+              { "label": "Recevoir mon plan workflow patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Simple • Respect confidentialité"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Logique d’impact",
+              "items": [
+                { "label": "No-show", "range": "↓", "note": "confirmations + relances." },
+                { "label": "Transformation RDV", "range": "↑", "note": "nurturing + cadrage." }
+              ],
+              "microcopy": "On mesure avant/après et on itère."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Pipeline RDV (statuts) + confirmation",
+              "Scripts + relances (email/SMS) si pertinent",
+              "Nurturing (contenus preuves) si utile",
+              "Routing + règles (seuils/objectifs)",
+              "Dashboard RDV/no-show par source"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "On ne veut pas trop d’automatisation", "a": "On automatise uniquement ce qui réduit la perte (confirmation/relance). Le reste reste humain." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous avez des no-show",
+              "vous voulez mieux transformer à volume constant",
+              "vous voulez un suivi propre des RDV"
+            ],
+            "avoid": [
+              "Automatiser sans process",
+              "Ne pas suivre les statuts RDV"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        },
+        {
+          "prestaId": "presta_ads_local",
+          "priority": 6,
+          "angle": "Ads ciblées RDV (si offres et ciblage OK) + landing",
+          "cta": "Générer des RDV",
+          "hero": {
+            "eyebrow": "Ads local × Patrimoine",
+            "titleHtml": "Google Ads patrimoine :<br/> générer des RDV en 60/95",
+            "subtitle": "Ciblage + landing + filtrage : pilotage sur RDV qualifiés.",
+            "ctas": [
+              { "label": "Recevoir mon plan Ads patrimoine", "href": "CONTACT_UTM", "icon": "bi-arrow-right", "variant": "primary" },
+              { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+            ],
+            "note": "Réponse 24–48h • Filtrage seuils • Tracking inclus"
+          },
+          "proof": {
+            "mode": "metrics",
+            "metrics": {
+              "title": "Benchmarks réalistes",
+              "items": [
+                { "label": "Délai d’impact", "range": "immédiat", "note": "une fois campagnes + landing + conversions en place." },
+                { "label": "Stabilisation qualité", "range": "2–4 semaines", "note": "via filtrage + messages + landing + tracking." }
+              ],
+              "microcopy": "On pilote au RDV qualifié, pas au clic."
+            }
+          },
+          "deliverables": {
+            "title": "Ce que vous recevez",
+            "items": [
+              "Plan campagnes (angles RDV) + structure compte",
+              "Landing RDV + preuve/FAQ + filtrage seuils",
+              "Conversions + UTMs + (option) call tracking",
+              "Négatifs/exclusions + ajustements zones",
+              "Routine optimisation sur RDV"
+            ]
+          },
+          "objections": {
+            "items": [
+              { "q": "Ads attire des curieux", "a": "On cadre : landing filtrante + preuve + seuils + tracking. On pilote sur RDV qualifiés." }
+            ],
+            "maxFromMetier": 2
+          },
+          "fit": {
+            "title": "Si vous faites du patrimoine et que…",
+            "conditions": [
+              "vous avez un angle RDV clair",
+              "vous acceptez un filtrage (seuils/objectifs)",
+              "vous pouvez traiter vite les demandes"
+            ],
+            "avoid": [
+              "Ads sans landing filtrante",
+              "Optimiser sans conversions/RDV"
+            ],
+            "cta": { "label": "Voir si applicable à ma zone", "href": "CONTACT_UTM", "variant": "dark" }
+          }
+        }
       ]
     }
   ]

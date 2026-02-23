@@ -1,0 +1,71 @@
+---
+// src/components/blocks/CaseMini.astro
+const { data } = Astro.props as { data: any };
+
+const header = data?.header ?? null;
+const item = data?.item ?? null;
+const layout = data?.layout ?? {};
+
+const sectionClass = layout.sectionClass ?? "section my-0 py-6";
+const containerClass = layout.containerClass ?? "container";
+---
+{item && (
+<div class={sectionClass} id={data?.id}>
+  <div class={containerClass}>
+
+    {(header?.badge || header?.title || header?.subtitle) && (
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            {header?.badge && (
+                <p class="text-uppercase ls-3 text-smaller color mb-2 fw-bold">
+                  {header.badge}
+                </p>
+            )}
+            {header?.title && <h2 class="mb-2">{header.title}</h2>}
+            {header?.subtitle && <p class="mb-4 op-07">{header.subtitle}</p>}
+          </div>
+        </div>
+    )}
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card rounded-6 shadow-sm border-0">
+          <div class="card-body p-4">
+            {item?.title && <h3 class="h4 mb-3">{item.title}</h3>}
+
+            <dl class="row mb-0">
+              {item?.context && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Contexte</dt>
+                    <dd class="col-12 mb-3">{item.context}</dd>
+                  </>
+              )}
+              {item?.action && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Action</dt>
+                    <dd class="col-12 mb-38">{item.action}</dd>
+                  </>
+              )}
+              {item?.result && (
+                  <>
+                    <dt class="col-12 text-uppercase ls-2 text-smaller op-06 mb-1">Résultat</dt>
+                    <dd class="col-12 mb-0"><strong>{item.result}</strong></dd>
+                  </>
+              )}
+            </dl>
+
+            {item?.cta?.href && item?.cta?.label && (
+                <div class="mt-4">
+                  <a href={item.cta.href} class={item.cta.class ?? "btn btn-link p-0"}>
+                    <u>{item.cta.label}</u>
+                  </a>
+                </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+  )}

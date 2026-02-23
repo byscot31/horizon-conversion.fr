@@ -8,59 +8,180 @@
 
   "seoMap": {
     "brand": "Horizon Conversion",
+
     "intent": {
       "primary": "transactionnel",
-      "secondary": ["commercial"],
+      "secondary": ["commercial", "informationnel"],
       "stage": "conversion",
       "microConversions": ["form_submit", "appel", "whatsapp"]
     },
+
     "geo": {
       "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
-      "departements": ["60", "95"]
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "positioning": "local-sans-pages-villes"
     },
-    "kw": {
+
+    "keywords": {
       "primary": "contact génération leads assurance",
-      "secondary": ["diagnostic acquisition assurance", "audit SEO local assurance", "audit Google Ads assurance"]
+      "longTail": [
+        "demander un diagnostic leads assurance 60 95",
+        "contacter un spécialiste leads assurance dans l’Oise et le Val-d’Oise",
+        "audit acquisition locale pour agence d’assurance 60 95",
+        "diagnostic demandes de devis assurance Sud Oise Nord Val-d’Oise",
+        "contact pour obtenir des rendez-vous assurance qualifiés 60 95"
+      ],
+      "secondary": [
+        "diagnostic acquisition assurance",
+        "audit référencement local assurance",
+        "audit annonces Google assurance",
+        "demandes de devis assurance",
+        "rendez-vous assurance qualifiés",
+        "prospects assurance qualifiés",
+        "agence d’assurance",
+        "courtier assurance",
+        "mutuelle locale"
+      ],
+      "semantic": [
+        "zone de chalandise",
+        "offre d’entrée",
+        "pré-qualification",
+        "appels entrants",
+        "formulaire de demande",
+        "prise de rendez-vous",
+        "qualité des demandes",
+        "concurrence locale",
+        "messages de réassurance",
+        "avis et retours clients",
+        "délais de réponse"
+      ]
     },
+
     "tokens": {
       "offer": "leads assurance",
-      "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking"
+      "goal": "demandes de devis et rendez-vous qualifiés",
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages par métier + acquisition locale + suivi des appels et formulaires",
+      "hub": "Assurance Horizon Conversion"
+    },
+
+    "contentPlan": {
+      "promise": "Demandez un diagnostic pour obtenir plus de demandes de devis assurance en 60/95, avec un suivi clair des appels et formulaires.",
+      "benefits": [
+        "Un plan d’action concret, avec les priorités dans le bon ordre",
+        "Des pages adaptées à votre métier (agence, courtier, mutuelle) et à vos offres",
+        "Une meilleure qualification pour limiter les demandes hors zone ou hors besoin",
+        "Un suivi lisible des demandes (appels + formulaires) pour piloter efficacement"
+      ],
+      "proof": [
+        "Exemples de pages et de messages de réassurance sur la page Preuves",
+        "Engagement de réponse sous 24–48h ouvrées",
+        "Travail sur micro-secteur pour éviter la concurrence directe (si applicable)"
+      ],
+      "h1": "Contact : diagnostic pour générer des leads assurance en 60/95",
+      "h2": [
+        "Demander un diagnostic : objectifs, zone, offres prioritaires",
+        "Ce que vous recevez après votre demande",
+        "Questions fréquentes avant de vous lancer"
+      ],
+      "h3": [
+        "Agence d’assurance : demandes de devis et rendez-vous",
+        "Courtier : prospects mieux ciblés",
+        "Mutuelle : demandes cohérentes avec vos offres",
+        "Pré-qualification : éviter les demandes hors zone",
+        "Suivi des appels et formulaires"
+      ]
     }
   },
 
   "seoTemplates": {
-    "title": "Contact | Diagnostic acquisition assurance (60/95) — {brand}",
-    "description": "Demande de diagnostic : {tokens.method}, tracking et plan d’action. Objectif : {tokens.goal} sur {geo.core}."
+    "title": "Contact | Diagnostic leads assurance 60/95 — {brand}",
+    "description": "Demandez un diagnostic pour générer plus de demandes de devis assurance en 60/95. Plan d’action clair : offres prioritaires, pages adaptées et suivi des appels et formulaires."
   },
 
   "schema": {
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Sous combien de temps vous répondez ?", "a": "Réponse sous 24–48h ouvrées avec un plan d’action et les prochaines étapes." },
-      { "q": "Vous travaillez avec plusieurs acteurs sur la même zone ?", "a": "Non sur un micro-secteur défini : on évite la cannibalisation et on protège votre investissement." },
-      { "q": "Quelles infos préparer ?", "a": "Offres prioritaires, zone, budget Ads (si existant), objectif leads/mois. L’accès Analytics/Ads est optionnel." },
-      { "q": "Faites-vous le suivi des leads (relances, RDV) ?", "a": "Oui en option : scripts d’appel, relances, prise de RDV et automatisations (CRM/workflows) pour réduire la perte." },
-      { "q": "Comment éviter les demandes hors zone ou non qualifiées ?", "a": "Ciblage géographique + exclusions + messages clairs + formulaire pré-qualifiant + call tracking si nécessaire." },
-      { "q": "Je dois choisir SEO ou Google Ads ?", "a": "Ads pour du volume immédiat, SEO local pour stabiliser le coût. On priorise selon le besoin et le contexte." }
+      {
+        "q": "Sous combien de temps répondez-vous ?",
+        "a": "Réponse sous 24 à 48h ouvrées, avec une première lecture de votre situation et les prochaines étapes."
+      },
+      {
+        "q": "Travaillez-vous avec plusieurs acteurs sur la même zone ?",
+        "a": "Nous privilégions un micro-secteur défini pour éviter la concurrence directe et protéger votre investissement."
+      },
+      {
+        "q": "Quelles informations préparer avant de demander un diagnostic ?",
+        "a": "Votre métier, vos offres prioritaires, votre zone et votre objectif de demandes par mois. Si vous avez déjà des campagnes en cours, indiquez simplement le budget ; les accès ne sont pas indispensables au départ."
+      },
+      {
+        "q": "Faites-vous aussi le suivi des demandes (rappel, qualification, rendez-vous) ?",
+        "a": "Oui, en option : messages, scripts de rappel, relances et organisation de la prise de rendez-vous pour limiter la perte de demandes."
+      },
+      {
+        "q": "Comment éviter les demandes hors zone ou non qualifiées ?",
+        "a": "En clarifiant la zone, l’offre et les conditions dès la page, puis en ajoutant une pré-qualification simple dans le formulaire. Objectif : réduire les demandes hors cible."
+      },
+      {
+        "q": "Dois-je choisir le référencement local ou les annonces Google ?",
+        "a": "Les annonces Google peuvent apporter du volume rapidement. Le référencement local stabilise dans la durée. On priorise selon votre délai, votre budget et la concurrence sur votre zone."
+      }
     ]
   },
 
   "hero": {
     "id": "slider",
-    "eyebrow": "Diagnostic acquisition Assurance (60/95)",
-    "titleHtml": "Parlez-nous de votre métier.<br />On vous rend un plan d’action.",
-    "subtitle": "Objectif : {tokens.goal} (agences, courtiers, mutuelles), avec {tokens.method} et tracking propre.",
+    "eyebrow": "Contact — Diagnostic acquisition locale (60/95)",
+    "titleHtml": "Parlez-nous de votre activité d’assurance.<br />Vous recevez un plan d’action clair.",
+    "subtitle": "Objectif : {tokens.goal} pour agences, courtiers et mutuelles en 60/95, avec {tokens.method} et un suivi simple des demandes.",
     "ctas": [
-      { "label": "Demander un diagnostic", "href": "#contact-form", "icon": "bi-arrow-right", "variant": "primary", "scrollTo": "#contact-form" },
-      { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true, "track": "click_whatsapp" }
+      {
+        "label": "Demander un diagnostic",
+        "href": "#contact-form",
+        "icon": "bi-arrow-right",
+        "variant": "primary",
+        "scrollTo": "#contact-form"
+      },
+      {
+        "label": "WhatsApp {phoneDisplay}",
+        "href": "WHATSAPP",
+        "icon": "fa-brands fa-whatsapp",
+        "variant": "secondary",
+        "external": true,
+        "track": "click_whatsapp"
+      }
     ],
-    "note": "{geo.core}"
+    "note": "Zone : {geo.core} — réponse sous 24–48h ouvrées"
   },
 
   "sections": {
+    "contactIntro": {
+      "id": "contact-intro",
+      "variant": "light",
+      "content": {
+        "eyebrow": "Avant d’envoyer",
+        "title": "Un diagnostic utile, pas un simple échange.",
+        "text": "Vous indiquez votre métier, vos offres prioritaires et votre zone. Nous revenons vers vous avec un plan d’action concret pour obtenir plus de demandes de devis et de rendez-vous en 60/95."
+      },
+      "bullets": [
+        "Clarification de la zone de chalandise : Sud Oise (60) et Nord Val-d’Oise (95)",
+        "Choix des offres à mettre en avant (celles qui génèrent des demandes pertinentes)",
+        "Pré-qualification : limiter les demandes hors zone ou hors besoin",
+        "Suivi des demandes : appels et formulaires, pour piloter avec du factuel"
+      ],
+      "proof": {
+        "title": "Preuves et éléments de confiance",
+        "items": [
+          "Exemples et retours sur la page Preuves",
+          "Réponse sous 24–48h ouvrées",
+          "Approche par micro-secteur quand c’est possible, pour éviter la concurrence directe"
+        ],
+        "cta": { "label": "Voir les preuves", "href": "/preuves/", "variant": "dark" }
+      }
+    },
+
     "contactForm": {
       "id": "contact-form",
       "theme": {
@@ -69,8 +190,8 @@
       },
       "header": {
         "badge": "Contact",
-        "title": "Demande de diagnostic",
-        "subtitle": "Dites-nous votre métier, vos offres prioritaires et votre objectif. On revient avec un plan d’action (pages + acquisition + tracking)."
+        "title": "Demande de diagnostic (60/95)",
+        "subtitle": "Dites-nous votre métier, vos offres prioritaires et votre objectif. Vous recevez un plan d’action clair : pages adaptées, acquisition locale, et suivi des appels et formulaires."
       },
       "form": {
         "id": "template-contactform",
@@ -81,22 +202,63 @@
         "botcheckField": "template-contactform-botcheck"
       },
       "fields": {
-        "name": { "id": "template-contactform-name", "name": "template-contactform-name", "label": "Nom / Société", "type": "text", "required": true },
-        "metier": { "id": "template-contactform-service", "name": "template-contactform-service", "label": "Métier", "type": "select", "required": false, "placeholder": "— Choisir —", "includeOther": true, "otherLabel": "Autre" },
-        "email": { "id": "template-contactform-email", "name": "template-contactform-email", "label": "Email", "type": "email", "required": true },
-        "phone": { "id": "template-contactform-phone", "name": "template-contactform-phone", "label": "Téléphone", "type": "text", "required": true },
+        "name": {
+          "id": "template-contactform-name",
+          "name": "template-contactform-name",
+          "label": "Nom / Société",
+          "type": "text",
+          "required": true
+        },
+        "metier": {
+          "id": "template-contactform-service",
+          "name": "template-contactform-service",
+          "label": "Métier",
+          "type": "select",
+          "required": false,
+          "placeholder": "— Choisir —",
+          "includeOther": true,
+          "otherLabel": "Autre"
+        },
+        "email": {
+          "id": "template-contactform-email",
+          "name": "template-contactform-email",
+          "label": "Email",
+          "type": "email",
+          "required": true
+        },
+        "phone": {
+          "id": "template-contactform-phone",
+          "name": "template-contactform-phone",
+          "label": "Téléphone",
+          "type": "text",
+          "required": true
+        },
         "offers": {
           "id": "template-contactform-offers",
           "name": "template-contactform-offers",
           "label": "Offres prioritaires",
           "type": "datalist",
           "required": false,
-          "placeholder": "ex: assurance auto, mutuelle santé…",
-          "hint": "Astuce : sépare par virgules (ex: \"assurance auto, habitation\").",
+          "placeholder": "ex : assurance auto, habitation, mutuelle santé…",
+          "hint": "Astuce : séparez par virgules (ex : \"assurance auto, habitation\").",
           "hintSuffix": "(suggestions selon métier)"
         },
-        "budget": { "id": "template-contactform-budget", "name": "template-contactform-budget", "label": "Budget Ads (si existant)", "type": "text", "required": false, "placeholder": "ex: 500€/mois" },
-        "message": { "id": "template-contactform-message", "name": "template-contactform-message", "label": "Contexte & objectif", "type": "textarea", "required": true, "rows": 6 }
+        "budget": {
+          "id": "template-contactform-budget",
+          "name": "template-contactform-budget",
+          "label": "Budget annonces (si existant)",
+          "type": "text",
+          "required": false,
+          "placeholder": "ex : 500 €/mois"
+        },
+        "message": {
+          "id": "template-contactform-message",
+          "name": "template-contactform-message",
+          "label": "Contexte & objectif",
+          "type": "textarea",
+          "required": true,
+          "rows": 6
+        }
       },
       "hidden": {
         "metier_slug": { "id": "metier_slug", "name": "metier_slug" },
@@ -105,12 +267,12 @@
         "page_path": "page_path"
       },
       "submit": {
-        "label": "Envoyer",
+        "label": "Envoyer ma demande",
         "class": "button button-rounded button-light button-border border-width-1 ls-0 fw-medium me-2",
         "track": "form_submit"
       },
       "legal": {
-        "text": "En envoyant ce formulaire, vous acceptez d’être recontacté.",
+        "text": "En envoyant ce formulaire, vous acceptez d’être recontacté au sujet de votre demande.",
         "link": { "label": "Politique de confidentialité", "href": "/politique-confidentialite/" }
       },
       "recaptcha": {
@@ -127,11 +289,42 @@
       }
     },
 
+    "proofBand": {
+      "id": "proof-band",
+      "variant": "light",
+      "content": {
+        "eyebrow": "Ce que vous recevez",
+        "title": "Après votre demande : un plan d’action en 3 points",
+        "text": "Objectif : vous aider à décider rapidement, sur du concret, avec des priorités claires pour votre zone 60/95."
+      },
+      "steps": [
+        {
+          "title": "1) Priorités et offre d’entrée",
+          "text": "On identifie les offres qui déclenchent des demandes pertinentes (et celles à éviter), selon votre métier et votre zone."
+        },
+        {
+          "title": "2) Pages et messages de réassurance",
+          "text": "On précise les informations attendues par vos prospects : conditions, zone couverte, délais, et éléments de confiance."
+        },
+        {
+          "title": "3) Suivi des demandes",
+          "text": "On met au clair les demandes reçues : appels et formulaires, pour piloter avec des chiffres lisibles."
+        },
+        {
+          "cta": {
+            "label": "Voir la méthode complète",
+            "href": "/methode/",
+            "variant": "dark"
+          }
+        }
+      ]
+    },
+
     "promoCall": {
       "id": "promo-call",
       "content": {
-        "title": "Appel direct",
-        "subtitle": "Zone : {geo.core}"
+        "title": "Besoin d’un échange rapide ?",
+        "subtitle": "Zone : {geo.core} — agences, courtiers, mutuelles"
       },
       "cta": {
         "label": "Voir la méthode",

@@ -2,7 +2,7 @@
   "id": "metier_agence_assurance",
   "slug": "agence-assurance",
   "label": "Agences d’assurance",
-  "cardTeaser": "Plus de demandes de devis auto/habitation/santé sur 60/95, avec une offre d’entrée et une page qui convertit.",
+  "cardTeaser": "Plus de demandes de devis auto, habitation et santé en 60/95, avec une offre d’entrée claire, une page qui rassure et un suivi des appels et formulaires.",
 
   "offres": [
     "assurance auto",
@@ -14,27 +14,27 @@
   ],
 
   "meta": {
-    "title": "Génération de leads pour agence d’assurance | Sud Oise & Nord Val-d’Oise",
-    "description": "Plus de prospects qualifiés en assurance (auto, habitation, santé) avec une méthode locale : SEO + Ads + CRO, orientée RDV et devis.",
+    "title": "Leads pour agence d’assurance en 60/95 | Devis auto, habitation, santé",
+    "description": "Obtenez plus de demandes de devis pour votre agence d’assurance en 60/95 (auto, habitation, santé). Méthode locale : référencement local, annonces Google, page de demande claire et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/agence-assurance/"
   },
 
   "hero": {
-    "h1": "Générez des leads qualifiés pour votre agence d’assurance",
-    "sub": "Méthode locale (60/95) : pages qui convertissent + acquisition (SEO/Ads) + tracking appels/formulaires.",
-    "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
-    "ctaSecondary": { "label": "Voir la méthode", "href": "/methode/" }
+    "h1": "Agence d’assurance : plus de devis qualifiés en 60/95",
+    "sub": "Offre d’entrée + page de demande claire + acquisition locale (référencement local / annonces Google) + suivi des appels et formulaires.",
+    "ctaPrimary": { "label": "Recevoir le plan pour mon agence (zone + rayon)", "href": "/contact/" },
+    "ctaSecondary": { "label": "Échanger 10 min : {phoneDisplay}", "href": "WHATSAPP" }
   },
 
   "positionnement": {
-    "promesse": "Augmenter le volume de demandes de devis locales, sans dépendre uniquement du réseau ou de l’agence centrale.",
-    "angle": "Offre d’entrée + landing CRO + acquisition locale + mesure (CPL, RDV, éligibilité)."
+    "promesse": "Augmenter le volume de demandes de devis locales, sans dépendre uniquement du réseau ou du siège.",
+    "angle": "Offre d’entrée + page qui rassure + acquisition locale + suivi clair des demandes (appels, formulaires, qualité)."
   },
 
   "icp": {
     "taille": ["1-5 conseillers", "6-20 conseillers"],
-    "maturite": ["déjà présent sur Google", "campagnes Ads existantes", "site vitrine sans leads"],
+    "maturite": ["déjà présent sur Google", "campagnes annonces existantes", "site vitrine sans demandes"],
     "offresPrioritaires": ["auto", "habitation", "santé", "prévoyance"]
   },
 
@@ -70,46 +70,46 @@
     {
       "id": "obj_01",
       "texte": "On a déjà un site corporate, ça suffit.",
-      "reponse": "Un site corporate ne cible pas l’intention locale transactionnelle. On ajoute une page d’entrée orientée devis/RDV + preuve + FAQ + CTA + maillage."
+      "reponse": "Un site corporate informe, mais convertit rarement sur une intention locale de devis. On ajoute une page d’entrée dédiée (auto, habitation, santé…) : preuves, réponses aux objections, FAQ utile, et prise de contact simple."
     },
     {
       "id": "obj_02",
       "texte": "Leads = beaucoup de non qualifiés.",
-      "reponse": "On filtre par offre, zone, messages, formulaires pré-qualifiants, call tracking et un scoring simple (profil, urgence, motif)."
+      "reponse": "On réduit les demandes hors cible avec 3 leviers : zone claire, message précis, et pré-qualification simple dans le formulaire. Les appels et formulaires sont suivis pour ajuster rapidement."
     },
     {
       "id": "obj_03",
       "texte": "Google Ads coûte trop cher.",
-      "reponse": "On priorise une offre d’entrée, on travaille la conversion (CRO) et on combine SEO local + Ads ciblées pour stabiliser le CPL."
+      "reponse": "On limite les coûts en démarrant avec 1 à 2 offres d’entrée, une page plus claire, et des exclusions. On combine ensuite avec le référencement local pour stabiliser dans la durée."
     }
   ],
 
   "kpis": [
-    { "name": "CPL (coût par lead)", "target": "baisse progressive sur 60–90 jours" },
-    { "name": "Taux de conversion landing", "target": "x1.5 à x3 selon point de départ" },
-    { "name": "Part de leads locaux", "target": ">= 80%" },
-    { "name": "Appels trackés", "target": "100% des numéros campagne" }
+    { "name": "Coût par demande", "target": "baisse progressive sur 60–90 jours" },
+    { "name": "Taux de transformation de la page", "target": "x1.5 à x3 selon point de départ" },
+    { "name": "Part de demandes locales", "target": "≥ 80%" },
+    { "name": "Appels suivis", "target": "100% des numéros de campagne" }
   ],
 
   "livrables": [
-    "Page d’entrée (offre d’entrée) orientée devis/RDV",
-    "Modules preuve/objections/FAQ + formulaire pré-qualifiant",
-    "Tracking appels + formulaires + UTMs",
-    "Plan d’acquisition locale (SEO/Ads) et itérations CRO"
+    "Page d’entrée (offre d’entrée) orientée demande de devis / rendez-vous",
+    "Modules : preuves, objections, FAQ + formulaire de pré-qualification",
+    "Suivi des appels + formulaires (lecture simple des sources)",
+    "Plan d’acquisition locale (référencement local / annonces Google) et améliorations régulières de la page"
   ],
 
   "faq": [
     {
-      "q": "En combien de temps on voit des leads ?",
-      "a": "Ads : immédiat. SEO local : montée en puissance 4–12 semaines selon concurrence et historique."
+      "q": "En combien de temps voit-on des demandes ?",
+      "a": "Annonces : dès la mise en ligne. Référencement local : montée en puissance en 4 à 12 semaines selon concurrence et historique."
     },
     {
       "q": "Peut-on cibler auto + habitation + santé ?",
-      "a": "Oui, mais on priorise d’abord 1–2 offres d’entrée pour stabiliser le CPL et augmenter le taux de RDV."
+      "a": "Oui, mais on priorise d’abord 1 à 2 offres d’entrée pour stabiliser le coût par demande et augmenter les rendez-vous."
     },
     {
-      "q": "Comment évitez-vous les leads hors zone ?",
-      "a": "Ciblage géo (Ads), contenus et modules locaux, exclusions, et formulaires qui cadrent la zone/commune."
+      "q": "Comment évitez-vous les demandes hors zone ?",
+      "a": "Zone cadrée (rayon / communes), messages clairs sur la page, exclusions si annonces, et questions simples dans le formulaire pour valider la localisation."
     }
   ],
 
@@ -147,18 +147,18 @@
         "href": "/preuves/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Méthode et preuves : génération de leads pour agences d’assurance"
+          "alt": "Méthode et preuves : obtenir plus de demandes de devis pour une agence d’assurance en 60/95"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Agences d’assurance",
-        "title": "Transformer l’intention locale en devis et RDV.",
-        "text": "On part d’une offre d’entrée, on crée une landing qui convertit, on active l’acquisition locale (SEO/Ads) et on mesure appels/formulaires pour optimiser le CPL.",
+        "eyebrow": "Agences d’assurance (60/95)",
+        "title": "Transformer une recherche locale en demande de devis et rendez-vous.",
+        "text": "On démarre par une offre d’entrée (auto, habitation, santé…), on construit une page de demande claire, on active l’acquisition locale (référencement local / annonces Google) et on suit appels et formulaires pour améliorer la qualité des demandes.",
         "bullets": [
-          "Offre d’entrée + page d’entrée orientée conversion.",
-          "Ciblage local + exclusions + messages par produit.",
-          "Tracking + itérations CRO pour améliorer la qualité."
+          "Offre d’entrée + page orientée demande de devis.",
+          "Ciblage local, exclusions et messages par produit (auto, habitation, santé).",
+          "Suivi des appels et formulaires pour améliorer la qualité et réduire le coût par demande."
         ]
       },
       "ctas": [
@@ -167,12 +167,89 @@
       ]
     },
 
+    "painPointsBullets": {
+      "id": "problemes",
+      "header": {
+        "badge": "Votre situation",
+        "title": "Problèmes fréquents des agences d’assurance locales",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir plus de demandes de devis en 60/95."
+      },
+      "items": [
+        "Dépendance au réseau et aux recommandations : volume irrégulier.",
+        "Saisonnalité (auto / habitation) : variations fortes des demandes.",
+        "Concurrence locale et comparateurs : pression sur le coût par demande.",
+        "Appels non pertinents ou hors zone : temps perdu en agence.",
+        "Manque de visibilité : difficile de savoir ce qui apporte des rendez-vous."
+      ],
+      "ctas": [
+        { "label": "Recevoir le plan pour mon agence (zone + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+      ]
+    },
+
+    "processSteps3": {
+      "id": "parcours",
+      "header": {
+        "badge": "Parcours",
+        "title": "Diagnostic → Setup → Pilotage",
+        "subtitle": "Un déroulé simple, orienté agence et demandes de devis."
+      },
+      "steps": [
+        {
+          "title": "Diagnostic (J+7)",
+          "text": "On cadre l’offre d’entrée, la zone 60/95, le suivi des demandes et le canal à activer en premier.",
+          "bullets": [
+            "Plan 30/60/90 jours (agence)",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : référencement local / annonces Google"
+          ],
+          "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
+        },
+        {
+          "title": "Setup (lancement)",
+          "text": "On met en place la page et le suivi, puis on lance l’acquisition locale.",
+          "bullets": [
+            "Page de demande + formulaire de pré-qualification",
+            "Suivi des appels et des formulaires",
+            "Activation du canal prioritaire"
+          ]
+        },
+        {
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore le coût par demande et la qualité, en s’appuyant sur les demandes réellement reçues.",
+          "bullets": [
+            "Suivi par source et par offre",
+            "Optimisation mots-clés / exclusions",
+            "Améliorations de la page : preuves, clarté, questions"
+          ],
+          "cta": { "label": "Voir les preuves", "href": "/preuves/" }
+        }
+      ]
+    },
+
+    "caseMini": {
+      "id": "mini-cas",
+      "header": {
+        "badge": "Mini-cas",
+        "title": "Exemple proche (anonymisé)",
+        "subtitle": "Projection : ce qu’on change et ce que ça débloque."
+      },
+      "item": {
+        "title": "Agence : réduire les demandes hors zone et augmenter les rendez-vous",
+        "context": "Beaucoup d’appels non pertinents, peu de visibilité sur les sources.",
+        "action": "Page dédiée + pré-qualification + suivi des appels + exclusions annonces + ajustement des messages.",
+        "result": "Plus de demandes pertinentes, moins de temps perdu, décisions basées sur les sources.",
+        "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
+      }
+    },
+
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
       "content": {
         "eyebrow": "Prestations",
-        "title": "Les leviers les plus rentables pour une agence d’assurance."
+        "title": "Les leviers les plus rentables pour une agence d’assurance.",
+        "text": "On commence par un canal prioritaire, puis on renforce avec une page plus claire et un suivi des demandes pour améliorer la qualité."
       },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
@@ -190,7 +267,7 @@
       "content": {
         "eyebrow": "Diagnostic",
         "title": "Plan d’action par offre d’entrée et par zone.",
-        "text": "On définit l’offre prioritaire, la zone, la page d’entrée et le tracking, puis on choisit le canal prioritaire (SEO/Ads)."
+        "text": "On définit l’offre prioritaire, la zone 60/95, la page d’entrée et le suivi des demandes, puis on choisit le canal prioritaire."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -202,15 +279,15 @@
       "id": "execution",
       "linkMode": "cross",
       "content": {
-        "eyebrow": "Traitement des leads",
-        "title": "Rappel rapide, qualification, RDV : moins de perte.",
-        "text": "On structure le traitement : scripts, relances, scoring simple et suivi des sources. Option : CRM/workflows pour industrialiser."
+        "eyebrow": "Traitement des demandes",
+        "title": "Rappel rapide, qualification, rendez-vous : moins de perte.",
+        "text": "On structure le traitement : scripts, relances, qualification simple et suivi des sources. Option : organisation plus poussée si vous souhaitez industrialiser."
       },
       "ctas": [
         { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow de traitement des leads et suivi des sources" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Traitement des demandes : rappel, qualification et suivi des sources" } }
     },
 
     "faqToggles": {
@@ -220,7 +297,7 @@
       "sidebar": {
         "eyebrow": "Tarifs",
         "title": "Chiffrage basé sur une offre d’entrée et un canal prioritaire.",
-        "text": "On commence simple : 1 offre d’entrée, 1 page d’entrée, tracking propre, puis extension si les KPIs sont bons.",
+        "text": "On commence simple : 1 offre d’entrée, 1 page de demande, suivi des appels et formulaires, puis extension si les indicateurs sont bons.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -229,8 +306,8 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides utiles pour générer plus de devis",
-        "subtitle": "Landing, tracking et process : capter l’intention locale et la convertir en RDV."
+        "title": "Guides utiles pour obtenir plus de devis",
+        "subtitle": "Pages, suivi des demandes et organisation : capter l’intention locale et la transformer en rendez-vous."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

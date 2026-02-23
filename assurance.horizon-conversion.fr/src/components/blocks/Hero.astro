@@ -18,36 +18,86 @@ type HeroProps = {
   subtitle?: string;
   ctas?: CTA[];
   note?: string;
+  variant?: "default" | "home";
+  image?: { src: string; alt?: string };
 };
 
-const { id = "slider", eyebrow, title, titleHtml, subtitle, ctas = [], note } =
-  Astro.props as HeroProps;
+const {
+  id = "slider",
+  eyebrow,
+  title,
+  titleHtml,
+  subtitle,
+  ctas = [],
+  note,
+  variant = "default",
+  image
+} = Astro.props as HeroProps;
+
+const isHome = variant === "home";
 ---
 
 <section id={id} class="slider-element">
   <div class="container">
-    <div class="row align-items-center justify-content-center gx-5 pt-6 pb-0">
-      <div class="col-lg-9">
-        {eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{eyebrow}</p>}
+    <div class={`row ${isHome ? "flex-row-reverse" : ""} align-items-center justify-content-center gx-5 pt-6 pb-0`}>
 
-        {(titleHtml || title) && (
-            <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem;">
-              {titleHtml ? <Fragment set:html={titleHtml} /> : title}
-            </h1>
-        )}
-
-        {subtitle && <p class="fs-5 mb-5">{subtitle}</p>}
-
-        <CtaButtons ctas={ctas} />
-
-        {note && (
-            <div class="mt-4 op-08">
-              <small>{note}</small>
+      {isHome ? (
+          <>
+            <div class="col-lg-5 col-10 d-flex justify-content-center justify-content-lg-end">
+              <img
+                  src={image?.src ?? "/assets/images/hero.svg"}
+                  alt={image?.alt ?? "Image"}
+                  class="card-img px-4 px-lg-0"
+              />
             </div>
-        )}
-      </div>
 
-      <div class="col-lg-2">&nbsp;</div>
+            <div class="col-lg-6">
+              {eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{eyebrow}</p>}
+
+              {(titleHtml || title) && (
+                  <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem;">
+                    {titleHtml ? <Fragment set:html={titleHtml} /> : title}
+                  </h1>
+              )}
+
+              {subtitle && <p class="fs-5 mb-5">{subtitle}</p>}
+
+              <CtaButtons ctas={ctas} />
+
+              {note && (
+                  <div class="mt-4 op-08">
+                    <small>{note}</small>
+                  </div>
+              )}
+            </div>
+
+            <div class="col-lg-2">&nbsp;</div>
+          </>
+      ) : (
+          <>
+            <div class="col-lg-9">
+              {eyebrow && <p class="text-uppercase ls-3 text-smaller color mb-3 fw-bold">{eyebrow}</p>}
+
+              {(titleHtml || title) && (
+                  <h1 class="text-dark mb-3 fw-normal" style="font-size: 3rem;">
+                    {titleHtml ? <Fragment set:html={titleHtml} /> : title}
+                  </h1>
+              )}
+
+              {subtitle && <p class="fs-5 mb-5">{subtitle}</p>}
+
+              <CtaButtons ctas={ctas} />
+
+              {note && (
+                  <div class="mt-4 op-08">
+                    <small>{note}</small>
+                  </div>
+              )}
+            </div>
+
+            <div class="col-lg-2">&nbsp;</div>
+          </>
+      )}
     </div>
   </div>
 </section>

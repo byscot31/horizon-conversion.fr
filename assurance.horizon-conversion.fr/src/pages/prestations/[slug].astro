@@ -2,6 +2,8 @@
 // src/pages/prestations/[slug].astro
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import Hero from "../../components/blocks/Hero.astro";
+import ValueClarity from "../../components/blocks/ValueClarity.astro";
+import ProcessBenchmarks from "../../components/blocks/ProcessBenchmarks.astro";
 import MethodVideoProof from "../../components/blocks/MethodVideoProof.astro";
 import MetiersGrid from "../../components/blocks/MetiersGrid.astro";
 import CtaBand from "../../components/blocks/CtaBand.astro";
@@ -39,6 +41,8 @@ const faq = prestation?.faq ?? [];
 
   <section id="content">
     <div class="content-wrap pb-0 pt-0 pt-lg-5">
+      <ValueClarity data={prestation.sections.valueClarity} />
+      <ProcessBenchmarks data={prestation.sections.processBenchmarks} />
       <MethodVideoProof data={prestation.sections.videoProof} />
       <MetiersGrid
           data={{ ...prestation.sections.metiersGrid, linkMode: "cross", prestaSlug: prestation.slug }}

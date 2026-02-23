@@ -3,6 +3,9 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import Hero from "../../components/blocks/Hero.astro";
 import MethodVideoProof from "../../components/blocks/MethodVideoProof.astro";
+import PainPointsBullets from "../../components/blocks/PainPointsBullets.astro";
+import ProcessSteps3 from "../../components/blocks/ProcessSteps3.astro";
+import CaseMini from "../../components/blocks/CaseMini.astro";
 import PrestationsTabs from "../../components/blocks/PrestationsTabs.astro";
 import CtaBand from "../../components/blocks/CtaBand.astro";
 import SupportBand from "../../components/blocks/SupportBand.astro";
@@ -43,6 +46,15 @@ const faq = metier?.faq ?? [];
   <section id="content">
     <div class="content-wrap pb-0 pt-0 pt-lg-5">
       <MethodVideoProof data={metier.sections.videoProof} />
+      {metier?.sections?.painPointsBullets && (
+          <PainPointsBullets data={metier.sections.painPointsBullets} />
+      )}
+      {metier?.sections?.processSteps3 && (
+          <ProcessSteps3 data={metier.sections.processSteps3} />
+      )}
+      {metier?.sections?.caseMini && (
+          <CaseMini data={metier.sections.caseMini} />
+      )}
       <PrestationsTabs
           data={{ ...metier.sections.prestationsTabs, linkMode: "cross", metierSlug: metier.slug }}
           prestations={prestations}

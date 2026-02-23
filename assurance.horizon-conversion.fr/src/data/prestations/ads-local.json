@@ -63,6 +63,57 @@
   },
 
   "sections": {
+    "valueClarity": {
+      "id": "clarification",
+      "header": {
+        "badge": "Clarification",
+        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
+        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+      },
+      "impacts": [
+        "Plus d’appels entrants depuis Google Maps / Local Pack.",
+        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
+        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
+        "Un système sans pages villes : modules locaux + preuve + FAQ.",
+        "Attribution plus claire : demandes de devis reliées à une source."
+      ],
+      "notThis": [
+        "Des articles de blog au hasard sans intention devis.",
+        "Du positionnement “vanity” sur des requêtes non rentables.",
+        "Une “page ville” copiée-collée qui fait du risque SEO.",
+        "Un SEO sans tracking appels/formulaires."
+      ]
+    },
+
+    "processBenchmarks": {
+      "id": "process",
+      "header": {
+        "badge": "Process",
+        "title": "Une exécution mesurable, orientée leads",
+        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+      },
+      "steps": [
+        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
+        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
+        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
+        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
+        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+      ],
+      "deliverables": [
+        "Liste des pages à créer (métier × offre) + priorisation",
+        "Plan de contenu preuves/objections (format + topics)",
+        "Optimisations GBP + checklist exécution",
+        "Corrections techniques (schema, indexation, perfs)",
+        "Reporting mensuel : leads, sources, pages qui convertissent"
+      ],
+      "benchmarks": {
+        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "items": [
+          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
+          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+        ]
+      }
+    },
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",

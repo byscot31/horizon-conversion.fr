@@ -109,6 +109,82 @@
       ]
     },
 
+    "painPointsBullets": {
+      "id": "problemes",
+      "header": {
+        "badge": "Votre situation",
+        "title": "Problèmes fréquents des agences d’assurance locales",
+        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+      },
+      "items": [
+        "Dépendance au réseau / recommandations : flux irrégulier.",
+        "Saisonnalité (auto/habitation) : variations fortes du volume.",
+        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
+        "Appels non qualifiés / hors zone : temps perdu en agence.",
+        "Attribution floue : impossible de savoir ce qui génère des RDV."
+      ],
+      "ctas": [
+        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+      ]
+    },
+
+    "processSteps3": {
+      "id": "parcours",
+      "header": {
+        "badge": "Parcours",
+        "title": "Diagnostic → Setup → Pilotage",
+        "subtitle": "Un déroulé simple, orienté métier et ROI."
+      },
+      "steps": [
+        {
+          "title": "Diagnostic (J+7)",
+          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "bullets": [
+            "Plan 30/60/90 jours (agence)",
+            "Structure landing + objections/FAQ",
+            "Recommandation SEO/Ads + priorités"
+          ],
+          "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
+        },
+        {
+          "title": "Setup (lancement)",
+          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "bullets": [
+            "Landing CRO + formulaire pré-qualifiant",
+            "Call tracking + UTMs + events",
+            "Ads local ou SEO local selon priorité"
+          ]
+        },
+        {
+          "title": "Pilotage (itérations)",
+          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "bullets": [
+            "Dashboard leads (source/campagne/offre)",
+            "Optimisation mots-clés / exclusions",
+            "Tests CRO (preuve, CTA, friction)"
+          ],
+          "cta": { "label": "Voir les preuves", "href": "/preuves/" }
+        }
+      ]
+    },
+
+    "caseMini": {
+      "id": "mini-cas",
+      "header": {
+        "badge": "Mini-cas",
+        "title": "Exemple proche (anonymisé)",
+        "subtitle": "Projection : ce qu’on change et ce que ça débloque."
+      },
+      "item": {
+        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
+        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
+        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
+        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
+      }
+    },
+
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",

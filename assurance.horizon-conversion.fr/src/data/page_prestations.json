@@ -22,18 +22,47 @@
     "kw": {
       "primary": "prestations génération leads assurance",
       "secondary": [
-        "SEO local assurance",
-        "Google Ads assurance",
-        "CRO assurance",
-        "tracking attribution leads assurance",
-        "CRM workflow leads"
+        "référencement local assurance",
+        "annonces Google assurance",
+        "page de demande de devis assurance",
+        "suivi des appels et formulaires",
+        "pré-qualification des demandes",
+        "Google Business Profile assurance"
+      ],
+      "supporting": [
+        "acquisition locale assurance 60 95",
+        "agence d’assurance leads",
+        "courtier assurance leads",
+        "mutuelle locale leads",
+        "mots clés négatifs assurance",
+        "messages de réassurance assurance",
+        "organisation du rappel des demandes"
+      ],
+      "longTail": [
+        "prestations pour obtenir des demandes de devis assurance en 60 95",
+        "référencement local pour assureurs dans l’Oise et le Val-d’Oise",
+        "annonces Google pour agence d’assurance en 60/95",
+        "suivi des appels et formulaires pour leads assurance",
+        "page de demande de devis assurance qui convertit"
+      ],
+      "semantic": [
+        "intention de recherche",
+        "zone de chalandise",
+        "offre d’entrée",
+        "devis en ligne",
+        "prise de rendez-vous",
+        "appels entrants",
+        "qualité des demandes",
+        "avis clients",
+        "preuves et cas concrets",
+        "concurrence locale"
       ]
     },
     "tokens": {
       "offer": "leads assurance",
       "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking"
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages utiles + acquisition locale + suivi des appels et formulaires"
     }
   },
 
@@ -46,9 +75,18 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Quelle prestation choisir en premier ?", "a": "On choisit le canal prioritaire selon délai et concurrence : Ads pour lancer vite, SEO local pour stabiliser, CRO pour améliorer la conversion." },
-      { "q": "Mesurez-vous appels et formulaires ?", "a": "Oui : tracking et attribution (UTMs, événements, call tracking si besoin), puis reporting et décisions." },
-      { "q": "Est-ce adapté aux agences, courtiers et mutuelles ?", "a": "Oui, les pages et le message sont adaptés par métier via les pages dédiées." }
+      {
+        "q": "Quelle prestation choisir en premier ?",
+        "a": "On choisit le canal prioritaire selon votre délai et la concurrence : les annonces pour démarrer vite, le référencement local pour stabiliser, puis l’amélioration des pages pour augmenter les demandes."
+      },
+      {
+        "q": "Suivez-vous les appels et les formulaires ?",
+        "a": "Oui. On met en place un suivi des appels et des formulaires pour savoir ce qui génère réellement des demandes et améliorer la qualité."
+      },
+      {
+        "q": "Est-ce adapté aux agences, courtiers et mutuelles ?",
+        "a": "Oui. Les pages et les messages sont adaptés par métier, avec des offres d’entrée et des réponses aux objections spécifiques."
+      }
     ]
   },
 
@@ -67,7 +105,11 @@
   "sections": {
     "prestationsTabs": {
       "id": "prestations",
-      "content": { "eyebrow": "Leviers", "title": "Choisir le canal prioritaire, puis étendre." },
+      "content": {
+        "eyebrow": "Leviers",
+        "title": "Choisir le canal prioritaire, puis étendre.",
+        "text": "Objectif : obtenir plus de demandes de devis en 60/95. On démarre par le levier le plus utile pour votre métier, puis on renforce avec des pages plus claires et un suivi des demandes."
+      },
       "cta": { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["seo-local", "ads-local", "cro", "tracking-attribution"] }
@@ -80,7 +122,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Chaque métier a ses objections et ses offres d’entrée : on adapte pages et leviers pour convertir en demandes actionnables.",
+        "text": "Chaque métier a ses objections, ses offres d’entrée et ses demandes typiques : on adapte les pages et les leviers pour obtenir des demandes actionnables (devis et rendez-vous).",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -88,7 +130,11 @@
     "ctaBand": {
       "id": "diagnostic",
       "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
-      "content": { "eyebrow": "Diagnostic", "title": "Ordre d’exécution + estimation + priorités.", "text": "Offre d’entrée, zone, page de conversion, tracking, canal prioritaire (SEO/Ads)." },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "Ordre d’exécution + estimation + priorités.",
+        "text": "Offre d’entrée, zone, page de demande, suivi des appels et formulaires, puis canal prioritaire (référencement local ou annonces Google)."
+      },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
@@ -101,8 +147,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Packs et pilotage.",
-        "text": "Tarifs HT, priorisés ROI : diagnostic → setup → pilotage.",
+        "title": "Packs et suivi.",
+        "text": "Tarifs HT, priorisés sur les demandes : diagnostic → mise en place → suivi mensuel.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     }

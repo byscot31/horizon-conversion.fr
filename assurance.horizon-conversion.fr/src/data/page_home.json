@@ -1,0 +1,402 @@
+{
+  "key": "page:home",
+
+  "seo": {
+    "canonical": "/",
+    "robots": "index,follow"
+  },
+
+  "seoMap": {
+    "brand": "Horizon Conversion",
+
+    "intent": {
+      "primary": "commercial",
+      "secondary": ["transactionnel", "informationnel"],
+      "stage": "awareness",
+      "microConversions": ["diagnostic", "appel", "whatsapp"]
+    },
+
+    "geo": {
+      "core": "Sud Oise (60) & Nord Val-d’Oise (95)",
+      "departements": ["60", "95"],
+      "places": ["Chantilly", "Senlis", "Creil", "Persan", "Lamorlaye", "Gouvieux", "Nogent-sur-Oise", "Clermont (Oise)"],
+      "positioning": "local-sans-pages-villes"
+    },
+
+    "audience": {
+      "segments": [
+        { "id": "agences", "label": "Agences d’assurance", "priority": 1 },
+        { "id": "courtiers", "label": "Courtiers en assurance", "priority": 1 },
+        { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
+      ],
+      "painPoints": [
+        "Du trafic, mais peu de demandes de devis",
+        "Des contacts hors cible ou difficiles à joindre",
+        "Un coût par demande qui varie trop",
+        "Des appels et formulaires difficiles à relier aux actions menées"
+      ],
+      "desiredOutcomes": [
+        "Plus de demandes de devis et de rendez-vous qualifiés",
+        "Priorité au local sur 60/95",
+        "Une vision claire des sources (appels, formulaires)",
+        "Une acquisition plus régulière mois après mois"
+      ]
+    },
+
+    "keywords": {
+      "primary": "leads assurance",
+      "longTail": [
+        "générer des leads assurance dans le Sud de l’Oise",
+        "obtenir des demandes de devis assurance dans le Nord du Val-d’Oise",
+        "attirer des clients assurance locaux 60 95",
+        "augmenter les demandes de devis pour agence d’assurance 60 95",
+        "leads qualifiés pour courtier en assurance 60 95"
+      ],
+      "secondary": [
+        "demandes de devis assurance",
+        "rendez-vous assurance",
+        "prospects assurance qualifiés",
+        "référencement local assurance",
+        "annonces Google assurance",
+        "suivi des appels",
+        "suivi des formulaires",
+        "pages métier assurance",
+        "agence d’assurance",
+        "courtier assurance",
+        "mutuelle santé"
+      ],
+      "semantic": [
+        "zone de chalandise",
+        "intention de recherche",
+        "prise de rendez-vous",
+        "devis en ligne",
+        "appels entrants",
+        "pré-qualification",
+        "taux de transformation",
+        "messages de réassurance",
+        "avis clients",
+        "preuves et cas concrets",
+        "concurrence locale"
+      ]
+    },
+
+    "contentPlan": {
+      "promise": "Obtenir des demandes de devis assurance qualifiées en 60/95, avec un suivi clair des appels et formulaires.",
+      "h1": "Leads assurance qualifiés en 60/95 (agences, courtiers, mutuelles)",
+      "h2": [
+        "Une méthode simple pour générer des demandes de devis locales",
+        "Des leviers adaptés aux métiers de l’assurance",
+        "Une qualification qui évite les contacts hors cible",
+        "Des offres claires : démarrage, mise en place, suivi mensuel",
+        "Réponses aux questions avant de réserver"
+      ],
+      "h3": [
+        "Référencement local (Google)",
+        "Annonces Google (mise en route rapide)",
+        "Pages dédiées par métier et par offre",
+        "Formulaire et appel : pré-qualification",
+        "Suivi : appels, formulaires, qualité des demandes"
+      ]
+    },
+
+    "tokens": {
+      "offer": "leads assurance",
+      "goal": "demandes de devis & rendez-vous qualifiés",
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages par métier + acquisition locale + suivi des appels et formulaires",
+      "hub": "Assurance Horizon Conversion"
+    }
+  },
+
+  "seoTemplates": {
+    "title": "{tokens.hub} | {tokens.offer} ({geo.core})",
+    "description": "Méthode pour générer des {tokens.offer} sur {geo.core} : {tokens.method} avec {tokens.system}. Objectif : {tokens.goal}."
+  },
+
+  "schema": {
+    "includeWebsite": true,
+    "includeSearchAction": false,
+    "faq": [
+      {
+        "q": "Référencement local ou annonces Google en premier ?",
+        "a": "Les annonces Google permettent de démarrer vite. Le référencement local stabilise dans la durée. Le bon ordre dépend de votre délai, de votre budget et de la concurrence sur votre zone."
+      },
+      {
+        "q": "Comment éviter les contacts non qualifiés ?",
+        "a": "On travaille l’offre, la zone, les messages de réassurance et un formulaire avec questions simples de pré-qualification. Objectif : limiter les demandes hors cible et favoriser les rendez-vous utiles."
+      },
+      {
+        "q": "Est-ce adapté aux agences, courtiers et mutuelles ?",
+        "a": "Oui. Chaque métier a ses propres recherches, objections et attentes. On adapte les pages, les preuves et la qualification pour obtenir des demandes de devis et des rendez-vous cohérents."
+      },
+      {
+        "q": "Comment suivez-vous les appels et les formulaires ?",
+        "a": "On met en place un suivi dédié des appels et des formulaires pour savoir ce qui génère réellement des demandes (et leur qualité). Vous gardez une vision claire, actionnable, sans outils compliqués."
+      },
+      {
+        "q": "Quelle est la prochaine étape ?",
+        "a": "Un diagnostic : offre d’entrée, zone, priorités et canal à lancer en premier. Ensuite, un plan d’actions 30/60/90 jours pour avancer dans le bon ordre."
+      }
+    ]
+  },
+
+  "hero": {
+    "id": "slider",
+    "variant": "home",
+    "image": { "src": "/assets/images/hero.svg", "alt": "Illustration d’acquisition locale pour assureurs (60/95)" },
+    "eyebrow": "Acquisition locale pour assureurs (60/95)",
+    "titleHtml": "Plus de demandes de devis assurance en 60/95<br>pour agences, courtiers et mutuelles",
+    "subtitle": "Référencement local + annonces Google + suivi des appels et formulaires",
+    "ctas": [
+      { "label": "Recevoir votre plan 30/60/90 jours", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Échanger 10 min : {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
+    ],
+    "note": "Pour {audience.segments.0.label}, {audience.segments.1.label}, {audience.segments.2.label} — zone {geo.core}"
+  },
+
+  "sections": {
+    "methodVideoProof": {
+      "id": "methode",
+      "variant": "darkSplit",
+      "media": {
+        "href": "/methode/",
+        "img": {
+          "src": "/assets/images/section-1.jpg",
+          "alt": "Méthode pour obtenir des demandes de devis assurance en local (60/95)"
+        },
+        "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
+      },
+      "content": {
+        "eyebrow": "Méthode",
+        "title": "Des demandes locales : plus régulières, mieux ciblées, mieux suivies.",
+        "text": "Nous construisons un dispositif complet : pages par métier, offres d’entrée, messages de réassurance et un suivi clair des appels et formulaires. L’objectif est simple : transformer l’intérêt local en demandes de devis et rendez-vous utiles.",
+        "bullets": [
+          "1 à 2 offres d’entrée pour attirer les bons profils et stabiliser le coût par demande.",
+          "Pages orientées prise de contact : preuves, réponses aux objections, FAQ utile, formulaire clair.",
+          "Suivi des appels et des formulaires pour piloter selon les demandes réellement reçues."
+        ]
+      },
+      "ctas": [
+        { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
+        { "label": "Voir des exemples", "href": "/preuves/", "variant": "light" }
+      ]
+    },
+
+    "socialProof": {
+      "id": "preuves",
+      "variant": "light",
+      "content": {
+        "eyebrow": "Preuves",
+        "title": "Ce que vous devez voir avant de vous lancer",
+        "text": "Des éléments concrets : résultats, avis et exemples de pages. L’objectif est de vous permettre de décider sur du factuel, pas sur des promesses."
+      },
+      "items": [
+        {
+          "type": "stat",
+          "title": "Demandes mieux qualifiées",
+          "text": "Mise en place d’une pré-qualification simple pour limiter les demandes hors zone ou hors besoin.",
+          "note": "Exemples et détails sur la page Preuves."
+        },
+        {
+          "type": "stat",
+          "title": "Suivi des appels et formulaires",
+          "text": "Vision claire des demandes reçues (appels + formulaires) pour savoir ce qui fonctionne réellement.",
+          "note": "Sans complexité inutile."
+        },
+        {
+          "type": "testimonial",
+          "title": "Avis (exemple)",
+          "text": "« Nous avons enfin des demandes de devis cohérentes avec nos contrats, et un suivi clair des appels. »",
+          "note": "— Direction d’agence (60/95)"
+        }
+      ],
+      "cta": { "label": "Voir les preuves", "href": "/preuves/", "variant": "dark" }
+    },
+
+    "prestationsTabs": {
+      "id": "prestations",
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Des actions pensées pour générer des demandes de devis, pas seulement des visites.",
+        "text": "Chaque prestation est conçue pour capter une intention locale, rassurer et faciliter la prise de contact."
+      },
+      "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
+      "itemCta": { "label": "Voir le détail" },
+      "items": { "slugs": ["seo-local", "ads-local", "tracking-attribution"] },
+      "linkMode": "prestation"
+    },
+
+    "metiersGrid": {
+      "id": "metiers",
+      "items": {
+        "slugs": [
+          "agence-assurance",
+          "courtier-assurance",
+          "mutuelle-sante",
+          "assurance-emprunteur",
+          "assurance-pro",
+          "assurance-vie-patrimoine"
+        ]
+      },
+      "card": {
+        "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
+        "text": "Pages par métier + adaptation des messages : vous captez l’intention locale et vous la transformez en {tokens.goal}.",
+        "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
+      }
+    },
+
+    "ctaBand": {
+      "id": "diagnostic",
+      "theme": {
+        "bgImage": "/assets/images/section-bg.jpg",
+        "bgRepeat": "no-repeat",
+        "bgPosition": "center 70%",
+        "bgSize": "cover"
+      },
+      "content": {
+        "eyebrow": "Diagnostic",
+        "title": "On vous dit quoi faire (et dans quel ordre) pour obtenir plus de demandes de devis.",
+        "text": "Vous repartez avec un plan actionnable : offre d’entrée, pages à créer, suivi des appels et formulaires, et canal prioritaire (référencement local ou annonces Google)."
+      },
+      "ctas": [
+        { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Appeler {phoneDisplay}", "href": "TEL", "icon": "bi-telephone", "variant": "secondary" }
+      ]
+    },
+
+    "supportBand": {
+      "id": "support",
+      "content": {
+        "eyebrow": "Traitement des demandes",
+        "title": "Moins de perte : rappel rapide, qualification, rendez-vous.",
+        "text": "Une demande non rappelée, c’est une opportunité perdue. Nous vous aidons à structurer le traitement : messages, relances, et suivi simple pour savoir ce qui aboutit réellement."
+      },
+      "ctas": [
+        { "label": "Voir l’organisation du traitement", "href": "/prestations/crm-workflow/", "variant": "dark" },
+        { "label": "Voir le suivi appels et formulaires", "href": "/prestations/tracking-attribution/", "variant": "dark" }
+      ],
+      "media": {
+        "img": { "src": "/assets/images/app.svg", "alt": "Illustration de suivi des demandes et organisation des relances" }
+      }
+    },
+
+    "offersPacks": {
+      "id": "packs",
+      "header": {
+        "badge": "Offres",
+        "title": "Diagnostic + offres pour générer des demandes de devis",
+        "subtitle": "Point de départ + 2 options selon votre timing et votre volume."
+      },
+      "layout": {
+        "sectionClass": "section bg-transparent pt-0 pb-lg-0",
+        "containerClass": "container",
+        "rowClass": "row g-4",
+        "colClass": "col-lg-4",
+        "cardClass": "card rounded-6 overflow-hidden",
+        "cardBodyClass": "card-body p-5"
+      },
+      "texts": {
+        "pricePrefix": "",
+        "priceSuffix": ""
+      },
+      "packs": [
+        {
+          "id": "pack_diagnostic",
+          "featured": false,
+          "badge": null,
+          "cardExtraClass": "",
+          "icon": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" fill=\"#FF6049\" viewBox=\"0 0 256 256\"><path d=\"M63.81,192.19c-47.89-79.81,16-159.62,151.64-151.64C223.43,176.23,143.62,240.08,63.81,192.19Z\" opacity=\"0.2\"></path><path d=\"M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z\"></path></svg>"
+          },
+          "kicker": "Démarrage",
+          "price": "690 €",
+          "priceNote": "À partir de",
+          "description": "Cadrage, priorités, suivi et plan d’action.",
+          "cta": {
+            "label": "Demander un diagnostic",
+            "href": "/contact/",
+            "class": "button button-border button-rounded button-large button-dark mx-0 fw-bold d-block"
+          },
+          "included": {
+            "title": "Inclus :",
+            "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
+            "items": [
+              { "iconClass": "bi-check-circle-fill", "text": "Offre d’entrée + zone + objectifs" },
+              { "iconClass": "bi-check-circle-fill", "text": "Plan de suivi appels + formulaires" },
+              { "iconClass": "bi-check-circle-fill", "text": "Plan 30/60/90 jours" },
+              { "iconClass": "bi-check-circle-fill", "text": "Canal prioritaire : référencement local ou annonces Google" }
+            ]
+          }
+        },
+        {
+          "id": "pack_setup",
+          "featured": true,
+          "badge": { "label": "Recommandé", "class": "badge bg-dark text-white rounded-pill px-3 py-2" },
+          "cardExtraClass": "shadow-sm",
+          "icon": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" fill=\"#FF6049\" viewBox=\"0 0 256 256\"><path d=\"M138.54,141.46C106.62,88.25,149.18,35.05,239.63,40.37,245,130.82,191.75,173.39,138.54,141.46ZM16.26,80.26c-3.8,64.61,34.21,95,72.21,72.21C111.27,114.47,80.87,76.46,16.26,80.26Z\" opacity=\"0.2\"></path><path d=\"M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.48-11.78,43.16-.16,65.74a71.37,71.37,0,0,0-14.17,26.95L98.33,151c7.82-16.33,7.52-33.36-1-47.49C84.09,81.73,53.62,70,15.79,72.27a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM86.06,138.74l-24.41-24.4a8,8,0,0,0-11.31,11.31l24.41,24.41c-9.61,3.18-18.93,2.39-26.94-2.46C32.47,138.31,23.79,116.32,24,88c28.31-.25,50.31,8.47,59.6,23.81C88.45,119.82,89.24,129.14,86.06,138.74Zm111.06-1.36c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.32L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.8,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z\"></path></svg>"
+          },
+          "kicker": "Mise en place",
+          "price": "3 490 €",
+          "priceNote": "À partir de",
+          "description": "Page(s) de prise de contact + suivi + canal prioritaire.",
+          "cta": {
+            "label": "Démarrer la mise en place",
+            "href": "/contact/",
+            "class": "button button-rounded button-large mx-0 fw-bold d-block"
+          },
+          "included": {
+            "title": "Inclus :",
+            "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
+            "items": [
+              { "iconClass": "bi-plus-circle-fill text-contrast-1000", "text": "Tout le pack Démarrage" },
+              { "iconClass": "bi-check-circle-fill", "text": "Page d’offre d’entrée (prise de contact facilitée)" },
+              { "iconClass": "bi-check-circle-fill", "text": "Suivi des appels et des formulaires" },
+              { "iconClass": "bi-check-circle-fill", "text": "Activation du canal 1 (référencement local OU annonces Google)" }
+            ]
+          }
+        },
+        {
+          "id": "pack_pilotage",
+          "featured": false,
+          "badge": null,
+          "cardExtraClass": "",
+          "icon": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" fill=\"#FF6049\" viewBox=\"0 0 256 256\"><path d=\"M232,127.82a64,64,0,0,1-99.52,53.41,8,8,0,0,0-9,0A64,64,0,1,1,61.25,69.86a8,8,0,0,0,4-4.17,68,68,0,0,1,125.44,0,8,8,0,0,0,4,4.17A64,64,0,0,1,232,127.82Z\" opacity=\"0.2\"></path><path d=\"M198.1,62.6a76,76,0,0,0-140.2,0A72.29,72.29,0,0,0,16,127.8C15.89,166.62,47.36,199,86.14,200A71.68,71.68,0,0,0,120,192.49V232a8,8,0,0,0,16,0V192.49A71.45,71.45,0,0,0,168,200l1.86,0c38.78-1,70.25-33.36,70.14-72.18A72.26,72.26,0,0,0,198.1,62.6ZM169.45,184a55.7,55.7,0,0,1-32.52-9.4q-.47-.3-.93-.57V132.94l43.58-21.78a8,8,0,1,0-7.16-14.32L136,115.06V88a8,8,0,0,0-16,0v51.06L83.58,120.84a8,8,0,1,0-7.16,14.32L120,156.94V174c-.31.18-.62.37-.92.57A55.73,55.73,0,0,1,86.55,184a56,56,0,0,1-22-106.86,15.9,15.9,0,0,0,8.05-8.33,60,60,0,0,1,110.7,0,15.9,15.9,0,0,0,8.05,8.33,56,56,0,0,1-22,106.86Z\"></path></svg>"
+          },
+          "kicker": "Suivi mensuel",
+          "price": "1 090 €/mois",
+          "priceNote": "À partir de",
+          "description": "Optimisation des demandes, de la qualification et des coûts.",
+          "cta": {
+            "label": "Lancer le suivi",
+            "href": "/contact/",
+            "class": "button button-border button-rounded button-large button-dark mx-0 fw-bold d-block"
+          },
+          "included": {
+            "title": "Inclus :",
+            "listClass": "iconlist iconlist-sm fw-medium text-muted mb-0",
+            "items": [
+              { "iconClass": "bi-plus-circle-fill text-contrast-1000", "text": "Tout le pack Mise en place" },
+              { "iconClass": "bi-check-circle-fill", "text": "Optimisations sur le canal choisi (local)" },
+              { "iconClass": "bi-check-circle-fill", "text": "Améliorations des pages : preuves, messages, formulaire" },
+              { "iconClass": "bi-check-circle-fill", "text": "Suivi régulier et décisions : renforcer, ajuster, arrêter" }
+            ]
+          }
+        }
+      ]
+    },
+
+    "faqToggles": {
+      "id": "faq",
+      "source": "schema.faq",
+      "qPrefix": "Q.",
+      "sidebar": {
+        "eyebrow": "FAQ",
+        "title": "Les réponses avant de réserver.",
+        "text": "Pour valider le canal prioritaire et l’ordre des actions : nous faisons un diagnostic, puis un plan 30/60/90 jours.",
+        "cta": { "label": "Réserver un diagnostic", "href": "/contact/", "variant": "dark" }
+      }
+    }
+  }
+}

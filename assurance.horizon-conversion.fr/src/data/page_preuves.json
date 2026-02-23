@@ -27,15 +27,15 @@
         { "id": "mutuelles", "label": "Mutuelles locales", "priority": 2 }
       ],
       "painPoints": [
-        "Doute sur la qualité des leads",
-        "Doute sur la mesure (attribution)",
-        "Doute sur la rentabilité (CPL)",
+        "Doute sur la qualité des demandes",
+        "Doute sur la mesure (appels, formulaires, sources)",
+        "Doute sur la rentabilité (coût par demande)",
         "Manque de preuves avant de lancer"
       ],
       "desiredOutcomes": [
         "Preuves concrètes (process + livrables)",
-        "KPIs suivis et décisions claires",
-        "Mesure appels + formulaires",
+        "Indicateurs suivis et décisions claires",
+        "Mesure des appels + formulaires",
         "Plan d’action priorisé"
       ]
     },
@@ -46,38 +46,37 @@
         "cas clients assurance",
         "preuves seo local assurance",
         "preuves google ads assurance",
-        "kpi coût par lead assurance",
-        "tracking attribution leads",
+        "coût par demande assurance",
+        "suivi des sources leads",
         "tableau de bord leads"
       ],
       "supporting": [
-        "call tracking assurance",
+        "suivi des appels assurance",
         "suivi formulaires assurance",
         "qualification leads assurance",
-        "taux conversion landing assurance",
-        "UTM google ads",
-        "dashboard CPL"
+        "taux de conversion landing assurance",
+        "tableau de suivi coût par demande",
+        "Google Business Profile assurance"
       ],
       "entities": [
         "preuves",
         "résultats",
         "cas clients",
-        "KPI",
-        "CPL",
+        "indicateurs",
+        "coût par demande",
         "conversion",
-        "tracking",
-        "attribution",
-        "SEO local",
-        "Google Ads",
-        "CRO"
+        "suivi des appels",
+        "suivi des formulaires",
+        "référencement local",
+        "annonces Google"
       ]
     },
     "tokens": {
       "offer": "leads assurance",
       "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking",
-      "proof": "preuves, KPIs et livrables"
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages utiles + acquisition locale + suivi des appels et formulaires",
+      "proof": "preuves, indicateurs et livrables"
     },
     "internalLinks": [
       { "href": "/methode/", "anchor": "méthode" },
@@ -85,14 +84,14 @@
       { "href": "/contact/", "anchor": "diagnostic" },
       { "href": "/prestations/seo-local/", "anchor": "SEO local assurance" },
       { "href": "/prestations/ads-local/", "anchor": "Google Ads assurance" },
-      { "href": "/prestations/cro/", "anchor": "CRO assurance" },
-      { "href": "/prestations/tracking-attribution/", "anchor": "tracking & attribution" }
+      { "href": "/prestations/cro/", "anchor": "optimisation des pages" },
+      { "href": "/prestations/tracking-attribution/", "anchor": "suivi des appels et formulaires" }
     ]
   },
 
   "seoTemplates": {
     "title": "Preuves {brand} | {tokens.offer} ({geo.core}) : {tokens.proof}",
-    "description": "Preuves et indicateurs pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Mesure appels + formulaires, attribution et pilotage."
+    "description": "Preuves et indicateurs pour générer {tokens.offer} sur {geo.core} : {tokens.system}. Objectif : {tokens.goal}. Mesure des appels + formulaires et décisions basées sur du concret."
   },
 
   "schema": {
@@ -101,27 +100,27 @@
     "faq": [
       {
         "q": "Quelles preuves fournissez-vous avant de lancer ?",
-        "a": "Des exemples de structure (pages, modules), des livrables attendus, des KPIs suivis et une logique de pilotage (attribution, CPL, conversion, éligibilité)."
+        "a": "Des exemples de structure (pages, modules), des livrables attendus, les indicateurs suivis et une logique de pilotage simple : qualité des demandes, coût par demande, et performance par offre."
       },
       {
         "q": "Mesurez-vous les appels et les formulaires ?",
-        "a": "Oui. Le tracking couvre les appels et formulaires, avec source/campagne/offre quand possible, et un tableau de bord de suivi."
+        "a": "Oui. Le suivi couvre les appels et les formulaires, avec une lecture claire des sources quand c’est possible, et un tableau de suivi."
       },
       {
         "q": "Les résultats sont-ils garantis ?",
-        "a": "Les résultats dépendent de l’offre, de la zone, de la concurrence et du budget. La méthode vise des décisions mesurables : ce qui marche est amplifié, ce qui ne marche pas est arrêté."
+        "a": "Les résultats dépendent de l’offre, de la zone, de la concurrence et du budget. La méthode vise des décisions mesurables : on renforce ce qui fonctionne et on arrête ce qui ne fonctionne pas."
       },
       {
         "q": "Comment évitez-vous les leads non qualifiés ?",
-        "a": "Par ciblage offres/zones, messages, formulaires pré-qualifiants, call tracking et un scoring simple pour qualifier rapidement."
+        "a": "Par ciblage offres/zones, messages clairs, formulaires pré-qualifiants, suivi des appels et une qualification simple pour trier rapidement."
       },
       {
-        "q": "Quels KPIs suivez-vous en priorité ?",
-        "a": "CPL, taux de conversion, volume de leads, part de leads éligibles, appels trackés, performance par offre et par campagne."
+        "q": "Quels indicateurs suivez-vous en priorité ?",
+        "a": "Coût par demande, taux de transformation, volume de demandes, part de demandes pertinentes, appels suivis, performance par offre et par campagne."
       },
       {
         "q": "Peut-on démarrer sans refonte complète du site ?",
-        "a": "Oui. On peut démarrer par une page de conversion et un setup tracking + acquisition, puis étendre la structure progressivement."
+        "a": "Oui. On peut démarrer par une page de demande et un suivi des appels/formulaires, puis étendre la structure progressivement."
       }
     ]
   },
@@ -130,7 +129,7 @@
     "id": "slider",
     "eyebrow": "Preuves ({tokens.proof})",
     "titleHtml": "Des preuves pour décider,<br />pas des promesses.",
-    "subtitle": "KPIs, livrables et pilotage : {tokens.system}. Objectif : {tokens.goal}.",
+    "subtitle": "Indicateurs, livrables et pilotage : {tokens.system}. Objectif : {tokens.goal}.",
     "ctas": [
       { "label": "Obtenir un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -146,18 +145,18 @@
         "href": "/preuves/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Preuves et KPIs : génération de leads assurance, conversion, tracking et pilotage"
+          "alt": "Preuves et indicateurs : demandes de devis assurance, qualité des contacts, suivi des appels et formulaires"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "Preuves",
-        "title": "Ce qui est mesuré se pilote.",
-        "text": "On documente les livrables, les KPIs et le pilotage : attribution, CPL, conversion, éligibilité. L’objectif est d’itérer vite et d’allouer le budget aux actions rentables.",
+        "title": "Ce qui est suivi se pilote.",
+        "text": "Nous documentons les livrables, les indicateurs et la façon de décider : qualité des demandes, coût par demande, transformation et performance par offre. L’objectif est simple : avancer sur du concret et concentrer l’effort sur ce qui apporte des demandes pertinentes.",
         "bullets": [
-          "KPIs : CPL, conversion, leads éligibles, performance par offre/campagne.",
-          "Tracking : appels + formulaires, UTMs et événements.",
-          "Décisions : scaling, stop, duplication selon données."
+          "Indicateurs : coût par demande, transformation, part de demandes pertinentes, performance par offre/campagne.",
+          "Suivi : appels + formulaires, avec lecture des sources quand c’est possible.",
+          "Décisions : renforcer ce qui marche, arrêter ce qui ne marche pas, dupliquer ce qui est rentable."
         ]
       },
       "ctas": [
@@ -166,11 +165,110 @@
       ]
     },
 
+    "cases3": {
+      "id": "cas",
+      "header": {
+        "badge": "Mini-cas",
+        "title": "3 exemples (anonymisés) : contexte → action → résultat → leçon",
+        "subtitle": "On montre ce qui a été fait, ce qui a bougé, et pourquoi."
+      },
+      "items": [
+        {
+          "titleHtml": "Courtier :<br> stabiliser le coût par demande en zone concurrentielle",
+          "context": "Coût par demande instable, contacts hors cible, manque de visibilité sur les appels.",
+          "action": "Page dédiée + pré-qualification + annonces locales (exclusions) + suivi des appels.",
+          "result": "Coût par demande stabilisé, hausse des demandes pertinentes, meilleure lecture des sources.",
+          "lesson": "Sans pré-qualification et suivi des appels, on améliore à l’aveugle."
+        },
+        {
+          "titleHtml": "Agence :<br> augmenter les rendez-vous avec une page plus claire",
+          "context": "Trafic existant mais peu de demandes de devis.",
+          "action": "Renfort des avis et preuves + réponses aux objections + formulaire plus qualifiant + amélioration des appels à l’action.",
+          "result": "Hausse de la transformation, baisse des demandes non pertinentes.",
+          "lesson": "Le gain vient souvent de la clarté de la page, pas seulement du trafic."
+        },
+        {
+          "titleHtml": "Mutuelle locale :<br> référencement local sans pages par ville",
+          "context": "Dépendance aux annonces, coût en hausse, peu de pages visibles localement.",
+          "action": "Structure par intention + modules locaux + contenus de réassurance + maillage interne.",
+          "result": "Progression régulière, demandes naturelles plus stables.",
+          "lesson": "La structure “métier + preuves + modules locaux” fonctionne sans multiplier des pages par commune."
+        }
+      ]
+    },
+
+    "proofAssets": {
+      "id": "preuves-assets",
+      "header": {
+        "badge": "Preuves mesurables",
+        "title": "Ce qu’on suit, comment on relie les demandes, et des repères réalistes",
+        "subtitle": "Tout est pensé pour décider : renforcer, arrêter, dupliquer."
+      },
+      "screenshots": [
+        {
+          "src": "/assets/images/preuves/dashboard-leads-assurance-floute.png",
+          "alt": "Tableau de suivi des demandes (flouté) : volume, coût par demande et part de demandes pertinentes par source",
+          "caption": "Demandes, coût par demande, part de demandes pertinentes, par source."
+        },
+        {
+          "src": "/assets/images/preuves/call-tracking-assurance-floute.png",
+          "alt": "Suivi des appels assurance (flouté) : appels par source, durée et statut de qualification",
+          "caption": "Appels suivis : source, durée, statut, étiquettes."
+        },
+        {
+          "src": "/assets/images/preuves/conversions-landing-assurance-floute.png",
+          "alt": "Suivi des formulaires (flouté) : envois et actions sur la page",
+          "caption": "Formulaires : envois et actions clés (clic téléphone / WhatsApp)."
+        }
+      ],
+      "attribution": {
+        "title": "Méthode de mesure (simple et lisible)",
+        "text": "On suit les appels et les formulaires, puis on les relie à la source quand c’est possible (référencement local, annonces, page, offre). Ensuite, on qualifie les demandes avec un statut simple : pertinent / hors zone / hors besoin / rendez-vous pris. L’objectif : savoir ce qui apporte réellement des demandes de devis exploitables, puis renforcer ce qui fonctionne."
+      },
+      "benchmarks": {
+        "title": "Repères réalistes (fourchettes)",
+        "items": [
+          {
+            "kpi": "Coût par demande (annonces locales)",
+            "range": "selon offre/zone",
+            "note": "Dépend de la concurrence et de la pré-qualification."
+          },
+          {
+            "kpi": "Délai de montée (référencement local)",
+            "range": "6–12 semaines",
+            "note": "Variable selon historique, structure et preuves."
+          },
+          {
+            "kpi": "Volume / mois / zone",
+            "range": "variable",
+            "note": "Estimé après diagnostic : offre, zone, budget."
+          }
+        ]
+      },
+      "reassurance": {
+        "deliverablesTitle": "Ce que vous recevez en 7 jours (diagnostic)",
+        "deliverables": [
+          "Plan 30/60/90 jours priorisé",
+          "Offre d’entrée + angles + objections à traiter",
+          "Structure de page (preuves, objections, FAQ, formulaire)",
+          "Plan de suivi des appels + formulaires (simple et lisible)",
+          "Recommandation du canal prioritaire (référencement local / annonces Google) + budget indicatif"
+        ],
+        "refusalsTitle": "Ce qu’on refuse (crédibilité)",
+        "refusals": [
+          "Trafic “pour le trafic” sans intention devis/RDV",
+          "Promesses irréalistes de volume garanti",
+          "Zones trop larges sans ciblage offre/éligibilité",
+          "Pilotage sans suivi des appels et formulaires"
+        ]
+      }
+    },
+
     "prestationsTabs": {
       "id": "prestations",
       "content": {
         "eyebrow": "Leviers",
-        "title": "{tokens.method} : preuves par levier et par KPI."
+        "title": "{tokens.method} : preuves par levier et par indicateur."
       },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
@@ -209,7 +307,7 @@
       "content": {
         "eyebrow": "Décision",
         "title": "On valide la faisabilité et le plan d’action avant d’investir.",
-        "text": "Tu repars avec des priorités claires : offre d’entrée, page de conversion, tracking, et canal prioritaire. Pilotage par KPI et attribution."
+        "text": "Vous repartez avec des priorités claires : offre d’entrée, page de demande, suivi des appels et formulaires, et canal prioritaire. Pilotage par indicateurs et qualité des demandes."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -221,17 +319,17 @@
       "id": "pilotage",
       "content": {
         "eyebrow": "Pilotage",
-        "title": "Tableau de bord simple, décisions rapides.",
-        "text": "On suit la performance par source/campagne/offre : volume, CPL, conversion et éligibilité. Objectif : améliorer {tokens.goal} et réduire les pertes."
+        "title": "Tableau de suivi simple, décisions rapides.",
+        "text": "On suit la performance par source/offre : volume de demandes, coût par demande, transformation et part de demandes pertinentes. Objectif : améliorer {tokens.goal} et réduire les pertes."
       },
       "ctas": [
-        { "label": "Voir tracking & attribution", "href": "/prestations/tracking-attribution/", "variant": "dark" },
+        { "label": "Voir suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "dark" },
         { "label": "Voir la méthode", "href": "/methode/", "variant": "dark" }
       ],
       "media": {
         "img": {
           "src": "/assets/images/app.svg",
-          "alt": "Dashboard : suivi des leads assurance par source, coût et qualification"
+          "alt": "Tableau de suivi des demandes : appels, formulaires, coût par demande et qualification"
         }
       }
     },
@@ -244,7 +342,7 @@
         "eyebrow": "Zone",
         "title": "Preuves et exécution sur {geo.core}.",
         "text": "Couverture locale : {geo.places.0}, {geo.places.1}, {geo.places.2}, {geo.places.3}, {geo.places.4}…",
-        "cta": { "label": "Demander un diagnostic", "href": "/contact/", "variant": "dark" }
+        "cta": { "label": "Réserver un diagnostic", "href": "/contact/", "variant": "dark" }
       }
     }
   }

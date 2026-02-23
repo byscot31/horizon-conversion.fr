@@ -22,24 +22,57 @@
     "kw": {
       "primary": "ressources génération leads assurance",
       "secondary": [
-        "tracking leads assurance",
-        "landing assurance conversion",
-        "SEO local assurance",
-        "Google Ads assurance",
-        "CRO assurance"
+        "guides génération leads assurance",
+        "checklist génération leads assurance",
+        "suivi appels formulaires assurance",
+        "page demande devis assurance",
+        "référencement local assurance",
+        "annonces Google assurance",
+        "pré-qualification assurance"
+      ],
+      "supporting": [
+        "Google Business Profile assurance",
+        "mots clés négatifs assurance",
+        "structure campagnes annonces assurance",
+        "process rappel leads assurance",
+        "questions de pré-qualification",
+        "messages de réassurance assurance",
+        "zone de chalandise 60 95"
+      ],
+      "entities": [
+        "ressources",
+        "guides",
+        "checklists",
+        "assurance",
+        "agence d’assurance",
+        "courtier",
+        "mutuelle",
+        "demande de devis",
+        "rendez-vous",
+        "référencement local",
+        "annonces Google",
+        "pré-qualification",
+        "Google Business Profile"
+      ],
+      "longTail": [
+        "ressources pour obtenir des demandes de devis assurance en 60 95",
+        "checklist page de demande de devis assurance",
+        "comment suivre les appels et formulaires pour une agence d’assurance",
+        "mots clés négatifs annonces Google assurance",
+        "optimiser Google Business Profile pour assurance locale"
       ]
     },
     "tokens": {
       "offer": "leads assurance",
       "goal": "demandes de devis & RDV qualifiés",
-      "method": "SEO local + Ads + CRO",
-      "system": "pages qui convertissent + acquisition locale + tracking"
+      "method": "référencement local + annonces Google + pages claires",
+      "system": "pages utiles + acquisition locale + suivi des appels et formulaires"
     }
   },
 
   "seoTemplates": {
-    "title": "Ressources {brand} | {tokens.offer} ({geo.core})",
-    "description": "Guides et checklists pour générer {tokens.offer} : {tokens.system}. Objectif : {tokens.goal}. Zone : {geo.core}."
+    "title": "Ressources {brand} | Guides pour {tokens.offer} ({geo.core})",
+    "description": "Guides et checklists pour obtenir plus de demandes de devis assurance : {tokens.system}. Objectif : {tokens.goal}. Zone : {geo.core}."
   },
 
   "schema": {
@@ -48,11 +81,11 @@
     "faq": [
       {
         "q": "À qui s’adressent ces ressources ?",
-        "a": "Aux agences, courtiers et mutuelles qui veulent un système mesurable pour générer des demandes de devis/RDV."
+        "a": "Aux agences, courtiers et mutuelles qui veulent une méthode claire et mesurable pour obtenir des demandes de devis et des rendez-vous en local."
       },
       {
         "q": "Par quoi commencer ?",
-        "a": "Par le diagnostic : offre d’entrée, zone, tracking, puis canal prioritaire (SEO/Ads)."
+        "a": "Par le diagnostic : offre d’entrée, zone, page de demande, suivi des appels et formulaires, puis choix du canal prioritaire (référencement local ou annonces Google)."
       }
     ]
   },
@@ -60,7 +93,7 @@
   "hero": {
     "id": "slider",
     "eyebrow": "Ressources",
-    "titleHtml": "Guides & checklists,<br />orientés conversion.",
+    "titleHtml": "Guides & checklists,<br />pour obtenir plus de demandes de devis.",
     "subtitle": "{tokens.method}. Objectif : {tokens.goal}.",
     "ctas": [
       {
@@ -122,7 +155,7 @@
       "content": {
         "eyebrow": "Diagnostic",
         "title": "Plan d’action priorisé, avant d’investir.",
-        "text": "Offre d’entrée, zone, page de conversion, tracking, puis canal prioritaire (SEO/Ads)."
+        "text": "Vous repartez avec l’ordre des actions : offre d’entrée, zone, page de demande, suivi des appels et formulaires, puis canal prioritaire (référencement local ou annonces Google)."
       },
       "ctas": [
         {

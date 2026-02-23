@@ -3,6 +3,8 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import Hero from "../components/blocks/Hero.astro";
 import MethodVideoProof from "../components/blocks/MethodVideoProof.astro";
+import Cases3 from "../components/blocks/Cases3.astro";
+import ProofAssets from "../components/blocks/ProofAssets.astro";
 import PrestationsTabs from "../components/blocks/PrestationsTabs.astro";
 import MetiersGrid from "../components/blocks/MetiersGrid.astro";
 import CtaBand from "../components/blocks/CtaBand.astro";
@@ -31,6 +33,8 @@ const faq = pageData.schema?.faq ?? [];
   <section id="content">
     <div class="content-wrap pb-0 pt-0 pt-lg-5">
       <MethodVideoProof data={pageData.sections.videoProof} />
+      <Cases3 data={pageData.sections.cases3} />
+      <ProofAssets data={pageData.sections.proofAssets} />
       <PrestationsTabs data={pageData.sections.prestationsTabs} prestations={prestations} />
       <MetiersGrid data={pageData.sections.metiersGrid} metiers={metiers} />
       <CtaBand data={pageData.sections.ctaBand} />
