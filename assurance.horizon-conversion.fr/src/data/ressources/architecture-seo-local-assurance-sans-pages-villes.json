@@ -2,8 +2,8 @@
   "id": "res_seo_archi",
   "slug": "architecture-seo-local-assurance-sans-pages-villes",
   "meta": {
-    "title": "SEO local assurance sans pages villes : architecture + modules | 60/95",
-    "description": "Architecture SEO local sans pages villes : hubs, pages offres, maillage et modules locaux pour couvrir 60/95 sans duplication.",
+    "title": "SEO local assurance sans pages villes | Architecture + modules (60/95)",
+    "description": "Structure SEO local sans pages villes pour assureurs en 60/95 : hubs, pages offres, preuves, FAQ et modules locaux pour capter des demandes de devis sans duplication.",
     "robots": "index,follow",
     "canonical": "/ressources/architecture-seo-local-assurance-sans-pages-villes/"
   },
@@ -11,22 +11,36 @@
     "id": "slider",
     "eyebrow": "Ressource (SEO local)",
     "titleHtml": "SEO local sans pages villes :<br />architecture + modules.",
-    "subtitle": "Couvrir 60/95 sans duplication : pages offres, maillage, modules locaux et preuve.",
+    "subtitle": "Couvrir le 60/95 sans duplication : pages offres orientées devis, maillage “matriochka”, modules locaux et preuves.",
     "ctas": [
       { "label": "Audit SEO local", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir SEO local", "href": "/prestations/seo-local/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
-    "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
+    "note": "Sud Oise (60) & Nord Val-d’Oise (95) — Chantilly, Senlis, Creil, Persan…"
   },
   "schema": {
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Pourquoi éviter les pages villes ?", "a": "Risque de duplication/cannibalisation. Mieux : structure intentionnelle + modules locaux + maillage." },
-      { "q": "Quels contenus créer en priorité ?", "a": "1–2 pages offres d’entrée orientées conversion, puis duplication selon KPIs." }
+      {
+        "q": "Pourquoi éviter les pages villes ?",
+        "a": "Parce qu’elles se ressemblent souvent et finissent par se cannibaliser. Une structure par intention (offres), avec des modules locaux et un bon maillage, couvre la zone sans duplication."
+      },
+      {
+        "q": "Quels contenus créer en priorité ?",
+        "a": "Commencez par 1 à 2 pages d’offres d’entrée orientées demande de devis (par métier si besoin), puis étendez uniquement si les demandes et la qualité sont au rendez-vous."
+      },
+      {
+        "q": "Comment couvrir le 60/95 sans page par commune ?",
+        "a": "Avec une page offre forte, des modules locaux (zone, communes, intentions) et des liens internes cohérents entre hubs, métiers, offres et preuves."
+      },
+      {
+        "q": "Est-ce compatible avec Google Business Profile ?",
+        "a": "Oui. Le profil Google devient le point d’entrée “carte”, et les pages offres + preuves servent à convertir en appels et formulaires."
+      }
     ]
   },
-  "contentHtml": "<h2>Principe</h2><p>Travailler l’intention (offres) et la conversion, puis couvrir localement avec des modules et du maillage.</p><h2>Structure type</h2><ul><li>Hub Métiers</li><li>Hub Prestations</li><li>Pages offres d’entrée</li><li>Preuves + FAQ</li></ul><h2>Maillage</h2><ul><li>Matriochka : hubs → pages → croisements</li><li>Liens contextuels vers offres/préuves</li></ul>",
+  "contentHtml": "<h2>Intention : capter “devis” avant de couvrir des communes</h2><p>En SEO local assurance, la priorité n’est pas de multiplier des pages par ville. La priorité est de capter une intention claire (ex : <strong>devis assurance auto</strong>, <strong>mutuelle santé senior</strong>, <strong>délégation assurance emprunteur</strong>) et de <strong>transformer</strong> cette intention en <strong>appel</strong> ou <strong>formulaire</strong>.</p><p>Une page “ville” copiée-collée dilue le message, crée de la duplication et fait souvent concurrence à vos propres pages. À l’inverse, une structure par intention (offres), renforcée par des <strong>modules locaux</strong> et un <strong>maillage interne</strong>, vous permet de couvrir le 60/95 sans duplication.</p><h2>Architecture recommandée (sans pages villes)</h2><p>Objectif : organiser le site autour de ce que cherchent vos prospects, puis relier les pages entre elles pour pousser vers celles qui convertissent.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Hub Métiers</strong> : agences d’assurance, courtiers, mutuelles locales, assurance pro, assurance emprunteur, assurance vie &amp; patrimoine.</li><li class=\"d-block\"><strong>Hub Prestations</strong> : référencement local, annonces locales, optimisation des pages, suivi des demandes.</li><li class=\"d-block\"><strong>Pages offres d’entrée</strong> : 1 à 2 offres prioritaires par métier (au départ).</li><li class=\"d-block\"><strong>Pages preuves</strong> : avis, exemples, mini-cas, éléments concrets de méthode.</li><li class=\"d-block\"><strong>FAQ utile</strong> : objections fréquentes, questions locales (zone, délais, prise de rendez-vous).</li></ul><h2>Modules locaux : couvrir la zone 60/95 sans duplication</h2><p>Les modules locaux servent à <strong>ancrer la page</strong> dans votre zone de chalandise sans créer une page par commune. Ils se placent sur les pages offres et pages métiers.</p><h3>Module “Zone couverte” (exemples)</h3><ul class=\"iconlist\"><li class=\"d-block\"><strong>Zone principale</strong> : Sud Oise (60) et Nord Val-d’Oise (95).</li><li class=\"d-block\"><strong>Communes repères</strong> : Chantilly, Senlis, Creil, Persan, Lamorlaye, Gouvieux…</li><li class=\"d-block\"><strong>Rayon</strong> : préciser un rayon réaliste (selon votre organisation).</li></ul><h3>Module “Intentions locales” (exemples)</h3><p>Au lieu d’écrire une page “assurance auto Chantilly”, vous intégrez des variantes dans un module :</p><ul class=\"iconlist\"><li class=\"d-block\">« devis assurance auto Chantilly »</li><li class=\"d-block\">« assurance habitation Senlis »</li><li class=\"d-block\">« mutuelle senior Creil »</li><li class=\"d-block\">« assurance emprunteur Persan »</li></ul><p>Le module ne remplace pas la page offre : il la renforce, en restant <strong>court</strong>, <strong>utile</strong> et <strong>non dupliqué</strong>.</p><h3>Module “FAQ locale” (3 questions max)</h3><ul class=\"iconlist\"><li class=\"d-block\">Intervenez-vous sur <strong>ma commune</strong> ?</li><li class=\"d-block\">Peut-on faire un <strong>rendez-vous</strong> rapidement ?</li><li class=\"d-block\">Comment éviter les demandes <strong>hors zone</strong> ?</li></ul><h2>Maillage interne “matriochka” : hubs → pages → croisements</h2><p>Le maillage interne sert à faire circuler l’autorité et à guider Google (et vos prospects) vers les pages qui convertissent.</p><h3>Règles simples de maillage</h3><ul class=\"iconlist\"><li class=\"d-block\">Depuis les <strong>hubs</strong> : liens vers métiers et offres prioritaires.</li><li class=\"d-block\">Depuis une <strong>page métier</strong> : liens vers 1 à 2 offres d’entrée + preuves + prise de contact.</li><li class=\"d-block\">Depuis une <strong>page offre</strong> : liens vers preuves, FAQ, et pages métiers associées.</li><li class=\"d-block\">Depuis les <strong>preuves</strong> : liens contextuels vers les offres correspondantes.</li></ul><h2>Promesse, bénéfices, preuves : ce qui fait convertir</h2><p>Une architecture SEO locale ne sert à rien si la page ne convertit pas. Sur chaque page offre, gardez une structure simple :</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Promesse claire</strong> : “Obtenir des demandes de devis en 60/95”.</li><li class=\"d-block\"><strong>Bénéfices</strong> : délais, prise de rendez-vous, clarté des offres, zone couverte.</li><li class=\"d-block\"><strong>Preuves</strong> : avis, mini-cas, éléments concrets (process, suivi des demandes).</li><li class=\"d-block\"><strong>Réponses aux objections</strong> : prix, hors zone, non qualifié, délais.</li><li class=\"d-block\"><strong>Appel à l’action</strong> : appel / formulaire / WhatsApp, sans friction.</li></ul><h2>Plan d’action (simple) pour démarrer</h2><ol><li class=\"d-block\">Choisir <strong>1 à 2 offres d’entrée</strong> (celles qui génèrent le plus de valeur).</li><li class=\"d-block\">Créer la <strong>page offre</strong> (promesse, preuves, objections, FAQ, CTA).</li><li class=\"d-block\">Créer / renforcer la <strong>page preuves</strong> (avis, mini-cas, méthode).</li><li class=\"d-block\">Ajouter les <strong>modules locaux</strong> (zone + intentions + FAQ locale).</li><li class=\"d-block\">Mettre en place le <strong>maillage interne</strong> (hubs → métier → offre → preuves).</li></ol><p>Ensuite seulement, vous dupliquez : nouvelle offre, nouveau métier, puis extension si les demandes et la qualité sont au rendez-vous.</p>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
@@ -43,7 +57,7 @@
       "title": "Ressources liées",
       "items": [
         { "href": "/ressources/checklist-google-business-profile-assurance/", "label": "Checklist GBP", "anchor": "Google Business Profile assurance" },
-        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "landing assurance" }
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "page de demande de devis assurance" }
       ]
     }
   },

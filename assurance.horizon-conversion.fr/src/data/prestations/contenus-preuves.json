@@ -4,44 +4,44 @@
   "label": "Contenus & preuves (pages offres, avis, cas)",
   "shortLabel": "Contenus",
   "meta": {
-    "title": "Contenus assurance qui convertissent | Preuves, FAQ, pages offres",
-    "description": "Pages offres locales + preuves (avis, cas, chiffres) : augmentez la confiance et la conversion.",
+    "title": "Contenus assurance qui convertissent | Preuves, FAQ, pages offres (60/95)",
+    "description": "Pages offres locales + preuves (avis, cas, résultats) + FAQ utile : rassurer vite et obtenir plus de demandes de devis et rendez-vous en 60/95.",
     "robots": "index,follow",
     "canonical": "/prestations/contenus-preuves/"
   },
-  "promise": "Rassurer vite et convertir : preuve + réponses aux objections + CTA clairs.",
+  "promise": "Rassurer vite et convertir : preuves concrètes, réponses aux objections et appel à l’action clair vers la demande de devis ou le rendez-vous.",
   "scope": {
     "assets": ["pages offres", "pages preuves", "FAQ", "mini-cas clients"],
     "seo": ["structure Hn", "schémas FAQ", "maillage interne"],
-    "conversion": ["promesse", "rassurance", "formulaire orienté qualification"]
+    "conversion": ["promesse", "rassurance", "formulaire orienté pré-qualification"]
   },
   "deliverables": [
-    "Kit de pages preuve (avis, résultats, process)",
-    "Pages offres (1 à 6 selon plan)",
-    "FAQ locale utile (zones + cas fréquents)"
+    "Kit de pages preuves (avis, résultats, process, exemples)",
+    "Pages offres (1 à 6 selon le plan)",
+    "FAQ locale utile (zone 60/95 + cas fréquents)"
   ],
   "cta": { "primary": { "label": "Créer mes pages offres", "href": "/contact/" } },
 
   "faq": [
     {
       "q": "Pourquoi des contenus “preuves” en assurance ?",
-      "a": "Parce que la confiance fait la conversion : preuves, objections et FAQ réduisent l’hésitation et augmentent les demandes de devis/RDV."
+      "a": "Parce que la confiance déclenche la prise de contact : preuves, objections et FAQ réduisent l’hésitation et augmentent les demandes de devis et les rendez-vous."
     },
     {
       "q": "Qu’est-ce qu’une “page offre” qui convertit ?",
-      "a": "Une page structurée : promesse, preuve (avis/chiffres/cas), objections, FAQ, CTA clairs et formulaire pré-qualifiant."
+      "a": "Une page structurée : promesse, preuves (avis, cas, résultats), réponses aux objections, FAQ utile, appel à l’action clair et formulaire de pré-qualification."
     },
     {
       "q": "Est-ce utile même avec Google Ads ?",
-      "a": "Oui : une landing avec preuve et FAQ baisse la friction, augmente le taux de conversion et améliore le CPL effectif."
+      "a": "Oui. Une page de demande avec preuves et FAQ réduit la friction, augmente la transformation et aide à baisser le coût par demande."
     },
     {
       "q": "Combien de pages faut-il créer ?",
-      "a": "On démarre avec 1–2 offres d’entrée, puis on duplique si les KPIs sont bons (conversion, éligibilité, CPL)."
+      "a": "On démarre avec 1 à 2 offres d’entrée. Ensuite, on duplique si la qualité des demandes et le coût par demande sont bons."
     },
     {
-      "q": "Vous intégrez le schema FAQ ?",
-      "a": "Oui : FAQ utile + schema (si pertinent), et maillage interne pour renforcer les pages transactionnelles."
+      "q": "Vous intégrez le schéma FAQ ?",
+      "a": "Oui : une FAQ utile (pas du remplissage) avec schéma quand c’est pertinent, et un maillage interne qui renforce les pages de demande."
     }
   ],
 
@@ -49,7 +49,7 @@
     "id": "slider",
     "eyebrow": "Contenus & preuves",
     "titleHtml": "Rassurer vite,<br />convertir mieux.",
-    "subtitle": "Pages offres + preuves + FAQ : baisse de friction, meilleure conversion, et message plus clair pour Ads/SEO.",
+    "subtitle": "Pages offres + preuves + FAQ : moins d’hésitation, meilleure transformation, et un message plus clair pour le référencement local et les annonces.",
     "ctas": [
       { "label": "Créer mes pages offres", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -62,21 +62,21 @@
       "id": "clarification",
       "header": {
         "badge": "Clarification",
-        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "title": "Contenus assurance : capter l’intention “devis” en 60/95",
+        "subtitle": "Objectif : appels et formulaires pertinents, pas des visites inutiles."
       },
       "impacts": [
-        "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Des pages offres claires (auto, habitation, santé, pro…) qui déclenchent la demande.",
+        "Des preuves visibles (avis, cas, résultats) pour réduire l’hésitation.",
+        "Une FAQ utile qui répond aux questions avant l’appel.",
+        "Un message cohérent entre la page et les annonces / le référencement local.",
+        "Des demandes plus qualifiées grâce à la pré-qualification dans le formulaire."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Des articles sans intention de demande de devis.",
+        "Des pages “génériques” sans preuves ni réponses aux objections.",
+        "Une accumulation de textes sans appel à l’action clair.",
+        "Des pages publiées sans maillage interne et sans FAQ utile."
       ]
     },
 
@@ -84,31 +84,32 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une exécution structurée : preuves, offres, FAQ, maillage",
+        "subtitle": "Cadrage → structure → rédaction → intégration → amélioration."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Cadrage offre d’entrée", "text": "choix des offres prioritaires et des profils visés (zone 60/95)." },
+        { "title": "Collecte des preuves", "text": "avis, cas, chiffres, process, éléments de réassurance disponibles." },
+        { "title": "Structure des pages", "text": "promesse, preuves, objections, FAQ, appel à l’action clair." },
+        { "title": "Pré-qualification", "text": "questions simples pour réduire les demandes hors cible." },
+        { "title": "Maillage interne", "text": "liens vers méthode, preuves, tarifs, pages métier et offres." }
       ],
       "deliverables": [
-        "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Plan de pages (métier × offre) + priorisation",
+        "Liste des preuves à intégrer + formats (avis, mini-cas, chiffres)",
+        "FAQ utile : questions réelles, pas du remplissage",
+        "Maillage interne : liens et ancres vers les pages qui comptent",
+        "Mises à jour : amélioration selon les demandes reçues"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes (sans promesses absolues)",
         "items": [
-          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "1–2 semaines", "range": "1ère vague de pages offres", "note": "selon le volume de preuves et la validation." },
+          { "label": "3–6 semaines", "range": "renfort preuves + FAQ + maillage", "note": "pour améliorer la transformation et la qualité des demandes." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -116,18 +117,18 @@
         "href": "/preuves/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Contenus & preuves : pages offres, objections, FAQ et conversion"
+          "alt": "Contenus & preuves : pages offres, objections, FAQ et conversion en demandes de devis"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Preuve",
+        "eyebrow": "Preuves",
         "title": "Preuves + objections + FAQ : le trio qui convertit.",
-        "text": "On structure des pages qui répondent aux doutes : preuve, objections, FAQ utile et CTA. Objectif : plus de demandes de devis/RDV à trafic égal.",
+        "text": "On structure des pages qui répondent aux doutes : preuves, réponses aux objections, FAQ utile et appel à l’action clair. Objectif : plus de demandes de devis et de rendez-vous, à trafic égal.",
         "bullets": [
-          "Pages offres orientées conversion (promesse, preuve, CTA).",
-          "Pages preuves (avis, cas, chiffres, process).",
-          "FAQ utile + schémas + maillage interne."
+          "Pages offres orientées demande (promesse, preuves, appel à l’action).",
+          "Pages preuves (avis, mini-cas, résultats, process).",
+          "FAQ utile + schémas + maillage interne vers les pages clés."
         ]
       },
       "ctas": [
@@ -151,7 +152,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Preuves adaptées par métier : objections, promesses et CTA alignés sur l’offre d’entrée et le niveau de confiance.",
+        "text": "Preuves adaptées par métier : objections, promesses et appels à l’action alignés sur l’offre d’entrée et le niveau de confiance attendu.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -166,8 +167,8 @@
       },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "On définit les preuves et la structure avant d’écrire.",
-        "text": "Offre d’entrée, objections à traiter, preuves disponibles, FAQ utile, CTA et formulaire : tu repars avec un plan de contenus actionnable."
+        "title": "Définir les preuves et la structure avant d’écrire.",
+        "text": "Offre d’entrée, objections à traiter, preuves disponibles, FAQ utile, appel à l’action et pré-qualification : vous repartez avec un plan de contenus actionnable."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -179,14 +180,14 @@
       "id": "conversion",
       "content": {
         "eyebrow": "Conversion",
-        "title": "Plus de conversion sans augmenter le budget.",
-        "text": "Preuve et clarté réduisent la friction. On optimise aussi le formulaire (pré-qualification) pour améliorer la qualité des leads."
+        "title": "Plus de demandes sans augmenter le budget.",
+        "text": "Les preuves et la clarté réduisent la friction. On améliore aussi le formulaire (pré-qualification) pour augmenter la part de demandes pertinentes."
       },
       "ctas": [
-        { "label": "Voir CRO", "prestaSlug": "cro", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir optimisation de la page", "prestaSlug": "cro", "variant": "dark" },
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Conversion : preuve, CTA, formulaire pré-qualifiant" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Conversion : preuves, appel à l’action, formulaire de pré-qualification" } }
     },
 
     "faqToggles": {
@@ -195,8 +196,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT, priorisés ROI : démarrer par une offre d’entrée, une page de conversion et des preuves, puis dupliquer.",
+        "title": "Diagnostic → mise en place → suivi.",
+        "text": "Tarifs HT, priorisés sur les demandes : démarrer par une offre d’entrée, une page de demande et des preuves, puis étendre selon les indicateurs.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -206,12 +207,12 @@
       "header": {
         "badge": "Ressources",
         "title": "Guides contenus : rassurer vite et convertir mieux",
-        "subtitle": "Preuves, FAQ, objections : réduire l’hésitation et augmenter devis/RDV."
+        "subtitle": "Preuves, FAQ, objections : réduire l’hésitation et augmenter les demandes de devis et rendez-vous."
       },
       "headerCross": {
         "badge": "Ressources",
         "title": "Guides preuves & contenus pour {metierLabel}",
-        "subtitle": "Rassurer vite : preuves, FAQ et objections pour convertir davantage en devis/RDV."
+        "subtitle": "Rassurer vite : preuves, FAQ et objections pour convertir davantage en devis et rendez-vous."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

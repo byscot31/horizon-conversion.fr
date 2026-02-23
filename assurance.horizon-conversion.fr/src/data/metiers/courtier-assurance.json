@@ -2,32 +2,32 @@
   "id": "metier_courtier_assurance",
   "slug": "courtier-assurance",
   "label": "Courtiers en assurance",
-  "cardTeaser": "Des leads mieux qualifiés (pas des chasseurs de prix) : ciblage + formulaire pré-qualifiant + tracking.",
+  "cardTeaser": "Des demandes mieux qualifiées (pas des chasseurs de prix) : offre d’entrée claire, formulaire de pré-qualification et suivi des appels et formulaires en 60/95.",
 
   "offres": ["assurance auto", "assurance habitation", "mutuelle santé", "prévoyance", "RC pro", "assurance emprunteur"],
 
   "meta": {
-    "title": "Leads pour courtier en assurance | Sud Oise & Nord Val-d’Oise",
-    "description": "Générez des leads qualifiés pour votre cabinet de courtage : acquisition locale (SEO/Ads), pages qui convertissent, tracking appels/formulaires.",
+    "title": "Leads pour courtier en assurance en 60/95 | Devis & RDV qualifiés",
+    "description": "Obtenez des demandes de devis et des rendez-vous qualifiés pour votre cabinet de courtage en 60/95. Acquisition locale, page de demande claire, pré-qualification et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/courtier-assurance/"
   },
 
   "hero": {
-    "h1": "Générez des leads qualifiés pour votre cabinet de courtage",
-    "sub": "Méthode locale (60/95) : ciblage offres + landing CRO + acquisition SEO/Ads + attribution.",
+    "h1": "Courtiers en assurance : obtenir des demandes qualifiées en 60/95",
+    "sub": "Méthode locale (Sud Oise / Nord Val-d’Oise) : offre d’entrée, page de demande claire, acquisition locale et suivi des appels et formulaires.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir les preuves", "href": "/preuves/" }
   },
 
   "positionnement": {
-    "promesse": "Remplir l’agenda avec des demandes de devis/RDV qualifiées, sur une zone maîtrisée.",
-    "angle": "Spécialisation offre d’entrée + preuve + formulaire pré-qualifiant + pilotage par CPL et éligibilité."
+    "promesse": "Remplir l’agenda avec des demandes de devis et des rendez-vous qualifiés, sur une zone maîtrisée.",
+    "angle": "Offre d’entrée + preuves + formulaire de pré-qualification + décisions basées sur la qualité des demandes et le coût par demande."
   },
 
   "icp": {
     "taille": ["solo", "1-5 collaborateurs", "6-15 collaborateurs"],
-    "maturite": ["réseau existant mais irrégulier", "Ads instables", "site sans conversion mesurée"],
+    "maturite": ["réseau existant mais irrégulier", "annonces instables", "site sans suivi clair des demandes"],
     "offresPrioritaires": ["emprunteur", "santé", "auto", "RC pro"]
   },
 
@@ -38,29 +38,50 @@
   ],
 
   "objections": [
-    { "id": "obj_01", "texte": "On veut des leads, mais pas des chasseurs de prix.", "reponse": "On cadre l’offre d’entrée et le message, on qualifie par formulaire, et on optimise sur leads éligibles (pas sur clics)." },
-    { "id": "obj_02", "texte": "On a déjà des partenaires, on ne veut pas diluer.", "reponse": "On démarre avec une offre prioritaire et une zone, puis on duplique seulement si les KPIs sont bons." },
-    { "id": "obj_03", "texte": "On ne sait jamais d’où viennent les leads.", "reponse": "Tracking appels + formulaires + UTMs et dashboard : source/campagne/offre, et décisions claires." }
+    {
+      "id": "obj_01",
+      "texte": "On veut des demandes, mais pas des chasseurs de prix.",
+      "reponse": "On cadre l’offre d’entrée et le message, on ajoute une pré-qualification dans le formulaire, puis on améliore uniquement sur les demandes pertinentes (pas sur le volume de clics)."
+    },
+    {
+      "id": "obj_02",
+      "texte": "On a déjà des partenaires, on ne veut pas se disperser.",
+      "reponse": "On démarre avec 1 à 2 offres prioritaires et une zone claire. On étend uniquement si la qualité des demandes et le coût par demande sont au rendez-vous."
+    },
+    {
+      "id": "obj_03",
+      "texte": "On ne sait jamais d’où viennent les demandes.",
+      "reponse": "On met en place un suivi des appels et des formulaires, puis on lit la performance par offre et par source. Les décisions deviennent simples : renforcer, corriger, ou arrêter."
+    }
   ],
 
   "kpis": [
-    { "name": "Leads éligibles", "target": "hausse progressive via filtres + CRO" },
-    { "name": "CPL", "target": "stabilisation puis baisse sur 60–90 jours" },
-    { "name": "Taux RDV / lead", "target": "amélioration via scripts + rappel rapide" },
-    { "name": "Attribution", "target": "appels + formulaires trackés" }
+    { "name": "Demandes pertinentes", "target": "hausse progressive via pré-qualification et clarté de la page" },
+    { "name": "Coût par demande", "target": "stabilisation puis baisse sur 60–90 jours" },
+    { "name": "Taux RDV / demande", "target": "amélioration via rappel rapide et scripts" },
+    { "name": "Suivi des sources", "target": "appels + formulaires suivis" }
   ],
 
   "livrables": [
-    "Landing offre d’entrée + preuves + objections + FAQ",
-    "Formulaire pré-qualifiant + call tracking",
-    "Campagnes Ads ou SEO local (priorité ROI)",
-    "Dashboard simple (source, coût, éligibilité)"
+    "Page offre d’entrée + preuves + objections + FAQ",
+    "Formulaire de pré-qualification + suivi des appels et formulaires",
+    "Acquisition locale (annonces ou référencement local) selon priorité",
+    "Tableau de suivi simple (source, coût par demande, qualité)"
   ],
 
   "faq": [
-    { "q": "Peut-on cibler plusieurs offres ?", "a": "Oui, mais on commence par 1–2 offres d’entrée pour stabiliser le CPL et la qualité, puis on duplique." },
-    { "q": "Comment qualifier avant l’appel ?", "a": "Formulaire pré-qualifiant (profil, urgence, zone, besoin) + scripts de rappel et scoring simple." },
-    { "q": "Est-ce compatible avec un CRM ?", "a": "Oui, option CRM/workflows pour relances, rendez-vous, et suivi des sources." }
+    {
+      "q": "Peut-on cibler plusieurs offres ?",
+      "a": "Oui, mais on commence par 1 à 2 offres d’entrée pour stabiliser le coût par demande et la qualité. Ensuite, on duplique si les indicateurs sont bons."
+    },
+    {
+      "q": "Comment qualifier avant l’appel ?",
+      "a": "Avec un formulaire de pré-qualification (zone, besoin, urgence, éléments de profil) et un script de rappel. Objectif : trier vite et réserver des rendez-vous utiles."
+    },
+    {
+      "q": "Peut-on organiser les relances et la prise de rendez-vous ?",
+      "a": "Oui, en option : scripts, relances, confirmation de rendez-vous et suivi des statuts (qualifié / non qualifié) pour limiter la perte."
+    }
   ],
 
   "localModules": {
@@ -90,17 +111,17 @@
       "variant": "darkSplit",
       "media": {
         "href": "/preuves/",
-        "img": { "src": "/assets/images/section-1.jpg", "alt": "Preuves : génération de leads pour courtiers en assurance" },
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Preuves : obtenir des demandes qualifiées pour courtiers en assurance (60/95)" },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Courtiers",
-        "title": "Plus de RDV qualifiés, moins de perte.",
-        "text": "On travaille l’offre d’entrée, le message et la qualification. Puis on pilote l’acquisition (Ads/SEO) et la conversion (CRO) sur des leads éligibles.",
+        "eyebrow": "Courtiers (60/95)",
+        "title": "Plus de rendez-vous qualifiés, moins de perte.",
+        "text": "On travaille l’offre d’entrée, le message et la pré-qualification. Ensuite, on pilote l’acquisition locale et on améliore la page à partir des appels et formulaires réellement reçus, pour augmenter la part de demandes pertinentes.",
         "bullets": [
-          "Formulaire pré-qualifiant + scripts de rappel.",
-          "Tracking appels/formulaires pour piloter au réel.",
-          "Itérations rapides (CRO) pour réduire le CPL."
+          "Formulaire de pré-qualification + scripts de rappel.",
+          "Suivi des appels et formulaires pour piloter au réel.",
+          "Améliorations rapides de la page pour réduire le coût par demande."
         ]
       },
       "ctas": [
@@ -113,18 +134,18 @@
       "id": "problemes",
       "header": {
         "badge": "Votre situation",
-        "title": "Problèmes fréquents des agences d’assurance locales",
-        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+        "title": "Problèmes fréquents des cabinets de courtage (local)",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir plus de demandes de devis et de rendez-vous en 60/95."
       },
       "items": [
-        "Dépendance au réseau / recommandations : flux irrégulier.",
-        "Saisonnalité (auto/habitation) : variations fortes du volume.",
-        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
-        "Appels non qualifiés / hors zone : temps perdu en agence.",
-        "Attribution floue : impossible de savoir ce qui génère des RDV."
+        "Demandes « chasseurs de prix » : beaucoup de volume, peu de dossiers exploitables.",
+        "Offres trop larges : difficile de prioriser et d’obtenir des demandes pertinentes.",
+        "Concurrence forte : besoin de filtrer et de rassurer pour éviter le gaspillage.",
+        "Rappel trop tardif : baisse du taux de jointure et des rendez-vous.",
+        "Absence de suivi : difficile de savoir ce qui apporte réellement des rendez-vous."
       ],
       "ctas": [
-        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Recevoir le plan pour mon cabinet (zone + offres)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
       ]
     },
@@ -134,35 +155,35 @@
       "header": {
         "badge": "Parcours",
         "title": "Diagnostic → Setup → Pilotage",
-        "subtitle": "Un déroulé simple, orienté métier et ROI."
+        "subtitle": "Un déroulé simple, orienté demandes pertinentes et rendez-vous."
       },
       "steps": [
         {
           "title": "Diagnostic (J+7)",
-          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "text": "On cadre l’offre d’entrée, la zone 60/95, la page de demande et le suivi des appels et formulaires, puis on choisit le canal à activer en premier.",
           "bullets": [
-            "Plan 30/60/90 jours (agence)",
-            "Structure landing + objections/FAQ",
-            "Recommandation SEO/Ads + priorités"
+            "Plan 30/60/90 jours (courtier)",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : référencement local / annonces locales"
           ],
           "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
         },
         {
           "title": "Setup (lancement)",
-          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "text": "On met en place la page et le suivi des demandes, puis on lance l’acquisition locale.",
           "bullets": [
-            "Landing CRO + formulaire pré-qualifiant",
-            "Call tracking + UTMs + events",
-            "Ads local ou SEO local selon priorité"
+            "Page de demande + formulaire de pré-qualification",
+            "Suivi des appels et des formulaires",
+            "Activation du canal prioritaire selon objectif"
           ]
         },
         {
-          "title": "Pilotage (itérations)",
-          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore le coût par demande et la qualité, en s’appuyant sur les demandes réellement reçues.",
           "bullets": [
-            "Dashboard leads (source/campagne/offre)",
-            "Optimisation mots-clés / exclusions",
-            "Tests CRO (preuve, CTA, friction)"
+            "Lecture par offre et par source",
+            "Ajustements : exclusions, ciblage, messages",
+            "Améliorations de la page : preuves, clarté, questions"
           ],
           "cta": { "label": "Voir les preuves", "href": "/preuves/" }
         }
@@ -177,10 +198,10 @@
         "subtitle": "Projection : ce qu’on change et ce que ça débloque."
       },
       "item": {
-        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
-        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
-        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
-        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "title": "Courtier : réduire les demandes non pertinentes et augmenter les rendez-vous",
+        "context": "Beaucoup de demandes « prix », peu de dossiers exploitables, manque de visibilité sur les sources.",
+        "action": "Page offre d’entrée + pré-qualification + suivi des appels et formulaires + exclusions + messages plus clairs.",
+        "result": "Plus de demandes pertinentes, moins de temps perdu, décisions basées sur les sources.",
         "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
       }
     },
@@ -188,7 +209,11 @@
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
-      "content": { "eyebrow": "Prestations", "title": "Les leviers les plus efficaces pour un cabinet de courtage." },
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Les leviers les plus efficaces pour un cabinet de courtage.",
+        "text": "On démarre par le levier prioritaire, puis on renforce avec une page plus claire et un suivi des demandes pour améliorer la qualité."
+      },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
@@ -199,8 +224,8 @@
       "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Prioriser l’offre d’entrée et le canal rentable.",
-        "text": "On cadre la zone, l’offre, la page de conversion, le tracking, puis on choisit Ads ou SEO selon le ROI attendu."
+        "title": "Prioriser l’offre d’entrée et le canal le plus rentable.",
+        "text": "On cadre la zone, l’offre, la page de demande, le suivi des appels et formulaires, puis on choisit annonces ou référencement local selon le contexte."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -213,14 +238,14 @@
       "linkMode": "cross",
       "content": {
         "eyebrow": "Qualification",
-        "title": "Des leads exploitables, pas des clics.",
-        "text": "Qualification avant appel, rappel rapide, relances et suivi des sources. Option CRM/workflows si tu veux industrialiser."
+        "title": "Des demandes exploitables, pas du volume.",
+        "text": "Pré-qualification avant appel, rappel rapide, relances et suivi des sources. Objectif : transformer plus de demandes en rendez-vous utiles."
       },
       "ctas": [
-        { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi & relances", "prestaSlug": "crm-workflow", "variant": "dark" },
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Qualification et suivi : workflow + dashboard" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Qualification et suivi : traitement des demandes et lecture des sources" } }
     },
 
     "faqToggles": {
@@ -229,8 +254,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Une offre claire, priorisée ROI.",
-        "text": "On chiffre sur une offre d’entrée + un canal prioritaire, avec tracking et pilotage mesurable.",
+        "title": "Une offre claire, priorisée sur les demandes.",
+        "text": "Chiffrage basé sur une offre d’entrée, une page de demande, le suivi des appels et formulaires, puis un canal prioritaire selon le contexte.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -240,7 +265,7 @@
       "header": {
         "badge": "Ressources",
         "title": "Guides pour mieux qualifier (et éviter les chasseurs de prix)",
-        "subtitle": "Pré-qualification, suivi et attribution : piloter sur leads éligibles, pas sur volume."
+        "subtitle": "Pré-qualification, suivi des demandes et organisation : piloter sur la qualité, pas sur le volume."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

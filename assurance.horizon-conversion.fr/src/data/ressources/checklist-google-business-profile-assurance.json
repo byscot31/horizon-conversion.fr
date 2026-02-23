@@ -2,8 +2,8 @@
   "id": "res_gbp_checklist",
   "slug": "checklist-google-business-profile-assurance",
   "meta": {
-    "title": "Checklist Google Business Profile assurance : appels, itinéraires, leads | 60/95",
-    "description": "Checklist GBP assurance : catégories, services, avis, posts et cohérence NAP pour améliorer le local pack et générer des leads.",
+    "title": "Checklist Google Business Profile assurance | Appels & leads en 60/95",
+    "description": "Checklist Google Business Profile pour assureurs en 60/95 : catégories, services, avis, photos, infos et liens vers pages offres. Objectif : plus d’appels, d’itinéraires et de demandes locales.",
     "robots": "index,follow",
     "canonical": "/ressources/checklist-google-business-profile-assurance/"
   },
@@ -11,7 +11,7 @@
     "id": "slider",
     "eyebrow": "Ressource (SEO local)",
     "titleHtml": "Checklist Google Business Profile :<br />gagner en local.",
-    "subtitle": "Optimiser GBP pour appels, itinéraires et demandes locales sur 60/95.",
+    "subtitle": "Optimiser votre profil Google pour générer des appels, des itinéraires et des demandes locales en 60/95.",
     "ctas": [
       { "label": "Audit SEO local", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir SEO local", "href": "/prestations/seo-local/", "icon": "bi-arrow-right", "variant": "secondary" }
@@ -22,11 +22,21 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "GBP suffit-il sans pages ?", "a": "GBP est puissant, mais des pages offres transactionnelles améliorent conversion et couverture intentionnelle." },
-      { "q": "Quels KPIs GBP suivre ?", "a": "Appels, itinéraires, clics site, et requêtes principales." }
+      {
+        "q": "Google Business Profile suffit-il sans pages ?",
+        "a": "Le profil Google peut générer des appels, mais des pages offres orientées demande de devis améliorent la conversion et couvrent mieux les intentions (auto, habitation, santé, pro…)."
+      },
+      {
+        "q": "Quels indicateurs Google Business Profile suivre ?",
+        "a": "Appels, itinéraires, clics vers le site, messages (si activés) et requêtes principales qui déclenchent l’affichage."
+      },
+      {
+        "q": "Combien d’avis faut-il ?",
+        "a": "Il n’y a pas de chiffre magique. L’important est la régularité, la qualité des avis, et des réponses systématiques."
+      }
     ]
   },
-  "contentHtml": "<h2>Checklist rapide</h2><ul><li>Catégorie principale + secondaires</li><li>Services (offres d’entrée)</li><li>Photos (équipe, agence)</li><li>Avis (collecte et réponses)</li><li>Posts (si utile)</li><li>NAP cohérent</li></ul><h2>Alignement pages</h2><p>Relier GBP à des pages offres orientées conversion pour améliorer les demandes actionnables.</p>",
+  "contentHtml": "<h2>Objectif : apparaître et déclencher une action (appel, itinéraire, site)</h2><p>Pour un assureur local, Google Business Profile sert à capter des demandes “chaudes” : une personne cherche un assureur, voit votre profil, puis <strong>appelle</strong>, demande un <strong>itinéraire</strong> ou clique vers votre <strong>site</strong>. Cette checklist vise un résultat concret : <strong>plus d’actions</strong>, pas seulement une fiche “jolie”.</p><h2>Checklist rapide (à faire en 30–60 minutes)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Catégorie principale</strong> : la plus proche de votre activité réelle (agence, courtier, mutuelle…).</li><li class=\"d-block\"><strong>Catégories secondaires</strong> : uniquement si vous proposez réellement ces services.</li><li class=\"d-block\"><strong>Services</strong> : renseigner vos <strong>offres d’entrée</strong> (auto, habitation, santé, emprunteur, pro…), avec libellés clairs.</li><li class=\"d-block\"><strong>Description</strong> : expliquer la zone (60/95), les offres prioritaires, et le mode de prise de contact.</li><li class=\"d-block\"><strong>Horaires</strong> : à jour (y compris jours fériés si possible).</li><li class=\"d-block\"><strong>Téléphone</strong> : numéro direct et stable.</li><li class=\"d-block\"><strong>Site</strong> : lien vers une <strong>page offre</strong> (pas juste l’accueil) quand c’est pertinent.</li><li class=\"d-block\"><strong>Photos</strong> : façade, équipe, intérieur, logo (rassurer et légitimer).</li><li class=\"d-block\"><strong>Avis</strong> : demander régulièrement + répondre à 100% des avis.</li></ul><h2>Catégories & services : la base du ciblage</h2><p>La catégorie principale influence fortement sur quelles recherches vous ressortez. Ensuite, les services doivent refléter vos offres prioritaires. Objectif : être visible sur des recherches “devis” et “près de moi”, en restant cohérent.</p><h3>À vérifier</h3><ul class=\"iconlist\"><li class=\"d-block\">La catégorie principale correspond à votre réalité (pas une approximation).</li><li class=\"d-block\">Les catégories secondaires ne créent pas de confusion (mieux vaut peu et juste).</li><li class=\"d-block\">Les services reprennent vos offres d’entrée avec des libellés simples.</li></ul><h2>Avis : ce qui déclenche l’appel</h2><p>En assurance, la confiance est un facteur décisif. Les avis servent à rassurer vite.</p><h3>Checklist avis</h3><ul class=\"iconlist\"><li class=\"d-block\">Mettre en place une demande d’avis simple (après signature, après RDV, après gestion de sinistre).</li><li class=\"d-block\">Répondre à chaque avis (positif et négatif) avec un ton professionnel.</li><li class=\"d-block\">Repérer les mots-clés naturels dans les avis (ex : “mutuelle”, “assurance auto”, “réactivité”).</li></ul><h2>Photos : réassurance immédiate</h2><p>Les photos rassurent : “c’est une vraie agence”, “je sais où je vais”, “je peux appeler”.</p><ul class=\"iconlist\"><li class=\"d-block\">Façade (extérieur)</li><li class=\"d-block\">Accueil / intérieur</li><li class=\"d-block\">Équipe (si possible)</li><li class=\"d-block\">Logo et visuels propres</li></ul><h2>Posts : utiles si vous avez quelque chose à dire</h2><p>Les posts ne sont pas obligatoires. Ils sont utiles si vous pouvez publier :</p><ul class=\"iconlist\"><li class=\"d-block\">des horaires exceptionnels,</li><li class=\"d-block\">une offre d’entrée (ex : mutuelle senior),</li><li class=\"d-block\">un rappel simple (prise de RDV, zone couverte).</li></ul><h2>NAP : cohérence des informations</h2><p>NAP = Nom, Adresse, Téléphone. L’objectif est d’avoir les <strong>mêmes informations</strong> partout (site, annuaires, réseaux). Un NAP incohérent crée de la confusion et peut réduire la confiance.</p><h2>Alignement avec le site : convertir mieux</h2><p>Le profil Google capte l’attention. Les pages du site convertissent. Pour augmenter les demandes :</p><ul class=\"iconlist\"><li class=\"d-block\">Lier le profil vers une <strong>page offre</strong> (auto, santé, emprunteur, pro…) plutôt que la page d’accueil.</li><li class=\"d-block\">Sur la page offre : promesse claire, preuves, réponses aux objections, FAQ, appel à l’action.</li><li class=\"d-block\">Indiquer la zone 60/95 et les conditions (pour réduire les demandes hors zone).</li></ul><h2>Indicateurs à suivre (chaque mois)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Appels</strong> depuis le profil Google</li><li class=\"d-block\"><strong>Itinéraires</strong> demandés</li><li class=\"d-block\"><strong>Clics</strong> vers le site</li><li class=\"d-block\"><strong>Requêtes principales</strong> (ce qui déclenche l’affichage)</li><li class=\"d-block\"><strong>Évolution des avis</strong> (volume + régularité)</li></ul><h2>Plan d’action (simple)</h2><ol><li class=\"d-block\">Mettre à jour catégories, services, horaires, téléphone.</li><li class=\"d-block\">Ajouter 10–20 photos propres (façade, intérieur, équipe).</li><li class=\"d-block\">Mettre en place une routine d’avis (demander + répondre).</li><li class=\"d-block\">Relier GBP à une page offre orientée demande de devis.</li><li class=\"d-block\">Suivre appels/itinéraires/clics et ajuster selon les demandes reçues.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",

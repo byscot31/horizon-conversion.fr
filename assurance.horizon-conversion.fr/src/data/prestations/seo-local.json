@@ -4,28 +4,28 @@
   "label": "SEO local (Google + pages locales)",
   "shortLabel": "SEO local",
   "meta": {
-    "title": "SEO local assurance (60/95) | Google + pages locales qui convertissent",
-    "description": "Structure locale, contenus transactionnels, maillage, GBP : captez des leads assurance sur Chantilly, Senlis, Creil, Persan…",
+    "title": "SEO local assurance en 60/95 | Google + pages locales qui convertissent",
+    "description": "Structure locale, pages offres orientées devis, maillage et Google Business Profile : obtenir des demandes d’assurance en 60/95 (Chantilly, Senlis, Creil, Persan…).",
     "robots": "index,follow",
     "canonical": "/prestations/seo-local/"
   },
-  "promise": "Gagner des positions locales et transformer le trafic en demandes de devis.",
-  "pourQui": ["agences d’assurance", "courtiers", "mutuelles", "assurance pro", "emprunteur"],
+  "promise": "Gagner en visibilité locale sur Google et transformer cette visibilité en demandes de devis et rendez-vous, grâce à des pages offres claires, des preuves et une prise de contact simple.",
+  "pourQui": ["agences d’assurance", "courtiers", "mutuelles", "assurance pro", "assurance emprunteur"],
   "scope": {
-    "audit": ["technique", "sémantique", "concurrentiel local", "GBP"],
-    "build": ["arborescence hubs/cocons", "templates pages offres", "FAQ locales", "maillage interne matriochka"],
-    "ops": ["publication régulière", "optimisations GBP", "netlinking local (sélectif)"]
+    "audit": ["technique", "sémantique", "concurrentiel local", "Google Business Profile"],
+    "build": ["arborescence hubs/cocons", "modèles de pages offres", "FAQ locales", "maillage interne matriochka"],
+    "ops": ["publication régulière", "optimisations Google Business Profile", "liens locaux (sélectif)"]
   },
   "deliverables": [
-    "Mapping mots-clés local (offres × villes/secteurs)",
-    "Création/optimisation pages offres locales",
+    "Mapping mots-clés local (offres × secteurs 60/95)",
+    "Création / optimisation des pages offres locales",
     "Optimisation Google Business Profile",
     "Sitemap + canonicals + schémas FAQ/LocalBusiness"
   ],
   "kpis": [
     "Top 3 local pack (requêtes ciblées)",
-    "Clics appels/itinéraires (GBP)",
-    "Leads organiques (forms + calls)"
+    "Clics appels/itinéraires (Google Business Profile)",
+    "Demandes organiques (formulaires + appels)"
   ],
   "cta": {
     "primary": { "label": "Audit SEO local", "href": "/contact/" },
@@ -34,32 +34,32 @@
 
   "faq": [
     {
-      "q": "En combien de temps le SEO local produit des leads ?",
-      "a": "En général 4 à 12 semaines selon l’historique, la concurrence et la qualité des pages/GBP. L’objectif est de stabiliser le coût moyen dans le temps."
+      "q": "En combien de temps le SEO local produit des demandes ?",
+      "a": "En général 4 à 12 semaines selon l’historique, la concurrence et la qualité des pages et du Google Business Profile. L’objectif est de stabiliser le coût moyen dans le temps."
     },
     {
-      "q": "Travaillez-vous sans pages villes ?",
-      "a": "Oui : structure intentionnelle (offres, objections, preuves) + modules locaux et maillage, sans multiplier des pages ville."
+      "q": "Travaillez-vous sans pages par ville ?",
+      "a": "Oui : structure par intention (offres, objections, preuves) + modules locaux et maillage interne, sans multiplier des pages par commune."
     },
     {
       "q": "Le Google Business Profile est inclus ?",
-      "a": "Oui : optimisation GBP (catégories, contenus, posts si besoin, cohérence NAP) et alignement avec les pages offres."
+      "a": "Oui : optimisation du profil (catégories, services, cohérence des informations, contenu) et alignement avec les pages offres."
     },
     {
-      "q": "Quels KPIs suivez-vous ?",
-      "a": "Top 3 local pack sur requêtes ciblées, clics appels/itinéraires GBP, leads organiques (formulaires + appels) et performance par offre."
+      "q": "Quels indicateurs suivez-vous ?",
+      "a": "Positions sur requêtes locales ciblées, clics appels/itinéraires via Google Business Profile, demandes organiques (appels + formulaires) et performance par offre."
     },
     {
-      "q": "SEO ou Ads en premier ?",
-      "a": "Ads pour lancer vite, SEO local pour stabiliser. Le choix dépend du délai et du budget, mais l’idéal est la complémentarité."
+      "q": "SEO local ou annonces en premier ?",
+      "a": "Les annonces permettent de démarrer vite. Le SEO local stabilise dans la durée. Le choix dépend du délai et du budget, mais la complémentarité est souvent la meilleure option."
     }
   ],
 
   "hero": {
     "id": "slider",
     "eyebrow": "SEO local (Google + pages)",
-    "titleHtml": "Captez des leads assurance<br />en organique (60/95).",
-    "subtitle": "Structure locale + pages offres + GBP + maillage : convertir l’intention locale en devis/RDV mesurés.",
+    "titleHtml": "Obtenir des demandes d’assurance<br />en organique (60/95).",
+    "subtitle": "Structure locale + pages offres + Google Business Profile + maillage : transformer l’intention locale en demandes de devis et rendez-vous.",
     "ctas": [
       { "label": "Audit SEO local", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -73,20 +73,20 @@
       "header": {
         "badge": "Clarification",
         "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "subtitle": "Objectif : appels et formulaires pertinents, pas des positions inutiles."
       },
       "impacts": [
         "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Des pages orientées offre (auto, habitation, santé, pro) qui déclenchent la demande.",
+        "Moins de dépendance aux annuaires et aux variations de budget annonces.",
+        "Une structure sans pages par commune : modules locaux + preuves + FAQ.",
+        "Suivi plus clair : demandes reliées à une source quand c’est possible."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Des contenus publiés sans intention de demande de devis.",
+        "Des requêtes “visibilité” non rentables pour votre activité.",
+        "Des pages par ville copiées-collées qui ajoutent du risque.",
+        "Une visibilité non reliée aux appels et formulaires."
       ]
     },
 
@@ -94,31 +94,32 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une exécution mesurable, orientée demandes",
+        "subtitle": "Audit → structure → pages offres → preuves → liens locaux."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Audit Google Business Profile", "text": "catégories, services, avis, cohérence des informations, signaux locaux." },
+        { "title": "Pages locales (métier/offre)", "text": "pages de demande structurées + modules locaux (sans pages par commune)." },
+        { "title": "SEO technique", "text": "indexation, canonicals, performance, schémas FAQ/LocalBusiness." },
+        { "title": "Preuves & objections", "text": "avis, exemples, FAQ utile, réponses aux objections." },
+        { "title": "Liens locaux (sélectif)", "text": "partenariats, annuaires qualitatifs, presse locale si pertinent." }
       ],
       "deliverables": [
         "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Plan de preuves et FAQ (questions réelles, pas du remplissage)",
+        "Optimisations Google Business Profile + checklist d’exécution",
+        "Corrections techniques (indexation, schémas, performance)",
+        "Suivi mensuel : demandes, sources, pages qui transforment"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes (sans promesses absolues)",
         "items": [
           { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure, pages et liens locaux sont tenus." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -126,18 +127,18 @@
         "href": "/methode/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "SEO local assurance : structure, pages offres, GBP, maillage et conversion"
+          "alt": "SEO local assurance : structure, pages offres, Google Business Profile, maillage et conversion"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "SEO local",
-        "title": "Stabiliser l’acquisition locale et convertir.",
-        "text": "On structure l’arborescence, on crée des pages offres transactionnelles, on optimise la GBP et on met un maillage qui pousse vers les pages qui convertissent.",
+        "title": "Stabiliser la visibilité locale et obtenir des demandes.",
+        "text": "On structure l’arborescence, on crée des pages offres orientées demande, on optimise le Google Business Profile et on met un maillage interne qui pousse vers les pages qui convertissent.",
         "bullets": [
-          "Audit technique/sémantique + concurrence locale.",
-          "Pages offres : preuve, objections, FAQ, CTA.",
-          "GBP + maillage matriochka + schémas."
+          "Audit technique et sémantique + lecture de la concurrence locale.",
+          "Pages offres : promesse, preuves, objections, FAQ, appel et formulaire.",
+          "Google Business Profile + maillage interne + schémas."
         ]
       },
       "ctas": [
@@ -161,7 +162,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Pages locales adaptées par métier : offres d’entrée, objections et preuves qui transforment le trafic en demandes actionnables.",
+        "text": "Pages locales adaptées par métier : offres d’entrée, objections et preuves qui transforment la visibilité en demandes actionnables.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -176,8 +177,8 @@
       },
       "content": {
         "eyebrow": "Audit",
-        "title": "On identifie les requêtes, l’offre d’entrée et les pages à créer.",
-        "text": "Tu repars avec une arborescence, un mapping mots-clés local et les priorités (pages offres + GBP + maillage)."
+        "title": "Identifier les requêtes, l’offre d’entrée et les pages à créer.",
+        "text": "Vous repartez avec une arborescence, un mapping local (60/95) et des priorités : pages offres, Google Business Profile et maillage interne."
       },
       "ctas": [
         { "label": "Réserver un audit", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -188,15 +189,15 @@
     "supportBand": {
       "id": "ops",
       "content": {
-        "eyebrow": "Ops",
+        "eyebrow": "Suivi",
         "title": "Publication et amélioration continue.",
-        "text": "On publie, on optimise GBP, on renforce le maillage et on suit les KPIs. Objectif : plus de leads organiques qualifiés."
+        "text": "On publie, on optimise le Google Business Profile, on renforce le maillage et on suit les indicateurs. Objectif : plus de demandes organiques qualifiées en 60/95."
       },
       "ctas": [
         { "label": "Voir contenus & preuves", "prestaSlug": "contenus-preuves", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "SEO local : suivi KPIs et amélioration continue" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "SEO local : suivi des demandes et amélioration continue" } }
     },
 
     "faqToggles": {
@@ -205,8 +206,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT : on démarre par l’audit et la structure, puis création des pages offres/GBP et pilotage.",
+        "title": "Audit → mise en place → suivi.",
+        "text": "Tarifs HT : démarrage par l’audit et la structure, puis création des pages offres, optimisation Google Business Profile et suivi.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -215,13 +216,13 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides SEO local : structure, GBP et maillage",
-        "subtitle": "Couvrir 60/95 sans pages villes, et convertir l’intention locale en demandes actionnables."
+        "title": "Guides SEO local : structure, Google Business Profile et maillage",
+        "subtitle": "Couvrir 60/95 sans pages par ville, et convertir l’intention locale en demandes actionnables."
       },
       "headerCross": {
         "badge": "Ressources",
         "title": "Guides SEO local pour {metierLabel}",
-        "subtitle": "Structure, GBP et maillage : capter l’intention locale et la convertir en demandes actionnables."
+        "subtitle": "Structure, Google Business Profile et maillage : capter l’intention locale et la convertir en demandes actionnables."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

@@ -2,19 +2,19 @@
   "id": "res_utm_convention",
   "slug": "utm-assurance-convention",
   "meta": {
-    "title": "UTM assurance : convention simple pour attribuer les leads | 60/95",
-    "description": "Convention UTM simple pour attribuer les leads (appels/formulaires) à la source/campagne/offre et piloter le CPL.",
+    "title": "UTM assurance : convention simple pour attribuer les demandes | 60/95",
+    "description": "Convention UTM simple pour assureurs en 60/95 : attribuer les demandes (appels/formulaires) à la source, la campagne et l’offre, pour piloter le coût par demande et la qualité.",
     "robots": "index,follow",
     "canonical": "/ressources/utm-assurance-convention/"
   },
   "hero": {
     "id": "slider",
-    "eyebrow": "Ressource (Tracking)",
+    "eyebrow": "Ressource (Suivi des demandes)",
     "titleHtml": "UTM assurance :<br />une convention simple.",
-    "subtitle": "Retrouver la source/campagne/offre sans ambiguïté pour piloter CPL, conversion et éligibilité.",
+    "subtitle": "Retrouver la source, la campagne et l’offre sans ambiguïté pour piloter le coût par demande, la conversion et la qualité.",
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
-      { "label": "Voir Tracking & attribution", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir suivi des demandes", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
   },
@@ -22,19 +22,29 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "À quoi servent les UTM ?", "a": "À identifier la source et la campagne d’un lead afin de mesurer et piloter le ROI." },
-      { "q": "UTM et Ads, c’est obligatoire ?", "a": "Fortement recommandé : sans UTMs, l’attribution est partielle et les décisions sont plus risquées." }
+      {
+        "q": "À quoi servent les UTM ?",
+        "a": "À identifier la source et la campagne d’une demande, pour mesurer ce qui apporte réellement des dossiers et piloter le budget."
+      },
+      {
+        "q": "UTM et Google Ads, c’est obligatoire ?",
+        "a": "Fortement recommandé. Sans marquage, l’attribution est partielle et les décisions (renforcer/arrêter) sont plus risquées."
+      },
+      {
+        "q": "Faut-il marquer aussi les liens vers WhatsApp et téléphone ?",
+        "a": "Oui si possible : l’objectif est de relier les actions (clic appel / clic WhatsApp) à la source, comme pour les formulaires."
+      }
     ]
   },
-  "contentHtml": "<h2>Objectif</h2><p>Attribuer chaque lead (appel/formulaire) à une source et une campagne.</p><h2>Convention minimale</h2><ul><li><strong>utm_source</strong> : google / facebook / email</li><li><strong>utm_medium</strong> : cpc / organic / referral</li><li><strong>utm_campaign</strong> : offre-zone-intention</li><li><strong>utm_content</strong> : variation annonce / créa</li></ul><h2>Bonnes pratiques</h2><ul><li>Règles d’écriture uniques (minuscules, tirets)</li><li>Pas de doublons (campagnes nommées pareil)</li><li>Convention partagée par l’équipe</li></ul>",
+  "contentHtml": "<h2>Objectif : attribuer chaque demande à une source et une campagne</h2><p>Les UTM sont un marquage ajouté aux liens. Ils permettent d’identifier <strong>d’où vient une demande</strong> (annonces, référencement, email…), et sur quelle <strong>campagne</strong> et <strong>offre</strong> elle a été générée. Sans UTM, vous avez des demandes… mais vous pilotez au feeling.</p><h2>Ce que vous devez obtenir</h2><ul class=\"iconlist\"><li class=\"d-block\">Une demande (formulaire ou appel) associée à une <strong>source</strong>.</li><li class=\"d-block\">Une lecture par <strong>campagne</strong> et par <strong>offre</strong>.</li><li class=\"d-block\">Un indicateur clair : <strong>coût par demande</strong> (et idéalement la qualité : éligible / non).</li></ul><h2>Convention minimale (simple et suffisante)</h2><p>Gardez une convention courte. Le but est la lisibilité, pas la complexité.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>utm_source</strong> : google / facebook / email / referral</li><li class=\"d-block\"><strong>utm_medium</strong> : cpc / organic / social / referral</li><li class=\"d-block\"><strong>utm_campaign</strong> : offre-zone-intention</li><li class=\"d-block\"><strong>utm_content</strong> : variation-annonce (option)</li><li class=\"d-block\"><strong>utm_term</strong> : mot-clé (option, surtout en Ads)</li></ul><h2>Format conseillé pour utm_campaign</h2><p>Un format qui aide à décider :</p><p><strong>offre_zone_intention</strong></p><ul class=\"iconlist\"><li class=\"d-block\"><strong>offre</strong> : auto / habitation / sante / emprunteur / pro / patrimoine</li><li class=\"d-block\"><strong>zone</strong> : 60-95 (ou un sous-secteur si vous segmentez)</li><li class=\"d-block\"><strong>intention</strong> : devis / rdv / appel</li></ul><p><em>Exemples :</em></p><ul class=\"iconlist\"><li class=\"d-block\">mutuelle_senior_60-95_devis</li><li class=\"d-block\">emprunteur_60-95_devis</li><li class=\"d-block\">decennale_60-95_devis</li><li class=\"d-block\">auto_60-95_devis</li></ul><h2>Règles d’écriture (à ne pas négocier)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Minuscules</strong> partout.</li><li class=\"d-block\"><strong>Tirets</strong> ou <strong>underscore</strong>, mais un seul style (choisissez et gardez-le).</li><li class=\"d-block\"><strong>Pas d’accents</strong>, pas d’espaces.</li><li class=\"d-block\"><strong>Pas de doublons</strong> : une campagne = un nom unique et stable.</li><li class=\"d-block\"><strong>Convention partagée</strong> : la même pour toute l’équipe.</li></ul><h2>Où mettre les UTM</h2><ul class=\"iconlist\"><li class=\"d-block\">Liens d’annonces (Google Ads / social).</li><li class=\"d-block\">Liens d’emailing et newsletters.</li><li class=\"d-block\">Liens depuis annuaires / partenaires (si vous voulez mesurer).</li></ul><p><strong>Astuce :</strong> marquez aussi les liens internes qui déclenchent une action (ex : bouton “demander un devis”), si votre suivi repose sur des pages intermédiaires.</p><h2>Pour les appels et WhatsApp</h2><p>Les UTM ne “marquent” pas un appel à elles seules. L’objectif est de relier :</p><ul class=\"iconlist\"><li class=\"d-block\">la source (UTM) →</li><li class=\"d-block\">la session →</li><li class=\"d-block\">l’action (clic appel / clic WhatsApp / formulaire).</li></ul><p>Ensuite, vous consolidez dans un tableau de suivi (demandes + source + offre + qualité).</p><h2>Erreurs fréquentes</h2><ul class=\"iconlist\"><li class=\"d-block\">Changer de convention tous les mois : impossible de comparer.</li><li class=\"d-block\">Mettre des noms trop longs : illisible.</li><li class=\"d-block\">Ne pas inclure l’offre : vous ne savez pas quoi renforcer.</li><li class=\"d-block\">Ne pas inclure la zone : vous ne voyez pas le hors zone.</li></ul><h2>Checklist (rapide)</h2><ul class=\"iconlist\"><li class=\"d-block\">Convention écrite (1 page) : source, medium, campaign.</li><li class=\"d-block\">Format utm_campaign : offre_zone_intention.</li><li class=\"d-block\">Règles : minuscules, sans accents, sans espaces.</li><li class=\"d-block\">Tout le monde applique la même convention.</li><li class=\"d-block\">Tableau de suivi : demandes, sources, offre, coût, qualité.</li></ul>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
-        { "href": "/methode/", "label": "Méthode", "anchor": "méthode SEO + Ads + CRO" },
-        { "href": "/prestations/ads-local/", "label": "Google Ads", "anchor": "Google Ads orienté leads" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "suivi des demandes" },
+        { "href": "/methode/", "label": "Méthode", "anchor": "méthode" },
+        { "href": "/prestations/ads-local/", "label": "Google Ads", "anchor": "Google Ads local" },
         { "href": "/contact/", "label": "Diagnostic", "anchor": "obtenir un diagnostic" }
       ]
     },
@@ -42,15 +52,15 @@
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking assurance", "anchor": "call tracking assurance" },
-        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing assurance", "anchor": "checklist landing assurance" }
+        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking assurance", "anchor": "suivi des appels" },
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing assurance", "anchor": "landing assurance" }
       ]
     }
   },
   "cta": {
     "enabled": true,
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
     ]
   }

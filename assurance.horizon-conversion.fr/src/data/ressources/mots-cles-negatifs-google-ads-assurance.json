@@ -2,16 +2,16 @@
   "id": "res_ads_negatifs",
   "slug": "mots-cles-negatifs-google-ads-assurance",
   "meta": {
-    "title": "Mots-clés négatifs Ads assurance : filtrer et baisser le CPL | 60/95",
-    "description": "Méthode mots-clés négatifs : filtrer trafic hors cible et réduire le CPL effectif sur Google Ads assurance.",
+    "title": "Mots-clés négatifs Google Ads assurance | Filtrer et baisser le coût par demande (60/95)",
+    "description": "Guide mots-clés négatifs pour assureurs en 60/95 : filtrer les requêtes hors cible, réduire le gaspillage et baisser le coût par demande sur Google Ads.",
     "robots": "index,follow",
     "canonical": "/ressources/mots-cles-negatifs-google-ads-assurance/"
   },
   "hero": {
     "id": "slider",
     "eyebrow": "Ressource (Ads)",
-    "titleHtml": "Mots-clés négatifs :<br />baisser le CPL.",
-    "subtitle": "Filtrer les requêtes hors cible et améliorer la qualité des leads Ads assurance.",
+    "titleHtml": "Mots-clés négatifs :<br />baisser le coût par demande.",
+    "subtitle": "Filtrer les requêtes hors cible et améliorer la qualité des demandes issues de Google Ads assurance.",
     "ctas": [
       { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir Ads local", "href": "/prestations/ads-local/", "icon": "bi-arrow-right", "variant": "secondary" }
@@ -22,20 +22,30 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "À quoi servent les négatifs ?", "a": "À éviter les requêtes hors cible et réduire le gaspillage budget." },
-      { "q": "On les ajoute quand ?", "a": "Dès le départ (liste de base) puis en continu via rapport termes de recherche." }
+      {
+        "q": "À quoi servent les mots-clés négatifs ?",
+        "a": "À empêcher vos annonces d’apparaître sur des recherches hors cible, pour réduire le gaspillage et baisser le coût par demande."
+      },
+      {
+        "q": "On les ajoute quand ?",
+        "a": "Dès le départ avec une liste de base, puis en continu en analysant les termes de recherche."
+      },
+      {
+        "q": "Faut-il les mettre au niveau du compte ou des campagnes ?",
+        "a": "Les négatifs “généraux” au niveau du compte. Les négatifs “produit” ou “offre” plutôt au niveau de la campagne ou du groupe, selon votre structure."
+      }
     ]
   },
-  "contentHtml": "<h2>Objectif</h2><p>Réduire le gaspillage et améliorer la qualité en filtrant les requêtes.</p><h2>Liste de départ</h2><ul><li>Gratuit, emploi, stage</li><li>Définition, avis général</li><li>Résiliation (si hors offre)</li><li>Comparateurs non souhaités</li></ul><h2>Routine</h2><ul><li>Analyse termes de recherche</li><li>Ajout négatifs par thème</li><li>Contrôle zones et extensions</li></ul>",
+  "contentHtml": "<h2>Objectif : éviter le gaspillage et améliorer la qualité des demandes</h2><p>En Google Ads assurance, la différence entre une campagne rentable et une campagne qui “brûle” du budget se joue souvent sur la capacité à <strong>filtrer</strong>. Les mots-clés négatifs empêchent vos annonces d’apparaître sur des requêtes qui ne donneront pas de dossiers : recherche d’emploi, définition, résiliation, sinistre, ou demandes hors offre.</p><p>Résultat attendu : <strong>moins de clics inutiles</strong>, plus de demandes pertinentes, et un <strong>coût par demande</strong> plus stable.</p><h2>Les 3 familles de négatifs (simple)</h2><h3>1) Hors intention “devis”</h3><p>Tout ce qui n’est pas une intention de demande :</p><ul class=\"iconlist\"><li class=\"d-block\">définition</li><li class=\"d-block\">c’est quoi</li><li class=\"d-block\">wikipédia</li><li class=\"d-block\">forum</li><li class=\"d-block\">pdf</li><li class=\"d-block\">cours</li><li class=\"d-block\">exemple</li></ul><h3>2) Hors offre / hors service</h3><p>Si vous ne gérez pas ces sujets, filtrez :</p><ul class=\"iconlist\"><li class=\"d-block\">résiliation</li><li class=\"d-block\">sinistre</li><li class=\"d-block\">réclamation</li><li class=\"d-block\">attestation (si hors objectif)</li><li class=\"d-block\">remboursement</li><li class=\"d-block\">service client</li></ul><p><em>Note :</em> certains termes peuvent être utiles si vous avez une offre dédiée (ex : “résiliation mutuelle” si vous ciblez le changement). Sinon, mettez-les en négatif.</p><h3>3) Hors cible (profil / concurrence / parasitage)</h3><ul class=\"iconlist\"><li class=\"d-block\">gratuit</li><li class=\"d-block\">emploi</li><li class=\"d-block\">stage</li><li class=\"d-block\">alternance</li><li class=\"d-block\">formation</li><li class=\"d-block\">salaire</li><li class=\"d-block\">recrutement</li></ul><p>Et selon votre stratégie :</p><ul class=\"iconlist\"><li class=\"d-block\">comparateur / comparateurs (si vous ne voulez pas de “chasseurs de prix”)</li><li class=\"d-block\">marques non travaillées (si vous ne vendez pas ces produits)</li><li class=\"d-block\">assurance “pas chère” (si vous visez une clientèle qualité plutôt que prix)</li></ul><h2>Liste de départ (prête à l’emploi)</h2><p>À adapter selon vos offres. L’idée est de démarrer propre, puis d’affiner.</p><ul class=\"iconlist\"><li class=\"d-block\">gratuit</li><li class=\"d-block\">emploi</li><li class=\"d-block\">stage</li><li class=\"d-block\">alternance</li><li class=\"d-block\">formation</li><li class=\"d-block\">salaire</li><li class=\"d-block\">recrutement</li><li class=\"d-block\">définition</li><li class=\"d-block\">c’est quoi</li><li class=\"d-block\">wikipédia</li><li class=\"d-block\">forum</li><li class=\"d-block\">pdf</li><li class=\"d-block\">cours</li><li class=\"d-block\">exemple</li><li class=\"d-block\">résiliation (si hors offre)</li><li class=\"d-block\">sinistre (si hors offre)</li><li class=\"d-block\">réclamation (si hors offre)</li><li class=\"d-block\">remboursement (si hors offre)</li><li class=\"d-block\">service client (si hors offre)</li></ul><h2>Routine hebdomadaire (15 minutes)</h2><h3>1) Ouvrir le rapport des termes de recherche</h3><ul class=\"iconlist\"><li class=\"d-block\">Repérer les requêtes hors intention, hors offre, hors zone.</li><li class=\"d-block\">Identifier les thèmes qui reviennent (ex : “emploi”, “résiliation”, “définition”).</li></ul><h3>2) Ajouter des négatifs par thème</h3><ul class=\"iconlist\"><li class=\"d-block\">Ajouter au compte si c’est global (emploi, stage, définition…).</li><li class=\"d-block\">Ajouter au niveau campagne si c’est spécifique (ex : “emprunteur” dans une campagne auto).</li></ul><h3>3) Contrôler zone et paramètres</h3><ul class=\"iconlist\"><li class=\"d-block\">Vérifier que le ciblage géographique correspond à votre zone (60/95).</li><li class=\"d-block\">Vérifier les paramètres de présence (éviter “intérêt” si ça vous élargit trop).</li></ul><h2>Bonnes pratiques (assurance)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Un négatif = une décision</strong> : on filtre ce qui ne donne pas de dossiers.</li><li class=\"d-block\"><strong>Ne pas sur-filtrer</strong> : gardez le volume suffisant pour recevoir des demandes.</li><li class=\"d-block\"><strong>Aligner avec la page</strong> : si la landing est “mutuelle senior”, filtrez “famille”, “TNS” (si hors segment).</li><li class=\"d-block\"><strong>Suivre la qualité</strong> : si vous filtrez trop, le coût peut monter et le volume chuter.</li></ul><h2>À éviter</h2><ul class=\"iconlist\"><li class=\"d-block\">Mettre des négatifs au hasard sans regarder les termes de recherche.</li><li class=\"d-block\">Filtrer des termes “rentables” parce qu’ils ressemblent à du bruit.</li><li class=\"d-block\">Oublier la zone : un mauvais paramètre peut générer des clics hors 60/95.</li></ul><h2>Plan d’action (simple)</h2><ol><li class=\"d-block\">Ajouter la <strong>liste de départ</strong> au niveau compte.</li><li class=\"d-block\">Lancer avec <strong>1 offre d’entrée</strong> + une landing dédiée.</li><li class=\"d-block\">Chaque semaine : analyser les termes de recherche et ajouter des négatifs par thème.</li><li class=\"d-block\">Suivre le <strong>coût par demande</strong> et la <strong>qualité</strong> (éligible / non).</li><li class=\"d-block\">Étendre à une 2e offre uniquement si les indicateurs sont bons.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking" },
-        { "href": "/contact/", "label": "Diagnostic Ads", "anchor": "diagnostic Ads" }
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads local" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "suivi des demandes" },
+        { "href": "/contact/", "label": "Diagnostic Ads", "anchor": "diagnostic Google Ads" }
       ]
     },
     "related": {

@@ -2,16 +2,16 @@
   "id": "res_ads_structure",
   "slug": "structure-google-ads-assurance",
   "meta": {
-    "title": "Google Ads assurance : structure par offre et intention | 60/95",
-    "description": "Structure Google Ads orientée leads : campagnes par offre, exclusions, extensions, messages et landing dédiée pour stabiliser le CPL.",
+    "title": "Google Ads assurance : structure par offre et intention | Coût par demande (60/95)",
+    "description": "Structure Google Ads assurance orientée demandes en 60/95 : 1 campagne par offre d’entrée, groupes par intention, ciblage géographique, exclusions, extensions et page de demande dédiée pour stabiliser le coût par demande.",
     "robots": "index,follow",
     "canonical": "/ressources/structure-google-ads-assurance/"
   },
   "hero": {
     "id": "slider",
     "eyebrow": "Ressource (Ads)",
-    "titleHtml": "Google Ads assurance :<br />structure orientée leads.",
-    "subtitle": "Campagnes par offre, messages, exclusions et landing : piloter CPL et qualité.",
+    "titleHtml": "Google Ads assurance :<br />structure orientée demandes.",
+    "subtitle": "Campagnes par offre, messages, exclusions et page de demande : piloter le coût par demande et la qualité.",
     "ctas": [
       { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir Ads local", "href": "/prestations/ads-local/", "icon": "bi-arrow-right", "variant": "secondary" }
@@ -22,28 +22,38 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Pourquoi structurer par offre ?", "a": "Pour aligner annonce/landing et améliorer conversion et CPL." },
-      { "q": "Faut-il une landing dédiée ?", "a": "Oui : c’est un levier majeur de conversion et de qualité." }
+      {
+        "q": "Pourquoi structurer par offre ?",
+        "a": "Pour aligner recherche, annonce et page de demande. Cet alignement augmente la conversion, améliore la qualité des demandes et aide à stabiliser le coût par demande."
+      },
+      {
+        "q": "Faut-il une page de demande dédiée ?",
+        "a": "Oui. C’est un levier majeur : une page par offre d’entrée clarifie le message, réduit la friction et filtre mieux les demandes hors cible."
+      },
+      {
+        "q": "Combien d’offres lancer au départ ?",
+        "a": "1 à 2 offres d’entrée. Ensuite, vous dupliquez uniquement si la qualité des demandes et le coût par demande sont satisfaisants."
+      }
     ]
   },
-  "contentHtml": "<h2>Principe</h2><p>Structurer par offre d’entrée et intention, pas pour “faire du trafic”.</p><h2>Setup minimal</h2><ul><li>1 campagne = 1 offre d’entrée</li><li>Groupes par intention</li><li>Extensions (appel, accroches)</li><li>Exclusions + géo fin</li></ul><h2>Pilotage</h2><ul><li>KPIs : CPL, conversion, éligibilité</li><li>Décisions : scale/stop/dupliquer</li></ul>",
+  "contentHtml": "<h2>Principe : structurer pour obtenir des demandes, pas pour “faire du trafic”</h2><p>En assurance, une campagne rentable repose sur une règle simple : <strong>aligner</strong> l’intention de recherche, l’annonce et la page de demande. La structure doit permettre de piloter sur du concret : <strong>coût par demande</strong> et <strong>qualité</strong> (éligible / non).</p><h2>Structure minimale recommandée (simple)</h2><h3>1 campagne = 1 offre d’entrée</h3><p>Exemples d’offres d’entrée :</p><ul class=\"iconlist\"><li class=\"d-block\">mutuelle santé senior</li><li class=\"d-block\">assurance emprunteur (délégation)</li><li class=\"d-block\">assurance pro (décennale / RC Pro)</li><li class=\"d-block\">assurance auto / habitation (selon votre priorité)</li></ul><p>Pourquoi ? Parce que vous pouvez :</p><ul class=\"iconlist\"><li class=\"d-block\">écrire des annonces spécifiques,</li><li class=\"d-block\">envoyer vers une page de demande dédiée,</li><li class=\"d-block\">mettre des exclusions propres à l’offre.</li></ul><h3>Groupes par intention (à l’intérieur de la campagne)</h3><p>Objectif : séparer les intentions pour piloter plus finement.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Devis</strong> : “devis mutuelle senior”, “devis décennale”</li><li class=\"d-block\"><strong>Près de moi</strong> : “assurance emprunteur près de moi”</li><li class=\"d-block\"><strong>Local</strong> : “mutuelle Chantilly”, “décennale Senlis”</li><li class=\"d-block\"><strong>Comparatif</strong> (si vous l’acceptez) : “meilleure mutuelle senior”</li></ul><h2>Setup minimal (checklist)</h2><h3>Ciblage géographique (60/95)</h3><ul class=\"iconlist\"><li class=\"d-block\">Limiter à votre zone (Sud Oise / Nord Val-d’Oise).</li><li class=\"d-block\">Paramètre conseillé : <strong>présence</strong> (personnes dans la zone), pas “intérêt” (qui élargit trop).</li><li class=\"d-block\">Exclure les zones non servies (si besoin).</li></ul><h3>Exclusions (dès le départ)</h3><ul class=\"iconlist\"><li class=\"d-block\">Ajouter une liste de mots-clés négatifs “génériques” (emploi, stage, définition, etc.).</li><li class=\"d-block\">Ajouter des négatifs “offre” (ex : “emprunteur” dans une campagne auto).</li></ul><h3>Extensions (pour augmenter la demande)</h3><ul class=\"iconlist\"><li class=\"d-block\"><strong>Extension d’appel</strong> (si vous prenez des appels).</li><li class=\"d-block\"><strong>Accroches</strong> (ex : “réponse sous 24–48h”, “zone 60/95”, “RDV rapide”).</li><li class=\"d-block\"><strong>Liens annexes</strong> vers pages utiles (preuves, méthode, contact).</li></ul><h2>Message : 3 choses à répéter partout</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Offre</strong> : une seule offre d’entrée par campagne.</li><li class=\"d-block\"><strong>Zone</strong> : 60/95 clairement.</li><li class=\"d-block\"><strong>Action</strong> : demande de devis / rendez-vous (appel ou formulaire).</li></ul><h2>Page de demande dédiée (indispensable)</h2><p>Sans page dédiée, vous payez des clics qui ne se transforment pas. Une page dédiée doit contenir :</p><ul class=\"iconlist\"><li class=\"d-block\">Promesse claire (demande de devis / RDV).</li><li class=\"d-block\">Preuves (avis, mini-cas, process).</li><li class=\"d-block\">Réponses aux objections (prix, délai, hors zone).</li><li class=\"d-block\">Formulaire de pré-qualification (zone + 1–2 champs utiles).</li><li class=\"d-block\">Appel à l’action visible (appel / formulaire).</li></ul><h2>Pilotage : les indicateurs à suivre</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Coût par demande</strong> (pas juste le coût par clic).</li><li class=\"d-block\"><strong>Taux de transformation de la page</strong> (formulaire + appels).</li><li class=\"d-block\"><strong>Part de demandes éligibles</strong> (qualification simple).</li><li class=\"d-block\"><strong>Répartition par offre</strong> (quelle offre apporte des dossiers).</li></ul><h2>Décisions : renforcer, corriger, dupliquer</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Renforcer</strong> : ce qui apporte des demandes éligibles à un coût acceptable.</li><li class=\"d-block\"><strong>Corriger</strong> : annonces, exclusions, zone, page de demande.</li><li class=\"d-block\"><strong>Dupliquer</strong> : seulement quand l’offre d’entrée est stable (qualité + coût).</li></ul><h2>À éviter</h2><ul class=\"iconlist\"><li class=\"d-block\">Une seule campagne “toutes assurances” : message flou, demandes hors cible, pilotage difficile.</li><li class=\"d-block\">Lancer trop d’offres dès le départ : budget dispersé et apprentissage lent.</li><li class=\"d-block\">Oublier les exclusions : clics inutiles et coût par demande instable.</li><li class=\"d-block\">Envoyer vers l’accueil du site : conversion faible.</li></ul><h2>Plan d’action (simple)</h2><ol><li class=\"d-block\">Choisir <strong>1 offre d’entrée</strong> prioritaire.</li><li class=\"d-block\">Créer <strong>1 campagne</strong> dédiée à cette offre.</li><li class=\"d-block\">Créer <strong>1 page de demande</strong> dédiée (preuves, objections, pré-qualification).</li><li class=\"d-block\">Ajouter une liste de <strong>négatifs</strong> de départ + contrôler la zone.</li><li class=\"d-block\">Chaque semaine : termes de recherche → négatifs → ajustements → suivi qualité.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking & attribution" },
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
-        { "href": "/contact/", "label": "Lancer Ads", "anchor": "lancer Ads" }
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads local" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "suivi des demandes" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages" },
+        { "href": "/contact/", "label": "Lancer Ads", "anchor": "lancer Google Ads" }
       ]
     },
     "related": {
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/mots-cles-negatifs-google-ads-assurance/", "label": "Mots-clés négatifs", "anchor": "mots-clés négatifs Ads assurance" },
-        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance", "anchor": "UTM" }
+        { "href": "/ressources/mots-cles-negatifs-google-ads-assurance/", "label": "Mots-clés négatifs", "anchor": "mots-clés négatifs Google Ads assurance" },
+        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance", "anchor": "convention de marquage" }
       ]
     }
   },

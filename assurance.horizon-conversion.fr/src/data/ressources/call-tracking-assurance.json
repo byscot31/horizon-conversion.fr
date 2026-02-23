@@ -2,19 +2,19 @@
   "id": "res_call_tracking",
   "slug": "call-tracking-assurance",
   "meta": {
-    "title": "Call tracking assurance : mesurer les appels et piloter le CPL | 60/95",
-    "description": "Guide call tracking : mesurer les appels, attribuer les sources, réduire le bruit et piloter CPL et qualité des leads.",
+    "title": "Call tracking assurance : mesurer les appels et piloter le coût par demande | 60/95",
+    "description": "Guide call tracking pour assureurs en 60/95 : mesurer les appels, relier les sources, réduire le bruit et piloter le coût par demande et la qualité des demandes.",
     "robots": "index,follow",
     "canonical": "/ressources/call-tracking-assurance/"
   },
   "hero": {
     "id": "slider",
-    "eyebrow": "Ressource (Tracking)",
+    "eyebrow": "Ressource (Suivi des demandes)",
     "titleHtml": "Call tracking assurance :<br />mesurer les appels.",
-    "subtitle": "Attribuer les appels aux campagnes et piloter CPL, conversion et leads éligibles.",
+    "subtitle": "Relier les appels aux sources et piloter le coût par demande, la conversion et la qualité des demandes.",
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
-      { "label": "Voir Tracking & attribution", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir suivi des demandes", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
   },
@@ -22,18 +22,32 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Quand le call tracking est-il utile ?", "a": "Quand une part significative des leads arrive par téléphone ou quand Ads/SEO génèrent des appels." },
-      { "q": "Peut-on mesurer la qualité des appels ?", "a": "Oui via qualification et catégorisation (éligible/non, motif, offre, zone) dans un suivi simple." }
+      {
+        "q": "Quand le call tracking est-il utile ?",
+        "a": "Quand une part significative des demandes arrive par téléphone, ou quand vos annonces / votre visibilité locale génèrent des appels et que vous voulez savoir ce qui apporte des dossiers."
+      },
+      {
+        "q": "Peut-on mesurer la qualité des appels ?",
+        "a": "Oui, avec une qualification simple après l’appel : éligible / non éligible, motif, offre, zone et prochain pas (rendez-vous, devis, à relancer)."
+      },
+      {
+        "q": "Faut-il enregistrer les appels ?",
+        "a": "Pas forcément. Pour piloter, une qualification simple (statut + tags) suffit souvent. L’enregistrement peut se discuter au cas par cas, avec prudence sur la conformité."
+      },
+      {
+        "q": "Le call tracking remplace-t-il le suivi des formulaires ?",
+        "a": "Non. L’objectif est de consolider appels et formulaires, pour lire la performance réelle par source, offre et zone."
+      }
     ]
   },
-  "contentHtml": "<h2>Objectif</h2><p>Attribuer les appels à une source/campagne et piloter au réel.</p><h2>Setup minimal</h2><ul><li>Numéro tracké (campagne / canal)</li><li>Consolidation appels + formulaires</li><li>Tag “éligible/non” après appel</li></ul><h2>À éviter</h2><ul><li>Pas de qualification → données inutiles</li><li>Pas de convention UTM → attribution partielle</li><li>Pas de process rappel → perte de leads</li></ul>",
+  "contentHtml": "<h2>Objectif : piloter sur des demandes réelles</h2><p>En assurance, une partie importante des demandes arrive par téléphone. Sans call tracking, vous voyez des clics et des visites… mais vous ne savez pas <strong>ce qui déclenche réellement des appels</strong>. Le call tracking sert à <strong>relier un appel à une source</strong> (annonces, référencement, profil Google), puis à piloter le <strong>coût par demande</strong> et la <strong>qualité</strong> (dossier éligible ou non).</p><h2>Quand c’est indispensable</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Vous recevez beaucoup d’appels</strong> (ou vous voulez en recevoir plus).</li><li class=\"d-block\">Vos annonces ou votre visibilité locale génèrent des appels, mais vous ne savez pas <strong>lesquels</strong>.</li><li class=\"d-block\">Vous avez du <strong>bruit</strong> : appels hors zone, hors offre, demandes non pertinentes.</li><li class=\"d-block\">Vous cherchez à stabiliser le <strong>coût par demande</strong> et augmenter la part de demandes éligibles.</li></ul><h2>Setup minimal (simple et efficace)</h2><p>Le but n’est pas de complexifier : c’est d’avoir une attribution lisible et des décisions simples.</p><h3>1) Un numéro suivi par canal</h3><ul class=\"iconlist\"><li class=\"d-block\">Un numéro dédié pour <strong>les annonces</strong> (si vous en faites).</li><li class=\"d-block\">Un numéro pour <strong>le site</strong> (ou le référencement).</li><li class=\"d-block\">Option : un numéro pour <strong>le profil Google</strong> si besoin.</li></ul><h3>2) Consolidation appels + formulaires</h3><p>Vous devez lire au même endroit :</p><ul class=\"iconlist\"><li class=\"d-block\">les <strong>appels</strong> (date, durée, source quand possible),</li><li class=\"d-block\">les <strong>formulaires</strong>,</li><li class=\"d-block\">et un <strong>statut</strong> de qualification.</li></ul><h3>3) Qualification en 15 secondes après l’appel</h3><p>Sans qualification, les données ne servent pas. L’objectif est un tri simple :</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Éligible</strong> / <strong>non éligible</strong>,</li><li class=\"d-block\"><strong>Motif</strong> (auto, habitation, santé, pro, emprunteur…),</li><li class=\"d-block\"><strong>Zone</strong> (OK / hors zone),</li><li class=\"d-block\"><strong>Suite</strong> : RDV pris / devis envoyé / à relancer.</li></ul><h2>Ce que vous pouvez piloter (concrètement)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Coût par demande</strong> : combien vous coûte un appel exploitable.</li><li class=\"d-block\"><strong>Part de demandes éligibles</strong> : le vrai indicateur de qualité.</li><li class=\"d-block\"><strong>Performance par offre</strong> : quelles offres amènent des dossiers.</li><li class=\"d-block\"><strong>Performance par zone</strong> : où vous avez trop de hors zone.</li><li class=\"d-block\"><strong>Décisions</strong> : renforcer, corriger ou arrêter une source.</li></ul><h2>À éviter (ce qui rend le call tracking inutile)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Pas de qualification</strong> : vous accumulez des appels sans savoir si c’est bon.</li><li class=\"d-block\"><strong>Pas de convention de marquage</strong> : attribution partielle et confusion.</li><li class=\"d-block\"><strong>Pas de consolidation</strong> : appels d’un côté, formulaires de l’autre, impossible de décider.</li><li class=\"d-block\"><strong>Pas de process de rappel</strong> : même avec le tracking, vous perdez des demandes.</li></ul><h2>Bonnes pratiques simples (assurance)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Rappel rapide</strong> : viser au plus vite (idéalement &lt; 10 min) quand c’est une demande chaude.</li><li class=\"d-block\"><strong>Messages clairs</strong> sur la page : zone, offres, conditions → moins d’appels hors cible.</li><li class=\"d-block\"><strong>Pré-qualification</strong> : une ou deux questions clés avant l’appel (si possible).</li><li class=\"d-block\"><strong>Routine hebdo</strong> : 15 minutes pour regarder les appels éligibles par source et décider.</li></ul><h2>Plan d’action (60/95)</h2><ol><li class=\"d-block\">Choisir vos <strong>1–2 offres d’entrée</strong> (celles qui vous rapportent le plus).</li><li class=\"d-block\">Créer ou optimiser une <strong>page de demande</strong> claire (preuves, objections, FAQ).</li><li class=\"d-block\">Mettre un <strong>numéro suivi</strong> pour les annonces et/ou le site.</li><li class=\"d-block\">Ajouter une <strong>qualification simple</strong> après appel (éligible/non, motif, zone).</li><li class=\"d-block\">Lire chaque semaine : <strong>appels éligibles</strong> par source → renforcer / corriger / arrêter.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
-        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Ads local" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "suivi des demandes" },
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads local" },
         { "href": "/preuves/", "label": "Preuves", "anchor": "preuves" },
         { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
       ]
@@ -42,15 +56,15 @@
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/utm-assurance-convention/", "label": "UTM assurance", "anchor": "UTM assurance" },
-        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel <10 min", "anchor": "process rappel leads" }
+        { "href": "/ressources/utm-assurance-convention/", "label": "Convention de marquage", "anchor": "marquage des sources" },
+        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel <10 min", "anchor": "rappel rapide" }
       ]
     }
   },
   "cta": {
     "enabled": true,
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
     ]
   }
 }

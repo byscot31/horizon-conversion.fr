@@ -2,65 +2,86 @@
   "id": "metier_assurance_vie_patrimoine",
   "slug": "assurance-vie-patrimoine",
   "label": "Assurance vie & patrimoine",
-  "cardTeaser": "Convertir en RDV : preuve + pédagogie + CTA RDV, avec suivi et attribution.",
+  "cardTeaser": "Convertir en rendez-vous : preuves, pédagogie et prise de RDV simple, avec suivi des appels et formulaires en 60/95.",
 
   "offres": ["assurance vie", "PER", "épargne", "prévoyance", "transmission", "optimisation fiscale"],
 
   "meta": {
-    "title": "Leads assurance vie & patrimoine | Sud Oise & Nord Val-d’Oise",
-    "description": "Générez des prospects qualifiés en assurance vie/patrimoine : contenus preuve, pages qui convertissent, acquisition locale et tracking.",
+    "title": "Leads assurance vie & patrimoine en 60/95 | Rendez-vous qualifiés",
+    "description": "Obtenez des prospects qualifiés en assurance vie et patrimoine en 60/95 (PER, assurance vie). Page de prise de RDV claire, contenus de réassurance, acquisition locale et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/assurance-vie-patrimoine/"
   },
 
   "hero": {
-    "h1": "Attirez des prospects qualifiés en assurance vie & patrimoine",
-    "sub": "Méthode locale (60/95) : preuve + contenu + landing CRO + acquisition + tracking.",
+    "h1": "Assurance vie & patrimoine : obtenir des rendez-vous qualifiés en 60/95",
+    "sub": "Méthode locale (Sud Oise / Nord Val-d’Oise) : preuves, pédagogie, page de prise de RDV claire, acquisition locale et suivi des appels et formulaires.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir les preuves", "href": "/preuves/" }
   },
 
   "positionnement": {
-    "promesse": "Plus de RDV qualifiés, avec un discours qui rassure et un tracking clair.",
-    "angle": "Preuve, pédagogie, objections, conversion et pilotage sur RDV."
+    "promesse": "Plus de rendez-vous qualifiés, avec un discours qui rassure et un suivi clair des demandes.",
+    "angle": "Preuves, pédagogie, réponses aux objections, prise de rendez-vous simple et pilotage sur rendez-vous qualifiés."
   },
 
   "icp": {
     "taille": ["cabinet", "agence", "conseiller indépendant"],
-    "maturite": ["site vitrine", "réseau existant", "SEO faible"],
+    "maturite": ["site vitrine", "réseau existant", "référencement faible"],
     "offresPrioritaires": ["assurance vie", "PER"]
   },
 
   "intentionsSEO": [
     { "cluster": "commercial", "queries": ["assurance vie Chantilly conseil", "PER Senlis", "conseil épargne Creil", "assurance vie Persan"] },
-    { "cluster": "informationnel", "queries": ["PER ou assurance vie", "meilleur PER 2026", "assurance vie fiscalité", "PER déduction impôts"] },
+    { "cluster": "informationnel", "queries": ["PER ou assurance vie", "assurance vie fiscalité", "PER déduction impôts", "assurance vie succession"] },
     { "cluster": "local pack", "queries": ["conseiller patrimoine près de moi", "assurance vie autour de Creil", "PER ouvert Senlis"] }
   ],
 
   "objections": [
-    { "id": "obj_01", "texte": "Les gens ne demandent pas de devis, ils veulent être rassurés.", "reponse": "On met en avant preuve, pédagogie, objections et un CTA RDV, pas un formulaire agressif." },
-    { "id": "obj_02", "texte": "Difficile à mesurer.", "reponse": "Tracking appels + formulaires + sources, et suivi RDV (qualifié / non qualifié)." },
-    { "id": "obj_03", "texte": "Le SEO prend trop de temps.", "reponse": "On peut démarrer par Ads + landing et construire l’actif SEO en parallèle." }
+    {
+      "id": "obj_01",
+      "texte": "Les gens ne demandent pas de devis, ils veulent être rassurés.",
+      "reponse": "On met en avant les preuves (approche, cas, avis si disponibles), des explications simples, des réponses aux objections, et un appel à l’action orienté rendez-vous (pas un formulaire agressif)."
+    },
+    {
+      "id": "obj_02",
+      "texte": "Difficile à mesurer.",
+      "reponse": "On suit les appels et formulaires, et on qualifie les rendez-vous (qualifié / non qualifié). Objectif : savoir ce qui apporte réellement des rendez-vous utiles."
+    },
+    {
+      "id": "obj_03",
+      "texte": "Le référencement prend trop de temps.",
+      "reponse": "On peut démarrer par les annonces pour générer des rendez-vous plus vite, tout en construisant une base de visibilité locale durable en parallèle."
+    }
   ],
 
   "kpis": [
-    { "name": "RDV qualifiés", "target": "augmentation via preuve + process" },
-    { "name": "Taux de conversion RDV", "target": "amélioration via CRO" },
-    { "name": "Coût par RDV", "target": "stabilisation puis baisse" },
-    { "name": "Attribution", "target": "appels + formulaires trackés" }
+    { "name": "Rendez-vous qualifiés", "target": "augmentation via preuves + process" },
+    { "name": "Taux de conversion en rendez-vous", "target": "amélioration via page plus claire" },
+    { "name": "Coût par rendez-vous", "target": "stabilisation puis baisse" },
+    { "name": "Suivi des sources", "target": "appels + formulaires suivis" }
   ],
 
   "livrables": [
-    "Page RDV (preuve/objections/FAQ)",
-    "Contenus preuve (cas, approche, méthode)",
-    "Tracking complet et reporting",
-    "Acquisition (SEO/Ads) pilotée RDV"
+    "Page de prise de rendez-vous (preuves / objections / FAQ)",
+    "Contenus de réassurance (approche, méthode, exemples)",
+    "Suivi des appels et formulaires + tableau de suivi",
+    "Acquisition locale (référencement / annonces) pilotée sur les rendez-vous"
   ],
 
   "faq": [
-    { "q": "Comment convertir en RDV ?", "a": "Preuve + objections + CTA RDV, friction réduite, et process de rappel/confirmation." },
-    { "q": "SEO ou Ads ?", "a": "Ads pour accélérer, SEO pour stabiliser et réduire le coût moyen dans le temps." },
-    { "q": "Peut-on mesurer les appels ?", "a": "Oui : call tracking et attribution via sources/campagnes quand possible." }
+    {
+      "q": "Comment convertir en rendez-vous ?",
+      "a": "Avec des preuves, des réponses aux objections, un appel à l’action orienté rendez-vous, peu de friction, puis un process de confirmation et relance pour limiter les absences."
+    },
+    {
+      "q": "Référencement ou annonces ?",
+      "a": "Les annonces accélèrent au départ. Le référencement stabilise et réduit le coût moyen dans le temps. On choisit selon le délai et le budget."
+    },
+    {
+      "q": "Peut-on mesurer les appels ?",
+      "a": "Oui. On suit les appels et les formulaires, et on relie les demandes aux sources quand c’est possible."
+    }
   ],
 
   "localModules": {
@@ -90,17 +111,17 @@
       "variant": "darkSplit",
       "media": {
         "href": "/preuves/",
-        "img": { "src": "/assets/images/section-1.jpg", "alt": "Patrimoine : preuve, pédagogie et conversion RDV" },
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance vie & patrimoine : preuves, pédagogie et prise de rendez-vous" },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Patrimoine",
-        "title": "Preuve et pédagogie : convertir en RDV.",
-        "text": "On construit une page RDV qui rassure (preuve/objections/FAQ), on active l’acquisition locale et on pilote sur coût par RDV et qualité.",
+        "eyebrow": "Assurance vie & patrimoine (60/95)",
+        "title": "Preuves et pédagogie : transformer l’intérêt en rendez-vous.",
+        "text": "On construit une page de prise de rendez-vous qui rassure (preuves, objections, FAQ), on active l’acquisition locale, puis on pilote sur rendez-vous qualifiés et coût par rendez-vous grâce au suivi des appels et formulaires.",
         "bullets": [
-          "Preuves et contenus pour rassurer.",
-          "CTA RDV + friction réduite.",
-          "Tracking et pilotage sur RDV qualifiés."
+          "Preuves et contenus de réassurance pour instaurer la confiance.",
+          "Prise de rendez-vous simple (friction réduite).",
+          "Suivi des appels et formulaires pour piloter sur rendez-vous qualifiés."
         ]
       },
       "ctas": [
@@ -113,18 +134,18 @@
       "id": "problemes",
       "header": {
         "badge": "Votre situation",
-        "title": "Problèmes fréquents des agences d’assurance locales",
-        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+        "title": "Problèmes fréquents en assurance vie & patrimoine (local)",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir plus de rendez-vous qualifiés."
       },
       "items": [
-        "Dépendance au réseau / recommandations : flux irrégulier.",
-        "Saisonnalité (auto/habitation) : variations fortes du volume.",
-        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
-        "Appels non qualifiés / hors zone : temps perdu en agence.",
-        "Attribution floue : impossible de savoir ce qui génère des RDV."
+        "Le prospect a besoin d’être rassuré : manque de preuves et de pédagogie sur la page.",
+        "Beaucoup de visites, peu de prises de rendez-vous : appel à l’action trop faible.",
+        "Difficulté à mesurer : appels et demandes non suivis.",
+        "Rendez-vous non honorés : absence de confirmation et relances.",
+        "Concurrence locale : besoin d’un positionnement clair (PER, assurance vie, transmission…)."
       ],
       "ctas": [
-        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Obtenir un plan rendez-vous (PER / assurance vie)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
       ]
     },
@@ -134,35 +155,35 @@
       "header": {
         "badge": "Parcours",
         "title": "Diagnostic → Setup → Pilotage",
-        "subtitle": "Un déroulé simple, orienté métier et ROI."
+        "subtitle": "Un déroulé simple, orienté prise de rendez-vous."
       },
       "steps": [
         {
           "title": "Diagnostic (J+7)",
-          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "text": "On choisit l’offre d’entrée (PER / assurance vie), la zone 60/95, et la structure de page orientée rendez-vous.",
           "bullets": [
-            "Plan 30/60/90 jours (agence)",
-            "Structure landing + objections/FAQ",
-            "Recommandation SEO/Ads + priorités"
+            "Plan 30/60/90 jours (rendez-vous)",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : annonces locales / référencement local"
           ],
           "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
         },
         {
           "title": "Setup (lancement)",
-          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "text": "On met en place la page de rendez-vous et le suivi des demandes, puis on lance l’acquisition locale.",
           "bullets": [
-            "Landing CRO + formulaire pré-qualifiant",
-            "Call tracking + UTMs + events",
-            "Ads local ou SEO local selon priorité"
+            "Page rendez-vous + messages de réassurance",
+            "Suivi des appels et formulaires",
+            "Activation du canal prioritaire"
           ]
         },
         {
-          "title": "Pilotage (itérations)",
-          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore le coût par rendez-vous et la qualité, en s’appuyant sur les rendez-vous réellement obtenus.",
           "bullets": [
-            "Dashboard leads (source/campagne/offre)",
-            "Optimisation mots-clés / exclusions",
-            "Tests CRO (preuve, CTA, friction)"
+            "Suivi par source et par offre (PER / assurance vie…)",
+            "Améliorations : preuves, clarté, prise de rendez-vous",
+            "Process : confirmation, relances, réduction des absences"
           ],
           "cta": { "label": "Voir les preuves", "href": "/preuves/" }
         }
@@ -177,10 +198,10 @@
         "subtitle": "Projection : ce qu’on change et ce que ça débloque."
       },
       "item": {
-        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
-        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
-        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
-        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "title": "Patrimoine : augmenter les rendez-vous qualifiés",
+        "context": "Visites sur le site, mais peu de prises de rendez-vous ; manque de preuves et de suivi.",
+        "action": "Page rendez-vous plus claire + contenus de réassurance + suivi des demandes + ajustement des messages.",
+        "result": "Hausse des prises de rendez-vous, meilleure qualité, décisions basées sur les sources.",
         "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
       }
     },
@@ -188,7 +209,11 @@
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
-      "content": { "eyebrow": "Prestations", "title": "Les leviers adaptés à l’assurance vie & patrimoine." },
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Les leviers adaptés à l’assurance vie & patrimoine.",
+        "text": "On renforce la confiance : contenus de réassurance, page de rendez-vous, acquisition locale et suivi des demandes."
+      },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["contenus-preuves", "cro", "tracking-attribution", "seo-local"] }
@@ -199,8 +224,8 @@
       "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Plan RDV : preuve, conversion, acquisition, tracking.",
-        "text": "On définit l’offre d’entrée (PER/AV), la page RDV, le tracking, puis le canal prioritaire."
+        "title": "Plan rendez-vous : preuves, conversion, acquisition, suivi.",
+        "text": "On définit l’offre d’entrée (PER / assurance vie), la page de rendez-vous, le suivi des appels et formulaires, puis le canal prioritaire."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -213,14 +238,14 @@
       "linkMode": "cross",
       "content": {
         "eyebrow": "Process",
-        "title": "Confirmation RDV et suivi : moins d’absences.",
-        "text": "Scripts, confirmation, relances, et option CRM/workflows pour industrialiser le suivi des RDV."
+        "title": "Confirmation de rendez-vous et suivi : moins d’absences.",
+        "text": "Scripts, confirmation, relances et suivi des sources. Option : organisation plus poussée si vous souhaitez industrialiser le suivi des rendez-vous."
       },
       "ctas": [
         { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow de suivi RDV et reporting" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Suivi des rendez-vous : confirmation, relances et reporting" } }
     },
 
     "faqToggles": {
@@ -229,8 +254,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Chiffrage basé sur la page RDV et le canal prioritaire.",
-        "text": "On chiffre sur une offre d’entrée (PER/AV), une page RDV CRO et du tracking, puis on optimise.",
+        "title": "Chiffrage basé sur la page rendez-vous et le canal prioritaire.",
+        "text": "On chiffre sur une offre d’entrée (PER / assurance vie), une page de prise de rendez-vous, le suivi des appels et formulaires, puis on optimise selon la qualité des rendez-vous.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -239,8 +264,8 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides pour convertir en RDV (preuve + pédagogie)",
-        "subtitle": "Objections, contenus et process : augmenter la confiance et la prise de RDV."
+        "title": "Guides pour convertir en rendez-vous (preuves + pédagogie)",
+        "subtitle": "Objections, contenus et process : augmenter la confiance et la prise de rendez-vous."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

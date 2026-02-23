@@ -2,8 +2,8 @@
   "id": "res_process_rappel",
   "slug": "process-rappel-leads-assurance",
   "meta": {
-    "title": "Process rappel leads assurance : rappel <10 min, scripts, relances | 60/95",
-    "description": "Process de rappel : scripts d’appel, cadence de relance, suivi RDV/devis/signé pour réduire la perte et augmenter le taux RDV.",
+    "title": "Process rappel leads assurance | Rappel <10 min, scripts, relances (60/95)",
+    "description": "Process de rappel pour assureurs en 60/95 : rappel rapide (<10 min), scripts d’appel, cadence de relance et suivi RDV/devis/signé pour réduire la perte et augmenter le taux de rendez-vous.",
     "robots": "index,follow",
     "canonical": "/ressources/process-rappel-leads-assurance/"
   },
@@ -11,10 +11,10 @@
     "id": "slider",
     "eyebrow": "Ressource (Process)",
     "titleHtml": "Process rappel leads :<br />moins de perte.",
-    "subtitle": "Rappel <10 min, scripts et relances : transformer plus de leads en RDV/devis.",
+    "subtitle": "Rappel <10 min, scripts et relances : transformer plus de demandes en rendez-vous et devis.",
     "ctas": [
-      { "label": "Automatiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
-      { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
+      { "label": "Organiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Voir suivi & relances", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
   },
@@ -22,27 +22,37 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Pourquoi <10 min est important ?", "a": "Parce que la joignabilité chute vite. Rappeler tôt augmente contact et RDV." },
-      { "q": "Que suivre ?", "a": "Délai de rappel, taux contact, taux RDV, taux devis, taux signé, et source du lead." }
+      {
+        "q": "Pourquoi <10 min est important ?",
+        "a": "Parce que la joignabilité chute vite. Rappeler tôt augmente le taux de contact et la prise de rendez-vous."
+      },
+      {
+        "q": "Que faut-il suivre ?",
+        "a": "Délai de rappel, taux de contact, taux de rendez-vous, taux de devis, taux de signé, et source de la demande."
+      },
+      {
+        "q": "Combien de relances faire ?",
+        "a": "En général 3 à 5 tentatives sur quelques jours, avec une alternance appel + message court, suffit pour capter la majorité des réponses."
+      }
     ]
   },
-  "contentHtml": "<h2>Objectif</h2><p>Rappeler vite, qualifier, relancer, et suivre jusqu’au RDV/devis/signé.</p><h2>Cadence recommandée</h2><ul><li>0–10 min : appel 1</li><li>J0 : appel 2 + SMS</li><li>J1 : appel 3</li><li>J3 : relance</li></ul><h2>Scripts</h2><ul><li>Motif + offre + zone</li><li>Qualification (critères simples)</li><li>Prochaine étape (RDV/devis)</li></ul>",
+  "contentHtml": "<h2>Objectif : rappeler vite, qualifier, relancer, puis suivre jusqu’au rendez-vous</h2><p>Le plus gros “gaspillage” en génération de demandes vient rarement du canal. Il vient du traitement : rappel trop tardif, absence de relance, qualification floue. Un process simple de rappel permet de transformer plus de demandes en <strong>rendez-vous</strong>, puis en <strong>devis</strong> et <strong>dossiers signés</strong>.</p><h2>Pourquoi le rappel <10 min change tout</h2><p>Plus vous rappelez vite, plus vous joignez. En assurance, la demande est souvent comparative : si vous rappelez tard, le prospect a déjà parlé à 2 ou 3 acteurs. Viser un rappel <strong>au plus vite</strong> (idéalement &lt; 10 min quand c’est possible) augmente :</p><ul class=\"iconlist\"><li class=\"d-block\">le <strong>taux de contact</strong>,</li><li class=\"d-block\">le <strong>taux de rendez-vous</strong>,</li><li class=\"d-block\">et la <strong>qualité perçue</strong> (réactivité).</li></ul><h2>Pré-requis : une qualification simple</h2><p>Le but n’est pas de faire un dossier complet au téléphone. Le but est de trier vite :</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Éligible</strong> (à traiter maintenant),</li><li class=\"d-block\"><strong>À relancer</strong> (pas joint / hésite / à recontacter),</li><li class=\"d-block\"><strong>Hors cible</strong> (hors zone, hors offre, profil non traité).</li></ul><p>Ajoutez ensuite 2 tags : <strong>offre</strong> (auto/santé/pro/emprunteur…) et <strong>zone</strong> (OK / hors zone).</p><h2>Cadence recommandée (simple)</h2><p>Cette cadence marche bien dans la plupart des agences et cabinets. Adaptez selon vos horaires.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>0–10 min</strong> : Appel 1 (prioritaire)</li><li class=\"d-block\"><strong>J0 (plus tard)</strong> : Appel 2 + message court (si pas de réponse)</li><li class=\"d-block\"><strong>J1</strong> : Appel 3</li><li class=\"d-block\"><strong>J3</strong> : Relance (appel ou message)</li><li class=\"d-block\"><strong>J7</strong> : Dernière relance (option selon valeur du dossier)</li></ul><p><em>Conseil :</em> alternez un appel et un message court. Le message sert à “réchauffer” sans harceler.</p><h2>Message court (exemples)</h2><h3>Après Appel 1 (pas de réponse)</h3><p>“Bonjour, c’est [Prénom] de [Agence/Cabinet]. J’ai bien reçu votre demande pour [offre]. Je peux vous rappeler quand ?”</p><h3>Après Appel 2</h3><p>“Je suis disponible aujourd’hui entre [créneau 1] et [créneau 2]. Dites-moi ce qui vous arrange.”</p><h3>Confirmation RDV</h3><p>“RDV confirmé : [jour/heure]. Si besoin de décaler, répondez à ce message.”</p><h2>Script d’appel (2 minutes)</h2><p>L’objectif : cadrer l’offre, vérifier la zone, qualifier, puis décider de la prochaine étape.</p><ol><li class=\"d-block\"><strong>Rappel du motif</strong> : “Vous avez demandé une info/un devis pour [offre].”</li><li class=\"d-block\"><strong>Zone</strong> : “Vous êtes sur [commune] ?”</li><li class=\"d-block\"><strong>Besoin / urgence</strong> : “C’est pour quand ?”</li><li class=\"d-block\"><strong>1–2 questions utiles</strong> selon l’offre (ex : emprunteur : montant/délai ; pro : activité).</li><li class=\"d-block\"><strong>Prochaine étape</strong> : RDV / devis / rappel planifié.</li></ol><h2>Suivi (ce qu’il faut mesurer)</h2><p>Sans mesure, vous ne savez pas si le process est appliqué et efficace.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Délai de rappel</strong> : médian si possible.</li><li class=\"d-block\"><strong>Taux de contact</strong> : contacté / total.</li><li class=\"d-block\"><strong>Taux de rendez-vous</strong> : RDV / contactés.</li><li class=\"d-block\"><strong>Taux de devis</strong> : devis / RDV.</li><li class=\"d-block\"><strong>Taux de signé</strong> : signé / devis.</li><li class=\"d-block\"><strong>Source</strong> : d’où vient la demande (quand c’est possible).</li></ul><h2>À éviter</h2><ul class=\"iconlist\"><li class=\"d-block\">Un seul appel puis “on verra plus tard”.</li><li class=\"d-block\">Pas de message court : vous perdez des prospects joignables.</li><li class=\"d-block\">Qualification trop longue : vous perdez du temps et de l’attention.</li><li class=\"d-block\">Pas de confirmation de RDV : plus d’absences.</li></ul><h2>Plan d’action (immédiat)</h2><ol><li class=\"d-block\">Définir une règle simple : “toute demande = rappel au plus vite”.</li><li class=\"d-block\">Mettre 3 statuts : éligible / à relancer / hors cible.</li><li class=\"d-block\">Créer 3 messages (pas de réponse / proposition de créneau / confirmation RDV).</li><li class=\"d-block\">Appliquer la cadence 0–10 min / J0 / J1 / J3.</li><li class=\"d-block\">Suivre chaque semaine : délai de rappel + taux contact + taux RDV.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "CRM & workflows" },
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking & attribution" },
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO" },
-        { "href": "/contact/", "label": "Automatiser le suivi", "anchor": "automatiser le suivi" }
+        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "suivi et relances" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "suivi des demandes" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages" },
+        { "href": "/contact/", "label": "Organiser le suivi", "anchor": "organiser le suivi" }
       ]
     },
     "related": {
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking", "anchor": "call tracking" },
+        { "href": "/ressources/call-tracking-assurance/", "label": "Call tracking", "anchor": "suivi des appels" },
         { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "pré-qualification" }
       ]
     }
@@ -50,7 +60,7 @@
   "cta": {
     "enabled": true,
     "ctas": [
-      { "label": "Automatiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
+      { "label": "Organiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" }
     ]
   }
 }

@@ -2,65 +2,95 @@
   "id": "metier_assurance_pro",
   "slug": "assurance-pro",
   "label": "Assurance pro",
-  "cardTeaser": "Décennale/RC Pro : ciblage niche + formulaire qualifiant pour obtenir des demandes pro éligibles.",
+  "cardTeaser": "Décennale / RC Pro : ciblage par activité + formulaire qualifiant pour obtenir des demandes pro éligibles en 60/95.",
 
   "offres": ["RC pro", "multirisque pro", "décennale", "flotte", "cyber", "prévoyance dirigeant"],
 
   "meta": {
-    "title": "Leads assurance pro (RC Pro, décennale…) | Sud Oise & Nord Val-d’Oise",
-    "description": "Générez des leads assurance pro : intention transactionnelle locale, landing CRO, Ads/SEO, tracking appels/formulaires et qualification.",
+    "title": "Leads assurance pro en 60/95 | RC Pro, décennale, multirisque",
+    "description": "Obtenez des demandes de devis en assurance pro en 60/95 (RC Pro, décennale, multirisque). Méthode locale : page de demande claire, qualification par activité et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/assurance-pro/"
   },
 
   "hero": {
-    "h1": "Générez des leads qualifiés en assurance pro",
-    "sub": "Méthode locale (60/95) : offres pro prioritaires + landing CRO + acquisition + tracking + pilotage.",
+    "h1": "Assurance pro : des demandes de devis qualifiées en 60/95",
+    "sub": "Méthode locale (Sud Oise / Nord Val-d’Oise) : offres pro prioritaires, page de demande claire, qualification et suivi des appels et formulaires.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir la méthode", "href": "/methode/" }
   },
 
   "positionnement": {
-    "promesse": "Plus de demandes de devis pro éligibles, sur des niches et zones maîtrisées.",
-    "angle": "Offre pro = qualification + preuve + process + attribution."
+    "promesse": "Plus de demandes de devis pro éligibles, sur des activités et une zone maîtrisées.",
+    "angle": "Offre pro = qualification par activité + preuves + process de rappel + suivi des demandes."
   },
 
   "icp": {
     "taille": ["cabinet", "agence", "courtier spécialisé"],
-    "maturite": ["Ads coûteuses", "SEO faible", "pas de tracking appels"],
+    "maturite": ["annonces coûteuses", "référencement faible", "pas de suivi des appels"],
     "offresPrioritaires": ["décennale", "RC pro", "multirisque pro"]
   },
 
   "intentionsSEO": [
-    { "cluster": "transactionnel", "queries": ["assurance décennale Chantilly", "RC pro Senlis devis", "multirisque pro Creil", "assurance flotte Persan"] },
-    { "cluster": "comparatif", "queries": ["prix RC pro Chantilly", "devis décennale Senlis", "meilleure multirisque pro Creil"] },
-    { "cluster": "local pack", "queries": ["assurance pro près de moi", "décennale autour de Creil", "RC pro ouverte Senlis"] }
+    {
+      "cluster": "transactionnel",
+      "queries": ["assurance décennale Chantilly", "RC pro Senlis devis", "multirisque pro Creil", "assurance flotte Persan"]
+    },
+    {
+      "cluster": "comparatif",
+      "queries": ["prix RC pro Chantilly", "devis décennale Senlis", "meilleure multirisque pro Creil"]
+    },
+    {
+      "cluster": "local pack",
+      "queries": ["assurance pro près de moi", "décennale autour de Creil", "RC pro ouverte Senlis"]
+    }
   ],
 
   "objections": [
-    { "id": "obj_01", "texte": "La décennale génère des leads hors cible.", "reponse": "On filtre par métier/niche, zone, messages, et formulaire (SIRET, activité, urgence, zone)." },
-    { "id": "obj_02", "texte": "Les prospects pro veulent un devis rapide.", "reponse": "Landing orientée devis + preuve + formulaire court mais qualifiant + rappel rapide." },
-    { "id": "obj_03", "texte": "On ne sait pas ce qui marche.", "reponse": "Tracking appels + formulaires + dashboard : source/campagne/offre, et décisions." }
+    {
+      "id": "obj_01",
+      "texte": "La décennale génère des leads hors cible.",
+      "reponse": "On filtre à la source : activité/métier, zone, messages et formulaire qualifiant (SIRET, activité, urgence, commune). Objectif : réduire les demandes hors cible."
+    },
+    {
+      "id": "obj_02",
+      "texte": "Les prospects pro veulent un devis rapide.",
+      "reponse": "On construit une page orientée demande de devis : preuves, réponses aux objections, formulaire court mais qualifiant, et rappel rapide pour sécuriser le rendez-vous."
+    },
+    {
+      "id": "obj_03",
+      "texte": "On ne sait pas ce qui marche.",
+      "reponse": "On suit appels et formulaires et on lit la performance par offre et par source. Les décisions sont prises sur la qualité des demandes, pas sur le volume brut."
+    }
   ],
 
   "kpis": [
-    { "name": "Leads éligibles", "target": "hausse via qualification" },
-    { "name": "CPL/CPA", "target": "stabilisation puis baisse via CRO + filtres" },
-    { "name": "Taux de conversion", "target": "amélioration via landing" },
-    { "name": "Attribution", "target": "tracking complet" }
+    { "name": "Demandes éligibles", "target": "hausse via qualification par activité et filtres" },
+    { "name": "Coût par demande", "target": "stabilisation puis baisse via ciblage et exclusions" },
+    { "name": "Taux de transformation de la page", "target": "amélioration via page plus claire" },
+    { "name": "Suivi des sources", "target": "appels + formulaires suivis" }
   ],
 
   "livrables": [
-    "Landing assurance pro (niche prioritaire)",
-    "Formulaire qualifiant (activité, statut, zone)",
-    "Tracking complet + dashboard",
-    "Acquisition (Ads/SEO) pilotée KPI"
+    "Page assurance pro (activité prioritaire) orientée demande de devis",
+    "Formulaire qualifiant (activité, SIRET, statut, zone, urgence)",
+    "Suivi des appels et formulaires + tableau de suivi",
+    "Acquisition locale (annonces ou référencement) pilotée sur la qualité"
   ],
 
   "faq": [
-    { "q": "Peut-on cibler la décennale ?", "a": "Oui : on filtre par métier/activité, zone, urgence, et on optimise sur leads éligibles." },
-    { "q": "Quel canal est prioritaire ?", "a": "Ads pour lancer vite, SEO local pour stabiliser. Le choix dépend budget/délai." },
-    { "q": "Comment suivre l’efficacité ?", "a": "Tracking appels/formulaires + UTMs + reporting : CPL, conversion, éligibilité." }
+    {
+      "q": "Peut-on cibler la décennale ?",
+      "a": "Oui : on filtre par activité, zone et urgence, puis on optimise sur les demandes éligibles (pas sur le volume brut)."
+    },
+    {
+      "q": "Quel canal est prioritaire ?",
+      "a": "Les annonces permettent de démarrer vite. Le référencement local stabilise dans la durée. Le choix dépend de votre budget, de votre délai et de la concurrence."
+    },
+    {
+      "q": "Comment suivre l’efficacité ?",
+      "a": "En suivant les appels et formulaires, puis en lisant la performance par offre : volume, qualité des demandes et coût par demande."
+    }
   ],
 
   "localModules": {
@@ -90,17 +120,17 @@
       "variant": "darkSplit",
       "media": {
         "href": "/preuves/",
-        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance pro : qualification, conversion et pilotage" },
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance pro : demandes de devis, qualification par activité et suivi des appels et formulaires" },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Assurance pro",
-        "title": "Devis pro : ciblage niche + qualification + pilotage.",
-        "text": "On démarre par une niche (décennale/RC pro), une landing CRO et du tracking, puis on active acquisition locale et itérations.",
+        "eyebrow": "Assurance pro (60/95)",
+        "title": "Devis pro : activité ciblée + qualification + suivi.",
+        "text": "On démarre par une activité prioritaire (décennale / RC Pro / multirisque), une page de demande claire et un suivi des appels et formulaires. Ensuite, on améliore la qualité des demandes et on étend si les indicateurs sont bons.",
         "bullets": [
-          "Formulaire qualifiant (activité, statut, zone).",
-          "Tracking appels/formulaires et optimisation.",
-          "Itérations CRO pour augmenter conversion."
+          "Formulaire qualifiant (activité, SIRET, zone, urgence).",
+          "Suivi des appels et formulaires pour relier les demandes aux actions menées.",
+          "Améliorations régulières de la page pour augmenter la part de demandes éligibles."
         ]
       },
       "ctas": [
@@ -113,18 +143,18 @@
       "id": "problemes",
       "header": {
         "badge": "Votre situation",
-        "title": "Problèmes fréquents des agences d’assurance locales",
-        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+        "title": "Problèmes fréquents en assurance pro (local)",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir des demandes de devis pro éligibles."
       },
       "items": [
-        "Dépendance au réseau / recommandations : flux irrégulier.",
-        "Saisonnalité (auto/habitation) : variations fortes du volume.",
-        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
-        "Appels non qualifiés / hors zone : temps perdu en agence.",
-        "Attribution floue : impossible de savoir ce qui génère des RDV."
+        "Demandes hors cible (activité non couverte, zone trop large).",
+        "Concurrence forte : besoin de filtrer et d’éviter le gaspillage.",
+        "Page peu claire : manque de preuves et de réassurance.",
+        "Rappel trop tardif : perte de dossiers et de rendez-vous.",
+        "Absence de suivi : difficile de savoir ce qui rapporte vraiment."
       ],
       "ctas": [
-        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Obtenir un plan pro (activité + zone)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
       ]
     },
@@ -134,35 +164,35 @@
       "header": {
         "badge": "Parcours",
         "title": "Diagnostic → Setup → Pilotage",
-        "subtitle": "Un déroulé simple, orienté métier et ROI."
+        "subtitle": "Un déroulé simple, orienté devis pro et demandes éligibles."
       },
       "steps": [
         {
           "title": "Diagnostic (J+7)",
-          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "text": "On choisit l’activité prioritaire, la zone 60/95, et on fixe les critères de qualification.",
           "bullets": [
-            "Plan 30/60/90 jours (agence)",
-            "Structure landing + objections/FAQ",
-            "Recommandation SEO/Ads + priorités"
+            "Activité / niche : décennale, RC Pro, multirisque…",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : annonces locales / référencement local"
           ],
           "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
         },
         {
           "title": "Setup (lancement)",
-          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "text": "On met en place la page et le suivi des demandes, puis on lance l’acquisition locale.",
           "bullets": [
-            "Landing CRO + formulaire pré-qualifiant",
-            "Call tracking + UTMs + events",
-            "Ads local ou SEO local selon priorité"
+            "Page de demande + formulaire qualifiant",
+            "Suivi des appels et formulaires",
+            "Activation du canal prioritaire"
           ]
         },
         {
-          "title": "Pilotage (itérations)",
-          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore la part de demandes éligibles et on stabilise le coût par demande.",
           "bullets": [
-            "Dashboard leads (source/campagne/offre)",
-            "Optimisation mots-clés / exclusions",
-            "Tests CRO (preuve, CTA, friction)"
+            "Lecture par offre et par source",
+            "Exclusions / ciblage pour réduire le hors cible",
+            "Améliorations de la page : clarté, preuves, questions"
           ],
           "cta": { "label": "Voir les preuves", "href": "/preuves/" }
         }
@@ -177,10 +207,10 @@
         "subtitle": "Projection : ce qu’on change et ce que ça débloque."
       },
       "item": {
-        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
-        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
-        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
-        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "title": "Assurance pro : réduire le hors cible et augmenter les devis exploitables",
+        "context": "Demandes nombreuses mais peu éligibles, manque de visibilité sur les sources.",
+        "action": "Page dédiée + formulaire qualifiant + suivi des demandes + exclusions + messages plus clairs.",
+        "result": "Plus de demandes éligibles, moins de gaspillage, décisions basées sur les sources.",
         "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
       }
     },
@@ -188,7 +218,11 @@
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
-      "content": { "eyebrow": "Prestations", "title": "Leviers pour générer des devis pro éligibles." },
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Leviers pour obtenir des devis pro éligibles.",
+        "text": "On privilégie la qualité : activité ciblée, page claire, suivi des demandes, puis extension si les indicateurs sont bons."
+      },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
@@ -199,8 +233,8 @@
       "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Choisir la niche pro prioritaire et cadrer la qualification.",
-        "text": "On fixe niche, zone, landing, tracking et canal prioritaire, puis on étend si KPIs OK."
+        "title": "Choisir l’activité pro prioritaire et cadrer la qualification.",
+        "text": "On fixe l’activité, la zone, la page de demande, le suivi des appels et formulaires, puis on active le canal prioritaire et on étend si les résultats sont bons."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -213,14 +247,14 @@
       "linkMode": "cross",
       "content": {
         "eyebrow": "Process",
-        "title": "Traitement rapide = plus de conversion.",
-        "text": "Scripts, relances, scoring simple, et option CRM/workflows pour industrialiser."
+        "title": "Traitement rapide = plus de devis signés.",
+        "text": "Rappel rapide, scripts, relances et suivi des sources. Option : organisation plus poussée si vous souhaitez industrialiser une partie du suivi."
       },
       "ctas": [
         { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow et dashboard de suivi des leads pro" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Process assurance pro : rappel, qualification et suivi des sources" } }
     },
 
     "faqToggles": {
@@ -229,8 +263,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Chiffrage par niche et par canal.",
-        "text": "On chiffre sur une niche prioritaire + landing + tracking + canal, puis duplication si KPIs OK.",
+        "title": "Chiffrage par activité et par canal.",
+        "text": "On chiffre sur une activité prioritaire + une page de demande + le suivi des demandes + un canal prioritaire, puis on duplique si les indicateurs sont bons.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -240,7 +274,7 @@
       "header": {
         "badge": "Ressources",
         "title": "Guides pour obtenir des devis pro éligibles",
-        "subtitle": "Ciblage niche, scripts et relances : convertir vite et limiter les leads hors cible."
+        "subtitle": "Ciblage par activité, formulaire qualifiant et process : convertir vite et limiter le hors cible."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

@@ -2,19 +2,19 @@
   "id": "res_form_qualif",
   "slug": "formulaire-prequalification-assurance",
   "meta": {
-    "title": "Formulaire pré-qualifiant assurance : réduire les leads non éligibles | 60/95",
-    "description": "Champs utiles, friction minimale et scoring simple : améliorer la qualité des leads assurance (appels/formulaires).",
+    "title": "Formulaire pré-qualifiant assurance | Réduire les demandes non éligibles (60/95)",
+    "description": "Guide formulaire pré-qualifiant pour assureurs en 60/95 : champs utiles, friction minimale et qualification simple pour améliorer la qualité des demandes (appels et formulaires).",
     "robots": "index,follow",
     "canonical": "/ressources/formulaire-prequalification-assurance/"
   },
   "hero": {
     "id": "slider",
-    "eyebrow": "Ressource (CRO)",
+    "eyebrow": "Ressource (Optimisation des pages)",
     "titleHtml": "Formulaire pré-qualifiant :<br />mieux qualifier.",
-    "subtitle": "Réduire les leads non éligibles via champs utiles, message clair et scoring simple.",
+    "subtitle": "Réduire les demandes non éligibles avec des champs utiles, un message clair et une qualification simple.",
     "ctas": [
       { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
-      { "label": "Voir CRM & workflows", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
+      { "label": "Voir suivi & relances", "href": "/prestations/crm-workflow/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
   },
@@ -22,19 +22,29 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Quel est le minimum de champs ?", "a": "Offre, zone, besoin/urgence, coordonnées. Puis 1–2 champs de qualification selon métier/offre." },
-      { "q": "Plus de champs = moins de conversion ?", "a": "Oui, donc on privilégie peu de champs mais très utiles pour filtrer." }
+      {
+        "q": "Quel est le minimum de champs ?",
+        "a": "Offre, zone (commune/code postal), besoin/urgence et coordonnées. Puis 1 à 2 champs de qualification selon l’offre (ex : emprunteur : montant/délai ; pro : activité/SIRET)."
+      },
+      {
+        "q": "Plus de champs = moins de conversion ?",
+        "a": "Souvent oui. C’est pourquoi on privilégie peu de champs, mais très utiles pour filtrer hors zone et hors besoin."
+      },
+      {
+        "q": "Faut-il demander un budget ?",
+        "a": "Uniquement si c’est réellement utile pour qualifier. Sinon, préférez des questions plus directes (profil, besoin, urgence, zone)."
+      }
     ]
   },
-  "contentHtml": "<h2>Objectif</h2><p>Qualifier avant l’appel : moins de perte, meilleure éligibilité.</p><h2>Champs utiles</h2><ul><li>Zone (commune/secteur)</li><li>Offre (auto/habitation/santé…)</li><li>Besoin/urgence</li><li>Critère métier (ex: montant/délai en emprunteur)</li></ul><h2>Scoring simple</h2><ul><li>Éligible / à rappeler / hors cible</li><li>Motif + offre + zone</li></ul>",
+  "contentHtml": "<h2>Objectif : qualifier avant l’appel (et éviter le temps perdu)</h2><p>En assurance, le problème n’est pas seulement d’obtenir des demandes : c’est d’obtenir des demandes <strong>exploitables</strong>. Un formulaire pré-qualifiant sert à filtrer <strong>hors zone</strong>, <strong>hors offre</strong> et <strong>hors profil</strong> avant le rappel. Résultat : moins de perte, plus de rendez-vous utiles, et une meilleure qualité globale des demandes.</p><h2>Règle n°1 : une friction minimale, mais utile</h2><p>Chaque champ supplémentaire baisse le taux de conversion. La bonne approche : <strong>peu de champs</strong>, mais <strong>des champs qui font gagner du temps</strong>.</p><h2>Champs indispensables (base)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Offre</strong> : auto / habitation / santé / emprunteur / pro…</li><li class=\"d-block\"><strong>Zone</strong> : commune ou code postal (filtre hors zone).</li><li class=\"d-block\"><strong>Besoin / urgence</strong> : “à assurer maintenant / bientôt / information”.</li><li class=\"d-block\"><strong>Coordonnées</strong> : téléphone + email (et nom).</li></ul><h2>1 à 2 champs de qualification selon l’offre</h2><p>Ces champs dépendent du produit. L’objectif est de filtrer le non-éligible, pas de faire un dossier complet.</p><h3>Exemples (très utilisés)</h3><ul class=\"iconlist\"><li class=\"d-block\"><strong>Assurance emprunteur</strong> : montant + délai (ou statut : en cours / signé).</li><li class=\"d-block\"><strong>Assurance pro</strong> : activité + commune (option : SIRET).</li><li class=\"d-block\"><strong>Mutuelle santé</strong> : profil (senior / famille / TNS) + besoin prioritaire.</li><li class=\"d-block\"><strong>Auto/habitation</strong> : type de véhicule / type de logement (1 champ max).</li></ul><h2>Formulation : dire pourquoi vous demandez l’info</h2><p>Pour réduire la friction, expliquez en une phrase :</p><ul class=\"iconlist\"><li class=\"d-block\">“<em>Pour vérifier que nous intervenons sur votre zone</em>” (zone).</li><li class=\"d-block\">“<em>Pour vous rappeler avec la bonne solution</em>” (offre / profil).</li><li class=\"d-block\">“<em>Pour traiter en priorité les demandes urgentes</em>” (urgence).</li></ul><h2>Exemple de structure de formulaire (4 à 8 champs)</h2><ol><li class=\"d-block\">Offre (liste)</li><li class=\"d-block\">Commune / code postal</li><li class=\"d-block\">Besoin / urgence</li><li class=\"d-block\">Champ métier (selon offre)</li><li class=\"d-block\">Nom</li><li class=\"d-block\">Téléphone</li><li class=\"d-block\">Email</li><li class=\"d-block\">Message (option, court)</li></ol><h2>Qualification simple après réception (scoring)</h2><p>Le formulaire pré-qualifie. Ensuite, vous devez qualifier en 15 secondes :</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Éligible</strong> / <strong>à rappeler</strong> / <strong>hors cible</strong></li><li class=\"d-block\"><strong>Motif</strong> : offre</li><li class=\"d-block\"><strong>Zone</strong> : OK / hors zone</li><li class=\"d-block\"><strong>Suite</strong> : RDV / devis / relance</li></ul><p>Sans cette étape, vous ne pouvez pas améliorer la qualité dans le temps.</p><h2>À éviter</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Formulaire trop long</strong> : vous perdez des demandes.</li><li class=\"d-block\"><strong>Formulaire trop vague</strong> : vous récupérez du hors cible.</li><li class=\"d-block\"><strong>Questions inutiles</strong> : civilité, date de naissance, détails non nécessaires (au début).</li><li class=\"d-block\"><strong>Pas de filtre zone</strong> : vous payez (ou perdez du temps) pour du hors zone.</li></ul><h2>Bonnes pratiques (assurance)</h2><ul class=\"iconlist\"><li class=\"d-block\">Mettre le formulaire <strong>au-dessus</strong> et <strong>en bas</strong> de page (ou un bouton qui y amène).</li><li class=\"d-block\">Afficher un <strong>délai de réponse</strong> (ex : 24–48h ouvrées).</li><li class=\"d-block\">Proposer une alternative : <strong>appel direct</strong> si la personne ne veut pas remplir.</li><li class=\"d-block\">Couper le hors cible avec un texte simple : zone, offres, conditions.</li></ul><h2>Mini-checklist (résumé)</h2><ul class=\"iconlist\"><li class=\"d-block\">4 champs minimum : offre + zone + urgence + coordonnées.</li><li class=\"d-block\">+1 à +2 champs métier (selon offre).</li><li class=\"d-block\">Explication courte “pourquoi on demande”.</li><li class=\"d-block\">Qualification simple après réception (éligible / non).</li><li class=\"d-block\">Rappel rapide pour les demandes chaudes.</li></ul>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
-        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "CRM & workflows" },
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "tracking" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages assurance" },
+        { "href": "/prestations/crm-workflow/", "label": "CRM & workflows", "anchor": "suivi et relances" },
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking", "anchor": "suivi des demandes" },
         { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
       ]
     },
@@ -42,8 +52,8 @@
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "checklist landing" },
-        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel", "anchor": "process rappel" }
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "structure landing assurance" },
+        { "href": "/ressources/process-rappel-leads-assurance/", "label": "Process rappel", "anchor": "rappel rapide" }
       ]
     }
   },
