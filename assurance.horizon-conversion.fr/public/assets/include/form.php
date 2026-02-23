@@ -42,7 +42,7 @@ $toemails[] = array(
 ---------------------------------------------------*/
 
 $fromemail = array(
-	'email' => 'no-reply@website.com', // Company's Email Address (preferably currently used Domain Name)
+	'email' => 'no-reply@horizon-conversion.fr', // Company's Email Address (preferably currently used Domain Name)
 	'name' => 'Horizon Conversion' // Company Name
 );
 
@@ -70,7 +70,14 @@ $hcaptcha_secret = ''; // Your hCaptcha Secret
 $mail = new PHPMailer();
 
 /* Add your SMTP Codes after this Line */
-
+$mail->IsSMTP();
+$mail->Host = "horizon-conversion.fr";
+$mail->SMTPDebug = 0;
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = "ssl";
+$mail->Port = 465;
+$mail->Username = "contact@horizon-conversion.fr";
+$mail->Password = "Francois@75*";
 
 // End of SMTP
 
@@ -411,7 +418,14 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$autoresponder = new PHPMailer();
 
 		/* Add your Auto-Responder SMTP Codes after this Line */
-
+    $mail->IsSMTP();
+    $mail->Host = "horizon-conversion.fr";
+    $mail->SMTPDebug = 0;
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = "ssl";
+    $mail->Port = 465;
+    $mail->Username = "contact@horizon-conversion.fr";
+    $mail->Password = "Francois@75*";
 
 		// End of Auto-Responder SMTP
 
