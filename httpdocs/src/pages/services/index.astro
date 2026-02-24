@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import services from "../../data/services.json";
+import ScrollAnimation from "../../components/ScrollAnimation.astro";
 
 const servicesPremium = services.filter(s => s.premium);
 const servicesComplementaires = services.filter(s => !s.premium);
