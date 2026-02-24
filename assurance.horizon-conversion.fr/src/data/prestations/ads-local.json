@@ -1,27 +1,27 @@
 {
   "id": "presta_ads_local",
   "slug": "ads-local",
-  "label": "Ads local (Google Ads orienté leads)",
+  "label": "Ads local (Google Ads orienté demandes)",
   "shortLabel": "Google Ads",
   "meta": {
-    "title": "Google Ads assurance local (60/95) | Leads & RDV",
-    "description": "Campagnes locales (zones/offres), landing pages, tracking appels : pilotez CPL et volume de devis.",
+    "title": "Google Ads assurance en 60/95 | Demandes de devis & RDV",
+    "description": "Campagnes locales par offre et par zone (60/95), page de demande dédiée et suivi des appels et formulaires. Objectif : demandes de devis et rendez-vous, avec un coût par demande maîtrisé.",
     "robots": "index,follow",
     "canonical": "/prestations/ads-local/"
   },
-  "promise": "Générer des leads immédiatement avec un CPL maîtrisé via structure + landing + tracking.",
+  "promise": "Obtenir des demandes de devis immédiatement, avec un coût par demande maîtrisé, grâce à une structure claire, une page de demande dédiée et un suivi des appels et formulaires.",
   "scope": {
-    "setup": ["structure compte", "groupes par offre", "extensions", "exclusions", "géociblage fin"],
-    "landing": ["pages dédiées par offre", "preuve + FAQ", "CTA appels/formulaire"],
-    "optim": ["tests annonces", "ajustements zones", "négatifs", "pilotage CPL"]
+    "setup": ["structure du compte", "groupes par offre", "extensions", "exclusions", "ciblage géographique précis"],
+    "landing": ["pages dédiées par offre", "preuves + FAQ", "prise de contact simple (appel / formulaire)"],
+    "optim": ["tests d’annonces", "ajustements de zones", "mots-clés négatifs", "pilotage du coût par demande"]
   },
   "deliverables": [
-    "Plan de campagnes (offres × zones)",
-    "Landing pages Ads (1 à 3)",
-    "Call tracking + conversions",
-    "Dashboard (leads / source / coût)"
+    "Plan de campagnes (offres × zones 60/95)",
+    "Pages de demande pour les annonces (1 à 3)",
+    "Suivi des appels + suivi des formulaires",
+    "Tableau de suivi (demandes / source / coût)"
   ],
-  "kpis": ["CPL", "Taux de conversion landing", "Part leads éligibles", "Taux de contact < 10 min"],
+  "kpis": ["Coût par demande", "Taux de transformation de la page", "Part de demandes éligibles", "Taux de contact < 10 min"],
   "cta": {
     "primary": { "label": "Lancer une campagne", "href": "/contact/" },
     "secondary": { "label": "Voir les preuves", "href": "/preuves/" }
@@ -29,32 +29,32 @@
 
   "faq": [
     {
-      "q": "En combien de temps les leads arrivent ?",
-      "a": "Dès la mise en ligne des campagnes. La stabilisation du CPL et de la qualité se fait ensuite via exclusions, messages, landing et tracking."
+      "q": "En combien de temps les demandes arrivent ?",
+      "a": "Dès la mise en ligne des campagnes. Ensuite, on stabilise le coût par demande et la qualité grâce aux exclusions, aux messages, à la page de demande et au suivi des appels et formulaires."
     },
     {
-      "q": "Comment éviter les leads non qualifiés ?",
-      "a": "Ciblage par offre et zone, exclusions, annonces alignées sur le message, formulaire pré-qualifiant et call tracking. Pilotage sur leads éligibles."
+      "q": "Comment éviter les demandes non qualifiées ?",
+      "a": "Ciblage par offre et par zone, exclusions, annonces alignées sur le message, formulaire de pré-qualification et suivi des appels. On améliore en priorité la part de demandes éligibles."
     },
     {
       "q": "Le budget média est-il inclus ?",
-      "a": "Non. Le budget média est séparé et reste transparent. La prestation couvre la structure, la mise en place, le tracking et l’optimisation."
+      "a": "Non. Le budget média est séparé et transparent. La prestation couvre la structure, la mise en place, le suivi des demandes et l’optimisation."
     },
     {
-      "q": "Mesurez-vous les appels ?",
-      "a": "Oui via call tracking (si activé) et conversions. On suit appels + formulaires, et on rapproche la performance des campagnes."
+      "q": "Suivez-vous les appels ?",
+      "a": "Oui. On suit les appels et les formulaires pour relier les demandes aux campagnes et piloter sur la qualité."
     },
     {
-      "q": "Faut-il une landing dédiée ?",
-      "a": "Oui idéalement : une landing par offre d’entrée améliore fortement la conversion et permet de baisser le CPL."
+      "q": "Faut-il une page dédiée ?",
+      "a": "Oui, idéalement. Une page de demande par offre d’entrée améliore la transformation et aide à réduire le coût par demande."
     }
   ],
 
   "hero": {
     "id": "slider",
-    "eyebrow": "Google Ads local (orienté leads)",
-    "titleHtml": "Générer des leads assurance<br />immédiatement (60/95).",
-    "subtitle": "Structure campagnes + landing qui convertit + tracking appels/formulaires. Pilotage CPL, volume et éligibilité.",
+    "eyebrow": "Google Ads local (orienté demandes)",
+    "titleHtml": "Obtenir des demandes de devis assurance<br />immédiatement (60/95).",
+    "subtitle": "Structure des campagnes + page de demande claire + suivi des appels et formulaires. Pilotage : coût par demande, volume et qualité.",
     "ctas": [
       { "label": "Lancer une campagne", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -67,21 +67,21 @@
       "id": "clarification",
       "header": {
         "badge": "Clarification",
-        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "title": "Google Ads assurance en 60/95 : capter l’intention “devis” et “rendez-vous”",
+        "subtitle": "Objectif : appels et formulaires pertinents, pas des clics inutiles."
       },
       "impacts": [
-        "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Démarrage rapide : premières demandes dès la mise en ligne.",
+        "Ciblage précis par offre (auto, habitation, santé, pro, emprunteur).",
+        "Formulaire de pré-qualification pour réduire les demandes hors cible.",
+        "Suivi des appels et formulaires pour savoir ce qui fonctionne réellement.",
+        "Optimisation continue pour stabiliser le coût par demande."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Lancer des annonces sans page de demande dédiée.",
+        "Payer des clics sur des recherches hors zone ou hors offre.",
+        "Chercher du volume sans pré-qualification.",
+        "Décider sans suivi des appels et des formulaires."
       ]
     },
 
@@ -89,31 +89,31 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une exécution mesurable, orientée demandes",
+        "subtitle": "Offre → structure → page de demande → suivi → améliorations."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Choix de l’offre d’entrée", "text": "1 à 2 offres prioritaires pour démarrer (ex : auto, mutuelle, emprunteur, décennale)." },
+        { "title": "Structure des campagnes", "text": "Groupes par offre, extensions, ciblage géographique et exclusions." },
+        { "title": "Page de demande dédiée", "text": "Preuves, réponses aux objections, FAQ utile, prise de contact simple." },
+        { "title": "Suivi des demandes", "text": "Appels + formulaires suivis pour lire la performance par offre et par source." },
+        { "title": "Améliorations continues", "text": "Ajustements des annonces, des zones, des exclusions et de la page pour stabiliser le coût par demande." }
       ],
       "deliverables": [
-        "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Plan de campagnes (offres × zones 60/95) + priorisation",
+        "Pages de demande (1 à 3) orientées devis / rendez-vous",
+        "Suivi des appels + suivi des formulaires",
+        "Tableau de suivi : demandes, coût par demande, qualité"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes (sans promesses absolues)",
         "items": [
-          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "1–2 semaines", "range": "mise en place + premières demandes", "note": "selon la rapidité de validation et les éléments fournis." },
+          { "label": "3–6 semaines", "range": "stabilisation progressive du coût par demande", "note": "avec exclusions, messages et page de demande optimisée." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -121,18 +121,18 @@
         "href": "/preuves/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Google Ads assurance local : structure, landing, tracking et pilotage CPL"
+          "alt": "Google Ads assurance local : structure, page de demande, suivi des appels et formulaires, et pilotage du coût par demande"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Ads local",
-        "title": "Du budget au lead : mesurer, filtrer, optimiser.",
-        "text": "On démarre par une offre d’entrée et une zone, puis on construit : campagnes par offre, landing dédiée, tracking complet. Ensuite on pilote sur CPL et qualité.",
+        "eyebrow": "Google Ads (local)",
+        "title": "Du budget à la demande : suivre, filtrer, améliorer.",
+        "text": "On démarre par une offre d’entrée et une zone, puis on construit : campagnes par offre, page de demande dédiée, suivi des appels et formulaires. Ensuite, on pilote sur coût par demande et qualité.",
         "bullets": [
-          "Structure compte + groupes par offre + extensions + exclusions.",
-          "Landing dédiée : preuve, objections, FAQ, CTA appels/formulaire.",
-          "Tracking conversions : appels + formulaires + UTMs + dashboard."
+          "Structure du compte + groupes par offre + extensions + exclusions.",
+          "Page de demande : preuves, objections, FAQ, appel et formulaire.",
+          "Suivi : appels + formulaires, puis lecture par offre et par source."
         ]
       },
       "ctas": [
@@ -156,7 +156,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Déclinaisons par métier : offre d’entrée, angles, objections, qualification et messages adaptés pour maximiser les leads éligibles.",
+        "text": "Déclinaisons par métier : offre d’entrée, angles, objections, pré-qualification et messages adaptés pour maximiser les demandes éligibles.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -171,8 +171,8 @@
       },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "On fixe l’offre d’entrée et le plan Ads avant d’investir.",
-        "text": "Offre, zone, landing, tracking, budget média : tu repars avec l’ordre d’exécution et les priorités pour lancer proprement."
+        "title": "Fixer l’offre d’entrée et le plan Ads avant d’investir.",
+        "text": "Offre, zone, page de demande, suivi des appels et formulaires, budget média : vous repartez avec l’ordre d’exécution et les priorités pour démarrer proprement."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -183,15 +183,15 @@
     "supportBand": {
       "id": "pilotage",
       "content": {
-        "eyebrow": "Pilotage",
-        "title": "Optimiser CPL, conversion et éligibilité.",
-        "text": "Tests annonces, ajustements zones, négatifs, amélioration landing et suivi des conversions. Décisions basées sur données : scale/stop/dupliquer."
+        "eyebrow": "Suivi",
+        "title": "Améliorer le coût par demande, la page et la qualité.",
+        "text": "Tests d’annonces, ajustements de zones, mots-clés négatifs, amélioration de la page de demande et suivi des conversions. Décisions basées sur la qualité des demandes : renforcer, corriger, dupliquer."
       },
       "ctas": [
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" },
-        { "label": "Voir CRO", "prestaSlug": "cro", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" },
+        { "label": "Voir optimisation de la page", "prestaSlug": "cro", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Dashboard : suivi CPL, conversion et qualité des leads" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Tableau de suivi : coût par demande, sources, qualité" } }
     },
 
     "faqToggles": {
@@ -200,8 +200,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT, priorisés ROI : on démarre par une offre d’entrée, une landing et du tracking, puis on pilote selon KPIs.",
+        "title": "Diagnostic → mise en place → suivi.",
+        "text": "Tarifs HT, priorisés sur les demandes : offre d’entrée, page de demande, suivi des appels et formulaires, puis améliorations régulières selon les indicateurs.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -210,13 +210,13 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides Ads : structure, filtrage et pilotage CPL",
-        "subtitle": "UTM, négatifs, landing : améliorer la qualité des leads et stabiliser les coûts."
+        "title": "Guides Ads : structure, filtrage et pilotage du coût par demande",
+        "subtitle": "Mots-clés négatifs, page de demande, suivi des appels : améliorer la qualité des demandes et stabiliser les coûts."
       },
       "headerCross": {
         "badge": "Ressources",
         "title": "Guides Google Ads pour {metierLabel}",
-        "subtitle": "Structure, filtrage et tracking : stabiliser le CPL et améliorer la qualité des leads."
+        "subtitle": "Structure, filtrage et suivi des demandes : stabiliser le coût par demande et améliorer la qualité."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

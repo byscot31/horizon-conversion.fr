@@ -2,19 +2,19 @@
   "id": "res_landing_checklist",
   "slug": "checklist-landing-assurance",
   "meta": {
-    "title": "Checklist landing assurance : preuve, objections, CTA, formulaire | 60/95",
-    "description": "Checklist landing assurance orientée devis/RDV : structure, preuve, objections, FAQ, formulaire pré-qualifiant.",
+    "title": "Checklist landing assurance | Preuves, objections, CTA, formulaire (60/95)",
+    "description": "Checklist landing assurance orientée devis et rendez-vous en 60/95 : structure de page, preuves, objections, FAQ, appels à l’action et formulaire de pré-qualification.",
     "robots": "index,follow",
     "canonical": "/ressources/checklist-landing-assurance/"
   },
   "hero": {
     "id": "slider",
-    "eyebrow": "Ressource (CRO)",
+    "eyebrow": "Ressource (Optimisation des pages)",
     "titleHtml": "Checklist landing assurance :<br />convertir mieux.",
-    "subtitle": "Structure de page orientée devis/RDV : preuve, objections, CTA et formulaire.",
+    "subtitle": "Structure orientée devis et rendez-vous : promesse, preuves, objections, appels à l’action et formulaire de pré-qualification.",
     "ctas": [
       { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
-      { "label": "Voir CRO", "href": "/prestations/cro/", "icon": "bi-arrow-right", "variant": "secondary" }
+      { "label": "Voir optimisation des pages", "href": "/prestations/cro/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
   },
@@ -22,27 +22,37 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Faut-il une landing par offre ?", "a": "Oui au démarrage : une offre d’entrée + une landing dédiée améliore la conversion et la qualité." },
-      { "q": "Quel est le bloc le plus important ?", "a": "Le couple promesse + preuve, puis le formulaire pré-qualifiant." }
+      {
+        "q": "Faut-il une landing par offre ?",
+        "a": "Oui au démarrage : une offre d’entrée et une landing dédiée améliorent la conversion et la qualité des demandes. Ensuite, vous dupliquez si les indicateurs sont bons."
+      },
+      {
+        "q": "Quel est le bloc le plus important ?",
+        "a": "Le couple promesse + preuves, puis le formulaire de pré-qualification. Si ces deux éléments sont faibles, la page convertira mal."
+      },
+      {
+        "q": "Combien de questions dans le formulaire ?",
+        "a": "Le minimum utile : assez pour filtrer hors zone et hors besoin, pas assez pour décourager. En général 4 à 8 champs bien choisis."
+      }
     ]
   },
-  "contentHtml": "<h2>Structure recommandée</h2><ol><li>Hero (promesse + CTA)</li><li>Preuve (avis/chiffres/cas)</li><li>Objections + FAQ</li><li>Formulaire pré-qualifiant</li><li>Rassurance (process, délais, zone)</li></ol><h2>Checklist rapide</h2><ul><li>1 offre d’entrée claire</li><li>CTA visibles (appel + formulaire)</li><li>Preuve au-dessus de la ligne de flottaison</li><li>FAQ sur objections</li><li>Tracking events + appels</li></ul>",
+  "contentHtml": "<h2>Objectif : une page qui déclenche une demande (appel ou formulaire)</h2><p>Une landing assurance n’a qu’un but : transformer un visiteur en <strong>demande de devis</strong> ou <strong>rendez-vous</strong>. Pour y arriver, la page doit : (1) être claire sur l’offre, (2) rassurer vite, (3) répondre aux objections, (4) rendre la prise de contact simple, et (5) filtrer les demandes hors cible.</p><h2>Structure recommandée (ordre conseillé)</h2><ol><li class=\"d-block\"><strong>Bloc d’accueil</strong> : promesse + bénéfices + appel à l’action.</li><li class=\"d-block\"><strong>Preuves</strong> : avis, exemples, éléments concrets (process, résultats).</li><li class=\"d-block\"><strong>Objections + FAQ</strong> : répondre aux doutes avant qu’ils bloquent.</li><li class=\"d-block\"><strong>Formulaire de pré-qualification</strong> : filtrer hors zone / hors besoin.</li><li class=\"d-block\"><strong>Réassurance</strong> : zone couverte (60/95), délais, déroulé, confidentialité.</li></ol><h2>Checklist bloc d’accueil (promesse + bénéfices + CTA)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>1 offre d’entrée</strong> claire (pas 6 offres en même temps).</li><li class=\"d-block\"><strong>Promesse</strong> orientée résultat : demandes de devis / rendez-vous.</li><li class=\"d-block\"><strong>Zone</strong> explicitée : 60/95 + communes repères si utile.</li><li class=\"d-block\"><strong>2–3 bénéfices</strong> maximum (ex : rappel rapide, devis, accompagnement).</li><li class=\"d-block\"><strong>CTA visibles</strong> : appel + formulaire (et WhatsApp si vous l’utilisez).</li></ul><h2>Checklist preuves (rassurer vite)</h2><ul class=\"iconlist\"><li class=\"d-block\">Preuves <strong>au-dessus de la ligne de flottaison</strong> si possible (au moins un élément).</li><li class=\"d-block\"><strong>Avis</strong> (si disponibles) + réponses professionnelles.</li><li class=\"d-block\"><strong>Mini-cas</strong> : contexte → action → résultat (même anonymisé).</li><li class=\"d-block\"><strong>Process</strong> en 3 étapes : demande → rappel → devis / RDV.</li><li class=\"d-block\"><strong>Éléments concrets</strong> : zone couverte, horaires, coordonnées, identité.</li></ul><h2>Checklist objections + FAQ (ce qui bloque les demandes)</h2><p>Listez les 5 objections qui reviennent le plus en assurance, puis répondez avec des phrases simples.</p><ul class=\"iconlist\"><li class=\"d-block\">“Je ne suis pas sûr d’être éligible”</li><li class=\"d-block\">“Je compare, je veux un prix”</li><li class=\"d-block\">“Je suis hors zone ?”</li><li class=\"d-block\">“Vous rappelez quand ?”</li><li class=\"d-block\">“Quelles infos faut-il préparer ?”</li></ul><p>Votre FAQ doit être <strong>courte</strong> et <strong>utile</strong>. Évitez les questions “marketing”.</p><h2>Checklist formulaire de pré-qualification (qualité &amp; gain de temps)</h2><p>Le formulaire doit filtrer sans décourager.</p><h3>Champs recommandés (à adapter)</h3><ul class=\"iconlist\"><li class=\"d-block\"><strong>Coordonnées</strong> : nom, téléphone, email.</li><li class=\"d-block\"><strong>Offre</strong> : choisir l’offre (auto, habitation, santé, emprunteur, pro…).</li><li class=\"d-block\"><strong>Zone</strong> : commune ou code postal.</li><li class=\"d-block\"><strong>Besoin / urgence</strong> : “à assurer maintenant / bientôt / information”.</li><li class=\"d-block\"><strong>1–2 champs métier</strong> selon l’offre (ex : emprunteur : montant/délai ; pro : activité/SIRET).</li></ul><h3>Bonnes pratiques</h3><ul class=\"iconlist\"><li class=\"d-block\">Limiter les champs : <strong>4 à 8</strong> bien choisis.</li><li class=\"d-block\">Indiquer pourquoi vous demandez une info (ex : “pour vérifier la zone”).</li><li class=\"d-block\">Ajouter une phrase de réassurance : “réponse sous 24–48h ouvrées”.</li></ul><h2>Checklist réassurance (ce qui fait passer à l’action)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Zone couverte</strong> : 60/95 + communes repères.</li><li class=\"d-block\"><strong>Délai</strong> : quand vous rappelez / quand vous proposez un RDV.</li><li class=\"d-block\"><strong>Confidentialité</strong> : phrase simple sur l’utilisation des informations.</li><li class=\"d-block\"><strong>Alternative</strong> : proposer l’appel direct si la personne ne veut pas remplir.</li></ul><h2>Checklist suivi des demandes (pour décider sur du concret)</h2><ul class=\"iconlist\"><li class=\"d-block\">Suivre les <strong>envois de formulaire</strong>.</li><li class=\"d-block\">Suivre les <strong>clics téléphone</strong> et <strong>clics WhatsApp</strong>.</li><li class=\"d-block\">Si le téléphone est majeur : mettre un <strong>suivi des appels</strong>.</li><li class=\"d-block\">Noter un statut simple : <strong>éligible</strong> / <strong>non éligible</strong> + motif.</li></ul><h2>Checklist rapide (résumé)</h2><ul class=\"iconlist\"><li class=\"d-block\">1 offre d’entrée claire.</li><li class=\"d-block\">CTA visibles (appel + formulaire) dès le haut de page.</li><li class=\"d-block\">Preuves visibles rapidement.</li><li class=\"d-block\">FAQ basée sur objections réelles.</li><li class=\"d-block\">Formulaire de pré-qualification (zone + besoin).</li><li class=\"d-block\">Suivi des appels et formulaires pour piloter.</li></ul>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages assurance" },
         { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves", "anchor": "preuves et contenus" },
-        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads orienté leads" },
-        { "href": "/contact/", "label": "Audit conversion", "anchor": "audit conversion" }
+        { "href": "/prestations/ads-local/", "label": "Ads local", "anchor": "Google Ads orienté demandes" },
+        { "href": "/contact/", "label": "Audit conversion", "anchor": "audit de page" }
       ]
     },
     "related": {
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualifiant assurance" },
+        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualification assurance" },
         { "href": "/ressources/objections-assurance-framework-reponses/", "label": "Framework objections", "anchor": "objections assurance" }
       ]
     }

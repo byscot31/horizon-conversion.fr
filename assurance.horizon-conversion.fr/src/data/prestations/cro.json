@@ -1,57 +1,57 @@
 {
   "id": "presta_cro",
   "slug": "cro",
-  "label": "CRO (conversion rate optimization)",
-  "shortLabel": "CRO",
+  "label": "Optimisation des pages (conversion)",
+  "shortLabel": "Optimisation",
   "meta": {
-    "title": "CRO assurance | Augmenter demandes de devis & RDV",
-    "description": "Optimisation pages, formulaires, preuve, messages : augmentez la conversion sans augmenter le budget pub.",
+    "title": "Optimiser vos pages assurance | Plus de demandes de devis & RDV (60/95)",
+    "description": "Optimisation des pages et formulaires : promesse claire, preuves, réponses aux objections, pré-qualification et appels à l’action. Objectif : plus de demandes à trafic égal.",
     "robots": "index,follow",
     "canonical": "/prestations/cro/"
   },
-  "promise": "Transformer plus de visiteurs en appels et formulaires (à trafic égal).",
+  "promise": "Transformer plus de visiteurs en appels et formulaires, à trafic égal, en clarifiant le message, en renforçant la confiance et en simplifiant la prise de contact.",
   "scope": {
-    "analyse": ["analytics", "heatmaps (option)", "parcours", "points de friction"],
-    "optim": ["copywriting offres", "preuve (avis, chiffres)", "UX formulaire", "CTA & rassurance"],
-    "tests": ["A/B (si stack OK)", "itérations rapides"]
+    "analyse": ["analyse des pages et du parcours", "lecture des points de friction", "priorisation des améliorations"],
+    "optim": ["promesse et offres", "preuves (avis, résultats, cas)", "formulaire (pré-qualification)", "appels à l’action et réassurance"],
+    "tests": ["améliorations rapides", "tests A/B (si volume et outil disponibles)"]
   },
   "deliverables": [
-    "Checklist conversion assurance (page + formulaire)",
-    "Refonte bloc hero + preuve + FAQ",
-    "Formulaire pré-qualifiant",
-    "Suivi conversion (events)"
+    "Checklist “page assurance” (message + preuves + formulaire)",
+    "Refonte du bloc d’accueil + preuves + FAQ",
+    "Formulaire de pré-qualification",
+    "Suivi des conversions (appels + formulaires)"
   ],
-  "kpis": ["Taux conversion", "Taux appels", "Taux dossiers éligibles", "Baisse CPL effectif"],
+  "kpis": ["Taux de conversion", "Taux d’appels", "Part de demandes éligibles", "Baisse du coût par demande"],
   "cta": { "primary": { "label": "Optimiser mes pages", "href": "/contact/" } },
 
   "faq": [
     {
-      "q": "Pourquoi faire du CRO en assurance ?",
-      "a": "Parce que chaque point de conversion gagné baisse le CPL effectif et augmente le volume de demandes à budget égal."
+      "q": "Pourquoi optimiser les pages en assurance ?",
+      "a": "Parce que chaque amélioration du taux de conversion augmente le nombre de demandes à trafic égal et réduit le coût par demande, surtout quand vous investissez en annonces."
     },
     {
-      "q": "Qu’est-ce que vous optimisez en premier ?",
-      "a": "Le hero, les preuves, les CTA, le formulaire (pré-qualification) et les objections/FAQ. Puis on itère sur les points de friction."
+      "q": "Qu’est-ce que vous améliorez en premier ?",
+      "a": "Le bloc d’accueil (promesse), les preuves, les appels à l’action, le formulaire (pré-qualification) et les objections/FAQ. Ensuite, on corrige les points de friction."
     },
     {
-      "q": "Faut-il beaucoup de trafic pour itérer ?",
-      "a": "Non : on commence par des quick wins (structure/copy/formulaire), puis tests si le volume le permet."
+      "q": "Faut-il beaucoup de trafic pour améliorer ?",
+      "a": "Non. On commence par des améliorations simples (structure, message, formulaire). Les tests A/B sont utiles si le volume le permet."
     },
     {
-      "q": "CRO et Ads, c’est lié ?",
-      "a": "Oui : une landing optimisée augmente la conversion, améliore la qualité et stabilise le CPL."
+      "q": "Est-ce lié aux annonces Google ?",
+      "a": "Oui. Une page de demande mieux structurée augmente la transformation, améliore la qualité des demandes et aide à stabiliser le coût par demande."
     },
     {
       "q": "Comment mesurez-vous l’impact ?",
-      "a": "Via events formulaires/appels, taux de conversion, leads éligibles, et CPL effectif par canal/offre."
+      "a": "En suivant les appels et les formulaires, puis en lisant le taux de conversion, la part de demandes éligibles et le coût par demande par offre et par source."
     }
   ],
 
   "hero": {
     "id": "slider",
-    "eyebrow": "CRO (conversion)",
+    "eyebrow": "Optimisation des pages",
     "titleHtml": "Convertir plus,<br />à trafic égal.",
-    "subtitle": "Optimiser hero, preuves, formulaires et CTA : augmenter devis/RDV sans augmenter le budget.",
+    "subtitle": "Promesse, preuves, formulaire et appels à l’action : obtenir plus de devis et rendez-vous sans augmenter le budget.",
     "ctas": [
       { "label": "Optimiser mes pages", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
@@ -64,21 +64,21 @@
       "id": "clarification",
       "header": {
         "badge": "Clarification",
-        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "title": "Optimiser une page assurance : obtenir plus de demandes, pas plus de bruit",
+        "subtitle": "Objectif : appels et formulaires pertinents, avec une prise de contact simple."
       },
       "impacts": [
-        "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Plus de demandes de devis à trafic égal (page plus claire).",
+        "Moins d’hésitation grâce aux preuves et aux réponses aux objections.",
+        "Demandes plus qualifiées grâce à la pré-qualification dans le formulaire.",
+        "Meilleur rendement des annonces : coût par demande plus stable.",
+        "Lecture plus simple : appels et formulaires suivis."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Changer le design sans clarifier la promesse.",
+        "Ajouter du texte sans preuves ni réponses aux objections.",
+        "Un formulaire trop long ou trop vague.",
+        "Décider sans suivi des appels et formulaires."
       ]
     },
 
@@ -86,31 +86,32 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une optimisation mesurable : message → preuves → formulaire → suivi",
+        "subtitle": "Analyse → améliorations → suivi → ajustements."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Analyse de la page", "text": "promesse, offre, preuves, objections, appels à l’action, formulaire." },
+        { "title": "Correction des freins", "text": "clarté du message, réassurance, informations manquantes, friction." },
+        { "title": "Pré-qualification", "text": "questions simples pour filtrer hors zone / hors besoin." },
+        { "title": "Appels à l’action", "text": "placer les bons CTA aux bons endroits : appel, formulaire, rendez-vous." },
+        { "title": "Suivi des demandes", "text": "appels et formulaires suivis pour piloter sur du concret." }
       ],
       "deliverables": [
-        "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Checklist d’optimisation (page + formulaire)",
+        "Bloc d’accueil retravaillé (promesse + bénéfices)",
+        "Bloc preuves (avis, exemples, éléments concrets)",
+        "FAQ orientée objections",
+        "Formulaire de pré-qualification + suivi des demandes"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes",
         "items": [
-          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "48–72h", "range": "premiers correctifs visibles", "note": "promesse, CTA, preuves, formulaire." },
+          { "label": "2–4 semaines", "range": "amélioration mesurable", "note": "si le suivi des demandes est en place et si on itère." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -118,23 +119,23 @@
         "href": "/methode/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "CRO assurance : conversion, preuve, formulaires et pilotage"
+          "alt": "Optimisation page assurance : promesse, preuves, formulaire et suivi des demandes"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "Conversion",
-        "title": "Levier direct sur CPL et qualité.",
-        "text": "On améliore ce qui fait la conversion : message, preuve, objections, formulaire et CTA. Puis on mesure et on itère.",
+        "title": "Un levier direct sur la qualité et le coût par demande.",
+        "text": "On améliore ce qui déclenche la prise de contact : message, preuves, objections, formulaire et appels à l’action. Ensuite, on suit les appels et formulaires et on ajuste.",
         "bullets": [
-          "Refonte hero + preuves + FAQ orientées objections.",
-          "Formulaire pré-qualifiant (meilleure éligibilité).",
-          "Suivi conversion via events et dashboard."
+          "Bloc d’accueil + preuves + FAQ orientées objections.",
+          "Formulaire de pré-qualification (meilleure éligibilité).",
+          "Suivi des demandes : appels + formulaires."
         ]
       },
       "ctas": [
         { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
-        { "label": "Voir tracking", "href": "/prestations/tracking-attribution/", "variant": "light" }
+        { "label": "Voir le suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "light" }
       ]
     },
 
@@ -153,7 +154,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Optimisations adaptées par métier : objections, preuves et qualification alignées sur l’offre d’entrée.",
+        "text": "Optimisations adaptées par métier : objections, preuves et pré-qualification alignées sur l’offre d’entrée.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -167,9 +168,9 @@
         "bgSize": "cover"
       },
       "content": {
-        "eyebrow": "Audit conversion",
-        "title": "On trouve les points de friction et on priorise.",
-        "text": "Hero, preuve, objections, formulaire, CTA : tu repars avec une liste d’actions priorisées et mesurables."
+        "eyebrow": "Audit de page",
+        "title": "Identifier les points de friction et prioriser.",
+        "text": "Promesse, preuves, objections, formulaire, appels à l’action : vous repartez avec une liste d’actions priorisées et mesurables."
       },
       "ctas": [
         { "label": "Réserver un audit", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -180,15 +181,15 @@
     "supportBand": {
       "id": "pilotage",
       "content": {
-        "eyebrow": "Itérations",
+        "eyebrow": "Améliorations",
         "title": "Améliorer en continu : conversion et éligibilité.",
-        "text": "Quick wins puis itérations (et A/B si stack/volume). Objectif : améliorer devis/RDV et réduire le CPL effectif."
+        "text": "Améliorations rapides puis itérations régulières (et tests A/B si le volume le permet). Objectif : plus de devis et rendez-vous, et un coût par demande plus bas."
       },
       "ctas": [
-        { "label": "Voir Ads local", "prestaSlug": "ads-local", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir Google Ads", "prestaSlug": "ads-local", "variant": "dark" },
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Itérations CRO : suivi conversion et qualité" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Suivi conversion : appels, formulaires et qualité des demandes" } }
     },
 
     "faqToggles": {
@@ -197,8 +198,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT : on démarre par l’audit conversion, puis optimisation des pages et suivi.",
+        "title": "Diagnostic → mise en place → suivi.",
+        "text": "Tarifs HT : on démarre par l’audit de page, puis optimisation et suivi des appels et formulaires.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -207,13 +208,13 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides CRO : augmenter la conversion à trafic égal",
-        "subtitle": "Preuve, objections, formulaire : plus d’appels et formulaires, moins de perte."
+        "title": "Guides : augmenter la conversion à trafic égal",
+        "subtitle": "Preuves, objections, formulaire : plus d’appels et de formulaires, moins de perte."
       },
       "headerCross": {
         "badge": "Ressources",
-        "title": "Guides CRO pour {metierLabel}",
-        "subtitle": "Preuve, objections et formulaire : augmenter la conversion et l’éligibilité à trafic égal."
+        "title": "Guides optimisation pour {metierLabel}",
+        "subtitle": "Preuves, objections et formulaire : augmenter la conversion et l’éligibilité à trafic égal."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

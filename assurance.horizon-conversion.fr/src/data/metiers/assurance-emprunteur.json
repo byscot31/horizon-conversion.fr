@@ -2,65 +2,108 @@
   "id": "metier_assurance_emprunteur",
   "slug": "assurance-emprunteur",
   "label": "Assurance emprunteur",
-  "cardTeaser": "Qualification stricte (profil/délai/montant) pour générer des leads emprunteur exploitables.",
+  "cardTeaser": "Qualification stricte (profil, délai, montant) pour obtenir des demandes emprunteur réellement exploitables en 60/95.",
 
   "offres": ["assurance de prêt", "délégation d’assurance", "rachat assurance emprunteur", "quotité", "surprimes"],
 
   "meta": {
-    "title": "Leads assurance emprunteur | Sud Oise & Nord Val-d’Oise",
-    "description": "Générez des leads assurance emprunteur : intention transactionnelle, landing CRO, Ads/SEO local, tracking appels/formulaires et qualification.",
+    "title": "Leads assurance emprunteur en 60/95 | Délégation, rachat, devis",
+    "description": "Obtenez des leads assurance emprunteur en 60/95 (délégation, rachat). Méthode locale : ciblage, page de demande claire, qualification stricte et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/assurance-emprunteur/"
   },
 
   "hero": {
-    "h1": "Générez des leads assurance emprunteur (délégation de prêt)",
-    "sub": "Méthode locale (60/95) : ciblage fort, qualification stricte, tracking et pilotage par éligibilité.",
+    "h1": "Assurance emprunteur : des demandes qualifiées en 60/95",
+    "sub": "Méthode locale (Sud Oise / Nord Val-d’Oise) : ciblage précis, qualification stricte, suivi des appels et formulaires, et décisions basées sur l’éligibilité.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir les preuves", "href": "/preuves/" }
   },
 
   "positionnement": {
-    "promesse": "Un flux de prospects éligibles (projets, montants, profils), pas des formulaires inutilisables.",
-    "angle": "Qualification stricte + tracking + optimisation sur leads éligibles."
+    "promesse": "Un flux de prospects éligibles (projet, montant, profil, délai), pas des formulaires inutilisables.",
+    "angle": "Qualification stricte + suivi des demandes + optimisation sur dossiers éligibles."
   },
 
   "icp": {
     "taille": ["courtier spécialisé", "cabinet généraliste avec pôle emprunteur"],
-    "maturite": ["Ads existantes mais non qualifiées", "pas de call tracking", "landing peu convertissante"],
-    "offresPrioritaires": ["délégation", "rachat", "optimisation de taux global"]
+    "maturite": ["annonces existantes mais demandes non qualifiées", "pas de suivi des appels", "page de demande peu claire"],
+    "offresPrioritaires": ["délégation", "rachat", "optimisation du coût global du crédit"]
   },
 
   "intentionsSEO": [
-    { "cluster": "transactionnel", "queries": ["assurance emprunteur Chantilly", "délégation assurance Senlis", "assurance prêt Creil devis", "rachat assurance emprunteur Persan"] },
-    { "cluster": "comparatif", "queries": ["meilleure assurance emprunteur Chantilly", "prix assurance prêt Senlis", "devis délégation Creil"] },
-    { "cluster": "local pack", "queries": ["assurance emprunteur près de moi", "courtier assurance prêt autour de Creil", "délégation assurance ouverte Senlis"] }
+    {
+      "cluster": "transactionnel",
+      "queries": [
+        "assurance emprunteur Chantilly",
+        "délégation assurance Senlis",
+        "assurance prêt Creil devis",
+        "rachat assurance emprunteur Persan"
+      ]
+    },
+    {
+      "cluster": "comparatif",
+      "queries": [
+        "meilleure assurance emprunteur Chantilly",
+        "prix assurance prêt Senlis",
+        "devis délégation Creil"
+      ]
+    },
+    {
+      "cluster": "local pack",
+      "queries": [
+        "assurance emprunteur près de moi",
+        "courtier assurance prêt autour de Creil",
+        "délégation assurance ouverte Senlis"
+      ]
+    }
   ],
 
   "objections": [
-    { "id": "obj_01", "texte": "Les leads emprunteur sont souvent non éligibles.", "reponse": "Formulaire strict (montant, statut, fumeur, âge, délai) + scoring + optimisation sur leads éligibles." },
-    { "id": "obj_02", "texte": "Les clics sont chers.", "reponse": "On réduit la perte via CRO + tracking + ciblage/exclusions. On pilote sur CPA et éligibilité." },
-    { "id": "obj_03", "texte": "On n’a pas le temps de rappeler.", "reponse": "Process de rappel < 10 min + templates + option workflows/CRM pour relances." }
+    {
+      "id": "obj_01",
+      "texte": "Les leads emprunteur sont souvent non éligibles.",
+      "reponse": "On réduit ce problème à la source : formulaire strict (montant, statut, âge, fumeur, délai, zone) + qualification simple. Ensuite, on améliore uniquement sur les demandes éligibles."
+    },
+    {
+      "id": "obj_02",
+      "texte": "Les clics sont chers.",
+      "reponse": "Le levier principal, c’est de réduire la perte : page plus claire, exclusions, ciblage précis, et suivi des demandes. L’objectif est d’augmenter la part de dossiers exploitables, pas le volume brut."
+    },
+    {
+      "id": "obj_03",
+      "texte": "On n’a pas le temps de rappeler.",
+      "reponse": "On met en place un process simple : rappel rapide (idéalement < 10 min), scripts, relances. Option : organisation plus poussée si vous souhaitez industrialiser."
+    }
   ],
 
   "kpis": [
-    { "name": "Leads éligibles", "target": "augmentation via qualification + filtres" },
-    { "name": "CPL / CPA", "target": "stabilisation puis baisse via CRO" },
+    { "name": "Demandes éligibles", "target": "augmentation via qualification + filtres" },
+    { "name": "Coût par demande", "target": "stabilisation puis baisse via page plus claire et exclusions" },
     { "name": "Taux de jointure", "target": "amélioration via rappel rapide" },
-    { "name": "Attribution", "target": "appels + formulaires trackés" }
+    { "name": "Suivi des sources", "target": "appels + formulaires suivis" }
   ],
 
   "livrables": [
-    "Landing emprunteur (qualification stricte)",
-    "Tracking complet (call/form + UTMs)",
-    "Ads ou SEO local (priorité ROI)",
-    "Dashboard (source, coût, éligibilité)"
+    "Page dédiée emprunteur (qualification stricte)",
+    "Suivi complet des demandes (appels + formulaires)",
+    "Activation du canal prioritaire (annonces locales ou référencement local)",
+    "Tableau de suivi : source, coût, éligibilité"
   ],
 
   "faq": [
-    { "q": "Comment qualifier un lead emprunteur ?", "a": "Champs utiles : montant, statut, âge, fumeur, délai, zone + consentement contact. Puis scoring simple." },
-    { "q": "Ads ou SEO pour l’emprunteur ?", "a": "Ads pour volume immédiat, SEO local pour stabiliser. Le choix dépend du délai et du budget." },
-    { "q": "Vous mesurez les appels ?", "a": "Oui : call tracking + attribution quand possible, et suivi des sources dans un dashboard." }
+    {
+      "q": "Comment qualifier une demande emprunteur ?",
+      "a": "On demande l’essentiel : montant, statut (en cours / signé), âge, fumeur, délai, zone, et consentement. Puis une qualification simple permet de trier rapidement les dossiers."
+    },
+    {
+      "q": "Annonces ou référencement local pour l’emprunteur ?",
+      "a": "Les annonces apportent du volume rapidement. Le référencement local stabilise dans la durée. Le choix dépend de votre délai, du budget et de la concurrence sur votre zone."
+    },
+    {
+      "q": "Vous suivez les appels ?",
+      "a": "Oui. Les appels et les formulaires sont suivis pour savoir ce qui génère réellement des demandes éligibles."
+    }
   ],
 
   "localModules": {
@@ -73,7 +116,12 @@
       "rotatePatterns": true,
       "maxMin": 8,
       "maxMax": 10,
-      "patterns": ["assurance emprunteur {ville}", "délégation assurance {ville}", "devis assurance prêt {ville}", "rachat assurance emprunteur {ville}"]
+      "patterns": [
+        "assurance emprunteur {ville}",
+        "délégation assurance {ville}",
+        "devis assurance prêt {ville}",
+        "rachat assurance emprunteur {ville}"
+      ]
     },
     "faqLocale": { "enabled": true, "limit": 3 }
   },
@@ -90,17 +138,17 @@
       "variant": "darkSplit",
       "media": {
         "href": "/preuves/",
-        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance emprunteur : qualification, tracking et pilotage" },
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Assurance emprunteur : qualification stricte, suivi des demandes et pilotage" },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Emprunteur",
-        "title": "Qualification stricte = leads exploitables.",
-        "text": "On optimise sur l’éligibilité : formulaire strict, tracking, pilotage Ads/SEO et itérations CRO pour réduire le gaspillage.",
+        "eyebrow": "Assurance emprunteur (60/95)",
+        "title": "Qualification stricte = demandes exploitables.",
+        "text": "On privilégie l’éligibilité : page de demande claire, formulaire strict, suivi des appels et formulaires, puis amélioration continue pour réduire le gaspillage et augmenter la part de dossiers exploitables.",
         "bullets": [
-          "Formulaire stricte (projet, profil, délai).",
-          "Tracking appels/formulaires et suivi des sources.",
-          "Optimisation sur leads éligibles, pas volume brut."
+          "Formulaire strict (projet, montant, profil, délai, zone).",
+          "Suivi des appels et formulaires, pour relier les demandes aux actions menées.",
+          "Optimisation sur les dossiers éligibles, pas sur le volume brut."
         ]
       },
       "ctas": [
@@ -113,18 +161,18 @@
       "id": "problemes",
       "header": {
         "badge": "Votre situation",
-        "title": "Problèmes fréquents des agences d’assurance locales",
-        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+        "title": "Problèmes fréquents en assurance emprunteur (local)",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir des demandes éligibles."
       },
       "items": [
-        "Dépendance au réseau / recommandations : flux irrégulier.",
-        "Saisonnalité (auto/habitation) : variations fortes du volume.",
-        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
-        "Appels non qualifiés / hors zone : temps perdu en agence.",
-        "Attribution floue : impossible de savoir ce qui génère des RDV."
+        "Beaucoup de demandes non éligibles (montants, profils, délais).",
+        "Concurrence forte : coût par clic élevé, besoin d’éviter le gaspillage.",
+        "Appels et formulaires sans suivi : difficile de savoir ce qui marche.",
+        "Rappel trop tardif : baisse du taux de jointure.",
+        "Dossiers hors zone : perte de temps et de budget."
       ],
       "ctas": [
-        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Obtenir un plan emprunteur (zone + critères)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
       ]
     },
@@ -134,35 +182,35 @@
       "header": {
         "badge": "Parcours",
         "title": "Diagnostic → Setup → Pilotage",
-        "subtitle": "Un déroulé simple, orienté métier et ROI."
+        "subtitle": "Un déroulé simple, orienté éligibilité et dossiers exploitables."
       },
       "steps": [
         {
           "title": "Diagnostic (J+7)",
-          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "text": "On fixe les critères d’éligibilité, la zone 60/95, et le canal à activer en premier.",
           "bullets": [
-            "Plan 30/60/90 jours (agence)",
-            "Structure landing + objections/FAQ",
-            "Recommandation SEO/Ads + priorités"
+            "Critères : montant, statut, délai, profil",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : annonces locales / référencement local"
           ],
           "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
         },
         {
           "title": "Setup (lancement)",
-          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "text": "On met en place la page et le suivi, puis on lance l’acquisition locale.",
           "bullets": [
-            "Landing CRO + formulaire pré-qualifiant",
-            "Call tracking + UTMs + events",
-            "Ads local ou SEO local selon priorité"
+            "Page emprunteur + pré-qualification stricte",
+            "Suivi des appels et formulaires",
+            "Activation du canal prioritaire"
           ]
         },
         {
-          "title": "Pilotage (itérations)",
-          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore la part de dossiers éligibles et on stabilise le coût par demande.",
           "bullets": [
-            "Dashboard leads (source/campagne/offre)",
-            "Optimisation mots-clés / exclusions",
-            "Tests CRO (preuve, CTA, friction)"
+            "Suivi par source et par requête",
+            "Exclusions et ciblage pour réduire le hors cible",
+            "Améliorations de la page : clarté, preuves, questions"
           ],
           "cta": { "label": "Voir les preuves", "href": "/preuves/" }
         }
@@ -177,10 +225,10 @@
         "subtitle": "Projection : ce qu’on change et ce que ça débloque."
       },
       "item": {
-        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
-        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
-        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
-        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "title": "Emprunteur : augmenter la part de dossiers éligibles",
+        "context": "Demandes nombreuses mais peu exploitables, manque de suivi des appels et des formulaires.",
+        "action": "Page dédiée + pré-qualification stricte + suivi des demandes + exclusions + messages plus clairs.",
+        "result": "Hausse des dossiers éligibles, baisse du gaspillage, décisions basées sur les sources.",
         "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
       }
     },
@@ -188,7 +236,11 @@
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
-      "content": { "eyebrow": "Prestations", "title": "Les leviers pour l’emprunteur (pilotage et conversion)." },
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Les leviers pour l’emprunteur (qualification et suivi).",
+        "text": "On privilégie la qualité : ciblage, page claire, suivi des demandes et améliorations régulières."
+      },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
@@ -200,7 +252,7 @@
       "content": {
         "eyebrow": "Diagnostic",
         "title": "Cadrer l’éligibilité et réduire le gaspillage.",
-        "text": "On définit les critères de qualification, la page de conversion, le tracking, puis on active le canal prioritaire."
+        "text": "On définit les critères de qualification, la page de demande, le suivi des appels et formulaires, puis on active le canal prioritaire."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -214,13 +266,13 @@
       "content": {
         "eyebrow": "Process",
         "title": "Traitement rapide : plus de jointure.",
-        "text": "Rappel rapide, scripts, relances, suivi sources. Option CRM/workflows pour automatiser le suivi."
+        "text": "Rappel rapide, scripts, relances, suivi des sources. Option : organisation plus poussée si vous souhaitez automatiser une partie du suivi."
       },
       "ctas": [
         { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
         { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Workflow de qualification et suivi des leads" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Process emprunteur : rappel, qualification et suivi des sources" } }
     },
 
     "faqToggles": {
@@ -230,7 +282,7 @@
       "sidebar": {
         "eyebrow": "Tarifs",
         "title": "Chiffrage selon volume et critères d’éligibilité.",
-        "text": "On chiffre sur une offre d’entrée, une landing et le canal prioritaire, avec tracking.",
+        "text": "On chiffre sur une offre d’entrée, une page de demande et un canal prioritaire, avec suivi des appels et formulaires.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -239,8 +291,8 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides pour qualifier strict et réduire le gaspillage",
-        "subtitle": "Tracking, formulaire et process : viser les dossiers éligibles (profil/délai/montant)."
+        "title": "Guides pour qualifier strictement et limiter le hors cible",
+        "subtitle": "Formulaire, suivi des demandes et process : viser les dossiers éligibles (profil, délai, montant)."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

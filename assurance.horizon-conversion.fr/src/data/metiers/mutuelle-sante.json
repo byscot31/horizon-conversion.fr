@@ -2,32 +2,32 @@
   "id": "metier_mutuelle_sante",
   "slug": "mutuelle-sante",
   "label": "Mutuelles locales",
-  "cardTeaser": "Segmente seniors/familles/TNS pour capter des devis santé éligibles et réduire le CPL.",
+  "cardTeaser": "Segmenter seniors, familles et TNS pour obtenir des demandes de devis santé éligibles en 60/95 et réduire le coût par demande.",
 
   "offres": ["mutuelle santé", "surcomplémentaire", "prévoyance", "seniors", "TNS", "familles"],
 
   "meta": {
-    "title": "Leads mutuelle santé locale | Sud Oise & Nord Val-d’Oise",
-    "description": "Captez des demandes de devis mutuelle santé locales : pages qui convertissent + acquisition (SEO/Ads) + tracking et qualification.",
+    "title": "Leads mutuelle santé locale en 60/95 | Devis seniors, familles, TNS",
+    "description": "Obtenez des demandes de devis mutuelle santé en 60/95 (seniors, familles, TNS). Page de demande claire, segmentation, pré-qualification et suivi des appels et formulaires.",
     "robots": "index,follow",
     "canonical": "/metiers/mutuelle-sante/"
   },
 
   "hero": {
-    "h1": "Générez des demandes de devis mutuelle santé locales",
-    "sub": "Méthode (60/95) : intention locale + preuve + formulaire pré-qualifiant + pilotage par CPL et éligibilité.",
+    "h1": "Mutuelle santé : des demandes de devis locales en 60/95",
+    "sub": "Méthode (Sud Oise / Nord Val-d’Oise) : segmentation (seniors, familles, TNS), preuves, formulaire de pré-qualification et suivi des appels et formulaires.",
     "ctaPrimary": { "label": "Obtenir un diagnostic", "href": "/contact/" },
     "ctaSecondary": { "label": "Voir les preuves", "href": "/preuves/" }
   },
 
   "positionnement": {
     "promesse": "Stabiliser un flux de demandes de devis santé qualifiées, sur une zone maîtrisée.",
-    "angle": "Ciblage segment (seniors/familles/TNS) + landing CRO + tracking + process de rappel."
+    "angle": "Segmentation (seniors / familles / TNS) + page de demande claire + suivi des demandes + process de rappel."
   },
 
   "icp": {
     "taille": ["antenne locale", "réseau local", "structure multi-agences"],
-    "maturite": ["GBP existante", "SEO faible", "Ads peu qualifiées"],
+    "maturite": ["fiche Google existante", "référencement faible", "annonces peu qualifiées"],
     "offresPrioritaires": ["seniors", "familles", "TNS"]
   },
 
@@ -38,29 +38,50 @@
   ],
 
   "objections": [
-    { "id": "obj_01", "texte": "Les prospects santé comparent beaucoup.", "reponse": "On qualifie (profil/budget/besoins) et on optimise sur leads éligibles, pas sur volume brut." },
-    { "id": "obj_02", "texte": "On reçoit trop de demandes hors cible.", "reponse": "Segmentation (seniors/familles/TNS), exclusions, et formulaires pré-qualifiants pour filtrer." },
-    { "id": "obj_03", "texte": "Le prix des clics est élevé.", "reponse": "CRO + meilleure qualification + mix SEO/Ads pour réduire le CPL et améliorer la conversion." }
+    {
+      "id": "obj_01",
+      "texte": "Les prospects santé comparent beaucoup.",
+      "reponse": "On réduit la comparaison « prix seulement » en cadrant le profil et le besoin (seniors, familles, TNS), puis en pré-qualifiant dans le formulaire. Ensuite, on améliore sur les demandes pertinentes."
+    },
+    {
+      "id": "obj_02",
+      "texte": "On reçoit trop de demandes hors cible.",
+      "reponse": "On segmente (seniors/familles/TNS), on clarifie la zone, et on ajoute des questions simples dans le formulaire pour filtrer dès l’entrée."
+    },
+    {
+      "id": "obj_03",
+      "texte": "Le prix des clics est élevé.",
+      "reponse": "On baisse le coût par demande en réduisant le gaspillage : page plus claire, meilleure qualification, exclusions, et combinaison annonces + visibilité locale durable."
+    }
   ],
 
   "kpis": [
-    { "name": "CPL", "target": "baisse progressive via CRO + filtres" },
-    { "name": "Taux de conversion landing", "target": "amélioration continue" },
-    { "name": "Part de leads éligibles", "target": "augmentation via qualification" },
-    { "name": "Attribution", "target": "appels + formulaires trackés" }
+    { "name": "Coût par demande", "target": "baisse progressive via segmentation + filtres" },
+    { "name": "Taux de transformation de la page", "target": "amélioration continue" },
+    { "name": "Part de demandes éligibles", "target": "augmentation via pré-qualification" },
+    { "name": "Suivi des sources", "target": "appels + formulaires suivis" }
   ],
 
   "livrables": [
-    "Landing mutuelle santé segmentée (seniors/familles/TNS)",
-    "Formulaire pré-qualifiant + scripts de rappel",
-    "Tracking appels/formulaires + dashboard",
-    "Acquisition locale (SEO/Ads) pilotée par éligibilité"
+    "Page mutuelle santé segmentée (seniors / familles / TNS) orientée demande de devis",
+    "Formulaire de pré-qualification + scripts de rappel",
+    "Suivi des appels et formulaires + tableau de suivi",
+    "Acquisition locale (référencement / annonces) pilotée sur l’éligibilité"
   ],
 
   "faq": [
-    { "q": "Peut-on segmenter seniors/familles/TNS ?", "a": "Oui : on commence par 1 segment prioritaire, puis duplication si les KPIs sont bons." },
-    { "q": "Comment filtrer les demandes non sérieuses ?", "a": "Formulaire pré-qualifiant + champs utiles (profil, besoin, budget, zone) et scoring simple." },
-    { "q": "SEO ou Ads en premier ?", "a": "Ads pour l’immédiat, SEO local pour stabiliser. Le choix dépend du délai et du budget." }
+    {
+      "q": "Peut-on segmenter seniors, familles et TNS ?",
+      "a": "Oui. On commence par 1 segment prioritaire, puis on duplique si la qualité des demandes et le coût par demande sont bons."
+    },
+    {
+      "q": "Comment filtrer les demandes non sérieuses ?",
+      "a": "Avec un formulaire de pré-qualification : profil (senior/famille/TNS), besoin, budget indicatif, zone, et un tri simple des demandes."
+    },
+    {
+      "q": "Référencement local ou annonces en premier ?",
+      "a": "Les annonces donnent des demandes plus vite. Le référencement local stabilise dans la durée. Le choix dépend du délai, du budget et de la concurrence sur votre zone."
+    }
   ],
 
   "localModules": {
@@ -90,17 +111,17 @@
       "variant": "darkSplit",
       "media": {
         "href": "/preuves/",
-        "img": { "src": "/assets/images/section-1.jpg", "alt": "Mutuelle santé : preuve, qualification, conversion et tracking" },
+        "img": { "src": "/assets/images/section-1.jpg", "alt": "Mutuelle santé : segmentation, pré-qualification et suivi des appels et formulaires (60/95)" },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
-        "eyebrow": "Mutuelle santé",
-        "title": "Devis qualifiés : segmentation + qualification + pilotage.",
-        "text": "On structure une offre d’entrée par segment, une landing CRO et un tracking complet, puis on pilote l’acquisition au CPL et à l’éligibilité.",
+        "eyebrow": "Mutuelle santé (60/95)",
+        "title": "Devis qualifiés : segmentation + pré-qualification + suivi.",
+        "text": "On structure une offre d’entrée par segment, une page de demande claire et un suivi des appels et formulaires. Ensuite, on pilote l’acquisition sur la qualité des demandes et le coût par demande.",
         "bullets": [
-          "Segmentation (seniors/familles/TNS) et messages adaptés.",
-          "Formulaire pré-qualifiant + process de rappel.",
-          "Tracking et décisions (scale/stop) sur KPIs."
+          "Segmentation (seniors / familles / TNS) et messages adaptés.",
+          "Formulaire de pré-qualification + process de rappel.",
+          "Suivi des appels et formulaires pour décider sur du concret."
         ]
       },
       "ctas": [
@@ -113,18 +134,18 @@
       "id": "problemes",
       "header": {
         "badge": "Votre situation",
-        "title": "Problèmes fréquents des agences d’assurance locales",
-        "subtitle": "Ce qu’on corrige en priorité pour générer plus de demandes de devis."
+        "title": "Problèmes fréquents en mutuelle santé (local)",
+        "subtitle": "Ce qu’on corrige en priorité pour obtenir plus de devis éligibles."
       },
       "items": [
-        "Dépendance au réseau / recommandations : flux irrégulier.",
-        "Saisonnalité (auto/habitation) : variations fortes du volume.",
-        "Concurrence locale + comparateurs : CPC élevés et pression sur le CPL.",
-        "Appels non qualifiés / hors zone : temps perdu en agence.",
-        "Attribution floue : impossible de savoir ce qui génère des RDV."
+        "Beaucoup de comparaisons : besoin de segmenter et d’expliquer clairement.",
+        "Demandes hors cible : profil non correspondant, hors zone, budget incohérent.",
+        "Coût par demande instable : besoin de filtrer et d’éviter le gaspillage.",
+        "Rappel trop tardif : baisse du taux de jointure.",
+        "Absence de suivi : difficile de savoir ce qui apporte des devis réellement exploitables."
       ],
       "ctas": [
-        { "label": "Recevoir le plan pour mon agence (ville + rayon)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+        { "label": "Obtenir un plan mutuelle (segment + zone)", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
         { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
       ]
     },
@@ -134,35 +155,35 @@
       "header": {
         "badge": "Parcours",
         "title": "Diagnostic → Setup → Pilotage",
-        "subtitle": "Un déroulé simple, orienté métier et ROI."
+        "subtitle": "Un déroulé simple, orienté devis santé et demandes éligibles."
       },
       "steps": [
         {
           "title": "Diagnostic (J+7)",
-          "text": "On cadre offre d’entrée + zone + tracking + canal prioritaire.",
+          "text": "On choisit le segment prioritaire, la zone 60/95 et les critères de pré-qualification.",
           "bullets": [
-            "Plan 30/60/90 jours (agence)",
-            "Structure landing + objections/FAQ",
-            "Recommandation SEO/Ads + priorités"
+            "Segment : seniors / familles / TNS",
+            "Structure de page : preuves, objections, FAQ",
+            "Recommandation : annonces locales / référencement local"
           ],
           "cta": { "label": "Voir les tarifs", "href": "/tarifs/" }
         },
         {
           "title": "Setup (lancement)",
-          "text": "On met en place la page et la mesure, puis on active l’acquisition.",
+          "text": "On met en place la page et le suivi des demandes, puis on lance l’acquisition locale.",
           "bullets": [
-            "Landing CRO + formulaire pré-qualifiant",
-            "Call tracking + UTMs + events",
-            "Ads local ou SEO local selon priorité"
+            "Page segmentée + formulaire de pré-qualification",
+            "Suivi des appels et formulaires",
+            "Activation du canal prioritaire"
           ]
         },
         {
-          "title": "Pilotage (itérations)",
-          "text": "On améliore le CPL et la qualité via données (éligibilité/RDV).",
+          "title": "Pilotage (améliorations)",
+          "text": "On améliore le coût par demande et la qualité, en s’appuyant sur les demandes réellement reçues.",
           "bullets": [
-            "Dashboard leads (source/campagne/offre)",
-            "Optimisation mots-clés / exclusions",
-            "Tests CRO (preuve, CTA, friction)"
+            "Lecture par segment et par source",
+            "Exclusions / ciblage pour réduire le hors cible",
+            "Améliorations de la page : clarté, preuves, questions"
           ],
           "cta": { "label": "Voir les preuves", "href": "/preuves/" }
         }
@@ -177,10 +198,10 @@
         "subtitle": "Projection : ce qu’on change et ce que ça débloque."
       },
       "item": {
-        "title": "Agence : réduire les leads hors zone et augmenter les RDV",
-        "context": "Beaucoup d’appels non qualifiés, peu de visibilité sur les sources.",
-        "action": "Landing + pré-qualification + call tracking + exclusions Ads + ajustement messages.",
-        "result": "Plus de leads éligibles, moins de temps perdu, décisions basées sur la source.",
+        "title": "Mutuelle santé : augmenter les demandes éligibles par segment",
+        "context": "Demandes nombreuses mais peu exploitables, manque de suivi et de pré-qualification.",
+        "action": "Page segmentée + pré-qualification + suivi des demandes + exclusions + messages plus clairs.",
+        "result": "Hausse des demandes éligibles, coût par demande plus stable, décisions basées sur les sources.",
         "cta": { "label": "Voir plus de preuves", "href": "/preuves/" }
       }
     },
@@ -188,7 +209,11 @@
     "prestationsTabs": {
       "id": "prestations",
       "linkMode": "cross",
-      "content": { "eyebrow": "Prestations", "title": "Leviers pour générer des devis mutuelle santé." },
+      "content": {
+        "eyebrow": "Prestations",
+        "title": "Leviers pour obtenir des devis mutuelle santé.",
+        "text": "Segmentation, page claire, acquisition locale et suivi des demandes : on améliore la qualité avant d’augmenter le volume."
+      },
       "cta": { "label": "Voir toutes les prestations", "href": "/prestations/", "variant": "light" },
       "itemCta": { "label": "Voir le détail" },
       "items": { "slugs": ["ads-local", "cro", "tracking-attribution", "seo-local"] }
@@ -199,8 +224,8 @@
       "theme": { "bgImage": "/assets/images/section-bg.jpg", "bgRepeat": "no-repeat", "bgPosition": "center 70%", "bgSize": "cover" },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "Choisir le segment prioritaire et le canal rentable.",
-        "text": "On cadre segment, zone, landing, tracking et canal (Ads/SEO). Puis on duplique si les KPIs sont bons."
+        "title": "Choisir le segment prioritaire et le canal le plus rentable.",
+        "text": "On cadre le segment, la zone, la page de demande, le suivi des appels et formulaires, puis on active annonces ou référencement local. Ensuite, on duplique si les indicateurs sont bons."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -213,14 +238,14 @@
       "linkMode": "cross",
       "content": {
         "eyebrow": "Qualification",
-        "title": "Moins de perte : traitement et relances.",
-        "text": "On met un process simple pour rappeler vite, qualifier et suivre les sources. Option CRM/workflows pour industrialiser."
+        "title": "Moins de perte : rappel rapide et relances.",
+        "text": "On met en place un process simple : rappel rapide, qualification, relances et suivi des sources. Objectif : transformer plus de demandes en devis utiles."
       },
       "ctas": [
-        { "label": "Voir CRM & workflows", "prestaSlug": "crm-workflow", "variant": "dark" },
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" }
+        { "label": "Voir suivi & relances", "prestaSlug": "crm-workflow", "variant": "dark" },
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Qualification et suivi : workflow et dashboard" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Qualification mutuelle : rappel rapide, relances et suivi des sources" } }
     },
 
     "faqToggles": {
@@ -230,7 +255,7 @@
       "sidebar": {
         "eyebrow": "Tarifs",
         "title": "Chiffrage par segment et par canal.",
-        "text": "On démarre par un segment prioritaire, une landing, du tracking, puis on étend selon KPIs.",
+        "text": "On démarre par un segment prioritaire, une page de demande, le suivi des appels et formulaires, puis un canal prioritaire. Ensuite, on étend selon la qualité des demandes.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -239,8 +264,8 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides pour générer des devis santé éligibles",
-        "subtitle": "Segmentation, preuve et formulaire : améliorer la qualité et stabiliser le CPL."
+        "title": "Guides pour obtenir des devis santé éligibles",
+        "subtitle": "Segmentation, preuves et pré-qualification : améliorer la qualité et stabiliser le coût par demande."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

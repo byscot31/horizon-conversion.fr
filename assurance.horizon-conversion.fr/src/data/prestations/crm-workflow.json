@@ -4,55 +4,55 @@
   "label": "CRM & workflows (rappel, RDV, nurturing)",
   "shortLabel": "CRM",
   "meta": {
-    "title": "CRM assurance | Réduire la perte de leads et augmenter le taux de RDV",
-    "description": "Automatisations rappel <10 min, prise de RDV, nurturing : plus de dossiers transformés.",
+    "title": "Suivi des leads assurance | Réduire la perte et augmenter les RDV (60/95)",
+    "description": "Rappel rapide (<10 min), qualification, relances et prise de rendez-vous : transformez plus de demandes en dossiers. Suivi des étapes : demande → RDV → devis → signé.",
     "robots": "index,follow",
     "canonical": "/prestations/crm-workflow/"
   },
-  "promise": "Ne plus perdre de leads : contacter plus vite, mieux qualifier, mieux relancer.",
+  "promise": "Ne plus perdre de demandes : rappeler plus vite, qualifier simplement et relancer jusqu’au rendez-vous.",
   "scope": {
-    "process": ["pipeline", "scoring simple", "routage par offre/zone"],
+    "process": ["pipeline", "qualification simple", "routage par offre/zone"],
     "automation": ["SMS/email", "rappels", "prise de RDV", "nurturing"],
     "ops": ["scripts d’appel", "templates messages"]
   },
   "deliverables": [
-    "Pipeline + champs qualification",
-    "Workflows rappel et relance",
-    "Scripts + templates",
-    "Tableau suivi (leads -> RDV -> devis -> signé)"
+    "Pipeline + champs de qualification",
+    "Workflows de rappel et de relance",
+    "Scripts + modèles de messages",
+    "Tableau de suivi (demandes → RDV → devis → signé)"
   ],
-  "cta": { "primary": { "label": "Automatiser le suivi", "href": "/contact/" } },
+  "cta": { "primary": { "label": "Organiser le suivi", "href": "/contact/" } },
 
   "faq": [
     {
-      "q": "Pourquoi un CRM/workflow est critique en assurance ?",
-      "a": "Parce que la vitesse de rappel et la relance font la différence. Sans process, une partie des leads payés est perdue."
+      "q": "Pourquoi un process de suivi est critique en assurance ?",
+      "a": "Parce que la vitesse de rappel et la relance font la différence. Sans process, une partie des demandes (même payées) est perdue."
     },
     {
       "q": "Que mettez-vous en place en priorité ?",
-      "a": "Pipeline, champs de qualification, règles de routage, rappels <10 min, relances et prise de RDV."
+      "a": "Pipeline, champs de qualification, règles de routage, rappel rapide (<10 min), relances et prise de rendez-vous."
     },
     {
-      "q": "Est-ce compatible avec les leads Ads/SEO ?",
-      "a": "Oui : on capte la source/campagne (UTM), on tague l’offre et on suit conversion RDV/devis/signé."
+      "q": "Est-ce compatible avec les demandes issues des annonces et du référencement ?",
+      "a": "Oui. On associe chaque demande à une source quand c’est possible, on étiquette l’offre, puis on suit le passage en rendez-vous, devis et signé."
     },
     {
-      "q": "Peut-on commencer sans CRM existant ?",
-      "a": "Oui : on peut démarrer avec un outil simple ou un tableau structuré, puis migrer vers un CRM."
+      "q": "Peut-on commencer sans outil dédié ?",
+      "a": "Oui. On peut démarrer avec un tableau structuré et des scripts, puis passer à un outil plus complet si nécessaire."
     },
     {
       "q": "Qu’est-ce qui est mesuré ?",
-      "a": "Délai de rappel, taux de contact, taux RDV, taux devis, taux signé, et performance par source/offre."
+      "a": "Délai de rappel, taux de contact, taux de rendez-vous, taux de devis, taux de signé, et performance par offre et par source."
     }
   ],
 
   "hero": {
     "id": "slider",
     "eyebrow": "CRM & workflows",
-    "titleHtml": "Moins de perte,<br />plus de RDV.",
-    "subtitle": "Rappel <10 min, qualification, relances et suivi : transformer plus de leads en dossiers.",
+    "titleHtml": "Moins de perte,<br />plus de rendez-vous.",
+    "subtitle": "Rappel rapide (<10 min), qualification, relances et suivi : transformer plus de demandes en dossiers.",
     "ctas": [
-      { "label": "Automatiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Organiser le suivi", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
     ],
     "note": "Cible : agences, courtiers, mutuelles — Sud Oise (60) & Nord Val-d’Oise (95)"
@@ -63,21 +63,21 @@
       "id": "clarification",
       "header": {
         "badge": "Clarification",
-        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "title": "Suivi des demandes : convertir plus, sans générer plus de volume",
+        "subtitle": "Objectif : rappeler vite, qualifier et réserver des rendez-vous utiles."
       },
       "impacts": [
-        "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Plus de rendez-vous grâce au rappel rapide et aux relances.",
+        "Moins de demandes perdues : scripts et process simples.",
+        "Qualification plus claire : tri des demandes hors zone / hors besoin.",
+        "Meilleure visibilité : suivi demande → RDV → devis → signé.",
+        "Décisions plus simples : savoir quelles offres et quelles sources apportent des dossiers."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Un outil complexe sans process de rappel.",
+        "Des demandes laissées sans réponse ou rappel trop tardif.",
+        "Un suivi “au feeling” sans statuts ni étapes.",
+        "Des relances inexistantes alors que le prospect hésite."
       ]
     },
 
@@ -85,31 +85,32 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une mise en place simple : pipeline, scripts, relances, suivi",
+        "subtitle": "Cadrage → mise en place → routine de traitement."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Définir les statuts", "text": "demande reçue, à rappeler, contacté, rendez-vous fixé, devis envoyé, signé, non qualifié." },
+        { "title": "Champs de qualification", "text": "offre, zone, urgence, éléments de profil utiles, et cause de non-qualification." },
+        { "title": "Rappel rapide", "text": "règle simple : rappeler au plus vite (idéalement <10 min) + script d’appel." },
+        { "title": "Relances", "text": "rappels planifiés + messages courts (SMS/email) pour confirmer et relancer." },
+        { "title": "Tableau de suivi", "text": "lecture mensuelle : taux contact, taux RDV, taux devis, taux signé par offre et par source." }
       ],
       "deliverables": [
-        "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Pipeline (étapes) + champs de qualification",
+        "Scripts d’appel + modèles de messages",
+        "Règles de rappel et relances (calendrier simple)",
+        "Tableau de suivi : demande → RDV → devis → signé",
+        "Recommandations d’amélioration selon les retours terrain"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes",
         "items": [
-          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "48–72h", "range": "mise en place du process de base", "note": "pipeline, champs, scripts et relances simples." },
+          { "label": "2–4 semaines", "range": "amélioration visible du taux de RDV", "note": "si le rappel rapide et les relances sont appliqués." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -117,23 +118,23 @@
         "href": "/methode/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "CRM & workflows : rappel, qualification, RDV et suivi des sources"
+          "alt": "Suivi des leads : rappel rapide, qualification, rendez-vous et suivi des étapes"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "Process",
-        "title": "Leads traités vite = plus de RDV.",
-        "text": "On structure le traitement : pipeline, champs utiles, scoring simple, rappels et relances. Objectif : augmenter le taux de transformation.",
+        "title": "Demandes traitées vite = plus de rendez-vous.",
+        "text": "On structure le traitement : étapes, champs utiles, qualification simple, rappel rapide et relances. Objectif : augmenter le taux de transformation sans augmenter le volume de demandes.",
         "bullets": [
-          "Rappel <10 min + scripts + templates.",
-          "Relances multi-canal et prise de RDV.",
-          "Suivi : leads → RDV → devis → signé."
+          "Rappel rapide (<10 min) + scripts + modèles de messages.",
+          "Relances et prise de rendez-vous : confirmation et réduction des absences.",
+          "Suivi : demandes → RDV → devis → signé (lecture simple)."
         ]
       },
       "ctas": [
         { "label": "Voir la méthode", "href": "/methode/", "variant": "light" },
-        { "label": "Voir tracking", "href": "/prestations/tracking-attribution/", "variant": "light" }
+        { "label": "Voir le suivi des demandes", "href": "/prestations/tracking-attribution/", "variant": "light" }
       ]
     },
 
@@ -152,7 +153,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Workflows adaptés par métier : champs de qualification, routage, scripts et relances alignés sur l’offre d’entrée.",
+        "text": "Process adaptés par métier : champs de qualification, routage, scripts et relances alignés sur vos offres d’entrée.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -167,8 +168,8 @@
       },
       "content": {
         "eyebrow": "Diagnostic",
-        "title": "On définit le pipeline et les relances avant d’automatiser.",
-        "text": "Sources, offres, zones, champs de qualification, SLA rappel, étapes RDV/devis : tu repars avec un plan d’implémentation clair."
+        "title": "Définir le pipeline et les relances avant d’organiser le suivi.",
+        "text": "Offres, zones, champs de qualification, règle de rappel, étapes RDV/devis : vous repartez avec un plan d’implémentation clair."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -181,13 +182,13 @@
       "content": {
         "eyebrow": "Mesure",
         "title": "Suivre la performance jusqu’au signé.",
-        "text": "On suit délai de rappel, taux contact/RDV/devis/signé, et performance par source/campagne/offre quand c’est disponible."
+        "text": "On suit délai de rappel, taux contact / RDV / devis / signé, et performance par offre et par source quand c’est disponible."
       },
       "ctas": [
-        { "label": "Voir tracking & attribution", "prestaSlug": "tracking-attribution", "variant": "dark" },
-        { "label": "Voir Ads local", "prestaSlug": "ads-local", "variant": "dark" }
+        { "label": "Voir suivi des demandes", "prestaSlug": "tracking-attribution", "variant": "dark" },
+        { "label": "Voir Google Ads", "prestaSlug": "ads-local", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Dashboard : suivi leads -> RDV -> devis -> signé" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Suivi : demandes → RDV → devis → signé" } }
     },
 
     "faqToggles": {
@@ -196,8 +197,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT : on démarre par le process (pipeline, champs, SLA), puis automatisation et suivi.",
+        "title": "Diagnostic → mise en place → suivi.",
+        "text": "Tarifs HT : démarrage par le process (pipeline, champs, règle de rappel), puis mise en place des relances et suivi des indicateurs.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -206,13 +207,13 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides process : rappel <10 min, scripts et relances",
-        "subtitle": "Moins de perte : transformer plus de leads en RDV, devis et dossiers signés."
+        "title": "Guides process : rappel rapide, scripts et relances",
+        "subtitle": "Moins de perte : transformer plus de demandes en rendez-vous, devis et dossiers signés."
       },
       "headerCross": {
         "badge": "Ressources",
         "title": "Guides process & relances pour {metierLabel}",
-        "subtitle": "Rappel <10 min, scripts et suivi : réduire la perte et augmenter le taux de RDV."
+        "subtitle": "Rappel rapide, scripts et suivi : réduire la perte et augmenter le taux de rendez-vous."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

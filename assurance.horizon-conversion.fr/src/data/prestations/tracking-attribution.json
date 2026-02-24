@@ -1,48 +1,48 @@
 {
   "id": "presta_tracking_attribution",
   "slug": "tracking-attribution",
-  "label": "Tracking & attribution (calls + forms)",
+  "label": "Tracking & attribution (appels + formulaires)",
   "shortLabel": "Tracking",
   "meta": {
-    "title": "Tracking assurance | Attribuer appels & formulaires à la bonne source",
-    "description": "Call tracking, événements, UTM, dashboard : sachez ce qui génère des leads rentables.",
+    "title": "Suivi des appels & formulaires assurance | Savoir ce qui génère des demandes (60/95)",
+    "description": "Suivi des appels et formulaires, convention de marquage et tableau de suivi : relier chaque demande à une source, une offre et une zone pour décider sur du concret.",
     "robots": "index,follow",
     "canonical": "/prestations/tracking-attribution/"
   },
-  "promise": "Mesurer précisément appels & formulaires pour piloter ROI et budget.",
+  "promise": "Savoir précisément d’où viennent les demandes (appels et formulaires) pour piloter le budget et renforcer ce qui apporte des dossiers.",
   "scope": {
-    "tracking": ["UTM", "events formulaires", "call tracking", "numéros dynamiques (option)"],
-    "dashboard": ["leads par source", "campagne", "offre", "zone"],
+    "tracking": ["convention de marquage", "suivi des formulaires", "suivi des appels (option)", "numéros dynamiques (option)"],
+    "dashboard": ["demandes par source", "par campagne", "par offre", "par zone"],
     "rgpd": ["consentement", "durées", "mentions"]
   },
   "deliverables": [
-    "Plan de marquage (events)",
-    "Call tracking opérationnel",
-    "Dashboard simple (Looker/Sheet/CRM)",
-    "Convention UTM"
+    "Plan de marquage (événements)",
+    "Suivi des appels opérationnel (si activé)",
+    "Tableau de suivi simple (Sheet/CRM/Looker)",
+    "Convention de marquage (noms de campagnes et sources)"
   ],
-  "cta": { "primary": { "label": "Mettre le tracking en place", "href": "/contact/" } },
+  "cta": { "primary": { "label": "Mettre le suivi en place", "href": "/contact/" } },
 
   "faq": [
     {
-      "q": "Que mesurez-vous exactement ?",
-      "a": "Appels et formulaires, sources/campagnes (UTM), offres, et indicateurs clés (CPL, conversion, éligibilité) via un tableau de bord simple."
+      "q": "Que suivez-vous exactement ?",
+      "a": "Les appels et les formulaires, la source (quand c’est possible), l’offre et la zone, puis des indicateurs simples : coût par demande, transformation de la page et part de demandes éligibles."
     },
     {
-      "q": "Le call tracking est-il obligatoire ?",
-      "a": "Non, mais recommandé si le téléphone est un canal majeur. Sinon on mesure au minimum formulaires + événements."
+      "q": "Le suivi des appels est-il obligatoire ?",
+      "a": "Non, mais recommandé si le téléphone est un canal important. Sinon, on suit au minimum les formulaires et les actions clés sur la page."
     },
     {
-      "q": "Peut-on attribuer un lead à une campagne Ads ?",
-      "a": "Oui via UTMs + events + call tracking (selon configuration). L’objectif est de prendre des décisions basées sur données."
+      "q": "Peut-on relier une demande à une campagne d’annonces ?",
+      "a": "Oui, selon la configuration. L’objectif est de prendre des décisions basées sur des demandes réelles, pas sur des impressions ou des clics."
     },
     {
-      "q": "Est-ce compatible RGPD ?",
-      "a": "Oui : consentement, durées, mentions, et collecte minimale. On évite les données sensibles inutiles."
+      "q": "Est-ce compatible avec le RGPD ?",
+      "a": "Oui : consentement, mentions claires, durées de conservation, et collecte minimale. On évite les données sensibles inutiles."
     },
     {
-      "q": "À quoi sert le dashboard ?",
-      "a": "À voir rapidement ce qui marche : source, campagne, offre, coût, et à décider (scale/stop/dupliquer)."
+      "q": "À quoi sert le tableau de suivi ?",
+      "a": "À voir rapidement ce qui fonctionne : source, campagne, offre, coût et qualité, afin de décider quoi renforcer, corriger ou arrêter."
     }
   ],
 
@@ -50,9 +50,9 @@
     "id": "slider",
     "eyebrow": "Tracking & attribution",
     "titleHtml": "Savoir ce qui marche,<br />et couper le reste.",
-    "subtitle": "UTM + events + call tracking (option) + dashboard : piloter CPL, conversion et leads éligibles.",
+    "subtitle": "Suivi des appels et formulaires + tableau de suivi : piloter le coût par demande, la conversion et la qualité.",
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "WhatsApp {phoneDisplay}", "href": "WHATSAPP", "icon": "fa-brands fa-whatsapp", "variant": "secondary", "external": true }
     ],
     "note": "Mesure appels + formulaires — Sud Oise (60) & Nord Val-d’Oise (95)"
@@ -63,21 +63,21 @@
       "id": "clarification",
       "header": {
         "badge": "Clarification",
-        "title": "SEO local assurance : capter des intentions “devis” en 60/95",
-        "subtitle": "Objectif : appels + formulaires qualifiés, pas des positions vanity."
+        "title": "Suivi des demandes : savoir ce qui génère réellement des devis",
+        "subtitle": "Objectif : relier chaque demande à une source, une offre et une zone, puis décider sur du concret."
       },
       "impacts": [
-        "Plus d’appels entrants depuis Google Maps / Local Pack.",
-        "Des pages orientées métier et offre (auto/habitation/santé) qui convertissent.",
-        "Moins de dépendance aux annuaires et aux variations de budget Ads.",
-        "Un système sans pages villes : modules locaux + preuve + FAQ.",
-        "Attribution plus claire : demandes de devis reliées à une source."
+        "Stopper les dépenses inutiles : on voit ce qui ne génère pas de demandes.",
+        "Renforcer les offres qui apportent des demandes pertinentes.",
+        "Suivre appels et formulaires au même endroit (lecture simple).",
+        "Comparer les sources (annonces, référencement, profil Google) sur la qualité.",
+        "Améliorer la page avec des données réelles (questions, objections, preuves)."
       ],
       "notThis": [
-        "Des articles de blog au hasard sans intention devis.",
-        "Du positionnement “vanity” sur des requêtes non rentables.",
-        "Une “page ville” copiée-collée qui fait du risque SEO.",
-        "Un SEO sans tracking appels/formulaires."
+        "Décider au feeling sans suivre appels et formulaires.",
+        "Se limiter aux clics sans savoir si ça fait des demandes.",
+        "Lancer des campagnes sans convention de marquage.",
+        "Collecter trop de données inutiles ou sensibles."
       ]
     },
 
@@ -85,31 +85,32 @@
       "id": "process",
       "header": {
         "badge": "Process",
-        "title": "Une exécution mesurable, orientée leads",
-        "subtitle": "Audit → structure → contenu → preuve → liens locaux."
+        "title": "Une mise en place simple : marquage → suivi → tableau → décisions",
+        "subtitle": "Cadrage → mise en place → lecture hebdo → améliorations."
       },
       "steps": [
-        { "title": "Audit Google Business Profile", "text": "catégories, services, signaux, avis, cohérence NAP." },
-        { "title": "Pages locales (métier/offre)", "text": "structure CRO + modules locaux (sans pages ville)." },
-        { "title": "Schema & SEO technique", "text": "FAQ, service, breadcrumbs, perf, indexation." },
-        { "title": "Contenus preuves & objections", "text": "cas, FAQ utile, comparatifs, réassurance." },
-        { "title": "Netlinking local & citations", "text": "partenariats, annuaires qualitatifs, presse locale." }
+        { "title": "Définir la convention de marquage", "text": "noms de sources et campagnes, offres, zones, pour éviter le chaos." },
+        { "title": "Suivi des formulaires", "text": "envoi, clic téléphone, clic WhatsApp, et actions clés si utile." },
+        { "title": "Suivi des appels (option)", "text": "si le téléphone est majeur : relier les appels aux sources quand c’est possible." },
+        { "title": "Tableau de suivi", "text": "demandes, coûts, qualité (éligible / non), par offre et par source." },
+        { "title": "Routine de pilotage", "text": "renforcer, corriger ou arrêter selon les demandes réellement reçues." }
       ],
       "deliverables": [
-        "Liste des pages à créer (métier × offre) + priorisation",
-        "Plan de contenu preuves/objections (format + topics)",
-        "Optimisations GBP + checklist exécution",
-        "Corrections techniques (schema, indexation, perfs)",
-        "Reporting mensuel : leads, sources, pages qui convertissent"
+        "Convention de marquage (sources/campagnes/offres/zones)",
+        "Plan d’événements à suivre (formulaires + actions clés)",
+        "Suivi des appels (si activé) et/ou suivi des formulaires",
+        "Tableau de suivi simple : demandes, coût par demande, qualité",
+        "Checklist RGPD : mentions, consentement, conservation"
       ],
       "benchmarks": {
-        "title": "Benchmarks réalistes (sans promesses absolues)",
+        "title": "Repères réalistes",
         "items": [
-          { "label": "2–3 mois", "range": "signaux & premières progressions", "note": "selon historique du site, concurrence et exécution." },
-          { "label": "3–6 mois", "range": "stabilisation + volume plus régulier", "note": "si structure + contenu + liens locaux sont tenus." }
+          { "label": "24–72h", "range": "mise en place du suivi de base", "note": "convention + formulaires + tableau simple." },
+          { "label": "2–4 semaines", "range": "premières décisions fiables", "note": "avec assez de demandes pour comparer offres et sources." }
         ]
       }
     },
+
     "videoProof": {
       "id": "video-proof",
       "variant": "darkSplit",
@@ -117,18 +118,18 @@
         "href": "/methode/",
         "img": {
           "src": "/assets/images/section-1.jpg",
-          "alt": "Tracking assurance : attribution appels et formulaires, UTMs, events et dashboard"
+          "alt": "Suivi assurance : relier appels et formulaires aux sources, et piloter avec un tableau de suivi"
         },
         "iconClass": "uil uil-play h1 icon-stacked text-center rounded-circle ps-1 color bg-white z-3 position-absolute top-50 start-50 translate-middle"
       },
       "content": {
         "eyebrow": "Mesure",
-        "title": "Attribution : la base du pilotage ROI.",
-        "text": "Sans tracking propre, impossible de décider. On met en place UTMs, events, call tracking (si besoin) et un dashboard simple.",
+        "title": "Le suivi : la base du pilotage.",
+        "text": "Sans suivi propre, impossible de décider. On met en place une convention de marquage, le suivi des formulaires, le suivi des appels si nécessaire, et un tableau simple pour lire la performance par offre et par source.",
         "bullets": [
-          "Convention UTM + marquage events formulaires.",
-          "Call tracking (option) et numéros dynamiques (option).",
-          "Dashboard : source, campagne, offre, zone, CPL."
+          "Convention de marquage + événements formulaires.",
+          "Suivi des appels (option) et numéros dynamiques (option).",
+          "Tableau : source, campagne, offre, zone, coût par demande."
         ]
       },
       "ctas": [
@@ -152,7 +153,7 @@
       },
       "card": {
         "icon": { "src": "/assets/images/icons/contract.svg", "alt": "" },
-        "text": "Mesure adaptée par métier : qualification, éligibilité, et suivi des conversions jusqu’au RDV/devis quand c’est possible.",
+        "text": "Suivi adapté par métier : critères de qualification et lecture de la performance par offre et par source.",
         "cta": { "label": "Voir la page métier", "variant": "linkUnderline" }
       }
     },
@@ -166,9 +167,9 @@
         "bgSize": "cover"
       },
       "content": {
-        "eyebrow": "Plan de marquage",
-        "title": "On définit le tracking avant d’investir.",
-        "text": "Tu repars avec une convention UTM, une liste d’événements, et un dashboard pour piloter CPL, conversion et qualité."
+        "eyebrow": "Plan de suivi",
+        "title": "Définir le suivi avant d’investir.",
+        "text": "Vous repartez avec une convention de marquage, une liste d’événements à suivre et un tableau de suivi pour piloter coût par demande, conversion et qualité."
       },
       "ctas": [
         { "label": "Réserver un diagnostic", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
@@ -180,14 +181,14 @@
       "id": "pilotage",
       "content": {
         "eyebrow": "Décisions",
-        "title": "Scale / stop / dupliquer : pilotage data.",
-        "text": "On relie les leads aux sources et on décide : ce qui marche est amplifié, ce qui ne marche pas est stoppé."
+        "title": "Renforcer / corriger / arrêter : pilotage sur demandes réelles.",
+        "text": "On relie les demandes aux sources et on décide : ce qui apporte des demandes pertinentes est renforcé, le reste est corrigé ou arrêté."
       },
       "ctas": [
-        { "label": "Voir Ads local", "prestaSlug": "ads-local", "variant": "dark" },
-        { "label": "Voir CRO", "prestaSlug": "cro", "variant": "dark" }
+        { "label": "Voir Google Ads", "prestaSlug": "ads-local", "variant": "dark" },
+        { "label": "Voir optimisation des pages", "prestaSlug": "cro", "variant": "dark" }
       ],
-      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Dashboard : pilotage sources, coûts et qualité" } }
+      "media": { "img": { "src": "/assets/images/app.svg", "alt": "Tableau de suivi : sources, coûts et qualité des demandes" } }
     },
 
     "faqToggles": {
@@ -196,8 +197,8 @@
       "qPrefix": "Q.",
       "sidebar": {
         "eyebrow": "Tarifs",
-        "title": "Diagnostic → setup → pilotage.",
-        "text": "Tarifs HT : mise en place tracking + dashboard, puis optimisation continue avec Ads/SEO/CRO.",
+        "title": "Diagnostic → mise en place → suivi.",
+        "text": "Tarifs HT : mise en place du suivi et du tableau, puis amélioration continue avec les annonces, le référencement et les pages de demande.",
         "cta": { "label": "Voir les tarifs", "href": "/tarifs/", "variant": "dark" }
       }
     },
@@ -206,13 +207,13 @@
       "id": "ressources",
       "header": {
         "badge": "Ressources",
-        "title": "Guides tracking : attribuer appels & formulaires",
-        "subtitle": "UTM, events, call tracking : savoir ce qui marche et couper le reste."
+        "title": "Guides suivi : relier appels & formulaires aux sources",
+        "subtitle": "Convention de marquage, suivi et tableau : savoir ce qui marche et arrêter le reste."
       },
       "headerCross": {
         "badge": "Ressources",
-        "title": "Guides tracking pour {metierLabel}",
-        "subtitle": "UTM, events, appels : attribuer les leads et piloter ce qui génère du ROI."
+        "title": "Guides suivi pour {metierLabel}",
+        "subtitle": "Suivi des demandes : relier les demandes aux sources et piloter ce qui apporte des dossiers."
       },
       "layout": {
         "sectionClass": "section bg-transparent pt-0 pb-lg-0",

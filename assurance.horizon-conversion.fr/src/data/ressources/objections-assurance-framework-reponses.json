@@ -2,8 +2,8 @@
   "id": "res_objections_framework",
   "slug": "objections-assurance-framework-reponses",
   "meta": {
-    "title": "Objections assurance : framework pour répondre et convertir | 60/95",
-    "description": "Framework objections : leads non qualifiés, Ads trop cher, pas de mesure. Réponses structurées + preuve + CTA.",
+    "title": "Objections assurance : framework de réponses | Convertir en 60/95",
+    "description": "Framework pour traiter les objections en assurance (leads non qualifiés, annonces trop chères, manque de mesure, manque de temps). Réponses structurées + preuves + appel à l’action pour convertir en 60/95.",
     "robots": "index,follow",
     "canonical": "/ressources/objections-assurance-framework-reponses/"
   },
@@ -11,7 +11,7 @@
     "id": "slider",
     "eyebrow": "Ressource (Contenus)",
     "titleHtml": "Objections assurance :<br />framework de réponses.",
-    "subtitle": "Répondre aux doutes pour augmenter conversion : preuve, objections, FAQ et CTA.",
+    "subtitle": "Répondre aux doutes pour augmenter les demandes : preuves, objections, FAQ et appel à l’action clair.",
     "ctas": [
       { "label": "Créer mes pages offres", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir Contenus & preuves", "href": "/prestations/contenus-preuves/", "icon": "bi-arrow-right", "variant": "secondary" }
@@ -22,18 +22,28 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Quelle objection traiter en premier ?", "a": "Leads non qualifiés / coût Ads / manque de mesure : ce sont les freins majeurs à la décision." },
-      { "q": "Où placer les objections ?", "a": "Sous la preuve et avant le formulaire, pour réduire la friction." }
+      {
+        "q": "Quelle objection traiter en premier ?",
+        "a": "Commencez par : demandes non qualifiées, coût des annonces, manque de mesure. Ce sont les freins majeurs au lancement et à la décision."
+      },
+      {
+        "q": "Où placer les objections sur une page ?",
+        "a": "Juste après les preuves et avant le formulaire : c’est là que la plupart des visiteurs hésitent."
+      },
+      {
+        "q": "Faut-il répondre à toutes les objections ?",
+        "a": "Non. Traitez 4 à 6 objections clés, celles qui reviennent réellement. Le but est de lever les freins, pas d’allonger la page."
+      }
     ]
   },
-  "contentHtml": "<h2>Framework</h2><ol><li>Reconnaître l’objection</li><li>Apporter une preuve</li><li>Donner la méthode</li><li>Proposer une action simple</li></ol><h2>Top objections</h2><ul><li>Leads non qualifiés</li><li>Ads trop cher</li><li>Pas de mesure</li><li>Manque de temps pour rappeler</li></ul><h2>Où l’intégrer</h2><p>Pages offres, pages métiers et FAQ : aligner message + preuve + CTA.</p>",
+  "contentHtml": "<h2>Objectif : lever les freins avant le formulaire</h2><p>En assurance, la conversion ne se joue pas seulement sur l’offre. Elle se joue sur la <strong>confiance</strong> et la <strong>clarté</strong>. Les objections sont les phrases que vos prospects se répètent avant de remplir : “ça va être non qualifié”, “ça va coûter trop cher”, “on ne saura pas d’où ça vient”, “on n’a pas le temps de rappeler”.</p><p>Traiter ces objections au bon endroit (après les preuves, avant le formulaire) augmente le taux de demande et améliore la qualité.</p><h2>Le framework (simple) en 4 étapes</h2><ol><li class=\"d-block\"><strong>Reconnaître l’objection</strong> (vous comprenez le risque).</li><li class=\"d-block\"><strong>Apporter une preuve</strong> (élément concret, même simple).</li><li class=\"d-block\"><strong>Expliquer la méthode</strong> (comment vous évitez le problème).</li><li class=\"d-block\"><strong>Proposer une action</strong> (petit pas : diagnostic, appel, prise de RDV).</li></ol><h2>Où l’intégrer (sur le site)</h2><ul class=\"iconlist\"><li class=\"d-block\"><strong>Pages offres</strong> : objections spécifiques à l’offre (auto, santé, emprunteur, pro…).</li><li class=\"d-block\"><strong>Pages métiers</strong> : objections liées au contexte (agence, courtier, mutuelle).</li><li class=\"d-block\"><strong>FAQ</strong> : objections formulées en questions courtes.</li><li class=\"d-block\"><strong>Pages preuves</strong> : associer preuve → objection → réponse.</li></ul><h2>Top objections (assurance) + réponses prêtes à adapter</h2><h3>1) “On va recevoir des demandes non qualifiées.”</h3><p><strong>Reconnaître :</strong> c’est le risque n°1 : perdre du temps en agence.</p><p><strong>Preuve :</strong> un formulaire de pré-qualification + une zone claire réduisent fortement le hors cible.</p><p><strong>Méthode :</strong> on filtre par offre et zone, on ajoute 1–2 champs utiles (selon l’offre), et on qualifie “éligible / non” après réception pour améliorer.</p><p><strong>Action :</strong> “On vous propose un diagnostic : choix de l’offre d’entrée + champs de pré-qualification + messages à afficher.”</p><h3>2) “Les annonces coûtent trop cher.”</h3><p><strong>Reconnaître :</strong> sur certaines offres (santé, emprunteur, pro), la concurrence est forte.</p><p><strong>Preuve :</strong> une page de demande claire + exclusions + mots-clés négatifs réduisent le gaspillage.</p><p><strong>Méthode :</strong> on démarre avec 1 offre d’entrée, on filtre les requêtes hors cible, on renforce les preuves et on pilote sur coût par demande et demandes éligibles.</p><p><strong>Action :</strong> “On définit l’offre d’entrée et la liste de filtrage avant de lancer.”</p><h3>3) “On ne saura pas d’où viennent les demandes.”</h3><p><strong>Reconnaître :</strong> sans suivi, on décide à l’aveugle.</p><p><strong>Preuve :</strong> suivi des formulaires + suivi des appels (si besoin) + tableau simple.</p><p><strong>Méthode :</strong> convention de marquage, événements clés, consolidation appels/formulaires, lecture par offre et par source.</p><p><strong>Action :</strong> “On met en place un tableau de suivi : demandes, sources, qualité.”</p><h3>4) “On n’a pas le temps de rappeler.”</h3><p><strong>Reconnaître :</strong> sans rappel rapide, la demande se refroidit et vous perdez des dossiers.</p><p><strong>Preuve :</strong> un process simple de rappel + scripts augmente le taux de rendez-vous.</p><p><strong>Méthode :</strong> règle de rappel, messages prêts à l’emploi, relances, et organisation des statuts.</p><p><strong>Action :</strong> “On vous donne un process rappel &lt;10 min + scripts.”</p><h3>5) “On a déjà un site / une page, ça suffit.”</h3><p><strong>Reconnaître :</strong> un site vitrine rassure, mais ne convertit pas toujours sur une intention “devis”.</p><p><strong>Preuve :</strong> une page offre d’entrée dédiée convertit souvent mieux qu’une page généraliste.</p><p><strong>Méthode :</strong> promesse claire, preuves, objections, FAQ utile, formulaire de pré-qualification, et appel direct.</p><p><strong>Action :</strong> “On crée une page d’entrée par offre prioritaire.”</p><h2>Conseils de rédaction (ton assurance, sans jargon)</h2><ul class=\"iconlist\"><li class=\"d-block\">Formulez les objections comme vos prospects parlent : “hors zone”, “trop cher”, “je compare”.</li><li class=\"d-block\">Réponses courtes : 3 à 6 lignes + un exemple concret.</li><li class=\"d-block\">Une preuve par objection (avis, mini-cas, process, chiffre, engagement de rappel).</li><li class=\"d-block\">Terminez par un appel à l’action simple : “diagnostic”, “appel”, “rendez-vous”.</li></ul><h2>Mini-checklist (à coller sur vos pages)</h2><ol><li class=\"d-block\">4 à 6 objections max.</li><li class=\"d-block\">Chaque objection = preuve + méthode + action.</li><li class=\"d-block\">Placement : sous les preuves, avant le formulaire.</li><li class=\"d-block\">Une FAQ courte qui reprend les objections en questions.</li><li class=\"d-block\">Pré-qualification (zone + besoin) pour réduire le hors cible.</li></ol>",
   "links": {
     "outbound": {
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
         { "href": "/prestations/contenus-preuves/", "label": "Contenus & preuves", "anchor": "preuves et contenus" },
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "CRO assurance" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation des pages assurance" },
         { "href": "/preuves/", "label": "Preuves", "anchor": "preuves" },
         { "href": "/contact/", "label": "Diagnostic", "anchor": "diagnostic" }
       ]
@@ -43,7 +53,7 @@
       "title": "Ressources liées",
       "items": [
         { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing", "anchor": "landing qui convertit" },
-        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualifiant" }
+        { "href": "/ressources/formulaire-prequalification-assurance/", "label": "Formulaire pré-qualifiant", "anchor": "formulaire pré-qualification" }
       ]
     }
   },

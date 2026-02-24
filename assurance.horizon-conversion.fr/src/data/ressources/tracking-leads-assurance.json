@@ -2,19 +2,19 @@
   "id": "res_tracking_leads",
   "slug": "tracking-leads-assurance",
   "meta": {
-    "title": "Tracking leads assurance : attribuer appels & formulaires | 60/95",
-    "description": "Guide simple : UTM, events, call tracking et dashboard pour attribuer les leads et piloter le CPL.",
+    "title": "Tracking leads assurance | Attribuer appels & formulaires (60/95)",
+    "description": "Guide simple tracking leads pour assureurs en 60/95 : convention de marquage, suivi des formulaires, suivi des appels (option) et tableau de suivi pour attribuer les demandes et piloter le coût par demande.",
     "robots": "index,follow",
     "canonical": "/ressources/tracking-leads-assurance/"
   },
 
   "hero": {
     "id": "slider",
-    "eyebrow": "Ressource",
+    "eyebrow": "Ressource (Suivi des demandes)",
     "titleHtml": "Tracking leads assurance :<br />attribuer appels & formulaires.",
-    "subtitle": "UTM + events + call tracking : mesurer, décider, scaler ce qui marche.",
+    "subtitle": "Convention de marquage + suivi des formulaires + suivi des appels (option) : mesurer, décider, renforcer ce qui apporte des dossiers.",
     "ctas": [
-      { "label": "Mettre le tracking en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
+      { "label": "Mettre le suivi en place", "href": "/contact/", "icon": "bi-arrow-right", "variant": "primary" },
       { "label": "Voir la prestation Tracking", "href": "/prestations/tracking-attribution/", "icon": "bi-arrow-right", "variant": "secondary" }
     ],
     "note": "Sud Oise (60) & Nord Val-d’Oise (95)"
@@ -24,12 +24,22 @@
     "includeWebsite": true,
     "includeSearchAction": false,
     "faq": [
-      { "q": "Faut-il un call tracking ?", "a": "Recommandé si le téléphone est un canal majeur. Sinon, events formulaires + UTMs minimum." },
-      { "q": "Que doit contenir un dashboard ?", "a": "Leads par source/campagne/offre, CPL, conversion et (si possible) éligibilité." }
+      {
+        "q": "Faut-il un call tracking ?",
+        "a": "Recommandé si le téléphone est un canal important. Sinon, suivez au minimum les formulaires et les actions clés sur la page."
+      },
+      {
+        "q": "Que doit contenir un tableau de suivi ?",
+        "a": "Demandes par source/campagne/offre, coût par demande, taux de conversion, et si possible un statut de qualité (éligible / non)."
+      },
+      {
+        "q": "À partir de quand les données deviennent utiles ?",
+        "a": "Dès la mise en place, mais les décisions deviennent plus fiables après quelques semaines, quand vous avez assez de demandes pour comparer les offres et les sources."
+      }
     ]
   },
 
-  "contentHtml": "<h2>Objectif</h2><p>Attribuer chaque lead (appel/formulaire) à une source et prendre des décisions.</p><h2>Checklist</h2><ul><li>Convention UTM</li><li>Events formulaires</li><li>Call tracking (option)</li><li>Dashboard simple</li></ul><h2>À relier à la méthode</h2><p>Sans mesure fiable, impossible d’optimiser CPL, conversion et leads éligibles.</p>",
+  "contentHtml": "<h2>Objectif : attribuer chaque demande et décider sur du concret</h2><p>En assurance, vous ne pilotez pas un budget sur des clics. Vous pilotez sur des <strong>demandes</strong> : appels, formulaires, rendez-vous. Le tracking a un seul but : <strong>relier chaque demande à une source</strong> (annonces, référencement, profil Google), puis décider quoi renforcer, corriger ou arrêter.</p><h2>Ce que vous devez obtenir à la fin</h2><ul class=\"iconlist\"><li class=\"d-block\">Une lecture simple : <strong>demandes par offre</strong> (auto, santé, emprunteur, pro…).</li><li class=\"d-block\">Une lecture par source : annonces / référencement / profil Google.</li><li class=\"d-block\">Un indicateur clé : <strong>coût par demande</strong> (et pas seulement coût par clic).</li><li class=\"d-block\">Un indicateur qualité : <strong>éligible / non éligible</strong> (même simple).</li></ul><h2>Checklist (mise en place minimale)</h2><h3>1) Convention de marquage</h3><p>Sans convention, les sources deviennent illisibles. L’objectif est d’avoir des noms cohérents.</p><ul class=\"iconlist\"><li class=\"d-block\">Source (ex : google, facebook, email…)</li><li class=\"d-block\">Type (ex : annonces, organique…)</li><li class=\"d-block\">Campagne (ex : mutuelle_senior_60-95)</li><li class=\"d-block\">Offre (ex : emprunteur, décennale…)</li></ul><h3>2) Suivi des formulaires</h3><p>Au minimum :</p><ul class=\"iconlist\"><li class=\"d-block\">envoi de formulaire,</li><li class=\"d-block\">clic téléphone,</li><li class=\"d-block\">clic WhatsApp (si utilisé).</li></ul><p>Vous devez pouvoir compter les demandes, puis les relier à une source quand c’est possible.</p><h3>3) Suivi des appels (option, mais souvent utile)</h3><p>Si le téléphone est un canal majeur, il faut le mesurer. Un setup simple :</p><ul class=\"iconlist\"><li class=\"d-block\">un numéro suivi pour les annonces,</li><li class=\"d-block\">un numéro suivi pour le site / référencement,</li><li class=\"d-block\">qualification simple après appel (éligible / non, offre, zone).</li></ul><h3>4) Tableau de suivi simple</h3><p>Le tableau doit répondre à 3 questions :</p><ul class=\"iconlist\"><li class=\"d-block\">Qu’est-ce qui apporte des demandes ? (source/campagne)</li><li class=\"d-block\">Qu’est-ce qui apporte des dossiers ? (offre + qualité)</li><li class=\"d-block\">Combien ça coûte ? (coût par demande)</li></ul><h2>Qualification (le chaînon manquant)</h2><p>Le tracking n’a de valeur que si vous qualifiez. Pas besoin d’un système compliqué : un statut suffit.</p><ul class=\"iconlist\"><li class=\"d-block\"><strong>Éligible</strong></li><li class=\"d-block\"><strong>Non éligible</strong> (hors zone / hors offre / profil non traité)</li><li class=\"d-block\"><strong>À relancer</strong> (pas joint, à rappeler)</li></ul><p>Ajoutez 2 tags : <strong>offre</strong> et <strong>zone</strong>. Vous pourrez ensuite améliorer les pages et les campagnes.</p><h2>Erreurs fréquentes</h2><ul class=\"iconlist\"><li class=\"d-block\">Suivre des clics mais pas les demandes.</li><li class=\"d-block\">Oublier les appels (alors que c’est un canal majeur).</li><li class=\"d-block\">Pas de convention : impossible de comparer les campagnes.</li><li class=\"d-block\">Pas de qualification : impossible d’améliorer la qualité.</li></ul><h2>Plan d’action (simple)</h2><ol><li class=\"d-block\">Définir 1 à 2 offres d’entrée.</li><li class=\"d-block\">Mettre la convention de marquage.</li><li class=\"d-block\">Suivre formulaires + clics téléphone.</li><li class=\"d-block\">Ajouter le suivi des appels si nécessaire.</li><li class=\"d-block\">Qualifier chaque demande (éligible / non) pendant 2 à 4 semaines.</li><li class=\"d-block\">Décider : renforcer, corriger, ou arrêter selon les demandes éligibles.</li></ol><h2>À relier à la méthode</h2><p>Sans mesure fiable, vous ne pouvez pas améliorer le coût par demande, la conversion et la qualité. Le tracking rend les décisions simples : <strong>vous investissez là où ça apporte des dossiers</strong>.</p>",
 
   "related": {
     "items": [
@@ -44,16 +54,16 @@
       "id": "liens-utiles",
       "title": "Aller plus loin",
       "items": [
-        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "tracking & attribution" },
-        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimisation conversion" },
-        { "href": "/methode/", "label": "Méthode", "anchor": "méthode SEO + Ads + CRO" }
+        { "href": "/prestations/tracking-attribution/", "label": "Tracking & attribution", "anchor": "suivi des demandes" },
+        { "href": "/prestations/cro/", "label": "CRO", "anchor": "optimiser la page de demande" },
+        { "href": "/methode/", "label": "Méthode", "anchor": "méthode" }
       ]
     },
     "related": {
       "id": "ressources-liees",
       "title": "Ressources liées",
       "items": [
-        { "href": "/ressources/landing-assurance-qui-convertit/", "label": "Landing assurance qui convertit", "anchor": "landing assurance qui convertit" }
+        { "href": "/ressources/checklist-landing-assurance/", "label": "Checklist landing assurance", "anchor": "landing assurance" }
       ]
     }
   },
