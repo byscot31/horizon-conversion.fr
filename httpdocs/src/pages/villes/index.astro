@@ -1,0 +1,239 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const villes60 = villes.filter(v => v.zone === "60").sort((a, b) => a.nom.localeCompare(b.nom));
+const villes95 = villes.filter(v => v.zone === "95").sort((a, b) => a.nom.localeCompare(b.nom));
+
+const totalAlentours = villes.reduce((acc, v) => acc + v.alentours.length, 0);
+const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0);
+---
+
+<Layout
+    title="Villes d'intervention - Oise (60) et Val-d'Oise (95) | Horizon Conversion"
+    description="J'interviens dans tout l'Oise et le Val-d'Oise : Beauvais, Compiègne, Chantilly, Cergy, Argenteuil et leurs alentours."
+>
+
+  <!-- Hero avec carte conceptuelle -->
+  <section class="bg-gradient-to-br from-green-50 to-emerald-50 py-20 relative overflow-hidden">
+    <div class="absolute right-0 top-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-20"></div>
+    <div class="absolute left-0 bottom-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+
+    <div class="container-custom text-center relative z-10">
+      <h1 class="text-5xl font-bold text-gray-900 mb-6">
+        Où <span class="text-primary-600">j'interviens</span>
+      </h1>
+      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        Basé dans l'Oise, je me déplace dans tout le département et le Val-d'Oise pour accompagner les professionnels locaux.
+      </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-3xl font-bold text-primary-600">{villes.length}</div>
+          <div class="text-sm text-gray-600">villes principales</div>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-3xl font-bold text-primary-600">{totalAlentours}</div>
+          <div class="text-sm text-gray-600">communes alentours</div>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-3xl font-bold text-primary-600">{Math.round(populationTotale / 1000)}k+</div>
+          <div class="text-sm text-gray-600">habitants couverts</div>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-3xl font-bold text-primary-600">2</div>
+          <div class="text-sm text-gray-600">départements</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carte visuelle des départements -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Oise -->
+        <div class="bg-blue-50 rounded-2xl p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold">
+              <span class="text-primary-600">Oise</span>
+              <span class="text-sm bg-white px-3 py-1 rounded-full ml-3">60</span>
+            </h2>
+            <span class="text-lg font-semibold">{villes60.length} villes</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            {villes60.map(ville => (
+                <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
+                  <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
+                  <div class="text-sm text-gray-500">{ville.codePostal}</div>
+                  <div class="mt-2 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
+                    <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                  </div>
+                </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Val-d'Oise -->
+        <div class="bg-green-50 rounded-2xl p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold">
+              <span class="text-primary-600">Val-d'Oise</span>
+              <span class="text-sm bg-white px-3 py-1 rounded-full ml-3">95</span>
+            </h2>
+            <span class="text-lg font-semibold">{villes95.length} villes</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            {villes95.map(ville => (
+                <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
+                  <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
+                  <div class="text-sm text-gray-500">{ville.codePostal}</div>
+                  <div class="mt-2 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
+                    <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                  </div>
+                </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carte mentale des alentours -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Je travaille aussi dans toutes ces communes</h2>
+      <p class="text-center text-gray-600 mb-12">Pas besoin d'être dans une grande ville pour bénéficier de mon accompagnement.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {villes.slice(0, 8).map(ville => (
+            <div class="bg-white p-4 rounded-xl">
+              <h3 class="font-bold text-primary-600 mb-3 flex items-center gap-2">
+                <span>📍</span>
+                <span>Autour de {ville.nom}</span>
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {ville.alentours.slice(0, 4).map(alentour => (
+                    <span class="bg-gray-100 px-2 py-1 rounded-full text-xs">
+                  {alentour.split(' (')[0]}
+                </span>
+                ))}
+                {ville.alentours.length > 4 && (
+                    <span class="text-xs text-gray-500">+{ville.alentours.length - 4}</span>
+                )}
+              </div>
+            </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi ces villes -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Pourquoi ces <span class="text-primary-600">villes</span> ?</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Je connais parfaitement le tissu économique de l'Oise et du Val-d'Oise pour y être basé et y travailler quotidiennement depuis plusieurs années.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-primary-600">📍</span>
+              </div>
+              <div>
+                <h3 class="font-semibold">Proximité</h3>
+                <p class="text-gray-600">Je me déplace facilement sur tout le territoire, pas de frais de déplacement pour vous.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-primary-600">🏢</span>
+              </div>
+              <div>
+                <h3 class="font-semibold">Connaissance terrain</h3>
+                <p class="text-gray-600">Je connais les spécificités de chaque zone, les habitudes de recherche locales.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-primary-600">🤝</span>
+              </div>
+              <div>
+                <h3 class="font-semibold">Réseau local</h3>
+                <p class="text-gray-600">Des clients et des partenaires dans toutes les villes, une vraie implantation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-primary-600 text-white p-8 rounded-2xl">
+          <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <span>🎯</span>
+            <span>Vous ne trouvez pas votre ville ?</span>
+          </h3>
+          <p class="mb-6 opacity-90">
+            Je travaille dans toutes les communes de l'Oise et du Val-d'Oise, même si elles ne sont pas listées. La proximité est mon ADN.
+          </p>
+          <div class="bg-white/10 p-4 rounded-lg">
+            <p class="font-semibold mb-2">Exemples récents :</p>
+            <p class="text-sm">Interventions à Bresles, Chambly, Montataire, Eragny, Vauréal, Soisy-sous-Montmorency...</p>
+          </div>
+          <a href="/contact" class="mt-6 bg-white text-primary-600 px-6 py-3 rounded-full font-semibold inline-block hover:bg-gray-100 transition-colors">
+            Me contacter pour votre ville
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exemples de pages par ville -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Pages locales disponibles</h2>
+      <p class="text-center text-gray-600 mb-12">Pour chaque ville, des pages adaptées à votre métier.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <a href="/seo-local/artisans/beauvais" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
+          <span class="text-sm font-medium">SEO pour artisans</span>
+          <span class="text-xs text-gray-500 block">Beauvais</span>
+        </a>
+        <a href="/google-ads/commerces/cergy" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
+          <span class="text-sm font-medium">Ads pour commerces</span>
+          <span class="text-xs text-gray-500 block">Cergy</span>
+        </a>
+        <a href="/cro/profession-liberale/chantilly" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
+          <span class="text-sm font-medium">CRO pour avocats</span>
+          <span class="text-xs text-gray-500 block">Chantilly</span>
+        </a>
+        <a href="/seo-local/tourisme/compiegne" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
+          <span class="text-sm font-medium">SEO pour hôtels</span>
+          <span class="text-xs text-gray-500 block">Compiègne</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous êtes dans l'Oise ou le Val-d'Oise ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre visibilité locale.
+      </p>
+      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+        Demander mon audit gratuit
+      </a>
+    </div>
+  </section>
+
+</Layout>

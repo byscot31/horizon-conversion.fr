@@ -1,0 +1,332 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const ville = villes.find(v => v.id === "chantilly");
+---
+
+<Layout
+    title="Étude de cas : +80% de réservations directes pour un hôtel à Chantilly | Horizon Conversion"
+    description="Comment un hôtel 3 étoiles a réduit sa dépendance à Booking et augmenté ses réservations directes de 80% grâce au SEO local et au content marketing."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-rose-50 to-pink-50 py-16">
+    <div class="container-custom">
+      <nav class="text-sm text-gray-600 mb-8">
+        <a href="/" class="hover:text-primary-600">Accueil</a> ›
+        <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+        <span class="text-gray-900">Hôtel du Parc</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="badge-consultant">Hôtellerie</span>
+          <span class="badge-agence">SEO local</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Chantilly (60)</span>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+80% de réservations directes pour un hôtel à Chantilly</h1>
+        <p class="text-xl text-gray-700">Comment Virginie est passée de 70% Booking / 30% direct à 40% Booking / 60% direct, économisant 15 000€/an de commissions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats clés -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">30% → 60%</div>
+          <p class="text-gray-600">réservations directes</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">15 000€</div>
+          <p class="text-gray-600">économisés par an</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">#1-3</div>
+          <p class="text-gray-600">positions sur 8 mots-clés</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Graphique répartition des réservations -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom max-w-4xl">
+      <h2 class="text-3xl font-bold text-center mb-12">Évolution des réservations</h2>
+
+      <div class="grid md:grid-cols-2 gap-16">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold mb-6 text-gray-700">Avant</h3>
+          <div class="relative w-64 h-64 mx-auto">
+            <div class="absolute inset-0 rounded-full bg-gray-200"></div>
+            <div class="absolute inset-0 rounded-full bg-primary-300" style="clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%)"></div>
+            <div class="absolute inset-0 flex items-center justify-center flex-col">
+              <span class="text-3xl font-bold text-gray-800">70%</span>
+              <span class="text-sm text-gray-600">Booking</span>
+              <span class="text-2xl font-bold text-primary-700 mt-4">30%</span>
+              <span class="text-sm text-primary-600">Direct</span>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-600">70% des réservations passaient par Booking</p>
+        </div>
+
+        <div class="text-center">
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 8 mois</h3>
+          <div class="relative w-64 h-64 mx-auto">
+            <div class="absolute inset-0 rounded-full bg-gray-200"></div>
+            <div class="absolute inset-0 rounded-full bg-green-400" style="clip-path: polygon(0 0, 100% 0, 100% 60%, 0 60%)"></div>
+            <div class="absolute inset-0 flex items-center justify-center flex-col">
+              <span class="text-3xl font-bold text-gray-800">40%</span>
+              <span class="text-sm text-gray-600">Booking</span>
+              <span class="text-2xl font-bold text-green-700 mt-4">60%</span>
+              <span class="text-sm text-green-600">Direct</span>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-600">60% de réservations directes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client et situation -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La cliente</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">🏨</div>
+              <div>
+                <p class="text-xl font-semibold">Virginie Laurent</p>
+                <p class="text-gray-600">Hôtel du Parc • Chantilly (60)</p>
+              </div>
+            </div>
+            <p class="text-gray-700">Hôtel 3 étoiles de 22 chambres, situé à proximité du château de Chantilly. Fréquentation touristique et d'affaires.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La situation avant</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>70% des réservations via Booking</strong> - commissions élevées</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Site peu visible</strong> sur les mots-clés locaux</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Peu de contenu</strong> sur Chantilly et ses attraits</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Fiche Google incomplète</strong> - photos peu attractives</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectif -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom text-center max-w-3xl">
+      <h2 class="text-3xl font-bold mb-6">L'objectif</h2>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        "Je perdais 15 à 20% de mon chiffre en commissions Booking. Je savais que si les clients me trouvaient directement, ils réserveraient chez moi. Mais je n'arrivais pas à être visible sur Google pour 'hôtel Chantilly'."
+      </p>
+      <p class="mt-4 font-semibold">— Virginie Laurent</p>
+    </div>
+  </section>
+
+  <!-- Méthodologie détaillée -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Notre méthodologie</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Audit sémantique tourisme</h3>
+            <p class="text-gray-600">Identification des 50 mots-clés : "hôtel Chantilly", "chambre Chantilly", "week-end Chantilly", etc.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Stratégie de contenu</h3>
+            <p class="text-gray-600">Création de pages sur les activités autour : "que faire à Chantilly", "week-end romantique", "château de Chantilly".</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Optimisation Google My Business</h3>
+            <p class="text-gray-600">Photos professionnelles, posts réguliers sur les offres, catégorie "Hôtel" complétée.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Moteur de réservation directe</h3>
+            <p class="text-gray-600">Intégration d'un moteur de réservation simple et visible sur chaque page.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Stratégie d'avis</h3>
+            <p class="text-gray-600">Process pour demander aux clients satisfaits de laisser un avis Google (petit mot, flyer).</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">6</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Netlinking local</h3>
+            <p class="text-gray-600">Partenariats avec l'office de tourisme, les restaurants locaux, les sites d'activités.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats détaillés -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 8 mois</h2>
+
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-xl shadow-sm">
+          <h3 class="text-2xl font-bold mb-6">Avant</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">70%</span>
+              <span>Booking / 30% direct</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">15 000€</span>
+              <span>commissions/an</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">#23</span>
+              <span>position sur "hôtel Chantilly"</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-green-200">
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 8 mois</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">40%</span>
+              <span><strong class="text-green-700">Booking / 60% direct</strong> (+80% direct)</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">Économie</span>
+              <span><strong class="text-green-700">15 000€/an</strong> de commissions</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">#1-3</span>
+              <span><strong class="text-green-700">positions sur 8 mots-clés</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"hôtel Chantilly"</div>
+          <div class="text-green-600">#1</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"hôtel proche château"</div>
+          <div class="text-green-600">#2</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"week-end Chantilly"</div>
+          <div class="text-green-600">#3</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"chambre Chantilly"</div>
+          <div class="text-green-600">#2</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage complet -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <div class="bg-primary-600 text-white p-12 rounded-2xl">
+        <svg class="w-16 h-16 mb-6 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+        <blockquote class="text-2xl italic mb-6">
+          "Je dépendais trop de Booking. Maintenant les clients me trouvent directement sur Google et je fais plus de réservations directes. Je garde mes marges et je connais mieux mes clients. Le meilleur, c'est que je ne paie plus 15-20% de commission sur une grande partie de mes réservations. 15 000€ d'économisés par an, c'est énorme pour un petit hôtel comme le mien."
+        </blockquote>
+        <p class="font-semibold text-xl">Virginie Laurent</p>
+        <p class="text-white/80">Hôtel du Parc - Chantilly (60)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leçon à retenir -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Ce qu'il faut retenir</h2>
+      <div class="bg-white p-8 rounded-xl">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les hôtels peuvent réduire leur dépendance aux OTAs</strong> - avec une bonne stratégie SEO locale, on reprend le contrôle.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Le contenu local est roi</strong> - les pages sur les activités autour de l'hôtel attirent des visiteurs qualifiés.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les photos professionnelles font la différence</strong> - sur Google My Business et sur le site, elles rassurent et donnent envie.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>15 000€ d'économies par an</strong> - le ROI d'une stratégie SEO pour un hôtel est souvent très rapide.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous voulez réduire vos commissions ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre visibilité et voir comment attirer plus de réservations directes.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

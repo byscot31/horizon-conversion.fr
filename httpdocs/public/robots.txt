@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /
-
-Sitemap: https://animaux.horizon-conversion.fr/sitemap-index.xml

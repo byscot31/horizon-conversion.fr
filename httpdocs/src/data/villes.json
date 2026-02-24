@@ -1,141 +1,349 @@
 [
   {
-    "slug": "chantilly",
-    "name": "Chantilly",
-    "zoneSlug": "sud-oise",
-    "around": ["Lamorlaye", "Gouvieux", "Coye-la-Forêt", "Vineuil-Saint-Firmin", "Orry-la-Ville", "Avilly-Saint-Léonard"]
+    "id": "beauvais",
+    "nom": "Beauvais",
+    "zone": "60",
+    "codePostal": "60000",
+    "population": 56000,
+    "description": "Préfecture de l'Oise, avec une zone industrielle dynamique et un aéroport.",
+    "profil": "prefecture",
+    "metiersPositionnement": {
+      "tpe-pme": "agence",
+      "artisans": "consultant",
+      "profession-liberale": "consultant"
+    },
+    "alentours": [
+      "Bresles (zone industrielle)",
+      "Tillé (aéroport, hôtels)",
+      "Allonne (commerces)",
+      "Troissereux",
+      "Goincourt",
+      "Warluis"
+    ]
   },
   {
-    "slug": "senlis",
-    "name": "Senlis",
-    "zoneSlug": "sud-oise",
-    "around": ["Pont-Sainte-Maxence", "Verneuil-en-Halatte", "Chamant", "Barbery", "Mont-l’Évêque", "Aumont-en-Halatte"]
+    "id": "creil",
+    "nom": "Creil",
+    "zone": "60",
+    "codePostal": "60100",
+    "population": 36000,
+    "description": "Ville industrielle et commerciale, en forte densité.",
+    "profil": "industriel",
+    "metiersPositionnement": {
+      "tpe-pme": "agence",
+      "artisans": "mixte",
+      "commerces": "agence"
+    },
+    "alentours": [
+      "Nogent-sur-Oise (très dense)",
+      "Montataire (industrie)",
+      "Pont-Sainte-Maxence",
+      "Villers-Saint-Paul",
+      "Verneuil-en-Halatte",
+      "Saint-Leu-d'Esserent"
+    ]
   },
   {
-    "slug": "creil",
-    "name": "Creil",
-    "zoneSlug": "sud-oise",
-    "around": ["Nogent-sur-Oise", "Montataire", "Saint-Leu-d’Esserent", "Thiverny", "Villers-Saint-Paul", "Verneuil-en-Halatte"]
+    "id": "compiegne",
+    "nom": "Compiègne",
+    "zone": "60",
+    "codePostal": "60200",
+    "population": 40000,
+    "description": "Ville royale et touristique, avec une forte activité économique.",
+    "profil": "touristique",
+    "metiersPositionnement": {
+      "tourisme": "agence",
+      "tpe-pme": "mixte",
+      "profession-liberale": "consultant"
+    },
+    "alentours": [
+      "Thourotte (zone industrielle)",
+      "Margny-lès-Compiègne",
+      "Venette",
+      "Jaux (commerces)",
+      "Clairoix",
+      "Choisy-au-Bac"
+    ]
   },
   {
-    "slug": "nogent-sur-oise",
-    "name": "Nogent-sur-Oise",
-    "zoneSlug": "sud-oise",
-    "around": ["Creil", "Montataire", "Laigneville", "Mogneville", "Villers-Saint-Paul", "Rousseloy"]
+    "id": "noyon",
+    "nom": "Noyon",
+    "zone": "60",
+    "codePostal": "60400",
+    "population": 14000,
+    "description": "Ville historique, centre de services pour l'est de l'Oise.",
+    "profil": "rural",
+    "metiersPositionnement": {
+      "artisans": "consultant",
+      "commerces": "consultant"
+    },
+    "alentours": [
+      "Passel",
+      "Salency",
+      "Sempigny",
+      "Carlepont",
+      "Cuts",
+      "Crisolles"
+    ]
   },
   {
-    "slug": "pont-sainte-maxence",
-    "name": "Pont-Sainte-Maxence",
-    "zoneSlug": "sud-oise",
-    "around": ["Sacy-le-Grand", "Saint-Martin-Longueau", "Pontpoint", "Verberie", "Brenouille", "Cinqueux"]
+    "id": "crepy-en-valois",
+    "nom": "Crépy-en-Valois",
+    "zone": "60",
+    "codePostal": "60800",
+    "population": 15000,
+    "description": "Ville médiévale, pôle commercial du Valois.",
+    "profil": "commercial",
+    "metiersPositionnement": {
+      "commerces": "mixte",
+      "artisans": "consultant"
+    },
+    "alentours": [
+      "Betz",
+      "Bargny",
+      "Fresnoy-la-Rivière",
+      "Feigneux",
+      "Gilocourt",
+      "Gondreville"
+    ]
   },
   {
-    "slug": "compiegne",
-    "name": "Compiègne",
-    "zoneSlug": "sud-oise",
-    "around": ["Margny-lès-Compiègne", "Venette", "Le Meux", "Jaux", "Lacroix-Saint-Ouen", "Choisy-au-Bac"]
+    "id": "clermont",
+    "nom": "Clermont",
+    "zone": "60",
+    "codePostal": "60600",
+    "population": 11000,
+    "description": "Sous-préfecture de l'Oise, centre de services.",
+    "profil": "sous-prefecture",
+    "metiersPositionnement": {
+      "tpe-pme": "agence",
+      "profession-liberale": "consultant"
+    },
+    "alentours": [
+      "Fitz-James",
+      "Agnetz (commerces)",
+      "Breuil-le-Sec",
+      "Breuil-le-Vert",
+      "Nointel",
+      "Erquery"
+    ]
   },
   {
-    "slug": "noyon",
-    "name": "Noyon",
-    "zoneSlug": "sud-oise",
-    "around": ["Guiscard", "Cuts", "Pont-l’Évêque", "Passel", "Tracy-le-Mont", "Ribécourt-Dreslincourt"]
+    "id": "chantilly",
+    "nom": "Chantilly",
+    "zone": "60",
+    "codePostal": "60500",
+    "population": 11000,
+    "description": "Ville touristique et résidentielle très prisée.",
+    "profil": "residentiel-aisé",
+    "metiersPositionnement": {
+      "profession-liberale": "consultant-premium",
+      "tourisme": "consultant",
+      "commerces": "consultant",
+      "tpe-pme": "consultant"
+    },
+    "alentours": [
+      "Lamorlaye (quartier résidentiel aisé)",
+      "Saint-Maximin",
+      "Gouvieux (résidentiel)",
+      "Coye-la-Forêt",
+      "Avilly-Saint-Léonard",
+      "Vineuil-Saint-Firmin"
+    ]
   },
   {
-    "slug": "clermont-oise",
-    "name": "Clermont",
-    "zoneSlug": "sud-oise",
-    "around": ["Fitz-James", "Agnetz", "Breuil-le-Sec", "Breuil-le-Vert", "Liancourt", "Laigneville"]
+    "id": "meru",
+    "nom": "Méru",
+    "zone": "60",
+    "codePostal": "60110",
+    "population": 14000,
+    "description": "Ville active, proche du Val-d'Oise, avec une zone industrielle.",
+    "profil": "artisanal",
+    "metiersPositionnement": {
+      "artisans": "consultant",
+      "commerces": "consultant"
+    },
+    "alentours": [
+      "Chambly (important, limitrophe 60/95)",
+      "Esches",
+      "Amblainville",
+      "Andeville",
+      "Laboissière-en-Thelle",
+      "Le Mesnil-en-Thelle"
+    ]
   },
   {
-    "slug": "beauvais",
-    "name": "Beauvais",
-    "zoneSlug": "sud-oise",
-    "around": ["Allonne", "Goincourt", "Tillé", "Saint-Paul", "Bresles", "Noailles"]
+    "id": "chaumont-en-vexin",
+    "nom": "Chaumont-en-Vexin",
+    "zone": "60",
+    "codePostal": "60240",
+    "population": 3500,
+    "description": "Village dynamique du Vexin français, proche de Gisors.",
+    "profil": "rural",
+    "metiersPositionnement": {
+      "artisans": "consultant",
+      "commerces": "consultant"
+    },
+    "alentours": [
+      "Gisors (ville importante, 27)",
+      "Trie-Château",
+      "Jouy-sous-Thelle",
+      "Liancourt-Saint-Pierre",
+      "Le Vaumain",
+      "Boury-en-Vexin"
+    ]
   },
   {
-    "slug": "meru",
-    "name": "Méru",
-    "zoneSlug": "sud-oise",
-    "around": ["Andeville", "Amblainville", "Laboissière-en-Thelle", "Corbeil-Cerf", "Chambly", "Bornel"]
-  },
-
-  {
-    "slug": "l-isle-adam",
-    "name": "L’Isle-Adam",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Parmain", "Mériel", "Presles", "Valmondois", "Champagne-sur-Oise", "Chambly"]
-  },
-  {
-    "slug": "beaumont-sur-oise",
-    "name": "Beaumont-sur-Oise",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Persan", "Bernes-sur-Oise", "Nointel", "Mours", "Bruyères-sur-Oise", "Champagne-sur-Oise"]
-  },
-  {
-    "slug": "persan",
-    "name": "Persan",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Beaumont-sur-Oise", "Chambly", "Bernes-sur-Oise", "Bruyères-sur-Oise", "L’Isle-Adam", "Boran-sur-Oise"]
+    "id": "senlis",
+    "nom": "Senlis",
+    "zone": "60",
+    "codePostal": "60300",
+    "population": 16000,
+    "description": "Cité médiévale, ville d'art et d'histoire, résidentielle.",
+    "profil": "touristique-residentiel",
+    "metiersPositionnement": {
+      "tourisme": "mixte",
+      "profession-liberale": "consultant",
+      "commerces": "consultant"
+    },
+    "alentours": [
+      "Chamant",
+      "Mont-l'Évêque",
+      "Montépilloy",
+      "Barbery",
+      "Ognon",
+      "Villers-Saint-Frambourg"
+    ]
   },
   {
-    "slug": "cergy",
-    "name": "Cergy",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Pontoise", "Osny", "Éragny", "Vauréal", "Courdimanche", "Neuville-sur-Oise"]
+    "id": "cergy",
+    "nom": "Cergy",
+    "zone": "95",
+    "codePostal": "95000",
+    "population": 67000,
+    "description": "Préfecture du Val-d'Oise, pôle universitaire et économique.",
+    "profil": "prefecture-dense",
+    "metiersPositionnement": {
+      "tpe-pme": "agence",
+      "reseaux-franchise": "agence",
+      "commerces": "agence",
+      "profession-liberale": "mixte",
+      "artisans": "mixte"
+    },
+    "alentours": [
+      "Pontoise (centre historique, professions libérales)",
+      "Osny",
+      "Neuville-sur-Oise",
+      "Jouy-le-Moutier",
+      "Vauréal",
+      "Puiseux-Pontoise"
+    ]
   },
   {
-    "slug": "pontoise",
-    "name": "Pontoise",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Cergy", "Saint-Ouen-l’Aumône", "Osny", "Ennery", "Éragny", "Auvers-sur-Oise"]
+    "id": "argenteuil",
+    "nom": "Argenteuil",
+    "zone": "95",
+    "codePostal": "95100",
+    "population": 110000,
+    "description": "Ville la plus peuplée du Val-d'Oise, très dense.",
+    "profil": "urbain-dense",
+    "metiersPositionnement": {
+      "commerces": "agence",
+      "artisans": "agence",
+      "tpe-pme": "agence"
+    },
+    "alentours": [
+      "Bezons",
+      "Colombes (92 limitrophe)",
+      "Gennevilliers (92)",
+      "Cormeilles-en-Parisis",
+      "Sannois",
+      "Saint-Gratien"
+    ]
   },
   {
-    "slug": "saint-ouen-l-aumone",
-    "name": "Saint-Ouen-l’Aumône",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Pontoise", "Cergy", "Osny", "Éragny", "Méry-sur-Oise", "Herblay-sur-Seine"]
+    "id": "auvers-sur-oise",
+    "nom": "Auvers-sur-Oise",
+    "zone": "95",
+    "codePostal": "95430",
+    "population": 7000,
+    "description": "Ville touristique, très prisée, village de peintres.",
+    "profil": "touristique",
+    "metiersPositionnement": {
+      "tourisme": "consultant",
+      "commerces": "consultant"
+    },
+    "alentours": [
+      "Méry-sur-Oise",
+      "Butry-sur-Oise",
+      "Valmondois",
+      "Nesles-la-Vallée",
+      "L'Isle-Adam",
+      "Mériel"
+    ]
   },
   {
-    "slug": "taverny",
-    "name": "Taverny",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Saint-Leu-la-Forêt", "Beauchamp", "Bessancourt", "Franconville", "Montigny-lès-Cormeilles", "Herblay-sur-Seine"]
+    "id": "montmorency",
+    "nom": "Montmorency",
+    "zone": "95",
+    "codePostal": "95160",
+    "population": 22000,
+    "description": "Ville résidentielle aisée, proche de Paris.",
+    "profil": "residentiel-aisé",
+    "metiersPositionnement": {
+      "profession-liberale": "consultant-premium",
+      "commerces": "consultant",
+      "tpe-pme": "consultant"
+    },
+    "alentours": [
+      "Soisy-sous-Montmorency",
+      "Andilly",
+      "Margency",
+      "Eaubonne",
+      "Saint-Prix",
+      "Bouffémont"
+    ]
   },
   {
-    "slug": "argenteuil",
-    "name": "Argenteuil",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Bezons", "Colombes", "Sartrouville", "Sannois", "Franconville", "Cormeilles-en-Parisis"]
+    "id": "isle-adam",
+    "nom": "L'Isle-Adam",
+    "zone": "95",
+    "codePostal": "95290",
+    "population": 12000,
+    "description": "Ville touristique et résidentielle au bord de l'Oise.",
+    "profil": "touristique-residentiel",
+    "metiersPositionnement": {
+      "tourisme": "mixte",
+      "commerces": "mixte"
+    },
+    "alentours": [
+      "Parmain",
+      "Mériel",
+      "Méry-sur-Oise",
+      "Valmondois",
+      "Butry-sur-Oise",
+      "Nerville-la-Forêt"
+    ]
   },
   {
-    "slug": "sarcelles",
-    "name": "Sarcelles",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Garges-lès-Gonesse", "Villiers-le-Bel", "Arnouville", "Gonesse", "Saint-Brice-sous-Forêt", "Écouen"]
-  },
-  {
-    "slug": "enghien-les-bains",
-    "name": "Enghien-les-Bains",
-    "zoneSlug": "nord-val-doise",
-    "around": ["Soisy-sous-Montmorency", "Montmorency", "Deuil-la-Barre", "Saint-Gratien", "Eaubonne", "Sannois"]
-  },
-  {
-    "zoneSlug": "nord-val-doise",
-    "slug": "herblay-sur-seine",
-    "name": "Herblay-sur-Seine",
-    "around": ["Montigny-lès-Cormeilles", "La Frette-sur-Seine", "Conflans-Sainte-Honorine", "Taverny", "Franconville", "Saint-Ouen-l’Aumône"]
-  },
-  {
-    "zoneSlug": "nord-val-doise",
-    "slug": "franconville",
-    "name": "Franconville",
-    "around": ["Ermont", "Eaubonne", "Sannois", "Beauchamp", "Taverny", "Saint-Leu-la-Forêt"]
-  },
-  {
-    "zoneSlug": "nord-val-doise",
-    "slug": "ermont",
-    "name": "Ermont",
-    "around": ["Eaubonne", "Franconville", "Saint-Gratien", "Sannois", "Enghien-les-Bains", "Deuil-la-Barre"]
+    "id": "conflans-sainte-honorine",
+    "nom": "Conflans-Sainte-Honorine",
+    "zone": "95",
+    "codePostal": "78700",
+    "population": 36000,
+    "description": "Ville des Yvelines (par convention, vous ciblez le 95 limitrophe), confluent de l'Oise et de la Seine.",
+    "profil": "mixte",
+    "metiersPositionnement": {
+      "commerces": "agence",
+      "tpe-pme": "agence"
+    },
+    "alentours": [
+      "Andrésy (résidentiel aisé)",
+      "Maurecourt",
+      "Eragny (zone d'activités)",
+      "Neuville-sur-Oise",
+      "Jouy-le-Moutier",
+      "Vauréal (université, étudiants)"
+    ]
   }
 ]

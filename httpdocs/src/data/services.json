@@ -1,87 +1,56 @@
 [
   {
-    "slug": "seo-local",
-    "name": "SEO local",
-    "excerpt": "Être visible sur Google quand on vous cherche près de chez vous.",
-    "icon": "/assets/images/services/seo.svg",
-    "tier": "primary",
-    "bullets": [
-      "Audit SEO local + plan d’action",
-      "Fiche Google optimisée (GBP)",
-      "Pages locales qui convertissent",
-      "Maillage interne local",
-      "Suivi des positions + demandes"
-    ]
+    "id": "seo-local",
+    "nom": "Référencement local",
+    "nomCourt": "SEO local",
+    "description": "Votre entreprise apparaît dans les premiers résultats quand on cherche votre métier dans votre ville.",
+    "benefice": "Recevoir plus d'appels et de clients de proximité",
+    "premium": true,
+    "icon": "map-pin"
   },
   {
-    "slug": "google-ads",
-    "name": "Google Ads",
-    "excerpt": "Des campagnes simples pour générer des demandes rapidement.",
-    "icon": "/assets/images/services/adwords.svg",
-    "tier": "primary",
-    "bullets": [
-      "Ciblage local et mots-clés rentables",
-      "Annonces claires + extensions",
-      "Landing page dédiée si besoin",
-      "Suivi des conversions (appels, formulaires)",
-      "Optimisations régulières"
-    ]
+    "id": "google-ads",
+    "nom": "Google Ads & Facebook Ads",
+    "nomCourt": "annonces",
+    "description": "Des publicités qui s'affichent uniquement pour les gens autour de chez vous, qui cherchent ce que vous vendez.",
+    "benefice": "Obtenir des clients rapidement, sans attendre",
+    "premium": true,
+    "icon": "megaphone"
   },
   {
-    "slug": "pages-locales",
-    "name": "Pages locales qui convertissent",
-    "excerpt": "Des pages “service × ville” pensées pour obtenir des appels et des formulaires.",
-    "icon": "/assets/images/services/experience.svg",
-    "tier": "primary",
-    "bullets": [
-      "Message clair (problème → solution)",
-      "CTA visibles et rassurance",
-      "Preuves (avis, cas, réalisations)",
-      "Structure SEO propre (Hn, schema, maillage)",
-      "Améliorations continues"
-    ]
-  },
-
-  {
-    "slug": "google-business-profile",
-    "name": "Fiche Google (Google Business Profile)",
-    "excerpt": "Optimiser votre présence Maps pour générer plus d’appels et d’itinéraires.",
-    "icon": "/assets/images/services/content_marketing.svg",
-    "tier": "secondary",
-    "bullets": [
-      "Catégories, services, zones",
-      "Photos, posts et FAQ",
-      "Optimisation avis + réponses",
-      "Cohérence NAP (nom/adresse/tel)",
-      "Suivi appels et actions"
-    ]
+    "id": "cro",
+    "nom": "Optimisation des conversions (CRO)",
+    "nomCourt": "optimisation",
+    "description": "On améliore votre site pour que les visiteurs vous contactent ou achètent, sans changer votre trafic.",
+    "benefice": "Plus de clients avec le même nombre de visiteurs",
+    "premium": true,
+    "icon": "trending-up"
   },
   {
-    "slug": "meta-ads",
-    "name": "Meta Ads (Facebook/Instagram)",
-    "excerpt": "Des pubs locales pour obtenir plus de contacts et relancer les visiteurs.",
-    "icon": "/assets/images/services/social.svg",
-    "tier": "secondary",
-    "bullets": [
-      "Ciblage par zone et profils",
-      "Créa simple orientée demande",
-      "Formulaire instantané ou landing",
-      "Retargeting (ne pas perdre les visiteurs)",
-      "Ajustements selon les résultats"
-    ]
+    "id": "creation-site",
+    "nom": "Création de sites web",
+    "nomCourt": "site web",
+    "description": "Un site moderne, simple à gérer, qui présente bien votre activité et donne envie de vous contacter.",
+    "benefice": "Avoir une vitrine professionnelle sur internet",
+    "premium": false,
+    "icon": "code"
   },
   {
-    "slug": "tracking",
-    "name": "Suivi & mesure des conversions",
-    "excerpt": "Savoir exactement d’où viennent les demandes (appels, formulaires, coût).",
-    "icon": "/assets/images/services/analysis.svg",
-    "tier": "secondary",
-    "bullets": [
-      "Tracking formulaires + appels",
-      "GA4 / Tag Manager / événements",
-      "UTM + sources (SEO, Ads, réseaux)",
-      "Tableau de bord simple",
-      "Pilotage par la donnée"
-    ]
+    "id": "gmb",
+    "nom": "Optimisation Google My Business",
+    "nomCourt": "fiche Google",
+    "description": "On optimise votre fiche Google (avis, photos, horaires) pour que les clients vous trouvent facilement.",
+    "benefice": "Apparaître dans Google Maps avec une belle fiche",
+    "premium": false,
+    "icon": "map"
+  },
+  {
+    "id": "formation",
+    "nom": "Formation SEO",
+    "nomCourt": "formation",
+    "description": "Je vous forme pour que vous puissiez gérer vous-même votre référencement local.",
+    "benefice": "Devenir autonome sur votre SEO",
+    "premium": false,
+    "icon": "graduation-cap"
   }
 ]

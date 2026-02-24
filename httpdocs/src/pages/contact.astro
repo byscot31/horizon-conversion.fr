@@ -1,141 +1,70 @@
 ---
-// src/pages/contact.astro
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PageTitle from "../components/PageTitle.astro";
-import ContactForm from "../components/ContactForm.astro";
-
-import { buildModel } from "../lib/pageModel";
-
-const model = buildModel({
-  type: "home",
-  canonical: "/contact/",
-});
-
-const seo = {
-  title: "Contact | Horizon Conversion",
-  description:
-    "Demander un audit gratuit ou un rappel. Zones : Sud Oise (60) & Val d’Oise (95).",
-  canonical: "/contact/",
-};
-
-const contexte = { type: "contact" };
-
-const breadcrumbItems = [
-  { label: "Accueil", href: "/" },
-  { label: "Contact", href: "/contact/" },
-];
-
-// WhatsApp (format wa.me sans +)
-const whatsappRaw = String(model.site?.whatsapp ?? "").trim();
-const whatsappDigits = whatsappRaw ? whatsappRaw.replace(/[^\d]/g, "") : "";
-const whatsappUrl = whatsappDigits ? `https://wa.me/${whatsappDigits}` : "";
-const whatsappLabel = model.site?.whatsappDisplay ?? "WhatsApp";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<BaseLayout seo={seo} site={model.site}>
-  <PageTitle
-      contexte={contexte}
-      seo={seo}
-      breadcrumbItems={breadcrumbItems}
-      data={{
-        badge: "Contact",
-        h1: "Parlons de vos demandes",
-        chapo: "Audit gratuit ou rappel rapide. Dites-moi votre ville et votre besoin, je vous réponds vite.",
-      }}
-  />
+<Layout title="Contact" description="Contactez Horizon Conversion pour votre projet SEO dans l'Oise et le Val-d'Oise.">
+  <div class="container-custom py-16">
+    <h1 class="text-4xl font-bold mb-8">Contactez-moi</h1>
 
-  <section id="content">
-    <div class="content-wrap pb-0">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <p class="text-lg text-gray-700 mb-6">
+          Discutons de votre projet. Je vous propose un échange gratuit pour analyser votre situation et voir comment je peux vous aider.
+        </p>
 
-      <!-- Infos rapides -->
-      <div class="container mb-3">
-        <div class="row justify-content-between">
-
-          <!-- Zone -->
-          <div class="col-lg-4 col-md-6">
-            <div class="feature-box flex-column text-center">
-              <div class="fbox-image text-center mb-3">
-                <img height="120" src="/assets/images/icons/seo.svg" alt="Zone d’intervention" />
-              </div>
-              <div class="fbox-content">
-                <h3 class="text-transform-none ls-0 mb-3">Zone d’intervention</h3>
-                <p class="text-smaller mb-3">
-                  Sud Oise (60) &amp; Val d’Oise (95) — et alentours si c’est cohérent.
-                </p>
-                <div class="text-muted small">
-                  Exemples : Chantilly, Senlis, Creil, L’Isle-Adam, Pontoise…
-                </div>
-              </div>
-            </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">📞</span>
+            <a href="tel:0660921008" class="text-primary-600 text-xl hover:underline">06 60 92 10 08</a>
           </div>
 
-          <!-- Coordonnées -->
-          <div class="col-lg-4 col-md-6">
-            <div class="feature-box flex-column text-center">
-              <div class="fbox-image text-center mb-3">
-                <img height="120" src="/assets/images/icons/group.svg" alt="Coordonnées" />
-              </div>
-              <div class="fbox-content">
-                <h3 class="text-transform-none ls-0 mb-3">Coordonnées</h3>
-                <p class="text-smaller mb-3">
-                  Réponse rapide (lun–ven). Le plus simple : formulaire ci-dessous.
-                </p>
-                <div class="d-flex flex-column gap-2 align-items-center">
-                  <a data-track="click_phone" class="btn btn-link p-0" href="tel:+33660921008"><u>06 60 92 10 08</u></a>
-
-                  {whatsappUrl && (
-                      <a
-                          data-track="click_whatsapp"
-                          class="btn btn-link p-0"
-                          href={whatsappUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                      >
-                        <u>{whatsappLabel}</u>
-                      </a>
-                  )}
-
-                  <a class="btn btn-link p-0" href="mailto:contact@horizon-conversion.fr"><u>contact@horizon-conversion.fr</u></a>
-                </div>
-              </div>
-            </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">✉️</span>
+            <a href="mailto:contact@horizon-conversion.fr" class="text-primary-600 text-xl hover:underline">contact@horizon-conversion.fr</a>
           </div>
 
-          <!-- CTA -->
-          <div class="col-lg-4 col-md-12">
-            <div class="feature-box flex-column text-center">
-              <div class="fbox-image text-center mb-3">
-                <img height="120" src="/assets/images/icons/social.svg" alt="Audit gratuit" />
-              </div>
-              <div class="fbox-content">
-                <h3 class="text-transform-none ls-0 mb-3">Audit gratuit</h3>
-                <p class="text-smaller mb-3">
-                  On vérifie : page, suivi des demandes, leviers (SEO local / Ads) et priorités actionnables.
-                </p>
-                <div class="d-flex justify-content-center gap-2 flex-wrap">
-                  <a data-track="click_audit" href="#audit" data-scrollto="#audit" class="button button-rounded text-transform-none ls-0 m-0">
-                    Demander un audit
-                  </a>
-                  <a data-track="click_callback" href="#rappel" data-scrollto="#rappel" class="button button-rounded button-light text-dark bg-white border text-transform-none ls-0 m-0">
-                    Être rappelé
-                  </a>
-                </div>
-              </div>
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">📍</span>
+            <div>
+              <p class="font-semibold">Zones d'intervention :</p>
+              <p>Oise (60) et Val-d'Oise (95)</p>
+              <p class="text-sm text-gray-600 mt-2">Je me déplace dans tout les deux départements.</p>
             </div>
           </div>
-
         </div>
       </div>
 
-      <div class="clear"></div>
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <h2 class="text-2xl font-bold mb-4">Envoyez-moi un message</h2>
+        <form class="space-y-4" method="POST" action="/contact">
+          <div>
+            <label class="block text-sm font-medium mb-1">Nom</label>
+            <input type="text" class="w-full px-4 py-2 border rounded-lg" required>
+          </div>
 
-      <!-- Formulaires -->
-      <div id="audit"></div>
-      <ContactForm form={model.blocks.form} data={model.site} contexte={contexte} mode="audit" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Email</label>
+            <input type="email" class="w-full px-4 py-2 border rounded-lg" required>
+          </div>
 
-      <div id="rappel"></div>
-      <ContactForm form={model.blocks.form} data={model.site} contexte={contexte} mode="callback" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Téléphone</label>
+            <input type="tel" class="w-full px-4 py-2 border rounded-lg">
+          </div>
 
+          <div>
+            <label class="block text-sm font-medium mb-1">Ville</label>
+            <input type="text" class="w-full px-4 py-2 border rounded-lg" placeholder="Ex: Beauvais, Cergy...">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Message</label>
+            <textarea rows="4" class="w-full px-4 py-2 border rounded-lg" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full">Envoyer</button>
+        </form>
+      </div>
     </div>
-  </section>
-</BaseLayout>
+  </div>
+</Layout>

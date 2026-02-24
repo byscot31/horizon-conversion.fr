@@ -1,0 +1,361 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const ville = villes.find(v => v.id === "cergy");
+---
+
+<Layout
+    title="Étude de cas : +30% de clients en boutique pour une caviste à Cergy | Horizon Conversion"
+    description="Découvrez comment une caviste à Cergy a augmenté sa fréquentation de 30% grâce à des campagnes Google Ads géolocalisées."
+>
+
+  <!-- Hero avec image -->
+  <section class="relative bg-gradient-to-r from-green-50 to-emerald-50 py-16 overflow-hidden">
+    <div class="absolute right-0 top-0 w-1/3 h-full opacity-10">
+      <img src="/images/etudes/caviste-hero.svg" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'">
+    </div>
+    <div class="container-custom relative z-10">
+      <nav class="text-sm text-gray-600 mb-8">
+        <a href="/" class="hover:text-primary-600">Accueil</a> ›
+        <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+        <span class="text-gray-900">Cave des 3 Rois</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="badge-consultant">Commerce</span>
+          <span class="badge-agence">Google Ads</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Cergy (95)</span>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+30% de clients en boutique pour une caviste à Cergy</h1>
+        <p class="text-xl text-gray-700">Comment Sophie est passée de 0 à 15-20 visites par semaine directement issues de ses annonces Google.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image clé avant/après -->
+  <section class="py-12 bg-white">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="bg-gray-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center">
+            <img src="/images/etudes/caviste-campagne-avant.png" alt="Campagne avant optimisation" class="max-h-full object-contain">
+          </div>
+          <p class="text-sm text-gray-500">Avant : campagne non géolocalisée, CTR à 0,8%</p>
+        </div>
+        <div class="text-center">
+          <div class="bg-green-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center border-2 border-green-300">
+            <img src="/images/etudes/caviste-campagne-apres.png" alt="Campagne après optimisation" class="max-h-full object-contain">
+          </div>
+          <p class="text-sm text-gray-500">Après : géolocalisation fine, CTR à 4,2%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vue d'ensemble -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">30%</div>
+          <p class="text-gray-600">d'augmentation de la fréquentation</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">4,2%</div>
+          <p class="text-gray-600">taux de clic (CTR) sur les annonces</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">3x</div>
+          <p class="text-gray-600">ROI sur la période des fêtes</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-16">
+        <!-- Client -->
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La cliente</h2>
+          <div class="bg-white p-6 rounded-xl">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">🍷</div>
+              <div>
+                <p class="text-xl font-semibold">Sophie Dubois</p>
+                <p class="text-gray-600">Cave des 3 Rois • Cergy (95)</p>
+              </div>
+            </div>
+            <p class="text-gray-700">Caviste passionnée, Sophie a ouvert sa cave en 2019 dans le centre de Cergy. Elle avait une belle clientèle fidèle mais peinait à attirer de nouveaux clients, surtout les jeunes actifs du quartier.</p>
+          </div>
+        </div>
+
+        <!-- Situation initiale -->
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La situation avant</h2>
+          <div class="bg-white p-6 rounded-xl">
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>0 client</strong> via publicité en ligne</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Dépendance au bouche-à-oreille</strong> uniquement</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Fiche Google incomplète</strong> (peu de photos, pas de posts)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Pas de visibilité</strong> pour les recherches "caviste Cergy"</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectif -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom text-center max-w-3xl">
+      <h2 class="text-3xl font-bold mb-6">L'objectif</h2>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        "Je voulais attirer une nouvelle clientèle, notamment les jeunes actifs de 25-40 ans qui habitent autour de la cave. Je savais qu'ils cherchaient sur Google 'caviste près de chez moi' ou 'vin Cergy', mais je n'apparaissais pas."
+      </p>
+      <p class="mt-4 font-semibold">— Sophie Dubois</p>
+    </div>
+  </section>
+
+  <!-- Méthodologie détaillée -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Notre méthodologie</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Audit des mots-clés locaux</h3>
+            <p class="text-gray-600">Identification des 30 mots-clés les plus pertinents : "caviste Cergy", "vin Cergy", "cave à vin Pontoise", "cadeau vin", etc.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Création de campagnes géolocalisées</h3>
+            <p class="text-gray-600">Rayon de 5km autour de Cergy, avec exclusion des zones non pertinentes. Ciblage des horaires d'ouverture.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Optimisation de la fiche Google</h3>
+            <p class="text-gray-600">Ajout de 20 photos professionnelles, posts réguliers sur les nouvelles cuvées, réponses aux avis.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Création d'annonces saisonnières</h3>
+            <p class="text-gray-600">Annonces spécifiques pour les fêtes : "Coffrets cadeaux vins à Cergy", "Idées cadeaux pour Noël".</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Suivi et optimisation quotidienne</h3>
+            <p class="text-gray-600">Ajustement des enchères, tests d'annonces, analyse des heures de conversion.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">6</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Extension aux réseaux sociaux</h3>
+            <p class="text-gray-600">Campagnes Facebook/Instagram pour toucher une audience plus large avec des visuels attractifs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats détaillés -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 2 mois</h2>
+
+      <!-- Graphique -->
+      <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl mb-12">
+        <p class="text-center text-gray-500 mb-4">📊 Évolution des visites en boutique (novembre-décembre)</p>
+        <div class="h-64 bg-gray-100 rounded-lg flex items-end justify-center p-4">
+          <div class="flex items-end gap-4 h-48">
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-gray-300 rounded-t-lg" style="height: 60px"></div>
+              <span class="text-sm mt-2">Sem 1</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-gray-300 rounded-t-lg" style="height: 75px"></div>
+              <span class="text-sm mt-2">Sem 2</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-primary-300 rounded-t-lg" style="height: 100px"></div>
+              <span class="text-sm mt-2">Sem 3</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-primary-400 rounded-t-lg" style="height: 130px"></div>
+              <span class="text-sm mt-2">Sem 4</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-primary-500 rounded-t-lg" style="height: 150px"></div>
+              <span class="text-sm mt-2">Sem 5</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-primary-600 rounded-t-lg" style="height: 180px"></div>
+              <span class="text-sm mt-2">Sem 6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="bg-white p-8 rounded-xl shadow-sm">
+          <h3 class="text-2xl font-bold mb-6">Avant</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">0</span>
+              <span>clients via publicité</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">50</span>
+              <span>clients/semaine (estimation)</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">0,8%</span>
+              <span>taux de clic sur les rares annonces</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-green-200">
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 2 mois</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">15-20</span>
+              <span><strong class="text-green-700">clients/semaine via les annonces</strong></span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">30%</span>
+              <span><strong class="text-green-700">augmentation globale</strong> de la fréquentation</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">4,2%</span>
+              <span><strong class="text-green-700">taux de clic</strong> sur les annonces optimisées</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">3x</span>
+              <span><strong class="text-green-700">ROI sur les fêtes</strong> (décembre)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"caviste Cergy"</div>
+          <div class="text-green-600">position #4</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"vin Cergy"</div>
+          <div class="text-green-600">position #3</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"cave à vin Pontoise"</div>
+          <div class="text-green-600">position #6</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"coffret vin"</div>
+          <div class="text-green-600">position #2 (Ads)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capture écran Google Ads -->
+  <section class="py-12 bg-white">
+    <div class="container-custom max-w-4xl">
+      <h3 class="text-xl font-bold text-center mb-6">Capture d'écran de la campagne Google Ads</h3>
+      <div class="bg-gray-100 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
+        <span class="text-gray-400 text-lg">📸 [Placeholder : Capture d'écran de la console Google Ads]</span>
+        <p class="text-sm text-gray-500 mt-2">Taux de clic : 4,2% • Coût par clic moyen : 1,20€ • Conversions : 48</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage complet -->
+  <section class="py-20 bg-primary-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto bg-primary-600 text-white p-12 rounded-2xl">
+        <svg class="w-16 h-16 mb-6 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+        <blockquote class="text-2xl italic mb-6">
+          "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'. Ça change tout ! Des jeunes du quartier, des cadres de La Défense, plein de nouveaux visages. Le meilleur, c'est que je peux mesurer précisément ce que me rapporte chaque euro investi dans les annonces."
+        </blockquote>
+        <p class="font-semibold text-xl">Sophie Dubois</p>
+        <p class="text-white/80">Cave des 3 Rois - Cergy (95)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leçon à retenir -->
+  <section class="py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Ce qu'il faut retenir</h2>
+      <div class="bg-white p-8 rounded-xl shadow-sm">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les commerces de proximité ont tout à gagner des annonces géolocalisées</strong> - on peut cibler très finement les gens qui habitent ou travaillent à côté.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les fêtes sont une opportunité énorme</strong> - avec des annonces saisonnières, on multiplie le ROI.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Google Ads + fiche Google My Business</strong> = combo gagnant. Les clients voient l'annonce, cliquent, atterrissent sur la fiche avec photos et avis, et viennent.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les photos professionnelles font la différence</strong> - Sophie a investi dans une séance photo, ses annonces ont un taux de clic bien supérieur.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous voulez le même résultat pour votre commerce ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre situation et voir si les annonces Google peuvent vous aider.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

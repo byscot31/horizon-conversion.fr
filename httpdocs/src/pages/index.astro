@@ -1,647 +1,184 @@
 ---
-// src/pages/index.astro
-import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactForm from "../components/ContactForm.astro";
-import Faqs from "../components/Faqs.astro";
+import Layout from "../layouts/Layout.astro";
+import services from "../data/services.json";
+import metiers from "../data/metiers.json";
+import villes from "../data/villes.json";
 
-import { buildModel } from "../lib/pageModel";
-
-const model = buildModel({
-  type: "home",
-  canonical: "/",
-});
-
-const contexte = model.contexte;
-
-const seo = {
-  ...model.seo,
-  title: model.site.name,
-  description:
-    model.site.defaultDescription ??
-    "Des demandes qualifiées via Google pour les pros locaux (Sud Oise 60 + Nord Val-d’Oise 95). Audit gratuit.",
-  canonical: "/",
-};
-
-// CTA (règles projet)
-const ctaPrimary = { label: "Demander un audit (gratuit)", href: "/contact/" };
-const ctaSecondary = { label: "Être rappelé", href: "/contact/" };
-
-// FAQ (home) : si vide, tu peux en ajouter plus tard via faqs_*.json
-const faqItems = Array.isArray(model.faqs) ? model.faqs : [];
+const servicesPremium = services.filter(s => s.premium);
+const villesPrincipales = villes.slice(0, 6);
 ---
 
-<BaseLayout seo={seo} site={model.site}>
-  <!-- Slider ============================================= -->
-  <section id="slider" class="slider-element slider-parallax min-vh-60 min-vh-md-100 include-header">
-    <div class="slider-inner" style="background: var(--cnvs-contrast-0) url('/assets/images/hero/hero-1.jpg') center center no-repeat; background-size: cover;">
-
-      <div class="vertical-middle slider-element-fade">
-        <div class="container py-5">
-          <div class="row pt-5">
-            <div class="col-lg-6 col-md-9">
-              <div class="slider-title">
-                <div class="badge rounded-pill badge-default">Webmarketing local</div>
-
-                <h1>Des demandes qualifiées via Google pour les pros locaux.</h1>
-
-                <h2 class="text-rotater mb-4" data-separator="," data-rotate="fadeIn" data-speed="3500">
-                  - Sud Oise (60) &amp; Nord Val d’Oise (95).
-                  <span class="t-rotate">SEO local,Google Ads,Meta Ads,Optimisation de conversion</span>.
-                </h2>
-
-                <a href={ctaPrimary.href} class="button button-rounded button-large text-transform-none ls-0">
-                  {ctaPrimary.label}
-                </a>
-                <a href={ctaSecondary.href} class="button button-rounded button-large button-light text-dark bg-white border text-transform-none ls-0">
-                  {ctaSecondary.label}
-                </a>
-              </div>
-
-              <div class="mt-4">
-                <span class="d-inline-block mb-3 me-3 small">
-                  <i class="fa-check fa-solid me-1 position-relative text-success" style="top:1px"></i>
-                  Exécution soignée (sans blabla)
-                </span>
-                <span class="d-inline-block mb-3 me-3 small">
-                  <i class="fa-check fa-solid me-1 position-relative text-success" style="top:1px"></i>
-                  Suivi des appels + formulaires
-                </span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="video-wrap h-100 d-block d-lg-none">
-        <div class="video-overlay" style="background: rgba(255,255,255,0.85);"></div>
-      </div>
-
-    </div>
-  </section><!-- #slider end -->
-
-  <!-- Content ============================================= -->
-  <section id="content">
-    <div class="content-wrap pt-0">
-
-      <!-- Pour qui ============================================= -->
-      <div class="section bg-transparent m-0 py-5">
-        <div class="container">
-          <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 550px">
-            <div class="badge rounded-pill badge-default">Pour qui</div>
-            <h2 class="text-transform-none ls-0 mb-3">Des pros locaux qui veulent plus de demandes</h2>
-            <p>Obtenez des demandes locales qualifiées et développez votre activité sans dépendre du hasard.</p>
-          </div>
-
-          <div class="row col-mb-30 align-content-stretch">
-            <div class="col-lg-3 col-md-6 d-flex">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">Artisans</h3>
-                      <p class="text-smaller">Plus d’appels entrants, moins de demandes non pertinentes.</p>
-                      <a class="more-link mt-2" href="/profils/artisans/">Voir le profil</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-flex">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">PME / TPE</h3>
-                      <p class="text-smaller">Un flux régulier de demandes qualifiées, sans y passer tes journées.</p>
-                      <a class="more-link mt-2" href="/contact/">Demander un audit</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-flex">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">Commerces</h3>
-                      <p class="text-smaller">Plus de visites, d’appels et d’actions locales (itinéraire, réservation…).</p>
-                      <a class="more-link mt-2" href="/services/seo-local/">Voir le levier SEO local</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-flex">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">Professions libérales</h3>
-                      <p class="text-smaller">Rassurer vite, mettre en confiance, et déclencher la prise de contact.</p>
-                      <a class="more-link mt-2" href="/profils/professions-liberales/">Voir le profil</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-center">
-            <a href={ctaPrimary.href} class="button button-large button-rounded text-capitalize ms-0 mt-5 ls-0">
-              {ctaPrimary.label}
-            </a>
-            <div class="text-muted small mt-2">
-              Réponse rapide — si ce n’est pas pertinent pour toi, je te le dis.
-            </div>
-          </div>
-
-          <div class="clear line my-6"></div>
-        </div>
-      </div>
-
-      <!-- Zone d’intervention ============================================= -->
-      <div class="section bg-transparent m-0 p-0" id="zone-intervention">
-        <div class="container">
-          <div class="heading-block border-bottom-0 text-center mx-auto mb-5" style="max-width: 760px;">
-            <div class="badge rounded-pill badge-default">Zone d’intervention</div>
-            <h2 class="text-transform-none ls-0 mb-3">Sud Oise (60) &amp; Nord Val-d’Oise (95)</h2>
-            <p class="text-muted mb-0">
-              J’accompagne les entreprises locales dans le sud de l’Oise (60) et le nord du Val-d’Oise (95).
-            </p>
-          </div>
-
-          <div class="row col-mb-30">
-            <div class="col-lg-6">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
-                    <div>
-                      <h3 class="text-transform-none ls-0 mb-1">Sud Oise (60)</h3>
-                      <p class="text-muted small mb-0">
-                        Secteur prioritaire : Chantilly, Senlis, Lamorlaye, Creil (et alentours).
-                      </p>
-                    </div>
-                  </div>
-                  <div class="text-muted small mb-4">
-                    Si ta ville est proche, c’est généralement couvert.
-                  </div>
-                  <a class="button button-small button-rounded text-transform-none ls-0 m-0" href="/zones/sud-oise/">
-                    Voir la zone
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
-                    <div>
-                      <h3 class="text-transform-none ls-0 mb-1">Nord Val-d’Oise (95)</h3>
-                      <p class="text-muted small mb-0">
-                        Secteur prioritaire : L’Isle-Adam, Persan, Beaumont-sur-Oise (et alentours).
-                      </p>
-                    </div>
-                  </div>
-                  <div class="text-muted small mb-4">
-                    Donne-moi ta commune, je te dis si c’est OK.
-                  </div>
-                  <a class="button button-small button-rounded text-transform-none ls-0 m-0" href="/zones/nord-val-doise/">
-                    Voir la zone
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-center mt-5">
-            <a class="button button-large button-rounded text-transform-none ls-0 m-0 me-2" href="/zones/">
-              Voir toutes les villes couvertes
-            </a>
-            <div class="text-muted small mt-2">
-              Réponse rapide — tu me donnes ta ville, je te dis si c’est OK.
-            </div>
-          </div>
-
-          <div class="clear line my-6"></div>
-        </div>
-      </div>
-
-      <!-- Ce que tu obtiens (livrables) ============================================= -->
-      <div class="section bg-transparent m-0 p-0">
-        <div class="container">
-          <div class="heading-block border-bottom-0 text-center mx-auto mb-0" style="max-width: 550px">
-            <div class="badge rounded-pill badge-default">Ce que tu obtiens</div>
-            <h2 class="text-transform-none ls-0 mb-3">Des livrables concrets, orientés demandes</h2>
-            <p>Tout ce qu’il faut pour générer des demandes et améliorer la conversion, semaine après semaine.</p>
-          </div>
-
-          <div class="row justify-content-between align-items-center">
-            <div class="col-sm-6">
-              <div class="feature-box border-0">
-                <div class="fbox-icon">
-                  <img src="/assets/images/icons/seo.svg" alt="Appels & formulaires" class="bg-transparent rounded-0" />
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none ls-0">Appels &amp; formulaires</h3>
-                  <p>Des prises de contact simples, rapides, et mesurables.</p>
-                  <ul class="iconlist ms-3 mt-4 mb-0">
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Formulaire optimisé</li>
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Bouton d’appel / click-to-call</li>
-                    <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Messages anti-fuite (merci, relance)</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="feature-box border-0 mt-5">
-                <div class="fbox-icon">
-                  <img src="/assets/images/icons/adword.svg" alt="Suivi clair" class="bg-transparent rounded-0" />
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none ls-0">Suivi clair</h3>
-                  <p>Tu sais d’où viennent les demandes (SEO / Ads) et ce qui convertit.</p>
-                  <ul class="iconlist ms-3 mt-4 mb-0">
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Suivi formulaires + appels</li>
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Sources identifiées (SEO / Ads)</li>
-                    <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Tableau de bord simple</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-6">
-              <div class="feature-box border-0">
-                <div class="fbox-icon">
-                  <img src="/assets/images/icons/social.svg" alt="Pages qui convertissent" class="bg-transparent rounded-0" />
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none ls-0">Pages qui convertissent</h3>
-                  <p>Des pages orientées “demande”, pas juste “présentation”.</p>
-                  <ul class="iconlist ms-3 mt-4 mb-0">
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Structure claire (problème → solution)</li>
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Preuves (avis, réalisations)</li>
-                    <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> CTA visibles + rassurance</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="feature-box border-0 mt-5">
-                <div class="fbox-icon">
-                  <img src="/assets/images/icons/experience.svg" alt="Optimisation" class="bg-transparent rounded-0" />
-                </div>
-                <div class="fbox-content">
-                  <h3 class="text-transform-none ls-0">Optimisation continue</h3>
-                  <p>On corrige, on teste, on améliore (messages, pages, ciblage).</p>
-                  <ul class="iconlist ms-3 mt-4 mb-0">
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> 1–3 actions prioritaires</li>
-                    <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Ajustements sur les leviers</li>
-                    <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Résultats suivis</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="clear line my-6"></div>
-        </div>
-      </div>
-
-      <!-- La méthode (4 étapes) ============================================= -->
-      <div class="section bg-transparent m-0 pt-3 pb-0">
-        <div class="container mw-md">
-
-          <div class="heading-block border-bottom-0 text-center mx-auto" style="max-width: 550px">
-            <div class="badge rounded-pill badge-default">La méthode</div>
-            <h2 class="text-transform-none ls-0 mb-3">Une méthode simple en 4 étapes</h2>
-            <p class="mb-0">
-              Audit → Mise en place → Acquisition → Optimisation. Objectif : générer des demandes locales qualifiées.
-            </p>
-          </div>
-
-          <div class="text-md-center">
-            <h3 class="bg-color d-inline-block px-4 py-2 text-white mb-0 rounded-1">Le plan d’action</h3>
-          </div>
-
-          <div class="story-timeline">
-            <div class="clear mt-4"></div>
-            <div class="story-timeline-line"></div>
-
-            <!-- Étape 1 -->
-            <div class="row justify-content-md-center">
-              <div class="col-md-5 text-md-end">
-                <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">
-                  Étape 1
-                </h4>
-              </div>
-              <div class="story-timeline-dots"></div>
-              <div class="col-md-5">
-                <h3 class="mb-2">Audit</h3>
-                <p class="mb-0">
-                  Diagnostic complet + plan d’action priorisé : on identifie ce qui bloque et ce qui rapporte le plus vite.
-                </p>
-              </div>
-            </div>
-
-            <div class="clear my-5"></div>
-
-            <!-- Étape 2 -->
-            <div class="row justify-content-md-center">
-              <div class="col-md-5 order-md-2">
-                <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">
-                  Étape 2
-                </h4>
-              </div>
-              <div class="story-timeline-dots"></div>
-              <div class="col-md-5 text-md-end">
-                <h3 class="mb-2">Mise en place</h3>
-                <p class="mb-0">
-                  On pose des fondations solides : pages qui convertissent, preuve (avis/réalisations), formulaire et suivi.
-                </p>
-              </div>
-            </div>
-
-            <div class="clear my-5"></div>
-
-            <!-- Étape 3 -->
-            <div class="row justify-content-md-center">
-              <div class="col-md-5 text-md-end">
-                <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">
-                  Étape 3
-                </h4>
-              </div>
-              <div class="story-timeline-dots"></div>
-              <div class="col-md-5">
-                <h3 class="mb-2">Acquisition</h3>
-                <p class="mb-0">
-                  On active les leviers locaux : SEO local, Google Business, contenus ciblés — et Ads si tu veux accélérer.
-                </p>
-              </div>
-            </div>
-
-            <div class="clear my-5"></div>
-
-            <!-- Étape 4 -->
-            <div class="row justify-content-md-center">
-              <div class="col-md-5 order-md-2">
-                <h4 class="bg-secondary d-inline-block px-3 py-1 text-white mb-0 rounded-1 mb-3">
-                  Étape 4
-                </h4>
-              </div>
-              <div class="story-timeline-dots"></div>
-              <div class="col-md-5 text-md-end">
-                <h3 class="mb-2">Optimisation</h3>
-                <p class="mb-0">
-                  On améliore en continu : messages, pages, mots-clés, annonces et conversion pour gagner en volume et qualité.
-                </p>
-              </div>
-            </div>
-
-            <div class="clear mt-5"></div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Le système (les 3 leviers) ============================================= -->
-      <div class="section bg-transparent">
-        <div class="container">
-          <div class="heading-block border-bottom-0 text-center mx-auto" style="max-width: 550px">
-            <div class="badge rounded-pill badge-default">Le système</div>
-            <h2 class="text-transform-none ls-0 mb-3">3 leviers pour générer des demandes qualifiées</h2>
-            <p class="mb-0">On combine visibilité (SEO), vitesse (Ads) et performance (CRO) pour transformer ta présence en clients.</p>
-          </div>
-
-          <div class="row col-mb-30 align-content-stretch">
-
-            <!-- SEO local -->
-            <div class="col-lg-4 col-md-6 d-flex">
-              <a href="#seo-local" class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-image mb-5 text-center">
-                      <img height="150" src="/assets/images/services/seo.svg" alt="SEO local">
-                    </div>
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">SEO local (Google)</h3>
-                      <p class="text-smaller">Être trouvé par les bonnes personnes, au bon endroit, au bon moment.</p>
-                    </div>
-                    <ul class="iconlist ms-3 mt-4 mb-0">
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Pages “service × ville” qui rankent</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Google Business optimisée (appels, itinéraires)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Contenus utiles + preuves (avis, réalisations)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Maillage interne + structure claire</li>
-                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Suivi des positions et des demandes</li>
-                    </ul>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Google & Meta Ads -->
-            <div class="col-lg-4 col-md-6 d-flex">
-              <a href="#ads" class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-image mb-5 text-center">
-                      <img height="150" src="/assets/images/services/social.svg" alt="Google & Meta Ads">
-                    </div>
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">Google &amp; Meta Ads</h3>
-                      <p class="text-smaller">Des leads rapides et ciblés pendant que le SEO monte en puissance.</p>
-                    </div>
-                    <ul class="iconlist ms-3 mt-4 mb-0">
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Campagnes Search (intentions fortes)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Retargeting (ne pas perdre les visiteurs)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Annonces locales (zones + horaires)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Pages d’atterrissage dédiées</li>
-                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Budget maîtrisé + pilotage hebdo</li>
-                    </ul>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- CRO -->
-            <div class="col-lg-4 col-md-6 d-flex">
-              <a href="#cro" class="card h-shadow h-translate-y-sm all-ts">
-                <div class="card-body p-5">
-                  <div class="feature-box flex-column">
-                    <div class="fbox-image mb-5 text-center">
-                      <img height="150" src="/assets/images/services/adwords.svg" alt="Conversion CRO">
-                    </div>
-                    <div class="fbox-content">
-                      <h3 class="text-transform-none ls-0 text-larger">Conversion (CRO)</h3>
-                      <p class="text-smaller">Plus de demandes avec le même trafic (sans tout refaire).</p>
-                    </div>
-                    <ul class="iconlist ms-3 mt-4 mb-0">
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Messages clairs et rassurants</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Formulaire simple + friction réduite</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Preuves (avis, cas clients, garanties)</li>
-                      <li class="mb-2 text-muted"><i class="fa-solid fa-check text-smaller color"></i> Optimisation mobile et vitesse</li>
-                      <li class="text-muted"><i class="fa-solid fa-check text-smaller color"></i> Tests et améliorations continues</li>
-                    </ul>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Offres (3 packs) ============================================= -->
-      <div class="section m-0"
-           style="background: url('/assets/images/sections/4.png') no-repeat center top; background-size: cover; padding: 140px 0 0;">
-        <div class="container">
-          <div class="heading-block border-bottom-0 text-center mx-auto" style="max-width: 550px">
-            <div class="badge rounded-pill badge-default">Offres</div>
-            <h2 class="text-transform-none ls-0 mb-3">3 packs pour générer des demandes locales qualifiées</h2>
-            <p class="mb-0">Choisis le niveau d’accompagnement adapté à ton objectif. Chaque pack est pensé pour te faire avancer vite, sans blabla.</p>
-          </div>
-          <div class="row justify-content-between align-items-start">
-
-            <!-- Pricing -->
-            <div id="section-pricing" class="page-section p-0 m-0">
-
-              <div class="pricing row align-items-stretch g-0 col-mb-50 mb-4">
-
-                <!-- Pack 1: Démarrage -->
-                <div class="col-md-4">
-                  <div class="pricing-box h-100">
-                    <div class="pricing-title">
-                      <img class="mb-2 bg-transparent rounded-0" src="/assets/images/icons/man.svg" alt="Icon Démarrage" width="50">
-                      <h3>Démarrage</h3>
-                      <span>Pour poser une base solide</span>
-                    </div>
-
-                    <div class="pricing-price">
-                      <div class="pts-content pts-content-false">
-                        <small class="d-block">À partir de</small>590<span class="price-unit">€</span><span class="price-tenure">/ mois</span>
-                      </div>
-                      <p class="text-muted small mt-3 mb-0">Idéal pour démarrer proprement et obtenir les premières demandes.</p>
-                    </div>
-
-                    <div class="pricing-features border-0 bg-transparent">
-                      <ul>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Audit rapide + plan d’action</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Optimisation visibilité locale (base)</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Pages essentielles qui convertissent</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Suivi des demandes (simple)</li>
-                      </ul>
-                    </div>
-
-                    <div class="pricing-action">
-                      <a href="#eligibilite" class="button button-large button-rounded w-100 text-capitalize m-0 ls-0">
-                        Vérifier mon éligibilité
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Pack 2: Croissance (mis en avant) -->
-                <div class="col-md-4">
-                  <div class="pricing-box h-100 pricing-best">
-                    <div class="pricing-title">
-                      <img class="mb-2 bg-transparent rounded-0" src="/assets/images/icons/group.svg" alt="Icon Croissance" width="60">
-                      <h3>Croissance</h3>
-                      <span>Le meilleur équilibre</span>
-                    </div>
-
-                    <div class="pricing-price">
-                      <div class="pts-content pts-content-false">
-                        <small class="d-block">À partir de</small>1 190<span class="price-unit">€</span><span class="price-tenure">/ mois</span>
-                      </div>
-                      <p class="text-muted small mt-3 mb-0">Pour générer un flux régulier de demandes qualifiées.</p>
-                    </div>
-
-                    <div class="pricing-features border-0 bg-transparent">
-                      <ul>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Tout le pack Démarrage</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Pages ville × service (prioritaires)</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Optimisation conversion (formulaire + messages)</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Reporting + recommandations mensuelles</li>
-                      </ul>
-                    </div>
-
-                    <div class="pricing-action">
-                      <a href="#eligibilite" class="button button-large button-rounded w-100 text-capitalize m-0 ls-0">
-                        Choisir Croissance
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Pack 3: Dominance -->
-                <div class="col-md-4">
-                  <div class="pricing-box h-100">
-                    <div class="pricing-title">
-                      <img class="mb-2 bg-transparent rounded-0" src="/assets/images/icons/rocket.svg" alt="Icon Dominance" width="55">
-                      <h3>Dominance</h3>
-                      <span>Pour prendre la place #1</span>
-                    </div>
-
-                    <div class="pricing-price">
-                      <div class="pts-content pts-content-false">
-                        <small class="d-block">À partir de</small>2 490<span class="price-unit">€</span><span class="price-tenure">/ mois</span>
-                      </div>
-                      <p class="text-muted small mt-3 mb-0">Pour accélérer et dominer ta zone (SEO + Ads + conversion).</p>
-                    </div>
-
-                    <div class="pricing-features border-0 bg-transparent">
-                      <ul>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Tout le pack Croissance</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Google Ads (mise en place + pilotage)</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Optimisations hebdo (tests, pages, messages)</li>
-                        <li><i class="fa-solid fa-check-circle color me-2"></i>Priorité support + itérations rapides</li>
-                      </ul>
-                    </div>
-
-                    <div class="pricing-action">
-                      <a href="#eligibilite" class="button button-rounded button-large button-light text-dark bg-white border w-100 text-transform-none m-0 ls-0">
-                        Parler du pack Dominance
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="text-muted small">
-                  * “À partir de” : le tarif dépend du nombre de services, de villes ciblées et du niveau de concurrence.
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ ============================================= -->
-      <div class="container py-5" id="faq">
-        <Faqs
-            items={faqItems}
-            data={{
-              badge: "FAQ",
-              title: "Questions fréquentes",
-              intro: "Réponses simples et concrètes.",
-            }}
-            contexte={contexte}
-        />
-      </div>
-
-      <!-- Contact ============================================= -->
-      <ContactForm
-          data={model.cta}
-          form={model.blocks.form}
-          contexte={contexte}
-          mode="audit"
-      />
-
-    </div>
-  </section><!-- #content end -->
-</BaseLayout>
+<Layout
+	title="Expert SEO local Oise & Val-d'Oise"
+	description="Horizon Conversion : consultant SEO avec méthode d'agence. J'accompagne artisans, commerces et entreprises à Beauvais, Compiègne, Cergy et dans tout le 60 et 95."
+>
+
+	<!-- Hero Section -->
+	<section class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
+		<div class="container-custom">
+			<div class="max-w-4xl mx-auto text-center">
+				<!-- Badge hybride -->
+				<div class="mb-6">
+          <span class="inline-flex gap-2">
+            <span class="badge-consultant">👤 Consultant indépendant</span>
+            <span class="badge-agence">🏢 Méthode d'agence</span>
+          </span>
+				</div>
+
+				<h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+					Expert SEO local dans <span class="text-primary-600">l'Oise</span> et le <span class="text-primary-600">Val-d'Oise</span>
+				</h1>
+
+				<p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+					Je suis <strong>consultant indépendant</strong> (vous parlez directement à l'expert)
+					mais je travaille avec <strong>les process d'une agence</strong> (méthode, reporting, résultats).
+				</p>
+
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="/contact" class="btn-primary text-lg px-8 py-4">
+						Discutons de votre projet
+					</a>
+					<a href="/methodologie" class="btn-secondary text-lg px-8 py-4">
+						Découvrir ma méthode
+					</a>
+				</div>
+
+				<div class="mt-8 flex items-center justify-center gap-4 text-sm text-gray-600">
+					<span>📞 06 60 92 10 08</span>
+					<span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+					<span>📍 Beauvais - Cergy</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Section -->
+	<section class="py-20">
+		<div class="container-custom">
+			<h2 class="text-3xl font-bold text-center mb-4">Mes services</h2>
+			<p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+				Des solutions adaptées à chaque métier, chaque territoire.
+			</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				{servicesPremium.map(service => (
+					<div class="card p-8 text-center hover:shadow-xl transition-all">
+						<div class="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4">
+							<svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold mb-2">{service.nom}</h3>
+						<p class="text-gray-600 mb-4">{service.description}</p>
+						<p class="text-sm font-semibold text-primary-600 mb-4">{service.benefice}</p>
+						<a href={`/services/${service.id}`} class="text-primary-600 font-medium hover:underline inline-flex items-center gap-1">
+							En savoir plus
+							<span>→</span>
+						</a>
+					</div>
+				))}
+			</div>
+
+			<div class="text-center mt-12">
+				<a href="/services" class="btn-secondary">
+					Voir tous les services
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Positionnement hybride expliqué -->
+	<section class="bg-gray-50 py-20">
+		<div class="container-custom">
+			<div class="grid md:grid-cols-2 gap-12">
+				<div class="bg-white p-8 rounded-xl shadow-md">
+					<div class="badge-consultant inline-block mb-4">👤 Consultant</div>
+					<h3 class="text-2xl font-bold mb-4">L'expertise directe</h3>
+					<ul class="space-y-3 text-gray-700">
+						<li class="flex items-start gap-2">✓ Vous travaillez directement avec moi, pas de commercial</li>
+						<li class="flex items-start gap-2">✓ 100% de votre budget va à l'expertise</li>
+						<li class="flex items-start gap-2">✓ Relation durable, je suis là sur le long terme</li>
+						<li class="flex items-start gap-2">✓ Connaissance terrain du 60 et 95</li>
+					</ul>
+				</div>
+
+				<div class="bg-white p-8 rounded-xl shadow-md">
+					<div class="badge-agence inline-block mb-4">🏢 Méthode d'agence</div>
+					<h3 class="text-2xl font-bold mb-4">La fiabilité structurée</h3>
+					<ul class="space-y-3 text-gray-700">
+						<li class="flex items-start gap-2">✓ Process éprouvés sur des dizaines de clients</li>
+						<li class="flex items-start gap-2">✓ Reporting professionnels (Data Studio)</li>
+						<li class="flex items-start gap-2">✓ Outils experts (SEMrush, Ahrefs)</li>
+						<li class="flex items-start gap-2">✓ Équipe de partenaires si besoin</li>
+					</ul>
+				</div>
+			</div>
+
+			<p class="text-center text-xl font-semibold text-primary-600 mt-8">
+				Le meilleur des deux mondes, pour vous.
+			</p>
+		</div>
+	</section>
+
+	<!-- Métiers Section -->
+	<section class="py-20">
+		<div class="container-custom">
+			<h2 class="text-3xl font-bold text-center mb-4">J'accompagne</h2>
+			<p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+				Chaque métier a ses spécificités. J'adapte mon approche à vos besoins.
+			</p>
+
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+				{metiers.map(metier => (
+					<a href={`/metiers/${metier.id}`} class="card p-4 text-center hover:scale-105 transition-transform group">
+						<div class="font-semibold text-gray-900 group-hover:text-primary-600">{metier.nomCourt}</div>
+						<div class="text-xs text-gray-500 mt-1">{metier.description.split(',')[0]}</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Villes Section -->
+	<section class="bg-gray-50 py-20">
+		<div class="container-custom">
+			<h2 class="text-3xl font-bold text-center mb-4">Mes villes d'intervention</h2>
+			<p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+				Je me déplace dans tout l'Oise (60) et le Val-d'Oise (95).
+			</p>
+
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				{villesPrincipales.map(ville => (
+					<a href={`/villes/${ville.id}`} class="card p-4 text-center hover:border-primary-300 transition-colors">
+						<div class="font-semibold">{ville.nom}</div>
+						<div class="text-sm text-gray-500">{ville.codePostal}</div>
+						<div class="text-xs text-primary-600 mt-1">{ville.zone === "60" ? "Oise" : "Val-d'Oise"}</div>
+					</a>
+				))}
+			</div>
+
+			<div class="text-center mt-8">
+				<a href="/villes" class="text-primary-600 font-medium hover:underline inline-flex items-center gap-1">
+					Voir les 16 villes et leurs alentours
+					<span>→</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Final -->
+	<section class="py-16">
+		<div class="container-custom">
+			<div class="bg-primary-600 text-white rounded-2xl p-12 text-center">
+				<h2 class="text-3xl font-bold mb-4">Prêt à passer à l'action ?</h2>
+				<p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+					Que vous soyez artisan, commerce ou entreprise dans l'Oise ou le Val-d'Oise, je vous propose un audit gratuit de votre visibilité en ligne.
+				</p>
+				<a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+					Demander mon audit gratuit
+				</a>
+			</div>
+		</div>
+	</section>
+
+</Layout>

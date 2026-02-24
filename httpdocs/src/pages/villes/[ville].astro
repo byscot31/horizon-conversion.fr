@@ -1,0 +1,280 @@
+---
+// src/pages/villes/[ville].astro
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+import services from "../../data/services.json";
+import metiers from "../../data/metiers.json";
+
+export async function getStaticPaths() {
+  return villes.map(ville => ({
+    params: { ville: ville.id },
+    props: { ville }
+  }));
+}
+
+const { ville } = Astro.props;
+
+// Services recommandés pour cette ville
+const servicesRecommandes = services.filter(s => s.premium);
+
+// Métiers principaux de cette ville (selon son profil)
+const metiersVille = metiers.filter(m =>
+  ville.profil === 'residentiel-aisé' ? ['profession-liberale', 'commerces'].includes(m.id) :
+    ville.profil === 'industriel' ? ['tpe-pme', 'artisans'].includes(m.id) :
+      ville.profil === 'touristique' ? ['tourisme', 'commerces'].includes(m.id) :
+        ville.profil === 'commercial' ? ['commerces', 'tpe-pme'].includes(m.id) :
+          ville.profil === 'prefecture' ? ['tpe-pme', 'commerces', 'profession-liberale'].includes(m.id) :
+            ['artisans', 'commerces', 'tpe-pme']
+).slice(0, 4);
+
+// Stats de la ville (approximatives)
+const statsVille = {
+  entreprises: Math.floor(ville.population / 10) || 500,
+  artisans: Math.floor(ville.population / 50) || 100,
+  commerces: Math.floor(ville.population / 100) || 50
+};
+
+// Couleur selon le département
+const zoneColor = ville.zone === "60" ? "bg-blue-50" : "bg-green-50";
+---
+
+<Layout
+    title={`${ville.nom} (${ville.codePostal}) - Expert SEO local | Horizon Conversion`}
+    description={`Expert SEO à ${ville.nom} et ses environs. J'accompagne les artisans, commerces et entreprises du ${ville.zone === "60" ? "département de l'Oise" : "Val-d'Oise"}.`}
+>
+
+  <!-- Hero -->
+  <section class={`${zoneColor} py-20`}>
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <nav class="text-sm text-gray-600 mb-8">
+          <a href="/villes" class="hover:text-primary-600">Villes</a> ›
+          <span class="text-gray-900">{ville.nom}</span>
+        </nav>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">{ville.nom}</h1>
+
+        <div class="flex flex-wrap gap-3 mb-6">
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">📮 {ville.codePostal}</span>
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">
+            {ville.zone === "60" ? "📍 Oise (60)" : "📍 Val-d'Oise (95)"}
+          </span>
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">👥 {ville.population.toLocaleString()} habitants</span>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-6">{ville.description}</p>
+
+        <div class="bg-white/50 p-4 rounded-lg">
+          <p class="font-semibold mb-2">Profil de la ville :</p>
+          <div class="flex gap-2">
+            <span class="badge-consultant text-xs">
+              {ville.profil === 'residentiel-aisé' && '🏡 Résidentiel aisé'}
+              {ville.profil === 'industriel' && '🏭 Industriel'}
+              {ville.profil === 'touristique' && '🏰 Touristique'}
+              {ville.profil === 'commercial' && '🏪 Commercial'}
+              {ville.profil === 'prefecture' && '🏛️ Préfecture'}
+              {ville.profil === 'sous-prefecture' && '🏛️ Sous-préfecture'}
+              {ville.profil === 'rural' && '🌳 Rural'}
+              {ville.profil === 'artisanal' && '🔨 Artisanal'}
+              {ville.profil === 'urbain-dense' && '🏙️ Urbain dense'}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats rapides -->
+  <section class="py-12 border-b">
+    <div class="container-custom">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div>
+          <div class="text-3xl font-bold text-primary-600">{statsVille.entreprises}+</div>
+          <div class="text-sm text-gray-600">entreprises</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary-600">{statsVille.artisans}+</div>
+          <div class="text-sm text-gray-600">artisans</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary-600">{statsVille.commerces}+</div>
+          <div class="text-sm text-gray-600">commerces</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary-600">{ville.alentours.length}</div>
+          <div class="text-sm text-gray-600">communes alentours</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services à la ville -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Mes services à {ville.nom}</h2>
+      <p class="text-center text-gray-600 mb-12">Des solutions adaptées au tissu économique local.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {servicesRecommandes.map(service => (
+            <div class="card p-6">
+              <h3 class="text-xl font-bold mb-2">{service.nom}</h3>
+              <p class="text-gray-600 text-sm mb-3">{service.description}</p>
+              <p class="text-primary-600 font-semibold text-sm mb-3">{service.benefice}</p>
+
+              <div class="mt-4 space-y-2">
+                <a href={`/${service.id}/artisans/${ville.id}`} class="block text-sm text-gray-700 hover:text-primary-600">
+                  → Pour les artisans
+                </a>
+                <a href={`/${service.id}/commerces/${ville.id}`} class="block text-sm text-gray-700 hover:text-primary-600">
+                  → Pour les commerces
+                </a>
+                <a href={`/${service.id}/profession-liberale/${ville.id}`} class="block text-sm text-gray-700 hover:text-primary-600">
+                  → Pour les professions libérales
+                </a>
+              </div>
+            </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Métiers clés -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Les métiers que j'accompagne à {ville.nom}</h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+        {metiersVille.map(metier => (
+            <a href={`/seo-local/${metier.id}/${ville.id}`} class="card p-4 text-center hover:border-primary-300">
+              <div class="font-semibold">{metier.nom}</div>
+              <div class="text-xs text-gray-500 mt-1">{metier.description}</div>
+              <div class="mt-2 text-primary-600 text-sm">Voir la page →</div>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Villes alentours -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">J'interviens aussi dans les environs</h2>
+      <p class="text-center text-gray-600 mb-12">Je me déplace dans toutes ces communes proches de {ville.nom}.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {ville.alentours.map(alentour => {
+          // Extraire le nom sans la description entre parenthèses
+          const nomAlentour = alentour.split(' (')[0];
+          const description = alentour.includes('(') ? alentour.split('(')[1].replace(')', '') : '';
+
+          return (
+              <div class="bg-white p-3 rounded-lg border border-gray-100 text-center hover:shadow-sm">
+                <div class="font-medium">{nomAlentour}</div>
+                {description && <div class="text-xs text-gray-500">{description}</div>}
+              </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Analyse concurrentielle locale -->
+  <section class="bg-primary-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Analyse concurrentielle à {ville.nom}</h2>
+      <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto">
+        Exemple pour le mot-clé "{ville.profil === 'residentiel-aisé' ? 'avocat' : ville.profil === 'industriel' ? 'transport' : 'plombier'} {ville.nom}"
+      </p>
+
+      <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl">
+        <table class="w-full">
+          <thead>
+          <tr class="border-b">
+            <th class="text-left py-2">Concurrent</th>
+            <th class="text-left py-2">Position</th>
+            <th class="text-left py-2">Points forts</th>
+            <th class="text-left py-2">Opportunité</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="border-b">
+            <td class="py-2">Concurrent A</td>
+            <td class="py-2">#1</td>
+            <td class="py-2">Avis (30), ancienneté</td>
+            <td class="py-2 text-green-600">Site non mobile</td>
+          </tr>
+          <tr class="border-b">
+            <td class="py-2">Concurrent B</td>
+            <td class="py-2">#3</td>
+            <td class="py-2">Site rapide</td>
+            <td class="py-2 text-green-600">Peu de contenu local</td>
+          </tr>
+          <tr>
+            <td class="py-2 font-semibold">Vous</td>
+            <td class="py-2">?</td>
+            <td class="py-2">-</td>
+            <td class="py-2 text-primary-600">À jouer sur les avis et le contenu local</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <p class="mt-4 text-sm text-gray-600">
+          <strong>Mon analyse :</strong> En créant du contenu sur les {ville.alentours.length} villages autour et en optimisant votre fiche Google, vous pouvez atteindre le top 3 en 3-4 mois.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi travailler avec moi ici -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Pourquoi travailler avec moi à {ville.nom} ?</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">📍</span>
+              <div>
+                <span class="font-semibold">Je connais le terrain</span>
+                <p class="text-gray-600">Basé dans l'Oise, je connais les spécificités de {ville.nom} et des environs.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">🏢</span>
+              <div>
+                <span class="font-semibold">Des clients dans la ville</span>
+                <p class="text-gray-600">J'accompagne déjà des professionnels à {ville.nom}, je connais le marché local.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">🤝</span>
+              <div>
+                <span class="font-semibold">Je me déplace</span>
+                <p class="text-gray-600">Pas de problème pour vous rencontrer à {ville.nom} ou dans les environs.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-8 rounded-xl">
+          <h2 class="text-2xl font-bold mb-4">Un client à {ville.nom}</h2>
+          <div class="bg-white p-4 rounded-lg mb-4">
+            <p class="italic text-gray-700 mb-2">
+              "{ville.id === 'meru' && "Je reçois des appels de clients que je n'avais jamais eus avant, même des villages autour."}
+              {ville.id === 'chantilly' && "Je ne dépends plus de Booking, les clients me trouvent directement sur Google."}
+              {ville.id === 'cergy' && "Pendant les fêtes, +30% de clients en boutique grâce aux annonces."}
+              {ville.id === 'montmorency' && "Je reçois deux fois plus de rendez-vous sans changer mes annonces."}
+              {ville.id === 'compiegne' && "Maintenant je reçois des demandes de devis toutes les semaines."}"
+            </p>
+            <p class="font-semibold text-sm">- Professionnel à {ville.nom}</p>
+          </div>
+
+          <a href="/contact" class="btn-primary w-full text-center">
+            Me contacter pour {ville.nom}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

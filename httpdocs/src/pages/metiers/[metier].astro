@@ -1,0 +1,250 @@
+---
+// src/pages/metiers/[metier].astro
+import Layout from "../../layouts/Layout.astro";
+import services from "../../data/services.json";
+import metiers from "../../data/metiers.json";
+import villes from "../../data/villes.json";
+
+export async function getStaticPaths() {
+  return metiers.map(metier => ({
+    params: { metier: metier.id },
+    props: { metier }
+  }));
+}
+
+const { metier } = Astro.props;
+
+// Services recommandés pour ce métier
+const servicesConseilles = services.filter(s =>
+  metier.id === 'artisans' ? ['seo-local', 'gmb', 'creation-site'].includes(s.id) :
+    metier.id === 'commerces' ? ['google-ads', 'gmb', 'seo-local'].includes(s.id) :
+      metier.id === 'profession-liberale' ? ['cro', 'seo-local', 'formation'].includes(s.id) :
+        metier.id === 'tpe-pme' ? ['creation-site', 'seo-local', 'google-ads'].includes(s.id) :
+          metier.id === 'reseaux-franchise' ? ['gmb', 'google-ads', 'cro'].includes(s.id) :
+            metier.id === 'tourisme' ? ['seo-local', 'google-ads', 'cro'].includes(s.id) :
+              []
+);
+
+// Villes où ce métier est le plus présent
+const villesMetier = villes.filter(v =>
+  metier.id === 'artisans' ? ['meru', 'beauvais', 'creil'].includes(v.id) :
+    metier.id === 'commerces' ? ['cergy', 'argenteuil', 'compiegne'].includes(v.id) :
+      metier.id === 'profession-liberale' ? ['chantilly', 'montmorency', 'senlis'].includes(v.id) :
+        metier.id === 'tpe-pme' ? ['creil', 'cergy', 'beauvais'].includes(v.id) :
+          metier.id === 'reseaux-franchise' ? ['cergy', 'argenteuil', 'compiegne'].includes(v.id) :
+            metier.id === 'tourisme' ? ['chantilly', 'compiegne', 'auvers-sur-oise'].includes(v.id) :
+              []
+).slice(0, 6);
+
+// Couleur selon le métier
+const bgColor = {
+  artisans: "bg-blue-50",
+  commerces: "bg-green-50",
+  "profession-liberale": "bg-purple-50",
+  "tpe-pme": "bg-amber-50",
+  "reseaux-franchise": "bg-indigo-50",
+  tourisme: "bg-rose-50"
+}[metier.id] || "bg-gray-50";
+---
+
+<Layout
+    title={`${metier.nom} | Horizon Conversion`}
+    description={`Accompagnement SEO pour les ${metier.nomCourt} dans l'Oise et le Val-d'Oise. ${metier.description}`}
+>
+
+  <!-- Hero -->
+  <section class={`${bgColor} py-20`}>
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <nav class="text-sm text-gray-600 mb-8">
+          <a href="/metiers" class="hover:text-primary-600">Métiers</a> ›
+          <span class="text-gray-900">{metier.nom}</span>
+        </nav>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">{metier.nom}</h1>
+        <p class="text-xl text-gray-700 mb-6">{metier.description}</p>
+
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">🎯 {metier.besoin}</span>
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">⚡ Urgence : {metier.urgence}</span>
+        </div>
+
+        <p class="mt-8 text-lg italic text-gray-700">{metier.message?.replace('{ville}', 'votre ville')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enjeux spécifiques -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Les enjeux des {metier.nomCourt}</h2>
+
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl mt-0.5">✓</span>
+              <div>
+                <span class="font-semibold">Visibilité locale</span>
+                <p class="text-gray-600">Être trouvé quand les clients cherchent près de chez eux.</p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl mt-0.5">✓</span>
+              <div>
+                <span class="font-semibold">Confiance et crédibilité</span>
+                <p class="text-gray-600">Avis Google, présence dans les annuaires, site professionnel.</p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl mt-0.5">✓</span>
+              <div>
+                <span class="font-semibold">Différenciation concurrentielle</span>
+                <p class="text-gray-600">Se démarquer des autres professionnels du même secteur.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class={`${bgColor} p-8 rounded-xl`}>
+          <h2 class="text-2xl font-bold mb-4">Mon approche pour les {metier.nomCourt}</h2>
+
+          <p class="text-gray-700 mb-4">
+            Je ne propose pas une solution standard. J'adapte ma stratégie à votre activité spécifique.
+          </p>
+
+          <div class="bg-white p-4 rounded-lg">
+            <div class="font-semibold text-primary-600">Exemple pour {metier.nomCourt} :</div>
+            <p class="text-sm text-gray-600 mt-2">
+              {metier.id === 'artisans' && "Création de pages par service (plomberie, électricité) et par ville, optimisation de la fiche Google, suivi des avis."}
+              {metier.id === 'commerces' && "Campagnes Google Ads géolocalisées, photos professionnelles, posts réguliers sur la fiche Google."}
+              {metier.id === 'profession-liberale' && "Contenu d'autorité, optimisation du taux de rendez-vous, gestion de l'e-réputation."}
+              {metier.id === 'tpe-pme' && "Site vitrine professionnel, SEO B2B, campagnes LinkedIn si pertinent."}
+              {metier.id === 'reseaux-franchise' && "Gestion centralisée des fiches Google, formation des gérants, audits réguliers."}
+              {metier.id === 'tourisme' && "Photos de qualité, contenu sur les activités locales, avis Google soignés."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services recommandés -->
+  <section className="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Services clés pour les {metier.nomCourt}</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {servicesConseilles.map(service => (
+            <a href={`/services/${service.id}`} class="card p-6 text-center hover:shadow-xl group">
+              <h3 class="text-xl font-bold mb-2 group-hover:text-primary-600">{service.nom}</h3>
+              <p class="text-gray-600 text-sm mb-3">{service.description}</p>
+              <span class="text-primary-600 font-medium">Découvrir →</span>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Villes clés -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Où j'accompagne des {metier.nomCourt}</h2>
+      <p class="text-center text-gray-600 mb-12">Dans tout l'Oise et le Val-d'Oise, avec une présence forte dans ces villes :</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        {villesMetier.map(ville => (
+            <a href={`/villes/${ville.id}`} class="card p-4 text-center hover:border-primary-300">
+              <div class="font-semibold">{ville.nom}</div>
+              <div class="text-xs text-gray-500">{ville.codePostal}</div>
+              <div class="mt-2 text-primary-600 text-sm">Voir la ville →</div>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md">
+        <div class="flex justify-between items-start mb-4">
+          <span class="badge-consultant">{metier.nom}</span>
+          <span class="text-gray-500">Ville</span>
+        </div>
+
+        <blockquote class="text-xl italic text-gray-700 mb-6">
+          "{metier.id === 'artisans' && "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant."}
+          {metier.id === 'commerces' && "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'."}
+          {metier.id === 'profession-liberale' && "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."}
+          {metier.id === 'tpe-pme' && "Maintenant je reçois des demandes de devis toutes les semaines."}
+          {metier.id === 'reseaux-franchise' && "On avait du mal à gérer nos fiches Google. Maintenant tout est centralisé."}
+          {metier.id === 'tourisme' && "Je ne dépends plus de Booking, les clients me trouvent directement."}"
+        </blockquote>
+
+        <p class="font-semibold">
+          {metier.id === 'artisans' && "Robert, plombier à Méru"}
+          {metier.id === 'commerces' && "Sophie, caviste à Cergy"}
+          {metier.id === 'profession-liberale' && "Maître Dupont, avocat à Montmorency"}
+          {metier.id === 'tpe-pme' && "Franck, Transports Moreau à Compiègne"}
+          {metier.id === 'reseaux-franchise' && "Caroline, Boulangeries du Pain"}
+          {metier.id === 'tourisme' && "Virginie, Hôtel du Parc à Chantilly"}
+        </p>
+
+        <a href="/etudes-de-cas" class="inline-block mt-6 text-primary-600 hover:underline">
+          Voir les études de cas {metier.nomCourt} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi moi -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Pourquoi travailler avec moi ?</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">✓</span>
+              <div>
+                <span class="font-semibold">Je connais votre métier</span>
+                <p class="text-gray-600">J'accompagne des {metier.nomCourt} depuis plusieurs années, je connais vos enjeux.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">✓</span>
+              <div>
+                <span class="font-semibold">Stratégie sur-mesure</span>
+                <p class="text-gray-600">Pas de solution standard, chaque plan est adapté à votre activité et votre zone.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 text-xl">✓</span>
+              <div>
+                <span class="font-semibold">Présent localement</span>
+                <p class="text-gray-600">Basé dans l'Oise, je me déplace facilement pour vous rencontrer.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-8 rounded-xl">
+          <h2 class="text-2xl font-bold mb-4">Prêt à discuter ?</h2>
+          <p class="text-gray-700 mb-6">
+            Je propose un audit gratuit pour analyser votre situation et voir comment je peux vous aider.
+          </p>
+          <a href="/contact" class="btn-primary inline-block w-full text-center">
+            Demander mon audit gratuit
+          </a>
+          <p class="text-sm text-gray-500 mt-4 text-center">
+            📞 06 60 92 10 08 • contact@horizon-conversion.fr
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,153 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+
+export interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	noIndex?: boolean;
+}
+
+const { title, description, image, noIndex } = Astro.props;
+const siteName = "Horizon Conversion";
+const telephone = "06 60 92 10 08";
+const email = "contact@horizon-conversion.fr";
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- SEO -->
+	<title>{title} | {siteName}</title>
+	<meta name="description" content={description || "Expert SEO local dans l'Oise et le Val-d'Oise. Accompagnement personnalisé pour artisans, commerces et entreprises."} />
+	{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={Astro.url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	{image && <meta property="og:image" content={image} />}
+	<meta property="og:site_name" content={siteName} />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+
+	<!-- Canonical -->
+	<link rel="canonical" href={Astro.url} />
+
+	<!-- Favicon (à créer) -->
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<!-- Contact structured data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "LocalBusiness",
+		"name": siteName,
+		"telephone": telephone,
+		"email": email,
+		"url": "https://horizon-conversion.fr",
+		"areaServed": ["Oise", "Val-d'Oise"]
+	})} />
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Header -->
+<header class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
+	<nav class="container-custom py-4">
+		<div class="flex justify-between items-center">
+			<a href="/" class="text-2xl font-bold text-primary-600">
+				Horizon <span class="text-gray-900">Conversion</span>
+			</a>
+
+			<div class="hidden md:flex space-x-8">
+				<a href="/services" class="text-gray-700 hover:text-primary-600 transition-colors">Services</a>
+				<a href="/metiers" class="text-gray-700 hover:text-primary-600 transition-colors">Métiers</a>
+				<a href="/villes" class="text-gray-700 hover:text-primary-600 transition-colors">Villes</a>
+				<a href="/etudes-de-cas" class="text-gray-700 hover:text-primary-600 transition-colors">Études de cas</a>
+				<a href="/contact" class="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
+			</div>
+
+			<a href="/contact" class="btn-primary hidden md:inline-flex">
+				<span class="mr-2">📞</span> {telephone}
+			</a>
+
+			<!-- Mobile menu button -->
+			<button class="md:hidden p-2" aria-label="Menu">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+			</button>
+		</div>
+	</nav>
+</header>
+
+<!-- Main content -->
+<main class="flex-grow">
+	<slot />
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white mt-20">
+	<div class="container-custom py-12">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+			<div>
+				<h3 class="text-xl font-bold mb-4">Horizon Conversion</h3>
+				<p class="text-gray-400 mb-4">Expert SEO local dans l'Oise et le Val-d'Oise.</p>
+				<div class="space-y-2 text-gray-400">
+					<p>📞 <a href={`tel:${telephone}`} class="hover:text-white transition">{telephone}</a></p>
+					<p>✉️ <a href={`mailto:${email}`} class="hover:text-white transition">{email}</a></p>
+				</div>
+			</div>
+
+			<div>
+				<h4 class="font-semibold mb-4">Services</h4>
+				<ul class="space-y-2 text-gray-400">
+					<li><a href="/services/seo-local" class="hover:text-white transition">Référencement local</a></li>
+					<li><a href="/services/google-ads" class="hover:text-white transition">Google & Meta Ads</a></li>
+					<li><a href="/services/cro" class="hover:text-white transition">Optimisation des conversions</a></li>
+					<li><a href="/services/creation-site" class="hover:text-white transition">Création de sites</a></li>
+					<li><a href="/services/gmb" class="hover:text-white transition">Fiche Google My Business</a></li>
+					<li><a href="/services/formation" class="hover:text-white transition">Formation SEO</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4 class="font-semibold mb-4">Métiers</h4>
+				<ul class="space-y-2 text-gray-400">
+					<li><a href="/metiers/artisans" class="hover:text-white transition">Artisans</a></li>
+					<li><a href="/metiers/commerces" class="hover:text-white transition">Commerces</a></li>
+					<li><a href="/metiers/profession-liberale" class="hover:text-white transition">Professions libérales</a></li>
+					<li><a href="/metiers/tpe-pme" class="hover:text-white transition">TPE & PME</a></li>
+					<li><a href="/metiers/reseaux-franchise" class="hover:text-white transition">Réseaux & Franchises</a></li>
+					<li><a href="/metiers/tourisme" class="hover:text-white transition">Hôtellerie & Tourisme</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4 class="font-semibold mb-4">Zones d'intervention</h4>
+				<ul class="space-y-2 text-gray-400">
+					<li><a href="/villes/beauvais" class="hover:text-white transition">Beauvais</a></li>
+					<li><a href="/villes/compiegne" class="hover:text-white transition">Compiègne</a></li>
+					<li><a href="/villes/chantilly" class="hover:text-white transition">Chantilly</a></li>
+					<li><a href="/villes/cergy" class="hover:text-white transition">Cergy</a></li>
+					<li><a href="/villes/argenteuil" class="hover:text-white transition">Argenteuil</a></li>
+					<li><a href="/villes" class="text-primary-400 hover:text-white transition">Toutes nos villes →</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+			<p>&copy; {new Date().getFullYear()} Horizon Conversion. Tous droits réservés.</p>
+			<p class="text-sm mt-2">
+				<a href="/mentions-legales" class="hover:text-white transition">Mentions légales</a> •
+				<a href="/politique-confidentialite" class="hover:text-white transition">Politique de confidentialité</a>
+			</p>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

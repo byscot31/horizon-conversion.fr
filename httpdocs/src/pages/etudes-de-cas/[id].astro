@@ -1,0 +1,159 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Cette page est un exemple - vous devrez créer un fichier par étude de cas
+// Ou utiliser une approche dynamique comme pour les services/métiers
+
+const { id } = Astro.params;
+
+// Données (à externaliser dans un fichier JSON plus tard)
+const cas = {
+  "plombier-meru": {
+    client: "Robert Martin",
+    entreprise: "Plomberie Martin",
+    metier: "Artisan",
+    ville: "Méru",
+    secteur: "Plomberie, chauffage",
+    site: "plomberie-martin.fr",
+    annee: 2024,
+    situation: "Robert est plombier à Méru depuis 15 ans. Son site avait été créé en 2018 mais n'avait jamais été optimisé. Résultat : quasi invisible sur Google, il ne recevait que 2 appels par semaine, uniquement de clients fidèles.",
+    objectif: "Augmenter le nombre d'appels pour des dépannages urgents et des devis. Devenir visible sur 'plombier Méru' et les mots-clés associés.",
+    methodologie: [
+      "Audit technique complet du site (temps de chargement, mobile, structure)",
+      "Optimisation de la fiche Google My Business (photos, avis, catégories)",
+      "Création de 8 pages spécifiques (plomberie, chauffage, dépannage, etc.)",
+      "Optimisation des pages pour les villes alentours (Chambly, Esches, etc.)",
+      "Campagne de netlinking local (annuaires, partenaires)"
+    ],
+    resultats: {
+      chiffre: "+650% d'appels",
+      avant: {
+        appels: "2 appels/semaine",
+        trafic: "50 visites/mois",
+        position: "#47 sur 'plombier Méru'"
+      },
+      apres: {
+        appels: "15 appels/semaine",
+        trafic: "450 visites/mois",
+        position: "#3 sur 'plombier Méru'"
+      }
+    },
+    temoignage: "Depuis qu'on a commencé avec Julien, je reçois des appels de clients que je n'avais jamais eus avant. Même des gens de Chambly et des villages autour m'ont trouvé ! Mon téléphone n'arrête pas de sonner, et j'ai même dû embaucher un apprenti pour gérer la charge.",
+    duree: "3 mois",
+    investissement: "1200€/mois",
+    services: ["seo-local", "gmb"]
+  }
+}[id] || null;
+---
+
+<Layout title={`Étude de cas - ${cas?.entreprise || 'Horizon Conversion'}`}>
+
+  {cas ? (
+      <div class="container-custom py-12">
+        <!-- Fil d'ariane -->
+        <nav class="text-sm text-gray-600 mb-8">
+          <a href="/" class="hover:text-primary-600">Accueil</a> ›
+          <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+          <span class="text-gray-900">{cas.entreprise}</span>
+        </nav>
+
+        <!-- En-tête -->
+        <div class="bg-gradient-to-r from-primary-50 to-indigo-50 p-8 rounded-2xl mb-12">
+          <div class="flex justify-between items-start mb-4">
+            <span class="badge-consultant">{cas.metier}</span>
+            <span class="text-gray-600">{cas.ville}</span>
+          </div>
+          <h1 class="text-4xl font-bold mb-2">{cas.entreprise}</h1>
+          <p class="text-xl text-gray-700 mb-4">Avec {cas.client}</p>
+          <div class="flex gap-4 text-sm">
+            <span>📍 {cas.secteur}</span>
+            <span>📅 {cas.annee}</span>
+            <span>🔗 {cas.site}</span>
+          </div>
+        </div>
+
+        <!-- Résultat clé -->
+        <div class="grid md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h2 class="text-2xl font-bold mb-4">La situation</h2>
+            <p class="text-gray-700 mb-6">{cas.situation}</p>
+
+            <h3 class="text-xl font-bold mb-3">Objectif</h3>
+            <p class="text-gray-700">{cas.objectif}</p>
+          </div>
+
+          <div class="bg-green-50 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-4 text-green-800">Résultat</h2>
+            <div class="text-5xl font-bold text-green-700 mb-4">{cas.resultats.chiffre}</div>
+
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="bg-white p-4 rounded-lg">
+                <p class="text-sm text-gray-500">Avant</p>
+                <p class="font-bold">{cas.resultats.avant.appels}</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg">
+                <p class="text-sm text-gray-500">Après</p>
+                <p class="font-bold text-green-700">{cas.resultats.apres.appels}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Méthodologie -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8">Notre méthodologie</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            {cas.methodologie.map((etape, index) => (
+                <div class="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
+              <span class="bg-primary-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                {index + 1}
+              </span>
+                  <p class="text-gray-700">{etape}</p>
+                </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Témoignage -->
+        <div class="bg-primary-600 text-white p-12 rounded-2xl mb-16">
+          <svg class="w-12 h-12 mb-4 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+          <blockquote class="text-2xl italic mb-4">
+            "{cas.temoignage}"
+          </blockquote>
+          <p class="font-semibold">{cas.client}</p>
+          <p class="text-sm opacity-80">{cas.entreprise}</p>
+        </div>
+
+        <!-- Détails techniques -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <h3 class="font-bold mb-4">Détails de la mission</h3>
+            <ul class="space-y-2">
+              <li><span class="font-medium">Durée :</span> {cas.duree}</li>
+              <li><span class="font-medium">Investissement :</span> {cas.investissement}</li>
+              <li><span class="font-medium">Services :</span> {cas.services.join(' + ')}</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <h3 class="font-bold mb-4">Vous voulez le même résultat ?</h3>
+            <p class="text-gray-700 mb-4">
+              Je propose un audit gratuit pour analyser votre situation et voir ce qui est possible pour votre activité.
+            </p>
+            <a href="/contact" class="btn-primary inline-block">
+              Demander mon audit
+            </a>
+          </div>
+        </div>
+
+      </div>
+  ) : (
+      <div class="container-custom py-16 text-center">
+        <h1 class="text-3xl font-bold mb-4">Étude de cas non trouvée</h1>
+        <a href="/etudes-de-cas" class="text-primary-600">Voir toutes les études de cas →</a>
+      </div>
+  )}
+
+</Layout>

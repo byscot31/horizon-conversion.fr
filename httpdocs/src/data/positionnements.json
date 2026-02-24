@@ -1,0 +1,58 @@
+{
+  "consultant": {
+    "badge": "👤 Consultant indépendant",
+    "suffixeTitre": "Consultant SEO",
+    "intro": "En tant que consultant indépendant spécialisé dans les {metier}, je vous accompagne personnellement à {ville}.",
+    "argument": "✅ Vous travaillez directement avec l'expert, pas avec un commercial ou un chef de projet.",
+    "arguments": [
+      "Vous avez mon expertise directe, pas un junior formé en 2 semaines",
+      "100% de votre budget va à l'expertise, pas à des frais de structure",
+      "Je connais personnellement votre dossier, pas de turnover",
+      "Relation durable, je suis là dans 1 an, 3 ans, 5 ans"
+    ],
+    "cta": "Parler directement à un expert",
+    "ton": "direct, rassurant, technique"
+  },
+  "agence": {
+    "badge": "🏢 Agence locale",
+    "suffixeTitre": "Agence SEO",
+    "intro": "Notre agence accompagne les {metier} comme vous à {ville} avec des process structurés et éprouvés.",
+    "argument": "🏢 Une méthode d'agence, des outils professionnels, un reporting clair.",
+    "arguments": [
+      "Des process éprouvés sur des dizaines de clients",
+      "Des reporting professionnels (Google Data Studio)",
+      "Des outils experts (SEMrush, Ahrefs, Screaming Frog)",
+      "Une équipe de partenaires si besoin (design, dev)"
+    ],
+    "cta": "Découvrir nos prestations",
+    "ton": "professionnel, structuré, rassurant"
+  },
+  "mixte": {
+    "badge": "👤 Consultant · 🏢 Agence",
+    "suffixeTitre": "Expert SEO",
+    "intro": "Que vous cherchiez un consultant indépendant ou une agence structurée à {ville}, je vous propose le meilleur des deux mondes.",
+    "argument": "L'expertise d'un consultant, la fiabilité d'une agence.",
+    "arguments": [
+      "L'agilité d'un consultant (décisions rapides, pas d'intermédiaire)",
+      "La robustesse d'une agence (process, outils, reporting)",
+      "Une méthode éprouvée, adaptable à votre taille",
+      "Un interlocuteur unique, des moyens professionnels"
+    ],
+    "cta": "Discutons de votre projet",
+    "ton": "flexible, adaptable, pragmatique"
+  },
+  "consultant-premium": {
+    "badge": "👤 Consultant expert",
+    "suffixeTitre": "Consultant SEO expert",
+    "intro": "Pour les {metier} exigeants de {ville}, je propose un accompagnement sur-mesure et confidentiel.",
+    "argument": "Une expertise pointue, une relation privilégiée, des résultats mesurables.",
+    "arguments": [
+      "Une expertise de haut niveau (8+ ans d'expérience)",
+      "Une stratégie 100% sur-mesure, pas de solution standardisée",
+      "Une relation directe et privilégiée",
+      "Des résultats prouvés pour des clients exigeants"
+    ],
+    "cta": "Réserver un appel stratégique",
+    "ton": "expert, haut de gamme, sur-mesure"
+  }
+}

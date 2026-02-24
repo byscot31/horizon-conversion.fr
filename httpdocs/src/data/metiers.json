@@ -1,0 +1,109 @@
+[
+  {
+    "id": "artisans",
+    "nom": "Artisans du bâtiment",
+    "nomCourt": "artisans",
+    "description": "plombiers, électriciens, menuisiers, peintres...",
+    "accroche": "Vous êtes artisan à {ville} ?",
+    "message": "Comme Robert, notre client plombier à Méru, vous voulez qu'on vous appelle quand quelqu'un cherche un dépanneur dans le coin ?",
+    "besoin": "recevoir plus d'appels pour des devis ou des dépannages",
+    "urgence": "élevée",
+    "positionnement": {
+      "default": "consultant",
+      "exceptions": {
+        "creil": "mixte",
+        "cergy": "mixte"
+      }
+    },
+    "icon": "tool"
+  },
+  {
+    "id": "commerces",
+    "nom": "Commerces de proximité",
+    "nomCourt": "commerces",
+    "description": "boutiques, salons de coiffure, restaurants, cavistes...",
+    "accroche": "Vous avez un commerce à {ville} ?",
+    "message": "Comme Sophie, notre cliente caviste à Cergy, vous voulez que les gens passent la porte de votre boutique ?",
+    "besoin": "attirer plus de monde dans votre magasin",
+    "urgence": "moyenne",
+    "positionnement": {
+      "default": "mixte",
+      "exceptions": {
+        "chantilly": "consultant",
+        "montmorency": "consultant",
+        "cergy": "agence",
+        "argenteuil": "agence"
+      }
+    },
+    "icon": "shopping-bag"
+  },
+  {
+    "id": "profession-liberale",
+    "nom": "Professions libérales",
+    "nomCourt": "professionnels libéraux",
+    "description": "avocats, médecins, architectes, notaires...",
+    "accroche": "Avocat, médecin, architecte à {ville} ?",
+    "message": "Comme Maître Dupont à Montmorency, vous voulez qu'on vous trouve quand on cherche un expert dans votre domaine ?",
+    "besoin": "être contacté par de nouveaux clients",
+    "urgence": "modérée",
+    "positionnement": {
+      "default": "consultant-premium",
+      "exceptions": {
+        "cergy": "mixte",
+        "beauvais": "consultant"
+      }
+    },
+    "icon": "briefcase"
+  },
+  {
+    "id": "tpe-pme",
+    "nom": "TPE et PME",
+    "nomCourt": "entreprises",
+    "description": "petites et moyennes entreprises, industries, services B2B",
+    "accroche": "Vous dirigez une entreprise à {ville} ?",
+    "message": "Comme Franck à Compiègne, vous cherchez à obtenir plus de devis et de nouveaux clients professionnels ?",
+    "besoin": "obtenir plus de demandes de devis",
+    "urgence": "moyenne",
+    "positionnement": {
+      "default": "agence",
+      "exceptions": {
+        "chantilly": "consultant",
+        "montmorency": "consultant"
+      }
+    },
+    "icon": "building"
+  },
+  {
+    "id": "reseaux-franchise",
+    "nom": "Réseaux et franchises",
+    "nomCourt": "réseaux",
+    "description": "enseignes multi-sites, franchises, groupes",
+    "accroche": "Vous gérez plusieurs points de vente ?",
+    "message": "Comme Caroline à Cergy, vous voulez que toutes vos boutiques soient bien visibles sur Google, sans vous prendre la tête ?",
+    "besoin": "que tous vos points de vente soient trouvés facilement",
+    "urgence": "modérée",
+    "positionnement": {
+      "default": "agence"
+    },
+    "icon": "grid"
+  },
+  {
+    "id": "tourisme",
+    "nom": "Hôtellerie, restauration, tourisme",
+    "nomCourt": "hôtels & restaurants",
+    "description": "hôtels, restaurants, chambres d'hôtes, gîtes",
+    "accroche": "Hôtelier, restaurateur à {ville} ?",
+    "message": "Comme Virginie à Chantilly, vous voulez que les touristes vous trouvent sans passer par Booking ?",
+    "besoin": "avoir des réservations directes",
+    "urgence": "moyenne",
+    "positionnement": {
+      "default": "mixte",
+      "exceptions": {
+        "chantilly": "consultant",
+        "auvers-sur-oise": "consultant",
+        "compiegne": "agence"
+      }
+    },
+    "icon": "hotel"
+  }
+]

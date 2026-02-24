@@ -1,0 +1,128 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import metiers from "../../data/metiers.json";
+---
+
+<Layout
+    title="Métiers accompagnés - Artisans, commerces, professions libérales"
+    description="J'accompagne les artisans, commerces, professions libérales, TPE/PME, réseaux et hôteliers dans l'Oise et le Val-d'Oise."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-16">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Vous êtes plutôt...
+        </h1>
+        <p class="text-xl text-gray-700 mb-8">
+          Chaque métier a ses spécificités, ses enjeux, ses clients. J'adapte ma stratégie à votre activité.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grille des métiers -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {metiers.map(metier => {
+          // Déterminer la couleur de fond selon le métier
+          const bgColor = {
+            artisans: "bg-blue-50",
+            commerces: "bg-green-50",
+            "profession-liberale": "bg-purple-50",
+            "tpe-pme": "bg-amber-50",
+            "reseaux-franchise": "bg-indigo-50",
+            tourisme: "bg-rose-50"
+          }[metier.id] || "bg-gray-50";
+
+          return (
+              <a href={`/metiers/${metier.id}`} class="card group hover:shadow-xl transition-all overflow-hidden">
+                <div class={`${bgColor} p-8 text-center`}>
+                  <h2 class="text-2xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
+                    {metier.nom}
+                  </h2>
+                  <p class="text-gray-600 text-sm mb-4">{metier.description}</p>
+                  <span class="inline-block text-primary-600 font-medium">
+                  {metier.nomCourt} →
+                </span>
+                </div>
+
+                <div class="p-6 bg-white">
+                  <p class="text-gray-700 italic mb-4">
+                    "{metier.message?.replace('{ville}', 'votre ville')}"
+                  </p>
+                  <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500">Urgence : {metier.urgence}</span>
+                    <span class="text-primary-600">En savoir plus</span>
+                  </div>
+                </div>
+              </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section positionnement par métier -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Mon approche selon votre métier</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl">
+          <div class="badge-consultant inline-block mb-3">Consultant</div>
+          <h3 class="text-xl font-bold mb-2">Artisans, commerces</h3>
+          <p class="text-gray-600">Relation directe, expertise terrain, réactivité. Je suis votre interlocuteur unique.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl">
+          <div class="badge-agence inline-block mb-3">Agence</div>
+          <h3 class="text-xl font-bold mb-2">PME, franchises</h3>
+          <p class="text-gray-600">Process structurés, reporting, outils pros. Une méthode d'agence sans les frais.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl">
+          <div class="badge-premium inline-block mb-3">Expert</div>
+          <h3 class="text-xl font-bold mb-2">Professions libérales</h3>
+          <p class="text-gray-600">Accompagnement sur-mesure, discrétion, expertise pointue pour une clientèle exigeante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignages par métier (extraits) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Ils me font confiance</h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <div class="badge-consultant text-xs mb-3">Artisan</div>
+          <p class="text-gray-700 italic mb-4">"Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus."</p>
+          <p class="font-semibold">Robert, plombier à Méru</p>
+        </div>
+
+        <div class="card p-6">
+          <div class="badge-agence text-xs mb-3">Commerce</div>
+          <p class="text-gray-700 italic mb-4">"Pendant les fêtes, +30% de clients en boutique grâce aux annonces."</p>
+          <p class="font-semibold">Sophie, caviste à Cergy</p>
+        </div>
+
+        <div class="card p-6">
+          <div class="badge-premium text-xs mb-3">Profession libérale</div>
+          <p class="text-gray-700 italic mb-4">"Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."</p>
+          <p class="font-semibold">Maître Dupont, avocat à Montmorency</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/etudes-de-cas" class="text-primary-600 font-medium hover:underline">
+          Voir toutes les études de cas →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

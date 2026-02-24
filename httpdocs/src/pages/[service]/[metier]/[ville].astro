@@ -1,0 +1,202 @@
+---
+// src/pages/[service]/[metier]/[ville].astro
+import Layout from "../../../layouts/Layout.astro";
+
+// Données
+import services from "../../../data/services.json";
+import metiers from "../../../data/metiers.json";
+import villes from "../../../data/villes.json";
+import positionnements from "../../../data/positionnements.json";
+
+// Types
+interface Props {
+  service: typeof services[0];
+  metier: typeof metiers[0];
+  ville: typeof villes[0];
+}
+
+// FONCTION 1 : Générer tous les chemins
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const service of services) {
+    for (const metier of metiers) {
+      for (const ville of villes) {
+        paths.push({
+          params: {
+            service: service.id,
+            metier: metier.id,
+            ville: ville.id
+          },
+          props: { service, metier, ville }
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+// FONCTION 2 : Déterminer le positionnement
+function getPositionnement(metier: any, ville: any) {
+  // 1. Vérifier si la ville a une exception pour ce métier
+  if (ville.metiersPositionnement?.[metier.id]) {
+    return ville.metiersPositionnement[metier.id];
+  }
+
+  // 2. Vérifier si le métier a une exception pour cette ville
+  if (metier.positionnement?.exceptions?.[ville.id]) {
+    return metier.positionnement.exceptions[ville.id];
+  }
+
+  // 3. Sinon, utiliser le défaut du métier
+  return metier.positionnement?.default || "mixte";
+}
+
+// Récupérer les props
+const { service, metier, ville } = Astro.props;
+
+// Déterminer le positionnement
+const positionnementId = getPositionnement(metier, ville);
+const positionnement = positionnements[positionnementId] || positionnements.mixte;
+
+// Construire le titre
+const titre = `${positionnement.suffixeTitre} pour ${metier.nomCourt} à ${ville.nom}`;
+const description = `Expert en ${service.nomCourt} pour les ${metier.nomCourt} à ${ville.nom}. ${positionnement.argument}`;
+
+// Classe CSS pour le badge
+const badgeClass = {
+  consultant: "badge-consultant",
+  agence: "badge-agence",
+  mixte: "badge-mixte",
+  "consultant-premium": "badge-premium"
+}[positionnementId] || "badge-mixte";
+---
+
+<Layout title={titre} description={description}>
+
+  <!-- Fil d'Ariane -->
+  <nav class="container-custom py-4 text-sm text-gray-600">
+    <ol class="flex items-center space-x-2">
+      <li><a href="/" class="hover:text-primary-600">Accueil</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/services" class="hover:text-primary-600">Services</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href={`/services/${service.id}`} class="hover:text-primary-600">{service.nomCourt}</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/metiers" class="hover:text-primary-600">Métiers</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href={`/metiers/${metier.id}`} class="hover:text-primary-600">{metier.nomCourt}</a></li>
+      <li class="text-gray-400">›</li>
+      <li class="text-gray-900 font-medium">{ville.nom}</li>
+    </ol>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 to-indigo-50 py-16">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <!-- Badge de positionnement -->
+        <div class="mb-4">
+          <span class={`${badgeClass} text-sm px-3 py-1 rounded-full`}>
+            {positionnement.badge}
+          </span>
+        </div>
+
+        <!-- Titre H1 -->
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          {titre}
+        </h1>
+
+        <!-- Introduction personnalisée -->
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          {positionnement.intro
+            .replace('{metier}', metier.nomCourt)
+            .replace('{ville}', ville.nom)}
+        </p>
+
+        <!-- Boutons CTA -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact" class="btn-primary text-lg">
+            {positionnement.cta}
+          </a>
+          <a href="/methodologie" class="btn-secondary text-lg">
+            Découvrir ma méthode
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arguments spécifiques au positionnement -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Pourquoi {positionnementId === 'consultant' ? 'un consultant' : positionnementId === 'agence' ? 'une agence' : 'cette approche'} ?</h2>
+          <ul class="space-y-4">
+            {positionnement.arguments.map((arg: string) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-primary-600 text-xl mt-0.5">✓</span>
+                  <span class="text-gray-700">{arg}</span>
+                </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-8 rounded-xl">
+          <h3 class="text-xl font-bold mb-4">Le service : {service.nom}</h3>
+          <p class="text-gray-700 mb-4">{service.description}</p>
+          <p class="font-semibold text-primary-600">Bénéfice : {service.benefice}</p>
+
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <h4 class="font-semibold mb-2">📍 Intervention à {ville.nom}</h4>
+            <p class="text-sm text-gray-600 mb-4">Code postal : {ville.codePostal} • {ville.zone === "60" ? "Oise" : "Val-d'Oise"}</p>
+
+            {ville.alentours.length > 0 && (
+                <>
+                  <h4 class="font-semibold mb-2">Villes alentours</h4>
+                  <div class="flex flex-wrap gap-2">
+                    {ville.alentours.slice(0, 4).map(alentour => (
+                        <span class="bg-white px-3 py-1 rounded-full text-sm shadow-sm">{alentour}</span>
+                    ))}
+                    <span class="text-sm text-gray-500">+{ville.alentours.length - 4} autres</span>
+                  </div>
+                </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section spécifique au métier -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Pour les {metier.nomCourt} comme vous</h2>
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-xl text-gray-700 mb-6">{metier.message?.replace('{ville}', ville.nom)}</p>
+        <p class="text-gray-600">Notre objectif : vous aider à <strong>{metier.besoin}</strong> dans le {ville.zone === "60" ? "département de l'Oise" : "Val-d'Oise"}.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appel à l'action final -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="bg-primary-600 text-white rounded-2xl p-12 text-center">
+        <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre projet ?</h2>
+        <p class="text-xl mb-8 opacity-90">Parlons de vos objectifs à {ville.nom} et voyons comment je peux vous aider.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+            {positionnement.cta}
+          </a>
+          <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+            📞 06 60 92 10 08
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
