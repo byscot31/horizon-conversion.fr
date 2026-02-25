@@ -1,0 +1,186 @@
+---
+// src/pages/urgence/[metier]/[ville].astro
+import Layout from "../../../../layouts/Layout.astro";
+import IntentionAnimation from "../../../../components/IntentionAnimation.astro";
+import metiers from "../../../../data/metiers.json";
+import villes from "../../../../data/villes.json";
+import intentions from "../../../../data/intentions.json";
+
+// 1. Générer tous les chemins possibles
+export async function getStaticPaths() {
+  const paths = [];
+  const metiersUrgence = ['artisans', 'commerces']; // Métiers avec urgence forte
+
+  for (const metier of metiers.filter(m => metiersUrgence.includes(m.id))) {
+    for (const ville of villes) {
+      paths.push({
+        params: {
+          metier: metier.id,
+          ville: ville.id
+        },
+        props: { metier, ville }
+      });
+    }
+  }
+  return paths;
+}
+
+// 2. Récupérer les props
+const { metier, ville } = Astro.props;
+
+// 3. Données d'intention
+const intentionData = intentions[metier.id]?.intentions.transactionnelle;
+const persona = intentions[metier.id]?.persona;
+
+// 4. Temps d'intervention estimé
+const villesProches = {
+  "meru": 15,
+  "beauvais": 20,
+  "chantilly": 25,
+  "cergy": 20,
+  "compiegne": 25,
+  "creil": 20,
+  "argenteuil": 30,
+  "montmorency": 25
+};
+const tempsIntervention = villesProches[ville.id] || 30;
+
+// 5. Titre et description
+const titre = `URGENCE ${metier.nomCourt} à ${ville.nom} - Intervention rapide`;
+const description = `Besoin ${metier.nomCourt} URGENT à ${ville.nom} ? Intervention sous ${tempsIntervention} min. Dépannage 7j/7. Appelez maintenant.`;
+---
+
+<Layout title={titre} description={description}>
+  <!-- Hero avec effet d'urgence maximal -->
+  <section class="relative bg-gradient-to-r from-red-600 to-red-800 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0 bg-[url('/images/urgence-pattern.svg')] animate-pulse"></div>
+    </div>
+
+    <div class="container-custom py-20 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <!-- Badge d'urgence -->
+        <IntentionAnimation intention="transactionnelle" type="badge" class="mb-6">
+          ⚡ INTERVENTION URGENTE ⚡
+        </IntentionAnimation>
+
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          {metier.nomCourt} <span class="text-yellow-300">URGENT</span> à {ville.nom}
+        </h1>
+
+        <p class="text-2xl mb-8 text-red-100">
+          {intentionData?.description || `Dépannage immédiat dans le ${ville.zone === "60" ? "60" : "95"}`}
+        </p>
+
+        <!-- Timer d'urgence -->
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl mb-8">
+          <div class="text-4xl font-bold mb-2 animate-pulse">
+            ⏱️ Intervention sous {tempsIntervention} minutes
+          </div>
+          <p class="text-red-200">Dans la zone de {ville.nom} et environs</p>
+        </div>
+
+        <!-- Double CTA urgent -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <IntentionAnimation intention="transactionnelle" type="button" class="text-lg px-8 py-4">
+            <a href="tel:0660921008" class="flex items-center gap-2">
+              <span>📞</span>
+              <span>APPELER MAINTENANT</span>
+            </a>
+          </IntentionAnimation>
+
+          <a href="/contact" class="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105">
+            Demander un rappel URGENT
+          </a>
+        </div>
+
+        <p class="text-sm mt-4 text-red-200">Disponible 7j/7 • 8h-22h</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section "Pourquoi nous appeler maintenant" -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-6">
+          <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+            <span class="text-3xl">⚡</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Réactivité</h3>
+          <p class="text-gray-600">Intervention sous {tempsIntervention} minutes dans {ville.nom} et les villages alentours</p>
+        </div>
+
+        <div class="text-center p-6">
+          <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span class="text-3xl">🔧</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Expertise locale</h3>
+          <p class="text-gray-600">{metier.nomCourt} expérimentés, connaissant parfaitement {ville.nom}</p>
+        </div>
+
+        <div class="text-center p-6">
+          <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span class="text-3xl">💶</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Devis gratuit</h3>
+          <p class="text-gray-600">Devis transparent avant toute intervention, pas de surprise</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section "Comme {persona?.nom} à {ville.nom}" -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="bg-white p-8 rounded-2xl shadow-lg">
+          <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+            👤
+          </div>
+          <h2 class="text-2xl font-bold mb-4">Comme {persona?.nom} à {ville.nom}...</h2>
+          <p class="text-lg text-gray-700 italic mb-6">
+            "{persona?.citation}"
+          </p>
+          <p class="text-gray-600">
+            {persona?.histoire?.split('.')[0]}. Aujourd'hui, il reçoit des appels IMMÉDIATS quand quelqu'un cherche un {metier.nomCourt} dans le coin.
+          </p>
+          <a href={`/etudes-de-cas/${metier.id === 'artisans' ? 'plombier-meru' : 'caviste-cergy'}`} class="text-primary-600 hover:underline mt-4 inline-block">
+            Voir comment →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Villes alentours -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-2xl font-bold text-center mb-8">Nous intervenons aussi dans les environs</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        {ville.alentours.map(alentour => (
+            <a
+                href={`/urgence/${metier.id}/${ville.id}`}
+                class="bg-red-50 p-3 rounded-lg text-center hover:bg-red-100 transition-colors animate-pulse"
+            >
+              <span class="font-medium">{alentour.split(' (')[0]}</span>
+              <span class="text-xs text-red-600 block">intervention sous 30 min</span>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action flottant (mobile) -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 md:hidden z-50 border-t border-red-200">
+    <div class="flex gap-4">
+      <a href="tel:0660921008" class="flex-1 bg-red-600 text-white py-3 rounded-full font-bold text-center animate-pulse">
+        📞 APPELER
+      </a>
+      <a href="/contact" class="flex-1 bg-primary-600 text-white py-3 rounded-full font-bold text-center">
+        RAPPEL
+      </a>
+    </div>
+  </div>
+
+</Layout>

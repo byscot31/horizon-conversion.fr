@@ -1,0 +1,186 @@
+---
+// src/pages/urgence/guides/[metier]/[ville].astro
+import Layout from "../../../../layouts/Layout.astro";
+import IntentionAnimation from "../../../../components/IntentionAnimation.astro";
+import metiers from "../../../../data/metiers.json";
+import villes from "../../../../data/villes.json";
+import intentions from "../../../../data/intentions.json";
+
+// 1. Générer tous les chemins possibles
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const metier of metiers) {
+    for (const ville of villes) {
+      paths.push({
+        params: {
+          metier: metier.id,
+          ville: ville.id
+        },
+        props: { metier, ville }
+      });
+    }
+  }
+  return paths;
+}
+
+// 2. Récupérer les props
+const { metier, ville } = Astro.props;
+const intentionData = intentions[metier.id]?.intentions.informationnelle;
+const persona = intentions[metier.id]?.persona;
+
+// 3. Titre et description
+const titre = `Guide gratuit : SEO pour ${metier.nomCourt} à ${ville.nom}`;
+const description = `Téléchargez notre guide gratuit pour ${metier.nomCourt} à ${ville.nom}. Apprenez les bases du SEO local adapté à votre métier.`;
+---
+
+<Layout title={titre} description={description}>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-green-50 to-emerald-50 py-20">
+    <div class="container-custom text-center">
+      <IntentionAnimation intention="informationnelle" type="badge" class="mb-6">
+        📚 GUIDE GRATUIT
+      </IntentionAnimation>
+
+      <h1 class="text-5xl font-bold mb-6">
+        Guide SEO pour <span class="text-primary-600">{metier.nomCourt}</span> à {ville.nom}
+      </h1>
+
+      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        {intentionData?.description || "Téléchargez notre guide complet et apprenez à être visible dans votre ville."}
+      </p>
+    </div>
+  </section>
+
+  <!-- Contenu du guide -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Colonne gauche : infos guide -->
+        <div>
+          <div class="bg-white p-8 rounded-xl shadow-sm sticky top-24">
+            <h2 class="text-2xl font-bold mb-4">Dans ce guide :</h2>
+
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">📘</span>
+                <span><strong>Chapitre 1 :</strong> Pourquoi le SEO local est crucial pour les {metier.nomCourt}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">📍</span>
+                <span><strong>Chapitre 2 :</strong> Être visible sur Google Maps à {ville.nom}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">⭐</span>
+                <span><strong>Chapitre 3 :</strong> La stratégie d'avis</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">🔧</span>
+                <span><strong>Chapitre 4 :</strong> Les pages par service</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">🌍</span>
+                <span><strong>Chapitre 5 :</strong> Les villages alentours</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary-600 text-xl">✅</span>
+                <span><strong>Bonus :</strong> Checklist en 30 points</span>
+              </li>
+            </ul>
+
+            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+              <p class="text-sm text-gray-600">📄 PDF de 45 pages • 2.4 Mo • Mis à jour en 2025</p>
+            </div>
+
+            <!-- Formulaire de téléchargement -->
+            <form class="space-y-4" id="download-guide-form">
+              <input
+                  type="text"
+                  placeholder="Votre prénom"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500"
+                  required
+              />
+              <input
+                  type="email"
+                  placeholder="Votre email professionnel"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500"
+                  required
+              />
+              <label class="flex items-start gap-2 text-sm text-gray-600">
+                <input type="checkbox" required class="mt-1" />
+                <span>J'accepte de recevoir le guide et des informations par email</span>
+              </label>
+              <IntentionAnimation intention="informationnelle" type="button">
+                <button type="submit" class="w-full">
+                  Télécharger le guide gratuit
+                </button>
+              </IntentionAnimation>
+            </form>
+
+            <p class="text-xs text-gray-500 text-center mt-4">
+              🔒 100% gratuit - Désinscription à tout moment
+            </p>
+          </div>
+        </div>
+
+        <!-- Colonne droite : aperçu et extrait -->
+        <div>
+          <div class="bg-gray-100 p-6 rounded-xl mb-8">
+            <h3 class="text-xl font-bold mb-4">Extrait du guide</h3>
+            <div class="bg-white p-6 rounded-lg">
+              <p class="text-gray-700 italic mb-4">
+                "À {ville.nom}, la concurrence entre {metier.nomCourt} est réelle. Mais peu d'entre eux optimisent correctement leur présence en ligne. C'est votre opportunité."
+              </p>
+              <p class="text-gray-700">
+                Dans ce guide, vous apprendrez les 12 actions concrètes à mettre en place pour apparaître dans le pack local Google Maps.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-primary-50 p-6 rounded-xl">
+            <h3 class="text-xl font-bold mb-4">Vous préférez un accompagnement personnalisé ?</h3>
+            <p class="text-gray-700 mb-4">
+              Je propose un audit gratuit pour analyser votre situation à {ville.nom} et vous recommander les actions prioritaires.
+            </p>
+            <a href="/contact" class="btn-primary inline-block">
+              Demander mon audit gratuit
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script de tracking -->
+  <script>
+    document.getElementById('download-guide-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const button = e.target.querySelector('button');
+      const originalText = button.innerText;
+
+      button.disabled = true;
+      button.innerText = 'Téléchargement...';
+
+      // Simuler téléchargement
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Créer lien fictif
+      const link = document.createElement('a');
+      link.href = `/guides/${metier.id}-${ville.id}.pdf`;
+      link.download = `guide-${metier.id}-${ville.id}.pdf`;
+      link.click();
+
+      // Tracking conversion
+      if (window.trackConversion) {
+        window.trackConversion('download', 10);
+      }
+
+      button.innerText = '✓ Téléchargé !';
+      setTimeout(() => {
+        button.innerText = originalText;
+        button.disabled = false;
+      }, 3000);
+    });
+  </script>
+</Layout>

@@ -1,8 +1,8 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
 
-// Données des articles récents (à externaliser dans un fichier JSON plus tard)
-const articlesRecents = [
+// Données des articles (à externaliser dans un fichier JSON plus tard)
+const articles = [
   {
     slug: "seo-local-artisans-2025",
     titre: "SEO local pour artisans : le guide complet 2025",
@@ -10,25 +10,31 @@ const articlesRecents = [
     date: "2025-02-15",
     categorie: "Guide",
     image: "/images/ressources/seo-artisans.jpg",
-    auteur: "Julien"
+    auteur: "Julien",
+    tempsLecture: 8,
+    vues: 1245
   },
   {
     slug: "google-ads-petits-budgets",
     titre: "Google Ads avec petit budget : 5 stratégies qui marchent",
     excerpt: "Comment faire des annonces rentables avec moins de 300€ par mois pour un commerce local.",
     date: "2025-02-10",
-    categorie: "Article",
+    categorie: "Stratégie",
     image: "/images/ressources/ads-budget.jpg",
-    auteur: "Julien"
+    auteur: "Julien",
+    tempsLecture: 6,
+    vues: 892
   },
   {
     slug: "avis-google-importance",
     titre: "Pourquoi les avis Google sont devenus plus importants que votre site",
     excerpt: "L'impact des avis sur le classement local et comment obtenir plus d'avis naturellement.",
     date: "2025-02-05",
-    categorie: "Article",
+    categorie: "E-réputation",
     image: "/images/ressources/avis-google.jpg",
-    auteur: "Julien"
+    auteur: "Julien",
+    tempsLecture: 5,
+    vues: 1567
   },
   {
     slug: "cro-pour-professions-liberales",
@@ -37,170 +43,185 @@ const articlesRecents = [
     date: "2025-01-28",
     categorie: "Guide",
     image: "/images/ressources/cro-pro.jpg",
-    auteur: "Julien"
+    auteur: "Julien",
+    tempsLecture: 7,
+    vues: 734
+  },
+  {
+    slug: "referencement-local-google-maps",
+    titre: "Google Maps : le guide pour être dans le pack local",
+    excerpt: "Les 12 actions concrètes pour apparaître dans les 3 premiers résultats avec carte.",
+    date: "2025-01-20",
+    categorie: "SEO local",
+    image: "/images/ressources/google-maps.jpg",
+    auteur: "Julien",
+    tempsLecture: 9,
+    vues: 2103
+  },
+  {
+    slug: "prix-seo-local-2025",
+    titre: "Combien coûte vraiment le SEO local en 2025 ?",
+    excerpt: "Analyse des prix du marché et ce que vous devez vraiment payer pour des résultats.",
+    date: "2025-01-12",
+    categorie: "Conseils",
+    image: "/images/ressources/prix-seo.jpg",
+    auteur: "Julien",
+    tempsLecture: 6,
+    vues: 3456
   }
 ];
 
-const guidesPopulaires = [
-  {
-    slug: "seo-local-artisans-2025",
-    titre: "SEO local pour artisans",
-    lectures: "2.5k"
-  },
-  {
-    slug: "google-ads-petits-budgets",
-    titre: "Google Ads petit budget",
-    lectures: "1.8k"
-  },
-  {
-    slug: "avis-google-importance",
-    titre: "Avis Google",
-    lectures: "1.2k"
-  }
-];
+// Pagination
+const url = new URL(Astro.request.url);
+const page = parseInt(url.searchParams.get('page') || '1');
+const articlesParPage = 6;
+const totalPages = Math.ceil(articles.length / articlesParPage);
+const start = (page - 1) * articlesParPage;
+const end = start + articlesParPage;
+const articlesPage = articles.slice(start, end);
 ---
 
 <Layout
-    title="Ressources SEO et marketing local | Horizon Conversion"
-    description="Guides, articles et conseils gratuits pour améliorer votre visibilité locale dans l'Oise et le Val-d'Oise."
+    title="Blog SEO et marketing local | Horizon Conversion"
+    description="Articles et conseils gratuits pour améliorer votre visibilité locale dans l'Oise et le Val-d'Oise."
 >
 
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
+  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-16">
     <div class="container-custom text-center">
-      <h1 class="text-5xl font-bold text-gray-900 mb-6">
-        <span class="text-primary-600">Ressources</span> gratuites
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        Le <span class="text-primary-600">blog</span>
       </h1>
       <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-        Guides, articles et conseils pour comprendre le SEO local et améliorer votre visibilité sans jargon technique.
+        Conseils, guides et astuces pour comprendre le SEO local sans jargon technique.
       </p>
+
+      <!-- Barre de recherche (simulée) -->
+      <div class="max-w-md mx-auto">
+        <div class="relative">
+          <input
+              type="search"
+              placeholder="Rechercher un article..."
+              class="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-primary-500"
+          >
+          <button class="absolute right-2 top-2 bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+            🔍
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Derniers articles -->
-  <section class="py-20">
+  <!-- Filtres par catégorie -->
+  <section class="py-8 border-b">
     <div class="container-custom">
-      <div class="flex justify-between items-center mb-12">
-        <h2 class="text-3xl font-bold">Dernières <span class="text-primary-600">publications</span></h2>
-        <a href="/ressources/blog" class="text-primary-600 hover:underline flex items-center gap-2">
-          Voir tout
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="/ressources/blog" class="px-4 py-2 bg-primary-600 text-white rounded-full text-sm">Tous</a>
+        <a href="/ressources/blog?categorie=guide" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Guides</a>
+        <a href="/ressources/blog?categorie=strategie" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Stratégie</a>
+        <a href="/ressources/blog?categorie=seo-local" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">SEO local</a>
+        <a href="/ressources/blog?categorie=conseils" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Conseils</a>
+        <a href="/ressources/blog?categorie=e-reputation" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">E-réputation</a>
       </div>
+    </div>
+  </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {articlesRecents.slice(0, 4).map(article => (
+  <!-- Grille des articles -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {articlesPage.map(article => (
             <a href={`/ressources/blog/${article.slug}`} class="card group hover:shadow-xl transition-all overflow-hidden">
-              <div class="grid md:grid-cols-3 gap-4">
-                <div class="md:col-span-1">
-                  <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                        src={article.image}
-                        alt={article.titre}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        onerror="this.src='https://placehold.co/400/2563eb/white?text=Article'"
-                    />
-                  </div>
-                </div>
-                <div class="md:col-span-2 p-4">
-                  <div class="flex items-center gap-2 mb-2">
-                  <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full">
-                    {article.categorie}
-                  </span>
-                    <span class="text-xs text-gray-500">{new Date(article.date).toLocaleDateString('fr-FR')}</span>
-                  </div>
-                  <h3 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
-                    {article.titre}
-                  </h3>
-                  <p class="text-gray-600 text-sm mb-3">{article.excerpt}</p>
-                  <span class="text-primary-600 text-sm font-medium group-hover:translate-x-2 transition-transform inline-block">
-                  Lire l'article →
+              <div class="aspect-video bg-gray-100 relative overflow-hidden">
+                <img
+                    src={article.image}
+                    alt={article.titre}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    onerror="this.src='https://placehold.co/600x400/2563eb/white?text=Article'"
+                >
+                <div class="absolute top-2 left-2">
+                <span class="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                  {article.categorie}
                 </span>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                  <span>{new Date(article.date).toLocaleDateString('fr-FR')}</span>
+                  <span>•</span>
+                  <span>{article.tempsLecture} min</span>
+                  <span>•</span>
+                  <span>👁️ {article.vues}</span>
+                </div>
+
+                <h2 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors line-clamp-2">
+                  {article.titre}
+                </h2>
+
+                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                  {article.excerpt}
+                </p>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-500">Par {article.auteur}</span>
+                  <span class="text-primary-600 group-hover:translate-x-2 transition-transform">Lire →</span>
                 </div>
               </div>
             </a>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- Guides populaires -->
-  <section class="bg-gray-50 py-20">
-    <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-12">Guides <span class="text-primary-600">populaires</span></h2>
+      <!-- Pagination -->
+      {totalPages > 1 && (
+          <div class="flex justify-center mt-12 gap-2">
+            {page > 1 && (
+                <a href={`/ressources/blog?page=${page - 1}`} class="px-4 py-2 border rounded-lg hover:bg-gray-50">
+                  ← Précédent
+                </a>
+            )}
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        {guidesPopulaires.map(guide => (
-            <a href={`/ressources/guides/${guide.slug}`} class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all group">
-              <div class="text-2xl mb-3">📘</div>
-              <h3 class="text-lg font-bold mb-2 group-hover:text-primary-600">{guide.titre}</h3>
-              <p class="text-sm text-gray-500 mb-3">{guide.lectures} lectures</p>
-              <span class="text-primary-600 text-sm group-hover:translate-x-2 transition-transform inline-block">
-              Lire le guide →
-            </span>
-            </a>
-        ))}
-      </div>
-    </div>
-  </section>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
+                <a
+                    href={`/ressources/blog?page=${num}`}
+                    class={`px-4 py-2 border rounded-lg ${
+                      num === page ? 'bg-primary-600 text-white border-primary-600' : 'hover:bg-gray-50'
+                    }`}
+                >
+                  {num}
+                </a>
+            ))}
 
-  <!-- FAQ -->
-  <section class="py-20">
-    <div class="container-custom max-w-3xl">
-      <h2 class="text-3xl font-bold text-center mb-12">Questions <span class="text-primary-600">fréquentes</span></h2>
-
-      <div class="space-y-4">
-        <details class="bg-gray-50 p-6 rounded-lg">
-          <summary class="font-semibold text-lg cursor-pointer">Combien de temps pour voir des résultats SEO ?</summary>
-          <p class="mt-3 text-gray-600">En général, les premiers résultats apparaissent entre 3 et 6 mois. Pour du SEO local, on peut voir des améliorations plus rapides sur Google My Business (1-2 mois).</p>
-        </details>
-
-        <details class="bg-gray-50 p-6 rounded-lg">
-          <summary class="font-semibold text-lg cursor-pointer">Quel budget prévoir pour Google Ads ?</summary>
-          <p class="mt-3 text-gray-600">Tout dépend de votre secteur et de votre zone. Pour un commerce local dans l'Oise, comptez entre 300€ et 800€ par mois pour des résultats significatifs.</p>
-        </details>
-
-        <details class="bg-gray-50 p-6 rounded-lg">
-          <summary class="font-semibold text-lg cursor-pointer">Est-ce que ça marche pour les petites communes ?</summary>
-          <p class="mt-3 text-gray-600">Absolument ! C'est même souvent plus facile car la concurrence est moindre. J'accompagne des clients dans des villages de 2000 habitants avec d'excellents résultats.</p>
-        </details>
-
-        <details class="bg-gray-50 p-6 rounded-lg">
-          <summary class="font-semibold text-lg cursor-pointer">Faut-il arrêter les annonces quand le SEO fonctionne ?</summary>
-          <p class="mt-3 text-gray-600">Non, les deux sont complémentaires. Le SEO apporte une visibilité durable, les annonces permettent de capter des clients immédiats. Une stratégie équilibrée est idéale.</p>
-        </details>
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="/ressources/faq" class="text-primary-600 hover:underline">
-          Voir toutes les questions →
-        </a>
-      </div>
+            {page < totalPages && (
+                <a href={`/ressources/blog?page=${page + 1}`} class="px-4 py-2 border rounded-lg hover:bg-gray-50">
+                  Suivant →
+                </a>
+            )}
+          </div>
+      )}
     </div>
   </section>
 
   <!-- Newsletter -->
-  <section class="bg-primary-600 text-white py-20">
+  <section class="bg-primary-50 py-16">
     <div class="container-custom text-center max-w-2xl">
-      <h2 class="text-3xl font-bold mb-4">Recevez nos conseils</h2>
-      <p class="text-xl mb-8 opacity-90">
-        Une fois par mois, des astuces concrètes pour améliorer votre visibilité locale.
+      <h2 class="text-3xl font-bold mb-4">Ne manquez aucun article</h2>
+      <p class="text-gray-600 mb-8">
+        Recevez mes nouveaux articles directement par email (une fois par mois maximum).
       </p>
 
-      <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" id="newsletter-form">
+      <form class="flex flex-col sm:flex-row gap-4">
         <input
             type="email"
             placeholder="Votre email"
-            class="flex-1 px-4 py-3 rounded-lg text-gray-900"
+            class="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500"
             required
         >
-        <button type="submit" class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+        <button class="btn-primary whitespace-nowrap">
           S'inscrire
         </button>
       </form>
-      <p class="text-sm mt-4 opacity-75">Pas de spam, désinscription à tout moment.</p>
+      <p class="text-xs text-gray-500 mt-4">Pas de spam, désinscription à tout moment.</p>
     </div>
   </section>
 

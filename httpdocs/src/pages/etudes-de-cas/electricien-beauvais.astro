@@ -1,0 +1,286 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const ville = villes.find(v => v.id === "beauvais");
+---
+
+<Layout
+    title="Étude de cas : +400% de visibilité pour un électricien à Beauvais | Horizon Conversion"
+    description="Découvrez comment un électricien à Beauvais est passé de la page 5 à la page 1 sur les mots-clés stratégiques."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
+    <div class="container-custom">
+      <nav class="text-sm text-gray-600 mb-8">
+        <a href="/" class="hover:text-primary-600">Accueil</a> ›
+        <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+        <span class="text-gray-900">Lefebvre Électricité</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="badge-consultant">Artisan</span>
+          <span class="badge-agence">SEO local</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Beauvais (60)</span>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+400% de visibilité pour un électricien à Beauvais</h1>
+        <p class="text-xl text-gray-700">Comment Jean-Claude est passé de la page 5 à la page 1 sur les mots-clés stratégiques.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats clés -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">#3</div>
+          <p class="text-gray-600">sur "électricien Beauvais" (était #38)</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">+400%</div>
+          <p class="text-gray-600">de visibilité sur les mots-clés</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">12</div>
+          <p class="text-gray-600">appels par semaine (était 3)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image avant/après -->
+  <section class="bg-gray-50 py-12">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="bg-gray-200 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center">
+            <img src="/images/etudes/electricien-avant.jpg" alt="Avant" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/cccccc/666666?text=Position+#38'">
+          </div>
+          <p class="text-sm text-gray-500">Avant : position #38</p>
+        </div>
+        <div class="text-center">
+          <div class="bg-green-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center border-2 border-green-300">
+            <img src="/images/etudes/electricien-apres.jpg" alt="Après" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/22c55e/white?text=Position+#3'">
+          </div>
+          <p class="text-sm text-gray-500">Après : position #3</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client et situation -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Le client</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">
+                ⚡
+              </div>
+              <div>
+                <p class="text-xl font-semibold">Jean-Claude Lefebvre</p>
+                <p class="text-gray-600">Lefebvre Électricité • Beauvais (60)</p>
+              </div>
+            </div>
+            <p class="text-gray-700">Électricien depuis 20 ans, Jean-Claude avait une clientèle fidèle mais ne voyait pas les nouveaux habitants de Beauvais. Son site, créé en 2015, n'était pas optimisé pour le référencement local.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La situation avant</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Position #38</strong> sur "électricien Beauvais"</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>3 appels par semaine</strong> maximum</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Fiche Google incomplète</strong> (peu de photos)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Site non responsive</strong> (mal vu sur mobile)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectif -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom text-center max-w-3xl">
+      <h2 class="text-3xl font-bold mb-6">L'objectif</h2>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        "Je voulais que les nouveaux arrivants à Beauvais me trouvent quand ils cherchent un électricien. Je savais qu'il y avait de la demande, mais je n'apparaissais nulle part sur Google."
+      </p>
+      <p class="mt-4 font-semibold">— Jean-Claude Lefebvre</p>
+    </div>
+  </section>
+
+  <!-- Méthodologie -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Notre méthodologie</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Audit technique complet</h3>
+            <p class="text-gray-600">Analyse du site : temps de chargement trop long, structure inadaptée, pas de balises meta optimisées.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Optimisation Google My Business</h3>
+            <p class="text-gray-600">Création d'une fiche complète avec photos professionnelles des réalisations.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Pages par service</h3>
+            <p class="text-gray-600">Création de pages dédiées : électricité générale, tableau électrique, mise aux normes, dépannage.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Pages par ville</h3>
+            <p class="text-gray-600">Contenu spécifique pour les 6 villages autour de Beauvais.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Stratégie d'avis</h3>
+            <p class="text-gray-600">Mise en place d'un process pour demander des avis aux clients satisfaits.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">6</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Netlinking local</h3>
+            <p class="text-gray-600">Partenariats avec des artisans complémentaires (plombiers, menuisiers).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats détaillés -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 4 mois</h2>
+
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-xl shadow-sm">
+          <h3 class="text-2xl font-bold mb-6">Avant</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">#38</span>
+              <span>position sur "électricien Beauvais"</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">3</span>
+              <span>appels/semaine</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">5</span>
+              <span>avis Google</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-green-200">
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 4 mois</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">#3</span>
+              <span><strong class="text-green-700">position sur "électricien Beauvais"</strong></span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">12</span>
+              <span><strong class="text-green-700">appels/semaine</strong> (+400%)</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">25</span>
+              <span><strong class="text-green-700">avis Google</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <div class="bg-primary-600 text-white p-12 rounded-2xl">
+        <svg class="w-16 h-16 mb-6 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+        <blockquote class="text-2xl italic mb-6">
+          "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région. Des clients que je n'aurais jamais touchés autrement me trouvent sur Google. Mon téléphone n'arrête pas de sonner, et j'ai même dû embaucher un apprenti."
+        </blockquote>
+        <p class="font-semibold text-xl">Jean-Claude Lefebvre</p>
+        <p class="text-white/80">Lefebvre Électricité - Beauvais (60)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leçons -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Ce qu'il faut retenir</h2>
+      <div class="bg-white p-8 rounded-xl">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les pages par service sont essentielles</strong> - chaque service a ses propres mots-clés.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les villages alentours sont une mine d'or</strong> - moins de concurrence.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>La fiche Google My Business est cruciale</strong> - avec photos, elle rassure les clients.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous voulez le même résultat ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre situation.
+      </p>
+      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+        Demander mon audit gratuit
+      </a>
+    </div>
+  </section>
+</Layout>

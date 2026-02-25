@@ -1,0 +1,106 @@
+---
+// src/pages/services/[service]/[ville].astro
+import Layout from "../../../layouts/Layout.astro";
+import services from "../../../data/services.json";
+import metiers from "../../../data/metiers.json";
+import villes from "../../../data/villes.json";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const service of services) {
+    for (const ville of villes) {
+      paths.push({
+        params: {
+          service: service.id,
+          ville: ville.id
+        },
+        props: { service, ville }
+      });
+    }
+  }
+  return paths;
+}
+
+const { service, ville } = Astro.props;
+
+// Métiers à afficher (tous pour l'instant)
+const metiersAffiches = metiers.slice(0, 6);
+
+// Titre et description
+const titre = `${service.nom} à ${ville.nom}`;
+const description = `Découvrez comment le ${service.nom} peut aider les professionnels à ${ville.nom} et ses environs.`;
+---
+
+<Layout title={titre} description={description}>
+  <!-- Fil d'ariane -->
+  <nav class="container-custom py-4 text-sm text-gray-600">
+    <ol class="flex items-center space-x-2">
+      <li><a href="/" class="hover:text-primary-600">Accueil</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/services" class="hover:text-primary-600">Services</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href={`/services/${service.id}`} class="hover:text-primary-600">{service.nomCourt}</a></li>
+      <li class="text-gray-400">›</li>
+      <li class="text-gray-900 font-medium">{ville.nom}</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">{titre}</h1>
+        <p class="text-xl text-gray-700 mb-8">{ville.description || description}</p>
+        <a href="/contact" class="btn-primary text-lg px-8 py-4">
+          Discutons de votre projet
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pour quels métiers -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Pour quels métiers ?</h2>
+      <p class="text-center text-gray-600 mb-12">J'accompagne tous types de professionnels à {ville.nom}.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+        {metiersAffiches.map(metier => (
+            <a href={`/services/${service.id}/${metier.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all">
+              <div class="font-semibold">{metier.nomCourt}</div>
+              <div class="text-xs text-gray-500 mt-1">{metier.description}</div>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Villes alentours -->
+  {ville.alentours.length > 0 && (
+      <section class="bg-gray-50 py-16">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold text-center mb-4">J'interviens aussi dans les environs</h2>
+          <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+            {ville.alentours.map(alentour => (
+                <span class="bg-white px-4 py-2 rounded-full text-sm border border-gray-200">
+              {typeof alentour === 'string' ? alentour.split(' (')[0] : alentour}
+            </span>
+            ))}
+          </div>
+        </div>
+      </section>
+  )}
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous êtes à {ville.nom} ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre situation.
+      </p>
+      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+        Demander mon audit gratuit
+      </a>
+    </div>
+  </section>
+</Layout>

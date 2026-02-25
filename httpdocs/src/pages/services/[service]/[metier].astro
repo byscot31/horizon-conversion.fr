@@ -1,0 +1,448 @@
+---
+// src/pages/services/[service]/[metier].astro
+import Layout from "../../../layouts/Layout.astro";
+import services from "../../../data/services.json";
+import metiers from "../../../data/metiers.json";
+import villes from "../../../data/villes.json";
+import intentions from "../../../data/intentions.json";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const service of services) {
+    for (const metier of metiers) {
+      paths.push({
+        params: {
+          service: service.id,
+          metier: metier.id
+        },
+        props: { service, metier }
+      });
+    }
+  }
+  return paths;
+}
+
+const { service, metier } = Astro.props;
+
+// Données spécifiques
+const intentionData = intentions[metier.id]?.intentions?.investigationnelle || {
+  description: "Découvrez comment ce service peut vous aider."
+};
+const persona = intentions[metier.id]?.persona;
+
+// Villes à afficher (toutes, mais on peut prioriser)
+const villesAffichees = villes.slice(0, 12); // Plus de villes
+
+// Autres services pertinents pour ce métier
+const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
+
+// Titre et description
+const titre = `${service.nom} pour ${metier.nomCourt}`;
+const description = `Découvrez comment le ${service.nom} peut aider les ${metier.nomCourt} comme ${persona?.nom || 'vous'} à ${persona?.objectif || 'développer leur activité'}.`;
+---
+
+<Layout title={titre} description={description}>
+  <!-- Fil d'ariane -->
+  <nav class="container-custom py-4 text-sm text-gray-600">
+    <ol class="flex items-center space-x-2">
+      <li><a href="/" class="hover:text-primary-600">Accueil</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/services" class="hover:text-primary-600">Services</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href={`/services/${service.id}`} class="hover:text-primary-600">{service.nomCourt}</a></li>
+      <li class="text-gray-400">›</li>
+      <li class="text-gray-900 font-medium">{metier.nomCourt}</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-4">
+          <span class="badge-consultant text-sm px-4 py-2">{metier.nom}</span>
+        </div>
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">{titre}</h1>
+        <p class="text-xl text-gray-700 mb-8">{description}</p>
+
+        <!-- Accroche persona -->
+        {persona && (
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl mb-6">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl">
+                  👤
+                </div>
+                <div>
+                  <p class="text-lg font-medium mb-1">Comme {persona.nom}...</p>
+                  <p class="text-gray-700 italic">"{persona.citation}"</p>
+                </div>
+              </div>
+            </div>
+        )}
+
+        <a href="/contact" class="btn-primary text-lg px-8 py-4">
+          Discutons de votre projet
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1 : Pourquoi ce service pour ce métier -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Pourquoi les {metier.nomCourt} ont besoin de {service.nomCourt} ?</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            {intentionData.description}
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600 text-xl">✓</span>
+              <span><strong>Visibilité locale</strong> – Soyez trouvé quand on cherche votre métier</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600 text-xl">✓</span>
+              <span><strong>Confiance</strong> – Avis Google, présence professionnelle</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600 text-xl">✓</span>
+              <span><strong>Résultats mesurables</strong> – Appels, rendez-vous, clients</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-xl">
+          <h3 class="text-2xl font-bold mb-4">Mon approche pour les {metier.nomCourt}</h3>
+          <p class="text-gray-700 mb-4">
+            Je ne propose pas une solution standard. J'adapte ma stratégie à votre activité spécifique.
+          </p>
+          <a href="/methodologie" class="text-primary-600 hover:underline">Découvrir ma méthode →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 : Villes disponibles (grille complète) -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Disponible dans nos villes</h2>
+      <p class="text-center text-gray-600 mb-12">Je me déplace dans tout l'Oise et le Val-d'Oise pour les {metier.nomCourt}.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        {villesAffichees.map(ville => (
+            <a
+                href={`/services/${service.id}/${metier.id}/${ville.id}`}
+                class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100"
+            >
+              <div class="font-semibold group-hover:text-primary-600">{ville.nom}</div>
+              <div class="text-xs text-gray-500">{ville.codePostal}</div>
+              <div class="text-xs text-primary-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                Voir pour {metier.nomCourt} →
+              </div>
+            </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/villes" class="text-primary-600 hover:underline font-medium">
+          Voir les 16 villes et leurs alentours →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : Autres services pour ce métier (maillage interne) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">D'autres services pour les {metier.nomCourt}</h2>
+      <p class="text-center text-gray-600 mb-12">Complétez votre stratégie avec ces solutions.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {autresServices.map(autreService => (
+            <a
+                href={`/services/${autreService.id}/${metier.id}`}
+                class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all group"
+            >
+              <h3 class="text-lg font-bold mb-2 group-hover:text-primary-600">{autreService.nom}</h3>
+              <p class="text-sm text-gray-600 mb-3">{autreService.description}</p>
+              <span class="text-primary-600 text-sm group-hover:translate-x-2 transition-transform inline-block">
+              Découvrir →
+            </span>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 : Étude de cas (preuve sociale) -->
+  <section class="bg-primary-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Des résultats concrets</h2>
+      <p class="text-center text-gray-700 mb-12">Découvrez comment {service.nom} a aidé d'autres {metier.nomCourt} comme vous.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+        <!-- CAS 1 : Principal / Référence -->
+        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="badge-consultant text-xs">{metier.nom}</span>
+            <span class="text-sm text-gray-500">
+            {metier.id === 'artisans' ? 'Méru' :
+              metier.id === 'commerces' ? 'Cergy' :
+                metier.id === 'profession-liberale' ? 'Montmorency' :
+                  metier.id === 'tpe-pme' ? 'Compiègne' :
+                    metier.id === 'reseaux-franchise' ? 'Cergy' : 'Chantilly'}
+          </span>
+          </div>
+
+          <blockquote class="text-gray-700 italic mb-4 text-sm">
+            "{metier.id === 'artisans' && "Je reçois des appels de clients que je n'avais jamais eus avant."}
+            {metier.id === 'commerces' && "Pendant les fêtes, +30% de clients en boutique."}
+            {metier.id === 'profession-liberale' && "Je reçois deux fois plus de rendez-vous."}
+            {metier.id === 'tpe-pme' && "Je reçois des demandes de devis toutes les semaines."}
+            {metier.id === 'reseaux-franchise' && "Toutes nos fiches Google sont maintenant optimisées."}
+            {metier.id === 'tourisme' && "Je ne dépends plus de Booking."}"
+          </blockquote>
+
+          <p class="font-semibold">
+            {metier.id === 'artisans' && "Robert, plombier"}
+            {metier.id === 'commerces' && "Sophie, caviste"}
+            {metier.id === 'profession-liberale' && "Maître Dupont, avocat"}
+            {metier.id === 'tpe-pme' && "Franck, Transports Moreau"}
+            {metier.id === 'reseaux-franchise' && "Caroline, boulangeries"}
+            {metier.id === 'tourisme' && "Virginie, hôtel"}
+          </p>
+
+          <div class="mt-3 text-green-700 font-bold text-lg">
+            {metier.id === 'artisans' && "+650% d'appels"}
+            {metier.id === 'commerces' && "+30% de clients"}
+            {metier.id === 'profession-liberale' && "+200% de rendez-vous"}
+            {metier.id === 'tpe-pme' && "+150% de devis"}
+            {metier.id === 'reseaux-franchise' && "+450 avis"}
+            {metier.id === 'tourisme' && "+80% réservations directes"}
+          </div>
+
+          <a href={`/etudes-de-cas/${
+            metier.id === 'artisans' ? 'plombier-meru' :
+              metier.id === 'commerces' ? 'caviste-cergy' :
+                metier.id === 'profession-liberale' ? 'avocat-montmorency' :
+                  metier.id === 'tpe-pme' ? 'transport-compiegne' :
+                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
+          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+            Voir l'étude →
+          </a>
+        </div>
+
+        <!-- CAS 2 : Second exemple (même métier, autre contexte) -->
+        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="badge-consultant text-xs">{metier.nom}</span>
+            <span class="text-sm text-gray-500">
+            {metier.id === 'artisans' ? 'Beauvais' :
+              metier.id === 'commerces' ? 'Argenteuil' :
+                metier.id === 'profession-liberale' ? 'Senlis' :
+                  metier.id === 'tpe-pme' ? 'Creil' :
+                    metier.id === 'reseaux-franchise' ? 'Pontoise' : 'Compiegne'}
+          </span>
+          </div>
+
+          <blockquote class="text-gray-700 italic mb-4 text-sm">
+            "{metier.id === 'artisans' && "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants."}
+            {metier.id === 'commerces' && "Les clients me trouvent directement sur Google Maps."}
+            {metier.id === 'profession-liberale' && "Mon taux de conversion a doublé en 3 mois."}
+            {metier.id === 'tpe-pme' && "Notre chiffre d'affaires a augmenté de 40%."}
+            {metier.id === 'reseaux-franchise' && "La gestion centralisée nous fait gagner 2j par semaine."}
+            {metier.id === 'tourisme' && "30% de réservations directes supplémentaires."}"
+          </blockquote>
+
+          <p class="font-semibold">
+            {metier.id === 'artisans' && "Jean-Claude, électricien"}
+            {metier.id === 'commerces' && "Isabelle, coiffeuse"}
+            {metier.id === 'profession-liberale' && "Dr. Martin, médecin"}
+            {metier.id === 'tpe-pme' && "Philippe, menuiserie"}
+            {metier.id === 'reseaux-franchise' && "Franck, opticiens"}
+            {metier.id === 'tourisme' && "Pierre, chambres d'hôtes"}
+          </p>
+
+          <div class="mt-3 text-green-700 font-bold text-lg">
+            {metier.id === 'artisans' && "+400% de visibilité"}
+            {metier.id === 'commerces' && "+25% de passages"}
+            {metier.id === 'profession-liberale' && "+180% de contacts"}
+            {metier.id === 'tpe-pme' && "+200% de trafic"}
+            {metier.id === 'reseaux-franchise' && "+300 avis"}
+            {metier.id === 'tourisme' && "+50% de nuitées"}
+          </div>
+
+          <a href="/etudes-de-cas" class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+            Voir l'étude →
+          </a>
+        </div>
+
+        <!-- CAS 3 : Troisième exemple (variété) -->
+        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="badge-consultant text-xs">{metier.nom}</span>
+            <span class="text-sm text-gray-500">
+            {metier.id === 'artisans' ? 'Chambly' :
+              metier.id === 'commerces' ? 'Cergy' :
+                metier.id === 'profession-liberale' ? 'Chantilly' :
+                  metier.id === 'tpe-pme' ? 'Noyon' :
+                    metier.id === 'reseaux-franchise' ? 'Beaumont' : 'Senlis'}
+          </span>
+          </div>
+
+          <blockquote class="text-gray-700 italic mb-4 text-sm">
+            "{metier.id === 'artisans' && "Mon téléphone sonne constamment, je dois refuser des chantiers."}
+            {metier.id === 'commerces' && "Je fais 40% de chiffre en plus le week-end."}
+            {metier.id === 'profession-liberale' && "Je n'ai plus besoin de faire de publicité."}
+            {metier.id === 'tpe-pme' && "Nous avons décroché 3 contrats majeurs."}
+            {metier.id === 'reseaux-franchise' && "La satisfaction client a explosé."}
+            {metier.id === 'tourisme' && "Booking ne représente plus que 30% de mon CA."}"
+          </blockquote>
+
+          <p class="font-semibold">
+            {metier.id === 'artisans' && "Michel, menuisier"}
+            {metier.id === 'commerces' && "Céline, fleuriste"}
+            {metier.id === 'profession-liberale' && "Maître Petit, notaire"}
+            {metier.id === 'tpe-pme' && "SARL BTP 60"}
+            {metier.id === 'reseaux-franchise' && "Réseau immobilier"}
+            {metier.id === 'tourisme' && "Gîtes du Val-d'Oise"}
+          </p>
+
+          <div class="mt-3 text-green-700 font-bold text-lg">
+            {metier.id === 'artisans' && "+500% de devis"}
+            {metier.id === 'commerces' && "+35% de ventes"}
+            {metier.id === 'profession-liberale' && "+150% de consultations"}
+            {metier.id === 'tpe-pme' && "+3M€ de CA"}
+            {metier.id === 'reseaux-franchise' && "+40% de visibilité"}
+            {metier.id === 'tourisme' && "90% de réservations directes"}
+          </div>
+
+          <a href="/etudes-de-cas" class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+            Voir l'étude →
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+          Voir toutes nos études de cas →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 : Ressources associées (guides, articles) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ressources pour les {metier.nomCourt}</h2>
+      <p class="text-center text-gray-600 mb-12">Guides et articles pour approfondir.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <!-- Guide SEO local -->
+        <a href="/ressources/guides/seo-local-artisans-2025" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📘</div>
+          <h3 class="font-bold mb-2">Guide SEO local pour {metier.nomCourt}</h3>
+          <p class="text-sm text-gray-600 mb-3">Toutes les clés pour être visible dans votre ville.</p>
+          <span class="text-primary-600 text-sm">Télécharger →</span>
+        </a>
+
+        <!-- Article avis Google -->
+        <a href="/ressources/blog/avis-google-importance" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📝</div>
+          <h3 class="font-bold mb-2">Pourquoi les avis sont cruciaux</h3>
+          <p class="text-sm text-gray-600 mb-3">Comment obtenir plus d'avis et mieux convertir.</p>
+          <span class="text-primary-600 text-sm">Lire l'article →</span>
+        </a>
+
+        <!-- Formation -->
+        <a href="/services/formation" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">🎓</div>
+          <h3 class="font-bold mb-2">Formation SEO pour {metier.nomCourt}</h3>
+          <p class="text-sm text-gray-600 mb-3">Devenez autonome sur votre référencement.</p>
+          <span class="text-primary-600 text-sm">En savoir plus →</span>
+        </a>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources" class="text-primary-600 hover:underline">
+          Voir toutes nos ressources →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 : FAQ spécifique -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-4">Questions fréquentes</h2>
+      <p class="text-center text-gray-600 mb-12">Sur le {service.nom} pour les {metier.nomCourt}.</p>
+
+      <div class="space-y-4">
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Combien de temps pour voir des résultats ?</summary>
+          <p class="mt-3 text-gray-600">Les premiers résultats apparaissent généralement entre 1 et 3 mois selon votre secteur et votre zone. Pour les {metier.nomCourt}, on voit souvent des améliorations rapides sur Google My Business.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quel budget prévoir pour un {metier.nomCourt} ?</summary>
+          <p class="mt-3 text-gray-600">Tout dépend de votre zone et de vos objectifs. Je propose des devis personnalisés après un audit gratuit. Comptez entre 300€ et 800€ par mois pour des résultats significatifs.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Est-ce que ça marche pour les petites communes ?</summary>
+          <p class="mt-3 text-gray-600">Absolument ! C'est même souvent plus facile car la concurrence est moindre. J'accompagne des {metier.nomCourt} dans des villages avec d'excellents résultats.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Faut-il un site web pour commencer ?</summary>
+          <p class="mt-3 text-gray-600">Un site est recommandé mais on peut commencer par optimiser votre fiche Google. Je vous conseille lors de l'audit.</p>
+        </details>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources/faq" class="text-primary-600 hover:underline">
+          Voir toutes les FAQ →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : Navigation vers autres métiers -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h3 class="text-lg font-semibold text-center mb-6">Ce service est aussi disponible pour :</h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        {metiers.filter(m => m.id !== metier.id).slice(0, 5).map(autreMetier => (
+            <a
+                href={`/services/${service.id}/${autreMetier.id}`}
+                class="bg-gray-100 px-4 py-2 rounded-full text-sm hover:bg-primary-100 hover:text-primary-600 transition-colors"
+            >
+              {autreMetier.nomCourt}
+            </a>
+        ))}
+        <a href="/metiers" class="bg-primary-50 text-primary-600 px-4 py-2 rounded-full text-sm hover:bg-primary-100 transition-colors">
+          Voir tous
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 : CTA final -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre projet ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je vous propose un audit gratuit pour analyser votre situation et voir comment je peux aider votre {metier.nomCourt}.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

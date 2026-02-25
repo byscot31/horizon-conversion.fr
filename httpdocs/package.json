@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:maillage": "node scripts/audit-maillage.js",
+    "audit:contenu": "node scripts/audit-contenu.js",
+    "audit:all": "npm run audit:maillage && npm run audit:contenu"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",

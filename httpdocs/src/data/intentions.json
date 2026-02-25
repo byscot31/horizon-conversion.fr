@@ -1,0 +1,163 @@
+{
+ "artisans": {
+  "id": "artisans",
+  "nom": "Artisans",
+  "intentions": {
+   "transactionnelle": {
+    "titre": "Être appelé immédiatement pour un dépannage",
+    "description": "Quand une fuite d'eau ou une panne d'électricité arrive, les clients cherchent quelqu'un de disponible MAINTENANT.",
+    "motsCles": ["urgence", "dépannage", "immédiat", "ce soir", "week-end"],
+    "cta": "Être rappelé sous 30 min",
+    "urgence": "haute",
+    "image": "/images/personas/artisan-urgence.jpg"
+   },
+   "investigationnelle": {
+    "titre": "Comparer les devis pour des travaux",
+    "description": "Pour des travaux planifiés (rénovation, installation), les clients comparent plusieurs devis.",
+    "motsCles": ["devis", "tarifs", "prix", "comparer"],
+    "cta": "Obtenir un devis personnalisé",
+    "urgence": "moyenne"
+   },
+   "informationnelle": {
+    "titre": "Comprendre un problème technique",
+    "description": "Avant d'appeler, certains clients cherchent à comprendre leur problème (pourquoi ma chaudière fait du bruit ?).",
+    "motsCles": ["pourquoi", "comment", "astuces", "guide"],
+    "cta": "Lire nos guides gratuits",
+    "urgence": "basse"
+   }
+  },
+  "persona": {
+   "nom": "Robert",
+   "age": 52,
+   "entreprise": "Plomberie Martin",
+   "ville": "Méru",
+   "citation": "Je veux qu'on m'appelle quand quelqu'un cherche un plombier en urgence.",
+   "histoire": "Robert est plombier depuis 25 ans. Il a toujours vécu du bouche-à-oreille, mais depuis 2 ans, il perd des appels face aux jeunes concurrents qui apparaissent sur Google.",
+   "objectif": "Être le premier appelé quand un client a une urgence."
+  }
+ },
+ "commerces": {
+  "id": "commerces",
+  "nom": "Commerces",
+  "intentions": {
+   "transactionnelle": {
+    "titre": "Attirer des clients dans la boutique aujourd'hui",
+    "description": "Les commerçants veulent que les gens passent la porte, surtout le week-end et pendant les soldes.",
+    "motsCles": ["ouvert", "magasin", "boutique", "soldes", "promo"],
+    "cta": "Augmenter ma fréquentation",
+    "urgence": "haute"
+   },
+   "investigationnelle": {
+    "titre": "Fidéliser la clientèle existante",
+    "description": "Faire revenir les clients déjà venus, créer une relation durable.",
+    "motsCles": ["fidélité", "carte de fidélité", "newsletter"],
+    "cta": "Mettre en place une stratégie de fidélisation",
+    "urgence": "moyenne"
+   }
+  },
+  "persona": {
+   "nom": "Sophie",
+   "age": 42,
+   "entreprise": "Cave des 3 Rois",
+   "ville": "Cergy",
+   "citation": "Je veux que les gens me trouvent quand ils cherchent un bon vin près de chez eux.",
+   "histoire": "Sophie a ouvert sa cave il y a 3 ans. Elle a une clientèle fidèle mais peine à attirer les jeunes actifs du quartier.",
+   "objectif": "Attirer une nouvelle clientèle sans exploser son budget pub."
+  }
+ },
+ "profession-liberale": {
+  "id": "profession-liberale",
+  "nom": "Professions libérales",
+  "intentions": {
+   "investigationnelle": {
+    "titre": "Être choisi comme expert de confiance",
+    "description": "Les clients ne comparent pas juste les prix, ils cherchent un professionnel en qui ils peuvent avoir confiance.",
+    "motsCles": ["expert", "confiance", "réputation", "avis"],
+    "cta": "Améliorer ma e-réputation",
+    "urgence": "moyenne"
+   },
+   "navigationnelle": {
+    "titre": "Faciliter la prise de rendez-vous",
+    "description": "Les clients veulent pouvoir prendre rendez-vous facilement, 24h/24.",
+    "motsCles": ["rendez-vous", "contact", "cabinet"],
+    "cta": "Optimiser ma prise de rendez-vous",
+    "urgence": "moyenne"
+   }
+  },
+  "persona": {
+   "nom": "Maître Dupont",
+   "age": 55,
+   "entreprise": "Cabinet Dupont & Associés",
+   "ville": "Montmorency",
+   "citation": "Je veux que les gens me trouvent quand ils cherchent un avocat de confiance.",
+   "histoire": "Avocat depuis 25 ans, Maître Dupont a une clientèle fidèle mais vieillissante. Il veut attirer une nouvelle génération de clients.",
+   "objectif": "Être visible sur les recherches juridiques sans perdre son image d'expert."
+  }
+ },
+ "tpe-pme": {
+  "id": "tpe-pme",
+  "nom": "TPE/PME",
+  "intentions": {
+   "transactionnelle": {
+    "titre": "Obtenir des devis qualifiés B2B",
+    "description": "Les entreprises cherchent des prestataires sérieux pour des projets professionnels.",
+    "motsCles": ["devis entreprise", "prestataire", "fournisseur"],
+    "cta": "Générer plus de leads B2B",
+    "urgence": "haute"
+   }
+  },
+  "persona": {
+   "nom": "Franck",
+   "age": 48,
+   "entreprise": "Transports Moreau",
+   "ville": "Compiègne",
+   "citation": "Je veux que des clients professionnels me trouvent quand ils cherchent un transporteur.",
+   "histoire": "Franck dirige une entreprise de transport de 12 salariés. Son site a 10 ans et ne lui apporte aucun client.",
+   "objectif": "Avoir un site professionnel qui génère des devis."
+  }
+ },
+ "reseaux-franchise": {
+  "id": "reseaux-franchise",
+  "nom": "Réseaux et franchises",
+  "intentions": {
+   "navigationnelle": {
+    "titre": "Gérer la cohérence de plusieurs points de vente",
+    "description": "Les responsables de réseau veulent que toutes leurs fiches Google soient parfaites et cohérentes.",
+    "motsCles": ["multi-sites", "centralisation", "cohérence"],
+    "cta": "Centraliser ma gestion locale",
+    "urgence": "moyenne"
+   }
+  },
+  "persona": {
+   "nom": "Caroline",
+   "age": 38,
+   "entreprise": "Boulangeries du Pain",
+   "ville": "Cergy",
+   "citation": "Je veux que toutes nos boulangeries aient une présence en ligne cohérente.",
+   "histoire": "Caroline gère le marketing d'une franchise de 15 boulangeries. Chaque gérant fait à sa sauce, c'est l'incohérence totale.",
+   "objectif": "Centraliser et harmoniser la présence en ligne du réseau."
+  }
+ },
+ "tourisme": {
+  "id": "tourisme",
+  "nom": "Hôtellerie et tourisme",
+  "intentions": {
+   "transactionnelle": {
+    "titre": "Obtenir des réservations directes",
+    "description": "Les hôteliers veulent dépendre moins des plateformes de réservation (Booking, Airbnb) et garder leurs marges.",
+    "motsCles": ["réserver", "chambre", "hôtel", "direct"],
+    "cta": "Augmenter mes réservations directes",
+    "urgence": "haute"
+   }
+  },
+  "persona": {
+   "nom": "Virginie",
+   "age": 45,
+   "entreprise": "Hôtel du Parc",
+   "ville": "Chantilly",
+   "citation": "Je veux que les touristes me trouvent sans passer par Booking.",
+   "histoire": "Virginie gère un hôtel de 22 chambres à Chantilly. Elle perd 15% de son chiffre en commissions Booking.",
+   "objectif": "Être visible sur Google pour capter les réservations directes."
+  }
+ }
+}

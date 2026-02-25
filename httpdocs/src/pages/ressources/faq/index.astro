@@ -1,0 +1,155 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+const faqCategories = [
+  {
+    nom: "SEO local",
+    questions: [
+      {
+        q: "Combien de temps pour voir des résultats SEO ?",
+        r: "Les premiers résultats apparaissent généralement entre 3 et 6 mois. Pour du SEO local, on peut voir des améliorations plus rapides sur Google My Business (1-2 mois)."
+      },
+      {
+        q: "Est-ce que le SEO local fonctionne pour les petites communes ?",
+        r: "Absolument ! C'est même souvent plus facile car la concurrence est moindre. J'accompagne des clients dans des villages de 2000 habitants avec d'excellents résultats."
+      },
+      {
+        q: "Faut-il un site web pour faire du SEO local ?",
+        r: "Oui, c'est fortement recommandé. La fiche Google My Business est essentielle, mais un site web vous donne plus de contrôle et de crédibilité."
+      }
+    ]
+  },
+  {
+    nom: "Google Ads",
+    questions: [
+      {
+        q: "Quel budget prévoir pour Google Ads ?",
+        r: "Tout dépend de votre secteur et de votre zone. Pour un commerce local dans l'Oise, comptez entre 300€ et 800€ par mois pour des résultats significatifs."
+      },
+      {
+        q: "Faut-il arrêter les annonces quand le SEO fonctionne ?",
+        r: "Non, les deux sont complémentaires. Le SEO apporte une visibilité durable, les annonces permettent de capter des clients immédiats."
+      }
+    ]
+  },
+  {
+    nom: "CRO",
+    questions: [
+      {
+        q: "C'est quoi le CRO ?",
+        r: "Le CRO (Conversion Rate Optimization) consiste à optimiser votre site pour transformer plus de visiteurs en clients, sans changer votre trafic."
+      },
+      {
+        q: "Quel est le taux de conversion moyen ?",
+        r: "Pour un site local, un bon taux de conversion se situe entre 2% et 5%. Tout dépend de votre secteur et de la qualité de votre trafic."
+      }
+    ]
+  },
+  {
+    nom: "Pratique",
+    questions: [
+      {
+        q: "Comment se passe la collaboration ?",
+        r: "On commence par un audit gratuit pour analyser votre situation. Si on décide de travailler ensemble, on établit un plan d'action sur-mesure avec des objectifs clairs."
+      },
+      {
+        q: "Y a-t-il un engagement de durée ?",
+        r: "Non, vous pouvez arrêter quand vous voulez. Je fonctionne sans engagement, car je préfère que mes clients restent parce qu'ils sont satisfaits, pas par contrat."
+      },
+      {
+        q: "Puis-je vous rencontrer ?",
+        r: "Bien sûr ! Je suis basé dans l'Oise et je me déplace facilement dans tout le département et le Val-d'Oise pour vous rencontrer."
+      }
+    ]
+  }
+];
+---
+
+<Layout
+    title="FAQ - Questions fréquentes sur le SEO local | Horizon Conversion"
+    description="Toutes les réponses à vos questions sur le SEO local, Google Ads, le CRO et mon accompagnement dans l'Oise et le Val-d'Oise."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-16">
+    <div class="container-custom text-center">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        Questions <span class="text-primary-600">fréquentes</span>
+      </h1>
+      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        Toutes les réponses à vos questions sur le SEO local, mon accompagnement et mes méthodes.
+      </p>
+
+      <!-- Barre de recherche -->
+      <div class="max-w-md mx-auto">
+        <div class="relative">
+          <input
+              type="search"
+              placeholder="Rechercher une question..."
+              class="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-primary-500"
+          />
+          <button class="absolute right-2 top-2 bg-primary-600 text-white px-6 py-2 rounded-full">
+            🔍
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation par catégories -->
+  <section class="py-8 border-b sticky top-16 bg-white z-40">
+    <div class="container-custom">
+      <div class="flex flex-wrap gap-3 justify-center">
+        {faqCategories.map(cat => (
+            <a href={`#${cat.nom.toLowerCase().replace(/ /g, '-')}`} class="px-4 py-2 bg-gray-100 hover:bg-primary-100 rounded-full text-sm transition-colors">
+              {cat.nom}
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ par catégorie -->
+  <section class="py-16">
+    <div class="container-custom max-w-3xl">
+      {faqCategories.map(cat => (
+          <div class="mb-16" id={cat.nom.toLowerCase().replace(/ /g, '-')}>
+            <h2 class="text-3xl font-bold mb-8 pb-2 border-b">{cat.nom}</h2>
+
+            <div class="space-y-4">
+              {cat.questions.map(item => (
+                  <details class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                    <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+                      <span>{item.q}</span>
+                      <span class="text-primary-600">▼</span>
+                    </summary>
+                    <p class="mt-4 text-gray-700 pl-4 border-l-4 border-primary-300">
+                      {item.r}
+                    </p>
+                  </details>
+              ))}
+            </div>
+          </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Pas trouvé votre réponse ? -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom text-center max-w-2xl">
+      <h2 class="text-3xl font-bold mb-4">Vous n'avez pas trouvé votre réponse ?</h2>
+      <p class="text-gray-700 mb-8">
+        Je suis là pour répondre à toutes vos questions. Contactez-moi directement, je vous répondrai sous 24h.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">
+          Me contacter
+        </a>
+        <a href="tel:0660921008" class="btn-secondary">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

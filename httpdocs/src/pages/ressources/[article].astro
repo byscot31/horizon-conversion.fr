@@ -1,0 +1,36 @@
+---
+// src/pages/ressources/[article].astro
+import Layout from "../../layouts/Layout.astro";
+
+// 1️⃣ AJOUT OBLIGATOIRE : Générer tous les chemins possibles
+export async function getStaticPaths() {
+  // Définissez la liste de tous vos articles (venant de vos données)
+  const articles = [
+    { slug: "seo-local-artisans-2025", titre: "SEO local pour artisans : le guide complet 2025" },
+    { slug: "google-ads-petits-budgets", titre: "Google Ads avec petit budget : 5 stratégies qui marchent" },
+    { slug: "avis-google-importance", titre: "Pourquoi les avis Google sont devenus plus importants que votre site" },
+    { slug: "cro-pour-professions-liberales", titre: "CRO pour professions libérales : transformer les visites en rendez-vous" },
+    { slug: "referencement-local-google-maps", titre: "Google Maps : le guide pour être dans le pack local" },
+    { slug: "prix-seo-local-2025", titre: "Combien coûte vraiment le SEO local en 2025 ?" },
+  ];
+
+  // Retourne un tableau de paramètres pour chaque article
+  return articles.map((article) => ({
+    params: { article: article.slug }, // ⚠️ Doit correspondre au nom du fichier [article]
+    props: { article }, // On passe l'article complet en props
+  }));
+}
+
+// 2️⃣ Récupérer les props passées par getStaticPaths
+const { article } = Astro.props;
+
+// (Le reste de votre code existant pour afficher l'article)
+// Assurez-vous d'utiliser `article.titre`, `article.contenu`, etc.
+---
+
+<Layout title={`${article.titre} | Horizon Conversion`}>
+  <div class="container-custom py-12 max-w-3xl">
+    <h1 class="text-4xl font-bold mb-6">{article.titre}</h1>
+    <!-- Le reste de votre template -->
+  </div>
+</Layout>

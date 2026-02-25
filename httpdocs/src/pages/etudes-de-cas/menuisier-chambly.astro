@@ -1,0 +1,88 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const ville = villes.find(v => v.id === "chambly");
+---
+
+<Layout
+    title="Étude de cas : +500% de devis pour un menuisier à Chambly | Horizon Conversion"
+    description="Comment un menuisier à Chambly a multiplié ses demandes de devis par 5 grâce à une stratégie de contenu ciblée."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-amber-50 to-orange-50 py-16">
+    <div class="container-custom">
+      <nav class="text-sm text-gray-600 mb-8">
+        <a href="/" class="hover:text-primary-600">Accueil</a> ›
+        <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+        <span class="text-gray-900">Menuiserie Dubois</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="badge-consultant">Artisan</span>
+          <span class="badge-agence">Création site + SEO</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Chambly (60)</span>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+500% de devis pour un menuisier à Chambly</h1>
+        <p class="text-xl text-gray-700">Comment Michel est passé de 2 devis par mois à 10-12 devis par mois.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats clés -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">+500%</div>
+          <p class="text-gray-600">de demandes de devis</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">2 → 12</div>
+          <p class="text-gray-600">devis par mois</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">#1</div>
+          <p class="text-gray-600">sur "menuisier Chambly"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image avant/après -->
+  <section class="bg-gray-50 py-12">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="bg-gray-200 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center">
+            <span class="text-gray-500">📸 Ancien site (aucune photo des réalisations)</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-green-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center border-2 border-green-300">
+            <span class="text-green-700">📸 Nouveau site avec portfolio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Suite similaire à la précédente mais adaptée -->
+  <!-- ... -->
+
+  <!-- Témoignage -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <div class="bg-primary-600 text-white p-12 rounded-2xl">
+        <blockquote class="text-2xl italic mb-6">
+          "Mon téléphone sonne constamment, je dois refuser des chantiers. Le site me ramène des clients de Chambly et de toutes les communes autour."
+        </blockquote>
+        <p class="font-semibold text-xl">Michel Dubois</p>
+        <p class="text-white/80">Menuiserie Dubois - Chambly (60)</p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,62 @@
+---
+// src/components/MicroInteractions.astro
+---
+
+<script>
+  // Détection de l'intention via l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const intention = urlParams.get('intention');
+
+  // Animation du curseur selon l'intention
+  if (intention === 'transactionnelle') {
+    document.body.style.cursor = 'url(/images/cursor-urgent.png), auto';
+  }
+
+  // Effet de scroll qui change la couleur du header
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    const scrollY = window.scrollY;
+
+    if (scrollY > 100) {
+      header?.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
+      header?.classList.remove('bg-white');
+    } else {
+      header?.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
+      header?.classList.add('bg-white');
+    }
+  });
+
+  // Animation au survol des cards
+  document.querySelectorAll('[data-intention]').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const intention = card.dataset.intention;
+      if (intention === 'transactionnelle') {
+        card.style.transform = 'scale(1.05) rotate(1deg)';
+      } else if (intention === 'investigationnelle') {
+        card.style.transform = 'translateY(-8px)';
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'none';
+    });
+  });
+
+  // Compteur d'urgence qui défile
+  const urgentCounters = document.querySelectorAll('.urgent-counter');
+  urgentCounters.forEach(counter => {
+    let count = 0;
+    const interval = setInterval(() => {
+      count = (count + 1) % 100;
+      counter.innerHTML = `${count} personnes regardent cette page en ce moment`;
+    }, 3000);
+  });
+
+  // Animation de "personnes en train de regarder"
+  const viewerBadge = document.createElement('div');
+  viewerBadge.className = 'fixed bottom-4 left-4 bg-white shadow-lg rounded-full px-4 py-2 text-sm z-50 animate-bounce';
+  viewerBadge.innerHTML = '👥 12 personnes regardent cette offre';
+  if (intention === 'transactionnelle') {
+    document.body.appendChild(viewerBadge);
+  }
+</script>

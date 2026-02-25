@@ -1,58 +1,234 @@
 ---
+// src/pages/ressources/blog/[slug].astro
 import Layout from "../../../layouts/Layout.astro";
 
-// Exemple pour un article (à adapter selon votre système)
-const { slug } = Astro.params;
+// 1. DÉFINIR tous les articles disponibles
+export async function getStaticPaths() {
+  const articles = [
+    {
+      slug: "seo-local-artisans-2025",
+      titre: "SEO local pour artisans : le guide complet 2025",
+      date: "2025-02-15",
+      auteur: "Julien",
+      categorie: "Guide",
+      image: "/images/ressources/seo-artisans.jpg",
+      tempsLecture: 8,
+      description: "Comment être trouvé quand un client cherche un plombier, électricien ou menuisier dans votre ville.",
+      contenu: `
+        <h2>Pourquoi le SEO local est crucial pour les artisans</h2>
+        <p>Quand un client a une fuite d'eau ou une panne d'électricité, il ne va pas comparer les prix pendant 3 jours. Il prend son téléphone et tape "plombier urgence" ou "électricien près de chez moi".</p>
+        <p>Si vous n'apparaissez pas dans les premiers résultats, vous perdez ce client.</p>
+        
+        <h2>Les 3 piliers du SEO local pour artisans</h2>
+        
+        <h3>1. Google My Business</h3>
+        <p>Votre fiche Google est devenue plus importante que votre site. C'est la première chose que voient vos clients.</p>
+        <ul>
+          <li>Photos professionnelles de vos réalisations</li>
+          <li>Avis clients (demandez systématiquement)</li>
+          <li>Horaires à jour (surtout pour les urgences)</li>
+          <li>Posts réguliers sur vos services</li>
+        </ul>
+        
+        <h3>2. Les pages par service</h3>
+        <p>Ne faites pas une seule page "plomberie". Créez des pages spécifiques :</p>
+        <ul>
+          <li>Dépannage urgence</li>
+          <li>Installation chaudière</li>
+          <li>Réparation fuite d'eau</li>
+          <li>Débouchage canalisation</li>
+        </ul>
+        
+        <h3>3. Les pages par ville</h3>
+        <p>Si vous intervenez dans plusieurs communes, créez des pages dédiées. Exemple :</p>
+        <ul>
+          <li>Plombier Méru</li>
+          <li>Plombier Chambly</li>
+          <li>Plombier Esches</li>
+        </ul>
+        
+        <h2>Exemple concret : Robert, plombier à Méru</h2>
+        <p>Robert avait un site vieux de 10 ans et ne recevait que 2 appels par semaine. Après optimisation de sa fiche Google et création de pages par service, il reçoit maintenant 15 appels par semaine.</p>
+        <p><a href="/etudes-de-cas/plombier-meru">Voir l'étude de cas complète →</a></p>
+      `
+    },
+    {
+      slug: "google-ads-petits-budgets",
+      titre: "Google Ads avec petit budget : 5 stratégies qui marchent",
+      date: "2025-02-10",
+      auteur: "Julien",
+      categorie: "Stratégie",
+      image: "/images/ressources/ads-budget.jpg",
+      tempsLecture: 6,
+      description: "Comment faire des annonces rentables avec moins de 300€ par mois pour un commerce local.",
+      contenu: `
+        <h2>1. La géolocalisation fine</h2>
+        <p>Avec un petit budget, vous devez être hyper-ciblé. Ne diffusez pas sur tout le département, concentrez-vous sur un rayon de 5-10km autour de votre commerce.</p>
+        
+        <h2>2. Les heures de diffusion</h2>
+        <p>Diffusez uniquement aux heures où vous pouvez répondre. Si vous fermez à 19h, arrêtez les annonces à 18h.</p>
+        
+        <h2>3. Les mots-clés négatifs</h2>
+        <p>Excluez les recherches qui ne rapportent pas. Pour un plombier, excluez "cours plomberie", "formation", "prix", etc.</p>
+        
+        <h2>4. Les annonces saisonnières</h2>
+        <p>Adaptez vos annonces aux périodes : "chauffage" en hiver, "climatisation" en été, "cadeaux" en décembre.</p>
+        
+        <h2>5. Le retargeting léger</h2>
+        <p>Remarquez les visiteurs de votre site avec des annonces à petit budget. Le ROI est souvent excellent.</p>
+      `
+    },
+    {
+      slug: "avis-google-importance",
+      titre: "Pourquoi les avis Google sont devenus plus importants que votre site",
+      date: "2025-02-05",
+      auteur: "Julien",
+      categorie: "E-réputation",
+      image: "/images/ressources/avis-google.jpg",
+      tempsLecture: 5,
+      description: "L'impact des avis sur le classement local et comment obtenir plus d'avis naturellement.",
+      contenu: `
+        <h2>1. Les avis influencent directement votre classement</h2>
+        <p>Google considère la quantité, la qualité et la récence des avis comme des facteurs de classement majeurs. Plus vous avez d'avis récents et positifs, plus vous montez.</p>
+        
+        <h2>2. Les avis rassurent les clients</h2>
+        <p>Un client qui hésite entre deux prestataires va regarder les avis. 84% des gens font autant confiance aux avis en ligne qu'à une recommandation personnelle.</p>
+        
+        <h2>3. Comment obtenir plus d'avis</h2>
+        <ul>
+          <li>Demandez systématiquement aux clients satisfaits</li>
+          <li>Créez un lien direct vers votre fiche Google</li>
+          <li>Formez vos équipes à demander des avis</li>
+          <li>Répondez à tous les avis (positifs et négatifs)</li>
+        </ul>
+        
+        <h2>4. Exemple de Sophie, caviste à Cergy</h2>
+        <p>Sophie a gagné 30% de clients en boutique après avoir optimisé sa fiche Google et obtenu 50 nouveaux avis.</p>
+      `
+    },
+    {
+      slug: "cro-pour-professions-liberales",
+      titre: "CRO pour professions libérales : transformer les visites en rendez-vous",
+      date: "2025-01-28",
+      auteur: "Julien",
+      categorie: "Guide",
+      image: "/images/ressources/cro-pro.jpg",
+      tempsLecture: 7,
+      description: "Techniques spécifiques pour avocats, médecins et architectes qui veulent plus de clients.",
+      contenu: `
+        <h2>Le problème des sites de professionnels libéraux</h2>
+        <p>Beaucoup de sites d'avocats, médecins ou architectes reçoivent des visites... mais pas de rendez-vous. Le problème n'est pas le trafic, c'est la conversion.</p>
+        
+        <h2>1. Le formulaire de contact idéal</h2>
+        <ul>
+          <li>4 champs maximum</li>
+          <li>Mention "réponse sous 24h"</li>
+          <li>Badge de confiance</li>
+        </ul>
+        
+        <h2>2. Les témoignages clients</h2>
+        <p>Placez des témoignages STRATÉGIQUEMENT, pas cachés en bas de page.</p>
+        
+        <h2>3. Exemple concret</h2>
+        <p>Maître Dupont, avocat à Montmorency, a doublé ses rendez-vous sans changer ses annonces, juste en optimisant son formulaire.</p>
+      `
+    },
+    {
+      slug: "referencement-local-google-maps",
+      titre: "Google Maps : le guide pour être dans le pack local",
+      date: "2025-01-20",
+      auteur: "Julien",
+      categorie: "SEO local",
+      image: "/images/ressources/google-maps.jpg",
+      tempsLecture: 9,
+      description: "Les 12 actions concrètes pour apparaître dans les 3 premiers résultats avec carte.",
+      contenu: `
+        <h2>Les 3 facteurs clés du pack local</h2>
+        
+        <h3>1. La pertinence</h3>
+        <p>Votre fiche doit correspondre exactement à ce que cherche l'utilisateur. Utilisez les bonnes catégories.</p>
+        
+        <h3>2. La distance</h3>
+        <p>Google privilégie les commerces proches du lieu de recherche.</p>
+        
+        <h3>3. La notoriété</h3>
+        <p>Avis, liens, mentions : tout ce qui prouve que vous êtes connu.</p>
+        
+        <h2>12 actions concrètes</h2>
+        <ol>
+          <li>Catégorie principale précise</li>
+          <li>Catégories secondaires</li>
+          <li>Photos de qualité (minimum 10)</li>
+          <li>Horaires complets</li>
+          <li>Messagerie activée</li>
+          <li>Questions/réponses</li>
+          <li>Posts réguliers</li>
+          <li>Avis (demandez !)</li>
+          <li>Réponses aux avis</li>
+          <li>Lien vers votre site</li>
+          <li>Numéro de téléphone local</li>
+          <li>Produits/services listés</li>
+        </ol>
+      `
+    },
+    {
+      slug: "prix-seo-local-2025",
+      titre: "Combien coûte vraiment le SEO local en 2025 ?",
+      date: "2025-01-12",
+      auteur: "Julien",
+      categorie: "Conseils",
+      image: "/images/ressources/prix-seo.jpg",
+      tempsLecture: 6,
+      description: "Analyse des prix du marché et ce que vous devez vraiment payer pour des résultats.",
+      contenu: `
+        <h2>Les fourchettes de prix sur le marché</h2>
+        <ul>
+          <li>Freelance débutant : 300-600€/mois</li>
+          <li>Consultant confirmé : 600-1200€/mois</li>
+          <li>Agence locale : 1000-2000€/mois</li>
+          <li>Grande agence : 2000-5000€/mois</li>
+        </ul>
+        
+        <h2>Ce qui justifie le prix</h2>
+        <ul>
+          <li>Audit initial (temps d'analyse)</li>
+          <li>Création de contenu (rédaction)</li>
+          <li>Netlinking (liens)</li>
+          <li>Suivi et reporting</li>
+        </ul>
+        
+        <h2>Mon approche</h2>
+        <p>Je propose des forfaits à partir de 790€/mois pour un accompagnement complet, avec un engagement sans contrainte.</p>
+        
+        <h2>Attention aux arnaques</h2>
+        <p>Méfiez-vous des promesses de #1 en 15 jours et des tarifs trop bas. Le SEO demande du temps et du travail.</p>
+      `
+    }
+  ];
 
-// Données de l'article (à remplacer par une vraie source)
-const article = {
-  "seo-local-artisans-2025": {
-    titre: "SEO local pour artisans : le guide complet 2025",
-    date: "2025-02-15",
-    auteur: "Julien",
-    categorie: "Guide",
-    image: "/images/ressources/seo-artisans.jpg",
-    contenu: `
-      <h2>Pourquoi le SEO local est crucial pour les artisans</h2>
-      <p>Quand un client a une fuite d'eau ou une panne d'électricité, il ne va pas comparer les prix pendant 3 jours. Il prend son téléphone et tape "plombier urgence" ou "électricien près de chez moi".</p>
-      <p>Si vous n'apparaissez pas dans les premiers résultats, vous perdez ce client.</p>
-      
-      <h2>Les 3 piliers du SEO local pour artisans</h2>
-      <h3>1. Google My Business</h3>
-      <p>Votre fiche Google est devenue plus importante que votre site. C'est la première chose que voient vos clients.</p>
-      <ul>
-        <li>Photos professionnelles de vos réalisations</li>
-        <li>Avis clients (demandez systématiquement)</li>
-        <li>Horaires à jour (surtout pour les urgences)</li>
-        <li>Posts réguliers sur vos services</li>
-      </ul>
-      
-      <h3>2. Les pages par service</h3>
-      <p>Ne faites pas une seule page "plomberie". Créez des pages spécifiques :</p>
-      <ul>
-        <li>Dépannage urgence</li>
-        <li>Installation chaudière</li>
-        <li>Réparation fuite d'eau</li>
-        <li>Débouchage canalisation</li>
-      </ul>
-      
-      <h3>3. Les pages par ville</h3>
-      <p>Si vous intervenez dans plusieurs communes, créez des pages dédiées. Exemple :</p>
-      <ul>
-        <li>Plombier Méru</li>
-        <li>Plombier Chambly</li>
-        <li>Plombier Esches</li>
-      </ul>
-      
-      <h2>Exemple concret : Robert, plombier à Méru</h2>
-      <p>Robert avait un site vieux de 10 ans et ne recevait que 2 appels par semaine. Après optimisation de sa fiche Google et création de pages par service, il reçoit maintenant 15 appels par semaine.</p>
-      <p><a href="/etudes-de-cas/plombier-meru">Voir l'étude de cas complète →</a></p>
-    `
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+// 2. Récupérer les props
+const { article } = Astro.props;
+
+// 3. Articles similaires (pour la fin de page)
+const articlesSimilaires = [
+  {
+    slug: "avis-google-importance",
+    titre: "Pourquoi les avis Google sont devenus plus importants que votre site"
+  },
+  {
+    slug: "cro-pour-professions-liberales",
+    titre: "CRO pour professions libérales : transformer les visites en rendez-vous"
   }
-}[slug] || null;
+];
 ---
 
-<Layout title={`${article?.titre || 'Article'} | Horizon Conversion`}>
+<Layout title={`${article.titre} | Horizon Conversion`} description={article.description}>
   {article ? (
       <div class="container-custom py-12 max-w-3xl">
         <!-- Fil d'ariane -->
@@ -66,9 +242,10 @@ const article = {
         <!-- En-tête -->
         <div class="mb-8">
           <div class="flex items-center gap-3 mb-4">
-            <span class="badge-consultant text-xs">{article.categorie}</span>
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-xs">{article.categorie}</span>
             <span class="text-sm text-gray-500">{new Date(article.date).toLocaleDateString('fr-FR')}</span>
             <span class="text-sm text-gray-500">Par {article.auteur}</span>
+            <span class="text-sm text-gray-500">{article.tempsLecture} min de lecture</span>
           </div>
           <h1 class="text-4xl font-bold mb-6">{article.titre}</h1>
         </div>
@@ -81,18 +258,36 @@ const article = {
         <!-- Contenu -->
         <div class="prose prose-lg max-w-none" set:html={article.contenu} />
 
-        <!-- Partage -->
+        <!-- Auteur -->
+        <div class="bg-gray-50 p-6 rounded-xl mt-12 flex items-start gap-4">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">
+            👤
+          </div>
+          <div>
+            <h3 class="font-bold text-lg mb-1">Julien</h3>
+            <p class="text-gray-600 text-sm mb-2">Consultant SEO local dans l'Oise et le Val-d'Oise depuis 2015.</p>
+            <a href="/contact" class="text-primary-600 text-sm hover:underline">Contacter →</a>
+          </div>
+        </div>
+
+        <!-- Articles similaires -->
         <div class="border-t mt-12 pt-8">
-          <p class="text-sm text-gray-600 mb-4">Partager cet article :</p>
-          <div class="flex gap-4">
-            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${Astro.url}`} target="_blank" class="text-gray-500 hover:text-primary-600">LinkedIn</a>
-            <a href={`https://twitter.com/intent/tweet?url=${Astro.url}&text=${article.titre}`} target="_blank" class="text-gray-500 hover:text-primary-600">Twitter</a>
-            <a href={`mailto:?subject=${article.titre}&body=${Astro.url}`} class="text-gray-500 hover:text-primary-600">Email</a>
+          <h3 class="text-xl font-bold mb-6">Vous aimerez aussi</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            {articlesSimilaires.map(articleSim => (
+                <a href={`/ressources/blog/${articleSim.slug}`} class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                  <div class="w-12 h-12 bg-gray-100 rounded"></div>
+                  <div>
+                    <p class="font-medium">{articleSim.titre}</p>
+                    <p class="text-xs text-gray-500">Lire l'article →</p>
+                  </div>
+                </a>
+            ))}
           </div>
         </div>
 
         <!-- CTA -->
-        <div class="bg-primary-50 p-8 rounded-xl mt-12">
+        <div class="bg-primary-50 p-8 rounded-xl mt-8">
           <h3 class="text-xl font-bold mb-2">Vous voulez appliquer ces conseils ?</h3>
           <p class="text-gray-700 mb-4">Je propose un audit gratuit pour analyser votre situation.</p>
           <a href="/contact" class="btn-primary inline-block">Demander mon audit</a>
@@ -101,7 +296,7 @@ const article = {
   ) : (
       <div class="container-custom py-16 text-center">
         <h1 class="text-3xl font-bold mb-4">Article non trouvé</h1>
-        <a href="/ressources" class="text-primary-600">Voir toutes les ressources →</a>
+        <a href="/ressources/blog" class="text-primary-600">Voir tous les articles →</a>
       </div>
   )}
 </Layout>
