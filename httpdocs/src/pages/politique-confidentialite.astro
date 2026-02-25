@@ -8,24 +8,97 @@ import Layout from "../layouts/Layout.astro";
 
     <div class="space-y-8">
       <section>
-        <h2 class="text-2xl font-bold mb-4">1. Collecte des données</h2>
-        <p>Nous collectons les données suivantes via le formulaire de contact : nom, prénom, email, téléphone, message. Ces données sont utilisées uniquement pour répondre à votre demande.</p>
+        <h2 class="text-2xl font-bold mb-4">1. Qui sommes-nous ?</h2>
+        <p>
+          <strong>Horizon Conversion</strong> est une marque de <strong>DA COSTA FRANCOIS</strong> (Entreprise Individuelle).<br />
+          21 Boulevard de l'Orangerie<br />
+          95160 MONTMORENCY<br />
+          SIREN : 810 922 641
+        </p>
+        <p class="mt-2">
+          Adresse email : <strong>contact@horizon-conversion.fr</strong><br />
+          Téléphone : <strong>06 60 92 10 08</strong>
+        </p>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-4">2. Durée de conservation</h2>
-        <p>Les données sont conservées pendant une durée de 3 ans à compter du dernier contact.</p>
+        <h2 class="text-2xl font-bold mb-4">2. Données collectées</h2>
+        <p>Nous collectons les données suivantes via le formulaire de contact :</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li>Nom et prénom</li>
+          <li>Adresse email</li>
+          <li>Numéro de téléphone</li>
+          <li>Message (contenant possiblement des informations sur votre projet)</li>
+          <li>Ville (si renseignée)</li>
+        </ul>
+        <p class="mt-2">Ces données sont collectées uniquement dans le but de répondre à votre demande et de vous fournir un devis personnalisé.</p>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-4">3. Vos droits</h2>
-        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour les exercer, contactez-nous à contact@horizon-conversion.fr.</p>
+        <h2 class="text-2xl font-bold mb-4">3. Base légale du traitement</h2>
+        <p>Le traitement de vos données repose sur :</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li><strong>Votre consentement</strong> (case à cocher dans le formulaire)</li>
+          <li><strong>L'exécution de mesures précontractuelles</strong> (réponse à votre demande de devis)</li>
+        </ul>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-4">4. Cookies</h2>
-        <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement. Aucun cookie publicitaire ou de traçage n'est utilisé sans votre consentement.</p>
+        <h2 class="text-2xl font-bold mb-4">4. Durée de conservation</h2>
+        <p>Les données sont conservées pendant une durée de <strong>3 ans</strong> à compter du dernier contact avec vous (dernier email échangé ou dernière action de votre part).</p>
+        <p class="mt-2">Passé ce délai, vos données sont supprimées de nos systèmes.</p>
       </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">5. Destinataires des données</h2>
+        <p>Vos données sont destinées uniquement à <strong>François DA COSTA</strong>, en qualité de responsable de traitement. Elles ne sont ni vendues, ni louées, ni transmises à des tiers, sauf obligation légale.</p>
+        <p class="mt-2">Aucun transfert de données hors de l'Union européenne n'est effectué.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">6. Vos droits</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez des droits suivants :</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li><strong>Droit d'accès</strong> – obtenir une copie de vos données</li>
+          <li><strong>Droit de rectification</strong> – faire modifier vos données si elles sont inexactes</li>
+          <li><strong>Droit à l'effacement</strong> – demander la suppression de vos données</li>
+          <li><strong>Droit à la limitation</strong> – restreindre le traitement de vos données</li>
+          <li><strong>Droit d'opposition</strong> – vous opposer au traitement de vos données</li>
+          <li><strong>Droit à la portabilité</strong> – récupérer vos données dans un format structuré</li>
+        </ul>
+        <p class="mt-2">Pour exercer ces droits, contactez-nous par email à <strong>contact@horizon-conversion.fr</strong> ou par courrier à l'adresse postale indiquée ci-dessus.</p>
+        <p class="mt-2">Vous avez également le droit d'introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés).</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">7. Cookies</h2>
+        <p>Ce site utilise uniquement des <strong>cookies techniques</strong> nécessaires à son fonctionnement :</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li>Cookie de session (pour maintenir votre navigation)</li>
+          <li>Cookie de consentement (pour mémoriser votre choix sur les cookies)</li>
+        </ul>
+        <p class="mt-2">Aucun cookie publicitaire ou de traçage (tracking) n'est utilisé sans votre consentement explicite. Le site ne comporte pas de régies publicitaires.</p>
+        <p class="mt-2">Vous pouvez à tout moment paramétrer vos préférences via les paramètres de votre navigateur.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">8. Sécurité</h2>
+        <p>Nous mettons en œuvre toutes les mesures techniques et organisationnelles appropriées pour garantir la sécurité et la confidentialité de vos données (hébergement sécurisé, accès restreint, chiffrement des échanges via HTTPS).</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">9. Mise à jour de la politique</h2>
+        <p>Cette politique de confidentialité peut être mise à jour ponctuellement. La date de la dernière modification est indiquée ci-dessous.</p>
+        <p class="mt-2 text-sm text-gray-600">Dernière mise à jour : <strong>25 février 2026</strong></p>
+      </section>
+
+      <div class="border-t pt-8 text-sm text-gray-500">
+        <p>
+          Pour toute question relative à vos données personnelles, vous pouvez nous contacter :<br />
+          📧 <strong>contact@horizon-conversion.fr</strong><br />
+          📞 <strong>06 60 92 10 08</strong>
+        </p>
+      </div>
     </div>
   </div>
 </Layout>

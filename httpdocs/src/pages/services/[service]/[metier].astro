@@ -122,6 +122,83 @@ const description = `Découvrez comment le ${service.nom} peut aider les ${metie
     </div>
   </section>
 
+  <!-- NOUVELLE SECTION : CE QUE VOUS OBTENEZ (PACKS) -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ce que <span class="text-primary-600">vous obtenez</span></h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        Des formules adaptées aux besoins des {metier.nomCourt}.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Pack Essentiel -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <div class="text-center mb-4">
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Essentiel</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">
+            {service.id === 'seo-local' && '390€'}
+            {service.id === 'google-ads' && '390€'}
+            {service.id === 'cro' && '490€'}
+            {service.id === 'creation-site' && '990€'}
+            {service.id === 'gmb' && '290€'}
+            {service.id === 'formation' && '590€'}
+          </span></div>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Audit complet inclus
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Actions prioritaires
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Reporting mensuel
+            </li>
+          </ul>
+          <a href="/contact" class="block text-center text-primary-600 font-medium hover:underline">Demander un devis →</a>
+        </div>
+
+        <!-- Pack Standard (recommandé) -->
+        <div class="bg-primary-50 p-6 rounded-xl border-2 border-primary-200 hover:shadow-lg transition-all relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <span class="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Recommandé</span>
+          </div>
+          <div class="text-center mb-4 mt-4">
+            <span class="bg-primary-200 text-primary-800 px-3 py-1 rounded-full text-sm font-semibold">Standard</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">
+            {service.id === 'seo-local' && '690€'}
+            {service.id === 'google-ads' && '690€'}
+            {service.id === 'cro' && '890€'}
+            {service.id === 'creation-site' && '1990€'}
+            {service.id === 'gmb' && '490€'}
+            {service.id === 'formation' && '990€'}
+          </span></div>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Tout le pack Essentiel
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Actions avancées
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-green-500">✓</span>
+              Suivi personnalisé
+            </li>
+          </ul>
+          <a href="/contact" class="block text-center text-primary-600 font-medium hover:underline">Demander un devis →</a>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-gray-500 mt-6">* Audit initial gratuit - Sans engagement</p>
+    </div>
+  </section>
+
   <!-- SECTION 2 : Villes disponibles (grille complète) -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">

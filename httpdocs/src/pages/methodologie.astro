@@ -1,4 +1,5 @@
 ---
+// src/pages/methodologie.astro
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -22,8 +23,126 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
+  <!-- NOUVEAU : CE QUE VOUS OBTENEZ (BLOC OFFRE) -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ce que <span class="text-primary-600">vous obtenez</span></h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        Une collaboration transparente, sans surprise, avec des livrables clairs à chaque étape.
+      </p>
+
+      <!-- 3 PACKS INDICATIFS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Pack Essentiel -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <div class="text-center mb-4">
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Essentiel</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">390€</span></div>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">Audit technique complet (15-20 pages)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">Optimisation fiche Google My Business</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">5 pages optimisées</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">Reporting mensuel</span>
+            </li>
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : 1 mois</p>
+            <p>📋 Pré-requis : accès GSC, GA, GMB</p>
+          </div>
+        </div>
+
+        <!-- Pack Standard -->
+        <div class="bg-primary-50 p-6 rounded-xl border-2 border-primary-200 hover:shadow-lg transition-all relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <span class="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Recommandé</span>
+          </div>
+          <div class="text-center mb-4 mt-4">
+            <span class="bg-primary-200 text-primary-800 px-3 py-1 rounded-full text-sm font-semibold">Standard</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">690€</span></div>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">Tout le pack Essentiel</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ 10 pages optimisées / créées</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Suivi bi-mensuel (visio)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Netlinking local (5 liens)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Dashboard Data Studio</span>
+            </li>
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : 2-3 mois</p>
+            <p>📋 Pré-requis : accès complets + photos pro</p>
+          </div>
+        </div>
+
+        <!-- Pack Premium -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <div class="text-center mb-4">
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">Sur mesure</div>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">Tout le pack Standard</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Stratégie sur-mesure</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Contenu illimité</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Netlinking avancé</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500">✓</span>
+              <span class="text-sm">+ Accompagnement prioritaire</span>
+            </li>
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : selon objectifs</p>
+            <p>📋 Devis personnalisé</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-sm text-gray-600">* Tous les packs incluent l'audit initial gratuit</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Les 4 piliers -->
-  <section class="py-20">
+  <section class="py-20 bg-gray-50">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Les 4 piliers de mon approche</h2>
       <p class="text-gray-600 text-center mb-16 max-w-2xl mx-auto">
@@ -67,7 +186,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Phase 1 : Audit détaillé -->
-  <section class="bg-gray-50 py-20">
+  <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -119,7 +238,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Phase 2 : Stratégie -->
-  <section class="py-20">
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="order-2 md:order-1">
@@ -142,17 +261,17 @@ import Layout from "../layouts/Layout.astro";
           <p class="text-lg text-gray-700 mb-6">À partir de l'audit, je construis une stratégie sur-mesure, avec des objectifs clairs et un plan d'action détaillé.</p>
 
           <div class="space-y-4">
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">🎯 Définition des objectifs</h3>
               <p class="text-gray-600">Objectifs chiffrés et datés : trafic, appels, positionnements, conversions.</p>
             </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">📝 Plan de contenu</h3>
               <p class="text-gray-600">Quelles pages créer ? Quels articles de blog ? Quel calendrier de publication ?</p>
             </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">🔗 Stratégie de liens</h3>
               <p class="text-gray-600">Quels sites locaux cibler ? Quels partenariats ? Quels annuaires de qualité ?</p>
             </div>
@@ -163,7 +282,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Phase 3 : Exécution -->
-  <section class="bg-gray-50 py-20">
+  <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -211,7 +330,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Phase 4 : Reporting -->
-  <section class="py-20">
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="order-2 md:order-1">
@@ -234,17 +353,17 @@ import Layout from "../layouts/Layout.astro";
           <p class="text-lg text-gray-700 mb-6">Vous n'êtes pas un expert SEO, et vous n'avez pas à l'être. Je vous fournis des rapports clairs, avec des graphiques et des explications simples.</p>
 
           <div class="space-y-4">
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">📈 Tableau de bord personnalisé</h3>
               <p class="text-gray-600">Google Data Studio avec vos indicateurs clés, actualisé en temps réel.</p>
             </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">📄 Rapport mensuel détaillé</h3>
               <p class="text-gray-600">PDF de 10-15 pages avec analyse des résultats et recommandations.</p>
             </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg">
               <h3 class="font-semibold text-lg mb-1">🎯 Point mensuel</h3>
               <p class="text-gray-600">30 minutes pour discuter des résultats et ajuster la stratégie.</p>
             </div>
@@ -255,7 +374,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Transparence -->
-  <section class="bg-gray-50 py-20">
+  <section class="py-20">
     <div class="container-custom">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold mb-6">Transparence totale</h2>
@@ -264,19 +383,19 @@ import Layout from "../layouts/Layout.astro";
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-xl">
+          <div class="bg-gray-50 p-6 rounded-xl">
             <div class="text-2xl mb-2">🔓</div>
             <h3 class="font-semibold mb-2">Pas d'engagement</h3>
             <p class="text-sm text-gray-600">Vous pouvez arrêter quand vous voulez, sans frais.</p>
           </div>
 
-          <div class="bg-white p-6 rounded-xl">
+          <div class="bg-gray-50 p-6 rounded-xl">
             <div class="text-2xl mb-2">📊</div>
             <h3 class="font-semibold mb-2">Accès à vos données</h3>
             <p class="text-sm text-gray-600">Vous avez accès à tous vos comptes (GA, GSC, etc.)</p>
           </div>
 
-          <div class="bg-white p-6 rounded-xl">
+          <div class="bg-gray-50 p-6 rounded-xl">
             <div class="text-2xl mb-2">🤝</div>
             <h3 class="font-semibold mb-2">Propriété de vos contenus</h3>
             <p class="text-sm text-gray-600">Tout ce que je crée vous appartient.</p>
@@ -287,7 +406,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Cas client exemple -->
-  <section class="py-20">
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-12">Cette méthode appliquée à un client</h2>
 

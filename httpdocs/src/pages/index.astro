@@ -7,6 +7,17 @@ import villes from "../data/villes.json";
 
 const servicesPremium = services.filter(s => s.premium);
 const villesPrincipales = villes.slice(0, 6);
+
+// Statistiques (à ajuster selon vos vrais chiffres)
+const stats = {
+	clients: 82,
+	leadsMensuels: "450+",
+	delaiAudit: 48,
+	sansEngagement: true,
+	dashboards: true,
+	noteGoogle: 4.9,
+	avisGoogle: 30
+};
 ---
 
 <Layout
@@ -50,6 +61,53 @@ const villesPrincipales = villes.slice(0, 6);
 					<span>📍 Beauvais - Cergy</span>
 				</div>
 			</div>
+		</div>
+	</section>
+
+	<!-- BANDEAU DE CONFIANCE (PREUVES SOCIALES) - AJOUTÉ -->
+	<section class="py-8 border-b border-t bg-white">
+		<div class="container-custom">
+			<div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+				<!-- Nombre de clients -->
+				<div class="p-3">
+					<div class="text-2xl font-bold text-primary-600">{stats.clients}+</div>
+					<div class="text-xs text-gray-600">clients accompagnés</div>
+				</div>
+
+				<!-- Note Google -->
+				<div class="p-3">
+					<div class="text-2xl font-bold text-primary-600">{stats.noteGoogle}★</div>
+					<div class="text-xs text-gray-600">{stats.avisGoogle} avis Google</div>
+				</div>
+
+				<!-- Leads mensuels -->
+				<div class="p-3">
+					<div class="text-2xl font-bold text-primary-600">{stats.leadsMensuels}</div>
+					<div class="text-xs text-gray-600">leads/mois générés</div>
+				</div>
+
+				<!-- Délai audit -->
+				<div class="p-3">
+					<div class="text-2xl font-bold text-primary-600">{stats.delaiAudit}h</div>
+					<div class="text-xs text-gray-600">délai audit</div>
+				</div>
+
+				<!-- Sans engagement -->
+				<div class="p-3">
+					<div class="text-2xl font-bold text-primary-600">✓</div>
+					<div class="text-xs text-gray-600">sans engagement</div>
+				</div>
+			</div>
+
+			<!-- Deuxième ligne pour les dashboards (optionnel) -->
+			{stats.dashboards && (
+				<div class="flex justify-center mt-2">
+					<div class="bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-sm inline-flex items-center gap-2">
+						<span>📊</span>
+						<span>Accès dashboards en temps réel inclus</span>
+					</div>
+				</div>
+			)}
 		</div>
 	</section>
 

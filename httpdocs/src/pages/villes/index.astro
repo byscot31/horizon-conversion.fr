@@ -32,11 +32,10 @@ const servicesPrincipaux = services.slice(0, 3);
     description="J'interviens dans tout l'Oise et le Val-d'Oise : Beauvais, Compiègne, Chantilly, Cergy, Argenteuil et leurs alentours."
 >
 
-  <!-- HERO AMÉLIORÉ -->
+  <!-- HERO AVEC RECHERCHE ET ANCRES -->
   <section class="bg-gradient-to-br from-green-50 to-emerald-50 py-20 relative overflow-hidden">
     <div class="absolute right-0 top-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-20"></div>
     <div class="absolute left-0 bottom-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
-    <div class="absolute inset-0 opacity-5" style="background-image: url('/images/map-outline.svg'); background-size: cover;"></div>
 
     <div class="container-custom text-center relative z-10">
       <h1 class="text-5xl font-bold text-gray-900 mb-6">
@@ -46,8 +45,8 @@ const servicesPrincipaux = services.slice(0, 3);
         Basé dans l'Oise, je me déplace dans tout le département et le Val-d'Oise pour accompagner les professionnels locaux.
       </p>
 
-      <!-- STATS ENRICHIÉES -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+      <!-- STATS -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
         <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
           <div class="text-3xl font-bold text-primary-600">{villes.length}</div>
           <div class="text-sm text-gray-600">villes principales</div>
@@ -66,18 +65,35 @@ const servicesPrincipaux = services.slice(0, 3);
         </div>
       </div>
 
-      <!-- BARRE DE RECHERCHE SIMPLE -->
-      <div class="max-w-md mx-auto mt-12">
-        <div class="relative">
+      <!-- BARRE DE RECHERCHE + LIEN DIRECT VERS CONTACT -->
+      <div class="max-w-2xl mx-auto">
+        <div class="relative mb-4">
           <input
               type="text"
-              placeholder="Recherchez votre ville..."
-              class="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-primary-500 shadow-sm"
+              placeholder="Tapez votre ville (ex: Beauvais, Cergy...)"
+              class="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-primary-500 shadow-sm pr-32"
               id="ville-search"
+              list="villes-list"
           />
+          <datalist id="villes-list">
+            {villes.map(v => <option value={v.nom} />)}
+          </datalist>
           <button class="absolute right-2 top-2 bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
-            🔍
+            🔍 Trouver
           </button>
+        </div>
+
+        <!-- LIENS RAPIDES POUR RÉDUIRE LA CHARGE COGNITIVE -->
+        <div class="flex flex-wrap justify-center gap-3 text-sm">
+          <a href="#villes-principales" class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white transition-colors">
+            📍 Villes principales
+          </a>
+          <a href="#resultats-proches" class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white transition-colors">
+            📊 Résultats près de chez vous
+          </a>
+          <a href="/contact" class="bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+            📞 Me contacter
+          </a>
         </div>
       </div>
     </div>
@@ -230,6 +246,31 @@ const servicesPrincipaux = services.slice(0, 3);
     </div>
   </section>
 
+  <!-- RÉSULTATS PAR VILLE (NOUVEAU) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Résultats <span class="text-primary-600">près de chez vous</span></h2>
+      <p class="text-center text-gray-600 mb-12">Des études de cas dans votre région.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {casClients && Object.values(casClients).flat().filter(c => c.villeId && villesEnUne.includes(c.villeId)).slice(0, 3).map(cas => {
+          const ville = villes.find(v => v.id === cas.villeId);
+          return (
+              <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="font-semibold">{cas.nom}</span>
+                  <span class="text-xs bg-primary-100 px-2 py-1 rounded-full">{ville?.nom || cas.ville}</span>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">{cas.entreprise}</p>
+                <p class="text-green-700 font-bold text-lg mb-2">{cas.resultat}</p>
+                <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">Voir l'étude →</a>
+              </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
   <!-- MÉTIERS CLÉS PAR VILLE (NOUVEAU) -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">
@@ -267,31 +308,6 @@ const servicesPrincipaux = services.slice(0, 3);
             <a href="/metiers/tpe-pme" class="block text-sm text-gray-700 hover:text-primary-600">TPE/PME 🏭</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RÉSULTATS PAR VILLE (NOUVEAU) -->
-  <section class="py-20">
-    <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-4">Résultats <span class="text-primary-600">près de chez vous</span></h2>
-      <p class="text-center text-gray-600 mb-12">Des études de cas dans votre région.</p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        {casClients && Object.values(casClients).flat().filter(c => c.villeId && villesEnUne.includes(c.villeId)).slice(0, 3).map(cas => {
-          const ville = villes.find(v => v.id === cas.villeId);
-          return (
-              <div class="bg-white p-6 rounded-xl shadow-md">
-                <div class="flex justify-between items-start mb-2">
-                  <span class="font-semibold">{cas.nom}</span>
-                  <span class="text-xs bg-primary-100 px-2 py-1 rounded-full">{ville?.nom || cas.ville}</span>
-                </div>
-                <p class="text-sm text-gray-600 mb-2">{cas.entreprise}</p>
-                <p class="text-green-700 font-bold text-lg mb-2">{cas.resultat}</p>
-                <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">Voir l'étude →</a>
-              </div>
-          );
-        })}
       </div>
     </div>
   </section>

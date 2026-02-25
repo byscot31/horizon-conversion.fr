@@ -64,6 +64,237 @@ const casParService = {
 
 const casService = casParService[service.id] || [];
 const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
+
+// Configuration des packs par service
+const packsParService = {
+  'seo-local': {
+    essentiel: {
+      prix: '390€',
+      duree: '1 mois',
+      includes: [
+        'Audit technique complet (15-20 pages)',
+        'Optimisation fiche Google My Business',
+        '5 pages optimisées / créées',
+        'Reporting mensuel',
+        'Suivi des positions'
+      ],
+      prerequis: ['Accès Google Search Console', 'Accès Google Analytics', 'Accès GMB']
+    },
+    standard: {
+      prix: '690€',
+      duree: '2-3 mois',
+      includes: [
+        'Tout le pack Essentiel',
+        '10 pages optimisées / créées',
+        'Suivi bi-mensuel (visio)',
+        'Netlinking local (5 liens)',
+        'Dashboard Data Studio personnalisé',
+        'Stratégie de contenu locale'
+      ],
+      prerequis: ['Accès complets', 'Photos professionnelles']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon objectifs',
+      includes: [
+        'Tout le pack Standard',
+        'Contenu illimité',
+        'Netlinking avancé',
+        'Accompagnement prioritaire',
+        'Stratégie sur-mesure'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  },
+  'google-ads': {
+    essentiel: {
+      prix: '390€',
+      duree: '1 mois',
+      includes: [
+        'Audit campagne existante',
+        'Création de 2 campagnes',
+        '10 mots-clés ciblés',
+        'Suivi hebdomadaire',
+        'Rapport de performance'
+      ],
+      prerequis: ['Budget pub minimum 300€', 'Objectifs clairs']
+    },
+    standard: {
+      prix: '690€',
+      duree: '2-3 mois',
+      includes: [
+        'Tout le pack Essentiel',
+        '5 campagnes',
+        '25 mots-clés',
+        'A/B testing',
+        'Optimisations quotidiennes',
+        'Dashboard en temps réel'
+      ],
+      prerequis: ['Budget pub minimum 500€', 'Accès au compte']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon objectifs',
+      includes: [
+        'Tout le pack Standard',
+        'Campagnes illimitées',
+        'Stratégie multi-canaux',
+        'Accompagnement prioritaire'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  },
+  'cro': {
+    essentiel: {
+      prix: '490€',
+      duree: '1 mois',
+      includes: [
+        'Audit UX/CRO complet',
+        'Analyse heatmaps',
+        '3 recommandations prioritaires',
+        'Mise en place des modifications',
+        'Rapport d\'impact'
+      ],
+      prerequis: ['Site avec trafic >500 visites/mois', 'Accès analytics']
+    },
+    standard: {
+      prix: '890€',
+      duree: '2-3 mois',
+      includes: [
+        'Tout le pack Essentiel',
+        'Tests A/B',
+        '10 recommandations',
+        'Optimisation formulaires',
+        'Suivi bi-mensuel'
+      ],
+      prerequis: ['Trafic >1000 visites/mois']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon objectifs',
+      includes: [
+        'Tout le pack Standard',
+        'Refonte UX si nécessaire',
+        'Tests utilisateurs',
+        'Accompagnement prioritaire'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  },
+  'creation-site': {
+    essentiel: {
+      prix: '990€',
+      duree: '2-3 semaines',
+      includes: [
+        'Site vitrine 5 pages',
+        'Design responsive',
+        'Formulaire de contact',
+        'Optimisation SEO de base',
+        'Formation admin'
+      ],
+      prerequis: ['Contenus textuels', 'Photos de qualité']
+    },
+    standard: {
+      prix: '1990€',
+      duree: '4-6 semaines',
+      includes: [
+        'Tout le pack Essentiel',
+        '10 pages',
+        'Blog intégré',
+        'Design sur-mesure',
+        'Optimisation SEO avancée'
+      ],
+      prerequis: ['Contenus textuels', 'Photos professionnelles']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon besoins',
+      includes: [
+        'Tout le pack Standard',
+        'Fonctionnalités spécifiques',
+        'E-commerce possible',
+        'Accompagnement prioritaire'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  },
+  'gmb': {
+    essentiel: {
+      prix: '290€',
+      duree: '2 semaines',
+      includes: [
+        'Audit fiche GMB',
+        'Optimisation complète',
+        '5 photos',
+        'Stratégie d\'avis',
+        'Rapport initial'
+      ],
+      prerequis: ['Accès à la fiche GMB']
+    },
+    standard: {
+      prix: '490€',
+      duree: '1 mois',
+      includes: [
+        'Tout le pack Essentiel',
+        '20 photos',
+        'Posts réguliers',
+        'Gestion des avis',
+        'Suivi mensuel'
+      ],
+      prerequis: ['Accès GMB', 'Photos de qualité']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon besoins',
+      includes: [
+        'Tout le pack Standard',
+        'Gestion multi-sites',
+        'Formation équipe',
+        'Accompagnement prioritaire'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  },
+  'formation': {
+    essentiel: {
+      prix: '590€',
+      duree: '1 jour',
+      includes: [
+        'Formation SEO basics',
+        'Support de cours',
+        'Exercices pratiques',
+        'Accès replay 1 mois',
+        'Suivi post-formation'
+      ],
+      prerequis: ['Aucun']
+    },
+    standard: {
+      prix: '990€',
+      duree: '2 jours',
+      includes: [
+        'Tout le pack Essentiel',
+        'Formation approfondie',
+        'Cas pratiques personnalisés',
+        'Accès replay illimité',
+        'Support 3 mois'
+      ],
+      prerequis: ['Connaissance de base du web']
+    },
+    premium: {
+      prix: 'Sur mesure',
+      duree: 'Selon besoins',
+      includes: [
+        'Formation sur-mesure',
+        'Accompagnement individuel',
+        'Mise en place concrète',
+        'Suivi 6 mois'
+      ],
+      prerequis: ['Devis personnalisé']
+    }
+  }
+};
+
+const packs = packsParService[service.id] || packsParService['seo-local'];
 ---
 
 <Layout
@@ -150,6 +381,85 @@ const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOUVELLE SECTION : CE QUE VOUS OBTENEZ (PACKS) -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ce que <span class="text-primary-600">vous obtenez</span></h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        Des formules adaptées à vos besoins et à votre budget. Audit initial gratuit inclus.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Pack Essentiel -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <div class="text-center mb-4">
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Essentiel</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">{packs.essentiel.prix}</span></div>
+          <ul class="space-y-3 mb-6 min-h-[200px]">
+            {packs.essentiel.includes.map(item => (
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500">✓</span>
+                  <span class="text-sm">{item}</span>
+                </li>
+            ))}
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : {packs.essentiel.duree}</p>
+            <p>📋 Pré-requis : {packs.essentiel.prerequis.join(' • ')}</p>
+          </div>
+        </div>
+
+        <!-- Pack Standard (recommandé) -->
+        <div class="bg-primary-50 p-6 rounded-xl border-2 border-primary-200 hover:shadow-lg transition-all relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <span class="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Recommandé</span>
+          </div>
+          <div class="text-center mb-4 mt-4">
+            <span class="bg-primary-200 text-primary-800 px-3 py-1 rounded-full text-sm font-semibold">Standard</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">À partir de <span class="text-primary-600">{packs.standard.prix}</span></div>
+          <ul class="space-y-3 mb-6 min-h-[200px]">
+            {packs.standard.includes.map(item => (
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500">✓</span>
+                  <span class="text-sm">{item}</span>
+                </li>
+            ))}
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : {packs.standard.duree}</p>
+            <p>📋 Pré-requis : {packs.standard.prerequis.join(' • ')}</p>
+          </div>
+        </div>
+
+        <!-- Pack Premium -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <div class="text-center mb-4">
+            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
+          </div>
+          <div class="text-3xl font-bold text-center mb-4">{packs.premium.prix}</div>
+          <ul class="space-y-3 mb-6 min-h-[200px]">
+            {packs.premium.includes.map(item => (
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500">✓</span>
+                  <span class="text-sm">{item}</span>
+                </li>
+            ))}
+          </ul>
+          <div class="border-t pt-4 text-xs text-gray-500">
+            <p>⏱️ Délais : {packs.premium.duree}</p>
+            <p>📋 Pré-requis : {packs.premium.prerequis.join(' • ')}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-sm text-gray-600">* Audit initial gratuit et sans engagement</p>
       </div>
     </div>
   </section>
