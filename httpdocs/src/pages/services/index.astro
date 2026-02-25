@@ -1,10 +1,13 @@
 ---
+// src/pages/services/index.astro
 import Layout from "../../layouts/Layout.astro";
 import services from "../../data/services.json";
-import ScrollAnimation from "../../components/ScrollAnimation.astro";
+import metiers from "../../data/metiers.json";
+import villes from "../../data/villes.json";
 
 const servicesPremium = services.filter(s => s.premium);
 const servicesComplementaires = services.filter(s => !s.premium);
+const villesPrincipales = villes.slice(0, 8);
 ---
 
 <Layout
@@ -33,6 +36,10 @@ const servicesComplementaires = services.filter(s => !s.premium);
         <div>
           <div class="text-3xl font-bold text-primary-600">576</div>
           <div class="text-sm text-gray-600">pages combinées</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary-600">16</div>
+          <div class="text-sm text-gray-600">villes</div>
         </div>
       </div>
     </div>
@@ -100,7 +107,7 @@ const servicesComplementaires = services.filter(s => !s.premium);
     </div>
   </section>
 
-  <!-- Comment je travaille -->
+  <!-- SECTION 4 : Comment je travaille -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -160,47 +167,174 @@ const servicesComplementaires = services.filter(s => !s.premium);
     </div>
   </section>
 
-  <!-- Exemples de réalisations -->
-  <section class="bg-gray-50 py-20">
+  <!-- SECTION 5 : Pour quels métiers -->
+  <section class="bg-gray-50 py-16">
     <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-4">Ils m'ont fait confiance</h2>
-      <p class="text-center text-gray-600 mb-12">Quelques résultats concrets obtenus pour mes clients.</p>
+      <h2 class="text-3xl font-bold text-center mb-4">Pour quels <span class="text-primary-600">métiers</span> ?</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        J'accompagne tous types de professionnels, avec une approche adaptée à chaque activité.
+      </p>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-xl">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+        {metiers.map(metier => (
+            <a href={`/metiers/${metier.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+              <div class="font-semibold group-hover:text-primary-600">{metier.nomCourt}</div>
+              <div class="text-xs text-gray-500 mt-1">{metier.description}</div>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 : Dans quelles villes -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Dans <span class="text-primary-600">quelles villes</span> ?</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        J'interviens dans tout l'Oise (60) et le Val-d'Oise (95).
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        {villesPrincipales.map(ville => (
+            <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all">
+              <div class="font-semibold">{ville.nom}</div>
+              <div class="text-xs text-gray-500">{ville.codePostal}</div>
+            </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/villes" class="text-primary-600 hover:underline">Voir les 16 villes et leurs alentours →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : Témoignages clients -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ils m'ont <span class="text-primary-600">fait confiance</span></h2>
+      <p class="text-center text-gray-600 mb-12">Des résultats concrets pour des clients comme vous.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
           <div class="badge-consultant text-xs mb-3">SEO local</div>
           <p class="text-2xl font-bold text-primary-600 mb-2">+650%</p>
-          <p class="text-gray-600 text-sm">d'appels pour un plombier à Méru</p>
+          <p class="text-gray-600 text-sm mb-3">d'appels pour un plombier à Méru</p>
+          <p class="text-sm italic text-gray-700 mb-2">"Je reçois des appels de clients que je n'avais jamais eus avant."</p>
+          <p class="text-xs font-semibold">Robert, plombier</p>
           <a href="/etudes-de-cas/plombier-meru" class="text-primary-600 text-sm hover:underline mt-3 inline-block">Voir l'étude →</a>
         </div>
 
-        <div class="bg-white p-6 rounded-xl">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
           <div class="badge-agence text-xs mb-3">Google Ads</div>
           <p class="text-2xl font-bold text-primary-600 mb-2">+30%</p>
-          <p class="text-gray-600 text-sm">de clients en boutique pour une caviste à Cergy</p>
+          <p class="text-gray-600 text-sm mb-3">de clients en boutique pour une caviste à Cergy</p>
+          <p class="text-sm italic text-gray-700 mb-2">"Pendant les fêtes, j'ai eu 30% de clients en plus."</p>
+          <p class="text-xs font-semibold">Sophie, caviste</p>
           <a href="/etudes-de-cas/caviste-cergy" class="text-primary-600 text-sm hover:underline mt-3 inline-block">Voir l'étude →</a>
         </div>
 
-        <div class="bg-white p-6 rounded-xl">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
           <div class="badge-premium text-xs mb-3">CRO</div>
           <p class="text-2xl font-bold text-primary-600 mb-2">+200%</p>
-          <p class="text-gray-600 text-sm">de rendez-vous pour un avocat à Montmorency</p>
+          <p class="text-gray-600 text-sm mb-3">de rendez-vous pour un avocat à Montmorency</p>
+          <p class="text-sm italic text-gray-700 mb-2">"Je reçois deux fois plus de demandes de rendez-vous."</p>
+          <p class="text-xs font-semibold">Maître Dupont</p>
           <a href="/etudes-de-cas/avocat-montmorency" class="text-primary-600 text-sm hover:underline mt-3 inline-block">Voir l'étude →</a>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+          Voir les 12 études de cas →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 : Parcours recommandé -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Quel service <span class="text-primary-600">choisir</span> ?</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Un parcours simple selon votre situation.</p>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <div class="text-3xl mb-3">1️⃣</div>
+          <h3 class="text-xl font-bold mb-2">Je débute</h3>
+          <p class="text-gray-600 text-sm mb-4">Vous n'avez pas de site ou il est obsolète.</p>
+          <div class="space-y-2">
+            <a href="/services/creation-site" class="block text-primary-600 hover:underline">→ Création de site</a>
+            <a href="/services/gmb" class="block text-primary-600 hover:underline">→ Fiche Google My Business</a>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <div class="text-3xl mb-3">2️⃣</div>
+          <h3 class="text-xl font-bold mb-2">Je veux des clients rapidement</h3>
+          <p class="text-gray-600 text-sm mb-4">Vous avez besoin de résultats immédiats.</p>
+          <div class="space-y-2">
+            <a href="/services/google-ads" class="block text-primary-600 hover:underline">→ Google & Meta Ads</a>
+            <a href="/services/seo-local" class="block text-primary-600 hover:underline">→ SEO local</a>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <div class="text-3xl mb-3">3️⃣</div>
+          <h3 class="text-xl font-bold mb-2">J'optimise</h3>
+          <p class="text-gray-600 text-sm mb-4">Vous avez du trafic mais pas assez de conversions.</p>
+          <div class="space-y-2">
+            <a href="/services/cro" class="block text-primary-600 hover:underline">→ Optimisation CRO</a>
+            <a href="/services/formation" class="block text-primary-600 hover:underline">→ Formation SEO</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- SECTION 9 : FAQ rapide -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Questions <span class="text-primary-600">fréquentes</span></h2>
+
+      <div class="space-y-4">
+        <details class="bg-white p-4 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Combien de temps pour voir des résultats ?</summary>
+          <p class="mt-2 text-gray-600">Les premiers résultats apparaissent généralement entre 1 et 3 mois selon le service et la concurrence locale.</p>
+        </details>
+
+        <details class="bg-white p-4 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quel est l'investissement mensuel ?</summary>
+          <p class="mt-2 text-gray-600">Tout dépend de vos objectifs et de votre zone. Je propose des devis personnalisés après un audit gratuit.</p>
+        </details>
+
+        <details class="bg-white p-4 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Est-ce que ça marche pour mon métier ?</summary>
+          <p class="mt-2 text-gray-600">J'accompagne tous types de métiers. Chaque stratégie est adaptée à votre activité spécifique.</p>
+        </details>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources/faq" class="text-primary-600 hover:underline">Voir toutes les FAQ →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
   <section class="bg-primary-600 text-white py-16">
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre projet ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
         Je propose un audit gratuit pour analyser votre situation et voir quel service peut vous aider.
       </p>
-      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
-        Demander mon audit gratuit
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
     </div>
   </section>
 

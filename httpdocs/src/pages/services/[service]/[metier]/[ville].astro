@@ -5,6 +5,8 @@ import services from "../../../../data/services.json";
 import metiers from "../../../../data/metiers.json";
 import villes from "../../../../data/villes.json";
 import intentions from "../../../../data/intentions.json";
+import personasParVille from "../../../../data/personas-par-ville.json";
+import casClients from "../../../../data/cas-clients.json";
 import IntentionAnimation from "../../../../components/IntentionAnimation.astro";
 
 export async function getStaticPaths() {
@@ -35,10 +37,76 @@ const intentionData = intentions[metier.id]?.intentions?.transactionnelle || {
   urgence: "haute"
 };
 
-const persona = intentions[metier.id]?.persona || {
+// Récupérer le persona spécifique à cette ville et ce métier
+const personaLocal = personasParVille[ville.id]?.[metier.id];
+
+// Fallback sur le persona générique du métier
+const personaGenerique = intentions[metier.id]?.persona;
+
+// Déterminer quel persona afficher
+const persona = personaLocal || personaGenerique || {
   nom: "nos clients",
   citation: "Je veux être plus visible dans ma ville.",
   histoire: "Comme beaucoup de professionnels, vous cherchez à attirer plus de clients locaux."
+};
+
+// Filtrer les cas clients pour ce métier
+const casPourCeMetier = casClients[metier.id] || [];
+
+// Priorité : cas dans la même ville, sinon cas du métier
+const casMemeVille = casPourCeMetier.filter(c => c.villeId === ville.id);
+const casAAfficher = casMemeVille.length >= 3
+  ? casMemeVille.slice(0, 3)
+  : [...casMemeVille, ...casPourCeMetier.filter(c => c.villeId !== ville.id)].slice(0, 3);
+
+// Si pas assez de cas, utiliser des cas génériques
+const TEMOIGNAGES_PAR_DEFAUT = {
+  artisans: [
+    { nom: "Robert", entreprise: "Plomberie Martin", ville: "Méru", resultat: "+650% d'appels", etude: "plombier-meru", citation: "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant.", icone: "👤" },
+    { nom: "Jean-Claude", entreprise: "Lefebvre Électricité", ville: "Beauvais", resultat: "+400% de visibilité", etude: "electricien-beauvais", citation: "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants.", icone: "🔧" },
+    { nom: "Michel", entreprise: "Menuiserie Dubois", ville: "Chambly", resultat: "+500% de devis", etude: "menuisier-chambly", citation: "Mon téléphone sonne constamment.", icone: "🔨" }
+  ],
+  commerces: [
+    { nom: "Sophie", entreprise: "Cave des 3 Rois", ville: "Cergy", resultat: "+30% de clients", etude: "caviste-cergy", citation: "Pendant les fêtes, +30% de clients.", icone: "🍷" },
+    { nom: "Isabelle", entreprise: "Coiffure Isabelle", ville: "Argenteuil", resultat: "+35% de clients", etude: "coiffeuse-argenteuil", citation: "Les clients me trouvent sur Google Maps.", icone: "💇" },
+    { nom: "Céline", entreprise: "Fleuriste Céline", ville: "Cergy", resultat: "+40% de CA", etude: "fleuriste-cergy", citation: "+40% de chiffre le week-end.", icone: "💐" }
+  ],
+  "profession-liberale": [
+    { nom: "Maître Dupont", entreprise: "Cabinet Dupont", ville: "Montmorency", resultat: "+200% de rendez-vous", etude: "avocat-montmorency", citation: "Je reçois deux fois plus de rendez-vous.", icone: "⚖️" },
+    { nom: "Dr. Martin", entreprise: "Médecine générale", ville: "Senlis", resultat: "+180% de rendez-vous", etude: "medecin-senlis", citation: "Mon taux de conversion a doublé.", icone: "👨‍⚕️" },
+    { nom: "Claire", entreprise: "Atelier Architecture", ville: "Montmorency", resultat: "+200% de devis", etude: "architecte-montmorency", citation: "Je n'ai plus besoin de publicité.", icone: "📐" }
+  ],
+  "tpe-pme": [
+    { nom: "Franck", entreprise: "Transports Moreau", ville: "Compiègne", resultat: "+150% de devis", etude: "transport-compiegne", citation: "Des devis toutes les semaines.", icone: "🚛" },
+    { nom: "Philippe", entreprise: "SARL BTP 60", ville: "Creil", resultat: "+300% de CA", etude: "macon-creil", citation: "Notre CA a augmenté de 40%.", icone: "🏗️" },
+    { nom: "Sylvie", entreprise: "Beauvais Nettoyage", ville: "Beauvais", resultat: "+250% contrats pros", etude: "nettoyage-beauvais", citation: "3 contrats majeurs décrochés.", icone: "🧹" }
+  ],
+  "reseaux-franchise": [
+    { nom: "Caroline", entreprise: "Boulangeries du Pain", ville: "Cergy", resultat: "+450 avis", etude: "franchise-cergy", citation: "Gestion centralisée qui nous fait gagner un temps précieux.", icone: "🥖" }
+  ],
+  tourisme: [
+    { nom: "Virginie", entreprise: "Hôtel du Parc", ville: "Chantilly", resultat: "+80% réservations", etude: "hotel-chantilly", citation: "Je ne dépends plus de Booking.", icone: "🏨" },
+    { nom: "Pierre", entreprise: "Restaurant", ville: "Compiègne", resultat: "+200 couverts", etude: "restaurateur-compiegne", citation: "30% de réservations directes en plus.", icone: "🍽️" },
+    { nom: "Sophie", entreprise: "Gîte Les Rêves d'Ô", ville: "Senlis", resultat: "+80% réservations", etude: "gite-senlis", citation: "Booking ne représente plus que 30% de mon CA.", icone: "🏡" }
+  ]
+};
+
+const temoignagesAAfficher = casAAfficher.length >= 3
+  ? casAAfficher
+  : (TEMOIGNAGES_PAR_DEFAUT[metier.id] || []).slice(0, 3);
+
+// Déterminer le texte à afficher selon la situation
+const affichagePersona = {
+  // Si on a un persona spécifique à la ville, on l'utilise
+  avecNom: personaLocal ? `Comme ${persona.nom}, ${metier.nomCourt} à ${ville.nom}...` : null,
+
+  // Sinon, on utilise une formule générique
+  sansNom: `Comme d'autres ${metier.nomCourt} à ${ville.nom}...`,
+
+  // Texte à utiliser
+  texte: personaLocal
+    ? `Comme ${persona.nom}, ${metier.nomCourt} à ${ville.nom}...`
+    : `Comme d'autres ${metier.nomCourt} à ${ville.nom}...`
 };
 
 // Autres villes pour ce même service+métier
@@ -86,11 +154,18 @@ const description = intentionData.description;
         <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl mb-8">
           <div class="flex items-center justify-center gap-4">
             <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
-              👤
+              {personaLocal ? '👤' : '👥'}
             </div>
             <div class="text-left">
-              <p class="text-lg font-medium mb-1">Comme {persona.nom}, {metier.nomCourt} à {ville.nom}...</p>
-              <p class="text-white/90 italic">"{persona.citation}"</p>
+              <p class="text-lg font-medium mb-1">
+                {personaLocal
+                  ? `Comme ${persona.nom}, ${metier.nomCourt} à ${ville.nom}...`
+                  : `Comme d'autres ${metier.nomCourt} à ${ville.nom}...`
+                }
+              </p>
+              <p class="text-white/90 italic">
+                "{personaLocal ? persona.citation : (personaGenerique?.citation || "Je veux être plus visible dans ma ville.")}"
+              </p>
             </div>
           </div>
         </div>
@@ -232,197 +307,36 @@ const description = intentionData.description;
       <p class="text-center text-gray-600 mb-12">Découvrez ce que disent d'autres {metier.nomCourt} comme vous.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {temoignagesAAfficher.map((temoignage, index) => (
+            <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+              <div class="flex items-start gap-4 mb-4">
+                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl">
+                  {temoignage.icone || '👤'}
+                </div>
+                <div>
+                  <p class="font-semibold text-lg">{temoignage.nom}</p>
+                  <p class="text-sm text-gray-600">{temoignage.entreprise}</p>
+                  <p class="text-xs text-gray-500">{temoignage.ville}</p>
+                </div>
+              </div>
 
-        <!-- TÉMOIGNAGE 1 : Persona principal -->
-        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-          <div class="flex items-start gap-4 mb-4">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl">
-              👤
+              <div class="mb-3 text-yellow-400 text-lg">
+                ★★★★★
+              </div>
+
+              <blockquote class="text-gray-700 italic mb-4">
+                "{temoignage.citation}"
+              </blockquote>
+
+              <div class="mt-3 text-green-700 font-bold">
+                {temoignage.resultat}
+              </div>
+
+              <a href={`/etudes-de-cas/${temoignage.etude}`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+                Voir son histoire →
+              </a>
             </div>
-            <div>
-              <p class="font-semibold text-lg">{persona.nom}</p>
-              <p class="text-sm text-gray-600">{persona.entreprise}</p>
-              <p class="text-xs text-gray-500">
-                {metier.id === 'artisans' ? 'Méru' :
-                  metier.id === 'commerces' ? 'Cergy' :
-                    metier.id === 'profession-liberale' ? 'Montmorency' :
-                      metier.id === 'tpe-pme' ? 'Compiègne' :
-                        metier.id === 'reseaux-franchise' ? 'Cergy' : 'Chantilly'}
-              </p>
-            </div>
-          </div>
-
-          <div class="mb-3 text-yellow-400 text-lg">
-            ★★★★★
-          </div>
-
-          <blockquote class="text-gray-700 italic mb-4">
-            "{persona.citation}"
-          </blockquote>
-
-          <div class="mt-3 text-green-700 font-bold">
-            {metier.id === 'artisans' && "+650% d'appels"}
-            {metier.id === 'commerces' && "+30% de clients"}
-            {metier.id === 'profession-liberale' && "+200% de rendez-vous"}
-            {metier.id === 'tpe-pme' && "+150% de devis"}
-            {metier.id === 'reseaux-franchise' && "+450 avis"}
-            {metier.id === 'tourisme' && "+80% réservations directes"}
-          </div>
-
-          <a href={`/etudes-de-cas/${
-            metier.id === 'artisans' ? 'plombier-meru' :
-              metier.id === 'commerces' ? 'caviste-cergy' :
-                metier.id === 'profession-liberale' ? 'avocat-montmorency' :
-                  metier.id === 'tpe-pme' ? 'transport-compiegne' :
-                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
-          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
-            Voir son histoire →
-          </a>
-        </div>
-
-        <!-- TÉMOIGNAGE 2 : Second client (même métier, autre ville) -->
-        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-          <div class="flex items-start gap-4 mb-4">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl">
-              {metier.id === 'artisans' && '🔧'}
-              {metier.id === 'commerces' && '🍷'}
-              {metier.id === 'profession-liberale' && '⚖️'}
-              {metier.id === 'tpe-pme' && '🚛'}
-              {metier.id === 'reseaux-franchise' && '🥖'}
-              {metier.id === 'tourisme' && '🏨'}
-            </div>
-            <div>
-              <p class="font-semibold text-lg">
-                {metier.id === 'artisans' && "Jean-Claude Lefebvre"}
-                {metier.id === 'commerces' && "Isabelle Mercier"}
-                {metier.id === 'profession-liberale' && "Dr. Martin"}
-                {metier.id === 'tpe-pme' && "Philippe Durand"}
-                {metier.id === 'reseaux-franchise' && "Franck Moreau"}
-                {metier.id === 'tourisme' && "Pierre Lambert"}
-              </p>
-              <p class="text-sm text-gray-600">
-                {metier.id === 'artisans' && "Lefebvre Électricité"}
-                {metier.id === 'commerces' && "Coiffure Isabelle"}
-                {metier.id === 'profession-liberale' && "Médecine générale"}
-                {metier.id === 'tpe-pme' && "Menuiserie Durand"}
-                {metier.id === 'reseaux-franchise' && "Optical Center"}
-                {metier.id === 'tourisme' && "Gîtes du Val-d'Oise"}
-              </p>
-              <p class="text-xs text-gray-500">
-                {metier.id === 'artisans' && "Beauvais"}
-                {metier.id === 'commerces' && "Argenteuil"}
-                {metier.id === 'profession-liberale' && "Senlis"}
-                {metier.id === 'tpe-pme' && "Creil"}
-                {metier.id === 'reseaux-franchise' && "Pontoise"}
-                {metier.id === 'tourisme' && "Compiegne"}
-              </p>
-            </div>
-          </div>
-
-          <div class="mb-3 text-yellow-400 text-lg">
-            ★★★★★
-          </div>
-
-          <blockquote class="text-gray-700 italic mb-4">
-            "{metier.id === 'artisans' && "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région."}
-            {metier.id === 'commerces' && "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer."}
-            {metier.id === 'profession-liberale' && "Mon taux de rendez-vous a doublé en seulement 3 mois."}
-            {metier.id === 'tpe-pme' && "Nous avons décroché 3 contrats majeurs grâce à notre nouvelle visibilité."}
-            {metier.id === 'reseaux-franchise' && "La gestion centralisée nous fait gagner un temps précieux."}
-            {metier.id === 'tourisme' && "Je reçois des réservations directes chaque semaine."}"
-          </blockquote>
-
-          <div class="mt-3 text-green-700 font-bold">
-            {metier.id === 'artisans' && "+400% de visibilité"}
-            {metier.id === 'commerces' && "+25% de passages"}
-            {metier.id === 'profession-liberale' && "+180% de contacts"}
-            {metier.id === 'tpe-pme' && "+200% de trafic"}
-            {metier.id === 'reseaux-franchise' && "+300 avis"}
-            {metier.id === 'tourisme' && "+50% de nuitées"}
-          </div>
-
-          <a href={`/etudes-de-cas/${
-            metier.id === 'artisans' ? 'plombier-meru' :
-              metier.id === 'commerces' ? 'caviste-cergy' :
-                metier.id === 'profession-liberale' ? 'avocat-montmorency' :
-                  metier.id === 'tpe-pme' ? 'transport-compiegne' :
-                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
-          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
-            Voir son histoire →
-          </a>
-        </div>
-
-        <!-- TÉMOIGNAGE 3 : Troisième client (variété) -->
-        <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-          <div class="flex items-start gap-4 mb-4">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl">
-              {metier.id === 'artisans' && '🔨'}
-              {metier.id === 'commerces' && '💐'}
-              {metier.id === 'profession-liberale' && '📜'}
-              {metier.id === 'tpe-pme' && '🏗️'}
-              {metier.id === 'reseaux-franchise' && '🏠'}
-              {metier.id === 'tourisme' && '🛏️'}
-            </div>
-            <div>
-              <p class="font-semibold text-lg">
-                {metier.id === 'artisans' && "Michel Dubois"}
-                {metier.id === 'commerces' && "Céline Petit"}
-                {metier.id === 'profession-liberale' && "Maître Petit"}
-                {metier.id === 'tpe-pme' && "SARL BTP 60"}
-                {metier.id === 'reseaux-franchise' && "Réseau immobilier"}
-                {metier.id === 'tourisme' && "Chambres d'hôtes"}
-              </p>
-              <p class="text-sm text-gray-600">
-                {metier.id === 'artisans' && "Menuiserie Dubois"}
-                {metier.id === 'commerces' && "Fleuriste Céline"}
-                {metier.id === 'profession-liberale' && "Étude notariale"}
-                {metier.id === 'tpe-pme' && "Construction BTP"}
-                {metier.id === 'reseaux-franchise' && "Century 21"}
-                {metier.id === 'tourisme' && "La Maison Bleue"}
-              </p>
-              <p class="text-xs text-gray-500">
-                {metier.id === 'artisans' && "Chambly"}
-                {metier.id === 'commerces' && "Cergy"}
-                {metier.id === 'profession-liberale' && "Chantilly"}
-                {metier.id === 'tpe-pme' && "Noyon"}
-                {metier.id === 'reseaux-franchise' && "Beaumont"}
-                {metier.id === 'tourisme' && "Senlis"}
-              </p>
-            </div>
-          </div>
-
-          <div class="mb-3 text-yellow-400 text-lg">
-            ★★★★★
-          </div>
-
-          <blockquote class="text-gray-700 italic mb-4">
-            "{metier.id === 'artisans' && "Mon téléphone sonne constamment, je dois refuser des chantiers."}
-            {metier.id === 'commerces' && "Je fais 40% de chiffre en plus le week-end."}
-            {metier.id === 'profession-liberale' && "Je n'ai plus besoin de faire de publicité traditionnelle."}
-            {metier.id === 'tpe-pme' && "Notre chiffre d'affaires a augmenté de 40%."}
-            {metier.id === 'reseaux-franchise' && "La satisfaction client a explosé."}
-            {metier.id === 'tourisme' && "Booking ne représente plus que 30% de mon CA."}"
-          </blockquote>
-
-          <div class="mt-3 text-green-700 font-bold">
-            {metier.id === 'artisans' && "+500% de devis"}
-            {metier.id === 'commerces' && "+35% de ventes"}
-            {metier.id === 'profession-liberale' && "+150% de consultations"}
-            {metier.id === 'tpe-pme' && "+3M€ de CA"}
-            {metier.id === 'reseaux-franchise' && "+40% de visibilité"}
-            {metier.id === 'tourisme' && "90% de réservations directes"}
-          </div>
-
-          <a href={`/etudes-de-cas/${
-            metier.id === 'artisans' ? 'plombier-meru' :
-              metier.id === 'commerces' ? 'caviste-cergy' :
-                metier.id === 'profession-liberale' ? 'avocat-montmorency' :
-                  metier.id === 'tpe-pme' ? 'transport-compiegne' :
-                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
-          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
-            Voir son histoire →
-          </a>
-        </div>
+        ))}
       </div>
 
       <div class="text-center mt-12">

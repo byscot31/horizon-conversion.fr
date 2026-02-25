@@ -273,7 +273,14 @@ const description = `Découvrez comment le ${service.nom} peut aider les ${metie
             {metier.id === 'tourisme' && "+50% de nuitées"}
           </div>
 
-          <a href="/etudes-de-cas" class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+          <!-- CAS 2 -->
+          <a href={`/etudes-de-cas/${
+            metier.id === 'artisans' ? 'electricien-beauvais' :
+              metier.id === 'commerces' ? 'coiffeuse-argenteuil' :
+                metier.id === 'profession-liberale' ? 'medecin-senlis' :
+                  metier.id === 'tpe-pme' ? 'macon-creil' :
+                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'restaurateur-compiegne'
+          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
             Voir l'étude →
           </a>
         </div>
@@ -318,7 +325,14 @@ const description = `Découvrez comment le ${service.nom} peut aider les ${metie
             {metier.id === 'tourisme' && "90% de réservations directes"}
           </div>
 
-          <a href="/etudes-de-cas" class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+          <!-- CAS 3 -->
+          <a href={`/etudes-de-cas/${
+            metier.id === 'artisans' ? 'menuisier-chambly' :
+              metier.id === 'commerces' ? 'fleuriste-cergy' :
+                metier.id === 'profession-liberale' ? 'architecte-montmorency' :
+                  metier.id === 'tpe-pme' ? 'nettoyage-beauvais' :
+                    metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'gite-senlis'
+          }`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
             Voir l'étude →
           </a>
         </div>

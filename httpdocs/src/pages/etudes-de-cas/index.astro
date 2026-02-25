@@ -1,89 +1,51 @@
 ---
+// src/pages/etudes-de-cas/index.astro
 import Layout from "../../layouts/Layout.astro";
+import casClients from "../../data/cas-clients.json";
 
-// Données des études de cas (à externaliser dans un fichier JSON plus tard)
-const etudesCas = [
-  {
-    id: "plombier-meru",
-    client: "Plomberie Martin",
-    metier: "Artisan",
-    metierId: "artisans",
-    ville: "Méru",
-    service: "SEO local",
-    serviceId: "seo-local",
-    resultat: "+650% d'appels",
-    description: "Comment un plombier est passé de 2 à 15 appels par semaine.",
-    image: "/images/etudes/plombier-thumb.png"
-  },
-  {
-    id: "caviste-cergy",
-    client: "Cave des 3 Rois",
-    metier: "Commerce",
-    metierId: "commerces",
-    ville: "Cergy",
-    service: "Google Ads",
-    serviceId: "google-ads",
-    resultat: "+30% de clients",
-    description: "Une caviste augmente sa fréquentation de 30% grâce aux annonces.",
-    image: "/images/etudes/caviste-thumb.png"
-  },
-  {
-    id: "avocat-montmorency",
-    client: "Cabinet Dupont",
-    metier: "Profession libérale",
-    metierId: "profession-liberale",
-    ville: "Montmorency",
-    service: "CRO",
-    serviceId: "cro",
-    resultat: "+200% de rendez-vous",
-    description: "Un avocat double ses demandes de rendez-vous sans changer ses annonces.",
-    image: "/images/etudes/avocat-thumb.png"
-  },
-  {
-    id: "transport-compiegne",
-    client: "Transports Moreau",
-    metier: "PME",
-    metierId: "tpe-pme",
-    ville: "Compiègne",
-    service: "Création site",
-    serviceId: "creation-site",
-    resultat: "+150% de devis",
-    description: "Une PME de transport multiplie ses demandes de devis.",
-    image: "/images/etudes/transport-thumb.png"
-  },
-  {
-    id: "franchise-cergy",
-    client: "Boulangeries du Pain",
-    metier: "Franchise",
-    metierId: "reseaux-franchise",
-    ville: "Cergy",
-    service: "GMB Multi-sites",
-    serviceId: "gmb",
-    resultat: "+450 avis",
-    description: "Gestion centralisée de 15 fiches Google pour une franchise.",
-    image: "/images/etudes/franchise-thumb.png"
-  },
-  {
-    id: "hotel-chantilly",
-    client: "Hôtel du Parc",
-    metier: "Tourisme",
-    metierId: "tourisme",
-    ville: "Chantilly",
-    service: "SEO local",
-    serviceId: "seo-local",
-    resultat: "80% réservations directes",
-    description: "Un hôtel réduit sa dépendance à Booking et économise 15 000€/an.",
-    image: "/images/etudes/hotel-thumb.png"
-  }
-];
+// Transformer les données structurées en tableau plat
+const toutesEtudes = Object.values(casClients).flat().map(cas => ({
+  id: cas.etude,
+  client: cas.entreprise,
+  metier: {
+    artisans: "Artisan",
+    commerces: "Commerce",
+    "profession-liberale": "Profession libérale",
+    "tpe-pme": "PME",
+    "reseaux-franchise": "Franchise",
+    tourisme: "Tourisme"
+  }[cas.metier] || cas.metier,
+  metierId: cas.metier,
+  ville: cas.ville,
+  service: {
+    "seo-local": "SEO local",
+    "google-ads": "Google Ads",
+    "cro": "CRO",
+    "creation-site": "Création site",
+    "gmb": "GMB"
+  }[cas.service] || cas.service,
+  serviceId: cas.service,
+  resultat: cas.resultat,
+  description: `${cas.nom} a obtenu ${cas.resultat} grâce à notre accompagnement.`,
+  image: `/images/etudes/${cas.etude}-thumb.png`,
+  icone: cas.icone,
+  citation: cas.citation
+}));
 
-// Récupérer les filtres de l'URL
+// Pagination
 const url = new URL(Astro.request.url);
+const page = parseInt(url.searchParams.get('page') || '1');
+const itemsPerPage = 9; // 3x3
+const totalPages = Math.ceil(toutesEtudes.length / itemsPerPage);
+const start = (page - 1) * itemsPerPage;
+const end = start + itemsPerPage;
+
+// Filtres
 const filtreMetier = url.searchParams.get('metier');
 const filtreService = url.searchParams.get('service');
 
-// Filtrer les études
-let etudesFiltrees = etudesCas;
+// Appliquer les filtres
+let etudesFiltrees = toutesEtudes;
 if (filtreMetier) {
   etudesFiltrees = etudesFiltrees.filter(e => e.metierId === filtreMetier);
 }
@@ -91,15 +53,26 @@ if (filtreService) {
   etudesFiltrees = etudesFiltrees.filter(e => e.serviceId === filtreService);
 }
 
-// Liste unique des métiers et services pour les filtres
-const metiers = [...new Set(etudesCas.map(e => e.metierId))].map(id => ({
+// Paginer après filtrage
+const etudesPage = etudesFiltrees.slice(start, end);
+
+// Statistiques
+const totalResultats = toutesEtudes.reduce((acc, e) => {
+  const chiffre = parseInt(e.resultat.replace(/[^0-9]/g, ''));
+  return acc + (isNaN(chiffre) ? 0 : chiffre);
+}, 0);
+
+// Métiers et services uniques pour les filtres
+const metiersListe = [...new Set(toutesEtudes.map(e => e.metierId))].map(id => ({
   id,
-  nom: etudesCas.find(e => e.metierId === id)?.metier
+  nom: toutesEtudes.find(e => e.metierId === id)?.metier,
+  count: toutesEtudes.filter(e => e.metierId === id).length
 }));
 
-const services = [...new Set(etudesCas.map(e => e.serviceId))].map(id => ({
+const servicesListe = [...new Set(toutesEtudes.map(e => e.serviceId))].map(id => ({
   id,
-  nom: etudesCas.find(e => e.serviceId === id)?.service
+  nom: toutesEtudes.find(e => e.serviceId === id)?.service,
+  count: toutesEtudes.filter(e => e.serviceId === id).length
 }));
 ---
 
@@ -108,145 +81,288 @@ const services = [...new Set(etudesCas.map(e => e.serviceId))].map(id => ({
     description="Découvrez les résultats obtenus pour nos clients : artisans, commerces, professions libérales, PME et franchises dans le 60 et 95."
 >
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-16">
-    <div class="container-custom text-center">
-      <h1 class="text-5xl font-bold text-gray-900 mb-4">Études de <span class="text-primary-600">cas</span></h1>
-      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-        Des résultats concrets, chiffrés, pour des clients comme vous dans l'Oise et le Val-d'Oise.
-      </p>
+  <!-- HERO AMÉLIORÉ -->
+  <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">
+          <span class="text-primary-600">Résultats</span> concrets
+        </h1>
+        <p class="text-xl text-gray-700 mb-12 max-w-3xl mx-auto">
+          Des clients comme vous ont transformé leur activité grâce au SEO local. Découvrez leurs histoires.
+        </p>
 
-      <!-- Statistiques -->
-      <div class="flex justify-center gap-8 text-sm">
-        <div><span class="font-bold text-2xl">{etudesCas.length}</span> études de cas</div>
-        <div><span class="font-bold text-2xl">6</span> métiers représentés</div>
-        <div><span class="font-bold text-2xl">8</span> villes</div>
+        <!-- STATISTIQUES ENRICHIÉS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{toutesEtudes.length}</div>
+            <div class="text-sm text-gray-600">études de cas</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{metiersListe.length}</div>
+            <div class="text-sm text-gray-600">métiers</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{totalResultats}+%</div>
+            <div class="text-sm text-gray-600">progression moyenne</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">14</div>
+            <div class="text-sm text-gray-600">villes</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Filtres -->
+  <!-- FILTRES AMÉLIORÉS (PILLS) -->
   <section class="py-8 border-b sticky top-16 bg-white z-40">
     <div class="container-custom">
-      <div class="flex flex-wrap gap-4 items-center justify-center">
-        <span class="font-medium text-gray-700">Filtrer par :</span>
-
-        <!-- Filtre métier -->
-        <div class="relative">
-          <select
-              class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:border-primary-500"
-              onchange="window.location.href = this.value ? '/etudes-de-cas?metier=' + this.value : '/etudes-de-cas'"
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div class="flex flex-wrap gap-2">
+          <a
+              href="/etudes-de-cas"
+              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                !filtreMetier && !filtreService
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 hover:bg-gray-200'
+              }`}
           >
-            <option value="">Tous les métiers</option>
-            {metiers.map(m => (
-                <option value={m.id} selected={filtreMetier === m.id}>{m.nom}</option>
-            ))}
-          </select>
+            Tous ({toutesEtudes.length})
+          </a>
+
+          <!-- Filtres métiers en pills -->
+          {metiersListe.map(m => (
+              <a
+                  href={`/etudes-de-cas?metier=${m.id}`}
+                  class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    filtreMetier === m.id
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-gray-100 hover:bg-gray-200'
+                  }`}
+              >
+                {m.nom} ({m.count})
+              </a>
+          ))}
         </div>
 
-        <!-- Filtre service -->
-        <div class="relative">
+        <!-- Filtre service en select (gardé car plus long) -->
+        <div class="relative w-full md:w-auto">
           <select
-              class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:border-primary-500"
-              onchange="window.location.href = this.value ? '/etudes-de-cas?service=' + this.value : '/etudes-de-cas'"
+              class="appearance-none bg-gray-50 border border-gray-200 rounded-full px-6 py-2 pr-10 focus:outline-none focus:border-primary-500 w-full"
+              onchange="window.location.href = this.value ? '/etudes-de-cas?service=' + this.value + (filtreMetier ? '&metier=' + filtreMetier : '') : '/etudes-de-cas' + (filtreMetier ? '?metier=' + filtreMetier : '')"
           >
             <option value="">Tous les services</option>
-            {services.map(s => (
-                <option value={s.id} selected={filtreService === s.id}>{s.nom}</option>
+            {servicesListe.map(s => (
+                <option value={s.id} selected={filtreService === s.id}>
+                  {s.nom} ({s.count})
+                </option>
             ))}
           </select>
         </div>
 
         <!-- Reset filters -->
         {(filtreMetier || filtreService) && (
-            <a href="/etudes-de-cas" class="text-sm text-primary-600 hover:underline">
-              Réinitialiser les filtres
+            <a href="/etudes-de-cas" class="text-sm text-primary-600 hover:underline whitespace-nowrap">
+              ← Réinitialiser
             </a>
         )}
       </div>
     </div>
   </section>
 
-  <!-- Grille des études -->
+  <!-- GRILLE DES ÉTUDES AMÉLIORÉE -->
   <section class="py-16">
     <div class="container-custom">
-      {etudesFiltrees.length === 0 ? (
+      {etudesPage.length === 0 ? (
           <div class="text-center py-16">
             <p class="text-gray-500 text-lg">Aucune étude de cas ne correspond à ces filtres.</p>
             <a href="/etudes-de-cas" class="text-primary-600 hover:underline mt-4 inline-block">Voir toutes les études</a>
           </div>
       ) : (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {etudesFiltrees.map(etude => (
-                <a href={`/etudes-de-cas/${etude.id}`} class="card group hover:shadow-xl transition-all overflow-hidden">
-                  <!-- Image -->
-                  <div class="aspect-video bg-gray-100 relative overflow-hidden">
-                    <img
-                        src={etude.image}
-                        alt={etude.client}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    <!-- Badge métier -->
-                    <div class="absolute top-2 left-2">
-                  <span class="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                    {etude.metier}
-                  </span>
+          <>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {etudesPage.map(etude => (
+                  <a href={`/etudes-de-cas/${etude.id}`} class="card group hover:shadow-xl transition-all overflow-hidden">
+                    <!-- Image avec icône superposée -->
+                    <div class="aspect-video bg-gradient-to-br from-primary-100 to-primary-50 relative overflow-hidden">
+                      {etude.image ? (
+                          <img
+                              src={etude.image}
+                              alt={etude.client}
+                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                      ) : (
+                          <div class="w-full h-full flex items-center justify-center text-6xl">
+                            {etude.icone || '📊'}
+                          </div>
+                      )}
+                      <!-- Badges améliorés -->
+                      <div class="absolute top-2 left-2 flex flex-col gap-1">
+                    <span class="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                      {etude.metier}
+                    </span>
+                        <span class="bg-primary-600/90 text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                      {etude.service}
+                    </span>
+                      </div>
+                      <div class="absolute top-2 right-2">
+                    <span class="bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                      📍 {etude.ville}
+                    </span>
+                      </div>
                     </div>
-                    <!-- Badge ville -->
-                    <div class="absolute top-2 right-2">
-                  <span class="bg-primary-600 text-white px-3 py-1 rounded-full text-xs">
-                    {etude.ville}
-                  </span>
-                    </div>
-                  </div>
 
-                  <!-- Contenu -->
-                  <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                      <h2 class="text-xl font-bold group-hover:text-primary-600 transition-colors">
+                    <!-- Contenu enrichi -->
+                    <div class="p-6">
+                      <h2 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
                         {etude.client}
                       </h2>
-                    </div>
 
-                    <p class="text-gray-600 text-sm mb-3">{etude.description}</p>
+                      <!-- Citation courte -->
+                      {etude.citation && (
+                          <p class="text-gray-600 text-sm italic mb-3 line-clamp-2">
+                            "{etude.citation}"
+                          </p>
+                      )}
 
-                    <!-- Résultat clé -->
-                    <div class="bg-green-50 text-green-700 font-bold py-2 px-3 rounded-lg inline-block mb-4 text-sm">
-                      {etude.resultat}
-                    </div>
+                      <!-- Résultat clé mis en avant -->
+                      <div class="bg-green-50 text-green-700 font-bold py-3 px-4 rounded-lg mb-4 text-center text-lg">
+                        {etude.resultat}
+                      </div>
 
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2">
-                  <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
-                    {etude.service}
-                  </span>
-                    </div>
+                      <!-- Métadonnées -->
+                      <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span>{etude.ville}</span>
+                        <span>{etude.metier}</span>
+                      </div>
 
-                    <!-- Lien -->
-                    <div class="mt-4 text-primary-600 font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Lire l'étude complète
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                      </svg>
+                      <!-- Lien avec animation -->
+                      <div class="mt-4 text-primary-600 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Lire l'étude complète
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                </a>
-            ))}
-          </div>
+                  </a>
+              ))}
+            </div>
+
+            <!-- PAGINATION -->
+            {totalPages > 1 && (
+                <div class="flex justify-center mt-12 gap-2">
+                  {page > 1 && (
+                      <a
+                          href={`/etudes-de-cas?page=${page - 1}${filtreMetier ? `&metier=${filtreMetier}` : ''}${filtreService ? `&service=${filtreService}` : ''}`}
+                          class="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        ← Précédent
+                      </a>
+                  )}
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
+                      <a
+                          href={`/etudes-de-cas?page=${num}${filtreMetier ? `&metier=${filtreMetier}` : ''}${filtreService ? `&service=${filtreService}` : ''}`}
+                          class={`px-4 py-2 border rounded-lg transition-colors ${
+                            num === page
+                              ? 'bg-primary-600 text-white border-primary-600'
+                              : 'hover:bg-gray-50'
+                          }`}
+                      >
+                        {num}
+                      </a>
+                  ))}
+
+                  {page < totalPages && (
+                      <a
+                          href={`/etudes-de-cas?page=${page + 1}${filtreMetier ? `&metier=${filtreMetier}` : ''}${filtreService ? `&service=${filtreService}` : ''}`}
+                          class="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        Suivant →
+                      </a>
+                  )}
+                </div>
+            )}
+          </>
       )}
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- SECTION "PAR MÉTIER" (Navigation transverse) -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Études de cas <span class="text-primary-600">par métier</span></h2>
+      <p class="text-center text-gray-600 mb-12">Choisissez votre secteur pour voir des résultats concrets.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+        <a href="/etudes-de-cas?metier=artisans" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">🔧</div>
+          <div class="font-semibold group-hover:text-primary-600">Artisans</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'artisans')?.count || 0} cas</div>
+        </a>
+        <a href="/etudes-de-cas?metier=commerces" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">🍷</div>
+          <div class="font-semibold group-hover:text-primary-600">Commerces</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'commerces')?.count || 0} cas</div>
+        </a>
+        <a href="/etudes-de-cas?metier=profession-liberale" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">⚖️</div>
+          <div class="font-semibold group-hover:text-primary-600">Professions libérales</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'profession-liberale')?.count || 0} cas</div>
+        </a>
+        <a href="/etudes-de-cas?metier=tpe-pme" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">🚛</div>
+          <div class="font-semibold group-hover:text-primary-600">TPE/PME</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'tpe-pme')?.count || 0} cas</div>
+        </a>
+        <a href="/etudes-de-cas?metier=reseaux-franchise" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">🥖</div>
+          <div class="font-semibold group-hover:text-primary-600">Réseaux & Franchises</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'reseaux-franchise')?.count || 0} cas</div>
+        </a>
+        <a href="/etudes-de-cas?metier=tourisme" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+          <div class="text-3xl mb-2">🏨</div>
+          <div class="font-semibold group-hover:text-primary-600">Tourisme</div>
+          <div class="text-sm text-gray-500">{metiersListe.find(m => m.id === 'tourisme')?.count || 0} cas</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES EXTRAITS -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ce qu'ils <span class="text-primary-600">disent</span></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {toutesEtudes.slice(0, 3).map(etude => (
+            <div class="bg-gray-50 p-6 rounded-xl">
+              <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+              <p class="text-gray-700 italic mb-4">"{etude.citation || `Grâce à cet accompagnement, nous avons obtenu ${etude.resultat}.`}"</p>
+              <p class="font-semibold">{etude.client.split(' ')[0]}</p>
+              <p class="text-sm text-gray-500">{etude.metier} • {etude.ville}</p>
+            </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
   <section class="bg-primary-600 text-white py-16">
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Vous voulez le même résultat ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
         Je propose un audit gratuit pour analyser votre situation et voir quelle stratégie peut vous aider.
       </p>
-      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
-        Demander mon audit gratuit
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
     </div>
   </section>
-
 </Layout>

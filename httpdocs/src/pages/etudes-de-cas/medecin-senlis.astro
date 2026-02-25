@@ -2,32 +2,32 @@
 import Layout from "../../layouts/Layout.astro";
 import villes from "../../data/villes.json";
 
-const ville = villes.find(v => v.id === "chambly");
+const ville = villes.find(v => v.id === "senlis");
 ---
 
 <Layout
-    title="Étude de cas : +500% de devis pour un menuisier à Chambly | Horizon Conversion"
-    description="Comment un menuisier à Chambly a multiplié ses demandes de devis par 5 grâce à une stratégie de contenu ciblée."
+    title="Étude de cas : +180% de prises de rendez-vous pour un médecin à Senlis | Horizon Conversion"
+    description="Comment un cabinet médical à Senlis a doublé ses prises de rendez-vous grâce à l'optimisation de sa fiche Google et à un site de confiance."
 >
 
   <!-- Hero -->
-  <section class="bg-gradient-to-r from-amber-50 to-orange-50 py-16">
+  <section class="bg-gradient-to-r from-blue-50 to-cyan-50 py-16">
     <div class="container-custom">
       <nav class="text-sm text-gray-600 mb-8">
         <a href="/" class="hover:text-primary-600">Accueil</a> ›
         <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
-        <span class="text-gray-900">Menuiserie Dubois</span>
+        <span class="text-gray-900">Docteur Martin</span>
       </nav>
 
       <div class="max-w-4xl">
         <div class="flex flex-wrap gap-3 mb-4">
-          <span class="badge-consultant">Artisan</span>
-          <span class="badge-agence">Création site + SEO</span>
-          <span class="bg-white px-3 py-1 rounded-full text-sm">Chambly (60)</span>
+          <span class="badge-premium">Profession libérale</span>
+          <span class="badge-agence">SEO local + CRO</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Senlis (60)</span>
         </div>
 
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">+500% de devis pour un menuisier à Chambly</h1>
-        <p class="text-xl text-gray-700">Comment Michel est passé de 2 devis par mois à 10-12 devis par mois.</p>
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+180% de prises de rendez-vous pour un médecin à Senlis</h1>
+        <p class="text-xl text-gray-700">Comment le Docteur Martin a rempli son agenda sans changer ses habitudes.</p>
       </div>
     </div>
   </section>
@@ -37,16 +37,16 @@ const ville = villes.find(v => v.id === "chambly");
     <div class="container-custom">
       <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
         <div class="card p-6 text-center">
-          <div class="text-4xl font-bold text-primary-600 mb-2">+500%</div>
-          <p class="text-gray-600">de demandes de devis</p>
+          <div class="text-4xl font-bold text-primary-600 mb-2">+180%</div>
+          <p class="text-gray-600">de prises de rendez-vous</p>
         </div>
         <div class="card p-6 text-center">
-          <div class="text-4xl font-bold text-primary-600 mb-2">2 → 12</div>
-          <p class="text-gray-600">devis par mois</p>
+          <div class="text-4xl font-bold text-primary-600 mb-2">4,9★</div>
+          <p class="text-gray-600">note Google (42 avis)</p>
         </div>
         <div class="card p-6 text-center">
-          <div class="text-4xl font-bold text-primary-600 mb-2">#1</div>
-          <p class="text-gray-600">sur "menuisier Chambly"</p>
+          <div class="text-4xl font-bold text-primary-600 mb-2">-47%</div>
+          <p class="text-gray-600">de taux de rebond</p>
         </div>
       </div>
     </div>
@@ -58,15 +58,15 @@ const ville = villes.find(v => v.id === "chambly");
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <div class="text-center">
           <div class="bg-gray-200 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center">
-            <img src="/images/etudes/menuisier-avant.jpg" alt="Ancien site" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/cccccc/666666?text=Ancien+site'">
+            <img src="/images/etudes/medecin-avant.jpg" alt="Avant" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/cccccc/666666?text=Ancien+site'">
           </div>
-          <p class="text-sm text-gray-500">Ancien site : aucune photo des réalisations</p>
+          <p class="text-sm text-gray-500">Ancien site : informations parcellaires, formulaire complexe</p>
         </div>
         <div class="text-center">
           <div class="bg-green-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center border-2 border-green-300">
-            <img src="/images/etudes/menuisier-apres.jpg" alt="Nouveau site" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/22c55e/white?text=Nouveau+site+avec+portfolio'">
+            <img src="/images/etudes/medecin-apres.jpg" alt="Après" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/22c55e/white?text=Nouveau+site'">
           </div>
-          <p class="text-sm text-gray-500">Nouveau site avec portfolio des réalisations</p>
+          <p class="text-sm text-gray-500">Nouveau site : prise de rendez-vous simplifiée</p>
         </div>
       </div>
     </div>
@@ -81,14 +81,14 @@ const ville = villes.find(v => v.id === "chambly");
           <div class="bg-gray-50 p-6 rounded-xl">
             <div class="flex items-center gap-4 mb-4">
               <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">
-                🔨
+                👨‍⚕️
               </div>
               <div>
-                <p class="text-xl font-semibold">Michel Dubois</p>
-                <p class="text-gray-600">Menuiserie Dubois • Chambly (60)</p>
+                <p class="text-xl font-semibold">Docteur Martin</p>
+                <p class="text-gray-600">Médecine générale • Senlis (60)</p>
               </div>
             </div>
-            <p class="text-gray-700">Menuisier ébéniste depuis 25 ans, Michel travaillait principalement pour des clients fidèles. Il n'avait jamais eu besoin d'un site internet, jusqu'à ce que la concurrence commence à lui prendre des parts de marché.</p>
+            <p class="text-gray-700">Médecin généraliste installé depuis 20 ans à Senlis. Le Docteur Martin avait une patientèle fidèle mais vieillissante, et peinait à attirer les nouveaux habitants, notamment les jeunes familles.</p>
           </div>
         </div>
 
@@ -98,19 +98,19 @@ const ville = villes.find(v => v.id === "chambly");
             <ul class="space-y-3">
               <li class="flex items-start gap-2">
                 <span class="text-red-500 mt-1">✕</span>
-                <span><strong>2 devis par mois</strong> uniquement par recommandation</span>
+                <span><strong>Site créé en 2010</strong> - design daté, non responsive</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-red-500 mt-1">✕</span>
-                <span><strong>Pas de site internet</strong> - invisible sur Google</span>
+                <span><strong>Formulaire de contact complexe</strong> - 8 champs, taux d'abandon 85%</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-red-500 mt-1">✕</span>
-                <span><strong>Dépendance totale</strong> au bouche-à-oreille</span>
+                <span><strong>Fiche Google incomplète</strong> - 5 avis seulement</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-red-500 mt-1">✕</span>
-                <span><strong>Perte de parts de marché</strong> face aux concurrents plus visibles</span>
+                <span><strong>Pas de prise de rendez-vous en ligne</strong></span>
               </li>
             </ul>
           </div>
@@ -124,9 +124,9 @@ const ville = villes.find(v => v.id === "chambly");
     <div class="container-custom text-center max-w-3xl">
       <h2 class="text-3xl font-bold mb-6">L'objectif</h2>
       <p class="text-xl text-gray-700 leading-relaxed">
-        "Je voyais des clients potentiels passer chez mes concurrents simplement parce qu'ils avaient un site internet. Je savais que mon travail était de qualité, mais je n'étais pas visible. Il fallait que ça change."
+        "Je voyais de nouveaux patients potentiels passer chez mes confrères plus jeunes, simplement parce qu'ils étaient plus visibles sur internet. Je savais qu'il fallait que je modernise ma présence en ligne."
       </p>
-      <p class="mt-4 font-semibold">— Michel Dubois</p>
+      <p class="mt-4 font-semibold">— Docteur Martin</p>
     </div>
   </section>
 
@@ -139,48 +139,48 @@ const ville = villes.find(v => v.id === "chambly");
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Création du site</h3>
-            <p class="text-gray-600">Création d'un site vitrine avec portfolio des réalisations, présentant le savoir-faire de Michel.</p>
+            <h3 class="font-bold text-lg mb-2">Refonte du site</h3>
+            <p class="text-gray-600">Création d'un site moderne, responsive, avec une charte graphique rassurante.</p>
           </div>
         </div>
 
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Pages par service</h3>
-            <p class="text-gray-600">Création de pages dédiées : cuisine sur mesure, dressing, parquet, menuiserie extérieure.</p>
+            <h3 class="font-bold text-lg mb-2">Optimisation du formulaire</h3>
+            <p class="text-gray-600">Passage de 8 à 4 champs, ajout de la mention "réponse sous 24h".</p>
           </div>
         </div>
 
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Pages par ville</h3>
-            <p class="text-gray-600">Contenu spécifique pour Chambly, Lamorlaye, Saint-Maximin et les communes environnantes.</p>
+            <h3 class="font-bold text-lg mb-2">Google My Business optimisé</h3>
+            <p class="text-gray-600">Fiche complète avec photos du cabinet, horaires, spécialités.</p>
           </div>
         </div>
 
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Google My Business</h3>
-            <p class="text-gray-600">Création d'une fiche complète avec photos des réalisations et des ateliers.</p>
+            <h3 class="font-bold text-lg mb-2">Stratégie d'avis</h3>
+            <p class="text-gray-600">Mise en place d'un process pour demander des avis aux patients satisfaits.</p>
           </div>
         </div>
 
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Stratégie de contenu</h3>
-            <p class="text-gray-600">Articles de blog sur les tendances menuiserie, conseils d'entretien, etc.</p>
+            <h3 class="font-bold text-lg mb-2">Contenu de confiance</h3>
+            <p class="text-gray-600">Ajout de pages sur les spécialités, les parcours de soins, les questions fréquentes.</p>
           </div>
         </div>
 
         <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
           <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">6</div>
           <div>
-            <h3 class="font-bold text-lg mb-2">Netlinking local</h3>
-            <p class="text-gray-600">Partenariats avec des architectes d'intérieur et des constructeurs de maisons.</p>
+            <h3 class="font-bold text-lg mb-2">Doctolib intégré</h3>
+            <p class="text-gray-600">Intégration de la prise de rendez-vous en ligne visible sur toutes les pages.</p>
           </div>
         </div>
       </div>
@@ -190,41 +190,41 @@ const ville = villes.find(v => v.id === "chambly");
   <!-- Résultats détaillés -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 6 mois</h2>
+      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 4 mois</h2>
 
       <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
         <div class="bg-white p-8 rounded-xl shadow-sm">
           <h3 class="text-2xl font-bold mb-6">Avant</h3>
           <ul class="space-y-4">
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">2</span>
-              <span>devis par mois</span>
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">5</span>
+              <span>demandes/semaine</span>
             </li>
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">0</span>
-              <span>visiteurs/mois</span>
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">15%</span>
+              <span>taux de conversion</span>
             </li>
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">0</span>
-              <span>avis Google</span>
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">72%</span>
+              <span>taux de rebond</span>
             </li>
           </ul>
         </div>
 
         <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-green-200">
-          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 6 mois</h3>
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 4 mois</h3>
           <ul class="space-y-4">
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">10-12</span>
-              <span><strong class="text-green-700">devis par mois</strong> (+500%)</span>
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">14</span>
+              <span><strong class="text-green-700">demandes/semaine</strong> (+180%)</span>
             </li>
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">450</span>
-              <span><strong class="text-green-700">visiteurs/mois</strong></span>
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">42%</span>
+              <span><strong class="text-green-700">taux de conversion</strong> (x2,8)</span>
             </li>
             <li class="flex items-center gap-3">
-              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">15</span>
-              <span><strong class="text-green-700">avis Google</strong> (note 4,9★)</span>
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">47%</span>
+              <span><strong class="text-green-700">taux de rebond</strong> (-25 points)</span>
             </li>
           </ul>
         </div>
@@ -232,19 +232,19 @@ const ville = villes.find(v => v.id === "chambly");
 
       <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
         <div class="bg-white p-3 rounded-lg text-center">
-          <div class="font-bold">"menuisier Chambly"</div>
-          <div class="text-green-600">#1</div>
+          <div class="font-bold">"médecin Senlis"</div>
+          <div class="text-green-600">#2</div>
         </div>
         <div class="bg-white p-3 rounded-lg text-center">
-          <div class="font-bold">"cuisine sur mesure 60"</div>
+          <div class="font-bold">"généraliste Senlis"</div>
           <div class="text-green-600">#3</div>
         </div>
         <div class="bg-white p-3 rounded-lg text-center">
-          <div class="font-bold">"dressing sur mesure"</div>
-          <div class="text-green-600">#4</div>
+          <div class="font-bold">"prise rdv médecin 60"</div>
+          <div class="text-green-600">#1</div>
         </div>
         <div class="bg-white p-3 rounded-lg text-center">
-          <div class="font-bold">"parquet Chambly"</div>
+          <div class="font-bold">"cabinet médical Senlis"</div>
           <div class="text-green-600">#2</div>
         </div>
       </div>
@@ -259,10 +259,10 @@ const ville = villes.find(v => v.id === "chambly");
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
         </svg>
         <blockquote class="text-2xl italic mb-6">
-          "Mon téléphone sonne constamment, je dois refuser des chantiers. Le site me ramène des clients de Chambly et de toutes les communes autour. Aujourd'hui, je travaille pour des clients que je n'aurais jamais touchés avant, simplement parce qu'ils m'ont trouvé sur Google."
+          "Je pensais que mon site était suffisant. En réalité, il faisait fuir les patients. Maintenant, je reçois des demandes de rendez-vous de nouveaux patients chaque semaine, et le site m'aide à gagner un temps précieux au téléphone."
         </blockquote>
-        <p class="font-semibold text-xl">Michel Dubois</p>
-        <p class="text-white/80">Menuiserie Dubois - Chambly (60)</p>
+        <p class="font-semibold text-xl">Docteur Martin</p>
+        <p class="text-white/80">Médecine générale - Senlis (60)</p>
       </div>
     </div>
   </section>
@@ -275,15 +275,15 @@ const ville = villes.find(v => v.id === "chambly");
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
             <span class="text-primary-600 text-xl">✓</span>
-            <span><strong>Un site avec portfolio est essentiel</strong> - les clients veulent voir vos réalisations avant de vous contacter.</span>
+            <span><strong>Le CRO est essentiel pour les professions libérales</strong> - avoir du trafic ne suffit pas, il faut convertir.</span>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-primary-600 text-xl">✓</span>
-            <span><strong>Les pages par service</strong> - chaque prestation a ses propres mots-clés et clients.</span>
+            <span><strong>Un formulaire simple change tout</strong> - 4 champs au lieu de 8 ont multiplié les conversions par 2,8.</span>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-primary-600 text-xl">✓</span>
-            <span><strong>Il n'est jamais trop tard</strong> - même après 25 ans de métier, le digital peut transformer votre activité.</span>
+            <span><strong>Les avis Google sont cruciaux pour la confiance</strong> - 42 avis 4,9★ rassurent les nouveaux patients.</span>
           </li>
         </ul>
       </div>
@@ -295,7 +295,7 @@ const ville = villes.find(v => v.id === "chambly");
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Vous voulez le même résultat ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-        Je propose un audit gratuit pour analyser votre situation.
+        Je propose un audit gratuit pour analyser votre site et vos conversions.
       </p>
       <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
         Demander mon audit gratuit

@@ -1,12 +1,30 @@
 ---
+// src/pages/villes/index.astro
 import Layout from "../../layouts/Layout.astro";
 import villes from "../../data/villes.json";
+import services from "../../data/services.json";
+import metiers from "../../data/metiers.json";
+import casClients from "../../data/cas-clients.json";
 
 const villes60 = villes.filter(v => v.zone === "60").sort((a, b) => a.nom.localeCompare(b.nom));
 const villes95 = villes.filter(v => v.zone === "95").sort((a, b) => a.nom.localeCompare(b.nom));
 
 const totalAlentours = villes.reduce((acc, v) => acc + v.alentours.length, 0);
 const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0);
+
+// Compter les cas clients par ville
+const casParVille = {};
+casClients && Object.values(casClients).flat().forEach(cas => {
+  if (cas.villeId) {
+    casParVille[cas.villeId] = (casParVille[cas.villeId] || 0) + 1;
+  }
+});
+
+// Villes principales pour la section "à la une"
+const villesEnUne = ["beauvais", "compiegne", "chantilly", "cergy", "argenteuil", "senlis"];
+
+// Services principaux pour l'affichage rapide
+const servicesPrincipaux = services.slice(0, 3);
 ---
 
 <Layout
@@ -14,10 +32,11 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
     description="J'interviens dans tout l'Oise et le Val-d'Oise : Beauvais, Compiègne, Chantilly, Cergy, Argenteuil et leurs alentours."
 >
 
-  <!-- Hero avec carte conceptuelle -->
+  <!-- HERO AMÉLIORÉ -->
   <section class="bg-gradient-to-br from-green-50 to-emerald-50 py-20 relative overflow-hidden">
     <div class="absolute right-0 top-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-20"></div>
     <div class="absolute left-0 bottom-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image: url('/images/map-outline.svg'); background-size: cover;"></div>
 
     <div class="container-custom text-center relative z-10">
       <h1 class="text-5xl font-bold text-gray-900 mb-6">
@@ -27,8 +46,8 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
         Basé dans l'Oise, je me déplace dans tout le département et le Val-d'Oise pour accompagner les professionnels locaux.
       </p>
 
-      <!-- Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+      <!-- STATS ENRICHIÉES -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
         <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
           <div class="text-3xl font-bold text-primary-600">{villes.length}</div>
           <div class="text-sm text-gray-600">villes principales</div>
@@ -46,65 +65,238 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
           <div class="text-sm text-gray-600">départements</div>
         </div>
       </div>
+
+      <!-- BARRE DE RECHERCHE SIMPLE -->
+      <div class="max-w-md mx-auto mt-12">
+        <div class="relative">
+          <input
+              type="text"
+              placeholder="Recherchez votre ville..."
+              class="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-primary-500 shadow-sm"
+              id="ville-search"
+          />
+          <button class="absolute right-2 top-2 bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+            🔍
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Carte visuelle des départements -->
+  <!-- VILLES À LA UNE -->
   <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Villes <span class="text-primary-600">principales</span></h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Les villes où j'accompagne le plus de professionnels.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+        {villes.filter(v => villesEnUne.includes(v.id)).map(ville => {
+          const nbCas = casParVille[ville.id] || 0;
+          return (
+              <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+                <div class="text-3xl mb-2">📍</div>
+                <div class="font-semibold group-hover:text-primary-600">{ville.nom}</div>
+                <div class="text-xs text-gray-500">{ville.codePostal}</div>
+                {nbCas > 0 && (
+                    <div class="text-xs text-green-600 mt-1">{nbCas} étude{nbCas > 1 ? 's' : ''}</div>
+                )}
+              </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTE VISUELLE DES DÉPARTEMENTS (AMÉLIORÉE) -->
+  <section class="py-16 bg-gray-50">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-8">
         <!-- Oise -->
-        <div class="bg-blue-50 rounded-2xl p-8">
+        <div class="bg-blue-50 rounded-2xl p-8 hover:shadow-lg transition-all">
           <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-bold">
               <span class="text-primary-600">Oise</span>
               <span class="text-sm bg-white px-3 py-1 rounded-full ml-3">60</span>
             </h2>
-            <span class="text-lg font-semibold">{villes60.length} villes</span>
+            <span class="text-lg font-semibold bg-white px-4 py-2 rounded-full">{villes60.length} villes</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            {villes60.map(ville => (
-                <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
-                  <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
-                  <div class="text-sm text-gray-500">{ville.codePostal}</div>
-                  <div class="mt-2 flex justify-between items-center">
-                    <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
-                    <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                  </div>
-                </a>
-            ))}
+          <div class="grid grid-cols-2 gap-3">
+            {villes60.map(ville => {
+              const nbCas = casParVille[ville.id] || 0;
+              return (
+                  <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
+                    <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
+                    <div class="text-sm text-gray-500">{ville.codePostal}</div>
+                    <div class="mt-2 flex justify-between items-center">
+                      <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
+                      {nbCas > 0 && (
+                          <span class="text-xs text-green-600">{nbCas} cas</span>
+                      )}
+                      <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </div>
+                  </a>
+              );
+            })}
           </div>
         </div>
 
         <!-- Val-d'Oise -->
-        <div class="bg-green-50 rounded-2xl p-8">
+        <div class="bg-green-50 rounded-2xl p-8 hover:shadow-lg transition-all">
           <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-bold">
               <span class="text-primary-600">Val-d'Oise</span>
               <span class="text-sm bg-white px-3 py-1 rounded-full ml-3">95</span>
             </h2>
-            <span class="text-lg font-semibold">{villes95.length} villes</span>
+            <span class="text-lg font-semibold bg-white px-4 py-2 rounded-full">{villes95.length} villes</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            {villes95.map(ville => (
-                <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
-                  <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
-                  <div class="text-sm text-gray-500">{ville.codePostal}</div>
-                  <div class="mt-2 flex justify-between items-center">
-                    <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
-                    <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                  </div>
-                </a>
-            ))}
+          <div class="grid grid-cols-2 gap-3">
+            {villes95.map(ville => {
+              const nbCas = casParVille[ville.id] || 0;
+              return (
+                  <a href={`/villes/${ville.id}`} class="bg-white p-4 rounded-xl hover:shadow-md transition-all group">
+                    <div class="font-semibold text-lg group-hover:text-primary-600">{ville.nom}</div>
+                    <div class="text-sm text-gray-500">{ville.codePostal}</div>
+                    <div class="mt-2 flex justify-between items-center">
+                      <span class="text-xs text-gray-400">{ville.alentours.length} alentours</span>
+                      {nbCas > 0 && (
+                          <span class="text-xs text-green-600">{nbCas} cas</span>
+                      )}
+                      <span class="text-primary-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </div>
+                  </a>
+              );
+            })}
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Carte mentale des alentours -->
+  <!-- SERVICES PAR VILLE (NOUVEAU) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Mes <span class="text-primary-600">services</span> par ville</h2>
+      <p class="text-center text-gray-600 mb-12">Découvrez les services disponibles dans chaque ville.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 bg-blue-600 rounded-full"></span>
+            Oise (60)
+          </h3>
+          <div class="space-y-3">
+            {villes60.slice(0, 4).map(ville => (
+                <div class="border-b border-gray-100 pb-2 last:border-0">
+                  <div class="font-semibold text-primary-600">{ville.nom}</div>
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    {servicesPrincipaux.map(service => (
+                        <a href={`/services/${service.id}/${ville.id}`} class="text-xs bg-gray-100 px-2 py-1 rounded-full hover:bg-primary-100 hover:text-primary-600">
+                          {service.nomCourt}
+                        </a>
+                    ))}
+                    <a href={`/villes/${ville.id}`} class="text-xs text-primary-600 hover:underline">+</a>
+                  </div>
+                </div>
+            ))}
+          </div>
+          <a href="#oise" class="inline-block mt-4 text-primary-600 text-sm hover:underline">Voir toutes les villes de l'Oise →</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+            Val-d'Oise (95)
+          </h3>
+          <div class="space-y-3">
+            {villes95.slice(0, 4).map(ville => (
+                <div class="border-b border-gray-100 pb-2 last:border-0">
+                  <div class="font-semibold text-primary-600">{ville.nom}</div>
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    {servicesPrincipaux.map(service => (
+                        <a href={`/services/${service.id}/${ville.id}`} class="text-xs bg-gray-100 px-2 py-1 rounded-full hover:bg-primary-100 hover:text-primary-600">
+                          {service.nomCourt}
+                        </a>
+                    ))}
+                    <a href={`/villes/${ville.id}`} class="text-xs text-primary-600 hover:underline">+</a>
+                  </div>
+                </div>
+            ))}
+          </div>
+          <a href="#valdoise" class="inline-block mt-4 text-primary-600 text-sm hover:underline">Voir toutes les villes du Val-d'Oise →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTIERS CLÉS PAR VILLE (NOUVEAU) -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Métiers <span class="text-primary-600">par ville</span></h2>
+      <p class="text-center text-gray-600 mb-12">Les professionnels que j'accompagne le plus dans chaque ville.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-white p-4 rounded-xl">
+          <h3 class="font-bold text-primary-600">Beauvais</h3>
+          <div class="mt-2 space-y-1">
+            <a href="/metiers/artisans" class="block text-sm text-gray-700 hover:text-primary-600">Artisans ⚡</a>
+            <a href="/metiers/tpe-pme" class="block text-sm text-gray-700 hover:text-primary-600">TPE/PME 🏭</a>
+            <a href="/metiers/commerces" class="block text-sm text-gray-700 hover:text-primary-600">Commerces 🛍️</a>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl">
+          <h3 class="font-bold text-primary-600">Cergy</h3>
+          <div class="mt-2 space-y-1">
+            <a href="/metiers/commerces" class="block text-sm text-gray-700 hover:text-primary-600">Commerces 🛍️</a>
+            <a href="/metiers/reseaux-franchise" class="block text-sm text-gray-700 hover:text-primary-600">Franchises 🥖</a>
+            <a href="/metiers/tpe-pme" class="block text-sm text-gray-700 hover:text-primary-600">TPE/PME 🏭</a>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl">
+          <h3 class="font-bold text-primary-600">Chantilly</h3>
+          <div class="mt-2 space-y-1">
+            <a href="/metiers/tourisme" class="block text-sm text-gray-700 hover:text-primary-600">Tourisme 🏨</a>
+            <a href="/metiers/profession-liberale" class="block text-sm text-gray-700 hover:text-primary-600">Prof. libérales ⚖️</a>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl">
+          <h3 class="font-bold text-primary-600">Compiègne</h3>
+          <div class="mt-2 space-y-1">
+            <a href="/metiers/tourisme" class="block text-sm text-gray-700 hover:text-primary-600">Tourisme 🏨</a>
+            <a href="/metiers/tpe-pme" class="block text-sm text-gray-700 hover:text-primary-600">TPE/PME 🏭</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSULTATS PAR VILLE (NOUVEAU) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Résultats <span class="text-primary-600">près de chez vous</span></h2>
+      <p class="text-center text-gray-600 mb-12">Des études de cas dans votre région.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {casClients && Object.values(casClients).flat().filter(c => c.villeId && villesEnUne.includes(c.villeId)).slice(0, 3).map(cas => {
+          const ville = villes.find(v => v.id === cas.villeId);
+          return (
+              <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="font-semibold">{cas.nom}</span>
+                  <span class="text-xs bg-primary-100 px-2 py-1 rounded-full">{ville?.nom || cas.ville}</span>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">{cas.entreprise}</p>
+                <p class="text-green-700 font-bold text-lg mb-2">{cas.resultat}</p>
+                <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">Voir l'étude →</a>
+              </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTE MENTALE DES ALENTOURS (AMÉLIORÉE) -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Je travaille aussi dans toutes ces communes</h2>
@@ -112,17 +304,20 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {villes.slice(0, 8).map(ville => (
-            <div class="bg-white p-4 rounded-xl">
+            <div class="bg-white p-4 rounded-xl hover:shadow-md transition-all">
               <h3 class="font-bold text-primary-600 mb-3 flex items-center gap-2">
                 <span>📍</span>
-                <span>Autour de {ville.nom}</span>
+                <a href={`/villes/${ville.id}`} class="hover:underline">{ville.nom}</a>
               </h3>
               <div class="flex flex-wrap gap-2">
-                {ville.alentours.slice(0, 4).map(alentour => (
-                    <span class="bg-gray-100 px-2 py-1 rounded-full text-xs">
-                  {alentour.split(' (')[0]}
-                </span>
-                ))}
+                {ville.alentours.slice(0, 4).map(alentour => {
+                  const nom = typeof alentour === 'string' ? alentour.split(' (')[0] : alentour;
+                  return (
+                      <span class="bg-gray-100 px-2 py-1 rounded-full text-xs hover:bg-primary-50 cursor-default">
+                        {nom}
+                      </span>
+                  );
+                })}
                 {ville.alentours.length > 4 && (
                     <span class="text-xs text-gray-500">+{ville.alentours.length - 4}</span>
                 )}
@@ -133,8 +328,32 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
     </div>
   </section>
 
-  <!-- Pourquoi ces villes -->
+  <!-- FAQ PAR VILLE (NOUVEAU) -->
   <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Questions <span class="text-primary-600">fréquentes</span></h2>
+
+      <div class="space-y-4">
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Intervenez-vous dans ma ville si elle n'est pas listée ?</summary>
+          <p class="mt-3 text-gray-600">Oui, absolument ! Je me déplace dans toutes les communes de l'Oise et du Val-d'Oise, même les plus petites. N'hésitez pas à me contacter pour votre ville.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quels sont les délais d'intervention ?</summary>
+          <p class="mt-3 text-gray-600">Je peux généralement intervenir sous 48h dans n'importe quelle ville des deux départements. Les rendez-vous peuvent se faire en visio ou sur place.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Y a-t-il des frais de déplacement ?</summary>
+          <p class="mt-3 text-gray-600">Non, les frais de déplacement sont inclus dans mes prestations pour tout l'Oise et le Val-d'Oise.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI CES VILLES (inchangé) -->
+  <section class="bg-primary-50 py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -196,44 +415,82 @@ const populationTotale = villes.reduce((acc, v) => acc + (v.population || 0), 0)
     </div>
   </section>
 
-  <!-- Exemples de pages par ville -->
-  <section class="bg-gray-50 py-20">
+  <!-- EXEMPLES DE PAGES PAR VILLE (ENRICHI) -->
+  <section class="py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Pages locales disponibles</h2>
       <p class="text-center text-gray-600 mb-12">Pour chaque ville, des pages adaptées à votre métier.</p>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-        <a href="/seo-local/artisans/beauvais" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
-          <span class="text-sm font-medium">SEO pour artisans</span>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <a href="/services/seo-local/artisans/beauvais" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">🔧</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">SEO artisans</span>
           <span class="text-xs text-gray-500 block">Beauvais</span>
         </a>
-        <a href="/google-ads/commerces/cergy" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
-          <span class="text-sm font-medium">Ads pour commerces</span>
+        <a href="/services/google-ads/commerces/cergy" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">📢</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">Ads commerces</span>
           <span class="text-xs text-gray-500 block">Cergy</span>
         </a>
-        <a href="/cro/profession-liberale/chantilly" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
-          <span class="text-sm font-medium">CRO pour avocats</span>
+        <a href="/services/cro/profession-liberale/chantilly" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">⚖️</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">CRO avocats</span>
           <span class="text-xs text-gray-500 block">Chantilly</span>
         </a>
-        <a href="/seo-local/tourisme/compiegne" class="bg-white p-3 rounded-lg text-center hover:shadow-md">
-          <span class="text-sm font-medium">SEO pour hôtels</span>
+        <a href="/services/seo-local/tourisme/compiegne" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">🏨</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">SEO hôtels</span>
           <span class="text-xs text-gray-500 block">Compiègne</span>
+        </a>
+        <a href="/services/creation-site/artisans/creil" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">💻</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">Site artisans</span>
+          <span class="text-xs text-gray-500 block">Creil</span>
+        </a>
+        <a href="/services/gmb/commerces/argenteuil" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">📱</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">GMB commerces</span>
+          <span class="text-xs text-gray-500 block">Argenteuil</span>
+        </a>
+        <a href="/services/formation/artisans/senlis" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">🎓</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">Formation</span>
+          <span class="text-xs text-gray-500 block">Senlis</span>
+        </a>
+        <a href="/services/seo-local/profession-liberale/montmorency" class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group border border-gray-100">
+          <span class="text-2xl block mb-1">⚖️</span>
+          <span class="text-sm font-medium group-hover:text-primary-600">SEO avocats</span>
+          <span class="text-xs text-gray-500 block">Montmorency</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA FINAL -->
   <section class="bg-primary-600 text-white py-16">
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Vous êtes dans l'Oise ou le Val-d'Oise ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-        Je propose un audit gratuit pour analyser votre visibilité locale.
+        Je propose un audit gratuit pour analyser votre visibilité locale, où que vous soyez.
       </p>
-      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
-        Demander mon audit gratuit
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
     </div>
   </section>
 
+  <!-- SCRIPT POUR LA RECHERCHE SIMPLE -->
+  <script>
+    // Simple search functionality (to be implemented)
+    document.getElementById('ville-search')?.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      // This would need a more sophisticated implementation with actual data
+      console.log('Searching for:', searchTerm);
+    });
+  </script>
 </Layout>

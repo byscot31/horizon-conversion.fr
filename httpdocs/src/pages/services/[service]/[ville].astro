@@ -23,8 +23,54 @@ export async function getStaticPaths() {
 
 const { service, ville } = Astro.props;
 
-// Métiers à afficher (tous pour l'instant)
+// Métiers à afficher
 const metiersAffiches = metiers.slice(0, 6);
+
+// Autres services disponibles dans cette ville
+const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
+
+// Cas clients proches géographiquement (à adapter selon la ville)
+const casProches = {
+  'beauvais': [
+    { metier: 'artisans', nom: 'Jean-Claude', entreprise: 'Lefebvre Électricité', resultat: '+400% de visibilité', etude: 'electricien-beauvais' },
+    { metier: 'tpe-pme', nom: 'Sylvie', entreprise: 'Beauvais Nettoyage', resultat: '+250% contrats pros', etude: 'nettoyage-beauvais' }
+  ],
+  'cergy': [
+    { metier: 'commerces', nom: 'Sophie', entreprise: 'Cave des 3 Rois', resultat: '+30% de clients', etude: 'caviste-cergy' },
+    { metier: 'commerces', nom: 'Céline', entreprise: 'Fleuriste Céline', resultat: '+40% de CA', etude: 'fleuriste-cergy' },
+    { metier: 'tpe-pme', nom: 'Laurent', entreprise: 'Garage du Centre', resultat: '+400% de rendez-vous', etude: 'garage-cergy' }
+  ],
+  'compiegne': [
+    { metier: 'tpe-pme', nom: 'Franck', entreprise: 'Transports Moreau', resultat: '+150% de devis', etude: 'transport-compiegne' },
+    { metier: 'tourisme', nom: 'Pierre', entreprise: 'Restaurant', resultat: '+200 couverts', etude: 'restaurateur-compiegne' }
+  ],
+  'chantilly': [
+    { metier: 'profession-liberale', nom: 'Maître Petit', entreprise: 'Étude notariale', resultat: '+150% de consultations', etude: 'notaire-chantilly' },
+    { metier: 'tourisme', nom: 'Virginie', entreprise: 'Hôtel du Parc', resultat: '+80% réservations', etude: 'hotel-chantilly' }
+  ],
+  'montmorency': [
+    { metier: 'profession-liberale', nom: 'Maître Dupont', entreprise: 'Cabinet Dupont', resultat: '+200% de rendez-vous', etude: 'avocat-montmorency' },
+    { metier: 'profession-liberale', nom: 'Claire', entreprise: 'Atelier Architecture', resultat: '+200% de devis', etude: 'architecte-montmorency' }
+  ],
+  'senlis': [
+    { metier: 'profession-liberale', nom: 'Dr. Martin', entreprise: 'Médecine générale', resultat: '+180% de rendez-vous', etude: 'medecin-senlis' },
+    { metier: 'tourisme', nom: 'Sophie', entreprise: 'Gîte Les Rêves d\'Ô', resultat: '+80% réservations', etude: 'gite-senlis' }
+  ],
+  'creil': [
+    { metier: 'artisans', nom: 'Philippe', entreprise: 'SARL BTP 60', resultat: '+300% de CA', etude: 'macon-creil' }
+  ],
+  'argenteuil': [
+    { metier: 'commerces', nom: 'Isabelle', entreprise: 'Coiffure Isabelle', resultat: '+35% de clients', etude: 'coiffeuse-argenteuil' }
+  ],
+  'meru': [
+    { metier: 'artisans', nom: 'Robert', entreprise: 'Plomberie Martin', resultat: '+650% d\'appels', etude: 'plombier-meru' }
+  ],
+  'chambly': [
+    { metier: 'artisans', nom: 'Michel', entreprise: 'Menuiserie Dubois', resultat: '+500% de devis', etude: 'menuisier-chambly' }
+  ]
+};
+
+const casVille = casProches[ville.id] || [];
 
 // Titre et description
 const titre = `${service.nom} à ${ville.nom}`;
@@ -45,62 +91,267 @@ const description = `Découvrez comment le ${service.nom} peut aider les profess
     </ol>
   </nav>
 
-  <!-- Hero -->
+  <!-- SECTION 1 : Hero -->
   <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
+        <div class="mb-4">
+          <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm inline-flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            Intervention dans le {ville.zone === "60" ? "département de l'Oise (60)" : "Val-d'Oise (95)"}
+          </span>
+        </div>
         <h1 class="text-5xl font-bold text-gray-900 mb-4">{titre}</h1>
         <p class="text-xl text-gray-700 mb-8">{ville.description || description}</p>
-        <a href="/contact" class="btn-primary text-lg px-8 py-4">
-          Discutons de votre projet
-        </a>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact" class="btn-primary text-lg px-8 py-4">
+            Discutons de votre projet
+          </a>
+          <a href={`/villes/${ville.id}`} class="btn-secondary text-lg px-8 py-4">
+            En savoir plus sur {ville.nom}
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Pour quels métiers -->
+  <!-- SECTION 2 : Pour quels métiers -->
   <section class="py-20">
     <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-4">Pour quels métiers ?</h2>
-      <p class="text-center text-gray-600 mb-12">J'accompagne tous types de professionnels à {ville.nom}.</p>
+      <h2 class="text-3xl font-bold text-center mb-4">Pour quels métiers à {ville.nom} ?</h2>
+      <p class="text-center text-gray-600 mb-12">J'accompagne tous types de professionnels dans cette ville.</p>
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
         {metiersAffiches.map(metier => (
-            <a href={`/services/${service.id}/${metier.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all">
-              <div class="font-semibold">{metier.nomCourt}</div>
+            <a href={`/services/${service.id}/${metier.id}/${ville.id}`} class="bg-white p-4 rounded-xl text-center hover:shadow-md transition-all group">
+              <div class="font-semibold group-hover:text-primary-600">{metier.nomCourt}</div>
               <div class="text-xs text-gray-500 mt-1">{metier.description}</div>
+            </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/metiers" class="text-primary-600 hover:underline">Voir tous les métiers →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : Informations sur la ville -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-4">{ville.nom}</h2>
+          <p class="text-gray-700 mb-4">{ville.description}</p>
+          <div class="grid grid-cols-2 gap-4 mt-6">
+            <div class="bg-white p-4 rounded-lg text-center">
+              <div class="text-2xl font-bold text-primary-600">{ville.population?.toLocaleString() || 'N/A'}</div>
+              <div class="text-sm text-gray-600">habitants</div>
+            </div>
+            <div class="bg-white p-4 rounded-lg text-center">
+              <div class="text-2xl font-bold text-primary-600">{ville.codePostal}</div>
+              <div class="text-sm text-gray-600">code postal</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-bold mb-4">Pourquoi {ville.nom} est une ville stratégique ?</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600">✓</span>
+              <span><strong>{ville.alentours.length} communes</strong> autour cherchent des services</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600">✓</span>
+              <span><strong>Zone dynamique</strong> – économie locale en développement</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary-600">✓</span>
+              <span><strong>Concurrence modérée</strong> – opportunité de se démarquer</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 : Villes alentours -->
+  {ville.alentours.length > 0 && (
+      <section class="py-16">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold text-center mb-4">J'interviens aussi dans les environs</h2>
+          <p class="text-center text-gray-600 mb-8">Je me déplace dans toutes ces communes proches de {ville.nom}.</p>
+
+          <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+            {ville.alentours.map(alentour => {
+              const nomAlentour = typeof alentour === 'string' ? alentour.split(' (')[0] : alentour;
+              const description = typeof alentour === 'string' && alentour.includes('(') ? alentour.split('(')[1].replace(')', '') : '';
+              return (
+                  <div class="bg-white px-4 py-2 rounded-full text-sm border border-gray-200 hover:shadow-sm transition-shadow">
+                    {nomAlentour}
+                    {description && <span class="text-xs text-gray-500 ml-1">({description})</span>}
+                  </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+  )}
+
+  <!-- SECTION 5 : Résultats concrets dans la région -->
+  {casVille.length > 0 && (
+      <section class="bg-primary-50 py-20">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold text-center mb-4">Des résultats près de chez vous</h2>
+          <p class="text-center text-gray-700 mb-12">Découvrez comment nous avons aidé des professionnels à {ville.nom} et dans les environs.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {casVille.slice(0, 2).map(cas => (
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+                  <div class="flex justify-between items-start mb-3">
+                    <span class="badge-consultant text-xs">{cas.metier}</span>
+                  </div>
+
+                  <p class="font-semibold text-lg mb-1">{cas.nom}</p>
+                  <p class="text-sm text-gray-600 mb-3">{cas.entreprise}</p>
+
+                  <div class="mt-2 text-green-700 font-bold text-xl mb-3">
+                    {cas.resultat}
+                  </div>
+
+                  <a href={`/etudes-de-cas/${cas.etude}`} class="inline-block text-primary-600 text-sm hover:underline">
+                    Voir l'étude complète →
+                  </a>
+                </div>
+            ))}
+          </div>
+
+          <div class="text-center mt-8">
+            <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+              Voir toutes les études de cas →
+            </a>
+          </div>
+        </div>
+      </section>
+  )}
+
+  <!-- SECTION 6 : Autres services dans cette ville -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">D'autres services à {ville.nom}</h2>
+      <p class="text-center text-gray-600 mb-12">Complétez votre stratégie avec ces solutions.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {autresServices.map(autreService => (
+            <a href={`/services/${autreService.id}/${ville.id}`} class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all group">
+              <h3 class="text-lg font-bold mb-2 group-hover:text-primary-600">{autreService.nom}</h3>
+              <p class="text-sm text-gray-600 mb-3">{autreService.description}</p>
+              <span class="text-primary-600 text-sm group-hover:translate-x-2 transition-transform inline-block">
+                Découvrir →
+              </span>
             </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Villes alentours -->
-  {ville.alentours.length > 0 && (
-      <section class="bg-gray-50 py-16">
-        <div class="container-custom">
-          <h2 class="text-3xl font-bold text-center mb-4">J'interviens aussi dans les environs</h2>
-          <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-            {ville.alentours.map(alentour => (
-                <span class="bg-white px-4 py-2 rounded-full text-sm border border-gray-200">
-              {typeof alentour === 'string' ? alentour.split(' (')[0] : alentour}
-            </span>
-            ))}
-          </div>
-        </div>
-      </section>
-  )}
+  <!-- SECTION 7 : Autres métiers dans cette ville -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h3 class="text-xl font-bold text-center mb-6">{service.nom} à {ville.nom} pour d'autres métiers</h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        {metiers.filter(m => m.id !== metiersAffiches[0]?.id).slice(0, 6).map(autreMetier => (
+            <a href={`/services/${service.id}/${autreMetier.id}/${ville.id}`}
+               class="bg-white px-4 py-2 rounded-full text-sm hover:bg-primary-100 hover:text-primary-600 transition-colors">
+              {autreMetier.nomCourt}
+            </a>
+        ))}
+        <a href="/metiers" class="bg-primary-50 text-primary-600 px-4 py-2 rounded-full text-sm hover:bg-primary-100 transition-colors">
+          Tous les métiers
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- CTA -->
+  <!-- SECTION 8 : FAQ spécifique à la ville -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-4">Questions fréquentes à {ville.nom}</h2>
+
+      <div class="space-y-4">
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Combien de temps pour voir des résultats à {ville.nom} ?</summary>
+          <p class="mt-3 text-gray-600">Les premiers résultats apparaissent généralement entre 1 et 3 mois. À {ville.nom}, la concurrence est modérée, ce qui permet souvent des résultats plus rapides.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Intervenez-vous aussi dans les villages autour ?</summary>
+          <p class="mt-3 text-gray-600">Oui ! Je me déplace dans toutes les communes autour de {ville.nom} : {ville.alentours.slice(0, 4).map(a => typeof a === 'string' ? a.split(' (')[0] : a).join(', ')} et bien d'autres.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Puis-je vous rencontrer à {ville.nom} ?</summary>
+          <p class="mt-3 text-gray-600">Absolument ! Je me déplace régulièrement à {ville.nom} pour rencontrer mes clients. Je peux venir dans votre commerce ou votre bureau.</p>
+        </details>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources/faq" class="text-primary-600 hover:underline">
+          Voir toutes les FAQ →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9 : Ressources locales -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ressources pour les professionnels à {ville.nom}</h2>
+      <p class="text-center text-gray-600 mb-8">Guides et articles pour vous aider.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a href="/ressources/guides/seo-local-artisans-2025" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📘</div>
+          <h3 class="font-bold mb-2">Guide SEO local</h3>
+          <p class="text-sm text-gray-600">Toutes les clés pour être visible dans votre ville.</p>
+          <span class="text-primary-600 text-sm">Télécharger →</span>
+        </a>
+
+        <a href="/ressources/blog/avis-google-importance" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📝</div>
+          <h3 class="font-bold mb-2">Pourquoi les avis sont cruciaux</h3>
+          <p class="text-sm text-gray-600">Comment obtenir plus d'avis et mieux convertir.</p>
+          <span class="text-primary-600 text-sm">Lire l'article →</span>
+        </a>
+
+        <a href="/methodologie" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">🔍</div>
+          <h3 class="font-bold mb-2">Ma méthode</h3>
+          <p class="text-sm text-gray-600">Découvrez comment je travaille en 4 phases.</p>
+          <span class="text-primary-600 text-sm">Découvrir →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 : CTA final -->
   <section class="bg-primary-600 text-white py-16">
     <div class="container-custom text-center">
-      <h2 class="text-3xl font-bold mb-4">Vous êtes à {ville.nom} ?</h2>
+      <h2 class="text-4xl font-bold mb-4">Vous êtes à {ville.nom} ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-        Je propose un audit gratuit pour analyser votre situation.
+        Je propose un audit gratuit pour analyser votre visibilité locale.
       </p>
-      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
-        Demander mon audit gratuit
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+      <p class="text-sm mt-6 text-white/80">
+        Disponible 7j/7 • Intervention dans le {ville.zone === "60" ? "60" : "95"}
+      </p>
     </div>
   </section>
 </Layout>

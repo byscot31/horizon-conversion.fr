@@ -1,0 +1,223 @@
+{
+  "artisans": [
+    {
+      "id": "robert-plombier",
+      "nom": "Robert",
+      "entreprise": "Plomberie Martin",
+      "ville": "Méru",
+      "villeId": "meru",
+      "resultat": "+650% d'appels",
+      "etude": "plombier-meru",
+      "service": "seo-local",
+      "citation": "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant.",
+      "citation2": "Mon téléphone n'arrête pas de sonner !",
+      "note": 5,
+      "icone": "👤"
+    },
+    {
+      "id": "jean-claude-electricien",
+      "nom": "Jean-Claude",
+      "entreprise": "Lefebvre Électricité",
+      "ville": "Beauvais",
+      "villeId": "beauvais",
+      "resultat": "+400% de visibilité",
+      "etude": "electricien-beauvais",
+      "service": "seo-local",
+      "citation": "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région.",
+      "note": 5,
+      "icone": "🔧"
+    },
+    {
+      "id": "michel-menuisier",
+      "nom": "Michel",
+      "entreprise": "Menuiserie Dubois",
+      "ville": "Chambly",
+      "villeId": "chambly",
+      "resultat": "+500% de devis",
+      "etude": "menuisier-chambly",
+      "service": "creation-site",
+      "citation": "Mon téléphone sonne constamment, je dois refuser des chantiers.",
+      "note": 5,
+      "icone": "🔨"
+    }
+  ],
+  "commerces": [
+    {
+      "id": "sophie-caviste",
+      "nom": "Sophie",
+      "entreprise": "Cave des 3 Rois",
+      "ville": "Cergy",
+      "villeId": "cergy",
+      "resultat": "+30% de clients",
+      "etude": "caviste-cergy",
+      "service": "google-ads",
+      "citation": "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'.",
+      "note": 5,
+      "icone": "🍷"
+    },
+    {
+      "id": "isabelle-coiffeuse",
+      "nom": "Isabelle",
+      "entreprise": "Coiffure Isabelle",
+      "ville": "Argenteuil",
+      "villeId": "argenteuil",
+      "resultat": "+35% de clients",
+      "etude": "coiffeuse-argenteuil",
+      "service": "gmb",
+      "citation": "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer.",
+      "note": 5,
+      "icone": "💇"
+    },
+    {
+      "id": "celine-fleuriste",
+      "nom": "Céline",
+      "entreprise": "Fleuriste Céline",
+      "ville": "Cergy",
+      "villeId": "cergy",
+      "resultat": "+40% de CA",
+      "etude": "fleuriste-cergy",
+      "service": "seo-local",
+      "citation": "Je fais 40% de chiffre en plus le week-end.",
+      "note": 5,
+      "icone": "💐"
+    }
+  ],
+  "profession-liberale": [
+    {
+      "id": "maitre-dupont",
+      "nom": "Maître Dupont",
+      "entreprise": "Cabinet Dupont",
+      "ville": "Montmorency",
+      "villeId": "montmorency",
+      "resultat": "+200% de rendez-vous",
+      "etude": "avocat-montmorency",
+      "service": "cro",
+      "citation": "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces.",
+      "note": 5,
+      "icone": "⚖️"
+    },
+    {
+      "id": "dr-martin",
+      "nom": "Dr. Martin",
+      "entreprise": "Médecine générale",
+      "ville": "Senlis",
+      "villeId": "senlis",
+      "resultat": "+180% de rendez-vous",
+      "etude": "medecin-senlis",
+      "service": "cro",
+      "citation": "Mon taux de conversion a doublé en seulement 3 mois.",
+      "note": 5,
+      "icone": "👨‍⚕️"
+    },
+    {
+      "id": "claire-architecte",
+      "nom": "Claire",
+      "entreprise": "Atelier Architecture",
+      "ville": "Montmorency",
+      "villeId": "montmorency",
+      "resultat": "+200% de devis",
+      "etude": "architecte-montmorency",
+      "service": "creation-site",
+      "citation": "Je n'ai plus besoin de faire de publicité traditionnelle.",
+      "note": 5,
+      "icone": "📐"
+    }
+  ],
+  "tpe-pme": [
+    {
+      "id": "franck-transport",
+      "nom": "Franck",
+      "entreprise": "Transports Moreau",
+      "ville": "Compiègne",
+      "villeId": "compiegne",
+      "resultat": "+150% de devis",
+      "etude": "transport-compiegne",
+      "service": "creation-site",
+      "citation": "Maintenant je reçois des demandes de devis toutes les semaines.",
+      "note": 5,
+      "icone": "🚛"
+    },
+    {
+      "id": "philippe-macon",
+      "nom": "Philippe",
+      "entreprise": "SARL BTP 60",
+      "ville": "Creil",
+      "villeId": "creil",
+      "resultat": "+300% de CA",
+      "etude": "macon-creil",
+      "service": "seo-local",
+      "citation": "Notre chiffre d'affaires a augmenté de 40%.",
+      "note": 5,
+      "icone": "🏗️"
+    },
+    {
+      "id": "sylvie-nettoyage",
+      "nom": "Sylvie",
+      "entreprise": "Beauvais Nettoyage",
+      "ville": "Beauvais",
+      "villeId": "beauvais",
+      "resultat": "+250% contrats pros",
+      "etude": "nettoyage-beauvais",
+      "service": "seo-local",
+      "citation": "Nous avons décroché 3 contrats majeurs.",
+      "note": 5,
+      "icone": "🧹"
+    }
+  ],
+  "reseaux-franchise": [
+    {
+      "id": "caroline-franchise",
+      "nom": "Caroline",
+      "entreprise": "Boulangeries du Pain",
+      "ville": "Cergy",
+      "villeId": "cergy",
+      "resultat": "+450 avis",
+      "etude": "franchise-cergy",
+      "service": "gmb",
+      "citation": "On avait du mal à gérer nos fiches Google. Maintenant tout est centralisé.",
+      "note": 5,
+      "icone": "🥖"
+    }
+  ],
+  "tourisme": [
+    {
+      "id": "virginie-hotel",
+      "nom": "Virginie",
+      "entreprise": "Hôtel du Parc",
+      "ville": "Chantilly",
+      "villeId": "chantilly",
+      "resultat": "+80% réservations",
+      "etude": "hotel-chantilly",
+      "service": "seo-local",
+      "citation": "Je ne dépends plus de Booking, les clients me trouvent directement.",
+      "note": 5,
+      "icone": "🏨"
+    },
+    {
+      "id": "pierre-restaurant",
+      "nom": "Pierre",
+      "entreprise": "Restaurant",
+      "ville": "Compiègne",
+      "villeId": "compiegne",
+      "resultat": "+200 couverts",
+      "etude": "restaurateur-compiegne",
+      "service": "gmb",
+      "citation": "30% de réservations directes supplémentaires.",
+      "note": 5,
+      "icone": "🍽️"
+    },
+    {
+      "id": "sophie-gite",
+      "nom": "Sophie",
+      "entreprise": "Gîte Les Rêves d'Ô",
+      "ville": "Senlis",
+      "villeId": "senlis",
+      "resultat": "+80% réservations",
+      "etude": "gite-senlis",
+      "service": "seo-local",
+      "citation": "Booking ne représente plus que 30% de mon CA.",
+      "note": 5,
+      "icone": "🏡"
+    }
+  ]
+}

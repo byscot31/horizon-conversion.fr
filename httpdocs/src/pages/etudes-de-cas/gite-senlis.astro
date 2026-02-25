@@ -1,0 +1,347 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import villes from "../../data/villes.json";
+
+const ville = villes.find(v => v.id === "senlis");
+---
+
+<Layout
+    title="Étude de cas : +80% de réservations directes pour un gîte rural à Senlis | Horizon Conversion"
+    description="Comment un gîte de charme à Senlis a réduit sa dépendance aux plateformes de réservation et augmenté ses réservations directes de 80%."
+>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-green-50 to-emerald-50 py-16">
+    <div class="container-custom">
+      <nav class="text-sm text-gray-600 mb-8">
+        <a href="/" class="hover:text-primary-600">Accueil</a> ›
+        <a href="/etudes-de-cas" class="hover:text-primary-600">Études de cas</a> ›
+        <span class="text-gray-900">Les Rêves d'Ô</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="badge-consultant">Tourisme</span>
+          <span class="badge-agence">SEO local + Contenu</span>
+          <span class="bg-white px-3 py-1 rounded-full text-sm">Senlis (60)</span>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">+80% de réservations directes pour un gîte rural à Senlis</h1>
+        <p class="text-xl text-gray-700">Comment Sophie est passée de 70% Airbnb à 70% de réservations directes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats clés -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">30% → 70%</div>
+          <p class="text-gray-600">réservations directes</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">+80%</div>
+          <p class="text-gray-600">de réservations directes</p>
+        </div>
+        <div class="card p-6 text-center">
+          <div class="text-4xl font-bold text-primary-600 mb-2">12 000€</div>
+          <p class="text-gray-600">économisés par an</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image avant/après -->
+  <section class="bg-gray-50 py-12">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="bg-gray-200 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center">
+            <img src="/images/etudes/gite-avant.jpg" alt="Avant" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/cccccc/666666?text=Site+minimaliste'">
+          </div>
+          <p class="text-sm text-gray-500">Ancien site : page unique, 3 photos</p>
+        </div>
+        <div class="text-center">
+          <div class="bg-green-100 p-4 rounded-xl mb-2 aspect-video flex items-center justify-center border-2 border-green-300">
+            <img src="/images/etudes/gite-apres.jpg" alt="Après" class="max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/600x400/22c55e/white?text=Nouveau+site'">
+          </div>
+          <p class="text-sm text-gray-500">Nouveau site : blog, galerie, réservation directe</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Graphique répartition réservations -->
+  <section class="py-12 bg-white">
+    <div class="container-custom max-w-3xl">
+      <h3 class="text-xl font-bold text-center mb-6">Évolution des réservations</h3>
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="flex justify-center gap-16">
+          <div class="text-center">
+            <p class="font-semibold mb-3">Avant</p>
+            <div class="relative w-40 h-40">
+              <div class="absolute inset-0 rounded-full bg-gray-200"></div>
+              <div class="absolute inset-0 rounded-full bg-primary-300" style="clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%)"></div>
+              <div class="absolute inset-0 flex items-center justify-center flex-col">
+                <span class="text-2xl font-bold">70%</span>
+                <span class="text-sm">Airbnb</span>
+                <span class="text-lg font-bold mt-2">30%</span>
+                <span class="text-sm">Direct</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <p class="font-semibold mb-3">Après</p>
+            <div class="relative w-40 h-40">
+              <div class="absolute inset-0 rounded-full bg-gray-200"></div>
+              <div class="absolute inset-0 rounded-full bg-green-400" style="clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%)"></div>
+              <div class="absolute inset-0 flex items-center justify-center flex-col">
+                <span class="text-2xl font-bold">30%</span>
+                <span class="text-sm">Airbnb</span>
+                <span class="text-lg font-bold mt-2">70%</span>
+                <span class="text-sm">Direct</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client et situation -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La cliente</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">
+                🏡
+              </div>
+              <div>
+                <p class="text-xl font-semibold">Sophie Lambert</p>
+                <p class="text-gray-600">Les Rêves d'Ô • Senlis (60)</p>
+              </div>
+            </div>
+            <p class="text-gray-700">Gîte de charme 4 épis, 3 chambres, situé à 5 minutes du centre de Senlis. Sophie dépendait à 70% d'Airbnb et Booking pour ses réservations.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">La situation avant</h2>
+          <div class="bg-gray-50 p-6 rounded-xl">
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>70% des réservations via Airbnb</strong> - commissions élevées</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Site minimaliste</strong> - une page, 3 photos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Invisible sur Google</strong> - page 4-5</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 mt-1">✕</span>
+                <span><strong>Pas de réservation directe</strong></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectif -->
+  <section class="bg-primary-50 py-16">
+    <div class="container-custom text-center max-w-3xl">
+      <h2 class="text-3xl font-bold mb-6">L'objectif</h2>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        "Je perdais 15 à 20% de mon chiffre en commissions Airbnb. Je savais que si les clients me trouvaient directement, ils réserveraient chez moi. Mais je n'arrivais pas à être visible sur Google."
+      </p>
+      <p class="mt-4 font-semibold">— Sophie Lambert</p>
+    </div>
+  </section>
+
+  <!-- Méthodologie -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Notre méthodologie</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Séance photo professionnelle</h3>
+            <p class="text-gray-600">Photographe spécialisé en hébergement touristique pour 50 photos du gîte et des environs.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Création du site</h3>
+            <p class="text-gray-600">Site complet avec galerie photo, pages des chambres, tarifs, disponibilités.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Moteur de réservation</h3>
+            <p class="text-gray-600">Intégration d'un système de réservation directe simple et sécurisé.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Blog sur Senlis</h3>
+            <p class="text-gray-600">Articles sur les activités à faire à Senlis, les bons restaurants, les balades.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Google My Business</h3>
+            <p class="text-gray-600">Fiche complète avec photos, mise à jour des disponibilités.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl">
+          <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">6</div>
+          <div>
+            <h3 class="font-bold text-lg mb-2">Stratégie d'avis</h3>
+            <p class="text-gray-600">Demande d'avis aux clients pour renforcer la crédibilité.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Résultats détaillés -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Les résultats après 10 mois</h2>
+
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-xl shadow-sm">
+          <h3 class="text-2xl font-bold mb-6">Avant</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">70%</span>
+              <span>réservations via plateformes</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">30%</span>
+              <span>réservations directes</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold">#15</span>
+              <span>position moyenne</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-green-200">
+          <h3 class="text-2xl font-bold mb-6 text-green-700">Après 10 mois</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">30%</span>
+              <span><strong class="text-green-700">réservations via plateformes</strong></span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">70%</span>
+              <span><strong class="text-green-700">réservations directes</strong> (+80%)</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">#1-3</span>
+              <span><strong class="text-green-700">positions clés</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"gîte Senlis"</div>
+          <div class="text-green-600">#2</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"location week-end Oise"</div>
+          <div class="text-green-600">#1</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"chambres d'hôtes Senlis"</div>
+          <div class="text-green-600">#3</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg text-center">
+          <div class="font-bold">"gîte de charme 60"</div>
+          <div class="text-green-600">#1</div>
+        </div>
+      </div>
+
+      <div class="mt-8 text-center">
+        <p class="text-lg font-semibold">Économies réalisées : <span class="text-green-700">12 000€/an</span> de commissions</p>
+        <p class="text-sm text-gray-600">Soit l'équivalent de 15% du chiffre d'affaires</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <div class="bg-primary-600 text-white p-12 rounded-2xl">
+        <svg class="w-16 h-16 mb-6 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+        <blockquote class="text-2xl italic mb-6">
+          "Le blog a changé la donne. Les clients qui viennent me disent qu'ils ont choisi mon gîte parce qu'ils ont vu mes articles sur les balades à Senlis. Ils arrivent déjà conquis. Et je garde mes marges sans payer de commissions."
+        </blockquote>
+        <p class="font-semibold text-xl">Sophie Lambert</p>
+        <p class="text-white/80">Les Rêves d'Ô - Senlis (60)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leçons -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Ce qu'il faut retenir</h2>
+      <div class="bg-white p-8 rounded-xl">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Le contenu local attire des clients qualifiés</strong> - les articles sur Senlis intéressent les touristes en phase de recherche.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Les photos professionnelles sont essentielles</strong> - 50 photos de qualité donnent envie de réserver.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span><strong>Réduire sa dépendance aux plateformes</strong> - les 12 000€ économisés peuvent être réinvestis dans le gîte.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Vous voulez le même résultat ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre visibilité en ligne.
+      </p>
+      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
+        Demander mon audit gratuit
+      </a>
+    </div>
+  </section>
+</Layout>

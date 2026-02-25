@@ -1,6 +1,56 @@
 ---
+// src/pages/metiers/index.astro
 import Layout from "../../layouts/Layout.astro";
 import metiers from "../../data/metiers.json";
+import services from "../../data/services.json";
+import villes from "../../data/villes.json";
+
+// Statistiques
+const totalClients = 82;
+const totalVilles = villes.length;
+const totalServices = services.length;
+
+// Mapping des résultats par métier
+const resultatsParMetier = {
+  artisans: [
+    { nom: "Robert", entreprise: "Plomberie Martin", ville: "Méru", resultat: "+650% d'appels", etude: "plombier-meru" },
+    { nom: "Jean-Claude", entreprise: "Lefebvre Électricité", ville: "Beauvais", resultat: "+400% de visibilité", etude: "electricien-beauvais" },
+    { nom: "Michel", entreprise: "Menuiserie Dubois", ville: "Chambly", resultat: "+500% de devis", etude: "menuisier-chambly" }
+  ],
+  commerces: [
+    { nom: "Sophie", entreprise: "Cave des 3 Rois", ville: "Cergy", resultat: "+30% de clients", etude: "caviste-cergy" },
+    { nom: "Isabelle", entreprise: "Coiffure Isabelle", ville: "Argenteuil", resultat: "+35% de clients", etude: "coiffeuse-argenteuil" },
+    { nom: "Céline", entreprise: "Fleuriste Céline", ville: "Cergy", resultat: "+40% de CA", etude: "fleuriste-cergy" }
+  ],
+  "profession-liberale": [
+    { nom: "Maître Dupont", entreprise: "Cabinet Dupont", ville: "Montmorency", resultat: "+200% de rendez-vous", etude: "avocat-montmorency" },
+    { nom: "Dr. Martin", entreprise: "Médecine générale", ville: "Senlis", resultat: "+180% de rendez-vous", etude: "medecin-senlis" },
+    { nom: "Claire", entreprise: "Atelier Architecture", ville: "Montmorency", resultat: "+200% de devis", etude: "architecte-montmorency" }
+  ],
+  "tpe-pme": [
+    { nom: "Franck", entreprise: "Transports Moreau", ville: "Compiègne", resultat: "+150% de devis", etude: "transport-compiegne" },
+    { nom: "Philippe", entreprise: "SARL BTP 60", ville: "Creil", resultat: "+300% de CA", etude: "macon-creil" },
+    { nom: "Sylvie", entreprise: "Beauvais Nettoyage", ville: "Beauvais", resultat: "+250% contrats pros", etude: "nettoyage-beauvais" }
+  ],
+  "reseaux-franchise": [
+    { nom: "Caroline", entreprise: "Boulangeries du Pain", ville: "Cergy", resultat: "+450 avis", etude: "franchise-cergy" }
+  ],
+  tourisme: [
+    { nom: "Virginie", entreprise: "Hôtel du Parc", ville: "Chantilly", resultat: "+80% réservations", etude: "hotel-chantilly" },
+    { nom: "Pierre", entreprise: "Restaurant", ville: "Compiègne", resultat: "+200 couverts", etude: "restaurateur-compiegne" },
+    { nom: "Sophie", entreprise: "Gîte Les Rêves d'Ô", ville: "Senlis", resultat: "+80% réservations", etude: "gite-senlis" }
+  ]
+};
+
+// Villes clés par métier
+const villesParMetier = {
+  artisans: ["Méru", "Beauvais", "Chambly", "Creil", "Noyon"],
+  commerces: ["Cergy", "Argenteuil", "Compiègne", "Pontoise"],
+  "profession-liberale": ["Montmorency", "Senlis", "Chantilly", "Beauvais"],
+  "tpe-pme": ["Compiègne", "Creil", "Beauvais", "Noyon"],
+  "reseaux-franchise": ["Cergy", "Pontoise", "Compiègne"],
+  tourisme: ["Chantilly", "Compiègne", "Senlis", "Auvers-sur-Oise"]
+};
 ---
 
 <Layout
@@ -8,26 +58,45 @@ import metiers from "../../data/metiers.json";
     description="J'accompagne les artisans, commerces, professions libérales, TPE/PME, réseaux et hôteliers dans l'Oise et le Val-d'Oise."
 >
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-16">
+  <!-- Hero avec stats -->
+  <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
     <div class="container-custom">
-      <div class="max-w-3xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Vous êtes plutôt...
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold text-gray-900 mb-6">
+          Vous êtes <span class="text-primary-600">plutôt...</span>
         </h1>
-        <p class="text-xl text-gray-700 mb-8">
+        <p class="text-xl text-gray-700 mb-12 max-w-3xl mx-auto">
           Chaque métier a ses spécificités, ses enjeux, ses clients. J'adapte ma stratégie à votre activité.
         </p>
+
+        <!-- Statistiques -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{metiers.length}</div>
+            <div class="text-sm text-gray-600">métiers</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{totalClients}+</div>
+            <div class="text-sm text-gray-600">clients</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{totalVilles}</div>
+            <div class="text-sm text-gray-600">villes</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl">
+            <div class="text-3xl font-bold text-primary-600">{totalServices}</div>
+            <div class="text-sm text-gray-600">services</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Grille des métiers -->
+  <!-- Grille des métiers enrichie -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {metiers.map(metier => {
-          // Déterminer la couleur de fond selon le métier
           const bgColor = {
             artisans: "bg-blue-50",
             commerces: "bg-green-50",
@@ -37,92 +106,268 @@ import metiers from "../../data/metiers.json";
             tourisme: "bg-rose-50"
           }[metier.id] || "bg-gray-50";
 
+          const villesMetier = villesParMetier[metier.id] || [];
+          const resultats = resultatsParMetier[metier.id] || [];
+
           return (
-              <a href={`/metiers/${metier.id}`} class="card group hover:shadow-xl transition-all overflow-hidden">
-                <div class={`${bgColor} p-8 text-center`}>
+              <div class="card group hover:shadow-xl transition-all overflow-hidden">
+                <div class={`${bgColor} p-8 text-center relative overflow-hidden`}>
+                  <div class="absolute top-0 right-0 w-24 h-24 bg-white/20 rounded-full -mt-8 -mr-8"></div>
                   <h2 class="text-2xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
                     {metier.nom}
                   </h2>
                   <p class="text-gray-600 text-sm mb-4">{metier.description}</p>
-                  <span class="inline-block text-primary-600 font-medium">
-                  {metier.nomCourt} →
-                </span>
+
+                  <!-- Services rapides -->
+                  <div class="flex flex-wrap justify-center gap-2 mb-4">
+                    <span class="bg-white/80 text-xs px-2 py-1 rounded-full">SEO local</span>
+                    <span class="bg-white/80 text-xs px-2 py-1 rounded-full">Google Ads</span>
+                    <span class="bg-white/80 text-xs px-2 py-1 rounded-full">CRO</span>
+                  </div>
+
+                  <a href={`/metiers/${metier.id}`} class="inline-block bg-white px-6 py-2 rounded-full text-primary-600 font-medium hover:shadow-md transition-all">
+                    Découvrir →
+                  </a>
                 </div>
 
                 <div class="p-6 bg-white">
-                  <p class="text-gray-700 italic mb-4">
+                  <p class="text-gray-700 italic mb-4 text-sm">
                     "{metier.message?.replace('{ville}', 'votre ville')}"
                   </p>
-                  <div class="flex justify-between items-center text-sm">
+
+                  <!-- Villes clés -->
+                  {villesMetier.length > 0 && (
+                      <div class="mb-4">
+                        <p class="text-xs font-semibold text-gray-500 mb-2">PRÉSENT À :</p>
+                        <div class="flex flex-wrap gap-1">
+                          {villesMetier.slice(0, 3).map(ville => (
+                              <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">{ville}</span>
+                          ))}
+                          {villesMetier.length > 3 && (
+                              <span class="text-xs text-gray-400">+{villesMetier.length - 3}</span>
+                          )}
+                        </div>
+                      </div>
+                  )}
+
+                  <!-- Résultat clé -->
+                  {resultats.length > 0 && (
+                      <div class="mb-3">
+                        <p class="text-xs font-semibold text-gray-500 mb-1">RÉSULTAT :</p>
+                        <p class="text-sm font-bold text-green-600">{resultats[0].resultat}</p>
+                      </div>
+                  )}
+
+                  <div class="flex justify-between items-center text-sm border-t pt-3">
                     <span class="text-gray-500">Urgence : {metier.urgence}</span>
-                    <span class="text-primary-600">En savoir plus</span>
+                    <span class="text-primary-600 font-medium group-hover:translate-x-2 transition-transform inline-flex items-center gap-1">
+                      En savoir plus →
+                    </span>
                   </div>
                 </div>
-              </a>
+              </div>
           );
         })}
       </div>
     </div>
   </section>
 
-  <!-- Section positionnement par métier -->
+  <!-- Section : Les services par métier -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-12">Mon approche selon votre métier</h2>
+      <h2 class="text-3xl font-bold text-center mb-4">Quels services <span class="text-primary-600">pour quel métier</span> ?</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Chaque métier a des besoins spécifiques. Voici les services les plus adaptés.</p>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-xl">
-          <div class="badge-consultant inline-block mb-3">Consultant</div>
-          <h3 class="text-xl font-bold mb-2">Artisans, commerces</h3>
-          <p class="text-gray-600">Relation directe, expertise terrain, réactivité. Je suis votre interlocuteur unique.</p>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="badge-consultant inline-block mb-3">Artisans</div>
+          <h3 class="text-xl font-bold mb-3">Services clés</h3>
+          <ul class="space-y-2">
+            <li><a href="/services/seo-local" class="text-primary-600 hover:underline">→ SEO local</a> <span class="text-xs text-gray-500">(priorité)</span></li>
+            <li><a href="/services/gmb" class="text-primary-600 hover:underline">→ Fiche Google My Business</a></li>
+            <li><a href="/services/creation-site" class="text-primary-600 hover:underline">→ Création de site</a></li>
+          </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-xl">
-          <div class="badge-agence inline-block mb-3">Agence</div>
-          <h3 class="text-xl font-bold mb-2">PME, franchises</h3>
-          <p class="text-gray-600">Process structurés, reporting, outils pros. Une méthode d'agence sans les frais.</p>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="badge-agence inline-block mb-3">Commerces</div>
+          <h3 class="text-xl font-bold mb-3">Services clés</h3>
+          <ul class="space-y-2">
+            <li><a href="/services/google-ads" class="text-primary-600 hover:underline">→ Google Ads</a> <span class="text-xs text-gray-500">(priorité)</span></li>
+            <li><a href="/services/gmb" class="text-primary-600 hover:underline">→ Fiche Google My Business</a></li>
+            <li><a href="/services/seo-local" class="text-primary-600 hover:underline">→ SEO local</a></li>
+          </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-xl">
-          <div class="badge-premium inline-block mb-3">Expert</div>
-          <h3 class="text-xl font-bold mb-2">Professions libérales</h3>
-          <p class="text-gray-600">Accompagnement sur-mesure, discrétion, expertise pointue pour une clientèle exigeante.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Témoignages par métier (extraits) -->
-  <section class="py-20">
-    <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-12">Ils me font confiance</h2>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card p-6">
-          <div class="badge-consultant text-xs mb-3">Artisan</div>
-          <p class="text-gray-700 italic mb-4">"Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus."</p>
-          <p class="font-semibold">Robert, plombier à Méru</p>
-        </div>
-
-        <div class="card p-6">
-          <div class="badge-agence text-xs mb-3">Commerce</div>
-          <p class="text-gray-700 italic mb-4">"Pendant les fêtes, +30% de clients en boutique grâce aux annonces."</p>
-          <p class="font-semibold">Sophie, caviste à Cergy</p>
-        </div>
-
-        <div class="card p-6">
-          <div class="badge-premium text-xs mb-3">Profession libérale</div>
-          <p class="text-gray-700 italic mb-4">"Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."</p>
-          <p class="font-semibold">Maître Dupont, avocat à Montmorency</p>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="badge-premium inline-block mb-3">Professions libérales</div>
+          <h3 class="text-xl font-bold mb-3">Services clés</h3>
+          <ul class="space-y-2">
+            <li><a href="/services/cro" class="text-primary-600 hover:underline">→ CRO</a> <span class="text-xs text-gray-500">(priorité)</span></li>
+            <li><a href="/services/seo-local" class="text-primary-600 hover:underline">→ SEO local</a></li>
+            <li><a href="/services/formation" class="text-primary-600 hover:underline">→ Formation</a></li>
+          </ul>
         </div>
       </div>
 
       <div class="text-center mt-8">
-        <a href="/etudes-de-cas" class="text-primary-600 font-medium hover:underline">
-          Voir toutes les études de cas →
+        <a href="/services" class="text-primary-600 hover:underline font-medium">
+          Voir tous les services →
         </a>
       </div>
     </div>
   </section>
 
+  <!-- Section : Résultats par métier -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Des résultats <span class="text-primary-600">par métier</span></h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Découvrez ce que nous avons accompli pour chaque secteur.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {metiers.map(metier => {
+          const premiersResultats = (resultatsParMetier[metier.id] || []).slice(0, 2);
+          return (
+              <div class="bg-white p-6 rounded-xl shadow-sm">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                  <span class="w-2 h-2 bg-primary-600 rounded-full"></span>
+                  {metier.nom}
+                </h3>
+                <div class="space-y-4">
+                  {premiersResultats.map((res, idx) => (
+                      <div key={idx} class="border-l-2 border-primary-200 pl-3">
+                        <p class="font-semibold">{res.nom}</p>
+                        <p class="text-sm text-gray-600">{res.entreprise} • {res.ville}</p>
+                        <p class="text-sm text-green-600 font-bold mt-1">{res.resultat}</p>
+                        <a href={`/etudes-de-cas/${res.etude}`} class="text-xs text-primary-600 hover:underline">Voir l'étude →</a>
+                      </div>
+                  ))}
+                </div>
+                <a href={`/etudes-de-cas?metier=${metier.id}`} class="inline-block mt-4 text-primary-600 text-sm hover:underline">
+                  Voir tous les cas {metier.nomCourt} →
+                </a>
+              </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section : Villes clés par métier -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Nos <span class="text-primary-600">villes d'intervention</span></h2>
+      <p class="text-center text-gray-600 mb-12">Présents dans tout l'Oise et le Val-d'Oise.</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {metiers.map(metier => (
+            <div>
+              <h3 class="font-semibold text-lg mb-3 text-primary-600">
+                {metier.id === 'artisans' && '🔧 Artisans'}
+                {metier.id === 'commerces' && '🛍️ Commerces'}
+                {metier.id === 'profession-liberale' && '⚖️ Professions libérales'}
+                {metier.id === 'tpe-pme' && '🏭 TPE/PME'}
+                {metier.id === 'reseaux-franchise' && '🥐 Réseaux & Franchises'}
+                {metier.id === 'tourisme' && '🏨 Tourisme'}
+              </h3>
+              <div class="space-y-2">
+                {(villesParMetier[metier.id] || []).map(ville => (
+                    <a href={`/villes/${ville.toLowerCase()}`} class="block text-gray-700 hover:text-primary-600">
+                      {ville}
+                    </a>
+                ))}
+                <a href={`/metiers/${metier.id}`} class="block text-sm text-primary-600 mt-2 hover:underline">
+                  Voir toutes les villes →
+                </a>
+              </div>
+            </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section : Approche par métier -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-12">Mon approche selon votre métier</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-blue-600 text-xl">🔧</span>
+          </div>
+          <div class="badge-consultant inline-block mb-3">Consultant</div>
+          <h3 class="text-xl font-bold mb-2">Artisans & commerces</h3>
+          <p class="text-gray-600 mb-4">Relation directe, expertise terrain, réactivité. Je suis votre interlocuteur unique pour des résultats rapides.</p>
+          <a href="/metiers/artisans" class="text-primary-600 hover:underline">En savoir plus →</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-purple-600 text-xl">🏢</span>
+          </div>
+          <div class="badge-agence inline-block mb-3">Agence</div>
+          <h3 class="text-xl font-bold mb-2">PME, franchises</h3>
+          <p class="text-gray-600 mb-4">Process structurés, reporting, outils pros. Une méthode d'agence sans les frais de structure.</p>
+          <a href="/metiers/tpe-pme" class="text-primary-600 hover:underline">En savoir plus →</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
+          <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-amber-600 text-xl">⚖️</span>
+          </div>
+          <div class="badge-premium inline-block mb-3">Expert</div>
+          <h3 class="text-xl font-bold mb-2">Professions libérales</h3>
+          <p class="text-gray-600 mb-4">Accompagnement sur-mesure, discrétion, expertise pointue pour une clientèle exigeante.</p>
+          <a href="/metiers/profession-liberale" class="text-primary-600 hover:underline">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section : FAQ par métier -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-8">Questions <span class="text-primary-600">fréquentes</span></h2>
+
+      <div class="space-y-4">
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quel service est le plus adapté à mon métier ?</summary>
+          <p class="mt-3 text-gray-600">Tout dépend de vos objectifs. Les artisans ont besoin de visibilité locale (SEO, GMB), les commerces de trafic immédiat (Google Ads), les professions libérales de confiance et de conversion (CRO). Je vous conseille lors de l'audit gratuit.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Combien de clients avez-vous accompagnés dans mon métier ?</summary>
+          <p class="mt-3 text-gray-600">J'ai accompagné des dizaines de professionnels dans chaque secteur. Consultez les études de cas pour voir des exemples concrets.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Y a-t-il des spécificités pour mon métier dans l'Oise/Val-d'Oise ?</summary>
+          <p class="mt-3 text-gray-600">Oui, chaque territoire a ses propres dynamiques. Je connais parfaitement le tissu économique local et les habitudes de recherche dans chaque ville.</p>
+        </details>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources/faq" class="text-primary-600 hover:underline">Voir toutes les FAQ →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="bg-primary-600 text-white py-16">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre métier ?</h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Je propose un audit gratuit pour analyser votre situation et voir comment je peux vous aider.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander mon audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>

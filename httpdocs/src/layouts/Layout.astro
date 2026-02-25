@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 import '../styles/global.css';
+import '../styles/animations.css';
 import MicroInteractions from '../components/MicroInteractions.astro';
 
 export interface Props {
@@ -43,8 +44,6 @@ const email = "contact@horizon-conversion.fr";
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-	<link rel="stylesheet" href="/styles/animations.css" />
 
 	<!-- Contact structured data -->
 	<script type="application/ld+json" set:html={JSON.stringify({

@@ -27,14 +27,14 @@ const servicesConseilles = services.filter(s =>
 
 // Villes où ce métier est le plus présent
 const villesMetier = villes.filter(v =>
-  metier.id === 'artisans' ? ['meru', 'beauvais', 'creil'].includes(v.id) :
-    metier.id === 'commerces' ? ['cergy', 'argenteuil', 'compiegne'].includes(v.id) :
-      metier.id === 'profession-liberale' ? ['chantilly', 'montmorency', 'senlis'].includes(v.id) :
-        metier.id === 'tpe-pme' ? ['creil', 'cergy', 'beauvais'].includes(v.id) :
-          metier.id === 'reseaux-franchise' ? ['cergy', 'argenteuil', 'compiegne'].includes(v.id) :
-            metier.id === 'tourisme' ? ['chantilly', 'compiegne', 'auvers-sur-oise'].includes(v.id) :
+  metier.id === 'artisans' ? ['meru', 'beauvais', 'creil', 'chambly', 'noyon'].includes(v.id) :
+    metier.id === 'commerces' ? ['cergy', 'argenteuil', 'compiegne', 'pontoise'].includes(v.id) :
+      metier.id === 'profession-liberale' ? ['chantilly', 'montmorency', 'senlis', 'beauvais'].includes(v.id) :
+        metier.id === 'tpe-pme' ? ['creil', 'cergy', 'beauvais', 'compiegne'].includes(v.id) :
+          metier.id === 'reseaux-franchise' ? ['cergy', 'argenteuil', 'compiegne', 'pontoise'].includes(v.id) :
+            metier.id === 'tourisme' ? ['chantilly', 'compiegne', 'auvers-sur-oise', 'senlis'].includes(v.id) :
               []
-).slice(0, 6);
+).slice(0, 8);
 
 // Couleur selon le métier
 const bgColor = {
@@ -45,6 +45,41 @@ const bgColor = {
   "reseaux-franchise": "bg-indigo-50",
   tourisme: "bg-rose-50"
 }[metier.id] || "bg-gray-50";
+
+// Mapping des cas clients par métier
+const casParMetier = {
+  artisans: [
+    { nom: "Robert", entreprise: "Plomberie Martin", ville: "Méru", resultat: "+650% d'appels", etude: "plombier-meru", service: "seo-local" },
+    { nom: "Jean-Claude", entreprise: "Lefebvre Électricité", ville: "Beauvais", resultat: "+400% de visibilité", etude: "electricien-beauvais", service: "seo-local" },
+    { nom: "Michel", entreprise: "Menuiserie Dubois", ville: "Chambly", resultat: "+500% de devis", etude: "menuisier-chambly", service: "creation-site" }
+  ],
+  commerces: [
+    { nom: "Sophie", entreprise: "Cave des 3 Rois", ville: "Cergy", resultat: "+30% de clients", etude: "caviste-cergy", service: "google-ads" },
+    { nom: "Isabelle", entreprise: "Coiffure Isabelle", ville: "Argenteuil", resultat: "+35% de clients", etude: "coiffeuse-argenteuil", service: "gmb" },
+    { nom: "Céline", entreprise: "Fleuriste Céline", ville: "Cergy", resultat: "+40% de CA", etude: "fleuriste-cergy", service: "seo-local" }
+  ],
+  "profession-liberale": [
+    { nom: "Maître Dupont", entreprise: "Cabinet Dupont", ville: "Montmorency", resultat: "+200% de rendez-vous", etude: "avocat-montmorency", service: "cro" },
+    { nom: "Dr. Martin", entreprise: "Médecine générale", ville: "Senlis", resultat: "+180% de rendez-vous", etude: "medecin-senlis", service: "cro" },
+    { nom: "Claire", entreprise: "Atelier Architecture", ville: "Montmorency", resultat: "+200% de devis", etude: "architecte-montmorency", service: "creation-site" }
+  ],
+  "tpe-pme": [
+    { nom: "Franck", entreprise: "Transports Moreau", ville: "Compiègne", resultat: "+150% de devis", etude: "transport-compiegne", service: "creation-site" },
+    { nom: "Philippe", entreprise: "SARL BTP 60", ville: "Creil", resultat: "+300% de CA", etude: "macon-creil", service: "seo-local" },
+    { nom: "Sylvie", entreprise: "Beauvais Nettoyage", ville: "Beauvais", resultat: "+250% contrats pros", etude: "nettoyage-beauvais", service: "seo-local" }
+  ],
+  "reseaux-franchise": [
+    { nom: "Caroline", entreprise: "Boulangeries du Pain", ville: "Cergy", resultat: "+450 avis", etude: "franchise-cergy", service: "gmb" }
+  ],
+  tourisme: [
+    { nom: "Virginie", entreprise: "Hôtel du Parc", ville: "Chantilly", resultat: "+80% réservations", etude: "hotel-chantilly", service: "seo-local" },
+    { nom: "Pierre", entreprise: "Restaurant", ville: "Compiègne", resultat: "+200 couverts", etude: "restaurateur-compiegne", service: "gmb" },
+    { nom: "Sophie", entreprise: "Gîte Les Rêves d'Ô", ville: "Senlis", resultat: "+80% réservations", etude: "gite-senlis", service: "seo-local" }
+  ]
+};
+
+const casMetier = casParMetier[metier.id] || [];
+const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
 ---
 
 <Layout
@@ -69,12 +104,18 @@ const bgColor = {
           <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">⚡ Urgence : {metier.urgence}</span>
         </div>
 
-        <p class="mt-8 text-lg italic text-gray-700">{metier.message?.replace('{ville}', 'votre ville')}</p>
+        <p class="mt-8 text-lg italic text-gray-700">"{metier.message?.replace('{ville}', 'votre ville')}"</p>
+
+        <div class="mt-8">
+          <a href="/contact" class="btn-primary text-lg px-8 py-4">
+            Discutons de votre projet
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Enjeux spécifiques -->
+  <!-- SECTION 1 : Enjeux spécifiques -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12">
@@ -131,14 +172,14 @@ const bgColor = {
     </div>
   </section>
 
-  <!-- Services recommandés -->
-  <section className="bg-gray-50 py-20">
+  <!-- SECTION 2 : Services recommandés (LIENS CORRIGÉS) -->
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-12">Services clés pour les {metier.nomCourt}</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {servicesConseilles.map(service => (
-            <a href={`/services/${service.id}`} class="card p-6 text-center hover:shadow-xl group">
+            <a href={`/services/${service.id}/${metier.id}`} class="card p-6 text-center hover:shadow-xl group">
               <h3 class="text-xl font-bold mb-2 group-hover:text-primary-600">{service.nom}</h3>
               <p class="text-gray-600 text-sm mb-3">{service.description}</p>
               <span class="text-primary-600 font-medium">Découvrir →</span>
@@ -148,59 +189,252 @@ const bgColor = {
     </div>
   </section>
 
-  <!-- Villes clés -->
-  <section class="py-20">
+  <!-- SECTION 3 : Résultats concrets -->
+  {casMetier.length > 0 && (
+      <section class="py-20">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold text-center mb-4">Des résultats pour des {metier.nomCourt}</h2>
+          <p class="text-center text-gray-600 mb-12">Découvrez comment nous avons aidé des professionnels comme vous.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {casMetier.slice(0, 3).map(cas => (
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+                  <div class="flex justify-between items-start mb-3">
+                    <span class="badge-consultant text-xs">{cas.service === 'seo-local' ? 'SEO' : cas.service === 'google-ads' ? 'Ads' : cas.service === 'cro' ? 'CRO' : 'Site'}</span>
+                    <span class="text-sm text-gray-500">{cas.ville}</span>
+                  </div>
+                  <p class="font-semibold text-lg mb-1">{cas.nom}</p>
+                  <p class="text-sm text-gray-600 mb-3">{cas.entreprise}</p>
+                  <p class="text-2xl font-bold text-green-600 mb-3">{cas.resultat}</p>
+                  <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">
+                    Voir l'étude complète →
+                  </a>
+                </div>
+            ))}
+          </div>
+
+          <div class="text-center mt-8">
+            <a href={`/etudes-de-cas?metier=${metier.id}`} class="text-primary-600 hover:underline font-medium">
+              Voir toutes les études de cas {metier.nomCourt} →
+            </a>
+          </div>
+        </div>
+      </section>
+  )}
+
+  <!-- SECTION 4 : Villes clés avec liens profonds -->
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Où j'accompagne des {metier.nomCourt}</h2>
-      <p class="text-center text-gray-600 mb-12">Dans tout l'Oise et le Val-d'Oise, avec une présence forte dans ces villes :</p>
+      <p class="text-center text-gray-600 mb-12">Dans tout l'Oise et le Val-d'Oise, avec une présence forte dans ces villes.</p>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
         {villesMetier.map(ville => (
-            <a href={`/villes/${ville.id}`} class="card p-4 text-center hover:border-primary-300">
-              <div class="font-semibold">{ville.nom}</div>
-              <div class="text-xs text-gray-500">{ville.codePostal}</div>
-              <div class="mt-2 text-primary-600 text-sm">Voir la ville →</div>
-            </a>
+            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
+              <div class="font-semibold text-center mb-2">{ville.nom}</div>
+              <div class="space-y-2 text-sm">
+                {servicesConseilles.slice(0, 3).map(service => (
+                    <a href={`/services/${service.id}/${metier.id}/${ville.id}`}
+                       class="block text-primary-600 hover:underline text-center">
+                      {service.nomCourt} →
+                    </a>
+                ))}
+              </div>
+            </div>
         ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/villes" class="text-primary-600 hover:underline">Voir toutes les villes →</a>
       </div>
     </div>
   </section>
 
-  <!-- Témoignage -->
-  <section class="bg-primary-50 py-16">
+  <!-- SECTION 5 : Témoignages clients (2 témoignages) -->
+  <section class="py-20 bg-primary-50">
     <div class="container-custom">
-      <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <div class="flex justify-between items-start mb-4">
-          <span class="badge-consultant">{metier.nom}</span>
-          <span class="text-gray-500">Ville</span>
+      <h2 class="text-3xl font-bold text-center mb-4">Ils nous ont fait confiance</h2>
+      <p class="text-center text-gray-600 mb-12">Découvrez ce que disent d'autres {metier.nomCourt}.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- TÉMOIGNAGE 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
+              👤
+            </div>
+            <div>
+              <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+              <p class="text-lg italic text-gray-700 mb-4">
+                "{metier.id === 'artisans' && "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant."}
+                {metier.id === 'commerces' && "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'."}
+                {metier.id === 'profession-liberale' && "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."}
+                {metier.id === 'tpe-pme' && "Maintenant je reçois des demandes de devis toutes les semaines."}
+                {metier.id === 'reseaux-franchise' && "On avait du mal à gérer nos fiches Google. Maintenant tout est centralisé."}
+                {metier.id === 'tourisme' && "Je ne dépends plus de Booking, les clients me trouvent directement."}"
+              </p>
+              <p class="font-semibold">
+                {metier.id === 'artisans' && "Robert, plombier à Méru"}
+                {metier.id === 'commerces' && "Sophie, caviste à Cergy"}
+                {metier.id === 'profession-liberale' && "Maître Dupont, avocat à Montmorency"}
+                {metier.id === 'tpe-pme' && "Franck, Transports Moreau"}
+                {metier.id === 'reseaux-franchise' && "Caroline, Boulangeries du Pain"}
+                {metier.id === 'tourisme' && "Virginie, Hôtel du Parc"}
+              </p>
+              <a href={`/etudes-de-cas/${
+                metier.id === 'artisans' ? 'plombier-meru' :
+                  metier.id === 'commerces' ? 'caviste-cergy' :
+                    metier.id === 'profession-liberale' ? 'avocat-montmorency' :
+                      metier.id === 'tpe-pme' ? 'transport-compiegne' :
+                        metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
+              }`} class="inline-block mt-3 text-primary-600 text-sm hover:underline">
+                Voir son histoire →
+              </a>
+            </div>
+          </div>
         </div>
 
-        <blockquote class="text-xl italic text-gray-700 mb-6">
-          "{metier.id === 'artisans' && "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant."}
-          {metier.id === 'commerces' && "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'."}
-          {metier.id === 'profession-liberale' && "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."}
-          {metier.id === 'tpe-pme' && "Maintenant je reçois des demandes de devis toutes les semaines."}
-          {metier.id === 'reseaux-franchise' && "On avait du mal à gérer nos fiches Google. Maintenant tout est centralisé."}
-          {metier.id === 'tourisme' && "Je ne dépends plus de Booking, les clients me trouvent directement."}"
-        </blockquote>
+        <!-- TÉMOIGNAGE 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md">
+          <div class="flex items-start gap-4">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
+              {metier.id === 'artisans' && '🔧'}
+              {metier.id === 'commerces' && '🍷'}
+              {metier.id === 'profession-liberale' && '⚖️'}
+              {metier.id === 'tpe-pme' && '🚛'}
+              {metier.id === 'reseaux-franchise' && '🥖'}
+              {metier.id === 'tourisme' && '🏨'}
+            </div>
+            <div>
+              <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+              <p class="text-lg italic text-gray-700 mb-4">
+                "{metier.id === 'artisans' && "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région."}
+                {metier.id === 'commerces' && "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer."}
+                {metier.id === 'profession-liberale' && "Mon taux de conversion a doublé en seulement 3 mois."}
+                {metier.id === 'tpe-pme' && "Notre chiffre d'affaires a augmenté de 40%."}
+                {metier.id === 'reseaux-franchise' && "La gestion centralisée nous fait gagner un temps précieux."}
+                {metier.id === 'tourisme' && "30% de réservations directes supplémentaires."}"
+              </p>
+              <p class="font-semibold">
+                {metier.id === 'artisans' && "Jean-Claude, électricien à Beauvais"}
+                {metier.id === 'commerces' && "Isabelle, coiffeuse à Argenteuil"}
+                {metier.id === 'profession-liberale' && "Dr. Martin, médecin à Senlis"}
+                {metier.id === 'tpe-pme' && "Philippe, menuiserie à Creil"}
+                {metier.id === 'reseaux-franchise' && "Franck, Optical Center"}
+                {metier.id === 'tourisme' && "Pierre, restaurant à Compiègne"}
+              </p>
+              <a href={`/etudes-de-cas/${
+                metier.id === 'artisans' ? 'electricien-beauvais' :
+                  metier.id === 'commerces' ? 'coiffeuse-argenteuil' :
+                    metier.id === 'profession-liberale' ? 'medecin-senlis' :
+                      metier.id === 'tpe-pme' ? 'macon-creil' :
+                        metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'restaurateur-compiegne'
+              }`} class="inline-block mt-3 text-primary-600 text-sm hover:underline">
+                Voir son histoire →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <p class="font-semibold">
-          {metier.id === 'artisans' && "Robert, plombier à Méru"}
-          {metier.id === 'commerces' && "Sophie, caviste à Cergy"}
-          {metier.id === 'profession-liberale' && "Maître Dupont, avocat à Montmorency"}
-          {metier.id === 'tpe-pme' && "Franck, Transports Moreau à Compiègne"}
-          {metier.id === 'reseaux-franchise' && "Caroline, Boulangeries du Pain"}
-          {metier.id === 'tourisme' && "Virginie, Hôtel du Parc à Chantilly"}
-        </p>
-
-        <a href="/etudes-de-cas" class="inline-block mt-6 text-primary-600 hover:underline">
-          Voir les études de cas {metier.nomCourt} →
+      <div class="text-center mt-8">
+        <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+          Voir toutes les études de cas →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Pourquoi moi -->
+  <!-- SECTION 6 : Ressources métier -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ressources pour les {metier.nomCourt}</h2>
+      <p class="text-center text-gray-600 mb-12">Guides et articles pour approfondir.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a href="/ressources/guides/seo-local-artisans-2025" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📘</div>
+          <h3 class="font-bold mb-2">Guide SEO local pour {metier.nomCourt}</h3>
+          <p class="text-sm text-gray-600 mb-3">Toutes les clés pour être visible dans votre ville.</p>
+          <span class="text-primary-600 text-sm">Télécharger →</span>
+        </a>
+
+        <a href="/ressources/blog/avis-google-importance" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📝</div>
+          <h3 class="font-bold mb-2">Pourquoi les avis sont cruciaux</h3>
+          <p class="text-sm text-gray-600 mb-3">Comment obtenir plus d'avis et mieux convertir.</p>
+          <span class="text-primary-600 text-sm">Lire l'article →</span>
+        </a>
+
+        <a href="/methodologie" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">🔍</div>
+          <h3 class="font-bold mb-2">Ma méthode</h3>
+          <p class="text-sm text-gray-600 mb-3">Découvrez comment je travaille en 4 phases.</p>
+          <span class="text-primary-600 text-sm">Découvrir →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : FAQ métier -->
+  <section class="py-20">
+    <div class="container-custom max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-4">Questions fréquentes</h2>
+      <p class="text-center text-gray-600 mb-12">Sur le SEO pour les {metier.nomCourt}.</p>
+
+      <div class="space-y-4">
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Combien de temps pour voir des résultats pour un {metier.nomCourt} ?</summary>
+          <p class="mt-3 text-gray-600">Les premiers résultats apparaissent généralement entre 1 et 3 mois selon votre secteur et votre zone. Pour les {metier.nomCourt}, on voit souvent des améliorations rapides sur Google My Business.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quel budget pour un {metier.nomCourt} ?</summary>
+          <p class="mt-3 text-gray-600">Je propose des devis personnalisés après un audit gratuit. Pour les {metier.nomCourt}, comptez entre 300€ et 800€ par mois selon vos objectifs.</p>
+        </details>
+
+        <details class="bg-gray-50 p-6 rounded-lg">
+          <summary class="font-semibold cursor-pointer">Quel service est le plus adapté pour un {metier.nomCourt} ?</summary>
+          <p class="mt-3 text-gray-600">
+            {metier.id === 'artisans' && "Le SEO local et la fiche Google My Business sont essentiels. La création d'un site avec portfolio est également recommandée."}
+            {metier.id === 'commerces' && "Google Ads pour des résultats rapides, complété par une fiche Google optimisée et du SEO local."}
+            {metier.id === 'profession-liberale' && "Le CRO pour convertir les visiteurs en rendez-vous, associé à du contenu d'expertise."}
+            {metier.id === 'tpe-pme' && "Un site professionnel associé à du SEO B2B et des campagnes ciblées."}
+            {metier.id === 'reseaux-franchise' && "La gestion centralisée des fiches Google est la priorité, avec des campagnes locales."}
+            {metier.id === 'tourisme' && "Le SEO local et un contenu de qualité sur les activités environnantes."}
+          </p>
+        </details>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/ressources/faq" class="text-primary-600 hover:underline">
+          Voir toutes les FAQ →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 : Autres métiers -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h3 class="text-lg font-semibold text-center mb-6">Découvrez aussi nos accompagnements pour :</h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        {autresMetiers.map(autreMetier => (
+            <a
+                href={`/metiers/${autreMetier.id}`}
+                class="bg-white px-4 py-2 rounded-full text-sm hover:bg-primary-100 hover:text-primary-600 transition-colors"
+            >
+              {autreMetier.nomCourt}
+            </a>
+        ))}
+        <a href="/metiers" class="bg-primary-50 text-primary-600 px-4 py-2 rounded-full text-sm hover:bg-primary-100 transition-colors">
+          Tous les métiers
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9 : Pourquoi moi -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12">
@@ -234,7 +468,7 @@ const bgColor = {
         <div class="bg-gray-50 p-8 rounded-xl">
           <h2 class="text-2xl font-bold mb-4">Prêt à discuter ?</h2>
           <p class="text-gray-700 mb-6">
-            Je propose un audit gratuit pour analyser votre situation et voir comment je peux vous aider.
+            Je propose un audit gratuit pour analyser votre situation et voir comment je peux aider votre {metier.nomCourt}.
           </p>
           <a href="/contact" class="btn-primary inline-block w-full text-center">
             Demander mon audit gratuit

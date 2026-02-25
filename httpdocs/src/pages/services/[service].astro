@@ -27,6 +27,43 @@ const metiersConseilles = metiers.filter(m =>
 
 // Villes principales pour les exemples
 const villesExemples = villes.slice(0, 6);
+
+// Mapping des cas clients par service
+const casParService = {
+  'seo-local': [
+    { metier: 'artisans', nom: 'Robert', entreprise: 'Plomberie Martin', ville: 'Méru', resultat: '+650% d\'appels', etude: 'plombier-meru' },
+    { metier: 'commerces', nom: 'Sophie', entreprise: 'Cave des 3 Rois', ville: 'Cergy', resultat: '+30% de clients', etude: 'caviste-cergy' },
+    { metier: 'profession-liberale', nom: 'Maître Dupont', entreprise: 'Cabinet Dupont', ville: 'Montmorency', resultat: '+200% de rendez-vous', etude: 'avocat-montmorency' }
+  ],
+  'google-ads': [
+    { metier: 'commerces', nom: 'Sophie', entreprise: 'Cave des 3 Rois', ville: 'Cergy', resultat: '+30% de clients', etude: 'caviste-cergy' },
+    { metier: 'commerces', nom: 'Isabelle', entreprise: 'Coiffure Isabelle', ville: 'Argenteuil', resultat: '+35% de clients', etude: 'coiffeuse-argenteuil' },
+    { metier: 'tourisme', nom: 'Pierre', entreprise: 'Restaurant', ville: 'Compiègne', resultat: '+200 couverts', etude: 'restaurateur-compiegne' }
+  ],
+  'cro': [
+    { metier: 'profession-liberale', nom: 'Maître Dupont', entreprise: 'Cabinet Dupont', ville: 'Montmorency', resultat: '+200% de rendez-vous', etude: 'avocat-montmorency' },
+    { metier: 'profession-liberale', nom: 'Dr. Martin', entreprise: 'Médecine générale', ville: 'Senlis', resultat: '+180% de rendez-vous', etude: 'medecin-senlis' },
+    { metier: 'tpe-pme', nom: 'Philippe', entreprise: 'Menuiserie Durand', ville: 'Creil', resultat: '+200% de trafic', etude: 'macon-creil' }
+  ],
+  'creation-site': [
+    { metier: 'artisans', nom: 'Michel', entreprise: 'Menuiserie Dubois', ville: 'Chambly', resultat: '+500% de devis', etude: 'menuisier-chambly' },
+    { metier: 'tpe-pme', nom: 'Franck', entreprise: 'Transports Moreau', ville: 'Compiègne', resultat: '+150% de devis', etude: 'transport-compiegne' },
+    { metier: 'profession-liberale', nom: 'Claire', entreprise: 'Atelier Architecture', ville: 'Montmorency', resultat: '+200% de devis', etude: 'architecte-montmorency' }
+  ],
+  'gmb': [
+    { metier: 'artisans', nom: 'Jean-Claude', entreprise: 'Lefebvre Électricité', ville: 'Beauvais', resultat: '+400% de visibilité', etude: 'electricien-beauvais' },
+    { metier: 'commerces', nom: 'Céline', entreprise: 'Fleuriste Céline', ville: 'Cergy', resultat: '+40% de CA', etude: 'fleuriste-cergy' },
+    { metier: 'reseaux-franchise', nom: 'Caroline', entreprise: 'Boulangeries', ville: 'Cergy', resultat: '+450 avis', etude: 'franchise-cergy' }
+  ],
+  'formation': [
+    { metier: 'artisans', nom: 'Robert', entreprise: 'Plomberie Martin', ville: 'Méru', resultat: 'Autonome en 2 mois', etude: 'plombier-meru' },
+    { metier: 'commerces', nom: 'Sophie', entreprise: 'Cave des 3 Rois', ville: 'Cergy', resultat: 'Gère ses annonces seule', etude: 'caviste-cergy' },
+    { metier: 'tpe-pme', nom: 'Sylvie', entreprise: 'Beauvais Nettoyage', ville: 'Beauvais', resultat: '+250% contrats pros', etude: 'nettoyage-beauvais' }
+  ]
+};
+
+const casService = casParService[service.id] || [];
+const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
 ---
 
 <Layout
@@ -34,7 +71,7 @@ const villesExemples = villes.slice(0, 6);
     description={service.description}
 >
 
-  <!-- Hero (inchangé) -->
+  <!-- Hero -->
   <section class="bg-gradient-to-br from-primary-50 to-indigo-50 py-20">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
@@ -56,7 +93,7 @@ const villesExemples = villes.slice(0, 6);
     </div>
   </section>
 
-  <!-- Bénéfices détaillés (inchangé) -->
+  <!-- SECTION 1 : Bénéfices détaillés -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-16">
@@ -117,7 +154,7 @@ const villesExemples = villes.slice(0, 6);
     </div>
   </section>
 
-  <!-- Pour quels métiers → liens vers /services/service/metier -->
+  <!-- SECTION 2 : Pour quels métiers -->
   <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-12">Pour quels métiers ?</h2>
@@ -137,7 +174,7 @@ const villesExemples = villes.slice(0, 6);
     </div>
   </section>
 
-  <!-- Exemples dans les villes → liens vers /services/service/ville -->
+  <!-- SECTION 3 : Villes disponibles -->
   <section class="py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Disponible dans toutes nos villes</h2>
@@ -158,46 +195,43 @@ const villesExemples = villes.slice(0, 6);
     </div>
   </section>
 
-  <!-- Cas client exemple (reste inchangé) -->
-  <section class="bg-primary-50 py-16">
+  <!-- SECTION 4 : Résultats concrets (3 cas) -->
+  <section class="bg-primary-50 py-20">
     <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-12">Un résultat concret</h2>
+      <h2 class="text-3xl font-bold text-center mb-4">Résultats concrets</h2>
+      <p class="text-center text-gray-700 mb-12">Découvrez comment ce service a aidé d'autres professionnels.</p>
 
-      <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <div class="flex justify-between items-start mb-4">
-          <span class="badge-consultant">Artisan</span>
-          <span class="text-gray-500">Méru (60)</span>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {casService.map(cas => (
+            <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+              <div class="flex justify-between items-start mb-3">
+                <span class="badge-consultant text-xs">{cas.metier}</span>
+                <span class="text-sm text-gray-500">{cas.ville}</span>
+              </div>
 
-        <blockquote class="text-xl italic text-gray-700 mb-6">
-          "{service.id === 'seo-local' && "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant. Mon téléphone n'arrête pas de sonner !"}
-          {service.id === 'google-ads' && "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'."}
-          {service.id === 'cro' && "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."}
-          {service.id === 'creation-site' && "Mon site était vieux, je n'avais pas de leads. Maintenant je reçois des demandes de devis toutes les semaines."}
-          {service.id === 'gmb' && "Mes clients me trouvent sur Google Maps et prennent rendez-vous en ligne."}
-          {service.id === 'formation' && "Maintenant je gère mon SEO tout seul et je comprends ce que je fais."}"
-        </blockquote>
+              <p class="font-semibold text-lg mb-1">{cas.nom}</p>
+              <p class="text-sm text-gray-600 mb-3">{cas.entreprise}</p>
 
-        <p class="font-semibold">Robert Martin</p>
-        <p class="text-sm text-gray-600">Plomberie Martin</p>
+              <div class="mt-2 text-green-700 font-bold text-xl mb-3">
+                {cas.resultat}
+              </div>
 
-        <div class="mt-4 text-green-700 font-bold text-xl">
-          {service.id === 'seo-local' && "+650% d'appels"}
-          {service.id === 'google-ads' && "+30% de clients en boutique"}
-          {service.id === 'cro' && "+200% de rendez-vous"}
-          {service.id === 'creation-site' && "+400% de trafic"}
-          {service.id === 'gmb' && "+450 avis en 6 mois"}
-          {service.id === 'formation' && "Autonome en 2 mois"}
-        </div>
+              <a href={`/etudes-de-cas/${cas.etude}`} class="inline-block text-primary-600 text-sm hover:underline">
+                Voir l'étude complète →
+              </a>
+            </div>
+        ))}
+      </div>
 
-        <a href="/etudes-de-cas" class="inline-block mt-6 text-primary-600 hover:underline">
-          Voir l'étude de cas complète →
+      <div class="text-center mt-12">
+        <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+          Voir toutes les études de cas →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- FAQ rapide (inchangé) -->
+  <!-- SECTION 5 : FAQ rapide -->
   <section class="py-20">
     <div class="container-custom max-w-3xl">
       <h2 class="text-3xl font-bold text-center mb-12">Questions fréquentes</h2>
@@ -221,16 +255,97 @@ const villesExemples = villes.slice(0, 6);
     </div>
   </section>
 
-  <!-- CTA (inchangé) -->
+  <!-- SECTION 6 : Ressources associées -->
+  <section class="bg-gray-50 py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ressources pour aller plus loin</h2>
+      <p class="text-center text-gray-600 mb-12">Guides et articles pour approfondir.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a href="/ressources/guides/seo-local-artisans-2025" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📘</div>
+          <h3 class="font-bold mb-2">Guide SEO local</h3>
+          <p class="text-sm text-gray-600">Toutes les clés pour être visible dans votre ville.</p>
+          <span class="text-primary-600 text-sm">Télécharger →</span>
+        </a>
+
+        <a href="/ressources/blog/avis-google-importance" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">📝</div>
+          <h3 class="font-bold mb-2">Pourquoi les avis sont cruciaux</h3>
+          <p class="text-sm text-gray-600">Comment obtenir plus d'avis et mieux convertir.</p>
+          <span class="text-primary-600 text-sm">Lire l'article →</span>
+        </a>
+
+        <a href="/methodologie" class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">🔍</div>
+          <h3 class="font-bold mb-2">Ma méthode</h3>
+          <p class="text-sm text-gray-600">Découvrez comment je travaille en 4 phases.</p>
+          <span class="text-primary-600 text-sm">Découvrir →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : Autres services (maillage interne) -->
+  <section class="py-20">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">D'autres services pour vous</h2>
+      <p class="text-center text-gray-600 mb-12">Complétez votre stratégie avec ces solutions.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {autresServices.map(autreService => (
+            <a href={`/services/${autreService.id}`} class="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-all group">
+              <h3 class="text-lg font-bold mb-2 group-hover:text-primary-600">{autreService.nom}</h3>
+              <p class="text-sm text-gray-600 mb-3">{autreService.description}</p>
+              <span class="text-primary-600 text-sm group-hover:translate-x-2 transition-transform inline-block">
+                Découvrir →
+              </span>
+            </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 : Témoignages clients -->
+  <section class="bg-gray-50 py-16">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Ils nous ont fait confiance</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-xl">
+          <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+          <p class="text-gray-700 italic mb-3">"Un accompagnement personnalisé et des résultats au rendez-vous. Je recommande !"</p>
+          <p class="font-semibold">Robert, plombier à Méru</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl">
+          <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+          <p class="text-gray-700 italic mb-3">"Mes clients me trouvent directement sur Google, je ne peux plus m'en passer."</p>
+          <p class="font-semibold">Sophie, caviste à Cergy</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl">
+          <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
+          <p class="text-gray-700 italic mb-3">"Mon taux de rendez-vous a doublé sans changer mes annonces. Exceptionnel !"</p>
+          <p class="font-semibold">Maître Dupont, avocat</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9 : CTA final -->
   <section class="bg-primary-600 text-white py-16">
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre projet ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
         Parlons de vos objectifs et voyons comment ce service peut vous aider.
       </p>
-      <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg inline-block transition-colors">
-        Demander un audit gratuit
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          Demander un audit gratuit
+        </a>
+        <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
+          📞 06 60 92 10 08
+        </a>
+      </div>
     </div>
   </section>
 
