@@ -24,7 +24,7 @@ const email = "contact@horizon-conversion.fr";
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- SEO -->
-	<title>{title} | {siteName}</title>
+	<title>{title}</title>
 	<meta name="description" content={description || "Expert SEO local dans l'Oise et le Val-d'Oise. Accompagnement personnalisé pour artisans, commerces et entreprises."} />
 	{noIndex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -69,6 +69,7 @@ const email = "contact@horizon-conversion.fr";
 				<a href="/services" class="text-gray-700 hover:text-primary-600 transition-colors">Services</a>
 				<a href="/metiers" class="text-gray-700 hover:text-primary-600 transition-colors">Métiers</a>
 				<a href="/villes" class="text-gray-700 hover:text-primary-600 transition-colors">Villes</a>
+				<a href="/ressources" class="text-gray-700 hover:text-primary-600 transition-colors">Ressources</a>  <!-- NOUVEAU -->
 				<a href="/etudes-de-cas" class="text-gray-700 hover:text-primary-600 transition-colors">Études de cas</a>
 				<a href="/contact" class="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
 			</div>
@@ -95,7 +96,7 @@ const email = "contact@horizon-conversion.fr";
 <!-- Footer -->
 <footer class="bg-gray-900 text-white mt-20">
 	<div class="container-custom py-12">
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+		<div class="grid grid-cols-1 md:grid-cols-5 gap-8">
 			<div>
 				<h3 class="text-xl font-bold mb-4">Horizon Conversion</h3>
 				<p class="text-gray-400 mb-4">Expert SEO local dans l'Oise et le Val-d'Oise.</p>
@@ -138,6 +139,17 @@ const email = "contact@horizon-conversion.fr";
 					<li><a href="/villes/cergy" class="hover:text-white transition">Cergy</a></li>
 					<li><a href="/villes/argenteuil" class="hover:text-white transition">Argenteuil</a></li>
 					<li><a href="/villes" class="text-primary-400 hover:text-white transition">Toutes nos villes →</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4 class="font-semibold mb-4">Ressources</h4>
+				<ul class="space-y-2 text-gray-400">
+					<li><a href="/ressources" class="hover:text-white transition">Toutes nos ressources</a></li>
+					<li><a href="/ressources/blog" class="hover:text-white transition">Blog</a></li>
+					<li><a href="/ressources/guides" class="hover:text-white transition">Guides gratuits</a></li>
+					<li><a href="/ressources/faq" class="hover:text-white transition">FAQ</a></li>
+					<li><a href="/methodologie" class="hover:text-white transition">Méthodologie</a></li>
 				</ul>
 			</div>
 		</div>

@@ -53,7 +53,7 @@ const zoneTextColor = ville.zone === "60" ? "text-blue-700" : "text-green-700";
 ---
 
 <Layout
-    title={`${ville.nom} (${ville.codePostal}) - Expert SEO local | Horizon Conversion`}
+    title={`${ville.nom} (${ville.codePostal}) - Expert SEO local`}
     description={`Expert SEO à ${ville.nom} et ses environs. J'accompagne les artisans, commerces et entreprises du ${ville.zone === "60" ? "département de l'Oise" : "Val-d'Oise"}.`}
 >
 
@@ -113,24 +113,24 @@ const zoneTextColor = ville.zone === "60" ? "text-blue-700" : "text-green-700";
   </section>
 
   <!-- STATS RAPIDES ENRICHIÉES -->
-  <section class="py-12 border-b">
+  <section class="py-12 bg-white border-b">
     <div class="container-custom">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div class="bg-white p-4 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-primary-600">{statsVille.entreprises}+</div>
-          <div class="text-sm text-gray-600">entreprises</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-center">
+        <div class="bg-primary-50 p-4 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-primary-600">{ville.population?.toLocaleString() || 'N/A'}</div>
+          <div class="text-xs text-gray-600">habitants</div>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-primary-600">{statsVille.artisans}+</div>
-          <div class="text-sm text-gray-600">artisans</div>
+        <div class="bg-primary-50 p-4 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-primary-600">{ville.zone === "60" ? "Oise" : "Val-d'Oise"}</div>
+          <div class="text-xs text-gray-600">département</div>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-primary-600">{statsVille.commerces}+</div>
-          <div class="text-sm text-gray-600">commerces</div>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow-sm">
+        <div class="bg-primary-50 p-4 rounded-xl shadow-sm">
           <div class="text-3xl font-bold text-primary-600">{ville.alentours.length}</div>
-          <div class="text-sm text-gray-600">communes alentours</div>
+          <div class="text-xs text-gray-600">communes alentours</div>
+        </div>
+        <div class="bg-primary-50 p-4 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-primary-600">{statsVille.entreprises}+</div>
+          <div class="text-xs text-gray-600">entreprises</div>
         </div>
       </div>
     </div>

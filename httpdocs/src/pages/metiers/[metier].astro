@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import services from "../../data/services.json";
 import metiers from "../../data/metiers.json";
 import villes from "../../data/villes.json";
+import MiniDevis from "../../components/MiniDevis.astro";
 
 export async function getStaticPaths() {
   return metiers.map(metier => ({
@@ -83,7 +84,7 @@ const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
 ---
 
 <Layout
-    title={`${metier.nom} | Horizon Conversion`}
+    title={metier.nom}
     description={`Accompagnement SEO pour les ${metier.nomCourt} dans l'Oise et le Val-d'Oise. ${metier.description}`}
 >
 
@@ -108,10 +109,93 @@ const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
 
         <div class="mt-8">
           <a href="/contact" class="btn-primary text-lg px-8 py-4">
-            Discutons de votre projet
+            Demander mon audit gratuit
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- NOUVEAU BLOC : Les 3 défis des [métier] -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-center mb-4">Les 3 défis des {metier.nomCourt}</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Des problématiques spécifiques à votre métier.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+        <!-- DÉFI 1 -->
+        <div class="bg-gray-50 p-6 rounded-xl hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">1️⃣</div>
+          <h3 class="text-xl font-bold mb-2">
+            {metier.id === 'artisans' && "Urgences et dépannage"}
+            {metier.id === 'commerces' && "Attirer en boutique"}
+            {metier.id === 'profession-liberale' && "Instaurer la confiance"}
+            {metier.id === 'tpe-pme' && "Générer des leads B2B"}
+            {metier.id === 'reseaux-franchise' && "Cohérence multi-sites"}
+            {metier.id === 'tourisme' && "Dépendance aux plateformes"}
+          </h3>
+          <p class="text-gray-600">
+            {metier.id === 'artisans' && "Les clients cherchent un dépanneur immédiatement disponible, pas dans 3 jours. Si vous n'apparaissez pas dans les premiers résultats, ils appellent vos concurrents."}
+            {metier.id === 'commerces' && "Faire venir de nouveaux clients sans exploser le budget pub, et les fidéliser pour qu'ils reviennent. Le bouche-à-oreille ne suffit plus."}
+            {metier.id === 'profession-liberale' && "Les patients/clients comparent longuement avant de choisir un professionnel. Avis Google, site de confiance, tout compte."}
+            {metier.id === 'tpe-pme' && "Toucher des décideurs B2B et pas seulement des particuliers. Les entreprises cherchent des prestataires sérieux en ligne."}
+            {metier.id === 'reseaux-franchise' && "Chaque point de vente fait sa propre communication, pas de cohérence, et des fiches Google souvent négligées."}
+            {metier.id === 'tourisme' && "Perdre 15-20% de marge sur les plateformes comme Booking ou Airbnb, et ne pas connaître ses clients."}
+          </p>
+        </div>
+
+        <!-- DÉFI 2 -->
+        <div class="bg-gray-50 p-6 rounded-xl hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">2️⃣</div>
+          <h3 class="text-xl font-bold mb-2">
+            {metier.id === 'artisans' && "Clientèle fidèle mais vieillissante"}
+            {metier.id === 'commerces' && "Concurrence des grandes surfaces / e-commerce"}
+            {metier.id === 'profession-liberale' && "Pas de visibilité pour les nouveaux arrivants"}
+            {metier.id === 'tpe-pme' && "Site vieillissant qui ne convertit pas"}
+            {metier.id === 'reseaux-franchise' && "Difficulté à gérer les avis clients"}
+            {metier.id === 'tourisme' && "Saisonnalité et remplissage hors vacances"}
+          </h3>
+          <p class="text-gray-600">
+            {metier.id === 'artisans' && "Vous vivez du bouche-à-oreille, mais les nouveaux habitants ne vous trouvent pas. Votre clientèle ne se renouvelle pas assez."}
+            {metier.id === 'commerces' && "Les clients comparent les prix sur internet avant d'acheter. Il faut leur donner une raison de pousser votre porte."}
+            {metier.id === 'profession-liberale' && "Les nouveaux arrivants dans la région cherchent un médecin, un avocat... mais ne vous trouvent pas sur Google."}
+            {metier.id === 'tpe-pme' && "Votre site a 10 ans, il ne donne pas confiance et ne génère pas de devis. Vous perdez des parts de marché."}
+            {metier.id === 'reseaux-franchise' && "Les avis Google sont mal gérés, certains points de vente ont des notes basses qui impactent tout le réseau."}
+            {metier.id === 'tourisme' && "Comment remplir votre établissement en basse saison ? Comment attirer une clientèle locale ?"}
+          </p>
+        </div>
+
+        <!-- DÉFI 3 -->
+        <div class="bg-gray-50 p-6 rounded-xl hover:shadow-md transition-all">
+          <div class="text-3xl mb-3">3️⃣</div>
+          <h3 class="text-xl font-bold mb-2">
+            {metier.id === 'artisans' && "Se démarquer de la concurrence"}
+            {metier.id === 'commerces' && "Fidéliser la clientèle existante"}
+            {metier.id === 'profession-liberale' && "Gérer sa e-réputation"}
+            {metier.id === 'tpe-pme' && "Se faire connaître localement"}
+            {metier.id === 'reseaux-franchise' && "Centraliser sans perdre le local"}
+            {metier.id === 'tourisme' && "Fidéliser et faire revenir les clients"}
+          </h3>
+          <p class="text-gray-600">
+            {metier.id === 'artisans' && "Vos concurrents sont mieux référencés, ils captent les appels d'urgence avant vous. Il faut inverser la tendance."}
+            {metier.id === 'commerces' && "Les clients passent, mais ne reviennent pas. Comment créer une relation durable et les fidéliser ?"}
+            {metier.id === 'profession-liberale' && "Un mauvais avis peut vous coûter cher. Comment gérer sa réputation en ligne et obtenir des avis positifs ?"}
+            {metier.id === 'tpe-pme' && "Vous êtes peu connu en dehors de votre réseau. Comment être visible pour les entreprises de la zone ?"}
+            {metier.id === 'reseaux-franchise' && "Comment garder une cohérence de marque tout en permettant à chaque point de vente d'avoir une présence locale ?"}
+            {metier.id === 'tourisme' && "Les clients partent sans laisser d'avis et sans réserver directement pour leur prochain séjour. Comment les faire revenir ?"}
+          </p>
+        </div>
+      </div>
+
+      <!-- POUR LES MÉTIERS AVEC PEU DE DÉFIS (ex: franchises) -->
+      {metier.id === 'reseaux-franchise' && (
+          <p class="text-center text-sm text-gray-500 mt-4">
+            * Ces défis sont adaptés aux réseaux de toutes tailles, de 2 à 50 points de vente.
+          </p>
+      )}
     </div>
   </section>
 
@@ -169,6 +253,13 @@ const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- MINI-DEVIS ESTIMATEUR (NOUVEAU) -->
+  <section class="py-12 bg-white">
+    <div class="container-custom">
+      <MiniDevis />
     </div>
   </section>
 

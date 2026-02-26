@@ -1,0 +1,203 @@
+---
+// src/components/MiniDevis.astro
+export interface Props {
+  position?: 'hero' | 'sidebar' | 'popup';
+  title?: string;
+}
+
+const { position = 'hero', title = 'Estimez votre besoin en 30 secondes' } = Astro.props;
+
+const metiers = [
+  { id: 'artisans', nom: 'Artisan', icone: '🔧' },
+  { id: 'commerces', nom: 'Commerce', icone: '🛍️' },
+  { id: 'profession-liberale', nom: 'Profession libérale', icone: '⚖️' },
+  { id: 'tpe-pme', nom: 'TPE/PME', icone: '🏭' },
+  { id: 'reseaux-franchise', nom: 'Franchise', icone: '🥖' },
+  { id: 'tourisme', nom: 'Tourisme/Hôtellerie', icone: '🏨' }
+];
+
+const objectifs = [
+  { id: 'appels', nom: 'Plus d\'appels', icone: '📞' },
+  { id: 'devis', nom: 'Plus de devis', icone: '📝' },
+  { id: 'rdv', nom: 'Plus de rendez-vous', icone: '📅' },
+  { id: 'clients', nom: 'Plus de clients en boutique', icone: '👥' }
+];
+---
+
+<div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 max-w-2xl mx-auto">
+  <h3 class="text-2xl font-bold text-center mb-2">{title}</h3>
+  <p class="text-gray-600 text-center mb-6">Répondez en 30 secondes, je vous propose un plan personnalisé</p>
+
+  <div class="space-y-6">
+    <!-- Étape 1 : Métier -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Vous êtes plutôt...</label>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {metiers.map(m => (
+          <label class="relative flex items-center justify-center p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition-all has-[:checked]:border-primary-600 has-[:checked]:bg-primary-50">
+            <input type="radio" name="metier" value={m.id} class="sr-only peer" />
+            <span class="flex flex-col items-center text-center">
+              <span class="text-2xl mb-1">{m.icone}</span>
+              <span class="text-sm font-medium text-gray-900 peer-checked:text-primary-600">{m.nom}</span>
+            </span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <!-- Étape 2 : Ville -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Votre ville</label>
+      <input
+        type="text"
+        name="ville"
+        placeholder="Ex: Beauvais, Cergy, Compiègne..."
+        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+        list="villes-list"
+      />
+      <datalist id="villes-list">
+        <!-- À remplir dynamiquement avec vos villes -->
+        <option value="Beauvais" />
+        <option value="Cergy" />
+        <option value="Compiègne" />
+        <option value="Chantilly" />
+        <option value="Creil" />
+        <option value="Argenteuil" />
+      </datalist>
+    </div>
+
+    <!-- Étape 3 : Objectif -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Votre objectif principal</label>
+      <div class="grid grid-cols-2 gap-3">
+        {objectifs.map(o => (
+          <label class="relative flex items-center justify-center p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition-all has-[:checked]:border-primary-600 has-[:checked]:bg-primary-50">
+            <input type="radio" name="objectif" value={o.id} class="sr-only peer" />
+            <span class="flex flex-col items-center text-center">
+              <span class="text-2xl mb-1">{o.icone}</span>
+              <span class="text-sm font-medium text-gray-900 peer-checked:text-primary-600">{o.nom}</span>
+            </span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button
+      id="btn-estimateur"
+      class="w-full bg-primary-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled
+    >
+      Voir mon plan recommandé
+    </button>
+
+    <!-- Message de réassurance -->
+    <p class="text-xs text-center text-gray-400">🔒 Sans engagement - Je ne spamme pas</p>
+  </div>
+</div>
+
+<!-- Résultat (caché par défaut) -->
+<div id="estimateur-resultat" class="hidden bg-white rounded-2xl shadow-xl p-8 border border-gray-100 max-w-2xl mx-auto mt-4">
+  <div class="text-center mb-4">
+    <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium inline-block">Votre plan personnalisé</span>
+  </div>
+  <h3 class="text-2xl font-bold mb-2" id="resultat-titre">Plan recommandé pour [ville]</h3>
+  <p class="text-gray-600 mb-6" id="resultat-description">Basé sur votre profil, voici ce que je vous conseille :</p>
+
+  <div class="space-y-4 mb-6">
+    <div class="flex items-start gap-3 p-3 bg-primary-50 rounded-lg">
+      <span class="text-2xl">1️⃣</span>
+      <div>
+        <p class="font-semibold" id="service1">Service prioritaire</p>
+        <p class="text-sm text-gray-600" id="service1-desc">Description</p>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+      <span class="text-2xl">2️⃣</span>
+      <div>
+        <p class="font-semibold" id="service2">Service complémentaire</p>
+        <p class="text-sm text-gray-600" id="service2-desc">Description</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="/contact" class="flex-1 btn-primary text-center py-3">Demander mon audit gratuit</a>
+    <button id="btn-modifier" class="flex-1 btn-secondary text-center py-3">Modifier mes réponses</button>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector('.space-y-6');
+  const btnEstimateur = document.getElementById('btn-estimateur');
+  const resultatDiv = document.getElementById('estimateur-resultat');
+  const formDiv = form.closest('div.bg-white');
+
+  // Vérifier que tous les champs sont remplis
+  const checkFields = () => {
+    const metier = document.querySelector('input[name="metier"]:checked');
+    const ville = document.querySelector('input[name="ville"]');
+    const objectif = document.querySelector('input[name="objectif"]:checked');
+
+    if (metier && ville?.value?.trim() && objectif) {
+      btnEstimateur.disabled = false;
+    } else {
+      btnEstimateur.disabled = true;
+    }
+  };
+
+  // Ajouter les écouteurs
+  document.querySelectorAll('input[name="metier"], input[name="objectif"]').forEach(el => {
+    el.addEventListener('change', checkFields);
+  });
+  document.querySelector('input[name="ville"]')?.addEventListener('input', checkFields);
+
+  // Soumission
+  btnEstimateur?.addEventListener('click', () => {
+    const metier = document.querySelector('input[name="metier"]:checked')?.value;
+    const ville = document.querySelector('input[name="ville"]')?.value;
+    const objectif = document.querySelector('input[name="objectif"]:checked')?.value;
+
+    if (!metier || !ville || !objectif) return;
+
+    // Logique de recommandation (à adapter selon votre offre)
+    const recommandations = {
+      artisans: {
+        appels: { service: 'SEO local', desc: 'Priorité : soyez trouvé en URGENCE', service2: 'Google My Business' },
+        devis: { service: 'Création de site', desc: 'Un site avec portfolio pour montrer vos réalisations', service2: 'SEO local' },
+        rdv: { service: 'Google Ads', desc: 'Des annonces ciblées pour des rendez-vous', service2: 'CRO' }
+      },
+      commerces: {
+        appels: { service: 'Google Ads', desc: 'Campagnes géolocalisées pour attirer du trafic', service2: 'GMB' },
+        clients: { service: 'Google My Business', desc: 'Optimisez votre visibilité locale', service2: 'Réseaux sociaux' }
+      },
+      "profession-liberale": {
+        rdv: { service: 'CRO', desc: 'Transformez vos visiteurs en rendez-vous', service2: 'SEO local' }
+      }
+      // ... ajouter pour tous les métiers/objectifs
+    };
+
+    const reco = recommandations[metier]?.[objectif] || {
+      service: 'Audit gratuit',
+      desc: 'Commençons par analyser votre situation',
+      service2: 'Stratégie personnalisée'
+    };
+
+    // Remplir les résultats
+    document.getElementById('resultat-titre').textContent = `Plan recommandé pour ${ville}`;
+    document.getElementById('service1').textContent = reco.service;
+    document.getElementById('service1-desc').textContent = reco.desc;
+    document.getElementById('service2').textContent = reco.service2 || 'Accompagnement personnalisé';
+    document.getElementById('service2-desc').textContent = 'Adapté à vos objectifs';
+
+    // Cacher le formulaire, afficher le résultat
+    formDiv.classList.add('hidden');
+    resultatDiv.classList.remove('hidden');
+  });
+
+  // Bouton modifier
+  document.getElementById('btn-modifier')?.addEventListener('click', () => {
+    formDiv.classList.remove('hidden');
+    resultatDiv.classList.add('hidden');
+  });
+</script>

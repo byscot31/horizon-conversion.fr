@@ -1,6 +1,7 @@
 ---
 // src/pages/ressources/blog/[slug].astro
 import Layout from "../../../layouts/Layout.astro";
+import MiniDevis from "../../../components/MiniDevis.astro";
 
 // 1. DÉFINIR tous les articles disponibles
 export async function getStaticPaths() {
@@ -270,6 +271,13 @@ const articlesSimilaires = [
           </div>
         </div>
 
+        <!-- MINI-DEVIS ESTIMATEUR (NOUVEAU) -->
+        <section class="py-12 bg-white">
+          <div class="container-custom">
+            <MiniDevis />
+          </div>
+        </section>
+
         <!-- Articles similaires -->
         <div class="border-t mt-12 pt-8">
           <h3 class="text-xl font-bold mb-6">Vous aimerez aussi</h3>
@@ -290,7 +298,7 @@ const articlesSimilaires = [
         <div class="bg-primary-50 p-8 rounded-xl mt-8">
           <h3 class="text-xl font-bold mb-2">Vous voulez appliquer ces conseils ?</h3>
           <p class="text-gray-700 mb-4">Je propose un audit gratuit pour analyser votre situation.</p>
-          <a href="/contact" class="btn-primary inline-block">Demander mon audit</a>
+          <a href="/contact" class="btn-primary inline-block">Demander mon audit gratuit</a>
         </div>
       </div>
   ) : (

@@ -81,7 +81,7 @@ const description = `Découvrez comment le ${service.nom} peut aider les ${metie
         )}
 
         <a href="/contact" class="btn-primary text-lg px-8 py-4">
-          Discutons de votre projet
+          Demander mon audit gratuit
         </a>
       </div>
     </div>
@@ -524,7 +524,10 @@ const description = `Découvrez comment le ${service.nom} peut aider les ${metie
     <div class="container-custom text-center">
       <h2 class="text-3xl font-bold mb-4">Prêt à discuter de votre projet ?</h2>
       <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-        Je vous propose un audit gratuit pour analyser votre situation et voir comment je peux aider votre {metier.nomCourt}.
+        Je vous propose un audit gratuit pour analyser votre situation et voir comment je peux aider
+        {metier.nomCourt === 'artisans' ? 'les artisans' :
+          metier.nomCourt === 'commerces' ? 'les commerces' :
+            'les ' + metier.nomCourt}.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">

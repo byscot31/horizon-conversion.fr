@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import services from "../../data/services.json";
 import metiers from "../../data/metiers.json";
 import villes from "../../data/villes.json";
+import MiniDevis from "../../components/MiniDevis.astro";
 
 export async function getStaticPaths() {
   return services.map(service => ({
@@ -314,11 +315,20 @@ const packs = packsParService[service.id] || packsParService['seo-local'];
         <h1 class="text-5xl font-bold text-gray-900 mb-6">{service.nom}</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-3xl">{service.description}</p>
 
-        <div class="flex flex-wrap gap-4 items-center">
+        <div class="flex flex-wrap gap-4 items-center mb-6">
           <span class="bg-white px-4 py-2 rounded-full text-sm shadow-sm">🎯 {service.benefice}</span>
           <span class="bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm">
             {service.premium ? '⭐ Service premium' : '🔧 Service complémentaire'}
           </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact" class="btn-primary text-lg px-8 py-4">
+            Demander mon audit gratuit
+          </a>
+          <a href="/etudes-de-cas" class="btn-secondary text-lg px-8 py-4">
+            Voir les résultats concrets
+          </a>
         </div>
       </div>
     </div>
@@ -382,6 +392,45 @@ const packs = packsParService[service.id] || packsParService['seo-local'];
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- NOUVEAU BLOC : Pourquoi ce service est différent -->
+  <section class="py-16 bg-primary-50">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-8">Pourquoi ce service est <span class="text-primary-600">différent</span></h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl">
+            <div class="text-2xl mb-3">🎯</div>
+            <h3 class="text-xl font-bold mb-2">Pas de solution standard</h3>
+            <p class="text-gray-600">Je ne vends pas de packs préfabriqués. Chaque stratégie est adaptée à votre métier et votre ville.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl">
+            <div class="text-2xl mb-3">📊</div>
+            <h3 class="text-xl font-bold mb-2">Résultats mesurables</h3>
+            <p class="text-gray-600">Dashboard en temps réel, reporting mensuel, suivi des positions. Vous voyez tout.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl">
+            <div class="text-2xl mb-3">🤝</div>
+            <h3 class="text-xl font-bold mb-2">Accompagnement direct</h3>
+            <p class="text-gray-600">Vous travaillez avec moi, pas avec un commercial ou un assistant.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl">
+            <div class="text-2xl mb-3">📍</div>
+            <h3 class="text-xl font-bold mb-2">Expertise locale</h3>
+            <p class="text-gray-600">Basé dans l'Oise, je connais le terrain comme personne.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI-DEVIS ESTIMATEUR (NOUVEAU) -->
+  <section class="py-12 bg-white">
+    <div class="container-custom">
+      <MiniDevis />
     </div>
   </section>
 
@@ -650,7 +699,7 @@ const packs = packsParService[service.id] || packsParService['seo-local'];
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
-          Demander un audit gratuit
+          Demander mon audit gratuit
         </a>
         <a href="tel:0660921008" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-lg transition-colors">
           📞 06 60 92 10 08

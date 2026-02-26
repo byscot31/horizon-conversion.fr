@@ -177,7 +177,7 @@ const description = intentionData.description;
           <IntentionAnimation intention="transactionnelle" type="button" class="text-lg px-8 py-4">
             <a href="/contact" class="flex items-center gap-2">
               <span>📞</span>
-              <span>{intentionData.cta}</span>
+              <span>Demander mon audit gratuit</span>
             </a>
           </IntentionAnimation>
 
@@ -394,7 +394,7 @@ const description = intentionData.description;
         </details>
 
         <details class="bg-gray-50 p-6 rounded-lg">
-          <summary class="font-semibold cursor-pointer">Quel budget pour un {metier.nomCourt} à {ville.nom} ?</summary>
+          <summary class="font-semibold cursor-pointer">Quel budget pour {metier.nomCourt === 'artisans' ? 'un artisan' : 'un ' + metier.nomCourt} à {ville.nom} ?</summary>
           <p class="mt-3 text-gray-600">Je propose des devis personnalisés après un audit gratuit. Pour {ville.nom}, comptez entre 300€ et 800€ par mois selon vos objectifs.</p>
         </details>
 
@@ -436,7 +436,12 @@ const description = intentionData.description;
   <section class="bg-primary-600 text-white py-20">
     <div class="container-custom text-center max-w-3xl">
       <h2 class="text-4xl font-bold mb-4">
-        Vous êtes {metier.nomCourt} à {ville.nom} ?
+        Vous êtes {metier.nomCourt === 'artisans' ? 'artisan' :
+        metier.nomCourt === 'commerces' ? 'commerçant' :
+          metier.nomCourt === 'profession-liberale' ? 'professionnel libéral' :
+            metier.nomCourt === 'tpe-pme' ? 'dirigeant d\'entreprise' :
+              metier.nomCourt === 'reseaux-franchise' ? 'responsable de réseau' :
+                'professionnel'} à {ville.nom} ?
       </h2>
       <p class="text-xl mb-8 opacity-90">
         Je vous propose un audit gratuit pour analyser votre visibilité locale et voir comment attirer plus de clients.
