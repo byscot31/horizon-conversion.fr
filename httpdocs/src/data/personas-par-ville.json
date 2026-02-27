@@ -4,7 +4,8 @@
       "nom": "Robert",
       "entreprise": "Plomberie Martin",
       "citation": "Je veux qu'on m'appelle quand quelqu'un cherche un plombier en urgence.",
-      "histoire": "Robert est plombier depuis 25 ans. Il a toujours vécu du bouche-à-oreille, mais depuis 2 ans, il perd des appels face aux jeunes concurrents qui apparaissent sur Google."
+      "histoire": "Robert est plombier depuis 25 ans à Méru. Il a toujours vécu du bouche-à-oreille, mais depuis 2 ans, il perd des appels face aux jeunes concurrents.",
+      "etude": "plombier-meru"
     }
   },
   "beauvais": {
@@ -12,7 +13,8 @@
       "nom": "Jean-Claude",
       "entreprise": "Lefebvre Électricité",
       "citation": "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région.",
-      "histoire": "Jean-Claude est électricien à Beauvais depuis 20 ans. Il avait un site vieux de 10 ans qui ne lui apportait aucun client."
+      "histoire": "Jean-Claude est électricien à Beauvais depuis 20 ans. Il avait un site vieux de 10 ans qui ne lui apportait aucun client.",
+      "etude": "electricien-beauvais"
     }
   },
   "chambly": {
@@ -20,61 +22,8 @@
       "nom": "Michel",
       "entreprise": "Menuiserie Dubois",
       "citation": "Mon téléphone sonne constamment, je dois refuser des chantiers.",
-      "histoire": "Michel est menuisier à Chambly. Il travaillait uniquement par bouche-à-oreille avant de créer son site."
-    }
-  },
-  "cergy": {
-    "commerces": {
-      "nom": "Sophie",
-      "entreprise": "Cave des 3 Rois",
-      "citation": "Je veux que les gens me trouvent quand ils cherchent un bon vin près de chez eux.",
-      "histoire": "Sophie a ouvert sa cave il y a 3 ans à Cergy. Elle avait du mal à attirer les jeunes actifs."
-    }
-  },
-  "argenteuil": {
-    "commerces": {
-      "nom": "Isabelle",
-      "entreprise": "Coiffure Isabelle",
-      "citation": "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer.",
-      "histoire": "Isabelle est coiffeuse à Argenteuil. Elle a modernisé sa fiche Google et vu sa clientèle rajeunir."
-    }
-  },
-  "montmorency": {
-    "profession-liberale": {
-      "nom": "Maître Dupont",
-      "entreprise": "Cabinet Dupont",
-      "citation": "Je veux que les gens me trouvent quand ils cherchent un avocat de confiance.",
-      "histoire": "Avocat depuis 25 ans à Montmorency, Maître Dupont voulait attirer une nouvelle génération de clients."
-    }
-  },
-  "senlis": {
-    "profession-liberale": {
-      "nom": "Dr. Martin",
-      "entreprise": "Médecine générale",
-      "citation": "Mon taux de conversion a doublé en seulement 3 mois.",
-      "histoire": "Le Dr. Martin est médecin généraliste à Senlis. Son site daté ne convertissait pas."
-    }
-  },
-  "chantilly": {
-    "tourisme": {
-      "nom": "Virginie",
-      "entreprise": "Hôtel du Parc",
-      "citation": "Je veux que les touristes me trouvent sans passer par Booking.",
-      "histoire": "Virginie gère un hôtel de 22 chambres à Chantilly. Elle perdait 15% de son chiffre en commissions Booking."
-    }
-  },
-  "compiegne": {
-    "tpe-pme": {
-      "nom": "Franck",
-      "entreprise": "Transports Moreau",
-      "citation": "Je veux que des clients professionnels me trouvent quand ils cherchent un transporteur.",
-      "histoire": "Franck dirige une entreprise de transport de 12 salariés à Compiègne. Son site de 10 ans ne lui apportait aucun client."
-    },
-    "tourisme": {
-      "nom": "Pierre",
-      "entreprise": "Restaurant",
-      "citation": "30% de réservations directes supplémentaires.",
-      "histoire": "Pierre est restaurateur à Compiègne. Il dépendait trop des plateformes de réservation."
+      "histoire": "Michel est menuisier à Chambly. Il travaillait uniquement par bouche-à-oreille avant de créer son site.",
+      "etude": "menuisier-chambly"
     }
   },
   "creil": {
@@ -82,7 +31,96 @@
       "nom": "Philippe",
       "entreprise": "SARL BTP 60",
       "citation": "Notre chiffre d'affaires a augmenté de 40%.",
-      "histoire": "Philippe dirige une entreprise de maçonnerie à Creil. Il a diversifié sa clientèle vers les particuliers."
+      "histoire": "Philippe dirige une entreprise de maçonnerie à Creil. Il a diversifié sa clientèle vers les particuliers.",
+      "etude": "macon-creil"
+    }
+  },
+  "noyon": {
+    "artisans": {
+      "nom": "Patrick",
+      "entreprise": "Plomberie Noyonnaise",
+      "citation": "Je ne pensais pas que le SEO local pouvait m'apporter autant de clients.",
+      "histoire": "Patrick est plombier à Noyon depuis 15 ans. Il était invisible sur Google avant notre collaboration.",
+      "etude": "plombier-meru"
+    }
+  },
+  "compiegne": {
+    "tpe-pme": {
+      "nom": "Franck",
+      "entreprise": "Transports Moreau",
+      "citation": "Je veux que des clients professionnels me trouvent quand ils cherchent un transporteur.",
+      "histoire": "Franck dirige une entreprise de transport de 12 salariés à Compiègne. Son site de 10 ans ne lui apportait aucun client.",
+      "etude": "transport-compiegne"
+    },
+    "tourisme": {
+      "nom": "Pierre",
+      "entreprise": "Restaurant",
+      "citation": "30% de réservations directes supplémentaires.",
+      "histoire": "Pierre est restaurateur à Compiègne. Il dépendait trop des plateformes de réservation.",
+      "etude": "restaurateur-compiegne"
+    }
+  },
+  "cergy": {
+    "commerces": {
+      "nom": "Sophie",
+      "entreprise": "Cave des 3 Rois",
+      "citation": "Je veux que les gens me trouvent quand ils cherchent un bon vin près de chez eux.",
+      "histoire": "Sophie a ouvert sa cave il y a 3 ans à Cergy. Elle avait du mal à attirer les jeunes actifs.",
+      "etude": "caviste-cergy"
+    }
+  },
+  "argenteuil": {
+    "commerces": {
+      "nom": "Isabelle",
+      "entreprise": "Coiffure Isabelle",
+      "citation": "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer.",
+      "histoire": "Isabelle est coiffeuse à Argenteuil. Elle a modernisé sa fiche Google et vu sa clientèle rajeunir.",
+      "etude": "coiffeuse-argenteuil"
+    }
+  },
+  "montmorency": {
+    "profession-liberale": {
+      "nom": "Maître Dupont",
+      "entreprise": "Cabinet Dupont",
+      "citation": "Je veux que les gens me trouvent quand ils cherchent un avocat de confiance.",
+      "histoire": "Avocat depuis 25 ans à Montmorency, Maître Dupont voulait attirer une nouvelle génération de clients.",
+      "etude": "avocat-montmorency"
+    }
+  },
+  "senlis": {
+    "profession-liberale": {
+      "nom": "Dr. Martin",
+      "entreprise": "Médecine générale",
+      "citation": "Mon taux de conversion a doublé en seulement 3 mois.",
+      "histoire": "Le Dr. Martin est médecin généraliste à Senlis. Son site daté ne convertissait pas.",
+      "etude": "medecin-senlis"
+    }
+  },
+  "chantilly": {
+    "tourisme": {
+      "nom": "Virginie",
+      "entreprise": "Hôtel du Parc",
+      "citation": "Je veux que les touristes me trouvent sans passer par Booking.",
+      "histoire": "Virginie gère un hôtel de 22 chambres à Chantilly. Elle perdait 15% de son chiffre en commissions Booking.",
+      "etude": "hotel-chantilly"
+    }
+  },
+  "auvers-sur-oise": {
+    "tourisme": {
+      "nom": "Claude",
+      "entreprise": "Chambres d'hôtes",
+      "citation": "Les touristes me trouvent directement grâce au contenu local.",
+      "histoire": "Claude a ouvert des chambres d'hôtes à Auvers-sur-Oise. Il a créé un blog sur les peintres impressionnistes.",
+      "etude": "gite-senlis"
+    }
+  },
+  "isle-adam": {
+    "tourisme": {
+      "nom": "Nathalie",
+      "entreprise": "Hôtel de l'Isle",
+      "citation": "Je reçois des réservations toute l'année, pas seulement l'été.",
+      "histoire": "Nathalie gérait un hôtel à L'Isle-Adam avec une forte saisonnalité. Le contenu local a lissé son activité.",
+      "etude": "hotel-chantilly"
     }
   }
 }

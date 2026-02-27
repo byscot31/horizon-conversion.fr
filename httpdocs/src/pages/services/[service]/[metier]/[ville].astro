@@ -60,40 +60,11 @@ const casAAfficher = casMemeVille.length >= 3
   : [...casMemeVille, ...casPourCeMetier.filter(c => c.villeId !== ville.id)].slice(0, 3);
 
 // Si pas assez de cas, utiliser des cas génériques
-const TEMOIGNAGES_PAR_DEFAUT = {
-  artisans: [
-    { nom: "Robert", entreprise: "Plomberie Martin", ville: "Méru", resultat: "+650% d'appels", etude: "plombier-meru", citation: "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant.", icone: "👤" },
-    { nom: "Jean-Claude", entreprise: "Lefebvre Électricité", ville: "Beauvais", resultat: "+400% de visibilité", etude: "electricien-beauvais", citation: "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants.", icone: "🔧" },
-    { nom: "Michel", entreprise: "Menuiserie Dubois", ville: "Chambly", resultat: "+500% de devis", etude: "menuisier-chambly", citation: "Mon téléphone sonne constamment.", icone: "🔨" }
-  ],
-  commerces: [
-    { nom: "Sophie", entreprise: "Cave des 3 Rois", ville: "Cergy", resultat: "+30% de clients", etude: "caviste-cergy", citation: "Pendant les fêtes, +30% de clients.", icone: "🍷" },
-    { nom: "Isabelle", entreprise: "Coiffure Isabelle", ville: "Argenteuil", resultat: "+35% de clients", etude: "coiffeuse-argenteuil", citation: "Les clients me trouvent sur Google Maps.", icone: "💇" },
-    { nom: "Céline", entreprise: "Fleuriste Céline", ville: "Cergy", resultat: "+40% de CA", etude: "fleuriste-cergy", citation: "+40% de chiffre le week-end.", icone: "💐" }
-  ],
-  "profession-liberale": [
-    { nom: "Maître Dupont", entreprise: "Cabinet Dupont", ville: "Montmorency", resultat: "+200% de rendez-vous", etude: "avocat-montmorency", citation: "Je reçois deux fois plus de rendez-vous.", icone: "⚖️" },
-    { nom: "Dr. Martin", entreprise: "Médecine générale", ville: "Senlis", resultat: "+180% de rendez-vous", etude: "medecin-senlis", citation: "Mon taux de conversion a doublé.", icone: "👨‍⚕️" },
-    { nom: "Claire", entreprise: "Atelier Architecture", ville: "Montmorency", resultat: "+200% de devis", etude: "architecte-montmorency", citation: "Je n'ai plus besoin de publicité.", icone: "📐" }
-  ],
-  "tpe-pme": [
-    { nom: "Franck", entreprise: "Transports Moreau", ville: "Compiègne", resultat: "+150% de devis", etude: "transport-compiegne", citation: "Des devis toutes les semaines.", icone: "🚛" },
-    { nom: "Philippe", entreprise: "SARL BTP 60", ville: "Creil", resultat: "+300% de CA", etude: "macon-creil", citation: "Notre CA a augmenté de 40%.", icone: "🏗️" },
-    { nom: "Sylvie", entreprise: "Beauvais Nettoyage", ville: "Beauvais", resultat: "+250% contrats pros", etude: "nettoyage-beauvais", citation: "3 contrats majeurs décrochés.", icone: "🧹" }
-  ],
-  "reseaux-franchise": [
-    { nom: "Caroline", entreprise: "Boulangeries du Pain", ville: "Cergy", resultat: "+450 avis", etude: "franchise-cergy", citation: "Gestion centralisée qui nous fait gagner un temps précieux.", icone: "🥖" }
-  ],
-  tourisme: [
-    { nom: "Virginie", entreprise: "Hôtel du Parc", ville: "Chantilly", resultat: "+80% réservations", etude: "hotel-chantilly", citation: "Je ne dépends plus de Booking.", icone: "🏨" },
-    { nom: "Pierre", entreprise: "Restaurant", ville: "Compiègne", resultat: "+200 couverts", etude: "restaurateur-compiegne", citation: "30% de réservations directes en plus.", icone: "🍽️" },
-    { nom: "Sophie", entreprise: "Gîte Les Rêves d'Ô", ville: "Senlis", resultat: "+80% réservations", etude: "gite-senlis", citation: "Booking ne représente plus que 30% de mon CA.", icone: "🏡" }
-  ]
-};
+const temoignagesParDefaut = casClients.default?.[metier.id] || [];
 
 const temoignagesAAfficher = casAAfficher.length >= 3
   ? casAAfficher
-  : (TEMOIGNAGES_PAR_DEFAUT[metier.id] || []).slice(0, 3);
+  : temoignagesParDefaut.slice(0, 3);
 
 // Déterminer le texte à afficher selon la situation
 const affichagePersona = {
@@ -109,18 +80,28 @@ const affichagePersona = {
     : `Comme d'autres ${metier.nomCourt} à ${ville.nom}...`
 };
 
+const hasLocalPersona = !!personaLocal;
+const hasLocalCase = casMemeVille.length > 0;
+const shouldNoIndex = !hasLocalPersona && !hasLocalCase;
+
 // Autres villes pour ce même service+métier
 const autresVilles = villes.filter(v => v.id !== ville.id).slice(0, 8);
 
 // Autres services pour ce même métier dans cette ville
 const autresServices = services.filter(s => s.id !== service.id).slice(0, 4);
 
+const statsVille = {
+  entreprises: Math.floor(ville.population / 10) || 500,
+  artisans: Math.floor(ville.population / 50) || 100,
+  commerces: Math.floor(ville.population / 100) || 50
+};
+
 // Titre et description
 const titre = `${service.nom} pour ${metier.nomCourt} à ${ville.nom}`;
 const description = intentionData.description;
 ---
 
-<Layout title={titre} description={description}>
+<Layout title={titre} description={description} noIndex={shouldNoIndex}>
   <!-- Fil d'Ariane -->
   <nav class="container-custom py-4 text-sm text-gray-600">
     <ol class="flex items-center space-x-2">
@@ -198,7 +179,68 @@ const description = intentionData.description;
     </div>
   </section>
 
-  <!-- SECTION 1 : Pourquoi c'est important ici -->
+  <!-- SECTION A : Spécificités de la ville -->
+  <section class="py-12 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-4">Pourquoi {ville.nom} ?</h2>
+        <p class="text-center text-gray-700 mb-8">
+          {ville.description || `Ville dynamique située dans le ${ville.zone === "60" ? "département de l'Oise" : "Val-d'Oise"}, ${ville.nom} offre un fort potentiel pour les professionnels locaux.`}
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-lg text-center">
+            <span class="text-2xl font-bold text-primary-600">{ville.population?.toLocaleString() || 'N/A'}</span>
+            <span class="block text-xs text-gray-600">habitants</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center">
+            <span class="text-2xl font-bold text-primary-600">{ville.codePostal}</span>
+            <span class="block text-xs text-gray-600">code postal</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center">
+            <span class="text-2xl font-bold text-primary-600">{ville.zone === "60" ? "Oise" : "Val-d'Oise"}</span>
+            <span class="block text-xs text-gray-600">département</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg text-center">
+            <span class="text-2xl font-bold text-primary-600">{ville.alentours.length}</span>
+            <span class="block text-xs text-gray-600">communes autour</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION B : Chiffres clés locaux -->
+  {(() => {
+    const statsVille = {
+      entreprises: Math.floor(ville.population / 10) || 500,
+      artisans: Math.floor(ville.population / 50) || 100,
+      commerces: Math.floor(ville.population / 100) || 50
+    };
+
+    return (
+        <section class="py-12 bg-white border-b">
+          <div class="container-custom">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-center">
+              <div class="bg-primary-50 p-4 rounded-xl">
+                <div class="text-2xl font-bold text-primary-600">{statsVille.entreprises}+</div>
+                <div class="text-xs text-gray-600">entreprises</div>
+              </div>
+              <div class="bg-primary-50 p-4 rounded-xl">
+                <div class="text-2xl font-bold text-primary-600">{statsVille.artisans}+</div>
+                <div class="text-xs text-gray-600">artisans</div>
+              </div>
+              <div class="bg-primary-50 p-4 rounded-xl">
+                <div class="text-2xl font-bold text-primary-600">{statsVille.commerces}+</div>
+                <div class="text-xs text-gray-600">commerces</div>
+              </div>
+            </div>
+          </div>
+        </section>
+    );
+  })()}
+
+  <!-- SECTION 1 : Pourquoi c'est important ici (ENRICHIE) -->
   <section class="py-20">
     <div class="container-custom">
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -206,6 +248,18 @@ const description = intentionData.description;
           <h2 class="text-3xl font-bold mb-6">
             Pourquoi les {metier.nomCourt} à {ville.nom} ont besoin de {service.nomCourt}
           </h2>
+
+          <!-- NOUVEAU : Données locales enrichies -->
+          <div class="bg-primary-50 p-4 rounded-lg mb-6">
+            <p class="text-sm">
+              <strong>📍 {ville.nom} en chiffres :</strong><br>
+              • {ville.population?.toLocaleString() || 'Plusieurs milliers d'} habitants<br>
+              • {statsVille.entreprises} entreprises<br>
+              • {statsVille.artisans} artisans<br>
+              • {ville.alentours.length} communes dans la zone d'intervention
+            </p>
+          </div>
+
           <p class="text-lg text-gray-700 mb-6">
             {ville.description || `À ${ville.nom} et dans ses environs, la concurrence est réelle.`}
           </p>
@@ -431,6 +485,24 @@ const description = intentionData.description;
       </div>
     </div>
   </section>
+
+  <!-- SECTION : Besoin urgent ? -->
+  {metier.id === 'artisans' || metier.id === 'commerces' ? (
+      <section class="py-12 bg-red-50 rounded-2xl my-8">
+        <div class="container-custom text-center">
+          <h3 class="text-2xl font-bold mb-3 text-red-700">⚠️ Intervention urgente ?</h3>
+          <p class="text-gray-700 mb-4">
+            Vous avez besoin d'un {metier.nomCourt} en urgence à {ville.nom} ?
+          </p>
+          <a
+              href={`/urgence/${metier.id}/${ville.id}`}
+              class="btn-primary bg-red-600 hover:bg-red-700 border-none"
+          >
+            Voir notre page urgence
+          </a>
+        </div>
+      </section>
+  ) : null}
 
   <!-- SECTION 9 : CTA final -->
   <section class="bg-primary-600 text-white py-20">

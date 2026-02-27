@@ -3,34 +3,41 @@
 import Layout from "../../layouts/Layout.astro";
 import casClients from "../../data/cas-clients.json";
 
-// Transformer les données structurées en tableau plat
-const toutesEtudes = Object.values(casClients).flat().map(cas => ({
-  id: cas.etude,
-  client: cas.entreprise,
-  metier: {
-    artisans: "Artisan",
-    commerces: "Commerce",
-    "profession-liberale": "Profession libérale",
-    "tpe-pme": "PME",
-    "reseaux-franchise": "Franchise",
-    tourisme: "Tourisme"
-  }[cas.metier] || cas.metier,
-  metierId: cas.metier,
-  ville: cas.ville,
-  service: {
-    "seo-local": "SEO local",
-    "google-ads": "Google Ads",
-    "cro": "CRO",
-    "creation-site": "Création site",
-    "gmb": "GMB"
-  }[cas.service] || cas.service,
-  serviceId: cas.service,
-  resultat: cas.resultat,
-  description: `${cas.nom} a obtenu ${cas.resultat} grâce à notre accompagnement.`,
-  image: `/images/etudes/${cas.etude}-thumb.png`,
-  icone: cas.icone,
-  citation: cas.citation
-}));
+const toutesEtudes = [];
+
+for (const [metierId, liste] of Object.entries(casClients)) {
+  if (Array.isArray(liste)) {
+    liste.forEach(cas => {
+      toutesEtudes.push({
+        id: cas.etude,
+        client: cas.entreprise,
+        metierId: metierId,
+        metier: {
+          artisans: "Artisan",
+          commerces: "Commerce",
+          "profession-liberale": "Profession libérale",
+          "tpe-pme": "PME",
+          "reseaux-franchise": "Franchise",
+          tourisme: "Tourisme"
+        }[metierId] || "Professionnel",
+        ville: cas.ville,
+        service: {
+          "seo-local": "SEO local",
+          "google-ads": "Google Ads",
+          "cro": "CRO",
+          "creation-site": "Création site",
+          "gmb": "GMB"
+        }[cas.service] || cas.service,
+        serviceId: cas.service,
+        resultat: cas.resultat,
+        description: `${cas.nom} a obtenu ${cas.resultat} grâce à notre accompagnement.`,
+        image: `/images/etudes/${cas.etude}-thumb.png`,
+        icone: cas.icone,
+        citation: cas.citation
+      });
+    });
+  }
+}
 
 // Pagination
 const url = new URL(Astro.request.url);

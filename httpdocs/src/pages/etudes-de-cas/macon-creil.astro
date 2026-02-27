@@ -1,14 +1,35 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import villes from "../../data/villes.json";
+import CaseStudySchema from "../../components/CaseStudySchema.astro";
+import casClients from "../../data/cas-clients.json";
 
 const ville = villes.find(v => v.id === "creil");
+
+// Récupère toutes les études
+const toutesLesEtudes = [];
+for (const [metierId, liste] of Object.entries(casClients)) {
+  if (Array.isArray(liste)) {
+    liste.forEach(cas => {
+      toutesLesEtudes.push({
+        ...cas,
+        metierId
+      });
+    });
+  }
+}
+
+const etudesSimilaires = toutesLesEtudes
+  .filter(e => e.etude !== "macon-creil")
+  .filter(e => e.metier === "artisans" || e.service === "seo-local")
+  .slice(0, 3);
 ---
 
 <Layout
     title="Étude de cas : +300% de chiffre d'affaires pour un maçon à Creil | Horizon Conversion"
     description="Comment une entreprise de maçonnerie à Creil a triplé son chiffre d'affaires grâce au référencement local et aux avis clients."
 >
+  <CaseStudySchema etudeId="macon-creil" />
 
   <!-- Hero -->
   <section class="bg-gradient-to-r from-stone-50 to-gray-50 py-16">
@@ -289,6 +310,33 @@ const ville = villes.find(v => v.id === "creil");
       </div>
     </div>
   </section>
+
+  <!-- SECTION ÉTUDES SIMILAIRES (À AJOUTER) -->
+  {etudesSimilaires.length > 0 && (
+      <section class="py-20 bg-gray-50">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold text-center mb-4">Études de cas <span class="text-primary-600">similaires</span></h2>
+          <p class="text-center text-gray-600 mb-12">Découvrez d'autres résultats concrets dans le même domaine.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {etudesSimilaires.map(etudeSim => (
+                <a href={`/etudes-de-cas/${etudeSim.etude}`} class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all group">
+                  <div class="flex justify-between items-start mb-3">
+                    <span class="badge-consultant text-xs">{etudeSim.metierNom || 'Professionnel'}</span>
+                    <span class="text-sm text-gray-500">{etudeSim.ville}</span>
+                  </div>
+                  <h3 class="font-semibold text-lg mb-2 group-hover:text-primary-600">{etudeSim.entreprise}</h3>
+                  <p class="text-sm text-gray-600 mb-3 line-clamp-2">"{etudeSim.citation}"</p>
+                  <div class="text-green-700 font-bold text-lg mb-3">{etudeSim.resultat}</div>
+                  <span class="text-primary-600 text-sm group-hover:translate-x-2 transition-transform inline-block">
+              Lire l'étude →
+            </span>
+                </a>
+            ))}
+          </div>
+        </div>
+      </section>
+  )}
 
   <!-- CTA -->
   <section class="bg-primary-600 text-white py-16">

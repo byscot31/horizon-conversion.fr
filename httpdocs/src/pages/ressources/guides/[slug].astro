@@ -1,122 +1,28 @@
 ---
-// src/pages/ressources/guides/[slug].astro
 import Layout from "../../../layouts/Layout.astro";
+import GuideSchema from "../../../components/GuideSchema.astro";
+import guides from "../../../data/guides.json";
 
-// 1. Définition de tous les guides disponibles
 export async function getStaticPaths() {
-  const guides = [
-    {
-      slug: "seo-local-artisans-2025",
-      titre: "SEO local pour artisans",
-      description: "Le guide complet pour être trouvé quand les clients cherchent un artisan près de chez eux.",
-      format: "PDF",
-      pages: 45,
-      taille: "2.4 Mo",
-      date: "2025-01-15",
-      image: "/images/ressources/guide-artisans.jpg",
-      apercu: "/images/ressources/apercu-guide-artisans.jpg",
-      niveau: "Débutant",
-      downloads: 1245,
-      contenu: [
-        "Chapitre 1 : Pourquoi le SEO local est crucial pour les artisans",
-        "Chapitre 2 : Google My Business : la fiche parfaite",
-        "Chapitre 3 : Les pages par service et par ville",
-        "Chapitre 4 : La stratégie d'avis",
-        "Chapitre 5 : Le netlinking local",
-        "Chapitre 6 : Mesurer vos résultats",
-        "Bonus : Checklist en 30 points"
-      ]
-    },
-    {
-      slug: "google-ads-petits-budgets",
-      titre: "Google Ads pour petits budgets",
-      description: "Comment rentabiliser vos annonces avec moins de 300€ par mois.",
-      format: "PDF",
-      pages: 32,
-      taille: "1.8 Mo",
-      date: "2025-01-10",
-      image: "/images/ressources/guide-ads.jpg",
-      apercu: "/images/ressources/apercu-guide-ads.jpg",
-      niveau: "Intermédiaire",
-      downloads: 892,
-      contenu: [
-        "Chapitre 1 : Les bases de Google Ads",
-        "Chapitre 2 : La géolocalisation fine",
-        "Chapitre 3 : Les mots-clés négatifs",
-        "Chapitre 4 : Le budget minimal efficace",
-        "Chapitre 5 : Les annonces saisonnières",
-        "Chapitre 6 : Le retargeting léger",
-        "Bonus : Template de campagne"
-      ]
-    },
-    {
-      slug: "avis-google-importance",
-      titre: "Guide des avis Google",
-      description: "Obtenez plus d'avis et gérez votre e-réputation efficacement.",
-      format: "PDF",
-      pages: 28,
-      taille: "1.5 Mo",
-      date: "2025-01-05",
-      image: "/images/ressources/guide-avis.jpg",
-      apercu: "/images/ressources/apercu-guide-avis.jpg",
-      niveau: "Débutant",
-      downloads: 1567,
-      contenu: [
-        "Chapitre 1 : Pourquoi les avis sont cruciaux",
-        "Chapitre 2 : Comment demander des avis",
-        "Chapitre 3 : Répondre aux avis négatifs",
-        "Chapitre 4 : Les avis et le référencement",
-        "Chapitre 5 : Les outils de gestion",
-        "Bonus : Modèles de réponses"
-      ]
-    },
-    {
-      slug: "cro-pour-professions-liberales",
-      titre: "CRO pour professions libérales",
-      description: "Transformez vos visiteurs en rendez-vous clients.",
-      format: "PDF",
-      pages: 38,
-      taille: "2.1 Mo",
-      date: "2024-12-20",
-      image: "/images/ressources/guide-cro.jpg",
-      apercu: "/images/ressources/apercu-guide-cro.jpg",
-      niveau: "Avancé",
-      downloads: 734,
-      contenu: [
-        "Chapitre 1 : Les spécificités des professions libérales",
-        "Chapitre 2 : Le formulaire de contact idéal",
-        "Chapitre 3 : Les témoignages stratégiques",
-        "Chapitre 4 : La preuve sociale",
-        "Chapitre 5 : Les appels à l'action",
-        "Chapitre 6 : Analyse et tests A/B",
-        "Bonus : Checklist d'audit CRO"
-      ]
-    }
-  ];
-
-  return guides.map((guide) => ({
+  return guides.map(guide => ({
     params: { slug: guide.slug },
     props: { guide }
   }));
 }
 
-// 2. Récupérer les props
 const { guide } = Astro.props;
 
-// 3. Guides similaires (pour la fin de page)
-const guidesSimilaires = [
-  {
-    slug: "seo-local-artisans-2025",
-    titre: "SEO local pour artisans"
-  },
-  {
-    slug: "avis-google-importance",
-    titre: "Guide des avis Google"
-  }
-];
+// Guides similaires : exclure le guide actuel, prendre 2 autres aléatoirement
+const guidesSimilaires = guides
+  .filter(g => g.slug !== guide.slug)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 2);
 ---
 
 <Layout title={`${guide.titre} - Guide gratuit | Horizon Conversion`} description={guide.description}>
+
+  <GuideSchema guide={guide} />
+
   <div class="container-custom py-12 max-w-5xl">
     <!-- Fil d'ariane -->
     <nav class="text-sm text-gray-600 mb-8">
@@ -174,30 +80,55 @@ const guidesSimilaires = [
           <h3 class="text-xl font-bold mb-4">Télécharger le guide gratuit</h3>
           <p class="text-sm text-gray-600 mb-4">Recevez le guide immédiatement par email.</p>
 
-          <form class="space-y-4" method="POST" action="/api/download-guide" id="download-form">
+          <form class="space-y-4" id="guide-form" name="guide-form" action="/include/form.php" method="post">
+
+            <div class="form-process">
+              <div class="css3-spinner">
+                <div class="css3-spinner-scaler"></div>
+              </div>
+            </div>
+
             <input
                 type="text"
-                name="prenom"
+                id="guide-form-name"
+                name="guide-form-name"
                 placeholder="Votre prénom"
                 class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500"
                 required
             />
             <input
                 type="email"
-                name="email"
+                id="guide-form-email"
+                name="guide-form-email"
                 placeholder="Votre email professionnel"
                 class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500"
                 required
             />
 
-            <label class="flex items-start gap-2 text-sm text-gray-600">
-              <input type="checkbox" name="consent" required class="mt-1" />
+            <label class="flex items-start gap-2 text-sm text-gray-600" for="guide-form-check">
+              <input type="checkbox" id="guide-form-check" name="guide-form-check" required class="mt-1" />
               <span>J'accepte de recevoir le guide et des informations par email (désinscription possible à tout moment)</span>
             </label>
 
-            <button type="submit" class="btn-primary w-full py-4 text-lg">
+            <input class="hidden" type="text" id="guide-form-botcheck" name="guide-form-botcheck">
+
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+
+            <script src="https://www.google.com/recaptcha/api.js?render=6LeL4HsUAAAAAP-TtLxY0OHX0ykl9p_mAvslYWJM"></script>
+            <script>
+              grecaptcha.ready(function() {
+                grecaptcha.execute('6LeL4HsUAAAAAP-TtLxY0OHX0ykl9p_mAvslYWJM', {action: 'contact_page'}).then(function(token) {
+                  // add token value to form
+                  document.getElementById('g-recaptcha-response').value = token;
+                });
+              });
+            </script>
+
+            <button class="btn-primary w-full py-4 text-lg" type="submit" id="guide-form-submit" name="guide-form-submit" value="submit">
               Télécharger maintenant
             </button>
+
+            <input type="hidden" name="prefix" value="guide-form-">
           </form>
 
           <p class="text-xs text-gray-500 text-center mt-4">
@@ -220,68 +151,24 @@ const guidesSimilaires = [
           <p class="text-sm text-gray-500 text-center mt-2">Aperçu du guide</p>
 
           <!-- Guides similaires -->
-          <div class="mt-8 p-4 bg-gray-50 rounded-xl">
-            <h3 class="font-bold mb-3">Vous aimerez aussi :</h3>
-            <div class="space-y-2">
-              {guidesSimilaires.map(guideSim => (
-                  <a
-                      href={`/ressources/guides/${guideSim.slug}`}
-                      class="block p-2 hover:bg-white rounded-lg transition-colors"
-                  >
-                    <p class="font-medium text-sm">{guideSim.titre}</p>
-                    <p class="text-xs text-primary-600">Télécharger →</p>
-                  </a>
-              ))}
-            </div>
-          </div>
+          {guidesSimilaires.length > 0 && (
+              <div class="mt-8 p-4 bg-gray-50 rounded-xl">
+                <h3 class="font-bold mb-3">Vous aimerez aussi :</h3>
+                <div class="space-y-2">
+                  {guidesSimilaires.map(guideSim => (
+                      <a
+                          href={`/ressources/guides/${guideSim.slug}`}
+                          class="block p-2 hover:bg-white rounded-lg transition-colors"
+                      >
+                        <p class="font-medium text-sm">{guideSim.titre}</p>
+                        <p class="text-xs text-primary-600">Télécharger →</p>
+                      </a>
+                  ))}
+                </div>
+              </div>
+          )}
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-    // Gestionnaire du formulaire de téléchargement
-    document.getElementById('download-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const form = e.target;
-      const button = form.querySelector('button');
-      const originalText = button.innerText;
-
-      // Désactiver le bouton
-      button.disabled = true;
-      button.innerText = 'Téléchargement en cours...';
-
-      try {
-        // Simuler l'appel API
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        // Créer un lien de téléchargement fictif (à remplacer par vrai téléchargement)
-        const link = document.createElement('a');
-        link.href = `/guides/${guide.slug}.pdf`;
-        link.download = `${guide.slug}.pdf`;
-        link.click();
-
-        // Afficher message de succès
-        button.innerText = '✓ Téléchargé !';
-
-        // Suivi de conversion
-        if (window.trackConversion) {
-          window.trackConversion('download', 10);
-        }
-
-        setTimeout(() => {
-          button.innerText = originalText;
-          button.disabled = false;
-        }, 3000);
-
-      } catch (error) {
-        button.innerText = 'Erreur - Réessayer';
-        setTimeout(() => {
-          button.innerText = originalText;
-          button.disabled = false;
-        }, 2000);
-      }
-    });
-  </script>
 </Layout>

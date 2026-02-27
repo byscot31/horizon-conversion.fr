@@ -5,6 +5,7 @@ import services from "../../data/services.json";
 import metiers from "../../data/metiers.json";
 import villes from "../../data/villes.json";
 import MiniDevis from "../../components/MiniDevis.astro";
+import casClients from "../../data/cas-clients.json";
 
 export async function getStaticPaths() {
   return metiers.map(metier => ({
@@ -280,38 +281,45 @@ const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
     </div>
   </section>
 
-  <!-- SECTION 3 : Résultats concrets -->
-  {casMetier.length > 0 && (
-      <section class="py-20">
-        <div class="container-custom">
-          <h2 class="text-3xl font-bold text-center mb-4">Des résultats pour des {metier.nomCourt}</h2>
-          <p class="text-center text-gray-600 mb-12">Découvrez comment nous avons aidé des professionnels comme vous.</p>
+  <!-- SECTION 3 : Résultats concrets (DYNAMIQUE) -->
+  {(() => {
+    // Récupérer les cas pour ce métier depuis le JSON centralisé
+  const casPourCeMetier = casClients[metier.id] || [];
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {casMetier.slice(0, 3).map(cas => (
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
-                  <div class="flex justify-between items-start mb-3">
-                    <span class="badge-consultant text-xs">{cas.service === 'seo-local' ? 'SEO' : cas.service === 'google-ads' ? 'Ads' : cas.service === 'cro' ? 'CRO' : 'Site'}</span>
-                    <span class="text-sm text-gray-500">{cas.ville}</span>
+    if (casPourCeMetier.length === 0) return null;
+
+    return (
+        <section class="py-20">
+          <div class="container-custom">
+            <h2 class="text-3xl font-bold text-center mb-4">Des résultats pour des {metier.nomCourt}</h2>
+            <p class="text-center text-gray-600 mb-12">Découvrez comment nous avons aidé des professionnels comme vous.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {casPourCeMetier.slice(0, 3).map(cas => (
+                  <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+                    <div class="flex justify-between items-start mb-3">
+                      <span class="badge-consultant text-xs">{cas.serviceNom || 'SEO'}</span>
+                      <span class="text-sm text-gray-500">{cas.ville}</span>
+                    </div>
+                    <p class="font-semibold text-lg mb-1">{cas.nom}</p>
+                    <p class="text-sm text-gray-600 mb-3">{cas.entreprise}</p>
+                    <p class="text-2xl font-bold text-green-600 mb-3">{cas.resultat}</p>
+                    <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">
+                      Voir l'étude complète →
+                    </a>
                   </div>
-                  <p class="font-semibold text-lg mb-1">{cas.nom}</p>
-                  <p class="text-sm text-gray-600 mb-3">{cas.entreprise}</p>
-                  <p class="text-2xl font-bold text-green-600 mb-3">{cas.resultat}</p>
-                  <a href={`/etudes-de-cas/${cas.etude}`} class="text-primary-600 text-sm hover:underline">
-                    Voir l'étude complète →
-                  </a>
-                </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <div class="text-center mt-8">
-            <a href={`/etudes-de-cas?metier=${metier.id}`} class="text-primary-600 hover:underline font-medium">
-              Voir toutes les études de cas {metier.nomCourt} →
-            </a>
+            <div class="text-center mt-8">
+              <a href={`/etudes-de-cas?metier=${metier.id}`} class="text-primary-600 hover:underline font-medium">
+                Voir toutes les études de cas {metier.nomCourt} →
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-  )}
+        </section>
+    );
+  })()}
 
   <!-- SECTION 4 : Villes clés avec liens profonds -->
   <section class="bg-gray-50 py-20">
@@ -341,100 +349,48 @@ const autresMetiers = metiers.filter(m => m.id !== metier.id).slice(0, 5);
     </div>
   </section>
 
-  <!-- SECTION 5 : Témoignages clients (2 témoignages) -->
-  <section class="py-20 bg-primary-50">
-    <div class="container-custom">
-      <h2 class="text-3xl font-bold text-center mb-4">Ils nous ont fait confiance</h2>
-      <p class="text-center text-gray-600 mb-12">Découvrez ce que disent d'autres {metier.nomCourt}.</p>
+  <!-- SECTION 5 : Témoignages clients (DYNAMIQUE) -->
+  {(() => {
+    const casPourCeMetier = casClients[metier.id] || [];
+    const premiersCas = casPourCeMetier.slice(0, 2);
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <!-- TÉMOIGNAGE 1 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md">
-          <div class="flex items-start gap-4">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
-              👤
+    if (premiersCas.length === 0) return null;
+
+    return (
+        <section class="py-20 bg-primary-50">
+          <div class="container-custom">
+            <h2 class="text-3xl font-bold text-center mb-4">Ils nous ont fait confiance</h2>
+            <p class="text-center text-gray-600 mb-12">Découvrez ce que disent d'autres {metier.nomCourt}.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {premiersCas.map(cas => (
+                  <div class="bg-white p-8 rounded-2xl shadow-md">
+                    <div class="flex items-start gap-4">
+                      <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
+                        {cas.icone || '👤'}
+                      </div>
+                      <div>
+                        <div class="text-yellow-400 text-lg mb-2">{"★".repeat(cas.note || 5)}</div>
+                        <p class="text-lg italic text-gray-700 mb-4">"{cas.citation}"</p>
+                        <p class="font-semibold">{cas.nom}, {cas.entreprise}</p>
+                        <a href={`/etudes-de-cas/${cas.etude}`} class="inline-block mt-3 text-primary-600 text-sm hover:underline">
+                          Voir son histoire →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              ))}
             </div>
-            <div>
-              <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
-              <p class="text-lg italic text-gray-700 mb-4">
-                "{metier.id === 'artisans' && "Depuis qu'on a commencé, je reçois des appels de clients que je n'avais jamais eus avant."}
-                {metier.id === 'commerces' && "Pendant les fêtes, j'ai eu 30% de clients en plus qui disaient 'je vous ai vu sur Google'."}
-                {metier.id === 'profession-liberale' && "Je reçois deux fois plus de demandes de rendez-vous sans changer mes annonces."}
-                {metier.id === 'tpe-pme' && "Maintenant je reçois des demandes de devis toutes les semaines."}
-                {metier.id === 'reseaux-franchise' && "On avait du mal à gérer nos fiches Google. Maintenant tout est centralisé."}
-                {metier.id === 'tourisme' && "Je ne dépends plus de Booking, les clients me trouvent directement."}"
-              </p>
-              <p class="font-semibold">
-                {metier.id === 'artisans' && "Robert, plombier à Méru"}
-                {metier.id === 'commerces' && "Sophie, caviste à Cergy"}
-                {metier.id === 'profession-liberale' && "Maître Dupont, avocat à Montmorency"}
-                {metier.id === 'tpe-pme' && "Franck, Transports Moreau"}
-                {metier.id === 'reseaux-franchise' && "Caroline, Boulangeries du Pain"}
-                {metier.id === 'tourisme' && "Virginie, Hôtel du Parc"}
-              </p>
-              <a href={`/etudes-de-cas/${
-                metier.id === 'artisans' ? 'plombier-meru' :
-                  metier.id === 'commerces' ? 'caviste-cergy' :
-                    metier.id === 'profession-liberale' ? 'avocat-montmorency' :
-                      metier.id === 'tpe-pme' ? 'transport-compiegne' :
-                        metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'hotel-chantilly'
-              }`} class="inline-block mt-3 text-primary-600 text-sm hover:underline">
-                Voir son histoire →
+
+            <div class="text-center mt-8">
+              <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
+                Voir toutes les études de cas →
               </a>
             </div>
           </div>
-        </div>
-
-        <!-- TÉMOIGNAGE 2 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md">
-          <div class="flex items-start gap-4">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 text-3xl">
-              {metier.id === 'artisans' && '🔧'}
-              {metier.id === 'commerces' && '🍷'}
-              {metier.id === 'profession-liberale' && '⚖️'}
-              {metier.id === 'tpe-pme' && '🚛'}
-              {metier.id === 'reseaux-franchise' && '🥖'}
-              {metier.id === 'tourisme' && '🏨'}
-            </div>
-            <div>
-              <div class="text-yellow-400 text-lg mb-2">★★★★★</div>
-              <p class="text-lg italic text-gray-700 mb-4">
-                "{metier.id === 'artisans' && "Aujourd'hui, je suis dans le top 3 sur les mots-clés importants de ma région."}
-                {metier.id === 'commerces' && "Les clients me trouvent directement sur Google Maps, je ne peux plus m'en passer."}
-                {metier.id === 'profession-liberale' && "Mon taux de conversion a doublé en seulement 3 mois."}
-                {metier.id === 'tpe-pme' && "Notre chiffre d'affaires a augmenté de 40%."}
-                {metier.id === 'reseaux-franchise' && "La gestion centralisée nous fait gagner un temps précieux."}
-                {metier.id === 'tourisme' && "30% de réservations directes supplémentaires."}"
-              </p>
-              <p class="font-semibold">
-                {metier.id === 'artisans' && "Jean-Claude, électricien à Beauvais"}
-                {metier.id === 'commerces' && "Isabelle, coiffeuse à Argenteuil"}
-                {metier.id === 'profession-liberale' && "Dr. Martin, médecin à Senlis"}
-                {metier.id === 'tpe-pme' && "Philippe, menuiserie à Creil"}
-                {metier.id === 'reseaux-franchise' && "Franck, Optical Center"}
-                {metier.id === 'tourisme' && "Pierre, restaurant à Compiègne"}
-              </p>
-              <a href={`/etudes-de-cas/${
-                metier.id === 'artisans' ? 'electricien-beauvais' :
-                  metier.id === 'commerces' ? 'coiffeuse-argenteuil' :
-                    metier.id === 'profession-liberale' ? 'medecin-senlis' :
-                      metier.id === 'tpe-pme' ? 'macon-creil' :
-                        metier.id === 'reseaux-franchise' ? 'franchise-cergy' : 'restaurateur-compiegne'
-              }`} class="inline-block mt-3 text-primary-600 text-sm hover:underline">
-                Voir son histoire →
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="/etudes-de-cas" class="text-primary-600 hover:underline font-medium">
-          Voir toutes les études de cas →
-        </a>
-      </div>
-    </div>
-  </section>
+        </section>
+    );
+  })()}
 
   <!-- SECTION 6 : Ressources métier -->
   <section class="bg-gray-50 py-20">

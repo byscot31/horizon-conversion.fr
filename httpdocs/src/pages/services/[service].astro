@@ -533,23 +533,33 @@ const packs = packsParService[service.id] || packsParService['seo-local'];
     </div>
   </section>
 
-  <!-- SECTION 3 : Villes disponibles -->
+  <!-- SECTION 3 : Villes disponibles avec liens profonds -->
   <section class="py-20">
     <div class="container-custom">
       <h2 class="text-3xl font-bold text-center mb-4">Disponible dans toutes nos villes</h2>
       <p class="text-center text-gray-600 mb-12">Je travaille dans tout l'Oise et le Val-d'Oise.</p>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {villesExemples.map(ville => (
-            <a href={`/services/${service.id}/${ville.id}`} class="card p-4 text-center hover:border-primary-300">
-              <div class="font-semibold">{ville.nom}</div>
-              <div class="text-xs text-gray-500">{ville.codePostal}</div>
-            </a>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        {villes.slice(0, 8).map(ville => (
+            <div class="bg-white p-4 rounded-xl border border-gray-100 hover:shadow-md transition-all">
+              <div class="font-semibold text-center mb-2">{ville.nom}</div>
+              <div class="text-xs text-center text-gray-500 mb-2">{ville.codePostal}</div>
+              <div class="space-y-1 text-sm">
+                {metiersConseilles.slice(0, 3).map(metier => (
+                    <a
+                        href={`/services/${service.id}/${metier.id}/${ville.id}`}
+                        class="block text-primary-600 hover:underline text-center"
+                    >
+                      {metier.nomCourt} →
+                    </a>
+                ))}
+              </div>
+            </div>
         ))}
       </div>
 
       <div class="text-center mt-8">
-        <a href="/villes" class="text-primary-600 hover:underline">Voir toutes les villes →</a>
+        <a href="/villes" class="text-primary-600 hover:underline">Voir les 16 villes et leurs alentours →</a>
       </div>
     </div>
   </section>

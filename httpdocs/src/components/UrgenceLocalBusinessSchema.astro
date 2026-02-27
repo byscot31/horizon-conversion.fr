@@ -1,0 +1,79 @@
+---
+// src/components/UrgenceLocalBusinessSchema.astro
+export interface Props {
+  metier: {
+    id: string;
+    nomCourt: string;
+  };
+  ville: {
+    nom: string;
+    zone: string;
+    codePostal: string;
+    alentours: string[];
+  };
+  telephone: string;
+  tempsIntervention: number;
+}
+
+const { metier, ville, telephone, tempsIntervention } = Astro.props;
+
+// Zone de desserte (ville principale + alentours)
+const areaServed = [
+  ville.nom,
+  ...ville.alentours.map(a => typeof a === 'string' ? a.split(' (')[0] : a)
+];
+
+// Horaires d'urgence (24/7)
+const openingHours = [
+  { day: "Monday", opens: "00:00", closes: "23:59" },
+  { day: "Tuesday", opens: "00:00", closes: "23:59" },
+  { day: "Wednesday", opens: "00:00", closes: "23:59" },
+  { day: "Thursday", opens: "00:00", closes: "23:59" },
+  { day: "Friday", opens: "00:00", closes: "23:59" },
+  { day: "Saturday", opens: "00:00", closes: "23:59" },
+  { day: "Sunday", opens: "00:00", closes: "23:59" }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `https://horizon-conversion.fr#urgence-${metier.id}-${ville.id}`,
+  "name": `Horizon Conversion - Urgence ${metier.nomCourt} à ${ville.nom}`,
+  "description": `Intervention ${metier.nomCourt} d'urgence à ${ville.nom} et ses environs. Disponible 7j/7.`,
+  "url": `https://horizon-conversion.fr/urgence/${metier.id}/${ville.id}`,
+  "telephone": telephone,
+  "email": "contact@horizon-conversion.fr",
+  "priceRange": "€€",
+  "areaServed": areaServed.map(ville => ({
+    "@type": "City",
+    "name": ville
+  })),
+  "availableLanguage": {
+    "@type": "Language",
+    "name": "Français"
+  },
+  "openingHoursSpecification": openingHours.map(h => ({
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": h.day,
+    "opens": h.opens,
+    "closes": h.closes
+  })),
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": ville.nom,
+    "addressRegion": ville.zone === "60" ? "Oise" : "Val-d'Oise",
+    "postalCode": ville.codePostal,
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 49.0,
+    "longitude": 2.0
+  },
+  "sameAs": [
+    "https://horizon-conversion.fr"
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />

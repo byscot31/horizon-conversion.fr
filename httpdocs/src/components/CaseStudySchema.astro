@@ -1,0 +1,77 @@
+---
+export interface Props {
+  etudeId: string;
+}
+
+const { etudeId } = Astro.props;
+import casClients from "../data/cas-clients.json";
+
+function findEtude(id: string) {
+  for (const cat of Object.values(casClients)) {
+    if (Array.isArray(cat)) {
+      const found = cat.find(e => e?.etude === id);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+const etude = findEtude(etudeId);
+if (!etude) return;
+
+// Construction du schéma complet
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": etude.titre || "Étude de cas",
+  "description": etude.description || "Découvrez comment nous avons aidé ce client.",
+  "image": etude.image ? `https://horizon-conversion.fr${etude.image}` : "https://horizon-conversion.fr/images/og-default.jpg",
+  "datePublished": etude.date || "2025-01-01",
+  "dateModified": new Date().toISOString().split('T')[0],
+  "author": {
+    "@type": "Person",
+    "name": "François DA COSTA",
+    "url": "https://horizon-conversion.fr"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Horizon Conversion",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://horizon-conversion.fr/favicon.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://horizon-conversion.fr/etudes-de-cas/${etudeId}`
+  },
+  "about": {
+    "@type": "Service",
+    "name": etude.serviceNom || "SEO local",
+    "description": `Résultat obtenu : ${etude.resultat || "Résultats significatifs"}`
+  },
+  "keywords": [
+    etude.metier || "professionnel",
+    etude.ville || "Oise",
+    "SEO local",
+    "étude de cas",
+    "résultats"
+  ].join(", "),
+  "articleSection": etude.metier === 'artisans' ? "Artisanat" :
+    etude.metier === 'commerces' ? "Commerce" :
+      etude.metier === 'profession-liberale' ? "Profession libérale" :
+        etude.metier === 'tpe-pme' ? "TPE/PME" :
+          etude.metier === 'reseaux-franchise' ? "Franchise" : "Tourisme",
+  "spatialCoverage": {
+    "@type": "Place",
+    "name": etude.ville || "Oise/Val-d'Oise",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": etude.ville || "",
+      "addressRegion": etude.zone === "60" ? "Oise" : "Val-d'Oise"
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

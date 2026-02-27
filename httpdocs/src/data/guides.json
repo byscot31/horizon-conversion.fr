@@ -1,0 +1,89 @@
+[
+  {
+    "slug": "seo-local-artisans-2025",
+    "titre": "SEO local pour artisans",
+    "description": "Le guide complet pour être trouvé quand les clients cherchent un artisan près de chez eux.",
+    "format": "PDF",
+    "pages": 45,
+    "taille": "2.4 Mo",
+    "date": "2025-01-15",
+    "image": "/images/ressources/guide-artisans.jpg",
+    "apercu": "/images/ressources/apercu-guide-artisans.jpg",
+    "niveau": "Débutant",
+    "downloads": 1245,
+    "contenu": [
+      "Chapitre 1 : Pourquoi le SEO local est crucial pour les artisans",
+      "Chapitre 2 : Google My Business : la fiche parfaite",
+      "Chapitre 3 : Les pages par service et par ville",
+      "Chapitre 4 : La stratégie d'avis",
+      "Chapitre 5 : Le netlinking local",
+      "Chapitre 6 : Mesurer vos résultats",
+      "Bonus : Checklist en 30 points"
+    ]
+  },
+  {
+    "slug": "google-ads-petits-budgets",
+    "titre": "Google Ads pour petits budgets",
+    "description": "Comment rentabiliser vos annonces avec moins de 300€ par mois.",
+    "format": "PDF",
+    "pages": 32,
+    "taille": "1.8 Mo",
+    "date": "2025-01-10",
+    "image": "/images/ressources/guide-ads.jpg",
+    "apercu": "/images/ressources/apercu-guide-ads.jpg",
+    "niveau": "Intermédiaire",
+    "downloads": 892,
+    "contenu": [
+      "Chapitre 1 : Les bases de Google Ads",
+      "Chapitre 2 : La géolocalisation fine",
+      "Chapitre 3 : Les mots-clés négatifs",
+      "Chapitre 4 : Le budget minimal efficace",
+      "Chapitre 5 : Les annonces saisonnières",
+      "Chapitre 6 : Le retargeting léger",
+      "Bonus : Template de campagne"
+    ]
+  },
+  {
+    "slug": "avis-google-importance",
+    "titre": "Guide des avis Google",
+    "description": "Obtenez plus d'avis et gérez votre e-réputation efficacement.",
+    "format": "PDF",
+    "pages": 28,
+    "taille": "1.5 Mo",
+    "date": "2025-01-05",
+    "image": "/images/ressources/guide-avis.jpg",
+    "apercu": "/images/ressources/apercu-guide-avis.jpg",
+    "niveau": "Débutant",
+    "downloads": 1567,
+    "contenu": [
+      "Chapitre 1 : Pourquoi les avis sont cruciaux",
+      "Chapitre 2 : Comment demander des avis",
+      "Chapitre 3 : Répondre aux avis négatifs",
+      "Chapitre 4 : Les avis et le référencement",
+      "Chapitre 5 : Les outils de gestion",
+      "Bonus : Modèles de réponses"
+    ]
+  },
+  {
+    "slug": "cro-pour-professions-liberales",
+    "titre": "CRO pour professions libérales",
+    "description": "Transformez vos visiteurs en rendez-vous clients.",
+    "format": "PDF",
+    "pages": 38,
+    "taille": "2.1 Mo",
+    "date": "2024-12-20",
+    "image": "/images/ressources/guide-cro.jpg",
+    "apercu": "/images/ressources/apercu-guide-cro.jpg",
+    "niveau": "Avancé",
+    "downloads": 734,
+    "contenu": [
+      "Chapitre 1 : Les spécificités des professions libérales",
+      "Chapitre 2 : Le formulaire de contact idéal",
+      "Chapitre 3 : Les témoignages stratégiques",
+      "Chapitre 4 : La preuve sociale",
+      "Chapitre 5 : Les appels à l'action",
+      "Chapitre 6 : Analyse et tests A/B",
+      "Bonus : Checklist d'audit CRO"
+    ]
+  }
+]

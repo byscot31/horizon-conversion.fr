@@ -1,44 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-
-const guides = [
-  {
-    slug: "seo-local-artisans-2025",
-    titre: "SEO local pour artisans",
-    description: "Le guide complet pour être trouvé quand les clients cherchent un artisan près de chez eux.",
-    format: "PDF • 45 pages",
-    image: "/images/ressources/guide-artisans.jpg",
-    downloads: 1245,
-    niveau: "Débutant"
-  },
-  {
-    slug: "google-ads-petits-budgets",
-    titre: "Google Ads pour petits budgets",
-    description: "Comment rentabiliser vos annonces avec moins de 300€ par mois.",
-    format: "PDF • 32 pages",
-    image: "/images/ressources/guide-ads.jpg",
-    downloads: 892,
-    niveau: "Intermédiaire"
-  },
-  {
-    slug: "avis-google-importance",
-    titre: "Guide des avis Google",
-    description: "Obtenez plus d'avis et gérez votre e-réputation efficacement.",
-    format: "PDF • 28 pages",
-    image: "/images/ressources/guide-avis.jpg",
-    downloads: 1567,
-    niveau: "Débutant"
-  },
-  {
-    slug: "cro-pour-professions-liberales",
-    titre: "CRO pour professions libérales",
-    description: "Transformez vos visiteurs en rendez-vous clients.",
-    format: "PDF • 38 pages",
-    image: "/images/ressources/guide-cro.jpg",
-    downloads: 734,
-    niveau: "Avancé"
-  }
-];
+import guides from "../../../data/guides.json";
 ---
 
 <Layout
@@ -71,7 +33,7 @@ const guides = [
               <div class="md:w-2/3 p-6">
                 <div class="flex items-center gap-2 mb-2">
                   <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">{guide.niveau}</span>
-                  <span class="text-xs text-gray-500">{guide.format}</span>
+                  <span class="text-xs text-gray-500">{guide.format} • {guide.pages} pages</span>
                 </div>
 
                 <h2 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors">

@@ -1,0 +1,63 @@
+---
+// src/components/GuideSchema.astro
+export interface Props {
+  guide: {
+    slug: string;
+    titre: string;
+    description: string;
+    date: string;
+    image?: string;
+    pages?: number;
+    format?: string;
+    niveau?: string;
+  };
+}
+
+const { guide } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",  // ou "DigitalDocument" (moins standard)
+  "headline": guide.titre,
+  "description": guide.description,
+  "datePublished": guide.date,
+  "dateModified": new Date().toISOString().split('T')[0],
+  "author": {
+    "@type": "Person",
+    "name": "François DA COSTA",
+    "url": "https://horizon-conversion.fr"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Horizon Conversion",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://horizon-conversion.fr/favicon.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://horizon-conversion.fr/ressources/guides/${guide.slug}`
+  },
+  "image": guide.image ? {
+    "@type": "ImageObject",
+    "url": guide.image.startsWith('http')
+      ? guide.image
+      : `https://horizon-conversion.fr${guide.image}`
+  } : undefined,
+  "keywords": ["guide", "SEO", guide.niveau, "gratuit"],
+  "inLanguage": "fr-FR",
+  "isFamilyFriendly": "true",
+  "typicalAgeRange": "18-"
+};
+
+// Ajouter des propriétés spécifiques si c'est un document
+if (guide.pages) {
+  schema["numberOfPages"] = guide.pages;
+}
+if (guide.format) {
+  schema["fileFormat"] = guide.format;
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
